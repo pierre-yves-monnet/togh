@@ -38,7 +38,7 @@ public class Application extends SpringBootServletInitializer {
         return String.format("Hello %s!", name);
     }
     
-    @Autowired
+    // @ A u t  owired
     private EventRepository eventRepository;
     
     @GetMapping("/events")
