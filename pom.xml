@@ -7,8 +7,8 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>Together</groupId>
-	<artifactId>Together</artifactId>
+	<groupId>together</groupId>
+	<artifactId>together2</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<properties>

@@ -42,7 +42,8 @@ Specifications
 
 
 # installation
-Tomcat server : D:\bonita\tomcat\Tomcat-9.0.41
+Tomcat server : D:\bonita\tomcat\Tomcat-9.0.41, port 7080
+http://localhost:7080/Together
 
 ## base de donnée
 
