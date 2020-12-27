@@ -1,47 +1,5 @@
+# Installation
 
-Specifications
-
-# Datas
-## Event:
-  An event is the base. it contains 
-  	* a name
-  	* a start event / event event
-  	* a list of participants
-    * a splitwyse
-    * a google meet
-    * mono day
-    	* a location
-    	* hotel|airbnb
-    	 
-    * a source
-    * if this is a Trip multi day
-    	List of "days" : Source, Destination, Hotel|airbnb
-    * a list of surveys
-    * a list of "what I bring"
-    
-    
-## Function
-	Register a split wyse
-	Add to my calendar
-	Invite
-	
-    
-    
-## participants
-	Search by Email, then search if the participant already exist as a TogetherUser. if not, create one
-	* participantId
-	* ShareMyLocation (Boolean)
-	
-	
-	
-	
-	
-## TogetherUser
-   * Email
-   * userName	
-
-
-# installation
 Tomcat server : D:\bonita\tomcat\Tomcat-9.0.41, port 7080
 http://localhost:7080/Together
 
@@ -99,4 +57,14 @@ Consider defining a bean of type 'com.together.data.entity.EventRepository' in y
 ## Les services
 Bon, je ne vois pas comment on crée des services. L'avantage que je vois des services comme Bonita les utilisent, c'est qu'on peut avoir 2 implementation du service, et pouvoir basculer via la configuration d'une implementation à l'autre.
 Comment faire cela?
+
+
+## React or Angular ?
+Quand je vois ca 
+https://stackoverflow.com/questions/43927144/react-equivalent-to-ng-model
+et ca
+https://reactjsnews.com/NgRepeat-Equivalent-in-React#:~:text=React%20Alternative%20to%20ng%2Drepeat,native%20iterator%20directly%20in%20React.
+je me dit qu'Angular est vraiment mieux.
+
+ES6 + Angular ?
 

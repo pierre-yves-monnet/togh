@@ -1,13 +1,17 @@
 package com.together.data.entity.base;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.json.simple.JSONValue;
 
 public class BaseEntity {
     
@@ -79,11 +83,23 @@ public class BaseEntity {
         return attributes;
     }
  
+    @SuppressWarnings("unchecked")
     public void setJson(String jsonSt) {
+        attributes= (Map<String, Object>) JSONValue.parse( jsonSt );
     }
     
     public String getJson() {
-        return "";
+        return  JSONValue.toJSONString( attributes );
     }
     
+    public static String getListJson( List<?> listBaseEntity  ) {
+        List<Map<String,Object>> jsonList= new ArrayList<>();
+        for (Object entity  : listBaseEntity) {
+            jsonList.add( ((BaseEntity)entity).attributes);
+        }
+        return  JSONValue.toJSONString( jsonList );
+    }
+    
+
+
 }
