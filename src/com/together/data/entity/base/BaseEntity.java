@@ -1,5 +1,6 @@
 package com.together.data.entity.base;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +29,9 @@ public class BaseEntity {
     
     public BaseEntity( String name ) {
         attributes.put("name", name);
+        setDateCreation( LocalDateTime.now());
+        // for the moment
+        id = System.currentTimeMillis();
     }
     
       
@@ -39,7 +43,21 @@ public class BaseEntity {
     /* -------------------------------------------------------------------- */
     public void set(String attributName, Object value) {
         attributes.put( attributName, value );
+        setDateModification( LocalDateTime.now());
     }
+    /**
+     * if attribute is a string, this method must be choose
+     * @param attributName
+     * @param value
+     * @param length
+     */
+    public void set(String attributName, String value, int length) {
+        if (value!=null && value.length()>length)
+            value= value.substring(0,length);
+        attributes.put( attributName, value );
+        setDateModification( LocalDateTime.now());
+    }
+  
     public Object get(String attributName) {
         return attributes.get( attributName);
     }
@@ -49,8 +67,8 @@ public class BaseEntity {
     public Long getLong( String attributName) {
         return (Long) get(attributName);
     }
-    public Date getDate( String attributName) {
-        return (Date) get(attributName);
+    public LocalDateTime getDate( String attributName) {
+        return (LocalDateTime) get(attributName);
     }
     
     
@@ -64,7 +82,33 @@ public class BaseEntity {
     public String getName() {
         return getString("name");
     }
-    
+    public void setName(String name ) {
+        set("name", name, 50);
+    }
+    /**
+     * Date of creation in UTC. Then, the date is translated in the current time zone of the observer.
+     * @return
+     */
+    @Column(name="DATECREATION", nullable = false)    
+    public LocalDateTime getDateCreation() {
+        return getDate("datecreation");
+    }
+    public void setDateCreation(LocalDateTime dateCreation ) {
+        set("datecreation", dateCreation);
+    }
+    @Column(name="DATEMODIFICATION", nullable = false)    
+    public LocalDateTime getDateModification() {
+        return getDate("datemodification");
+    }
+    /**
+     * Note : any set() call change the dateModification to the current date.
+     * @param dateModification
+     */
+    public void setDateModification(LocalDateTime dateModification ) {
+        // do not call the set() method : it will override the date
+        attributes.put("datemodification", dateModification);
+     }
+
     /**
      * when the object is saved, it will have an unique Id
      * @return

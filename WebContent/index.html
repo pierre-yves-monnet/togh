@@ -1,28 +1,21 @@
 <!--  http://localhost:7080/togh/index.html -->
 <head>
 <meta charset="utf-8">
-<title>Meteor</title>
+<title>Togh</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="style/animate.css" />
-<link rel="stylesheet" href="style/bootstrap.min.css">
+
+<link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="style/main.css">
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/dropbox.css">
-<link rel="stylesheet" href="style/ng-modal.css">
+
+<script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<!-- <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script> -->
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+</head>
 
 
-
-<!-- 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript"
-	src="https://www.google.com/uds/?file=visualization&amp;v=1&amp;hl=fr&amp;packages=corechart&amp;async=2"></script>
-<link type="text/css" href="https://www.google.com/uds/api/visualization/1.0/ff67c3772da186a412ae3231c32409e9/ui+fr.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="https://www.google.com/uds/api/visualization/1.0/ff67c3772da186a412ae3231c32409e9/format+fr,default+fr,ui+fr,corechart+fr.I.js"></script>
-<link href="https://ajax.googleapis.com/ajax/static/modules/gviz/1.0/core/tooltip.css" rel="stylesheet" type="text/css">
- -->
  
 <style>
 .Loading {
@@ -37,30 +30,67 @@
 	margin-top: 6px;
 	margin-right: 7px;
 }
+html { height: 100%; }
+body {
+    min-height:100%; 
+    position:relative; 
+    padding-bottom:[footer-height] 
+}
+.footer { 
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+    height:[footer-height] 
+}
 </style>
+
 </head>
 
 <body>
-	<div class="bs-component">
-		<center>
-			<table>
-				<tr>
-					<td><img src="img/togh.jpg" width="150" heigth="150" /></td>
-				</tr>
-				<tr>
-					<td><h1>Togh</h1></td>
-				</tr>
-			</table>
-		</center>
+	
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12" style="background:#067c04;">
+			<div style="color:white;text-align: right;">welcome</div>
+		</div>
 	</div>
-
-<div class="container-fluid" >
-	Hello Tog !
-
-Login page
-List of events: <a href="events">Events</a><br> 
-hello: <a href="hello">Hello</a> 
-New event: <a href="newevent">New event</a>
+</div>
+<div class="container">
+  <div class="row">
+	<div class="col-sm-4">
+		Welcome to Togh<p>
+		<img src="img/togh.jpg" style="width:150; height:150;" />
+	</div>
+		
+	<div class="col-sm-4">	
+		Login:<p>
+		<div id="login"> </div>
+	
+		
+		Connect with Google	
+	</div>
+	<div class="col-sm-2">
+		<button type="button" class="btn btn-primary">Inscription</button>
+	</div>
+  </div> <!--  end row -->
+  
+  <div class="row">
+  	<div class="col-sm-12">
+  		Quick access
+		List of events: <a href="events">Events</a><br> 
+		hello: <a href="hello">Hello</a> 
+		New event: <a href="newevent">New event</a>
+	</div>
+  </div>
+  
+   <footer class="footer">
+   		<div class="row">
+			<div class="col-xs-12" style="background:#e0f9d6;">
+				<div style="color:black;text-align: right;font-size: small">Py 2020</div>
+			</div>
+		</div>
+   </footer>
 </div>
 
+ <script type="text/babel" src="js/Login.jsx"></script>
+    
 </body>

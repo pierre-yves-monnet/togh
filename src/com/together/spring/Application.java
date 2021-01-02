@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.together.data.entity.EventEntity;
 import com.together.data.entity.base.BaseEntity;
 import com.together.service.EventService;
+import com.together.service.MemoryServiceAccessor;
 import com.together.service.SpringServiceAccessor;
 
 
@@ -57,20 +58,24 @@ public class Application extends SpringBootServletInitializer {
     
     @GetMapping("/events")
     public String events() {
-        EventService eventService = SpringServiceAccessor.getInstance().getEventService();
-        List<EventEntity> listEvents = eventService.getEvents(12L);
+        EventService eventService = getEventService();
+        List<EventEntity> listEvents = eventService.getMyEvents(12L);
         
         return BaseEntity.getListJson( listEvents );
         
     }
     @GetMapping("/newevent")
     public String newevent() {
-        EventService eventService = SpringServiceAccessor.getInstance().getEventService();
+        EventService eventService = getEventService();
         EventEntity event = eventService.createEvent(12L);
         
         return event.getJson();
         
     }
     
+    
+    private EventService getEventService() {
+        return MemoryServiceAccessor.getInstance().getEventService();
+    }
     
 }

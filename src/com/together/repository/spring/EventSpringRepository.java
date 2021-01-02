@@ -15,7 +15,7 @@ import com.together.data.entity.EventEntity;
 public interface EventSpringRepository extends CrudRepository<EventEntity, Long>  {
     
  
-    public List<EventEntity> getEvents(Long userId);
+    public List<EventEntity> getMyEvents(Long userId);
 
     List<EventEntity> getByUsers(Long userId);
 

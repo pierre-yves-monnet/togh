@@ -7,7 +7,9 @@ import com.together.repository.spring.EventSpringRepository;
 
 public class SpringServiceAccessor {
     
-    
+    @Autowired
+    private EventRepository eventSpringRepository;
+
   
     private final static SpringServiceAccessor springServiceAccessor = new SpringServiceAccessor();
     public static SpringServiceAccessor getInstance() {
@@ -20,7 +22,7 @@ public class SpringServiceAccessor {
      */
     public EventService getEventService( ) {
         EventService eventService = new EventService();
-       //  eventService.setEventRepository(eventRepository);
+        eventService.setEventRepository(eventSpringRepository);
         return eventService;
     }
 

@@ -37,6 +37,7 @@ https://start.spring.io/
 
 ## Créer la table et sauver des données:
 
+1/
 ***************************
 APPLICATION FAILED TO START
 ***************************
@@ -52,6 +53,35 @@ The injection point has the following annotations:
 Action:
 
 Consider defining a bean of type 'com.together.data.entity.EventRepository' in your configuration.
+==> Jamais trouvé la root cause, ca ne se produit plus
+
+2/
+Mais quand je demande un create, j'ai un
+
+java.lang.NullPointerException: null
+	at com.together.service.EventService.createEvent(EventService.java:35) ~[classes/:1.0.0]
+	at com.together.spring.Application.newevent(Application.java:69) ~[classes/:1.0.0]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_144]
+
+
+==> C'est la facon de Spring de dire que la table n'est pas crée?
+En effet, la table n'est pas créée. Rien dans les tutorial que je vois indique qu'il faut que je crée la table
+
+Et pourquoi je vois ca 
+2020-12-27 10:52:17.218  INFO 21352 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-27 10:52:17.300  INFO 21352 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51ms. Found 0 JPA repository interfaces.
+
+puis ca
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [D:\bonita\tomcat\Tomcat-9.0.41\wtpwebapps\togh\WEB-INF\classes\com\together\repository\spring\EventSpringRepository.class]; nested exception is java.nio.channels.ClosedByInterruptException
+
+
+3/ Script de creation
+En suivant https://www.baeldung.com/spring-data-jpa-generate-db-schema
+ le fichier est bien crée, mais vide !
+ 
+
+
+
 
 
 ## Les services
@@ -68,3 +98,10 @@ je me dit qu'Angular est vraiment mieux.
 
 ES6 + Angular ?
 
+
+
+https://daveceddia.com/angular-directives-mapped-to-react/#ng-click
+https://fr.reactjs.org/docs/getting-started.html
+
+
+https://www.taniarascia.com/getting-started-with-react/
