@@ -3,6 +3,7 @@ package com.together.service.accessor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.together.repository.EventRepository;
+import com.together.repository.spring.EventSpringRepository;
 import com.together.service.EventService;
 import com.together.service.LoginService;
 import com.together.service.MonitorService;
@@ -11,13 +12,13 @@ import com.together.service.UserService;
 public class SpringServiceAccessor implements ServiceAccessor {
     
     @Autowired
-    private EventRepository eventSpringRepository;
+    private EventSpringRepository eventSpringRepository;
 
   
     
-    public static SpringServiceAccessor getInstance() {
-        return springServiceAccessor;
-    }
+//    public static SpringServiceAccessor getInstance() {
+//        return springServiceAccessor;
+//    }
     
     private final static SpringServiceAccessor springServiceAccessor = new SpringServiceAccessor();
     
@@ -28,7 +29,7 @@ public class SpringServiceAccessor implements ServiceAccessor {
     public EventService getEventService( ) {
         EventService eventService = new EventService();
         eventService.setAccessor( this );
-        eventService.setEventRepository(eventSpringRepository);
+        // eventService.setEventRepository(eventSpringRepository);
         return eventService;
     }
 

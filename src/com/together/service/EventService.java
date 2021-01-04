@@ -13,17 +13,15 @@ import com.together.repository.spring.EventSpringRepository;
 public class EventService extends ToghService {
 
     
-    private EventRepository eventRepository;
+    @Autowired
+    private EventSpringRepository eventRepository;
 
     
-    // must not be called
-    public EventService() {
-    }
+   
     
-    
-    public void setEventRepository( EventRepository eventRepository ) {
-        this.eventRepository = eventRepository;
-    }
+    //public void setEventRepository( EventRepository eventRepository ) {
+    //    this.eventRepository = eventRepository;
+    //}
     
     public String index() {
         return "Greetings from Spring Boot!";
@@ -35,15 +33,19 @@ public class EventService extends ToghService {
         return event;
         
     }
-    public List<EventEntity> getEvents(long userId, String filterEvents) {
-        return eventRepository.getEvents( userId,filterEvents );
+   public List<EventEntity> getEvents(long userId, String filterEvents) {
+       return null;
+       // TODO IMPL return eventRepository.getEvents( userId,filterEvents );
     }
     
     public EventEntity getEventsById( long userId, long eventId) {
+        return null;
+        /* TODO IMPL 
         EventEntity event = eventRepository.getEventById( eventId );
         if (isAllowedUser( userId, event ))
             return event;
         return null; // not allowed !
+        */
     }
    
     /**

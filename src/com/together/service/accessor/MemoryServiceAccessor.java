@@ -28,7 +28,7 @@ public class MemoryServiceAccessor implements ServiceAccessor {
     @Override
     public EventService getEventService() {
         eventService.setAccessor(this);
-        eventService.setEventRepository(eventMemRepository);
+        // eventService.setEventRepository(eventMemRepository);
         return eventService;
     }
 

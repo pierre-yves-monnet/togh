@@ -21,9 +21,7 @@ import com.together.service.MonitorService.Chrono;
 
 @Service
 public class LoginService extends ToghService {
-    public LoginService() {
-        
-    }
+ 
     
     public static class LoginStatus {
         public boolean isConnected=false;
