@@ -33,7 +33,7 @@ https://start.spring.io/
 
 
 
-# Avancée
+# Avancée - question avec Christophe
 
 ## Créer la table et sauver des données:
 
@@ -88,8 +88,15 @@ En suivant https://www.baeldung.com/spring-data-jpa-generate-db-schema
 Bon, je ne vois pas comment on crée des services. L'avantage que je vois des services comme Bonita les utilisent, c'est qu'on peut avoir 2 implementation du service, et pouvoir basculer via la configuration d'une implementation à l'autre.
 Comment faire cela?
 
+Example : comment depuis ma classe LoginService, j'accede a ma classe UserService ? 
+Example 2 : j'ai 2 implementation de EventRepository ( EventMemRepository & EventSpringRepository). Comment puis passer la bonne classe a mon EventService?
+Actuel :
+	celui qui pilote est Application.java. J'ai donc un "serviceAccessor" avec 2 implementations : MemoryServiceAccessor a SpringServiceAccessor. Et Application donne un serviceAccessor a chaque service
+	Mais justement Spring fait ca : avec Bonita, on precise dans un XML quel est l'implementation des services : ici, je voudrais donner l'implementation des EventRepository.
+	
 
-## React or Angular ?
+
+# React or Angular ?
 Quand je vois ca 
 https://stackoverflow.com/questions/43927144/react-equivalent-to-ng-model
 et ca
@@ -100,8 +107,20 @@ ES6 + Angular ?
 
 
 
-https://daveceddia.com/angular-directives-mapped-to-react/#ng-click
+https://daveceddia.com/angular-directives-mapped-to-react/
 https://fr.reactjs.org/docs/getting-started.html
 
 
 https://www.taniarascia.com/getting-started-with-react/
+
+
+Spring;
+https://www.baeldung.com/spring-new-requestmapping-shortcuts
+
+## Collects 
+fetch("/login")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+          

@@ -1,5 +1,15 @@
 body>div.container {margin-top:10px;}
 
+
+.toghinput {
+	font-size: 15px; 
+	height: 30px; 
+	line-height: 24px; 
+	width: 95%; 
+	margin-top: 4px; 
+	margin-bottom: 15px
+}
+
 h4	{text-align:center;}
 
 .bs-component {

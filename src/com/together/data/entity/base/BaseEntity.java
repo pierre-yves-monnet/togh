@@ -1,11 +1,14 @@
 package com.together.data.entity.base;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -21,7 +24,9 @@ public class BaseEntity {
      */
     private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
      
-    
+
+    private final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
     /**
      * Save all attributes in a Map, then generic function like getMap(), toJson(), fromJson() are possible
      */
@@ -34,7 +39,12 @@ public class BaseEntity {
         id = System.currentTimeMillis();
     }
     
-      
+    /*
+     * Call only on simulation
+     */
+    public void setId( long id) {
+       this.id = id;
+    }
 
     /* -------------------------------------------------------------------- */
     /*                                                                      */
@@ -132,16 +142,33 @@ public class BaseEntity {
         attributes= (Map<String, Object>) JSONValue.parse( jsonSt );
     }
     
-    public String getJson() {
-        return  JSONValue.toJSONString( attributes );
+    public Map<String,Object> getMapForJson() {
+        // Attention, we have to manage the DATE attribut !
+        Map<String,Object> resultMap = new HashMap<>();
+        for (Entry<String, Object> entry : attributes.entrySet())
+        {
+            if (entry.getValue() instanceof String || entry.getValue() instanceof Long || entry.getValue() instanceof Integer)
+                resultMap.put( entry.getKey(), entry.getValue());
+            else if (entry.getValue() instanceof LocalDateTime)
+                resultMap.put( entry.getKey(), ((LocalDateTime)entry.getValue()).format(dateFormatter));
+            else 
+                resultMap.put( entry.getKey(), entry.getValue());
+        }
+        resultMap.put( "id", id);
+        return resultMap;
     }
     
-    public static String getListJson( List<?> listBaseEntity  ) {
+    /**
+     * 
+     * @param listBaseEntity
+     * @return
+     */
+    public static List<Map<String,Object>> getListForJson( List<?> listBaseEntity  ) {
         List<Map<String,Object>> jsonList= new ArrayList<>();
         for (Object entity  : listBaseEntity) {
-            jsonList.add( ((BaseEntity)entity).attributes);
+            jsonList.add( ((BaseEntity)entity).getMapForJson());
         }
-        return  JSONValue.toJSONString( jsonList );
+        return jsonList;
     }
     
 

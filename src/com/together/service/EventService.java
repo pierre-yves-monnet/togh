@@ -10,7 +10,7 @@ import com.together.repository.EventRepository;
 import com.together.repository.spring.EventSpringRepository;
 
 @Service
-public class EventService {
+public class EventService extends ToghService {
 
     
     private EventRepository eventRepository;
@@ -21,7 +21,7 @@ public class EventService {
     }
     
     
-    protected void setEventRepository( EventRepository eventRepository ) {
+    public void setEventRepository( EventRepository eventRepository ) {
         this.eventRepository = eventRepository;
     }
     
@@ -35,7 +35,25 @@ public class EventService {
         return event;
         
     }
-    public List<com.together.data.entity.EventEntity> getMyEvents(Long userId) {
-        return eventRepository.getMyEvents( userId );
+    public List<EventEntity> getEvents(long userId, String filterEvents) {
+        return eventRepository.getEvents( userId,filterEvents );
     }
+    
+    public EventEntity getEventsById( long userId, long eventId) {
+        EventEntity event = eventRepository.getEventById( eventId );
+        if (isAllowedUser( userId, event ))
+            return event;
+        return null; // not allowed !
+    }
+   
+    /**
+     * User must be the author, or a partipant, or should be invited
+     * @param userId
+     * @param event
+     * @return
+     */
+    private boolean isAllowedUser( long userId, EventEntity event) {
+        return true;
+    }
+    
 }

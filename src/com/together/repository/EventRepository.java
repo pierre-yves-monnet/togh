@@ -6,22 +6,27 @@ import com.together.data.entity.EventEntity;
 
 public interface EventRepository {
 
-    public List<EventEntity> getMyEvents(Long userId);
+    public List<EventEntity> getEvents(long userId, String filterEvent);
+    
+    
+    public EventEntity getEventById(long eventId);
     
     /**
      * Get any event where I'm involved, as a Author or a Participants
      * @param userId
      * @return
      */
-    public List<EventEntity> getInvolvedEvents(Long userId);
+    public List<EventEntity> getInvolvedEvents(long userId);
     
     /**
      * Get any actif event where I'm involved, as a Author or a Participants
      * @param userId
      * @return
      */
-    public List<EventEntity> getInvolvedActifEvents(Long userId);
+    public List<EventEntity> getInvolvedActifEvents(long userId);
 
+    
+    
     public void save(EventEntity event);
 
 }

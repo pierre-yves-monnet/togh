@@ -1,8 +1,8 @@
-<!--  http://localhost:7080/togh/index.html -->
+<!--  http://localhost:7080/togh/homeTog.html -->
 <head>
 <meta charset="utf-8">
 <title>Togh</title>
-<meta name="description" content="">
+<meta name="description" content="Home page events">
 <meta name="viewport" content="width=device-width">
 
 <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
@@ -51,30 +51,17 @@ body {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12" style="background:#067c04;">
-			<div style="color:white;text-align: right;">welcome</div>
+			<div style="color:white;text-align: right;">
+				<div id="reactBanner"> </div>
+			</div>
 		</div>
 	</div>
 </div>
 <div class="container">
-  <div class="row">
-	<div class="col-sm-4">
-		Welcome to Togh<p>
-		<img src="img/togh.jpg" style="width:150; height:150;" />
-	</div>
-		
-	<div class="col-sm-4">	
-		Login:<p>
-		<div id="reactLogin"> </div>
-	
-		
-		Connect with Google	
-	</div>
-	<div class="col-sm-2">
-		<button type="button" class="btn btn-primary">Inscription</button>
-	</div>
-  </div> <!--  end row -->
   
-   
+  		<div id="reactHomeTogh"> </div>
+  
+
    <footer class="footer">
    		<div class="row">
 			<div class="col-xs-12" style="background:#e0f9d6;">
@@ -84,6 +71,26 @@ body {
    </footer>
 </div>
 
- <script type="text/babel" src="js/Login.jsx"></script>
-    
+<!-- 
+<script>
+function onLoadIFrame() {
+	console.log("OnLoadIframeScript");
+	// Adjusting the iframe height onload event
+    var iframes = document.querySelectorAll("iframe");
+    for( var i = 0; i < iframes.length; i++) {
+    	var height=iframes[ i ].contentWindow.document.body.scrollHeight;
+    	height+= 20;
+    	console.log("OnLoadIframeScript: Found a Iframe, size="+iframes[ i ].contentWindow.document.body.scrollHeight+" set heigh="+height);
+        iframes[ i ].style.height = height + 'px';
+
+
+    }
+
+}
+</script>
+ -->
+<script type="text/babel" src="js/Banner.jsx"></script>
+<script type="text/babel" src="js/EventsList.jsx"></script>    
+<script type="text/babel" src="js/Event.jsx"></script>    
+<script type="text/babel" src="js/HomeTogh.jsx"></script>
 </body>
