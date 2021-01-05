@@ -1,13 +1,15 @@
 package com.together.repository;
 
-import com.together.data.entity.EndUserEntity;
+import org.springframework.data.repository.CrudRepository;
 
-public interface EndUserRepository {
+import com.together.entity.EndUserEntity;
+
+public interface EndUserRepository extends CrudRepository<EndUserEntity, Long>  {
     
-    public EndUserEntity getUserFromId(long id);
+    public EndUserEntity findById(long id);
     
-    public EndUserEntity getUserFromEmail(String email);
+    public EndUserEntity findByEmail(String email);
 
     
-    public EndUserEntity getUserFromConnectionStamp(String connectionStamp );
+    public EndUserEntity findByConnectionStamp(String connectionStamp );
 }
