@@ -165,8 +165,10 @@ public class BaseEntity {
      */
     public static List<Map<String,Object>> getListForJson( List<?> listBaseEntity  ) {
         List<Map<String,Object>> jsonList= new ArrayList<>();
+        if (listBaseEntity!=null) {
         for (Object entity  : listBaseEntity) {
             jsonList.add( ((BaseEntity)entity).getMapForJson());
+        }
         }
         return jsonList;
     }

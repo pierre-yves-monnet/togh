@@ -1,19 +1,13 @@
 package com.together.data.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.json.simple.JSONValue;
-
-import com.together.data.entity.base.BaseEntity;
 import com.together.data.entity.base.UserEntity;
 
 
@@ -32,7 +26,7 @@ public class EventEntity extends UserEntity {
 
     public EventEntity(long authorId, String name) {
         super(authorId, name);
-        setTypeEvent(TYPEEVENT.LIMITED);
+        setTypeEvent(SCOPEEVENT.LIMITED);
         setStatusEvent( STATUSEVENT.INPREPAR );
 
     }
@@ -50,13 +44,13 @@ public class EventEntity extends UserEntity {
      * @author Firstname Lastname
      *
      */
-    public enum TYPEEVENT { OPEN, LIMITED }
+    public enum SCOPEEVENT { OPEN, LIMITED }
     @Column(name = "typeevent", length=10, nullable = false )
-    public TYPEEVENT getTypeEvent() {
-        return TYPEEVENT.valueOf(getString("typeevent"));
+    public SCOPEEVENT getTypeEvent() {
+        return SCOPEEVENT.valueOf(getString("typeevent"));
     }
-    public void setTypeEvent( TYPEEVENT typeEvent) {
-        set( "typeevent", typeEvent==null ? TYPEEVENT.LIMITED.toString() : typeEvent.toString());
+    public void setTypeEvent( SCOPEEVENT typeEvent) {
+        set( "typeevent", typeEvent==null ? SCOPEEVENT.LIMITED.toString() : typeEvent.toString());
     }
 
     public enum STATUSEVENT { INPREPAR, INPROG, CLOSED, CANCELLED }

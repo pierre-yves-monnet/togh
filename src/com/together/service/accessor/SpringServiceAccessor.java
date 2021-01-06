@@ -11,7 +11,7 @@ import com.together.service.UserService;
 
 public class SpringServiceAccessor implements ServiceAccessor {
     
-    @Autowired
+    
     private EventSpringRepository eventSpringRepository;
 
   

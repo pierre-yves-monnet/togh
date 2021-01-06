@@ -67,7 +67,7 @@ class EventsList extends React.Component {
 	    };
     	fetch('events?filterEvents='+this.state.filterEvents, requestOptions)
 			.then(response => response.json())
-        	.then( data => this.setListEvents( data ));
+        	.then( httpPayload => this.setListEvents( httpPayload ));
 	}
 	
 	setListEvents( httpPayload ) {

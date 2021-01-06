@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.together.data.entity.EventEntity.TYPEEVENT;
+import com.together.data.entity.EventEntity.SCOPEEVENT;
 import com.together.data.entity.base.UserEntity;
 
 /* ******************************************************************************** */
