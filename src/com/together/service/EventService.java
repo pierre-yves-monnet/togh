@@ -5,19 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.together.data.entity.EventEntity;
+import com.together.entity.EventEntity;
+import com.together.entity.enumerations.StatusEventEnum;
 import com.together.repository.EventRepository;
-import com.together.repository.spring.EventSpringRepository;
 
 @Service
-public class EventService extends ToghService {
+public class EventService {
 
     
+<<<<<<< HEAD
     /*
     @ A u towired
     private EventSpringRepository eventRepository;
 */
     private EventRepository eventRepository;
+=======
+    @Autowired
+    private EventRepository eventRepository;
+
+    
+>>>>>>> cda
    
     
     public void setEventRepository( EventRepository eventRepository ) {
@@ -29,7 +36,9 @@ public class EventService extends ToghService {
     }
     
     public EventEntity createEvent( long userId) {
-        EventEntity event = new EventEntity(userId, "");
+        EventEntity event = new EventEntity();
+        event.setAuthorId(userId);
+        event.setStatusEvent(StatusEventEnum.INPREPAR);
         eventRepository.save(event);
         return event;
         

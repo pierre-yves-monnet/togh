@@ -1,9 +1,10 @@
 package com.together.service;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Logger;
+
+import org.springframework.stereotype.Service;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -13,8 +14,8 @@ import java.util.logging.Logger;
 /* the number of time a function is used for example    */
 /* -------------------------------------------------------------------- */
 
-
-public class MonitorService extends ToghService {
+@Service
+public class MonitorService {
     
     private Logger logger = Logger.getLogger( MonitorService.class.getName());
     private final static String logHeader = "com.togh.MonitorService";

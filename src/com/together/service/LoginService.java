@@ -13,15 +13,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.together.data.entity.EndUserEntity;
+
+import com.together.entity.EndUserEntity;
 import com.together.service.MonitorService.Chrono;
 
 
 
 @Service
-public class LoginService extends ToghService {
+public class LoginService {
  
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private MonitorService monitorService;
     
     public static class LoginStatus {
         public boolean isConnected=false;
@@ -32,7 +39,7 @@ public class LoginService extends ToghService {
             Map<String,Object> map = new HashMap<>();
             map.put("isConnected", isConnected);
             if (userConnected!=null)
-                map.put("user", userConnected.getMapForJson());
+                map.put("user", userConnected);
             return map;
         }
     }
@@ -45,8 +52,6 @@ public class LoginService extends ToghService {
      */
     public LoginStatus connectWithEmail(String email, String password) {
         LoginStatus loginStatus = new LoginStatus();
-        UserService userService=serviceAccessor.getUserService();
-        MonitorService monitorService=serviceAccessor.getMonitorService();
 
         Chrono chronoConnection = monitorService.startOperation("ConnectUserWithEmail");
         
@@ -113,7 +118,6 @@ public class LoginService extends ToghService {
             if (duration.toMinutes() < 2) 
                 return userConnected.userId;
         }
-        UserService userService=serviceAccessor.getUserService();
 
         // more than 2 mn or not in the cache? Get it from the database
         EndUserEntity endUserEntity = userService.getUserFromConnectionStamp( connectionStamp );
@@ -148,7 +152,6 @@ public class LoginService extends ToghService {
     public void disconnectUser(String connectionStamp ) {
         UserConnected userConnected = cacheUserConnected.get( connectionStamp);
         EndUserEntity endUserEntity = null;
-        UserService userService=serviceAccessor.getUserService();
 
         if (userConnected==null) {
             // search in the database
