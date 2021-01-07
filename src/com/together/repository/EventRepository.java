@@ -1,5 +1,7 @@
 package com.together.repository;
 
+import java.util.List;
+
 import com.together.entity.EventEntity;
 
 
@@ -9,5 +11,8 @@ import com.together.entity.EventEntity;
  */
 // extends EventRepository, CrudRepository<EventEntity, Long> JPARepository
 public interface EventRepository extends UserEntityRepository<EventEntity>  {
-
+    // public EventEntity getEventById( Long id );
+    
+    
+    // public List<EventEntity> getEvents( Long userId );
 }

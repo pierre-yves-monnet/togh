@@ -4,10 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,6 +36,14 @@ public class EventEntity extends UserEntity {
     @OneToMany(mappedBy = "event")
     private List<ParticipantEntity> participants;
 
+    public EventEntity(long authorId, String name) {
+        super(authorId, name);
+        setTypeEvent(TypeEventEnum.LIMITED);
+        setStatusEvent( StatusEventEnum.INPREPAR );
+
+    }
+    public EventEntity() { };
+        
 	public LocalDateTime getDateEvent() {
 		return dateEvent;
 	}

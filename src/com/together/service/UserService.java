@@ -24,6 +24,9 @@ public class UserService {
         return endUserRepository.findByConnectionStamp(connectionStamp);
     }
     
+    public void saveUser(EndUserEntity user ) {
+        endUserRepository.save( user );
+    }
 
  
     

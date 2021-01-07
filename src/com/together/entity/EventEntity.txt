@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.together.data.entity.base.UserEntity;
+import com.together.entity.ParticipantEntity;
 
 
 /* ******************************************************************************** */

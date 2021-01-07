@@ -22,6 +22,13 @@ public abstract class BaseEntity {
 
     private LocalDateTime datemodification;
     
+    public BaseEntity( String name ) {
+        this.name= name;
+        this.datecreation = LocalDateTime.now();
+    }
+    public BaseEntity() {
+        
+    }
 	public Long getId() {
 		return id;
 	}

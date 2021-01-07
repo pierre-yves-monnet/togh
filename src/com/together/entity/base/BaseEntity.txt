@@ -1,6 +1,7 @@
 package com.together.data.entity.base;
 
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,9 +15,12 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.MappedSuperclass;
 
 import org.json.simple.JSONValue;
-
+@MappedSuperclass
+@Inheritance
 public class BaseEntity {
     
     /** 
@@ -38,7 +42,9 @@ public class BaseEntity {
         // for the moment
         id = System.currentTimeMillis();
     }
-    
+    public BaseEntity() {
+        
+    }
     /*
      * Call only on simulation
      */

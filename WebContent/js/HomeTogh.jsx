@@ -25,6 +25,31 @@ class HomeTogh extends React.Component {
 		this.state.frameContent = 'event';
 	}
 
+
+	render2() {
+		console.log("HomeTogh.render frameContent=["+this.state.frameContent+"]");
+
+
+		return (
+				<div class="row">
+				<table style="width:100%">
+				<tr>
+					<td style="vertical-align: top;border-right: 3px solid #194063;vertical-align: top;" >
+						<MenuHtml />
+					</td>
+					<td>
+						{ this.state.frameContent == 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
+						{ this.state.frameContent == 'event' &&	<Event eventid={this.state.currenteventid} /> }
+					</td>
+				</tr>
+				</table>
+				</div>
+				)
+	
+	} // end render
+
+
+
 	render() {
 		console.log("HomeTogh.render frameContent=["+this.state.frameContent+"]");
 

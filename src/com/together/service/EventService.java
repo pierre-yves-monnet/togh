@@ -13,23 +13,16 @@ import com.together.repository.EventRepository;
 public class EventService {
 
     
-<<<<<<< HEAD
-    /*
-    @ A u towired
-    private EventSpringRepository eventRepository;
-*/
-    private EventRepository eventRepository;
-=======
+
     @Autowired
     private EventRepository eventRepository;
 
-    
->>>>>>> cda
    
-    
+    /*
     public void setEventRepository( EventRepository eventRepository ) {
         this.eventRepository = eventRepository;
     }
+    */
     
     public String index() {
         return "Greetings from Spring Boot!";
@@ -44,11 +37,13 @@ public class EventService {
         
     }
    public List<EventEntity> getEvents(long userId, String filterEvents) {
-       return eventRepository.getEvents( userId,filterEvents );
+       //        return eventRepository.getEvents( userId,filterEvents );
+       // return eventRepository.getEvents( userId);
+       return null;
     }
     
     public EventEntity getEventsById( long userId, long eventId) {
-        EventEntity event = eventRepository.getEventById( eventId );
+        EventEntity event = null; // eventRepository.getEventById( eventId );
         if (isAllowedUser( userId, event ))
             return event;
         return null; // not allowed !

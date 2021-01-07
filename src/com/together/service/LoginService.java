@@ -12,11 +12,13 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.together.entity.EndUserEntity;
+import com.together.service.LoginService.LoginStatus;
 import com.together.service.MonitorService.Chrono;
 
 
@@ -24,6 +26,10 @@ import com.together.service.MonitorService.Chrono;
 @Service
 public class LoginService {
  
+    
+    private Logger logger = Logger.getLogger(LoginService.class.getName());
+    private final static String logHeader ="LoginService:";
+    
 	@Autowired
 	private UserService userService;
 	
@@ -32,6 +38,7 @@ public class LoginService {
     
     public static class LoginStatus {
         public boolean isConnected=false;
+        public boolean isCorrect=false;
         public EndUserEntity userConnected;
         public String connectionStamp = "bob";
         
@@ -71,6 +78,52 @@ public class LoginService {
         monitorService.endOperation(chronoConnection);
         return loginStatus;
     }
+    /**
+     * Internal connection: we trust who call it and then we connect the user
+     */
+    public LoginStatus connectNoVerification(String email) {
+        LoginStatus loginStatus = new LoginStatus();
+
+        Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
+        
+        EndUserEntity endUser = userService.getFromEmail( email );
+        if (endUser==null) {
+            monitorService.endOperationWithStatus(chronoConnection, "NotExist");
+            return loginStatus;
+        }
+        loginStatus.isConnected=true;
+        loginStatus.userConnected = endUser;
+        loginStatus.connectionStamp = connectUser( endUser);
+        monitorService.endOperation(chronoConnection);
+        return loginStatus;
+        
+    }
+
+    
+    // create a new user
+    public LoginStatus registerNewUser(String email, String firstName, String lastName, String password)  {
+        LoginStatus loginStatus = new LoginStatus();
+        EndUserEntity endUser = userService.getFromEmail( email );
+        if (endUser !=null) {
+            return loginStatus;
+        }
+        endUser = new EndUserEntity();
+        endUser.setEmail(email);
+        endUser.setFirstname(firstName);
+        endUser.setLastName(lastName);
+        endUser.setPassword(password);
+        try {
+            userService.saveUser(endUser);
+            loginStatus.isCorrect=true;
+        } catch(Exception e) {
+            logger.severe(logHeader+"Can't create new user: "+e.toString());
+        }
+        return loginStatus;
+
+    }
+    
+
+    
     
     /* -------------------------------------------------------------------- */
     /*                                                                      */

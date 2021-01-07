@@ -15,6 +15,14 @@ public abstract class UserEntity extends BaseEntity {
     @Column(name="ACCESSDATA", length=20)
     private String accessdata = "local";
 
+    public UserEntity(long authorId, String name) {
+        super(name);
+        this.authorId = this.authorId;
+    }
+    public UserEntity() {
+        super();
+    }
+    
 	public Long getAuthorId() {
 		return authorId;
 	}
