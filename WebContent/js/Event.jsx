@@ -97,4 +97,6 @@ class Event extends React.Component {
 
 console.log("Event Render id=" + document.getElementById('reactEvent'));
 
-ReactDOM.render(<Event />, document.getElementById('reactEvent'));
+// the marker is maybe not in the page
+if (document.getElementById('reactEvent'))
+	ReactDOM.render(<Event />, document.getElementById('reactEvent'));

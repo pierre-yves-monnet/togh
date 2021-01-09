@@ -6,6 +6,7 @@ package com.together.controller;
 /* -------------------------------------------------------------------- */
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class EventControler {
         Long userId= loginService.isConnected(connectionStamp);
 
         if ( userId==null)
-            return null;
+            return new ArrayList<>();
         
         // EventService eventService = serciceAccessor.getEventService();
         return eventService.getEvents(userId, filterEvents);

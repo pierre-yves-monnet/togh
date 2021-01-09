@@ -1,5 +1,6 @@
 package com.together.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class EventService {
    public List<EventEntity> getEvents(long userId, String filterEvents) {
        //        return eventRepository.getEvents( userId,filterEvents );
        // return eventRepository.getEvents( userId);
-       return null;
+       return new ArrayList();
     }
     
     public EventEntity getEventsById( long userId, long eventId) {

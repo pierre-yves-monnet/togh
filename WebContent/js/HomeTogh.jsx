@@ -12,10 +12,11 @@ class HomeTogh extends React.Component {
 		this.state = { 'currenteventid' : null }
 		console.log("HomeTog.constructor");
 		this.homeSelectEvent = this.homeSelectEvent.bind(this)
+		this.clickMenu = this.clickMenu.bind(this)
 		
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		// this.connect = this.connect.bind(this);
-		this.state = { frameContent: "frameEvents" };
+		this.state = { frameContent: "frameEvents", showmenu : true };
 	}
 
 
@@ -25,6 +26,12 @@ class HomeTogh extends React.Component {
 		this.state.frameContent = 'event';
 	}
 
+	clickMenu( menuName ) {
+		console.log("HomeTogh.clickMenu: menuAction"+menuName);
+		this.setState( {'currenteventid' : null });
+		this.state.frameContent = 'frameEvents';
+		
+	}
 
 	render2() {
 		console.log("HomeTogh.render frameContent=["+this.state.frameContent+"]");
@@ -35,7 +42,8 @@ class HomeTogh extends React.Component {
 				<table style="width:100%">
 				<tr>
 					<td style="vertical-align: top;border-right: 3px solid #194063;vertical-align: top;" >
-						<MenuHtml />
+						<Menu />
+						
 					</td>
 					<td>
 						{ this.state.frameContent == 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
@@ -53,7 +61,26 @@ class HomeTogh extends React.Component {
 	render() {
 		console.log("HomeTogh.render frameContent=["+this.state.frameContent+"]");
 
+		
+		return (
+			<div class="row">
+			<table style={{width: "100%", "height": "100%"}}>
+				<tr>
+					<td style={{width:"10%", "vertical-align": "top", "border-right": "2px solid #194063"}} >
+							
+						<Menu clickMenu={this.clickMenu}/>
+					</td>
+					<td style={{padding: "10px", "vertical-align": "top"}} >
+						{ this.state.frameContent == 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
+						{ this.state.frameContent == 'event' && <Event eventid={this.state.currenteventid} />}
 
+					</td>
+				</tr>
+
+			</table>
+			</div>			
+		);
+		/*
 		if (this.state.frameContent == 'frameEvents') {
 			return (
 				<div class="row">
@@ -76,23 +103,10 @@ class HomeTogh extends React.Component {
 				</div>
 				)
 		}
-	
+	*/
 	} // end render
 	
 };
-
-function MenuHtml() {
-	return ( <div class="col-md-auto" > 
-				<div class="panel panel-info">
-					<div class="panel-heading" >Operations
-					</div>
-					<div class="panel panel-body" >
-						Events<p/>My profile<p/>My friends<p/>
-					</div>
-				</div>
-			</div>
-		)
-}
 
 
 // console.log("TogHome. Render id=" + document.getElementById('reactHomeTog'));

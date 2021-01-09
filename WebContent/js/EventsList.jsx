@@ -7,6 +7,9 @@
 // -----------------------------------------------------------
 
 class EventsList extends React.Component {
+	
+	// in props, a function must be give to the call back. When we click on a line, we call
+	// this.props.selectEvent( event.id)
 	constructor(props) {
 		super();
 		this.state = {  }
@@ -29,12 +32,12 @@ class EventsList extends React.Component {
 		
 		const listEventsHtml = this.state.events.map((event) =>
 			  <tr onClick={() =>this.props.selectEvent( event.id)}>
-				<td>Event:{event.name}</td>
+				<td>{event.name}</td>
 				<td>{event.dateevent}</td>
 			 </tr>
 		);
 		return ( 
-			<div> 
+			<div class="container-fluid"> 
 				<div class="row">
 					<table><tr><td><h1>List events</h1> </td>
 					 	<td><button type="button" class="btn btn-danger">Create an Event</button></td></tr>
@@ -78,6 +81,8 @@ class EventsList extends React.Component {
 }
 
 
-console.log("HomeEvent Render id=" + document.getElementById('reactEventsList'));
+console.log("EventsList Render id=" + document.getElementById('reactEventsList'));
 
-ReactDOM.render(<EventsList />, document.getElementById('reactEventsList'));
+// the marker is maybe not in the page
+if (document.getElementById('reactEventsList'))
+	ReactDOM.render(<EventsList />, document.getElementById('reactEventsList'));
