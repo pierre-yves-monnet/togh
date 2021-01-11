@@ -46,6 +46,8 @@ public class EndUserEntity extends BaseEntity {
 	@Column(name = "ConnectionLastActivity")
 	public LocalDateTime ConnectionLastActivity;
 
+   @Column(name = "sourceUser", length=10)
+
 	public boolean checkPassword(String passwordToCompare) {
 		if (passwordToCompare == null)
 			return false;
@@ -79,6 +81,22 @@ public class EndUserEntity extends BaseEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+	public enum SourceUserEnum {
+	    PORTAL(0), GOOGLE(1);
+	    private int valueEnum;
+	    private SourceUserEnum( int value ) {
+	        this.valueEnum=value;
+	    }
+	}
+	SourceUserEnum sourceUser;
+	public void setSourceUser(SourceUserEnum sourceUser) {
+        this.sourceUser= sourceUser;
+    }
+    public SourceUserEnum getSourceUser() {
+        return sourceUser;
+    }
 
 	public String getEmail() {
 		return email;

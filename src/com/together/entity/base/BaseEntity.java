@@ -1,6 +1,9 @@
 package com.together.entity.base;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +24,11 @@ public abstract class BaseEntity {
     private LocalDateTime datecreation;
 
     private LocalDateTime datemodification;
-    
+         
     public BaseEntity( String name ) {
         this.name= name;
-        this.datecreation = LocalDateTime.now();
+        setDatecreation( LocalDateTime.now(ZoneOffset.UTC));
+
     }
     public BaseEntity() {
         

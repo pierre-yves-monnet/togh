@@ -8,8 +8,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.together.entity.base.UserEntity;
-import com.together.entity.enumerations.StatusEventEnum;
-import com.together.entity.enumerations.TypeEventEnum;
 
 
 /* ******************************************************************************** */
@@ -27,9 +25,24 @@ public class EventEntity extends UserEntity {
 	
     private LocalDateTime dateEvent;
 
+    public enum TypeEventEnum {
+        OPEN("OPEN"), OPENCONFIRMATION("OPENCONF"), LIMITED("LIMITED"), SECRET("SECRET");
+        private String valueEnum;
+        private TypeEventEnum( String value ) {
+            this.valueEnum=value;
+        }       
+    }
     private TypeEventEnum typeEvent;
 
+    public enum StatusEventEnum {
+        INPREPAR("INPREP"), INPROG("INPROG"), CLOSED("CLOSED"), CANCELLED("CANCEL");
+        private String valueEnum;
+        private StatusEventEnum( String value ) {
+            this.valueEnum=value;
+        }       
+    }
     private StatusEventEnum statusEvent;
+    
     
     private String description;
     
@@ -52,14 +65,19 @@ public class EventEntity extends UserEntity {
 		this.dateEvent = dateEvent;
 	}
 
-	public TypeEventEnum getTypeEvent() {
-		return typeEvent;
-	}
 
+   
 	public void setTypeEvent(TypeEventEnum typeEvent) {
 		this.typeEvent = typeEvent;
 	}
 
+	   public TypeEventEnum getTypeEvent() {
+	        return typeEvent;
+	    }
+
+	
+	
+	
 	public StatusEventEnum getStatusEvent() {
 		return statusEvent;
 	}

@@ -37,7 +37,6 @@ class Login extends React.Component {
 				<input type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} class="toghinput" ></input><p />
 				<a class="btn btn-info" onClick={this.connect}>Connection</a><p />
 				<div dangerouslySetInnerHTML={{ __html: messageConnection}}></div>
-				
 			</div>
 		)
 	}
@@ -50,6 +49,7 @@ class Login extends React.Component {
 	
 	connect() {
 		console.log("Login.connect: ClickConnect email=" + this.toString());
+		console.log("Login.connect state="+JSON.stringify(this.state));
 		this.setState( {badConnection: false});
 		
 		const requestOptions = {
@@ -59,11 +59,11 @@ class Login extends React.Component {
 	    };
     	fetch('login?', requestOptions)
 			.then(response => response.json())
-        	.then( data => this.connectStatus( data ));
+        	.then( data => this.connectCallback( data ));
 	}
 	
-	connectStatus( httpPayload ) {
-		console.log("Login.connectStatus: connectStatus = "+JSON.stringify(httpPayload));
+	connectCallback( httpPayload ) {
+		console.log("Login.connectCallback: connectStatus = "+JSON.stringify(httpPayload));
  		if (httpPayload.isConnected) {
 			console.log("Loging.connectStatus : redirect then");
 			window.location.href = "homeTogh.html";
@@ -72,7 +72,8 @@ class Login extends React.Component {
 			this.setState( {badConnection: ! httpPayload.isConnected, isLog: httpPayload.isConnected});
 		}
 	} // end connectStatus
-}
+	
 
+}
 
 ReactDOM.render(<Login />, document.getElementById('reactLogin'));

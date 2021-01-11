@@ -2,6 +2,7 @@ package com.together.service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -18,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.together.entity.EndUserEntity;
+import com.together.entity.EndUserEntity.SourceUserEnum;
+import com.together.repository.EndUserRepository;
 import com.together.service.LoginService.LoginStatus;
 import com.together.service.MonitorService.Chrono;
 
@@ -67,6 +70,12 @@ public class LoginService {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
         }
+        // this user must be registered on the portal
+        if (! SourceUserEnum.PORTAL.equals( endUser.getSourceUser())) {
+            monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
+            return loginStatus;
+        }
+        
         // check the password
         if (! endUser.checkPassword(password)) {
             monitorService.endOperationWithStatus(chronoConnection, "BadPassword");
@@ -78,6 +87,8 @@ public class LoginService {
         monitorService.endOperation(chronoConnection);
         return loginStatus;
     }
+    
+    
     /**
      * Internal connection: we trust who call it and then we connect the user
      */
@@ -98,10 +109,33 @@ public class LoginService {
         return loginStatus;
         
     }
+    /**
+     * SSO connection: just give a name, and should connect Internal connection: we trust who call it and then we connect the user
+     */
+    public LoginStatus connectSSO(String email, boolean isGoogle) {
+        LoginStatus loginStatus = new LoginStatus();
 
+        Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
+        
+        EndUserEntity endUser = userService.getFromEmail(email);
+        if (endUser==null) {
+            monitorService.endOperationWithStatus(chronoConnection, "NotExist");
+            return loginStatus;
+        }
+        // not correct is the source is not the correct one
+        if (isGoogle && (! endUser.getSourceUser().equals(SourceUserEnum.GOOGLE)))
+            return loginStatus;
+        
+        loginStatus.isConnected=true;
+        loginStatus.userConnected = endUser;
+        loginStatus.connectionStamp = connectUser( endUser);
+        monitorService.endOperation(chronoConnection);
+        return loginStatus;
+        
+    }
     
     // create a new user
-    public LoginStatus registerNewUser(String email, String firstName, String lastName, String password)  {
+    public LoginStatus registerNewUser(String email, String firstName, String lastName, String password, SourceUserEnum sourceUser)  {
         LoginStatus loginStatus = new LoginStatus();
         EndUserEntity endUser = userService.getFromEmail( email );
         if (endUser !=null) {
@@ -112,6 +146,7 @@ public class LoginService {
         endUser.setFirstname(firstName);
         endUser.setLastName(lastName);
         endUser.setPassword(password);
+        endUser.setSourceUser(sourceUser);
         try {
             userService.saveUser(endUser);
             loginStatus.isCorrect=true;
@@ -134,8 +169,8 @@ public class LoginService {
 
     private class UserConnected {
         public long userId;
-        public LocalDateTime lastPing = LocalDateTime.now();
-        public LocalDateTime lastCheck = LocalDateTime.now();
+        public LocalDateTime lastPing = LocalDateTime.now(ZoneOffset.UTC);
+        public LocalDateTime lastCheck = LocalDateTime.now(ZoneOffset.UTC);
 
     }
     
@@ -146,9 +181,11 @@ public class LoginService {
         String randomStamp = String.valueOf(System.currentTimeMillis())+ String.valueOf( random.nextInt() );
         
         endUser.setConnectionStamp( randomStamp );
-        endUser.setConnectionTime( LocalDateTime.now());
-        endUser.setConnectionLastActivity( LocalDateTime.now());
+        endUser.setConnectionTime( LocalDateTime.now(ZoneOffset.UTC));
+        endUser.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
        
+        userService.saveUser(endUser);
+        
         // keep in the cache to be more efficient
         UserConnected userConnected = new UserConnected();
         userConnected.userId = endUser.getId();
@@ -220,4 +257,6 @@ public class LoginService {
         cacheUserConnected.remove(connectionStamp);
     }
 
+    
+  
 }

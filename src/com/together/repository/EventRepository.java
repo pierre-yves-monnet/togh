@@ -1,6 +1,11 @@
 package com.together.repository;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.together.entity.EventEntity;
 
@@ -10,9 +15,14 @@ import com.together.entity.EventEntity;
  * In Spring, the implementation is a interface, and should extends the CrudRepository. Then the service method use the @autowired to generate the class
  */
 // extends EventRepository, CrudRepository<EventEntity, Long> JPARepository
-public interface EventRepository extends UserEntityRepository<EventEntity>  {
-    // public EventEntity getEventById( Long id );
+public interface EventRepository extends JpaRepository<EventEntity, Long>  {
+    
+    @Query("SELECT e FROM EventEntity e WHERE e.id = :id")
+    EventEntity findByEventId( @Param("id") Long id );
+
+    EventEntity findByName( @Param("name") String name );
     
     
-    // public List<EventEntity> getEvents( Long userId );
+    @Query("SELECT e FROM EventEntity e WHERE e.authorId = :userid")
+    List<EventEntity> findEventsUser( @Param("userid") Long userId );
 }

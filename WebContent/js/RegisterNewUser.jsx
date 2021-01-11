@@ -31,8 +31,6 @@ class RegisterNewUser extends React.Component {
 
 
 	render() {
-		
-		
 		let messageRegistration='';
 		if (this.state.badRegistration) {
 			messageRegistration = messageRegistration.concat("<div style='color:red'>Account already exist</div>");
@@ -45,24 +43,32 @@ class RegisterNewUser extends React.Component {
 		}
 
 		if (this.state.showRegistration) {
-		return (
-			<div className="App">
-				<div class="requiredField">Email address</div><br />
-				<input type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} class="toghinput requiredField" required></input><br />
-				First name <span class="requiredField">.</span><br />
-				<input type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })} class="toghinput" required></input><br />
-				Last name<br />
-				<input type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })} class="toghinput" ></input><br />
-				Password <span class="requiredField">.</span><br />
-				<input type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} class="toghinput" required></input><br />
-				Retype Password <span class="requiredField">.</span><br />
-				<input type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} class="toghinput" required></input><br />
-				<div dangerouslySetInnerHTML={{ __html: messageBadPassword}}></div>
-				
-				<button class="btn btn-info" onClick={this.registerUser} disabled={ ! this.checkPassword() || ! this.validateForm()}>
-					{this.state.loading && <span class="loading">.</span>} Registration</button><p />
-				<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
-				
+			return (
+			<div className="App" class="panel panel-info">
+				<div class="panel-heading">
+					Registration 
+					<div style={{float: "right"}}>
+						<button class="glyphicon glyphicon-remove" onClick={this.hideRegistration} title="Close registration"></button>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="requiredField">Email address</div>
+					<br />
+					<input type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} class="toghinput requiredField" required></input><br />
+					First name <span class="requiredField">.</span><br />
+					<input type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })} class="toghinput" required></input><br />
+					Last name<br />
+					<input type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })} class="toghinput" ></input><br />
+					Password <span class="requiredField">.</span><br />
+					<input type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} class="toghinput" required></input><br />
+					Retype Password <span class="requiredField">.</span><br />
+					<input type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} class="toghinput" required></input><br />
+					<div dangerouslySetInnerHTML={{ __html: messageBadPassword}}></div>
+					
+					<button class="btn btn-info" onClick={this.registerUser} disabled={ ! this.checkPassword() || ! this.validateForm()}>
+						{this.state.loading && <span class="loading">.</span>} Registration</button><p />
+					<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
+				</div>
 			</div>
 		)
 		}
@@ -110,10 +116,10 @@ class RegisterNewUser extends React.Component {
 	    };
     	fetch('registernewuser?', requestOptions)
 			.then(response => response.json())
-        	.then( data => this.registerStatus( data ));
+        	.then( data => this.registerUserCallback( data ));
 	}
 	
-	registerStatus( httpPayload ) {
+	registerUserCallback( httpPayload ) {
 		console.log("RegisterNew.registerStatus: registerStatus = "+JSON.stringify(httpPayload));
  		if (httpPayload.isConnected) {
 			console.log("RegisterNew.connectStatus : redirect then");
