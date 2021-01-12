@@ -43,18 +43,33 @@ class Event extends React.Component {
 				
 		console.log("Event.render: section=secShoppinglist= "+this.state.show.secShoppinglist);
 		
+		var statusHtml;
+		
+		if (this.state.statusEvent == 'INPREPAR')
+			statusHtml= (<div class="label label-info">In preparation</div>);
+			
+		else if (this.state.statusEvent == 'INPROG')
+			statusHtml= (<div class="label label-info">Actif</div>);
+		else if (this.state.statusEvent == 'CLOSED')
+			statusHtml= (<div class="label label-warning">Done</div>);
+		else if (this.state.statusEvent == 'CANCEL')
+			statusHtml= (<div class="label label-danger">Cancelled</div>);
+		else 
+			statusHtml= (<div class="label label-danger">{this.state.statusEvent}</div>);
+
 		return ( 
 			<div> 
 				<div class="row">
 					<div class="col-sm-6">
-						<h1>Event {this.state.event.name}
+						<h1>{this.state.event.name}
 						</h1>
 					</div>
 					<div class="col-sm-2">
-						<button class="glyphicon glyphicon-pencil"></button>
+						satus={statusHtml}  = {this.state.statusEvent}
 					</div>
 					<div class="col-sm-2">
-					 	<select value={this.state.event.typeEvent} onChange={(event) => this.setAttribut( "event.typeEvent", event.target.value )}>
+						<div class="fieldlabel">Scope</div>
+					 	<select value={this.state.event.typeEvent} onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
 							<option value="OPEN">Open</option>
 							<option value="OPENCONF">Open on confirmation</option>
 							<option value="LIMITED">Limited</option>
@@ -65,18 +80,18 @@ class Event extends React.Component {
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<i>Name:</i><br/>
-						<input value={this.state.event.name} onChange={(event) => this.setAttribut( "event.name", event.target.value )} class="toghinput"></input><br />
+						<div class="fieldlabel">Name</div>
+						<input value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )} class="toghinput"></input><br />
 					</div>
 					<div class="col-sm-6">
-						<i>Date:</i><br/>
-						<input type="datetime" value={this.state.event.dateEvent} onChange={(event) => this.setAttribut( "event.dateEvent", event.target.value )} class="toghinput"></input><br />
+						<div class="fieldlabel">Date</div>
+						<input type="datetime" value={this.state.event.dateEvent} onChange={(event) => this.setAttribut( "dateEvent", event.target.value )} class="toghinput"></input><br />
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<i>Description</i>
-						<textarea  style={{width: "100%", "max-width": "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "event.description", event.target.value )}></textarea>
+						<div class="fieldlabel">Description</div>
+						<textarea  style={{width: "100%", "max-width": "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "description", event.target.value )}></textarea>
 					</div>
 				</div>	
 				
@@ -116,24 +131,26 @@ class Event extends React.Component {
 
 	// provide automatic save
 	setAttribut( name, value ) {
-		console.log("Event.setAttribut: attribut:"+name+" <= "+value);
-		var eventValue = { [name] : value};
+		console.log("Event.setAttribut: attribut:"+name+" <= "+value+" event="+this.state.event);
+		var eventValue = this.event;
+		eventValue[name]= value;
 		this.setState( { "event" : eventValue});
 		if (this.timer)
 			clearTimeout( this.timer);
-		this.timer = this.timer = setTimeout(() => { this.automaticSave();  }, 5000);
+		this.timer = this.timer = setTimeout(() => { this.automaticSave();  }, 2000);
 	}
 	
 	pingEvent() {
 		console.log("Event.pingEvent child change:"+JSON.stringify(this.state.event));
 		if (this.timer)
 			clearTimeout( this.timer);
-		this.timer = this.timer = setTimeout(() => { this.automaticSave();  }, 5000);
+		this.timer = this.timer = setTimeout(() => { this.automaticSave();  }, 2000);
 
 	}
 	automaticSave() {
-		console.log("Event.AutomaticSave event="+JSON.stringify(this.state.event));
-		
+		console.log("Event.AutomaticSave: event="+JSON.stringify(this.state.event));
+		if (this.timer)
+			clearTimeout( this.timer);
 		
 	}
 	

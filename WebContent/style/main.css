@@ -29,9 +29,12 @@ body>div.container {margin-top:10px;}
     color:red   
 }
 
+.fieldlabel {
+	 font-style: italic;
+}
 
 h1{
-	color: #550A21;
+	color: #ac1e4a;
 	overflow: hidden;
     max-width: 315px;
     white-space: nowrap;
@@ -54,6 +57,22 @@ h1{
     border-top: 2px solid #550A21; 
     margin: 10px 0 20px; 
 }
+
+/** when a list of item (shopping list..) this CSS is use**/ 
+.itemheader {
+	background-color: #99D9EA;
+	font-weight: bold;
+	font-size: 15px;
+}
+.itemcontent {
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 15px;
+	color: #2c3e50;
+	line-height: 1.42857143
+	
+}
+
+
 
 .bs-component {
     position: relative;

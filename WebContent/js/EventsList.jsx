@@ -30,7 +30,7 @@ class EventsList extends React.Component {
 		var listEventsHtml=[];
 		if ( this.state.events) {
 			listEventsHtml = this.state.events.map((event) =>
-			  <tr onClick={() =>this.props.selectEvent( event.id)}>
+			  <tr onClick={() =>this.props.selectEvent( event.id)} class="itemcontent">
 				<td><button class="glyphicon glyphicon glyphicon-tint" title="Access this event"></button> {event.name}</td>
 				<td>{event.dateevent}</td>
 			 </tr>
@@ -39,7 +39,7 @@ class EventsList extends React.Component {
 		return ( 
 			<div class="container-fluid"> 
 				<div class="row">
-					<h1>List events</h1>
+					<h1>Events</h1>
 					<div style={{float: "right"}}>
 					 	<button class="btn btn-info btn-lg" onClick={this.createEvent}>
 							<div class="glyphicon glyphicon-plus"> </div>&nbsp;Create an Event</button>
@@ -57,9 +57,9 @@ class EventsList extends React.Component {
 					<table class="table table-striped">
 					<tr>
 					
-						<th>Name</th>
-						<th>Date</th>
-						<th>Participants</th>
+						<th class="itemheader">Name</th>
+						<th class="itemheader">Date</th>
+						<th class="itemheader">Participants</th>
 					</tr>
 					{listEventsHtml}
 					</table>

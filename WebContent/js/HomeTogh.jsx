@@ -6,6 +6,10 @@
 //
 // -----------------------------------------------------------
 
+import React, { Component } from 'react';
+ 
+
+
 class HomeTogh extends React.Component {
 	constructor() {
 		super();
