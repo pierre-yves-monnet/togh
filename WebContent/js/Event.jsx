@@ -6,6 +6,8 @@
 //
 // -----------------------------------------------------------
 
+
+
 class Event extends React.Component {
 	constructor( props ) {
 		super();
@@ -59,6 +61,7 @@ class Event extends React.Component {
 
 		return ( 
 			<div> 
+				
 				<div class="row">
 					<div class="col-sm-6">
 						<h1>{this.state.event.name}

@@ -6,6 +6,9 @@
 //
 // -----------------------------------------------------------
 
+// import React from 'react';
+
+
 class EventsList extends React.Component {
 	
 	// in props, a function must be give to the call back. When we click on a line, we call

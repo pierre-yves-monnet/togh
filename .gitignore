@@ -3,3 +3,6 @@
 target/
 
 *.class
+/node_modules/
+/npm/
+build/

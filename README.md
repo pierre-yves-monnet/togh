@@ -3,6 +3,14 @@
 Tomcat server : D:\bonita\tomcat\Tomcat-9.0.41, port 7080
 http://localhost:7080/Together
 
+npm install
+npm install -S carbon-components carbon-components-react carbon-icons
+
+copier configuration/paths.js dans node_modules/react-scripts/config/path
+
+mvn clean install
+
+
 ## base de donnée
 
 Une base de donnée Postgres est crée. Le fichier applications.ressources défini cela:
@@ -34,53 +42,6 @@ https://start.spring.io/
 
 
 # Avancée - question avec Christophe
-
-## Créer la table et sauver des données:
-
-1/
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Field eventRepository in com.together.spring.Application required a bean of type 'com.together.data.entity.EventRepository' that could not be found.
-
-The injection point has the following annotations:
-	- @org.springframework.beans.factory.annotation.Autowired(required=true)
-
-
-Action:
-
-Consider defining a bean of type 'com.together.data.entity.EventRepository' in your configuration.
-==> Jamais trouvé la root cause, ca ne se produit plus
-
-2/
-Mais quand je demande un create, j'ai un
-
-java.lang.NullPointerException: null
-	at com.together.service.EventService.createEvent(EventService.java:35) ~[classes/:1.0.0]
-	at com.together.spring.Application.newevent(Application.java:69) ~[classes/:1.0.0]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_144]
-
-
-==> C'est la facon de Spring de dire que la table n'est pas crée?
-En effet, la table n'est pas créée. Rien dans les tutorial que je vois indique qu'il faut que je crée la table
-
-Et pourquoi je vois ca 
-2020-12-27 10:52:17.218  INFO 21352 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
-2020-12-27 10:52:17.300  INFO 21352 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51ms. Found 0 JPA repository interfaces.
-
-puis ca
-org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [D:\bonita\tomcat\Tomcat-9.0.41\wtpwebapps\togh\WEB-INF\classes\com\together\repository\spring\EventSpringRepository.class]; nested exception is java.nio.channels.ClosedByInterruptException
-
-
-3/ Script de creation
-En suivant https://www.baeldung.com/spring-data-jpa-generate-db-schema
- le fichier est bien crée, mais vide !
- 
-
-
 
 
 
@@ -123,6 +84,16 @@ https://blog.bitsrc.io/13-react-time-and-date-pickers-for-2020-d52d88d1ca0b
 
 Carbon:
 https://www.carbondesignsystem.com/developing/react-tutorial/overview
+install carbon
+https://www.npmjs.com/package/carbon-components
+npm install -S carbon-components carbon-components-react carbon-icons
+
+
+Install react in tomcat
+https://frugalisminds.com/deploy-react-js-in-tomcat/
+npm install
+mvn clean install
+
 
 
 ## Collects 

@@ -1,20 +1,18 @@
-<!--  http://localhost:7080/togh/homeTog.html -->
+<!--  http://localhost:7080/togh/index.html -->
 <head>
 <meta charset="utf-8">
 <title>Togh</title>
-<meta name="description" content="Home page events">
+<meta name="description" content="">
 <meta name="viewport" content="width=device-width">
 
 <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="style/main.css">
-
 
 <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
 <!--  Avec develpment, doesn't works... -->
 <!-- <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
 <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
-
 
 <!-- Google Sign In-->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -57,33 +55,57 @@ body {
 	
 <div class="container-fluid">
 	<div class="row">
-		<!--  green: #067c04; -->
-		<div class="col-xs-12 banner">
-			<div style="color:white;text-align: right;">
-				<div id="reactBanner"> </div>
-			</div>
+		<div class="col-xs-12" style="background:#067c04;">
+			<div style="color:white;text-align: right;">welcome</div>
 		</div>
 	</div>
 </div>
-<div class="container-fluid">
+<div class="container">
+  <div class="row">
+	<div class="col-sm-2">
+		Welcome to Togh<p>
+		<img src="img/togh.jpg" style="width:150; height:150;" />
+	</div>
+		
+	<div class="col-sm-5">	
+		Login:<p>
+		<div id="reactLogin"> </div>
+	
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		
+		
+		<a href="#" onclick="signOut();">Sign out</a> 
+	</div>
+	<div class="col-sm-5">
+		<div id="reactRegisterNewUser"></div>
+	</div>
+  </div> <!--  end row -->
   
-  		<div id="reactHomeTogh"> </div>
-  
-
+   
    <footer class="footer">
    		<div class="row">
-   		<!--  green light e0f9d6 -->
-			<div class="col-xs-12" style="background:#f1c4f4;">
+			<div class="col-xs-12" style="background:#e0f9d6;">
 				<div style="color:black;text-align: right;font-size: small">Py 2020</div>
 			</div>
 		</div>
    </footer>
 </div>
 
-<script type="text/babel" src="js/Banner.jsx"></script>
-<script type="text/babel" src="js/Menu.jsx"></script>   
-<script type="text/babel" src="js/EventsList.jsx"></script>     
-<script type="text/babel" src="js/Event.jsx"></script>     
-<script type="text/babel" src="js/EventShoppingList.jsx"></script>     
-<script type="text/babel" src="js/HomeTogh.jsx"></script>
+ <script type="text/babel" src="js/Login.jsx"></script>
+ <script type="text/babel" src="js/LoginGoogle.jsx"></script>
+ <script type="text/babel" src="js/RegisterNewUser.jsx"></script>
+
+<script >
+
+	// <a href="#" onclick="signOut();">Sign out</a> 
+  function signOut() {
+	  console.log("Index.signOut");
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+</script>    
+
 </body>
