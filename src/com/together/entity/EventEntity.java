@@ -46,7 +46,7 @@ public class EventEntity extends UserEntity {
     
     private String description;
     
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "participants")
     private List<ParticipantEntity> participants;
 
     public EventEntity(long authorId, String name) {

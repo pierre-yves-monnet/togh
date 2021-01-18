@@ -55,7 +55,41 @@ Actuel :
 	celui qui pilote est Application.java. J'ai donc un "serviceAccessor" avec 2 implementations : MemoryServiceAccessor a SpringServiceAccessor. Et Application donne un serviceAccessor a chaque service
 	Mais justement Spring fait ca : avec Bonita, on precise dans un XML quel est l'implementation des services : ici, je voudrais donner l'implementation des EventRepository.
 	
+# docker
+user togh: pass4togh
 
+## Creation d'une image a partir de tomcat
+pull tomcat ou qq chose comme ca
+
+## Creation du container togh
+docker run --name togh -h localhost -v /tmp/docker:/opt/togh -d -p 8080:8080 togh
+
+Ajout des composants vi & postgres
+apt-get update
+apt-get install vi
+apt-get install postgresql postgresql-contrib
+ 
+ su - postgres
+ pg_ctlcluster 11 main start
+ 
+ creation de la la base de donnée
+ \conninfo
+ psql
+ CREATE DATABASE together;
+ 
+ Ajout de npm 
+ A faire
+ 
+ 
+ 
+ ## Sauvegarder le container
+ 
+ ## importer le container
+  
+ 
+ Arret de docker
+  wsl --shutdown
+  
 
 # React or Angular ?
 Quand je vois ca 
@@ -94,6 +128,20 @@ https://frugalisminds.com/deploy-react-js-in-tomcat/
 npm install
 mvn clean install
 
+
+https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
+
+
+## install npm
+npx create-react-app togh
+
+### Install carbon
+https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e
+
+npm add carbon-components carbon-components-react carbon-icons
+npm add node-sass@4.14.1
+
+npm start
 
 
 ## Collects 
