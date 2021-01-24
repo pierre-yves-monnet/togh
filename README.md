@@ -76,13 +76,22 @@ public class EventService {
     private UserService userService;
 
 S1: Is that what we expect? is the userService created is the same instance, or 2 different instance (can I use some private variable in my userService class?)
-
+	IVAN ==> The default scope for a Service is singleton 
+	PY ==> Perfect, that when I want. The point is in the second class, I got a userService == null 
+	
+	
+	
 S2: Additionnal question: I see in Spring it's possible to have multiple implementation for a service, and then in a XML, declare which implementation you can use. It's possible to do that in XML (that the way my company does).
 How to do that in my application? I don't have any XML currently and it's working...
-
+ IVAN: You can use @Primary to denote the default implementation if you have more than one available to the JVM.
+ PY: Interresting. And how do you switch between them? Imagine that I have 2 Service "EventServiceBlue" and "EventServiceRed". 
+ 	- First, I should have maybe an interface or an abstract classe somewhere ? And this abstract class should have the tag @Service
+ 	- second, in which XML / or whatever file do I select the implementation Blue or Red ? Do you have a documentation somewhere about that?
 
 S3: I will need a scheduler. Something to execute a method every hour (to send email, chech status...). Is a scheduler service/ class exists in Spring?
-
+	 IVAN: try @Scheduled
+	 PY => Thank you
+	  
 
 
 ## JPA
@@ -111,7 +120,10 @@ JPA1: Why not?
 
 JPA2: Second question: imagine that I have now my application in production. Then, I have a new version to deploy: how can I get BEFORE the SQL script to update my database?
 In that situation, I don't want to drop column "last_name", then create "lastname" but I want to perform an "alter table ..." : how do I can detect changes, to prepare my SQL Script to update my database? I would like a tool which compare the existing schema with the new one and propose to me a SQL Script to update it.
-
+	IVAN:  JPA2: I don't know of a tool to automatically convert your database schema.  How would it figure out what the old column name vs the new column name without you telling it?  So I expect you would need to manually convert your database.  There is probably a nice GUI out there to make it a little easier. 
+	PY : I would expect a) a detection tool, b) a SQL script that I can review / then complete. That what I did in my previous company (we didn't use Hibernate). How do YOU do? You let Hibernate update for you your database?
+	
+	
 
 ------------------
 * Composition 1=n
@@ -134,6 +146,12 @@ ParticipantEntity:
     private EventEntity event;
 
 JPA3: Is that correct ?
+	IVAN:  @OneToMany(
+      mappedBy = "event",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+   ) 
+   PYM: Perfect ! It's work fine!: Thank you !
 
 To be honnest, I still not understand the role of the mappedof
 ----------------
