@@ -3,7 +3,6 @@
 target/
 
 *.class
-/node_modules/
-/npm/
+npm/node_modules/
 build/
 /npm.rar
