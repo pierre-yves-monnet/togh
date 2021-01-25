@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
+import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.base.UserEntity;
 import com.togh.repository.EndUserRepository;
 
@@ -57,6 +59,17 @@ public class EventEntity extends UserEntity {
     @Column( name="description", length=400)
     private String description;
     
+    
+    public enum DatePolicyEnum {
+        ONEDATE("ONEDATE"), PERIOD("PERIOD");
+        private String valueEnum;
+        private DatePolicyEnum( String value ) {
+            this.valueEnum=value;
+        }       
+    }
+    @Column( name="datePolicy")    
+    private DatePolicyEnum datePolicy;
+   
    
     public EventEntity(ToghUserEntity author, String name) {
         super(author, name);
@@ -106,7 +119,14 @@ public class EventEntity extends UserEntity {
 	public boolean isActif() {
         return getStatusEvent().equals(StatusEventEnum.INPREPAR) || getStatusEvent().equals(StatusEventEnum.INPROG);
     }
-   
+	 
+    public DatePolicyEnum getDatePolicy() {
+        return datePolicy;
+    }
+    
+    public void setDatePolicy(DatePolicyEnum datePolicy) {
+        this.datePolicy = datePolicy;
+    }
 	
 
     /* ******************************************************************************** */
@@ -122,7 +142,15 @@ public class EventEntity extends UserEntity {
     public List<ParticipantEntity> getParticipants() {
         return participants;
     }
-    public void addPartipants( ParticipantEntity participant) {
+    /** do not add a participant, which is a private information. So, don't take the risk to add accidentaly a participant from an another event
+     * 
+     * @param participant
+     */
+    public void addPartipant( ToghUserEntity userParticipant, ParticipantRoleEnum role, StatusEnum status ) {
+        ParticipantEntity participant = new ParticipantEntity();
+        participant.setUser(userParticipant);
+        participant.setRole(role);
+        participant.setStatus( status );
         participants.add( participant);
     }
     
@@ -130,5 +158,43 @@ public class EventEntity extends UserEntity {
         return "Event{" + super.toString() + "}";
     }
     
+ 
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Authorisation                                                                    */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    /**
+     * User must be the author, or a partipant, or should be invited
+     * @param userId
+     * @param event
+     * @return
+     */
+    public boolean isAllowedUser( long userId) {
+        return true;
+    }
+    /**
+     * is this user an organizer? Some operation, like invitation, is allowed only for organizer
+     * @param userId
+     * @return
+     */
+    public boolean isOrganizer( long userId) {
+        return true;
+    }
+    /**
+     * 
+     * is this user an active particpant? Active participant can modify an event (a observer is not a active participant) 
+     * @param userId
+     * @return
+     */
+    public boolean isActiveParticipant( long userId) {
+        return true;
+    }
+    
+    public ParticipantEntity getParticipant( long userId ) {
+        return null;
+    }
 
 }

@@ -23,6 +23,6 @@ public interface EventRepository extends JpaRepository<EventEntity, Long>  {
     EventEntity findByName( @Param("name") String name );
     
     
-    @Query("SELECT e FROM EventEntity e WHERE e.authorId = :userid")
+    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid")
     List<EventEntity> findEventsUser( @Param("userid") Long userId );
 }

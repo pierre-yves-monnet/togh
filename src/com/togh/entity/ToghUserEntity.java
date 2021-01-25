@@ -82,9 +82,13 @@ public class ToghUserEntity extends BaseEntity {
 		this.password = password;
 	}
 
+	/**
+	 * INVITED : an invitation is sent, the user did not confirm yet
+	 *
+	 */
 
 	public enum SourceUserEnum {
-	    PORTAL(0), GOOGLE(1);
+	    PORTAL(0), GOOGLE(1), INVITED(2);
 	    private int valueEnum;
 	    private SourceUserEnum( int value ) {
 	        this.valueEnum=value;

@@ -36,6 +36,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.service.EventService;
+import com.togh.service.FactoryService;
 import com.togh.service.LoginService;
 import com.togh.service.LoginService.LoginStatus;
 
@@ -45,13 +46,10 @@ public class RestLoginControler {
     private Logger logger = Logger.getLogger(RestLoginControler.class.getName());
     private final static String logHeader = "LoginControler: ";
     
-    
     @Autowired
-    private LoginService loginService;
+    private FactoryService factoryService;
 
-    @Autowired
-    private EventService eventService;
-  
+
     private final static String googleClientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com";
   
     /**
@@ -64,7 +62,7 @@ public class RestLoginControler {
     @PostMapping(value = "/api/login",produces = "application/json")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginStatus loginStatus = loginService.connectWithEmail(userData.get("email"), userData.get("password"));
+        LoginStatus loginStatus = factoryService.getLoginService().connectWithEmail(userData.get("email"), userData.get("password"));
         Cookie cookieConnection = new Cookie("togh", loginStatus.connectionToken);
         response.addCookie(cookieConnection);
         return loginStatus.getMap();
@@ -78,7 +76,7 @@ public class RestLoginControler {
     @CrossOrigin
     @PostMapping(value = "/api/logout",produces = "application/json")
     public String logout( @RequestHeader("Authorization") String connectionStamp) {
-        loginService.disconnectUser(connectionStamp);
+        factoryService.getLoginService().disconnectUser(connectionStamp);
         return "{}";
     }
   
@@ -119,12 +117,12 @@ public class RestLoginControler {
                 String picture = (String) payload.get("picture");
                 // fr, en..
                 String language= (String) payload.get("locale");
-                loginStatus = loginService.connectSSO( email, true);
+                loginStatus = factoryService.getLoginService().connectSSO( email, true);
                 if (! loginStatus.isConnected) {
                     // register it now !
-                    loginStatus = loginService.registerNewUser( email, firstName, lastName, /** No password */ null, SourceUserEnum.GOOGLE);
+                    loginStatus = factoryService.getLoginService().registerNewUser( email, firstName, lastName, /** No password */ null, SourceUserEnum.GOOGLE);
                     if (loginStatus.isCorrect)
-                        loginStatus = loginService.connectNoVerification(email );
+                        loginStatus = factoryService.getLoginService().connectNoVerification(email );
                 }
 
                 Cookie cookieConnection = new Cookie("togh", loginStatus.connectionToken);
@@ -148,16 +146,20 @@ public class RestLoginControler {
     @PostMapping(value = "/api/registernewuser",produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginStatus loginStatus = loginService.registerNewUser(userData.get("email"), userData.get("firstname"), userData.get("lastname"), userData.get("password"), SourceUserEnum.PORTAL);
+        LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), userData.get("firstname"), userData.get("lastname"), userData.get("password"), SourceUserEnum.PORTAL);
         if (loginStatus.isCorrect)
-            loginStatus = loginService.connectNoVerification(userData.get("email"));
+            loginStatus = factoryService.getLoginService().connectNoVerification(userData.get("email"));
             
         Cookie cookieConnection = new Cookie("togh", loginStatus.connectionToken);
         response.addCookie(cookieConnection);
         return loginStatus.getMap();
     }
   
-    
+    /**
+     * 
+     * @param message
+     * @return
+     */
     @CrossOrigin
     @GetMapping(value = "/api/ping",produces = "application/json")
     public Map<String,Object>  ping( @RequestParam(required = false) String message) {

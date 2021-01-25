@@ -26,40 +26,19 @@ import com.togh.entity.base.UserEntity;
 @Table(name = "PARTICIPANT")
 public class ParticipantEntity extends UserEntity {
 
-   
-    public static enum ParticipantRoleEnum {
-        ORGANIZER, PARTICIPANT, OBSERVER
+    public enum ParticipantRoleEnum {
+        OWNER, ORGANIZER, PARTICIPANT, OBSERVER
     }
 
     @Column(name = "role", length = 10, nullable = false)
     private ParticipantRoleEnum role;
 
-    /*
-     * public enum LIFESTATUS { INVITED, ACTIF, REJECTED }
-     * @Column(name = "lifestatus", length=10, nullable = false )
-     * public LIFESTATUS getLifeStatus() {
-     * return LIFESTATUS.valueOf(getString("lifestatus"));
-     * }
-     * public void setLifeStatus( LIFESTATUS lifestatus) {
-     * set( "lifestatus", lifestatus==null ? LIFESTATUS.INVITED.toString() : lifestatus.toString());
-     * }
-     */
-
-    // attachment to the Event is done at the event level.
-    // @ M anyToOne
-    // @ J oinColumn(name="event_id")
-    // p r ivate EventEntity event;
-
-    // @ManyToOne
-    // @JoinColumn(name = "eventid")
-    // private EventEntity event;
-
     // User attached to this participant
-    // @ O n e ToOne( fetch = FetchType.LAZY)    
-    // private ToghUserEntity user;
+    @OneToOne(fetch = FetchType.EAGER)
+    private ToghUserEntity user;
 
-    @Column(name = "userid")
-    private Long userId;
+    // @Column(name = "useridtemp")
+    // private Long userIdtemp;
 
     public enum StatusEnum {
         INVITED, ACTIF, LEFT
@@ -76,37 +55,29 @@ public class ParticipantEntity extends UserEntity {
         this.role = role;
     }
 
-    /*
-     * public ToghUserEntity getUser() {
-     * return user;
-     * }
-     * public void setUser(ToghUserEntity endUser ) {
-     * this.user=endUser;
-     * }
-     */
-    public Long getUserId() {
-        return userId;
+    public ToghUserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(ToghUserEntity endUser) {
+        this.user = endUser;
     }
-    
+
+    public Long getUserId() {
+        return user.getId();
+    }
+    /*
+     * public void setUserId(Long userId) {
+     * this.userIdtemp = userId;
+     * }
+     */
+
     public StatusEnum getStatus() {
         return status;
     }
 
-    
     public void setStatus(StatusEnum status) {
         this.status = status;
     }
 
-    /*
-     * public EventEntity getEvent() {
-     * return event;
-     * }
-     * public void setEvent(EventEntity event) {
-     * this.event = event;
-     * }
-     */
 }
