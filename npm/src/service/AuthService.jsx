@@ -65,10 +65,31 @@ class AuthService {
 				});
 		 } catch (err) {
         	// Handle Error Here
-        	console.log("connect.Error "+err);
+        	console.log("AuthService.connect.Error "+err);
 			return {};
 		}
     }
+	
+	//--------------------------- RegisterUser
+	//  param= { email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName };
+	registerUser(param, objToCall, fctToCallback) {
+		console.log("AuthService.registerUser: Register param=" + JSON.stringify(param));
+		var self=this;
+		try {
+			axios.post( this.restcallService.getUrl('/api/login/registernewuser?'), param)
+				.then( httpPayload => {
+					console.log("AuthService.registerStatus: registerStatus = "+JSON.stringify(httpPayload.data));
+					self.token = httpPayload.data.token;
+					self.user =  httpPayload.data.user;
+					self.connectMethod='DIRECT';
+					fctToCallback.call(objToCall, httpPayload.data);	
+				});
+		 } catch (err) {
+        	// Handle Error Here
+        	console.log("AuthService.registerUser.Error "+err);
+			return {};
+		}
+	}
 	
 	
 	//--------------------------------------- Logout

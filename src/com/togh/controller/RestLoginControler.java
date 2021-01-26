@@ -63,8 +63,6 @@ public class RestLoginControler {
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginStatus loginStatus = factoryService.getLoginService().connectWithEmail(userData.get("email"), userData.get("password"));
-        Cookie cookieConnection = new Cookie("togh", loginStatus.connectionToken);
-        response.addCookie(cookieConnection);
         return loginStatus.getMap();
     }
     
@@ -125,8 +123,6 @@ public class RestLoginControler {
                         loginStatus = factoryService.getLoginService().connectNoVerification(email );
                 }
 
-                Cookie cookieConnection = new Cookie("togh", loginStatus.connectionToken);
-                response.addCookie(cookieConnection);
                 return loginStatus.getMap();
              }
         } catch(Exception e) {
@@ -143,15 +139,13 @@ public class RestLoginControler {
      * @return
      */
     @CrossOrigin
-    @PostMapping(value = "/api/registernewuser",produces = "application/json")
+    @PostMapping(value = "/api/login/registernewuser",produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), userData.get("firstname"), userData.get("lastname"), userData.get("password"), SourceUserEnum.PORTAL);
         if (loginStatus.isCorrect)
             loginStatus = factoryService.getLoginService().connectNoVerification(userData.get("email"));
             
-        Cookie cookieConnection = new Cookie("togh", loginStatus.connectionToken);
-        response.addCookie(cookieConnection);
         return loginStatus.getMap();
     }
   

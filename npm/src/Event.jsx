@@ -89,11 +89,9 @@ class Event extends React.Component {
         							 
 							<DatePickerInput
 						    	placeholder="mm/dd/yyyy"
-								dateFormat="mm/dd/yyyy"
 						      	labelText="Date Picker label"
 						      	id="date-picker-simple"
 							  	value={this.state.event.dateEvent} 
-							  	showTimeSelect
 						    />
 						</DatePicker>
 						<TimePicker
@@ -291,7 +289,7 @@ class Event extends React.Component {
 
 	// provide automatic save
 	setAttribut( name, value ) {
-		console.log("Event.setAttribut: attribut:"+name+" <= "+value+" valueEvent="+JSON.stringify(this.state.event));
+		console.log("Event.setAttribut: attribut:"+name+" <= "+value+" typeof="+ (typeof value)+" EventinProgress="+JSON.stringify(this.state.event));
 		var eventValue = this.state.event;
 		eventValue[name]= value;
 

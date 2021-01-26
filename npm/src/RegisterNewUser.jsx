@@ -7,8 +7,13 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import FactoryService from './service/FactoryService';
+
+
 class RegisterNewUser extends React.Component {
-	constructor() {
+	
+	// this.props.authCallback()
+	constructor( props ) {
 		super();
 		// console.log("RegisterNewUser.constructor");
 
@@ -20,6 +25,7 @@ class RegisterNewUser extends React.Component {
 			email: 'pierre-yves.monnet@laposte.net', 
 			showRegistration:false,
 			badRegistration: false, 
+			registrationOk:false,
 			isLog: false,
 			loading : false }
 
@@ -36,10 +42,13 @@ class RegisterNewUser extends React.Component {
 		if (this.state.badRegistration) {
 			messageRegistration = messageRegistration.concat("<div style='color:red'>Account already exist</div>");
 		}
-		console.log("ResigerNewUser.render: badRegistration=" + this.state.badRegistration+" / message=["+messageRegistration+"]");
+		if (this.state.registrationOk) {
+			messageRegistration = messageRegistration.concat("<div style='color:green'>Account created</div>");
+		}
+		// console.log("ResigerNewUser.render: badRegistration=" + this.state.badRegistration+" / message=["+messageRegistration+"]");
 
 		let messageBadPassword='';
-		if (!   this.checkPassword()) {
+		if (! this.checkPassword()) {
 			messageBadPassword="<div style='color:red'>Password are different</div>";
 		}
 
@@ -80,6 +89,7 @@ class RegisterNewUser extends React.Component {
 		}
 	}
 
+	// -------------------------- Screen control
 	showRegistration() {
 		this.setState( {showRegistration: true });
 	}
@@ -107,27 +117,24 @@ class RegisterNewUser extends React.Component {
 	
 	// -------- Rest Call
 	registerUser() {
-		console.log("Login.connect: ClickConnect email=" + this.toString());
 		this.setState( {badRegistration: false, loading:true});
 		
-		const requestOptions = {
-	        method: 'POST',
-	        headers: { 'Content-Type': 'application/json' },
-	        body: JSON.stringify({ email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName })
-	    };
-    	fetch('registernewuser?', requestOptions)
-			.then(response => response.json())
-        	.then( data => this.registerUserCallback( data ));
+		var param= { email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName };
+		console.log("RegisterUser.registerUser: ClickRegistration, param" + JSON.stringify(param));
+
+		var authService =FactoryService.getInstance().getAuthService();  
+		authService.registerUser( param, this, this.registerUserCallback );
 	}
 	
 	registerUserCallback( httpPayload ) {
 		console.log("RegisterNew.registerStatus: registerStatus = "+JSON.stringify(httpPayload));
  		if (httpPayload.isConnected) {
 			console.log("RegisterNew.connectStatus : redirect then");
-			window.location.href = "homeTogh.html";
+			this.setState( {badRegistration: false, registrationOk:true,  loading:true});
+			this.props.authCallback( true );
 		}
 		else {
-			this.setState( {badConnection: true,  loading:false});
+			this.setState( {badRegistration: true,  registrationOk:false,  loading:false});
 		}
 	} // end connectStatus
 }
