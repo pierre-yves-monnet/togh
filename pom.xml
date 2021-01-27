@@ -118,6 +118,7 @@
 						<phase>compile</phase>
 						<configuration>
 							<executable>npm</executable>
+							<workingDirectory>npm</workingDirectory>
 							<arguments>
 								<argument>run</argument>
 								<argument>build</argument>

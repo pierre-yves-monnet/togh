@@ -350,12 +350,10 @@ npm add node-sass@4.14.1
 npm start
 
 
-## Collects 
-fetch("/login")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
+# Spring profile
+See https://www.baeldung.com/spring-profiles
+-Dspring.profiles.active=dev
+ 
           
           
           
