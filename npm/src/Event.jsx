@@ -18,6 +18,9 @@ import { TimePickerSelect } from 'carbon-components-react';
 import { SelectItem } from 'carbon-components-react';
 import { RadioButtonGroup } from 'carbon-components-react';
 import { RadioButton } from 'carbon-components-react';
+import { TextArea } from 'carbon-components-react';
+import { TextInput } from 'carbon-components-react';
+import { Select } from 'carbon-components-react';
 
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';
@@ -25,6 +28,7 @@ import { RadioButton } from 'carbon-components-react';
 
 import EventParticipants from './EventParticipants';
 import EventShoppingList from './EventShoppingList';
+import EventState from './EventState';
 
 
 class Event extends React.Component {
@@ -85,13 +89,23 @@ class Event extends React.Component {
 				{ this.state.event.datePolicy === 'ONEDATE' && (	
 					<div>
 						<DatePicker datePickerType="single"
-							onChange={(event) => this.setAttribut( "dateEvent", event ) }>
+							onChange={(dates) => {
+									console.log("SingleDatePicker :"+dates.length+" is an array "+Array.isArray(dates));
+ 
+									if (dates.length >= 1) {
+										console.log("SingleDatePicker set Date");
+										this.setAttribut( "dateEvent", dates[0] );
+									}
+								}
+							}
+						  	value={this.getDateListFromDate(this.state.event.dateEvent)}
+
+							>
         							 
 							<DatePickerInput
 						    	placeholder="mm/dd/yyyy"
-						      	labelText="Date Picker label"
+						      	labelText="Date Event"
 						      	id="date-picker-simple"
-							  	value={this.state.event.dateEvent} 
 						    />
 						</DatePicker>
 						<TimePicker
@@ -105,36 +119,32 @@ class Event extends React.Component {
 				{ this.state.event.datePolicy !== 'ONEDATE' && (	
 					<div>
 						 <DatePicker datePickerType="range"
-				  				onChange={(selectedDates, dateStr) => { 
-									console.log("RangeDatePicker :"+selectedDates+" dateStr="+dateStr);
+				  				onChange={(dates) => { 
+									if (dates.length > 1) {
+										this.setAttribut( "dateStartEvent", dates[0]);
+										this.setAttribut( "dateEndEvent", dates[1]);
+									}
 									}}
+								 	value={this.getDateListFromDate(this.state.event.dateStartEvent, this.state.event.dateEndEvent)}
+
 						>
 						      <DatePickerInput
 						        id="date-picker-input-id-start"
 						        placeholder="mm/dd/yyyy"
-						        labelText="Start date"
-								value={this.state.event.dateStartEvent} 
-								onChange={(selectedDates, dateStr) => { 
-									console.log("RangeDatePickerSTART :"+selectedDates+" dateStr="+dateStr);
-									}}
+						        labelText="Start date"								
 						      />
 						      <DatePickerInput
 						        id="date-picker-input-id-finish"
 						        placeholder="mm/dd/yyyy"
-						        labelText="End date"
-								value={this.state.event.dateEndEvent} 
-								onChange={(selectedDates, dateStr) => { 
-									console.log("RangeDatePickerEND :"+selectedDates+" dateStr="+dateStr);
-									}}
+						        labelText="End date"								
 						      />
 						</DatePicker>
 					</div> )
 				}
 
 				<div> <p/> Policy {this.state.event.datePolicy} 
-					Date: {this.state.event.dateEvent} 
 					Time: {this.state.event.timeEvent}
-					Range :{this.state.event.dateStartEvent} to {this.state.event.dateEndEvent}
+					
 				</div>
 							
 			</div>
@@ -152,23 +162,21 @@ class Event extends React.Component {
 					</div>
 					<div class="col-sm-2">
 						<div class="fieldlabel">Status</div>
-						{statusHtml}
+						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} />
 					</div>
 					<div class="col-sm-2">
-						<div class="fieldlabel">Scope</div>
-					 	<select value={this.state.event.typeEvent} onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
+					 	<Select  labelText="Scope" value={this.state.event.typeEvent} onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
 							<option value="OPEN">Open</option>
 							<option value="OPENCONF">Open on confirmation</option>
 							<option value="LIMITED">Limited</option>
 							<option value="SECRET">Secret</option>
-						</select>
+						</Select>
         			</div>
 	
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="fieldlabel">Name</div>
-						<input value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )} class="toghinput"></input><br />
+						<TextInput labelText="Name" value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )}></TextInput><br />
 					</div>
 					<div class="col-sm-6">
 						<div class="panel panel-info">
@@ -181,8 +189,7 @@ class Event extends React.Component {
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="fieldlabel">Description</div>
-						<textarea  style={{width: "100%", maxWidth: "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "description", event.target.value )}></textarea>
+						<TextArea labelText="Description" style={{width: "100%", maxWidth: "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "description", event.target.value )}></TextArea>
 					</div>
 				</div>	
 				
@@ -289,7 +296,8 @@ class Event extends React.Component {
 
 	// provide automatic save
 	setAttribut( name, value ) {
-		console.log("Event.setAttribut: attribut:"+name+" <= "+value+" typeof="+ (typeof value)+" EventinProgress="+JSON.stringify(this.state.event));
+		console.log("Event.setAttribute: attribut:"+name+" <= "+value+" typeof="+ (typeof value)+" EventinProgress="+JSON.stringify(this.state.event));
+		console.log("Event.setAttribute: isDate ? "+ (value instanceof Date)); 
 		var eventValue = this.state.event;
 		eventValue[name]= value;
 
@@ -364,6 +372,14 @@ class Event extends React.Component {
         }
 	}
 	
+	getDateListFromDate( dateone, datetwo ) {
+		console.log("Event.getDateListFromDate: ");
+		var listDates = [];
+		listDates.push( dateone);
+		if (datetwo)
+			listDates.push( datetwo);
+		return listDates;
+	}
 	
 	// -------------------------------------------- Call REST
 	refreshEvent() {
@@ -372,41 +388,20 @@ class Event extends React.Component {
 	
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.getJson( '/api/event?id='+this.state.eventid, httpPayload => {
-				console.log("Event.getPayload: get "+JSON.stringify(httpPayload.data)); 
+				console.log("Event.getPayload: get "+JSON.stringify(httpPayload.data));
+				
+				httpPayload.data.event.dateEvent= new Date();
+				httpPayload.data.event.name="HelloBob";
+								
 				this.setState( {event: httpPayload.data.event});
 				var show = this.state.show;
 				if (httpPayload.data.event && httpPayload.data.event.shoppinglist)
 					show.secShoppingList = 'COLLAPSE';
-				console.log("Event.getPayload: show "+JSON.stringify(show)); 
-
 				this.setState( {show: show});
 				});
-		/*
-		
- 		
-		const requestOptions = {
-	        method: 'GET',
-	        headers: { 'Content-Type': 'application/json' }
-	    };
-    	fetch('event?id='+this.state.eventid, requestOptions)
-			.then(response => response.json())
-        	.then( httpPayload => this.setEventCallback( httpPayload ));
-*/
-	}
-	/*
-	setEventCallback( httpPayload ) {
-		console.log("Event.getPayload: get "+JSON.stringify(httpPayload)); 
-		this.setState( {event: httpPayload.event});
-		var show = this.state.show;
-		if (httpPayload.event && httpPayload.event.shoppinglist)
-			show.secShoppingList = 'COLLAPSE';
-				
-		console.log("Event.getPayload: show "+JSON.stringify(show)); 
-
-		this.setState( {show: show});
-	}
-*/
 	
+	}
+		
 	
 	
 	// -------- Rest Call

@@ -87,7 +87,7 @@ class BodyTogh extends React.Component {
 						<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
 					</td>
 					<td style={{padding: "10px", "vertical-align": "top"}} >
-						{ this.state.frameContent === 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
+						{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
 						{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
 
 					</td>

@@ -308,6 +308,9 @@ mvn clean install
 
 
 https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
+https://react.semantic-ui.com/modules/dropdown/#types-search-selection
+
+Eleanora: epatricola@hotmail.com
 
 # 2 servers
 Comment avoir 2 servers?

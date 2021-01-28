@@ -7,6 +7,7 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { TextInput } from 'carbon-components-react';
 import FactoryService from './service/FactoryService';
 
 
@@ -49,10 +50,10 @@ class Login extends React.Component {
 
 		return (
 			<div className="App">
-				Email address<br />
-				<input type="string" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} class="toghinput" ></input><p />
-				Password<br />
-				<input type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} class="toghinput" ></input><p />
+				
+				 <TextInput labelText="Email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><p />
+				
+				<TextInput labelText="Password" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ></TextInput><p />
 				<a class="btn btn-info" onClick={this.loginConnect} href="/#">Connection</a><p />
 				<div dangerouslySetInnerHTML={{ __html: messageConnection}}></div>
 				<p/>
