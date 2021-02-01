@@ -2,6 +2,7 @@ package com.togh.entity.base;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
+
+import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
+import com.togh.entity.ToghUserEntity.ContextAccess;
 
 @MappedSuperclass
 @Inheritance
@@ -64,4 +68,24 @@ public abstract class BaseEntity {
 	public void setDatemodification(LocalDateTime datemodification) {
 		this.datemodification = datemodification;
 	}
+	
+	public String formatDate(LocalDateTime time ) {
+	    if (time== null)
+	        return null;
+	    //  datecreation: "2021-01-30T18:52:10.973"
+	    DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	    return time.format(sdt);
+	}
+    
+	  /**
+     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
+     * @param levelInformation
+     * @return
+     */
+    public Map<String,Object> getMap(ContextAccess contextAccess) {
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("id", id);
+        resultMap.put("name", name);
+        return resultMap;
+    }
 }

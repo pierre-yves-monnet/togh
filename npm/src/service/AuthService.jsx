@@ -29,7 +29,7 @@ class AuthService {
 	
 	isConnected() {
 		var connection=this.token !==null;
-		// console.log("AuthService.isConnected:"+connection)
+		console.log("AuthService.isConnected:"+connection+ +" in this="+this);
 		return connection;
 	}
 	
@@ -52,15 +52,17 @@ class AuthService {
 	
 	//--------------------------------------- Login
 	login( connectMethod, param, objToCall, fctToCallback ) {
-		console.log("AuthService.connect, param="+JSON.stringify(param));
+		console.log("AuthService.login, param="+JSON.stringify(param));
 		this.connectMethod = connectMethod;
 		var self=this;
 		try {
 			axios.post( this.restcallService.getUrl('/api/login?'), param)
 				.then( httpPayload => {
-					console.log("AuthService.connectCallBack, httpPayload="+JSON.stringify(httpPayload));
+					console.log("AuthService.loginCallback, httpPayload="+JSON.stringify(httpPayload));
 					self.token = httpPayload.data.token;
 					self.user =  httpPayload.data.user;
+					console.log("AuthService.loginCallback, token="+self.token+" in this="+self);
+
 					fctToCallback.call(objToCall, httpPayload.data);		
 				});
 		 } catch (err) {
@@ -70,6 +72,24 @@ class AuthService {
 		}
     }
 	
+	loginGoogle( googleInformation, objToCall, fctToCallback ) {
+		try {
+			console.log("AuthService.loginGoogle, objToCall="+objToCall+" googleInformation="+JSON.stringify(googleInformation));
+			var self=this;
+
+			axios.get( this.restcallService.getUrl('/api/logingoogle?idtokengoogle=' + googleInformation.tokenId))
+				.then( httpPayload => {
+					console.log("AuthService.loginGoogle, httpPayload="+JSON.stringify(httpPayload));
+					self.token = httpPayload.data.token;
+					self.user =  httpPayload.data.user;
+					fctToCallback.call(objToCall, httpPayload.data);		
+				});
+		 } catch (err) {
+        	// Handle Error Here
+        	console.log("AuthService.connect.Error "+err);
+			return {};
+		}
+	}
 	//--------------------------- RegisterUser
 	//  param= { email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName };
 	registerUser(param, objToCall, fctToCallback) {

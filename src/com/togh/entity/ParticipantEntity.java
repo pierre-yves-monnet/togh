@@ -1,5 +1,8 @@
 package com.togh.entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.togh.entity.EventEntity.TypeEventEnum;
+import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
 /* ******************************************************************************** */
@@ -23,11 +28,11 @@ import com.togh.entity.base.UserEntity;
 
 @Entity
 
-@Table(name = "PARTICIPANT")
+@Table(name = "EVTPARTICIPANT")
 public class ParticipantEntity extends UserEntity {
 
     public enum ParticipantRoleEnum {
-        OWNER, ORGANIZER, PARTICIPANT, OBSERVER
+        OWNER, ORGANIZER, PARTICIPANT, OBSERVER, WAITINGCONFIRMATION, EXTERNAL
     }
 
     @Column(name = "role", length = 10, nullable = false)
@@ -80,4 +85,19 @@ public class ParticipantEntity extends UserEntity {
         this.status = status;
     }
 
+   
+    /**
+     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
+     * @param levelInformation
+     * @return
+     */
+    public Map<String,Object> getMap( ContextAccess contextAccess) {
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("role", role==null ? null : role.toString());
+        resultMap.put("user", user.getMap(contextAccess ));
+        resultMap.put("id", getId());
+        resultMap.put("status", status==null ? null : status.toString());
+
+        return resultMap;
+    }
 }

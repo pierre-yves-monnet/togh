@@ -269,16 +269,7 @@ apt-get install postgresql postgresql-contrib
   wsl --shutdown
   
 
-# React or Angular ?
-Quand je vois ca 
-https://stackoverflow.com/questions/43927144/react-equivalent-to-ng-model
-et ca
-https://reactjsnews.com/NgRepeat-Equivalent-in-React#:~:text=React%20Alternative%20to%20ng%2Drepeat,native%20iterator%20directly%20in%20React.
-je me dit qu'Angular est vraiment mieux.
-
-ES6 + Angular ?
-
-
+# React
 
 https://daveceddia.com/angular-directives-mapped-to-react/
 https://fr.reactjs.org/docs/getting-started.html
@@ -312,33 +303,30 @@ https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 
 Eleanora: epatricola@hotmail.com
 
-# 2 servers
-Comment avoir 2 servers?
-J'ai donc maintenant npm sur 3000
-Spring sur 7080
-
-Comment faire un
-    fetch('api/login?', requestOptions)
-?
-1er option : mettre en dur le serveur    
-
-   	fetch('http://localhost:7080/togh/api/login?', requestOptions)
-==> Fonctionne, mais ne passera pas pour la production. Comment mettre cette header en properties quelques part ?
-
-2 eme option: mettre un proxy
-https://create-react-app.dev/docs/proxying-api-requests-in-development/
-Mais cela ne marche pas pour moi:
-[HPM] Error occurred while trying to proxy request /api/login? from localhost:3000 to http://localhost:7080 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+## Carbon
+import { DatePicker } from 'carbon-components-react';
+import { DatePickerInput } from 'carbon-components-react';
+import { TimePicker } from 'carbon-components-react';
+import { TimePickerSelect } from 'carbon-components-react';
+import { RadioButtonGroup } from 'carbon-components-react';
+import { RadioButton } from 'carbon-components-react';
+import { TextInput } from 'carbon-components-react';
+import { TextArea } from 'carbon-components-react';
+import { Select } from 'carbon-components-react';
+import { SelectItem } from 'carbon-components-react';
+import { Tag } from 'carbon-components-react';
 
 
-3eme option mettre dans le package.json
-"proxy": {
-    "/api/*":  {
-      "target": "http://localhost:8000",
-      "secure": false
-    }
-  },
-==> Proxy doit etre une String
+
+## Loaclisation
+https://phrase.com/blog/posts/react-i18n-best-libraries/
+
+https://www.freecodecamp.org/news/setting-up-internationalization-in-react-from-start-to-finish-6cb94a7af725/
+
+
+
+
+
 
 
 ## install npm
@@ -357,6 +345,16 @@ npm start
 See https://www.baeldung.com/spring-profiles
 -Dspring.profiles.active=dev
  
+# Database 
+update eventuser set name='birthday' where id=31;
+
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(40,'local', 1, 1, 30,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(41,'local', 1, 1, 28,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(42,'local', 1, 1, 29,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(43,'local', 1, 1, 5,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
+
           
           
           

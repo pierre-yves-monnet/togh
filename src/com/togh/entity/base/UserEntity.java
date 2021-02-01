@@ -1,5 +1,7 @@
 package com.togh.entity.base;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -8,6 +10,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
 import com.togh.entity.ToghUserEntity;
+import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 
 @MappedSuperclass
 @Inheritance
@@ -53,5 +57,17 @@ public abstract class UserEntity extends BaseEntity {
 	public void setAccessdata(String accessdata) {
 		this.accessdata = accessdata;
 	}
+	
+	/**
+	 * 
+	 * @param levelInformation
+	 * @return
+	 */
+    public Map<String,Object> getMap(ContextAccess contextAccess) {
+        Map<String,Object> resultMap = super.getMap( contextAccess );
+        if (contextAccess== contextAccess.ADMIN)
+            resultMap.put("authorid", this.getAuthorId());
+        return resultMap;
+    }
 
 }

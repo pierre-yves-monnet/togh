@@ -15,6 +15,8 @@ import { OverflowMenu } from 'carbon-components-react';
 import { OverflowMenuItem } from 'carbon-components-react';
 
 class EventState extends React.Component {
+	// this.props.changeState();
+
 	constructor( props ) {
 		super();
 		
@@ -42,14 +44,20 @@ class EventState extends React.Component {
 
 		var dropDownChangeHtml = (<div></div>);
 		if (this.state.modifyEvent) {
-			dropDownChangeHtml = (<OverflowMenu
-      							selectorPrimaryFocus={'.'+ this.state.statusEvent}
-    								>
-      							<OverflowMenuItem className="INPREPAR" itemText="In Preparation"/>
-      							<OverflowMenuItem className="INPROG" itemText="Actif"/>
-      							<OverflowMenuItem className="CLOSED" itemText="Done"/>
-      							<OverflowMenuItem className="CANCEL" itemText="Cancelled"/>
-        			</OverflowMenu>)
+			dropDownChangeHtml = (
+				<OverflowMenu
+      				selectorPrimaryFocus={'.'+ this.state.statusEvent}
+					onChange={(event) => { 
+						console.log("EventState: Click ");
+						this.props.changeState( event );
+						}
+					}
+    			>
+      				<OverflowMenuItem className="INPREPAR" itemText="In Preparation"/>
+      				<OverflowMenuItem className="INPROG" itemText="Actif"/>
+      				<OverflowMenuItem className="CLOSED" itemText="Done"/>
+      				<OverflowMenuItem className="CANCEL" itemText="Cancelled"/>
+        		</OverflowMenu>)
 		}
       
       

@@ -7,6 +7,9 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { TextInput } from 'carbon-components-react';
+
+
 import FactoryService from './service/FactoryService';
 
 
@@ -62,17 +65,16 @@ class RegisterNewUser extends React.Component {
 					</div>
 				</div>
 				<div class="panel-body">
-					<div class="requiredField">Email address</div>
 					<br />
-					<input type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} class="toghinput requiredField" required></input><br />
-					First name <span class="requiredField">.</span><br />
-					<input type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })} class="toghinput" required></input><br />
-					Last name<br />
-					<input type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })} class="toghinput" ></input><br />
-					Password <span class="requiredField">.</span><br />
-					<input type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} class="toghinput" required></input><br />
-					Retype Password <span class="requiredField">.</span><br />
-					<input type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} class="toghinput" required></input><br />
+					<TextInput labelText="Email" type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
+
+					<TextInput labelText="First name" type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })}  required></TextInput><br />
+
+					<TextInput labelText="Last name" type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })}  ></TextInput><br />
+
+					<TextInput labelText="Password" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  required></TextInput><br />
+
+					<TextInput labelText="Retype password" type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} required></TextInput><br />
 					<div dangerouslySetInnerHTML={{ __html: messageBadPassword}}></div>
 					
 					<button class="btn btn-info" onClick={this.registerUser} disabled={ ! this.checkPassword() || ! this.validateForm()}>

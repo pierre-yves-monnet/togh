@@ -7,6 +7,12 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { TextInput } from 'carbon-components-react';
+import { TextArea } from 'carbon-components-react';
+
+
+import ChooseParticipant from './ChooseParticipant';
+
 class EventShoppingList extends React.Component {
 	
 	// this.props.pingEvent()
@@ -25,7 +31,7 @@ class EventShoppingList extends React.Component {
 		this.addItem				= this.addItem.bind(this);
 	}
 
-
+	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		console.log("EventShoppinglist.render: visible="+this.state.show);
 		if (this.state.show === 'OFF')
@@ -33,10 +39,14 @@ class EventShoppingList extends React.Component {
 		// show the list
 		var listShoppingListHtml=[];
 		listShoppingListHtml= this.state.event.shoppinglist.map((item) =>
-			<tr class="itemcontent">
-				<td><input value={item.what} onChange={(event) => this.setChildAttribut( "what", event.target.value, item )} class="toghinput"></input></td>
-				<td><input value={item.description} onChange={(event) => this.setChildAttribut( "description", event.target.value, item )} class="toghinput"></input></td>
-				<td><input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input></td>
+			<tr key={item.id}>
+				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut( "what", event.target.value, item )}  labelText="" ></TextInput></td>
+				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut( "description", event.target.value, item )} class="toghinput" labelText=""></TextArea></td>
+				<td>
+					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} />
+				</td>
+				
+				
 				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem( item )} title="Remove this item"></button></td>
 			</tr>
 			);
@@ -53,16 +63,17 @@ class EventShoppingList extends React.Component {
 							<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
 						</div>
 					</div> 
-					{this.state.show ==='ON' && 	<table class="table table-striped">
-											<tr class="itemheader">
-											
-												<th>What</th>
-												<th>Description</th>
-												<th>Who</th>
-												<th></th>
-											</tr>
-											{listShoppingListHtml}
-											</table>
+					{this.state.show ==='ON' && <table class="table table-striped toghtable">
+							<thead>
+								<tr >
+									<th>What</th>
+									<th>Description</th>
+									<th>Who</th>
+									<th></th>
+								</tr>
+							</thead>											
+							{listShoppingListHtml}
+						</table>
 					}
 				</div>
 				);
@@ -93,7 +104,7 @@ class EventShoppingList extends React.Component {
 		console.log("EventShoppinglist.setChildAttribut: addItem item="+JSON.stringify(this.state.event));
 
 		var currentEvent = this.state.event;		
-		const newList = currentEvent.shoppinglist.concat( {"what": "HH"} );
+		const newList = currentEvent.shoppinglist.concat( {"what": ""} );
 		currentEvent.shoppinglist = newList;
 		this.setState( { "event" : currentEvent});
 		this.props.pingEvent();

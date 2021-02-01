@@ -3,20 +3,19 @@ package com.togh.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
+import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
-import com.togh.repository.EndUserRepository;
 
 
 /* ******************************************************************************** */
@@ -29,7 +28,7 @@ import com.togh.repository.EndUserRepository;
 // see https://github.com/spring-projects/spring-data-book/blob/master/jpa/src/main/java/com/oreilly/springdata/jpa/core/Customer.java
 
 @Entity
-@Table(name = "EVENTUSER")
+@Table(name = "EVT")
 public class EventEntity extends UserEntity {
 	
     @Column(name = "dateevent")
@@ -146,12 +145,13 @@ public class EventEntity extends UserEntity {
      * 
      * @param participant
      */
-    public void addPartipant( ToghUserEntity userParticipant, ParticipantRoleEnum role, StatusEnum status ) {
+    public ParticipantEntity addPartipant( ToghUserEntity userParticipant, ParticipantRoleEnum role, StatusEnum status ) {
         ParticipantEntity participant = new ParticipantEntity();
         participant.setUser(userParticipant);
         participant.setRole(role);
         participant.setStatus( status );
         participants.add( participant);
+        return participant;
     }
     
     public String toString() {
@@ -167,13 +167,32 @@ public class EventEntity extends UserEntity {
     /* ******************************************************************************** */
 
     /**
+     * isRegisteredParticipant. if this user is part of this event?
+     * @param userId
+     * @return
+     */
+    public boolean isAccess( long userId ) {
+        if (typeEvent ==  typeEvent.OPEN)
+            return true;
+        return getParticipant( userId ) != null;
+    }
+    /**
      * User must be the author, or a partipant, or should be invited
      * @param userId
      * @param event
      * @return
      */
-    public boolean isAllowedUser( long userId) {
-        return true;
+    public boolean isActiveParticipant( long userId) {
+        ParticipantEntity participant  = getParticipant( userId );
+        if (participant==null )
+            return false;
+        if (participant.getRole().equals(ParticipantRoleEnum.OWNER) 
+                || participant.getRole().equals(ParticipantRoleEnum.ORGANIZER)
+                || participant.getRole().equals(ParticipantRoleEnum.PARTICIPANT))
+        {
+            return participant.getStatus().equals( StatusEnum.ACTIF);
+        }
+        return false;
     }
     /**
      * is this user an organizer? Some operation, like invitation, is allowed only for organizer
@@ -181,20 +200,108 @@ public class EventEntity extends UserEntity {
      * @return
      */
     public boolean isOrganizer( long userId) {
-        return true;
+        ParticipantEntity participant  = getParticipant( userId );
+        if (participant==null )
+            return false;
+        return participant.getRole().equals(ParticipantRoleEnum.OWNER) ||participant.getRole().equals(ParticipantRoleEnum.ORGANIZER);
     }
     /**
-     * 
-     * is this user an active particpant? Active participant can modify an event (a observer is not a active participant) 
+     *  get the role of this userId in the event. Return null if the user does not have any participation
      * @param userId
      * @return
      */
-    public boolean isActiveParticipant( long userId) {
-        return true;
+    public ParticipantRoleEnum getRoleEnum( long userId) {
+        ParticipantEntity participant  = getParticipant( userId );
+        return (participant==null ? null : participant.getRole());
     }
     
-    public ParticipantEntity getParticipant( long userId ) {
+    /**
+     * 
+     * @param userId
+     * @return
+     */
+    public ParticipantEntity getParticipant( long userId) {
+        for (ParticipantEntity participant : participants) {
+            if (participant.getUserId().equals( userId))
+                return participant;
+        }
         return null;
     }
+    
+    
 
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Serialization                                                                    */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    
+    public Map<String,Object> getMap( ContextAccess contextAccess) {
+        Map<String,Object> resultMap = super.getMap( contextAccess );
+        
+        resultMap.put("dateEvent", formatDate( dateEvent));
+        resultMap.put("typeEvent", typeEvent==null ? null : typeEvent.toString());
+        resultMap.put("statusEvent", statusEvent==null ? null : statusEvent.toString());
+        resultMap.put("description", description);
+        
+        if (contextAccess != ContextAccess.PUBLICACCESS) { 
+            resultMap.put("datePolicy", datePolicy==null ? null : datePolicy.toString());
+        }
+       if (typeEvent == TypeEventEnum.OPEN || contextAccess != contextAccess.PUBLICACCESS) {
+           List<Map<String,Object>> listParticipantsMap = new ArrayList();
+           for (ParticipantEntity participant : participants) {
+               listParticipantsMap.add( participant.getMap(contextAccess));
+           }
+          resultMap.put("participants", listParticipantsMap);
+       }
+       
+        return resultMap;
+    }
+    
+    public Map<String,Object> getHeaderMap( ContextAccess contextAccess) {
+        Map<String,Object> resultMap = super.getMap( contextAccess );
+        resultMap.put("name", getName());
+        resultMap.put("dateEvent", formatDate( dateEvent));
+        resultMap.put("typeEvent", typeEvent==null ? null : typeEvent.toString());
+        resultMap.put("statusEvent", statusEvent==null ? null : statusEvent.toString());
+        return resultMap;
+
+    }
+        
+    /**
+     * According the user, and the type of event, the ContextAccess is calculated
+     * @param event
+     * @return
+     */
+    public ContextAccess getTypeAccess( long userId ) {
+        // event is public : so show onkly what you want to show to public
+        if (typeEvent == TypeEventEnum.OPEN)
+            return ContextAccess.PUBLICACCESS;
+        // event is secret : hide all at maximum
+        if (typeEvent == TypeEventEnum.SECRET)
+            return ContextAccess.SECRETACCESS;
+
+        ParticipantEntity participant = getParticipant( userId);
+        if (typeEvent == TypeEventEnum.OPENCONFIRMATION) {
+            // the user is not accepted : show the minimum.
+            if (participant == null)
+                return ContextAccess.SECRETACCESS;
+            if (participant.getStatus() == StatusEnum.ACTIF)
+                return ContextAccess.PUBLICACCESS;
+            // user left, or wait for the confirmation 
+            return ContextAccess.SECRETACCESS;
+        }
+        if (typeEvent == TypeEventEnum.LIMITED) {
+            if (participant == null)
+                return ContextAccess.SECRETACCESS;
+            if (participant.getStatus() == StatusEnum.ACTIF)
+                return ContextAccess.FRIENDACCESS;
+            // user left, or wait for the confirmation 
+            return ContextAccess.SECRETACCESS;
+        }
+        // should not be here
+        return ContextAccess.SECRETACCESS;
+        
+    }
 }

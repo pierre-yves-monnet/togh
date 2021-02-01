@@ -8,9 +8,13 @@
 
 import React from 'react';
 
+import { Select } from 'carbon-components-react';
+import { SelectItem } from 'carbon-components-react';
+
 
 import FactoryService from './service/FactoryService';
 
+import EventState from './EventState';
 
 class EventsList extends React.Component {
 
@@ -41,7 +45,9 @@ class EventsList extends React.Component {
 			listEventsHtml = this.state.events.map((event) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={event.id}>
 					<td><button class="glyphicon glyphicon glyphicon-tint" title="Access this event"></button></td>
-					<td>{event.statusEvent}</td>
+					<td>
+						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
+					</td>
 					<td>{event.name}</td>
 					<td>{event.dateevent}</td>
 				</tr>
@@ -65,14 +71,15 @@ class EventsList extends React.Component {
 
 				</div>
 				<div class="row">
-					<table class="table table-striped">
+					<table class="table table-striped toghtable">
+						<thead>
 						<tr>
-							<th class="itemheader"></th>
-							<th class="itemheader"></th>
-							<th class="itemheader">Name</th>
-							<th class="itemheader">Date</th>
-							<th class="itemheader">Participants</th>
+							<th></th>
+							<th colspan="2">Name</th>
+							<th>Date</th>
+							<th>Participants</th>
 						</tr>
+						</thead>
 						{listEventsHtml}
 					</table>
 				</div>

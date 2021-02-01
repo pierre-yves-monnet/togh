@@ -15,12 +15,12 @@ import { DatePicker } from 'carbon-components-react';
 import { DatePickerInput } from 'carbon-components-react';
 import { TimePicker } from 'carbon-components-react';
 import { TimePickerSelect } from 'carbon-components-react';
-import { SelectItem } from 'carbon-components-react';
 import { RadioButtonGroup } from 'carbon-components-react';
 import { RadioButton } from 'carbon-components-react';
 import { TextArea } from 'carbon-components-react';
 import { TextInput } from 'carbon-components-react';
 import { Select } from 'carbon-components-react';
+import { SelectItem } from 'carbon-components-react';
 
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';
@@ -50,6 +50,7 @@ class Event extends React.Component {
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.refreshEvent 		= this.refreshEvent.bind(this);
+		this.changeState 		= this.changeState.bind(this);
 		this.setAttribut 		= this.setAttribut.bind(this);
 		this.pingEvent			= this.pingEvent.bind(this);
 		this.refreshEvent();
@@ -68,9 +69,6 @@ class Event extends React.Component {
 				
 		console.log("Event.render: section=secShoppinglist= "+this.state.show.secShoppinglist);
 		
-		var statusHtml = this.getStatusHtml( this.state.event);
-		
-	
 				
 		var datePanelHtml = (
 			<div>
@@ -78,7 +76,7 @@ class Event extends React.Component {
 						valueSelected={this.state.event.datePolicy}
 						legend="Legend"
 						onChange={(event) => {
-							console.log("RadioGroup on change="+JSON.stringify(event));
+							console.log("RadioGroup.DataPolicy on change=");
         					
 							this.setAttribut( "datePolicy", event)}
 							}
@@ -142,10 +140,7 @@ class Event extends React.Component {
 					</div> )
 				}
 
-				<div> <p/> Policy {this.state.event.datePolicy} 
-					Time: {this.state.event.timeEvent}
-					
-				</div>
+			
 							
 			</div>
 			);
@@ -162,7 +157,7 @@ class Event extends React.Component {
 					</div>
 					<div class="col-sm-2">
 						<div class="fieldlabel">Status</div>
-						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} />
+						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeState} />
 					</div>
 					<div class="col-sm-2">
 					 	<Select  labelText="Scope" value={this.state.event.typeEvent} onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
@@ -215,7 +210,7 @@ class Event extends React.Component {
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title="Tasks" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title="Tasks" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-tasks"></div> 
 							</button>
 						</div>
@@ -227,37 +222,37 @@ class Event extends React.Component {
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secSurvey} title="Manage Survey" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secSurvey} title="Manage Survey" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-ok-circle"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secLocalisation} title="Where is the event?" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secLocalisation} title="Where is the event?" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-globe"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secItineraire} title="Itineraire" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secItineraire} title="Itineraire" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-road"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title="Point of interest" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title="Point of interest" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-camera"></div>
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secNight} title="What do we sleep?" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secNight} title="What do we sleep?" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-home"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secExpense} title="Expense" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secExpense} title="Expense" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-piggy-bank"></div>
 							</button>
 						</div>
@@ -279,25 +274,15 @@ class Event extends React.Component {
 	}
 
 
-	getStatusHtml( event ) {
-		if (event.statusEvent === 'INPREPAR')
-			return (<div class="label label-info">In preparation</div>);			
-		else if (this.state.event.statusEvent === 'INPROG')
-			return  (<div class="label label-info">Actif</div>);
-		else if (this.state.event.statusEvent === 'CLOSED')
-			return (<div class="label label-warning">Done</div>);
-		else if (this.state.event.statusEvent === 'CANCEL')
-			return (<div class="label label-danger">Cancelled</div>);
-		else 
-			return (<div class="label label-danger">{event.statusEvent}</div>);
+	changeState( event ) {
+		console.log("Event.setState event ");
+		// this.setAttribut("eventState", event);
 	}
-
 
 
 	// provide automatic save
 	setAttribut( name, value ) {
 		console.log("Event.setAttribute: attribut:"+name+" <= "+value+" typeof="+ (typeof value)+" EventinProgress="+JSON.stringify(this.state.event));
-		console.log("Event.setAttribute: isDate ? "+ (value instanceof Date)); 
 		var eventValue = this.state.event;
 		eventValue[name]= value;
 
@@ -340,12 +325,14 @@ class Event extends React.Component {
 	// Shopping list
 	accessShoppingList() {
 		console.log("accessShoppingList !!!!!!!!!!!!!!!!!!");
-		console.log("Event.accessShoppingList state="+JSON.stringify(this.state));
 		var event = this.state.event; 
 		if (!  event.shoppinglist ) {
 			console.log("Event.accessShoppingList: no shopping list exist, create one");
-			event.shoppinglist=[ {"what":"", "who":""} ];
-			event.shoppinglist.push( { "what": "line 2"});
+			event.shoppinglist=[];
+			
+			// add one line
+			event.shoppinglist.push( { 'what:':''});
+			
 			this.setState( {"event" : event })
 		}
 		this.showSection ("secShoppinglist");
@@ -390,9 +377,6 @@ class Event extends React.Component {
 		restCallService.getJson( '/api/event?id='+this.state.eventid, httpPayload => {
 				console.log("Event.getPayload: get "+JSON.stringify(httpPayload.data));
 				
-				httpPayload.data.event.dateEvent= new Date();
-				httpPayload.data.event.name="HelloBob";
-								
 				this.setState( {event: httpPayload.data.event});
 				var show = this.state.show;
 				if (httpPayload.data.event && httpPayload.data.event.shoppinglist)

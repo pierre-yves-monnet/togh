@@ -7,6 +7,8 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { Select } from 'carbon-components-react';
+import { Tag } from 'carbon-components-react';
 import Invitation from './Invitation';
 
 class EventParticipants extends React.Component {
@@ -24,7 +26,6 @@ class EventParticipants extends React.Component {
 		console.log("EventParticipant.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
 		this.collapse 				= this.collapse.bind(this);
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
-		this.addItem				= this.addItem.bind(this);
 	}
 
 
@@ -34,38 +35,44 @@ class EventParticipants extends React.Component {
 			return ( <div> </div>);
 		// show the list
 		var listParticipantListHtml=[];
+		//  
+		//	
+
 		listParticipantListHtml= this.state.event.participants.map((item) =>
-			<tr class="itemcontent" key={item.id}>
+			<tr key={item.id}>
 				<td>
-					{item.user !== '' && ( <div>{item.user.firstname} {item.user.lastname}</div>)}
-					{item.user === '' && ( <div>{item.user.email}</div>)}
-					{item.user.sourceUser === 'INVITED' && (<div class="label label-info">Invitation in progress</div>)}
+					{item.user !== '' && ( <div>{item.user.firstName} {item.user.lastName} {item.user.email} </div>)}
+					{item.user !== '' && item.user.phoneNumber && (<div> {item.user.phoneNumber} </div>)}
+					<p/>
+					{item.status === 'INVITED' && (<div class="label label-info">Invitation in progress</div>)}
+
 				</td>
 				
 				<td>
-					{item.role ==='OWNER' && (<div class="label label-info">Owner</div>)}
+					{item.role ==='OWNER' && (<div class="label label-info">Owner2</div>)}
+					
 					{item.role !=='OWNER' && (
-						<select value={item.role} onChange={(event) => this.setAttribut( "role", event.target.value )}>
+						<Select labelText="" disabled={item.status==='LEFT'} value={item.role} onChange={(event) => this.setAttribut( "role", event.target.value )}>
 								<option value="ORGANIZER">Organizer</option>
 								<option value="PARTICIPANT">Participant</option>
 								<option value="OBSERVER">Observer</option>
 								<option value="LEFT">Left</option>
-							</select>
+							</Select>
 							)}
+				</td>
+				<td>
+					{item.status==='ACTIF' && <Tag  type="green" title="Active participant">Actif</Tag>}			
+					{item.status==='INVITED' && <Tag  type="teal" title="Invited participant. The participant didn't confirm yet'">Invited</Tag>}			
+					{item.status==='LEFT' && <Tag  type="red" title="The participant left the event">Left</Tag>}			
 				</td>
 			</tr>
 			);
 		console.log("EventParticipant.render: list calculated from "+JSON.stringify( this.state.event.participantlist ));
 		console.log("EventParticipant.render: "+listParticipantListHtml.length);
 		
-		// invitation
-		var invitationPanel = ( <div class="panel panel-info">
-			<div class="panel-heading">Invitation</div>
-			<div class="panel-body">
-				<Invitation />
-			</div>
-			</div> );
 		
+			
+	
 		return ( <div>
 					<div class="eventsection"> 
 						<a href="secParticipantlist"></a>
@@ -73,17 +80,19 @@ class EventParticipants extends React.Component {
 							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down"></span>}
 							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"></span>}
 						</a> Participants
-						<div style={{float: "right"}}>
-							<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Invite a new person">Invit</button>
+						<div style={{float: "right"}}>							
+							<Invitation event={this.state.event} participantInvited={this.participantInvited}/>
 						</div>
 					</div> 
-					{this.state.showInvitation && {invitationPanel} }
-					{this.state.show ==='ON' && 	<table class="table table-striped">
-											<tr class="itemheader">
-											
-												<th>Person</th>
-												<th>Role</th>
-											</tr>
+
+					{this.state.show ==='ON' && 	<table class="table table-striped toghtable">
+											<thead>
+												<tr >
+													<th>Person</th>
+													<th>Role</th>
+													<th>Status</th>
+												</tr>
+											</thead>
 											{listParticipantListHtml}
 											</table>
 					}
@@ -112,16 +121,16 @@ class EventParticipants extends React.Component {
 		this.props.pingEvent();
 	}
 	
-	addItem() {
-		console.log("EventParticipant.setChildAttribut: addItem item="+JSON.stringify(this.state.event));
-
+	
+	
+	participantInvited( participant ) {
+		console.log("EventParticipant.participantinvated");
 		var currentEvent = this.state.event;		
-		const newList = currentEvent.shoppinglist.concat( {}  );
-		currentEvent.participantlist = newList;
+		const newList = currentEvent.participants.concat( participant  );
+		currentEvent.participants = newList;
 		this.setState( { "event" : currentEvent});
 		this.props.pingEvent();
 	}
-	
 	
 }		
 export default EventParticipants;

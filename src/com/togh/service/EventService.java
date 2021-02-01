@@ -84,7 +84,7 @@ public class EventService {
     */
     public EventEntity getEventById( long userId, long eventId) {
         EventEntity event =  eventRepository.findByEventId( eventId );
-        if (! event.isAllowedUser( userId ))
+        if (! event.isAccess( userId ))
             return null;
         
         // check consistant now
@@ -97,38 +97,42 @@ public class EventService {
    
     
     public enum InvitationStatus {
-        DONE, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, INVITATIONSENT, INVALIDUSERID
+        DONE, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
     };
     public class InvitationResult {
         public InvitationStatus status;
         public ToghUserEntity thogUserInvited;
+        
+        public ParticipantEntity participant;
     }
-    public InvitationResult invite( EventEntity event, Long userWhoInviteId, Long userInvitedId, String userInvitedEmail, ParticipantRoleEnum role ) {
+    public InvitationResult invite( EventEntity event, Long invitedByUserId, Long userInvitedId, String userInvitedEmail, ParticipantRoleEnum role, String message ) {
 
         MonitorService monitorService = factoryService.getMonitorService();
-
-        
-      
         InvitationResult invitationResult = new InvitationResult();
-        if (! event.isOrganizer(userWhoInviteId)) {
+        if (! event.isOrganizer(invitedByUserId)) {
             invitationResult.status =InvitationStatus.NOTAUTHORIZED;
             return invitationResult;
         }
+
         Chrono chronoInvitation = monitorService.startOperation("Invitation");
         ToghUserService userService = factoryService.getToghUserService();
         
-        // first, check if this email is a registered Thoguser
-        invitationResult.thogUserInvited = null; 
-        if (userInvitedEmail!=null) {
+        // first, check if this email is a registered Toghuser
+        ToghUserEntity invitedByUser = invitedByUserId==null ? null : userService.getUserFromId(invitedByUserId);
+        invitationResult.thogUserInvited = null;
+       
+        // invitation by the email? 
+        if (userInvitedId == null && userInvitedEmail!=null) {
             invitationResult.thogUserInvited  = userService.getFromEmail( userInvitedEmail );
             if (invitationResult.thogUserInvited ==null) {
                 // this is a real new user, register and invite it to join Togh
-                CreationStatus creationStatus = userService.inviteNewUser(userInvitedEmail);
+                CreationStatus creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByUser, event);
                 if (creationStatus.userEntity == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
                     return invitationResult;
                 }
                 invitationResult.thogUserInvited  = creationStatus.userEntity;
+                
                 invitationResult.status = InvitationStatus.INVITATIONSENT;
             }
         }
@@ -142,26 +146,28 @@ public class EventService {
         }
             
         // check if it is not already invited
-        ParticipantEntity alreadyInvitedParticipant=null;
-        for (ParticipantEntity participant : event.getParticipants()) {
-            if (invitationResult.thogUserInvited.getId().equals( participant.getUserId())) {
-                    alreadyInvitedParticipant= participant;
-                    break;
-                }
+        if (invitationResult.thogUserInvited==null) {
+            // Not by the email, not by the ID ? Something is not expected here
+            invitationResult.status = InvitationStatus.ERRORDURINVITATION;
+            monitorService.endOperation(chronoInvitation);
+            return invitationResult;
+            
         }
+        invitationResult.participant = event.getParticipant (invitationResult.thogUserInvited.getId() );
         // already in the participant list ? 
-        if (alreadyInvitedParticipant !=null) {
+        if (invitationResult.participant !=null) {
             invitationResult.status = InvitationStatus.ALREADYAPARTICIPANT;
             monitorService.endOperation(chronoInvitation);
             return invitationResult;
         }
         // create a new participant then!
-
-        event.addPartipant(invitationResult.thogUserInvited, role, StatusEnum.INVITED );
+        
+        invitationResult.participant = event.addPartipant(invitationResult.thogUserInvited, role, StatusEnum.INVITED );
         
         eventRepository.save(event);
         if (invitationResult.status == null)
             invitationResult.status = InvitationStatus.DONE;
+        
         monitorService.endOperation(chronoInvitation);
         return invitationResult;
     }

@@ -1,11 +1,6 @@
 package com.togh.controller;
 /* -------------------------------------------------------------------- */
 
-/*                                                                      */
-/* Login */
-/*                                                                      */
-/* -------------------------------------------------------------------- */
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +8,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,15 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
+import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.ToghUserEntity;
 import com.togh.service.EventService;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.FactoryService;
-import com.togh.service.LoginService;
-import com.togh.service.ToghUserService;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -49,7 +45,7 @@ public class RestEventControler {
     
     @CrossOrigin
     @GetMapping("/api/event/list")
-    public Map<String, Object> events(@RequestParam("filterEvents") String filterEvents, @RequestHeader("Authorization") String connectionStamp) {
+      public Map<String, Object> events(@RequestParam("filterEvents") String filterEvents, @RequestHeader("Authorization") String connectionStamp) {
         Long userId = factoryService.getLoginService().isConnected(connectionStamp);
 
         if (userId == null)
@@ -57,7 +53,12 @@ public class RestEventControler {
                     HttpStatus.UNAUTHORIZED, "Not connected");
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put("events", factoryService.getEventService().getEvents(userId, filterEvents));
+        List<Map<String,Object>> listEventsMap= new ArrayList<>();
+        for (EventEntity event : factoryService.getEventService().getEvents(userId, filterEvents)) {
+            listEventsMap.add( event.getHeaderMap( event.getTypeAccess(userId)));
+        }
+
+        payload.put("events", listEventsMap);
         // EventService eventService = serciceAccessor.getEventService();
         return payload;
 
@@ -76,7 +77,7 @@ public class RestEventControler {
                     HttpStatus.NOT_FOUND, "event not found");
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put("event", event);
+        payload.put("event", event.getMap( event.getTypeAccess(userId)));
 
         return payload;
 
@@ -112,7 +113,16 @@ public class RestEventControler {
     /**
      * Invite 
      *   /invite?
-     *   /invite?id=<eventid>&useremail=<userEmail>&role=<ORGANIZER|PARTICIPANT|OBSERVER>
+     *   /invitation?
+     *   {
+     *      var param = {
+            eventid : <eventid>,
+            email : '',
+            userid: <thoguserId>,
+            message : '',
+            role: <ORGANIZER|PARTICIPANT|OBSERVER>
+        }
+     *   payload
      *   {
      *      "eventid" :<eventId>,
      *      "useremail" :"email",
@@ -125,15 +135,16 @@ public class RestEventControler {
      */
     
     @CrossOrigin
-    @PostMapping("/api/event/invite")
-    public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData, @RequestParam @RequestHeader("Authorization") String connectionStamp) {
+    @PostMapping("/api/event/invitation")
+    public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData, @RequestHeader("Authorization") String connectionStamp) {
         Long userId = factoryService.getLoginService().isConnected(connectionStamp);
         if (userId == null) {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, "Not connected");
         }
         Long eventId = RestTool.getLong(inviteData, "eventid", null);
-        Long userInvitedId = RestTool.getLong(inviteData, "userid", null);
-        String userInvitedEmail = RestTool.getString(inviteData, "useremail", null);
+        Long inviteduserid= RestTool.getLong(inviteData, "inviteduserid", null);
+        String userInvitedEmail = RestTool.getString(inviteData, "email", null);
+        String message = RestTool.getString(inviteData, "message", null);
         String role = RestTool.getString(inviteData, "role", null);
         ParticipantRoleEnum roleEnum;
         try {
@@ -146,18 +157,21 @@ public class RestEventControler {
         if (eventId == null)
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Event not found");
 
-        
-        
         EventService eventService = factoryService.getEventService();
         EventEntity event = eventService.getEventById(userId, eventId);
         if (event==null) {
             // same error as not found: we don't want to give the information that the event exist
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Event not found");
         }
-     
-        InvitationResult invitationResult = eventService.invite( event, userId, userInvitedId, userInvitedEmail, roleEnum );
+ 
+                
+        InvitationResult invitationResult = eventService.invite( event, userId, inviteduserid, userInvitedEmail, roleEnum, message );
+        
         Map<String,Object> resultMap = new HashMap<>();
+        if ( invitationResult.participant!=null)
+            resultMap.putAll( invitationResult.participant.getMap( ContextAccess.PUBLICACCESS ));
         resultMap.put("status", invitationResult.status.toString());
+        resultMap.put("isinvitationsend", invitationResult.status == InvitationStatus.INVITATIONSENT);
         return resultMap;
     }
 }

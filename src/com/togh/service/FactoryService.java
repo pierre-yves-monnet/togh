@@ -30,7 +30,10 @@ public class FactoryService {
 
     @Autowired
     private MonitorService monitorService;
-    
+
+    @Autowired
+    private NotifyService notifyService;
+
     /*private static FactoryService factoryService = new FactoryService();
     public static FactoryService getInstance() {
         return factoryService;
@@ -52,4 +55,7 @@ public class FactoryService {
         return monitorService;
     }
 
+    public NotifyService getNotifyService() {
+        return notifyService;
+    }
 }

@@ -2,15 +2,15 @@ body>div.container {margin-top:10px;}
 
 
 .toghinput {
-	font-size: 15px; 
-	height: 30px; 
-	line-height: 24px; 
-	width: 95%; 
-	margin-top: 4px; 
-	margin-bottom: 15px;
+	
 }
-
-
+/* font-size: 15px; 
+ 	height: 30px; 
+ 	line-height: 24px; 
+ 	width: 95%; 
+ 	margin-top: 4px; 
+ 	margin-bottom: 15px;
+*/
 .Loading {
 	display: inline-block;
 	vertical-align: middle;
@@ -66,16 +66,17 @@ h1{
 /** when a list of item (shopping list..) this CSS is use
 background-color: #99D9EA;
 **/ 
-.itemheader {
+table.toghtable th {
 	background-color: #b3cde3;
 	font-weight: bold;
-	font-size: 15px;
 }
-.itemcontent {
+table.toghtable td {
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 15px;
 	color: #2c3e50;
-	line-height: 1.42857143
+	line-height: 1.42857143;
+	line-height:40px;
+	padding-right: 10px;
 	
 }
 

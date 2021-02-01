@@ -1,12 +1,23 @@
 package com.togh.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.h2.engine.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.support.TransactionTemplate;
 
+import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
+import com.togh.logevent.LogEvent;
+import com.togh.logevent.LogEventFactory;
 import com.togh.repository.EndUserRepository;
 
 @Service
@@ -22,6 +33,12 @@ public class ToghUserService {
 	@Autowired
     private EndUserRepository endUserRepository;
     
+	@Autowired
+    private PlatformTransactionManager transactionManager;
+
+    private TransactionTemplate transactionTemplate;
+
+    
     
     public ToghUserEntity getUserFromId(long userId ) {
         return endUserRepository.findById( userId );
@@ -35,7 +52,17 @@ public class ToghUserService {
     }
     
     public void saveUser(ToghUserEntity user ) {
-        endUserRepository.save( user );
+        transactionTemplate = new TransactionTemplate(transactionManager);
+        DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
+        TransactionStatus status = transactionManager.getTransaction(definition);
+        
+        try {
+            endUserRepository.save( user );
+            transactionManager.commit(status);
+        } catch (Exception ex) {
+            transactionManager.rollback(status);
+        }
+        
     }
 
  
@@ -69,7 +96,7 @@ public class ToghUserService {
         boolean isEmailIsCorrect=false;
         boolean isEmailSent=false;
     }
-    public CreationStatus inviteNewUser(String email) {
+    public CreationStatus inviteNewUser(String email, ToghUserEntity invitedByUser, EventEntity event) {
         CreationStatus invitationStatus= new CreationStatus();
         try {
             // Check the email now: we don't want to create a bad user
@@ -80,10 +107,17 @@ public class ToghUserService {
         invitationStatus.userEntity.setEmail(email);
         invitationStatus.userEntity.setSourceUser(SourceUserEnum.INVITED);
 
+        
         factoryService.getToghUserService().saveUser(invitationStatus.userEntity);
         
         // send the email now
         invitationStatus.isEmailSent=true;
+        NotifyService notifyService = factoryService.getNotifyService();
+        List<LogEvent> listEvents = notifyService.notifyNewUserInEvent( invitationStatus.userEntity, invitedByUser, event);
+        if (LogEventFactory.isError(listEvents))
+            invitationStatus.isEmailSent=false;
+        else
+            invitationStatus.isEmailSent=true;
         
             return invitationStatus;
         } catch(Exception e) {
@@ -92,4 +126,10 @@ public class ToghUserService {
             return invitationStatus;
         }
     }
+    
+    public List<ToghUserEntity> searchUsers( String firstName, String lastName, String phoneNumber, String email) {
+        
+        return endUserRepository.findByAttributes( firstName, lastName, phoneNumber, email);
+    }
+    
 }

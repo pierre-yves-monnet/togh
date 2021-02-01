@@ -59,7 +59,6 @@ class BodyTogh extends React.Component {
 							</div>
 								
 							<div class="col-sm-5">	
-								Login:<p/>
 								<Login authCallback={this.authCallback}/>
 							</div>
 							<div class="col-sm-5">
