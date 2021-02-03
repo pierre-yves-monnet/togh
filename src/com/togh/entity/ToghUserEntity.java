@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,32 +41,29 @@ public class ToghUserEntity extends BaseEntity {
 	@Column(name = "email", length = 100)
 	private String email;
 
-	public enum VisibilityEnum {
-	        ALWAYS("ALWAYS"), ALWAYBUTSEARCH("NOSEARCH"), LIMITEDEVENT("LIMITEDEVT"), NEVER("NEVER");
-	        private String valueEnum;
-	        private VisibilityEnum( String value ) {
-	            this.valueEnum=value;
-	        }       
-	    }
-    @Column(name = "EmailVisibility", length=10)
-    private  VisibilityEnum emailVisibility = VisibilityEnum.ALWAYS;
+	public enum VisibilityEnum {ALWAYS, ALWAYBUTSEARCH, LIMITEDEVENT, NEVER }
+	
+    @Column(name = "emailvisibility", length=15, nullable=false)
+    @Enumerated(EnumType.STRING)    
+    private VisibilityEnum emailVisibility = VisibilityEnum.ALWAYS;
 
-    @Column(name = "phoneNumber", length = 100)
+    @Column(name = "phonenumber", length = 100)
     private String phoneNumber;
 	
-    @Column(name = "PhoneVisibility" , length=10)
+    @Column(name = "phonevisibility" , length=15, nullable=false)
+    @Enumerated(EnumType.STRING)
     private VisibilityEnum phoneNumberVisibility = VisibilityEnum.ALWAYS;
     
     
 
-	@Column(name = "ConnectStamp", length = 100)
+	@Column(name = "connectstamp", length = 100)
 	private String connectionStamp;
 
 	@Column(name = "connectiontime")
 	private LocalDateTime connectionTime;
 
 	@Column(name = "connectionlastactivity")
-	public LocalDateTime ConnectionLastActivity;
+	public LocalDateTime connectionLastActivity;
 
 	/**
 	 * The user accept to be part of a search result, to be invited directly in an event
@@ -72,8 +71,6 @@ public class ToghUserEntity extends BaseEntity {
 	@Column(name = "searchable")
 	Boolean searchable=true;
 	
-   @Column(name = "sourceUser", length=10)
-
 	public boolean checkPassword(String passwordToCompare) {
 		if (passwordToCompare == null)
 			return false;
@@ -113,19 +110,17 @@ public class ToghUserEntity extends BaseEntity {
 	 *
 	 */
 
-	public enum SourceUserEnum {
-	    PORTAL(0), GOOGLE(1), INVITED(2);
-	    private int valueEnum;
-	    private SourceUserEnum( int value ) {
-	        this.valueEnum=value;
-	    }
-	}
-	SourceUserEnum sourceUser;
-	public void setSourceUser(SourceUserEnum sourceUser) {
-        this.sourceUser= sourceUser;
+	public enum SourceUserEnum { PORTAL, GOOGLE, INVITED }
+	
+	@Column( name="source", length=10,  nullable = false)
+	@Enumerated(EnumType.STRING)
+	 
+	SourceUserEnum source;
+	public void setSource(SourceUserEnum sourceUser) {
+        this.source= sourceUser;
     }
-    public SourceUserEnum getSourceUser() {
-        return sourceUser;
+    public SourceUserEnum getSource() {
+        return source;
     }
 
 	public String getEmail() {
@@ -161,17 +156,17 @@ public class ToghUserEntity extends BaseEntity {
 	}
 
 	public LocalDateTime getConnectionLastActivity() {
-		return ConnectionLastActivity;
+		return connectionLastActivity;
 	}
 
 	public void setConnectionLastActivity(LocalDateTime connectionLastActivity) {
-		ConnectionLastActivity = connectionLastActivity;
+		this.connectionLastActivity = connectionLastActivity;
 	}
 
 	public boolean isSearchable() {
 	    return searchable;
 	}
-	public void setSearchable() {
+	public void setSearchable(boolean searchable ) {
 	    this.searchable = searchable;
 	}
 	

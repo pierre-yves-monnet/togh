@@ -69,7 +69,7 @@ public class LoginService {
             return loginStatus;
         }
         // this user must be registered on the portal
-        if (! SourceUserEnum.PORTAL.equals( endUser.getSourceUser())) {
+        if (! SourceUserEnum.PORTAL.equals( endUser.getSource())) {
             monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
             return loginStatus;
         }
@@ -123,7 +123,7 @@ public class LoginService {
             return loginStatus;
         }
         // not correct is the source is not the correct one
-        if (isGoogle && (! endUser.getSourceUser().equals(SourceUserEnum.GOOGLE)))
+        if (isGoogle && (! endUser.getSource().equals(SourceUserEnum.GOOGLE)))
             return loginStatus;
         
         loginStatus.isConnected=true;
@@ -146,7 +146,7 @@ public class LoginService {
         endUser.setFirstname(firstName);
         endUser.setLastName(lastName);
         endUser.setPassword(password);
-        endUser.setSourceUser(sourceUser);
+        endUser.setSource(sourceUser);
         try {
             factoryService.getToghUserService().saveUser(endUser);
             loginStatus.isCorrect=true;

@@ -1,4 +1,4 @@
-package com.togh.controller;
+package com.togh.restcontroller;
 
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import com.togh.service.FactoryService;
 /* -------------------------------------------------------------------- */
 
 @RestController
-public class RestUserControler {
+public class RestUserController {
 
     @Autowired
     private FactoryService factoryService;

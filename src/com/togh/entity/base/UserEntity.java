@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
@@ -19,12 +20,7 @@ public abstract class UserEntity extends BaseEntity {
 
     
     
-    /*
-    @Column(name="authorid") 
-    private Long authorId;
-    */
-    @OneToOne( fetch = FetchType.EAGER)
-    // @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @ManyToOne( fetch = FetchType.EAGER)
     private ToghUserEntity author;
     
     @Column(name="ACCESSDATA", length=20)

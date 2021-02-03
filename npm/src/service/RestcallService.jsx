@@ -36,7 +36,7 @@ class RestcallService {
 		const requestOptions = {
 	        headers: headers
 	    };
-    	axios.get( this.getUrl( uri), requestOptions)
+    	axios.get( this.getUrl( uri ), requestOptions)
         	.then( httpPayload => fctPayload( httpPayload ) );
 	}
 	

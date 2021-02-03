@@ -1,4 +1,4 @@
-package com.togh.controller;
+package com.togh.restcontroller;
 /* -------------------------------------------------------------------- */
 /*                                                                      */
 /* Login */
@@ -41,9 +41,9 @@ import com.togh.service.LoginService;
 import com.togh.service.LoginService.LoginStatus;
 
 @RestController
-public class RestLoginControler {
+public class RestLoginController {
    
-    private Logger logger = Logger.getLogger(RestLoginControler.class.getName());
+    private Logger logger = Logger.getLogger(RestLoginController.class.getName());
     private final static String logHeader = "LoginControler: ";
     
     @Autowired

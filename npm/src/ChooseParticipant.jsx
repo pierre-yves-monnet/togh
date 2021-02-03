@@ -10,7 +10,7 @@ import React from 'react';
 
 
 
-import { Search } from 'carbon-components-react';
+import { Search, Select } from 'carbon-components-react';
 import { SearchFilterButton } from 'carbon-components-react';
 import { SearchLayoutButton } from 'carbon-components-react';
 
@@ -24,6 +24,8 @@ class ChooseParticipant extends React.Component {
 		this.state = { 'event' : props.event,
 						'participant' : props.participant,
 						'modifyParticipant' : props.modifyParticipant}
+						
+		this.setParticipant = this.setParticipant.bind(this);						
 	}
 
 	
@@ -39,18 +41,20 @@ class ChooseParticipant extends React.Component {
 				);
 			};
 			
-		// Display it and allow to change it		
-		var stateOptions = [ 
-			{key: "1", text:"Hello", value:"hello"},
-			{key: "1", text:"The", value:"the"}
-		
-		]
-		return (<Search id="searchparticipant" placeHolderText="Participant"></Search>);
-
-		 //  return (<Dropdown placeholder='Partipant' search selection options={stateOptions} /> )
+		// return (<Search id="searchparticipant" placeHolderText="Participant"></Search>);
+		let sortedList =  this.state.event.participants.map( (participant) => (
+			<option key={participant.user.id}>{participant.user.firstName} {participant.user.lastName}</option>)
+			);
+			
+		 return (<Select  labelText="Scope" value={this.state.participant.user} onChange={(event) => this.setParticipant( event.target.value )}> 
+			{sortedList}
+					</Select>)
 
 			
 		}
+	setParticipant() {
+		
+	}	
 		
 }
 

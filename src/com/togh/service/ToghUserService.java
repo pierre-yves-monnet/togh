@@ -76,7 +76,7 @@ public class ToghUserService {
     endUser.setFirstname(firstName);
     endUser.setLastName(lastName);
     endUser.setPassword(password);
-    endUser.setSourceUser(sourceUser);
+    endUser.setSource(sourceUser);
     try {
         factoryService.getToghUserService().saveUser(endUser);
         return endUser;
@@ -105,7 +105,7 @@ public class ToghUserService {
         // fullfill the event
         invitationStatus.userEntity = new ToghUserEntity();
         invitationStatus.userEntity.setEmail(email);
-        invitationStatus.userEntity.setSourceUser(SourceUserEnum.INVITED);
+        invitationStatus.userEntity.setSource(SourceUserEnum.INVITED);
 
         
         factoryService.getToghUserService().saveUser(invitationStatus.userEntity);

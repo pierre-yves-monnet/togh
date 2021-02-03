@@ -1,4 +1,4 @@
-package com.togh.controller;
+package com.togh.restcontroller;
 
 import java.util.Map;
 

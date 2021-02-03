@@ -31,7 +31,7 @@ class Invitation extends React.Component {
 						'email' : '',
 						'firstName'  : '',
 						'lastName' : '',
-						'phoneNumber': '',
+						'phoneNumber': '',						
 						'role': 'PARTICIPANT',
 						'panelVisible': 'INVITATION',
 						'message': 'Please join this event.',
@@ -41,7 +41,7 @@ class Invitation extends React.Component {
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.sendInvitation = this.sendInvitation.bind(this);
-		
+		this.searchToghUser	= this.searchToghUser.bind(this);
 		// this is mandatory to have access to the variable in the method... thank you React!   
 
 	}
@@ -49,18 +49,24 @@ class Invitation extends React.Component {
 
 	render() {
 		console.log("Invitation.render ");
+		console.log("Invitation.listSearch="+ JSON.stringify( this.state.listSearchUsers ));
+		
 		var listSearchUsersHtml = [];
-		if (this.state.listSearchUser) {
+		if (this.state.listSearchUser !== null) {
+			console.log("Invitation.buildListUser");
 			listSearchUsersHtml = this.state.listSearchUsers.map((toghUser) =>
-				<tr>
-					<td><Checkbox labelText="" id="checkbox-label-1" /></td>
+				<tr key={toghUser.id}>
+					<td><Checkbox labelText="" id={toghUser.id} /></td>
 					<td>
 						{toghUser.firstName} {toghUser.lastName}  
 					</td>
-					<td>{toghUser.Email}</td>
+					<td>{toghUser.phonenumber}</td>
+					<td>{toghUser.email}</td>
 				</tr>
 			);
 		}
+		console.log("Invitation.listSearchHtml="+listSearchUsersHtml);
+		
 		return ( 
 			 <ModalWrapper
      			 buttonTriggerText="Invitation"
@@ -99,16 +105,17 @@ class Invitation extends React.Component {
 								</td><td style={{ "padding-right": "10px"}}><TextInput labelText="Email" value={this.state.email} onChange={(event) => this.setState( {name: event.target.value })} ></TextInput>
 							</td></tr>
 							</table>
-							<p/>
-							<Button class="btn btn-info btn-lg" onClick={this.searchToghUser}>
+							<br/>
+							<button class="btn btn-info btn-lg" onClick={this.searchToghUser} class="btn btn-info">
 								<div class="glyphicon glyphicon-search"> </div>&nbsp;Search
-							</Button>
-							<p/>
+							</button>
+							<br/>
 							<table class="table table-striped toghtable">
 								<thead>
 									<tr>
 										<th></th>
 										<th>Name</th>
+										<th>Phone number</th>
 										<th>Email</th>
 									</tr>
 								</thead>
@@ -127,9 +134,9 @@ class Invitation extends React.Component {
 									<option value="OBSERVER">Observer</option>
 								</Select>
 							</td><td>
-								<Button class="btn btn-info btn-lg" onClick={this.sendInvitation}>
+								<button class="btn btn-info btn-lg" onClick={this.sendInvitation} class="btn btn-primary">
 									<div class="glyphicon glyphicon-envelope"> </div>&nbsp;Send the invitation
-								</Button>
+								</button>
 							</td>
 						</tr>
 					</table>
@@ -139,9 +146,11 @@ class Invitation extends React.Component {
 	};
 
 	searchToghUser() {
-		console.log("Invitation.Search:");
+		console.log("Invitation.Search: searchToghUser");
+		console.log("Invitation.Search: search by firstName="+this.state.firstName);
+
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.getJson('/api/event/invitation?firstName='+this.state.firstName+'&lastName='+this.state.lastName+'&email='+this.state.email, 
+		restCallService.getJson('/api/user/search?firstName='+this.state.firstName+'&lastName='+this.state.lastName+'&email='+this.state.email+'&phoneNumber='+this.state.phoneNumber, 
 			httpPayload => {
 				console.log("Invitation payload=" + JSON.stringify(httpPayload.data));
 				this.setState( { listSearchUsers: httpPayload.data.users});

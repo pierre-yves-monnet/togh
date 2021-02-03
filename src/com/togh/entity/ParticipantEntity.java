@@ -5,17 +5,12 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
@@ -32,24 +27,21 @@ import com.togh.entity.base.UserEntity;
 public class ParticipantEntity extends UserEntity {
 
     public enum ParticipantRoleEnum {
-        OWNER, ORGANIZER, PARTICIPANT, OBSERVER, WAITINGCONFIRMATION, EXTERNAL
+        OWNER, ORGANIZER, PARTICIPANT, OBSERVER, WAITCONFIR, EXTERNAL
     }
 
-    @Column(name = "role", length = 10, nullable = false)
+    @Column(name = "role", length=15, nullable = false)
+    @Enumerated(EnumType.STRING)    
     private ParticipantRoleEnum role;
 
     // User attached to this participant
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ToghUserEntity user;
 
-    // @Column(name = "useridtemp")
-    // private Long userIdtemp;
+    public enum StatusEnum {  INVITED, ACTIF, LEFT }
 
-    public enum StatusEnum {
-        INVITED, ACTIF, LEFT
-    }
-
-    @Column(name = "status", length = 10, nullable = false)
+    @Column(name = "status", length=10, nullable = false)
+    @Enumerated(EnumType.STRING)    
     private StatusEnum status;
 
     public ParticipantRoleEnum getRole() {
@@ -68,15 +60,7 @@ public class ParticipantEntity extends UserEntity {
         this.user = endUser;
     }
 
-    public Long getUserId() {
-        return user.getId();
-    }
-    /*
-     * public void setUserId(Long userId) {
-     * this.userIdtemp = userId;
-     * }
-     */
-
+   
     public StatusEnum getStatus() {
         return status;
     }

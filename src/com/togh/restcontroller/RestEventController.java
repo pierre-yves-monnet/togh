@@ -1,4 +1,4 @@
-package com.togh.controller;
+package com.togh.restcontroller;
 /* -------------------------------------------------------------------- */
 
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.event.EventController;
 import com.togh.entity.ToghUserEntity;
 import com.togh.service.EventService;
 import com.togh.service.EventService.InvitationResult;
@@ -37,7 +38,7 @@ import com.togh.service.FactoryService;
 /* -------------------------------------------------------------------- */
 
 @RestController
-public class RestEventControler {
+public class RestEventController {
 
     @Autowired
     private FactoryService factoryService;
@@ -55,7 +56,8 @@ public class RestEventControler {
         Map<String, Object> payload = new HashMap<>();
         List<Map<String,Object>> listEventsMap= new ArrayList<>();
         for (EventEntity event : factoryService.getEventService().getEvents(userId, filterEvents)) {
-            listEventsMap.add( event.getHeaderMap( event.getTypeAccess(userId)));
+            EventController eventController = new EventController(event);
+            listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(userId)));
         }
 
         payload.put("events", listEventsMap);
@@ -77,7 +79,7 @@ public class RestEventControler {
                     HttpStatus.NOT_FOUND, "event not found");
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put("event", event.getMap( event.getTypeAccess(userId)));
+        payload.put("event", event.getMap( EventController.getInstance(event).getTypeAccess(userId)));
 
         return payload;
 

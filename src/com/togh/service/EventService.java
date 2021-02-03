@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.togh.controller.RestEventControler;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
@@ -18,8 +17,9 @@ import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
-import com.togh.event.EventConductor;
+import com.togh.event.EventController;
 import com.togh.repository.EventRepository;
+import com.togh.restcontroller.RestEventController;
 import com.togh.service.MonitorService.Chrono;
 import com.togh.service.ToghUserService.CreationStatus;
 
@@ -62,9 +62,9 @@ public class EventService {
         event.setTypeEvent(TypeEventEnum.LIMITED);
         event.setDatePolicy(DatePolicyEnum.ONEDATE);
         
-        EventConductor eventConductor = new EventConductor();
+        EventController eventConductor = new EventController( event );
         // let's the conductor create the participant and all needed information
-        eventConductor.completeConsistant( event );
+        eventConductor.completeConsistant();
         eventRepository.save(event);
         
         return event;
@@ -84,12 +84,13 @@ public class EventService {
     */
     public EventEntity getEventById( long userId, long eventId) {
         EventEntity event =  eventRepository.findByEventId( eventId );
-        if (! event.isAccess( userId ))
+        EventController eventConductor = new EventController( event );
+        if (! eventConductor.isAccess( userId ))
             return null;
         
         // check consistant now
-        EventConductor eventControler = new EventConductor();
-        eventControler.completeConsistant( event );
+
+        eventConductor.completeConsistant( );
         
         return event; 
         
@@ -109,7 +110,9 @@ public class EventService {
 
         MonitorService monitorService = factoryService.getMonitorService();
         InvitationResult invitationResult = new InvitationResult();
-        if (! event.isOrganizer(invitedByUserId)) {
+        
+        EventController eventConductor = new EventController( event );
+        if (! eventConductor.isOrganizer(invitedByUserId)) {
             invitationResult.status =InvitationStatus.NOTAUTHORIZED;
             return invitationResult;
         }
@@ -153,7 +156,9 @@ public class EventService {
             return invitationResult;
             
         }
-        invitationResult.participant = event.getParticipant (invitationResult.thogUserInvited.getId() );
+        
+
+        invitationResult.participant = eventConductor.getParticipant(invitationResult.thogUserInvited.getId() );
         // already in the participant list ? 
         if (invitationResult.participant !=null) {
             invitationResult.status = InvitationStatus.ALREADYAPARTICIPANT;
