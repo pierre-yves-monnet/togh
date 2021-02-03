@@ -42,6 +42,9 @@ class ChooseParticipant extends React.Component {
 			};
 			
 		// return (<Search id="searchparticipant" placeHolderText="Participant"></Search>);
+		return (<div></div>);
+		
+		/*
 		let sortedList =  this.state.event.participants.map( (participant) => (
 			<option key={participant.user.id}>{participant.user.firstName} {participant.user.lastName}</option>)
 			);
@@ -49,7 +52,7 @@ class ChooseParticipant extends React.Component {
 		 return (<Select  labelText="Scope" value={this.state.participant.user} onChange={(event) => this.setParticipant( event.target.value )}> 
 			{sortedList}
 					</Select>)
-
+					*/
 			
 		}
 	setParticipant() {
