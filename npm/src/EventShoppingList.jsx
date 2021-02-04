@@ -29,6 +29,7 @@ class EventShoppingList extends React.Component {
 		this.collapse 				= this.collapse.bind(this);
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
 		this.addItem				= this.addItem.bind(this);
+		this.changeParticipant		= this.changeParticipant.bind(this);
 	}
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
@@ -43,7 +44,7 @@ class EventShoppingList extends React.Component {
 				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut( "what", event.target.value, item )}  labelText="" ></TextInput></td>
 				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut( "description", event.target.value, item )} class="toghinput" labelText=""></TextArea></td>
 				<td>
-					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} />
+					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
 				</td>
 				
 				
@@ -126,6 +127,10 @@ class EventShoppingList extends React.Component {
 		this.setState( { "event" : currentEvent });
 		this.props.pingEvent();	
 	} 
+	
+	changeParticipant() {
+		console.log("EventShoppinglist.cchangeParticipant");
+	}
 }		
 export default EventShoppingList;
 	

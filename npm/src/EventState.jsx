@@ -32,9 +32,9 @@ class EventState extends React.Component {
 
 		var tagHtml = null;
 		if (this.state.statusEvent === 'INPREPAR')
-			tagHtml = (<Tag  type="Teal" title="Event are in preparation">In preparation</Tag>)			
+			tagHtml = (<Tag  type="teal" title="Event are in preparation">In preparation</Tag>)			
 		else if (this.state.statusEvent === 'INPROG')
-			tagHtml = (<Tag  type="Green" title="Event in progress, let's have fun! '">Actif</Tag>);
+			tagHtml = (<Tag  type="green" title="Event in progress, let's have fun! '">Actif</Tag>);
 		else if (this.state.statusEvent === 'CLOSED')
 			tagHtml = (<Tag  type="warm-gray" title="Event is finished, hope you had fun">Done</Tag>);
 		else if (this.state.statusEvent === 'CANCEL')

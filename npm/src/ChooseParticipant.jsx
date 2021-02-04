@@ -15,8 +15,8 @@ import { SearchFilterButton } from 'carbon-components-react';
 import { SearchLayoutButton } from 'carbon-components-react';
 
 class ChooseParticipant extends React.Component {
-	// this.props.changeState();
-
+	
+	// pingChangeParticipant
 	constructor( props ) {
 		super();
 		
@@ -42,7 +42,9 @@ class ChooseParticipant extends React.Component {
 			};
 			
 		// return (<Search id="searchparticipant" placeHolderText="Participant"></Search>);
-		return (<div></div>);
+		return (<div>
+			<Select  labelText=""></Select> 
+		</div>);
 		
 		/*
 		let sortedList =  this.state.event.participants.map( (participant) => (

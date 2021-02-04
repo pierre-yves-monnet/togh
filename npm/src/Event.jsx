@@ -14,13 +14,11 @@ import FactoryService from './service/FactoryService';
 import { DatePicker } from 'carbon-components-react';
 import { DatePickerInput } from 'carbon-components-react';
 import { TimePicker } from 'carbon-components-react';
-import { TimePickerSelect } from 'carbon-components-react';
 import { RadioButtonGroup } from 'carbon-components-react';
 import { RadioButton } from 'carbon-components-react';
 import { TextArea } from 'carbon-components-react';
 import { TextInput } from 'carbon-components-react';
 import { Select } from 'carbon-components-react';
-import { SelectItem } from 'carbon-components-react';
 
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';
@@ -28,6 +26,8 @@ import { SelectItem } from 'carbon-components-react';
 
 import EventParticipants from './EventParticipants';
 import EventShoppingList from './EventShoppingList';
+import EventGeolocalisation from './EventGeolocalisation';
+
 import EventState from './EventState';
 
 
@@ -38,7 +38,7 @@ class Event extends React.Component {
 
 		this.state = { 'event' : {}, 
 						'eventid' : props.eventid,
-						'show' : { 'secParticipant': 'ON', 'secShoppinglist' : 'OFF'},
+						'show' : { 'secParticipant': 'ON', 'secShoppinglist' : 'OFF', 'secGeolocalisation' : 'OFF'},
 						showRegistration : false
 						};
 
@@ -46,6 +46,7 @@ class Event extends React.Component {
 		this.showRegistration 			= this.showRegistration.bind(this);
 		this.accessParticipantList 		= this.accessParticipantList.bind(this);
 		this.accessShoppingList			= this.accessShoppingList.bind(this);
+		this.accessGeolocalisation		= this.accessGeolocalisation.bind(this);
 		
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
@@ -146,7 +147,12 @@ class Event extends React.Component {
 			);
 		
 
-					
+		// <div class="btn-group mr-2" role="group" aria-label="First group">
+	//							<button style={{"marginLeft ": "10px"}} onClick={this.secItineraire} title="Itineraire" disabled={true} class="btn btn-primary">
+	//								<div class="glyphicon glyphicon-road"></div>
+	//						</button>
+	//					</div>
+											
 		// -----------------	 
 		return ( 
 			<div> 
@@ -228,16 +234,12 @@ class Event extends React.Component {
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secLocalisation} title="Where is the event?" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.accessGeolocalisation} title="Where is the event?" class="btn btn-primary">
 								<div class="glyphicon glyphicon-globe"></div>
 							</button>
 						</div>
 						
-						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secItineraire} title="Itineraire" disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-road"></div>
-							</button>
-						</div>
+						
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title="Point of interest" disabled={true} class="btn btn-primary">
@@ -262,6 +264,7 @@ class Event extends React.Component {
 				</div>
 				{ this.state.show.secParticipant !== 'OFF' && <EventParticipants event={this.state.event} show={this.state.show.secParticipant} pingEvent={this.pingEvent}/>}
 				{ this.state.show.secShoppinglist !== 'OFF' && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} pingEvent={this.pingEvent}/>}
+				{ this.state.show.secGeolocalisation !== 'OFF' && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} pingEvent={this.pingEvent}/>}
 			</div>)	
 	} //---------------------------- end Render
 
@@ -338,7 +341,18 @@ class Event extends React.Component {
 		this.showSection ("secShoppinglist");
 
 	}
-	
+	// Geolocalisation
+	accessGeolocalisation() {
+		console.log("accessGeolocalisation !!!!!!!!!!!!!!!!!!");
+		var event = this.state.event; 
+		if (!  event.geoLocalisation ) {
+			console.log("Event.accessShoppingList: no shopping list exist, create one");
+			event.geoLocalisation={};
+			this.setState( {"event" : event })
+		}
+		this.showSection ("secGeolocalisation");
+
+	}
 	
 	
 	
