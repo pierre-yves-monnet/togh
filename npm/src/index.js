@@ -14,7 +14,6 @@ var factoryService = new FactoryService();
 FactoryService.setInstance( factoryService );
 
 
-ReactDOM.render(<Banner />, document.getElementById('reactBanner'));
 ReactDOM.render(<BodyTogh />, document.getElementById('reactBodyTogh'));
 
 

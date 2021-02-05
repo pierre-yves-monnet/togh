@@ -76,9 +76,9 @@ class EventParticipants extends React.Component {
 		return ( <div>
 					<div class="eventsection"> 
 						<a href="secParticipantlist"></a>
-						<a onClick={this.collapse}>
-							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down"></span>}
-							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"></span>}
+						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
+							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
+							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
 						</a> Participants
 						<div style={{float: "right"}}>							
 							<Invitation event={this.state.event} participantInvited={this.participantInvited}/>

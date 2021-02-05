@@ -67,20 +67,22 @@ class Login extends React.Component {
 				
 				<TextInput labelText="Password" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ></TextInput><p />
 				<br/>
-				<button onClick={this.loginConnect} class="btn btn-info">Connection</button><p/>
-				
-				<div dangerouslySetInnerHTML={{ __html: messageConnection}}></div>
-				
-				<br/>
-				
+				<table >
+				<tr>
+				<td style={{"paddingRight" : "40px", "paddingLeft" : "150px"}}>
+					<button onClick={this.loginConnect} class="btn btn-info">Connection</button><p/>
+					<div dangerouslySetInnerHTML={{ __html: messageConnection}}></div>
+				</td>
+				<td>
 				<GoogleLogin
 				    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
 				    buttonText="Login"
 				    onSuccess={this.loginGoogle}
 				    
 				    cookiePolicy={'single_host_origin'}
-				  />,
-
+				  />
+					</td>
+					</tr></table>
 				
 								
 			</div>

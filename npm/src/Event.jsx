@@ -157,11 +157,13 @@ class Event extends React.Component {
 		return ( 
 			<div> 
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-5">
+						<img src="img/toghEvent.jpg" style={{width:90}} />
+					
 						<h1>{this.state.event.name}
 						</h1>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-5">
 						<div class="fieldlabel">Status</div>
 						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeState} />
 					</div>
@@ -172,12 +174,13 @@ class Event extends React.Component {
 							<option value="LIMITED">Limited</option>
 							<option value="SECRET">Secret</option>
 						</Select>
+						<br/>
         			</div>
 	
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<TextInput labelText="Name" value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )}></TextInput><br />
+						<TextArea labelText="Description" style={{width: "100%", maxWidth: "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "description", event.target.value )}></TextArea>
 					</div>
 					<div class="col-sm-6">
 						<div class="panel panel-info">
@@ -190,7 +193,7 @@ class Event extends React.Component {
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<TextArea labelText="Description" style={{width: "100%", maxWidth: "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "description", event.target.value )}></TextArea>
+						<TextInput labelText="Name" value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )}></TextInput><br />
 					</div>
 				</div>	
 				

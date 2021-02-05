@@ -96,6 +96,7 @@ public class ToghUserService {
         boolean isEmailIsCorrect=false;
         boolean isEmailSent=false;
     }
+    Boolean myTest = new Boolean( true );
     public CreationStatus inviteNewUser(String email, ToghUserEntity invitedByUser, EventEntity event) {
         CreationStatus invitationStatus= new CreationStatus();
         try {
@@ -107,7 +108,6 @@ public class ToghUserService {
         invitationStatus.userEntity.setEmail(email);
         invitationStatus.userEntity.setSource(SourceUserEnum.INVITED);
 
-        
         factoryService.getToghUserService().saveUser(invitationStatus.userEntity);
         
         // send the email now

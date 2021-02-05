@@ -9,6 +9,7 @@
 import React from 'react';
 
 import Login from './Login';
+import Banner from './Banner';
 import Menu from './Menu';
 import RegisterNewUser from './RegisterNewUser';
 import EventsList from './EventsList';
@@ -51,11 +52,13 @@ class BodyTogh extends React.Component {
 		if (authService.isConnected() === false) {
 			return (				
 				<div>
+					<Banner />
+
 					<div class="container">
   						<div class="row">
-							<div class="col-sm-2">
-								Welcome to Togh<p/>
-								<img src="img/togh.jpg" style={{width:150, height:150}} />
+							<div class="col-sm-2" >
+								Welcome to Togh<br/><br/>
+								<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
 							</div>
 								
 							<div class="col-sm-5">	
@@ -79,21 +82,24 @@ class BodyTogh extends React.Component {
 			"padding-left" : "30px"
         };
 		return (
-			<div class="row">
-			<table style={{width: "100%", "height": "100%"}}>
-				<tr>
-					<td style={styleMenu} >
-						<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
-					</td>
-					<td style={{padding: "10px", "vertical-align": "top"}} >
-						{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
-						{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
-
-					</td>
-				</tr>
-
-			</table>
-			</div>			
+			<div>
+				<Banner />
+				<div class="row">
+					<table style={{width: "100%", "height": "100%"}}>
+						<tr>
+							<td style={styleMenu} >
+								<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
+							</td>
+							<td style={{padding: "10px", "vertical-align": "top"}} >
+								{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
+								{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
+		
+							</td>
+						</tr>
+		
+					</table>
+				</div>	
+			</div>		
 		);
 		
 	} // end render

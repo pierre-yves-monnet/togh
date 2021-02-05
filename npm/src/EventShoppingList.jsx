@@ -55,10 +55,10 @@ class EventShoppingList extends React.Component {
 		console.log("EventShoppinglist.render: "+listShoppingListHtml.length);
 		return ( <div>
 					<div class="eventsection"> 
-						<a href="secShoppinglist" href="/#"></a>
-						<a onClick={this.collapse}  href="/#">
-							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down"></span>}
-							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"></span>}
+						<a href="secShoppinglist"></a>
+						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
+							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
+							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
 						</a> Shopping List
 						<div style={{float: "right"}}>
 							<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>

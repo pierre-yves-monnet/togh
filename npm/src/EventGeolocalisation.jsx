@@ -68,43 +68,43 @@ class EventGeolocalisation extends React.Component {
 			
 		return ( <div>
 					<div class="eventsection"> 
-						<a href="secGeolocalisation" href="/#"></a>
-						<a onClick={this.collapse}  href="/#">
-							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down"></span>}
-							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"></span>}
+						<a href="secGeolocalisation"></a>
+						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
+							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
+							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
 						</a> Geolocalisation
 					</div> 
+					{this.state.show ==='ON' && (
+						<div>
+						<table >
+						<tr><td style={{"paddingRight":"30px"}}>
+							<Toggle labelText="" aria-label="toggle button" 
+								
+								onChange={(event) => this.setAttributeCheckbox( "geosharemylocation", event.target.value )}
+	      						id="shareMyLocation" />
+	      				</td><td>Share my localisation during the event</td></tr>
+						</table>
+	    
+						<TextInput labelText="Address" style={{width: "100%", maxWidth: "100%"}} rows="4" value={this.state.event.geoaddress} 
+								onChange={(event) => this.setAttribute( "geoaddress", event.target.value )}></TextInput>					
+						<br/>
+						<div style={{ height: '100vh', width: '100%' }}>
+							<GoogleMapReact
+					          		bootstrapURLKeys={{ key: "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es" }}
+									defaultCenter={location}
+									defaultZoom={zoomLevel}
+						        >
+					           <LocationPin
+									lat={location.lat}
+	          						lng={location.lng}
+					          	text={location.address}
+					        />
+					        </GoogleMapReact>
+						</div>
+	
+						<br/> 
+						</div>)}
 					
-					<table >
-					<tr><td style={{"paddingRight":"30px"}}>
-						<Toggle labelText="" aria-label="toggle button" 
-							
-							onChange={(event) => this.setAttributeCheckbox( "geosharemylocation", event.target.value )}
-      						id="shareMyLocation" />
-      				</td><td>Share my localisation during the event</td></tr>
-					</table>
-    
-					<TextInput labelText="Address" style={{width: "100%", maxWidth: "100%"}} rows="4" value={this.state.event.geoaddress} 
-							onChange={(event) => this.setAttribute( "geoaddress", event.target.value )}></TextInput>					
-					<br/>
-					<div style={{ height: '100vh', width: '100%' }}>
-					
-
-
-						<GoogleMapReact
-				          		bootstrapURLKeys={{ key: "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es" }}
-								defaultCenter={location}
-								defaultZoom={zoomLevel}
-					        >
-				           <LocationPin
-								lat={location.lat}
-          						lng={location.lng}
-				          	text={location.address}
-				        />
-				        </GoogleMapReact>
-					</div>
-
-					<br/>
 				</div>
 				);
 				

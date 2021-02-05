@@ -41,6 +41,7 @@ class EventsList extends React.Component {
 		console.log("EventList.render listEvents " + JSON.stringify(this.state.events));
 		// no map read, return
 		var listEventsHtml = [];
+		// 
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={event.id}>
