@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.service.FactoryService;
+import com.togh.service.ToghUserService.SearchUsersResult;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -44,14 +45,16 @@ public class RestUserController {
                     HttpStatus.UNAUTHORIZED, "Not connected");
 
         Map<String, Object> payload = new HashMap<>();
-        List<ToghUserEntity> listToghUsers = factoryService.getToghUserService().searchUsers( firstName, lastName, phoneNumber, email);
+        SearchUsersResult searchUsers = factoryService.getToghUserService().searchUsers( firstName, lastName, phoneNumber, email,0,20);
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
-        for (ToghUserEntity togUser : listToghUsers) {
-            if (togUser.isSearchable())
-                listUsersMap.add( togUser.getMap( ContextAccess.SEARCH));
+        for (ToghUserEntity togUser : searchUsers.listUsers) {
+            listUsersMap.add( togUser.getMap( ContextAccess.SEARCH));
         }
         
         payload.put("users", listUsersMap);
+        payload.put("countusers", searchUsers.countUsers);
+        payload.put("page", searchUsers.page);
+        payload.put("numberperpage", searchUsers.numberPerPage);
 
         return payload;
 

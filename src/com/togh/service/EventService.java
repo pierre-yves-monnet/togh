@@ -21,7 +21,7 @@ import com.togh.event.EventController;
 import com.togh.repository.EventRepository;
 import com.togh.restcontroller.RestEventController;
 import com.togh.service.MonitorService.Chrono;
-import com.togh.service.ToghUserService.CreationStatus;
+import com.togh.service.ToghUserService.CreationResult;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -129,7 +129,7 @@ public class EventService {
             invitationResult.thogUserInvited  = userService.getFromEmail( userInvitedEmail );
             if (invitationResult.thogUserInvited ==null) {
                 // this is a real new user, register and invite it to join Togh
-                CreationStatus creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByUser, event);
+                CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByUser, event);
                 if (creationStatus.userEntity == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
                     return invitationResult;

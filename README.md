@@ -153,9 +153,14 @@ npm add node-sass@4.14.1
 npm start
 
 
-# Spring profile
+# Spring
+ 
+## profile
 See https://www.baeldung.com/spring-profiles
 -Dspring.profiles.active=dev
+
+## JPA
+https://www.baeldung.com/spring-data-jpa-query
  
 # Database 
 update eventuser set name='birthday' where id=31;

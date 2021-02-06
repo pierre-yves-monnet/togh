@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.h2.engine.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -91,14 +92,14 @@ public class ToghUserService {
      * @param email
      * @return
      */
-    public class CreationStatus {
+    public class CreationResult {
         ToghUserEntity userEntity;
         boolean isEmailIsCorrect=false;
         boolean isEmailSent=false;
     }
     Boolean myTest = new Boolean( true );
-    public CreationStatus inviteNewUser(String email, ToghUserEntity invitedByUser, EventEntity event) {
-        CreationStatus invitationStatus= new CreationStatus();
+    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, EventEntity event) {
+        CreationResult invitationStatus= new CreationResult();
         try {
             // Check the email now: we don't want to create a bad user
             invitationStatus.isEmailIsCorrect=true;
@@ -127,9 +128,34 @@ public class ToghUserService {
         }
     }
     
-    public List<ToghUserEntity> searchUsers( String firstName, String lastName, String phoneNumber, String email) {
-        
-        return endUserRepository.findByAttributes( firstName, lastName, phoneNumber, email);
+    
+    /**
+     * Search users
+     *
+     */
+    public class SearchUsersResult {
+        public List<ToghUserEntity> listUsers;
+        public int page=0;
+        public int numberPerPage=1;
+        public Long countUsers;
+    }
+    /**
+     * 
+     * @param firstName
+     * @param lastName
+     * @param phoneNumber
+     * @param email
+     * @param page page number, start at 0
+     * @param pageCount number of item per page. If this number is 0, then move to 1
+     * @return
+     */
+    public SearchUsersResult searchUsers( String firstName, String lastName, String phoneNumber, String email, int page, int numberPerPage) {
+        SearchUsersResult searchResult = new SearchUsersResult();
+        searchResult.page = page;
+        searchResult.numberPerPage = numberPerPage==0 ? 1 : numberPerPage;
+        searchResult.listUsers= endUserRepository.findPublicUsers( firstName, lastName, phoneNumber, email,  PageRequest.of(searchResult.page,searchResult.numberPerPage));
+        searchResult.countUsers= endUserRepository.countPublicUsers( firstName, lastName, phoneNumber, email );
+        return searchResult;
     }
     
 }
