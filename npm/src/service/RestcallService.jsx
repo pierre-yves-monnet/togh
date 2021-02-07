@@ -11,6 +11,7 @@
 import axios from 'axios';
 import FactoryService from './FactoryService';
 import AuthService from './AuthService';
+import HttpResponse  from './HttpResponse';
 
 
 class RestcallService {
@@ -30,14 +31,33 @@ class RestcallService {
 		return 'http://localhost:7080/togh'+uri;
 	}
 	
-	getJson(uri, fctPayload) {
+	
+	// According https://www.intricatecloud.io/2020/03/how-to-handle-api-errors-in-your-web-app-using-axios/
+	// the function fctToCallback must be
+	// iReceivedMyAnswer( httpPayLoad)
+	//  	httpPayLoad.data ==> Content
+	//      httpPayLoad.status => http status except 400 / 500 which come with error
+	//      httpPayload.err => contains boolean lile err.response 
+	getJson(uri, objToCall, fctToCallback) {
 		var headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
 		
 		const requestOptions = {
 	        headers: headers
 	    };
+		console.log("RestCallServer call ["+uri+"]");
+		
     	axios.get( this.getUrl( uri ), requestOptions)
-        	.then( httpPayload => fctPayload( httpPayload ) );
+        	.then( axiosPayload => { 
+				console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
+				var httpResponse = new HttpResponse( axiosPayload, null);
+				fctToCallback.call(objToCall, httpResponse); 
+				})
+			.catch(err => {
+				console.error("RestCallService.getJson: catch error:"+err);	
+				var httpResponse =  new HttpResponse( {}, err)
+				fctToCallback.call(objToCall, httpResponse); 
+
+				});
 	}
 	
 	// PostJson
@@ -48,7 +68,10 @@ class RestcallService {
 	        headers: headers
 	    };
     	axios.post( this.getUrl( uri), param, requestOptions)
-        	.then( httpPayload => fctPayload( httpPayload ) );
+        	.then( httpPayload => fctPayload( httpPayload ) )
+ 			.catch( err  => {
+					console.error("AuthService.loginCallback: Catch error:"+err);	
+					fctPayload( err);});		
 	}
 		
 }

@@ -142,7 +142,7 @@ public class RestLoginController {
     @PostMapping(value = "/api/login/registernewuser",produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), userData.get("firstname"), userData.get("lastname"), userData.get("password"), SourceUserEnum.PORTAL);
+        LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), userData.get("firstName"), userData.get("lastName"), userData.get("password"), SourceUserEnum.PORTAL);
         if (loginStatus.isCorrect)
             loginStatus = factoryService.getLoginService().connectNoVerification(userData.get("email"));
             

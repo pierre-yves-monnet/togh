@@ -2,24 +2,23 @@ package com.togh.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.entity.EventEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
+import com.togh.entity.ToghUserEntity;
 import com.togh.event.EventController;
 import com.togh.repository.EventRepository;
-import com.togh.restcontroller.RestEventController;
+import com.togh.restcontroller.RestTool;
 import com.togh.service.MonitorService.Chrono;
 import com.togh.service.ToghUserService.CreationResult;
 
@@ -98,15 +97,16 @@ public class EventService {
    
     
     public enum InvitationStatus {
-        DONE, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
+        DONE, NOUSERSGIVEN, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
     };
     public class InvitationResult {
         public InvitationStatus status;
-        public ToghUserEntity thogUserInvited;
-        
-        public ParticipantEntity participant;
+        public List<ToghUserEntity> listThogUserInvited = new ArrayList<>();        
+        public List<ParticipantEntity> newParticipants = new ArrayList<>();
+        public StringBuilder errorMessage = new StringBuilder();
+        public StringBuilder okMessage = new StringBuilder();
     }
-    public InvitationResult invite( EventEntity event, Long invitedByUserId, Long userInvitedId, String userInvitedEmail, ParticipantRoleEnum role, String message ) {
+    public InvitationResult invite( EventEntity event, Long invitedByUserId, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message ) {
 
         MonitorService monitorService = factoryService.getMonitorService();
         InvitationResult invitationResult = new InvitationResult();
@@ -119,61 +119,83 @@ public class EventService {
 
         Chrono chronoInvitation = monitorService.startOperation("Invitation");
         ToghUserService userService = factoryService.getToghUserService();
+        NotifyService notifyService = factoryService.getNotifyService();
         
         // first, check if this email is a registered Toghuser
         ToghUserEntity invitedByUser = invitedByUserId==null ? null : userService.getUserFromId(invitedByUserId);
-        invitationResult.thogUserInvited = null;
        
         // invitation by the email? 
-        if (userInvitedId == null && userInvitedEmail!=null) {
-            invitationResult.thogUserInvited  = userService.getFromEmail( userInvitedEmail );
-            if (invitationResult.thogUserInvited ==null) {
+        if (userInvitedEmail!=null && ! userInvitedEmail.trim().isEmpty()) {
+            ToghUserEntity toghUser  = userService.getFromEmail( userInvitedEmail );
+            if ( toghUser ==null) {
                 // this is a real new user, register and invite it to join Togh
                 CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByUser, event);
                 if (creationStatus.userEntity == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
+                    // This is an internal message here , cant sent back to the user error information 
+
                     return invitationResult;
                 }
-                invitationResult.thogUserInvited  = creationStatus.userEntity;
-                
-                invitationResult.status = InvitationStatus.INVITATIONSENT;
+                invitationResult.listThogUserInvited.add( creationStatus.userEntity );
             }
-        }
-        else if (userInvitedId !=null) {
-            invitationResult.thogUserInvited  = userService.getUserFromId( userInvitedId);
-            if (invitationResult.thogUserInvited  == null) {
-                invitationResult.status = InvitationStatus.INVALIDUSERID;
-                monitorService.endOperation(chronoInvitation);
-                return invitationResult;
+            else {
+                invitationResult.listThogUserInvited.add( toghUser );
             }
-        }
-            
-        // check if it is not already invited
-        if (invitationResult.thogUserInvited==null) {
-            // Not by the email, not by the ID ? Something is not expected here
-            invitationResult.status = InvitationStatus.ERRORDURINVITATION;
-            monitorService.endOperation(chronoInvitation);
-            return invitationResult;
-            
         }
         
+        // ---- from the list of ToghUserId
+        
+        if (listUsersId !=null && ! listUsersId.isEmpty()) {
+            for (Object userIdSt : listUsersId) {
+                // Javascript will pass a Integer or a String (JS doesn not manage correctly large Long number as Integer)
+                Long userId = RestTool.getLong( userIdSt, null);
+                ToghUserEntity toghUser =null;
+                if (userId!=null)
+                    toghUser = userService.getUserFromId( userId );
+                if (toghUser  == null) {
+                    
+                    // caller has supposed to give a valid userId. Stop immediatelly
+                    
+                    invitationResult.status = InvitationStatus.INVALIDUSERID;
+                    // This is an internal message here , cant sent back to the user error information 
+                    monitorService.endOperation(chronoInvitation);
+                    return invitationResult;
+                }
+                invitationResult.listThogUserInvited.add( toghUser );
 
-        invitationResult.participant = eventConductor.getParticipant(invitationResult.thogUserInvited.getId() );
-        // already in the participant list ? 
-        if (invitationResult.participant !=null) {
-            invitationResult.status = InvitationStatus.ALREADYAPARTICIPANT;
-            monitorService.endOperation(chronoInvitation);
-            return invitationResult;
+            }
         }
-        // create a new participant then!
         
-        invitationResult.participant = event.addPartipant(invitationResult.thogUserInvited, role, StatusEnum.INVITED );
         
+        // check if one users was already a participant ?
+        boolean doubleInvitation=false;
+        for (ToghUserEntity toghUser : invitationResult.listThogUserInvited ) {
+                ParticipantEntity participant = eventConductor.getParticipant(toghUser.getId() );
+                if ( participant !=null) {
+                    doubleInvitation = true;
+                    invitationResult.errorMessage.append(toghUser.getFirstname()+" "+toghUser.getLastName()+", ");
+                }
+                else {
+                    // send the invitation and register the guy
+                    notifyService.notifyNewUserInEvent(toghUser, invitedByUser, event);
+                    invitationResult.newParticipants.add( event.addPartipant(toghUser, role, StatusEnum.INVITED ));
+                    invitationResult.okMessage.append(toghUser.getFirstname()+" "+toghUser.getLastName()+", ");
+                }
+        }
+
         eventRepository.save(event);
-        if (invitationResult.status == null)
-            invitationResult.status = InvitationStatus.DONE;
         
+        
+        // status now
+        if (invitationResult.listThogUserInvited.isEmpty())
+            invitationResult.status = InvitationStatus.NOUSERSGIVEN; 
+        else if (doubleInvitation)
+            invitationResult.status = InvitationStatus.ALREADYAPARTICIPANT; 
+        else
+            invitationResult.status = InvitationStatus.INVITATIONSENT;
+
         monitorService.endOperation(chronoInvitation);
+        
         return invitationResult;
     }
 

@@ -8,8 +8,6 @@
 
 import React from 'react';
 
-import { Select } from 'carbon-components-react';
-import { SelectItem } from 'carbon-components-react';
 
 
 import FactoryService from './service/FactoryService';
@@ -23,19 +21,23 @@ class EventsList extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {}
-		console.log("EventsList.constructor - expected homeSelectEvent in the props");
-		this.state = { filterEvents: "", "message": "", events: [] };
+		console.log("EventsList.constructor");
+		this.state = { filterEvents: "", "message": "", 
+					events: [] };
 		// this is mandatory to have access to the variable in the method... thank you React!   
-		this.refreshListEvents = this.refreshListEvents.bind(this);
 
 		this.createEvent = this.createEvent.bind(this);
-
 		this.createEventCallback = this.createEventCallback.bind(this);
-		this.refreshListEvents();
+		this.refreshListEvents = this.refreshListEvents.bind(this);
 
+
+		console.log("EventsList.constructor: END");
 	}
-
-
+	componentDidMount () {
+		console.log("EventsList.componentWillMount: BEGIN");
+		this.refreshListEvents(); 	
+		console.log("EventsList.componentWillMount: END");
+	}
 	// -------------------------------------------- render
 	render() {
 		console.log("EventList.render listEvents " + JSON.stringify(this.state.events));
@@ -76,7 +78,7 @@ class EventsList extends React.Component {
 						<thead>
 						<tr>
 							<th></th>
-							<th colspan="2">Name</th>
+							<th colSpan="2">Name</th>
 							<th>Date</th>
 							<th>Participants</th>
 						</tr>
@@ -121,9 +123,9 @@ class EventsList extends React.Component {
 
 		var restCallService = FactoryService.getInstance().getRestcallService();
 
-		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, httpPayload => {
-			console.log("EventsList.refreshListEventsCallback: connectStatus = " + JSON.stringify(httpPayload.data));
-			this.setState({ events: httpPayload.data.events });
+		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, this, httpPayload => {
+			console.log("EventsList.refreshListEventsCallback: connectStatus = " + httpPayload.trace());
+			this.setState({ events: httpPayload.getData().events });
 		});
 
 	}

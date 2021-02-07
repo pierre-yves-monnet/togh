@@ -26,7 +26,8 @@ class EventParticipants extends React.Component {
 		console.log("EventParticipant.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
 		this.collapse 				= this.collapse.bind(this);
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
-	}
+		this.participantInvited 	= this.participantInvited.bind( this );
+	}	
 
 
 	render() {
@@ -123,10 +124,13 @@ class EventParticipants extends React.Component {
 	
 	
 	
-	participantInvited( participant ) {
-		console.log("EventParticipant.participantinvated");
-		var currentEvent = this.state.event;		
-		const newList = currentEvent.participants.concat( participant  );
+	participantInvited( participants ) {
+		console.log("EventParticipant.participantinvited event="+JSON.stringify( this.state.event));
+		var currentEvent = this.state.event;
+		var newList = currentEvent.participants;
+		for (var i in participants ) {		
+			newList = newList.concat( participants[ i ]  );
+		}
 		currentEvent.participants = newList;
 		this.setState( { "event" : currentEvent});
 		this.props.pingEvent();

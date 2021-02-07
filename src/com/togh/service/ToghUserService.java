@@ -157,5 +157,12 @@ public class ToghUserService {
         searchResult.countUsers= endUserRepository.countPublicUsers( firstName, lastName, phoneNumber, email );
         return searchResult;
     }
-    
+    public SearchUsersResult searchUsersOutEvent( String firstName, String lastName, String phoneNumber, String email, long eventId, int page, int numberPerPage) {
+        SearchUsersResult searchResult = new SearchUsersResult();
+        searchResult.page = page;
+        searchResult.numberPerPage = numberPerPage==0 ? 1 : numberPerPage;
+        searchResult.listUsers= endUserRepository.findPublicUsersOutEvent( firstName, lastName, phoneNumber, email, eventId, PageRequest.of(searchResult.page,searchResult.numberPerPage));
+        searchResult.countUsers= endUserRepository.countPublicUsersOutEvent( firstName, lastName, phoneNumber, email, eventId );
+        return searchResult;
+    }
 }

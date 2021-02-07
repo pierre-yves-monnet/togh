@@ -38,14 +38,23 @@ public class RestUserController {
     public Map<String, Object> searchUser(@RequestParam("firstName") String firstName, 
             @RequestParam("lastName") String lastName,
             @RequestParam("phoneNumber") String phoneNumber,
-            @RequestParam("email") String email, @RequestHeader("Authorization") String connectionStamp) {
+            @RequestParam("email") String email, 
+            @RequestParam("onlyNonInvitedUser") Boolean onlyNonInvitedUser,
+            @RequestParam("eventid") Long eventId,
+            @RequestHeader("Authorization") String connectionStamp) {
         Long userId = factoryService.getLoginService().isConnected(connectionStamp);
         if (userId == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, "Not connected");
 
         Map<String, Object> payload = new HashMap<>();
-        SearchUsersResult searchUsers = factoryService.getToghUserService().searchUsers( firstName, lastName, phoneNumber, email,0,20);
+        SearchUsersResult searchUsers;
+        if (Boolean.TRUE.equals( onlyNonInvitedUser ) && eventId != null)
+            searchUsers = factoryService.getToghUserService().searchUsersOutEvent( firstName, lastName, phoneNumber, email, eventId.longValue(), 0,20);
+        else
+            searchUsers = factoryService.getToghUserService().searchUsers( firstName, lastName, phoneNumber, email, 0,20);
+        
+        
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
         for (ToghUserEntity togUser : searchUsers.listUsers) {
             listUsersMap.add( togUser.getMap( ContextAccess.SEARCH));

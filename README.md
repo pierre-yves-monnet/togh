@@ -172,7 +172,10 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31);
 insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
 
-          
+
+## outils
+Rendre une image fond transparent
+https://www.remove.bg/fr/upload 
           
 # Tasks
 
@@ -180,9 +183,22 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 Simon Autocomplete
 
 Simon Google Carte
-Simon Toggle default value
+	Toggle default value (dans Google Map / Share my localisation)
+	DropDown : change value (status event => Si on le met en "actif" il faut capturer la demande)
+	
 
 Py	Sauvegarde
+	Survey
+	Task
+	Itineraire
+	Depenses
+
+	My profile
+	My Friend = recuperer les users de google
+	Internationalisation
+	Icon en petit ?
+	
+	
           
           
           

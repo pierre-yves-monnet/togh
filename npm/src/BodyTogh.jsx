@@ -77,9 +77,9 @@ class BodyTogh extends React.Component {
 		// we are connected, display the frame now
 		const styleMenu = {
 			width: this.state.sizeMenu,       
-			"vertical-align": "top", 
-			"border-right": "2px solid #194063",
-			"padding-left" : "30px"
+			"verticalAlign": "top", 
+			"borderRight": "2px solid #194063",
+			"paddingLeft" : "30px"
         };
 		return (
 			<div>
@@ -90,7 +90,7 @@ class BodyTogh extends React.Component {
 							<td style={styleMenu} >
 								<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
 							</td>
-							<td style={{padding: "10px", "vertical-align": "top"}} >
+							<td style={{padding: "10px", "verticalAlign": "top"}} >
 								{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
 								{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
 		

@@ -74,9 +74,10 @@ class Event extends React.Component {
 		var datePanelHtml = (
 			<div>
 				<RadioButtonGroup
-						valueSelected={this.state.event.datePolicy}
-						legend="Legend"
-						onChange={(event) => {
+					name="datePolicy"
+					valueSelected={this.state.event.datePolicy}
+					legend="Legend"
+					onChange={(event) => {
 							console.log("RadioGroup.DataPolicy on change=");
         					
 							this.setAttribut( "datePolicy", event)}
@@ -108,8 +109,9 @@ class Event extends React.Component {
 						    />
 						</DatePicker>
 						<TimePicker
-						  value={this.state.event.timeEvent} 
-						  onChange={(event) => this.setAttribut( "timeEvent", event.target.value )}
+							id="eventTime"
+						  	value={this.state.event.timeEvent} 
+						  	onChange={(event) => this.setAttribut( "timeEvent", event.target.value )}
 						>
 							
 						</TimePicker>
@@ -168,7 +170,10 @@ class Event extends React.Component {
 						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeState} />
 					</div>
 					<div class="col-sm-2">
-					 	<Select  labelText="Scope" value={this.state.event.typeEvent} onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
+					 	<Select  labelText="Scope" 
+							id="typeEvent"
+							value={this.state.event.typeEvent} 
+							onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
 							<option value="OPEN">Open</option>
 							<option value="OPENCONF">Open on confirmation</option>
 							<option value="LIMITED">Limited</option>
@@ -180,7 +185,12 @@ class Event extends React.Component {
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<TextArea labelText="Description" style={{width: "100%", maxWidth: "100%"}} rows="5" value={this.state.event.description} onChange={(event) => this.setAttribut( "description", event.target.value )}></TextArea>
+						<TextArea id="description"
+							labelText="Description"
+							style={{width: "100%", maxWidth: "100%"}} 
+							rows="5" 
+							value={this.state.event.description} 
+							onChange={(event) => this.setAttribut( "description", event.target.value )}></TextArea>
 					</div>
 					<div class="col-sm-6">
 						<div class="panel panel-info">
@@ -202,10 +212,13 @@ class Event extends React.Component {
 					<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" >
 				  		<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button   onClick={this.secParticipant} title="Participants" onClick={this.accessParticipantList} class="btn btn-primary">
-								<div class="glyphicon glyphicon-user"></div> 
+								<img  style={{"float": "right"}} src="img/btnParticipants.png" style={{width:45}} />
 							</button>
 						</div>
 						
+			
+							
+							
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button onClick={this.secDates} title="Dates" disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-calendar"></div> 
@@ -391,12 +404,12 @@ class Event extends React.Component {
 		this.setState( {event: {}});
 	
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.getJson( '/api/event?id='+this.state.eventid, httpPayload => {
-				console.log("Event.getPayload: get "+JSON.stringify(httpPayload.data));
+		restCallService.getJson( '/api/event?id='+this.state.eventid, this, httpPayload => {
+				console.log("Event.getPayload: get "+httpPayload.trace());
 				
-				this.setState( {event: httpPayload.data.event});
+				this.setState( {event: httpPayload.getData().event});
 				var show = this.state.show;
-				if (httpPayload.data.event && httpPayload.data.event.shoppinglist)
+				if (httpPayload.getData().event && httpPayload.getData().event.shoppinglist)
 					show.secShoppingList = 'COLLAPSE';
 				this.setState( {show: show});
 				});

@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput, Button } from 'carbon-components-react';
+import { TextInput,  Loading } from 'carbon-components-react';
 
 // https://www.npmjs.com/package/react-google-login
 // https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
@@ -25,7 +25,10 @@ class Login extends React.Component {
 		super();
 		// console.log("Login.constructor");
 
-		this.state = { email: 'pierre-yves.monnet@laposte.net', password: 'tog', badConnection: false }
+		this.state = { email: 'pierre-yves.monnet@laposte.net', password: 'tog', 
+			badConnection: false,
+			messageConnection:'',
+			inprogress: false }
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.loginConnect = this.loginConnect.bind(this);
@@ -36,12 +39,19 @@ class Login extends React.Component {
 	// ------------------------------ Render
 	render() {
 		
-		let messageConnection ="";
+		let messageConnectionHtml ="";
 		
 		var factory = FactoryService.getInstance();
 		var authService = factory.getAuthService();
 
-		console.log("Login.render: isConnected="+authService.isConnected());
+
+		console.log("Login.render: isConnected="+authService.isConnected()+" badConnection="+this.state.badConnection+" / message=["+this.state.messageConnection+"]");
+		let inprogresshtml=(<div/>);
+		if (this.state.inprogress )
+			inprogresshtml=(<Loading
+      						description="Active loading indicator" withOverlay={true}
+    						/>);
+		
 		if (authService.isConnected()) {
 			if (authService.getMethodConnection() ==='DIRECT')
 				return (
@@ -56,13 +66,14 @@ class Login extends React.Component {
 
 		// ---- not connected, give the different method
 		if (this.state.badConnection) {
-			messageConnection = messageConnection.concat("<div style='color:red'> Bad connection</div>");
+			messageConnectionHtml = (<div style='color:red'>+{this.state.messageConnection}</div>);
 		}
-		console.log("Login.render: badConnection=" + this.state.badConnection+" / message=["+messageConnection+"]");
+
+		// 					<div dangerouslySetInnerHTML={{ __html: messageConnectionHtml}}></div>
 
 		return (
 			<div className="App">
-				
+				 {inprogresshtml}
 				 <TextInput labelText="Email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><p />
 				
 				<TextInput labelText="Password" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ></TextInput><p />
@@ -71,7 +82,7 @@ class Login extends React.Component {
 				<tr>
 				<td style={{"paddingRight" : "40px", "paddingLeft" : "150px"}}>
 					<button onClick={this.loginConnect} class="btn btn-info">Connection</button><p/>
-					<div dangerouslySetInnerHTML={{ __html: messageConnection}}></div>
+					{messageConnectionHtml}
 				</td>
 				<td>
 				<GoogleLogin
@@ -104,20 +115,27 @@ class Login extends React.Component {
 	// ----------------------------- Connect
 	loginConnect() {
 		console.log("Login.connect state="+JSON.stringify(this.state));
-		this.setState( {badConnection: false});
+		this.setState( {badConnection: false, inprogress:true, messageConnection:''});
 		
 		var param = { email: this.state.email, password: this.state.password };
 		
 		FactoryService.getInstance().getAuthService().login( 'DIRECT', param, this, this.loginConnectCallback );
 	}
 	
-	loginConnectCallback( httpPayload ) {
-		console.log("Login.directConnectCallback Result="+JSON.stringify(httpPayload));
-		if (httpPayload.isConnected) {
+	loginConnectCallback( httpPayload, status ) {
+		
+		console.log("Login.directConnectCallback status "+status+" Result="+JSON.stringify(httpPayload));
+		if (status!=200) {
+			// messageConnection:"Server error" 
+			this.setState({ badConnection: true, inprogress:false });
+			this.setState({messageConnection:"Server error"});
+		}
+		else if (httpPayload.isConnected) {
 			// call the frame event to refresh all
+			this.setState({ badConnection: false, inprogress:false });
 			this.props.authCallback( true );
 		} else {
-			this.setState({ badConnection: true });
+			this.setState({ badConnection: true,inprogress:false,messageConnection:"Bad connection" });
 		}
 	}	
 	// ---------------------------- Logout

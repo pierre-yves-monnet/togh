@@ -11,8 +11,8 @@
 
 import axios from 'axios';
 
-import FactoryService from './FactoryService';
-import RestcallService from './RestcallService';
+// import FactoryService from './FactoryService';
+// import RestcallService from './RestcallService';
 
 
 class AuthService {
@@ -29,7 +29,7 @@ class AuthService {
 	
 	isConnected() {
 		var connection=this.token !==null;
-		console.log("AuthService.isConnected:"+connection+ +" in this="+this);
+		// console.log("AuthService.isConnected:"+connection);
 		return connection;
 	}
 	
@@ -45,7 +45,10 @@ class AuthService {
 	getHeaders( headers) {
 		if (headers===null)
 			headers= {};
-		headers.Authorization = this.token;
+		if (this.token !== null)
+			headers.Authorization = this.token;
+		headers["Access-Control-Allow-Origin"] ="*";
+
 		return headers;
 	}	
 	
@@ -56,15 +59,26 @@ class AuthService {
 		this.connectMethod = connectMethod;
 		var self=this;
 		try {
-			axios.post( this.restcallService.getUrl('/api/login?'), param)
+			const requestOptions = {
+	        headers: this.getHeaders({})
+	    };
+			axios.post( this.restcallService.getUrl('/api/login?'), param, requestOptions)
 				.then( httpPayload => {
 					console.log("AuthService.loginCallback, httpPayload="+JSON.stringify(httpPayload));
 					self.token = httpPayload.data.token;
 					self.user =  httpPayload.data.user;
+					
 					console.log("AuthService.loginCallback, token="+self.token+" in this="+self);
 
-					fctToCallback.call(objToCall, httpPayload.data);		
-				});
+					fctToCallback.call(objToCall, httpPayload.data, httpPayload.status);		
+				})
+				 .catch((err) => {
+					console.error("AuthService.loginCallback: Catch error:"+err);	
+					fctToCallback.call(objToCall, {}, err.status);		
+				}
+			
+			
+			);;
 		 } catch (err) {
         	// Handle Error Here
         	console.log("AuthService.connect.Error "+err);

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.togh.entity.EventEntity;
+import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.event.EventController;
@@ -144,7 +145,7 @@ public class RestEventController {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, "Not connected");
         }
         Long eventId = RestTool.getLong(inviteData, "eventid", null);
-        Long inviteduserid= RestTool.getLong(inviteData, "inviteduserid", null);
+        List<Long> listUsersId= RestTool.getList(inviteData, "listUsersid", null);
         String userInvitedEmail = RestTool.getString(inviteData, "email", null);
         String message = RestTool.getString(inviteData, "message", null);
         String role = RestTool.getString(inviteData, "role", null);
@@ -167,13 +168,18 @@ public class RestEventController {
         }
  
                 
-        InvitationResult invitationResult = eventService.invite( event, userId, inviteduserid, userInvitedEmail, roleEnum, message );
+        InvitationResult invitationResult = eventService.invite( event, userId, listUsersId, userInvitedEmail, roleEnum, message );
         
         Map<String,Object> resultMap = new HashMap<>();
-        if ( invitationResult.participant!=null)
-            resultMap.putAll( invitationResult.participant.getMap( ContextAccess.PUBLICACCESS ));
+        List<Map<String,Object>> listParticipants = new ArrayList();
+        resultMap.put("participants", listParticipants);
+        for (ParticipantEntity participant : invitationResult.participants)
+            listParticipants.add( participant.getMap( ContextAccess.PUBLICACCESS ));
         resultMap.put("status", invitationResult.status.toString());
-        resultMap.put("isinvitationsend", invitationResult.status == InvitationStatus.INVITATIONSENT);
+        resultMap.put("okMessage", invitationResult.okMessage.toString());
+        resultMap.put("errorMessage", invitationResult.errorMessage.toString());
+
+        resultMap.put("isInvitationSent", invitationResult.status == InvitationStatus.INVITATIONSENT);
         return resultMap;
     }
 }
