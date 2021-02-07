@@ -23,9 +23,10 @@ class Invitation extends React.Component {
 		// console.log("RegisterNewUser.constructor");
 		this.state = { 'event' : props.event,
 						'email' : '',
-						'firstName'  : '',
-						'lastName' : '',
-						'phoneNumber': '',		
+						'searchFirstName'  : '',
+						'searchLastName' : '',
+						'searchPhoneNumber': '',		
+						'searchEmail' : '',
 						'onlyNonInvitedUser': true,				
 						'role': 'PARTICIPANT',
 						'panelVisible': 'INVITATION',
@@ -97,8 +98,11 @@ class Invitation extends React.Component {
 						</RadioButtonGroup>
 					</div>
 					
-					<div style={{display: "inline-block", float: "right"}}>							
-						<button class="btn btn-info btn-lg" onClick={this.sendInvitation} class="btn btn-primary">
+					<div style={{display: "inline-block", float: "right"}}>	
+						<button class="btn btn-info btn-lg" 
+							onClick={this.sendInvitation}
+							disabled={! this.enableInvite() }
+							class="btn btn-primary">
 							<div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
 							{this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
 						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;Send invitation</div>)}
@@ -117,10 +121,10 @@ class Invitation extends React.Component {
 					{this.state.panelVisible === 'SEARCH' && (<div>
 							<table>
 							<tr>
-								<td style={{"paddingRight": "10px"}}><TextInput labelText="First name" value={this.state.firstName} onChange={(event) => this.setState( { firstName: event.target.value })} ></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Last name" value={this.state.lastName} onChange={(event) => this.setState( { lastName: event.target.value })}></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Phone number" value={this.state.phoneNumber} onChange={(event) => this.setState( { phoneNumber: event.target.value })} ></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Email" value={this.state.email} onChange={(event) => this.setState( {name: event.target.value })} ></TextInput>
+								<td style={{"paddingRight": "10px"}}><TextInput labelText="First name" value={this.state.searchFirstName} onChange={(event) => this.setState( { searchFirstName: event.target.value })} ></TextInput>
+								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Last name" value={this.state.searchLastName} onChange={(event) => this.setState( { searchLastName: event.target.value })}></TextInput>
+								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Phone number" value={this.state.searchPhoneNumber} onChange={(event) => this.setState( { searchPhoneNumber: event.target.value })} ></TextInput>
+								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Email" value={this.state.searchEmail} onChange={(event) => this.setState( {searchEmail: event.target.value })} ></TextInput>
 							</td></tr>
 							<tr><td style={{ "paddingRight": "10px"}} colspan="4">
 								<Checkbox labelText="Only users not already invited" 
@@ -177,16 +181,41 @@ class Invitation extends React.Component {
 		);
 	};
 
+	
+	enableInvite() {
+		if (this.state.email.length>0)
+			return true;
+		if (this.state.listSearchUsers.length==0)
+			return false;
+		// check : one must be check to enable the 
+		for (var i in this.state.listUsersSelected) {
+			if (this.state.listUsersSelected[ i ] === true) {		
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * searchToghUser
+	 */
 	searchToghUser() {
 		console.log("Invitation.Search: searchToghUser");
-		console.log("Invitation.Search: search by firstName="+this.state.firstName);
+		// console.log("Invitation.Search: search by firstName="+this.state.firstName);
 
-		this.setState( { listSearchUsers: [], countusers: -1, listUsersSelected: {}, messageServerSearch:''});
+		this.setState( { listSearchUsers: [], 
+			countusers: -1, 
+			listUsersSelected: {}, 
+			messageServerSearch:'', 
+			statusErrorInvitation: '', 
+			statusOkInvitation:'' });
+			
 		this.setState( {inprogresssearch: true });
 
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.getJson('/api/user/search?firstName='+this.state.firstName+'&lastName='+this.state.lastName+'&email='+this.state.email
-			+'&phoneNumber='+this.state.phoneNumber
+		restCallService.getJson('/api/user/search?firstName='+this.state.searchFirstName
+			+'&lastName='+this.state.searchLastName
+			+'&email='+this.state.searchEmail
+			+'&phoneNumber='+this.state.searchPhoneNumber
 			+'&onlyNonInvitedUser='+this.state.onlyNonInvitedUser
 			+'&eventid='+this.state.event.id, 
 			this, 

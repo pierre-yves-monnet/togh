@@ -173,7 +173,7 @@ public class RestEventController {
         Map<String,Object> resultMap = new HashMap<>();
         List<Map<String,Object>> listParticipants = new ArrayList();
         resultMap.put("participants", listParticipants);
-        for (ParticipantEntity participant : invitationResult.participants)
+        for (ParticipantEntity participant : invitationResult.newParticipants)
             listParticipants.add( participant.getMap( ContextAccess.PUBLICACCESS ));
         resultMap.put("status", invitationResult.status.toString());
         resultMap.put("okMessage", invitationResult.okMessage.toString());
