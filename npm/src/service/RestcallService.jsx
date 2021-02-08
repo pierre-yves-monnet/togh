@@ -48,7 +48,7 @@ class RestcallService {
 		
     	axios.get( this.getUrl( uri ), requestOptions)
         	.then( axiosPayload => { 
-				console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
+				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
 				var httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
@@ -61,17 +61,24 @@ class RestcallService {
 	}
 	
 	// PostJson
-	postJson(uri, param, fctPayload ) {
+	postJson(uri, objToCall, param, fctToCallback ) {
 		var headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
 		
 		const requestOptions = {
 	        headers: headers
 	    };
     	axios.post( this.getUrl( uri), param, requestOptions)
-        	.then( httpPayload => fctPayload( httpPayload ) )
- 			.catch( err  => {
-					console.error("AuthService.loginCallback: Catch error:"+err);	
-					fctPayload( err);});		
+        	.then( axiosPayload => { 
+				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
+				var httpResponse = new HttpResponse( axiosPayload, null);
+				fctToCallback.call(objToCall, httpResponse); 
+				})
+			.catch(err => {
+				console.error("RestCallService.getJson: catch error:"+err);	
+				var httpResponse =  new HttpResponse( {}, err)
+				fctToCallback.call(objToCall, httpResponse); 
+
+				});
 	}
 		
 }

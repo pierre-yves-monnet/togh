@@ -179,7 +179,7 @@ public class EventService {
                     // send the invitation and register the guy
                     notifyService.notifyNewUserInEvent(toghUser, invitedByUser, event);
                     invitationResult.newParticipants.add( event.addPartipant(toghUser, role, StatusEnum.INVITED ));
-                    invitationResult.okMessage.append(toghUser.getFirstname()+" "+toghUser.getLastName()+", ");
+                    invitationResult.okMessage.append( toghUser.getLabel()+", ");
                 }
         }
 

@@ -10,7 +10,7 @@ import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.repository.EndUserRepository;
+import com.togh.repository.ToghUserRepository;
 import com.togh.service.EventService;
 import com.togh.service.FactoryService;
 import com.togh.service.ToghUserService;

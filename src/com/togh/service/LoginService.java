@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
-import com.togh.repository.EndUserRepository;
+import com.togh.repository.ToghUserRepository;
 import com.togh.service.LoginService.LoginStatus;
 import com.togh.service.MonitorService.Chrono;
 

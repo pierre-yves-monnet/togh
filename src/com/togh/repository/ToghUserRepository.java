@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 
-public interface EndUserRepository extends JpaRepository<ToghUserEntity, Long>  {
+public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long>  {
     
     public ToghUserEntity findById(long id);
     
@@ -72,6 +72,10 @@ public interface EndUserRepository extends JpaRepository<ToghUserEntity, Long>  
     
     /**
      * Search user not already registered in an event
+     * select e from Employee e
+            where e not in (select epar from Employee epar, CertificateOrder c  join c.participants  p
+                            where c.persistenceId = :certificateid 
+                            and p.employee = epar)
      * @param firstName
      * @param lastName
      * @param phoneNumber

@@ -19,7 +19,7 @@ import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.logevent.LogEvent;
 import com.togh.logevent.LogEventFactory;
-import com.togh.repository.EndUserRepository;
+import com.togh.repository.ToghUserRepository;
 
 @Service
 public class ToghUserService {
@@ -32,7 +32,7 @@ public class ToghUserService {
     FactoryService factoryService;
   
 	@Autowired
-    private EndUserRepository endUserRepository;
+    private ToghUserRepository endUserRepository;
     
 	@Autowired
     private PlatformTransactionManager transactionManager;

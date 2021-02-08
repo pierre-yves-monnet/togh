@@ -185,9 +185,10 @@ Simon Autocomplete
 Simon Google Carte
 	Toggle default value (dans Google Map / Share my localisation)
 	DropDown : change value (status event => Si on le met en "actif" il faut capturer la demande)
-	
+	Invitation / Show only user not register => comment avoir une valeur par defaut a cochée ?	
 
 Py	Sauvegarde
+	faire marcher la requete JPA "user not register in the event"
 	Survey
 	Task
 	Itineraire

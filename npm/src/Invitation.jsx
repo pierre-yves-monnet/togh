@@ -254,24 +254,23 @@ class Invitation extends React.Component {
 		
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		this.setState( {inprogressinvitation: true, statusErrorInvitation: '', statusOkInvitation:'' });
-		restCallService.postJson('/api/event/invitation', param, httpPayload => {
-			console.log("Invitation.callback !!! payload=" + JSON.stringify(httpPayload.data));
-			if (! httpPayload.data) {
-				console.log("Invitation.callback Rebound ?");
-				return;
-			}
+		restCallService.postJson('/api/event/invitation', this, param, httpPayload => {
+			console.log("Invitation.callback !!! payload=" + httpPayload.trace() );
 			this.setState( {inprogressinvitation: false });
-			if (httpPayload.data.status === 'INVITATIONSENT') {
-				this.setState({ "statusOkInvitation": "Invitation sent with success"+httpPayload.data.okMessage });
-				console.log("Invitation.callback : register this new participant =" + JSON.stringify(httpPayload.data));
-			} else if (httpPayload.data.status === 'ALREADYAPARTICIPANT') {
-				this.setState({ "statusErrorInvitation": "This participant is already registered:"+httpPayload.data.errorMessage  });
-				this.setState({ "statusOkInvitation": "Invitation sent with success"+httpPayload.data.okMessage });
+			if (httpPayload.isError() ) {
+				this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });
+			}
+			else if (httpPayload.getData().status === 'INVITATIONSENT') {
+				this.setState({ "statusOkInvitation": "Invitation sent with success to "+httpPayload.getData().okMessage });
+				console.log("Invitation.callback : register this new participant =" + JSON.stringify(httpPayload.getData()));
+			} else if (httpPayload.getData().status === 'ALREADYAPARTICIPANT') {
+				this.setState({ "statusErrorInvitation": "This participant is already registered: "+httpPayload.getData().errorMessage  });
+				this.setState({ "statusOkInvitation": "Invitation sent with success"+httpPayload.getData().okMessage });
 
 			} else {
-				this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.data.status });
+				this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });
 			}
-			this.props.participantInvited(httpPayload.data.participants);
+			this.props.participantInvited(httpPayload.getData().participants);
 
 		});
 	}
