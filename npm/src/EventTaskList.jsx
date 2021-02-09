@@ -1,19 +1,20 @@
 // -----------------------------------------------------------
 //
-// EventShoppingList
+// EventTaskList
 //
-// Display one event
+// Manage the task list
 //
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag  } from 'carbon-components-react';
+import { TextInput, DatePicker, DatePickerInput, TextArea, Tag, OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 
+import FactoryService from './service/FactoryService';
 
 
 import ChooseParticipant from './ChooseParticipant';
 
-class EventShoppingList extends React.Component {
+class EventTaskList extends React.Component {
 	
 	// this.props.pingEvent()
 	constructor( props ) {
@@ -25,26 +26,70 @@ class EventShoppingList extends React.Component {
 						'collapse' : props.collapse
 						};
 		// show : OFF, ON, COLLAPSE
-		console.log("secShoppinglist.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
+		console.log("secTaskList.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
 		this.collapse 				= this.collapse.bind(this);
-		this.setChildAttribut		= this.setChildAttribut.bind(this);
 		this.addItem				= this.addItem.bind(this);
 		this.changeParticipant		= this.changeParticipant.bind(this);
 	}
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("EventShoppinglist.render: visible="+this.state.show);
+		console.log("EventTasklist.render: visible="+this.state.show);
 		if (this.state.show === 'OFF')
 			return ( <div> </div>);
+			
+		var toolService = FactoryService.getInstance().getToolService();
+			
 		// show the list
-		if (! this.state.event.shoppinglist) {
-			this.state.event.shoppinglist= [];
+		if (! this.state.event.tasklist) {
+			console.log("No tasklist defined, reset")
+			this.state.event.tasklist= [];
 		}
-		var listShoppingListHtml=[];
-		listShoppingListHtml= this.state.event.shoppinglist.map((item) =>
+
+		var listTaskListHtml=[];
+		listTaskListHtml= this.state.event.tasklist.map((item) =>
 			<tr key={item.id}>
 				<td> {this.getTagState( item.status )}</td>
+				<td>
+					<DatePicker datePickerType="single"
+						onChange={(dates) => {
+								console.log("SingleDatePicker :"+dates.length+" is an array "+Array.isArray(dates));
+ 
+								if (dates.length >= 1) {
+									console.log("SingleDatePicker set Date");
+									this.setChildAttribut( "datebegin", dates[0] , item);
+									}
+								}
+							}
+						 value={toolService.getDateListFromDate(item.datebegin)}
+						>        							 
+							<DatePickerInput
+						    	placeholder="mm/dd/yyyy"
+						      	labelText=""
+						      	id="date-picker-simple"
+						    />
+					</DatePicker>
+				</td>					
+				<td>
+					<DatePicker datePickerType="single"
+						onChange={(dates) => {
+								console.log("SingleDatePicker :"+dates.length+" is an array "+Array.isArray(dates));
+ 
+								if (dates.length >= 1) {
+									console.log("SingleDatePicker set Date");
+									this.setChildAttribut( "dateend", dates[0], item );
+									}
+								}
+							}
+						 value={toolService.getDateListFromDate(item.dateend)}
+						>        							 
+							<DatePickerInput
+						    	placeholder="mm/dd/yyyy"
+						      	labelText=""
+						      	id="date-picker-simple"
+						    />
+					</DatePicker>
+				</td>					
 				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut( "what", event.target.value, item )}  labelText="" ></TextInput></td>
 				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut( "description", event.target.value, item )} class="toghinput" labelText=""></TextArea></td>
 				<td>
@@ -55,15 +100,15 @@ class EventShoppingList extends React.Component {
 				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem( item )} title="Remove this item"></button></td>
 			</tr>
 			);
-		console.log("EventShoppinglist.render: list calculated from "+JSON.stringify( this.state.event.shoppinglist ));
-		console.log("EventShoppinglist.render: "+listShoppingListHtml.length);
+		console.log("EventTasklist.render: list calculated from "+JSON.stringify( this.state.event.tasklist ));
+
 		return ( <div>
 					<div class="eventsection"> 
-						<a href="secShoppinglist"></a>
+						<a href="secTasklist"></a>
 						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
 							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
 							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
-						</a> Shopping List
+						</a> Task List
 						<div style={{float: "right"}}>
 							<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
 						</div>
@@ -71,13 +116,16 @@ class EventShoppingList extends React.Component {
 					{this.state.show ==='ON' && <table class="table table-striped toghtable">
 							<thead>
 								<tr >
-									<th>What</th>
+									<th>State</th>
+									<th>Begin</th>
+									<th>End</th>
+									<th>Subject</th>
 									<th>Description</th>
 									<th>Who</th>
 									<th></th>
 								</tr>
 							</thead>											
-							{listShoppingListHtml}
+							{listTaskListHtml}
 						</table>
 					}
 				</div>
@@ -93,7 +141,7 @@ class EventShoppingList extends React.Component {
 	}
 	
 	setChildAttribut( name, value, item ) {
-		console.log("EventShoppinglist.setChildAttribut: set attribut:"+name+" <= "+value+" item="+JSON.stringify(item));
+		console.log("EventTasklist.setChildAttribut: set attribut:"+name+" <= "+value+" item="+JSON.stringify(item));
 		const { event } = { ...this.state };
   		const currentEvent = event;
 
@@ -106,33 +154,38 @@ class EventShoppingList extends React.Component {
 	}
 	
 	addItem() {
-		console.log("EventShoppinglist.setChildAttribut: addItem item="+JSON.stringify(this.state.event));
+		console.log("EventTasklist.setChildAttribut: addItem item="+JSON.stringify(this.state.event));
+
 		var currentEvent = this.state.event;		
-		const newList = currentEvent.shoppinglist.concat( {"status": "TODO", "what": ""} );
-		currentEvent.shoppinglist = newList;
+		const newList = currentEvent.tasklist.concat( {"status": "PLANNED",  "what": ""} );
+		currentEvent.tasklist = newList;
 		this.setState( { "event" : currentEvent});
 		this.props.pingEvent();
 	}
 	
 	removeItem( item ) {
-		console.log("EventShoppinglist.removeItem: event="+JSON.stringify(this.state.event));
+		console.log("EventTasklist.removeItem: event="+JSON.stringify(this.state.event));
 
 		var currentEvent = this.state.event;	
-		var listShopping = 	currentEvent.shoppinglist;
-		var index = listShopping.indexOf(item);
+		var listTask = 	currentEvent.tasklist;
+		var index = listTask.indexOf(item);
   		if (index > -1) {
-   			listShopping.splice(index, 1);
+   			listTask.splice(index, 1);
   		}
-		console.log("EventShoppinglist.removeItem: "+JSON.stringify(listShopping));
-		currentEvent.shoppinglist = listShopping;
-		console.log("EventShoppinglist.removeItem: eventAfter="+JSON.stringify(this.state.event));
+		console.log("EventTasklist.removeItem: "+JSON.stringify(listTask));
+		currentEvent.tasklist = listTask;
+		console.log("EventTasklist.removeItem: eventAfter="+JSON.stringify(this.state.event));
 
 		this.setState( { "event" : currentEvent });
 		this.props.pingEvent();	
 	} 
 	
+	changeParticipant() {
+		console.log("EventShoppinglist.changeParticipant");
+	}
 	
 	getTagState( task ) {
+		
 		var changeState= (
 		<OverflowMenu
       					selectorPrimaryFocus={'.'+ task }
@@ -141,15 +194,18 @@ class EventShoppingList extends React.Component {
 							}
 						}
     				>
-							<OverflowMenuItem className="TODO" itemText="To bring"/>
+							<OverflowMenuItem className="PLANNED" itemText="Planned"/>
+							<OverflowMenuItem className="ACTIVE" itemText="Active"/>
 							<OverflowMenuItem className="DONE" itemText="Done"/>
 							<OverflowMenuItem className="CANCEL" itemText="Cancel"/>
 					</OverflowMenu>
-		);
+);
 
 
-		if (task === 'TODO')
-			return (<Tag  type="teal" title="Task planned">To bring {changeState}</Tag>)			
+		if (task === 'PLANNED')
+			return (<Tag  type="teal" title="Task planned">Planned {changeState}</Tag>)			
+		if (task === 'ACTIVE')
+			return (<Tag  type="green" title="Task in progress">In progress {changeState}</Tag>);
 		if (task === 'DONE')
 			return (<Tag  type="warm-gray" title="Task is finish, well done !">Done {changeState}</Tag>);
 		if (task === 'CANCEL')
@@ -158,11 +214,6 @@ class EventShoppingList extends React.Component {
 		return (<Tag  type="gray" title="Something strange arrived">{task} {changeState}</Tag>);
 	}
 	
-	
-	
-	changeParticipant() {
-		console.log("EventShoppinglist.cchangeParticipant");
-	}
 }		
-export default EventShoppingList;
+export default EventTaskList;
 	

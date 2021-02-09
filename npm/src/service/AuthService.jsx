@@ -14,6 +14,10 @@ import axios from 'axios';
 // import FactoryService from './FactoryService';
 // import RestcallService from './RestcallService';
 
+import HttpResponse  from './HttpResponse';
+
+
+
 
 class AuthService {
 	constructor(factoryService ) {
@@ -62,19 +66,23 @@ class AuthService {
 			const requestOptions = {
 	        headers: this.getHeaders({})
 	    };
-			axios.post( this.restcallService.getUrl('/api/login?'), param, requestOptions)
-				.then( httpPayload => {
-					console.log("AuthService.loginCallback, httpPayload="+JSON.stringify(httpPayload));
-					self.token = httpPayload.data.token;
-					self.user =  httpPayload.data.user;
+		
+		
+		axios.post( this.restcallService.getUrl('/api/login?'), param, requestOptions)
+				.then( axiosPayload => {
+					console.log("AuthService.loginCallback, httpPayload="+JSON.stringify(axiosPayload));
+					self.token = axiosPayload.data.token;
+					self.user =  axiosPayload.data.user;
 					
 					console.log("AuthService.loginCallback, token="+self.token+" in this="+self);
-
-					fctToCallback.call(objToCall, httpPayload.data, httpPayload.status);		
+					var httpResponse = new HttpResponse( axiosPayload, null);
+					fctToCallback.call(objToCall, httpResponse);		
 				})
 				 .catch((err) => {
-					console.error("AuthService.loginCallback: Catch error:"+err);	
-					fctToCallback.call(objToCall, {}, err.status);		
+					console.error("AuthService.loginCallback: Catch error:"+err);
+					var httpResponse =  new HttpResponse( {}, err);
+					console.log("AuthService.loginCallback: trace:"+httpResponse.trace() );
+					fctToCallback.call(objToCall, httpResponse);		
 				}
 			
 			
@@ -92,11 +100,18 @@ class AuthService {
 			var self=this;
 
 			axios.get( this.restcallService.getUrl('/api/logingoogle?idtokengoogle=' + googleInformation.tokenId))
-				.then( httpPayload => {
-					console.log("AuthService.loginGoogle, httpPayload="+JSON.stringify(httpPayload));
-					self.token = httpPayload.data.token;
-					self.user =  httpPayload.data.user;
-					fctToCallback.call(objToCall, httpPayload.data);		
+				.then( axiosPayload => {
+					console.log("AuthService.loginGoogle, httpPayload="+JSON.stringify(axiosPayload));
+					self.token = axiosPayload.data.token;
+					self.user =  axiosPayload.data.user;
+										
+					var httpResponse = new HttpResponse( axiosPayload, null);
+					fctToCallback.call(objToCall, httpResponse);		
+				})
+				.catch((err) => {
+					console.error("AuthService.loginCallback: Catch error:"+err);
+					var httpResponse =  new HttpResponse( {}, err)
+					fctToCallback.call(objToCall, httpResponse);		
 				});
 		 } catch (err) {
         	// Handle Error Here
@@ -111,12 +126,19 @@ class AuthService {
 		var self=this;
 		try {
 			axios.post( this.restcallService.getUrl('/api/login/registernewuser?'), param)
-				.then( httpPayload => {
-					console.log("AuthService.registerStatus: registerStatus = "+JSON.stringify(httpPayload.data));
-					self.token = httpPayload.data.token;
-					self.user =  httpPayload.data.user;
+				.then( axiosPayload => {
+					console.log("AuthService.registerStatus: registerStatus = "+JSON.stringify(axiosPayload.data));
+					self.token = axiosPayload.data.token;
+					self.user =  axiosPayload.data.user;
 					self.connectMethod='DIRECT';
-					fctToCallback.call(objToCall, httpPayload.data);	
+
+					var httpResponse = new HttpResponse( axiosPayload, null);
+					fctToCallback.call(objToCall, httpResponse);	
+				})
+				.catch((err) => {
+					console.error("AuthService.loginCallback: Catch error:"+err);
+					var httpResponse =  new HttpResponse( {}, err)
+					fctToCallback.call(objToCall, httpResponse);		
 				});
 		 } catch (err) {
         	// Handle Error Here
@@ -137,11 +159,13 @@ class AuthService {
 			{
     			headers: this.getHeaders(null)
   			}).then(
-				httpPayload => {
-					console.log("AuthService.logout, httpPayload="+JSON.stringify(httpPayload));
+				axiosPayload => {
+					console.log("AuthService.logout, httpPayload="+JSON.stringify(axiosPayload));
 					self.token = null;
 					self.user =  null;
-					fctToCallback.call(objToCall, httpPayload.data);	
+			
+					var httpResponse = new HttpResponse( axiosPayload, null);		
+					fctToCallback.call(objToCall, httpResponse);	
 				}
 			);
 	}

@@ -9,8 +9,9 @@
 // -----------------------------------------------------------
 
 import axios from 'axios';
-import FactoryService from './FactoryService';
-import AuthService from './AuthService';
+
+// import FactoryService from './FactoryService';
+// import AuthService from './AuthService';
 import HttpResponse  from './HttpResponse';
 
 

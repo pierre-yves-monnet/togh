@@ -68,8 +68,8 @@ class EventParticipants extends React.Component {
 				</td>
 			</tr>
 			);
-		console.log("EventParticipant.render: list calculated from "+JSON.stringify( this.state.event.participantlist ));
-		console.log("EventParticipant.render: "+listParticipantListHtml.length);
+		// console.log("EventParticipant.render: list calculated from "+JSON.stringify( this.state.event.participantlist ));
+		// console.log("EventParticipant.render: "+listParticipantListHtml.length);
 		
 		
 			

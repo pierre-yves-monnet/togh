@@ -27,7 +27,7 @@ import { Select } from 'carbon-components-react';
 import EventParticipants from './EventParticipants';
 import EventShoppingList from './EventShoppingList';
 import EventGeolocalisation from './EventGeolocalisation';
-
+import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 
 
@@ -38,7 +38,11 @@ class Event extends React.Component {
 
 		this.state = { 'event' : {}, 
 						'eventid' : props.eventid,
-						'show' : { 'secParticipant': 'ON', 'secShoppinglist' : 'OFF', 'secGeolocalisation' : 'OFF'},
+						'show' : { 
+							secParticipant: 'ON', 
+							secShoppinglist : 'OFF',
+							secGeolocalisation : 'OFF', 
+							secTasklist : 'OFF'},
 						showRegistration : false
 						};
 
@@ -47,7 +51,8 @@ class Event extends React.Component {
 		this.accessParticipantList 		= this.accessParticipantList.bind(this);
 		this.accessShoppingList			= this.accessShoppingList.bind(this);
 		this.accessGeolocalisation		= this.accessGeolocalisation.bind(this);
-		
+		this.accessTaskList				= this.accessTaskList.bind(this);
+
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.refreshEvent 		= this.refreshEvent.bind(this);
@@ -60,7 +65,7 @@ class Event extends React.Component {
 
 	//----------------------------------- Render
 	render() {
-		console.log("Event.render eventId="+this.props.eventid + " event="+JSON.stringify(this.state.event));
+		console.log("Event.render eventId="+this.state.event.eventid + " event="+JSON.stringify(this.state.event)+" show:"+JSON.stringify(this.state.show));
 
 		// no map read, return
 		if (! this.state.event || Object.keys(this.state.event).length === 0) {
@@ -68,7 +73,8 @@ class Event extends React.Component {
 			return (<div />);
 		}
 				
-		console.log("Event.render: section=secShoppinglist= "+this.state.show.secShoppinglist);
+		console.log("Event.render: section=task:"+this.state.show.secTasklist+ " Shop:"+this.state.show.secShoppinglist);
+		var toolService = FactoryService.getInstance().getToolService();
 		
 				
 		var datePanelHtml = (
@@ -98,7 +104,7 @@ class Event extends React.Component {
 									}
 								}
 							}
-						  	value={this.getDateListFromDate(this.state.event.dateEvent)}
+						  	value={toolService.getDateListFromDate(this.state.event.dateEvent)}
 
 							>
         							 
@@ -126,7 +132,7 @@ class Event extends React.Component {
 										this.setAttribut( "dateEndEvent", dates[1]);
 									}
 									}}
-								 	value={this.getDateListFromDate(this.state.event.dateStartEvent, this.state.event.dateEndEvent)}
+								 	value={toolService.getDateListFromDate(this.state.event.dateStartEvent, this.state.event.dateEndEvent)}
 
 						>
 						      <DatePickerInput
@@ -232,7 +238,7 @@ class Event extends React.Component {
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title="Tasks" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title="Tasks"  onClick={this.accessTaskList}  class="btn btn-primary">
 								<div class="glyphicon glyphicon-tasks"></div> 
 							</button>
 						</div>
@@ -279,6 +285,7 @@ class Event extends React.Component {
 					
 				</div>
 				{ this.state.show.secParticipant !== 'OFF' && <EventParticipants event={this.state.event} show={this.state.show.secParticipant} pingEvent={this.pingEvent}/>}
+				{ this.state.show.secTasklist !== 'OFF' && <EventTaskList event={this.state.event} show={this.state.show.secTasklist} pingEvent={this.pingEvent}/>}
 				{ this.state.show.secShoppinglist !== 'OFF' && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} pingEvent={this.pingEvent}/>}
 				{ this.state.show.secGeolocalisation !== 'OFF' && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} pingEvent={this.pingEvent}/>}
 			</div>)	
@@ -328,8 +335,7 @@ class Event extends React.Component {
 	// -------------------------------------------- Access different part
 	
 	// accessParticipantList
-	 accessParticipantList() {
-		
+	 accessParticipantList() {		
 		console.log("Event.accessParticipantList state="+JSON.stringify(this.state));
 		var event = this.state.event; 
 		if (!  event.participants ) {
@@ -341,22 +347,36 @@ class Event extends React.Component {
 
 	}
 	
+	// Tasks list
+	accessTaskList() {
+		console.log("accessTaskList ");
+		var event = this.state.event; 
+		if (!  event.tasklist ) {
+			console.log("Event.accessShoppingList: no task list exist, create one");
+			event.tasklist=[];
+			// add one line
+			event.tasklist.push( { "status": "PLANNED",  "what": ""});
+			this.setState( {"event" : event })
+		}
+		this.showSection ("secTasklist");
+	}
+	
 	// Shopping list
 	accessShoppingList() {
-		console.log("accessShoppingList !!!!!!!!!!!!!!!!!!");
+		console.log("accessShoppingList");
 		var event = this.state.event; 
 		if (!  event.shoppinglist ) {
 			console.log("Event.accessShoppingList: no shopping list exist, create one");
 			event.shoppinglist=[];
 			
 			// add one line
-			event.shoppinglist.push( { 'what:':''});
+			event.shoppinglist.push( {  "status": "TODO", "what": ""});
 			
 			this.setState( {"event" : event })
 		}
 		this.showSection ("secShoppinglist");
-
 	}
+	
 	// Geolocalisation
 	accessGeolocalisation() {
 		console.log("accessGeolocalisation !!!!!!!!!!!!!!!!!!");
@@ -389,14 +409,7 @@ class Event extends React.Component {
         }
 	}
 	
-	getDateListFromDate( dateone, datetwo ) {
-		console.log("Event.getDateListFromDate: ");
-		var listDates = [];
-		listDates.push( dateone);
-		if (datetwo)
-			listDates.push( datetwo);
-		return listDates;
-	}
+	
 	
 	// -------------------------------------------- Call REST
 	refreshEvent() {

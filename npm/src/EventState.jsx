@@ -28,7 +28,7 @@ class EventState extends React.Component {
 	
 //----------------------------------- Render
 	render() {
-		console.log("Event.render eventId="+this.props.eventid + " event="+JSON.stringify(this.state.statusEvent));
+		// console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
 
 		var tagHtml = null;
 		if (this.state.statusEvent === 'INPREPAR')

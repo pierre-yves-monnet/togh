@@ -88,8 +88,7 @@ class Login extends React.Component {
 				<GoogleLogin
 				    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
 				    buttonText="Login"
-				    onSuccess={this.loginGoogle}
-				    
+				    onSuccess={this.loginGoogle}				    
 				    cookiePolicy={'single_host_origin'}
 				  />
 					</td>
@@ -122,16 +121,16 @@ class Login extends React.Component {
 		FactoryService.getInstance().getAuthService().login( 'DIRECT', param, this, this.loginConnectCallback );
 	}
 	
-	loginConnectCallback( httpPayload, status ) {
+	loginConnectCallback( httpResponse ) {
 		
-		console.log("Login.directConnectCallback status "+status+" Result="+JSON.stringify(httpPayload));
-		if (status!=200) {
+		console.log("Login.directConnectCallback:"+httpResponse.trace());
+		if (httpResponse.isError()) {
 			// messageConnection:"Server error" 
 			this.setState({ badConnection: true, inprogress:false });
 			this.setState({messageConnection:"Server error"});
 		}
-		else if (httpPayload.isConnected) {
-			// call the frame event to refresh all
+		else if (httpResponse.getData().isConnected) {
+			// call the frame event to refresh all - the fact that the user is connected is saved in the authService, not here
 			this.setState({ badConnection: false, inprogress:false });
 			this.props.authCallback( true );
 		} else {
@@ -139,8 +138,8 @@ class Login extends React.Component {
 		}
 	}	
 	// ---------------------------- Logout
-	logoutCallback( httpPayload ) {
-		console.log("Login.logoutCallback Result="+JSON.stringify(httpPayload));
+	logoutCallback( httpResponse ) {
+		console.log("Login.logoutCallback "+httpResponse.trace());
 		// call the frame event to refresh all
 		this.props.authCallback( false );
 	}	
@@ -163,12 +162,15 @@ class Login extends React.Component {
 		console.log("Login.loginGoogle this="+this+" StaticLogin="+staticLogin);
 		FactoryService.getInstance().getAuthService().loginGoogle( googleUser, staticLogin, staticLogin.loginGoogleCallBack );
 	};
-	loginGoogleCallBack( httpPayload ) {
-		console.log("Login.loginGoogleCallBack "+JSON.stringify(httpPayload));
-		if (httpPayload.isConnected) {
+	loginGoogleCallBack( httpResponse ) {
+		console.log("Login.loginGoogleCallBack "+httpResponse.trace());
+		if (httpResponse.isError()) {
+			this.setState({ badConnection: true, isLog: false });
+		}
+		else if (httpResponse.getData().isConnected) {
 			this.setState({ isConnected: true });
 		} else {
-			this.setState({ badConnection: !httpPayload.isConnected, isLog: httpPayload.isConnected });
+			this.setState({ badConnection: !httpResponse.getData().isConnected, isLog: httpResponse.getData().isConnected });
 		}
 		// call the frame event to refresh all
 		this.props.authCallback( true );	
@@ -180,7 +182,7 @@ class Login extends React.Component {
 	logoutGoogle() {
 		console.log("Login.loginGoogle this="+this+" StaticLogin="+staticLogin);
 
-		FactoryService.getInstance().getAuthService().logout(staticLogin, httpPayload => {
+		FactoryService.getInstance().getAuthService().logout(staticLogin, httpResponse => {
 					staticLogin.props.authCallback( false );
 			});
 

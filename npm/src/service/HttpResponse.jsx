@@ -32,23 +32,22 @@ class HttpResponse {
 	}
 	trace() {
 		if (this.isError()) {
-			console.log("HttpResponse: ERROR "+JSON.stringify(this.err));
-				if (this.err.response) {
-			      		// The request was made and the server responded with a status code
-			      // that falls out of the range of 2xx
-			      console.log("HttpResponse: ERRORDATA="+this.err.response.data);
-			      console.log("HttpResponse: ERRORSTATUS="+this.err.response.status);
-			      console.log("HttpResponse: ERRORHEADER="+this.err.response.headers);
-			    } else if (this.err.request) {
-			      // The request was made but no response was received
-			      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-			      // http.ClientRequest in node.js
-			      console.log("HttpResponse: ERRORREQUEST="+this.err.request);
-			    } else {
-			      // Something happened in setting up the request that triggered an Error
-			      console.log("HttpResponse: ERRORMESSAGE=", this.err.message);
-			    }
-			    console.log(this.err.config);
+			// console.log("HttpResponse: ERROR "+JSON.stringify(this.err));
+			if (this.err.response) {
+		      		// The request was made and the server responded with a status code
+		      // that falls out of the range of 2xx
+		      console.log("HttpResponse: ERROR "+this.err.response.status+" data: "+this.err.response.data);
+		      // console.log("HttpResponse: ERRORHEADER="+this.err.response.headers);
+		    } else if (this.err.request) {
+		      // The request was made but no response was received
+		      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+		      // http.ClientRequest in node.js
+		      console.log("HttpResponse: ERRORREQUEST="+this.err.request);
+		    } else {
+		      // Something happened in setting up the request that triggered an Error
+		      console.log("HttpResponse: ERRORMESSAGE=", this.err.message);
+		    }
+		    // console.log(this.err.config);
 		}
 		else {
 			console.log("HttpResponse:"+ this.getStatus() +" "+JSON.stringify( this.getData()));
