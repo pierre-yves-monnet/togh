@@ -6,15 +6,46 @@ import reportWebVitals from './reportWebVitals';
 
 
 import BodyTogh from './BodyTogh.jsx';
-import Banner from './Banner.jsx';
 
 import FactoryService from './service/FactoryService'
+
+
+import { IntlProvider } from 'react-intl';
+import {IntlShape} from 'react-intl';
+
+
+
+import fr from "./lang/fr.json";
+import en from "./lang/en.json";
+
 
 var factoryService = new FactoryService();
 FactoryService.setInstance( factoryService );
 
+// see https://lokalise.com/blog/react-i18n-intl/
+//default language
+let language  =navigator.language.split(/[-_]/)[0];
 
-ReactDOM.render(<BodyTogh />, document.getElementById('reactBodyTogh'));
+if (language ==="en") {
+	language  = "en";
+} else if (language === "fr") {
+	language  = "fr";
+} else {
+	language  = "fr";
+}
+const messages = {
+	    'fr': fr,
+	    'en': en
+	};
+
+
+
+console.log("index.js local=["+language+"]")
+ReactDOM.render(
+		<IntlProvider locale={language}  messages={messages[ language  ]} >
+			<BodyTogh />
+		</IntlProvider>
+		, document.getElementById('reactBodyTogh'));
 
 
 

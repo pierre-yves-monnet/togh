@@ -25,8 +25,8 @@ class Banner extends React.Component {
 			var user = authService.getUser();
 			console.log("User Connected "+JSON.stringify(user));
 			return ( 
-				<div >
-					<div >
+				<div class="container-fluid">
+					<div class="row">
 						<div class="col-xs-12 banner">
 						<table width="100%">
 							<tr><td style={{"color":"#888787", verticalAlign: "top"}}>

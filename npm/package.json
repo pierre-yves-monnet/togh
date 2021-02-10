@@ -49,6 +49,9 @@
     ]
   },
   "devDependencies": {
-    "@iconify/icons-mdi": "^1.1.9"
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@iconify/icons-mdi": "^1.1.9",
+    "babel-plugin-react-intl": "^8.2.25"
   }
 }

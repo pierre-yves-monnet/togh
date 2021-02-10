@@ -14,6 +14,10 @@ import Menu from './Menu';
 import RegisterNewUser from './RegisterNewUser';
 import EventsList from './EventsList';
 import Event from './Event';
+import { IntlProvider, addLocaleData,FormattedMessage } from "react-intl";
+import {Context} from "./Wrapper";
+
+
 
 import FactoryService from './service/FactoryService';
 import AuthService from './service/AuthService';
@@ -36,8 +40,7 @@ class BodyTogh extends React.Component {
 		this.state = { frameContent: 'frameEvents', 
 						showmenu : true, 
 						sizeMenu:  '10%',
-						currenteventid : null };
-					
+						currenteventid : null};
 			
 	}
 
@@ -57,7 +60,9 @@ class BodyTogh extends React.Component {
 					<div class="container">
   						<div class="row">
 							<div class="col-sm-2" >
-								Welcome to Togh<br/><br/>
+								<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh D" />
+								
+							<br/><br/>
 								<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
 							</div>
 								

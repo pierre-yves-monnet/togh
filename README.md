@@ -30,7 +30,8 @@ https://crunchify.com/step-by-step-guide-to-setup-and-install-apache-tomcat-serv
 Puis faire sur le projet un "Debug in server"
 ==> Le war va demarrer
 
-
+## mobile
+https://flutter.dev/
 
 # Architecture
 
@@ -136,6 +137,16 @@ https://phrase.com/blog/posts/react-i18n-best-libraries/
 https://www.freecodecamp.org/news/setting-up-internationalization-in-react-from-start-to-finish-6cb94a7af725/
 
 
+https://lokalise.com/blog/react-i18n-intl/
+{
+ "app.channel.plug": "Tutorial brought to you by {blogName}"
+}
+
+<FormattedMessage
+ id = "app.channel.plug"
+ defaultMessage="Tutorial brought to you by Lokalise"
+ values = {{blogName: "Lokalise"}}
+/>
 
 
 
