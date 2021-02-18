@@ -44,7 +44,7 @@ class EventShoppingList extends React.Component {
 		var listShoppingListHtml=[];
 		listShoppingListHtml= this.state.event.shoppinglist.map((item) =>
 			<tr key={item.id}>
-				<td> {this.getTagState( item.status )}</td>
+				<td> {this.getTagState( item.status, item )}</td>
 				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut( "what", event.target.value, item )}  labelText="" ></TextInput></td>
 				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut( "description", event.target.value, item )} class="toghinput" labelText=""></TextArea></td>
 				<td>
@@ -132,21 +132,37 @@ class EventShoppingList extends React.Component {
 	} 
 	
 	
-	getTagState( task ) {
+	getTagState( task, item ) {
+		window.alert("entering getTagState ")
 		var changeState= (
 		<OverflowMenu
-      					selectorPrimaryFocus={'.'+ task }
-						onChange={(event) => { 
-							console.log("EventState: Click ");
-							}
+      					selectorPrimaryFocus={ task }
+						onClick={() => {
+								window.alert("you just opened the menu")
+							} 
 						}
+//						onFocus={(event) => { 
+//							window.alert("you just changed this"+this.props.className)
+//							console.log("EventState: Click ");
+//							 task = this.props.className;
+//							}
+//						}
     				>
-							<OverflowMenuItem className="TODO" itemText="To bring"/>
-							<OverflowMenuItem className="DONE" itemText="Done"/>
+							<OverflowMenuItem className="TODO" itemText="To bring" />
+							<OverflowMenuItem className="DONE" itemText="Done"
+								onClick={() => {
+										item.status = "DONE"
+										task = 'DONE'
+										window.alert("you just clicked "+this.props.show)
+										this.getTagState( task, item )
+									} 
+								}
+							/>
 							<OverflowMenuItem className="CANCEL" itemText="Cancel"/>
 					</OverflowMenu>
 		);
 
+		window.alert("task is "+task)
 
 		if (task === 'TODO')
 			return (<Tag  type="teal" title="Task planned">To bring {changeState}</Tag>)			
