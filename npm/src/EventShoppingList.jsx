@@ -133,14 +133,9 @@ class EventShoppingList extends React.Component {
 	
 	
 	getTagState( task, item ) {
-		window.alert("entering getTagState ")
 		var changeState= (
 		<OverflowMenu
       					selectorPrimaryFocus={ task }
-						onClick={() => {
-								window.alert("you just opened the menu")
-							} 
-						}
 //						onFocus={(event) => { 
 //							window.alert("you just changed this"+this.props.className)
 //							console.log("EventState: Click ");
@@ -148,13 +143,25 @@ class EventShoppingList extends React.Component {
 //							}
 //						}
     				>
-							<OverflowMenuItem className="TODO" itemText="To bring" />
+							<OverflowMenuItem className="TODO" itemText="To bring" 
+								onClick={() => {
+										item.status = "TODO"
+//										task = 'DONE'
+										console.log("you just clicked "+this.props.show)
+//										this.setState({task})
+//										this.getTagState( item.status, item )
+									} 
+								}
+							/>
 							<OverflowMenuItem className="DONE" itemText="Done"
 								onClick={() => {
 										item.status = "DONE"
-										task = 'DONE'
-										window.alert("you just clicked "+this.props.show)
-										this.getTagState( task, item )
+//										task = 'DONE'
+										console.log("you just clicked "+this.props.show)
+										console.log("EventShoppinglist.render: NEW list calculated from "+JSON.stringify( this.state.event.shoppinglist ));
+		
+//										this.setState({task})
+//										this.getTagState( item.status, item )
 									} 
 								}
 							/>
@@ -162,14 +169,14 @@ class EventShoppingList extends React.Component {
 					</OverflowMenu>
 		);
 
-		window.alert("task is "+task)
+		console.log("task is "+task)
 
 		if (task === 'TODO')
-			return (<Tag  type="teal" title="Task planned">To bring {changeState}</Tag>)			
+			return (<Tag  type="teal" title="Task planned">To bring {changeState}  {task}</Tag>)			
 		if (task === 'DONE')
-			return (<Tag  type="warm-gray" title="Task is finish, well done !">Done {changeState}</Tag>);
+			return (<Tag  type="warm-gray" title="Task is finish, well done !">Done {changeState}  {task}</Tag>);
 		if (task === 'CANCEL')
-			return (<Tag  type="red" title="Oups, this task was cancelled">Cancelled{changeState}</Tag>);
+			return (<Tag  type="red" title="Oups, this task was cancelled">Cancelled{changeState}  {task}</Tag>);
 		 
 		return (<Tag  type="gray" title="Something strange arrived">{task} {changeState}</Tag>);
 	}

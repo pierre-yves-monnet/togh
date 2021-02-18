@@ -26,9 +26,10 @@ function getSuggestions(value, participants) {
     return [];
   }
 
-  const regex = new RegExp('^' + escapedValue, 'i');
+  // const regex = new RegExp('^' + escapedValue, 'i');
+  const regex = new RegExp('.*' + escapedValue + '.*', 'i');
 
-  return participants.filter(participant => regex.test(participant.user.email));
+  return participants.filter(participant => regex.test(participant.user.email+participant.user.firstname));
 }
 
 function getSuggestionValue(suggestion) {

@@ -55,7 +55,7 @@ class EventParticipants extends React.Component {
 					{item.role ==='OWNER' && (<div class="label label-info">Owner2</div>)}
 					
 					{item.role !=='OWNER' && (
-						<Select labelText="" disabled={item.status==='LEFT'} value={item.role} onChange={(event) => this.setAttribut( "role", event.target.value )}>
+						<Select labelText="" disabled={item.status==='LEFT'} value={item.role} onChange={(event) => this.setAttribute( "role", event.target.value )}>
 								<option value="ORGANIZER"><FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer"/></option>								
 								<option value="PARTICIPANT"><FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant"/></option>
 								<option value="OBSERVER"><FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer"/></option>
