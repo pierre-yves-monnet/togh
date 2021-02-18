@@ -8,6 +8,7 @@
 
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
 
 
 import FactoryService from './service/FactoryService';
@@ -47,7 +48,7 @@ class EventsList extends React.Component {
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={event.id}>
-					<td><button class="glyphicon glyphicon glyphicon-tint" title="Access this event"></button></td>
+					<td><button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button></td>
 					<td>
 						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
 					</td>
@@ -62,14 +63,14 @@ class EventsList extends React.Component {
 					<h1>Events</h1>
 					<div style={{ float: "right" }}>
 						<button class="btn btn-info btn-lg" onClick={this.createEvent}>
-							<div class="glyphicon glyphicon-plus"> </div>&nbsp;Create an Event</button>
+							<div class="glyphicon glyphicon-plus"> </div>&nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
 					</div>
 				</div>
 				<div class="row">
 					<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
 						<button class="glyphicon glyphicon-refresh" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}></button>
-						<button class="glyphicon glyphicon-menu-hamburger" title="All events" style={{ "marginLeft ": "10px" }}></button>
-						<button class="glyphicon glyphicon-user" title="My events" style={{ "marginLeft ": "10px" }}></button>
+						<button class="glyphicon glyphicon-menu-hamburger" title={<FormattedMessage id="EventList.AllEvents" defaultMessage="All events"/>} style={{ "marginLeft ": "10px" }}></button>
+						<button class="glyphicon glyphicon-user" title={<FormattedMessage id="EventList.MyEvents" defaultMessage="My events"/>} style={{ "marginLeft ": "10px" }}></button>
 					</div>
 
 				</div>
@@ -78,9 +79,9 @@ class EventsList extends React.Component {
 						<thead>
 						<tr>
 							<th></th>
-							<th colSpan="2">Name</th>
-							<th>Date</th>
-							<th>Participants</th>
+							<th colSpan="2"><FormattedMessage id="EventList.Name" defaultMessage="Name"/></th>
+							<th><FormattedMessage id="EventList.Dae" defaultMessage="Date"/></th>
+							<th><FormattedMessage id="EventList.Participants" defaultMessage="Participants"/></th>
 						</tr>
 						</thead>
 						{listEventsHtml}

@@ -14,18 +14,48 @@ import Menu from './Menu';
 import RegisterNewUser from './RegisterNewUser';
 import EventsList from './EventsList';
 import Event from './Event';
-import { IntlProvider, addLocaleData,FormattedMessage } from "react-intl";
-import {Context} from "./Wrapper";
-
-
+import { IntlProvider, FormattedMessage } from "react-intl";
 
 import FactoryService from './service/FactoryService';
 import AuthService from './service/AuthService';
 
+
+import fr from "./lang/fr.json";
+import en from "./lang/en.json";
+import pt from "./lang/pt.json";
+import de from "./lang/de.json";
+import el from "./lang/el.json";
+import hi from "./lang/hi.json";
+import it from "./lang/it.json";
+import ko from "./lang/ko.json";
+import ja from "./lang/ja.json";
+import ar from "./lang/ar.json";
+import es from "./lang/es.json";
+
+
+
+const messages = {
+	    'fr': fr,
+	    'en': en,
+		'pt': pt,
+		'de': de,
+		'el': el,
+		'hi': hi,
+		'it': it,
+		'ko': ko,
+		'ja': ja,
+		'ar': ar,
+		'es': es
+		
+	};
+	
+
 class BodyTogh extends React.Component {
+	
+ 
+
 	constructor( props ) {
 		super();
-		this.state = {}
 		console.log("BodyTogh.constructor");
 
 		this.authCallback = this.authCallback.bind(this);
@@ -34,13 +64,15 @@ class BodyTogh extends React.Component {
 		
 		this.clickMenu = this.clickMenu.bind( this )
 		this.showMenu = this.showMenu.bind( this );
+		this.changeLanguage = this.changeLanguage.bind( this );
 		
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		// this.connect = this.connect.bind(this);
 		this.state = { frameContent: 'frameEvents', 
 						showmenu : true, 
 						sizeMenu:  '10%',
-						currenteventid : null};
+						currenteventid : null,
+						language: props.language};
 			
 	}
 
@@ -53,29 +85,31 @@ class BodyTogh extends React.Component {
 
 	
 		if (authService.isConnected() === false) {
-			return (				
-				<div>
-					<Banner />
-
-					<div class="container">
-  						<div class="row">
-							<div class="col-sm-2" >
-								<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh D" />
-								
-							<br/><br/>
-								<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
+			return (	
+				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
+					<div>
+						<Banner language={this.state.language} changeLanguage={this.changeLanguage} />
+	
+						<div class="container">
+	  						<div class="row">
+								<div class="col-sm-2" >
+									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh D" />
+									
+								<br/><br/>
+									<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
+								</div>
+									
+								<div class="col-sm-5">	
+									<Login authCallback={this.authCallback}/>
+								</div>
+								<div class="col-sm-5">
+									<RegisterNewUser authCallback={this.authCallback}/>
+								</div>
+							  
 							</div>
-								
-							<div class="col-sm-5">	
-								<Login authCallback={this.authCallback}/>
-							</div>
-							<div class="col-sm-5">
-								<RegisterNewUser authCallback={this.authCallback}/>
-							</div>
-						  
 						</div>
-					</div>
-				</div>  
+					</div>  
+				</IntlProvider>
 			)
 		};
 	
@@ -87,9 +121,12 @@ class BodyTogh extends React.Component {
 			"paddingLeft" : "30px"
         };
 		return (
+			<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >
 			<div>
-				<Banner />
+				<Banner language={this.state.language} changeLanguage={this.changeLanguage}/>
 				<div class="row">
+				<div class="col-xs-12">
+
 					<table style={{width: "100%", "height": "100%"}}>
 						<tr>
 							<td style={styleMenu} >
@@ -101,10 +138,11 @@ class BodyTogh extends React.Component {
 		
 							</td>
 						</tr>
-		
 					</table>
+				</div>
 				</div>	
-			</div>		
+			</div>	
+			</IntlProvider>	
 		);
 		
 	} // end render
@@ -129,6 +167,10 @@ class BodyTogh extends React.Component {
 		this.setState( {'sizeMenu' : (isVisible? "10%": "2%") } );
 	}
 
+	changeLanguage( newlanguage ) {
+		console.log("BodyTogh.changeLanguage "+newlanguage);
+		this.setState( {'language' : newlanguage } );
+	}
 	
 	
 	

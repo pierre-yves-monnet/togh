@@ -7,6 +7,8 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
+
 import { TextInput, DatePicker, DatePickerInput, TextArea, Tag, OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 
 import FactoryService from './service/FactoryService';
@@ -108,7 +110,7 @@ class EventTaskList extends React.Component {
 						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
 							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
 							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
-						</a> Task List
+						</a> <FormattedMessage id="EventTaskList.MainTitleTaskList" defaultMessage="Tasks List"/>
 						<div style={{float: "right"}}>
 							<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
 						</div>
@@ -116,12 +118,12 @@ class EventTaskList extends React.Component {
 					{this.state.show ==='ON' && <table class="table table-striped toghtable">
 							<thead>
 								<tr >
-									<th>State</th>
-									<th>Begin</th>
-									<th>End</th>
-									<th>Subject</th>
-									<th>Description</th>
-									<th>Who</th>
+									<th><FormattedMessage id="EventTaskList.State" defaultMessage="State"/></th>
+									<th><FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin"/></th>
+									<th><FormattedMessage id="EventTaskList.End" defaultMessage="End"/></th>
+									<th><FormattedMessage id="EventTaskList.Subject" defaultMessage="Subject"/></th>
+									<th><FormattedMessage id="EventTaskList.Description" defaultMessage="Description"/></th>
+									<th><FormattedMessage id="EventTaskList.Who" defaultMessage="Who"/></th>
 									<th></th>
 								</tr>
 							</thead>											
@@ -194,22 +196,22 @@ class EventTaskList extends React.Component {
 							}
 						}
     				>
-							<OverflowMenuItem className="PLANNED" itemText="Planned"/>
-							<OverflowMenuItem className="ACTIVE" itemText="Active"/>
-							<OverflowMenuItem className="DONE" itemText="Done"/>
-							<OverflowMenuItem className="CANCEL" itemText="Cancel"/>
+							<OverflowMenuItem className="PLANNED" itemText={<FormattedMessage id="EventTaskList.StatePlanned" defaultMessage="Planned"/>}/>
+							<OverflowMenuItem className="ACTIVE" itemText={<FormattedMessage id="EventTaskList.InProgress" defaultMessage="In progress"/>}/>
+							<OverflowMenuItem className="DONE" itemText={<FormattedMessage id="EventTaskList.Done" defaultMessage="Done"/>}/>
+							<OverflowMenuItem className="CANCEL" itemText={<FormattedMessage id="EventTaskList.Cancelled" defaultMessage="Cancelled"/>}/>
 					</OverflowMenu>
 );
 
 
 		if (task === 'PLANNED')
-			return (<Tag  type="teal" title="Task planned">Planned {changeState}</Tag>)			
+			return (<Tag  type="teal" title="Task planned"><FormattedMessage id="EventTaskList.StatePlanned" defaultMessage="Planned"/> {changeState}</Tag>)			
 		if (task === 'ACTIVE')
-			return (<Tag  type="green" title="Task in progress">In progress {changeState}</Tag>);
+			return (<Tag  type="green" title="Task in progress"><FormattedMessage id="EventTaskList.InProgress" defaultMessage="In progress"/> {changeState}</Tag>);
 		if (task === 'DONE')
-			return (<Tag  type="warm-gray" title="Task is finish, well done !">Done {changeState}</Tag>);
+			return (<Tag  type="warm-gray" title="Task is finish, well done !"><FormattedMessage id="EventTaskList.Done" defaultMessage="Done"/> {changeState}</Tag>);
 		if (task === 'CANCEL')
-			return (<Tag  type="red" title="Oups, this task was cancelled">Cancelled{changeState}</Tag>);
+			return (<Tag  type="red" title="Oups, this task was cancelled"><FormattedMessage id="EventTaskList.Cancelled" defaultMessage="Cancelled"/>{changeState}</Tag>);
 		 
 		return (<Tag  type="gray" title="Something strange arrived">{task} {changeState}</Tag>);
 	}

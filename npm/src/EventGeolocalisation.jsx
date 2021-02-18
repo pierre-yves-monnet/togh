@@ -7,8 +7,9 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput, Toggle } from 'carbon-components-react';
+import { FormattedMessage } from "react-intl";
 
+import { TextInput, Toggle } from 'carbon-components-react';
 
 
 import GoogleMapReact from 'google-map-react';
@@ -43,7 +44,7 @@ class EventGeolocalisation extends React.Component {
 		if (this.state.show === 'OFF')
 			return ( <div> </div>);
 		// show the list
-		const zoomLevel=0;
+		const zoomLevel=8;
 		const googlelocation = {
   			address: this.state.event.geoaddress,
 			};
@@ -72,20 +73,20 @@ class EventGeolocalisation extends React.Component {
 						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
 							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
 							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
-						</a> Geolocalisation
+						</a><FormattedMessage id="EventGeolocalisation.MainTitleGeolocation" defaultMessage="Geolocalisation"/>
 					</div> 
 					{this.state.show ==='ON' && (
 						<div>
 						<table >
 						<tr><td style={{"paddingRight":"30px"}}>
-							<Toggle labelText="" aria-label="toggle button" 
+							<Toggle labelText={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event"/>} aria-label="toggle button" 
 								
 								onChange={(event) => this.setAttributeCheckbox( "geosharemylocation", event.target.value )}
 	      						id="shareMyLocation" />
-	      				</td><td>Share my localisation during the event</td></tr>
+	      				</td><td></td></tr>
 						</table>
 	    
-						<TextInput labelText="Address" style={{width: "100%", maxWidth: "100%"}} rows="4" value={this.state.event.geoaddress} 
+						<TextInput labelText={<FormattedMessage id="EventGeolocalisation.Address" defaultMessage="Address"/>}  style={{width: "100%", maxWidth: "100%"}} rows="4" value={this.state.event.geoaddress} 
 								onChange={(event) => this.setAttribute( "geoaddress", event.target.value )}></TextInput>					
 						<br/>
 						<div style={{ height: '100vh', width: '100%' }}>

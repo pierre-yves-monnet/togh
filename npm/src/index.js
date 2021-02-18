@@ -41,12 +41,16 @@ const messages = {
 
 
 console.log("index.js local=["+language+"]")
-ReactDOM.render(
-		<IntlProvider locale={language}  messages={messages[ language  ]} >
-			<BodyTogh />
-		</IntlProvider>
-		, document.getElementById('reactBodyTogh'));
+// 
+// ReactDOM.render(
+// 		<IntlProvider locale={language}  messages={messages[ language  ]} >
+// 			<BodyTogh language={language}/>
+// 		</IntlProvider>
+// 		, document.getElementById('reactBodyTogh'));
 
+ReactDOM.render(
+			<BodyTogh language={language}/>
+		, document.getElementById('reactBodyTogh'));
 
 
 

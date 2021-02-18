@@ -8,6 +8,8 @@
 
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
+
 
 // import { Button } from 'carbon-components-react';
 import { Tag } from 'carbon-components-react';
@@ -53,10 +55,10 @@ class EventState extends React.Component {
 						}
 					}
     			>
-      				<OverflowMenuItem className="INPREPAR" itemText="In Preparation"/>
-      				<OverflowMenuItem className="INPROG" itemText="Actif"/>
-      				<OverflowMenuItem className="CLOSED" itemText="Done"/>
-      				<OverflowMenuItem className="CANCEL" itemText="Cancelled"/>
+      				<OverflowMenuItem className="INPREPAR" itemText={<FormattedMessage id="EventState.InPreparation" defaultMessage="In Preparation"/>}/>
+      				<OverflowMenuItem className="INPROG" itemText={<FormattedMessage id="EventState.Actif" defaultMessage="Actif"/>}/>
+      				<OverflowMenuItem className="CLOSED" itemText={<FormattedMessage id="EventState.Done" defaultMessage="Done"/>}/>
+      				<OverflowMenuItem className="CANCEL" itemText={<FormattedMessage id="EventState.Cancelled" defaultMessage="Cancelled"/>}/>
         		</OverflowMenu>)
 		}
       

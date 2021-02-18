@@ -10,6 +10,8 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
+
 // import { Button } from 'carbon-components-react';
 import { ModalWrapper, RadioButtonGroup, RadioButton, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
 
@@ -79,9 +81,9 @@ class Invitation extends React.Component {
 		
 		return ( 
 			 <ModalWrapper
-     			 buttonTriggerText="Invitation"
-     			 modalLabel="Invitation"
-				primaryButtonText="Close"
+     			 buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
+     			 modalLabel={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
+				primaryButtonText={<FormattedMessage id="Invitation.Close" defaultMessage="Close"/>}
 				secondaryButtonText=''
 				size='lg'>
 					<div style={{display: "inline-block"}}>
@@ -93,8 +95,8 @@ class Invitation extends React.Component {
 								this.setState( {"panelVisible": event})}
 								}
 							>
-							<RadioButton value="INVITATION" id="invitation_r1" labelText="Email Invitation" labelPosition="right" />
-							<RadioButton value="SEARCH" id="invitation_r2"  labelText="Search a User" labelPosition="right"/>
+							<RadioButton value="INVITATION" id="invitation_r1" labelText={<FormattedMessage id="Invitation.ByEmail" defaultMessage="Send an Email"/>} labelPosition="right" />
+							<RadioButton value="SEARCH" id="invitation_r2"  labelText={<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} labelPosition="right"/>
 						</RadioButtonGroup>
 					</div>
 					
@@ -105,7 +107,7 @@ class Invitation extends React.Component {
 							class="btn btn-primary">
 							<div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
 							{this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
-						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;Send invitation</div>)}
+						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.SendInvitation" defaultMessage="Send Invitation"/></div>)}
 						</button>
 						<br />
 						{ this.state.statusErrorInvitation && (<div class="alert alert-warning">{this.state.statusErrorInvitation}</div>)}
@@ -115,19 +117,19 @@ class Invitation extends React.Component {
 
       				<br/>
       				{this.state.panelVisible === 'INVITATION' && (<div>
-							<TextInput labelText="Email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
+							<TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>} value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
 						</div>)
 					}		
 					{this.state.panelVisible === 'SEARCH' && (<div>
 							<table>
 							<tr>
-								<td style={{"paddingRight": "10px"}}><TextInput labelText="First name" value={this.state.searchFirstName} onChange={(event) => this.setState( { searchFirstName: event.target.value })} ></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Last name" value={this.state.searchLastName} onChange={(event) => this.setState( { searchLastName: event.target.value })}></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Phone number" value={this.state.searchPhoneNumber} onChange={(event) => this.setState( { searchPhoneNumber: event.target.value })} ></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText="Email" value={this.state.searchEmail} onChange={(event) => this.setState( {searchEmail: event.target.value })} ></TextInput>
+								<td style={{"paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.FirstName" defaultMessage="First name"/>} value={this.state.searchFirstName} onChange={(event) => this.setState( { searchFirstName: event.target.value })} ></TextInput>
+								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.LastName" defaultMessage="Last name"/>} value={this.state.searchLastName} onChange={(event) => this.setState( { searchLastName: event.target.value })}></TextInput>
+								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.PhoneNumber" defaultMessage="Phone number"/>} value={this.state.searchPhoneNumber} onChange={(event) => this.setState( { searchPhoneNumber: event.target.value })} ></TextInput>
+								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>} value={this.state.searchEmail} onChange={(event) => this.setState( {searchEmail: event.target.value })} ></TextInput>
 							</td></tr>
 							<tr><td style={{ "paddingRight": "10px"}} colspan="4">
-								<Checkbox labelText="Only users not already invited" 
+								<Checkbox labelText={<FormattedMessage id="Invitation.OnlyUserNotAlreadyAParticipant" defaultMessage="Only users not already a participant"/>} 
 									 
 									onChange={(value,event ) => {
 									console.log("Invitation.OnlyNonInvitedUser type="+JSON.stringify(event));
@@ -139,21 +141,25 @@ class Invitation extends React.Component {
 							<button class="btn btn-info btn-lg" onClick={this.searchToghUser} class="btn btn-info" disabled={this.state.inprogresssearch}>	
 								
 									<div class="glyphicon glyphicon-search" style={{display: "inline-block"}}> </div>
-									{this.state.inprogresssearch && (<div style={{display: "inline-block"}}><InlineLoading description="searching" status='active'/></div>) }
-									{this.state.inprogresssearch === false && (<div style={{display: "inline-block"}}>&nbsp;Search</div>)}
-								
+									{this.state.inprogresssearch && (
+										<div style={{display: "inline-block"}}>
+											<InlineLoading 
+												description={<FormattedMessage id="Invitation.Searching" defaultMessage="Searching"/>} status='active'/>
+										</div>) }
+									{this.state.inprogresssearch === false && (
+										<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.Search" defaultMessage="Search"/></div>)}
 							</button>
 							<br/>
-							{this.state.countusers > -1 && (<div style={{display: "inline-block"}}> {this.state.countusers} users found<br/></div> )}
+							{this.state.countusers > -1 && (<div style={{display: "inline-block"}}> {this.state.countusers} <FormattedMessage id="Invitation.UserFound" defaultMessage="UsersFound"/><br/></div> )}
 							{this.state.messageServerSearch && (<div class="alert alert-danger">{this.state.messageServerSearch}</div>)}
 							<br/>
 							<table class="table table-striped toghtable">
 								<thead>
 									<tr>
 										<th></th>
-										<th>Name</th>
-										<th>Phone number</th>
-										<th>Email</th>
+										<th><FormattedMessage id="Invitation.UserName" defaultMessage="Name"/></th>
+										<th><FormattedMessage id="Invitation.UserPhoneNumber" defaultMessage="Phone number"/></th>
+										<th><FormattedMessage id="Invitation.UserEmail" defaultMessage="Email"/></th>
 									</tr>
 								</thead>
 								{listSearchUsersHtml}
@@ -167,9 +173,9 @@ class Invitation extends React.Component {
 						<tr>
 							<td style={{"paddingRight": "10px"}}>
 								<Select labelText="Role in this event" value={this.state.role} onChange={(event) => this.setState({ role: event.target.value })}>
-									<option value="ORGANIZER">Organizer</option>
-									<option value="PARTICIPANT">Participant</option>
-									<option value="OBSERVER">Observer</option>
+									<option value="ORGANIZER"><FormattedMessage id="Invitation.RoleOrganizer" defaultMessage="Organizer"/></option>
+									<option value="PARTICIPANT"><FormattedMessage id="Invitation.RoleParticipant" defaultMessage="Participant"/></option>
+									<option value="OBSERVER"><FormattedMessage id="Invitation.RoleObserver" defaultMessage="Observer"/></option>
 								</Select>
 							</td><td>
 								<TextArea labelText="Message" value={this.state.message} onChange={(event) => this.setState({ message: event.target.value })} ></TextArea><br />

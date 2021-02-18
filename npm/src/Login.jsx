@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { TextInput,  Loading } from 'carbon-components-react';
+import { IntlProvider, FormattedMessage } from "react-intl";
 
 // https://www.npmjs.com/package/react-google-login
 // https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
@@ -55,11 +56,11 @@ class Login extends React.Component {
 		if (authService.isConnected()) {
 			if (authService.getMethodConnection() ==='DIRECT')
 				return (
-					<button onClick={() =>this.directLogout()} class="btn btn-warning">Logout</button>
+					<button onClick={() =>this.directLogout()} class="btn btn-warning"><FormattedMessage id="Login.logout" defaultMessage="Logout" /></button>
 					)
 			return ( <GoogleLogout 
 					    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
-						buttonText="Logout"
+						buttonText={<FormattedMessage id="Login.googlelogout" defaultMessage="Login"/>}
 						onLogoutSuccess={this.logoutGoogle}/>
 			 		 );
 		}
@@ -70,24 +71,24 @@ class Login extends React.Component {
 		}
 
 		// 					<div dangerouslySetInnerHTML={{ __html: messageConnectionHtml}}></div>
-
+		
 		return (
 			<div className="App">
 				 {inprogresshtml}
-				 <TextInput labelText="Email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><p />
+				 <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>} value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><p />
 				
-				<TextInput labelText="Password" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ></TextInput><p />
+				<TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>} type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ></TextInput><p />
 				<br/>
 				<table >
 				<tr>
 				<td style={{"paddingRight" : "40px", "paddingLeft" : "150px"}}>
-					<button onClick={this.loginConnect} class="btn btn-info">Connection</button><p/>
+					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><p/>
 					{messageConnectionHtml}
 				</td>
 				<td>
 				<GoogleLogin
 				    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
-				    buttonText="Login"
+				    buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
 				    onSuccess={this.loginGoogle}				    
 				    cookiePolicy={'single_host_origin'}
 				  />
@@ -105,8 +106,7 @@ class Login extends React.Component {
 	toString() {
 		return "email=[" + this.state.email+"],password=["+this.state.password+"] Connection=["+this.state.badConnection+"]";
 	}
-	
-	
+
 	// -----------------------------------------------
 	// DIRECT CONNECTION	
 	// -----------------------------------------------
@@ -134,7 +134,8 @@ class Login extends React.Component {
 			this.setState({ badConnection: false, inprogress:false });
 			this.props.authCallback( true );
 		} else {
-			this.setState({ badConnection: true,inprogress:false,messageConnection:"Bad connection" });
+			const label="Bad connection";
+			this.setState({ badConnection: true,inprogress:false,messageConnection: label });
 		}
 	}	
 	// ---------------------------- Logout

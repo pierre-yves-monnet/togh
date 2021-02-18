@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import FactoryService from './service/FactoryService';
+import { FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
 import { DatePicker } from 'carbon-components-react';
@@ -20,6 +20,7 @@ import { TextArea } from 'carbon-components-react';
 import { TextInput } from 'carbon-components-react';
 import { Select } from 'carbon-components-react';
 
+import FactoryService from './service/FactoryService';
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';
 
@@ -80,17 +81,17 @@ class Event extends React.Component {
 		var datePanelHtml = (
 			<div>
 				<RadioButtonGroup
-					name="datePolicy"
+					name="datepolicy"
 					valueSelected={this.state.event.datePolicy}
-					legend="Legend"
+					legend={<FormattedMessage id="Event.DatePolicy" defaultMessage="Date policy"/>}
 					onChange={(event) => {
 							console.log("RadioGroup.DataPolicy on change=");
         					
 							this.setAttribut( "datePolicy", event)}
 							}
 						>
-					<RadioButton value="ONEDATE" id="r1" labelText="One date" labelPosition="right" />
-					<RadioButton value="PERIOD" id="r2"  labelText="Period" labelPosition="right"/>
+					<RadioButton value="ONEDATE" id="r1" labelText={<FormattedMessage id="Event.OneDate" defaultMessage="One date"/>} labelPosition="right" />
+					<RadioButton value="PERIOD" id="r2"  labelText={<FormattedMessage id="Event.Period" defaultMessage="Period"/>} labelPosition="right"/>
 				</RadioButtonGroup>
 				{ this.state.event.datePolicy === 'ONEDATE' && (	
 					<div>
@@ -110,7 +111,7 @@ class Event extends React.Component {
         							 
 							<DatePickerInput
 						    	placeholder="mm/dd/yyyy"
-						      	labelText="Date Event"
+						      	labelText={<FormattedMessage id="Event.DateEvent" defaultMessage="Date Event"/>}
 						      	id="date-picker-simple"
 						    />
 						</DatePicker>
@@ -138,12 +139,12 @@ class Event extends React.Component {
 						      <DatePickerInput
 						        id="date-picker-input-id-start"
 						        placeholder="mm/dd/yyyy"
-						        labelText="Start date"								
+						        labelText={<FormattedMessage id="Event.StartDate" defaultMessage="Start Date"/>}								
 						      />
 						      <DatePickerInput
 						        id="date-picker-input-id-finish"
 						        placeholder="mm/dd/yyyy"
-						        labelText="End date"								
+						        labelText={<FormattedMessage id="Event.EndDate" defaultMessage="End Date"/>}								
 						      />
 						</DatePicker>
 					</div> )
@@ -172,18 +173,18 @@ class Event extends React.Component {
 						</h1>
 					</div>
 					<div class="col-sm-5">
-						<div class="fieldlabel">Status</div>
+						<div class="fieldlabel">{<FormattedMessage id="Event.Status" defaultMessage="Status"/>}</div>
 						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeState} />
 					</div>
 					<div class="col-sm-2">
-					 	<Select  labelText="Scope" 
+					 	<Select  labelText={<FormattedMessage id="Event.Scope" defaultMessage="Scope"/>} 
 							id="typeEvent"
 							value={this.state.event.typeEvent} 
 							onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
-							<option value="OPEN">Open</option>
-							<option value="OPENCONF">Open on confirmation</option>
-							<option value="LIMITED">Limited</option>
-							<option value="SECRET">Secret</option>
+							<option value="OPEN"><FormattedMessage id="Event.ScopeOpen" defaultMessage="Open"/></option>
+							<option value="OPENCONF"><FormattedMessage id="Event.ScopeOpenConfirmation" defaultMessage="Open on confirmation"/></option>
+							<option value="LIMITED"><FormattedMessage id="Event.ScopeLimited" defaultMessage="Limited"/></option>
+							<option value="SECRET"><FormattedMessage id="Event.ScopeSecret" defaultMessage="Secret"/></option>
 						</Select>
 						<br/>
         			</div>
@@ -192,7 +193,7 @@ class Event extends React.Component {
 				<div class="row">
 					<div class="col-sm-6">
 						<TextArea id="description"
-							labelText="Description"
+							labelText={<FormattedMessage id="Event.Description" defaultMessage="Description"/>}
 							style={{width: "100%", maxWidth: "100%"}} 
 							rows="5" 
 							value={this.state.event.description} 
@@ -200,7 +201,7 @@ class Event extends React.Component {
 					</div>
 					<div class="col-sm-6">
 						<div class="panel panel-info">
-							<div class="panel-heading">Date</div>
+							<div class="panel-heading"><FormattedMessage id="Event.EventDate" defaultMessage="Date"/></div>
 							<div class="panel-body">
 								{datePanelHtml}								
 							</div>
@@ -209,7 +210,7 @@ class Event extends React.Component {
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<TextInput labelText="Name" value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )}></TextInput><br />
+						<TextInput labelText={<FormattedMessage id="Event.EventName" defaultMessage="Name"/>} value={this.state.event.name} onChange={(event) => this.setAttribut( "name", event.target.value )}></TextInput><br />
 					</div>
 				</div>	
 				
@@ -217,7 +218,7 @@ class Event extends React.Component {
 					
 					<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" >
 				  		<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button   onClick={this.secParticipant} title="Participants" onClick={this.accessParticipantList} class="btn btn-primary">
+							<button   onClick={this.secParticipant} title={<FormattedMessage id="Event.TitleParticipants" defaultMessage="Participant"/>} onClick={this.accessParticipantList} class="btn btn-primary">
 								<img  style={{"float": "right"}} src="img/btnParticipants.png" style={{width:45}} />
 							</button>
 						</div>
@@ -226,37 +227,37 @@ class Event extends React.Component {
 							
 							
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button onClick={this.secDates} title="Dates" disabled={true} class="btn btn-primary">
+							<button onClick={this.secDates} title={<FormattedMessage id="Event.TitleDates" defaultMessage="Dates"/>} disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-calendar"></div> 
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secChat} title="Chat channel" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secChat} title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat"/>} disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-bullhorn" ></div>
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title="Tasks"  onClick={this.accessTaskList}  class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title={<FormattedMessage id="Event.TitleTasks" defaultMessage="Tasks"/>}  onClick={this.accessTaskList}  class="btn btn-primary">
 								<div class="glyphicon glyphicon-tasks"></div> 
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} title="Shopping list : what to brings?" onClick={this.accessShoppingList} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?"/>} onClick={this.accessShoppingList} class="btn btn-primary">
 								<div class="glyphicon glyphicon-shopping-cart"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secSurvey} title="Manage Survey" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secSurvey} title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey"/>} disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-ok-circle"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.accessGeolocalisation} title="Where is the event?" class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.accessGeolocalisation} title={<FormattedMessage id="Event.TitleGeolocalisation" defaultMessage="Where is the event?"/>} class="btn btn-primary">
 								<div class="glyphicon glyphicon-globe"></div>
 							</button>
 						</div>
@@ -264,19 +265,19 @@ class Event extends React.Component {
 						
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title="Point of interest" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title={<FormattedMessage id="Event.TitlePointOfInterest" defaultMessage="Point of interrest"/>} disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-camera"></div>
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secNight} title="What do we sleep?" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secNight} title={<FormattedMessage id="Event.TitleNight" defaultMessage="Where do we sleep?"/>} disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-home"></div>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secExpense} title="Expense" disabled={true} class="btn btn-primary">
+							<button style={{"marginLeft ": "10px"}} onClick={this.secExpense} title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses"/>} disabled={true} class="btn btn-primary">
 								<div class="glyphicon glyphicon-piggy-bank"></div>
 							</button>
 						</div>

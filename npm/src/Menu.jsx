@@ -7,6 +7,8 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
+
 import Login from './Login';
 
 
@@ -41,11 +43,21 @@ class Menu extends React.Component {
 				 </div>
 				&nbsp;<p/>
 				
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">Events</a><p/>
-				My profile<p/>
-				My friends<p/>
-				My Profile
-				&nbsp;<p />
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+					<FormattedMessage id="Menu.Events" defaultMessage="Events" />
+				</a><p/>
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+					<FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
+				</a><p/>
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+					<FormattedMessage id="Menu.MyFriends" defaultMessage="My Friends" />
+				</a><p/>
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+					<FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
+				</a><p/>
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+					<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
+				</a><p/>
 				&nbsp;<p />
 				&nbsp;<p />
 				<Login authCallback={this.authCallback} />

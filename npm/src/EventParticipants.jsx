@@ -7,6 +7,8 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
+
 import { Select } from 'carbon-components-react';
 import { Tag } from 'carbon-components-react';
 import Invitation from './Invitation';
@@ -45,7 +47,7 @@ class EventParticipants extends React.Component {
 					{item.user !== '' && ( <div>{item.user.firstName} {item.user.lastName} {item.user.email} </div>)}
 					{item.user !== '' && item.user.phoneNumber && (<div> {item.user.phoneNumber} </div>)}
 					<p/>
-					{item.status === 'INVITED' && (<div class="label label-info">Invitation in progress</div>)}
+					{item.status === 'INVITED' && (<div class="label label-info"><FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/></div>)}
 
 				</td>
 				
@@ -54,17 +56,17 @@ class EventParticipants extends React.Component {
 					
 					{item.role !=='OWNER' && (
 						<Select labelText="" disabled={item.status==='LEFT'} value={item.role} onChange={(event) => this.setAttribut( "role", event.target.value )}>
-								<option value="ORGANIZER">Organizer</option>
-								<option value="PARTICIPANT">Participant</option>
-								<option value="OBSERVER">Observer</option>
-								<option value="LEFT">Left</option>
+								<option value="ORGANIZER"><FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer"/></option>								
+								<option value="PARTICIPANT"><FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant"/></option>
+								<option value="OBSERVER"><FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer"/></option>
+								<option value="LEFT"><FormattedMessage id="EventParticipant.RoleLeft" defaultMessage="Left"/></option>
 							</Select>
 							)}
 				</td>
 				<td>
-					{item.status==='ACTIF' && <Tag  type="green" title="Active participant">Actif</Tag>}			
-					{item.status==='INVITED' && <Tag  type="teal" title="Invited participant. The participant didn't confirm yet'">Invited</Tag>}			
-					{item.status==='LEFT' && <Tag  type="red" title="The participant left the event">Left</Tag>}			
+					{item.status==='ACTIF' && <Tag  type="green" title={<FormattedMessage id="EventParticipant.TitleActiveParticipant" defaultMessage="Active participant"/>}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}			
+					{item.status==='INVITED' && <Tag  type="teal" title={<FormattedMessage id="EventParticipant.Titleinvited" defaultMessage="Invited participant: no confirmation is received at this moment"/>}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}			
+					{item.status==='LEFT' && <Tag  type="red" title={<FormattedMessage id="EventParticipant.TitleLeft" defaultMessage="The participant left the event"/>}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}			
 				</td>
 			</tr>
 			);
@@ -80,22 +82,22 @@ class EventParticipants extends React.Component {
 						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
 							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
 							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
-						</a> Participants
+						</a> <FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
 						<div style={{float: "right"}}>							
 							<Invitation event={this.state.event} participantInvited={this.participantInvited}/>
 						</div>
 					</div> 
 
 					{this.state.show ==='ON' && 	<table class="table table-striped toghtable">
-											<thead>
-												<tr >
-													<th>Person</th>
-													<th>Role</th>
-													<th>Status</th>
-												</tr>
-											</thead>
-											{listParticipantListHtml}
-											</table>
+						<thead>
+							<tr >
+								<th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
+								<th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
+								<th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
+							</tr>
+						</thead>
+						{listParticipantListHtml}
+						</table>
 					}
 				</div>
 				);
