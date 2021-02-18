@@ -125,9 +125,13 @@ class Login extends React.Component {
 		
 		console.log("Login.directConnectCallback:"+httpResponse.trace());
 		if (httpResponse.isError()) {
-			// messageConnection:"Server error" 
-			this.setState({ badConnection: true, inprogress:false });
-			this.setState({messageConnection:"Server error"});
+			// Server is not started
+			this.setState({ badConnection: true});
+			
+			 			
+			this.setState({ badConnection: true});
+			 
+			// , inprogress:false, messageConnection: "Server error" });
 		}
 		else if (httpResponse.getData().isConnected) {
 			// call the frame event to refresh all - the fact that the user is connected is saved in the authService, not here

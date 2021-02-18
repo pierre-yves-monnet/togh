@@ -79,7 +79,11 @@ class EventShoppingList extends React.Component {
 							</thead>											
 							{listShoppingListHtml}
 						</table>
+						
+						
+						
 					}
+					<div> {this.state.event.shoppinglist}</div>
 				</div>
 				);
 		}

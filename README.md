@@ -30,6 +30,10 @@ https://crunchify.com/step-by-step-guide-to-setup-and-install-apache-tomcat-serv
 Puis faire sur le projet un "Debug in server"
 ==> Le war va demarrer
 
+Note: 
+le projet doit etre noté "Dynamic web application" sinon Spring ne veut pas démarré ( ? )
+Click droit => Properties => Project Facet => Dynamic Web Application
+
 ## mobile
 https://flutter.dev/
 
