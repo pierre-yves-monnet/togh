@@ -1,0 +1,11 @@
+{
+"BodyTogh.welcome": "Καλώς ήλθατε στο Togh",
+"Login.email": "Email",
+"Login.logout": "Αποσύνδεση",
+"Login.password": "Κωδικός πρόσβασης",
+"Login.connection": "Σύνδεση",
+"Login.googleLogin": "Είσοδος",
+"Login.googleLogout": "Αποσύνδεση",
+"Login.badConnection": "Κακή σύνδεση - Ελέγξτε τα διαπιστευτήριά σας"
+
+}

@@ -1,0 +1,11 @@
+{
+"BodyTogh.welcome": "तोगड़ में आपका स्वागत है",
+"Login.email": "ईमेल",
+"Login.logout": "लॉगआउट",
+"Login.password": "पासवर्ड",
+"Login.connection": "कनेक्शन",
+"Login.googleLogin": "लॉगिन",
+"Login.googleLogout": "लॉगआउट",
+"Login.badConnection": "खराब कनेक्शन - अपनी साख जांचें"
+
+}

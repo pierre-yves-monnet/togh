@@ -1,0 +1,11 @@
+{
+"BodyTogh.welcome": "Benvenuto in Togh",
+"Login.email": "Email",
+"Login.logout": "Logout",
+"Login.password": "Password",
+"Login.connection": "Connection",
+"Login.googleLogin": "Login",
+"Login.googleLogout": "Logout",
+"Login.badConnection": "Connessione errata - Controlla le tue credenziali"
+
+}

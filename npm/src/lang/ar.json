@@ -1,0 +1,11 @@
+{
+"BodyTogh.welcome": "مرحبًا بكم في Togh",
+"Login.email": "Email",
+ "Login.logout": "تسجيل الخروج",
+"Login.password": "Password",
+"Login.connection": "اتصال",
+"Login.googleLogin": "تسجيل الدخول",
+"Login.googleLogout": "تسجيل الخروج",
+"Login.badConnection": "اتصال غير صالح - تحقق من بيانات الاعتماد الخاصة بك"
+
+} 

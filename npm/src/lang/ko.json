@@ -1,0 +1,11 @@
+{
+"BodyTogh.welcome": "Togh에 오신 것을 환영합니다",
+"Login.email": "이메일",
+"Login.logout": "로그 아웃",
+"Login.password": "비밀번호",
+"Login.connection": "연결",
+"Login.googleLogin": "로그인",
+"Login.googleLogout": "로그 아웃",
+"Login.badConnection": "잘못된 연결-자격 증명 확인"
+
+}

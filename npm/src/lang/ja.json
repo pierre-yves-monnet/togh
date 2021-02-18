@@ -1,0 +1,11 @@
+{
+"BodyTogh.welcome": "Welcome to Togh",
+"Login.email": "Email",
+"Login.logout": "Logout",
+"Login.password": "パスワード",
+"Login.connection": "接続",
+"Login.googleLogin": "ログイン",
+"Login.googleLogout": "ログアウト",
+"Login.badConnection": "接続不良-資格情報を確認してください"
+
+}
