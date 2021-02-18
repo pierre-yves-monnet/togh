@@ -131,7 +131,12 @@ class EventShoppingList extends React.Component {
 		this.props.pingEvent();	
 	} 
 	
-	
+	// Apparently that's too many nested functions for React
+//	change_item_status(item,new_state){
+//		item.status = new_state
+//		this.setState( { "event" : this.state.event});
+//	};
+//	
 	getTagState( task, item ) {
 		var changeState= (
 		<OverflowMenu
@@ -144,43 +149,37 @@ class EventShoppingList extends React.Component {
 //						}
     				>
 							<OverflowMenuItem className="TODO" itemText="To bring" 
-								onClick={() => {
-										item.status = "TODO"
-//										task = 'DONE'
-										console.log("you just clicked "+this.props.show)
-//										this.setState({task})
-//										this.getTagState( item.status, item )
+								onClick={() => {item.status = "TODO"
+										this.setState( { "event" : this.state.event});
 									} 
 								}
 							/>
-							<OverflowMenuItem className="DONE" itemText="Done"
-								onClick={() => {
-										item.status = "DONE"
-//										task = 'DONE'
-										console.log("you just clicked "+this.props.show)
-										console.log("EventShoppinglist.render: NEW list calculated from "+JSON.stringify( this.state.event.shoppinglist ));
-		
-//										this.setState({task})
-//										this.getTagState( item.status, item )
+							<OverflowMenuItem className="DONE" itemText="Done" 
+								onClick={() => {item.status = "DONE"
+										this.setState( { "event" : this.state.event});										
 									} 
 								}
 							/>
-							<OverflowMenuItem className="CANCEL" itemText="Cancel"/>
+							<OverflowMenuItem className="CANCEL" itemText="Cancel"
+								onClick={() => {item.status = "CANCEL"
+										this.setState( { "event" : this.state.event});
+									} 
+								}
+							/>
 					</OverflowMenu>
 		);
 
 		console.log("task is "+task)
 
 		if (task === 'TODO')
-			return (<Tag  type="teal" title="Task planned">To bring {changeState}  {task}</Tag>)			
+			return (<Tag  type="teal" title="Task planned">To bring {changeState}</Tag>)			
 		if (task === 'DONE')
-			return (<Tag  type="warm-gray" title="Task is finish, well done !">Done {changeState}  {task}</Tag>);
+			return (<Tag  type="warm-gray" title="Task is finish, well done !">Done {changeState}</Tag>);
 		if (task === 'CANCEL')
-			return (<Tag  type="red" title="Oups, this task was cancelled">Cancelled{changeState}  {task}</Tag>);
+			return (<Tag  type="red" title="Oups, this task was cancelled">Cancelled{changeState}</Tag>);
 		 
 		return (<Tag  type="gray" title="Something strange arrived">{task} {changeState}</Tag>);
 	}
-	
 	
 	
 	changeParticipant() {
