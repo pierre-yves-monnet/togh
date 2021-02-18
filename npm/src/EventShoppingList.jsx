@@ -135,16 +135,16 @@ class EventShoppingList extends React.Component {
 		this.props.pingEvent();	
 	} 
 	
-	
+	// Apparently that's too many nested functions for React
+//	change_item_status(item,new_state){
+//		item.status = new_state
+//		this.setState( { "event" : this.state.event});
+//	};
+//	
 	getTagState( task, item ) {
-		window.alert("entering getTagState ")
 		var changeState= (
 		<OverflowMenu
       					selectorPrimaryFocus={ task }
-						onClick={() => {
-								window.alert("you just opened the menu")
-							} 
-						}
 //						onFocus={(event) => { 
 //							window.alert("you just changed this"+this.props.className)
 //							console.log("EventState: Click ");
@@ -152,21 +152,28 @@ class EventShoppingList extends React.Component {
 //							}
 //						}
     				>
-							<OverflowMenuItem className="TODO" itemText="To bring" />
-							<OverflowMenuItem className="DONE" itemText="Done"
-								onClick={() => {
-										item.status = "DONE"
-										task = 'DONE'
-										window.alert("you just clicked "+this.props.show)
-										this.getTagState( task, item )
+							<OverflowMenuItem className="TODO" itemText="To bring" 
+								onClick={() => {item.status = "TODO"
+										this.setState( { "event" : this.state.event});
 									} 
 								}
 							/>
-							<OverflowMenuItem className="CANCEL" itemText="Cancel"/>
+							<OverflowMenuItem className="DONE" itemText="Done" 
+								onClick={() => {item.status = "DONE"
+										this.setState( { "event" : this.state.event});										
+									} 
+								}
+							/>
+							<OverflowMenuItem className="CANCEL" itemText="Cancel"
+								onClick={() => {item.status = "CANCEL"
+										this.setState( { "event" : this.state.event});
+									} 
+								}
+							/>
 					</OverflowMenu>
 		);
 
-		window.alert("task is "+task)
+		console.log("task is "+task)
 
 		if (task === 'TODO')
 			return (<Tag  type="teal" title="Task planned">To bring {changeState}</Tag>)			
@@ -177,7 +184,6 @@ class EventShoppingList extends React.Component {
 		 
 		return (<Tag  type="gray" title="Something strange arrived">{task} {changeState}</Tag>);
 	}
-	
 	
 	
 	changeParticipant() {
