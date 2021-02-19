@@ -44,23 +44,29 @@ class EventParticipants extends React.Component {
 		listParticipantListHtml= this.state.event.participants.map((item) =>
 			<tr key={item.id}>
 				<td>
-					{item.user !== '' && ( <div>{item.user.firstName} {item.user.lastName} {item.user.email} </div>)}
-					{item.user !== '' && item.user.phoneNumber && (<div> {item.user.phoneNumber} </div>)}
+					{item.user !== '' && ( <div>{item.user.label} </div>)}					
 					<p/>
 					{item.status === 'INVITED' && (<div class="label label-info"><FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/></div>)}
 
 				</td>
 				
 				<td>
-					{item.role ==='OWNER' && (<div class="label label-info">Owner2</div>)}
+					{item.role ==='OWNER' && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
+					{item.role ==='LEFT' && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
 					
-					{item.role !=='OWNER' && (
+					{ (item.role !=='OWNER' && item.role !== 'LEFT') && (
 						<Select labelText="" disabled={item.status==='LEFT'} value={item.role} onChange={(event) => this.setAttribute( "role", event.target.value )}>
-								<option value="ORGANIZER"><FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer"/></option>								
-								<option value="PARTICIPANT"><FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant"/></option>
-								<option value="OBSERVER"><FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer"/></option>
-								<option value="LEFT"><FormattedMessage id="EventParticipant.RoleLeft" defaultMessage="Left"/></option>
-							</Select>
+						 	<FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
+                          		{(message) => <option value="ORGANIZER">{message}</option>}
+                    		</FormattedMessage>
+							<FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
+                          		{(message) => <option value="PARTICIPANT">{message}</option>}
+                    		</FormattedMessage>
+							<FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
+								{(message) => <option value="OBSERVER">{message}</option>}
+                    		</FormattedMessage>
+							
+						</Select>
 							)}
 				</td>
 				<td>

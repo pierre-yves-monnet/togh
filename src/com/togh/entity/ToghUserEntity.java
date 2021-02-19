@@ -234,20 +234,34 @@ public class ToghUserEntity extends BaseEntity {
 	public Map<String,Object> getMap(ContextAccess contextAccess) {
 	    Map<String,Object> resultMap =super.getMap( contextAccess );
 	    
-	    resultMap.put("firstName",firstName);
+	    StringBuilder label = new StringBuilder();
+	    
+	    if (getName()!=null)
+	        label.append( getName() );
+	    
+        resultMap.put("name", getName());
+        resultMap.put("firstName",firstName);
 	    // if the context is SECRET, the last name is not visible
 	    if (contextAccess != ContextAccess.SECRETACCESS)
 	        resultMap.put("lastName", lastName);
 	    
-	    if (isVisible(  emailVisibility, contextAccess))
+	    if (isVisible(  emailVisibility, contextAccess)) {
 	        resultMap.put("email", email);
+	        if (email!=null)
+	            label.append(" ("+email+")");
+	    }
 	    else
 	        resultMap.put("email", "*********");
         
-        if (isVisible( phoneNumberVisibility, contextAccess))
+        if (isVisible( phoneNumberVisibility, contextAccess)) {
             resultMap.put("phoneNumber", phoneNumber);
+            if (phoneNumber!=null)
+                label.append(" "+phoneNumber);
+        }
         else
             resultMap.put("phoneNumber", "*********");
+        
+        resultMap.put("label", label.toString());
         return resultMap;
 	}
 
