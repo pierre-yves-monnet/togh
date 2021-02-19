@@ -41,14 +41,15 @@ class EventShoppingList extends React.Component {
 		if (! this.state.event.shoppinglist) {
 			this.state.event.shoppinglist= [];
 		}
+		
 		var listShoppingListHtml=[];
 		listShoppingListHtml= this.state.event.shoppinglist.map((item) =>
 			<tr key={item.id}>
-				<td> {this.getTagState( item.status, item )}</td>
+				<td> {this.getTagState( item.status, item )} id={item.id}</td>				
 				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut( "what", event.target.value, item )}  labelText="" ></TextInput></td>
 				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut( "description", event.target.value, item )} class="toghinput" labelText=""></TextArea></td>
 				<td>
-					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
+					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />			
 				</td>
 				
 				
@@ -56,7 +57,7 @@ class EventShoppingList extends React.Component {
 			</tr>
 			);
 		console.log("EventShoppinglist.render: list calculated from "+JSON.stringify( this.state.event.shoppinglist ));
-		console.log("EventShoppinglist.render: "+listShoppingListHtml.length);
+		console.log("EventShoppinglist.render: listsize="+listShoppingListHtml.length);
 		return ( <div>
 					<div class="eventsection"> 
 						<a href="secShoppinglist"></a>
@@ -83,7 +84,6 @@ class EventShoppingList extends React.Component {
 						
 						
 					}
-					<div> {this.state.event.shoppinglist}</div>
 				</div>
 				);
 		}

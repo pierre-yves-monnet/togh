@@ -44,7 +44,7 @@ class EventParticipants extends React.Component {
 		listParticipantListHtml= this.state.event.participants.map((item) =>
 			<tr key={item.id}>
 				<td>
-					{item.user !== '' && ( <div>{item.user.label} </div>)}					
+					{item.user !== '' && ( <div>{item.user.longlabel} </div>)}					
 					<p/>
 					{item.status === 'INVITED' && (<div class="label label-info"><FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/></div>)}
 

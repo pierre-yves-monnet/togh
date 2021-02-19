@@ -201,7 +201,7 @@ Simon Autocomplete
 Simon 	Toggle default value (dans Google Map / Share my localisation)
 		Checkbox Invitation / 
 	Google Geocodage d'une adresse
-		
+	Comment traduire les titles ? formatMessage ne marche pas la. D'apres https://formatjs.io/docs/react-intl/api/ il faut utiliser intl ==> Rien ne marche
 		
 	DropDown : change value (status event => Si on le met en "actif" il faut capturer la demande)
 		

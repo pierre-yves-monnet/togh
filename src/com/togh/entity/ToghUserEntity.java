@@ -235,10 +235,13 @@ public class ToghUserEntity extends BaseEntity {
 	    Map<String,Object> resultMap =super.getMap( contextAccess );
 	    
 	    StringBuilder label = new StringBuilder();
+        StringBuilder longlabel = new StringBuilder();
 	    
-	    if (getName()!=null)
+	    if (getName()!=null) {
 	        label.append( getName() );
-	    
+	        longlabel.append( getName() );
+	    }
+	        
         resultMap.put("name", getName());
         resultMap.put("firstName",firstName);
 	    // if the context is SECRET, the last name is not visible
@@ -247,21 +250,29 @@ public class ToghUserEntity extends BaseEntity {
 	    
 	    if (isVisible(  emailVisibility, contextAccess)) {
 	        resultMap.put("email", email);
-	        if (email!=null)
-	            label.append(" ("+email+")");
+	        if (email!=null && email.trim().length()>0) {
+	            // the label is the email only if there is no label at this moment
+	            if (label.length()==0)
+	                label.append(" ("+email+")");
+	            longlabel.append(" ("+email+")");
+	        }
 	    }
 	    else
 	        resultMap.put("email", "*********");
         
         if (isVisible( phoneNumberVisibility, contextAccess)) {
             resultMap.put("phoneNumber", phoneNumber);
-            if (phoneNumber!=null)
-                label.append(" "+phoneNumber);
+            if (phoneNumber!=null) {
+                if (label.length()==0)
+                    label.append(" "+phoneNumber);
+                longlabel.append(" "+phoneNumber);
+            }
         }
         else
             resultMap.put("phoneNumber", "*********");
         
         resultMap.put("label", label.toString());
+        resultMap.put("longlabel", longlabel.toString());
         return resultMap;
 	}
 

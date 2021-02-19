@@ -32,6 +32,7 @@ import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 
 
+
 class Event extends React.Component {
 	constructor( props ) {
 		super();
@@ -67,6 +68,7 @@ class Event extends React.Component {
 	//----------------------------------- Render
 	render() {
 		console.log("Event.render eventId="+this.state.event.eventid + " event="+JSON.stringify(this.state.event)+" show:"+JSON.stringify(this.state.show));
+		 
 
 		// no map read, return
 		if (! this.state.event || Object.keys(this.state.event).length === 0) {
@@ -233,7 +235,7 @@ class Event extends React.Component {
 					
 					<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" >
 				  		<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button   onClick={this.secParticipant} title={<FormattedMessage id="Event.TitleParticipants" defaultMessage="Participant"/>} onClick={this.accessParticipantList} class="btn btn-primary">
+							<button onClick={this.secParticipant} title='Particpants' onClick={this.accessParticipantList} class="btn btn-primary">
 								<img  style={{"float": "right"}} src="img/btnParticipants.png" style={{width:45}} />
 							</button>
 						</div>
