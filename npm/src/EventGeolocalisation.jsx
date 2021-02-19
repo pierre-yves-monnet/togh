@@ -44,7 +44,7 @@ class EventGeolocalisation extends React.Component {
 		if (this.state.show === 'OFF')
 			return ( <div> </div>);
 		// show the list
-		const zoomLevel=8;
+		const zoomLevel=15;
 		const googlelocation = {
   			address: this.state.event.geoaddress,
 			};

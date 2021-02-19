@@ -197,9 +197,10 @@ https://www.remove.bg/fr/upload
 
 Simon Autocomplete
 
-	Google Carte
+	
 Simon 	Toggle default value (dans Google Map / Share my localisation)
 		Checkbox Invitation / 
+	Google Geocodage d'une adresse
 		
 		
 	DropDown : change value (status event => Si on le met en "actif" il faut capturer la demande)
