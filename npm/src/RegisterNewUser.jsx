@@ -130,7 +130,7 @@ class RegisterNewUser extends React.Component {
 	
 	registerUserCallback( httpPayload ) {
 		console.log("RegisterNew.registerStatus: registerStatus = "+JSON.stringify(httpPayload));
- 		if (httpPayload.isConnected) {
+ 		if (httpPayload.getData().isConnected) {
 			console.log("RegisterNew.connectStatus : redirect then");
 			this.setState( {badRegistration: false, registrationOk:true,  loading:true});
 			this.props.authCallback( true );

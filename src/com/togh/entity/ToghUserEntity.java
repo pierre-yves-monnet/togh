@@ -1,18 +1,17 @@
 package com.togh.entity;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
+import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
+import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.base.BaseEntity;
 
 /* ******************************************************************************** */
@@ -71,21 +70,33 @@ public class ToghUserEntity extends BaseEntity {
 	@Column(name = "searchable")
 	Boolean searchable=true;
 	
+	public static ToghUserEntity getNewUser(String firstName, String lastName,String email, String password, SourceUserEnum sourceUser) {
+	    ToghUserEntity endUser = new ToghUserEntity();
+	    endUser.setEmail(email);
+        endUser.setFirstName(firstName);
+        endUser.setLastName(lastName);
+        endUser.setName( firstName+" "+lastName);
+        endUser.setPassword(password);
+        endUser.setSource(sourceUser);
+        LocalDateTime dateNow = LocalDateTime.now(ZoneOffset.UTC);
+        endUser.setDatecreation( dateNow );
+        endUser.setDatemodification( dateNow );
+        endUser.setPrivilegeUser( PrivilegeUserEnum.USER);
+        return endUser;
+	}
+	
+	
 	public boolean checkPassword(String passwordToCompare) {
 		if (passwordToCompare == null)
 			return false;
 		return passwordToCompare.equals(password);
 	}
 
-	public String  getUserName() {
-    	return getName();
-    }
-
 	public String getFirstname() {
 		return firstName;
 	}
 
-	public void setFirstname(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -123,6 +134,25 @@ public class ToghUserEntity extends BaseEntity {
         return source;
     }
 
+    /**
+     * Level of privilege
+     * an ADMIN can administrate the complete application
+     * a TRANSlator access all translation function
+     * a USER use the application
+     *
+     */
+    public enum PrivilegeUserEnum { ADMIN, TRANS, USER }
+    
+    @Column( name="privilegeuser", length=10)
+    @Enumerated(EnumType.STRING)
+     
+    PrivilegeUserEnum privilegeUser;
+    public void setPrivilegeUser(PrivilegeUserEnum privilegeUser) {
+        this.privilegeUser= privilegeUser;
+    }
+    public PrivilegeUserEnum getPrivilegeUser() {
+        return privilegeUser;
+    }
 	public String getEmail() {
 		return email;
 	}
@@ -171,7 +201,7 @@ public class ToghUserEntity extends BaseEntity {
 	}
 	
 	public String toString() {
-		return getId()+":"+getUserName() 
+		return getId()+":"+getName() 
 		    + (getGoogleId()!=null ? " Gid@" + getGoogleId() : "")		           
 		    + (getFirstname()!=null ? " " + getFirstname() + " " + getLastName() : "" )
 		    + (getEmail()!=null ? " email:"+ getEmail(): "")

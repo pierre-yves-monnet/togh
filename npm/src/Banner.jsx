@@ -96,7 +96,7 @@ class Banner extends React.Component {
 								{allFlags}
 								</td>
 							<td style={{"color":"#888787", textAlign: "right" , verticalAlign: "top"}}>
-								Welcome {user.firstname} {user.lastname}
+								Welcome {user.name}
 							</td>
 							</tr>
 							</table>

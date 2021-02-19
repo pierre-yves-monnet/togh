@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.togh.entity.ToghUserEntity;
+import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.repository.ToghUserRepository;
 import com.togh.service.LoginService.LoginStatus;
@@ -102,8 +103,9 @@ public class LoginService {
             return loginStatus;
         }
         loginStatus.isConnected=true;
-        loginStatus.userConnected = endUser;
+        loginStatus.userConnected = endUser;        
         loginStatus.connectionToken = connectUser( endUser);
+        loginStatus.isCorrect=true;
         monitorService.endOperation(chronoConnection);
         return loginStatus;
         
@@ -141,12 +143,8 @@ public class LoginService {
         if (endUser !=null) {
             return loginStatus;
         }
-        endUser = new ToghUserEntity();
-        endUser.setEmail(email);
-        endUser.setFirstname(firstName);
-        endUser.setLastName(lastName);
-        endUser.setPassword(password);
-        endUser.setSource(sourceUser);
+        endUser = ToghUserEntity.getNewUser(firstName, lastName, email, password, sourceUser);
+        
         try {
             factoryService.getToghUserService().saveUser(endUser);
             loginStatus.isCorrect=true;
