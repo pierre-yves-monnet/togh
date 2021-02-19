@@ -30,20 +30,9 @@ class EventState extends React.Component {
 	
 //----------------------------------- Render
 	render() {
-		// console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
+		console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
 
 		var tagHtml = null;
-		if (this.state.statusEvent === 'INPREPAR')
-			tagHtml = (<Tag  type="teal" title="Event are in preparation">In preparation</Tag>)			
-		else if (this.state.statusEvent === 'INPROG')
-			tagHtml = (<Tag  type="green" title="Event in progress, let's have fun! '">Actif</Tag>);
-		else if (this.state.statusEvent === 'CLOSED')
-			tagHtml = (<Tag  type="warm-gray" title="Event is finished, hope you had fun">Done</Tag>);
-		else if (this.state.statusEvent === 'CANCEL')
-			tagHtml =(<Tag  type="red" title="Oups, this event was cancelled">Cancelled</Tag>);
-		else 
-			tagHtml =(<Tag  type="gray" title="Something strange arrived">{this.state.statusEvent}</Tag>);
-
 		var dropDownChangeHtml = (<div></div>);
 		if (this.state.modifyEvent) {
 			dropDownChangeHtml = (
@@ -55,21 +44,47 @@ class EventState extends React.Component {
 						}
 					}
     			>
-      				<OverflowMenuItem className="INPREPAR" itemText={<FormattedMessage id="EventState.InPreparation" defaultMessage="In Preparation"/>}/>
-      				<OverflowMenuItem className="INPROG" itemText={<FormattedMessage id="EventState.Actif" defaultMessage="Actif"/>}/>
-      				<OverflowMenuItem className="CLOSED" itemText={<FormattedMessage id="EventState.Done" defaultMessage="Done"/>}/>
-      				<OverflowMenuItem className="CANCEL" itemText={<FormattedMessage id="EventState.Cancelled" defaultMessage="Cancelled"/>}/>
-        		</OverflowMenu>)
+					<FormattedMessage  id="EventState.InPreparation" defaultMessage="In Preparation">
+                       		{(message) => <OverflowMenuItem className="INPREPAR" itemText={message} />}
+                    </FormattedMessage>
+					<FormattedMessage  id="EventState.Actif" defaultMessage="Actif">
+                       		{(message) => <OverflowMenuItem className="INPROG" itemText={message}/>}
+                    </FormattedMessage>
+					<FormattedMessage  id="EventState.Done" defaultMessage="Done">
+                       		{(message) => <OverflowMenuItem className="CLOSED" itemText={message} />}
+                    </FormattedMessage>
+					<FormattedMessage  id="EventState.Cancelled" defaultMessage="Cancelled">
+                       		{(message) => <OverflowMenuItem className="CANCEL" itemText={message}/>}
+                    </FormattedMessage>
+						
+				</OverflowMenu>)
 		}
       
-      
-		return (<div>
-			<table><tr>
-				<td> {tagHtml}</td> 
-				<td>{dropDownChangeHtml}</td>
-				</tr>
-			</table>
-			</div>);
+      	if (this.state.statusEvent === 'INPREPAR')
+			tagHtml = (<Tag  type="teal" title="Event are in preparation">
+							<FormattedMessage  id="EventState.InPreparation" defaultMessage="In Preparation"/> 
+							{dropDownChangeHtml}
+						</Tag>)			
+		else if (this.state.statusEvent === 'INPROG')
+			tagHtml = (<Tag  type="green" title="Event in progress, let's have fun! '">
+							<FormattedMessage  id="EventState.Actif" defaultMessage="Actif"/> 
+							{dropDownChangeHtml}
+						</Tag>);
+		else if (this.state.statusEvent === 'CLOSED')
+			tagHtml = (<Tag  type="warm-gray" title="Event is finished, hope you had fun">
+							<FormattedMessage  id="EventState.Done" defaultMessage="Done"/> 
+							{dropDownChangeHtml}
+						</Tag>);
+		else if (this.state.statusEvent === 'CANCEL')
+			tagHtml =(<Tag  type="red" title="Oups, this event was cancelled">
+						<FormattedMessage  id="EventState.Cancelled" defaultMessage="Cancelled"/> 
+						{dropDownChangeHtml}
+					</Tag>);
+		else 
+			tagHtml =(<Tag  type="gray" title="Something strange arrived">{this.state.statusEvent} {dropDownChangeHtml}</Tag>);
+
+		console.log("EventState.render : tagHml");
+		return (<div>{tagHtml}</div>);
 	};
 };
 export default EventState;

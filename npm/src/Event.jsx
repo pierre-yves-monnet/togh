@@ -181,10 +181,25 @@ class Event extends React.Component {
 							id="typeEvent"
 							value={this.state.event.typeEvent} 
 							onChange={(event) => this.setAttribut( "typeEvent", event.target.value )}>
-							<option value="OPEN"><FormattedMessage id="Event.ScopeOpen" defaultMessage="Open"/></option>
-							<option value="OPENCONF"><FormattedMessage id="Event.ScopeOpenConfirmation" defaultMessage="Open on confirmation"/></option>
-							<option value="LIMITED"><FormattedMessage id="Event.ScopeLimited" defaultMessage="Limited"/></option>
-							<option value="SECRET"><FormattedMessage id="Event.ScopeSecret" defaultMessage="Secret"/></option>
+													 	
+													
+							<FormattedMessage id="Event.ScopeOpen" defaultMessage="Open">
+								{(message) => <option value="OPEN">{message}</option>}
+							</FormattedMessage>
+							
+							<FormattedMessage id="Event.ScopeOpenConfirmation" defaultMessage="Open on confirmation">
+								{(message) => <option value="OPENCONF">{message}</option>}
+							</FormattedMessage>
+
+							<FormattedMessage id="Event.ScopeLimited" defaultMessage="Limited">
+								{(message) => <option value="LIMITED">{message}</option>}
+							</FormattedMessage>
+
+							<FormattedMessage id="Event.ScopeSecret" defaultMessage="Secret">
+								{(message) => <option value="SECRET">{message}</option>}
+							</FormattedMessage>
+							
+
 						</Select>
 						<br/>
         			</div>
