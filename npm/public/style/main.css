@@ -52,15 +52,21 @@ h1{
 	background:#ccebc5
 	
 }
-/* color: #550A21;   border-top: 2px solid #550A21; */
+/* color: #550A21;   border-top: 2px solid #550A21; background: #fff1d2; */
 .eventsection {
 	font-size: 30px;
     margin-bottom: 0.65em;
     
-    color: #d95f02;
-    border-top: 2px solid #d95f02;
-    background: #fff1d2;
+    color: #2e6da4;
+    border-top: 1px solid #2e6da4;
+    
     margin: 10px 0 20px; 
+}
+
+
+/* we try to overload the class but it's not works... */
+.togh.bx--content-switcher--selected {
+	background-color: #2e6da4;
 }
 
 /** when a list of item (shopping list..) this CSS is use
