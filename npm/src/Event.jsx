@@ -373,7 +373,7 @@ class Event extends React.Component {
 			console.log("Event.accessShoppingList: no task list exist, create one");
 			event.tasklist=[];
 			// add one line
-			event.tasklist.push( { "status": "PLANNED",  "what": ""});
+			event.tasklist.push( { status: "PLANNED",  what: "", id:1});
 			this.setState( {"event" : event })
 		}
 		this.showSection ("secTasklist");
@@ -388,7 +388,7 @@ class Event extends React.Component {
 			event.shoppinglist=[];
 			
 			// add one line
-			event.shoppinglist.push( {  "status": "TODO", "what": ""});
+			event.shoppinglist.push( {  status: "TODO", what: "", id: 1});
 			
 			this.setState( {"event" : event })
 		}

@@ -126,6 +126,7 @@ class Login extends React.Component {
 		console.log("Login.directConnectCallback:"+httpResponse.trace());
 		if (httpResponse.isError()) {
 			// Server is not started
+			console.log("Login.directConnectCallback  ERROR IN HTTPCALL");
 			this.setState({ badConnection: true});
 			
 			 			

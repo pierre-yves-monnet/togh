@@ -10,7 +10,7 @@
 class ToolService {
 
 	getDateListFromDate( dateone, datetwo ) {
-		console.log("ToolService.getDateListFromDate: "+JSON.stringify(dateone));
+		// console.log("ToolService.getDateListFromDate: "+JSON.stringify(dateone));
 		var listDates = [];
 		listDates.push( dateone);
 		if (datetwo)
