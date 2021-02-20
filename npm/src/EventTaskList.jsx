@@ -23,12 +23,12 @@ class EventTaskList extends React.Component {
 		super();
 		// console.log("RegisterNewUser.constructor");
 		this.state = {
-			'event': props.event,
-			'show': props.show,
-			'collapse' : props.collapse,
-			"showProperties" : {
-				"showdates": true,
-				filterstate : "all",
+			event: props.event,
+			show: props.show,
+			collapse : props.collapse,
+			showProperties : {
+				showdates: true,
+				filterstate : "ALL",
 				filterparticipant: "all"
 			}  
 	};
@@ -38,6 +38,7 @@ class EventTaskList extends React.Component {
 		this.collapse = this.collapse.bind(this);
 		this.addItem = this.addItem.bind(this);
 		this.changeParticipant = this.changeParticipant.bind(this);
+		this.isTaskHidden = this.isTaskHidden.bind( this );
 	}
 
 	// --------------------------------- render
@@ -55,63 +56,70 @@ class EventTaskList extends React.Component {
 		}
 
 		var listTaskListHtml = [];
-		listTaskListHtml = this.state.event.tasklist.map((item) => {
-			console.log("He map------------------------------------------------------");
-			return (
-			<tr key={item.id}>
-				<td> {this.getTagState(item.status)}</td>
-				{this.state.showProperties.showdates && <td>
-					<DatePicker datePickerType="single"
-						onChange={(dates) => {
-							console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
-
-							if (dates.length >= 1) {
-								console.log("SingleDatePicker set Date");
-								this.setChildAttribut("datebegin", dates[0], item);
+		var self=this.state.showProperties;
+		listTaskListHtml = this.state.event.tasklist.map((item, index) => {
+			console.log("EventTaskList.isTaskHidden He map---------------- filterState=["+self.filterState+"] ");
+	
+			if ( this.isTaskHidden( item ))
+			 	return ( null );
+			else
+				return (
+				<tr key={index}>
+					<td> {this.getTagState(item)}</td>
+					{this.state.showProperties.showdates && <td>
+						<DatePicker datePickerType="single"
+							onChange={(dates) => {
+								console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
+	
+								if (dates.length >= 1) {
+									console.log("SingleDatePicker set Date");
+									this.setChildAttribut("datebegin", dates[0], item);
+								}
 							}
-						}
-						}
-						value={toolService.getDateListFromDate(item.datebegin)}
-					>
-						<DatePickerInput
-							placeholder="mm/dd/yyyy"
-							labelText=""
-							id="date-picker-simple"
-						/>
-					</DatePicker>
-				</td>
-				}
-				{this.state.showProperties.showdates && <td>
-					<DatePicker datePickerType="single"
-						onChange={(dates) => {
-							console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
-
-							if (dates.length >= 1) {
-								console.log("SingleDatePicker set Date");
-								this.setChildAttribut("dateend", dates[0], item);
 							}
-						}
-						}
-						value={toolService.getDateListFromDate(item.dateend)}
-					>
-						<DatePickerInput
-							placeholder="mm/dd/yyyy"
-							labelText=""
-							id="date-picker-simple"
-						/>
-					</DatePicker>
-				</td>
-				}
-				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
-				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
-				<td>
-					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
-				</td>
-
-
-				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title="Remove this item"></button></td>
-			</tr>
-			)
+							value={toolService.getDateListFromDate(item.datebegin)}
+						>
+							<DatePickerInput
+								placeholder="mm/dd/yyyy"
+								labelText=""
+								id="date-picker-simple"
+							/>
+						</DatePicker>
+					</td>
+					}
+					{this.state.showProperties.showdates && <td>
+						<DatePicker datePickerType="single"
+							onChange={(dates) => {
+								console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
+	
+								if (dates.length >= 1) {
+									console.log("SingleDatePicker set Date");
+									this.setChildAttribut("dateend", dates[0], item);
+								}
+							}
+							}
+							value={toolService.getDateListFromDate(item.dateend)}
+						>
+							<DatePickerInput
+								placeholder="mm/dd/yyyy"
+								labelText=""
+								id="date-picker-simple"
+							/>
+						</DatePicker>
+					</td>
+					}
+					<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
+					<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
+					<td>
+						<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
+					</td>
+	
+	
+					<td>
+						{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title="Remove this item"></button>}
+					</td>
+				</tr>
+				)
 			}
 		);
 		console.log("EventTasklist.render: list calculated from " + JSON.stringify(this.state.event.tasklist));
@@ -130,31 +138,31 @@ class EventTaskList extends React.Component {
 			</div>
 			{this.state.show === 'ON' &&
 				<div>
-				
-				
+					
 				
 					<table width="100%"><tr>
 					<td style={{ paddingRight: "60px;"}}>
 						<ToggleSmall labelText=""
 							aria-label=""
-							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates2" />}
-							labelB="show dates"
+							selectorPrimaryFocus={this.state.showProperties.showdates}
+							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
+							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							onChange={(event) => this.setCheckboxValue("showdates", event)}
 							id="showDates" />
 					</td><td style={{ paddingRight: "60px;"}}>
 						<ContentSwitcher  onChange={event => this.setSwitcherValue("filterstate", event)} 
 							labelText="Task" 
 							width="10px" height="small">
-	  						<Switch name='all' text={<FormattedMessage id="EventTaskList.FilterallStates" defaultMessage="All states" />} />
-	  						<Switch name={'planned'} text={<FormattedMessage id="EventTaskList.FilterPlannedTasks" defaultMessage="Planned" />} />
-	  						<Switch name={'InProgress'} text={<FormattedMessage id="EventTaskList.FilterInProgressTasks" defaultMessage="In progress" />} />
-	  						<Switch name={'done'} text={<FormattedMessage id="EventTaskList.FilterDone" defaultMessage="Done" />} />
+	  						<Switch name='ALL' 		text={<FormattedMessage id="EventTaskList.FilterAllStates" defaultMessage="All states" />} />
+	  						<Switch name='PLANNED' 	text={<FormattedMessage id="EventTaskList.FilterPlanned" defaultMessage="Planned" />} />
+	  						<Switch name='ACTIVE' 	text={<FormattedMessage id="EventTaskList.FilterInProgress" defaultMessage="In progress" />} />
+	  						<Switch name='DONE' 	text={<FormattedMessage id="EventTaskList.FilterDone" defaultMessage="Done" />} />
 						</ContentSwitcher>
 					</td><td>
 						<ContentSwitcher onChange={event =>  this.setSwitcherValue("filterparticipant", event)} labelText="Task">
-	  						<Switch name='all' text={<FormattedMessage id="EventTaskList.FilterallParticipant" defaultMessage="All participants" />} />
-	  						<Switch name={'MyTasks'} text={<FormattedMessage id="EventTaskList.FilterMyTasks" defaultMessage="My tasks" />} />
-	  						<Switch name={'Unaffected'} text={<FormattedMessage id="EventTaskList.FilterUnaffected" defaultMessage="Unaffected" />} />
+	  						<Switch name='ALL' text={<FormattedMessage id="EventTaskList.FilterAllParticipants" defaultMessage="All participants" />} />
+	  						<Switch name='MYTASKS' text={<FormattedMessage id="EventTaskList.FilterMyTasks" defaultMessage="My tasks" />} />
+	  						<Switch name='UNAFFECTED' text={<FormattedMessage id="EventTaskList.FilterUnaffected" defaultMessage="Unaffected" />} />
 
 						</ContentSwitcher>
 					</td>
@@ -183,6 +191,9 @@ class EventTaskList extends React.Component {
 		);
 	}
 
+
+	/**
+ 	*/
 	collapse() {
 		console.log("EventShoppinglist.collapse");
 		if (this.state.show === 'ON')
@@ -192,6 +203,36 @@ class EventTaskList extends React.Component {
 	}
 
 
+	/**
+	* Check filter to decide if the task has to be hidden on not 
+	*/
+	isTaskHidden( task ) {
+		var statushidden=false;
+		
+		if (this.state.showProperties.filterState === 'PLANNED' && task.status !== 'PLANNED')
+			statushidden= true;
+		if (this.state.showProperties.filterState === 'ACTIVE' && task.status !== 'ACTIVE')
+			statushidden= true;
+		if (this.state.showProperties.filterState === 'DONE' && task.status !== 'DONE')
+			statushidden= true;
+		
+		// participant filter now
+		if (this.state.showProperties.filterparticipant === 'MYTASKS' && task.who !== '12')
+			statushidden= true;
+		if (this.state.showProperties.filterparticipant === 'UNAFFECTED' && task.who !== '')
+			statushidden= true;
+		console.log("EventTaskList.isTaskHidden: "+statushidden+" task.status="+task.status+" filterState=["+this.state.showProperties.filterState+"] ");
+		return statushidden;
+	}
+
+		// only if the task is not empty	
+	isShowDelete( task ) {
+		if (task.what && task.what.length >0 )
+			return false;
+		if (task.description && task.description.length >0 )
+			return false;
+		return true;
+	}
 	/**
  	*/
 	setChildAttribut(name, value, item) {
@@ -225,6 +266,8 @@ class EventTaskList extends React.Component {
 		this.setState({ "showProperties": showPropertiesValue })
 	}
 
+  /**
+ */
 	addItem() {
 		console.log("EventTasklist.setChildAttribut: addItem item=" + JSON.stringify(this.state.event));
 
@@ -259,29 +302,29 @@ class EventTaskList extends React.Component {
 	/**
 	 *  getTagState
  	*/
-	getTagState(task) {
+	getTagState( item) {
 
 		var changeState = (
 			<OverflowMenu
-				selectorPrimaryFocus={'.' + task}
+				selectorPrimaryFocus={'.' + item.status}
 			>
 				<OverflowMenuItem className="PLANNED" itemText={<FormattedMessage id="EventTaskList.StatePlanned" defaultMessage="Planned" />} 
-					onClick={() => {task = "PLANNED"
+					onClick={() => {item.status = "PLANNED"
 									this.setState( { "event" : this.state.event});
 									}} 
 				/>
 				<OverflowMenuItem className="ACTIVE" itemText={<FormattedMessage id="EventTaskList.InProgress" defaultMessage="In progress" />} 
-					onClick={() => {task = "ACTIVE"
+					onClick={() => {item.status = "ACTIVE"
 									this.setState( { "event" : this.state.event});
 									}} 
 				/>
 				<OverflowMenuItem className="DONE" itemText={<FormattedMessage id="EventTaskList.Done" defaultMessage="Done" />} 
-						onClick={() => {task = "DONE"
+						onClick={() => {item.status = "DONE"
 									this.setState( { "event" : this.state.event});
 									}} 
 				/>
 				<OverflowMenuItem className="CANCEL" itemText={<FormattedMessage id="EventTaskList.Cancelled" defaultMessage="Cancelled" />}
-						onClick={() => {task = "CANCEL"
+						onClick={() => {item.status = "CANCEL"
 									this.setState( { "event" : this.state.event});
 									}} 
 				/>
@@ -289,16 +332,16 @@ class EventTaskList extends React.Component {
 		);
 
 
-		if (task === 'PLANNED')
+		if (item.status === 'PLANNED')
 			return (<Tag type="teal" title="Task planned"><FormattedMessage id="EventTaskList.StatePlanned" defaultMessage="Planned" /> {changeState}</Tag>)
-		if (task === 'ACTIVE')
+		if (item.status === 'ACTIVE')
 			return (<Tag type="green" title="Task in progress"><FormattedMessage id="EventTaskList.InProgress" defaultMessage="In progress" /> {changeState}</Tag>);
-		if (task === 'DONE')
+		if (item.status === 'DONE')
 			return (<Tag type="warm-gray" title="Task is finish, well done !"><FormattedMessage id="EventTaskList.Done" defaultMessage="Done" /> {changeState}</Tag>);
-		if (task === 'CANCEL')
+		if (item.status === 'CANCEL')
 			return (<Tag type="red" title="Oups, this task was cancelled"><FormattedMessage id="EventTaskList.Cancelled" defaultMessage="Cancelled" />{changeState}</Tag>);
 
-		return (<Tag type="gray" title="Something strange arrived">{task} {changeState}</Tag>);
+		return (<Tag type="gray" title="Something strange arrived">{item.status} {changeState}</Tag>);
 	}
 
 }
