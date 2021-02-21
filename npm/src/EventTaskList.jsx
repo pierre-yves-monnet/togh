@@ -225,7 +225,7 @@ class EventTaskList extends React.Component {
 		return statushidden;
 	}
 
-		// only if the task is not empty	
+	// only if the task is not empty	
 	isShowDelete( task ) {
 		if (task.what && task.what.length >0 )
 			return false;

@@ -36,6 +36,15 @@ public class EventEntity extends UserEntity {
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
 
+    /**
+     * In case of a policy Period, a Start and End event are provide.
+     */
+    @Column(name = "datestartevent")
+    private LocalDateTime dateStartEvent;
+
+    @Column(name = "dateendevent")
+    private LocalDateTime dateEndEvent;
+    
     public enum TypeEventEnum { OPEN, OPENCONF, LIMITED, SECRET }
     
     @Column( name="typeevent",length=10, nullable = false)
@@ -159,6 +168,8 @@ public class EventEntity extends UserEntity {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         
         resultMap.put("dateEvent", formatDate( dateEvent));
+        resultMap.put("dateStartEvent", formatDate( dateStartEvent));
+        resultMap.put("dateEndEvent", formatDate( dateEndEvent));
         resultMap.put("typeEvent", typeEvent==null ? null : typeEvent.toString());
         resultMap.put("statusEvent", statusEvent==null ? null : statusEvent.toString());
         resultMap.put("description", description);
@@ -181,6 +192,9 @@ public class EventEntity extends UserEntity {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         resultMap.put("name", getName());
         resultMap.put("dateEvent", formatDate( dateEvent));
+        resultMap.put("dateStartEvent", formatDate( dateStartEvent));
+        resultMap.put("dateEndEvent", formatDate( dateEndEvent));
+        resultMap.put("datePolicy", datePolicy.toString() );
         resultMap.put("typeEvent", typeEvent==null ? null : typeEvent.toString());
         resultMap.put("statusEvent", statusEvent==null ? null : statusEvent.toString());
         return resultMap;

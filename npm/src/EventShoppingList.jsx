@@ -44,9 +44,9 @@ class EventShoppingList extends React.Component {
 		}
 
 		var listShoppingListHtml = [];
-		listShoppingListHtml = this.state.event.shoppinglist.map((item) =>
-			<tr key={item.id}>
-				<td> {this.getTagState(item)} id={item.id}</td>
+		listShoppingListHtml = this.state.event.shoppinglist.map((item, index) =>
+			<tr key={index}>
+				<td> {this.getTagState(item)}</td>
 				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
 				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
 				<td>
@@ -66,9 +66,9 @@ class EventShoppingList extends React.Component {
 					{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
 					{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
 				</a> Shopping List
-						<div style={{ float: "right" }}>
-					<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
-				</div>
+					<div style={{ float: "right" }}>
+						<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
+					</div>
 			</div>
 			{this.state.show === 'ON' && <table class="table table-striped toghtable">
 				<thead>

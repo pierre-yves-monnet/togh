@@ -88,6 +88,9 @@ apt-get install postgresql postgresql-contrib
 
 # React
 
+Explication sur React:
+https://fr.reactjs.org/docs/state-and-lifecycle.html
+
 https://daveceddia.com/angular-directives-mapped-to-react/
 https://fr.reactjs.org/docs/getting-started.html
 
@@ -118,7 +121,12 @@ mvn clean install
 https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 
-Eleanora: epatricola@hotmail.com
+
+## React structure
+ {names.map(function(name, index){
+                    return <li key={ index }>{name}</li>;
+                  })}
+                  
 
 ## Carbon
 import { DatePicker } from 'carbon-components-react';
@@ -201,7 +209,12 @@ Simon ?	Google Geocodage d'une adresse
 Simon ?	Comment traduire les titles ? formatMessage ne marche pas la. D'apres https://formatjs.io/docs/react-intl/api/ il faut utiliser intl ==> Rien ne marche
 		
 		
-
+	Access this in a iterator: example dans EventTaskList, je veux pouvoir afficher (ou pas) la liste des taches suivant des indicateurs dans this.state. mais le this n'est pas accessible dans la sous classe
+	
+	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
+		.togh.bx--content-switcher--selected ==> Marche pas
+		
+	
 Py	Sauvegarde
 	faire marcher la requete JPA "user not register in the event"
 	Survey

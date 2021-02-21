@@ -26,6 +26,7 @@ import FactoryService from './service/FactoryService';
 
 
 import EventParticipants from './EventParticipants';
+import EventItinerary from './EventItinerary';
 import EventShoppingList from './EventShoppingList';
 import EventGeolocalisation from './EventGeolocalisation';
 import EventTaskList from './EventTaskList';
@@ -42,6 +43,7 @@ class Event extends React.Component {
 						'eventid' : props.eventid,
 						'show' : { 
 							secParticipant: 'ON', 
+							secItinerary : 'OFF',
 							secShoppinglist : 'OFF',
 							secGeolocalisation : 'OFF', 
 							secTasklist : 'OFF'},
@@ -54,7 +56,7 @@ class Event extends React.Component {
 		this.accessShoppingList			= this.accessShoppingList.bind(this);
 		this.accessGeolocalisation		= this.accessGeolocalisation.bind(this);
 		this.accessTaskList				= this.accessTaskList.bind(this);
-
+		this.accessItinerary			= this.accessItinerary.bind(this);
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.refreshEvent 		= this.refreshEvent.bind(this);
@@ -97,6 +99,8 @@ class Event extends React.Component {
 				</RadioButtonGroup>
 				{ this.state.event.datePolicy === 'ONEDATE' && (	
 					<div>
+						<table><tr>
+						<td colspan="2">
 						<DatePicker datePickerType="single"
 							onChange={(dates) => {
 									console.log("SingleDatePicker :"+dates.length+" is an array "+Array.isArray(dates));
@@ -117,13 +121,20 @@ class Event extends React.Component {
 						      	id="date-picker-simple"
 						    />
 						</DatePicker>
-						<TimePicker
-							id="eventTime"
-						  	value={this.state.event.timeEvent} 
-						  	onChange={(event) => this.setAttribut( "timeEvent", event.target.value )}
-						>
-							
-						</TimePicker>
+						</td></tr>
+						<tr><td>
+							<TimePicker
+								id="eventTime"
+								labelText={<FormattedMessage id="Event.TimeEvent" defaultMessage="Time"/>}
+							  	value={this.state.event.timeEvent} 
+							  	onChange={(event) => this.setAttribut( "timeEvent", event.target.value )}/>
+						</td><td>
+							<TimePicker
+								id="durationTime"
+								labelText={<FormattedMessage id="Event.DurationEvent" defaultMessage="Duration"/>}
+							  	value={this.state.event.durationEvent} 
+							  	onChange={(event) => this.setAttribut( "durationEvent", event.target.value )}/>
+						</td></tr></table>
 					</div>)
 				}	
 				{ this.state.event.datePolicy !== 'ONEDATE' && (	
@@ -236,7 +247,8 @@ class Event extends React.Component {
 					<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" >
 				  		<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button onClick={this.secParticipant} title='Particpants' onClick={this.accessParticipantList} class="btn btn-primary">
-								<img  style={{"float": "right"}} src="img/btnParticipants.png" style={{width:45}} />
+								<img  style={{"float": "right"}} src="img/btnParticipants.png" style={{width:45}} /><br/>
+								<FormattedMessage id="Event.Participants" defaultMessage="Participants"/>
 							</button>
 						</div>
 						
@@ -244,58 +256,61 @@ class Event extends React.Component {
 							
 							
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button onClick={this.secDates} title={<FormattedMessage id="Event.TitleDates" defaultMessage="Dates"/>} disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-calendar"></div> 
+							<button onClick={this.secDates}  onClick={this.accessItinerary}  title={<FormattedMessage id="Event.TitleItinerary" defaultMessage="Define your itinerary, and point of interest"/>} class="btn btn-primary">
+								<div class="glyphicon glyphicon-road"></div><br/>
+								<FormattedMessage id="Event.Itinerary" defaultMessage="itinerary"/> 
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button style={{"marginLeft ": "10px"}} onClick={this.secChat} title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat"/>} disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-bullhorn" ></div>
+								<div class="glyphicon glyphicon-bullhorn" ></div><br/>
+								<FormattedMessage id="Event.Chat" defaultMessage="Chat"/>
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button style={{"marginLeft ": "10px"}} onClick={this.secTasks} title={<FormattedMessage id="Event.TitleTasks" defaultMessage="Tasks"/>}  onClick={this.accessTaskList}  class="btn btn-primary">
-								<div class="glyphicon glyphicon-tasks"></div> 
+								<div class="glyphicon glyphicon-tasks"></div> <br/>
+								<FormattedMessage id="Event.Tasks" defaultMessage="Tasks"/>
 							</button>
 						</div>
 
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?"/>} onClick={this.accessShoppingList} class="btn btn-primary">
-								<div class="glyphicon glyphicon-shopping-cart"></div>
+							<button style={{"marginLeft ": "10px"}} onClick={this.accessShoppingList} title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?"/>}  class="btn btn-primary">
+								<div class="glyphicon glyphicon-shopping-cart"></div><br/>
+								<FormattedMessage id="Event.ShoppingList" defaultMessage="Shopping List"/>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button style={{"marginLeft ": "10px"}} onClick={this.secSurvey} title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey"/>} disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-ok-circle"></div>
+								<div class="glyphicon glyphicon-ok-circle"></div><br/>
+								<FormattedMessage id="Event.Survey" defaultMessage="Survey"/>
 							</button>
 						</div>
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button style={{"marginLeft ": "10px"}} onClick={this.accessGeolocalisation} title={<FormattedMessage id="Event.TitleGeolocalisation" defaultMessage="Where is the event?"/>} class="btn btn-primary">
-								<div class="glyphicon glyphicon-globe"></div>
+								<div class="glyphicon glyphicon-globe"></div><br/>
+								<FormattedMessage id="Event.Geolocalisation" defaultMessage="Geolocalisation"/>
 							</button>
 						</div>
 						
 						
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title={<FormattedMessage id="Event.TitlePointOfInterest" defaultMessage="Point of interrest"/>} disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-camera"></div>
+							<button style={{"marginLeft ": "10px"}} onClick={this.secPointofInterest} title={<FormattedMessage id="Event.TitlePhotos" defaultMessage="Photos"/>} disabled={true} class="btn btn-primary">
+								<div class="glyphicon glyphicon-camera"></div><br/>
+								<FormattedMessage id="Event.Photos" defaultMessage="Photos"/>
 							</button>
 						</div>
-
-						<div class="btn-group mr-2" role="group" aria-label="First group">
-							<button style={{"marginLeft ": "10px"}} onClick={this.secNight} title={<FormattedMessage id="Event.TitleNight" defaultMessage="Where do we sleep?"/>} disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-home"></div>
-							</button>
-						</div>
+						
 						
 						<div class="btn-group mr-2" role="group" aria-label="First group">
 							<button style={{"marginLeft ": "10px"}} onClick={this.secExpense} title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses"/>} disabled={true} class="btn btn-primary">
-								<div class="glyphicon glyphicon-piggy-bank"></div>
+								<div class="glyphicon glyphicon-piggy-bank"></div><br/>
+								<FormattedMessage id="Event.Expense" defaultMessage="Expense"/>
 							</button>
 						</div>
 
@@ -303,6 +318,7 @@ class Event extends React.Component {
 					
 				</div>
 				{ this.state.show.secParticipant !== 'OFF' && <EventParticipants event={this.state.event} show={this.state.show.secParticipant} pingEvent={this.pingEvent}/>}
+				{ this.state.show.secItinerary !== 'OFF' && <EventItinerary event={this.state.event} show={this.state.show.secItinerary} pingEvent={this.pingEvent}/>}
 				{ this.state.show.secTasklist !== 'OFF' && <EventTaskList event={this.state.event} show={this.state.show.secTasklist} pingEvent={this.pingEvent}/>}
 				{ this.state.show.secShoppinglist !== 'OFF' && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} pingEvent={this.pingEvent}/>}
 				{ this.state.show.secGeolocalisation !== 'OFF' && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} pingEvent={this.pingEvent}/>}
@@ -363,6 +379,17 @@ class Event extends React.Component {
 		}
 		this.showSection ("secParticipantlist");
 
+	}
+	
+	accessItinerary() {
+		console.log("Event.accessItinerary ");
+		var event = this.state.event; 
+		if (! event.itinerarylist ) {
+			console.log("Event.accessShoppingList: no task list exist, create one");
+			event.itinerarylist=[];
+			this.setState( { event : event })
+		}
+		this.showSection ("secItinerary");
 	}
 	
 	// Tasks list

@@ -6,6 +6,35 @@
 	"Login.connection": "Connexion",
 	"Login.googleLogin" : "Connexion",
 	"Login.googleLogout": "Deconnexion",
-	"Login.badConnection"  : "Mauvaise connection - V�rifiez vos identifiants"
-
+	"Login.badConnection"  : "Mauvaise connection - Vérifiez vos identifiants",
+	"EventParticipant.RoleOrganizer" : "Organiseur",
+	"EventParticipant.RoleParticipant" : "Partipant",
+	"EventParticipant.RoleObserver": "Observeur",
+	"EventTaskList.MainTitleTaskList":"Taches",
+	"Menu.Events": "Evénements",
+	"Menu.MyInvitations":"Mes invitations",
+	"Menu.MyFriends": "Mes amis",
+	"Menu.MyProfile": "Mon profile",
+	"Menu.Administration": "Administration",
+	"Event.TitleDates": "Dates",
+	
+	"EventItineray.WebSite":"Web site",
+	
+	"EventTaskList.StatePlanned": "Planifiée",
+	"EventTaskList.FilterPlanned":"Planifiées",
+	"EventTaskList.FilterInProgress": "En cours",
+	"EventTaskList.FilterDone": "Faites",
+	"EventTaskList.Begin": "Début",
+	"EventTaskList.End": "Fin",
+	"EventTaskList.Subject": "Sujet",
+	"EventTaskList.Description": "Description",
+	"EventTaskList.Who":"Responsable",
+	"EventTaskList.State": "Statut",
+	
+	"EventTaskList.FilterAllStates":"Toutes tâches",
+	"EventTaskList.FilterAllParticipants":"Tous participants",
+	"EventTaskList.FilterMyTasks":"Mes taches",
+	"EventTaskList.FilterUnaffected":"Non affectées",
+	"EventState.InPreparation": "En préparation",
+	"EventTaskList.ShowDate" : "Dates"
 }
