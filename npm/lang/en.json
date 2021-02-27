@@ -1,0 +1,440 @@
+{
+  "AdminHome.Title": {
+    "defaultMessage": "Administration"
+  },
+  "AdminTranslator.AverageTranslation": {
+    "defaultMessage": "Average (in Milliseconds)"
+  },
+  "AdminTranslator.CheckDictionary": {
+    "defaultMessage": "Check Dictionary"
+  },
+  "AdminTranslator.CompleteDictionary": {
+    "defaultMessage": "Complete Dictionary"
+  },
+  "AdminTranslator.MissingSentences": {
+    "defaultMessage": "Missing sentences"
+  },
+  "AdminTranslator.Name": {
+    "defaultMessage": "Name"
+  },
+  "AdminTranslator.TimeTranslation": {
+    "defaultMessage": "Time of translation"
+  },
+  "AdminTranslator.Title": {
+    "defaultMessage": "Translation"
+  },
+  "AdminTranslator.TooMuchSentences": {
+    "defaultMessage": "Overflow Sentence"
+  },
+  "AdminTranslator.TranslateSentences": {
+    "defaultMessage": "Translated sentences"
+  },
+  "AdminTranslator.nbTransations": {
+    "defaultMessage": "Number of translation"
+  },
+  "BodyTogh.welcome": {
+    "defaultMessage": "Welcome to Togh D"
+  },
+  "Event.Chat": {
+    "defaultMessage": "Chat"
+  },
+  "Event.DateEvent": {
+    "defaultMessage": "Date Event"
+  },
+  "Event.DatePolicy": {
+    "defaultMessage": "Date policy"
+  },
+  "Event.Description": {
+    "defaultMessage": "Description"
+  },
+  "Event.DurationEvent": {
+    "defaultMessage": "Duration"
+  },
+  "Event.EndDate": {
+    "defaultMessage": "End Date"
+  },
+  "Event.EventDate": {
+    "defaultMessage": "Date"
+  },
+  "Event.EventName": {
+    "defaultMessage": "Name"
+  },
+  "Event.Expense": {
+    "defaultMessage": "Expense"
+  },
+  "Event.Geolocalisation": {
+    "defaultMessage": "Geolocalisation"
+  },
+  "Event.Itinerary": {
+    "defaultMessage": "itinerary"
+  },
+  "Event.OneDate": {
+    "defaultMessage": "One date"
+  },
+  "Event.Participants": {
+    "defaultMessage": "Participants"
+  },
+  "Event.Period": {
+    "defaultMessage": "Period"
+  },
+  "Event.Photos": {
+    "defaultMessage": "Photos"
+  },
+  "Event.Scope": {
+    "defaultMessage": "Scope"
+  },
+  "Event.ScopeLimited": {
+    "defaultMessage": "Limited"
+  },
+  "Event.ScopeOpen": {
+    "defaultMessage": "Open"
+  },
+  "Event.ScopeOpenConfirmation": {
+    "defaultMessage": "Open on confirmation"
+  },
+  "Event.ScopeSecret": {
+    "defaultMessage": "Secret"
+  },
+  "Event.ShoppingList": {
+    "defaultMessage": "Shopping List"
+  },
+  "Event.StartDate": {
+    "defaultMessage": "Start Date"
+  },
+  "Event.Status": {
+    "defaultMessage": "Status"
+  },
+  "Event.Survey": {
+    "defaultMessage": "Survey"
+  },
+  "Event.Tasks": {
+    "defaultMessage": "Tasks"
+  },
+  "Event.TimeEvent": {
+    "defaultMessage": "Time"
+  },
+  "Event.TitleChat": {
+    "defaultMessage": "Chat"
+  },
+  "Event.TitleExpense": {
+    "defaultMessage": "Manage and share expenses"
+  },
+  "Event.TitleGeolocalisation": {
+    "defaultMessage": "Where is the event?"
+  },
+  "Event.TitleItinerary": {
+    "defaultMessage": "Define your itinerary, and point of interest"
+  },
+  "Event.TitlePhotos": {
+    "defaultMessage": "Photos"
+  },
+  "Event.TitleShoppingList": {
+    "defaultMessage": "Shopping list : what to brings?"
+  },
+  "Event.TitleSurvey": {
+    "defaultMessage": "Survey"
+  },
+  "Event.TitleTasks": {
+    "defaultMessage": "Tasks"
+  },
+  "EventGeolocalisation.Address": {
+    "defaultMessage": "Address"
+  },
+  "EventGeolocalisation.MainTitleGeolocation": {
+    "defaultMessage": "Geolocalisation"
+  },
+  "EventGeolocalisation.ShareMyLocation": {
+    "defaultMessage": "Share my localisation during the event"
+  },
+  "EventItinerary.MainTitleItinerary": {
+    "defaultMessage": "Itinerary"
+  },
+  "EventItinerary.ProvideDateInEvent": {
+    "defaultMessage": "Select a date for this event"
+  },
+  "EventItinerary.ProvidePeriodDateInEvent": {
+    "defaultMessage": "Select a start and a end date for this event"
+  },
+  "EventItinerary.ShowItineraryMap": {
+    "defaultMessage": "Show itinerary map"
+  },
+  "EventItineray.Address": {
+    "defaultMessage": "Address"
+  },
+  "EventItineray.Budget": {
+    "defaultMessage": "Budget"
+  },
+  "EventItineray.Category": {
+    "defaultMessage": "Category"
+  },
+  "EventItineray.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventItineray.Night": {
+    "defaultMessage": "Night"
+  },
+  "EventItineray.PointOfInterest": {
+    "defaultMessage": "Point Of Interest"
+  },
+  "EventItineray.Price": {
+    "defaultMessage": "Price"
+  },
+  "EventItineray.Restaurant": {
+    "defaultMessage": "Restaurant"
+  },
+  "EventItineray.Visite": {
+    "defaultMessage": "Visit"
+  },
+  "EventItineray.WebSite": {
+    "defaultMessage": "WebSite"
+  },
+  "EventItineray.What": {
+    "defaultMessage": "What"
+  },
+  "EventList.AccessThisEvent": {
+    "defaultMessage": "Access this event"
+  },
+  "EventList.AllEvents": {
+    "defaultMessage": "All events"
+  },
+  "EventList.CreateAnEvent": {
+    "defaultMessage": "Create an Event"
+  },
+  "EventList.Dae": {
+    "defaultMessage": "Date"
+  },
+  "EventList.MyEvents": {
+    "defaultMessage": "My events"
+  },
+  "EventList.Name": {
+    "defaultMessage": "Name"
+  },
+  "EventList.Participants": {
+    "defaultMessage": "Participants"
+  },
+  "EventParticipant.Actif": {
+    "defaultMessage": "Actif"
+  },
+  "EventParticipant.InvitationInProgress": {
+    "defaultMessage": "Invitation in progress"
+  },
+  "EventParticipant.Invited": {
+    "defaultMessage": "Invited"
+  },
+  "EventParticipant.Left": {
+    "defaultMessage": "Left"
+  },
+  "EventParticipant.MainTitleParticipant": {
+    "defaultMessage": "Participants"
+  },
+  "EventParticipant.Owner": {
+    "defaultMessage": "Owner"
+  },
+  "EventParticipant.Person": {
+    "defaultMessage": "Person"
+  },
+  "EventParticipant.Role": {
+    "defaultMessage": "Role"
+  },
+  "EventParticipant.RoleObserver": {
+    "defaultMessage": "Observer"
+  },
+  "EventParticipant.RoleOrganizer": {
+    "defaultMessage": "Organizer"
+  },
+  "EventParticipant.RoleParticipant": {
+    "defaultMessage": "Participant"
+  },
+  "EventParticipant.Status": {
+    "defaultMessage": "Status"
+  },
+  "EventParticipant.TitleActiveParticipant": {
+    "defaultMessage": "Active participant"
+  },
+  "EventParticipant.TitleLeft": {
+    "defaultMessage": "The participant left the event"
+  },
+  "EventParticipant.Titleinvited": {
+    "defaultMessage": "Invited participant: no confirmation is received at this moment"
+  },
+  "EventShoppingList.Cancel": {
+    "defaultMessage": "Cancelled"
+  },
+  "EventShoppingList.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventShoppingList.Done": {
+    "defaultMessage": "Done"
+  },
+  "EventShoppingList.Title": {
+    "defaultMessage": "Shopping List"
+  },
+  "EventShoppingList.ToBring": {
+    "defaultMessage": "To bring"
+  },
+  "EventShoppingList.What": {
+    "defaultMessage": "What"
+  },
+  "EventShoppingList.Who": {
+    "defaultMessage": "Who"
+  },
+  "EventState.Actif": {
+    "defaultMessage": "Actif"
+  },
+  "EventState.Cancelled": {
+    "defaultMessage": "Cancelled"
+  },
+  "EventState.Done": {
+    "defaultMessage": "Done"
+  },
+  "EventState.InPreparation": {
+    "defaultMessage": "In Preparation"
+  },
+  "EventTaskList.Begin": {
+    "defaultMessage": "Begin"
+  },
+  "EventTaskList.Cancelled": {
+    "defaultMessage": "Cancelled"
+  },
+  "EventTaskList.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventTaskList.Done": {
+    "defaultMessage": "Done"
+  },
+  "EventTaskList.End": {
+    "defaultMessage": "End"
+  },
+  "EventTaskList.FilterAllParticipants": {
+    "defaultMessage": "All participants"
+  },
+  "EventTaskList.FilterAllStates": {
+    "defaultMessage": "All states"
+  },
+  "EventTaskList.FilterDone": {
+    "defaultMessage": "Done"
+  },
+  "EventTaskList.FilterInProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventTaskList.FilterMyTasks": {
+    "defaultMessage": "My tasks"
+  },
+  "EventTaskList.FilterPlanned": {
+    "defaultMessage": "Planned"
+  },
+  "EventTaskList.FilterUnaffected": {
+    "defaultMessage": "Unaffected"
+  },
+  "EventTaskList.InProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventTaskList.MainTitleTaskList": {
+    "defaultMessage": "Tasks List"
+  },
+  "EventTaskList.ShowDate": {
+    "defaultMessage": "Show dates"
+  },
+  "EventTaskList.State": {
+    "defaultMessage": "State"
+  },
+  "EventTaskList.StatePlanned": {
+    "defaultMessage": "Planned"
+  },
+  "EventTaskList.Subject": {
+    "defaultMessage": "Subject"
+  },
+  "EventTaskList.Who": {
+    "defaultMessage": "Who"
+  },
+  "Invitation.ByEmail": {
+    "defaultMessage": "Send an Email"
+  },
+  "Invitation.Close": {
+    "defaultMessage": "Close"
+  },
+  "Invitation.Email": {
+    "defaultMessage": "Email"
+  },
+  "Invitation.FirstName": {
+    "defaultMessage": "First name"
+  },
+  "Invitation.Invitation": {
+    "defaultMessage": "Invitation"
+  },
+  "Invitation.LastName": {
+    "defaultMessage": "Last name"
+  },
+  "Invitation.OnlyUserNotAlreadyAParticipant": {
+    "defaultMessage": "Only users not already a participant"
+  },
+  "Invitation.PhoneNumber": {
+    "defaultMessage": "Phone number"
+  },
+  "Invitation.RoleObserver": {
+    "defaultMessage": "Observer"
+  },
+  "Invitation.RoleOrganizer": {
+    "defaultMessage": "Organizer"
+  },
+  "Invitation.RoleParticipant": {
+    "defaultMessage": "Participant"
+  },
+  "Invitation.Search": {
+    "defaultMessage": "Search"
+  },
+  "Invitation.SearchAUser": {
+    "defaultMessage": "Search a user"
+  },
+  "Invitation.Searching": {
+    "defaultMessage": "Searching"
+  },
+  "Invitation.SendInvitation": {
+    "defaultMessage": "Send Invitation"
+  },
+  "Invitation.UserEmail": {
+    "defaultMessage": "Email"
+  },
+  "Invitation.UserFound": {
+    "defaultMessage": "UsersFound"
+  },
+  "Invitation.UserName": {
+    "defaultMessage": "Name"
+  },
+  "Invitation.UserPhoneNumber": {
+    "defaultMessage": "Phone number"
+  },
+  "Login.connection": {
+    "defaultMessage": "Connection"
+  },
+  "Login.email": {
+    "defaultMessage": "Email"
+  },
+  "Login.googlelogin": {
+    "defaultMessage": "Login"
+  },
+  "Login.googlelogout": {
+    "defaultMessage": "Login"
+  },
+  "Login.logout": {
+    "defaultMessage": "Logout"
+  },
+  "Login.password": {
+    "defaultMessage": "Password"
+  },
+  "Menu.Administration": {
+    "defaultMessage": "Administration"
+  },
+  "Menu.Events": {
+    "defaultMessage": "Events"
+  },
+  "Menu.MyFriends": {
+    "defaultMessage": "My Friends"
+  },
+  "Menu.MyInvitations": {
+    "defaultMessage": "My Invitations"
+  },
+  "Menu.MyProfile": {
+    "defaultMessage": "My Profile"
+  }
+}

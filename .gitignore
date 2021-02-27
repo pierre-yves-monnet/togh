@@ -15,3 +15,4 @@ tomcat/
 ~$question Togh.xlsx
 
 npm/public/img/toghV1.jpg
+/npm/src/lang/*.bak
