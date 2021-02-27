@@ -17,10 +17,10 @@ import java.util.Properties;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Service;
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
-import com.togh.logevent.LogEvent;
-import com.togh.logevent.LogEvent.Level;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
