@@ -12,8 +12,13 @@ import { FormattedMessage } from "react-intl";
 import Login from './Login';
 
 
+export const MENU_NAME = {
+		ADMINISTRATION: "Administration"
+	}
+
 class Menu extends React.Component {
 	
+
 	// in props, a function must be give to the call back. When we click on a line, we call
 	// this.props.clickMenu( '<action>')
 	// this.props.showMenu ( isVisible )
@@ -55,7 +60,7 @@ class Menu extends React.Component {
 				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
 					<FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
 				</a><p/>
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+				<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#">
 					<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
 				</a><p/>
 				&nbsp;<p />

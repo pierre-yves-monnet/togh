@@ -31,7 +31,7 @@ Puis faire sur le projet un "Debug in server"
 ==> Le war va demarrer
 
 Note: 
-le projet doit etre noté "Dynamic web application" sinon Spring ne veut pas démarré ( ? )
+le projet doit etre notï¿½ "Dynamic web application" sinon Spring ne veut pas dï¿½marrï¿½ ( ? )
 Click droit => Properties => Project Facet => Dynamic Web Application
 
 ## mobile
@@ -48,10 +48,16 @@ https://start.spring.io/
 # google 
 API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
 
+https://console.cloud.google.com/apis
 
-	
+https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
+
+https://cloud.google.com/translate/docs/quickstarts
+API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
+ 	
 # docker
 user togh: pass4togh
+
 
 ## Creation d'une image a partir de tomcat
 pull tomcat ou qq chose comme ca
@@ -77,14 +83,16 @@ apt-get install postgresql postgresql-contrib
  
  
  
- ## Sauvegarder le container
+## Sauvegarder le container
  
- ## importer le container
+## importer le container
   
  
- Arret de docker
+## Arret de docker
   wsl --shutdown
   
+# CI
+https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
 
 # React
 
@@ -160,8 +168,10 @@ https://lokalise.com/blog/react-i18n-intl/
  values = {{blogName: "Lokalise"}}
 />
 
-
-
+Extraction : follow
+https://formatjs.io/docs/getting-started/message-extraction/
+> npm i -D @formatjs/cli
+> npm run extract
 
 
 ## install npm
@@ -222,11 +232,13 @@ Py	Sauvegarde
 	Itineraire
 	Depenses
 
+	Integrer weather  : https://openweathermap.org/api
 	My profile
 	My Friend = recuperer les users de google
 	Internationalisation
 	Icon en petit ?
-	
+	Integrate in Google Calendar
+	Integrate in Google Drive
 	
           
           

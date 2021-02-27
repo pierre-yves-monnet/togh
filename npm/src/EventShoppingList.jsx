@@ -7,6 +7,8 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
+
 import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag } from 'carbon-components-react';
 
 
@@ -65,7 +67,7 @@ class EventShoppingList extends React.Component {
 				<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
 					{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
 					{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
-				</a> Shopping List
+				</a> <FormattedMessage id="EventShoppingList.Title" defaultMessage="Shopping List" />
 					<div style={{ float: "right" }}>
 						<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
 					</div>
@@ -73,9 +75,9 @@ class EventShoppingList extends React.Component {
 			{this.state.show === 'ON' && <table class="table table-striped toghtable">
 				<thead>
 					<tr >
-						<th>What</th>
-						<th>Description</th>
-						<th>Who</th>
+						<th><FormattedMessage id="EventShoppingList.What" defaultMessage="What" /></th>
+						<th><FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" /></th>
+						<th><FormattedMessage id="EventShoppingList.Who" defaultMessage="Who" /></th>
 						<th></th>
 					</tr>
 				</thead>
@@ -153,21 +155,21 @@ class EventShoppingList extends React.Component {
 			//							}
 			//						}
 			>
-				<OverflowMenuItem className="TODO" itemText="To bring"
+				<OverflowMenuItem className="TODO" itemText={<FormattedMessage id="EventShoppingList.ToBring" defaultMessage="To bring" />}
 					onClick={() => {
 						item.status = "TODO"
 						this.setState({ "event": this.state.event });
 					}
 					}
 				/>
-				<OverflowMenuItem className="DONE" itemText="Done"
+				<OverflowMenuItem className="DONE" itemText={<FormattedMessage id="EventShoppingList.Done" defaultMessage="Done" />}
 					onClick={() => {
 						item.status = "DONE"
 						this.setState({ "event": this.state.event });
 					}
 					}
 				/>
-				<OverflowMenuItem className="CANCEL" itemText="Cancel"
+				<OverflowMenuItem className="CANCEL" itemText={<FormattedMessage id="EventShoppingList.Cancel" defaultMessage="Cancelled" />}
 					onClick={() => {
 						item.status = "CANCEL"
 						this.setState({ "event": this.state.event });
@@ -179,11 +181,20 @@ class EventShoppingList extends React.Component {
 
 
 		if (item.status === 'TODO')
-			return (<Tag type="teal" title="Task planned">To bring {changeState}</Tag>)
+			return (<Tag type="teal" title="Task planned">
+						<FormattedMessage id="EventShoppingList.ToBring" defaultMessage="To bring" />
+ 						{changeState}
+					</Tag>)
 		if (item.status === 'DONE')
-			return (<Tag type="warm-gray" title="Task is finish, well done !">Done {changeState}</Tag>);
+			return (<Tag type="warm-gray" title="Task is finish, well done !">
+						<FormattedMessage id="EventShoppingList.Done" defaultMessage="Done" />
+						{changeState}
+					</Tag>);
 		if (item.status === 'CANCEL')
-			return (<Tag type="red" title="Oups, this task was cancelled">Cancelled{changeState}</Tag>);
+			return (<Tag type="red" title="Oups, this task was cancelled">
+						<FormattedMessage id="EventShoppingList.Cancel" defaultMessage="Cancelled" />
+						{changeState}
+					</Tag>);
 
 		return (<Tag type="gray" title="Something strange arrived">{item.status} {changeState}</Tag>);
 	}

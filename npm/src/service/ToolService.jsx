@@ -43,7 +43,7 @@ class ToolService {
 	
 	getDayOfDate( dateObj ) {
 		// to be sure, first translate to a date 
-		var dateReal = getDateFromString( dateObj );
+		var dateReal = this.getDateFromString( dateObj );
 		if (! dateReal)
 			return null;
 		return dateReal.toISOString().slice(0,10);

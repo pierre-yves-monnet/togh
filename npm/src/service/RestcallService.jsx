@@ -46,7 +46,7 @@ class RestcallService {
 	        headers: headers
 	    };
 		console.log("RestCallServer call ["+uri+"]");
-		
+		var fct=fctToCallback;
     	axios.get( this.getUrl( uri ), requestOptions)
         	.then( axiosPayload => { 
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
@@ -55,7 +55,7 @@ class RestcallService {
 				})
 			.catch(err => {
 				console.error("RestCallService.getJson: catch error:"+err);	
-				var httpResponse =  new HttpResponse( {}, err)
+				var httpResponse =  new HttpResponse( {}, err);
 				fctToCallback.call(objToCall, httpResponse); 
 
 				});

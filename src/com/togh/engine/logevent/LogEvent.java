@@ -1,4 +1,4 @@
-package com.togh.logevent;
+package com.togh.engine.logevent;
 
 import java.io.PrintWriter;
 import java.io.Serializable;

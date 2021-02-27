@@ -1,6 +1,6 @@
 // -----------------------------------------------------------
 //
-// HomeEvents
+// EventsList
 //
 // HomeEvents page.Display the list of events
 //

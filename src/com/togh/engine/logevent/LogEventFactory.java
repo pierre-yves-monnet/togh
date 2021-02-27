@@ -1,4 +1,4 @@
-package com.togh.logevent;
+package com.togh.engine.logevent;
 
 import java.io.Serializable;
 import java.util.ArrayList;

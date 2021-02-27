@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,9 @@ import com.togh.service.ToghUserService.CreationResult;
 @Service
 public class EventService {
 
-    
+    private Logger logger = Logger.getLogger( EventService.class.getName());
+    private final static String logHeader = "com.togh.EventService";
+ 
     @Autowired
     FactoryService factoryService;
     

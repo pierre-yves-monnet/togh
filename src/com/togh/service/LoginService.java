@@ -233,6 +233,18 @@ public class LoginService {
         return userConnected.userId;                
     }
     
+    /**
+     * Is this user an admin ?
+     * @param userId
+     * @return
+     */
+    public boolean isAdministrator(long userId ) {
+        ToghUserEntity toghUserEntity = factoryService.getToghUserService().getUserFromId(userId);
+        if (toghUserEntity == null)
+            return false;
+        return PrivilegeUserEnum.ADMIN.equals(toghUserEntity.getPrivilegeUser());
+    }
+    
     
     /**
      * Disconnect

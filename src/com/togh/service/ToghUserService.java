@@ -11,11 +11,11 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
-import com.togh.logevent.LogEvent;
-import com.togh.logevent.LogEventFactory;
 import com.togh.repository.ToghUserRepository;
 
 @Service

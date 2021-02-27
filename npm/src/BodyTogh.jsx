@@ -8,17 +8,22 @@
 
 import React from 'react';
 
+import { IntlProvider, FormattedMessage } from "react-intl";
+
 import Login from './Login';
 import Banner from './Banner';
 import Menu from './Menu';
+import{ MENU_NAME} from './Menu';
 import RegisterNewUser from './RegisterNewUser';
 import EventsList from './EventsList';
 import Event from './Event';
-import { IntlProvider, FormattedMessage } from "react-intl";
+import AdminHome from './administration/AdminHome';
+
 
 import FactoryService from './service/FactoryService';
 import AuthService from './service/AuthService';
 
+ 
 
 import fr from "./lang/fr.json";
 import en from "./lang/en.json";
@@ -135,6 +140,7 @@ class BodyTogh extends React.Component {
 							<td style={{padding: "10px", "verticalAlign": "top"}} >
 								{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
 								{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
+								{ this.state.frameContent === 'frameAdministration' && <AdminHome />}
 		
 							</td>
 						</tr>
@@ -159,12 +165,16 @@ class BodyTogh extends React.Component {
 
 	clickMenu( menuName ) {
 		console.log("BodyTogh.clickMenu: menuAction"+menuName);
-		this.setState( {'currenteventid' : null, 'frameContent':'frameEvents' });
+		if (menuName === MENU_NAME.ADMINISTRATION)
+				this.setState( {'currenteventid' : null, 'frameContent':'frameAdministration' });
+		else
+			this.setState( {'currenteventid' : null, 'frameContent':'frameEvents' });
 	}
+	
 	
 	showMenu( isVisible ) {
 		console.log("BodyTogh.showMenu");
-		this.setState( {'sizeMenu' : (isVisible? "10%": "2%") } );
+		this.setState( {'sizeMenu' : (isVisible? "15%": "2%") } );
 	}
 
 	changeLanguage( newlanguage ) {
