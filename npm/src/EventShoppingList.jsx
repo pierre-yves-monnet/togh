@@ -7,21 +7,18 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl"; 
 
 import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag } from 'carbon-components-react';
 
-
-
 import ChooseParticipant from './ChooseParticipant';
 
+		
 class EventShoppingList extends React.Component {
-
 	// this.props.pingEvent()
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
-
 		this.state = {
 			'event': props.event,
 			'show': props.show,
@@ -34,9 +31,10 @@ class EventShoppingList extends React.Component {
 		this.addItem = this.addItem.bind(this);
 		this.changeParticipant = this.changeParticipant.bind(this);
 	}
-
+	
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
+		const intl = this.props.intl;
 		console.log("EventShoppinglist.render: visible=" + this.state.show);
 		if (this.state.show === 'OFF')
 			return (<div> </div>);
@@ -46,6 +44,7 @@ class EventShoppingList extends React.Component {
 		}
 
 		var listShoppingListHtml = [];
+//				<td><p title="This is a title en dur">placeholder</p></td>
 		listShoppingListHtml = this.state.event.shoppinglist.map((item, index) =>
 			<tr key={index}>
 				<td> {this.getTagState(item)}</td>
@@ -54,9 +53,7 @@ class EventShoppingList extends React.Component {
 				<td>
 					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
 				</td>
-
-
-				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title="Remove this item"></button></td>
+				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}></button></td>
 			</tr>
 		);
 		console.log("EventShoppinglist.render: list calculated from " + JSON.stringify(this.state.event.shoppinglist));
@@ -204,4 +201,4 @@ class EventShoppingList extends React.Component {
 		console.log("EventShoppinglist.cchangeParticipant");
 	}
 }
-export default EventShoppingList;
+export default injectIntl(EventShoppingList);
