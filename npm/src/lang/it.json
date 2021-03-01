@@ -1,6 +1,6 @@
 {
   "Invitation.LastName": "Cognome",
-  "AdminTranslator.TooMuchSentences": "Frase di overflow",
+  "AdminTranslator.TooMuchSentences": "Troppe frasi",
   "EventList.MyEvents": "I miei eventi",
   "Invitation.UserEmail": "E-mail",
   "Event.ShoppingList": "Lista della spesa",

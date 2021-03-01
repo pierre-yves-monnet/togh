@@ -83,7 +83,7 @@ class EventState extends React.Component {
 		else 
 			tagHtml =(<Tag  type="gray" title="Something strange arrived">{this.state.statusEvent} {dropDownChangeHtml}</Tag>);
 
-		console.log("EventState.render : tagHml");
+
 		return (<div>{tagHtml}</div>);
 	};
 };

@@ -32,18 +32,18 @@ class Banner extends React.Component {
 		console.log("banner.render isconnected="+authService.isConnected());
 		// 			<!--  green: #067c04;
 		const FLAG_SELECTOR_OPTION_LIST = [
-  	{ id: "en", name: 'US', displayText: 'English', locale: 'en_US', flag: "img/flags/usa.svg" },
+  	{ id: "en", name: 'US', displayText: 'English', locale: 'en_US', flag: "img/flags/en.svg" },
   	{ id: "fr", name: 'FR', displayText: 'Francais', locale: 'fr_FR', flag: "img/flags/fr.svg" },
-  	{ id: "pt", name: 'BR', displayText: 'Portuges', locale: 'pt_BR', flag: "img/flags/brazil.svg" },
-  	{ id: "de", name: 'DE', displayText: 'Deutch', locale: 'de_DE', flag: "img/flags/deutschland.svg" },
-  	{ id: "el", name: 'GR', displayText: 'Greek', locale: 'el_GR', flag: "img/flags/greece.svg" },
-  	{ id: "hi", name: 'IN', displayText: 'Indian', locale: 'hi_IN', flag: "img/flags/india.svg" },
-  	{ id: "it", name: 'IT', displayText: 'Italiano', locale: 'it_IT', flag: "img/flags/italia.svg" },
-  	{ id: "ko", name: 'KR', displayText: 'Korean', locale: "ko_KR", flag: "img/flags/korea.svg" },
-  	{ id: "ja", name: 'JP', displayText: 'Japanese', locale: "jp_JP", flag: "img/flags/japan.svg" },
-  	{ id: "ar", name: 'LB', displayText: 'Arabish (Lebanon)', locale: 'ar_LB', flag: "img/flags/lebanon.svg" },
-  	{ id: "ar", name: 'MO', displayText: 'Arabish (Marocco)', locale: 'ar_MA', flag: "img/flags/moroco.svg" },
-  	{ id: "es", name: 'ES', displayText: 'Spanish', locale: 'es_ES', flag: "img/flags/espagna.svg" }
+  	{ id: "pt", name: 'BR', displayText: 'Portuges', locale: 'pt_BR', flag: "img/flags/pt.svg" },
+  	{ id: "de", name: 'DE', displayText: 'Deutch', locale: 'de_DE', flag: "img/flags/de.svg" },
+  	{ id: "el", name: 'GR', displayText: 'Greek', locale: 'el_GR', flag: "img/flags/el.svg" },
+  	{ id: "hi", name: 'IN', displayText: 'Indian', locale: 'hi_IN', flag: "img/flags/hi.svg" },
+  	{ id: "it", name: 'IT', displayText: 'Italiano', locale: 'it_IT', flag: "img/flags/it.svg" },
+  	{ id: "ko", name: 'KR', displayText: 'Korean', locale: "ko_KR", flag: "img/flags/ko.svg" },
+  	{ id: "ja", name: 'JP', displayText: 'Japanese', locale: "jp_JP", flag: "img/flags/ja.svg" },
+  	{ id: "ar", name: 'LB', displayText: 'Arabish (Lebanon)', locale: 'ar_LB', flag: "img/flags/ar.svg" },
+  	{ id: "ar", name: 'MO', displayText: 'Arabish (Marocco)', locale: 'ar_MA', flag: "img/flags/mo.svg" },
+  	{ id: "es", name: 'ES', displayText: 'Spanish', locale: 'es_ES', flag: "img/flags/es.svg" }
 
 
 		];

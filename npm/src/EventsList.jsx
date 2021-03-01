@@ -46,8 +46,8 @@ class EventsList extends React.Component {
 		var listEventsHtml = [];
 		// 
 		if (this.state.events) {
-			listEventsHtml = this.state.events.map((event) =>
-				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={event.id}>
+			listEventsHtml = this.state.events.map((event,index) =>
+				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={index}>
 					<td><button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button></td>
 					<td>
 						<EventState statusEvent={event.statusEvent} modifyEvent={false} />

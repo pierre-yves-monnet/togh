@@ -9,7 +9,7 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { TextInput, DatePicker, DatePickerInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, ToggleSmall } from 'carbon-components-react';
+import { TextInput, DatePicker, DatePickerInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
 
 import FactoryService from './service/FactoryService';
 
@@ -142,15 +142,14 @@ class EventTaskList extends React.Component {
 				
 					<table width="100%"><tr>
 					<td style={{ paddingRight: "60px;"}}>
-						<ToggleSmall labelText=""
-							aria-label=""
+						<Toggle labelText="" aria-label="" size="sm"
 							selectorPrimaryFocus={this.state.showProperties.showdates}
 							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							onChange={(event) => this.setCheckboxValue("showdates", event)}
 							id="showDates" />
 					</td><td style={{ paddingRight: "60px;"}}>
-						<ContentSwitcher  onChange={event => this.setSwitcherValue("filterstate", event)} 
+						<ContentSwitcher size="sm" onChange={event => this.setSwitcherValue("filterstate", event)} 
 							labelText="Task" 
 							width="10px" height="small">
 	  						<Switch name='ALL' 		text={<FormattedMessage id="EventTaskList.FilterAllStates" defaultMessage="All states" />} />
@@ -159,7 +158,7 @@ class EventTaskList extends React.Component {
 	  						<Switch name='DONE' 	text={<FormattedMessage id="EventTaskList.FilterDone" defaultMessage="Done" />} />
 						</ContentSwitcher>
 					</td><td>
-						<ContentSwitcher onChange={event =>  this.setSwitcherValue("filterparticipant", event)} labelText="Task">
+						<ContentSwitcher size="sm" onChange={event =>  this.setSwitcherValue("filterparticipant", event)} labelText="Task">
 	  						<Switch name='ALL' text={<FormattedMessage id="EventTaskList.FilterAllParticipants" defaultMessage="All participants" />} />
 	  						<Switch name='MYTASKS' text={<FormattedMessage id="EventTaskList.FilterMyTasks" defaultMessage="My tasks" />} />
 	  						<Switch name='UNAFFECTED' text={<FormattedMessage id="EventTaskList.FilterUnaffected" defaultMessage="Unaffected" />} />

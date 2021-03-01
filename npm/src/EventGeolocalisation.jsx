@@ -9,7 +9,7 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { TextInput, ToggleSmall } from 'carbon-components-react';
+import { TextInput, Toggle } from 'carbon-components-react';
 
 
 import GoogleMapReact from 'google-map-react';
@@ -79,8 +79,7 @@ class EventGeolocalisation extends React.Component {
 						<div>
 						<table >
 						<tr><td style={{"paddingRight":"30px"}}>
-							<ToggleSmall labelText="" 
-								aria-label="" 
+							<Toggle labelText="" size="sm" aria-label="" 
 								labelA={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event"/>}
 								labelB={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event"/>}
 								onChange={(event) => this.setAttributeCheckbox( "geosharemylocation", event.target.value )}
@@ -187,9 +186,9 @@ class EventGeolocalisation extends React.Component {
 				          mapContainerStyle={mapStyles}
 				          zoom={13}
 				          center={defaultCenter}>
-							{locations.map(item => {
+							{locations.map((item,index) => {
 							              return (
-							              <Marker key={item.name} position={item.location}/>
+							              <Marker key={index} position={item.location}/>
 							              )
 							            })
 							}

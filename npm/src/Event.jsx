@@ -50,6 +50,11 @@ class Event extends React.Component {
 						showRegistration : false
 						};
 
+
+		// TextArea must not be null
+		if (! this.state.event.description)
+			this.state.event.description='';
+			
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.showRegistration 			= this.showRegistration.bind(this);
 		this.accessParticipantList 		= this.accessParticipantList.bind(this);
@@ -223,9 +228,9 @@ class Event extends React.Component {
 						<TextArea id="description"
 							labelText={<FormattedMessage id="Event.Description" defaultMessage="Description"/>}
 							style={{width: "100%", maxWidth: "100%"}} 
-							rows="5" 
+							rows={5} 
 							value={this.state.event.description} 
-							onChange={(event) => this.setAttribut( "description", event.target.value )}></TextArea>
+							onChange={(event) => this.setAttribut( "description", event.target.value )}/>
 					</div>
 					<div class="col-sm-6">
 						<div class="panel panel-info">

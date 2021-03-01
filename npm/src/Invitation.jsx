@@ -57,8 +57,8 @@ class Invitation extends React.Component {
 		var listSearchUsersHtml = [];
 		if (this.state.listSearchUser !== null) {
 			// console.log("Invitation.buildListUser");
-			listSearchUsersHtml = this.state.listSearchUsers.map((toghUser) =>
-				<tr key={toghUser.id}>
+			listSearchUsersHtml = this.state.listSearchUsers.map((toghUser,index) =>
+				<tr key={index}>
 					<td><Checkbox labelText="" 
 						id={`${toghUser.id}`} 
 						onChange={(value,event ) => {
