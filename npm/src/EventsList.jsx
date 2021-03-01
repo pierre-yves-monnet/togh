@@ -9,6 +9,7 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
+import { DropletFill, PlusCircle } from 'react-bootstrap-icons';
 
 
 import FactoryService from './service/FactoryService';
@@ -44,11 +45,13 @@ class EventsList extends React.Component {
 		console.log("EventList.render listEvents " + JSON.stringify(this.state.events));
 		// no map read, return
 		var listEventsHtml = [];
-		// 
+		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button>
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event,index) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={index}>
-					<td><button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button></td>
+					<td><button title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}>
+							<DropletFill/>
+						</button></td>
 					<td>
 						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
 					</td>
@@ -63,7 +66,7 @@ class EventsList extends React.Component {
 					<h1>Events</h1>
 					<div style={{ float: "right" }}>
 						<button class="btn btn-info btn-lg" onClick={this.createEvent}>
-							<div class="glyphicon glyphicon-plus"> </div>&nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
+							<PlusCircle/> &nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
 					</div>
 				</div>
 				<div class="row">
