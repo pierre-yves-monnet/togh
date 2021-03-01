@@ -187,6 +187,25 @@ npm start
 
 
 # Spring
+ Comment faire marcher le @configuration ?
+ 
+ Comment locker un record dans la table ?
+ Voici mon cas d'uisage. Une evenement peut etre modifié en meme temps par 2 utilisateurs, donc 2 threads en meme temps.
+ Il me faut donc, quand je veut modifier l'element, faire un "lock Event ID=444 / Read Event id=444/ My manipulation / Save Eventid=444 / Unlock ID=444
+ Et si le thread n'arrive pas a faire le lock, je vais mettre en place une strategie tel "sleep 5 s / reesaaye
+ Si j'en crois 
+ https://www.baeldung.com/java-jpa-transaction-locks
+ https://www.baeldung.com/jpa-pessimistic-locking
+ 
+ Je devrais mettre devant ma methode
+ 
+ @Lock(LockModeType.PESSIMISTIC_WRITE)
+mais tous les exemples sont pour des requetes en READ. 
+De plus, moi je veux mettre cet @ dans ma classe d'application (qui est un @Service, et j'ai l'impression que c'est a mettre que devant les SELECT pour proteger les selects
+je me trompe ? 
+
+ 
+ Mais l
  
 ## profile
 See https://www.baeldung.com/spring-profiles
@@ -215,8 +234,12 @@ https://www.remove.bg/fr/upload
 
 	
 Simon ?	Toggle default value (dans Google Map / Share my localisation ou EventtaskList / Show dates)
+Simon ? Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
 Simon ?	Google Geocodage d'une adresse
 Simon ?	Comment traduire les titles ? formatMessage ne marche pas la. D'apres https://formatjs.io/docs/react-intl/api/ il faut utiliser intl ==> Rien ne marche
+	Internationalisation : comment faire appel a la lib d'internationalisation dans les infobulle (title)		
+		eventPartipant.jsx
+			{item.status==='ACTIF' && <Tag  type="green" title={<FormattedMessage id="EventParticipant.TitleActiveParticipant" defaultMessage="Active participant"/>}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}			
 		
 		
 	Access this in a iterator: example dans EventTaskList, je veux pouvoir afficher (ou pas) la liste des taches suivant des indicateurs dans this.state. mais le this n'est pas accessible dans la sous classe
@@ -224,6 +247,8 @@ Simon ?	Comment traduire les titles ? formatMessage ne marche pas la. D'apres ht
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas
 		
+	EventParticpant => change user role to organizer ==> Plante
+	TagHtml : status marche plus
 	
 Py	Sauvegarde
 	faire marcher la requete JPA "user not register in the event"
@@ -231,12 +256,9 @@ Py	Sauvegarde
 	Task
 	Itineraire
 	Depenses
-
 	Integrer weather  : https://openweathermap.org/api
 	My profile
 	My Friend = recuperer les users de google
-	Internationalisation
-	Icon en petit ?
 	Integrate in Google Calendar
 	Integrate in Google Drive
 	

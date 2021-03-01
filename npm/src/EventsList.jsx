@@ -9,6 +9,7 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
+import { DropletFill, PlusCircle,ArrowRepeat,ClipboardData,PersonCircle } from 'react-bootstrap-icons';
 
 
 import FactoryService from './service/FactoryService';
@@ -44,11 +45,13 @@ class EventsList extends React.Component {
 		console.log("EventList.render listEvents " + JSON.stringify(this.state.events));
 		// no map read, return
 		var listEventsHtml = [];
-		// 
+		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button>
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event,index) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={index}>
-					<td><button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button></td>
+					<td><button title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}>
+							<DropletFill/>
+						</button></td>
 					<td>
 						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
 					</td>
@@ -60,19 +63,21 @@ class EventsList extends React.Component {
 		return (
 			<div class="container-fluid">
 				<div class="row">
-					<h1>Events</h1>
-					<div style={{ float: "right" }}>
+					<div class="col"><h1>Events</h1></div>
+					<div class="col"><div style={{ float: "right" }}>
 						<button class="btn btn-info btn-lg" onClick={this.createEvent}>
-							<div class="glyphicon glyphicon-plus"> </div>&nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
+							<PlusCircle/> &nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
+					</div>
 					</div>
 				</div>
 				<div class="row">
+				<div class="col-sm">
 					<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
-						<button class="glyphicon glyphicon-refresh" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}></button>
-						<button class="glyphicon glyphicon-menu-hamburger" title={<FormattedMessage id="EventList.AllEvents" defaultMessage="All events"/>} style={{ "marginLeft ": "10px" }}></button>
-						<button class="glyphicon glyphicon-user" title={<FormattedMessage id="EventList.MyEvents" defaultMessage="My events"/>} style={{ "marginLeft ": "10px" }}></button>
+						<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}><ArrowRepeat/><FormattedMessage id="EventList.Refresh" defaultMessage="Refresh"/></button>
+						<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><ClipboardData/> <FormattedMessage id="EventList.AllEvents" defaultMessage="All events"/></button>
+						<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><PersonCircle/> <FormattedMessage id="EventList.MyEvents" defaultMessage="My events"/></button>
 					</div>
-
+	</div>
 				</div>
 				<div class="row">
 					<table class="table table-striped toghtable">
