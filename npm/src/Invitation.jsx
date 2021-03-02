@@ -87,17 +87,22 @@ class Invitation extends React.Component {
 				secondaryButtonText=''
 				size='lg'>
 					<div style={{display: "inline-block"}}>
-						<RadioButtonGroup
-							valueSelected={this.state.panelVisible}
-							legend=""
-							onChange={(event) => {
-								console.log("Invitation.Change type="+event);        					
-								this.setState( {"panelVisible": event})}
-								}
-							>
-							<RadioButton value="INVITATION" id="invitation_r1" labelText={<FormattedMessage id="Invitation.ByEmail" defaultMessage="Send an Email"/>} labelPosition="right" />
-							<RadioButton value="SEARCH" id="invitation_r2"  labelText={<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} labelPosition="right"/>
-						</RadioButtonGroup>
+					
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+	  						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" 
+								defaultChecked={this.state.panelVisible === 'INVITATION'}
+              					onChange={(event) => { this.setState( {panelVisible: 'INVITATION'})}} />
+	  						<label class="btn btn-outline-primary btn-sm" for="btnradio1">{<FormattedMessage id="Invitation.ByEmail" defaultMessage="Send an Email"/>}</label>
+	
+							<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+								defaultChecked={this.state.panelVisible === 'SEARCH'}
+              					onChange={(event) => { this.setState( {panelVisible: 'SEARCH'})}}/>							
+	  						<label class="btn btn-outline-primary btn-sm" for="btnradio2">{<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} </label>
+	
+						</div>
+					
+					
+	
 					</div>
 					
 					<div style={{display: "inline-block", float: "right"}}>	
@@ -173,9 +178,15 @@ class Invitation extends React.Component {
 						<tr>
 							<td style={{"paddingRight": "10px"}}>
 								<Select labelText="Role in this event" value={this.state.role} onChange={(event) => this.setState({ role: event.target.value })}>
-									<option value="ORGANIZER"><FormattedMessage id="Invitation.RoleOrganizer" defaultMessage="Organizer"/></option>
-									<option value="PARTICIPANT"><FormattedMessage id="Invitation.RoleParticipant" defaultMessage="Participant"/></option>
-									<option value="OBSERVER"><FormattedMessage id="Invitation.RoleObserver" defaultMessage="Observer"/></option>
+									<FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
+	                          			{(message) => <option value="ORGANIZER">{message}</option>}
+	                    			</FormattedMessage>							
+									<FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
+		                          		{(message) => <option value="PARTICIPANT">{message}</option>}
+		                    		</FormattedMessage>
+									<FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
+										{(message) => <option value="OBSERVER">{message}</option>}
+		                    		</FormattedMessage>
 								</Select>
 							</td><td>
 								<TextArea labelText="Message" value={this.state.message} onChange={(event) => this.setState({ message: event.target.value })} ></TextArea><br />
@@ -226,7 +237,7 @@ class Invitation extends React.Component {
 			+'&eventid='+this.state.event.id, 
 			this, 
 			httpPayload => {
-				console.log("Invitation payload=" + httpPayload.trace());
+				httpPayload.trace("Invitation.searchTogUser");
 				this.setState( {inprogresssearch: false });
 				if (httpPayload.isError()) {
 					this.setState( {messageServerSearch: "Server connection error" } );
@@ -261,7 +272,7 @@ class Invitation extends React.Component {
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		this.setState( {inprogressinvitation: true, statusErrorInvitation: '', statusOkInvitation:'' });
 		restCallService.postJson('/api/event/invitation', this, param, httpPayload => {
-			console.log("Invitation.callback !!! payload=" + httpPayload.trace() );
+			httpPayload.trace("Invitation.callback");
 			this.setState( {inprogressinvitation: false });
 			if (httpPayload.isError() ) {
 				this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });

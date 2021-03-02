@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { FormattedMessage,FormattedDate } from "react-intl";
+import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
 import { TextInput,  TimePicker, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
 
@@ -27,7 +28,7 @@ class EventItinerary extends React.Component {
 			show: props.show,
 			collapse : props.collapse,
 			showProperties : {
-				showItineraryMap: false
+				showItineraryMap: true
 				
 			}
 		};
@@ -45,9 +46,19 @@ class EventItinerary extends React.Component {
 
 	}
 
+
+
+
+
+
 	// --------------------------------- render
 	render() {
 		console.log("EventItinerary.render: visible=" + this.state.show+" event="+JSON.stringify(this.state.event));
+
+		
+
+
+
 
 		var toolService = FactoryService.getInstance().getToolService();
 
@@ -58,8 +69,8 @@ class EventItinerary extends React.Component {
 					<div class="eventsection"> 
 						<a href="secItinerary"></a>
 						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
-							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
-							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
+							{this.state.show === 'ON' && <ChevronDown width="20px"/>}
+							{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
 						</a><FormattedMessage id="EventItinerary.MainTitleItinerary" defaultMessage="Itinerary"/>
 					</div> 
 					);
@@ -98,13 +109,19 @@ class EventItinerary extends React.Component {
 		// now, build a list day per days
 		// two ways: the total period is over 31 days, provide a list of item
 		// less than 31 days, create a day per day calendar
+		// 
+		// {<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
+		// 
 		resultHtml.push(
-			(<div>
-				<Toggle size="sm" labelText="" aria-label="" 
+			(<div class="row">
+				<div class="col-12">
+				<Toggle  labelText="" aria-label="" 
 					labelA={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
 					labelB={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
-					onChange={(event) => this.setCheckboxValue( "showItineraryMap", event.target.value )}
+					onChange={(event) => this.setAttributeCheckbox( "showItineraryMap", event.target.value )}
+					defaultToggled={this.state.showProperties.showItineraryMap}
 					id="showitinerarymap" />
+				</div>
 			</div> )
 		);
 		
@@ -123,18 +140,20 @@ class EventItinerary extends React.Component {
 	renderCalendar(dateStart, dateEnd ) {
 		console.log("EventItinerary.renderCalendar ");
 		
+		
+			
 		var toolService = FactoryService.getInstance().getToolService();
 
 		var listItineraryListHtml = [];
 		var dateIndex = dateStart;
-		var index=0;
+		var index=-10;
 		while (dateIndex.getTime() <= dateEnd.getTime()) {			
-			index ++;
+			index = index - 10;
 			console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
 			var dateIndexPublish = new Date( dateIndex);
 			
-			var line = (<tr key={ - index }>
-				<th colSpan="6">
+			var line = (<tr key={index }>
+				<th colSpan="6" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
 					<FormattedDate
 		           	value={dateIndexPublish}
 		           	year = 'numeric'
@@ -142,38 +161,51 @@ class EventItinerary extends React.Component {
 		           	day = 'numeric'
 		           	weekday = 'long'
 		       		/>
-			key={- index}
 				</th>
-				<th>
+				<th> 
 					 <div style={{ float: "right" }}>
-						<button class="btn btn-success btn-xs glyphicon glyphicon-plus" 
-							key={- index}
-							id={dateIndexPublish}
-							onClick={(event) => {
-								console.log("EventItinerary.add dateIndexPublish="+dateIndexPublish+" index="+index+" id="+event.target.id);
-								this.addItem( event.target.id, null );}
-							} title="Add a new step in the list"> key={- index}</button>
+							<button  class="btn btn-success btn-xs" >
+							<PlusCircle   
+								id={dateIndexPublish.toISOString()}
+								onClick={(event) => {
+									console.log("EventItinerary.add :  id="+event.target.id);
+									this.addItem( event.target.id, null );
+								}
+								}/>
+							</button>
+
+							
 					</div>
 				</th>
 				</tr>)
 			listItineraryListHtml.push( line );
 			
-			listItineraryListHtml.push( this.renderHeader( false ));
+			 
+			
+			
 			// now attach all events on this day - ok, we parse again the list, but reminber this is a 31 lines * 200 lines each so total is 6000 iteration - moden browser can hander that isn't it?
 			for (var j in this.state.event.itinerarylist) {
 				var stepinlist = this.state.event.itinerarylist[ j ];
 				if (toolService.getDayOfDate(stepinlist.datestep) === toolService.getDayOfDate(dateIndex)) {
 					console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
-
-					listItineraryListHtml.push( this.renderOneStep( stepinlist,false, j ) ); 
+					var blockLine = ( <div class="toghBlock">
+										<table>
+											{this.renderHeader( false, index ) }
+											{this.renderOneStep( stepinlist,false, j )}
+										</table>
+									</div> );
+				listItineraryListHtml.push( <tr><td colSpan="2"> {blockLine} </td></tr> );
+	 
 				}
 			}
-			
+
 			// advance one day
 			dateIndex.setDate( dateIndex.getDate() + 1);
 		}
 		
-		return (  <table class="table table-striped toghtable"> {listItineraryListHtml} </table>);
+		return (  <table class="table table-striped toghtable"> 
+					{listItineraryListHtml} 
+				</table>);
 		
 		
 	}
@@ -183,7 +215,7 @@ class EventItinerary extends React.Component {
 	 */
 	renderList() {
 		var listItineraryListHtml = [];
-		listItineraryListHtml.push( this.renderHeader( true ));
+		listItineraryListHtml.push( this.renderHeader( true, -1 ));
 		for (var j in this.state.event.itinerarylist) {
 			var stepinlist = this.state.event.itinerarylist[ j ];
 			listItineraryListHtml.push( this.renderOneStep( stepinlist, true, j ) ); 
@@ -195,11 +227,14 @@ class EventItinerary extends React.Component {
 	/** ---------------------------------------------
 	 * render the header
 	 */
-	renderHeader( showDate) {
+	renderHeader( showDate, index ) {
+		var indexLine = index - 1;
 		return (
-			<tr>
-				<td>{ showDate && <FormattedMessage id="EventItineray.Category" defaultMessage="Category" />} </td>
-				<td> <FormattedMessage id="EventItineray.Category" defaultMessage="Category" />	</td>
+			<tr key={indexLine}>
+				<td> {showDate && <FormattedMessage id="EventItineray.DateOfLine" defaultMessage="Date" />} </td>
+				<td></td>
+				<td></td>
+				<td> <h6 class="card-subtitle mb-2 text-muted"><FormattedMessage id="EventItineray.Category" defaultMessage="Category" /></h6>	</td>
 				<td> <FormattedMessage id="EventItineray.What" defaultMessage="What" />	</td>
 				<td> <FormattedMessage id="EventItineray.Description" defaultMessage="Description" /> </td>
 				<td> <FormattedMessage id="EventItineray.Budget" defaultMessage="Budget" />	</td>
@@ -215,33 +250,36 @@ class EventItinerary extends React.Component {
 		var selectDate= (null);
 		var listLines = [];
 		listLines.push(<tr key={index}>
-				{showDate && selectDate && (<td>Show Date</td>)}
+				
+				<td>{showDate && (<div>Show Date</div>)}</td>
 				<td>
-					key={index}, rownumber={item.rownumber}
-					<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><span class="glyphicon glyphicon-arrow-up"/></button>
-					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )} title="Down this line"><span class="glyphicon glyphicon-arrow-down"/></button>
+					<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><ArrowUp width="20px"/></button>
+				</td><td>
+					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )} title="Down this line"><ArrowDown width="20px"/></button>
 				</td><td>
 					{this.getTagCategory(item)}<br/>
 					{ item.category === "VISITE" && <TimePicker value={item.durationTime} onChange={(event) => this.setChildAttribut( "durationTime", event.target.value,item )}	/>}
 				</td>
 				<td> <TextInput value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
 				<td> <TextArea  value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
-				<td> <TextInput value={item.budget} onChange={(event) => this.setChildAttribut("budget", event.target.value, item)} labelText="" /></td>
-				<td> <TextInput value={item.price} onChange={(event) => this.setChildAttribut("price", event.target.value, item)} labelText="" disable="true"/>
-					<button style={{float: "right"}} class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-usd"/></button>
+				<td>
+					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} title="Remove this item">
+					<DashCircle/></button>}
 				</td>
 				<td>
-					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title="Remove this item"></button>}
-				</td>
-				<td>
-					<button class="btn btn-primary btn-xs glyphicon glyphicon-plus" onClick={() => this.addItem( item.datestep, item.rownumber+5)} title="Add a line"></button>
+					<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.datestep, item.rownumber+5)} title="Add a line"><PlusCircle/></button>
 				</td>
 			</tr>);
 			listLines.push(
 				<tr key={index+"-1"}>
 					<td colSpan="2"></td>
 					<td colSpan="4"><TextInput value={item.address} onChange={(event) => this.setChildAttribut("what", event.target.address, item)} 
-							labelText={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} /></td>
+							labelText={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} />
+					</td>
+					<td> <TextInput value={item.budget} onChange={(event) => this.setChildAttribut("budget", event.target.value, item)} labelText="" /></td>
+					<td> <TextInput value={item.price} onChange={(event) => this.setChildAttribut("price", event.target.value, item)} labelText="" disable="true"/>
+						<button style={{float: "right"}} class="btn btn-primary btn-xs"><Cash/></button>
+					</td>
 				</tr>
 			);
 			listLines.push(
@@ -282,10 +320,11 @@ class EventItinerary extends React.Component {
 
 	/** --------------------
  	*/
-	setCheckboxValue(name, value) {
+	setAttributeCheckbox(name, value) {
+		console.log("EventTaskList.setCheckBoxValue .1");
 		let showPropertiesValue = this.state.showProperties;
-		console.log("EventTaskList.setCheckBoxValue set "+name+"="+value.target.checked+" showProperties =" + JSON.stringify(showPropertiesValue));
-		if (value.target.checked)
+		console.log("EventTaskList.setCheckBoxValue set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
+		if (value === 'on')
 			showPropertiesValue[name] = true;
 		else
 			showPropertiesValue[name] = false;
@@ -320,8 +359,10 @@ class EventItinerary extends React.Component {
 	}
 
 	/** --------------------
+	bob
  	*/
-	addItem(datestep, rownumber) {
+	addItem(datestepSt, rownumber) {
+		var datestep = new Date( datestepSt);
 		var currentEvent = this.state.event;
 		console.log("Eventitinerary.addItem: addItem datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarylist));
 
@@ -335,6 +376,13 @@ class EventItinerary extends React.Component {
 			}
 			rownumber = rownumber+5;
 		}
+		if (datestep instanceof Date) {
+			console.log("Eventitinerary.addItem: this is a DATE");
+		} else if (datestep instanceof String) {
+			console.log("Eventitinerary.addItem: this is a STRING");
+		} else
+			console.log("Eventitinerary.addItem: DIFFERENT");
+
 		let newList = currentEvent.itinerarylist.concat({ datestep: datestep, category: "POI", rownumber: rownumber });
 		
 		currentEvent.itinerarylist = this.reorderList( newList );

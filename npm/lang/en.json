@@ -212,6 +212,9 @@
   "EventList.Participants": {
     "defaultMessage": "Participants"
   },
+  "EventList.Refresh": {
+    "defaultMessage": "Refresh"
+  },
   "EventParticipant.Actif": {
     "defaultMessage": "Actif"
   },
@@ -277,6 +280,9 @@
   },
   "EventShoppingList.Who": {
     "defaultMessage": "Who"
+  },
+  "EventShoppingList.removeItem": {
+    "defaultMessage": "Remove this item"
   },
   "EventState.Actif": {
     "defaultMessage": "Actif"
@@ -370,15 +376,6 @@
   },
   "Invitation.PhoneNumber": {
     "defaultMessage": "Phone number"
-  },
-  "Invitation.RoleObserver": {
-    "defaultMessage": "Observer"
-  },
-  "Invitation.RoleOrganizer": {
-    "defaultMessage": "Organizer"
-  },
-  "Invitation.RoleParticipant": {
-    "defaultMessage": "Participant"
   },
   "Invitation.Search": {
     "defaultMessage": "Search"

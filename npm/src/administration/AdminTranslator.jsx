@@ -10,6 +10,8 @@ import React from 'react';
 import { FormattedMessage } from "react-intl";
 import { Loading } from 'carbon-components-react';
 
+import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+
 import FactoryService from '../service/FactoryService';
 
 import LogEvents from '../tools/LogEvents';
@@ -67,8 +69,8 @@ class AdminTranslator extends React.Component {
 				 {inprogresshtml}
 				<div class="eventsection">
 					<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
-						{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
-						{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
+						{this.state.show === 'ON' && <ChevronDown width="20px"/>}
+						{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
 					</a><FormattedMessage id="AdminTranslator.Title" defaultMessage="Translation" />
 				</div>
 				{this.state.show === 'ON' && <div>
@@ -136,7 +138,7 @@ class AdminTranslator extends React.Component {
 		this.setState({inprogress: true });
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.getJson('/api/admin/translator/status', this, httpPayload =>{
-			console.log("AdminTranslator.completeDictionary payload=" + httpPayload.trace());
+			httpPayload.trace("AdminTranslator.checkDictionary");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error" });
@@ -156,7 +158,7 @@ class AdminTranslator extends React.Component {
 		
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.postJson('/api/admin/translator/complete', this, {}, httpPayload =>{
-			console.log("AdminTranslator.completeDictionary payload=" + httpPayload.trace());
+			httpPayload.trace("AdminTranslator.completeDictionary");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});

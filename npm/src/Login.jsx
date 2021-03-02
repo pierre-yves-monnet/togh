@@ -123,7 +123,7 @@ class Login extends React.Component {
 	
 	loginConnectCallback( httpResponse ) {
 		
-		console.log("Login.directConnectCallback:"+httpResponse.trace());
+		httpResponse.trace("Login.directConnectCallback");
 		if (httpResponse.isError()) {
 			// Server is not started
 			console.log("Login.directConnectCallback  ERROR IN HTTPCALL");
@@ -145,7 +145,7 @@ class Login extends React.Component {
 	}	
 	// ---------------------------- Logout
 	logoutCallback( httpResponse ) {
-		console.log("Login.logoutCallback "+httpResponse.trace());
+		httpResponse.trace("Login.logoutCallback ");
 		// call the frame event to refresh all
 		this.props.authCallback( false );
 	}	
@@ -169,7 +169,7 @@ class Login extends React.Component {
 		FactoryService.getInstance().getAuthService().loginGoogle( googleUser, staticLogin, staticLogin.loginGoogleCallBack );
 	};
 	loginGoogleCallBack( httpResponse ) {
-		console.log("Login.loginGoogleCallBack "+httpResponse.trace());
+		httpResponse.trace("Login.loginGoogleCallBack");
 		if (httpResponse.isError()) {
 			this.setState({ badConnection: true, isLog: false });
 		}

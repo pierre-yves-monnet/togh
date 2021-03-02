@@ -73,6 +73,7 @@ class BodyTogh extends React.Component {
 		
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		// this.connect = this.connect.bind(this);
+		// currenteventid : we keep the ID here, but we don't load it. Component Event will be call, and it will be in charge to load it.
 		this.state = { frameContent: 'frameEvents', 
 						showmenu : true, 
 						sizeMenu:  '10%',

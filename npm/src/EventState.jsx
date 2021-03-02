@@ -22,7 +22,6 @@ class EventState extends React.Component {
 	constructor( props ) {
 		super();
 		
-		
 		this.state = { 'statusEvent' : props.statusEvent,
 						'modifyEvent' : props.modifyEvent}
 	}

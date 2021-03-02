@@ -81,7 +81,7 @@ class AuthService {
 				 .catch((err) => {
 					console.error("AuthService.loginCallback: Catch error:"+err);
 					var httpResponse =  new HttpResponse( {}, err);
-					console.log("AuthService.loginCallback: trace:"+httpResponse.trace() );
+					httpResponse.trace(AuthService.loginCallback);
 					fctToCallback.call(objToCall, httpResponse);		
 				}
 			

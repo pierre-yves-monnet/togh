@@ -7,10 +7,12 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 
-import { Select } from 'carbon-components-react';
-import { Tag } from 'carbon-components-react';
+import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+
+import { Select, Tag } from 'carbon-components-react';
+
 import Invitation from './Invitation';
 
 class EventParticipants extends React.Component {
@@ -25,7 +27,7 @@ class EventParticipants extends React.Component {
 						'collapse' : props.collapse
 						};
 		// show : OFF, ON, COLLAPSE
-		console.log("EventParticipant.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
+		console.log("EventParticipant.constructor show="+ this.state.show+" event="+JSON.stringify(this.state.event));
 		this.collapse 				= this.collapse.bind(this);
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
 		this.participantInvited 	= this.participantInvited.bind( this );
@@ -33,6 +35,8 @@ class EventParticipants extends React.Component {
 
 
 	render() {
+		const intl = this.props.intl;
+
 		console.log("EventParticipant.render: visible="+this.state.show+" Participants:"+JSON.stringify(this.state.event.participants) );
 		if (this.state.show === 'OFF')
 			return ( <div> </div>);
@@ -70,9 +74,9 @@ class EventParticipants extends React.Component {
 								)}
 					</td>
 					<td>
-						{item.status==='ACTIF' && <Tag  type="green" title={<FormattedMessage id="EventParticipant.TitleActiveParticipant" defaultMessage="Active participant"/>}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}			
-						{item.status==='INVITED' && <Tag  type="teal" title={<FormattedMessage id="EventParticipant.Titleinvited" defaultMessage="Invited participant: no confirmation is received at this moment"/>}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}			
-						{item.status==='LEFT' && <Tag  type="red" title={<FormattedMessage id="EventParticipant.TitleLeft" defaultMessage="The participant left the event"/>}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}			
+						{item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}			
+						{item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}			
+						{item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}			
 					</td>
 				</tr>
 				);
@@ -87,8 +91,8 @@ class EventParticipants extends React.Component {
 					<div class="eventsection"> 
 						<a href="secParticipantlist"></a>
 						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
-							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
-							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
+							{this.state.show === 'ON' && <ChevronDown width="20px"/>}
+							{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
 						</a> <FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
 						<div style={{float: "right"}}>							
 							<Invitation event={this.state.event} participantInvited={this.participantInvited}/>
@@ -146,4 +150,4 @@ class EventParticipants extends React.Component {
 	}
 	
 }		
-export default EventParticipants;
+export default injectIntl(EventParticipants);

@@ -150,6 +150,18 @@ import { SelectItem } from 'carbon-components-react';
 import { Tag } from 'carbon-components-react';
 
 
+					<RadioButtonGroup
+							valueSelected={this.state.panelVisible}
+							legend=""
+							name="type"
+							onChange={(event) => {
+								console.log("Invitation.Change type="+event);        					
+								this.setState( {"panelVisible": event})}
+								}
+							>
+							<RadioButton value="INVITATION" id="invitation_r1" labelText={<FormattedMessage id="Invitation.ByEmail" defaultMessage="Send an Email"/>} labelPosition="right" />
+							<RadioButton value="SEARCH" id="invitation_r2"  labelText={<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} labelPosition="right"/>
+						</RadioButtonGroup>     
 
 ## Loaclisation
 https://phrase.com/blog/posts/react-i18n-best-libraries/
@@ -168,10 +180,17 @@ https://lokalise.com/blog/react-i18n-intl/
  values = {{blogName: "Lokalise"}}
 />
 
+--------- from JS
+import { injectIntl, FormattedMessage } from "react-intl"; 
+		const intl = this.props.intl;
+ title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}
+export default injectIntl(EventShoppingList);
+
 Extraction : follow
 https://formatjs.io/docs/getting-started/message-extraction/
 > npm i -D @formatjs/cli
 > npm run extract
+
 
 
 ## install npm
@@ -205,7 +224,12 @@ De plus, moi je veux mettre cet @ dans ma classe d'application (qui est un @Serv
 je me trompe ? 
 
  
- Mais l
+ * comment faire un update sur un champ?
+ Ma REST API va etre du type "UPDATE / ROOT / DESCRIPTION" value="Ceci est ma nouvelle description"
+ "UPDATE / ININERARY / Pid=111 / NAME" "Visite du musée
+ Le serveur va faire / read event / Update description='Ceci est ma nouvelle description' / Save
+ 
+ Comment je met a jour un seul champ de maniere dynamique ? Je voudrais avoir une methode "setAttribut( name, value)" ?
  
 ## profile
 See https://www.baeldung.com/spring-profiles
@@ -229,19 +253,19 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 Rendre une image fond transparent
 https://www.remove.bg/fr/upload 
           
+          
+               
 # Tasks
 
 
 	
-Simon ?	Toggle default value (dans Google Map / Share my localisation ou EventtaskList / Show dates)
+	Toggle default value (dans Google Map / Share my localisation ou EventtaskList / Show dates)
+	==> defaultToggled = 
 Simon ? Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
 Simon ?	Google Geocodage d'une adresse
-Simon ?	Comment traduire les titles ? formatMessage ne marche pas la. D'apres https://formatjs.io/docs/react-intl/api/ il faut utiliser intl ==> Rien ne marche
-	Internationalisation : comment faire appel a la lib d'internationalisation dans les infobulle (title)		
-		eventPartipant.jsx
-			{item.status==='ACTIF' && <Tag  type="green" title={<FormattedMessage id="EventParticipant.TitleActiveParticipant" defaultMessage="Active participant"/>}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}			
 		
-		
+	Date Carbon: le format de date ne respecte pas la langue
+	
 	Access this in a iterator: example dans EventTaskList, je veux pouvoir afficher (ou pas) la liste des taches suivant des indicateurs dans this.state. mais le this n'est pas accessible dans la sous classe
 	
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux

@@ -102,7 +102,7 @@ class EventsList extends React.Component {
 
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.postJson('/api/event/create', this, {}, httpPayload => {
-			console.log("EventList.createEventCallback payload=" + httpPayload.trace());
+			httpPayload.trace("EventList.createEventCallback");
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error"});
 			}
@@ -133,7 +133,7 @@ class EventsList extends React.Component {
 		var restCallService = FactoryService.getInstance().getRestcallService();
 
 		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, this, httpPayload => {
-			console.log("EventsList.refreshListEventsCallback: connectStatus = " + httpPayload.trace());
+			httpPayload.trace("EventsList.refreshListEventsCallback");
 			this.setState({ events: httpPayload.getData().events });
 		});
 

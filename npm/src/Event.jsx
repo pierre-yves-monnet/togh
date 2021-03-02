@@ -31,13 +31,14 @@ import EventShoppingList from './EventShoppingList';
 import EventGeolocalisation from './EventGeolocalisation';
 import EventTaskList from './EventTaskList';
 import EventState from './EventState';
+import EventExpense from './EventExpense';
 
 
 
 class Event extends React.Component {
 	constructor(props) {
 		super();
-		// console.log("RegisterNewUser.constructor");
+		console.log("Event.constructor eventId="+props.eventid);
 
 		this.state = {
 			'event': {},
@@ -47,7 +48,8 @@ class Event extends React.Component {
 				secItinerary: 'OFF',
 				secShoppinglist: 'OFF',
 				secGeolocalisation: 'OFF',
-				secTasklist: 'OFF'
+				secTasklist: 'OFF',
+				secExpense: 'OFF'
 			},
 			showRegistration: false
 		};
@@ -58,25 +60,31 @@ class Event extends React.Component {
 			this.state.event.description = '';
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
-		this.showRegistration = this.showRegistration.bind(this);
-		this.accessParticipantList = this.accessParticipantList.bind(this);
-		this.accessShoppingList = this.accessShoppingList.bind(this);
-		this.accessGeolocalisation = this.accessGeolocalisation.bind(this);
-		this.accessTaskList = this.accessTaskList.bind(this);
-		this.accessItinerary = this.accessItinerary.bind(this);
+		this.showRegistration 			= this.showRegistration.bind(this);
+		this.accessParticipantList 		= this.accessParticipantList.bind(this);
+		this.accessShoppingList 		= this.accessShoppingList.bind(this);
+		this.accessGeolocalisation 		= this.accessGeolocalisation.bind(this);
+		this.accessTaskList 			= this.accessTaskList.bind(this);
+		this.accessItinerary 			= this.accessItinerary.bind(this);
+		this.accessExpense				= this.accessExpense.bind(this);
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
-		this.refreshEvent = this.refreshEvent.bind(this);
-		this.changeState = this.changeState.bind(this);
-		this.setAttribut = this.setAttribut.bind(this);
-		this.pingEvent = this.pingEvent.bind(this);
-		this.refreshEvent();
+		this.loadEvent 					= this.loadEvent.bind(this);
+		this.changeState 				= this.changeState.bind(this);
+		this.setAttribut 				= this.setAttribut.bind(this);
+		this.pingEvent 					= this.pingEvent.bind(this);
+		
 
+	}
+	componentDidMount() {
+		// Ok, now we do the load
+		this.loadEvent();
+		
 	}
 
 	//----------------------------------- Render
 	render() {
-		console.log("Event.render eventId=" + this.state.event.eventid + " event=" + JSON.stringify(this.state.event) + " show:" + JSON.stringify(this.state.show));
+		console.log("Event.render eventId=" + this.state.eventid + " event=" + JSON.stringify(this.state.event) + " show:" + JSON.stringify(this.state.show));
 
 
 		// no map read, return
@@ -183,7 +191,8 @@ class Event extends React.Component {
 		//						</button>
 		//					</div>
 
-		// -----------------	 
+		// -----------------	
+		console.log("Event.render : statusEvent="+JSON.stringify(this.state.event.statusEvent)+" Participants="+JSON.stringify(this.state.event.participants)); 
 		return (
 			<div>
 				<div class="row">
@@ -302,7 +311,7 @@ class Event extends React.Component {
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={this.secExpense} title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} disabled={true} class="btn btn-primary">
+						<button style={{ "marginLeft ": "10px" }} onClick={this.secExpense} title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} onClick={this.accessExpense} class="btn btn-primary">
 							<div class="glyphicon glyphicon-piggy-bank"></div><br />
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
 						</button>
@@ -315,6 +324,7 @@ class Event extends React.Component {
 				{this.state.show.secTasklist !== 'OFF' && <EventTaskList event={this.state.event} show={this.state.show.secTasklist} pingEvent={this.pingEvent} />}
 				{this.state.show.secShoppinglist !== 'OFF' && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} pingEvent={this.pingEvent} />}
 				{this.state.show.secGeolocalisation !== 'OFF' && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} pingEvent={this.pingEvent} />}
+				{this.state.show.secExpense !== 'OFF' && <EventExpense event={this.state.event} show={this.state.show.secExpense} pingEvent={this.pingEvent} />}
 			</div>)
 	} //---------------------------- end Render
 
@@ -378,7 +388,7 @@ class Event extends React.Component {
 		console.log("Event.accessItinerary ");
 		var event = this.state.event;
 		if (!event.itinerarylist) {
-			console.log("Event.accessShoppingList: no task list exist, create one");
+			console.log("Event.accessShoppingList: no tassecExpensecreate one");
 			event.itinerarylist = [];
 			this.setState({ event: event })
 		}
@@ -428,6 +438,18 @@ class Event extends React.Component {
 
 	}
 
+	// Geolocalisation
+	accessExpense() {
+		console.log("accessExpense !!!!!!!!!!!!!!!!!!");
+		var event = this.state.event;
+		if (!event.expenses) {
+			console.log("Event.accessShoppingList: no shopping list exist, create one");
+			event.expenses = {};
+			this.setState({ "event": event })
+		}
+		this.showSection("secExpense");
+
+	}
 
 
 	// Show the section
@@ -450,19 +472,31 @@ class Event extends React.Component {
 
 
 	// -------------------------------------------- Call REST
-	refreshEvent() {
-		console.log("Event: http[event?id=" + this.state.eventid + "]");
+	loadEvent() {
+		console.log("Event.loadEvent: event?id=" + this.state.eventid + "]");
 		this.setState({ event: {} });
 
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.getJson('/api/event?id=' + this.state.eventid, this, httpPayload => {
-			console.log("Event.getPayload: get " + httpPayload.trace());
+			httpPayload.trace("Event.getPayload");
 
-			this.setState({ event: httpPayload.getData().event });
-			var show = this.state.show;
-			if (httpPayload.getData().event && httpPayload.getData().event.shoppinglist)
-				show.secShoppingList = 'COLLAPSE';
-			this.setState({ show: show });
+			if (httpPayload.isError()) {
+				
+			}
+			else {
+
+				// TextArea must not be null
+				if (! httpPayload.getData().event.description)
+					httpPayload.getData().event.description='';
+
+				this.setState({ event: httpPayload.getData().event });
+
+				console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
+				var show = this.state.show;
+				if (httpPayload.getData().event && httpPayload.getData().event.shoppinglist)
+					show.secShoppingList = 'COLLAPSE';
+				this.setState({ show: show });
+			}
 		});
 
 	}
