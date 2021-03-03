@@ -46,6 +46,7 @@ class ToolService {
 		var dateReal = this.getDateFromString( dateObj );
 		if (! dateReal)
 			return null;
+		console.log("ToolService.getDayOfDate dateObj="+dateObj+ " Date="+JSON.stringify( dateReal ));
 		return dateReal.toISOString().slice(0,10);
 	}
 }

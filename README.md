@@ -216,6 +216,8 @@ npm start
  https://www.baeldung.com/java-jpa-transaction-locks
  https://www.baeldung.com/jpa-pessimistic-locking
  
+ SQL ACID Atomic Consistent Isolation...
+ 
  Je devrais mettre devant ma methode
  
  @Lock(LockModeType.PESSIMISTIC_WRITE)
@@ -230,6 +232,11 @@ je me trompe ?
  Le serveur va faire / read event / Update description='Ceci est ma nouvelle description' / Save
  
  Comment je met a jour un seul champ de maniere dynamique ? Je voudrais avoir une methode "setAttribut( name, value)" ?
+ 	==> Beanutils.copy
+ 	PersistenceUtil.copyNonNullProperties(u, user);
+https://github.com/chDame/fabulexie/blob/c7471210f2c6df6f7cf6d9022986a24aa11d48b0/[…]e-backend/src/main/java/org/fabulexie/util/PersistenceUtil.java
+ 	
+ 
  
 ## profile
 See https://www.baeldung.com/spring-profiles

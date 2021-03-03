@@ -28,21 +28,16 @@ class EventGeolocalisation extends React.Component {
 		super();
 		// console.log("RegisterNewUser.constructor");
 
-		this.state = { 'event' : props.event, 
-						'show' : props.show,
-						'collapse' : props.collapse
+		this.state = { 'event' : props.event 
 						};
 		// show : OFF, ON, COLLAPSE
 		console.log("secGeolocalisation.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
-		this.collapse 				= this.collapse.bind(this);
 		this.setAttribute			= this.setAttribute.bind(this);
 	}
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		console.log("EventGeolocalisation.render: visible="+this.state.show);
-		if (this.state.show === 'OFF')
-			return ( <div> </div>);
 		// show the list
 		const zoomLevel=15;
 		const googlelocation = {
@@ -75,8 +70,7 @@ class EventGeolocalisation extends React.Component {
 							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
 						</a><FormattedMessage id="EventGeolocalisation.MainTitleGeolocation" defaultMessage="Geolocalisation"/>
 					</div> 
-					{this.state.show ==='ON' && (
-						<div>
+					<div>
 						<table >
 						<tr><td style={{"paddingRight":"30px"}}>
 							<Toggle labelText="" size="sm" aria-label="" 
@@ -105,7 +99,7 @@ class EventGeolocalisation extends React.Component {
 						</div>
 	
 						<br/> 
-						</div>)}
+					</div>
 					
 				</div>
 				);

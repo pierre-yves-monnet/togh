@@ -20,13 +20,10 @@ class EventShoppingList extends React.Component {
 		super();
 		// console.log("RegisterNewUser.constructor");
 		this.state = {
-			'event': props.event,
-			'show': props.show,
-			'collapse': props.collapse
+			'event': props.event
 		};
 		// show : OFF, ON, COLLAPSE
 		console.log("secShoppinglist.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.collapse = this.collapse.bind(this);
 		this.setChildAttribut = this.setChildAttribut.bind(this);
 		this.addItem = this.addItem.bind(this);
 		this.changeParticipant = this.changeParticipant.bind(this);
@@ -36,12 +33,7 @@ class EventShoppingList extends React.Component {
 	render() {
 		const intl = this.props.intl;
 		console.log("EventShoppinglist.render: visible=" + this.state.show);
-		if (this.state.show === 'OFF')
-			return (<div> </div>);
 		// show the list
-		if (!this.state.event.shoppinglist) {
-			this.state.event.shoppinglist = [];
-		}
 
 		var listShoppingListHtml = [];
 //				<td><p title="This is a title en dur">placeholder</p></td>
@@ -60,16 +52,12 @@ class EventShoppingList extends React.Component {
 		console.log("EventShoppinglist.render: listsize=" + listShoppingListHtml.length);
 		return (<div>
 			<div class="eventsection">
-				<a href="secShoppinglist"></a>
-				<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
-					{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
-					{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
-				</a> <FormattedMessage id="EventShoppingList.Title" defaultMessage="Shopping List" />
-					<div style={{ float: "right" }}>
-						<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
-					</div>
+				<FormattedMessage id="EventShoppingList.Title" defaultMessage="Shopping List" />
+				<div style={{ float: "right" }}>
+					<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
+				</div>
 			</div>
-			{this.state.show === 'ON' && <table class="table table-striped toghtable">
+			<table class="table table-striped toghtable">
 				<thead>
 					<tr >
 						<th><FormattedMessage id="EventShoppingList.What" defaultMessage="What" /></th>
@@ -80,20 +68,9 @@ class EventShoppingList extends React.Component {
 				</thead>
 				{listShoppingListHtml}
 			</table>
-
-
-
-			}
+			
 		</div>
 		);
-	}
-
-	collapse() {
-		console.log("EventShoppinglist.collapse");
-		if (this.state.show === 'ON')
-			this.setState({ 'show': 'COLLAPSE' });
-		else
-			this.setState({ 'show': 'ON' });
 	}
 
 	setChildAttribut(name, value, item) {

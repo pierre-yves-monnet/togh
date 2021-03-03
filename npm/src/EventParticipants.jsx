@@ -22,13 +22,10 @@ class EventParticipants extends React.Component {
 		super();
 		// console.log("RegisterNewUser.constructor");
 
-		this.state = { 'event' : props.event, 
-						'show' : props.show,
-						'collapse' : props.collapse
+		this.state = { 'event' : props.event 
 						};
 		// show : OFF, ON, COLLAPSE
 		console.log("EventParticipant.constructor show="+ this.state.show+" event="+JSON.stringify(this.state.event));
-		this.collapse 				= this.collapse.bind(this);
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
 		this.participantInvited 	= this.participantInvited.bind( this );
 	}	
@@ -37,14 +34,13 @@ class EventParticipants extends React.Component {
 	render() {
 		const intl = this.props.intl;
 
-		console.log("EventParticipant.render: visible="+this.state.show+" Participants:"+JSON.stringify(this.state.event.participants) );
-		if (this.state.show === 'OFF')
-			return ( <div> </div>);
+		console.log("EventParticipant.render:  Participants:"+JSON.stringify(this.state.event.participants) );
 		// show the list
 		var listParticipantListHtml=[];
-		//  
+
 		//	
 		if (this.state.event.participants) {
+			console.log("EventParticipant.render:  Calcul the list" );
 			listParticipantListHtml= this.state.event.participants.map((item,index) =>
 				<tr key={index}>
 					<td>
@@ -79,27 +75,20 @@ class EventParticipants extends React.Component {
 						{item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}			
 					</td>
 				</tr>
-				);
-			}
-		// console.log("EventParticipant.render: list calculated from "+JSON.stringify( this.state.event.participantlist ));
+			);
+		}
+		
 		// console.log("EventParticipant.render: "+listParticipantListHtml.length);
-		
-		
-			
 	
 		return ( <div>
 					<div class="eventsection"> 
-						<a href="secParticipantlist"></a>
-						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
-							{this.state.show === 'ON' && <ChevronDown width="20px"/>}
-							{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
-						</a> <FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
+						<FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
 						<div style={{float: "right"}}>							
 							<Invitation event={this.state.event} participantInvited={this.participantInvited}/>
 						</div>
 					</div> 
 
-					{this.state.show ==='ON' && 	<table class="table table-striped toghtable">
+					<table class="table table-striped toghtable">
 						<thead>
 							<tr >
 								<th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
@@ -108,20 +97,13 @@ class EventParticipants extends React.Component {
 							</tr>
 						</thead>
 						{listParticipantListHtml}
-						</table>
-					}
+					</table>
+					
 				</div>
 				);
 		}
 		
-	collapse() {
-		console.log("EventParticipant.collapse");
-		if (this.state.show === 'ON')
-			this.setState( { 'show' : 'COLLAPSE' });
-		else
-			this.setState( { 'show' : 'ON' });
-	}
-	
+
 	setChildAttribut( name, value, item ) {
 		console.log("EventParticipant.setChildAttribut: set attribut:"+name+" <= "+value+" item="+JSON.stringify(item));
 		const { event } = { ...this.state };

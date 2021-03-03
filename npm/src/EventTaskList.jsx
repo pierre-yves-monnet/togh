@@ -24,8 +24,6 @@ class EventTaskList extends React.Component {
 		// console.log("RegisterNewUser.constructor");
 		this.state = {
 			event: props.event,
-			show: props.show,
-			collapse : props.collapse,
 			showProperties : {
 				showdates: true,
 				filterstate : "ALL",
@@ -35,7 +33,6 @@ class EventTaskList extends React.Component {
 		
 		// show : OFF, ON, COLLAPSE
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.collapse = this.collapse.bind(this);
 		this.addItem = this.addItem.bind(this);
 		this.changeParticipant = this.changeParticipant.bind(this);
 		this.isTaskHidden = this.isTaskHidden.bind( this );
@@ -127,78 +124,60 @@ class EventTaskList extends React.Component {
 		// render the tab
 		return (<div>
 			<div class="eventsection">
-				<a href="secTasklist"></a>
-				<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
-					{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
-					{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
-				</a> <FormattedMessage id="EventTaskList.MainTitleTaskList" defaultMessage="Tasks List" />
+				<FormattedMessage id="EventTaskList.MainTitleTaskList" defaultMessage="Tasks List" />
 				<div style={{ float: "right" }}>
 					<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
 				</div>
 			</div>
-			{this.state.show === 'ON' &&
-				<div>
-					
+			
+			<div>
+				<table width="100%"><tr>
+				<td style={{ paddingRight: "60px;"}}>
+					<Toggle labelText="" aria-label="" size="sm"
+						selectorPrimaryFocus={this.state.showProperties.showdates}
+						labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
+						labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
+						onChange={(event) => this.setCheckboxValue("showdates", event)}
+						id="showDates" />
+				</td><td style={{ paddingRight: "60px;"}}>
+					<ContentSwitcher size="sm" onChange={event => this.setSwitcherValue("filterstate", event)} 
+						labelText="Task" 
+						width="10px" height="small">
+						<Switch name='ALL' 		text={<FormattedMessage id="EventTaskList.FilterAllStates" defaultMessage="All states" />} />
+						<Switch name='PLANNED' 	text={<FormattedMessage id="EventTaskList.FilterPlanned" defaultMessage="Planned" />} />
+						<Switch name='ACTIVE' 	text={<FormattedMessage id="EventTaskList.FilterInProgress" defaultMessage="In progress" />} />
+						<Switch name='DONE' 	text={<FormattedMessage id="EventTaskList.FilterDone" defaultMessage="Done" />} />
+					</ContentSwitcher>
+				</td><td>
+					<ContentSwitcher size="sm" onChange={event =>  this.setSwitcherValue("filterparticipant", event)} labelText="Task">
+						<Switch name='ALL' text={<FormattedMessage id="EventTaskList.FilterAllParticipants" defaultMessage="All participants" />} />
+						<Switch name='MYTASKS' text={<FormattedMessage id="EventTaskList.FilterMyTasks" defaultMessage="My tasks" />} />
+						<Switch name='UNAFFECTED' text={<FormattedMessage id="EventTaskList.FilterUnaffected" defaultMessage="Unaffected" />} />
+	
+					</ContentSwitcher>
+				</td>
+				</tr></table>
 				
-					<table width="100%"><tr>
-					<td style={{ paddingRight: "60px;"}}>
-						<Toggle labelText="" aria-label="" size="sm"
-							selectorPrimaryFocus={this.state.showProperties.showdates}
-							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
-							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
-							onChange={(event) => this.setCheckboxValue("showdates", event)}
-							id="showDates" />
-					</td><td style={{ paddingRight: "60px;"}}>
-						<ContentSwitcher size="sm" onChange={event => this.setSwitcherValue("filterstate", event)} 
-							labelText="Task" 
-							width="10px" height="small">
-	  						<Switch name='ALL' 		text={<FormattedMessage id="EventTaskList.FilterAllStates" defaultMessage="All states" />} />
-	  						<Switch name='PLANNED' 	text={<FormattedMessage id="EventTaskList.FilterPlanned" defaultMessage="Planned" />} />
-	  						<Switch name='ACTIVE' 	text={<FormattedMessage id="EventTaskList.FilterInProgress" defaultMessage="In progress" />} />
-	  						<Switch name='DONE' 	text={<FormattedMessage id="EventTaskList.FilterDone" defaultMessage="Done" />} />
-						</ContentSwitcher>
-					</td><td>
-						<ContentSwitcher size="sm" onChange={event =>  this.setSwitcherValue("filterparticipant", event)} labelText="Task">
-	  						<Switch name='ALL' text={<FormattedMessage id="EventTaskList.FilterAllParticipants" defaultMessage="All participants" />} />
-	  						<Switch name='MYTASKS' text={<FormattedMessage id="EventTaskList.FilterMyTasks" defaultMessage="My tasks" />} />
-	  						<Switch name='UNAFFECTED' text={<FormattedMessage id="EventTaskList.FilterUnaffected" defaultMessage="Unaffected" />} />
-
-						</ContentSwitcher>
-					</td>
-					</tr></table>
-					
-					
-					
-					<p/>					
-					<table class="table table-striped toghtable">
-						<thead>
-							<tr >
-								<th><FormattedMessage id="EventTaskList.State" defaultMessage="State" /></th>
-								{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin" /></th>}
-								{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.End" defaultMessage="End" /></th>}
-								<th><FormattedMessage id="EventTaskList.Subject" defaultMessage="Subject" /></th>
-								<th><FormattedMessage id="EventTaskList.Description" defaultMessage="Description" /></th>
-								<th><FormattedMessage id="EventTaskList.Who" defaultMessage="Who" /></th>
-								<th></th>
-							</tr>
-						</thead>
-						{listTaskListHtml}
-					</table>
-				</div>
-			}
+				
+				
+				<p/>					
+				<table class="table table-striped toghtable">
+					<thead>
+						<tr >
+							<th><FormattedMessage id="EventTaskList.State" defaultMessage="State" /></th>
+							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin" /></th>}
+							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.End" defaultMessage="End" /></th>}
+							<th><FormattedMessage id="EventTaskList.Subject" defaultMessage="Subject" /></th>
+							<th><FormattedMessage id="EventTaskList.Description" defaultMessage="Description" /></th>
+							<th><FormattedMessage id="EventTaskList.Who" defaultMessage="Who" /></th>
+							<th></th>
+						</tr>
+					</thead>
+					{listTaskListHtml}
+				</table>
+			</div>			
 		</div>
 		);
-	}
-
-
-	/**
- 	*/
-	collapse() {
-		console.log("EventShoppinglist.collapse");
-		if (this.state.show === 'ON')
-			this.setState({ 'show': 'COLLAPSE' });
-		else
-			this.setState({ 'show': 'ON' });
 	}
 
 

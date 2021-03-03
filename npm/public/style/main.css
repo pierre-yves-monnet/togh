@@ -90,25 +90,27 @@ table.toghtable td {
  * use to display an event, like an itineray item
  */
 .toghBlock {
-	position: relative;
-    display: flex;
-    flex-direction: column;
-        background-clip: border-box;
+    background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+    border-radius: 25px; /* .25rem;*/
+    background-color: #fed9a691;
     margin-top: 10px;
     margin-bottom: 10px;
+    
+
+}
+/*
     min-width: 0;
 	font-size: 0.875rem;
     font-weight: 400;
-        letter-spacing: 0.16px;
+    letter-spacing: 0.16px;
     color: #161616;
     line-height: 1;
-    background-color: #ffffff;
     box-sizing: border-box;
-
-}
-
+	position: relative;
+    display: flex;
+    flex-direction: column;
+*/
 
 .bs-component {
     position: relative;

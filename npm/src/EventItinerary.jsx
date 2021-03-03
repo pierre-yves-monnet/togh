@@ -25,8 +25,6 @@ class EventItinerary extends React.Component {
 		// console.log("RegisterNewUser.constructor");
 		this.state = {
 			event: props.event,
-			show: props.show,
-			collapse : props.collapse,
 			showProperties : {
 				showItineraryMap: true
 				
@@ -41,14 +39,9 @@ class EventItinerary extends React.Component {
 		
 		// show : OFF, ON, COLLAPSE
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.collapse = this.collapse.bind(this);
 		this.addItem = this.addItem.bind(this);
 
 	}
-
-
-
-
 
 
 	// --------------------------------- render
@@ -67,15 +60,9 @@ class EventItinerary extends React.Component {
 		var resultHtml= [];
 		resultHtml.push(
 					<div class="eventsection"> 
-						<a href="secItinerary"></a>
-						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
-							{this.state.show === 'ON' && <ChevronDown width="20px"/>}
-							{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
-						</a><FormattedMessage id="EventItinerary.MainTitleItinerary" defaultMessage="Itinerary"/>
+						<FormattedMessage id="EventItinerary.MainTitleItinerary" defaultMessage="Itinerary"/>
 					</div> 
 					);
-		if (this.state.show !=='ON')
-			return resultHtml;
 			
 		// let's create a list of days.
 		var dateStart = null;
@@ -190,7 +177,6 @@ class EventItinerary extends React.Component {
 					console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
 					var blockLine = ( <div class="toghBlock">
 										<table>
-											{this.renderHeader( false, index ) }
 											{this.renderOneStep( stepinlist,false, j )}
 										</table>
 									</div> );
@@ -203,7 +189,7 @@ class EventItinerary extends React.Component {
 			dateIndex.setDate( dateIndex.getDate() + 1);
 		}
 		
-		return (  <table class="table table-striped toghtable"> 
+		return (  <table class="table table-striped toghtable" style={{border: "1px solid black"}}> 
 					{listItineraryListHtml} 
 				</table>);
 		
@@ -224,24 +210,7 @@ class EventItinerary extends React.Component {
 	}
 
 
-	/** ---------------------------------------------
-	 * render the header
-	 */
-	renderHeader( showDate, index ) {
-		var indexLine = index - 1;
-		return (
-			<tr key={indexLine}>
-				<td> {showDate && <FormattedMessage id="EventItineray.DateOfLine" defaultMessage="Date" />} </td>
-				<td></td>
-				<td></td>
-				<td> <h6 class="card-subtitle mb-2 text-muted"><FormattedMessage id="EventItineray.Category" defaultMessage="Category" /></h6>	</td>
-				<td> <FormattedMessage id="EventItineray.What" defaultMessage="What" />	</td>
-				<td> <FormattedMessage id="EventItineray.Description" defaultMessage="Description" /> </td>
-				<td> <FormattedMessage id="EventItineray.Budget" defaultMessage="Budget" />	</td>
-				<td> <FormattedMessage id="EventItineray.Price" defaultMessage="Price" /> </td>
-			</tr>
-		)
-	}
+	
 	
 	/** ---------------------------------------------
 	 * render the header
@@ -249,59 +218,85 @@ class EventItinerary extends React.Component {
 	renderOneStep( item, showDate, index ) {
 		var selectDate= (null);
 		var listLines = [];
-		listLines.push(<tr key={index}>
-				
-				<td>{showDate && (<div>Show Date</div>)}</td>
-				<td>
-					<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><ArrowUp width="20px"/></button>
-				</td><td>
+		listLines.push(<tr key={index-2} style={{border: "1px solid black"}}>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						</tr>);
+						
+						
+		listLines.push(<tr key={index} style={{border: "1px solid black"}}>
+				<td rowSpan="3">
+					<div style={{paddingBottom: "10px"}}>
+						<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><ArrowUp width="20px"/></button><br/>
+					</div>
 					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )} title="Down this line"><ArrowDown width="20px"/></button>
-				</td><td>
-					{this.getTagCategory(item)}<br/>
-					{ item.category === "VISITE" && <TimePicker value={item.durationTime} onChange={(event) => this.setChildAttribut( "durationTime", event.target.value,item )}	/>}
+				</td>	
+				
+						
+				<td  style={{border: "1px solid black"}}>
+					<table><tr>{showDate && (<td>Show Date</td>)}
+							<td>{this.getTagCategory(item)}<br/>
+								{ item.category === "VISITE" && <TimePicker value={item.durationTime} onChange={(event) => this.setChildAttribut( "durationTime", event.target.value,item )}	/>}
+							</td>
+							</tr>
+					</table>
 				</td>
-				<td> <TextInput value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
-				<td> <TextArea  value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
-				<td>
+				<td  style={{border: "1px solid black"}}> 
+					<TextInput 
+						labelText={<FormattedMessage id="EventItineray.What" defaultMessage="What" />} 
+						value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} />
+				</td><td colSpan="2" style={{border: "1px solid black"}}> 
+					<TextArea
+						labelText={<FormattedMessage id="EventItineray.Description" defaultMessage="Description" />} 
+						value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" />
+				</td><td>
 					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} title="Remove this item">
 					<DashCircle/></button>}
 				</td>
 				<td>
-					<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.datestep, item.rownumber+5)} title="Add a line"><PlusCircle/></button>
+					<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
 				</td>
 			</tr>);
+			
 			listLines.push(
-				<tr key={index+"-1"}>
-					<td colSpan="2"></td>
-					<td colSpan="4"><TextInput value={item.address} onChange={(event) => this.setChildAttribut("what", event.target.address, item)} 
+				<tr key={index-1}>
+					<td colSpan="3">
+						<TextInput value={item.address} onChange={(event) => this.setChildAttribut("what", event.target.address, item)} 
 							labelText={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} />
 					</td>
-					<td> <TextInput value={item.budget} onChange={(event) => this.setChildAttribut("budget", event.target.value, item)} labelText="" /></td>
-					<td> <TextInput value={item.price} onChange={(event) => this.setChildAttribut("price", event.target.value, item)} labelText="" disable="true"/>
-						<button style={{float: "right"}} class="btn btn-primary btn-xs"><Cash/></button>
+					<td> 
+						<div class="card" >
+							<div class="card-header">
+								<FormattedMessage id="EventItineray.Expense" defaultMessage="Expense" />
+							</div>
+							<div class="card-body">
+								<table><tr><td>
+								<TextInput value={item.budget} onChange={(event) => this.setChildAttribut("budget", event.target.value, item)} 
+									labelText={<FormattedMessage id="EventItineray.Budget" defaultMessage="Budget" />}  />
+								</td><td>
+								<TextInput value={item.price} onChange={(event) => this.setChildAttribut("price", event.target.value, item)} 
+									labelText={<FormattedMessage id="EventItineray.Price" defaultMessage="Price" />} disable="true"/>
+								</td><td>								
+								<button class="btn btn-primary btn-xs"><Cash/></button>
+								</td>
+								</tr></table>
+							</div>
+						</div>
 					</td>
 				</tr>
 			);
 			listLines.push(
-				<tr style={{borderBottom:"1pt solid black"}} key={index+"-2"}>
-					<td colSpan="2"></td>
-					<td colSpan="4"><TextInput value={item.website} onChange={(event) => this.setChildAttribut("what", event.target.website, item)} 
+				<tr key={index-2}>
+					<td colSpan="6"><TextInput value={item.website} onChange={(event) => this.setChildAttribut("what", event.target.website, item)} 
 					labelText={<FormattedMessage id="EventItineray.WebSite" defaultMessage="WebSite" />} /></td>
 				</tr>
 			);
 			return listLines;
 	}
-	/**
- 	*/
-	collapse() {
-		console.log("EventItinerary.collapse");
-		if (this.state.show === 'ON')
-			this.setState({ 'show': 'COLLAPSE' });
-		else
-			this.setState({ 'show': 'ON' });
-	}
-
-
 	
 	/**
  	*/
