@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -49,6 +50,8 @@ public class RestLoginController {
     @Autowired
     private FactoryService factoryService;
 
+    @Value("${dictionary.lang-path}")
+    private String propertyDictionaryPath;
 
     private final static String googleClientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com";
   

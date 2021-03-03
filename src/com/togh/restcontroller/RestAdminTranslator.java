@@ -28,6 +28,10 @@ public class RestAdminTranslator {
     @Autowired
     private FactoryService factoryService;
 
+    @Autowired
+    private TranslateDictionary translateDictionnary;
+    
+    
     @CrossOrigin
     @GetMapping(value ="/api/admin/translator/status",  produces = "application/json")
       public TranslateResult translatorStatus( @RequestHeader("Authorization") String connectionStamp) {
@@ -43,7 +47,7 @@ public class RestAdminTranslator {
                     HttpStatus.UNAUTHORIZED, "Not an adminstrator");
             
         }
-        TranslateDictionary translateDictionnary = new TranslateDictionary();
+        
         return translateDictionnary.check(); 
         
     }
