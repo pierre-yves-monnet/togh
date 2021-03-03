@@ -14,5 +14,7 @@ tomcat/
 
 ~$question Togh.xlsx
 
+src/main/resources/secret.properties
+
 npm/public/img/toghV1.jpg
 /npm/src/lang/*.bak
