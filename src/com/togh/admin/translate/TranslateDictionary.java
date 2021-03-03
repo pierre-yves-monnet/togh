@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,34 +21,25 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import com.togh.admin.translate.TranslatorGoogle.TranslateSentenceResult;
 import com.togh.engine.chrono.ChronoSet;
 import com.togh.engine.chrono.Chronometer;
 import com.togh.engine.logevent.LogEvent;
-import com.togh.engine.logevent.LogEventFactory;
 import com.togh.engine.logevent.LogEvent.Level;
-import com.togh.service.EventService;
+import com.togh.engine.logevent.LogEventFactory;
 
 /**
  * https://code.google.com/archive/p/java-google-translate-text-to-speech/
  */
-@Service
+
 @Configuration
-@PropertySource("classpath:application.properties")
+// @ P ropertySource("classpath:application.properties")
 public class TranslateDictionary {
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }    
+    @Autowired
+   private TranslatorGoogle translatorGoogle;
     
     private static final LogEvent eventDictionaryOperationError = new LogEvent(TranslateDictionary.class.getName(), 1, Level.ERROR, "During Dictionary operation", "Operation on dictionnary will failed", "Dictionary is empty", "Check Exception");
 
@@ -96,7 +86,11 @@ public class TranslateDictionary {
     private TranslateResult operationOnDictionary(boolean translate) {
         TranslateResult translateResult = new TranslateResult();
         // load all dictionnary
+        
+        
         try {
+            
+            
             if (propertyExtractPath==null)
                 propertyExtractPath= "D:/dev/git/togh/npm/lang";
             if (propertyDictionaryPath == null)
@@ -113,9 +107,8 @@ public class TranslateDictionary {
         Chronometer chronoTranslate = chronoSet.getChronometer("translate");
         Chronometer chronoInitialisation = chronoSet.getChronometer("initialisation");
 
-        TranslatorGoogle translator = new TranslatorGoogle();
         chronoInitialisation.start();
-        translateResult.listEvents.addAll( translator.initialisation() );
+        translateResult.listEvents.addAll( translatorGoogle.initialisation() );
         chronoInitialisation.stop();
         
         // detect the languages
@@ -149,7 +142,7 @@ public class TranslateDictionary {
                             countTranslation++;                            
                             // traduction needed
                             chronoTranslate.start();
-                            TranslateSentenceResult translation = translator.translateSentence(sentenceEntry.getValue(), language);
+                            TranslateSentenceResult translation = translatorGoogle.translateSentence(sentenceEntry.getValue(), language);
                             chronoTranslate.stop();
                             
                             translateResult.listEvents.addAll(translation.listEvents);

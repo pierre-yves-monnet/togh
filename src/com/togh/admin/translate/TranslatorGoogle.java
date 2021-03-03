@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.Arrays;
@@ -31,6 +32,7 @@ import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.service.EventService;
 import com.togh.service.NotifyService;
 
+@Configuration
 @PropertySource("classpath:secret.properties")
 public class TranslatorGoogle {
 
@@ -44,20 +46,19 @@ public class TranslatorGoogle {
     private static Translate translate;
 
     
-    @Value( "${google.ServerKeyAPI}" )
+    @Value( "${google.TranslateKeyAPI}" )
     private String googleApiKey;
     
     
     @SuppressWarnings("deprecation")
     public List<LogEvent> initialisation() {
         List<LogEvent> listEvents = new ArrayList<>();
-        String googleFileName = "D:/dev/git/togh/configuration/Togh-2021-a38140b44a29.json";
+        // String googleFileName = "D:/dev/git/togh/configuration/Togh-2021-a38140b44a29.json";
         // String googleFileName = "D:/dev/git/togh/configuration/client_secret.json";
 
         try {
             // authExplicit(googleFileName);
-
-            translate = TranslateOptions.newBuilder().setApiKey("AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg").build().getService();
+            translate = TranslateOptions.newBuilder().setApiKey( googleApiKey ).build().getService();
 
             
              /* } catch (IOException e) {
