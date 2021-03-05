@@ -7,26 +7,29 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { FormattedMessage,FormattedDate } from "react-intl";
+import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
 import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
 import { TextInput,  TimePicker, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
 
 import FactoryService from './service/FactoryService';
 
+import Expense from './component/Expense';
+import SlabEvent from './service/SlabEvent';
 
 
 
 class EventItinerary extends React.Component {
 
-	// this.props.pingEvent()
+	// this.props.updateEvent()
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
 		this.state = {
 			event: props.event,
-			showProperties : {
-				showItineraryMap: true
+			show : {
+				showItineraryMap: true,
+				showExpense : false
 				
 			}
 		};
@@ -39,8 +42,10 @@ class EventItinerary extends React.Component {
 		
 		// show : OFF, ON, COLLAPSE
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.addItem = this.addItem.bind(this);
-
+		this.addItem 				= this.addItem.bind(this);
+		this.upItem					= this.upItem.bind( this );
+		this.downItem				= this.downItem.bind( this );
+		this.moveItemOneDirection	= this.moveItemOneDirection.bind( this );
 	}
 
 
@@ -48,14 +53,7 @@ class EventItinerary extends React.Component {
 	render() {
 		console.log("EventItinerary.render: visible=" + this.state.show+" event="+JSON.stringify(this.state.event));
 
-		
-
-
-
-
 		var toolService = FactoryService.getInstance().getToolService();
-
-		
 
 		var resultHtml= [];
 		resultHtml.push(
@@ -101,13 +99,29 @@ class EventItinerary extends React.Component {
 		// 
 		resultHtml.push(
 			(<div class="row">
-				<div class="col-12">
-				<Toggle  labelText="" aria-label="" 
-					labelA={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
-					labelB={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
-					onChange={(event) => this.setAttributeCheckbox( "showItineraryMap", event.target.value )}
-					defaultToggled={this.state.showProperties.showItineraryMap}
-					id="showitinerarymap" />
+				<div class="col">
+					<Toggle  labelText="" aria-label="" 
+						labelA={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
+						labelB={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
+						onChange={(event) => this.setAttributeCheckbox( "showItineraryMap", event.target.value )}
+						defaultToggled={this.state.show.showItineraryMap}
+						id="showitinerarymap" />
+				</div>
+				<div class="col">
+					<Toggle  labelText="" aria-label="" 
+						labelA={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
+						labelB={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
+						onChange={(event) => this.setAttributeCheckbox( "showExpense", event.target.value )}
+						defaultToggled={this.state.show.showExpense}
+						id="showexpense" />
+				</div>
+				<div class="col">
+					<Toggle  labelText="" aria-label="" 
+						labelA={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
+						labelB={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
+						onChange={(event) => this.setAttributeCheckbox( "showDetail", event.target.value )}
+						defaultToggled={this.state.show.showDetail}
+						id="showDetail" />
 				</div>
 			</div> )
 		);
@@ -139,32 +153,40 @@ class EventItinerary extends React.Component {
 			console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
 			var dateIndexPublish = new Date( dateIndex);
 			
-			var line = (<tr key={index }>
-				<th colSpan="6" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
-					<FormattedDate
-		           	value={dateIndexPublish}
-		           	year = 'numeric'
-		           	month= 'long'
-		           	day = 'numeric'
-		           	weekday = 'long'
-		       		/>
-				</th>
-				<th> 
-					 <div style={{ float: "right" }}>
-							<button  class="btn btn-success btn-xs" >
-							<PlusCircle   
-								id={dateIndexPublish.toISOString()}
-								onClick={(event) => {
-									console.log("EventItinerary.add :  id="+event.target.id);
-									this.addItem( event.target.id, null );
-								}
-								}/>
-							</button>
-
-							
+			var line = (
+				<div style={{marginBottom: "10px"}}>
+				<div class="row" style={{verticalAlign: "middle", paddingLeft: "20px", paddingTop: "5px", fontWeight: "bold", backgroundColor: "#b3cde3"}}>
+					<div class="col-10" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
+						<FormattedDate
+			           	value={dateIndexPublish}
+			           	year = 'numeric'
+			           	month= 'long'
+			           	day = 'numeric'
+			           	weekday = 'long'
+			       		/>
 					</div>
-				</th>
-				</tr>)
+					<div class="col-2"> 
+						 <div style={{ float: "right" }}>
+								<button  class="btn btn-success btn-xs" 
+									id={dateIndexPublish.toISOString()}
+									onClick={(event) => {
+										console.log("EventItinerary.addFromButton :  id="+event.target.id);
+										this.addItem( event.target.id, null );
+									}}>
+								<PlusCircle   
+									id={dateIndexPublish.toISOString()}
+									onClick={(event) => {
+										console.log("EventItinerary.addFromPlusCircle :  id="+event.target.id);
+										this.addItem( event.target.id, null );
+									}
+									}/>
+								</button>
+	
+								
+						</div>
+					</div>
+				</div>
+				</div>)
 			listItineraryListHtml.push( line );
 			
 			 
@@ -175,23 +197,20 @@ class EventItinerary extends React.Component {
 				var stepinlist = this.state.event.itinerarylist[ j ];
 				if (toolService.getDayOfDate(stepinlist.datestep) === toolService.getDayOfDate(dateIndex)) {
 					console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
-					var blockLine = ( <div class="toghBlock">
-										<table>
+					var line = (<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
+										<div class="container">
 											{this.renderOneStep( stepinlist,false, j )}
-										</table>
+										</div>
 									</div> );
-				listItineraryListHtml.push( <tr><td colSpan="2"> {blockLine} </td></tr> );
-	 
+					listItineraryListHtml.push( line ); 									
 				}
 			}
 
 			// advance one day
 			dateIndex.setDate( dateIndex.getDate() + 1);
 		}
-		
-		return (  <table class="table table-striped toghtable" style={{border: "1px solid black"}}> 
-					{listItineraryListHtml} 
-				</table>);
+		console.log("EventItinerary.renderCalendar : end")
+		return (  listItineraryListHtml );
 		
 		
 	}
@@ -218,83 +237,75 @@ class EventItinerary extends React.Component {
 	renderOneStep( item, showDate, index ) {
 		var selectDate= (null);
 		var listLines = [];
-		listLines.push(<tr key={index-2} style={{border: "1px solid black"}}>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						</tr>);
 						
-						
-		listLines.push(<tr key={index} style={{border: "1px solid black"}}>
-				<td rowSpan="3">
+		listLines.push(<div class="row">
+				<div class="col-1">
 					<div style={{paddingBottom: "10px"}}>
 						<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><ArrowUp width="20px"/></button><br/>
 					</div>
 					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )} title="Down this line"><ArrowDown width="20px"/></button>
-				</td>	
+				</div>	
 				
-						
-				<td  style={{border: "1px solid black"}}>
+				<div class="col-2">
 					<table><tr>{showDate && (<td>Show Date</td>)}
 							<td>{this.getTagCategory(item)}<br/>
 								{ item.category === "VISITE" && <TimePicker value={item.durationTime} onChange={(event) => this.setChildAttribut( "durationTime", event.target.value,item )}	/>}
 							</td>
 							</tr>
 					</table>
-				</td>
-				<td  style={{border: "1px solid black"}}> 
+				</div>
+				
+				<div class="col-2">
 					<TextInput 
 						labelText={<FormattedMessage id="EventItineray.What" defaultMessage="What" />} 
 						value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} />
-				</td><td colSpan="2" style={{border: "1px solid black"}}> 
-					<TextArea
-						labelText={<FormattedMessage id="EventItineray.Description" defaultMessage="Description" />} 
-						value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" />
-				</td><td>
+				</div>
+				
+				{this.state.show.showDetail && (<div class="col-4"> 
+						<TextArea
+							labelText={<FormattedMessage id="EventItineray.Description" defaultMessage="Description" />} 
+							value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" />
+					</div> ) }
+				
+				<div class="col-1">
+					<table><tr>
+					<td>
 					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} title="Remove this item">
 					<DashCircle/></button>}
-				</td>
-				<td>
-					<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
-				</td>
-			</tr>);
+					</td><td>
+						<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
+					</td>
+					</tr></table>
+				</div>
+			</div>);
 			
-			listLines.push(
-				<tr key={index-1}>
-					<td colSpan="3">
-						<TextInput value={item.address} onChange={(event) => this.setChildAttribut("what", event.target.address, item)} 
-							labelText={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} />
-					</td>
-					<td> 
-						<div class="card" >
-							<div class="card-header">
-								<FormattedMessage id="EventItineray.Expense" defaultMessage="Expense" />
-							</div>
-							<div class="card-body">
-								<table><tr><td>
-								<TextInput value={item.budget} onChange={(event) => this.setChildAttribut("budget", event.target.value, item)} 
-									labelText={<FormattedMessage id="EventItineray.Budget" defaultMessage="Budget" />}  />
-								</td><td>
-								<TextInput value={item.price} onChange={(event) => this.setChildAttribut("price", event.target.value, item)} 
-									labelText={<FormattedMessage id="EventItineray.Price" defaultMessage="Price" />} disable="true"/>
-								</td><td>								
-								<button class="btn btn-primary btn-xs"><Cash/></button>
-								</td>
-								</tr></table>
-							</div>
+			if ( this.state.show.showDetail) {
+				listLines.push(
+					<div class="row">
+						<div class="col-xl">
+							<TextInput value={item.address} onChange={(event) => this.setChildAttribut("what", event.target.address, item)} 
+								labelText={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} />
 						</div>
-					</td>
-				</tr>
-			);
-			listLines.push(
-				<tr key={index-2}>
-					<td colSpan="6"><TextInput value={item.website} onChange={(event) => this.setChildAttribut("what", event.target.website, item)} 
-					labelText={<FormattedMessage id="EventItineray.WebSite" defaultMessage="WebSite" />} /></td>
-				</tr>
-			);
+						<div class="col-md">
+							{ this.state.show.showExpense &&  
+								<Expense item={item.expense} event={this.state.event} updateEvent={( slabEvent ) => 
+									{ 	console.log("EventItinerary.ExpenseUpdate slab="+slabEvent.getString());
+										this.props.updateEvent(slabEvent)
+									} }/>
+							}
+						</div>
+					</div>
+				);
+				
+				listLines.push(
+					<div class="row">
+						<div class="col-xs">
+							<TextInput value={item.website} onChange={(event) => this.setChildAttribut("what", event.target.website, item)} 
+								labelText={<FormattedMessage id="EventItineray.WebSite" defaultMessage="WebSite" />} />
+						</div>
+					</div>
+				);
+			}
 			return listLines;
 	}
 	
@@ -310,20 +321,20 @@ class EventItinerary extends React.Component {
 		// currentEvent.shoppinglist[0].[name] = value;
 
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 
 	/** --------------------
  	*/
 	setAttributeCheckbox(name, value) {
 		console.log("EventTaskList.setCheckBoxValue .1");
-		let showPropertiesValue = this.state.showProperties;
+		let showPropertiesValue = this.state.show;
 		console.log("EventTaskList.setCheckBoxValue set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
 		if (value === 'on')
 			showPropertiesValue[name] = true;
 		else
 			showPropertiesValue[name] = false;
-		this.setState({ "showProperties": showPropertiesValue })
+		this.setState({ show: showPropertiesValue })
 	}
 	
 	// only if the task is not empty	
@@ -346,21 +357,100 @@ class EventItinerary extends React.Component {
 	//  one exception : in a ! showdate, if the item is the first line in the day, then we will change the day to "date -1"
 	// item become then the LAST item in the previous day. The rownumber does not change, the day change. 
 	// same with the down: if this is a ! showdate policy, then the row number does not change and a day +1 is added
+	// bob
 	upItem( showDates, item ) {
-		
+		// console.log("EventItinerary.upItem");
+		this.moveItemOneDirection( item, -1);
 	}
+	
+	
 	downItem( showDates, item ) {
-		
+		// console.log("EventItinerary.downItem");
+		this.moveItemOneDirection( item, 1);		
 	}
 
+	/**
+	 */
+	moveItemOneDirection( item, direction) {
+		var toolService = FactoryService.getInstance().getToolService();
+
+		var	dateStartEvent = toolService.getDateFromString( this.state.event.dateStartEvent );
+		var dateEndEvent   = toolService.getDateFromString( this.state.event.dateEndEvent );
+
+
+		var indexInList = this.getIndexInList ( item );
+		if (indexInList === null) {
+			return; // not normal
+		}
+		
+		// Move top but first in the list
+		if (direction === -1 && indexInList === 0 ) {
+			// first in the list, maybe back for one day ?
+			var newDate = new Date( item.datestep.getTime() - 86400000 );			
+			// something is wrong here if we are before the startDate!
+			if (newDate.getTime() >= dateStartEvent.getTime() ) {
+				item.datestep = newDate;
+			}
+			
+		// index start at 0
+		} else if (direction === 1 && indexInList === this.state.event.itinerarylist.length-1 ) {
+			// Last in the list, maybe advance for one day ?
+			var newDate = new Date( item.datestep.getTime() + 86400000 );			
+			// something is wrong here if we are before the startDate!
+			if (newDate.getTime() <= dateEndEvent.getTime() ) {
+				item.datestep = newDate;
+			}
+			
+		} else {
+			// we have a guy before (or after). If the guy before is the same day? THen go before it
+			var stepGuy = this.state.event.itinerarylist[ indexInList + direction ];
+			if (stepGuy==null) {
+				// not normal : we are not the last in the list ??
+				return;
+			}
+			
+			if ( toolService.getDayOfDate(stepGuy.datestep) === toolService.getDayOfDate(item.datestep  ))
+			{
+				// we just past before it
+				item.rownumber = stepGuy.rownumber + (direction * 5);
+			}
+			else 
+			{
+				// move the day before, keep the same rownumber
+				item.datestep = stepGuy.datestep;
+			}
+		}	
+		var currentEvent = this.state.event;
+		currentEvent.itinerarylist = this.reorderList( currentEvent.itinerarylist );
+		this.setState({ "event": currentEvent });
+		this.props.updateEvent( SlabEvent.getUpdateList( this.state.event, "/itinerarylist", this.state.event));	
+	}
+
+	getIndexInList( item ) {
+		for (var i in this.state.event.itinerarylist) {
+			if (item === this.state.event.itinerarylist[ i ]) {
+				console.log("EventItinerary.getIndexInList found i="+i);
+				return parseInt(i);
+			}
+			
+		}
+		return null;
+	}
 	/** --------------------
-	bob
+	 *
  	*/
 	addItem(datestepSt, rownumber) {
+		if (! datestepSt) {
+			console.log("Eventitinerary.addItem: date is NULL !");
+			return;
+		}
+		
 		var datestep = new Date( datestepSt);
 		var currentEvent = this.state.event;
+		
 		console.log("Eventitinerary.addItem: addItem datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarylist));
 
+		
 		if (! rownumber) {
 			// then find it
 			rownumber=0;
@@ -371,18 +461,13 @@ class EventItinerary extends React.Component {
 			}
 			rownumber = rownumber+5;
 		}
-		if (datestep instanceof Date) {
-			console.log("Eventitinerary.addItem: this is a DATE");
-		} else if (datestep instanceof String) {
-			console.log("Eventitinerary.addItem: this is a STRING");
-		} else
-			console.log("Eventitinerary.addItem: DIFFERENT");
+		
 
-		let newList = currentEvent.itinerarylist.concat({ datestep: datestep, category: "POI", rownumber: rownumber });
+		let newList = currentEvent.itinerarylist.concat({ datestep: datestep, category: "POI", rownumber: rownumber, expense: {} });
 		
 		currentEvent.itinerarylist = this.reorderList( newList );
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent( );
 	}
 
 	/** --------------------
@@ -400,7 +485,7 @@ class EventItinerary extends React.Component {
 		console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
 
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 
 	/** --------------------
@@ -436,11 +521,11 @@ class EventItinerary extends React.Component {
 			<OverflowMenu
 				selectorPrimaryFocus={'.' + item.status}
 			>
-				<OverflowMenuItem className="POI" itemText={<FormattedMessage id="EventItineray.PointOfInterest" defaultMessage="Point Of Interest" />} 
+				<OverflowMenuItem className="POI" 
+					itemText={<FormattedMessage id="EventItineray.PointOfInterest" defaultMessage="Point Of Interest" />} 
 					onClick={() => {item.category = "POI"
 									this.setState( { "event" : this.state.event});
-									}} 
-				/>
+									}} />
 				<OverflowMenuItem className="NIGHT" itemText={<FormattedMessage id="EventItineray.Night" defaultMessage="Night" />} 
 					onClick={() => {item.category = "NIGHT"
 									this.setState( { "event" : this.state.event});
@@ -459,18 +544,31 @@ class EventItinerary extends React.Component {
 			</OverflowMenu>
 		);
 
+		const intl = this.props.intl;
 
 		if (item.category === 'POI')
-			return (<Tag type="teal" title="Task planned"><FormattedMessage id="EventItineray.PointOfInterest" defaultMessage="Point Of Interest" /> {changeState}</Tag>)
+			return (<Tag type="teal" title="Point of interest">
+					 	<img src="img/panorama.svg" style={{width:30}} 
+							title={intl.formatMessage({id: "EventItineray.PointOfInterest",defaultMessage: "Point Of Interest"})}/> 
+						{changeState}</Tag>)
 		if (item.category === 'NIGHT')
-			return (<Tag type="warm-gray" title="Task in progress"><FormattedMessage id="EventItineray.Night" defaultMessage="Night" /> {changeState}</Tag>);
+			return (<Tag type="warm-gray" >
+					<img src="img/hotel.svg" style={{width:30}} 
+							title={intl.formatMessage({id:"EventItineray.Night", defaultMessage: "Night" })} /> 
+					{changeState}</Tag>);
 		if (item.category === 'VISITE')
-			return (<Tag type="green" title="Task is finish, well done !"><FormattedMessage id="EventItineray.Visite" defaultMessage="Visit" /> {changeState}</Tag>);
+			return (<Tag type="green" >
+						<img src="img/museum.svg" style={{width:30}} 
+							title={intl.formatMessage({id:"EventItineray.Visite", defaultMessage: "Visit" })} /> 
+						{changeState}</Tag>);
 		if (item.category === 'RESTAURANT')
-			return (<Tag type="red" title="Oups, this task was cancelled"><FormattedMessage id="EventItineray.Restaurant" defaultMessage="Restaurant" />{changeState}</Tag>);
+			return (<Tag type="red" >
+						<img src="img/restaurant.svg" style={{width:30}} 
+							title={intl.formatMessage({id:"EventItineray.Restaurant", defaultMessage: "Restaurant" })} /> 
+					{changeState}</Tag>);
 
 		return (<Tag type="gray" title="Something strange arrived">{item.category} {changeState}</Tag>);
 	}
 
 }
-export default EventItinerary;
+export default injectIntl(EventItinerary);

@@ -55,6 +55,7 @@ https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
 https://cloud.google.com/translate/docs/quickstarts
 API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
  	
+
 # docker
 user togh: pass4togh
 
@@ -79,7 +80,11 @@ apt-get install postgresql postgresql-contrib
  CREATE DATABASE together;
  
  Ajout de npm 
- A faire
+ 
+## cloud
+
+Deployer une image docker: 	
+https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
  
  
  
@@ -130,6 +135,13 @@ https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 
 
+# icon
+<a href='https://www.freepik.com/vectors/icons'>Icons vector created by freepik - www.freepik.com</a>
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/retinaicons" title="Retinaicons">Retinaicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
 ## React structure
  {names.map(function(name, index){
                     return <li key={ index }>{name}</li>;
@@ -163,7 +175,7 @@ import { Tag } from 'carbon-components-react';
 							<RadioButton value="SEARCH" id="invitation_r2"  labelText={<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} labelPosition="right"/>
 						</RadioButtonGroup>     
 
-## Loaclisation
+## Translation
 https://phrase.com/blog/posts/react-i18n-best-libraries/
 
 https://www.freecodecamp.org/news/setting-up-internationalization-in-react-from-start-to-finish-6cb94a7af725/
@@ -267,8 +279,12 @@ https://www.remove.bg/fr/upload
 
 	
 	Toggle default value (dans Google Map / Share my localisation ou EventtaskList / Show dates)
-	==> defaultToggled = 
-Simon ? Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
+	==> defaultToggled =
+	 
+	Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
+	==> Utiliser le radio button de Bootstap
+	
+
 Simon ?	Google Geocodage d'une adresse
 		
 	Date Carbon: le format de date ne respecte pas la langue

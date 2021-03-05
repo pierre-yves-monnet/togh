@@ -9,24 +9,31 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl"; 
 
-import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag } from 'carbon-components-react';
+import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag, Toggle } from 'carbon-components-react';
 
-import ChooseParticipant from './ChooseParticipant';
+import ChooseParticipant from './component/ChooseParticipant';
+import Expense from './component/Expense';
 
+import SlabEvent from './service/SlabEvent';
 		
 class EventShoppingList extends React.Component {
-	// this.props.pingEvent()
+	// this.props.updateEvent()
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
 		this.state = {
-			'event': props.event
+			'event': props.event,
+			show: {
+				showDetail: true,
+				showExpense : false
+			}
 		};
 		// show : OFF, ON, COLLAPSE
 		console.log("secShoppinglist.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.setChildAttribut = this.setChildAttribut.bind(this);
-		this.addItem = this.addItem.bind(this);
-		this.changeParticipant = this.changeParticipant.bind(this);
+		this.setChildAttribut 			= this.setChildAttribut.bind(this);
+		this.setAttributeCheckbox		= this.setAttributeCheckbox.bind( this );
+		this.addItem 					= this.addItem.bind(this);
+		this.changeParticipant 			= this.changeParticipant.bind(this);
 	}
 	
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
@@ -36,14 +43,23 @@ class EventShoppingList extends React.Component {
 		// show the list
 
 		var listShoppingListHtml = [];
-//				<td><p title="This is a title en dur">placeholder</p></td>
+
+
 		listShoppingListHtml = this.state.event.shoppinglist.map((item, index) =>
 			<tr key={index}>
 				<td> {this.getTagState(item)}</td>
 				<td><TextInput value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
-				<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
+				{this.state.show.showDetail && (<td><TextArea labelText="" value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>)}
 				<td>
 					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
+					<br/>
+					{ this.state.show.showExpense &&  
+						<Expense item={item.expense} event={this.state.event} updateEvent={( slabEvent ) => 
+						{ 	console.log("EventItinerary.ExpenseUpdate slab="+slabEvent.getString());
+							this.props.updateEvent(slabEvent)
+						} }/>
+					}
+
 				</td>
 				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}></button></td>
 			</tr>
@@ -57,11 +73,30 @@ class EventShoppingList extends React.Component {
 					<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col">
+					<Toggle  labelText="" aria-label="" 
+						labelA={<FormattedMessage id="EventShoppingList.ShowDetails" defaultMessage="Detail"/>}
+						labelB={<FormattedMessage id="EventShoppingList.ShowDetails" defaultMessage="Detail"/>}
+						onChange={(event) => this.setAttributeCheckbox( "showDetail", event.target.value )}
+						defaultToggled={this.state.show.showDetail}
+						id="showDetail" />
+				</div>
+				<div class="col">
+					<Toggle  labelText="" aria-label="" 
+						labelA={<FormattedMessage id="EventShoppingList.ShowExpense" defaultMessage="Show Expense"/>}
+						labelB={<FormattedMessage id="EventShoppingList.ShowExpense" defaultMessage="Show Expense"/>}
+						onChange={(event) => this.setAttributeCheckbox( "showExpense", event.target.value )}
+						defaultToggled={this.state.show.showExpense}
+						id="showexpense" />
+					</div>
+			</div>
 			<table class="table table-striped toghtable">
 				<thead>
 					<tr >
 						<th><FormattedMessage id="EventShoppingList.What" defaultMessage="What" /></th>
-						<th><FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" /></th>
+						{this.state.show.showDetail && <th><FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" /></th>}
 						<th><FormattedMessage id="EventShoppingList.Who" defaultMessage="Who" /></th>
 						<th></th>
 					</tr>
@@ -73,6 +108,19 @@ class EventShoppingList extends React.Component {
 		);
 	}
 
+/** --------------------
+ 	*/
+	setAttributeCheckbox(name, value) {
+		console.log("EventTaskList.setCheckBoxValue .1");
+		let showPropertiesValue = this.state.show;
+		console.log("EventTaskList.setCheckBoxValue set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
+		if (value === 'on')
+			showPropertiesValue[name] = true;
+		else
+			showPropertiesValue[name] = false;
+		this.setState({ show: showPropertiesValue })
+	}
+	
 	setChildAttribut(name, value, item) {
 		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 		const { event } = { ...this.state };
@@ -83,16 +131,23 @@ class EventShoppingList extends React.Component {
 		// currentEvent.shoppinglist[0].[name] = value;
 
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		
+		var slabEvent = SlabEvent.getUpdate(this.state.event, name, value, "/shoppinglist/"+item.id);
+		this.props.updateEvent( slabEvent );
 	}
 
 	addItem() {
 		console.log("EventShoppinglist.setChildAttribut: addItem item=" + JSON.stringify(this.state.event));
 		var currentEvent = this.state.event;
-		const newList = currentEvent.shoppinglist.concat({ "status": "TODO", "what": "" });
+		var itemInList = { status: "TODO", what: "", expense:{} };
+		
+		const newList = currentEvent.shoppinglist.concat( itemInList );
 		currentEvent.shoppinglist = newList;
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		
+		var slabEvent = SlabEvent.getAddList(this.state.event, "shoppinglist", itemInList, "/");
+		
+		this.props.updateEvent( slabEvent );
 	}
 
 	removeItem(item) {
@@ -109,7 +164,7 @@ class EventShoppingList extends React.Component {
 		console.log("EventShoppinglist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
 
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 
 	// Apparently that's too many nested functions for React

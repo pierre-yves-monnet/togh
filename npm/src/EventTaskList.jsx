@@ -14,11 +14,11 @@ import { TextInput, DatePicker, DatePickerInput, TextArea, Tag, OverflowMenu, Ov
 import FactoryService from './service/FactoryService';
 
 
-import ChooseParticipant from './ChooseParticipant';
+import ChooseParticipant from './component/ChooseParticipant';
 
 class EventTaskList extends React.Component {
 
-	// this.props.pingEvent()
+	// this.props.updateEvent()
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
@@ -223,7 +223,7 @@ class EventTaskList extends React.Component {
 		// currentEvent.shoppinglist[0].[name] = value;
 
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 
 
@@ -253,7 +253,7 @@ class EventTaskList extends React.Component {
 		const newList = currentEvent.tasklist.concat({ "status": "PLANNED", "what": "" });
 		currentEvent.tasklist = newList;
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 
 	removeItem(item) {
@@ -270,7 +270,7 @@ class EventTaskList extends React.Component {
 		console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
 
 		this.setState({ "event": currentEvent });
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 
 	changeParticipant() {

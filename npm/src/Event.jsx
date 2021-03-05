@@ -32,6 +32,8 @@ import EventGeolocalisation from './EventGeolocalisation';
 import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 import EventExpense from './EventExpense';
+import BasketSlabEvent from './service/BasketSlabEvent';
+
 
 const TAB_PARTICIPANT='Participant';
 const TAB_ITINERARY = 'Itinerary';
@@ -58,7 +60,8 @@ class Event extends React.Component {
 			showRegistration: false
 		};
 
-
+		
+		
 		// TextArea must not be null
 		if (!this.state.event.description)
 			this.state.event.description = '';
@@ -71,7 +74,7 @@ class Event extends React.Component {
 		this.loadEvent 					= this.loadEvent.bind(this);
 		this.changeState 				= this.changeState.bind(this);
 		this.setAttribut 				= this.setAttribut.bind(this);
-		this.pingEvent 					= this.pingEvent.bind(this);
+		this.updateEvent 					= this.updateEvent.bind(this);
 		
 
 	}
@@ -319,12 +322,12 @@ class Event extends React.Component {
 					</div>
 
 				</div>
-				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} pingEvent={this.pingEvent} />}
-				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event} show={this.state.show.secItinerary} pingEvent={this.pingEvent} />}
-				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event} show={this.state.show.secTasklist} pingEvent={this.pingEvent} />}
-				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} pingEvent={this.pingEvent} />}
-				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} pingEvent={this.pingEvent} />}
-				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event} show={this.state.show.secExpense} pingEvent={this.pingEvent} />}
+				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event} show={this.state.show.secItinerary} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event} show={this.state.show.secTasklist} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event} show={this.state.show.secExpense} updateEvent={this.updateEvent} />}
 			</div>)
 	} //---------------------------- end Render
 
@@ -355,15 +358,27 @@ class Event extends React.Component {
 		this.timer = this.timer = setTimeout(() => { this.automaticSave(); }, 2000);
 	}
 
-	pingEvent() {
-		console.log("Event.pingEvent child change:" + JSON.stringify(this.state.event));
+
+	
+	updateEvent( slab ) {
+		console.log("Event.updateEvent getSlab");
+		if (! slab) {
+			console.log("Event.updateEvent Don't receive a SLAB !!");
+			return;
+		}
+		this.currentBasketSlabEvent.addSlabEvent( slab );
 		if (this.timer)
 			clearTimeout(this.timer);
 		this.timer = this.timer = setTimeout(() => { this.automaticSave(); }, 2000);
 
 	}
 	automaticSave() {
-		console.log("Event.AutomaticSave: event=" + JSON.stringify(this.state.event));
+		console.log("Event.AutomaticSave: ListSlab=" +this.currentBasketSlabEvent.getString());
+		var readyToSendBasket = this.currentBasketSlabEvent;
+		this.currentBasketSlabEvent = new BasketSlabEvent( this.state.event );
+		readyToSendBasket.sendToServer();
+		
+		
 		if (this.timer)
 			clearTimeout(this.timer);
 
@@ -405,7 +420,11 @@ class Event extends React.Component {
 			else {
 
 				this.setState({ event: httpPayload.getData().event, show: { currentSection : TAB_PARTICIPANT } });
-
+				
+				// not in the state: we don't want a render when something is added
+				// so, this is the moment to create the Basket
+				this.currentBasketSlabEvent= new BasketSlabEvent( this.state.event );
+	
 				console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
 				this.completeEvent();
 			}

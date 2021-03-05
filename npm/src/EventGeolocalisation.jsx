@@ -23,7 +23,7 @@ import locationIcon from '@iconify/icons-mdi/map-marker'
 
 class EventGeolocalisation extends React.Component {
 	
-	// this.props.pingEvent()
+	// this.props.updateEvent()
 	constructor( props ) {
 		super();
 		// console.log("RegisterNewUser.constructor");
@@ -211,7 +211,7 @@ class EventGeolocalisation extends React.Component {
 		// currentEvent.shoppinglist[0].[name] = value;
 		
 		this.setState( { "event" : currentEvent});
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 	setAttributeCheckbox( name, value ) {
 		console.log("EventShoppinglist.setChildAttribut: set attribut:"+name+" <= "+value);
@@ -224,7 +224,7 @@ class EventGeolocalisation extends React.Component {
 		// currentEvent.shoppinglist[0].[name] = value;
 		
 		this.setState( { "event" : currentEvent});
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 	
 }		

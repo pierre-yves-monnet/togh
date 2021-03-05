@@ -296,7 +296,7 @@ class Invitation extends React.Component {
 
 	
 	pingParent() {
-		console.log("Invitation.pingEvent child change");
+		console.log("Invitation.pingParent child change");
 	}
 	
 

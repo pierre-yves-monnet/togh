@@ -1,6 +1,6 @@
 // -----------------------------------------------------------
 //
-// ChooseState
+// ChooseParticipant
 //
 // Choose a participant
 //

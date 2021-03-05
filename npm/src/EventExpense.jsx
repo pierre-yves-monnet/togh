@@ -23,7 +23,7 @@ import locationIcon from '@iconify/icons-mdi/map-marker'
 
 class EventExpense extends React.Component {
 	
-	// this.props.pingEvent()
+	// this.props.updateEvent()
 	constructor( props ) {
 		super();
 		// console.log("RegisterNewUser.constructor");

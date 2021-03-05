@@ -17,7 +17,7 @@ import Invitation from './Invitation';
 
 class EventParticipants extends React.Component {
 	
-	// this.props.pingEvent()
+	// this.props.updateEvent()
 	constructor( props ) {
 		super();
 		// console.log("RegisterNewUser.constructor");
@@ -114,7 +114,7 @@ class EventParticipants extends React.Component {
 		// currentEvent.shoppinglist[0].[name] = value;
 		
 		this.setState( { "event" : currentEvent});
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 	
 	
@@ -128,7 +128,7 @@ class EventParticipants extends React.Component {
 		}
 		currentEvent.participants = newList;
 		this.setState( { "event" : currentEvent});
-		this.props.pingEvent();
+		this.props.updateEvent();
 	}
 	
 }		

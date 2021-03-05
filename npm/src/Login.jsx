@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { TextInput,  Loading } from 'carbon-components-react';
-import { IntlProvider, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 
 // https://www.npmjs.com/package/react-google-login
 // https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
@@ -67,11 +67,9 @@ class Login extends React.Component {
 
 		// ---- not connected, give the different method
 		if (this.state.badConnection) {
-			messageConnectionHtml = (<div style='color:red'>+{this.state.messageConnection}</div>);
+			messageConnectionHtml = (<div style={{color: "red"}}>{this.state.messageConnection}</div>);
 		}
 
-		// 					<div dangerouslySetInnerHTML={{ __html: messageConnectionHtml}}></div>
-		
 		return (
 			<div className="App">
 				 {inprogresshtml}
@@ -82,7 +80,7 @@ class Login extends React.Component {
 				<table >
 				<tr>
 				<td style={{"paddingRight" : "40px", "paddingLeft" : "150px"}}>
-					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><p/>
+					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
 					{messageConnectionHtml}
 				</td>
 				<td>
@@ -118,31 +116,29 @@ class Login extends React.Component {
 		
 		var param = { email: this.state.email, password: this.state.password };
 		
-		FactoryService.getInstance().getAuthService().login( 'DIRECT', param, this, this.loginConnectCallback );
+		FactoryService.getInstance().getAuthService().login( 'DIRECT', param, this, httpPayload => 
+			{
+				const intl = this.props.intl;
+
+				httpPayload.trace("Login.directConnectCallback");
+				if (httpPayload.isError()) {
+					// Server is not started
+					console.log("Login.directConnectCallback  ERROR IN HTTPCALL");
+					
+					this.setState({ badConnection: true,inprogress:false, 
+						messageConnection: intl.formatMessage({id: "Login.CantConnectToTheServer",defaultMessage: "Can't Connect To The Server"})});
+				}
+				else if (httpPayload.getData().isConnected) {
+					// call the frame event to refresh all - the fact that the user is connected is saved in the authService, not here
+					this.setState({ badConnection: false, inprogress:false });
+					this.props.authCallback( true );
+				} else {
+					const label="Bad connection";
+					this.setState({ badConnection: true,inprogress:false,messageConnection: label });
+				}		
+			} );
 	}
 	
-	loginConnectCallback( httpResponse ) {
-		
-		httpResponse.trace("Login.directConnectCallback");
-		if (httpResponse.isError()) {
-			// Server is not started
-			console.log("Login.directConnectCallback  ERROR IN HTTPCALL");
-			this.setState({ badConnection: true});
-			
-			 			
-			this.setState({ badConnection: true});
-			 
-			// , inprogress:false, messageConnection: "Server error" });
-		}
-		else if (httpResponse.getData().isConnected) {
-			// call the frame event to refresh all - the fact that the user is connected is saved in the authService, not here
-			this.setState({ badConnection: false, inprogress:false });
-			this.props.authCallback( true );
-		} else {
-			const label="Bad connection";
-			this.setState({ badConnection: true,inprogress:false,messageConnection: label });
-		}
-	}	
 	// ---------------------------- Logout
 	logoutCallback( httpResponse ) {
 		httpResponse.trace("Login.logoutCallback ");
@@ -196,5 +192,5 @@ class Login extends React.Component {
 	
 
 }
-export default Login;
+export default injectIntl(Login);
 
