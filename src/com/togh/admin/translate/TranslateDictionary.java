@@ -42,6 +42,7 @@ public class TranslateDictionary {
    private TranslatorGoogle translatorGoogle;
     
     private static final LogEvent eventDictionaryOperationError = new LogEvent(TranslateDictionary.class.getName(), 1, Level.ERROR, "During Dictionary operation", "Operation on dictionnary will failed", "Dictionary is empty", "Check Exception");
+    private static final LogEvent eventDictionaryPathNotDefined = new LogEvent(TranslateDictionary.class.getName(), 2, Level.ERROR, "Path to access dictionnary is not setted in the configuration file", "Operation on dictionnaries are not possible", "Dictionaries will not change", "Check configuration file");
 
     private Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
     private final static String logHeader = "com.togh.TranslateDictionary";
@@ -91,10 +92,11 @@ public class TranslateDictionary {
         try {
             
             
-            if (propertyExtractPath==null)
-                propertyExtractPath= "D:/dev/git/togh/npm/lang";
-            if (propertyDictionaryPath == null)
-                propertyDictionaryPath="D:/dev/git/togh/npm/src/lang";
+            if (propertyExtractPath==null || propertyDictionaryPath == null)
+            {
+                translateResult.listEvents.add( eventDictionaryPathNotDefined );
+                return translateResult;
+            }
             
         File extractFolder = new File( propertyExtractPath );
         

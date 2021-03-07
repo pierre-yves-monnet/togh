@@ -28,8 +28,8 @@ class UserParticipant {
 			return false;
 		if (this.participant.statusUser === participantConstant.STATUS_LEFT)
 			return false;
-		if (this.participant.role == participantConstant.ROLE_OWNER 
-			|| this.participant.role == participantConstant.ROLE_ORGANIZER)
+		if (this.participant.role === participantConstant.ROLE_OWNER 
+			|| this.participant.role === participantConstant.ROLE_ORGANIZER)
 			return true;
 		return false;  
 	}
@@ -47,9 +47,9 @@ class UserParticipant {
 			console.log("UserParticipant.isParticipant? Status="+this.participant.statusUser +" role="+this.participant.role);
 		if (this.participant.statusUser === participantConstant.STATUS_LEFT)
 			return false;
-		if (this.participant.role == participantConstant.ROLE_OWNER 
-			|| this.participant.role == participantConstant.ROLE_ORGANIZER
-			|| this.participant.role == participantConstant.ROLE_PARTICIPANT)
+		if (this.participant.role === participantConstant.ROLE_OWNER 
+			|| this.participant.role === participantConstant.ROLE_ORGANIZER
+			|| this.participant.role === participantConstant.ROLE_PARTICIPANT)
 			return true;
 		return false;  
 	}
