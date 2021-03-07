@@ -1,20 +1,15 @@
 
 .settings/
 target/
-
 *.class
 npm/node_modules/
 npm/package-lock.json
 build/
 tomcat/
-
-/npm/.eslintcache
-
+npm/public/img/material
+npm/.eslintcache
 *.log
-
 ~$question Togh.xlsx
-
 src/main/resources/secret.properties
-
 npm/public/img/toghV1.jpg
-/npm/src/lang/*.bak
+npm/src/lang/*.bak
