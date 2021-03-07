@@ -247,9 +247,11 @@ class Event extends React.Component {
 							onChange={(event) => this.setAttribut("description", event.target.value)} />
 					</div>
 					<div class="col-sm-6">
-						<div class="panel panel-info">
-							<div class="panel-heading"><FormattedMessage id="Event.EventDate" defaultMessage="Date" /></div>
-							<div class="panel-body">
+						<div class="card" style={{marginTop: "10px"}}>
+							<div class="card-header" style={{backgroundColor:"#decbe4"}}>
+								<FormattedMessage id="Event.EventDate" defaultMessage="Date" />
+							</div>
+							<div class="card-body">
 								{datePanelHtml}
 							</div>
 						</div>
@@ -340,13 +342,13 @@ class Event extends React.Component {
 					</div>
 
 				</div>
-				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event}  updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}  updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}  updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} updateEvent={this.updateEvent}  getUserParticipant={this.getUserParticipant}/>}
+				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event}  updateEvent={this.updateEvent}  getUserParticipant={this.getUserParticipant}/>}
+				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}  updateEvent={this.updateEvent}  getUserParticipant={this.getUserParticipant}/>}
+				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event} updateEvent={this.updateEvent}  getUserParticipant={this.getUserParticipant}/>}
+				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}  updateEvent={this.updateEvent}  getUserParticipant={this.getUserParticipant}/>}
 				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList event={this.state.event}  updateEvent={this.updateEvent} getUserParticipant={this.getUserParticipant}/>}
-				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}  updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}  updateEvent={this.updateEvent}  getUserParticipant={this.getUserParticipant}/>}
 			</div>)
 	} //---------------------------- end Render
 
@@ -379,13 +381,14 @@ class Event extends React.Component {
 	}
 
 
-	
+	/**
+	Something change in the event, all subcomponent refer it with a Slab, which is the information which change */
 	updateEvent( slab ) {
-		console.log("Event.updateEvent getSlab");
 		if (! slab) {
 			console.log("Event.updateEvent Don't receive a SLAB !!");
 			return;
 		}
+		console.log("Event.updateEvent: getSlab event="+JSON.stringify( this.state.event));
 		this.currentBasketSlabEvent.addSlabEvent( slab );
 		if (this.timer)
 			clearTimeout(this.timer);
@@ -414,7 +417,7 @@ class Event extends React.Component {
 	// -------------------------------------------- Tool Service
 	getUserParticipant() {
 		var authService = FactoryService.getInstance().getAuthService();
-		console.log("Event.getUserPartipant.start");
+		// console.log("Event.getUserPartipant.start");
 		var user= authService.getUser();
 		// search the access right for this user
 		for (var i in this.state.event.participants) {
