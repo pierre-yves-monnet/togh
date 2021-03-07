@@ -15,9 +15,24 @@ import { TextInput,  TimePicker, TextArea, Tag, OverflowMenu, OverflowMenuItem, 
 import FactoryService from './service/FactoryService';
 
 import Expense from './component/Expense';
+import TagDropdown from './component/TagDropdown';
+import UserTips from './component/UserTips';
+
 import SlabEvent from './service/SlabEvent';
 
 
+const ITINERARYITEM_POI 		= "POI";
+const ITINERARYITEM_BEGIN		= "BEGIN";
+const ITINERARYITEM_END			= "END";
+const ITINERARYITEM_SHOPPING	= "SHOPPING";
+const ITINERARYITEM_AIRPORT		= "AIRPORT";
+const ITINERARYITEM_BUS			= "BUS";
+const ITINERARYITEM_TRAIN		= "TRAIN";
+const ITINERARYITEM_BOAT		= "BOAT";
+const ITINERARYITEM_NIGHT		= "NIGHT";
+const ITINERARYITEM_VISITE		= "VISITE";
+const ITINERARYITEM_RESTAURANT	= "RESTAURANT";
+const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
 
 class EventItinerary extends React.Component {
 
@@ -57,10 +72,14 @@ class EventItinerary extends React.Component {
 
 		var resultHtml= [];
 		resultHtml.push(
-					<div class="eventsection"> 
-						<FormattedMessage id="EventItinerary.MainTitleItinerary" defaultMessage="Itinerary"/>
-					</div> 
-					);
+				<div class="eventsection">
+					<div style={{ float: "left" }}>
+						<img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 100 }} /><br />
+					</div>
+					<FormattedMessage id="EventSurveyList.MainTitleItinerary" defaultMessage="Itinerary" />
+				</div>);
+							
+		resultHtml.push(<UserTips id="itinerary" text={<FormattedMessage id="EventSurveyList.ItineraryTip" defaultMessage="List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary" />}/>);
 			
 		// let's create a list of days.
 		var dateStart = null;
@@ -139,10 +158,7 @@ class EventItinerary extends React.Component {
 	* render Calendar
  	*/
 	renderCalendar(dateStart, dateEnd ) {
-		console.log("EventItinerary.renderCalendar ");
-		
-		
-			
+		// console.log("EventItinerary.renderCalendar ");
 		var toolService = FactoryService.getInstance().getToolService();
 
 		var listItineraryListHtml = [];
@@ -155,7 +171,7 @@ class EventItinerary extends React.Component {
 			
 			var line = (
 				<div style={{marginBottom: "10px"}}>
-				<div class="row" style={{verticalAlign: "middle", paddingLeft: "20px", paddingTop: "5px", fontWeight: "bold", backgroundColor: "#b3cde3"}}>
+				<div class="row toghSectionHeader">
 					<div class="col-10" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
 						<FormattedDate
 			           	value={dateIndexPublish}
@@ -237,6 +253,65 @@ class EventItinerary extends React.Component {
 	renderOneStep( item, showDate, index ) {
 		var selectDate= (null);
 		var listLines = [];
+
+		const intl = this.props.intl;		
+		const listOptions = [
+			{ 	label: intl.formatMessage({id: "EventItineray.Begin",defaultMessage: "Begin"}),
+			 	value: ITINERARYITEM_BEGIN,
+				icon: null,
+			 	type: "Blue" },
+			{ 	label: intl.formatMessage({id: "EventItineray.PointOfInterest",defaultMessage: "Point Of Interest"}),				
+			 	value: ITINERARYITEM_POI,
+				icon: "img/panorama.svg", 
+			 	type: "teal" },
+			{ 	label: intl.formatMessage({id: "EventItineray.Visite",defaultMessage: "Visite"}),
+			 	value: ITINERARYITEM_VISITE,
+				icon: "img/museum.svg",
+			 	type: "green" },
+			{ 	label: intl.formatMessage({id: "EventItineray.Shopping",defaultMessage: "Shopping"}),
+			 	value: ITINERARYITEM_SHOPPING,
+				icon: null,
+			 	type: "Purple" },
+			{ 	label: intl.formatMessage({id: "EventItineray.Entertainment",defaultMessage: "Entertainment"}),
+			 	value: ITINERARYITEM_ENTERTAINMENT,
+				icon: "img/restaurant.svg",
+			 	type: "Purple" },
+			{ 	label: intl.formatMessage({id: "EventItineray.Airport",defaultMessage: "Airport"}),
+			 	value: ITINERARYITEM_AIRPORT,
+				icon: null,
+			 	type: "Magenta" },
+			{ 	label: intl.formatMessage({id: "EventItineray.BusStation",defaultMessage: "Bus Station"}),
+			 	value: ITINERARYITEM_BUS,
+			 	icon: null,
+			 	type: "Magenta" },
+			{ 	label: intl.formatMessage({id: "EventItineray.TrainStation",defaultMessage: "Train Station"}),
+			 	value: ITINERARYITEM_TRAIN,
+			 	icon: null,
+			 	type: "Magenta" },
+			{ 	label: intl.formatMessage({id: "EventItineray.Harbor",defaultMessage: "Harbor"}),
+			 	value: ITINERARYITEM_BOAT,
+			 	icon: null,
+			 	type: "Magenta" },			
+			{ 	label: intl.formatMessage({id: "EventItineray.Restaurant",defaultMessage: "Restaurant"}),
+			 	value: ITINERARYITEM_RESTAURANT,
+				icon: "img/restaurant.svg",
+			 	type: "Purple" },
+			{ 	label: intl.formatMessage({id: "EventItineray.Night",defaultMessage: "Night"}),
+			 	value: ITINERARYITEM_NIGHT,
+				icon: "img/hotel.svg",
+			 	type: "warm-gray" },
+			{ 	label: intl.formatMessage({id: "EventItineray.End",defaultMessage: "End"}),
+			 	value: ITINERARYITEM_END,
+				icon: null,
+			 	type: "Blue" }
+
+		
+		];
+					
+
+				
+							
+					
 						
 		listLines.push(<div class="row">
 				<div class="col-1">
@@ -248,8 +323,24 @@ class EventItinerary extends React.Component {
 				
 				<div class="col-2">
 					<table><tr>{showDate && (<td>Show Date</td>)}
-							<td>{this.getTagCategory(item)}<br/>
-								{ item.category === "VISITE" && <TimePicker value={item.durationTime} onChange={(event) => this.setChildAttribut( "durationTime", event.target.value,item )}	/>}
+							<td><TagDropdown listOptions={listOptions} value={item.category} readWrite={true} 
+									changeState={(value) => {this.setChildAttribut("category", value, item, "");}}/><br/>
+								<table><tr>
+									<td><TimePicker 
+										value={item.visitTime} 
+										labelText={<FormattedMessage id="EventItineray.VisitTime" defaultMessage="Visit time" />}
+										onChange={(event) => this.setChildAttribut( "visitTime", event.target.value,item )}	/>
+									</td>
+									{ (item.category === ITINERARYITEM_VISITE 
+										|| item.category === ITINERARYITEM_ENTERTAINMENT
+										|| item.category === ITINERARYITEM_SHOPPING) && (
+										<td style={{paddingLeft: "10px"}}>
+										<TimePicker 
+											value={item.durationTime} 
+											labelText={<FormattedMessage id="EventItineray.Duration" defaultMessage="Duration" />}
+											onChange={(event) => this.setChildAttribut( "durationTime", event.target.value,item )}	/>
+										</td> )}
+									</tr></table>
 							</td>
 							</tr>
 					</table>
@@ -257,8 +348,8 @@ class EventItinerary extends React.Component {
 				
 				<div class="col-2">
 					<TextInput 
-						labelText={<FormattedMessage id="EventItineray.What" defaultMessage="What" />} 
-						value={item.what} onChange={(event) => this.setChildAttribut("what", event.target.value, item)} />
+						labelText={<FormattedMessage id="EventItineray.Title" defaultMessage="Title" />} 
+						value={item.title} onChange={(event) => this.setChildAttribut("title", event.target.value, item)} />
 				</div>
 				
 				{this.state.show.showDetail && (<div class="col-4"> 
@@ -512,63 +603,7 @@ class EventItinerary extends React.Component {
 		return listSteps;	
 	}
 
-	/**
-	 *  getTagState
- 	*/
-	getTagCategory( item) {
-
-		var changeState = (
-			<OverflowMenu
-				selectorPrimaryFocus={'.' + item.status}
-			>
-				<OverflowMenuItem className="POI" 
-					itemText={<FormattedMessage id="EventItineray.PointOfInterest" defaultMessage="Point Of Interest" />} 
-					onClick={() => {item.category = "POI"
-									this.setState( { "event" : this.state.event});
-									}} />
-				<OverflowMenuItem className="NIGHT" itemText={<FormattedMessage id="EventItineray.Night" defaultMessage="Night" />} 
-					onClick={() => {item.category = "NIGHT"
-									this.setState( { "event" : this.state.event});
-									}} 
-				/>
-				<OverflowMenuItem className="VISITE" itemText={<FormattedMessage id="EventItineray.Visite" defaultMessage="Visit" />} 
-						onClick={() => {item.category = "VISITE"
-									this.setState( { "event" : this.state.event});
-									}} 
-				/>
-				<OverflowMenuItem className="RESTAURANT" itemText={<FormattedMessage id="EventItineray.Restaurant" defaultMessage="Restaurant" />}
-						onClick={() => {item.category = "RESTAURANT"
-									this.setState( { "event" : this.state.event});
-									}} 
-				/>
-			</OverflowMenu>
-		);
-
-		const intl = this.props.intl;
-
-		if (item.category === 'POI')
-			return (<Tag type="teal" title="Point of interest">
-					 	<img src="img/panorama.svg" style={{width:30}} 
-							title={intl.formatMessage({id: "EventItineray.PointOfInterest",defaultMessage: "Point Of Interest"})}/> 
-						{changeState}</Tag>)
-		if (item.category === 'NIGHT')
-			return (<Tag type="warm-gray" >
-					<img src="img/hotel.svg" style={{width:30}} 
-							title={intl.formatMessage({id:"EventItineray.Night", defaultMessage: "Night" })} /> 
-					{changeState}</Tag>);
-		if (item.category === 'VISITE')
-			return (<Tag type="green" >
-						<img src="img/museum.svg" style={{width:30}} 
-							title={intl.formatMessage({id:"EventItineray.Visite", defaultMessage: "Visit" })} /> 
-						{changeState}</Tag>);
-		if (item.category === 'RESTAURANT')
-			return (<Tag type="red" >
-						<img src="img/restaurant.svg" style={{width:30}} 
-							title={intl.formatMessage({id:"EventItineray.Restaurant", defaultMessage: "Restaurant" })} /> 
-					{changeState}</Tag>);
-
-		return (<Tag type="gray" title="Something strange arrived">{item.category} {changeState}</Tag>);
-	}
+	
 
 }
 export default injectIntl(EventItinerary);
