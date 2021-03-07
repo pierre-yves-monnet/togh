@@ -9,6 +9,7 @@
 import AuthService from './AuthService';
 import RestcallService from './RestcallService';
 import ToolService from './ToolService';
+import UserService from './UserService';
 
 var instanceFactory;
 
@@ -20,6 +21,7 @@ class FactoryService  {
 		this.authService = new AuthService( this );
 		this.restcallService = new RestcallService( this );
 		this.toolService = new ToolService( this );
+		this.userService = new UserService( this );
 		
 		this.authService.init();
 		this.restcallService.init();
@@ -30,6 +32,10 @@ class FactoryService  {
 		return this.authService;
 	}
 	
+	getUserService() {
+		// console.log("FactoryService.getUserService");
+		return this.userService;
+	}
 	getRestcallService() {
 		// console.log("FactoryService.getRestcallService");
 		return this.restcallService;

@@ -11,6 +11,8 @@ import { injectIntl, FormattedMessage } from "react-intl";
 
 import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag, Toggle } from 'carbon-components-react';
 
+import {  ArrowUp, ArrowDown, Cash, DashCircle, PlusCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+
 import ChooseParticipant from './component/ChooseParticipant';
 import Expense from './component/Expense';
 
@@ -40,10 +42,26 @@ class EventShoppingList extends React.Component {
 	render() {
 		const intl = this.props.intl;
 		console.log("EventShoppinglist.render: visible=" + this.state.show);
+		
+		var userParticipant = this.props.getUserParticipant();
+
+		if (this.state.event.shoppinglist.length === 0) {
+			return (
+				<div>
+					<FormattedMessage id="EventShoppingList.NoItem" defaultMessage="You don't have any item in the list." />
+					{ userParticipant.isParticipant() && 
+						<button class="btn btn-success btn-xs" 
+							title={intl.formatMessage({id: "EventShoppingList.addItem",defaultMessage: "Add a new item in the list"})}>
+							<PlusCircle onClick={() => this.addItem()} />
+							<FormattedMessage id="EventShoppingList.AddOne" defaultMessage="Add one !" />
+						</button>
+					}
+				</div>
+				)
+		}
+
 		// show the list
-
 		var listShoppingListHtml = [];
-
 
 		listShoppingListHtml = this.state.event.shoppinglist.map((item, index) =>
 			<tr key={index}>
@@ -61,7 +79,10 @@ class EventShoppingList extends React.Component {
 					}
 
 				</td>
-				<td><button class="btn btn-danger btn-xs glyphicon glyphicon-minus" onClick={() => this.removeItem(item)} title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}></button></td>
+				<td><button class="btn btn-danger btn-xs" 					 
+					title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}>
+						<DashCircle onClick={() => this.removeItem(item)} />
+					</button></td>
 			</tr>
 		);
 		console.log("EventShoppinglist.render: list calculated from " + JSON.stringify(this.state.event.shoppinglist));
@@ -70,7 +91,10 @@ class EventShoppingList extends React.Component {
 			<div class="eventsection">
 				<FormattedMessage id="EventShoppingList.Title" defaultMessage="Shopping List" />
 				<div style={{ float: "right" }}>
-					<button class="btn btn-success btn-xs glyphicon glyphicon-plus" onClick={this.addItem} title="Add a new item in the list"></button>
+					<button class="btn btn-success btn-xs" 
+						title={intl.formatMessage({id: "EventShoppingList.addItem",defaultMessage: "Add a new item in the list"})}>
+						<PlusCircle onClick={() => this.addItem()} />
+					</button>
 				</div>
 			</div>
 			

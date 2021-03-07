@@ -29,7 +29,7 @@ class Expense extends React.Component {
 			'event': props.event
 		};
 		
-		}
+	}
 
 
 	

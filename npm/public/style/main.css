@@ -60,7 +60,7 @@ h1{
     color: #2e6da4;
     border-top: 1px solid #2e6da4;
     
-    margin: 10px 0 20px; 
+    margin: 10px 0 30px; 
 }
 
 
@@ -98,6 +98,19 @@ table.toghtable td {
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px
+
+}
+
+.toghTips {
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 25px; /* .25rem;*/
+    background-color: #ffffcc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px 30px 30px 20px
 
 }
 /*

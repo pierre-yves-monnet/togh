@@ -11,14 +11,10 @@ import React from 'react';
 import { FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
-import { DatePicker } from 'carbon-components-react';
-import { DatePickerInput } from 'carbon-components-react';
-import { TimePicker } from 'carbon-components-react';
-import { RadioButtonGroup } from 'carbon-components-react';
-import { RadioButton } from 'carbon-components-react';
-import { TextArea } from 'carbon-components-react';
-import { TextInput } from 'carbon-components-react';
-import { Select } from 'carbon-components-react';
+import { DatePicker, DatePickerInput, TimePicker, RadioButtonGroup, RadioButton, TextArea, TextInput, Select } from 'carbon-components-react';
+
+import * as participantConstant from './EventParticipants';
+
 
 import FactoryService from './service/FactoryService';
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
@@ -32,7 +28,10 @@ import EventGeolocalisation from './EventGeolocalisation';
 import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 import EventExpense from './EventExpense';
+import EventSurveyList from './EventSurveyList';
 import BasketSlabEvent from './service/BasketSlabEvent';
+import UserParticipant from './component/UserParticipant';
+
 
 
 const TAB_PARTICIPANT='Participant';
@@ -74,8 +73,8 @@ class Event extends React.Component {
 		this.loadEvent 					= this.loadEvent.bind(this);
 		this.changeState 				= this.changeState.bind(this);
 		this.setAttribut 				= this.setAttribut.bind(this);
-		this.updateEvent 					= this.updateEvent.bind(this);
-		
+		this.updateEvent 				= this.updateEvent.bind(this);
+		this.getUserParticipant			= this.getUserParticipant.bind(this);
 
 	}
 	componentDidMount() {
@@ -266,56 +265,75 @@ class Event extends React.Component {
 
 					<div class="col-lg">
 
-						<button onClick={this.secParticipant} title='Particpants' onClick={() => this.accessTab( TAB_PARTICIPANT )} class="btn btn-primary">
+						<button onClick={() => this.accessTab( TAB_PARTICIPANT )}
+								title={<FormattedMessage id="Event.TitleParticipant" defaultMessage="Invite participant to your event" />}
+								 class="btn btn-primary">
 							<img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Participants" defaultMessage="Participants" />
 						</button>
 						&nbsp;
 
-						<button onClick={this.secDates} onClick={() => this.accessTab( TAB_ITINERARY )} title={<FormattedMessage id="Event.TitleItinerary" defaultMessage="Define your itinerary, and point of interest" />} class="btn btn-primary">
-							<div class="glyphicon glyphicon-road"></div><br />
+						<button onClick={() => this.accessTab( TAB_ITINERARY )}
+								title={<FormattedMessage id="Event.TitleItinerary" defaultMessage="Define your itinerary, and point of interest" />} 
+								class="btn btn-primary" style={{ "marginLeft ": "10px" }}>
+							<img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Itinerary" defaultMessage="itinerary" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_CHAT) } title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} disabled={true} class="btn btn-primary">
-							<div class="glyphicon glyphicon-bullhorn" ></div><br />
+						<button onClick={() => this.accessTab( TAB_CHAT) } 
+							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} disabled={true} class="btn btn-primary"
+							style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Chat" defaultMessage="Chat" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_TASKLIST )} title={<FormattedMessage id="Event.TitleTasks" defaultMessage="Tasks" />} class="btn btn-primary">
-							<div class="glyphicon glyphicon-tasks"></div> <br />
+						<button  onClick={() => this.accessTab( TAB_TASKLIST )} 
+							title={<FormattedMessage id="Event.TitleTasks" defaultMessage="Tasks" />} 
+							class="btn btn-primary" style={{ "marginLeft ": "10px" }}>
+							<img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Tasks" defaultMessage="Tasks" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_SHOPPINGLIST)} title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?" />} class="btn btn-primary">
-							<div class="glyphicon glyphicon-shopping-cart"></div><br />
+						<button onClick={() => this.accessTab( TAB_SHOPPINGLIST)} 
+							title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?" />} 
+							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.ShoppingList" defaultMessage="Shopping List" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_SURVEY )} title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />} disabled={true} class="btn btn-primary">
-							<div class="glyphicon glyphicon-ok-circle"></div><br />
+						<button onClick={() => this.accessTab( TAB_SURVEY )} 
+							title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />}  
+							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Survey" defaultMessage="Survey" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_GEOLOCALISATION )} title={<FormattedMessage id="Event.TitleGeolocalisation" defaultMessage="Where is the event?" />} class="btn btn-primary">
-							<div class="glyphicon glyphicon-globe"></div><br />
+						<button onClick={() => this.accessTab( TAB_GEOLOCALISATION )} 
+							title={<FormattedMessage id="Event.TitleGeolocalisation" defaultMessage="Where is the event?" />} 
+							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Geolocalisation" defaultMessage="Geolocalisation" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_PHOTO )} title={<FormattedMessage id="Event.TitlePhotos" defaultMessage="Photos" />} disabled={true} class="btn btn-primary">
-							<div class="glyphicon glyphicon-camera"></div><br />
+						<button onClick={() => this.accessTab( TAB_PHOTO )} 
+							title={<FormattedMessage id="Event.TitlePhotos" defaultMessage="Photos" />} 
+							disabled={true} 
+							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Photos" defaultMessage="Photos" />
 						</button>
 						&nbsp;
 
-						<button style={{ "marginLeft ": "10px" }} onClick={() => this.accessTab( TAB_EXPENSE )} title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} onClick={this.accessExpense} class="btn btn-primary">
-							<div class="glyphicon glyphicon-piggy-bank"></div><br />
+						<button onClick={() => this.accessTab( TAB_EXPENSE )} 
+							title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} 
+							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnExpense.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
 						</button>
 
@@ -323,11 +341,12 @@ class Event extends React.Component {
 
 				</div>
 				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event} show={this.state.show.secItinerary} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event} show={this.state.show.secTasklist} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event} show={this.state.show.secShoppinglist} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event} show={this.state.show.secGeolocalisation} updateEvent={this.updateEvent} />}
-				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event} show={this.state.show.secExpense} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event}  updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}  updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event} updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}  updateEvent={this.updateEvent} />}
+				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList event={this.state.event}  updateEvent={this.updateEvent} getUserParticipant={this.getUserParticipant}/>}
+				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}  updateEvent={this.updateEvent} />}
 			</div>)
 	} //---------------------------- end Render
 
@@ -345,6 +364,7 @@ class Event extends React.Component {
 		// this.setAttribut("eventState", event);
 	}
 
+	
 
 	// provide automatic save
 	setAttribut(name, value) {
@@ -385,24 +405,26 @@ class Event extends React.Component {
 	}
 
 	// -------------------------------------------- Access different part
-
-	// accessParticipantList
 	accessTab( accessTab ) {
 		console.log("Event.accessTab tab=" + JSON.stringify(accessTab));
 		this.setState( { show: { currentSection: accessTab} });
 
 	}
 
-	accessItinerary() {
-		console.log("Event.accessItinerary ");
-		var event = this.state.event;
-		if (!event.itinerarylist) {
-			console.log("Event.accessShoppingList: no tassecExpensecreate one");
-			event.itinerarylist = [];
-			this.setState({ event: event })
+	// -------------------------------------------- Tool Service
+	getUserParticipant() {
+		var authService = FactoryService.getInstance().getAuthService();
+		console.log("Event.getUserPartipant.start");
+		var user= authService.getUser();
+		// search the access right for this user
+		for (var i in this.state.event.participants) {
+			if (this.state.event.participants[ i ].user && this.state.event.participants[ i ].user.id === user.id) {
+				return new UserParticipant(this.state.event, this.state.event.participants[ i ] )
+			}
 		}
-		this.showSection("secItinerary");
+		return new UserParticipant(this.state.event,null );
 	}
+	
 
 
 	// -------------------------------------------- Call REST
@@ -441,7 +463,6 @@ class Event extends React.Component {
 		if (! event.description)
 			event.description='';
 
-
 		if (!event.participants) {
 			console.log("Event.accessParticipantList: not normal but be robust, create one");
 			event.participants = [];
@@ -457,14 +478,15 @@ class Event extends React.Component {
 		if (!event.shoppinglist) {
 			console.log("Event.accessShoppingList: no shopping list exist, create one");
 			event.shoppinglist = [];
-			// add one line
-			event.shoppinglist.push({ status: "TODO", what: "", id: 1 });
 		}
+		
 		if (!event.tasklist) {
 			console.log("Event.accessShoppingList: no task list exist, create one");
 			event.tasklist = [];
-			// add one line
-			event.tasklist.push({ status: "PLANNED", what: "", id: 1 });
+		}
+		if (!event.surveylist) {
+			console.log("Event.accessShoppingList: no task list exist, create one");
+			event.surveylist = [];
 		}
 		
 		this.setState( {event: event });

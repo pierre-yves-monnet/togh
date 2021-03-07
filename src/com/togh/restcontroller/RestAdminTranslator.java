@@ -67,7 +67,7 @@ public class RestAdminTranslator {
                     HttpStatus.UNAUTHORIZED, "Not an adminstrator");
             
         }
-        TranslateDictionary translateDictionnary = new TranslateDictionary();
+        
         return translateDictionnary.complete(); 
         
     }

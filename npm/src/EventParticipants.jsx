@@ -15,6 +15,17 @@ import { Select, Tag } from 'carbon-components-react';
 
 import Invitation from './Invitation';
 
+
+export const ROLE_OWNER = 'OWNER';
+export const ROLE_ORGANIZER = 'ORGANIZER';
+export const ROLE_PARTICIPANT = 'PARTICIPANT';
+export const ROLE_OBSERVER = 'OBSERVER';
+export const ROLE_OUTSIDE = 'OUTSIDE';
+
+export const STATUS_LEFT = 'LEFT';
+
+
+
 class EventParticipants extends React.Component {
 	
 	// this.props.updateEvent()
@@ -51,13 +62,13 @@ class EventParticipants extends React.Component {
 					</td>
 					
 					<td>
-						{item.role ==='OWNER' && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
-						{item.role ==='LEFT' && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
+						{item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
+						{item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
 						
-						{ (item.role !=='OWNER' && item.role !== 'LEFT') && (
-							<Select labelText="" disabled={item.status==='LEFT'} value={item.role} onChange={(event) => this.setAttribute( "role", event.target.value )}>
+						{ (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
+							<Select labelText="" disabled={item.status===STATUS_LEFT} value={item.role} onChange={(event) => this.setAttribute( "role", event.target.value )}>
 							 	<FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
-	                          		{(message) => <option value="ORGANIZER">{message}</option>}
+	                          		{(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
 	                    		</FormattedMessage>
 								<FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
 	                          		{(message) => <option value="PARTICIPANT">{message}</option>}
@@ -131,5 +142,7 @@ class EventParticipants extends React.Component {
 		this.props.updateEvent();
 	}
 	
+	
+
 }		
 export default injectIntl(EventParticipants);
