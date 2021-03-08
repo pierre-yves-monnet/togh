@@ -18,6 +18,10 @@ class UserParticipant {
 		this.participant = participant;
 	}
 
+
+	getUser() {
+		return this.participant.user;
+	}
 	/**
 	* isOrganizer
 	*

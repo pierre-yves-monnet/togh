@@ -86,7 +86,8 @@ apt-get install postgresql postgresql-contrib
 Deployer une image docker: 	
 https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
  
- 
+Deployer Postgres
+https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
  
 ## Sauvegarder le container
  
@@ -141,6 +142,48 @@ https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/retinaicons" title="Retinaicons">Retinaicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+https://www.flaticon.com/
+
+Rendre une image fond transparent
+https://www.remove.bg/fr/upload 
+
+Participant : 3 personnages          
+Itinerary : a revoir
+Chat : OK
+Task : OK
+Shopping List : OK
+Survey : Revoir un peu la ligne pour ne pas faire 3 zones identiques 
+Geolocalisation : a revoir
+Photo : a revoir
+Frais : a revoir
+
+Starter 		: todo
+Ender 			: todo
+Default Boy		: todo
+Default girl	: todo
+
+
+const ITINERARYITEM_POI 		= "POI";
+const ITINERARYITEM_BEGIN		= "BEGIN";
+const ITINERARYITEM_END			= "END";
+const ITINERARYITEM_SHOPPING	= "SHOPPING";
+const ITINERARYITEM_AIRPORT		= "AIRPORT";
+const ITINERARYITEM_BUS			= "BUS";
+const ITINERARYITEM_TRAIN		= "TRAIN";
+const ITINERARYITEM_BOAT		= "BOAT";
+const ITINERARYITEM_NIGHT		= "NIGHT";
+const ITINERARYITEM_VISITE		= "VISITE";
+const ITINERARYITEM_RESTAURANT	= "RESTAURANT";
+const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
+
+
+
+
+
+
+
+
 
 ## React structure
  {names.map(function(name, index){
@@ -269,38 +312,36 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 
 
 ## outils
-Rendre une image fond transparent
-https://www.remove.bg/fr/upload 
-          
           
                
 # Tasks
 
 
-	
-	Toggle default value (dans Google Map / Share my localisation ou EventtaskList / Show dates)
-	==> defaultToggled =
 	 
 	Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
 	==> Utiliser le radio button de Bootstap
 	
 
 Simon ?	Google Geocodage d'une adresse
+		Affichage d'un itineraire
+		TextInput avec Crayon de modification
+			
+Simon ?	comment faire une saisie de currency en carbon : TextNumber => pas de virgule
 		
-	Date Carbon: le format de date ne respecte pas la langue
+Simon ?	Date Carbon: le format de date ne respecte pas la langue
+	
 	
 	Access this in a iterator: example dans EventTaskList, je veux pouvoir afficher (ou pas) la liste des taches suivant des indicateurs dans this.state. mais le this n'est pas accessible dans la sous classe
 	
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas
 		
-	EventParticpant => change user role to organizer ==> Plante
-	TagHtml : status marche plus
+
 	
 Py	Sauvegarde
 	faire marcher la requete JPA "user not register in the event"
 	Survey
-	Task
+	
 	Itineraire
 	Depenses
 	Integrer weather  : https://openweathermap.org/api

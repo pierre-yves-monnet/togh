@@ -125,6 +125,9 @@
   "Event.TitleItinerary": {
     "defaultMessage": "Define your itinerary, and point of interest"
   },
+  "Event.TitleParticipant": {
+    "defaultMessage": "Invite participant to your event"
+  },
   "Event.TitlePhotos": {
     "defaultMessage": "Photos"
   },
@@ -155,29 +158,29 @@
   "EventItinerary.ProvidePeriodDateInEvent": {
     "defaultMessage": "Select a start and a end date for this event"
   },
+  "EventItinerary.ShowDetail": {
+    "defaultMessage": "Show Detail"
+  },
+  "EventItinerary.ShowExpense": {
+    "defaultMessage": "Show Expense"
+  },
   "EventItinerary.ShowItineraryMap": {
     "defaultMessage": "Show itinerary map"
   },
   "EventItineray.Address": {
     "defaultMessage": "Address"
   },
-  "EventItineray.Budget": {
-    "defaultMessage": "Budget"
-  },
-  "EventItineray.Category": {
-    "defaultMessage": "Category"
-  },
   "EventItineray.Description": {
     "defaultMessage": "Description"
+  },
+  "EventItineray.Expense": {
+    "defaultMessage": "Expense"
   },
   "EventItineray.Night": {
     "defaultMessage": "Night"
   },
   "EventItineray.PointOfInterest": {
     "defaultMessage": "Point Of Interest"
-  },
-  "EventItineray.Price": {
-    "defaultMessage": "Price"
   },
   "EventItineray.Restaurant": {
     "defaultMessage": "Restaurant"
@@ -260,6 +263,9 @@
   "EventParticipant.Titleinvited": {
     "defaultMessage": "Invited participant: no confirmation is received at this moment"
   },
+  "EventShoppingList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
   "EventShoppingList.Cancel": {
     "defaultMessage": "Cancelled"
   },
@@ -268,6 +274,15 @@
   },
   "EventShoppingList.Done": {
     "defaultMessage": "Done"
+  },
+  "EventShoppingList.NoItem": {
+    "defaultMessage": "You don't have any item in the list."
+  },
+  "EventShoppingList.ShowDetails": {
+    "defaultMessage": "Detail"
+  },
+  "EventShoppingList.ShowExpense": {
+    "defaultMessage": "Show Expense"
   },
   "EventShoppingList.Title": {
     "defaultMessage": "Shopping List"
@@ -280,6 +295,9 @@
   },
   "EventShoppingList.Who": {
     "defaultMessage": "Who"
+  },
+  "EventShoppingList.addItem": {
+    "defaultMessage": "Add a new item in the list"
   },
   "EventShoppingList.removeItem": {
     "defaultMessage": "Remove this item"
@@ -295,6 +313,48 @@
   },
   "EventState.InPreparation": {
     "defaultMessage": "In Preparation"
+  },
+  "EventSurvey.Closed": {
+    "defaultMessage": "closed"
+  },
+  "EventSurvey.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventSurvey.InPreparation": {
+    "defaultMessage": "In preparation"
+  },
+  "EventSurvey.InProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventSurvey.NoAccessForSurveyInPreparation": {
+    "defaultMessage": "This survey is in preparation. You can't access it for the moment."
+  },
+  "EventSurvey.Title": {
+    "defaultMessage": "Title"
+  },
+  "EventSurvey.removeItem": {
+    "defaultMessage": "Remove this item"
+  },
+  "EventSurveyList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventSurveyList.MainTitleSurveyList": {
+    "defaultMessage": "Survey"
+  },
+  "EventSurveyList.NoItem": {
+    "defaultMessage": "You don't have any survey ready in the list."
+  },
+  "EventSurveyList.SurveyTip": {
+    "defaultMessage": "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review."
+  },
+  "EventSurveyList.addItem": {
+    "defaultMessage": "Create a new survey in the list"
+  },
+  "EventTaskList.AddSurvey": {
+    "defaultMessage": "Add a survey in the list"
+  },
+  "EventTaskList.AddTask": {
+    "defaultMessage": "Add a task in the list"
   },
   "EventTaskList.Begin": {
     "defaultMessage": "Begin"
@@ -338,6 +398,9 @@
   "EventTaskList.MainTitleTaskList": {
     "defaultMessage": "Tasks List"
   },
+  "EventTaskList.NoItem": {
+    "defaultMessage": "You don't have any item in the list. Add one !"
+  },
   "EventTaskList.ShowDate": {
     "defaultMessage": "Show dates"
   },
@@ -350,8 +413,20 @@
   "EventTaskList.Subject": {
     "defaultMessage": "Subject"
   },
+  "EventTaskList.TaskTip": {
+    "defaultMessage": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize"
+  },
   "EventTaskList.Who": {
     "defaultMessage": "Who"
+  },
+  "EventTaskList.addItem": {
+    "defaultMessage": "Add a new item in the list"
+  },
+  "Expense.Budget": {
+    "defaultMessage": "Budget"
+  },
+  "Expense.Price": {
+    "defaultMessage": "Price"
   },
   "Invitation.ByEmail": {
     "defaultMessage": "Send an Email"
@@ -401,6 +476,9 @@
   "Invitation.UserPhoneNumber": {
     "defaultMessage": "Phone number"
   },
+  "Login.CantConnectToTheServer": {
+    "defaultMessage": "Can't Connect To The Server"
+  },
   "Login.connection": {
     "defaultMessage": "Connection"
   },
@@ -433,5 +511,8 @@
   },
   "Menu.MyProfile": {
     "defaultMessage": "My Profile"
+  },
+  "UserTips.DeactivateTipInPreference": {
+    "defaultMessage": "Tips can be deactived in your preference"
   }
 }

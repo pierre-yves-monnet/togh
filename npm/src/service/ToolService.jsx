@@ -2,7 +2,7 @@
 //
 // ToolService
 //
-//  var ToolService = FactoryService.getInstance().getToolService();
+//  var toolService = FactoryService.getInstance().getToolService();
 
 // -----------------------------------------------------------
 
@@ -48,6 +48,20 @@ class ToolService {
 			return null;
 		// console.log("ToolService.getDayOfDate dateObj="+dateObj+ " Date="+JSON.stringify( dateReal ));
 		return dateReal.toISOString().slice(0,10);
+	}
+	
+	/**
+	Look all existing code, then return an uniq number
+	In fact, return max( code )+1.
+	Example, list is [ {"code" : 12}, {"code":3}, {"code":5}  ]" ==> Return 13 */
+	getUniqueCodeInList( list, attribut) {
+		var maxInList =0;
+		for (var i in list) {
+			var value = list[i][ attribut ];
+			if (value > maxInList)
+				maxInList = value;
+		}
+		return maxInList+1;
 	}
 }
 export default ToolService;

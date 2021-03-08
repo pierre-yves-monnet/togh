@@ -30,7 +30,7 @@ import EventState from './EventState';
 import EventExpense from './EventExpense';
 import EventSurveyList from './EventSurveyList';
 import BasketSlabEvent from './service/BasketSlabEvent';
-import UserParticipant from './component/UserParticipant';
+import UserParticipant from './entity/UserParticipant';
 
 
 
