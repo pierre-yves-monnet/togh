@@ -96,7 +96,6 @@ class EventSurvey extends React.Component {
 	renderSurveyAdmin() {
 		const intl = this.props.intl;
 
-		var toolService = FactoryService.getInstance().getToolService();
 		
 		var listChoiceHtml = [];
 		

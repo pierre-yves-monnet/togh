@@ -77,8 +77,6 @@ class Event extends React.Component {
 		this.updateEvent 				= this.updateEvent.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
 		
-		// Event preferences
-		this.eventPreferences           = new EventPreferences(this.state.event)
 
 	}
 	componentDidMount() {
@@ -491,31 +489,39 @@ class Event extends React.Component {
 			event.description='';
 
 		if (!event.participants) {
-			console.log("Event.accessParticipantList: not normal but be robust, create one");
+			console.log("Event.completeEvent: not normal but be robust, create one");
 			event.participants = [];
 		}
 		if (!event.expenses) {
-			console.log("Event.accessShoppingList: no shopping list exist, create one");
+			console.log("Event.completeEvent: no shopping list exist, create one");
 			event.expenses = {};
 		}
+		
 		if (!event.geoLocalisation) {
-			console.log("Event.accessShoppingList: no shopping list exist, create one");
+			console.log("Event.completeEvent: no shopping list exist, create one");
 			event.geoLocalisation = {};
 		}
 		if (!event.shoppinglist) {
-			console.log("Event.accessShoppingList: no shopping list exist, create one");
+			console.log("Event.completeEvent: no shopping list exist, create one");
 			event.shoppinglist = [];
 		}
 		
 		if (!event.tasklist) {
-			console.log("Event.accessShoppingList: no task list exist, create one");
+			console.log("Event.completeEvent: no task list exist, create one");
 			event.tasklist = [];
 		}
 		if (!event.surveylist) {
-			console.log("Event.accessShoppingList: no task list exist, create one");
+			console.log("Event.completeEvent: no survey list exist, create one");
 			event.surveylist = [];
 		}
-		
+		if (!event.preferences) {
+			console.log("Event.preferences: no preference, create one");
+			event.preferences = {};
+		}
+		// Create the eventPreference now
+		this.eventPreferences           = new EventPreferences(this.state.event, this.updateEvent);
+
+
 		this.setState( {event: event });
 
 } 

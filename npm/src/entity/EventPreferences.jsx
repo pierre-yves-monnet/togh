@@ -2,24 +2,48 @@
 //
 // EventPreferences
 //
-// For one event, the event preferences  
-//
+// For one event, the event preferences
+// Preferences are saved as data, but have a big impact on the interface or on the event, and are not supposed to change too much
+//  Example of preferences:
+//    - Currency used in the event
+//    - budget are used or not ?
+//    - time zone
+
 // -----------------------------------------------------------
 //
 
 import FactoryService from './../service/FactoryService';
+// CurrencyService from './../service/CurrencyService';
+import SlabEvent from './../service/SlabEvent';
 
+const CURRENCY_ATTRIBUT_NAME= "currency";
 
 class EventPreferences {
 	
+	// props.updateEvent must be defined
+	// props.eventPreferences
 	// props.text is the text to display, translated
-	constructor(event) {
+	constructor(event, updateEventfct ) {
 		this.event = event;
-		this.currencyCode = "USD";
+		this.updateEventfct = updateEventfct;
+		this.currencyCode = event.preferences[ CURRENCY_ATTRIBUT_NAME ];
+		if (! this.currencyCode)
+			this.currencyCode="USD";
 	}
 	
-	setCurrency(currency) {
-		this.currencyCode = currency
+	
+	// --------------------------------------------------------------
+	// 
+	// Currency
+	// 
+	// --------------------------------------------------------------
+	
+	setCurrency(currencyCode) {
+		this.currencyCode = currencyCode;
+
+		var slabEvent = SlabEvent.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
+		this.updateEventfct( slabEvent );
+
 	}
 	
 	getCurrency(){
@@ -32,30 +56,23 @@ class EventPreferences {
 	}
 	
 	getCurrencySymbolPrefix(){
-		console.log("EventPreferences.Prefix ==== entering function")
-		var currencyService = FactoryService.getInstance().getCurrencyService();
-		var set = currencyService.getCurrencyInfoByCode(this.currencyCode);
-		console.log("EventPreferences.Prefix.currencycode ==== "+JSON.stringify(this.currencyCode));
-		console.log("EventPreferences.Prefix.set ==== "+JSON.stringify(set));
-		if (set){
-			console.log("EventPreferences.Prefix ==== "+JSON.stringify(set.prefix))
-			return set.prefix;
-		}
-		else{
+		console.log("EventPreferences.getCurrencySymbolPrefix");
+		var currency = this.getCurrency();
+		if (currency)
+			return currency.prefix;
+		else
 			return "";
-		}
 	}
 	
 	
 	getCurrencySymbolSuffix(){
-		var currencyService = FactoryService.getInstance().getCurrencyService();
-		var set = currencyService.getCurrencyInfoByCode(this.currencyCode);
-		if (set){
-			return set.suffix;
-		}
-		else{
+		console.log("EventPreferences.getCurrencySymbolSuffix");
+		var currency = this.getCurrency();
+		if (currency)
+			return currency.suffix;
+		else
 			return "";
-		}
+
 	}
 
 }

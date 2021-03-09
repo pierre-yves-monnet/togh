@@ -13,17 +13,22 @@
 import React from 'react';
 
 import { FormattedMessage,FormattedDate } from "react-intl";
-import {  ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+import { ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle, Search } from 'carbon-components-react';
 import CurrencyInput from 'react-currency-input';
  
 
 import SlabEvent from './../service/SlabEvent';
+import FactoryService from './../service/FactoryService'
+
+
+import * as expenseConstant from './../EventExpense';
 
 
 class Expense extends React.Component {
 	
 	// props.updateEvent must be defined
+	// props.eventPreferences
 	constructor(props) {
 		super();
 		this.state = {
@@ -60,9 +65,10 @@ class Expense extends React.Component {
 				</div>
 				<div class="card-body">
 					<table><tr><td>
-					TEST
-					{<FormattedMessage id="Expense.Price" defaultMessage="Budget" />}<br/>
-					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.budget} onChangeEvent={(event) => this.setChildAttribut("budget", event.target.value)}
+					{<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}<br/>
+					<CurrencyInput class="bx--text-input bx--text__input" 
+						value={this.state.item.budget} 
+						onChangeEvent={(event) => this.setChildAttribut("budget", event.target.value)}
 						decimalSeparator="." thousandSeparator=","
 						precision="2"
 						prefix={this.props.eventPreferences.getCurrencySymbolPrefix()}
@@ -75,7 +81,7 @@ class Expense extends React.Component {
 						decimalSeparator="." thousandSeparator=","
 						precision="2"
 						prefix={this.props.eventPreferences.getCurrencySymbolPrefix()}
-						suffix={this.props.eventPreferences.getCurrencySymbolSuffix()} 
+						suffix={this.props.eventPreferences.getCurrencySymbolSuffix()}
 						 />
 					</td><td>								
 					<button class="btn btn-primary btn-xs"><Cash/></button>
@@ -98,6 +104,9 @@ class Expense extends React.Component {
 		 
 		this.props.updateEvent( slabEvent );
 	}
+
+
+	
 
 }
 

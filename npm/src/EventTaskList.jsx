@@ -14,9 +14,10 @@ import { PlusCircle, DashCircle} from 'react-bootstrap-icons';
 
 import FactoryService from './service/FactoryService';
 
+import EventSectionHeader from './component/EventSectionHeader';
 
 import ChooseParticipant from './component/ChooseParticipant';
-import UserTips from './component/UserTips';
+
 
 
 class EventTaskList extends React.Component {
@@ -47,6 +48,15 @@ class EventTaskList extends React.Component {
 		console.log("EventTasklist.render: visible=" + this.state.show);
 		
 		var headerSection =(
+			<EventSectionHeader id="task" 
+				image="img/btnTask.png" 
+				title={<FormattedMessage id="EventTaskList.MainTitleTaskList" defaultMessage="Tasks List" />}
+				showPlusButton  = {true}
+				showPlusButtonTitle={<FormattedMessage id="EventTaskList.AddTask" defaultMessage="Add a task in the list" />}
+				userTipsText={<FormattedMessage id="EventTaskList.TaskTip" defaultMessage="Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize" />}
+				/>
+				);
+		/* old
 			<div>	
 				<div class="eventsection">
 					<div style={{ float: "left" }}>
@@ -63,6 +73,7 @@ class EventTaskList extends React.Component {
 			<UserTips id="task" text={<FormattedMessage id="EventTaskList.TaskTip" defaultMessage="Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize" />}/>
 			</div> 
 			)
+			*/
 			
 		var toolService = FactoryService.getInstance().getToolService();
 
