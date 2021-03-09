@@ -198,11 +198,15 @@ class Event extends React.Component {
 		return (
 			<div>
 				<div class="row">
-					<div class="col-sm-5">
-						<img src="img/toghEvent.jpg" style={{ width: 90 }} />
-
-						<h1>{this.state.event.name}
-						</h1>
+					<div class="col-sm-1">
+						<img src="img/toghEvent.jpg" style={{ width: 90 }}     />
+					</div>
+						
+					<div class="col-sm-4">
+						<TextInput labelText="" 
+							value={this.state.event.name}
+							style={{fontSize: "24px", height: "50px", color: "#ac1e4a", maxWidth: "315px"}} 
+							onChange={(event) => this.setAttribut("name", event.target.value)} /><br />
 					</div>
 					<div class="col-sm-5">
 						<div class="fieldlabel">{<FormattedMessage id="Event.Status" defaultMessage="Status" />}</div>
@@ -255,11 +259,6 @@ class Event extends React.Component {
 								{datePanelHtml}
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<TextInput labelText={<FormattedMessage id="Event.EventName" defaultMessage="Name" />} value={this.state.event.name} onChange={(event) => this.setAttribut("name", event.target.value)}></TextInput><br />
 					</div>
 				</div>
 

@@ -323,11 +323,8 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 	
 
 Simon ?	Google Geocodage d'une adresse
-		Affichage d'un itineraire
-		TextInput avec Crayon de modification
-			
+Simon ?	Affichage d'un itineraire
 Simon ?	comment faire une saisie de currency en carbon : TextNumber => pas de virgule
-		
 Simon ?	Date Carbon: le format de date ne respecte pas la langue
 	
 	

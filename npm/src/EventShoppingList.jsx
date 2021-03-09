@@ -51,7 +51,8 @@ class EventShoppingList extends React.Component {
 					<FormattedMessage id="EventShoppingList.NoItem" defaultMessage="You don't have any item in the list." />
 					{ userParticipant.isParticipant() && 
 						<button class="btn btn-success btn-xs" 
-							title={intl.formatMessage({id: "EventShoppingList.addItem",defaultMessage: "Add a new item in the list"})}>
+							title={intl.formatMessage({id: "EventShoppingList.addItem",defaultMessage: "Add a new item in the list"})}
+							onClick={() => this.addItem()}>
 							<PlusCircle onClick={() => this.addItem()} />
 							<FormattedMessage id="EventShoppingList.AddOne" defaultMessage="Add one !" />
 						</button>

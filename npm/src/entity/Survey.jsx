@@ -15,7 +15,7 @@ export const STATUS_OPEN = 'OPEN';
 export const STATUS_CLOSE = 'CLOSE';
 
 const CHILD_CHOICES="choices";
-const CHILD_ANSWER="answer";
+const CHILD_ANSWER="answers";
 
 class Survey {
 	
@@ -26,6 +26,10 @@ class Survey {
 		this.userParticipant = userParticipant;
 		this.updateEventfct = updateEventfct;
 
+		if (! this.survey) {
+			console.log("Event.constructor : survey does not exist, this is not expected")
+			this.survey= Survey.getDefaultSurvey();
+		}
 		if (! this.survey.status) {
 			this.survey.status= STATUS_INPREPARATION;
 		}
@@ -42,6 +46,9 @@ class Survey {
 	getStatus() {
 		return this.survey.status;
 	}
+	/** ------------------------------------------------------
+	*   Choice
+	*/
 	addChoice() {
 		var toolService = FactoryService.getInstance().getToolService();
 
@@ -55,7 +62,30 @@ class Survey {
  		this.setChildAttribut( CHILD_CHOICES,newChoices, "");
 	}
 	
+	/** ------------------------------------------------------
+	*   Answer
+	*/
+	setAnswer( answerParticipant, surveyChoiceCode, value) {
+		console.log("Survey.setAnswer: userId "+answerParticipant.userid+" choice:"+surveyChoiceCode+" value="+value);
+		// answerParticipant && surveyChoice are correctly pointed to the value expected
+		
+		// avoid the JSON Circular
+		for (var i in this.survey.answers) {
+			if (this.survey.answers[ i ].userid === answerParticipant.userid ) {
+				this.survey.answers[ i ].decision [ surveyChoiceCode ] = value;
+			}
+		}
+		
+ 		this.setChildAttribut( CHILD_ANSWER, this.survey.answers, "");
 	
+	}
+
+
+
+	// -----------------------------------------------
+	// Tools
+	/**
+	 */
 	completeSurveyWithMe() {
 		// Ok, I must be part on this survey, ins't ?
 		for (var i in this.survey.answers) {
@@ -67,11 +97,15 @@ class Survey {
 		// so, add me
 		var newlist = this.survey.answers.concat( { userid : this.userParticipant.getUser().id,
 													username: this.userParticipant.getUser().label,
-													 answer: {}});
+													 decision: {}});
 		this.survey.answers = newlist;
 		this.setChildAttribut( CHILD_ANSWER, newlist, "/");
 	}
 
+	// -----------------------------------------------
+	// Set value to update the survey
+	/**
+	 */
 	setAttribut(name, value) {
 		this.setChildAttribut(name, value, this.survey, "/");
 	}
@@ -86,7 +120,7 @@ class Survey {
 	 * 
 	*/
 	setChildAttribut(name, value,localisation) {
-		console.log("Survey.setChildAttribut: set attribut:" + name + " <= " + value + " survey=" + JSON.stringify(this.survey));
+		console.log("Survey.setChildAttribut: set attribut:" + name + " <= " +JSON.stringify(value) + " survey=" + JSON.stringify(this.survey));
 		
 		this.survey[name] = value;
 

@@ -72,7 +72,7 @@ class EventSurvey extends React.Component {
 	
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("EventSurvey: render");
+		console.log("EventSurvey: render survey"+JSON.stringify(this.state.survey));
 		if (! this.state.survey) {
 			return (<div/>)
 		}
@@ -111,7 +111,11 @@ class EventSurvey extends React.Component {
 					 labelText="" ></TextInput>
 				</td>
 				<td><button class="btn btn-danger btn-xs" 					 
-					title={intl.formatMessage({id: "EventSurvey.removeItem",defaultMessage: "Remove this item"})}>
+					title={intl.formatMessage({id: "EventSurvey.removeItem",defaultMessage: "Remove this item"})}
+					onClick={() => {
+								this.surveyEmbeded.removeChoice( item.code );
+								this.setState( {survey: this.surveyEmbeded.getValue()});															
+						}} >
 						<DashCircle onClick={() => {
 								this.surveyEmbeded.removeChoice( item.code );
 								this.setState( {survey: this.surveyEmbeded.getValue()});															
@@ -166,7 +170,11 @@ class EventSurvey extends React.Component {
 							<tr>
 								<th><FormattedMessage id="EventSurvey.Option" defaultMessage="Option" /></th>
 								<th><button class="btn btn-success btn-xs" 					 
-									title={intl.formatMessage({id: "EventSurvey.AddOption",defaultMessage: "Option"})}>
+									title={intl.formatMessage({id: "EventSurvey.AddOption",defaultMessage: "Option"})}
+									onClick={() => { 
+											this.surveyEmbeded.addChoice();
+											this.setState({ survey: this.surveyEmbeded.getValue() });
+									}}	>
 									<PlusCircle onClick={() => { 
 											this.surveyEmbeded.addChoice();
 											this.setState({ survey: this.surveyEmbeded.getValue() });
@@ -193,7 +201,7 @@ class EventSurvey extends React.Component {
 		for (var i in survey.choices) {
 			headerList.push(
 				<th class="toghSectionHeader" style={{textAlign: "center"}}>
-					{survey.choices[ i ].propositiontext}
+					{survey.choices[ i ].propositiontext} ({survey.choices[ i ].code})
 				</th> );
 		}
 		
@@ -202,21 +210,24 @@ class EventSurvey extends React.Component {
 		if (survey.state === surveyConstant.STATUS_INPREPARATION) {
 			participantList.push(<tr><td><FormattedMessage id="EventSurvey.SurveyInPreparationNoParticipantsVisible" defaultMessage="This survey is in preparation. Participants are not visible" /></td></tr>)
 		} else {
-		
+			// Checkbox can't be center		
 			for (var i in survey.answers) {
 				var answerParticipant = survey.answers[ i ];
 				var participantAnswer = [];
 				for (var j in survey.choices) {
 					var surveyChoice = survey.choices[ j ]
-					participantAnswer.push(<td style={{textAlign: "center"}}>
-						<center>
-						<Checkbox defaultChecked={answerParticipant[ surveyChoice.code ]}
-							readOnly={survey.state === surveyConstant.STATUS_CLOSE} 
-							onChange={(value,event ) => {
-								this.surveyEmbeded.setAnswer( answerParticipant, surveyChoice, value );
-								this.setState({ survey: this.surveyEmbeded.getValue() });
-								}} />
-							</center>
+					participantAnswer.push(
+						<td style={{textAlign: "center"}}>
+							<input type="checkbox"
+							 	id ={answerParticipant.userid+"_"+surveyChoice.code}
+								style={{ width: "1rem", height:"1rem",  margin: "0.125rem"}}
+								defaultChecked={answerParticipant.decision[ surveyChoice.code ]}
+								readOnly={survey.state === surveyConstant.STATUS_CLOSE || answerParticipant.userid !== userParticipant.getUser().id} 
+								onChange={( event ) => {
+									console.log("EventSurvey.clickOnCheckBox code="+surveyChoice.code);
+									this.surveyEmbeded.setAnswer( answerParticipant, surveyChoice.code, event.target.checked );
+									this.setState({ survey: this.surveyEmbeded.getValue() });
+									}} />
 						</td>);
 				}
 				participantList.push(<tr>

@@ -116,9 +116,11 @@ class EventSurveyList extends React.Component {
 				}
 				
 				listSurveyHtml.push( 
-					<li class={classSurvey} style={styleSurvey}> 
-						{item.title}
-						 <span class="badge bg-primary rounded-pill">14</span>
+					<li class={classSurvey} style={styleSurvey}
+						id={item.id}
+						onClick={ (event) =>{console.log("EventSurveyList.click on "+event.target.value);}} > 
+						{item.title}&nbsp;						
+						<span class="badge bg-primary rounded-pill">{item.answers.length + "/14"}</span>
 					</li>
 					);
 			}
