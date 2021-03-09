@@ -20,6 +20,7 @@ import SlabEvent from './service/SlabEvent';
 		
 class EventShoppingList extends React.Component {
 	// this.props.updateEvent()
+	// props.eventPreferences is provide (or should be at least, I think, I don't know)
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
@@ -73,10 +74,14 @@ class EventShoppingList extends React.Component {
 					<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
 					<br/>
 					{ this.state.show.showExpense &&  
-						<Expense item={item.expense} event={this.state.event} updateEvent={( slabEvent ) => 
-						{ 	console.log("EventItinerary.ExpenseUpdate slab="+slabEvent.getString());
-							this.props.updateEvent(slabEvent)
-						} }/>
+						<Expense item={item.expense}
+								 event={this.state.event}
+								 eventPreferences={this.props.eventPreferences}
+								 updateEvent={( slabEvent ) => 
+									{ 	console.log("EventItinerary.ExpenseUpdate slab="+slabEvent.getString());
+										this.props.updateEvent(slabEvent)
+									} }
+						/>
 					}
 
 				</td>

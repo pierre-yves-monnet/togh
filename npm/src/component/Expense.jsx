@@ -14,7 +14,9 @@ import React from 'react';
 
 import { FormattedMessage,FormattedDate } from "react-intl";
 import {  ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
-import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
+import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle, Search } from 'carbon-components-react';
+import CurrencyInput from 'react-currency-input';
+ 
 
 import SlabEvent from './../service/SlabEvent';
 
@@ -32,9 +34,24 @@ class Expense extends React.Component {
 	}
 
 
-	
+//	get_currency(item){
+//		if (item.currency==="euro"){
+//			return "suffix=\"�\""
+//		}
+//		if (item.currency==="dollar"){
+//			return "prefix=\"$\""
+//		}
+//		
+//	}
 	
 	//  -------------------------------------------- Render
+	// Function to decide prefix or suffix and symbol
+	// labelText={<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}
+	// Divs from Search - removed because probably useless
+	// <div class="bx--form-item bx--text-input-wrapper">
+	// <div class="bx--text-input__field-outer-wrapper">
+	// <div class="bx--text-input__field-wrapper">
+	// </div></div></div>
 	render() {
 		return (
 			<div class="card" style={{marginTop: "10px"}}>
@@ -43,12 +60,23 @@ class Expense extends React.Component {
 				</div>
 				<div class="card-body">
 					<table><tr><td>
-					<TextInput value={this.state.item.budget} onChange={(event) => this.setChildAttribut("budget", event.target.value)} 
-						labelText={<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />} 
-						step={0.01} />
+					TEST
+					{<FormattedMessage id="Expense.Price" defaultMessage="Budget" />}<br/>
+					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.budget} onChangeEvent={(event) => this.setChildAttribut("budget", event.target.value)}
+						decimalSeparator="." thousandSeparator=","
+						precision="2"
+						prefix={this.props.eventPreferences.getCurrencySymbolPrefix()}
+						suffix={this.props.eventPreferences.getCurrencySymbolSuffix()}
+					/>
+					 
 					</td><td>
-					<TextInput value={this.state.item.price} onChange={(event) => this.setChildAttribut("price", event.target.value)} 
-						labelText={<FormattedMessage id="Expense.Price" defaultMessage="Price" />} disable="true"/>
+					{<FormattedMessage id="Expense.Cost" defaultMessage="Cost" />}<br/>
+					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.price} onChangeEvent={(event) => this.setChildAttribut("price", event.target.value)}
+						decimalSeparator="." thousandSeparator=","
+						precision="2"
+						prefix={this.props.eventPreferences.getCurrencySymbolPrefix()}
+						suffix={this.props.eventPreferences.getCurrencySymbolSuffix()} 
+						 />
 					</td><td>								
 					<button class="btn btn-primary btn-xs"><Cash/></button>
 					</td>
