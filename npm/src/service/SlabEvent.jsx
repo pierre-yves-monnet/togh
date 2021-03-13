@@ -18,6 +18,9 @@ class SlabEvent {
 		
 	};
 	
+	getJson() {
+		return { operation: this.optration, name: this.name, value: this.value, localisation:this.localisation};
+	}
 	/**
 	* UPDATE name value localisation
 	* 
@@ -41,6 +44,8 @@ class SlabEvent {
 	getString() {
 		return this.slabid+" "+this.operation+": ["+this.name+"]="+this.value;
 	}
+	
+	
 	
 }
  

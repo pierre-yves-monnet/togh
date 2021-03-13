@@ -1,6 +1,6 @@
 // -----------------------------------------------------------
 //
-// UserParticipant
+// UserParticipantCtrl
 //
 // For one event, the participant information. Contains  
 //
@@ -10,7 +10,7 @@
 import * as participantConstant from './../EventParticipants';
 
 
-class UserParticipant {
+class UserParticipantCtrl {
 	
 	// props.text is the text to display, translated
 	constructor(event, participant) {
@@ -45,10 +45,10 @@ class UserParticipant {
 	* An particpant can modify and write event 
  	*/	
 	isParticipant() {
-		console.log("UserParticipant.isParticipant? ");
+		// console.log("UserParticipant.isParticipant? ");
 		if (! this.participant)
 			return false;
-			console.log("UserParticipant.isParticipant? Status="+this.participant.statusUser +" role="+this.participant.role);
+		// console.log("UserParticipant.isParticipant? Status="+this.participant.statusUser +" role="+this.participant.role);
 		if (this.participant.statusUser === participantConstant.STATUS_LEFT)
 			return false;
 		if (this.participant.role === participantConstant.ROLE_OWNER 
@@ -59,5 +59,5 @@ class UserParticipant {
 	}
 }
 
-export default UserParticipant;
+export default UserParticipantCtrl;
 	

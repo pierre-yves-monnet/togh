@@ -73,9 +73,16 @@ class Login extends React.Component {
 		return (
 			<div className="App">
 				 {inprogresshtml}
-				 <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>} value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><p />
+				 <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>}
+					id="loginemail" 
+					value={this.state.email} 
+					onChange={(event) => this.setState({ email: event.target.value })} /><p />
 				
-				<TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>} type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} ></TextInput><p />
+				<TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>} 
+					type="password"
+					id="loginpassword" 
+					value={this.state.password} 
+					onChange={(event) => this.setState({ password: event.target.value })} /><p />
 				<br/>
 				<table >
 				<tr>

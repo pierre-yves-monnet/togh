@@ -1,5 +1,27 @@
 body>div.container {margin-top:10px;}
 
+.toghmenu {
+    border-left: 6px solid #1f78b4;
+    color: #1f78b4;
+    font-weight: bold;
+    height: 19px;
+    white-space: nowrap;
+    display: block;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 10px 2px 8px;
+    text-decoration: none;
+
+}
+.toghmenulabel {
+    display: block;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 10px 2px 20px;
+    text-decoration: none;
+}
 
 .toghinput {
 	
@@ -23,7 +45,11 @@ body>div.container {margin-top:10px;}
 	margin-top: 6px;
 	margin-right: 7px;
 }
-
+.toghfooter { 
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+    height:[footer-height] 
+}
 .requiredField::after {
 	content:" * " ;
     color:red   

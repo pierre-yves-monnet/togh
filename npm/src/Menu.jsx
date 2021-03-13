@@ -9,6 +9,8 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
+import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
+
 import Login from './Login';
 
 
@@ -44,25 +46,53 @@ class Menu extends React.Component {
 			return ( <div  > 
 				
 				<div style={{float: "right"}}>
-					<a onClick={() =>this.setVisibleMenu(false)} href="/#"><span class="glyphicon glyphicon-chevron-left" href="/#"></span></a>
+					<a onClick={() =>this.setVisibleMenu(false)} href="/#">
+						<ChevronCompactLeft height="40px" width="40px"/></a>
 				 </div>
 				&nbsp;<p/>
 				
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#" class="toghmenu">
 					<FormattedMessage id="Menu.Events" defaultMessage="Events" />
-				</a><p/>
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+				</a>
+				<div class="toghmenulabel">
+					<FormattedMessage id="Menu.EventsExplanation" defaultMessage="Access all events you can access" />
+				</div>
+				
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#" class="toghmenu">
+					<FormattedMessage id="Menu.Join" defaultMessage="Join an event" />
+				</a>
+				<div class="toghmenulabel">
+					<FormattedMessage id="Menu.JoinExplanation" defaultMessage="Search and join events" />
+				</div>
+				
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#" class="toghmenu">
 					<FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
-				</a><p/>
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+				</a>
+				<div class="toghmenulabel">
+					<FormattedMessage id="Menu.InvitationExplanation" defaultMessage="Check your invitations, accept them." />
+				</div>
+				
+				
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#"  class="toghmenu">
 					<FormattedMessage id="Menu.MyFriends" defaultMessage="My Friends" />
-				</a><p/>
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#">
+				</a>
+				<div class="toghmenulabel">
+					<FormattedMessage id="Menu.MyFriendExplanation" defaultMessage="See all your friends, invite new, send messages." />
+				</div>
+				
+				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#"  class="toghmenu">
 					<FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
-				</a><p/>
-				<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#">
+				</a>
+				<div class="toghmenulabel">
+					<FormattedMessage id="Menu.MyProfileExplanation" defaultMessage="Manage your preferences, set up an avatar." />
+				</div>
+
+				<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghmenu">
 					<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
-				</a><p/>
+				</a>
+				<div class="toghmenulabel">
+					<FormattedMessage id="Menu.AdmininstratorExplanation" defaultMessage="Administrator function." />
+				</div>
 				&nbsp;<p />
 				&nbsp;<p />
 				<Login authCallback={this.authCallback} />
@@ -73,7 +103,7 @@ class Menu extends React.Component {
 				<div> 
 					<div style={{float: "right"}}>
 						<a onClick={() =>this.setVisibleMenu(true)} href="/#">
-						<span class="glyphicon glyphicon-chevron-right" ></span></a>
+						<ChevronCompactRight height="40px" width="40px"/></a>
 					</div>
 				</div>
 			)

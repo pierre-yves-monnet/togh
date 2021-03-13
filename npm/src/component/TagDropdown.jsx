@@ -35,26 +35,25 @@ class TagDropDown extends React.Component {
 	
 //----------------------------------- Render
 	render() {
-		console.log("TagDropDown.render value="+this.state.value);
+		// console.log("TagDropDown.render value="+this.state.value);
 
 		var tagHtml = null;
 		var dropDownChangeHtml = (<div/>);
 		if (this.state.readWrite) {
-			var listOptions = this.state.listOptions.map( item =>
-				{ return (
-						<OverflowMenuItem className={item.value} 
-							itemText={item.label}
-							id={item.value}
-							onClick={(event) => {
-									console.log("TagDropdown.click new value="+item.value);
-									this.setState( { value : item.value});
-									this.props.changeState( item.value )}} />
-					);
-				}
-			)
 			dropDownChangeHtml = (
 				<OverflowMenu selectorPrimaryFocus={'.'+ this.state.value} >
-					{listOptions}
+					{this.state.listOptions.map( (item, index) =>
+						{ return (
+							<OverflowMenuItem className={item.value} 
+								itemText={item.label}
+								key={index}
+								id={item.value}
+								onClick={(event) => {
+										// console.log("TagDropdown.click new value="+item.value);
+										this.setState( { value : item.value});
+										this.props.changeState( item.value )}} />
+							);
+						}) }
 				</OverflowMenu>)
 		}
 		var tagHtml= (<div>{dropDownChangeHtml}</div>);

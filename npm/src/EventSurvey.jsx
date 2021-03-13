@@ -10,14 +10,14 @@ import React from 'react';
 import { injectIntl, FormattedMessage } from "react-intl"; 
 
 import { TextInput, TextArea, Checkbox } from 'carbon-components-react';
-import { Pencil, Eye, DashCircle, PlusCircle} from 'react-bootstrap-icons';
+import { Pencil, Eye, DashCircle, PlusCircle, Check2Square, Square} from 'react-bootstrap-icons';
 
 
 import UserTips from './component/UserTips';
 import TagDropdown from './component/TagDropdown';
-import UserParticipant from './entity/UserParticipant';
-import Survey from './entity/Survey';
-import * as surveyConstant from './entity/Survey';
+import UserParticipantCtrl from './controller/UserParticipantCtrl';
+import SurveyCtrl from './controller/SurveyCtrl';
+import * as surveyConstant from './controller/SurveyCtrl';
 
 import FactoryService from './service/FactoryService';
 
@@ -30,19 +30,21 @@ const DISPLAY_NOACCESS = "NOACCESS";
 
 class EventSurvey extends React.Component {
 	// this.props.updateEvent()
+	// this.props.getSurveyfct()
 	constructor(props) {
 		super();
 		this.state = {
 			event: props.event,
-			survey : props.survey, 
 			show: {
 				typeDisplay: DISPLAY_SURVEY,
 			}
 		};
-		console.log("EventSurvey.constructor survey="+JSON.stringify(props.survey));
-
-		var userParticipant = props.getUserParticipant();
-		this.surveyEmbeded = new Survey( props.event, props.survey, userParticipant, props.updateEvent);
+		console.log("EventSurvey.constructor ");
+		this.eventCtrl = props.eventCtrl;
+		this.forceUpdatefct =  props.forceUpdatefct;
+		
+		this.surveyCtrl =  this.eventCtrl.getCurrentSurveyCtrl();
+		
 		
 		// show : OFF, ON, COLLAPSE
 		this.setAttributeCheckbox		= this.setAttributeCheckbox.bind( this );
@@ -53,14 +55,15 @@ class EventSurvey extends React.Component {
 	}
 	// Calculate the state to display
 	componentDidMount () {
-		console.log("EventSurvey.componentDidMount surveyEmbeded="+JSON.stringify(this.surveyEmbeded.getValue()));
+		console.log("EventSurvey.componentDidMount");
 		// survey May be completed, set it again	
-		this.setState( {survey: this.surveyEmbeded.getValue()});
-		
-		var userParticipant = this.props.getUserParticipant();
-		if ( this.surveyEmbeded.getStatus() === surveyConstant.STATUS_INPREPARATION) {
+		// this.setState( {survey: this.surveyEmbeded.getValue()});
+		this.currentSurveyCtrl =  this.eventCtrl.getCurrentSurveyCtrl();
+
+		this.userParticipant = this.eventCtrl.getUserParticipant();
+		if ( this.currentSurveyCtrl.getStatus() === surveyConstant.STATUS_INPREPARATION) {
 			// so move to the ADMIN or the NOACCESS, depending of the user permission
-			if (userParticipant.isParticipant()) 
+			if (this.userParticipant.isParticipant()) 
 				this.setState( { show: { typeDisplay: DISPLAY_ADMIN}});
 			else
 				this.setState( { show: { typeDisplay: DISPLAY_NOACCESS}});
@@ -72,15 +75,20 @@ class EventSurvey extends React.Component {
 	
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("EventSurvey: render survey"+JSON.stringify(this.state.survey));
-		if (! this.state.survey) {
+		console.log("EventSurvey: render survey");
+		this.surveyCtrl = this.eventCtrl.getCurrentSurveyCtrl();
+
+		if (! this.surveyCtrl ) {
 			return (<div/>)
 		}
-		
+	
+		// refresh the current survey embeded
+		// this.surveyEmbeded = new Survey( this.state.event, currentSurvey, this.userParticipant, this.updateEventfct);
+
 		if (this.state.show.typeDisplay === DISPLAY_NOACCESS) {
 			return (
 				<div>
-					<div class="row toghSectionHeader">{this.state.survey.title}</div>
+					<div class="row toghSectionHeader"> {this.survey.title}</div>
 					<div><FormattedMessage id="EventSurvey.NoAccessForSurveyInPreparation" defaultMessage="This survey is in preparation. You can't access it for the moment." /></div>
 				</div>
 			);
@@ -95,29 +103,30 @@ class EventSurvey extends React.Component {
 	 */
 	renderSurveyAdmin() {
 		const intl = this.props.intl;
-
+		
+		var survey = this.surveyCtrl.getValue();
 		
 		var listChoiceHtml = [];
 		
-		listChoiceHtml = this.surveyEmbeded.getValue().choices.map((item, index) =>
+		listChoiceHtml = survey.choices.map((item, index) =>
 			<tr key={item.code}>
 				<td> 
 					<TextInput value={item.propositiontext} 
 						onChange={(event) => {
-						this.surveyEmbeded.setChoiceValue("propositiontext", event.target.value, item);
-						this.setState( {survey: this.surveyEmbeded.getValue()});
+						this.surveyCtrl.setChoiceValue("propositiontext", event.target.value, item);
+						this.setState( {survey: this.surveyCtrl.getValue()});
 					}}
 					 labelText="" ></TextInput>
 				</td>
 				<td><button class="btn btn-danger btn-xs" 					 
 					title={intl.formatMessage({id: "EventSurvey.removeItem",defaultMessage: "Remove this item"})}
 					onClick={() => {
-								this.surveyEmbeded.removeChoice( item.code );
-								this.setState( {survey: this.surveyEmbeded.getValue()});															
+								this.surveyCtrl.removeChoice( item.code );
+								this.setState( {survey: this.surveyCtrl.getValue()});															
 						}} >
 						<DashCircle onClick={() => {
-								this.surveyEmbeded.removeChoice( item.code );
-								this.setState( {survey: this.surveyEmbeded.getValue()});															
+								this.surveyCtrl.removeChoice( item.code );
+								this.setState( {survey: this.surveyCtrl.getValue()});															
 						}}  />
 					</button>
 				</td>
@@ -127,13 +136,16 @@ class EventSurvey extends React.Component {
 		return (<div>
 					<div class="row">
 						<div class="col-2">
-							{this.getTagState( this.surveyEmbeded.getValue() )}
+							{this.getTagState( survey )}
 						</div>
 						<div class="col-8">
-							<TextInput value={this.state.survey.title} 
+							<TextInput value={survey.title} 
 								onChange={(event) => {
-									this.surveyEmbeded.setAttribut("title", event.target.value);									
-									this.setState({ survey: this.surveyEmbeded.getValue() });
+									this.surveyCtrl.setAttribut("title", event.target.value);			
+									//console.log("EventSurvey:setState( eventCtrl.getEvent()) ");						
+									this.setState({ event: this.eventCtrl.getEvent() });
+									// console.log("EventSurvey:forceUpdate my parent");
+									this.forceUpdatefct();
 									}
 								} 
 								labelText={<FormattedMessage id="EventSurvey.Title" defaultMessage="Title" />} />
@@ -142,13 +154,13 @@ class EventSurvey extends React.Component {
 							<button  class="btn btn-primary btn-xs" 
 								onClick={(event) => {
 									console.log("EventItinerary.ClickOnButtonView : ");
-									this.surveyEmbeded.completeSurveyWithMe();									
+									this.surveyCtrl.completeSurveyWithMe();									
 									this.setState( { show: { typeDisplay: DISPLAY_SURVEY}});
 								}}>
 							<Eye   
 								onClick={(event) => {
 									console.log("EventSurvey : ClickOnEyeView");
-									this.surveyEmbeded.completeSurveyWithMe();
+									this.surveyCtrl.completeSurveyWithMe();
 									this.setState( { show: { typeDisplay: DISPLAY_SURVEY}});
 								}
 								}/>
@@ -157,10 +169,10 @@ class EventSurvey extends React.Component {
 					</div>
 					<div class="row">
 						<div class="col-8">
-							<TextArea value={this.state.survey.description} 
+							<TextArea value={survey.description} 
 								onChange={(event) => {
-									this.surveyEmbeded.setAttribut("description", event.target.value);
-									this.setState({ survey: this.surveyEmbeded.getValue() });
+									this.surveyCtrl.setAttribut("description", event.target.value);
+									this.setState({  event: this.eventCtrl.getEvent() });
 								}}  
 								labelText={<FormattedMessage id="EventSurvey.Description" defaultMessage="Description" />} />
 						</div>
@@ -171,12 +183,14 @@ class EventSurvey extends React.Component {
 								<th><button class="btn btn-success btn-xs" 					 
 									title={intl.formatMessage({id: "EventSurvey.AddOption",defaultMessage: "Option"})}
 									onClick={() => { 
-											this.surveyEmbeded.addChoice();
-											this.setState({ survey: this.surveyEmbeded.getValue() });
+											console.log("EventSurvey.addButtonChoice");
+											this.surveyCtrl.addChoice();
+											this.setState({  event: this.eventCtrl.getEvent() });
 									}}	>
-									<PlusCircle onClick={() => { 
-											this.surveyEmbeded.addChoice();
-											this.setState({ survey: this.surveyEmbeded.getValue() });
+									<PlusCircle onClick={() => {
+											console.log("EventSurvey.addPlusChoice"); 
+											//this.surveyCtrl.addChoice();
+											//this.setState({  event: this.eventCtrl.getEvent() });
 									}}/>
 									</button>
 								</th></tr>
@@ -192,15 +206,16 @@ class EventSurvey extends React.Component {
 	 */
 	renderSurvey () {
 				
-		var userParticipant = this.props.getUserParticipant();
-		var survey =this.surveyEmbeded.getValue();
+		var userParticipant = this.eventCtrl.getUserParticipant();
+
+		var survey = this.surveyCtrl.getValue();
 
 		var headerList = [];
 		headerList.push(<th class="toghSectionHeader"></th>);
 		for (var i in survey.choices) {
 			headerList.push(
 				<th class="toghSectionHeader" style={{textAlign: "center"}}>
-					{survey.choices[ i ].propositiontext} ({survey.choices[ i ].code})
+					{survey.choices[ i ].propositiontext} ({this.getNumberOfVote(survey.choices[ i ].code)})
 				</th> );
 		}
 		
@@ -212,26 +227,33 @@ class EventSurvey extends React.Component {
 			// Checkbox can't be center		
 			for (var i in survey.answers) {
 				var answerParticipant = survey.answers[ i ];
-				var participantAnswer = [];
-				for (var j in survey.choices) {
-					var surveyChoice = survey.choices[ j ]
-					participantAnswer.push(
-						<td style={{textAlign: "center"}}>
-							<input type="checkbox"
-							 	id ={answerParticipant.userid+"_"+surveyChoice.code}
-								style={{ width: "1rem", height:"1rem",  margin: "0.125rem"}}
-								defaultChecked={answerParticipant.decision[ surveyChoice.code ]}
-								readOnly={survey.state === surveyConstant.STATUS_CLOSE || answerParticipant.userid !== userParticipant.getUser().id} 
-								onChange={( event ) => {
-									console.log("EventSurvey.clickOnCheckBox code="+surveyChoice.code);
-									this.surveyEmbeded.setAnswer( answerParticipant, surveyChoice.code, event.target.checked );
-									this.setState({ survey: this.surveyEmbeded.getValue() });
-									}} />
-						</td>);
-				}
+				
 				participantList.push(<tr>
 					<td> {answerParticipant.username}</td>
-					{participantAnswer}
+					{ survey.choices.map( surveyChoice => 
+						{ 
+							var itemSquare=(<div/>);
+							if (survey.status === surveyConstant.STATUS_CLOSE || answerParticipant.userid !== userParticipant.getUser().id) {
+								if (answerParticipant.decision[ surveyChoice.code ])
+									itemSquare= (<Check2Square/>);
+								else	
+									itemSquare= (<Square/>);
+							} else {
+								itemSquare = (<input type="checkbox"
+										 	id ={answerParticipant.userid+"_"+surveyChoice.code}
+											style={{ width: "1rem", height:"1rem",  margin: "0.125rem"}}
+											defaultChecked={answerParticipant.decision[ surveyChoice.code ]}
+											onChange={( event ) => {
+												console.log("EventSurvey.clickOnCheckBox code="+surveyChoice.code);
+												this.surveyCtrl.setAnswer( answerParticipant, surveyChoice.code, event.target.checked );
+												this.setState({ survey: this.surveyCtrl.getValue() });
+												}} />)
+							}
+							return ( 
+								<td style={{textAlign: "center"}}>
+									{itemSquare}							
+								</td>) } ) 
+						}
 					</tr>);
 			}		
 		}
@@ -291,13 +313,13 @@ class EventSurvey extends React.Component {
 	
 	
 	getTagState( survey ) {
-		console.log("EventSurvey.getTagState item.status="+survey.status);
+		// console.log("EventSurvey.getTagState item.status="+survey.status);
 		const intl = this.props.intl;
 		
 		const listOptions = [
 			{ label: intl.formatMessage({id: "EventSurvey.InPreparation",defaultMessage: "In preparation"}),
 			 value: surveyConstant.STATUS_INPREPARATION,
-			 type: "tear" },			
+			 type: "teal" },			
 			{ label: intl.formatMessage({id: "EventSurvey.InProgress",defaultMessage: "In progress"}),
 			 value:  surveyConstant.STATUS_OPEN,
 			 type: "blue" },
@@ -307,9 +329,22 @@ class EventSurvey extends React.Component {
 		];
 		return (<TagDropdown listOptions={listOptions} value={survey.status} readWrite={true} 
 				changeState={(value) => {
-					this.surveyEmbeded.setAttribut("status", value);
-					this.setState( {survey: this.surveyEmbeded.getValue()});
+					this.surveyCtrl.setAttribut("status", value);
+					this.setState( {survey: this.surveyCtrl.getValue()});
 					}} />);		
+	}
+	
+	
+	getNumberOfVote( surveyCode ) {
+		var survey = this.surveyCtrl.getValue();
+
+		var total=0;
+		for (var i in survey.answers) {
+			var answerParticipant = survey.answers[ i ];
+			if (answerParticipant.decision[ surveyCode ])
+				total++;
+		}
+		return total;
 	}
 	
 }

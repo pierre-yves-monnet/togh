@@ -30,10 +30,10 @@ import EventState from './EventState';
 import EventExpense from './EventExpense';
 import EventSurveyList from './EventSurveyList';
 import BasketSlabEvent from './service/BasketSlabEvent';
-import UserParticipant from './entity/UserParticipant';
-import EventPreferences from './entity/EventPreferences';
+import UserParticipantCtrl from './controller/UserParticipantCtrl';
+import EventPreferencesCtrl from './controller/EventPreferencesCtrl';
 
-
+import EventCtrl from './controller/EventCtrl';
 
 const TAB_PARTICIPANT='Participant';
 const TAB_ITINERARY = 'Itinerary';
@@ -56,8 +56,7 @@ class Event extends React.Component {
 			'eventid': props.eventid,
 			show: {
 				currentSection: TAB_PARTICIPANT
-			},
-			showRegistration: false
+			}
 		};
 
 		
@@ -67,14 +66,14 @@ class Event extends React.Component {
 			this.state.event.description = '';
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
-		this.showRegistration 			= this.showRegistration.bind(this);
+
 		this.accessTab			 		= this.accessTab.bind(this);
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.loadEvent 					= this.loadEvent.bind(this);
 		this.changeState 				= this.changeState.bind(this);
 		this.setAttribut 				= this.setAttribut.bind(this);
-		this.updateEvent 				= this.updateEvent.bind(this);
+		this.updateEventfct 			= this.updateEventfct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
 		
 
@@ -97,7 +96,7 @@ class Event extends React.Component {
 			return (<div />);
 		}
 
-		console.log("Event.render: section=task:" + this.state.show.secTasklist + " Shop:" + this.state.show.secShoppinglist);
+		
 		var toolService = FactoryService.getInstance().getToolService();
 
 
@@ -206,6 +205,7 @@ class Event extends React.Component {
 						
 					<div class="col-sm-4">
 						<TextInput labelText="" 
+							id="name"
 							value={this.state.event.name}
 							style={{fontSize: "24px", height: "50px", color: "#ac1e4a", maxWidth: "315px"}} 
 							onChange={(event) => this.setAttribut("name", event.target.value)} /><br />
@@ -344,43 +344,34 @@ class Event extends React.Component {
 
 				</div>
 				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} 
-																			updateEvent={this.updateEvent}
+																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
 				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event}
-																			updateEvent={this.updateEvent}
+																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
 				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}
-																			updateEvent={this.updateEvent}
+																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
 				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event}
-																			updateEvent={this.updateEvent}
+																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
 				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}
-																			updateEvent={this.updateEvent}
+																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
-				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList event={this.state.event}
-																			updateEvent={this.updateEvent}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList 
+																			eventCtrl={this.eventCtrl}
+																			/>}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
-																			updateEvent={this.updateEvent}
+																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
 			</div>)
 	} //---------------------------- end Render
-
-
-	showRegistration() {
-		console.log("ShowRegistration !!!!!!!!!!!!!!!!!!");
-		console.log("Event.showRegistration state=" + JSON.stringify(this.state));
-
-		this.setState({ showRegistration: true });
-	}
 
 
 	changeState(event) {
@@ -393,6 +384,8 @@ class Event extends React.Component {
 	// provide automatic save
 	setAttribut(name, value) {
 		console.log("Event.setAttribute: attribut:" + name + " <= " + value + " typeof=" + (typeof value) + " EventinProgress=" + JSON.stringify(this.state.event));
+		this.eventCtrl.setAttribut( name, value, this.state.event, "");
+		/*
 		var eventValue = this.state.event;
 		eventValue[name] = value;
 
@@ -400,35 +393,24 @@ class Event extends React.Component {
 		if (this.timer)
 			clearTimeout(this.timer);
 		this.timer = this.timer = setTimeout(() => { this.automaticSave(); }, 2000);
+		*/
 	}
 
 
+	/** */
+	refreshEventfct(  ) {
+		console.log("Event.refreshEventfct Start!! event="+JSON.stringify(this.eventCtrl.getEvent()));
+
+		this.setState( { event: this.eventCtrl.getEvent()} );
+	}
+	
 	/**
 	Something change in the event, all subcomponent refer it with a Slab, which is the information which change */
-	updateEvent( slab ) {
-		if (! slab) {
-			console.log("Event.updateEvent Don't receive a SLAB !!");
-			return;
-		}
-		console.log("Event.updateEvent: getSlab event="+JSON.stringify( this.state.event));
-		this.currentBasketSlabEvent.addSlabEvent( slab );
-		if (this.timer)
-			clearTimeout(this.timer);
-		this.timer = this.timer = setTimeout(() => { this.automaticSave(); }, 2000);
-
+	updateEventfct( slab ) {
+			console.log("Event.updateEventfct : DEPRECATED METHOD !!");
 	}
-	automaticSave() {
-		console.log("Event.AutomaticSave: ListSlab=" +this.currentBasketSlabEvent.getString());
-		var readyToSendBasket = this.currentBasketSlabEvent;
-		this.currentBasketSlabEvent = new BasketSlabEvent( this.state.event );
-		readyToSendBasket.sendToServer();
-		
-		
-		if (this.timer)
-			clearTimeout(this.timer);
-
-	}
-
+	
+	
 	// -------------------------------------------- Access different part
 	accessTab( accessTab ) {
 		console.log("Event.accessTab tab=" + JSON.stringify(accessTab));
@@ -444,10 +426,10 @@ class Event extends React.Component {
 		// search the access right for this user
 		for (var i in this.state.event.participants) {
 			if (this.state.event.participants[ i ].user && this.state.event.participants[ i ].user.id === user.id) {
-				return new UserParticipant(this.state.event, this.state.event.participants[ i ] )
+				return new UserParticipantCtrl(this.state.event,  this.state.event.participants[ i ] )
 			}
 		}
-		return new UserParticipant(this.state.event,null );
+		return new UserParticipantCtrl(this.state.event,null );
 	}
 	
 
@@ -466,65 +448,24 @@ class Event extends React.Component {
 			}
 			else {
 
-				this.setState({ event: httpPayload.getData().event, show: { currentSection : TAB_PARTICIPANT } });
 				
 				// not in the state: we don't want a render when something is added
 				// so, this is the moment to create the Basket
-				this.currentBasketSlabEvent= new BasketSlabEvent( this.state.event );
+				// this.currentBasketSlabEvent= new BasketSlabEvent( this.state.event );
 	
-				console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
-				this.completeEvent();
+				// console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
+				this.eventCtrl = new EventCtrl( this, httpPayload.getData().event );
+				// console.log("Event.loadEvent: before complementeion event=" + JSON.stringify(this.eventCtrl.getEvent()));
+				this.eventCtrl.completeEvent();
+				// console.log("Event.loadEvent: end of complete, event=" + JSON.stringify(this.eventCtrl.getEvent()));
+				this.setState({ event: this.eventCtrl.getEvent(), show: { currentSection : TAB_PARTICIPANT } });
+				// console.log("Event.loadEvent: the end ");
 			}
 		});
 
 	}
 
-	// -------------------------------------------- CompleteEvent
-    completeEvent() {
-		var event = this.state.event;
-		console.log("Event.completeEvent: Start=" + JSON.stringify( event ));
 
-		// TextArea must not be null
-		if (! event.description)
-			event.description='';
-
-		if (!event.participants) {
-			console.log("Event.completeEvent: not normal but be robust, create one");
-			event.participants = [];
-		}
-		if (!event.expenses) {
-			console.log("Event.completeEvent: no shopping list exist, create one");
-			event.expenses = {};
-		}
-		
-		if (!event.geoLocalisation) {
-			console.log("Event.completeEvent: no shopping list exist, create one");
-			event.geoLocalisation = {};
-		}
-		if (!event.shoppinglist) {
-			console.log("Event.completeEvent: no shopping list exist, create one");
-			event.shoppinglist = [];
-		}
-		
-		if (!event.tasklist) {
-			console.log("Event.completeEvent: no task list exist, create one");
-			event.tasklist = [];
-		}
-		if (!event.surveylist) {
-			console.log("Event.completeEvent: no survey list exist, create one");
-			event.surveylist = [];
-		}
-		if (!event.preferences) {
-			console.log("Event.preferences: no preference, create one");
-			event.preferences = {};
-		}
-		// Create the eventPreference now
-		this.eventPreferences           = new EventPreferences(this.state.event, this.updateEvent);
-
-
-		this.setState( {event: event });
-
-} 
 
 
 	// -------- Rest Call

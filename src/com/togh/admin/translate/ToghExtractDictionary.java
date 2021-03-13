@@ -52,8 +52,9 @@ public class ToghExtractDictionary extends ToghDictionary {
         //    "defaultMessage": "Welcome to Togh D"
         //  },
         for (Entry<String, Object> entry :dictionaryExtracted.entrySet())  {
+            @SuppressWarnings("unchecked")
             String defaultMessage = (String) ((Map<String,Object>)entry.getValue()).get("defaultMessage");
-            setSentence( entry.getKey(), defaultMessage);
+            setSentence( entry.getKey(), defaultMessage, defaultMessage);
         }
         }catch(Exception e ) {
             listEvents.add( new LogEvent(eventReadExtractDictionaryError, "Dictionary ["+language+"] error "+e.getMessage() ));

@@ -1,185 +1,588 @@
 {
-  "UserTips.DeactivateTipInPreference": "يمكن إلغاء تنشيط النصائح في تفضيلاتك",
-  "Invitation.LastName": "الكنية",
-  "AdminTranslator.TooMuchSentences": "جملة تجاوز السعة",
-  "EventList.MyEvents": "أحداثي",
-  "Invitation.UserEmail": "بريد الالكتروني",
-  "Event.ShoppingList": "قائمة التسوق",
-  "EventParticipant.Owner": "مالك",
-  "EventParticipant.TitleActiveParticipant": "مشارك نشط",
-  "Event.ScopeOpen": "فتح",
-  "AdminTranslator.AverageTranslation": "المتوسط (بالمللي ثانية)",
-  "Event.Photos": "الصور",
-  "Event.Scope": "مجال",
-  "EventTaskList.MainTitleTaskList": "قائمة المهام",
-  "EventParticipant.InvitationInProgress": "الدعوة قيد التقدم",
-  "Invitation.PhoneNumber": "رقم التليفون",
-  "EventTaskList.State": "حالة",
-  "EventItinerary.ProvideDateInEvent": "حدد تاريخ لهذا الحدث",
-  "Invitation.OnlyUserNotAlreadyAParticipant": "فقط المستخدمين ليسوا مشاركين بالفعل",
-  "AdminTranslator.CompleteDictionary": "القاموس الكامل",
-  "EventItinerary.ShowDetail": "أظهر تفاصيل",
-  "Event.StartDate": "تاريخ البدء",
-  "Event.Tasks": "مهام",
-  "EventList.CreateAnEvent": "أنشئ حدثًا",
-  "EventShoppingList.removeItem": "أزل هذا البند",
-  "EventList.Name": "اسم",
-  "EventList.Refresh": "ينعش",
-  "Invitation.Close": "قريب",
-  "EventTaskList.FilterUnaffected": "غير متأثر",
-  "EventShoppingList.ShowDetails": "التفاصيل",
-  "Event.Survey": "استبيان",
-  "Event.EventName": "اسم",
-  "EventTaskList.NoItem": "ليس لديك أي عنصر في القائمة. أضف واحدا !",
-  "EventItineray.Description": "وصف",
-  "EventSurvey.NoItem": "ليس لديك أي استطلاع جاهز في القائمة.",
-  "EventSurvey.addItem": "قم بإنشاء استبيان جديد في القائمة",
-  "Expense.Budget": "ميزانية",
-  "EventTaskList.FilterDone": "منتهي",
-  "Login.connection": "اتصال",
-  "Event.Status": "حالة",
-  "EventTaskList.Cancelled": "ألغيت",
-  "AdminTranslator.Name": "اسم",
-  "EventTaskList.Who": "متى",
-  "Event.OneDate": "موعد واحد",
-  "Event.TitleSurvey": "استبيان",
-  "AdminTranslator.CheckDictionary": "تحقق من القاموس",
-  "EventList.Dae": "تاريخ",
-  "EventShoppingList.Who": "متى",
-  "Event.TitleExpense": "إدارة النفقات وتقاسمها",
-  "Event.EndDate": "تاريخ الانتهاء",
-  "EventParticipant.Person": "شخص",
-  "Login.googlelogin": "تسجيل الدخول",
-  "Invitation.Search": "بحث",
-  "EventItinerary.ProvidePeriodDateInEvent": "حدد تاريخ البدء والانتهاء لهذا الحدث",
-  "EventShoppingList.Cancel": "ألغيت",
-  "EventGeolocalisation.Address": "تبوك",
-  "Event.TimeEvent": "وقت",
-  "Event.TitleGeolocalisation": "اين الحدث؟",
-  "EventSurvey.SurveyTip": "هل يفضل المشاركون زيارة متحف للفنون أو الفضاء الجوي؟ هل تفضل مطعم Japanase أو إيطالي أو فرنسي؟ قم بإنشاء استطلاع وجمع المراجعة.",
-  "Event.EventDate": "تاريخ",
-  "EventParticipant.Left": "اليسار",
-  "EventSurvey.MainTitleSurveyList": "استبيان",
-  "Event.TitleShoppingList": "قائمة التسوق: ماذا نحضر؟",
-  "EventTaskList.addItem": "إضافة عنصر جديد في القائمة",
-  "AdminTranslator.Title": "ترجمة",
-  "EventSurveyList.NoItem": "ليس لديك أي استطلاع جاهز في القائمة.",
-  "Invitation.Email": "بريد الالكتروني",
-  "EventTaskList.End": "نهاية",
-  "Event.DurationEvent": "مدة",
-  "Event.Expense": "مصروف",
-  "Login.googlelogout": "تسجيل الدخول",
-  "AdminHome.Title": "إدارة",
-  "EventSurvey.InPreparation": "قيد التحضير",
-  "Event.ScopeLimited": "محدود",
-  "EventTaskList.FilterInProgress": "في تقدم",
-  "EventTaskList.InProgress": "في تقدم",
-  "Menu.Events": "الأحداث",
-  "Event.TitleChat": "محادثة",
-  "EventSurvey.AddOne": "أضف واحدا !",
-  "Event.DatePolicy": "سياسة التاريخ",
-  "EventShoppingList.ShowExpense": "إظهار المصاريف",
-  "Invitation.RoleParticipant": "مشارك",
-  "EventParticipant.RoleParticipant": "مشارك",
-  "Menu.MyInvitations": "دعواتي",
-  "EventTaskList.ShowDate": "عرض التواريخ",
-  "EventItineray.What": "ماذا او ما",
-  "EventGeolocalisation.ShareMyLocation": "مشاركة الترجمة الخاصة بي خلال الحدث",
-  "EventTaskList.FilterPlanned": "مخطط",
-  "Invitation.Invitation": "رسالة دعوة",
-  "Login.email": "بريد الالكتروني",
-  "Event.TitleTasks": "مهام",
-  "EventTaskList.Begin": "يبدأ",
-  "AdminTranslator.TranslateSentences": "الجمل المترجمة",
-  "EventSurvey.Description": "وصف",
-  "EventTaskList.FilterAllParticipants": "كل المشاركين",
-  "EventParticipant.RoleOrganizer": "منظم",
-  "EventShoppingList.ToBring": "لجلب",
-  "EventShoppingList.AddOne": "أضف واحدا !",
-  "EventItineray.Category": "فئة",
-  "Event.TitleItinerary": "حدد خط سير الرحلة ونقطة الاهتمام",
-  "EventItineray.Night": "ليل",
-  "EventItineray.Restaurant": "مطعم",
-  "EventState.Done": "منتهي",
-  "EventTaskList.Subject": "موضوعات",
-  "Login.CantConnectToTheServer": "لا يمكن الاتصال بالخادم",
-  "Event.Period": "فترة",
-  "EventParticipant.Titleinvited": "المشارك المدعو: لم يتم استلام أي تأكيد في هذه اللحظة",
-  "Invitation.Searching": "يبحث",
-  "EventShoppingList.addItem": "إضافة عنصر جديد في القائمة",
-  "EventParticipant.TitleLeft": "غادر المشارك الحدث",
-  "EventSurveyList.MainTitleSurveyList": "استبيان",
-  "EventSurveyList.addItem": "قم بإنشاء استبيان جديد في القائمة",
-  "EventList.AccessThisEvent": "الوصول إلى هذا الحدث",
-  "Event.ScopeSecret": "سر",
-  "EventItinerary.MainTitleItinerary": "مسار الرحلة",
-  "Menu.MyFriends": "أصدقائى",
-  "EventTaskList.TaskTip": "استخدم المهام للإشارة إلى ما عليك القيام به لحدثك. يمكنك تعيين مشارك ، وتمييز حالة المهمة: مخطط لها ، تم إنجازه .... وفقًا لتفضيلاتك ، قد تتلقى ملاحظة عندما يكون لديك مهمة يجب إدراكها",
-  "EventParticipant.Invited": "مدعو",
-  "EventParticipant.Status": "حالة",
-  "EventState.InPreparation": "قيد التحضير",
-  "AdminTranslator.TimeTranslation": "وقت الترجمة",
-  "Event.DateEvent": "تاريخ الحدث",
-  "Event.ScopeOpenConfirmation": "فتح عند التأكيد",
-  "EventItineray.Expense": "مصروف",
-  "EventState.Actif": "أكتيف",
-  "EventItinerary.ShowExpense": "إظهار المصاريف",
-  "Event.Description": "وصف",
-  "EventShoppingList.What": "ماذا او ما",
-  "EventSurvey.Title": "لقب",
-  "Invitation.RoleOrganizer": "منظم",
-  "Invitation.UserPhoneNumber": "رقم التليفون",
-  "EventGeolocalisation.MainTitleGeolocation": "تحديد الموقع الجغرافي",
-  "EventList.AllEvents": "كل الأحداث",
-  "EventSurveyList.AddOne": "أضف واحدا !",
-  "Menu.MyProfile": "ملفي",
-  "EventSurvey.NoAccessForSurveyInPreparation": "هذا المسح قيد الإعداد. لا يمكنك الوصول إليه في الوقت الحالي.",
-  "EventTaskList.FilterMyTasks": "مهامي",
-  "Invitation.UserName": "اسم",
-  "EventItineray.Budget": "ميزانية",
-  "EventTaskList.AddSurvey": "أضف استطلاع في القائمة",
-  "AdminTranslator.MissingSentences": "الجمل المفقودة",
-  "EventItineray.PointOfInterest": "نقطة الأهتمام",
-  "Event.Geolocalisation": "تحديد الموقع الجغرافي",
-  "EventParticipant.MainTitleParticipant": "مشاركون",
-  "EventParticipant.Role": "دور",
-  "EventItineray.WebSite": "موقع الكتروني",
-  "Invitation.RoleObserver": "مراقب",
-  "Menu.Administration": "إدارة",
-  "EventItineray.Visite": "زيارة",
-  "EventTaskList.FilterAllStates": "كل المقاطعات",
-  "EventTaskList.AddTask": "أضف مهمة في القائمة",
-  "EventShoppingList.NoItem": "ليس لديك أي عنصر في القائمة.",
-  "EventSurvey.Closed": "مغلق",
-  "AdminTranslator.nbTransations": "عدد الترجمة",
-  "EventParticipant.Actif": "أكتيف",
-  "Event.TitleParticipant": "ادعُ مشاركًا إلى هذا الحدث الخاص بك",
-  "EventTaskList.Description": "وصف",
-  "Event.Chat": "محادثة",
-  "Event.Itinerary": "مسار الرحلة",
-  "Invitation.FirstName": "الاسم الاول",
-  "Invitation.SendInvitation": "إرسال دعوة",
-  "EventItinerary.ShowItineraryMap": "إظهار خريطة خط سير الرحلة",
-  "BodyTogh.welcome": "مرحبا بكم في طوق د",
-  "EventState.Cancelled": "ألغيت",
-  "EventSurvey.InProgress": "في تقدم",
-  "EventShoppingList.Title": "قائمة التسوق",
-  "EventList.Participants": "مشاركون",
-  "EventItineray.Address": "تبوك",
-  "EventSurvey.removeItem": "أزل هذا البند",
-  "EventTaskList.StatePlanned": "مخطط",
-  "Invitation.UserFound": "المستخدمون تم العثور عليها",
-  "Expense.Price": "السعر",
-  "EventSurveyList.SurveyTip": "هل يفضل المشاركون زيارة متحف للفنون أو الفضاء الجوي؟ هل تفضل مطعم Japanase أو إيطالي أو فرنسي؟ قم بإنشاء استطلاع وجمع المراجعة.",
-  "EventShoppingList.Description": "وصف",
-  "EventItineray.Price": "السعر",
-  "EventTaskList.Done": "منتهي",
-  "Login.password": "كلمة المرور",
-  "Login.logout": "تسجيل خروج",
-  "Invitation.SearchAUser": "ابحث عن مستخدم",
-  "EventParticipant.RoleObserver": "مراقب",
-  "Event.TitlePhotos": "الصور",
-  "EventShoppingList.Done": "منتهي",
-  "Event.Participants": "مشاركون",
-  "Invitation.ByEmail": "أرسل بريدا إلكترونيا"
-}
+  "__AdminTransaltor.Title" : "Administration",
+  "AdminTransaltor.Title" : "إدارة",
+
+  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation" : "المتوسط (بالمللي ثانية)",
+
+  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
+  "AdminTranslator.CheckDictionary" : "تحقق من القاموس",
+
+  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary" : "القاموس الكامل",
+
+  "__AdminTranslator.MissingSentences" : "Missing sentences",
+  "AdminTranslator.MissingSentences" : "الجمل المفقودة",
+
+  "__AdminTranslator.Name" : "Name",
+  "AdminTranslator.Name" : "اسم",
+
+  "__AdminTranslator.TimeTranslation" : "Time of translation",
+  "AdminTranslator.TimeTranslation" : "وقت الترجمة",
+
+  "__AdminTranslator.Title" : "Translation",
+  "AdminTranslator.Title" : "ترجمة",
+
+  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences" : "جملة تجاوز السعة",
+
+  "__AdminTranslator.TranslateSentences" : "Translated sentences",
+  "AdminTranslator.TranslateSentences" : "الجمل المترجمة",
+
+  "__AdminTranslator.nbTransations" : "Number of translation",
+  "AdminTranslator.nbTransations" : "عدد الترجمة",
+
+  "__BodyTogh.welcome" : "Welcome to Togh D",
+  "BodyTogh.welcome" : "مرحبا بكم في طوق د",
+
+  "__Event.Chat" : "Chat",
+  "Event.Chat" : "محادثة",
+
+  "__Event.DateEvent" : "Date Event",
+  "Event.DateEvent" : "تاريخ الحدث",
+
+  "__Event.DatePolicy" : "Date policy",
+  "Event.DatePolicy" : "سياسة التاريخ",
+
+  "__Event.Description" : "Description",
+  "Event.Description" : "وصف",
+
+  "__Event.DurationEvent" : "Duration",
+  "Event.DurationEvent" : "مدة",
+
+  "__Event.EndDate" : "End Date",
+  "Event.EndDate" : "تاريخ الانتهاء",
+
+  "__Event.EventDate" : "Date",
+  "Event.EventDate" : "تاريخ",
+
+  "__Event.Expense" : "Expense",
+  "Event.Expense" : "مصروف",
+
+  "__Event.Geolocalisation" : "Geolocalisation",
+  "Event.Geolocalisation" : "تحديد الموقع الجغرافي",
+
+  "__Event.Itinerary" : "itinerary",
+  "Event.Itinerary" : "مسار الرحلة",
+
+  "__Event.OneDate" : "One date",
+  "Event.OneDate" : "موعد واحد",
+
+  "__Event.Participants" : "Participants",
+  "Event.Participants" : "مشاركون",
+
+  "__Event.Period" : "Period",
+  "Event.Period" : "فترة",
+
+  "__Event.Photos" : "Photos",
+  "Event.Photos" : "الصور",
+
+  "__Event.Scope" : "Scope",
+  "Event.Scope" : "مجال",
+
+  "__Event.ScopeLimited" : "Limited",
+  "Event.ScopeLimited" : "محدود",
+
+  "__Event.ScopeOpen" : "Open",
+  "Event.ScopeOpen" : "فتح",
+
+  "__Event.ScopeOpenConfirmation" : "Open on confirmation",
+  "Event.ScopeOpenConfirmation" : "فتح عند التأكيد",
+
+  "__Event.ScopeSecret" : "Secret",
+  "Event.ScopeSecret" : "سر",
+
+  "__Event.ShoppingList" : "Shopping List",
+  "Event.ShoppingList" : "قائمة التسوق",
+
+  "__Event.StartDate" : "Start Date",
+  "Event.StartDate" : "تاريخ البدء",
+
+  "__Event.Status" : "Status",
+  "Event.Status" : "حالة",
+
+  "__Event.Survey" : "Survey",
+  "Event.Survey" : "استبيان",
+
+  "__Event.Tasks" : "Tasks",
+  "Event.Tasks" : "مهام",
+
+  "__Event.TimeEvent" : "Time",
+  "Event.TimeEvent" : "وقت",
+
+  "__Event.TitleChat" : "Chat",
+  "Event.TitleChat" : "محادثة",
+
+  "__Event.TitleExpense" : "Manage and share expenses",
+  "Event.TitleExpense" : "إدارة النفقات وتقاسمها",
+
+  "__Event.TitleGeolocalisation" : "Where is the event?",
+  "Event.TitleGeolocalisation" : "اين الحدث؟",
+
+  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
+  "Event.TitleItinerary" : "حدد خط سير الرحلة ونقطة الاهتمام",
+
+  "__Event.TitleParticipant" : "Invite participant to your event",
+  "Event.TitleParticipant" : "ادعُ مشاركًا إلى هذا الحدث الخاص بك",
+
+  "__Event.TitlePhotos" : "Photos",
+  "Event.TitlePhotos" : "الصور",
+
+  "__Event.TitleShoppingList" : "Shopping list : what to brings?",
+  "Event.TitleShoppingList" : "قائمة التسوق: ماذا نحضر؟",
+
+  "__Event.TitleSurvey" : "Survey",
+  "Event.TitleSurvey" : "استبيان",
+
+  "__Event.TitleTasks" : "Tasks",
+  "Event.TitleTasks" : "مهام",
+
+  "__EventExpense.AddExpense" : "Add a expense",
+  "EventExpense.AddExpense" : "أضف نفقة",
+
+  "__EventExpense.CurrencyOnEvent" : "Currency used in this event",
+  "EventExpense.CurrencyOnEvent" : "العملة المستخدمة في هذا الحدث",
+
+  "__EventExpense.ExpenseTip" : "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here",
+  "EventExpense.ExpenseTip" : "سجل جميع النفقات في الفعالية. المصاريف من قسم آخر (خط سير الرحلة ، قائمة التسوق) مرئية هنا",
+
+  "__EventExpense.MainTitleExpense" : "Expense",
+  "EventExpense.MainTitleExpense" : "مصروف",
+
+  "__EventGeolocalisation.Address" : "Address",
+  "EventGeolocalisation.Address" : "تبوك",
+
+  "__EventGeolocalisation.MainTitleGeolocation" : "Geolocalisation",
+  "EventGeolocalisation.MainTitleGeolocation" : "تحديد الموقع الجغرافي",
+
+  "__EventGeolocalisation.ShareMyLocation" : "Share my localisation during the event",
+  "EventGeolocalisation.ShareMyLocation" : "مشاركة الترجمة الخاصة بي خلال الحدث",
+
+  "__EventItinerary.ProvideDateInEvent" : "Select a date for this event",
+  "EventItinerary.ProvideDateInEvent" : "حدد تاريخ لهذا الحدث",
+
+  "__EventItinerary.ProvidePeriodDateInEvent" : "Select a start and a end date for this event",
+  "EventItinerary.ProvidePeriodDateInEvent" : "حدد تاريخ البدء والانتهاء لهذا الحدث",
+
+  "__EventItinerary.ShowDetail" : "Show Detail",
+  "EventItinerary.ShowDetail" : "أظهر تفاصيل",
+
+  "__EventItinerary.ShowExpense" : "Show Expense",
+  "EventItinerary.ShowExpense" : "إظهار المصاريف",
+
+  "__EventItinerary.ShowItineraryMap" : "Show itinerary map",
+  "EventItinerary.ShowItineraryMap" : "إظهار خريطة خط سير الرحلة",
+
+  "__EventItineray.Address" : "Address",
+  "EventItineray.Address" : "تبوك",
+
+  "__EventItineray.Airport" : "Airport",
+  "EventItineray.Airport" : "مطار",
+
+  "__EventItineray.Begin" : "Begin",
+  "EventItineray.Begin" : "يبدأ",
+
+  "__EventItineray.BusStation" : "Bus Station",
+  "EventItineray.BusStation" : "محطة الحافلات",
+
+  "__EventItineray.Description" : "Description",
+  "EventItineray.Description" : "وصف",
+
+  "__EventItineray.Duration" : "Duration",
+  "EventItineray.Duration" : "مدة",
+
+  "__EventItineray.End" : "End",
+  "EventItineray.End" : "نهاية",
+
+  "__EventItineray.Entertainment" : "Entertainment",
+  "EventItineray.Entertainment" : "ترفيه",
+
+  "__EventItineray.Expense" : "Expense",
+  "EventItineray.Expense" : "مصروف",
+
+  "__EventItineray.Harbor" : "Harbor",
+  "EventItineray.Harbor" : "مرفأ",
+
+  "__EventItineray.Night" : "Night",
+  "EventItineray.Night" : "ليل",
+
+  "__EventItineray.PointOfInterest" : "Point Of Interest",
+  "EventItineray.PointOfInterest" : "نقطة الأهتمام",
+
+  "__EventItineray.Restaurant" : "Restaurant",
+  "EventItineray.Restaurant" : "مطعم",
+
+  "__EventItineray.Shopping" : "Shopping",
+  "EventItineray.Shopping" : "التسوق",
+
+  "__EventItineray.Title" : "Title",
+  "EventItineray.Title" : "لقب",
+
+  "__EventItineray.TrainStation" : "Train Station",
+  "EventItineray.TrainStation" : "محطة القطار",
+
+  "__EventItineray.VisitTime" : "Visit time",
+  "EventItineray.VisitTime" : "وقت الزيارة",
+
+  "__EventItineray.Visite" : "Visite",
+  "EventItineray.Visite" : "زيارة",
+
+  "__EventItineray.WebSite" : "WebSite",
+  "EventItineray.WebSite" : "موقع الكتروني",
+
+  "__EventList.AccessThisEvent" : "Access this event",
+  "EventList.AccessThisEvent" : "الوصول إلى هذا الحدث",
+
+  "__EventList.AllEvents" : "All events",
+  "EventList.AllEvents" : "كل الأحداث",
+
+  "__EventList.CreateAnEvent" : "Create an Event",
+  "EventList.CreateAnEvent" : "أنشئ حدثًا",
+
+  "__EventList.Dae" : "Date",
+  "EventList.Dae" : "تاريخ",
+
+  "__EventList.MyEvents" : "My events",
+  "EventList.MyEvents" : "أحداثي",
+
+  "__EventList.Name" : "Name",
+  "EventList.Name" : "اسم",
+
+  "__EventList.Participants" : "Participants",
+  "EventList.Participants" : "مشاركون",
+
+  "__EventList.Refresh" : "Refresh",
+  "EventList.Refresh" : "ينعش",
+
+  "__EventParticipant.Actif" : "Actif",
+  "EventParticipant.Actif" : "أكتيف",
+
+  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
+  "EventParticipant.InvitationInProgress" : "الدعوة قيد التقدم",
+
+  "__EventParticipant.Invited" : "Invited",
+  "EventParticipant.Invited" : "مدعو",
+
+  "__EventParticipant.Left" : "Left",
+  "EventParticipant.Left" : "اليسار",
+
+  "__EventParticipant.MainTitleParticipant" : "Participants",
+  "EventParticipant.MainTitleParticipant" : "مشاركون",
+
+  "__EventParticipant.Owner" : "Owner",
+  "EventParticipant.Owner" : "مالك",
+
+  "__EventParticipant.Person" : "Person",
+  "EventParticipant.Person" : "شخص",
+
+  "__EventParticipant.Role" : "Role",
+  "EventParticipant.Role" : "دور",
+
+  "__EventParticipant.RoleObserver" : "Observer",
+  "EventParticipant.RoleObserver" : "مراقب",
+
+  "__EventParticipant.RoleOrganizer" : "Organizer",
+  "EventParticipant.RoleOrganizer" : "منظم",
+
+  "__EventParticipant.RoleParticipant" : "Participant",
+  "EventParticipant.RoleParticipant" : "مشارك",
+
+  "__EventParticipant.Status" : "Status",
+  "EventParticipant.Status" : "حالة",
+
+  "__EventParticipant.TitleActiveParticipant" : "Active participant",
+  "EventParticipant.TitleActiveParticipant" : "مشارك نشط",
+
+  "__EventParticipant.TitleLeft" : "The participant left the event",
+  "EventParticipant.TitleLeft" : "غادر المشارك الحدث",
+
+  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited" : "المشارك المدعو: لم يتم استلام أي تأكيد في هذه اللحظة",
+
+  "__EventShoppingList.AddOne" : "Add one !",
+  "EventShoppingList.AddOne" : "أضف واحدا !",
+
+  "__EventShoppingList.Cancel" : "Cancelled",
+  "EventShoppingList.Cancel" : "ألغيت",
+
+  "__EventShoppingList.Description" : "Description",
+  "EventShoppingList.Description" : "وصف",
+
+  "__EventShoppingList.Done" : "Done",
+  "EventShoppingList.Done" : "منتهي",
+
+  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
+  "EventShoppingList.NoItem" : "ليس لديك أي عنصر في القائمة.",
+
+  "__EventShoppingList.ShowDetails" : "Detail",
+  "EventShoppingList.ShowDetails" : "التفاصيل",
+
+  "__EventShoppingList.ShowExpense" : "Show Expense",
+  "EventShoppingList.ShowExpense" : "إظهار المصاريف",
+
+  "__EventShoppingList.Title" : "Shopping List",
+  "EventShoppingList.Title" : "قائمة التسوق",
+
+  "__EventShoppingList.ToBring" : "To bring",
+  "EventShoppingList.ToBring" : "لجلب",
+
+  "__EventShoppingList.What" : "What",
+  "EventShoppingList.What" : "ماذا او ما",
+
+  "__EventShoppingList.Who" : "Who",
+  "EventShoppingList.Who" : "متى",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+  "EventShoppingList.addItem" : "إضافة عنصر جديد في القائمة",
+
+  "__EventShoppingList.removeItem" : "Remove this item",
+  "EventShoppingList.removeItem" : "أزل هذا البند",
+
+  "__EventState.Actif" : "Actif",
+  "EventState.Actif" : "أكتيف",
+
+  "__EventState.Cancelled" : "Cancelled",
+  "EventState.Cancelled" : "ألغيت",
+
+  "__EventState.Done" : "Done",
+  "EventState.Done" : "منتهي",
+
+  "__EventState.InPreparation" : "In Preparation",
+  "EventState.InPreparation" : "قيد التحضير",
+
+  "__EventSurvey.AddOption" : "Option",
+  "EventSurvey.AddOption" : "خيار",
+
+  "__EventSurvey.Closed" : "closed",
+  "EventSurvey.Closed" : "مغلق",
+
+  "__EventSurvey.Description" : "Description",
+  "EventSurvey.Description" : "وصف",
+
+  "__EventSurvey.InPreparation" : "In preparation",
+  "EventSurvey.InPreparation" : "قيد التحضير",
+
+  "__EventSurvey.InProgress" : "In progress",
+  "EventSurvey.InProgress" : "في تقدم",
+
+  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation" : "هذا المسح قيد الإعداد. لا يمكنك الوصول إليه في الوقت الحالي.",
+
+  "__EventSurvey.Option" : "Option",
+  "EventSurvey.Option" : "خيار",
+
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "هذا المسح قيد الإعداد. المشاركون غير مرئيين",
+
+  "__EventSurvey.Title" : "Title",
+  "EventSurvey.Title" : "لقب",
+
+  "__EventSurvey.removeItem" : "Remove this item",
+  "EventSurvey.removeItem" : "أزل هذا البند",
+
+  "__EventSurveyList.AddOne" : "Add one !",
+  "EventSurveyList.AddOne" : "أضف واحدا !",
+
+  "__EventSurveyList.AddSurvey" : "Add a survey in the list",
+  "EventSurveyList.AddSurvey" : "أضف استطلاع في القائمة",
+
+  "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
+  "EventSurveyList.ItineraryTip" : "ضع قائمة بكل الأماكن التي تريد زيارتها خلال هذا الحدث. إذا كان الحدث في عدة أيام ، فيمكنك إعداد خط سير الرحلة يوميًا",
+
+  "__EventSurveyList.MainTitleItinerary" : "Itinerary",
+  "EventSurveyList.MainTitleItinerary" : "مسار الرحلة",
+
+  "__EventSurveyList.MainTitleSurveyList" : "Surveys",
+  "EventSurveyList.MainTitleSurveyList" : "الدراسات الاستقصائية",
+
+  "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
+  "EventSurveyList.NoItem" : "ليس لديك أي استطلاع جاهز في القائمة.",
+
+  "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
+  "EventSurveyList.SurveyTip" : "هل يفضل المشاركون زيارة متحف للفنون أو الفضاء الجوي؟ هل تفضل مطعم Japanase أو إيطالي أو فرنسي؟ قم بإنشاء استطلاع وجمع المراجعة.",
+
+  "__EventSurveyList.addItem" : "Create a new survey in the list",
+  "EventSurveyList.addItem" : "قم بإنشاء استبيان جديد في القائمة",
+
+  "__EventTaskList.AddTask" : "Add a task in the list",
+  "EventTaskList.AddTask" : "أضف مهمة في القائمة",
+
+  "__EventTaskList.Begin" : "Begin",
+  "EventTaskList.Begin" : "يبدأ",
+
+  "__EventTaskList.Cancelled" : "Cancelled",
+  "EventTaskList.Cancelled" : "ألغيت",
+
+  "__EventTaskList.Description" : "Description",
+  "EventTaskList.Description" : "وصف",
+
+  "__EventTaskList.Done" : "Done",
+  "EventTaskList.Done" : "منتهي",
+
+  "__EventTaskList.End" : "End",
+  "EventTaskList.End" : "نهاية",
+
+  "__EventTaskList.FilterAllParticipants" : "All participants",
+  "EventTaskList.FilterAllParticipants" : "كل المشاركين",
+
+  "__EventTaskList.FilterAllStates" : "All states",
+  "EventTaskList.FilterAllStates" : "كل المقاطعات",
+
+  "__EventTaskList.FilterDone" : "Done",
+  "EventTaskList.FilterDone" : "منتهي",
+
+  "__EventTaskList.FilterInProgress" : "In progress",
+  "EventTaskList.FilterInProgress" : "في تقدم",
+
+  "__EventTaskList.FilterMyTasks" : "My tasks",
+  "EventTaskList.FilterMyTasks" : "مهامي",
+
+  "__EventTaskList.FilterPlanned" : "Planned",
+  "EventTaskList.FilterPlanned" : "مخطط",
+
+  "__EventTaskList.FilterUnaffected" : "Unaffected",
+  "EventTaskList.FilterUnaffected" : "غير متأثر",
+
+  "__EventTaskList.InProgress" : "In progress",
+  "EventTaskList.InProgress" : "في تقدم",
+
+  "__EventTaskList.MainTitleTaskList" : "Tasks List",
+  "EventTaskList.MainTitleTaskList" : "قائمة المهام",
+
+  "__EventTaskList.NoItem" : "You don't have any item in the list. Add one !",
+  "EventTaskList.NoItem" : "ليس لديك أي عنصر في القائمة. أضف واحدا !",
+
+  "__EventTaskList.ShowDate" : "Show dates",
+  "EventTaskList.ShowDate" : "عرض التواريخ",
+
+  "__EventTaskList.State" : "State",
+  "EventTaskList.State" : "حالة",
+
+  "__EventTaskList.StatePlanned" : "Planned",
+  "EventTaskList.StatePlanned" : "مخطط",
+
+  "__EventTaskList.Subject" : "Subject",
+  "EventTaskList.Subject" : "موضوعات",
+
+  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+  "EventTaskList.TaskTip" : "استخدم المهام للإشارة إلى ما عليك القيام به لحدثك. يمكنك تعيين مشارك ، وتمييز حالة المهمة: مخطط لها ، تم إنجازه .... وفقًا لتفضيلاتك ، قد تتلقى ملاحظة عندما يكون لديك مهمة يجب إدراكها",
+
+  "__EventTaskList.Who" : "Who",
+  "EventTaskList.Who" : "متى",
+
+  "__EventTaskList.addItem" : "Add a new item in the list",
+  "EventTaskList.addItem" : "إضافة عنصر جديد في القائمة",
+
+  "__Expense.Budget" : "Budget",
+  "Expense.Budget" : "ميزانية",
+
+  "__Expense.Cost" : "Cost",
+  "Expense.Cost" : "كلفة",
+
+  "__Invitation.ByEmail" : "Send an Email",
+  "Invitation.ByEmail" : "أرسل بريدا إلكترونيا",
+
+  "__Invitation.Close" : "Close",
+  "Invitation.Close" : "قريب",
+
+  "__Invitation.Email" : "Email",
+  "Invitation.Email" : "بريد الالكتروني",
+
+  "__Invitation.FirstName" : "First name",
+  "Invitation.FirstName" : "الاسم الاول",
+
+  "__Invitation.Invitation" : "Invitation",
+  "Invitation.Invitation" : "رسالة دعوة",
+
+  "__Invitation.LastName" : "Last name",
+  "Invitation.LastName" : "الكنية",
+
+  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant" : "فقط المستخدمين ليسوا مشاركين بالفعل",
+
+  "__Invitation.PhoneNumber" : "Phone number",
+  "Invitation.PhoneNumber" : "رقم التليفون",
+
+  "__Invitation.Search" : "Search",
+  "Invitation.Search" : "بحث",
+
+  "__Invitation.SearchAUser" : "Search a user",
+  "Invitation.SearchAUser" : "ابحث عن مستخدم",
+
+  "__Invitation.Searching" : "Searching",
+  "Invitation.Searching" : "يبحث",
+
+  "__Invitation.SendInvitation" : "Send Invitation",
+  "Invitation.SendInvitation" : "إرسال دعوة",
+
+  "__Invitation.UserEmail" : "Email",
+  "Invitation.UserEmail" : "بريد الالكتروني",
+
+  "__Invitation.UserFound" : "UsersFound",
+  "Invitation.UserFound" : "المستخدمون تم العثور عليها",
+
+  "__Invitation.UserName" : "Name",
+  "Invitation.UserName" : "اسم",
+
+  "__Invitation.UserPhoneNumber" : "Phone number",
+  "Invitation.UserPhoneNumber" : "رقم التليفون",
+
+  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
+  "Login.CantConnectToTheServer" : "لا يمكن الاتصال بالخادم",
+
+  "__Login.connection" : "Connection",
+  "Login.connection" : "اتصال",
+
+  "__Login.email" : "Email",
+  "Login.email" : "بريد الالكتروني",
+
+  "__Login.googlelogin" : "Login",
+  "Login.googlelogin" : "تسجيل الدخول",
+
+  "__Login.googlelogout" : "Login",
+  "Login.googlelogout" : "تسجيل الدخول",
+
+  "__Login.logout" : "Logout",
+  "Login.logout" : "تسجيل خروج",
+
+  "__Login.password" : "Password",
+  "Login.password" : "كلمة المرور",
+
+  "__Menu.AdmininstratorExplanation" : "Administrator function.",
+  "Menu.AdmininstratorExplanation" : "وظيفة المسؤول.",
+
+  "__Menu.Administration" : "Administration",
+  "Menu.Administration" : "إدارة",
+
+  "__Menu.Events" : "Events",
+  "Menu.Events" : "الأحداث",
+
+  "__Menu.EventsExplanation" : "Access all events you can access",
+  "Menu.EventsExplanation" : "الوصول إلى جميع الأحداث التي يمكنك الوصول إليها",
+
+  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
+  "Menu.InvitationExplanation" : "تحقق من دعواتك ، اقبلها.",
+
+  "__Menu.Join" : "Join an event",
+  "Menu.Join" : "انضم إلى حدث",
+
+  "__Menu.JoinExplanation" : "Search and join events",
+  "Menu.JoinExplanation" : "البحث والانضمام إلى الأحداث",
+
+  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
+  "Menu.MyFriendExplanation" : "شاهد كل أصدقائك ، ادعُ جددًا ، أرسل رسائل.",
+
+  "__Menu.MyFriends" : "My Friends",
+  "Menu.MyFriends" : "أصدقائى",
+
+  "__Menu.MyInvitations" : "My Invitations",
+  "Menu.MyInvitations" : "دعواتي",
+
+  "__Menu.MyProfile" : "My Profile",
+  "Menu.MyProfile" : "ملفي",
+
+  "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
+  "Menu.MyProfileExplanation" : "إدارة تفضيلاتك ، وإعداد الصورة الرمزية.",
+
+  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference" : "يمكن إلغاء تنشيط النصائح في تفضيلاتك"}

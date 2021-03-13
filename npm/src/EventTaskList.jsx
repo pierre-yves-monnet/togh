@@ -54,26 +54,10 @@ class EventTaskList extends React.Component {
 				showPlusButton  = {true}
 				showPlusButtonTitle={<FormattedMessage id="EventTaskList.AddTask" defaultMessage="Add a task in the list" />}
 				userTipsText={<FormattedMessage id="EventTaskList.TaskTip" defaultMessage="Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize" />}
+				addItemCallback={this.addItem}
 				/>
 				);
-		/* old
-			<div>	
-				<div class="eventsection">
-					<div style={{ float: "left" }}>
-						<img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 100 }} /><br />
-					</div>
-					<FormattedMessage id="EventTaskList.MainTitleTaskList" defaultMessage="Tasks List" />
-					<div style={{ float: "right" }}>
-						<button class="btn btn-success btn-xs " 
-							 title={<FormattedMessage id="EventTaskList.AddTask" defaultMessage="Add a task in the list" />}>
-							<PlusCircle onClick={this.addItem}/>
-						</button>
-					</div>
-				</div>			
-			<UserTips id="task" text={<FormattedMessage id="EventTaskList.TaskTip" defaultMessage="Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize" />}/>
-			</div> 
-			)
-			*/
+		
 			
 		var toolService = FactoryService.getInstance().getToolService();
 

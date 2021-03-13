@@ -23,6 +23,7 @@ export const ROLE_OBSERVER = 'OBSERVER';
 export const ROLE_OUTSIDE = 'OUTSIDE';
 
 export const STATUS_LEFT = 'LEFT';
+export const STATUS_ACTIF = 'ACTIF';
 
 
 

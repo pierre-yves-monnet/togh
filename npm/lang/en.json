@@ -1,5 +1,5 @@
 {
-  "AdminHome.Title": {
+  "AdminTransaltor.Title": {
     "defaultMessage": "Administration"
   },
   "AdminTranslator.AverageTranslation": {
@@ -55,9 +55,6 @@
   },
   "Event.EventDate": {
     "defaultMessage": "Date"
-  },
-  "Event.EventName": {
-    "defaultMessage": "Name"
   },
   "Event.Expense": {
     "defaultMessage": "Expense"
@@ -140,6 +137,18 @@
   "Event.TitleTasks": {
     "defaultMessage": "Tasks"
   },
+  "EventExpense.AddExpense": {
+    "defaultMessage": "Add a expense"
+  },
+  "EventExpense.CurrencyOnEvent": {
+    "defaultMessage": "Currency used in this event"
+  },
+  "EventExpense.ExpenseTip": {
+    "defaultMessage": "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here"
+  },
+  "EventExpense.MainTitleExpense": {
+    "defaultMessage": "Expense"
+  },
   "EventGeolocalisation.Address": {
     "defaultMessage": "Address"
   },
@@ -148,9 +157,6 @@
   },
   "EventGeolocalisation.ShareMyLocation": {
     "defaultMessage": "Share my localisation during the event"
-  },
-  "EventItinerary.MainTitleItinerary": {
-    "defaultMessage": "Itinerary"
   },
   "EventItinerary.ProvideDateInEvent": {
     "defaultMessage": "Select a date for this event"
@@ -170,11 +176,32 @@
   "EventItineray.Address": {
     "defaultMessage": "Address"
   },
+  "EventItineray.Airport": {
+    "defaultMessage": "Airport"
+  },
+  "EventItineray.Begin": {
+    "defaultMessage": "Begin"
+  },
+  "EventItineray.BusStation": {
+    "defaultMessage": "Bus Station"
+  },
   "EventItineray.Description": {
     "defaultMessage": "Description"
   },
+  "EventItineray.Duration": {
+    "defaultMessage": "Duration"
+  },
+  "EventItineray.End": {
+    "defaultMessage": "End"
+  },
+  "EventItineray.Entertainment": {
+    "defaultMessage": "Entertainment"
+  },
   "EventItineray.Expense": {
     "defaultMessage": "Expense"
+  },
+  "EventItineray.Harbor": {
+    "defaultMessage": "Harbor"
   },
   "EventItineray.Night": {
     "defaultMessage": "Night"
@@ -185,14 +212,23 @@
   "EventItineray.Restaurant": {
     "defaultMessage": "Restaurant"
   },
+  "EventItineray.Shopping": {
+    "defaultMessage": "Shopping"
+  },
+  "EventItineray.Title": {
+    "defaultMessage": "Title"
+  },
+  "EventItineray.TrainStation": {
+    "defaultMessage": "Train Station"
+  },
+  "EventItineray.VisitTime": {
+    "defaultMessage": "Visit time"
+  },
   "EventItineray.Visite": {
-    "defaultMessage": "Visit"
+    "defaultMessage": "Visite"
   },
   "EventItineray.WebSite": {
     "defaultMessage": "WebSite"
-  },
-  "EventItineray.What": {
-    "defaultMessage": "What"
   },
   "EventList.AccessThisEvent": {
     "defaultMessage": "Access this event"
@@ -314,6 +350,9 @@
   "EventState.InPreparation": {
     "defaultMessage": "In Preparation"
   },
+  "EventSurvey.AddOption": {
+    "defaultMessage": "Option"
+  },
   "EventSurvey.Closed": {
     "defaultMessage": "closed"
   },
@@ -329,6 +368,12 @@
   "EventSurvey.NoAccessForSurveyInPreparation": {
     "defaultMessage": "This survey is in preparation. You can't access it for the moment."
   },
+  "EventSurvey.Option": {
+    "defaultMessage": "Option"
+  },
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": {
+    "defaultMessage": "This survey is in preparation. Participants are not visible"
+  },
   "EventSurvey.Title": {
     "defaultMessage": "Title"
   },
@@ -338,8 +383,17 @@
   "EventSurveyList.AddOne": {
     "defaultMessage": "Add one !"
   },
+  "EventSurveyList.AddSurvey": {
+    "defaultMessage": "Add a survey in the list"
+  },
+  "EventSurveyList.ItineraryTip": {
+    "defaultMessage": "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary"
+  },
+  "EventSurveyList.MainTitleItinerary": {
+    "defaultMessage": "Itinerary"
+  },
   "EventSurveyList.MainTitleSurveyList": {
-    "defaultMessage": "Survey"
+    "defaultMessage": "Surveys"
   },
   "EventSurveyList.NoItem": {
     "defaultMessage": "You don't have any survey ready in the list."
@@ -349,9 +403,6 @@
   },
   "EventSurveyList.addItem": {
     "defaultMessage": "Create a new survey in the list"
-  },
-  "EventTaskList.AddSurvey": {
-    "defaultMessage": "Add a survey in the list"
   },
   "EventTaskList.AddTask": {
     "defaultMessage": "Add a task in the list"
@@ -425,8 +476,8 @@
   "Expense.Budget": {
     "defaultMessage": "Budget"
   },
-  "Expense.Price": {
-    "defaultMessage": "Price"
+  "Expense.Cost": {
+    "defaultMessage": "Cost"
   },
   "Invitation.ByEmail": {
     "defaultMessage": "Send an Email"
@@ -497,11 +548,29 @@
   "Login.password": {
     "defaultMessage": "Password"
   },
+  "Menu.AdmininstratorExplanation": {
+    "defaultMessage": "Administrator function."
+  },
   "Menu.Administration": {
     "defaultMessage": "Administration"
   },
   "Menu.Events": {
     "defaultMessage": "Events"
+  },
+  "Menu.EventsExplanation": {
+    "defaultMessage": "Access all events you can access"
+  },
+  "Menu.InvitationExplanation": {
+    "defaultMessage": "Check your invitations, accept them."
+  },
+  "Menu.Join": {
+    "defaultMessage": "Join an event"
+  },
+  "Menu.JoinExplanation": {
+    "defaultMessage": "Search and join events"
+  },
+  "Menu.MyFriendExplanation": {
+    "defaultMessage": "See all your friends, invite new, send messages."
   },
   "Menu.MyFriends": {
     "defaultMessage": "My Friends"
@@ -511,6 +580,9 @@
   },
   "Menu.MyProfile": {
     "defaultMessage": "My Profile"
+  },
+  "Menu.MyProfileExplanation": {
+    "defaultMessage": "Manage your preferences, set up an avatar."
   },
   "UserTips.DeactivateTipInPreference": {
     "defaultMessage": "Tips can be deactived in your preference"

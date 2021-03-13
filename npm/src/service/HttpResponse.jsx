@@ -9,13 +9,14 @@ class HttpResponse {
 	constructor( axiosHttpPayload, err) {
 		this.axiosHttpPayload = axiosHttpPayload;
 		this.err = err;
+ 
 	};
-
+	
 	isError() {
-		console.log("HttpResponse.isError: "+this.err);
+		// console.log("HttpResponse.isError: "+this.err);
 		if (this.err)
 			return true;
-		console.log("HttpResponse.isError httpStatus: "+this.axiosHttpPayload.status);
+		// console.log("HttpResponse.isError httpStatus: "+this.axiosHttpPayload.status);
 		if (this.axiosHttpPayload.status<200 || this.axiosHttpPayload.status>204 )
 			return true;
 		return false;

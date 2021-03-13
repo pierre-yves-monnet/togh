@@ -12,6 +12,7 @@ import { IntlProvider, FormattedMessage } from "react-intl";
 
 import Login from './Login';
 import Banner from './Banner';
+import Footer from './Footer';
 import Menu from './Menu';
 import{ MENU_NAME} from './Menu';
 import RegisterNewUser from './RegisterNewUser';
@@ -114,6 +115,7 @@ class BodyTogh extends React.Component {
 							  
 							</div>
 						</div>
+						<Footer language={this.state.language} />					
 					</div>  
 				</IntlProvider>
 			)
@@ -131,23 +133,24 @@ class BodyTogh extends React.Component {
 			<div>
 				<Banner language={this.state.language} changeLanguage={this.changeLanguage}/>
 				<div class="row">
-				<div class="col-xs-12">
-
-					<table style={{width: "100%", "height": "100%"}}>
-						<tr>
-							<td style={styleMenu} >
-								<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
-							</td>
-							<td style={{padding: "10px", "verticalAlign": "top"}} >
-								{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
-								{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
-								{ this.state.frameContent === 'frameAdministration' && <AdminHome />}
-		
-							</td>
-						</tr>
-					</table>
-				</div>
+					<div class="col-xs-12">
+	
+						<table style={{width: "100%", "height": "100%"}}>
+							<tr>
+								<td style={styleMenu} >
+									<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
+								</td>
+								<td style={{padding: "10px", "verticalAlign": "top"}} >
+									{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
+									{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
+									{ this.state.frameContent === 'frameAdministration' && <AdminHome />}
+			
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>	
+				<Footer language={this.state.language} />
 			</div>	
 			</IntlProvider>	
 		);

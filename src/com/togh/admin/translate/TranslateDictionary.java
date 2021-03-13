@@ -1,6 +1,8 @@
 package com.togh.admin.translate;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -23,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import com.togh.admin.translate.ToghDictionary.SentenceItem;
 import com.togh.admin.translate.TranslatorGoogle.TranslateSentenceResult;
 import com.togh.engine.chrono.ChronoSet;
 import com.togh.engine.chrono.Chronometer;
@@ -128,15 +131,19 @@ public class TranslateDictionary {
 
             // first, check all missing sentences            
             if ( toghReference.getDictionary() !=null)
-                for (Entry<String, String> sentenceEntry : toghReference.getDictionary() ) {
-                    if (!toghLanguage.exist(sentenceEntry.getKey())) {
+                for (SentenceItem sentenceEntry : toghReference.getDictionary() ) {
+                    if (toghLanguage.exist(sentenceEntry.key)) {
+                        // override the original sentence
+                        toghLanguage.setSentence(sentenceEntry.key, toghLanguage.getTranslation( sentenceEntry.key), sentenceEntry.translation);
+                    }
+                    else {
                         languageResult.nbMissingSentences++;
                         if (!translate)
                             continue;
                         if ("en".equals(language)) {
                             // no translation needed here
                             languageResult.nbTranslatedSentences++;
-                            toghLanguage.setSentence(sentenceEntry.getKey(), sentenceEntry.getValue());
+                            toghLanguage.setSentence(sentenceEntry.key, sentenceEntry.translation, sentenceEntry.translation);
                         } else {
                             if (countTranslation>1000)
                                 break;
@@ -144,13 +151,13 @@ public class TranslateDictionary {
                             countTranslation++;                            
                             // traduction needed
                             chronoTranslate.start();
-                            TranslateSentenceResult translation = translatorGoogle.translateSentence(sentenceEntry.getValue(), language);
+                            TranslateSentenceResult translation = translatorGoogle.translateSentence( sentenceEntry.translation, "en", language);
                             chronoTranslate.stop();
                             
                             translateResult.listEvents.addAll(translation.listEvents);
                             if (!LogEventFactory.isError(translation.listEvents)) {
                                 languageResult.nbTranslatedSentences++;
-                                toghLanguage.setSentence(sentenceEntry.getKey(), translation.getTranslation());
+                                toghLanguage.setSentence(sentenceEntry.key, translation.getTranslation(), sentenceEntry.translation);
                             }
                         }
                     }
@@ -160,8 +167,8 @@ public class TranslateDictionary {
             }
 
             // second, maybe too many sentences ?
-            for (Entry<String, String> sentenceEntry : toghLanguage.dictionary.entrySet()) {
-                if (!toghReference.exist(sentenceEntry.getKey())) {
+            for (SentenceItem sentenceEntry : toghLanguage.dictionary.values()) {
+                if (!toghReference.exist(sentenceEntry.key)) {
                     languageResult.nbTooMuchSentences++;
                 }
             }
@@ -180,7 +187,11 @@ public class TranslateDictionary {
 
         
         }catch(Exception e) {
-            logger.severe(logHeader + "During operationDictionary "+e.getMessage());
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionDetails = sw.toString();
+
+            logger.severe(logHeader + "During operationDictionary "+e+" at "+exceptionDetails);
             translateResult.listEvents.add( new LogEvent(eventDictionaryOperationError,e, e.getMessage()) );
         }
         return translateResult;

@@ -1,6 +1,6 @@
 // -----------------------------------------------------------
 //
-// EventPreferences
+// EventPreferenceCtrl
 //
 // For one event, the event preferences
 // Preferences are saved as data, but have a big impact on the interface or on the event, and are not supposed to change too much
@@ -18,15 +18,18 @@ import SlabEvent from './../service/SlabEvent';
 
 const CURRENCY_ATTRIBUT_NAME= "currency";
 
-class EventPreferences {
+class EventPreferenceCtrl {
 	
 	// props.updateEvent must be defined
 	// props.eventPreferences
 	// props.text is the text to display, translated
-	constructor(event, updateEventfct ) {
-		this.event = event;
+	constructor(eventCtrl, updateEventfct ) {
+		this.eventCtrl = eventCtrl;
 		this.updateEventfct = updateEventfct;
-		this.currencyCode = event.preferences[ CURRENCY_ATTRIBUT_NAME ];
+		var event = eventCtrl.getEvent();
+		if (event && event.preferences)
+			this.currencyCode = event.preferences[ CURRENCY_ATTRIBUT_NAME ];
+			
 		if (! this.currencyCode)
 			this.currencyCode="USD";
 	}
@@ -56,7 +59,7 @@ class EventPreferences {
 	}
 	
 	getCurrencySymbolPrefix(){
-		console.log("EventPreferences.getCurrencySymbolPrefix");
+		console.log("EventPreferenceEntity.getCurrencySymbolPrefix");
 		var currency = this.getCurrency();
 		if (currency)
 			return currency.prefix;
@@ -66,7 +69,7 @@ class EventPreferences {
 	
 	
 	getCurrencySymbolSuffix(){
-		console.log("EventPreferences.getCurrencySymbolSuffix");
+		console.log("EventPreferenceEntity.getCurrencySymbolSuffix");
 		var currency = this.getCurrency();
 		if (currency)
 			return currency.suffix;
@@ -77,5 +80,5 @@ class EventPreferences {
 
 }
 
-export default EventPreferences;
+export default EventPreferenceCtrl;
 	

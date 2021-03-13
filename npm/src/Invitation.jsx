@@ -10,7 +10,7 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
 import { ModalWrapper, RadioButtonGroup, RadioButton, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
@@ -53,7 +53,8 @@ class Invitation extends React.Component {
 	render() {
 		console.log("Invitation.render ");
 		// console.log("Invitation.listSearch="+ JSON.stringify( this.state.listSearchUsers ));
-		
+		const intl = this.props.intl;
+
 		var listSearchUsersHtml = [];
 		if (this.state.listSearchUser !== null) {
 			// console.log("Invitation.buildListUser");
@@ -82,19 +83,19 @@ class Invitation extends React.Component {
 		return ( 
 			 <ModalWrapper
      			 buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
-     			 modalLabel={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
-				primaryButtonText={<FormattedMessage id="Invitation.Close" defaultMessage="Close"/>}
+     			 modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}
+				primaryButtonText={intl.formatMessage({id: "Invitation.Close", defaultMessage: "Close"})}
 				secondaryButtonText=''
 				size='lg'>
 					<div style={{display: "inline-block"}}>
 					
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-	  						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" 
+	  						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autoComplete="off" 
 								defaultChecked={this.state.panelVisible === 'INVITATION'}
               					onChange={(event) => { this.setState( {panelVisible: 'INVITATION'})}} />
 	  						<label class="btn btn-outline-primary btn-sm" for="btnradio1">{<FormattedMessage id="Invitation.ByEmail" defaultMessage="Send an Email"/>}</label>
 	
-							<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+							<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autoComplete="off"
 								defaultChecked={this.state.panelVisible === 'SEARCH'}
               					onChange={(event) => { this.setState( {panelVisible: 'SEARCH'})}}/>							
 	  						<label class="btn btn-outline-primary btn-sm" for="btnradio2">{<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} </label>
@@ -177,7 +178,10 @@ class Invitation extends React.Component {
 					<table>
 						<tr>
 							<td style={{"paddingRight": "10px"}}>
-								<Select labelText="Role in this event" value={this.state.role} onChange={(event) => this.setState({ role: event.target.value })}>
+								<Select labelText="Role in this event"
+									id="role" 
+									value={this.state.role} 
+									onChange={(event) => this.setState({ role: event.target.value })}>
 									<FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
 	                          			{(message) => <option value="ORGANIZER">{message}</option>}
 	                    			</FormattedMessage>							
@@ -304,5 +308,5 @@ class Invitation extends React.Component {
 	
 	// -------- Rest Call	
 }
-export default Invitation;
+export default injectIntl(Invitation);
 

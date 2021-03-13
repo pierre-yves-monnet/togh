@@ -29,7 +29,7 @@ class AdminTranslator extends React.Component {
 			inprogress : false,
 			translateresult: null,
 			message: '',
-			show:'COLLAPSE',
+			show:'ON',
 			translate : {}
 		};
 		// show : OFF, ON, COLLAPSE
@@ -38,8 +38,12 @@ class AdminTranslator extends React.Component {
 		this.checkDictionary = this.checkDictionary.bind(this);
 		this.completeDictionary = this.completeDictionary.bind(this);
 		
-		this.checkDictionary();
+		
 	}
+	
+	componentDidMount() {
+		this.checkDictionary();
+	} 
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
@@ -55,8 +59,8 @@ class AdminTranslator extends React.Component {
 		
 		var listDictionaryHtml = (<div></div>);
 		if (this.state.translate && this.state.translate.listLanguages ) 
-			listDictionaryHtml = this.state.translate.listLanguages.map((language) =>
-				<tr>
+			listDictionaryHtml = this.state.translate.listLanguages.map((language,index) =>
+				<tr key={index}>
 					<td><img src={this.getIcon( language ) }  style={{width: "30px"}}/></td>
 					<td>{language.name}</td>
 					<td>{language.nbMissingSentences}</td>
@@ -65,51 +69,63 @@ class AdminTranslator extends React.Component {
 				</tr>);
 		
 		return (
-			<div>
-				 {inprogresshtml}
-				<div class="eventsection">
-					<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
-						{this.state.show === 'ON' && <ChevronDown width="20px"/>}
-						{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
-					</a><FormattedMessage id="AdminTranslator.Title" defaultMessage="Translation" />
+			<div class="card" style={{marginTop: "10px"}}>
+				<div class="card-header" style={{backgroundColor:"#decbe4"}}>
+					<FormattedMessage id="AdminTransaltor.Title" defaultMessage="Administration" />
 				</div>
-				{this.state.show === 'ON' && <div>
-					<button class="btn btn-info btn-sm" onClick={this.checkDictionary}>
-						<span class="glyphicon glyphicon-refresh"> </span>&nbsp;
-						<FormattedMessage id="AdminTranslator.CheckDictionary" defaultMessage="Check Dictionary"/>
-					</button>	
-					<br/>
-					{this.state.message}<br/> 
-					
-					
-					
-					<br/>
-					<table class="table table-striped toghtable">
-						<tr>
-							<th></th>
-							<th><FormattedMessage id="AdminTranslator.Name" defaultMessage="Name"/></th>
-							<th><FormattedMessage id="AdminTranslator.MissingSentences" defaultMessage="Missing sentences"/></th>
-							<th><FormattedMessage id="AdminTranslator.TranslateSentences" defaultMessage="Translated sentences"/></th>
-							<th><FormattedMessage id="AdminTranslator.TooMuchSentences" defaultMessage="Overflow Sentence"/></th>
-						</tr>
-						{listDictionaryHtml}
-					</table>
-					<button class="btn btn-info btn-sm" onClick={this.completeDictionary}>
-						<FormattedMessage id="AdminTranslator.CompleteDictionary" defaultMessage="Complete Dictionary"/>
-					</button>
-					{this.state.translateresult && (<div>
-						<FormattedMessage id="AdminTranslator.nbTransations" defaultMessage="Number of translation"/>&nbsp;:&nbsp;
-						{this.state.translateresult.chronometers.translate.nbexecutions}
-						&nbsp;,&nbsp;<FormattedMessage id="AdminTranslator.TimeTranslation" defaultMessage="Time of translation"/>&nbsp;:&nbsp;
-						{this.state.translateresult.chronometers.translate.timeinms}
-						&nbsp;,&nbsp;<FormattedMessage id="AdminTranslator.AverageTranslation" defaultMessage="Average (in Milliseconds)"/>&nbsp;:&nbsp;
-						{this.state.translateresult.chronometers.translate.average}
-						</div>
-					)}
+				<div class="card-body">
+					 {inprogresshtml}
+					<div class="eventsection">
+						<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
+							{this.state.show === 'ON' && <ChevronDown width="20px"/>}
+							{this.state.show === 'COLLAPSE' && <ChevronRight width="20px"/>}
+						</a><FormattedMessage id="AdminTranslator.Title" defaultMessage="Translation" />
+					</div>
+					{this.state.show === 'ON' && <div>
+						<button class="btn btn-info btn-sm" onClick={this.checkDictionary}>
+							<span class="glyphicon glyphicon-refresh"> </span>&nbsp;
+							<FormattedMessage id="AdminTranslator.CheckDictionary" defaultMessage="Check Dictionary"/>
+						</button>	
+						<br/>
+						{this.state.message}<br/> 
+						
+						
+						
+						<br/>
+						<table class="table table-striped toghtable">
+							<tr>
+								<th></th>
+								<th><FormattedMessage id="AdminTranslator.Name" defaultMessage="Name"/></th>
+								<th><FormattedMessage id="AdminTranslator.MissingSentences" defaultMessage="Missing sentences"/></th>
+								<th><FormattedMessage id="AdminTranslator.TranslateSentences" defaultMessage="Translated sentences"/></th>
+								<th><FormattedMessage id="AdminTranslator.TooMuchSentences" defaultMessage="Overflow Sentence"/></th>
+							</tr>
+							{this.state.translate && this.state.translate.listLanguages && this.state.translate.listLanguages.map((language,index) =>
+								<tr key={index}>
+									<td><img src={this.getIcon( language ) }  style={{width: "30px"}}/></td>
+									<td>{language.name}</td>
+									<td>{language.nbMissingSentences}</td>
+				        			<td>{language.nbTranslatedSentences}</td>
+				        			<td>{language.nbTooMuchSentences}</td>
+								</tr>) }
+								
+						</table>
+						<button class="btn btn-info btn-sm" onClick={this.completeDictionary}>
+							<FormattedMessage id="AdminTranslator.CompleteDictionary" defaultMessage="Complete Dictionary"/>
+						</button>
+						{this.state.translateresult && (<div>
+							<FormattedMessage id="AdminTranslator.nbTransations" defaultMessage="Number of translation"/>&nbsp;:&nbsp;
+							{this.state.translateresult.chronometers.translate.nbexecutions}
+							&nbsp;,&nbsp;<FormattedMessage id="AdminTranslator.TimeTranslation" defaultMessage="Time of translation"/>&nbsp;:&nbsp;
+							{this.state.translateresult.chronometers.translate.timeinms}
+							&nbsp;,&nbsp;<FormattedMessage id="AdminTranslator.AverageTranslation" defaultMessage="Average (in Milliseconds)"/>&nbsp;:&nbsp;
+							{this.state.translateresult.chronometers.translate.average}
+							</div>
+						)}
+					</div>
+					}
 				</div>
-				}
 			</div>
-			
 			);
 	}
 	

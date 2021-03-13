@@ -18,18 +18,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.google.api.pathtemplate.TemplatedResourceName;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 
@@ -40,7 +46,21 @@ public class ToghDictionary {
 
     File path;
     String language;
-    Map<String, String> dictionary;
+
+    public class SentenceItem {
+
+        String key;
+        String translation;
+        String originalSentence;
+
+        public SentenceItem(String key, String translation, String originalSentence) {
+            this.key = key;
+            this.translation = translation;
+            this.originalSentence = originalSentence;
+        }
+    }
+
+    Map<String, SentenceItem> dictionary = new HashMap<String, SentenceItem>();
     /**
      * marker to know if the dictionnary is modified or not
      */
@@ -64,15 +84,23 @@ public class ToghDictionary {
     @SuppressWarnings("unchecked")
     public List<LogEvent> read() {
         List<LogEvent> listEvents = new ArrayList<>();
-        try {
-            File file = getFile();
-            FileInputStream fis = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
-            
+        // clear the dictionnary
+        dictionary = new HashMap<String, SentenceItem>();
+        File file = getFile();
+        try (FileInputStream fis = new FileInputStream(file);
+                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8)) {
+
             JSONTokener tokener = new JSONTokener(isr);
             JSONObject object = new JSONObject(tokener);
-            dictionary = (Map<String, String>) ((Object) object.toMap());
-            
+            Map<String, String> brutDictionary = (Map<String, String>) ((Object) object.toMap());
+            // rebuild the SentenceItem dictionnary
+            for (Entry<String, String> entry : brutDictionary.entrySet()) {
+                if (entry.getValue().startsWith("__"))
+                    continue;
+                String originalTranslation = brutDictionary.get("__" + entry.getKey());
+                dictionary.put(entry.getKey(), new SentenceItem(entry.getKey(), entry.getValue(), originalTranslation));
+            }
+
             dictionaryIsModified = false;
         } catch (Exception e) {
             listEvents.add(new LogEvent(eventReadDictionaryError, "Dictionary [" + language + "] error " + e.getMessage()));
@@ -80,40 +108,80 @@ public class ToghDictionary {
         return listEvents;
     }
 
+    /**
+     * Write the dictionnary
+     * 
+     * @return
+     */
     public List<LogEvent> write() {
         List<LogEvent> listEvents = new ArrayList<>();
-        FileOutputStream fos=null;
+        FileOutputStream fos = null;
+        OutputStreamWriter osw = null;
+        BufferedWriter writer = null;
         try {
-            
+
             // file exist before ? Rename it to .bak
             File file = getFile();
             if (file.exists()) {
-                String fileName = file.getAbsolutePath();
+                File backupDirectory = new File( file.getParentFile().getAbsolutePath()+"/backup");
+                backupDirectory.mkdirs();
+                String fileName = file.getName();
                 fileName = fileName.replace(".json", ".bak");
-                File destFile = new File(fileName);
+                File destFile = new File(backupDirectory.getAbsolutePath()+"/"+fileName);
+                
                 file.renameTo(destFile);
             }
             fos = new FileOutputStream(file);
-            OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
-            BufferedWriter writer = new BufferedWriter(osw);
-            
-            // don't use JSONObject.writeJSONString(dictionary, writer) : it write all in one line
+            osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+            writer = new BufferedWriter(osw);
 
-            org.json.JSONObject json = new JSONObject( dictionary);
-            writer.write(json.toString(2));
+            // don't use JSONObject.writeJSONString(dictionary, writer) : it write all in one line
+            // Move the dictionnary to sentence to the brut dictionnary
+            List<SentenceItem> listSentences = new ArrayList();
+            for (Entry<String, SentenceItem> entry : dictionary.entrySet())
+                listSentences.add(entry.getValue());
+
+            Collections.sort(listSentences, new Comparator<SentenceItem>() {
+
+                public int compare(SentenceItem s1,
+                        SentenceItem s2) {
+                    return s1.key.compareTo(s2.key);
+                }
+            });
+
+            
+            // we want to keep the order, so write the ASCII file directly
+            writer.write("{\n");
+            for (int i=0;i<listSentences.size();i++) {
+                SentenceItem sentence =listSentences.get( i ); 
+                if (i>0)
+                    writer.write(",\n\n"); 
+                if (sentence.originalSentence!=null)
+                    writer.write("  \"__" + sentence.key+"\" : \"" +sentence.originalSentence+"\",\n");
+                writer.write("  \"" + sentence.key+"\" : \"" +sentence.translation+"\"");
+            }
+            writer.write("}\n");
+            
             
             writer.flush();
 
         } catch (Exception e) {
             listEvents.add(new LogEvent(eventWriteDictionaryError, "Dictionary [" + language + "] error " + e.getMessage()));
-        }
-        finally {
-            if (fos!=null)
-                try { fos.close(); } catch (IOException e) {
-                    listEvents.add(new LogEvent(eventWriteDictionaryError, "Dictionary [" + language + "] error during close:" + e.getMessage()));
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.flush();
+                    writer.close();
                 }
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                listEvents.add(new LogEvent(eventWriteDictionaryError, "Dictionary [" + language + "] error during close:" + e.getMessage()));
+            }
         }
         return listEvents;
+
     }
 
     /* -------------------------------------------------------------------- */
@@ -125,27 +193,32 @@ public class ToghDictionary {
         return dictionaryIsModified;
     }
 
-    public void setSentence(String key, String translation) {
+    public void setSentence(String key, String translation, String originalSentence) {
         if (translation == null)
             return;
         if (dictionary == null)
             dictionary = new HashMap<>();
 
-        String currentValue = dictionary.get(key);
-        if (currentValue == null || !currentValue.equals(translation))
+        SentenceItem currentValue = dictionary.get(key);
+        if (currentValue == null || !currentValue.translation.equals(translation))
             dictionaryIsModified = true;
 
-        dictionary.put(key, translation);
+        SentenceItem SentenceItem = new SentenceItem(key, translation, originalSentence);
+        dictionary.put(key, SentenceItem);
+    }
+
+    public String getTranslation(String key) {
+        return dictionary.containsKey(key) ? dictionary.get(key).translation : null;
     }
 
     public boolean exist(String key) {
         return (dictionary != null && dictionary.containsKey(key));
     }
 
-    public Set<Entry<String, String>> getDictionary() {
+    public Collection<SentenceItem> getDictionary() {
         if (dictionary == null)
             return new HashMap().entrySet();
-        return dictionary.entrySet();
+        return dictionary.values();
     }
 
     /* -------------------------------------------------------------------- */

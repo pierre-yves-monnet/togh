@@ -191,6 +191,9 @@ const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
                   })}
                   
 
+Contexte
+https://fr.reactjs.org/docs/context.html
+
 ## Carbon
 import { DatePicker } from 'carbon-components-react';
 import { DatePickerInput } from 'carbon-components-react';
@@ -237,8 +240,11 @@ https://lokalise.com/blog/react-i18n-intl/
 
 --------- from JS
 import { injectIntl, FormattedMessage } from "react-intl"; 
-		const intl = this.props.intl;
- title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}
+
+const intl = this.props.intl;
+
+title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}
+
 export default injectIntl(EventShoppingList);
 
 Extraction : follow

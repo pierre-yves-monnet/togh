@@ -29,7 +29,7 @@ class EventState extends React.Component {
 	
 //----------------------------------- Render
 	render() {
-		console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
+		// console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
 
 		var tagHtml = null;
 		var dropDownChangeHtml = (<div></div>);

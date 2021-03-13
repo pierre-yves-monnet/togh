@@ -51,9 +51,12 @@ class AdminHome extends React.Component {
 											
 		// -----------------	 
 		return ( 
-			<div> 
-				<h1><FormattedMessage id="AdminHome.Title" defaultMessage="Administration" /></h1>
-				<AdminTranslator/>
+			<div>
+				<div class="row">
+					<div class="col-6"> 
+						<AdminTranslator/>
+					</div>
+				</div>
 			</div>)	
 	} //---------------------------- end Render
 

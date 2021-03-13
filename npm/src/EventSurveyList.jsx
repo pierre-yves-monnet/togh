@@ -13,21 +13,27 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { PlusCircle} from 'react-bootstrap-icons';
 
 import UserTips from './component/UserTips';
+import FactoryService from './service/FactoryService';
+
 import SlabEvent from './service/SlabEvent';
+import EventSectionHeader from './component/EventSectionHeader';
 
 
-import * as surveyConstant from './entity/Survey';
+import * as surveyConstant from './controller/SurveyCtrl';
 import EventSurvey from './EventSurvey';
-import Survey from './entity/Survey';
+import EventCtrl from './controller/EventCtrl';
+import SurveyCtrl from './controller/SurveyCtrl';
 
 class EventSurveyList extends React.Component {
 	// this.props.updateEvent()
 	constructor(props) {
 		super();
-		// console.log("RegisterNewUser.constructor");
+		console.log("EventSurveyList.constructor");
+		this.eventCtrl =  props.eventCtrl;
+
+		// keep the event in the state 
 		this.state = {
-			event: props.event,
-			currentSurveyId : null, 
+			event: this.eventCtrl.getEvent(),
 			show: {
 				showAll: true,
 				showOnlyNonAnswered : false,
@@ -36,43 +42,41 @@ class EventSurveyList extends React.Component {
 			}
 		};
 		// show : OFF, ON, COLLAPSE
-		console.log("secShoppinglist.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
+		// console.log("EventSurveyList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.setAttributeCheckbox		= this.setAttributeCheckbox.bind( this );
 		this.addSurvey 					= this.addSurvey.bind(this);
-		this.getCurrentSurvey			= this.getCurrentSurvey.bind( this );		
+		this.addSurveyCallback			= this.addSurveyCallback.bind( this );		
 		
 	}
 	
-// Calculate the state to display
+	// Calculate the state to display
 	componentDidMount () {
-		if (this.state.event.surveylist.length >0 ) {
-			// curreent survey is the first one then
-			this.setState( { currentSurveyId : this.state.event.surveylist[ 0 ].id });
+		console.log("EventSurveyList.componentDidMount");
+		if (this.eventCtrl.getSurveyList().length >0 ) {
+			// current survey is the first one then
+			this.eventCtrl.setCurrentSurveyId( this.getSurveyList()[ 0 ].id );
+			
 		}
 	}
+	
+	
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		const intl = this.props.intl;
-		console.log("EventSurveyList: render");
-		var userParticipant = this.props.getUserParticipant();
-		
+		console.log("EventSurveyList: render event="+JSON.stringify(this.state.event));
+		var userParticipant = this.eventCtrl.getUserParticipant();
+		var nbParticipants  = this.eventCtrl.getTotalParticipants();
 		var headerSection =(
-			<div>	
-				<div class="eventsection">
-					<div style={{ float: "left" }}>
-						<img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 100 }} /><br />
-					</div>
-					<FormattedMessage id="EventSurveyList.MainTitleSurveyList" defaultMessage="Survey" />
-					<div style={{ float: "right" }}>
-						<button class="btn btn-success btn-xs " 
-							 title={<FormattedMessage id="EventTaskList.AddSurvey" defaultMessage="Add a survey in the list" />}>
-							<PlusCircle onClick={() => this.addSurvey()} />
-						</button>
-					</div>
-				</div>			
-				<UserTips id="survey" text={<FormattedMessage id="EventSurveyList.SurveyTip" defaultMessage="Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review." />}/>
-			</div> 
-			)
+			<EventSectionHeader id="survey" 
+				image="img/btnSurvey.png" 
+				title={<FormattedMessage id="EventSurveyList.MainTitleSurveyList" defaultMessage="Surveys" />}
+				showPlusButton  = {true}
+				showPlusButtonTitle={<FormattedMessage id="EventSurveyList.AddSurvey" defaultMessage="Add a survey in the list" />}
+				userTipsText={<FormattedMessage id="EventSurveyList.SurveyTip" defaultMessage="Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review." />}
+				addItemCallback={this.addSurvey}
+				/>
+				);
+
 		var contentPage = (<div/>);
 							
 		if (this.state.event.surveylist.length === 0) {
@@ -93,38 +97,51 @@ class EventSurveyList extends React.Component {
 		else { 
 			var listSurveyHtml = [];
 			
-			
-			for (var i in this.state.event.surveylist ) {
-				var item = this.state.event.surveylist[ i ];
+			listSurveyHtml.push( this.state.event.surveylist.map( (item, index) => {
 				var classSurvey = "";
 				var styleSurvey="";
 				// color
 				if (item.status === surveyConstant.STATUS_INPREPARATION)
 					classSurvey= "list-group-item list-group-item-dark"
 				else if (item.status === surveyConstant.STATUS_OPEN)
-					classSurvey= "list-group-item list-group-item-primary"
+					classSurvey= "list-group-item list-group-item-warning"
 				else 			
-					classSurvey= "list-group-item list-group-item-info";
+					classSurvey= "list-group-item list-group-item-success";
 				
 				// Tab
-				if (item.id === this.state.currentSurveyId) {					
+				if (item.id.toString() === this.eventCtrl.getCurrentSurveyId().toString()) {					
 					// classSurvey = classSurvey.concat(" active");
-					styleSurvey = { borderTop: "4px solid black", borderLeft: "4px solid black", borderBottom: "4px solid black"};
+					styleSurvey = { borderTop: "2px solid black", borderLeft: "2px solid black", borderBottom: "2px solid black"};
 				}
 				else {
-					styleSurvey = {borderRight:"4px solid black"};
+					styleSurvey = {borderRight:"2px solid black"};
 				}
 				
-				listSurveyHtml.push( 
+				return(
 					<li class={classSurvey} style={styleSurvey}
+						key={index}
 						id={item.id}
-						onClick={ (event) =>{console.log("EventSurveyList.click on "+event.target.value);}} > 
+						onClick={ (event) =>{
+								console.log("EventSurveyList.click on "+event.target.id);
+								this.eventCtrl.setCurrentSurveyId(event.target.id);
+								// do a setState to force to redisplay the component -- maybe use the context ?
+								this.setState({currentSurveyId: event.target.id}  );
+								}} > 
 						{item.title}&nbsp;						
-						<span class="badge bg-primary rounded-pill">{item.answers.length + "/14"}</span>
+						<span class="badge bg-primary rounded-pill">{item.answers.length + "/"+nbParticipants}</span>
 					</li>
-					);
-			}
+					) }
+					)
+			);
+			listSurveyHtml.push(<li  style={{borderRight:"2px solid black", height: "40px"}}/>);
+						
 			
+			var currentSurvey = this.eventCtrl.getCurrentSurvey();
+			var surid=-1;
+			if (currentSurvey) {
+				console.log("EventSurveyList.currentSurveyd = "+currentSurvey.id);
+				var surid=currentSurvey.id;
+			 }
 			contentPage= (
 				<div class="row">
 					<div class="col-2">
@@ -134,17 +151,11 @@ class EventSurveyList extends React.Component {
 					</div>
 					<div class="col-10"> 
 						<EventSurvey event={this.state.event} 
-							survey={this.getCurrentSurvey() } 
-							getUserParticipant={this.props.getUserParticipant}
-							updateEvent={(slabEvent) => {
-								// My child say something change. So update myself
-								var currentSurvey = this.getCurrentSurvey();
-								console.log("EventSurveyList.EventSurverCallback : my currentServey is " + JSON.stringify( currentSurvey ));
-
-								// Please refresh myself
-								this.setState( { survey: currentSurvey });
-								this.props.updateEvent( slabEvent);
-							}} />
+							eventCtrl={this.eventCtrl}
+							forceUpdatefct={() => {
+								console.log("EventSurveyList.forceUpdate");
+								this.forceUpdate()}}
+							 />
 					</div>
 				</div>
 			)
@@ -161,7 +172,7 @@ class EventSurveyList extends React.Component {
 	
 	
 	setChildAttribut(name, value, item, localisation) {
-		console.log("EventSurveyList.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
+		// console.log("EventSurveyList.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 		const currentEvent = this.state.event;
 
 		item[name] = value;
@@ -179,7 +190,7 @@ class EventSurveyList extends React.Component {
 
 	setAttributeCheckbox(name, value) {
 		let showPropertiesValue = this.state.show;
-		console.log("EventSurveyList.setCheckBoxValue set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
+		// console.log("EventSurveyList.setCheckBoxValue set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
 		if (value === 'on')
 			showPropertiesValue[name] = true;
 		else
@@ -188,36 +199,27 @@ class EventSurveyList extends React.Component {
 	}	
 	
 	addSurvey() {
-		console.log("EventSurveyList.addSurvey: addItem " );
-		var currentEvent = this.state.event;
-		var surveyToAdd = Survey.getDefaultSurvey();
+		console.log("EventSurveyList.addSurvey" );
+		
+		var surveyToAdd = SurveyCtrl.getDefaultSurvey();
 		
 		// call the server to get an ID on this survey
-		var slabEvent = SlabEvent.getAddList(this.state.event, "surveylist", surveyToAdd, "/");
- 		this.props.updateEvent( slabEvent );
-	
-	
-		surveyToAdd.id = new Date().getTime();
-		this.setState( {currentSurveyId: surveyToAdd.id});
-		
-		const newList = currentEvent.surveylist.concat( surveyToAdd );
-		
-		currentEvent.surveylist = newList;
-		this.setState({ event: currentEvent, show: { showSurveyAdmin : true} });
-		
-		
-		this.props.updateEvent( slabEvent );
+ 		this.eventCtrl.addEventChildFct( "surveylist", surveyToAdd, "/", this.addSurveyCallback);
 	}
 	
-	/**
-	* return the current survey choose by the user  */
-	getCurrentSurvey() {
-		for (var i in this.state.event.surveylist) {
-			if (this.state.event.surveylist[ i ].id ===  this.state.currentSurveyId)
-				return this.state.event.surveylist[ i ];
+	addSurveyCallback(httpPayload) {
+		console.log("EventSurveyList.addSurveyCallback ");
+		if (httpPayload.isError()) {
+				// feedback to user is required
+				console.log("EventSurveyList.addSurveyCallback: ERROR ");
+		} else {
+			var surveyToAdd = httpPayload.getData().child;
+			this.eventCtrl.addSurveyInEvent( surveyToAdd );
+			this.setState( { event: this.eventCtrl.getEvent(), show: { showSurveyAdmin : true} });
 		}
-		return null;
 	}
+	
+	
 	
 }
 

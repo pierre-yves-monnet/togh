@@ -86,30 +86,44 @@ public class TranslatorGoogle {
         }
     }
 
-    public TranslateSentenceResult translateSentence(String sentence, String language) {
+    /**
+     * Translate a unique sentence from the Source language to the target langage 
+     * @param sentence
+     * @param language &#39;
+     * @return
+     */
+    public TranslateSentenceResult translateSentence(String sentence, String sourceLanguage, String targetLanguage) {
         List<String> sentences = new ArrayList<>();
         sentences.add(sentence);
-        return translateSentences(sentences, language);
+        return translateSentences(sentences, sourceLanguage, targetLanguage);
     }
     
-        
-    public TranslateSentenceResult translateSentences(List<String> sentences, String language) {
+    /**
+     * Translate a list of sentence from the source language to the target langage
+     * Replace the sequence &#39; by ' : google encode this character, and React does not need that 
+     * @param sentences
+     * @param sourceLanguage
+     * @param targetLanguage
+     * @return
+     */
+    public TranslateSentenceResult translateSentences(List<String> sentences, String sourceLanguage, String targetLanguage) {
         // list languages
         TranslateSentenceResult translateResult = new TranslateSentenceResult();
         // perform
         try {
             for (String sentence : sentences) {
 
-                TranslateOption sourceLanguage = Translate.TranslateOption.sourceLanguage("en");
-                TranslateOption destinationLanguage = Translate.TranslateOption.targetLanguage(language);
+                TranslateOption sourceLanguageOption = Translate.TranslateOption.sourceLanguage(sourceLanguage);
+                TranslateOption targetLanguageOption = Translate.TranslateOption.targetLanguage(targetLanguage);
 
                 Translation translation = translate.translate(
                         sentence,
-                        sourceLanguage,
-                        destinationLanguage);
+                        sourceLanguageOption,
+                        targetLanguageOption);
                 // Use "base" for standard edition, "nmt" for the premium model.
                 // Translate.TranslateOption.model("base"));
-                translateResult.listTranslations.add(translation.getTranslatedText());
+                String decodeSentence = translation.getTranslatedText().replace("&#39;", "'");
+                translateResult.listTranslations.add( decodeSentence );
             }
 
         } catch (Exception e) {
