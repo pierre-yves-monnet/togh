@@ -195,7 +195,7 @@ class EventTaskList extends React.Component {
 							id="showDates" />
 							
 							
-					</td><td style={{ paddingRight: "70px;" }}>
+					</td><td style={{ paddingLeft: "50px", paddingRight: "50px;" }}>
 						<div class="btn-group btn-group-sm" role="groupstate" aria-label="Basic radio toggle button group">
 							<input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autocomplete="off" 
 								checked={this.state.showProperties.filterState === "ALL"}
