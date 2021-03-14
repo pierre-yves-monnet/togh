@@ -76,6 +76,11 @@ class EventCtrl {
 			log = log.concat("create participants;");
 			this.event.participants = [];
 		}
+		if (!this.event.itinerarylist) {
+			log = log.concat("create ItineraryList;");
+			this.event.itinerarylist = [];
+		}
+			
 		if (!this.event.expenses) {
 			log = log.concat("create Expenses;");
 			this.event.expenses = {};
@@ -153,16 +158,13 @@ class EventCtrl {
 		console.log("EventCtrl:addEventChildFct."+this.ctrlId+" child="+listname)
 		// MOCKUP 
 		var toolService = FactoryService.getInstance().getToolService();
-		value.id = toolService.getUniqueCodeInList( this.event[ listname ], "id");
-		value.title="Blue rose";
+		value.id = toolService.getUniqueCodeInList( this.event[ listname ], "id");		
 		var dataHttp ={ child : value};
 		var httpResponse = new HttpResponseMockup(dataHttp);
 		
 		console.log("EventCtrl:addEventChildFct callBack now")
  
 		callbackfct( httpResponse )
-		
-		
 		
 		if (this.timer)
 			clearTimeout(this.timer);
@@ -174,7 +176,30 @@ class EventCtrl {
 		readyToSendBasket.sendToServer( callbackfct );
 		*/
 	}
-	
+	removeEventChild(listname, value, localisation, callbackfct) {
+		console.log("EventCtrl.removeEventChildFct."+this.ctrlId+" child="+listname)
+		var dataHttp ={ child : value};
+		var httpResponse = new HttpResponseMockup(dataHttp);
+		
+		console.log("EventCtrl.removeEventChildFct callBack now")
+ 
+		callbackfct( httpResponse );
+		
+		/*
+		var slabEvent = SlabEvent.getRemoveList(this.event, listname, value, localisation);
+		this.currentBasketSlabEvent.addSlabEvent( slabEvent );
+		var readyToSendBasket = this.currentBasketSlabEvent;
+		this.currentBasketSlabEvent = new BasketSlabEvent( this );
+		readyToSendBasket.sendToServer( callbackfct );
+		*/
+	}
+	updateEventChild( listname,value, localisation, callbackfct) {
+		console.log("EventCtrl.updateEventChild."+this.ctrlId+" child="+listname)
+		var dataHttp ={ child : value};
+		var httpResponse = new HttpResponseMockup(dataHttp);
+		callbackfct( httpResponse );
+
+	}
 	
 	automaticSave() {
 		console.log("EventCtrl.AutomaticSave: ListSlab=" +this.currentBasketSlabEvent.length);

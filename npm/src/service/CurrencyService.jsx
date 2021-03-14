@@ -8,14 +8,14 @@
 
 
 const list_currencies = [
-		{label: "US Dollar", prefix: "$", suffix: "", code: "USD"},
-		{label: "Euro", prefix: "", suffix: "€", code:"EUR"},
-		{label: "British Pound", prefix: "£", suffix: "", code:"GBP"},
-		{label: "Moroccan Dirham", prefix: "", suffix: " DH", code:"MAD"},
-		{label: "Peso", prefix: "$", suffix: "", code: "MXN"},
-		{label: "Yen", prefix: "¥", suffix: "", code: "JPY"},
-		{label: "Real", prefix: "R$", suffix: "", code: "BRL"},
-		{label: "Won", prefix: "₩", suffix: "", code: "QRW"}
+		{label: "US Dollar", 		prefix: "$", 	suffix: "", 	code: "USD"},
+		{label: "Euro", 			prefix: "", 	suffix: "€", 	code:"EUR"},
+		{label: "British Pound", 	prefix: "£", 	suffix: "", 	code:"GBP"},
+		{label: "Moroccan Dirham", 	prefix: "", 	suffix: " DH", 	code:"MAD"},
+		{label: "Peso", 			prefix: "$", 	suffix: "", 	code: "MXN"},
+		{label: "Yen", 				prefix: "¥", 	suffix: "", 	code: "JPY"},
+		{label: "Real", 			prefix: "R$", 	suffix: "", 	code: "BRL"},
+		{label: "Won", 				prefix: "₩", 	suffix: "", 	code: "QRW"}
 ]
 
 class CurrencyService {

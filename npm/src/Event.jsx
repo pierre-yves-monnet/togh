@@ -347,10 +347,7 @@ class Event extends React.Component {
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
-				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event}
-																			updateEvent={this.updateEventfct}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary  eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
@@ -363,9 +360,7 @@ class Event extends React.Component {
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
-				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList 
-																			eventCtrl={this.eventCtrl}
-																			/>}
+				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}

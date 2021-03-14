@@ -86,6 +86,9 @@ class Invitation extends React.Component {
      			 modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}
 				primaryButtonText={intl.formatMessage({id: "Invitation.Close", defaultMessage: "Close"})}
 				secondaryButtonText=''
+				onRequestClose= {() => { console.log("Inviration.Modal.onRequestClose")}}
+				handleSubmit={() => { console.log("Invitation.Modal.handleSubmit")}}
+				shouldCloseAfterSubmit
 				size='lg'>
 					<div style={{display: "inline-block"}}>
 					

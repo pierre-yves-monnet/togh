@@ -31,7 +31,10 @@ class Expense extends React.Component {
 	// props.eventPreferences
 	constructor(props) {
 		super();
+		this.eventCtrl =  props.eventCtrl;
+		this.parentLocalisation = props.parentLocalisation;
 		this.state = {
+			
 			'item': props.item,
 			'event': props.event
 		};
@@ -39,16 +42,6 @@ class Expense extends React.Component {
 	}
 
 
-//	get_currency(item){
-//		if (item.currency==="euro"){
-//			return "suffix=\"�\""
-//		}
-//		if (item.currency==="dollar"){
-//			return "prefix=\"$\""
-//		}
-//		
-//	}
-	
 	//  -------------------------------------------- Render
 	// Function to decide prefix or suffix and symbol
 	// labelText={<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}
@@ -68,23 +61,23 @@ class Expense extends React.Component {
 					{<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}<br/>
 					<CurrencyInput class="bx--text-input bx--text__input" 
 						value={this.state.item.budget} 
-						onChangeEvent={(event) => this.setChildAttribut("budget", event.target.value)}
+						onChangeEvent={(event) => this.setAttribut("budget", event.target.value)}
 						decimalSeparator="." thousandSeparator=","
 						precision="2"
-						prefix={this.props.eventPreferences.getCurrencySymbolPrefix()}
-						suffix={this.props.eventPreferences.getCurrencySymbolSuffix()}
+						prefix={this.eventCtrl.getEventPreferences().getCurrencySymbolPrefix()}
+						suffix={this.eventCtrl.getEventPreferences().getCurrencySymbolSuffix()}
 					/>
 					 
-					</td><td>
+					</td><td style={{paddingLeft: "10px"}}>
 					{<FormattedMessage id="Expense.Cost" defaultMessage="Cost" />}<br/>
-					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.price} onChangeEvent={(event) => this.setChildAttribut("price", event.target.value)}
+					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.price} onChangeEvent={(event) => this.setAttribut("price", event.target.value)}
 						decimalSeparator="." thousandSeparator=","
 						precision="2"
-						prefix={this.props.eventPreferences.getCurrencySymbolPrefix()}
-						suffix={this.props.eventPreferences.getCurrencySymbolSuffix()}
+						prefix={this.eventCtrl.getEventPreferences().getCurrencySymbolPrefix()}
+						suffix={this.eventCtrl.getEventPreferences().getCurrencySymbolSuffix()}
 						 />
-					</td><td>								
-					<button class="btn btn-primary btn-xs"><Cash/></button>
+					</td><td style={{paddingLeft: "10px", verticalAlign: "middle"}}>								
+						<button class="btn btn-primary btn-xs"><Cash/></button>
 					</td>
 					</tr></table>
 				</div>
@@ -92,17 +85,23 @@ class Expense extends React.Component {
 		)
 	}
 
-	setChildAttribut(name, value, item) {
-		console.log("Expense.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
+	setAttribut(name, value, item) {
+		console.log("Expense.setAttribut: set attribut:" + name + " <= [" + value + "] item=" + JSON.stringify(item));
 		var item = this.state.item;
 		item[name] = value;
 
+		console.log("EventTasklist.setAttribut: set attribut:" + name + " <= " + value + +" Localisation="+this.parentLocalisation+" item=" + JSON.stringify(item));
+		
+		this.eventCtrl.setAttribut(name, value, item, this.parentLocalisation);
+
+		/*
 		this.setState({ item: item });
 		
 		var slabEvent = SlabEvent.getUpdate(this.state.event, name, value, item);
-		console.log("Expense.setChildAttribut Slab="+slabEvent.getString());
+		console.log("Expense.setAttribut Slab="+slabEvent.getString());
 		 
 		this.props.updateEvent( slabEvent );
+		*/
 	}
 
 

@@ -337,7 +337,9 @@ class EventSurvey extends React.Component {
 	
 	getNumberOfVote( surveyCode ) {
 		var survey = this.surveyCtrl.getValue();
-
+		if (!survey)
+			return 0;
+			
 		var total=0;
 		for (var i in survey.answers) {
 			var answerParticipant = survey.answers[ i ];

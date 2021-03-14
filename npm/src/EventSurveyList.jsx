@@ -12,17 +12,17 @@ import { injectIntl, FormattedMessage } from "react-intl";
 
 import { PlusCircle} from 'react-bootstrap-icons';
 
-import UserTips from './component/UserTips';
 import FactoryService from './service/FactoryService';
-
 import SlabEvent from './service/SlabEvent';
 import EventSectionHeader from './component/EventSectionHeader';
 
 
+
 import * as surveyConstant from './controller/SurveyCtrl';
-import EventSurvey from './EventSurvey';
 import EventCtrl from './controller/EventCtrl';
 import SurveyCtrl from './controller/SurveyCtrl';
+
+import EventSurvey from './EventSurvey';
 
 class EventSurveyList extends React.Component {
 	// this.props.updateEvent()

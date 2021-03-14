@@ -327,10 +327,10 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 	Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
 	==> Utiliser le radio button de Bootstap
 	
-
+Simon ? Modal cick sur Fermer ne ferme pas le modal (Invitation). POurtant j'ai mis la propriété shouldCloseAfterSubmit
 Simon ?	Google Geocodage d'une adresse
 Simon ?	Affichage d'un itineraire
-Simon ?	comment faire une saisie de currency en carbon : TextNumber => pas de virgule
+
 Simon ?	Date Carbon: le format de date ne respecte pas la langue
 	
 	

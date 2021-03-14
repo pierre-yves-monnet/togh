@@ -13,12 +13,12 @@ import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronR
 import { TextInput,  TimePicker, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
 
 import FactoryService from './service/FactoryService';
+import SlabEvent from './service/SlabEvent';
 
 import Expense from './component/Expense';
 import TagDropdown from './component/TagDropdown';
-import UserTips from './component/UserTips';
+import EventSectionHeader from './component/EventSectionHeader';
 
-import SlabEvent from './service/SlabEvent';
 
 
 const ITINERARYITEM_POI 		= "POI";
@@ -40,8 +40,10 @@ class EventItinerary extends React.Component {
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
+		this.eventCtrl =  props.eventCtrl;
+		
 		this.state = {
-			event: props.event,
+			event: this.eventCtrl.getEvent(),
 			show : {
 				showItineraryMap: true,
 				showExpense : false
@@ -50,17 +52,14 @@ class EventItinerary extends React.Component {
 		};
 		console.log("EventItinerary.constructor event="+JSON.stringify(props.event));
 		
-		if (!this.state.event.itinerarylist) {
-			console.log("EventItinerary.constructor No tasklist defined, create an empty one")
-			this.state.event.itinerarylist = [];
-		}
-		
 		// show : OFF, ON, COLLAPSE
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.addItem 				= this.addItem.bind(this);
+		this.addStep 				= this.addStep.bind(this);
 		this.upItem					= this.upItem.bind( this );
 		this.downItem				= this.downItem.bind( this );
 		this.moveItemOneDirection	= this.moveItemOneDirection.bind( this );
+		this.addStepCallback		= this.addStepCallback.bind( this );
+		this.removeStepCallback		= this.removeStepCallback.bind( this );
 	}
 
 
@@ -72,15 +71,13 @@ class EventItinerary extends React.Component {
 
 		var resultHtml= [];
 		resultHtml.push(
-				<div class="eventsection">
-					<div style={{ float: "left" }}>
-						<img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 100 }} /><br />
-					</div>
-					<FormattedMessage id="EventSurveyList.MainTitleItinerary" defaultMessage="Itinerary" />
-				</div>);
-							
-		resultHtml.push(<UserTips id="itinerary" text={<FormattedMessage id="EventSurveyList.ItineraryTip" defaultMessage="List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary" />}/>);
-			
+			<EventSectionHeader id="itinerary" 
+				image="img/btnItinerary.png" 
+				title={<FormattedMessage id="EventItinerary.MainTitleItinerary" defaultMessage="Itinerary" />}
+				showPlusButton  = {false}
+				userTipsText={<FormattedMessage id="EventItinerary.ItineraryTip" defaultMessage="List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary" />}
+				/>
+				);
 		// let's create a list of days.
 		var dateStart = null;
 		var dateEnd = null;
@@ -166,42 +163,36 @@ class EventItinerary extends React.Component {
 		var index=-10;
 		while (dateIndex.getTime() <= dateEnd.getTime()) {			
 			index = index - 10;
-			console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
+			// console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
 			var dateIndexPublish = new Date( dateIndex);
 			
 			var line = (
-				<div style={{marginBottom: "10px"}}>
-				<div class="row toghSectionHeader">
-					<div class="col-10" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
-						<FormattedDate
-			           	value={dateIndexPublish}
-			           	year = 'numeric'
-			           	month= 'long'
-			           	day = 'numeric'
-			           	weekday = 'long'
-			       		/>
-					</div>
-					<div class="col-2"> 
-						 <div style={{ float: "right" }}>
-								<button  class="btn btn-success btn-xs" 
-									id={dateIndexPublish.toISOString()}
-									onClick={(event) => {
-										console.log("EventItinerary.addFromButton :  id="+event.target.id);
-										this.addItem( event.target.id, null );
-									}}>
-								<PlusCircle   
-									id={dateIndexPublish.toISOString()}
-									onClick={(event) => {
-										console.log("EventItinerary.addFromPlusCircle :  id="+event.target.id);
-										this.addItem( event.target.id, null );
-									}
-									}/>
-								</button>
-	
-								
+				<div style={{marginBottom: "10px"}} key={index}>
+					<div class="row toghSectionHeader">
+						<div class="col-10" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
+							<FormattedDate
+				           	value={dateIndexPublish}
+				           	year = 'numeric'
+				           	month= 'long'
+				           	day = 'numeric'
+				           	weekday = 'long'
+				       		/>
+						</div>
+						<div class="col-2"> 
+							 <div style={{ float: "right" }}>
+									<button  class="btn btn-success btn-xs" 
+										id={dateIndexPublish.toISOString()}
+										onClick={(event) => {
+											console.log("EventItinerary.addFromButton :  id="+event.target.id);
+											this.addStep( event.target.id, null );
+										}}>
+										<PlusCircle id={dateIndexPublish.toISOString()}/>
+									</button>
+		
+									
+							</div>
 						</div>
 					</div>
-				</div>
 				</div>)
 			listItineraryListHtml.push( line );
 			
@@ -239,9 +230,14 @@ class EventItinerary extends React.Component {
 		listItineraryListHtml.push( this.renderHeader( true, -1 ));
 		for (var j in this.state.event.itinerarylist) {
 			var stepinlist = this.state.event.itinerarylist[ j ];
-			listItineraryListHtml.push( this.renderOneStep( stepinlist, true, j ) ); 
+			listItineraryListHtml.push( 
+				<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
+					<div class="container"> 
+					{this.renderOneStep( stepinlist, true, j ) }
+					</div>
+				</div>);
 		}
-		return (  <table class="table table-striped toghtable"> {listItineraryListHtml} </table>);
+		return ( {listItineraryListHtml} );
 	}
 
 
@@ -364,7 +360,7 @@ class EventItinerary extends React.Component {
 					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} title="Remove this item">
 					<DashCircle/></button>}
 					</td><td>
-						<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
+						<button class="btn btn-primary btn-xs" onClick={() => this.addStep( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
 					</td>
 					</tr></table>
 				</div>
@@ -379,10 +375,9 @@ class EventItinerary extends React.Component {
 						</div>
 						<div class="col-md">
 							{ this.state.show.showExpense &&  
-								<Expense item={item.expense} event={this.state.event} updateEvent={( slabEvent ) => 
-									{ 	console.log("EventItinerary.ExpenseUpdate slab="+slabEvent.getString());
-										this.props.updateEvent(slabEvent)
-									} }/>
+								<Expense item={item.expense} 
+									eventCtrl={this.eventCtrl} 
+									parentLocalisation={"/itinerarylist/"+item.id}/>
 							}
 						</div>
 					</div>
@@ -404,6 +399,8 @@ class EventItinerary extends React.Component {
  	*/
 	setChildAttribut(name, value, item) {
 		console.log("EventTasklist.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
+		this.eventCtrl.setAttribut(name, value, item, "/itinerarylist");
+		/*
 		const { event } = { ...this.state };
 		const currentEvent = event;
 
@@ -413,6 +410,7 @@ class EventItinerary extends React.Component {
 
 		this.setState({ "event": currentEvent });
 		this.props.updateEvent();
+		*/
 	}
 
 	/** --------------------
@@ -448,7 +446,6 @@ class EventItinerary extends React.Component {
 	//  one exception : in a ! showdate, if the item is the first line in the day, then we will change the day to "date -1"
 	// item become then the LAST item in the previous day. The rownumber does not change, the day change. 
 	// same with the down: if this is a ! showdate policy, then the row number does not change and a day +1 is added
-	// bob
 	upItem( showDates, item ) {
 		// console.log("EventItinerary.upItem");
 		this.moveItemOneDirection( item, -1);
@@ -511,10 +508,11 @@ class EventItinerary extends React.Component {
 				item.datestep = stepGuy.datestep;
 			}
 		}	
-		var currentEvent = this.state.event;
+		var currentEvent = this.eventCtrl.getEvent();
 		currentEvent.itinerarylist = this.reorderList( currentEvent.itinerarylist );
 		this.setState({ "event": currentEvent });
-		this.props.updateEvent( SlabEvent.getUpdateList( this.state.event, "/itinerarylist", this.state.event));	
+		this.eventCtrl.updateEventChild( "itinerarylist", currentEvent.itinerarylist, "", (httpPayLoad) => {console.log("EventItinerary.uploadList")});
+			
 	}
 
 	getIndexInList( item ) {
@@ -530,16 +528,16 @@ class EventItinerary extends React.Component {
 	/** --------------------
 	 *
  	*/
-	addItem(datestepSt, rownumber) {
+	addStep(datestepSt, rownumber) {
 		if (! datestepSt) {
-			console.log("Eventitinerary.addItem: date is NULL !");
+			console.log("Eventitinerary.addStep: date is NULL !");
 			return;
 		}
 		
 		var datestep = new Date( datestepSt);
 		var currentEvent = this.state.event;
 		
-		console.log("Eventitinerary.addItem: addItem datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarylist));
+		console.log("Eventitinerary.addStep: addStep datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarylist));
 
 		
 		if (! rownumber) {
@@ -554,31 +552,52 @@ class EventItinerary extends React.Component {
 		}
 		
 
-		let newList = currentEvent.itinerarylist.concat({ datestep: datestep, category: "POI", rownumber: rownumber, expense: {} });
-		
-		currentEvent.itinerarylist = this.reorderList( newList );
-		this.setState({ "event": currentEvent });
-		this.props.updateEvent( );
+		let stepToAdd ={ datestep: datestep, title:"", category: "POI", rownumber: rownumber, expense: {} };
+		// call the server to get an ID on this survey
+ 		this.eventCtrl.addEventChildFct( "itinerary", stepToAdd, "/", this.addStepCallback);
 	}
+
+	addStepCallback(httpPayload) {
+		console.log("EventItinerary.addStepCallback" );
+	
+		if (httpPayload.isError()) {
+				// feedback to user is required
+				console.log("EventItinerary.addStepCallback: ERROR ");
+		} else {
+			var stepToAdd = httpPayload.getData().child;
+			var event = this.eventCtrl.getEvent();
+			var newList= event.itinerarylist.concat( stepToAdd);
+			event.itinerarylist = this.reorderList( newList );
+			this.setState( { event: event});
+		}
+	}
+
+
+
+
+
 
 	/** --------------------
  	*/
 	removeItem(item) {
 		console.log("Eventitinerary.removeItem: event=" + JSON.stringify(this.state.event));
 
-		var currentEvent = this.state.event;
-		var listTask = currentEvent.itinerarylist;
-		var index = listTask.indexOf(item);
+		var currentEvent = this.eventCtrl.getEvent();
+		var listSteps = currentEvent.itinerarylist;
+		var index = listSteps.indexOf(item);
 		if (index > -1) {
-			listTask.splice(index, 1);
+			this.eventCtrl.removeEventChild("itinerarylist", listSteps, "", this.removeStepCallback)
+			listSteps.splice(index, 1);
 		}
-		currentEvent.itinerarylist = listTask;
-		console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
+		currentEvent.itinerarylist = listSteps;
+		console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.currentEvent));
 
 		this.setState({ "event": currentEvent });
-		this.props.updateEvent();
 	}
 
+	removeStepCallback() {
+		// we already delete the steps.
+	}
 	/** --------------------
  	*/
 	reorderList( listSteps ) {
