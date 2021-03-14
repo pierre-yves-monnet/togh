@@ -230,6 +230,13 @@ class EventCtrl {
 	getEventPreferences() {
 		return this.eventPreferences;
 	}
+	getMyself() {
+		var authService = FactoryService.getInstance().getAuthService();
+		// console.log("Event.getUserPartipant.start");
+		var user= authService.getUser();
+		return user;
+	}
+	
 	getUserParticipant() {
 		var authService = FactoryService.getInstance().getAuthService();
 		// console.log("Event.getUserPartipant.start");

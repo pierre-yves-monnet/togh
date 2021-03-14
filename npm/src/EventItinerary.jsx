@@ -357,7 +357,8 @@ class EventItinerary extends React.Component {
 				<div class="col-1">
 					<table><tr>
 					<td>
-					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} title="Remove this item">
+					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} 
+						title={intl.formatMessage({id: "EventItineray.RemoveThisStep",defaultMessage: "Remove this step"})}>
 					<DashCircle/></button>}
 					</td><td>
 						<button class="btn btn-primary btn-xs" onClick={() => this.addStep( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
@@ -586,7 +587,7 @@ class EventItinerary extends React.Component {
 		var listSteps = currentEvent.itinerarylist;
 		var index = listSteps.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("itinerarylist", listSteps, "", this.removeStepCallback)
+			this.eventCtrl.removeEventChild("itinerarylist", listSteps[ index ], "", this.removeStepCallback);
 			listSteps.splice(index, 1);
 		}
 		currentEvent.itinerarylist = listSteps;
@@ -595,7 +596,7 @@ class EventItinerary extends React.Component {
 		this.setState({ "event": currentEvent });
 	}
 
-	removeStepCallback() {
+	removeStepCallback( httpPayLoad) {
 		// we already delete the steps.
 	}
 	/** --------------------

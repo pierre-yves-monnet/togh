@@ -13,7 +13,7 @@ import { TextInput, TextArea, Checkbox } from 'carbon-components-react';
 import { Pencil, Eye, DashCircle, PlusCircle, Check2Square, Square} from 'react-bootstrap-icons';
 
 
-import UserTips from './component/UserTips';
+
 import TagDropdown from './component/TagDropdown';
 import UserParticipantCtrl from './controller/UserParticipantCtrl';
 import SurveyCtrl from './controller/SurveyCtrl';

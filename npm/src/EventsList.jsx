@@ -71,13 +71,13 @@ class EventsList extends React.Component {
 					</div>
 				</div>
 				<div class="row">
-				<div class="col-sm">
-					<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
-						<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}><ArrowRepeat/><FormattedMessage id="EventList.Refresh" defaultMessage="Refresh"/></button>
-						<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><ClipboardData/> <FormattedMessage id="EventList.AllEvents" defaultMessage="All events"/></button>
-						<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><PersonCircle/> <FormattedMessage id="EventList.MyEvents" defaultMessage="My events"/></button>
+					<div class="col-sm">
+						<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}><ArrowRepeat/><FormattedMessage id="EventList.Refresh" defaultMessage="Refresh"/></button>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><ClipboardData/> <FormattedMessage id="EventList.AllEvents" defaultMessage="All events"/></button>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><PersonCircle/> <FormattedMessage id="EventList.MyEvents" defaultMessage="My events"/></button>
+						</div>
 					</div>
-	</div>
 				</div>
 				<div class="row">
 					<table class="table table-striped toghtable">

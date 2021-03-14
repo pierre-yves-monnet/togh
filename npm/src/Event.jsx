@@ -347,11 +347,10 @@ class Event extends React.Component {
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
-				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary  eventCtrl={this.eventCtrl} />}
-				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}
-																			updateEvent={this.updateEventfct}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary eventCtrl={this.eventCtrl} />}
+				
+				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList  eventCtrl={this.eventCtrl} />}
+				
 				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event}
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}

@@ -327,6 +327,8 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 	Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
 	==> Utiliser le radio button de Bootstap
 	
+Simon : comment on utilise le ChooseParticipant ? Je veux lui donner un USERID, un item et avoir une methode "change"
+	
 Simon ? Modal cick sur Fermer ne ferme pas le modal (Invitation). POurtant j'ai mis la propriété shouldCloseAfterSubmit
 Simon ?	Google Geocodage d'une adresse
 Simon ?	Affichage d'un itineraire
