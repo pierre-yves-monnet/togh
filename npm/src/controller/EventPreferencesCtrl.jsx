@@ -45,7 +45,7 @@ class EventPreferenceCtrl {
 		this.currencyCode = currencyCode;
 
 		var slabEvent = SlabEvent.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
-		this.updateEventfct( slabEvent );
+		this.eventCtrl.updateEventfct( slabEvent );
 
 	}
 	

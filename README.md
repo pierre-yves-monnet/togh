@@ -148,20 +148,26 @@ https://www.flaticon.com/
 Rendre une image fond transparent
 https://www.remove.bg/fr/upload 
 
-Participant : 3 personnages          
-Itinerary : a revoir
-Chat : OK
-Task : OK
-Shopping List : OK
-Survey : Revoir un peu la ligne pour ne pas faire 3 zones identiques 
-Geolocalisation : a revoir
-Photo : a revoir
-Frais : a revoir
+Lounes : $5 / icons
+
+Chat 				: OK
+Task 				: OK
+Shopping List 		: OK
+
+Participant 		: 3 personnages          
+Itinerary 			: a revoir
+Survey 				: Revoir un peu la ligne pour ne pas faire 3 zones identiques 
+Geolocalisation 	: a revoir
+Photo 				: a revoir
+Frais 				: a revoir
 
 Starter 		: todo
 Ender 			: todo
+Preferences		: todo / Engrenages
+budget			: todo / sac ou tirelire
 Default Boy		: todo
 Default girl	: todo
+
 
 
 const ITINERARYITEM_POI 		= "POI";

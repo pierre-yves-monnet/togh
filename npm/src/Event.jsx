@@ -29,9 +29,10 @@ import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 import EventExpense from './EventExpense';
 import EventSurveyList from './EventSurveyList';
-import BasketSlabEvent from './service/BasketSlabEvent';
+
 import UserParticipantCtrl from './controller/UserParticipantCtrl';
-import EventPreferencesCtrl from './controller/EventPreferencesCtrl';
+
+import EventPreferences from './EventPreferences';
 
 import EventCtrl from './controller/EventCtrl';
 
@@ -44,7 +45,7 @@ const TAB_CHAT = 'Chat';
 const TAB_TASKLIST = 'TaskList';
 const TAB_SURVEY = 'Survey';
 const TAB_PHOTO = 'Photo';
-			
+const TAB_PREFERENCES= 'Preferences';
 
 class Event extends React.Component {
 	constructor(props) {
@@ -340,6 +341,13 @@ class Event extends React.Component {
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
 						</button>
 
+						<button onClick={() => this.accessTab( TAB_PREFERENCES )} 
+							title={<FormattedMessage id="Event.TitlePreferences" defaultMessage="Event preferences" />} 
+							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnPreference.png" style={{ width: 45 }} /><br />							
+							<FormattedMessage id="Event.Preferences" defaultMessage="Preferences" />
+						</button>
+
 					</div>
 
 				</div>
@@ -364,7 +372,8 @@ class Event extends React.Component {
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
-			</div>)
+				{this.state.show.currentSection === TAB_PREFERENCES  && <EventPreferences eventCtrl={this.eventCtrl} />}
+		</div>)
 	} //---------------------------- end Render
 
 

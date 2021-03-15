@@ -36,6 +36,8 @@ class ToolService {
 	format is dateStartEvent: "2021-02-20T16:05:10"
 	 */
 	getDateFromString( dateSt ) {
+		if (! dateSt)
+			return null;
 		if (dateSt instanceof Date) 
 			return dateSt;
 		return new Date( dateSt );

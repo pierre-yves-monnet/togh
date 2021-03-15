@@ -141,7 +141,11 @@ class EventTaskList extends React.Component {
 						<td><TextInput value={item.what} onChange={(event) => this.setAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
 						<td><TextArea labelText="" value={item.description} onChange={(event) => this.setAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
 						<td>
-							<ChooseParticipant participant={item.who} event={this.state.event} modifyParticipant={true} pingChangeParticipant={this.changeParticipant} />
+							<ChooseParticipant userid={item.who} 
+								event={this.state.event} 
+								modifyParticipant={true}
+								item={item} 
+								onChangeParticipantfct={this.changeParticipant} />
 						</td>
 
 
@@ -399,8 +403,13 @@ class EventTaskList extends React.Component {
 	removeStepCallback(httpPayLoad) {
 		// already done
 	}
-	changeParticipant() {
-		console.log("EventShoppinglist.changeParticipant");
+	changeParticipant( task, userid) {
+		console.log("EventShoppinglist.changeParticipant user="+JSON.stringify(userid));
+		this.eventCtrl.setAttribut("who", userid, task, "/tasklist" );
+		task.who = userid;
+		this.setState({ event: this.state.event });
+		console.log("EventShoppinglist.changeParticipant event="+JSON.stringify(this.state.event));
+
 	}
 
 
