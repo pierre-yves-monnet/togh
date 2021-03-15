@@ -8,7 +8,7 @@
 
 
 const list_currencies = [
-		{label: "US Dollar", 		prefix: "$", 	suffix: "", 	code: "USD"},
+{label: "US Dollar", 		prefix: "$", 	suffix: "", 	code: "USD"},
 		{label: "Euro", 			prefix: "", 	suffix: "€", 	code:"EUR"},
 		{label: "British Pound", 	prefix: "£", 	suffix: "", 	code:"GBP"},
 		{label: "Moroccan Dirham", 	prefix: "", 	suffix: " DH", 	code:"MAD"},

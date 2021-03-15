@@ -29,6 +29,12 @@ import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 import EventExpense from './EventExpense';
 import EventSurveyList from './EventSurveyList';
+<<<<<<< HEAD
+=======
+import BasketSlabEvent from './service/BasketSlabEvent';
+import UserParticipant from './entity/UserParticipant';
+import EventPreferences from './entity/EventPreferences';
+>>>>>>> 197bdda77aad97c3a5028ed0f07ebe846abac6ac
 
 import UserParticipantCtrl from './controller/UserParticipantCtrl';
 
@@ -77,6 +83,11 @@ class Event extends React.Component {
 		this.updateEventfct 			= this.updateEventfct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
 		
+
+
+		// Event preferences
+		this.eventPreferences           = new EventPreferences(this.state.event)
+
 
 	}
 	componentDidMount() {
@@ -352,6 +363,7 @@ class Event extends React.Component {
 
 				</div>
 				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} 
+<<<<<<< HEAD
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
@@ -374,6 +386,36 @@ class Event extends React.Component {
 																			eventPreferences={this.eventPreferences}/>}
 				{this.state.show.currentSection === TAB_PREFERENCES  && <EventPreferences eventCtrl={this.eventCtrl} />}
 		</div>)
+=======
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary event={this.state.event}
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList event={this.state.event}
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event}
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList event={this.state.event}
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
+																			updateEvent={this.updateEvent}
+																			getUserParticipant={this.getUserParticipant}
+																			eventPreferences={this.eventPreferences}/>}
+			</div>)
+>>>>>>> 197bdda77aad97c3a5028ed0f07ebe846abac6ac
 	} //---------------------------- end Render
 
 

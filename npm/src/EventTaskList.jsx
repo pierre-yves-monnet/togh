@@ -189,14 +189,15 @@ class EventTaskList extends React.Component {
 			<div>
 				<table width="100%"><tr>
 					<td style={{ paddingRight: "60px;" }}>
+
 						<Toggle labelText="" aria-label="" toggled={this.state.showProperties.showdates}
 							selectorPrimaryFocus={this.state.showProperties.showdates}
 							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							onChange={(event) => {
-								console.log("EventTaskList.click on showDates");
+								
 								this.setCheckboxValue("showdates", event);}}
-							id="showDates" />
+id="showDates" />
 							
 							
 					</td><td style={{ paddingLeft: "50px", paddingRight: "50px;" }}>

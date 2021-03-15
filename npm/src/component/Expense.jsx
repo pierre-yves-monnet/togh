@@ -13,6 +13,7 @@
 import React from 'react';
 
 import { FormattedMessage,FormattedDate } from "react-intl";
+
 import { ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle, Search } from 'carbon-components-react';
 import CurrencyInput from 'react-currency-input';
@@ -42,7 +43,7 @@ class Expense extends React.Component {
 	}
 
 
-	//  -------------------------------------------- Render
+//  -------------------------------------------- Render
 	// Function to decide prefix or suffix and symbol
 	// labelText={<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}
 	// Divs from Search - removed because probably useless
@@ -58,7 +59,7 @@ class Expense extends React.Component {
 				</div>
 				<div class="card-body">
 					<table><tr><td>
-					{<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}<br/>
+{<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}<br/>
 					<CurrencyInput class="bx--text-input bx--text__input" 
 						value={this.state.item.budget} 
 						onChangeEvent={(event) => this.setAttribut("budget", event.target.value)}
@@ -78,6 +79,7 @@ class Expense extends React.Component {
 						 />
 					</td><td style={{paddingLeft: "10px", verticalAlign: "middle"}}>								
 						<button class="btn btn-primary btn-xs"><Cash/></button>
+
 					</td>
 					</tr></table>
 				</div>
