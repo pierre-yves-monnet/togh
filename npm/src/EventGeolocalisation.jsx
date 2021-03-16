@@ -35,6 +35,12 @@ class EventGeolocalisation extends React.Component {
 		this.setAttribute			= this.setAttribute.bind(this);
 	}
 
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		console.log("EventGeolocalisation.render: visible="+this.state.show);
@@ -201,7 +207,13 @@ class EventGeolocalisation extends React.Component {
 		else
 			this.setState( { 'show' : 'ON' });
 	}
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
 	setAttribute( name, value ) {
 		console.log("EventShoppinglist.setChildAttribut: set attribut:"+name+" <= "+value);
   		const currentEvent = this.state.event;
@@ -226,6 +238,15 @@ class EventGeolocalisation extends React.Component {
 		this.setState( { "event" : currentEvent});
 		this.props.updateEvent();
 	}
+	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 	
 }		
 export default EventGeolocalisation;

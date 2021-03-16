@@ -47,6 +47,13 @@ class EventTaskList extends React.Component {
 		this.addTasklistCallback 		= this.addTasklistCallback.bind( this );
 	}
 
+
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	// --------------------------------- render
 	render() {
 		const intl = this.props.intl;
@@ -164,29 +171,34 @@ class EventTaskList extends React.Component {
 		);
 		console.log("EventTasklist.render: list calculated from " + JSON.stringify(this.state.event.tasklist));
 
-		/** 
-							<ContentSwitcher size="sm" onChange={event => this.setSwitcherValue("filterState", event)}
-								labelText="Task"
-								width="10px" height="small">
-								<Switch name='ALL' text={<FormattedMessage id="EventTaskList.FilterAllStates" defaultMessage="All states" />} />
-								<Switch name='PLANNED' text={<FormattedMessage id="EventTaskList.FilterPlanned" defaultMessage="Planned" />} />
-								<Switch name='ACTIVE' text={<FormattedMessage id="EventTaskList.FilterInProgress" defaultMessage="In progress" />} />
-								<Switch name='DONE' text={<FormattedMessage id="EventTaskList.FilterDone" defaultMessage="Done" />} />
-							</ContentSwitcher>
-							
-							<ContentSwitcher size="sm" onChange={event => this.setSwitcherValue("filterparticipant", event)} labelText="Task">
-							<Switch name='ALL' text={<FormattedMessage id="EventTaskList.FilterAllParticipants" defaultMessage="All participants" />} />
-							<Switch name='MYTASKS' text={<FormattedMessage id="EventTaskList.FilterMyTasks" defaultMessage="My tasks" />} />
-							<Switch name='UNAFFECTED' text={<FormattedMessage id="EventTaskList.FilterUnaffected" defaultMessage="Unaffected" />} />
-
-						</ContentSwitcher>
-			 */
+		
 
 		// render the tab
 		return (<div>
 			{headerSection}
-
+			{this.getFilterTaskHtml()}
 			<div>
+				<table class="toghtable">
+					<thead>
+						<tr >
+							<th><FormattedMessage id="EventTaskList.State" defaultMessage="State" /></th>
+							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin" /></th>}
+							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.End" defaultMessage="End" /></th>}
+							<th><FormattedMessage id="EventTaskList.Subject" defaultMessage="Subject" /></th>
+							<th><FormattedMessage id="EventTaskList.Description" defaultMessage="Description" /></th>
+							<th><FormattedMessage id="EventTaskList.Who" defaultMessage="Who" /></th>
+							<th></th>
+						</tr>
+					</thead>
+					{listTaskListHtml}
+				</table>
+			</div>
+		</div>
+		);
+	}
+	
+	getFilterTaskHtml() {
+		return (<div style={{paddingBottom:"10px", paddingTop:"10px"}}>
 				<table width="100%"><tr>
 					<td style={{ paddingRight: "60px;" }}>
 
@@ -195,9 +207,8 @@ class EventTaskList extends React.Component {
 							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							onChange={(event) => {
-								
 								this.setCheckboxValue("showdates", event);}}
-id="showDates" />
+							id="showDates" />
 							
 							
 					</td><td style={{ paddingLeft: "50px", paddingRight: "50px;" }}>
@@ -260,29 +271,15 @@ id="showDates" />
 						</div>
 					</td>
 				</tr></table>
-
-
-
-				<p />
-				<table class="table table-striped toghtable">
-					<thead>
-						<tr >
-							<th><FormattedMessage id="EventTaskList.State" defaultMessage="State" /></th>
-							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin" /></th>}
-							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.End" defaultMessage="End" /></th>}
-							<th><FormattedMessage id="EventTaskList.Subject" defaultMessage="Subject" /></th>
-							<th><FormattedMessage id="EventTaskList.Description" defaultMessage="Description" /></th>
-							<th><FormattedMessage id="EventTaskList.Who" defaultMessage="Who" /></th>
-							<th></th>
-						</tr>
-					</thead>
-					{listTaskListHtml}
-				</table>
-			</div>
-		</div>
-		);
+				</div>);
 	}
-
+	
+	
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
 
 	/**
 	* Check filter to decide if the task has to be hidden on not 
@@ -337,7 +334,7 @@ id="showDates" />
 
 	setCheckboxValue(name, value) {
 		let showPropertiesValue = this.state.showProperties;
-		console.log("EventTaskList.setCheckBoxValue2 set " + name + "<=" + value.target.checked + " showProperties =" + JSON.stringify(showPropertiesValue));
+		console.log("EventTaskList.setCheckBoxValue set " + name + "<=" + value.target.checked + " showProperties =" + JSON.stringify(showPropertiesValue));
 		if (value.target.checked)
 			showPropertiesValue[name] = true;
 		else
@@ -351,28 +348,28 @@ id="showDates" />
 		showPropertiesValue[name] = value;
 		this.setState({ showProperties: showPropertiesValue })
 	}
+	
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
 
 	/**
    */
 	addItem() {
-		console.log("EventTasklist.setAttribut: addItem item=" + JSON.stringify(this.state.event));
-		/*
-		var currentEvent = this.state.event;
-		const newList = currentEvent.tasklist.concat({ "status": "PLANNED", "what": "" });
-		currentEvent.tasklist = newList;
-		this.setState({ "event": currentEvent });
-				var surveyToAdd = SurveyCtrl.getDefaultSurvey();
-		*/
+		console.log("EventTasklist.addItem: addItem item=" + JSON.stringify(this.state.event));
 		// call the server to get an ID on this taskList
 		var newTask = { "status": "PLANNED", "what": "" };
 		this.eventCtrl.addEventChildFct("tasklist", newTask, "", this.addTasklistCallback);
 	}
 
 	addTasklistCallback(httpPayload) {
-		console.log("EventTasklist.addSurveyCallback ");
+		console.log("EventTasklist.addTasklistCallback ");
 		if (httpPayload.isError()) {
 			// feedback to user is required
-			console.log("EventSurveyList.addSurveyCallback: ERROR ");
+			console.log("EventTasklist.addTasklistCallback: ERROR ");
 		} else {
 			var taskToAdd = httpPayload.getData().child;
 			var event = this.eventCtrl.getEvent();
@@ -438,55 +435,8 @@ id="showDates" />
 					this.setAttribut("status", value, item);
 					}} />);
 		}		
-					
-	/**
-	 *  getTagState
- 	*/
-	getTagState2(item) {
+	
 
-		var changeState = (
-			<OverflowMenu
-				selectorPrimaryFocus={'.' + item.status}
-			>
-				<OverflowMenuItem className="PLANNED" itemText={<FormattedMessage id="EventTaskList.StatePlanned" defaultMessage="Planned" />}
-					onClick={() => {
-						item.status = "PLANNED"
-						this.setState({ "event": this.state.event });
-					}}
-				/>
-				<OverflowMenuItem className="ACTIVE" itemText={<FormattedMessage id="EventTaskList.InProgress" defaultMessage="In progress" />}
-					onClick={() => {
-						item.status = "ACTIVE"
-						this.setState({ "event": this.state.event });
-					}}
-				/>
-				<OverflowMenuItem className="DONE" itemText={<FormattedMessage id="EventTaskList.Done" defaultMessage="Done" />}
-					onClick={() => {
-						item.status = "DONE"
-						this.setState({ "event": this.state.event });
-					}}
-				/>
-				<OverflowMenuItem className="CANCEL" itemText={<FormattedMessage id="EventTaskList.Cancelled" defaultMessage="Cancelled" />}
-					onClick={() => {
-						item.status = "CANCEL"
-						this.setState({ "event": this.state.event });
-					}}
-				/>
-			</OverflowMenu>
-		);
-
-
-		if (item.status === 'PLANNED')
-			return (<Tag type="teal" title="Task planned"><FormattedMessage id="EventTaskList.StatePlanned" defaultMessage="Planned" /> {changeState}</Tag>)
-		if (item.status === 'ACTIVE')
-			return (<Tag type="green" title="Task in progress"><FormattedMessage id="EventTaskList.InProgress" defaultMessage="In progress" /> {changeState}</Tag>);
-		if (item.status === 'DONE')
-			return (<Tag type="warm-gray" title="Task is finish, well done !"><FormattedMessage id="EventTaskList.Done" defaultMessage="Done" /> {changeState}</Tag>);
-		if (item.status === 'CANCEL')
-			return (<Tag type="red" title="Oups, this task was cancelled"><FormattedMessage id="EventTaskList.Cancelled" defaultMessage="Cancelled" />{changeState}</Tag>);
-
-		return (<Tag type="gray" title="Something strange arrived">{item.status} {changeState}</Tag>);
-	}
 
 }
 export default injectIntl(EventTaskList);

@@ -32,6 +32,11 @@ class EventPreferences extends React.Component {
 	}
 
 
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
@@ -66,13 +71,28 @@ class EventPreferences extends React.Component {
 	}
 	
 	
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
 	
 	setAttribut(name, value, item ) {
 		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value );
 		this.eventCtrl.setAttribut( name, value, this.state.event, "");
 
 	}
+	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 }
 
 

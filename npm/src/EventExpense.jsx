@@ -44,6 +44,12 @@ class EventExpense extends React.Component {
 
 
 
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		var listHtml = [];
@@ -105,7 +111,13 @@ class EventExpense extends React.Component {
 					})}
 				</Select>)
 	}
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
 	setChildAttribut(name, value, isChild, item ) {
 		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value );
 		const currentEvent = this.state.event;
@@ -123,6 +135,15 @@ class EventExpense extends React.Component {
 		this.props.updateEvent( slabEvent );
 
 	}
+	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 }
 
 

@@ -43,6 +43,7 @@ const TAB_CHAT = 'Chat';
 const TAB_TASKLIST = 'TaskList';
 const TAB_SURVEY = 'Survey';
 const TAB_PHOTO = 'Photo';
+const TAB_BUDGET = 'Budget';
 const TAB_PREFERENCES= 'Preferences';
 
 class Event extends React.Component {
@@ -340,14 +341,20 @@ class Event extends React.Component {
 						<button onClick={() => this.accessTab( TAB_EXPENSE )} 
 							title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} 
 							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
-							<img style={{ "float": "right" }} src="img/btnExpense.png" style={{ width: 45 }} /><br />							
+							<img src="img/btnExpense.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
 						</button>
 
-						<button onClick={() => this.accessTab( TAB_PREFERENCES )} 
-							title={<FormattedMessage id="Event.TitlePreferences" defaultMessage="Event preferences" />} 
+						<button onClick={() => this.accessTab( TAB_BUDGET )} 
+							title={<FormattedMessage id="Event.TitleBudget" defaultMessage="Budget" />} 
 							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
-							<img style={{ "float": "right" }} src="img/btnPreference.png" style={{ width: 45 }} /><br />							
+							<img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 45 }} /><br />							
+							<FormattedMessage id="Event.Budget" defaultMessage="Budget" />
+						</button>
+						<button onClick={() => this.accessTab( TAB_PREFERENCES )} 
+							title={<FormattedMessage id="Event.TitlePreferences" defaultMessage="Preferences" />} 
+							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
+							<img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Preferences" defaultMessage="Preferences" />
 						</button>
 
@@ -362,10 +369,8 @@ class Event extends React.Component {
 				
 				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList  eventCtrl={this.eventCtrl} />}
 				
-				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList event={this.state.event}
-																			updateEvent={this.updateEventfct}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList eventCtrl={this.eventCtrl} />}
+				
 				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}
@@ -417,7 +422,14 @@ class Event extends React.Component {
 			console.log("Event.updateEventfct : DEPRECATED METHOD !!");
 	}
 	
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 	// -------------------------------------------- Access different part
 	accessTab( accessTab ) {
 		console.log("Event.accessTab tab=" + JSON.stringify(accessTab));

@@ -63,6 +63,12 @@ class EventItinerary extends React.Component {
 	}
 
 
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	// --------------------------------- render
 	render() {
 		console.log("EventItinerary.render: visible=" + this.state.show+" event="+JSON.stringify(this.state.event));
@@ -400,6 +406,13 @@ class EventItinerary extends React.Component {
 			return listLines;
 	}
 	
+		
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
 	/**
  	*/
 	setChildAttribut(name, value, item) {
@@ -443,6 +456,13 @@ class EventItinerary extends React.Component {
 			return false;
 		return true;
 	}
+
+	
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
 
 
 	// ------------------------------------------------------------------------

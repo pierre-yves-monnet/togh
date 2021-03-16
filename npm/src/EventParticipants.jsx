@@ -43,6 +43,12 @@ class EventParticipants extends React.Component {
 	}	
 
 
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	render() {
 		const intl = this.props.intl;
 
@@ -115,6 +121,12 @@ class EventParticipants extends React.Component {
 				);
 		}
 		
+	
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
 
 	setChildAttribut( name, value, item ) {
 		console.log("EventParticipant.setChildAttribut: set attribut:"+name+" <= "+value+" item="+JSON.stringify(item));
@@ -129,7 +141,14 @@ class EventParticipants extends React.Component {
 		this.props.updateEvent();
 	}
 	
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 	
 	participantInvited( participants ) {
 		console.log("EventParticipant.participantinvited event="+JSON.stringify( this.state.event));

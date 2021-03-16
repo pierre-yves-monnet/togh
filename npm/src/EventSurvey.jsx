@@ -99,6 +99,12 @@ class EventSurvey extends React.Component {
 			return this.renderSurvey();
 	}
 	
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	/**
 	 */
 	renderSurveyAdmin() {
@@ -300,6 +306,12 @@ class EventSurvey extends React.Component {
 	}
 	
 
+	
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
 
 	setAttributeCheckbox(name, value) {
 		let showPropertiesValue = this.state.show;
@@ -333,7 +345,14 @@ class EventSurvey extends React.Component {
 					this.setState( {survey: this.surveyCtrl.getValue()});
 					}} />);		
 	}
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 	
 	getNumberOfVote( surveyCode ) {
 		var survey = this.surveyCtrl.getValue();

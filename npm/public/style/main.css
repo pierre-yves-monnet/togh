@@ -47,8 +47,9 @@ body>div.container {margin-top:10px;}
 }
 .toghfooter { 
     position: absolute; 
-    left: 0 ; right: 0; bottom: 0; 
-    height:[footer-height] 
+    left: 0 ; right: 0; bottom: 0;
+    margin-top: 5px ;
+    height: 15px 
 }
 .requiredField::after {
 	content:" * " ;
@@ -101,6 +102,7 @@ background-color: #99D9EA;
 table.toghtable th {
 	background-color: #b3cde3;
 	font-weight: bold;
+	
 }
 table.toghtable td {
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -133,7 +135,7 @@ table.toghtable td {
     border-radius: 25px; /* .25rem;*/
     background-color: #ffffcc;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
     padding: 20px 30px 30px 20px

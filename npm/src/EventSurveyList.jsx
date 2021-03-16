@@ -60,6 +60,12 @@ class EventSurveyList extends React.Component {
 	}
 	
 	
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		const intl = this.props.intl;
@@ -169,7 +175,13 @@ class EventSurveyList extends React.Component {
 		)							
 	}
 	
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
 	
 	setChildAttribut(name, value, item, localisation) {
 		// console.log("EventSurveyList.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
@@ -197,7 +209,14 @@ class EventSurveyList extends React.Component {
 			showPropertiesValue[name] = false;
 		this.setState({ show: showPropertiesValue })
 	}	
-	
+		
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
 	addSurvey() {
 		console.log("EventSurveyList.addSurvey" );
 		

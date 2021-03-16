@@ -50,6 +50,12 @@ class Invitation extends React.Component {
 	}
 
 
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	render() {
 		console.log("Invitation.render ");
 		// console.log("Invitation.listSearch="+ JSON.stringify( this.state.listSearchUsers ));
@@ -205,7 +211,21 @@ class Invitation extends React.Component {
 		);
 	};
 
+		
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
+
 	
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
 	enableInvite() {
 		if (this.state.email.length>0)
 			return true;

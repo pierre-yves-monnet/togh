@@ -40,6 +40,14 @@ class EventsList extends React.Component {
 		this.refreshListEvents(); 	
 		console.log("EventsList.componentWillMount: END");
 	}
+	
+	
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
 	// -------------------------------------------- render
 	render() {
 		console.log("EventList.render listEvents " + JSON.stringify(this.state.events));
@@ -94,6 +102,20 @@ class EventsList extends React.Component {
 				</div>
 			</div>)
 	}
+
+	
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
+	
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
 
 
 	// -------------------------------------------- Call REST
