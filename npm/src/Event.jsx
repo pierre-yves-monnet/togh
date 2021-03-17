@@ -371,10 +371,8 @@ class Event extends React.Component {
 				
 				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList eventCtrl={this.eventCtrl} />}
 				
-				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation event={this.state.event}
-																			updateEvent={this.updateEventfct}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation eventCtrl={this.eventCtrl} />}
+				
 				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
 																			updateEvent={this.updateEventfct}

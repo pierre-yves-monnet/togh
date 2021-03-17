@@ -11,6 +11,9 @@ import RestcallService from './RestcallService';
 import ToolService from './ToolService';
 import UserService from './UserService';
 import CurrencyService from './CurrencyService';
+import ApiKeyService from './ApiKeyService';
+import GoogleMapService from './GoogleMapService';
+
 
 var instanceFactory;
 
@@ -24,9 +27,12 @@ class FactoryService  {
 		this.toolService = new ToolService( this );
 		this.currencyService = new CurrencyService( this );
 		this.userService = new UserService( this );
+		this.apiKeyService = new ApiKeyService( this );
+		this.googleMapService =  new GoogleMapService( this );
 		
 		this.authService.init();
 		this.restcallService.init();
+		this.apiKeyService.init();
 	}
 
 	getAuthService() {
@@ -52,6 +58,13 @@ class FactoryService  {
 		return this.currencyService;
 	}
 	
+	getApiKeyService() {
+		return this.apiKeyService;
+	};
+	
+	getGoogleMapService() {
+		return this.googleMapService;
+	}
 	static getInstance() {
 		// console.log("FactoryService.getInstance")
 		return instanceFactory;

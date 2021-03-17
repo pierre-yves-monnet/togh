@@ -35,6 +35,9 @@
   "BodyTogh.welcome": {
     "defaultMessage": "Welcome to Togh D"
   },
+  "Event.Budget": {
+    "defaultMessage": "Budget"
+  },
   "Event.Chat": {
     "defaultMessage": "Chat"
   },
@@ -77,6 +80,9 @@
   "Event.Photos": {
     "defaultMessage": "Photos"
   },
+  "Event.Preferences": {
+    "defaultMessage": "Preferences"
+  },
   "Event.Scope": {
     "defaultMessage": "Scope"
   },
@@ -110,6 +116,9 @@
   "Event.TimeEvent": {
     "defaultMessage": "Time"
   },
+  "Event.TitleBudget": {
+    "defaultMessage": "Budget"
+  },
   "Event.TitleChat": {
     "defaultMessage": "Chat"
   },
@@ -127,6 +136,9 @@
   },
   "Event.TitlePhotos": {
     "defaultMessage": "Photos"
+  },
+  "Event.TitlePreferences": {
+    "defaultMessage": "Preferences"
   },
   "Event.TitleShoppingList": {
     "defaultMessage": "Shopping list : what to brings?"
@@ -152,11 +164,23 @@
   "EventGeolocalisation.Address": {
     "defaultMessage": "Address"
   },
+  "EventGeolocalisation.GeolocalisationTip": {
+    "defaultMessage": "Where is the event? Do I want to share my position ? Note: for a multi place event, use the Itinerary."
+  },
+  "EventGeolocalisation.Instructions": {
+    "defaultMessage": "Instructions"
+  },
   "EventGeolocalisation.MainTitleGeolocation": {
     "defaultMessage": "Geolocalisation"
   },
   "EventGeolocalisation.ShareMyLocation": {
     "defaultMessage": "Share my localisation during the event"
+  },
+  "EventItinerary.ItineraryTip": {
+    "defaultMessage": "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary"
+  },
+  "EventItinerary.MainTitleItinerary": {
+    "defaultMessage": "Itinerary"
   },
   "EventItinerary.ProvideDateInEvent": {
     "defaultMessage": "Select a date for this event"
@@ -208,6 +232,9 @@
   },
   "EventItineray.PointOfInterest": {
     "defaultMessage": "Point Of Interest"
+  },
+  "EventItineray.RemoveThisStep": {
+    "defaultMessage": "Remove this step"
   },
   "EventItineray.Restaurant": {
     "defaultMessage": "Restaurant"
@@ -299,10 +326,19 @@
   "EventParticipant.Titleinvited": {
     "defaultMessage": "Invited participant: no confirmation is received at this moment"
   },
-  "EventShoppingList.AddOne": {
-    "defaultMessage": "Add one !"
+  "EventPreferences.CurrencyOnEvent": {
+    "defaultMessage": "Currency used in this event"
   },
-  "EventShoppingList.Cancel": {
+  "EventPreferences.ExpenseTip": {
+    "defaultMessage": "Set up all preferences for the event"
+  },
+  "EventPreferences.MainTitlePreferences": {
+    "defaultMessage": "Preference"
+  },
+  "EventShoppingList.AddItem": {
+    "defaultMessage": "Add a item in the list"
+  },
+  "EventShoppingList.Cancelled": {
     "defaultMessage": "Cancelled"
   },
   "EventShoppingList.Description": {
@@ -311,17 +347,17 @@
   "EventShoppingList.Done": {
     "defaultMessage": "Done"
   },
-  "EventShoppingList.NoItem": {
-    "defaultMessage": "You don't have any item in the list."
+  "EventShoppingList.MainTitleShoppingList": {
+    "defaultMessage": "Shopping List"
+  },
+  "EventShoppingList.ShoppingListTip": {
+    "defaultMessage": "You have a list of item to bing to the event. List them, decide who have to bought them"
   },
   "EventShoppingList.ShowDetails": {
     "defaultMessage": "Detail"
   },
   "EventShoppingList.ShowExpense": {
     "defaultMessage": "Show Expense"
-  },
-  "EventShoppingList.Title": {
-    "defaultMessage": "Shopping List"
   },
   "EventShoppingList.ToBring": {
     "defaultMessage": "To bring"
@@ -331,9 +367,6 @@
   },
   "EventShoppingList.Who": {
     "defaultMessage": "Who"
-  },
-  "EventShoppingList.addItem": {
-    "defaultMessage": "Add a new item in the list"
   },
   "EventShoppingList.removeItem": {
     "defaultMessage": "Remove this item"
@@ -386,12 +419,6 @@
   "EventSurveyList.AddSurvey": {
     "defaultMessage": "Add a survey in the list"
   },
-  "EventSurveyList.ItineraryTip": {
-    "defaultMessage": "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary"
-  },
-  "EventSurveyList.MainTitleItinerary": {
-    "defaultMessage": "Itinerary"
-  },
   "EventSurveyList.MainTitleSurveyList": {
     "defaultMessage": "Surveys"
   },
@@ -403,6 +430,9 @@
   },
   "EventSurveyList.addItem": {
     "defaultMessage": "Create a new survey in the list"
+  },
+  "EventTaskList.AddOne": {
+    "defaultMessage": "Add one !"
   },
   "EventTaskList.AddTask": {
     "defaultMessage": "Add a task in the list"
@@ -450,7 +480,10 @@
     "defaultMessage": "Tasks List"
   },
   "EventTaskList.NoItem": {
-    "defaultMessage": "You don't have any item in the list. Add one !"
+    "defaultMessage": "You don't have any task in the list."
+  },
+  "EventTaskList.RemoveThisTask": {
+    "defaultMessage": "Remove this task"
   },
   "EventTaskList.ShowDate": {
     "defaultMessage": "Show dates"

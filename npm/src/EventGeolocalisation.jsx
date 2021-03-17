@@ -9,30 +9,42 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { TextInput, Toggle } from 'carbon-components-react';
+import { TextInput, Toggle, TextArea } from 'carbon-components-react';
 
 
+import { GeoAltFill } from 'react-bootstrap-icons';
 import GoogleMapReact from 'google-map-react';
-import Geocode from "react-geocode";
+import FactoryService from './service/FactoryService';
+import GoogleMapService from './service/GoogleMapService';
+import EventSectionHeader from './component/EventSectionHeader';
 
+import GoogleAddressGeocode from './component/GoogleAddressGeocode';
+import * as GeocodeConstant from  './component/GoogleAddressGeocode';
+import GoogleMapDisplay from './component/GoogleMapDisplay';
 
 
 import { Icon } from '@iconify/react'
 import locationIcon from '@iconify/icons-mdi/map-marker'
+ 
 
 
 class EventGeolocalisation extends React.Component {
-	
+
 	// this.props.updateEvent()
-	constructor( props ) {
+	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
+		this.eventCtrl = props.eventCtrl;
 
-		this.state = { 'event' : props.event 
-						};
+		this.state = {
+			event: this.eventCtrl.getEvent()
+		};
+		this.timeout =  0;
+		
 		// show : OFF, ON, COLLAPSE
-		console.log("secGeolocalisation.constructor show="+ +this.state.show+" event="+JSON.stringify(this.state.event));
-		this.setAttribute			= this.setAttribute.bind(this);
+		console.log("secGeolocalisation.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
+		this.setAttribut 				= this.setAttribut.bind(this);
+		this.changeAddressCallbackfct	= this.changeAddressCallbackfct.bind( this);
 	}
 
 	// --------------------------------------------------------------
@@ -43,211 +55,128 @@ class EventGeolocalisation extends React.Component {
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("EventGeolocalisation.render: visible="+this.state.show);
-		// show the list
-		const zoomLevel=15;
-		const googlelocation = {
-  			address: this.state.event.geoaddress,
-			};
-			
-			
-			
-			
-		const location = {
-		  address: '1600 Amphitheatre Parkway, Mountain View, california.',
-		  lat: 37.42216,
-		  lng: -122.08427,
-		}			
-		const LocationPin = ({ text }) => (
-			  <div className="pin">
-			    <Icon icon={locationIcon} className="pin-icon" />
-			    <p className="pin-text">{text}</p>
-			  </div>
-			)
-			
-	
+		console.log("EventGeolocalisation.render: ");
+		
 
-			
-		return ( <div>
-					<div class="eventsection"> 
-						<a href="secGeolocalisation"></a>
-						<a onClick={this.collapse} style={{verticalAlign: "top"}}>
-							{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{fontSize: "small"}}></span>}
-							{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right"  style={{fontSize: "small"}}></span>}
-						</a><FormattedMessage id="EventGeolocalisation.MainTitleGeolocation" defaultMessage="Geolocalisation"/>
-					</div> 
-					<div>
-						<table >
-						<tr><td style={{"paddingRight":"30px"}}>
-							<Toggle labelText="" size="sm" aria-label="" 
-								labelA={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event"/>}
-								labelB={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event"/>}
-								onChange={(event) => this.setAttributeCheckbox( "geosharemylocation", event.target.value )}
-	      						id="shareMyLocation" />
-	      				</td><td></td></tr>
-						</table>
-	    
-						<TextInput labelText={<FormattedMessage id="EventGeolocalisation.Address" defaultMessage="Address"/>}  style={{width: "100%", maxWidth: "100%"}} rows="4" value={this.state.event.geoaddress} 
-								onChange={(event) => this.setAttribute( "geoaddress", event.target.value )}></TextInput>					
-						<br/>
-						<div style={{ height: '100vh', width: '100%' }}>
-							<GoogleMapReact
-					          		bootstrapURLKeys={{ key: "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es" }}
-									defaultCenter={location}
-									defaultZoom={zoomLevel}
-						        >
-					           <LocationPin
-									lat={location.lat}
-	          						lng={location.lng}
-					          	text={location.address}
-					        />
-					        </GoogleMapReact>
-						</div>
-	
-						<br/> 
-					</div>
-					
-				</div>
-				);
-				
-			// lat / lng for the pin
+		// show the list
+		const zoomLevel = 15;
+
+		var positions = [];
+		
+		if (this.state.event.geolat) {
+			// no lat was calculated, to use the default
+			console.log("EventGeolocalisation.render: setPositionLat="+this.state.event.geolat+", lng="+this.state.event.geolng);
+
+			positions.push( { key:"Event", 
+					lat: this.state.event.geolat, 
+					lng: this.state.event.geolng, 
+					address: this.state.event.geoaddress} );
 		}
 		
-		// Geocodage
-		// https://www.npmjs.com/package/react-geocode
-	/*
-	
-	
-	
+		console.log("EventGeolocalisation.render: positions=" + JSON.stringify( positions ) );
 
-	const locations = [
-    {
-      name: "Location 1",
-      location: { 
-        lat: 41.3954,
-        lng: 2.162 
-      },
-    },
-    {
-      name: "Location 2",
-      location: { 
-        lat: 41.3917,
-        lng: 2.1649
-      },
-    },
-    {
-      name: "Location 3",
-      location: { 
-        lat: 41.3773,
-        lng: 2.1585
-      },
-    },
-    {
-      name: "Location 4",
-      location: { 
-        lat: 41.3797,
-        lng: 2.1682
-      },
-    },
-    {
-      name: "Location 5",
-      location: { 
-        lat: 41.4055,
-        lng: 2.1915
-      },
-    }
-  ];
-	
-		<GoogleMapReact
-				        bootstrapURLKeys={{ key: 'AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es' }}
-				        defaultCenter={location}
-				        defaultZoom={zoomLevel}
-				      >
-				        <LocationPin
-				          text={location.address}
-				        />
-				      </GoogleMapReact>
-	
-	<GoogleMapReact
-				        bootstrapURLKeys={{ key: 'AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es' }}
-				        defaultCenter={location}
-				        defaultZoom={zoomLevel}
-				      >
-				        {locations.map(item => {
-							              return (
-							              <LocationPin text={item.name} lat={item.location.lat} lng={item.location.lat}/>
-							              )
-							            })
-							}
-				      </GoogleMapReact>
-						<LoadScript
-				       googleMapsApiKey='AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es'>
-				        <GoogleMap
-				          mapContainerStyle={mapStyles}
-				          zoom={13}
-				          center={defaultCenter}>
-							{locations.map((item,index) => {
-							              return (
-							              <Marker key={index} position={item.location}/>
-							              )
-							            })
-							}
-						</GoogleMap>
-				     </LoadScript>
 
-	
+		// // <div style={{ height: '100vh', width: '100%' }}>	
+		return (<div>
+			<EventSectionHeader id="geolocalisation"
+				image="img/btnGeolocalisation.png"
+				title={<FormattedMessage id="EventGeolocalisation.MainTitleGeolocation" defaultMessage="Geolocalisation" />}
+				showPlusButton={false}
+				userTipsText={<FormattedMessage id="EventGeolocalisation.GeolocalisationTip" defaultMessage="Where is the event? Do I want to share my position ? Note: for a multi place event, use the Itinerary." />}
+			/>
+			<div class="eventsection">
+				<a href="secGeolocalisation"></a>
+				<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
+					{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
+					{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
+				</a><FormattedMessage id="EventGeolocalisation.MainTitleGeolocation" defaultMessage="Geolocalisation" />
+			</div>
+			<div>
+				<table >
+					<tr><td style={{ "paddingRight": "30px" }}>
+						<Toggle labelText=""  aria-label=""
+							labelA={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event" />}
+							labelB={<FormattedMessage id="EventGeolocalisation.ShareMyLocation" defaultMessage="Share my localisation during the event" />}
+							onChange={(event) => this.setAttributCheckbox("geosharemylocation", event.target.value)}
+							id="shareMyLocation" />
+					</td><td></td></tr>
+				</table>
+
+				<GoogleAddressGeocode item={this.state.event} 
+							labelField={<FormattedMessage id="EventGeolocalisation.Address" defaultMessage="Address" />} 
+							changeCallbackfct={this.changeAddressCallbackfct} />
+				<br />
+				<div class="row">
+					<div class="col-sm-4">
+						<TextArea id="geoinstructions"
+								labelText={<FormattedMessage id="EventGeolocalisation.Instructions" defaultMessage="Instructions" />}
+								style={{ width: "100%", maxWidth: "100%" }}
+								rows={5}
+								value={this.state.event.geoinstructions}
+								onChange={(event) => this.setAttribut("geoinstructions", event.target.value)} />
+						</div>
+						<div class="col-sm-8">
+							<GoogleMapDisplay zoom={zoomLevel} positions={positions} />
+						</div>
 					
-*/
+				</div> 
 
-				
-	collapse() {
-		console.log("EventShoppinglist.collapse");
-		if (this.state.show === 'ON')
-			this.setState( { 'show' : 'COLLAPSE' });
-		else
-			this.setState( { 'show' : 'ON' });
+				<br />
+			</div>
+
+		</div>
+		);
 	}
-		
+
+
 	// --------------------------------------------------------------
 	// 
 	// Direct HTML controls
 	// 
 	// --------------------------------------------------------------
-
-	setAttribute( name, value ) {
-		console.log("EventShoppinglist.setChildAttribut: set attribut:"+name+" <= "+value);
-  		const currentEvent = this.state.event;
-
-  		currentEvent[ name ] = value;
-
-		// currentEvent.shoppinglist[0].[name] = value;
-		
-		this.setState( { "event" : currentEvent});
-		this.props.updateEvent();
-	}
-	setAttributeCheckbox( name, value ) {
-		console.log("EventShoppinglist.setChildAttribut: set attribut:"+name+" <= "+value);
-  		const currentEvent = this.state.event;
-		if (value === 'on')
-  			currentEvent[ name ] = true;
-		else
-  			currentEvent[ name ] = false;
-
-		// currentEvent.shoppinglist[0].[name] = value;
-		
-		this.setState( { "event" : currentEvent});
-		this.props.updateEvent();
+	changeAddressCallbackfct(type, eventUpdated ) {
+		// we pass the total event 
+		console.log("EventGeolocalisation; changeAddressCallbackfct type="+type+" location=("+eventUpdated.geolat+","+eventUpdated.geolng+") ["+eventUpdated.geoaddress+"]");
+		if (type === GeocodeConstant.CHANGE_ADDRESS) {
+			this.setAttribut("geoaddress", eventUpdated.geoaddress);
+		}
+		if (type === GeocodeConstant.CHANGE_LATLNG) {
+			this.setAttribut("geolat", eventUpdated.geolat);
+			this.setAttribut("geolng", eventUpdated.geolng);
+			this.forceUpdate(); // refresh the map
+		}	
+		this.setState( { event: eventUpdated });		
 	}
 	
-		
+
+	setAttribut(name, value) {
+		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value);
+		this.eventCtrl.setAttribut(name, value, this.state.event, "");
+	}
+	setAttributCheckbox(name, value) {
+		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value);
+		const currentEvent = this.state.event;
+		if (value === 'on')
+			currentEvent[name] = true;
+		else
+			currentEvent[name] = false;
+
+		// currentEvent.shoppinglist[0].[name] = value;
+
+		this.setState({ "event": currentEvent });
+		this.props.updateEvent();
+	}
+
+
 	// --------------------------------------------------------------
 	// 
 	// Component controls
 	// 
 	// --------------------------------------------------------------
+	// geocodage 
+	// npm install --save react-geocode
 
 
-	
-}		
+
+}
 export default EventGeolocalisation;
-	
