@@ -330,19 +330,13 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 
 
 	 
-	Trouver un bon Radio box (Taches : Toutes taches / Tache planifiée / En cours / Realisées
-	==> Utiliser le radio button de Bootstap
 	
-Simon : comment on utilise le ChooseParticipant ? Je veux lui donner un USERID, un item et avoir une methode "change"
 	
 Simon ? Modal cick sur Fermer ne ferme pas le modal (Invitation). POurtant j'ai mis la propriété shouldCloseAfterSubmit
-Simon ?	Google Geocodage d'une adresse
 Simon ?	Affichage d'un itineraire
+Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie existe google-maps-react)
 
 Simon ?	Date Carbon: le format de date ne respecte pas la langue
-	
-	
-	Access this in a iterator: example dans EventTaskList, je veux pouvoir afficher (ou pas) la liste des taches suivant des indicateurs dans this.state. mais le this n'est pas accessible dans la sous classe
 	
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas
@@ -351,9 +345,7 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 	
 Py	Sauvegarde
 	faire marcher la requete JPA "user not register in the event"
-	Survey
 	
-	Itineraire
 	Depenses
 	Integrer weather  : https://openweathermap.org/api
 	My profile

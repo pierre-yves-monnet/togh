@@ -38,8 +38,8 @@ class GoogleAddressGeocode extends React.Component {
 		return ( <div>
 					<TextInput labelText={this.state.labelField} 
 						style={{ width: "100%", maxWidth: "100%" }} value={this.state.item.geoaddress}
-						onChange={(event) => this.changeAddress( event.target.value)}></TextInput><br/>
-					<div style={{fontSize:"small"}} >lat:{this.state.item.geolat}, lng:{this.state.item.geolng}</div>
+						onChange={(event) => this.changeAddress( event.target.value)}></TextInput>
+					<div style={{fontSize:"10px", fontStyle:"italic", textAlign:"right"}} >lat:{this.state.item.geolat}, lng:{this.state.item.geolng}</div>
 				</div>
 			)
 	}

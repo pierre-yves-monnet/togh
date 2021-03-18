@@ -18,28 +18,29 @@ import SlabEvent from './service/SlabEvent';
 
 
 class EventExpense extends React.Component {
-	
+
 	// this.props.updateEvent()
-	constructor( props ) {
+	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
 
-		this.state = { event : props.event, 
-						
-					   listexpenses : [ {
-							name: 'helko', 
-							},
-							{
-							name: 'the', 
-							},
-							{
-							name: 'word', 
-							}]
-						
-						};
+		this.state = {
+			event: props.event,
+
+			listexpenses: [{
+				name: 'helko',
+			},
+			{
+				name: 'the',
+			},
+			{
+				name: 'word',
+			}]
+
+		};
 		// show : OFF, ON, COLLAPSE
-		console.log("EventExpense.constructor show="+ this.state.show+" event="+JSON.stringify(this.state.event));
-		
+		console.log("EventExpense.constructor show=" + this.state.show + " event=" + JSON.stringify(this.state.event));
+
 	}
 
 
@@ -54,50 +55,54 @@ class EventExpense extends React.Component {
 	render() {
 		var listHtml = [];
 		var currencyService = FactoryService.getInstance().getCurrencyService();
-	
+
 		for (var i in this.state.listexpenses) {
-			var line = this.state.listexpenses[ i ]
+			var line = this.state.listexpenses[i]
 			listHtml.push(<tr>
-						<td>{line.name}</td>
-						<td>
-							<button class="btn btn-success btn-xs" 
-							id={line.name}
-							onClick={(event) => {
-								console.log("EventItinerary.add : bob id="+event.target.id);
-								}
-							}>
-							</button>
-						</td>
-					</tr>)
+				<td>{line.name}</td>
+				<td>
+					<button class="btn btn-success btn-xs"
+						id={line.name}
+						onClick={(event) => {
+							console.log("EventItinerary.add : bob id=" + event.target.id);
+						}
+						}>
+					</button>
+				</td>
+			</tr>
+
+			)
 		};
-		
-	
+
+
 		// --- Header
-		var headerSection =(
-			<EventSectionHeader id="task" 
-				image="img/btnExpense.png" 
+		var headerSection = (
+			<EventSectionHeader id="task"
+				image="img/btnExpense.png"
 				title={<FormattedMessage id="EventExpense.MainTitleExpense" defaultMessage="Expense" />}
-				showPlusButton  = {true}
+				showPlusButton={true}
 				showPlusButtonTitle={<FormattedMessage id="EventExpense.AddExpense" defaultMessage="Add a expense" />}
 				userTipsText={<FormattedMessage id="EventExpense.ExpenseTip" defaultMessage="Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here" />}
-				/>
-				);
-	
+			/>
+		);
+
 		return (<div>
-				{headerSection}
-				{this.getCurrencySelectHtml()}
-				<table>
-					{listHtml}
-				</table>
-				</div>
-			)
+			{headerSection}
+			{this.getCurrencySelectHtml()}
+
+			<button onClick={this.test} > Test </button>
+			<table>
+				{listHtml}
+			</table>
+		</div>
+		)
 	}
-	
-	
+
+
 	getCurrencySelectHtml() {
-			//---- List Currency
+		//---- List Currency
 		var currencyService = FactoryService.getInstance().getCurrencyService();
-		
+		/*
 		return (<Select labelText={<FormattedMessage id="EventExpense.CurrencyOnEvent" defaultMessage="Currency used in this event" />}
 							id="currentEvent"
 							value={this.props.eventPreferences.getCurrencyCode()}
@@ -110,42 +115,41 @@ class EventExpense extends React.Component {
 						return ( <option value={item.code}> {item.code} {item.label}</option>)
 					})}
 				</Select>)
+				*/
 	}
-		
+
 	// --------------------------------------------------------------
 	// 
 	// Direct HTML controls
 	// 
 	// --------------------------------------------------------------
 
-	setChildAttribut(name, value, isChild, item ) {
-		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value );
+	setChildAttribut(name, value, isChild, item) {
+		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value);
 		const currentEvent = this.state.event;
 		var slabEvent;
-		 
+
 		if (isChild) {
 			item[name] = value;
-			slabEvent = SlabEvent.getUpdate(this.state.event, name, value, "/expense/"+item.id);
+			slabEvent = SlabEvent.getUpdate(this.state.event, name, value, "/expense/" + item.id);
 		} else {
-			currentEvent[ name ] = value
+			currentEvent[name] = value
 			var slabEvent = SlabEvent.getUpdate(this.state.event, name, value, "");
 		}
-		
+
 		this.setState({ "event": currentEvent });
-		this.props.updateEvent( slabEvent );
+		this.props.updateEvent(slabEvent);
 
 	}
-	
-		
+
+
 	// --------------------------------------------------------------
 	// 
 	// Component controls
 	// 
 	// --------------------------------------------------------------
-
-
+	
 }
 
 
 export default EventExpense;
-	

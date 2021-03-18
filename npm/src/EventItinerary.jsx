@@ -19,6 +19,10 @@ import Expense from './component/Expense';
 import TagDropdown from './component/TagDropdown';
 import EventSectionHeader from './component/EventSectionHeader';
 
+import GoogleAddressGeocode from './component/GoogleAddressGeocode';
+import * as GeocodeConstant from  './component/GoogleAddressGeocode';
+
+import GoogleMapDisplay from './component/GoogleMapDisplay';
 
 
 const ITINERARYITEM_POI 		= "POI";
@@ -56,6 +60,7 @@ class EventItinerary extends React.Component {
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.addStep 				= this.addStep.bind(this);
 		this.upItem					= this.upItem.bind( this );
+		this.setAttributCheckbox 	= this.setAttributCheckbox.bind( this);
 		this.downItem				= this.downItem.bind( this );
 		this.moveItemOneDirection	= this.moveItemOneDirection.bind( this );
 		this.addStepCallback		= this.addStepCallback.bind( this );
@@ -124,7 +129,7 @@ class EventItinerary extends React.Component {
 					<Toggle  labelText="" aria-label="" 
 						labelA={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
-						onChange={(event) => this.setAttributeCheckbox( "showItineraryMap", event.target.value )}
+						onChange={(event) => this.setAttributCheckbox( "showItineraryMap", event.target.value )}
 						defaultToggled={this.state.show.showItineraryMap}
 						id="showitinerarymap" />
 				</div>
@@ -132,7 +137,7 @@ class EventItinerary extends React.Component {
 					<Toggle  labelText="" aria-label="" 
 						labelA={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
-						onChange={(event) => this.setAttributeCheckbox( "showExpense", event.target.value )}
+						onChange={(event) => this.setAttributCheckbox( "showExpense", event.target.value )}
 						defaultToggled={this.state.show.showExpense}
 						id="showexpense" />
 				</div>
@@ -140,7 +145,7 @@ class EventItinerary extends React.Component {
 					<Toggle  labelText="" aria-label="" 
 						labelA={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
-						onChange={(event) => this.setAttributeCheckbox( "showDetail", event.target.value )}
+						onChange={(event) => {console.log("Eventitinerary.toggleDetail:"+ event.target.value);this.setAttributCheckbox( "showDetail", event.target.value )} }
 						defaultToggled={this.state.show.showDetail}
 						id="showDetail" />
 				</div>
@@ -210,17 +215,32 @@ class EventItinerary extends React.Component {
 			
 			
 			// now attach all events on this day - ok, we parse again the list, but reminber this is a 31 lines * 200 lines each so total is 6000 iteration - moden browser can hander that isn't it?
+			var listMarkers = [];
+			var countStepsInTheDay=0;
 			for (var j in this.state.event.itinerarylist) {
 				var stepinlist = this.state.event.itinerarylist[ j ];
 				if (toolService.getDayOfDate(stepinlist.datestep) === toolService.getDayOfDate(dateIndex)) {
-					console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
+					// console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
 					var line = (<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
 										<div class="container">
 											{this.renderOneStep( stepinlist,false, j )}
 										</div>
 									</div> );
+					countStepsInTheDay++;
+					if (stepinlist.geolat)
+						listMarkers.push({ lat: stepinlist.geolat, lng: stepinlist.geolng, text:stepinlist.title, category:stepinlist.category });
 					listItineraryListHtml.push( line ); 									
 				}
+			}
+			
+			// calculate the itinerary of the day
+			if ( this.state.show.showItineraryMap && countStepsInTheDay>0) {
+				// console.log("EventItinerary.renderCalendar: Draw map of the day "+JSON.stringify(listMarkers));
+
+				if (listMarkers.length ==0) 
+					listItineraryListHtml.push(<FormattedMessage id="EventItinerary.NoAddressProvided" defaultMessage="No address are provided for this day."/>);	
+				else 
+					listItineraryListHtml.push(<div><center> <GoogleMapDisplay  positions={listMarkers} /></center></div>	);
 			}
 
 			// advance one day
@@ -317,7 +337,7 @@ class EventItinerary extends React.Component {
 
 				
 							
-					
+		console.log("EventItinerary.renderOneStep showdetails="+this.state.show.showDetail);	
 						
 		listLines.push(<div class="row">
 				<div class="col-1">
@@ -381,8 +401,19 @@ class EventItinerary extends React.Component {
 				listLines.push(
 					<div class="row">
 						<div class="col-xl">
-							<TextInput value={item.address} onChange={(event) => this.setChildAttribut("what", event.target.address, item)} 
-								labelText={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} />
+							<GoogleAddressGeocode item={item} 
+								labelField={<FormattedMessage id="EventItineray.Address" defaultMessage="Address" />} 
+								changeCallbackfct={(type, itemUpdated) => {
+									if (type === GeocodeConstant.CHANGE_ADDRESS) {
+										this.setChildAttribut("geoaddress", itemUpdated.geoaddress, item);
+									}
+									if (type === GeocodeConstant.CHANGE_LATLNG) {
+										this.setChildAttribut("geolat", itemUpdated.geolat, item);
+										this.setChildAttribut("geolng", itemUpdated.geolng, item);
+										// this.forceUpdate(); // refresh the map
+									}	
+								}} />
+			
 						</div>
 						<div class="col-md">
 							{ this.state.show.showExpense &&  
@@ -402,6 +433,9 @@ class EventItinerary extends React.Component {
 						</div>
 					</div>
 				);
+				
+			
+		
 			}
 			return listLines;
 	}
@@ -418,25 +452,14 @@ class EventItinerary extends React.Component {
 	setChildAttribut(name, value, item) {
 		console.log("EventTasklist.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 		this.eventCtrl.setAttribut(name, value, item, "/itinerarylist");
-		/*
-		const { event } = { ...this.state };
-		const currentEvent = event;
-
-		item[name] = value;
-
-		// currentEvent.shoppinglist[0].[name] = value;
-
-		this.setState({ "event": currentEvent });
-		this.props.updateEvent();
-		*/
 	}
 
 	/** --------------------
  	*/
-	setAttributeCheckbox(name, value) {
-		console.log("EventTaskList.setCheckBoxValue .1");
+	setAttributCheckbox(name, value) {
+		
 		let showPropertiesValue = this.state.show;
-		console.log("EventTaskList.setCheckBoxValue set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
+		console.log("EventTaskList.setAttributCheckbox set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
 		if (value === 'on')
 			showPropertiesValue[name] = true;
 		else
