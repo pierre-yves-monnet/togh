@@ -1,414 +1,1066 @@
 {
-  "__EventSurvey.InPreparation": "In preparation",
-  "__EventShoppingList.Cancel": "Cancelled",
-  "__Menu.AdmininstratorExplanation": "Administrator function.",
-  "__Event.ScopeOpen": "Open",
-  "__EventItineray.Begin": "Begin",
-  "Event.ScopeOpen": "開いた",
-  "__Event.TitleGeolocalisation": "Where is the event?",
-  "EventTaskList.MainTitleTaskList": "タスクリスト",
-  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
-  "__EventState.Actif": "Actif",
-  "EventSurvey.AddOption": "オプション",
-  "__EventParticipant.RoleOrganizer": "Organizer",
-  "__Menu.MyFriends": "My Friends",
-  "__EventState.Cancelled": "Cancelled",
-  "Invitation.Close": "閉じる",
-  "__Invitation.UserName": "Name",
-  "__EventShoppingList.ShowDetails": "Detail",
-  "EventTaskList.FilterUnaffected": "影響を受けません",
-  "__EventSurvey.AddOption": "Option",
-  "__EventTaskList.FilterAllStates": "All states",
-  "__Event.Chat": "Chat",
-  "__EventSurveyList.MainTitleSurveyList": "Surveys",
-  "__EventSurveyList.NoItem": "You don't have any survey ready in the list.",
-  "__Menu.Administration": "Administration",
-  "Login.connection": "接続",
-  "__Event.Itinerary": "itinerary",
-  "Event.Status": "状態",
-  "EventTaskList.Cancelled": "キャンセル",
-  "__EventParticipant.Invited": "Invited",
-  "__EventGeolocalisation.ShareMyLocation": "Share my localisation during the event",
-  "__EventTaskList.State": "State",
-  "Event.EndDate": "終了日",
-  "Event.TimeEvent": "時間",
-  "Event.EventDate": "日付",
-  "__Invitation.OnlyUserNotAlreadyAParticipant": "Only users not already a participant",
-  "__Event.EventDate": "Date",
-  "__Event.Geolocalisation": "Geolocalisation",
-  "__Login.CantConnectToTheServer": "Can't Connect To The Server",
-  "Event.DatePolicy": "日付ポリシー",
-  "__AdminTranslator.CheckDictionary": "Check Dictionary",
-  "__EventTaskList.StatePlanned": "Planned",
-  "EventItineray.What": "何",
-  "__EventTaskList.FilterUnaffected": "Unaffected",
-  "__Invitation.Email": "Email",
-  "AdminTranslator.TranslateSentences": "翻訳された文章",
-  "Menu.AdmininstratorExplanation": "管理者機能。",
-  "EventParticipant.RoleOrganizer": "主催者",
-  "EventItineray.Category": "カテゴリー",
-  "EventItineray.Restaurant": "レストラン",
-  "EventExpense.ExpenseTip": "イベントにすべての費用を登録します。別のセクション（旅程、買い物リスト）からの費用はここに表示されます",
-  "Login.CantConnectToTheServer": "サーバーに接続できません",
-  "Menu.MyFriendExplanation": "すべての友達に会い、新しい人を招待し、メッセージを送ってください。",
-  "EventShoppingList.addItem": "リストに新しいアイテムを追加します",
-  "__EventTaskList.Who": "Who",
-  "EventSurveyList.addItem": "リストに新しい調査を作成します",
-  "__Invitation.Search": "Search",
-  "__EventTaskList.InProgress": "In progress",
-  "EventParticipant.Status": "状態",
-  "Menu.JoinExplanation": "イベントを検索して参加する",
-  "__EventSurvey.NoAccessForSurveyInPreparation": "This survey is in preparation. You can't access it for the moment.",
-  "__EventTaskList.FilterAllParticipants": "All participants",
-  "EventState.InPreparation": "準備中",
-  "Event.DateEvent": "日付イベント",
-  "__Event.Description": "Description",
-  "EventItineray.TrainStation": "でんしゃのりば",
-  "EventShoppingList.What": "何",
-  "EventSurvey.Title": "題名",
-  "Login.googleLogin": "ログイン",
-  "__EventSurvey.Title": "Title",
-  "Invitation.UserPhoneNumber": "電話番号",
-  "Menu.MyProfile": "私のプロフィール",
-  "__EventGeolocalisation.MainTitleGeolocation": "Geolocalisation",
-  "EventItineray.Budget": "予算",
-  "__AdminTranslator.nbTransations": "Number of translation",
-  "AdminTranslator.MissingSentences": "欠落している文",
-  "__Menu.Events": "Events",
-  "Event.Geolocalisation": "ジオローカリゼーション",
-  "__Event.TimeEvent": "Time",
-  "Menu.EventsExplanation": "アクセスできるすべてのイベントにアクセスする",
-  "__EventItineray.Duration": "Duration",
-  "EventShoppingList.NoItem": "リストにアイテムがありません。",
-  "Event.Chat": "チャット",
-  "__EventTaskList.Done": "Done",
-  "__Invitation.SearchAUser": "Search a user",
-  "Event.Itinerary": "旅程",
-  "Menu.InvitationExplanation": "招待状を確認し、受け入れます。",
-  "EventTaskList.StatePlanned": "予定",
-  "EventSurveyList.SurveyTip": "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
-  "Expense.Price": "価格",
-  "__AdminTranslator.CompleteDictionary": "Complete Dictionary",
-  "EventShoppingList.Description": "説明",
-  "__Invitation.PhoneNumber": "Phone number",
-  "Login.password": "パスワード",
-  "__EventSurvey.Closed": "closed",
-  "Login.googleLogout": "ログアウト",
-  "EventSurvey.Option": "オプション",
-  "__Event.Participants": "Participants",
-  "Invitation.UserEmail": "Eメール",
-  "Event.ShoppingList": "買い物リスト",
-  "EventParticipant.Owner": "オーナー",
-  "__EventSurveyList.ItineraryTip": "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
-  "AdminTranslator.AverageTranslation": "平均（ミリ秒単位）",
-  "Event.Scope": "範囲",
-  "Invitation.PhoneNumber": "電話番号",
-  "__EventShoppingList.Done": "Done",
-  "__EventSurvey.Description": "Description",
-  "__EventTaskList.FilterPlanned": "Planned",
-  "Event.StartDate": "開始日",
-  "EventList.CreateAnEvent": "イベントを作成する",
-  "EventShoppingList.removeItem": "このアイテムを削除します",
-  "EventList.Name": "名前",
-  "EventList.Refresh": "更新",
-  "__EventParticipant.Status": "Status",
-  "EventItineray.Description": "説明",
-  "__EventParticipant.RoleParticipant": "Participant",
-  "__EventTaskList.FilterInProgress": "In progress",
-  "Expense.Budget": "予算",
-  "__UserTips.DeactivateTipInPreference": "Tips can be deactived in your preference",
-  "__EventItineray.Entertainment": "Entertainment",
-  "__EventShoppingList.Title": "Shopping List",
-  "Event.TitleSurvey": "調査",
-  "__EventTaskList.Begin": "Begin",
-  "__Login.connection": "Connection",
-  "Invitation.Search": "探す",
-  "__Invitation.Invitation": "Invitation",
-  "EventGeolocalisation.Address": "住所",
-  "EventSurvey.SurveyTip": "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
-  "__Invitation.UserPhoneNumber": "Phone number",
-  "Login.badConnection": "接続不良-資格情報を確認してください",
-  "__EventItineray.Restaurant": "Restaurant",
-  "Event.TitleShoppingList": "買い物リスト：何を持っていくの？",
-  "__EventItinerary.ShowExpense": "Show Expense",
-  "__Event.OneDate": "One date",
-  "__Event.StartDate": "Start Date",
-  "Event.DurationEvent": "デュレーション",
-  "__EventList.Dae": "Date",
-  "Event.Expense": "費用",
-  "Event.ScopeLimited": "限定",
-  "EventSurvey.AddOne": "1つ追加してください！",
-  "__Menu.InvitationExplanation": "Check your invitations, accept them.",
-  "__Event.Tasks": "Tasks",
-  "Invitation.Invitation": "招待",
-  "Login.email": "Email",
-  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
-  "__Invitation.UserEmail": "Email",
-  "EventItineray.Night": "夜",
-  "Expense.Cost": "費用",
-  "__EventShoppingList.NoItem": "You don't have any item in the list.",
-  "EventTaskList.Subject": "件名",
-  "__Event.DateEvent": "Date Event",
-  "__Event.TitleSurvey": "Survey",
-  "EventExpense.MainTitleExpense": "費用",
-  "__Expense.Cost": "Cost",
-  "EventItineray.Shopping": "ショッピング",
-  "EventTaskList.TaskTip": "タスクを使用して、イベントに対して実行する必要があることを参照します。参加者を割り当て、タスクのステータスをマークすることができます：計画済み、完了....好みに応じて、実現するタスクがあるときに表記を受け取る場合があります",
-  "EventParticipant.Invited": "招待",
-  "EventItineray.BusStation": "バス停",
-  "__EventItineray.Description": "Description",
-  "EventItineray.Expense": "費用",
-  "__Menu.MyProfile": "My Profile",
-  "__Invitation.UserFound": "UsersFound",
-  "__EventList.Refresh": "Refresh",
-  "__Menu.Join": "Join an event",
-  "EventSurvey.NoAccessForSurveyInPreparation": "この調査は準備中です。現時点ではアクセスできません。",
-  "__EventItineray.Title": "Title",
-  "EventTaskList.FilterMyTasks": "私の仕事",
-  "Invitation.UserName": "名前",
-  "__Event.ScopeLimited": "Limited",
-  "__EventShoppingList.What": "What",
-  "EventItineray.PointOfInterest": "興味のあるポイント",
-  "__EventList.Participants": "Participants",
-  "__EventParticipant.TitleLeft": "The participant left the event",
-  "EventTaskList.AddTask": "リストにタスクを追加します",
-  "EventSurvey.Closed": "閉まっている",
-  "AdminTranslator.nbTransations": "翻訳数",
-  "__Invitation.LastName": "Last name",
-  "__EventTaskList.AddTask": "Add a task in the list",
-  "__EventList.AllEvents": "All events",
-  "__Invitation.FirstName": "First name",
-  "Invitation.FirstName": "ファーストネーム",
-  "EventItinerary.ShowItineraryMap": "旅程マップを表示する",
-  "BodyTogh.welcome": "Welcome to Togh",
-  "EventSurvey.InProgress": "進行中",
-  "EventSurveyList.ItineraryTip": "このイベント中に訪問したい場所をすべてリストしてください。イベントが複数日にわたる場合は、1日あたりの旅程を設定できます",
-  "__EventState.InPreparation": "In Preparation",
-  "__EventList.AccessThisEvent": "Access this event",
-  "__Menu.EventsExplanation": "Access all events you can access",
-  "Invitation.UserFound": "UsersFound",
-  "__EventTaskList.End": "End",
-  "__EventExpense.AddExpense": "Add a expense",
-  "__EventSurveyList.AddSurvey": "Add a survey in the list",
-  "EventTaskList.Done": "完了",
-  "__EventGeolocalisation.Address": "Address",
-  "__EventShoppingList.ShowExpense": "Show Expense",
-  "Menu.Join": "イベントに参加する",
-  "EventParticipant.RoleObserver": "観察者",
-  "__EventItineray.Expense": "Expense",
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
-  "EventShoppingList.Done": "完了",
-  "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
-  "Invitation.LastName": "苗字",
-  "AdminTranslator.TooMuchSentences": "オーバーフロー文",
-  "__AdminTranslator.TranslateSentences": "Translated sentences",
-  "__Invitation.ByEmail": "Send an Email",
-  "__Event.Photos": "Photos",
-  "__Event.TitleItinerary": "Define your itinerary, and point of interest",
-  "Event.Photos": "写真",
-  "__Invitation.Searching": "Searching",
-  "EventTaskList.State": "状態",
-  "__EventShoppingList.ToBring": "To bring",
-  "Invitation.OnlyUserNotAlreadyAParticipant": "まだ参加していないユーザーのみ",
-  "__EventItineray.Airport": "Airport",
-  "__EventTaskList.Cancelled": "Cancelled",
-  "EventItinerary.ShowDetail": "詳細を表示",
-  "Event.Tasks": "タスク",
-  "__EventItineray.WebSite": "WebSite",
-  "EventItineray.Airport": "空港",
-  "__Event.EndDate": "End Date",
-  "__EventParticipant.Owner": "Owner",
-  "__EventSurveyList.addItem": "Create a new survey in the list",
-  "EventShoppingList.ShowDetails": "詳細",
-  "__EventParticipant.InvitationInProgress": "Invitation in progress",
-  "__EventItineray.TrainStation": "Train Station",
-  "EventSurvey.addItem": "リストに新しい調査を作成します",
-  "AdminTranslator.Name": "名前",
-  "__AdminTranslator.Name": "Name",
-  "EventItineray.Begin": "ベギン",
-  "EventSurveyList.MainTitleItinerary": "旅程",
-  "EventShoppingList.Who": "WHO",
-  "__Menu.MyInvitations": "My Invitations",
-  "Event.TitleExpense": "経費の管理と共有",
-  "__EventParticipant.RoleObserver": "Observer",
-  "__Event.DatePolicy": "Date policy",
-  "EventItinerary.ProvidePeriodDateInEvent": "このイベントの開始日と終了日を選択します",
-  "EventShoppingList.Cancel": "キャンセル",
-  "Menu.MyProfileExplanation": "好みを管理し、アバターを設定します。",
-  "EventSurvey.MainTitleSurveyList": "調査",
-  "__Login.googlelogout": "Login",
-  "Invitation.Email": "Eメール",
-  "EventTaskList.End": "終わり",
-  "AdminHome.Title": "管理",
-  "__EventExpense.ExpenseTip": "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here",
-  "Login.googlelogout": "ログイン",
-  "EventTaskList.FilterInProgress": "進行中",
-  "EventTaskList.InProgress": "進行中",
-  "Menu.Events": "イベント",
-  "Event.TitleChat": "チャット",
-  "Invitation.RoleParticipant": "参加者",
-  "__EventItinerary.ProvideDateInEvent": "Select a date for this event",
-  "EventTaskList.ShowDate": "日付を表示",
-  "__EventShoppingList.Description": "Description",
-  "__Event.TitlePhotos": "Photos",
-  "Event.TitleTasks": "タスク",
-  "__Menu.MyFriendExplanation": "See all your friends, invite new, send messages.",
-  "EventTaskList.FilterAllParticipants": "すべての参加者",
-  "Event.TitleItinerary": "旅程と興味のあるポイントを定義します",
-  "__EventSurvey.InProgress": "In progress",
-  "EventState.Done": "完了",
-  "__EventItinerary.ShowDetail": "Show Detail",
-  "__Login.googlelogin": "Login",
-  "EventSurveyList.MainTitleSurveyList": "調査",
-  "EventItineray.VisitTime": "訪問時間",
-  "EventList.AccessThisEvent": "このイベントにアクセスする",
-  "Event.ScopeSecret": "秘密",
-  "EventItinerary.MainTitleItinerary": "旅程",
-  "Menu.MyFriends": "私の友人",
-  "__Event.ShoppingList": "Shopping List",
-  "AdminTranslator.TimeTranslation": "翻訳の時間",
-  "__EventTaskList.Subject": "Subject",
-  "Event.ScopeOpenConfirmation": "確認時に開く",
-  "__EventItinerary.ShowItineraryMap": "Show itinerary map",
-  "__EventParticipant.Person": "Person",
-  "__EventTaskList.FilterDone": "Done",
-  "EventItineray.End": "終わり",
-  "EventGeolocalisation.MainTitleGeolocation": "ジオローカリゼーション",
-  "EventSurveyList.AddOne": "1つ追加してください！",
-  "__EventItineray.Address": "Address",
-  "__EventShoppingList.removeItem": "Remove this item",
-  "__EventSurvey.Option": "Option",
-  "EventTaskList.AddSurvey": "リストに調査を追加する",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "この調査は準備中です。参加者は表示されません",
-  "EventParticipant.MainTitleParticipant": "参加者",
-  "EventParticipant.Role": "役割",
-  "__EventSurvey.removeItem": "Remove this item",
-  "__AdminTranslator.MissingSentences": "Missing sentences",
-  "__Event.ScopeSecret": "Secret",
-  "EventItineray.WebSite": "Webサイト",
-  "EventSurveyList.AddSurvey": "リストに調査を追加する",
-  "Invitation.RoleObserver": "観察者",
-  "EventTaskList.FilterAllStates": "すべての州",
-  "__EventShoppingList.Who": "Who",
-  "__Event.TitleExpense": "Manage and share expenses",
-  "Event.TitleParticipant": "イベントに参加者を招待する",
-  "__EventShoppingList.AddOne": "Add one !",
-  "__Event.TitleChat": "Chat",
-  "Invitation.SendInvitation": "招待状を送る",
-  "EventList.Participants": "参加者",
-  "EventItineray.Address": "住所",
-  "__BodyTogh.welcome": "Welcome to Togh D",
-  "EventItineray.Price": "価格",
-  "__EventItineray.Shopping": "Shopping",
-  "__EventParticipant.TitleActiveParticipant": "Active participant",
-  "Event.TitlePhotos": "写真",
-  "Event.Participants": "参加者",
-  "__EventItinerary.ProvidePeriodDateInEvent": "Select a start and a end date for this event",
-  "Invitation.ByEmail": "メールを送る",
-  "__EventParticipant.Actif": "Actif",
-  "__EventParticipant.Role": "Role",
-  "UserTips.DeactivateTipInPreference": "ヒントはお好みで無効にすることができます",
-  "__AdminTranslator.AverageTranslation": "Average (in Milliseconds)",
-  "__Event.Survey": "Survey",
-  "EventList.MyEvents": "私のイベント",
-  "EventParticipant.TitleActiveParticipant": "アクティブな参加者",
-  "EventParticipant.InvitationInProgress": "進行中の招待",
-  "__EventTaskList.ShowDate": "Show dates",
-  "__Menu.JoinExplanation": "Search and join events",
-  "EventItinerary.ProvideDateInEvent": "このイベントの日付を選択してください",
-  "AdminTranslator.CompleteDictionary": "完全な辞書",
-  "__AdminTranslator.Title": "Translation",
-  "__EventExpense.MainTitleExpense": "Expense",
-  "__EventShoppingList.addItem": "Add a new item in the list",
-  "__EventItineray.End": "End",
-  "Event.Survey": "調査",
-  "__EventTaskList.Description": "Description",
-  "__Invitation.Close": "Close",
-  "Event.EventName": "名前",
-  "EventTaskList.NoItem": "リストにアイテムがありません。 1つ追加してください！",
-  "EventSurvey.NoItem": "リストに調査の準備ができていません。",
-  "EventItineray.Entertainment": "エンターテインメント",
-  "EventTaskList.FilterDone": "完了",
-  "EventTaskList.Who": "WHO",
-  "Event.OneDate": "ある日",
-  "__EventTaskList.addItem": "Add a new item in the list",
-  "__EventList.CreateAnEvent": "Create an Event",
-  "AdminTranslator.CheckDictionary": "辞書をチェック",
-  "EventList.Dae": "日付",
-  "EventParticipant.Person": "人",
-  "Login.googlelogin": "ログイン",
-  "EventExpense.AddExpense": "費用を追加する",
-  "__EventItineray.Night": "Night",
-  "__EventItineray.BusStation": "Bus Station",
-  "Event.TitleGeolocalisation": "イベントはどこですか？",
-  "EventParticipant.Left": "左",
-  "EventTaskList.addItem": "リストに新しいアイテムを追加します",
-  "AdminTranslator.Title": "翻訳",
-  "EventSurveyList.NoItem": "リストに調査の準備ができていません。",
-  "__Login.password": "Password",
-  "__EventItineray.VisitTime": "Visit time",
-  "EventSurvey.InPreparation": "準備中",
-  "__EventParticipant.Left": "Left",
-  "EventShoppingList.ShowExpense": "経費を表示",
-  "__Menu.MyProfileExplanation": "Manage your preferences, set up an avatar.",
-  "EventParticipant.RoleParticipant": "参加者",
-  "Menu.MyInvitations": "私の招待状",
-  "__Event.TitleTasks": "Tasks",
-  "EventGeolocalisation.ShareMyLocation": "イベント中に私のローカリゼーションを共有する",
-  "EventTaskList.FilterPlanned": "予定",
-  "EventTaskList.Begin": "ベギン",
-  "__Event.DurationEvent": "Duration",
-  "EventSurvey.Description": "説明",
-  "EventShoppingList.ToBring": "持ってくる",
-  "EventExpense.CurrencyOnEvent": "このイベントで使用される通貨",
-  "__EventItineray.PointOfInterest": "Point Of Interest",
-  "EventShoppingList.AddOne": "1つ追加してください！",
-  "__EventSurveyList.SurveyTip": "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
-  "__Login.logout": "Logout",
-  "Event.Period": "限目",
-  "__Event.ScopeOpenConfirmation": "Open on confirmation",
-  "EventParticipant.Titleinvited": "招待された参加者：現時点では確認は受信されていません",
-  "Invitation.Searching": "検索中",
-  "EventParticipant.TitleLeft": "参加者はイベントを去りました",
-  "__Login.email": "Email",
-  "__EventSurveyList.AddOne": "Add one !",
-  "__AdminTransaltor.Title": "Administration",
-  "__EventList.Name": "Name",
-  "__EventList.MyEvents": "My events",
-  "EventItinerary.ShowExpense": "経費を表示",
-  "EventState.Actif": "Actif",
-  "Event.Description": "説明",
-  "EventItineray.Harbor": "港",
-  "Invitation.RoleOrganizer": "主催者",
-  "EventList.AllEvents": "すべてのイベント",
-  "__EventState.Done": "Done",
-  "EventItineray.Title": "題名",
-  "__Event.Expense": "Expense",
-  "__Event.TitleParticipant": "Invite participant to your event",
-  "__EventParticipant.MainTitleParticipant": "Participants",
-  "__Event.Scope": "Scope",
-  "__EventItineray.Visite": "Visite",
-  "__AdminTranslator.TimeTranslation": "Time of translation",
-  "__EventTaskList.MainTitleTaskList": "Tasks List",
-  "Menu.Administration": "管理",
-  "EventItineray.Visite": "訪問",
-  "__Expense.Budget": "Budget",
-  "__Event.Status": "Status",
-  "EventParticipant.Actif": "Actif",
-  "EventItineray.Duration": "デュレーション",
-  "EventTaskList.Description": "説明",
-  "__EventSurveyList.MainTitleItinerary": "Itinerary",
-  "EventState.Cancelled": "キャンセル",
-  "__EventTaskList.FilterMyTasks": "My tasks",
-  "__EventExpense.CurrencyOnEvent": "Currency used in this event",
-  "EventShoppingList.Title": "買い物リスト",
-  "EventSurvey.removeItem": "このアイテムを削除します",
-  "__EventItineray.Harbor": "Harbor",
-  "__EventTaskList.NoItem": "You don't have any item in the list. Add one !",
-  "__Invitation.SendInvitation": "Send Invitation",
-  "Login.logout": "Logout",
-  "Invitation.SearchAUser": "ユーザーを検索する",
-  "__Event.TitleShoppingList": "Shopping list : what to brings?",
-  "AdminTransaltor.Title": "管理",
-  "__Event.Period": "Period"
-}
+  "AdminHome.Title" : "管理",
+
+  "__AdminTransaltor.Title" : "Administration",
+  "AdminTransaltor.Title" : "管理",
+
+  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation" : "平均（ミリ秒単位）",
+
+  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
+  "AdminTranslator.CheckDictionary" : "辞書をチェック",
+
+  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary" : "完全な辞書",
+
+  "__AdminTranslator.MissingSentences" : "Missing sentences",
+  "AdminTranslator.MissingSentences" : "欠落している文",
+
+  "__AdminTranslator.Name" : "Name",
+  "AdminTranslator.Name" : "名前",
+
+  "__AdminTranslator.TimeTranslation" : "Time of translation",
+  "AdminTranslator.TimeTranslation" : "翻訳の時間",
+
+  "__AdminTranslator.Title" : "Translation",
+  "AdminTranslator.Title" : "翻訳",
+
+  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences" : "オーバーフロー文",
+
+  "__AdminTranslator.TranslateSentences" : "Translated sentences",
+  "AdminTranslator.TranslateSentences" : "翻訳された文章",
+
+  "__AdminTranslator.nbTransations" : "Number of translation",
+  "AdminTranslator.nbTransations" : "翻訳数",
+
+  "__BodyTogh.welcome" : "Welcome to Togh D",
+  "BodyTogh.welcome" : "Welcome to Togh",
+
+  "__Event.Budget" : "Budget",
+  "Event.Budget" : "予算",
+
+  "__Event.Chat" : "Chat",
+  "Event.Chat" : "チャット",
+
+  "__Event.DateEvent" : "Date Event",
+  "Event.DateEvent" : "日付イベント",
+
+  "__Event.DatePolicy" : "Date policy",
+  "Event.DatePolicy" : "日付ポリシー",
+
+  "__Event.Description" : "Description",
+  "Event.Description" : "説明",
+
+  "__Event.DurationEvent" : "Duration",
+  "Event.DurationEvent" : "デュレーション",
+
+  "__Event.EndDate" : "End Date",
+  "Event.EndDate" : "終了日",
+
+  "__Event.EventDate" : "Date",
+  "Event.EventDate" : "日付",
+
+  "Event.EventName" : "名前",
+
+  "__Event.Expense" : "Expense",
+  "Event.Expense" : "費用",
+
+  "__Event.Geolocalisation" : "Geolocalisation",
+  "Event.Geolocalisation" : "ジオローカリゼーション",
+
+  "__Event.Itinerary" : "itinerary",
+  "Event.Itinerary" : "旅程",
+
+  "__Event.OneDate" : "One date",
+  "Event.OneDate" : "ある日",
+
+  "__Event.Participants" : "Participants",
+  "Event.Participants" : "参加者",
+
+  "__Event.Period" : "Period",
+  "Event.Period" : "限目",
+
+  "__Event.Photos" : "Photos",
+  "Event.Photos" : "写真",
+
+  "__Event.Preferences" : "Preferences",
+  "Event.Preferences" : "環境設定",
+
+  "__Event.Scope" : "Scope",
+  "Event.Scope" : "範囲",
+
+  "__Event.ScopeLimited" : "Limited",
+  "Event.ScopeLimited" : "限定",
+
+  "__Event.ScopeOpen" : "Open",
+  "Event.ScopeOpen" : "開いた",
+
+  "__Event.ScopeOpenConfirmation" : "Open on confirmation",
+  "Event.ScopeOpenConfirmation" : "確認時に開く",
+
+  "__Event.ScopeSecret" : "Secret",
+  "Event.ScopeSecret" : "秘密",
+
+  "__Event.ShoppingList" : "Shopping List",
+  "Event.ShoppingList" : "買い物リスト",
+
+  "__Event.StartDate" : "Start Date",
+  "Event.StartDate" : "開始日",
+
+  "__Event.Status" : "Status",
+  "Event.Status" : "状態",
+
+  "__Event.Survey" : "Survey",
+  "Event.Survey" : "調査",
+
+  "__Event.Tasks" : "Tasks",
+  "Event.Tasks" : "タスク",
+
+  "__Event.TimeEvent" : "Time",
+  "Event.TimeEvent" : "時間",
+
+  "__Event.TitleChat" : "Chat",
+  "Event.TitleChat" : "チャット",
+
+  "__Event.TitleExpense" : "Manage and share expenses",
+  "Event.TitleExpense" : "経費の管理と共有",
+
+  "__Event.TitleGeolocalisation" : "Where is the event?",
+  "Event.TitleGeolocalisation" : "イベントはどこですか？",
+
+  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
+  "Event.TitleItinerary" : "旅程と興味のあるポイントを定義します",
+
+  "__Event.TitleParticipant" : "Invite participant to your event",
+  "Event.TitleParticipant" : "イベントに参加者を招待する",
+
+  "__Event.TitlePhotos" : "Photos",
+  "Event.TitlePhotos" : "写真",
+
+  "__Event.TitlePreferences" : "Preferences",
+  "Event.TitlePreferences" : "環境設定",
+
+  "__Event.TitleShoppingList" : "Shopping list : what to brings?",
+  "Event.TitleShoppingList" : "買い物リスト：何を持っていくの？",
+
+  "__Event.TitleSurvey" : "Survey",
+  "Event.TitleSurvey" : "調査",
+
+  "__Event.TitleTasks" : "Tasks",
+  "Event.TitleTasks" : "タスク",
+
+  "__EventExpense.AddExpense" : "Add a expense",
+  "EventExpense.AddExpense" : "費用を追加する",
+
+  "__EventExpense.CurrencyOnEvent" : "Currency used in this event",
+  "EventExpense.CurrencyOnEvent" : "このイベントで使用される通貨",
+
+  "__EventExpense.ExpenseTip" : "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here",
+  "EventExpense.ExpenseTip" : "イベントにすべての費用を登録します。別のセクション（旅程、買い物リスト）からの費用はここに表示されます",
+
+  "__EventExpense.MainTitleExpense" : "Expense",
+  "EventExpense.MainTitleExpense" : "費用",
+
+  "__EventGeolocalisation.Address" : "Address",
+  "EventGeolocalisation.Address" : "住所",
+
+  "__EventGeolocalisation.Instructions" : "Instructions",
+  "EventGeolocalisation.Instructions" : "指示",
+
+  "__EventGeolocalisation.MainTitleGeolocation" : "Geolocalisation",
+  "EventGeolocalisation.MainTitleGeolocation" : "ジオローカリゼーション",
+
+  "__EventGeolocalisation.ShareMyLocation" : "Share my localisation during the event",
+  "EventGeolocalisation.ShareMyLocation" : "イベント中に私のローカリゼーションを共有する",
+
+  "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
+  "EventItinerary.ItineraryTip" : "このイベント中に訪問したい場所をすべてリストしてください。イベントが複数日にわたる場合は、1日あたりの旅程を設定できます",
+
+  "__EventItinerary.MainTitleItinerary" : "Itinerary",
+  "EventItinerary.MainTitleItinerary" : "旅程",
+
+  "__EventItinerary.NoAddressProvided" : "No address are provided for this day.",
+  "EventItinerary.NoAddressProvided" : "この日の住所はありません。",
+
+  "__EventItinerary.ProvideDateInEvent" : "Select a date for this event",
+  "EventItinerary.ProvideDateInEvent" : "このイベントの日付を選択してください",
+
+  "__EventItinerary.ProvidePeriodDateInEvent" : "Select a start and a end date for this event",
+  "EventItinerary.ProvidePeriodDateInEvent" : "このイベントの開始日と終了日を選択します",
+
+  "__EventItinerary.ShowDetail" : "Show Detail",
+  "EventItinerary.ShowDetail" : "詳細を表示",
+
+  "__EventItinerary.ShowExpense" : "Show Expense",
+  "EventItinerary.ShowExpense" : "経費を表示",
+
+  "__EventItinerary.ShowItineraryMap" : "Show itinerary map",
+  "EventItinerary.ShowItineraryMap" : "旅程マップを表示する",
+
+  "__EventItineray.Address" : "Address",
+  "EventItineray.Address" : "住所",
+
+  "__EventItineray.Airport" : "Airport",
+  "EventItineray.Airport" : "空港",
+
+  "__EventItineray.Begin" : "Begin",
+  "EventItineray.Begin" : "ベギン",
+
+  "EventItineray.Budget" : "予算",
+
+  "__EventItineray.BusStation" : "Bus Station",
+  "EventItineray.BusStation" : "バス停",
+
+  "EventItineray.Category" : "カテゴリー",
+
+  "__EventItineray.Description" : "Description",
+  "EventItineray.Description" : "説明",
+
+  "__EventItineray.Duration" : "Duration",
+  "EventItineray.Duration" : "デュレーション",
+
+  "__EventItineray.End" : "End",
+  "EventItineray.End" : "終わり",
+
+  "__EventItineray.Entertainment" : "Entertainment",
+  "EventItineray.Entertainment" : "エンターテインメント",
+
+  "__EventItineray.Expense" : "Expense",
+  "EventItineray.Expense" : "費用",
+
+  "__EventItineray.Harbor" : "Harbor",
+  "EventItineray.Harbor" : "港",
+
+  "__EventItineray.Night" : "Night",
+  "EventItineray.Night" : "夜",
+
+  "__EventItineray.PointOfInterest" : "Point Of Interest",
+  "EventItineray.PointOfInterest" : "興味のあるポイント",
+
+  "EventItineray.Price" : "価格",
+
+  "__EventItineray.RemoveThisStep" : "Remove this step",
+  "EventItineray.RemoveThisStep" : "このステップを削除します",
+
+  "__EventItineray.Restaurant" : "Restaurant",
+  "EventItineray.Restaurant" : "レストラン",
+
+  "__EventItineray.Shopping" : "Shopping",
+  "EventItineray.Shopping" : "ショッピング",
+
+  "__EventItineray.Title" : "Title",
+  "EventItineray.Title" : "題名",
+
+  "__EventItineray.TrainStation" : "Train Station",
+  "EventItineray.TrainStation" : "でんしゃのりば",
+
+  "__EventItineray.VisitTime" : "Visit time",
+  "EventItineray.VisitTime" : "訪問時間",
+
+  "__EventItineray.Visite" : "Visite",
+  "EventItineray.Visite" : "訪問",
+
+  "__EventItineray.WebSite" : "WebSite",
+  "EventItineray.WebSite" : "Webサイト",
+
+  "EventItineray.What" : "何",
+
+  "__EventList.AccessThisEvent" : "Access this event",
+  "EventList.AccessThisEvent" : "このイベントにアクセスする",
+
+  "__EventList.AllEvents" : "All events",
+  "EventList.AllEvents" : "すべてのイベント",
+
+  "__EventList.CreateAnEvent" : "Create an Event",
+  "EventList.CreateAnEvent" : "イベントを作成する",
+
+  "__EventList.Dae" : "Date",
+  "EventList.Dae" : "日付",
+
+  "__EventList.MyEvents" : "My events",
+  "EventList.MyEvents" : "私のイベント",
+
+  "__EventList.Name" : "Name",
+  "EventList.Name" : "名前",
+
+  "__EventList.Participants" : "Participants",
+  "EventList.Participants" : "参加者",
+
+  "__EventList.Refresh" : "Refresh",
+  "EventList.Refresh" : "更新",
+
+  "__EventParticipant.Actif" : "Actif",
+  "EventParticipant.Actif" : "Actif",
+
+  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
+  "EventParticipant.InvitationInProgress" : "進行中の招待",
+
+  "__EventParticipant.Invited" : "Invited",
+  "EventParticipant.Invited" : "招待",
+
+  "__EventParticipant.Left" : "Left",
+  "EventParticipant.Left" : "左",
+
+  "__EventParticipant.MainTitleParticipant" : "Participants",
+  "EventParticipant.MainTitleParticipant" : "参加者",
+
+  "__EventParticipant.Owner" : "Owner",
+  "EventParticipant.Owner" : "オーナー",
+
+  "__EventParticipant.Person" : "Person",
+  "EventParticipant.Person" : "人",
+
+  "__EventParticipant.Role" : "Role",
+  "EventParticipant.Role" : "役割",
+
+  "__EventParticipant.RoleObserver" : "Observer",
+  "EventParticipant.RoleObserver" : "観察者",
+
+  "__EventParticipant.RoleOrganizer" : "Organizer",
+  "EventParticipant.RoleOrganizer" : "主催者",
+
+  "__EventParticipant.RoleParticipant" : "Participant",
+  "EventParticipant.RoleParticipant" : "参加者",
+
+  "__EventParticipant.Status" : "Status",
+  "EventParticipant.Status" : "状態",
+
+  "__EventParticipant.TitleActiveParticipant" : "Active participant",
+  "EventParticipant.TitleActiveParticipant" : "アクティブな参加者",
+
+  "__EventParticipant.TitleLeft" : "The participant left the event",
+  "EventParticipant.TitleLeft" : "参加者はイベントを去りました",
+
+  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited" : "招待された参加者：現時点では確認は受信されていません",
+
+  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent" : "このイベントで使用される通貨",
+
+  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip" : "イベントのすべての設定を設定します",
+
+  "__EventPreferences.MainTitlePreferences" : "Preference",
+  "EventPreferences.MainTitlePreferences" : "好み",
+
+  "__EventShoppingList.AddItem" : "Add a item in the list",
+  "EventShoppingList.AddItem" : "リストにアイテムを追加します",
+
+  "__EventShoppingList.AddOne" : "Add one !",
+  "EventShoppingList.AddOne" : "1つ追加してください！",
+
+  "__EventShoppingList.Cancel" : "Cancelled",
+  "EventShoppingList.Cancel" : "キャンセル",
+
+  "__EventShoppingList.Cancelled" : "Cancelled",
+  "EventShoppingList.Cancelled" : "キャンセル",
+
+  "__EventShoppingList.Description" : "Description",
+  "EventShoppingList.Description" : "説明",
+
+  "__EventShoppingList.Done" : "Done",
+  "EventShoppingList.Done" : "完了",
+
+  "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
+  "EventShoppingList.MainTitleShoppingList" : "買い物リスト",
+
+  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
+  "EventShoppingList.NoItem" : "リストにアイテムがありません。",
+
+  "__EventShoppingList.ShowDetails" : "Detail",
+  "EventShoppingList.ShowDetails" : "詳細",
+
+  "__EventShoppingList.ShowExpense" : "Show Expense",
+  "EventShoppingList.ShowExpense" : "経費を表示",
+
+  "__EventShoppingList.Title" : "Shopping List",
+  "EventShoppingList.Title" : "買い物リスト",
+
+  "__EventShoppingList.ToBring" : "To bring",
+  "EventShoppingList.ToBring" : "持ってくる",
+
+  "__EventShoppingList.What" : "What",
+  "EventShoppingList.What" : "何",
+
+  "__EventShoppingList.Who" : "Who",
+  "EventShoppingList.Who" : "WHO",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+  "EventShoppingList.addItem" : "リストに新しいアイテムを追加します",
+
+  "__EventShoppingList.removeItem" : "Remove this item",
+  "EventShoppingList.removeItem" : "このアイテムを削除します",
+
+  "__EventState.Actif" : "Actif",
+  "EventState.Actif" : "Actif",
+
+  "__EventState.Cancelled" : "Cancelled",
+  "EventState.Cancelled" : "キャンセル",
+
+  "__EventState.Done" : "Done",
+  "EventState.Done" : "完了",
+
+  "__EventState.InPreparation" : "In Preparation",
+  "EventState.InPreparation" : "準備中",
+
+  "EventSurvey.AddOne" : "1つ追加してください！",
+
+  "__EventSurvey.AddOption" : "Option",
+  "EventSurvey.AddOption" : "オプション",
+
+  "__EventSurvey.Closed" : "closed",
+  "EventSurvey.Closed" : "閉まっている",
+
+  "__EventSurvey.Description" : "Description",
+  "EventSurvey.Description" : "説明",
+
+  "__EventSurvey.InPreparation" : "In preparation",
+  "EventSurvey.InPreparation" : "準備中",
+
+  "__EventSurvey.InProgress" : "In progress",
+  "EventSurvey.InProgress" : "進行中",
+
+  "EventSurvey.MainTitleSurveyList" : "調査",
+
+  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation" : "この調査は準備中です。現時点ではアクセスできません。",
+
+  "EventSurvey.NoItem" : "リストに調査の準備ができていません。",
+
+  "__EventSurvey.Option" : "Option",
+  "EventSurvey.Option" : "オプション",
+
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "この調査は準備中です。参加者は表示されません",
+
+  "EventSurvey.SurveyTip" : "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
+
+  "__EventSurvey.Title" : "Title",
+  "EventSurvey.Title" : "題名",
+
+  "EventSurvey.addItem" : "リストに新しい調査を作成します",
+
+  "__EventSurvey.removeItem" : "Remove this item",
+  "EventSurvey.removeItem" : "このアイテムを削除します",
+
+  "__EventSurveyList.AddOne" : "Add one !",
+  "EventSurveyList.AddOne" : "1つ追加してください！",
+
+  "__EventSurveyList.AddSurvey" : "Add a survey in the list",
+  "EventSurveyList.AddSurvey" : "リストに調査を追加する",
+
+  "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
+  "EventSurveyList.ItineraryTip" : "このイベント中に訪問したい場所をすべてリストしてください。イベントが複数日にわたる場合は、1日あたりの旅程を設定できます",
+
+  "__EventSurveyList.MainTitleItinerary" : "Itinerary",
+  "EventSurveyList.MainTitleItinerary" : "旅程",
+
+  "__EventSurveyList.MainTitleSurveyList" : "Surveys",
+  "EventSurveyList.MainTitleSurveyList" : "調査",
+
+  "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
+  "EventSurveyList.NoItem" : "リストに調査の準備ができていません。",
+
+  "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
+  "EventSurveyList.SurveyTip" : "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
+
+  "__EventSurveyList.addItem" : "Create a new survey in the list",
+  "EventSurveyList.addItem" : "リストに新しい調査を作成します",
+
+  "__EventTaskList.AddOne" : "Add one !",
+  "EventTaskList.AddOne" : "1つ追加してください！",
+
+  "EventTaskList.AddSurvey" : "リストに調査を追加する",
+
+  "__EventTaskList.AddTask" : "Add a task in the list",
+  "EventTaskList.AddTask" : "リストにタスクを追加します",
+
+  "__EventTaskList.Begin" : "Begin",
+  "EventTaskList.Begin" : "ベギン",
+
+  "__EventTaskList.Cancelled" : "Cancelled",
+  "EventTaskList.Cancelled" : "キャンセル",
+
+  "__EventTaskList.Description" : "Description",
+  "EventTaskList.Description" : "説明",
+
+  "__EventTaskList.Done" : "Done",
+  "EventTaskList.Done" : "完了",
+
+  "__EventTaskList.End" : "End",
+  "EventTaskList.End" : "終わり",
+
+  "__EventTaskList.FilterAllParticipants" : "All participants",
+  "EventTaskList.FilterAllParticipants" : "すべての参加者",
+
+  "__EventTaskList.FilterAllStates" : "All states",
+  "EventTaskList.FilterAllStates" : "すべての州",
+
+  "__EventTaskList.FilterDone" : "Done",
+  "EventTaskList.FilterDone" : "完了",
+
+  "__EventTaskList.FilterInProgress" : "In progress",
+  "EventTaskList.FilterInProgress" : "進行中",
+
+  "__EventTaskList.FilterMyTasks" : "My tasks",
+  "EventTaskList.FilterMyTasks" : "私の仕事",
+
+  "__EventTaskList.FilterPlanned" : "Planned",
+  "EventTaskList.FilterPlanned" : "予定",
+
+  "__EventTaskList.FilterUnaffected" : "Unaffected",
+  "EventTaskList.FilterUnaffected" : "影響を受けません",
+
+  "__EventTaskList.InProgress" : "In progress",
+  "EventTaskList.InProgress" : "進行中",
+
+  "__EventTaskList.MainTitleTaskList" : "Tasks List",
+  "EventTaskList.MainTitleTaskList" : "タスクリスト",
+
+  "__EventTaskList.NoItem" : "You don't have any task in the list.",
+  "EventTaskList.NoItem" : "リストにアイテムがありません。 1つ追加してください！",
+
+  "__EventTaskList.RemoveThisTask" : "Remove this task",
+  "EventTaskList.RemoveThisTask" : "このタスクを削除します",
+
+  "__EventTaskList.ShowDate" : "Show dates",
+  "EventTaskList.ShowDate" : "日付を表示",
+
+  "__EventTaskList.State" : "State",
+  "EventTaskList.State" : "状態",
+
+  "__EventTaskList.StatePlanned" : "Planned",
+  "EventTaskList.StatePlanned" : "予定",
+
+  "__EventTaskList.Subject" : "Subject",
+  "EventTaskList.Subject" : "件名",
+
+  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+  "EventTaskList.TaskTip" : "タスクを使用して、イベントに対して実行する必要があることを参照します。参加者を割り当て、タスクのステータスをマークすることができます：計画済み、完了....好みに応じて、実現するタスクがあるときに表記を受け取る場合があります",
+
+  "__EventTaskList.Who" : "Who",
+  "EventTaskList.Who" : "WHO",
+
+  "__EventTaskList.addItem" : "Add a new item in the list",
+  "EventTaskList.addItem" : "リストに新しいアイテムを追加します",
+
+  "__Expense.Budget" : "Budget",
+  "Expense.Budget" : "予算",
+
+  "__Expense.Cost" : "Cost",
+  "Expense.Cost" : "費用",
+
+  "Expense.Price" : "価格",
+
+  "__Invitation.ByEmail" : "Send an Email",
+  "Invitation.ByEmail" : "メールを送る",
+
+  "__Invitation.Close" : "Close",
+  "Invitation.Close" : "閉じる",
+
+  "__Invitation.Email" : "Email",
+  "Invitation.Email" : "Eメール",
+
+  "__Invitation.FirstName" : "First name",
+  "Invitation.FirstName" : "ファーストネーム",
+
+  "__Invitation.Invitation" : "Invitation",
+  "Invitation.Invitation" : "招待",
+
+  "__Invitation.LastName" : "Last name",
+  "Invitation.LastName" : "苗字",
+
+  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant" : "まだ参加していないユーザーのみ",
+
+  "__Invitation.PhoneNumber" : "Phone number",
+  "Invitation.PhoneNumber" : "電話番号",
+
+  "Invitation.RoleObserver" : "観察者",
+
+  "Invitation.RoleOrganizer" : "主催者",
+
+  "Invitation.RoleParticipant" : "参加者",
+
+  "__Invitation.Search" : "Search",
+  "Invitation.Search" : "探す",
+
+  "__Invitation.SearchAUser" : "Search a user",
+  "Invitation.SearchAUser" : "ユーザーを検索する",
+
+  "__Invitation.Searching" : "Searching",
+  "Invitation.Searching" : "検索中",
+
+  "__Invitation.SendInvitation" : "Send Invitation",
+  "Invitation.SendInvitation" : "招待状を送る",
+
+  "__Invitation.UserEmail" : "Email",
+  "Invitation.UserEmail" : "Eメール",
+
+  "__Invitation.UserFound" : "UsersFound",
+  "Invitation.UserFound" : "UsersFound",
+
+  "__Invitation.UserName" : "Name",
+  "Invitation.UserName" : "名前",
+
+  "__Invitation.UserPhoneNumber" : "Phone number",
+  "Invitation.UserPhoneNumber" : "電話番号",
+
+  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
+  "Login.CantConnectToTheServer" : "サーバーに接続できません",
+
+  "Login.badConnection" : "接続不良-資格情報を確認してください",
+
+  "__Login.connection" : "Connection",
+  "Login.connection" : "接続",
+
+  "__Login.email" : "Email",
+  "Login.email" : "Email",
+
+  "Login.googleLogin" : "ログイン",
+
+  "Login.googleLogout" : "ログアウト",
+
+  "__Login.googlelogin" : "Login",
+  "Login.googlelogin" : "ログイン",
+
+  "__Login.googlelogout" : "Login",
+  "Login.googlelogout" : "ログイン",
+
+  "__Login.logout" : "Logout",
+  "Login.logout" : "Logout",
+
+  "__Login.password" : "Password",
+  "Login.password" : "パスワード",
+
+  "__Menu.AdmininstratorExplanation" : "Administrator function.",
+  "Menu.AdmininstratorExplanation" : "管理者機能。",
+
+  "__Menu.Administration" : "Administration",
+  "Menu.Administration" : "管理",
+
+  "__Menu.Events" : "Events",
+  "Menu.Events" : "イベント",
+
+  "__Menu.EventsExplanation" : "Access all events you can access",
+  "Menu.EventsExplanation" : "アクセスできるすべてのイベントにアクセスする",
+
+  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
+  "Menu.InvitationExplanation" : "招待状を確認し、受け入れます。",
+
+  "__Menu.Join" : "Join an event",
+  "Menu.Join" : "イベントに参加する",
+
+  "__Menu.JoinExplanation" : "Search and join events",
+  "Menu.JoinExplanation" : "イベントを検索して参加する",
+
+  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
+  "Menu.MyFriendExplanation" : "すべての友達に会い、新しい人を招待し、メッセージを送ってください。",
+
+  "__Menu.MyFriends" : "My Friends",
+  "Menu.MyFriends" : "私の友人",
+
+  "__Menu.MyInvitations" : "My Invitations",
+  "Menu.MyInvitations" : "私の招待状",
+
+  "__Menu.MyProfile" : "My Profile",
+  "Menu.MyProfile" : "私のプロフィール",
+
+  "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
+  "Menu.MyProfileExplanation" : "好みを管理し、アバターを設定します。",
+
+  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference" : "ヒントはお好みで無効にすることができます",
+
+  "__AdminTransaltor.Title" : "Administration",
+
+  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
+
+  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
+
+  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
+
+  "__AdminTranslator.MissingSentences" : "Missing sentences",
+
+  "__AdminTranslator.Name" : "Name",
+
+  "__AdminTranslator.TimeTranslation" : "Time of translation",
+
+  "__AdminTranslator.Title" : "Translation",
+
+  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
+
+  "__AdminTranslator.TranslateSentences" : "Translated sentences",
+
+  "__AdminTranslator.nbTransations" : "Number of translation",
+
+  "__BodyTogh.welcome" : "Welcome to Togh D",
+
+  "__Event.Chat" : "Chat",
+
+  "__Event.DateEvent" : "Date Event",
+
+  "__Event.DatePolicy" : "Date policy",
+
+  "__Event.Description" : "Description",
+
+  "__Event.DurationEvent" : "Duration",
+
+  "__Event.EndDate" : "End Date",
+
+  "__Event.EventDate" : "Date",
+
+  "__Event.Expense" : "Expense",
+
+  "__Event.Geolocalisation" : "Geolocalisation",
+
+  "__Event.Itinerary" : "itinerary",
+
+  "__Event.OneDate" : "One date",
+
+  "__Event.Participants" : "Participants",
+
+  "__Event.Period" : "Period",
+
+  "__Event.Photos" : "Photos",
+
+  "__Event.Scope" : "Scope",
+
+  "__Event.ScopeLimited" : "Limited",
+
+  "__Event.ScopeOpen" : "Open",
+
+  "__Event.ScopeOpenConfirmation" : "Open on confirmation",
+
+  "__Event.ScopeSecret" : "Secret",
+
+  "__Event.ShoppingList" : "Shopping List",
+
+  "__Event.StartDate" : "Start Date",
+
+  "__Event.Status" : "Status",
+
+  "__Event.Survey" : "Survey",
+
+  "__Event.Tasks" : "Tasks",
+
+  "__Event.TimeEvent" : "Time",
+
+  "__Event.TitleChat" : "Chat",
+
+  "__Event.TitleExpense" : "Manage and share expenses",
+
+  "__Event.TitleGeolocalisation" : "Where is the event?",
+
+  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
+
+  "__Event.TitleParticipant" : "Invite participant to your event",
+
+  "__Event.TitlePhotos" : "Photos",
+
+  "__Event.TitleShoppingList" : "Shopping list : what to brings?",
+
+  "__Event.TitleSurvey" : "Survey",
+
+  "__Event.TitleTasks" : "Tasks",
+
+  "__EventExpense.AddExpense" : "Add a expense",
+
+  "__EventExpense.CurrencyOnEvent" : "Currency used in this event",
+
+  "__EventExpense.ExpenseTip" : "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here",
+
+  "__EventExpense.MainTitleExpense" : "Expense",
+
+  "__EventGeolocalisation.Address" : "Address",
+
+  "__EventGeolocalisation.MainTitleGeolocation" : "Geolocalisation",
+
+  "__EventGeolocalisation.ShareMyLocation" : "Share my localisation during the event",
+
+  "__EventItinerary.ProvideDateInEvent" : "Select a date for this event",
+
+  "__EventItinerary.ProvidePeriodDateInEvent" : "Select a start and a end date for this event",
+
+  "__EventItinerary.ShowDetail" : "Show Detail",
+
+  "__EventItinerary.ShowExpense" : "Show Expense",
+
+  "__EventItinerary.ShowItineraryMap" : "Show itinerary map",
+
+  "__EventItineray.Address" : "Address",
+
+  "__EventItineray.Airport" : "Airport",
+
+  "__EventItineray.Begin" : "Begin",
+
+  "__EventItineray.BusStation" : "Bus Station",
+
+  "__EventItineray.Description" : "Description",
+
+  "__EventItineray.Duration" : "Duration",
+
+  "__EventItineray.End" : "End",
+
+  "__EventItineray.Entertainment" : "Entertainment",
+
+  "__EventItineray.Expense" : "Expense",
+
+  "__EventItineray.Harbor" : "Harbor",
+
+  "__EventItineray.Night" : "Night",
+
+  "__EventItineray.PointOfInterest" : "Point Of Interest",
+
+  "__EventItineray.Restaurant" : "Restaurant",
+
+  "__EventItineray.Shopping" : "Shopping",
+
+  "__EventItineray.Title" : "Title",
+
+  "__EventItineray.TrainStation" : "Train Station",
+
+  "__EventItineray.VisitTime" : "Visit time",
+
+  "__EventItineray.Visite" : "Visite",
+
+  "__EventItineray.WebSite" : "WebSite",
+
+  "__EventList.AccessThisEvent" : "Access this event",
+
+  "__EventList.AllEvents" : "All events",
+
+  "__EventList.CreateAnEvent" : "Create an Event",
+
+  "__EventList.Dae" : "Date",
+
+  "__EventList.MyEvents" : "My events",
+
+  "__EventList.Name" : "Name",
+
+  "__EventList.Participants" : "Participants",
+
+  "__EventList.Refresh" : "Refresh",
+
+  "__EventParticipant.Actif" : "Actif",
+
+  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
+
+  "__EventParticipant.Invited" : "Invited",
+
+  "__EventParticipant.Left" : "Left",
+
+  "__EventParticipant.MainTitleParticipant" : "Participants",
+
+  "__EventParticipant.Owner" : "Owner",
+
+  "__EventParticipant.Person" : "Person",
+
+  "__EventParticipant.Role" : "Role",
+
+  "__EventParticipant.RoleObserver" : "Observer",
+
+  "__EventParticipant.RoleOrganizer" : "Organizer",
+
+  "__EventParticipant.RoleParticipant" : "Participant",
+
+  "__EventParticipant.Status" : "Status",
+
+  "__EventParticipant.TitleActiveParticipant" : "Active participant",
+
+  "__EventParticipant.TitleLeft" : "The participant left the event",
+
+  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
+
+  "__EventShoppingList.AddOne" : "Add one !",
+
+  "__EventShoppingList.Cancel" : "Cancelled",
+
+  "__EventShoppingList.Description" : "Description",
+
+  "__EventShoppingList.Done" : "Done",
+
+  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
+
+  "__EventShoppingList.ShowDetails" : "Detail",
+
+  "__EventShoppingList.ShowExpense" : "Show Expense",
+
+  "__EventShoppingList.Title" : "Shopping List",
+
+  "__EventShoppingList.ToBring" : "To bring",
+
+  "__EventShoppingList.What" : "What",
+
+  "__EventShoppingList.Who" : "Who",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+
+  "__EventShoppingList.removeItem" : "Remove this item",
+
+  "__EventState.Actif" : "Actif",
+
+  "__EventState.Cancelled" : "Cancelled",
+
+  "__EventState.Done" : "Done",
+
+  "__EventState.InPreparation" : "In Preparation",
+
+  "__EventSurvey.AddOption" : "Option",
+
+  "__EventSurvey.Closed" : "closed",
+
+  "__EventSurvey.Description" : "Description",
+
+  "__EventSurvey.InPreparation" : "In preparation",
+
+  "__EventSurvey.InProgress" : "In progress",
+
+  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
+
+  "__EventSurvey.Option" : "Option",
+
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
+
+  "__EventSurvey.Title" : "Title",
+
+  "__EventSurvey.removeItem" : "Remove this item",
+
+  "__EventSurveyList.AddOne" : "Add one !",
+
+  "__EventSurveyList.AddSurvey" : "Add a survey in the list",
+
+  "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
+
+  "__EventSurveyList.MainTitleItinerary" : "Itinerary",
+
+  "__EventSurveyList.MainTitleSurveyList" : "Surveys",
+
+  "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
+
+  "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
+
+  "__EventSurveyList.addItem" : "Create a new survey in the list",
+
+  "__EventTaskList.AddTask" : "Add a task in the list",
+
+  "__EventTaskList.Begin" : "Begin",
+
+  "__EventTaskList.Cancelled" : "Cancelled",
+
+  "__EventTaskList.Description" : "Description",
+
+  "__EventTaskList.Done" : "Done",
+
+  "__EventTaskList.End" : "End",
+
+  "__EventTaskList.FilterAllParticipants" : "All participants",
+
+  "__EventTaskList.FilterAllStates" : "All states",
+
+  "__EventTaskList.FilterDone" : "Done",
+
+  "__EventTaskList.FilterInProgress" : "In progress",
+
+  "__EventTaskList.FilterMyTasks" : "My tasks",
+
+  "__EventTaskList.FilterPlanned" : "Planned",
+
+  "__EventTaskList.FilterUnaffected" : "Unaffected",
+
+  "__EventTaskList.InProgress" : "In progress",
+
+  "__EventTaskList.MainTitleTaskList" : "Tasks List",
+
+  "__EventTaskList.NoItem" : "You don't have any item in the list. Add one !",
+
+  "__EventTaskList.ShowDate" : "Show dates",
+
+  "__EventTaskList.State" : "State",
+
+  "__EventTaskList.StatePlanned" : "Planned",
+
+  "__EventTaskList.Subject" : "Subject",
+
+  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+
+  "__EventTaskList.Who" : "Who",
+
+  "__EventTaskList.addItem" : "Add a new item in the list",
+
+  "__Expense.Budget" : "Budget",
+
+  "__Expense.Cost" : "Cost",
+
+  "__Invitation.ByEmail" : "Send an Email",
+
+  "__Invitation.Close" : "Close",
+
+  "__Invitation.Email" : "Email",
+
+  "__Invitation.FirstName" : "First name",
+
+  "__Invitation.Invitation" : "Invitation",
+
+  "__Invitation.LastName" : "Last name",
+
+  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
+
+  "__Invitation.PhoneNumber" : "Phone number",
+
+  "__Invitation.Search" : "Search",
+
+  "__Invitation.SearchAUser" : "Search a user",
+
+  "__Invitation.Searching" : "Searching",
+
+  "__Invitation.SendInvitation" : "Send Invitation",
+
+  "__Invitation.UserEmail" : "Email",
+
+  "__Invitation.UserFound" : "UsersFound",
+
+  "__Invitation.UserName" : "Name",
+
+  "__Invitation.UserPhoneNumber" : "Phone number",
+
+  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
+
+  "__Login.connection" : "Connection",
+
+  "__Login.email" : "Email",
+
+  "__Login.googlelogin" : "Login",
+
+  "__Login.googlelogout" : "Login",
+
+  "__Login.logout" : "Logout",
+
+  "__Login.password" : "Password",
+
+  "__Menu.AdmininstratorExplanation" : "Administrator function.",
+
+  "__Menu.Administration" : "Administration",
+
+  "__Menu.Events" : "Events",
+
+  "__Menu.EventsExplanation" : "Access all events you can access",
+
+  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
+
+  "__Menu.Join" : "Join an event",
+
+  "__Menu.JoinExplanation" : "Search and join events",
+
+  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
+
+  "__Menu.MyFriends" : "My Friends",
+
+  "__Menu.MyInvitations" : "My Invitations",
+
+  "__Menu.MyProfile" : "My Profile",
+
+  "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
+
+  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference"}

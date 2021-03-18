@@ -60,7 +60,7 @@ class EventItinerary extends React.Component {
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.addStep 				= this.addStep.bind(this);
 		this.upItem					= this.upItem.bind( this );
-		this.setAttributCheckbox 	= this.setAttributCheckbox.bind( this);
+		this.setCheckboxValue	 	= this.setCheckboxValue.bind( this);
 		this.downItem				= this.downItem.bind( this );
 		this.moveItemOneDirection	= this.moveItemOneDirection.bind( this );
 		this.addStepCallback		= this.addStepCallback.bind( this );
@@ -76,7 +76,7 @@ class EventItinerary extends React.Component {
 
 	// --------------------------------- render
 	render() {
-		console.log("EventItinerary.render: visible=" + this.state.show+" event="+JSON.stringify(this.state.event));
+		console.log("EventItinerary.render: showProperties=" + JSON.stringify(this.state.showPropertiesValue)+" event="+JSON.stringify(this.state.event));
 
 		var toolService = FactoryService.getInstance().getToolService();
 
@@ -126,28 +126,29 @@ class EventItinerary extends React.Component {
 		resultHtml.push(
 			(<div class="row">
 				<div class="col">
-					<Toggle  labelText="" aria-label="" 
+					<Toggle labelText="" aria-label="" 
 						labelA={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
-						onChange={(event) => this.setAttributCheckbox( "showItineraryMap", event.target.value )}
+						onChange={(event) => this.setCheckboxValue( "showItineraryMap", event )}
 						defaultToggled={this.state.show.showItineraryMap}
 						id="showitinerarymap" />
+				</div>
+				<div class="col">
+					<Toggle labelText="" aria-label="" 
+						labelA={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
+						labelB={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
+						onChange={(event) => {console.log("Eventitinerary.toggleDetail:"+ event);this.setCheckboxValue( "showDetail", event )} }
+						defaultToggled={this.state.show.showDetail}
+						id="showDetail" />
 				</div>
 				<div class="col">
 					<Toggle  labelText="" aria-label="" 
 						labelA={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
-						onChange={(event) => this.setAttributCheckbox( "showExpense", event.target.value )}
+						onChange={(event) => this.setCheckboxValue( "showExpense", event )}
 						defaultToggled={this.state.show.showExpense}
+						disabled={this.state.show.showDetail === false}
 						id="showexpense" />
-				</div>
-				<div class="col">
-					<Toggle  labelText="" aria-label="" 
-						labelA={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
-						labelB={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
-						onChange={(event) => {console.log("Eventitinerary.toggleDetail:"+ event.target.value);this.setAttributCheckbox( "showDetail", event.target.value )} }
-						defaultToggled={this.state.show.showDetail}
-						id="showDetail" />
 				</div>
 			</div> )
 		);
@@ -178,7 +179,7 @@ class EventItinerary extends React.Component {
 			if (count > 100)
 				break;			
 			index = index - 10;
-			console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
+			// console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
 			var dateIndexPublish = new Date( dateIndex);
 			
 			var line = (
@@ -353,6 +354,7 @@ class EventItinerary extends React.Component {
 									changeState={(value) => {this.setChildAttribut("category", value, item, "");}}/><br/>
 								<table><tr>
 									<td><TimePicker 
+										id={item.id}
 										value={item.visitTime} 
 										labelText={<FormattedMessage id="EventItineray.VisitTime" defaultMessage="Visit time" />}
 										onChange={(event) => this.setChildAttribut( "visitTime", event.target.value,item )}	/>
@@ -456,14 +458,14 @@ class EventItinerary extends React.Component {
 
 	/** --------------------
  	*/
-	setAttributCheckbox(name, value) {
+	setCheckboxValue(name, value) {
 		
 		let showPropertiesValue = this.state.show;
-		console.log("EventTaskList.setAttributCheckbox set "+name+"="+value+" showProperties =" + JSON.stringify(showPropertiesValue));
-		if (value === 'on')
+		if (value.target.checked)
 			showPropertiesValue[name] = true;
 		else
 			showPropertiesValue[name] = false;
+		console.log("EventTaskList.setAttributCheckbox set "+name+"="+value.target.checked +" showProperties =" + JSON.stringify(showPropertiesValue));
 		this.setState({ show: showPropertiesValue })
 	}
 	

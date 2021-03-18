@@ -80,7 +80,7 @@ public class TranslatorGoogle {
          * In case only one sentence is asked, here the result is saved
          */
         public String getTranslation() {
-            if (listTranslations.size()>0)
+            if (! listTranslations.isEmpty())
                 return listTranslations.get(0);
             return null;
         }

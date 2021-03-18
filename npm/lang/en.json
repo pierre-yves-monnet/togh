@@ -152,9 +152,6 @@
   "EventExpense.AddExpense": {
     "defaultMessage": "Add a expense"
   },
-  "EventExpense.CurrencyOnEvent": {
-    "defaultMessage": "Currency used in this event"
-  },
   "EventExpense.ExpenseTip": {
     "defaultMessage": "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here"
   },
@@ -181,6 +178,9 @@
   },
   "EventItinerary.MainTitleItinerary": {
     "defaultMessage": "Itinerary"
+  },
+  "EventItinerary.NoAddressProvided": {
+    "defaultMessage": "No address are provided for this day."
   },
   "EventItinerary.ProvideDateInEvent": {
     "defaultMessage": "Select a date for this event"
