@@ -1,10 +1,11 @@
-// -----------------------------------------------------------
-//
-// EventPreferences
-//
-// Display one event
-//
-// -----------------------------------------------------------
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
@@ -14,8 +15,15 @@ import { TextInput, Select } from 'carbon-components-react';
 import FactoryService from './service/FactoryService';
 import EventSectionHeader from './component/EventSectionHeader';
 
-import SlabEvent from './service/SlabEvent';
+import SlabRecord from './service/SlabRecord';
 
+// -----------------------------------------------------------
+//
+// EventPreferences
+//
+// Display one event
+//
+// -----------------------------------------------------------
 
 class EventPreferences extends React.Component {
 	

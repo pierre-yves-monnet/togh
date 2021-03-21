@@ -1,3 +1,25 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+import SurveyCtrl from './SurveyCtrl';
+import UserParticipantCtrl from './UserParticipantCtrl';
+
+import FactoryService from './../service/FactoryService'
+import SlabRecord from './../service/SlabRecord';
+import BasketSlabRecord from './../service/BasketSlabRecord';
+import HttpResponseMockup from './../service/HttpResponseMockup';
+
+
+import EventPreferencesCtrl from './EventPreferencesCtrl';
+
+import * as participantConstant from './../EventParticipants';
+
 // -----------------------------------------------------------
 //
 // EventCtrl
@@ -24,21 +46,6 @@
 // This class contains all the controleur use to manipulate the object;
 //
 // -----------------------------------------------------------
-//
-
-import SurveyCtrl from './SurveyCtrl';
-import UserParticipantCtrl from './UserParticipantCtrl';
-
-import FactoryService from './../service/FactoryService'
-import SlabEvent from './../service/SlabEvent';
-import BasketSlabEvent from './../service/BasketSlabEvent';
-import HttpResponseMockup from './../service/HttpResponseMockup';
-
-
-import EventPreferencesCtrl from './EventPreferencesCtrl';
-
-import * as participantConstant from './../EventParticipants';
-
 class EventCtrl {
 	
 	// event is the React object
@@ -47,7 +54,7 @@ class EventCtrl {
 		this.event 						= event;
 		this.ctrlId 					= new Date().getTime();
 		this.eventPreferences           = new EventPreferencesCtrl(this, this.updateEventfct);
-		this.currentBasketSlabEvent 	= new BasketSlabEvent( this );
+		this.currentBasketSlabRecord 	= new BasketSlabRecord( this );
 	}
 	
 	getEvent() {
@@ -76,9 +83,15 @@ class EventCtrl {
 			log = log.concat("create participants;");
 			this.event.participants = [];
 		}
+		
 		if (!this.event.itinerarylist) {
 			log = log.concat("create ItineraryList;");
 			this.event.itinerarylist = [];
+		}
+
+		if (!this.event.chatlist) {
+			log = log.concat("create chatlist;");
+			this.event.chatlist = [];
 		}
 			
 		if (!this.event.expenses) {
@@ -124,10 +137,25 @@ class EventCtrl {
 
 	/**
 	* setAttribut
-	* a component update a value. Then this value is register in slabEvent  
+	* a component update a value. Then this value is register in SlabRecord  
 	*/
 	setAttribut(name, value, item, localisation) {
 		console.log("EventCtrl.setAttribut: set attribut:" + name + " <= " + value + " localisation=" +  localisation);
+		var type="";
+		 
+		if (value instanceof Date) {
+			type= 'date';			
+		} else if (value instanceof Number ) {
+			type=  'number';
+		} else if (value instanceof Boolean ) {
+			type=  'boolean';
+		} else { 
+			type= '';
+		}
+		this.setAttributType( name, value, item, localisation, type );
+	}
+	setAttributType(name, value, item, localisation, type) {
+			console.log("EventCtrl.setAttribut: set attribut:" + name + " <= " + value + " localisation=" +  localisation);
 		// const currentEvent = this.event;
 		// item is part of the event at one moment
 		item[name] = value;
@@ -135,13 +163,13 @@ class EventCtrl {
 		// we send a setState to refresh the value
 		this.eventReact.refreshEventfct();
 		
-		var slabEvent = SlabEvent.getUpdate(this.event, name, value, localisation);
-		this.updateEventfct( slabEvent );
+		let slabRecord; 
+		slabRecord = SlabRecord.getUpdateType(this.event, name, value, localisation, type);				
+		this.updateEventfct( slabRecord );
 	}
 	
-	
-	updateEventfct( slabEvent ) {	
-		this.currentBasketSlabEvent.addSlabEvent( slabEvent );
+	updateEventfct( slabRecord ) {	
+		this.currentBasketSlabRecord.addSlabRecord( slabRecord );
 		if (this.timer)
 			clearTimeout(this.timer);
 		this.timer = this.timer = setTimeout(() => { this.automaticSave(); }, 2000);
@@ -156,25 +184,30 @@ class EventCtrl {
 	 */
 	addEventChildFct(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl:addEventChildFct."+this.ctrlId+" child="+listname)
-		// MOCKUP 
-		var toolService = FactoryService.getInstance().getToolService();
-		value.id = toolService.getUniqueCodeInList( this.event[ listname ], "id");		
-		var dataHttp ={ child : value};
-		var httpResponse = new HttpResponseMockup(dataHttp);
+		/** MOCKUP 
+			var toolService = FactoryService.getInstance().getToolService();
+			value.id = toolService.getUniqueCodeInList( this.event[ listname ], "id");		
+			var dataHttp ={ child : value};
+			var httpResponse = new HttpResponseMockup(dataHttp);
+			
+			console.log("EventCtrl:addEventChildFct callBack now")
+	 
+			callbackfct( httpResponse )
+			
+			if (this.timer)
+				clearTimeout(this.timer);
+		*/
 		
-		console.log("EventCtrl:addEventChildFct callBack now")
- 
-		callbackfct( httpResponse )
-		
+		var slabRecord = SlabRecord.getAddList(this.event, listname, value, localisation);
+		this.currentBasketSlabRecord.addSlabRecord( slabRecord );
 		if (this.timer)
 			clearTimeout(this.timer);
-		/*
-		var slabEvent = SlabEvent.getAddList(this.event, listname, value, localisation);
-		this.currentBasketSlabEvent.addSlabEvent( slabEvent );
-		var readyToSendBasket = this.currentBasketSlabEvent;
-		this.currentBasketSlabEvent = new BasketSlabEvent( this );
+		// no more automatic save timeout, we just sent everything to the server
+		var readyToSendBasket = this.currentBasketSlabRecord;
+		this.currentBasketSlabRecord = new BasketSlabRecord( this );
 		readyToSendBasket.sendToServer( callbackfct );
-		*/
+
+
 	}
 	removeEventChild(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl.removeEventChildFct."+this.ctrlId+" child="+listname)
@@ -186,10 +219,10 @@ class EventCtrl {
 		callbackfct( httpResponse );
 		
 		/*
-		var slabEvent = SlabEvent.getRemoveList(this.event, listname, value, localisation);
-		this.currentBasketSlabEvent.addSlabEvent( slabEvent );
-		var readyToSendBasket = this.currentBasketSlabEvent;
-		this.currentBasketSlabEvent = new BasketSlabEvent( this );
+		var SlabRecord = SlabRecord.getRemoveList(this.event, listname, value, localisation);
+		this.currentBasketSlabRecord.addSlabRecord( SlabRecord );
+		var readyToSendBasket = this.currentBasketSlabRecord;
+		this.currentBasketSlabRecord = new BasketSlabRecord( this );
 		readyToSendBasket.sendToServer( callbackfct );
 		*/
 	}
@@ -202,9 +235,9 @@ class EventCtrl {
 	}
 	
 	automaticSave() {
-		console.log("EventCtrl.AutomaticSave: ListSlab=" +this.currentBasketSlabEvent.length);
-		var readyToSendBasket = this.currentBasketSlabEvent;
-		this.currentBasketSlabEvent = new BasketSlabEvent( this );
+		console.log("EventCtrl.AutomaticSave: ListSlab=" +this.currentBasketSlabRecord.length);
+		var readyToSendBasket = this.currentBasketSlabRecord;
+		this.currentBasketSlabRecord = new BasketSlabRecord( this );
 		readyToSendBasket.sendToServer( this.callbackSendFct );
 		if (this.timer)
 			clearTimeout(this.timer);

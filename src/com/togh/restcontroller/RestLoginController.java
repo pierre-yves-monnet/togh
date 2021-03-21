@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.restcontroller;
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -12,14 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,24 +32,21 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
-import com.togh.service.EventService;
 import com.togh.service.FactoryService;
-import com.togh.service.LoginService;
 import com.togh.service.LoginService.LoginStatus;
 
 @RestController
 public class RestLoginController {
    
     private Logger logger = Logger.getLogger(RestLoginController.class.getName());
-    private final static String logHeader = "LoginControler: ";
+    private final static String logHeader = RestLoginController.class.getSimpleName()+": ";
     
     @Autowired
     private FactoryService factoryService;
@@ -76,7 +77,7 @@ public class RestLoginController {
      */
     @CrossOrigin
     @PostMapping(value = "/api/logout",produces = "application/json")
-    public String logout( @RequestHeader("Authorization") String connectionStamp) {
+    public String logout( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         factoryService.getLoginService().disconnectUser(connectionStamp);
         return "{}";
     }

@@ -1,11 +1,11 @@
-// -----------------------------------------------------------
-//
-// Event
-//
-// Display one event
-//
-// -----------------------------------------------------------
-
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
@@ -15,10 +15,9 @@ import { DatePicker, DatePickerInput, TimePicker, RadioButtonGroup, RadioButton,
 
 import * as participantConstant from './EventParticipants';
 
-
 import FactoryService from './service/FactoryService';
 
-import BasketSlabEvent from './service/BasketSlabEvent';
+import BasketSlabRecord from './service/BasketSlabRecord';
 import UserParticipantCtrl from './controller/UserParticipantCtrl';
 
 import EventParticipants from './EventParticipants';
@@ -29,10 +28,19 @@ import EventTaskList from './EventTaskList';
 import EventState from './EventState';
 import EventExpense from './EventExpense';
 import EventSurveyList from './EventSurveyList';
+import EventChat from './EventChat';
 
 import EventPreferences from './EventPreferences';
 
 import EventCtrl from './controller/EventCtrl';
+
+// -----------------------------------------------------------
+//
+// Event
+//
+// Display one event
+//
+// -----------------------------------------------------------
 
 const TAB_PARTICIPANT='Participant';
 const TAB_ITINERARY = 'Itinerary';
@@ -112,9 +120,8 @@ class Event extends React.Component {
 					valueSelected={this.state.event.datePolicy}
 					legend={<FormattedMessage id="Event.DatePolicy" defaultMessage="Date policy" />}
 					onChange={(event) => {
-						console.log("RadioGroup.DataPolicy on change=");
-
-						this.setAttribut("datePolicy", event)
+						console.log("RadioGroup.DatePolicy on change="+event);
+						this.eventCtrl.setAttributType( "datePolicy", event, this.state.event, "", "datePolicyEnum");
 					}
 					}
 				>
@@ -290,7 +297,7 @@ class Event extends React.Component {
 						&nbsp;
 
 						<button onClick={() => this.accessTab( TAB_CHAT) } 
-							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} disabled={true} class="btn btn-primary"
+							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} class="btn btn-primary"
 							style={{ "marginLeft ": "10px" }} >
 							<img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Chat" defaultMessage="Chat" />
@@ -344,13 +351,16 @@ class Event extends React.Component {
 							<img src="img/btnExpense.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
 						</button>
-
+						&nbsp;
+						
 						<button onClick={() => this.accessTab( TAB_BUDGET )} 
 							title={<FormattedMessage id="Event.TitleBudget" defaultMessage="Budget" />} 
 							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
 							<img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Budget" defaultMessage="Budget" />
 						</button>
+						&nbsp;
+						
 						<button onClick={() => this.accessTab( TAB_PREFERENCES )} 
 							title={<FormattedMessage id="Event.TitlePreferences" defaultMessage="Preferences" />} 
 							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
@@ -366,6 +376,8 @@ class Event extends React.Component {
 																			getUserParticipant={this.getUserParticipant}
 																			eventPreferences={this.eventPreferences}/>}
 				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary eventCtrl={this.eventCtrl} />}
+				
+				{this.state.show.currentSection === TAB_CHAT && <EventChat eventCtrl={this.eventCtrl} />}
 				
 				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList  eventCtrl={this.eventCtrl} />}
 				
@@ -468,7 +480,7 @@ class Event extends React.Component {
 				
 				// not in the state: we don't want a render when something is added
 				// so, this is the moment to create the Basket
-				// this.currentBasketSlabEvent= new BasketSlabEvent( this.state.event );
+				// this.currentBasketSlabRecord= new BasketSlabRecord( this.state.event );
 	
 				// console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
 				this.eventCtrl = new EventCtrl( this, httpPayload.getData().event );

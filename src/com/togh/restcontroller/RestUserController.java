@@ -35,17 +35,17 @@ public class RestUserController {
     
     @CrossOrigin
     @GetMapping("/api/user/search")
-    public Map<String, Object> searchUser(@RequestParam("firstName") String firstName, 
-            @RequestParam("lastName") String lastName,
-            @RequestParam("phoneNumber") String phoneNumber,
-            @RequestParam("email") String email, 
-            @RequestParam("onlyNonInvitedUser") Boolean onlyNonInvitedUser,
-            @RequestParam("eventid") Long eventId,
-            @RequestHeader("Authorization") String connectionStamp) {
-        Long userId = factoryService.getLoginService().isConnected(connectionStamp);
-        if (userId == null)
+    public Map<String, Object> searchUser(@RequestParam( RestJsonConstants.CST_PARAM_FIRST_NAME) String firstName, 
+            @RequestParam( RestJsonConstants.CST_PARAM_LAST_NAME ) String lastName,
+            @RequestParam( RestJsonConstants.CST_PARAM_PHONE_NUMBER) String phoneNumber,
+            @RequestParam( RestJsonConstants.CST_PARAM_EMAIL) String email, 
+            @RequestParam( RestJsonConstants.CST_PARAM_ONLY_NON_INVITED_USER) Boolean onlyNonInvitedUser,
+            @RequestParam( RestJsonConstants.CST_INJSON_EVENTID ) Long eventId,
+            @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
+        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "Not connected");
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         Map<String, Object> payload = new HashMap<>();
         SearchUsersResult searchUsers;
@@ -60,10 +60,10 @@ public class RestUserController {
             listUsersMap.add( togUser.getMap( ContextAccess.SEARCH));
         }
         
-        payload.put("users", listUsersMap);
-        payload.put("countusers", searchUsers.countUsers);
-        payload.put("page", searchUsers.page);
-        payload.put("numberperpage", searchUsers.numberPerPage);
+        payload.put( RestJsonConstants.CST_USERS, listUsersMap);
+        payload.put( RestJsonConstants.CST_COUNTUSERS, searchUsers.countUsers);
+        payload.put( RestJsonConstants.CST_PAGE, searchUsers.page);
+        payload.put( RestJsonConstants.CST_NUMBERPERPAGE, searchUsers.numberPerPage);
 
         return payload;
 

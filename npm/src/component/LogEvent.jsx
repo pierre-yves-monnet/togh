@@ -23,44 +23,31 @@ import UserTips from './UserTips';
 //
 // -----------------------------------------------------------
 
-class EventSectionHeader extends React.Component {
+class LogEvent extends React.Component {
 	
 	// props.addItemCallback must be defined if a button PLUS is displayed
 	constructor(props) {
 		super();
 		this.state = {
-			id: props.id,
-			image: props.image,
-			title: props.title,
-			showPlusButton : props.showPlusButton,
-			showPlusButtonTitle : props.showPlusButtonTitle,
-			userTipsText: props.userTipsText
+			listevents: props.listevents
 		};
-		
+				
+		console.log("LogEvent: constructor "+JSON.stringify(this.state.listevents));
+
+	}
+	componentDidUpdate(prevProps) {
+		console.log("LogEvent.componentDidUpdate listevents=" + JSON.stringify(this.props.listevents));
+		if (prevProps.listevents !== this.props.listevents) {
+			this.setState({ listevents: this.props.listevents });
+		}
 	}
 
 
 	render() {
-		return (
-			<div>
-				<div class="eventsection">
-					<div style={{ float: "left" }}>
-						<img style={{ "float": "right" }} src={this.state.image} style={{ width: 100 }} /><br />
-					</div>
-					{this.state.title}
-					{this.state.showPlusButton &&
-						<div style={{ float: "right" }}>
-							<button class="btn btn-success btn-xs " 
-								 title={this.state.showPlusButtonTitle}>
-								<PlusCircle onClick={this.props.addItemCallback}/>
-							</button>
-						</div>
-					}
-				</div>			
-				<UserTips id={this.state.id} 
-					text={this.state.userTipsText}/>
-			</div>);
+		console.log("LogEvent: render "+JSON.stringify(this.state.listevents));
+		if (! this.state.listevents || this.state.listevents.length===0)
+			return (<div/>);
+		return (<div>UNE ERREUR ! </div>);
 	}
 }
-
-export default EventSectionHeader;
+export default LogEvent

@@ -1,3 +1,17 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+import FactoryService from './../service/FactoryService';
+// CurrencyService from './../service/CurrencyService';
+import SlabRecord from './../service/SlabRecord';
+
+const CURRENCY_ATTRIBUT_NAME= "currency";
+
 // -----------------------------------------------------------
 //
 // EventPreferenceCtrl
@@ -8,15 +22,7 @@
 //    - Currency used in the event
 //    - budget are used or not ?
 //    - time zone
-
 // -----------------------------------------------------------
-//
-
-import FactoryService from './../service/FactoryService';
-// CurrencyService from './../service/CurrencyService';
-import SlabEvent from './../service/SlabEvent';
-
-const CURRENCY_ATTRIBUT_NAME= "currency";
 
 class EventPreferenceCtrl {
 	
@@ -44,8 +50,8 @@ class EventPreferenceCtrl {
 	setCurrency(currencyCode) {
 		this.currencyCode = currencyCode;
 
-		var slabEvent = SlabEvent.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
-		this.eventCtrl.updateEventfct( slabEvent );
+		var SlabRecord = SlabRecord.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
+		this.eventCtrl.updateEventfct( SlabRecord );
 
 	}
 	

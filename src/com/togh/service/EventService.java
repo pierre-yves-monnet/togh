@@ -1,33 +1,34 @@
 package com.togh.service;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
+import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
-import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.event.EventController;
 import com.togh.repository.EventRepository;
-import com.togh.restcontroller.RestTool;
-import com.togh.service.MonitorService.Chrono;
-import com.togh.service.ToghUserService.CreationResult;
 
 /* ******************************************************************************** */
 /*                                                                                  */
 /*    EventService, access and manipulate event                                     */
 /*                                                                                  */
-/* The eventService is the Facade, it use classes under com.togh.event package      */
+/* The eventService delegate operation to the com.togh.event.EventController        */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -35,8 +36,11 @@ import com.togh.service.ToghUserService.CreationResult;
 @Service
 public class EventService {
 
+    private static final LogEvent eventAccessError = new LogEvent(EventService.class.getName(), 1, Level.APPLICATIONERROR, "Can't access this event", "This event can't be accessed", "Operations is not executed", "Check user and permission");
+    private static final LogEvent eventSaveError = new LogEvent(EventService.class.getName(), 2, Level.APPLICATIONERROR, "Can't save this event", "This event can't be saved", "Operations are not executed", "Check Database");
+
     private Logger logger = Logger.getLogger( EventService.class.getName());
-    private final static String logHeader = "com.togh.EventService";
+    private final static String logHeader = EventService.class.getSimpleName()+": ";
  
     @Autowired
     FactoryService factoryService;
@@ -45,163 +49,141 @@ public class EventService {
     private EventRepository eventRepository;
 
 
-    
-    public String index() {
-        return "Greetings from Spring Boot!";
+  
+    public static class EventOperationResult {
+        public EventEntity eventEntity;
+        public List<LogEvent> listEvents = new ArrayList<>();
+        public Object childEntity = null;
+        
+        public Long getEventId() {
+            return eventEntity !=null ? eventEntity.getId() : null;
+        }
+        public List<Map<String, Serializable>> getEventsJson() {
+            return LogEventFactory.getJson(listEvents);
+        }
+        
     }
-    
     /**
      * 
      * @param user
      * @return
      */
-    public EventEntity createEvent( ToghUserEntity user) {
+    public EventOperationResult createEvent( ToghUserEntity toghUser) {
+        
         EventEntity event = new EventEntity();
-        event.setAuthor(user);
+        event.setAuthor( toghUser );
         event.setName("New event");
         event.setDatecreation( LocalDateTime.now( ZoneOffset.UTC ));
+        event.touch();
         event.setStatusEvent(StatusEventEnum.INPREPAR);
         event.setTypeEvent(TypeEventEnum.LIMITED);
         event.setDatePolicy(DatePolicyEnum.ONEDATE);
         
-        EventController eventConductor = new EventController( event );
+        EventController eventController = new EventController( event );
         // let's the conductor create the participant and all needed information
-        eventConductor.completeConsistant();
+        eventController.completeConsistant();
         eventRepository.save(event);
-        
-        return event;
-        
-    }
-   public List<EventEntity> getEvents(long userId, String filterEvents) {
-
-       return eventRepository.findEventsUser( userId );
        
+        EventOperationResult eventOperationResult = new EventOperationResult();
+        eventOperationResult.eventEntity = event;
+        
+        return eventOperationResult;
+        
     }
     
+    public EventOperationResult updateEvent( ToghUserEntity toghUser, EventEntity event, List<Map<String,Object>> listSlab) {
+        
+        EventController eventConductor = new EventController( event );
+        if (! eventConductor.isAccess( toghUser ))
+        {
+            EventOperationResult eventOperationResult = new EventOperationResult();
+            eventOperationResult.listEvents.add( eventAccessError );
+            return eventOperationResult;
+        }
+
+        EventOperationResult eventOperationResult = eventConductor.update( listSlab);
+        
+        try {
+            eventRepository.save(event);
+        }catch(Exception e) {
+            eventOperationResult.listEvents.add( new LogEvent(eventSaveError, e, "Save event"));
+        }
+        
+        
+        return eventOperationResult;
+        
+    }
+ 
+ 
+   public List<EventEntity> getEvents(ToghUserEntity toghUser, String filterEvents) {
+       return eventRepository.findEventsUser( toghUser.getId() );       
+    }
+    
+   
+   public EventEntity getEventById( Long eventId) {
+       if (eventId==null)
+           return null;
+       EventEntity event =  eventRepository.findByEventId( eventId );
+       if (event==null)
+           return null;
+       EventController eventConductor = new EventController( event );
+       
+       // check consistant now
+       eventConductor.completeConsistant( );
+       
+       return event; 
+       
+   }
+   
    /**
     * 
     * @param userId
     * @param eventId
     * @return
     */
-    public EventEntity getEventById( long userId, long eventId) {
-        EventEntity event =  eventRepository.findByEventId( eventId );
-        EventController eventConductor = new EventController( event );
-        if (! eventConductor.isAccess( userId ))
+    public EventEntity getAllowedEventById( ToghUserEntity toghUser, long eventId) {
+        EventEntity event =  getEventById( eventId );
+        if (event==null)
             return null;
-        
-        // check consistant now
-
-        eventConductor.completeConsistant( );
-        
+        EventController eventConductor = new EventController( event );
+        if (! eventConductor.isAccess( toghUser ))
+            return null;
         return event; 
         
     }
    
     
+    /**
+     * invite
+     * 
+     *
+     */
     public enum InvitationStatus {
         DONE, NOUSERSGIVEN, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
-    };
-    public class InvitationResult {
+    }
+    
+    public static class InvitationResult {
         public InvitationStatus status;
         public List<ToghUserEntity> listThogUserInvited = new ArrayList<>();        
         public List<ParticipantEntity> newParticipants = new ArrayList<>();
         public StringBuilder errorMessage = new StringBuilder();
         public StringBuilder okMessage = new StringBuilder();
     }
-    public InvitationResult invite( EventEntity event, Long invitedByUserId, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message ) {
+    public InvitationResult invite( EventEntity event, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message ) {
 
-        MonitorService monitorService = factoryService.getMonitorService();
-        InvitationResult invitationResult = new InvitationResult();
-        
-        EventController eventConductor = new EventController( event );
-        if (! eventConductor.isOrganizer(invitedByUserId)) {
+        EventController eventControler = new EventController( event );
+        if (! eventControler.isOrganizer(invitedByUser)) {
+            InvitationResult invitationResult = new InvitationResult();
             invitationResult.status =InvitationStatus.NOTAUTHORIZED;
             return invitationResult;
         }
 
-        Chrono chronoInvitation = monitorService.startOperation("Invitation");
-        ToghUserService userService = factoryService.getToghUserService();
-        NotifyService notifyService = factoryService.getNotifyService();
+        // this operation is delegated to the evenController
+        return  eventControler.invite( event,  invitedByUser, listUsersId,  userInvitedEmail,  role,  message);
         
-        // first, check if this email is a registered Toghuser
-        ToghUserEntity invitedByUser = invitedByUserId==null ? null : userService.getUserFromId(invitedByUserId);
-       
-        // invitation by the email? 
-        if (userInvitedEmail!=null && ! userInvitedEmail.trim().isEmpty()) {
-            ToghUserEntity toghUser  = userService.getFromEmail( userInvitedEmail );
-            if ( toghUser ==null) {
-                // this is a real new user, register and invite it to join Togh
-                CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByUser, event);
-                if (creationStatus.userEntity == null) {
-                    invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
-                    // This is an internal message here , cant sent back to the user error information 
-
-                    return invitationResult;
-                }
-                invitationResult.listThogUserInvited.add( creationStatus.userEntity );
-            }
-            else {
-                invitationResult.listThogUserInvited.add( toghUser );
-            }
-        }
-        
-        // ---- from the list of ToghUserId
-        
-        if (listUsersId !=null && ! listUsersId.isEmpty()) {
-            for (Object userIdSt : listUsersId) {
-                // Javascript will pass a Integer or a String (JS doesn not manage correctly large Long number as Integer)
-                Long userId = RestTool.getLong( userIdSt, null);
-                ToghUserEntity toghUser =null;
-                if (userId!=null)
-                    toghUser = userService.getUserFromId( userId );
-                if (toghUser  == null) {
-                    
-                    // caller has supposed to give a valid userId. Stop immediatelly
-                    
-                    invitationResult.status = InvitationStatus.INVALIDUSERID;
-                    // This is an internal message here , cant sent back to the user error information 
-                    monitorService.endOperation(chronoInvitation);
-                    return invitationResult;
-                }
-                invitationResult.listThogUserInvited.add( toghUser );
-
-            }
-        }
-        
-        
-        // check if one users was already a participant ?
-        boolean doubleInvitation=false;
-        for (ToghUserEntity toghUser : invitationResult.listThogUserInvited ) {
-                ParticipantEntity participant = eventConductor.getParticipant(toghUser.getId() );
-                if ( participant !=null) {
-                    doubleInvitation = true;
-                    invitationResult.errorMessage.append(toghUser.getFirstname()+" "+toghUser.getLastName()+", ");
-                }
-                else {
-                    // send the invitation and register the guy
-                    notifyService.notifyNewUserInEvent(toghUser, invitedByUser, event);
-                    invitationResult.newParticipants.add( event.addPartipant(toghUser, role, StatusEnum.INVITED ));
-                    invitationResult.okMessage.append( toghUser.getLabel()+", ");
-                }
-        }
-
-        eventRepository.save(event);
-        
-        
-        // status now
-        if (invitationResult.listThogUserInvited.isEmpty())
-            invitationResult.status = InvitationStatus.NOUSERSGIVEN; 
-        else if (doubleInvitation)
-            invitationResult.status = InvitationStatus.ALREADYAPARTICIPANT; 
-        else
-            invitationResult.status = InvitationStatus.INVITATIONSENT;
-
-        monitorService.endOperation(chronoInvitation);
-        
-        return invitationResult;
     }
 
-    
+   
+        
     
 }

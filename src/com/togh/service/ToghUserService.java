@@ -83,13 +83,12 @@ public class ToghUserService {
      */
     public class CreationResult {
 
-        ToghUserEntity userEntity;
-        boolean isEmailIsCorrect = false;
-        boolean isEmailSent = false;
+        public ToghUserEntity toghUser;
+        public boolean isEmailIsCorrect = false;
+        public boolean isEmailSent = false;
     }
 
-    Boolean myTest = new Boolean(true);
-
+    
     public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, EventEntity event) {
         CreationResult invitationStatus = new CreationResult();
         try {
@@ -97,16 +96,16 @@ public class ToghUserService {
             invitationStatus.isEmailIsCorrect = true;
 
             // fullfill the event
-            invitationStatus.userEntity = new ToghUserEntity();
-            invitationStatus.userEntity.setEmail(email);
-            invitationStatus.userEntity.setSource(SourceUserEnum.INVITED);
+            invitationStatus.toghUser = new ToghUserEntity();
+            invitationStatus.toghUser.setEmail(email);
+            invitationStatus.toghUser.setSource(SourceUserEnum.INVITED);
 
-            factoryService.getToghUserService().saveUser(invitationStatus.userEntity);
+            factoryService.getToghUserService().saveUser(invitationStatus.toghUser);
 
             // send the email now
             invitationStatus.isEmailSent = true;
             NotifyService notifyService = factoryService.getNotifyService();
-            List<LogEvent> listEvents = notifyService.notifyNewUserInEvent(invitationStatus.userEntity, invitedByUser, event);
+            List<LogEvent> listEvents = notifyService.notifyNewUserInEvent(invitationStatus.toghUser, invitedByUser, event);
             if (LogEventFactory.isError(listEvents))
                 invitationStatus.isEmailSent = false;
             else
@@ -115,7 +114,7 @@ public class ToghUserService {
             return invitationStatus;
         } catch (Exception e) {
             logger.severe(logHeader + "Can't create new user: " + e.toString());
-            invitationStatus.userEntity = null;
+            invitationStatus.toghUser = null;
             return invitationStatus;
         }
     }

@@ -33,6 +33,7 @@ public class RestTool {
             return defaultValue;
         }
     }
+    @SuppressWarnings("rawtypes")
     public static List getList(Map<String,Object> content, String key, List defaultValue) {
         try
         { 
@@ -44,7 +45,18 @@ public class RestTool {
             return defaultValue;
         }
     }
-    
+    @SuppressWarnings("unchecked")
+    public static List<Long> getListLong(Map<String,Object> content, String key, List<Long> defaultValue) {
+        try
+        { 
+            if (content.get(key) instanceof List)
+                return (List<Long>) content.get(key);
+            return defaultValue;
+        }
+        catch(Exception e) {
+            return defaultValue;
+        }
+    }
     public static String getString(Map<String,Object> content, String key, String defaultValue) {
         try
         { 

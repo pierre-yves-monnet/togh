@@ -69,13 +69,7 @@ public abstract class BaseEntity {
 		this.datemodification = datemodification;
 	}
 	
-	public String formatDate(LocalDateTime time ) {
-	    if (time== null)
-	        return null;
-	    //  datecreation: "2021-01-30T18:52:10.973"
-	    DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-	    return time.format(sdt);
-	}
+	
     
 	  /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example

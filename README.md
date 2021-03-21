@@ -154,7 +154,7 @@ Chat 				: OK
 Task 				: OK
 Shopping List 		: OK
 
-Participant 		: 3 personnages          
+Participant 		: 4 personnages          
 Itinerary 			: a revoir
 Survey 				: Revoir un peu la ligne pour ne pas faire 3 zones identiques 
 Geolocalisation 	: a revoir
@@ -163,6 +163,17 @@ Frais 				: a revoir
 
 Starter 		: todo
 Ender 			: todo
+Point d'interet
+Visite
+Achat 			: sac de courses
+Divertissement
+Aeroport
+Stateus de bus
+gare
+port
+restaurant
+nuit (hotel)
+
 Preferences		: todo / Engrenages
 budget			: todo / sac ou tirelire
 Default Boy		: todo
@@ -299,6 +310,7 @@ je me trompe ?
  Le serveur va faire / read event / Update description='Ceci est ma nouvelle description' / Save
  
  Comment je met a jour un seul champ de maniere dynamique ? Je voudrais avoir une methode "setAttribut( name, value)" ?
+ //https://www.baeldung.com/apache-commons-beanutils
  	==> Beanutils.copy
  	PersistenceUtil.copyNonNullProperties(u, user);
 https://github.com/chDame/fabulexie/blob/c7471210f2c6df6f7cf6d9022986a24aa11d48b0/[…]e-backend/src/main/java/org/fabulexie/util/PersistenceUtil.java
@@ -325,6 +337,55 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 
 ## outils
           
+# Commentaire
+
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  EventController,                                                                 */
+/*                                                                                  */
+/*  Control what's happen on an event. Pilot all operations                         */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+React:
+// -----------------------------------------------------------
+//
+// EventExpense
+//
+// Display one event
+//
+// -----------------------------------------------------------
+
+
+	// --------------------------------------------------------------
+	// 
+	// Render HTML
+	// 
+	// --------------------------------------------------------------
+
+	// --------------------------------------------------------------
+	// 
+	// Direct HTML controls
+	// 
+	// --------------------------------------------------------------
+
+
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+	
                
 # Tasks
 
@@ -332,8 +393,8 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 	 
 	
 	
-Simon ? Modal cick sur Fermer ne ferme pas le modal (Invitation). POurtant j'ai mis la propriété shouldCloseAfterSubmit
-Simon ?	Affichage d'un itineraire
+Simon ? Modal click sur Fermer ne ferme pas le modal (Invitation). POurtant j'ai mis la propriété shouldCloseAfterSubmit
+Simon 	Anchor
 Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie existe google-maps-react)
 
 Simon ?	Date Carbon: le format de date ne respecte pas la langue

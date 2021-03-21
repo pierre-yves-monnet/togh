@@ -114,7 +114,7 @@ public class LogEventFactory {
      * @param listEvents
      * @return
      */
-    public static List<Map<String, Serializable>> getJsonFromListEvents(List<LogEvent> listEvents) {
+    public static List<Map<String, Serializable>> getJson(List<LogEvent> listEvents) {
         List<Map<String, Serializable>> listEventsJson = new ArrayList<>();
         for (LogEvent event : listEvents)
             listEventsJson.add(event.getJson(false));

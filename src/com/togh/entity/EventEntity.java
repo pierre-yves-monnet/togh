@@ -1,6 +1,7 @@
 package com.togh.entity;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
@@ -124,7 +126,29 @@ public class EventEntity extends UserEntity {
         this.datePolicy = datePolicy;
     }
 	
-
+    
+    public LocalDateTime getDateStartEvent() {
+        return dateStartEvent;
+    }
+    
+    public void setDateStartEvent(LocalDateTime dateStartEvent) {
+        this.dateStartEvent = dateStartEvent;
+    }
+    
+    public LocalDateTime getDateEndEvent() {
+        return dateEndEvent;
+    }
+    
+    public void setDateEndEvent(LocalDateTime dateEndEvent) {
+        this.dateEndEvent = dateEndEvent;
+    }
+    
+    public void setParticipants(List<ParticipantEntity> participants) {
+        this.participants = participants;
+    }
+    public void touch() {
+        this.setDatemodification( LocalDateTime.now( ZoneOffset.UTC ));
+    }
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Relation with another table                                                      */
@@ -167,9 +191,9 @@ public class EventEntity extends UserEntity {
     public Map<String,Object> getMap( ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         
-        resultMap.put("dateEvent", formatDate( dateEvent));
-        resultMap.put("dateStartEvent", formatDate( dateStartEvent));
-        resultMap.put("dateEndEvent", formatDate( dateEndEvent));
+        resultMap.put("dateEvent", EngineTool.dateToString( dateEvent));
+        resultMap.put("dateStartEvent", EngineTool.dateToString( dateStartEvent));
+        resultMap.put("dateEndEvent", EngineTool.dateToString( dateEndEvent));
         resultMap.put("typeEvent", typeEvent==null ? null : typeEvent.toString());
         resultMap.put("statusEvent", statusEvent==null ? null : statusEvent.toString());
         resultMap.put("description", description);
@@ -177,8 +201,8 @@ public class EventEntity extends UserEntity {
         if (contextAccess != ContextAccess.PUBLICACCESS) { 
             resultMap.put("datePolicy", datePolicy==null ? null : datePolicy.toString());
         }
-       if (typeEvent == TypeEventEnum.OPEN || contextAccess != contextAccess.PUBLICACCESS) {
-           List<Map<String,Object>> listParticipantsMap = new ArrayList();
+       if (typeEvent == TypeEventEnum.OPEN || contextAccess != ContextAccess.PUBLICACCESS) {
+           List<Map<String, Object>> listParticipantsMap = new ArrayList<>();
            for (ParticipantEntity participant : participants) {
                listParticipantsMap.add( participant.getMap(contextAccess));
            }
@@ -191,9 +215,9 @@ public class EventEntity extends UserEntity {
     public Map<String,Object> getHeaderMap( ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         resultMap.put("name", getName());
-        resultMap.put("dateEvent", formatDate( dateEvent));
-        resultMap.put("dateStartEvent", formatDate( dateStartEvent));
-        resultMap.put("dateEndEvent", formatDate( dateEndEvent));
+        resultMap.put("dateEvent", EngineTool.dateToString( dateEvent));
+        resultMap.put("dateStartEvent", EngineTool.dateToString( dateStartEvent));
+        resultMap.put("dateEndEvent", EngineTool.dateToString( dateEndEvent));
         resultMap.put("datePolicy", datePolicy.toString() );
         resultMap.put("typeEvent", typeEvent==null ? null : typeEvent.toString());
         resultMap.put("statusEvent", statusEvent==null ? null : statusEvent.toString());

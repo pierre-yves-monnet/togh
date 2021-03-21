@@ -1,10 +1,11 @@
-// -----------------------------------------------------------
-//
-// EventItinerary
-//
-// Manage Itinerary
-//
-// -----------------------------------------------------------
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 import React from 'react';
 
 import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
@@ -13,7 +14,7 @@ import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronR
 import { TextInput,  TimePicker, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
 
 import FactoryService from './service/FactoryService';
-import SlabEvent from './service/SlabEvent';
+import SlabRecord from './service/SlabRecord';
 
 import Expense from './component/Expense';
 import TagDropdown from './component/TagDropdown';
@@ -37,6 +38,14 @@ const ITINERARYITEM_NIGHT		= "NIGHT";
 const ITINERARYITEM_VISITE		= "VISITE";
 const ITINERARYITEM_RESTAURANT	= "RESTAURANT";
 const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
+
+// -----------------------------------------------------------
+//
+// EventItinerary
+//
+// Manage Itinerary
+//
+// -----------------------------------------------------------
 
 class EventItinerary extends React.Component {
 
@@ -195,17 +204,15 @@ class EventItinerary extends React.Component {
 				       		/>
 						</div>
 						<div class="col-2"> 
-							 <div style={{ float: "right" }}>
-									<button  class="btn btn-success btn-xs" 
-										id={dateIndexPublish.toISOString()}
-										onClick={(event) => {
-											console.log("EventItinerary.addFromButton :  id="+event.target.id);
-											this.addStep( event.target.id, null );
-										}}>
-										<PlusCircle id={dateIndexPublish.toISOString()}/>
-									</button>
-		
-									
+							<div style={{ float: "right" }}>
+								<button  class="btn btn-success btn-xs" 
+									id={dateIndexPublish.toISOString()}
+									onClick={(event) => {
+										console.log("EventItinerary.addFromButton :  id="+event.target.id);
+										this.addStep( event.target.id, null );
+									}}>
+									<PlusCircle id={dateIndexPublish.toISOString()}/>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -278,7 +285,7 @@ class EventItinerary extends React.Component {
 	 * render the header
 	 */
 	renderOneStep( item, showDate, index ) {
-		var selectDate= (null);
+		
 		var listLines = [];
 
 		const intl = this.props.intl;		

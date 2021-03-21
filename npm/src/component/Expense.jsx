@@ -1,14 +1,11 @@
-// -----------------------------------------------------------
-//
-// Expense
-//
-// Describe and give an expense item : 
-//  - the original budget
-//  - the price
-//  - then a button to split the expense between participants 
-//
-// -----------------------------------------------------------
-//
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
 import React from 'react';
 
@@ -19,12 +16,23 @@ import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem,
 import CurrencyInput from 'react-currency-input';
  
 
-import SlabEvent from './../service/SlabEvent';
+import SlabRecord from './../service/SlabRecord';
 import FactoryService from './../service/FactoryService'
 
 
 import * as expenseConstant from './../EventExpense';
 
+
+// -----------------------------------------------------------
+//
+// Expense
+//
+// Describe and give an expense item : 
+//  - the original budget
+//  - the price
+//  - then a button to split the expense between participants 
+//
+// -----------------------------------------------------------
 
 class Expense extends React.Component {
 	
@@ -99,10 +107,10 @@ class Expense extends React.Component {
 		/*
 		this.setState({ item: item });
 		
-		var slabEvent = SlabEvent.getUpdate(this.state.event, name, value, item);
-		console.log("Expense.setAttribut Slab="+slabEvent.getString());
+		var SlabRecord = SlabRecord.getUpdate(this.state.event, name, value, item);
+		console.log("Expense.setAttribut Slab="+SlabRecord.getString());
 		 
-		this.props.updateEvent( slabEvent );
+		this.props.updateEvent( SlabRecord );
 		*/
 	}
 

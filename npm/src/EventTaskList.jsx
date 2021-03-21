@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, DatePicker, DatePickerInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
+import { TextInput, DatePicker, DatePickerInput, TextArea, InlineLoading, Toggle } from 'carbon-components-react';
 import { PlusCircle, DashCircle, List, ListTask, ListUl, ListCheck } from 'react-bootstrap-icons';
 
 import FactoryService from './service/FactoryService';
@@ -17,6 +17,7 @@ import FactoryService from './service/FactoryService';
 import EventSectionHeader from './component/EventSectionHeader';
 import TagDropdown from './component/TagDropdown';
 import ChooseParticipant from './component/ChooseParticipant';
+import LogEvent from './component/LogEvent';
 
 const STATUS_PLANNED = "PLANNED";
 const STATUS_ACTIVE = "ACTIVE";
@@ -33,8 +34,9 @@ class EventTaskList extends React.Component {
 		this.eventCtrl = props.eventCtrl;
 		this.state = {
 			event: this.eventCtrl.getEvent(),
+			listlogevents: [],
 			showProperties: {
-				showdates: true,
+				showdates: true,				
 				filterState: "ALL",
 				filterParticipant: "ALL"
 			}
@@ -58,7 +60,7 @@ class EventTaskList extends React.Component {
 	render() {
 		const intl = this.props.intl;
 
-		console.log("EventTasklist.render: showProperties=" + JSON.stringify(this.state.showProperties)+" taslList="+JSON.stringify(this.state.event.tasklist));
+		console.log("EventTasklist.render: showProperties=" + JSON.stringify(this.state.showProperties)+" taslList="+JSON.stringify(this.state.event.tasklist)+ " logevent="+this.state.listlogevents.length);
 
 		var headerSection = (
 			<EventSectionHeader id="task"
@@ -82,11 +84,25 @@ class EventTaskList extends React.Component {
 					&nbsp;
 					<button class="btn btn-success btn-xs"
 						onClick={() => this.addItem()}
-						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a new item in the list" })}>
-
-						<PlusCircle />&nbsp;
-						<FormattedMessage id="EventTaskList.AddOne" defaultMessage="Add one !" />
+						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a new item in the list" })}
+						disabled={this.state.inprogress} >
+							{ this.state.inprogress && 
+								<table><tr><td>
+									<InlineLoading/>
+									</td><td>
+									&nbsp;
+									<FormattedMessage id="EventTaskList.AddOne" defaultMessage="Add one !" />
+									</td></tr></table>
+								
+							}							
+							{! this.state.inprogress && <div >
+								<PlusCircle />
+								&nbsp;
+								<FormattedMessage id="EventTaskList.AddOne" defaultMessage="Add one !" />
+								</div>
+							}
 					</button>
+					<LogEvent listevents={this.state.listlogevents} />
 				</div>
 			)
 		}
@@ -174,8 +190,10 @@ class EventTaskList extends React.Component {
 		
 
 		// render the tab
+		
 		return (<div>
 			{headerSection}
+			<LogEvent listevents={this.state.listlogevents} />
 			{this.getFilterTaskHtml()}
 			<div>
 				<table class="toghtable">
@@ -200,7 +218,7 @@ class EventTaskList extends React.Component {
 	getFilterTaskHtml() {
 		return (<div style={{paddingBottom:"10px", paddingTop:"10px"}}>
 				<table width="100%"><tr>
-					<td style={{ paddingRight: "60px;" }}>
+					<td style={{ paddingRight: "60px" }}>
 
 						<Toggle labelText="" aria-label="" toggled={this.state.showProperties.showdates}
 							selectorPrimaryFocus={this.state.showProperties.showdates}
@@ -211,7 +229,7 @@ class EventTaskList extends React.Component {
 							id="showDates" />
 							
 							
-					</td><td style={{ paddingLeft: "50px", paddingRight: "50px;" }}>
+					</td><td style={{ paddingLeft: "50px", paddingRight: "50px" }}>
 						<div class="btn-group btn-group-sm" role="groupstate" aria-label="Basic radio toggle button group">
 							<input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autocomplete="off" 
 								checked={this.state.showProperties.filterState === "ALL"}
@@ -360,22 +378,31 @@ class EventTaskList extends React.Component {
    */
 	addItem() {
 		console.log("EventTasklist.addItem: addItem item=" + JSON.stringify(this.state.event));
+		this.setState({inprogress:true, listlogevents: [] });
 		// call the server to get an ID on this taskList
 		var newTask = { "status": "PLANNED", "what": "" };
 		this.eventCtrl.addEventChildFct("tasklist", newTask, "", this.addTasklistCallback);
 	}
 
 	addTasklistCallback(httpPayload) {
-		console.log("EventTasklist.addTasklistCallback ");
+
+		this.setState({inprogress:false});
 		if (httpPayload.isError()) {
 			// feedback to user is required
-			console.log("EventTasklist.addTasklistCallback: ERROR ");
+			console.log("EventTasklist.addTasklistCallback: HTTP ERROR ");
 		} else {
 			var taskToAdd = httpPayload.getData().child;
 			var event = this.eventCtrl.getEvent();
-			var newList = event.tasklist.concat(taskToAdd);
-			event.tasklist = newList;
-			this.setState({ event: event });
+			if (httpPayload.getData().status ==="ERROR") {
+				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				this.setState({ listlogevents: httpPayload.getData().listLogEvents });
+			}
+			else {
+				console.log("EventTasklist.addTasklistCallback ");
+				var newList = event.tasklist.concat(taskToAdd);
+				event.tasklist = newList;
+				this.setState({ event: event });
+			}
 		}
 	}
 

@@ -1,14 +1,14 @@
-// -----------------------------------------------------------
-//
-// SurveyCtrl
-//
-// This class is not a ReactComponent, and it used to manipulate a Survey 
-//
-// -----------------------------------------------------------
-//
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 import FactoryService from './../service/FactoryService';
 
-import SlabEvent from './../service/SlabEvent';
+import SlabRecord from './../service/SlabRecord';
 
 export const STATUS_INPREPARATION = 'INPREPARATION';
 export const STATUS_OPEN = 'OPEN';
@@ -17,6 +17,13 @@ export const STATUS_CLOSE = 'CLOSE';
 const CHILD_CHOICES="choices";
 const CHILD_ANSWER="answers";
 
+// -----------------------------------------------------------
+//
+// SurveyCtrl
+//
+// This class is not a ReactComponent, and it used to manipulate a Survey 
+//
+// -----------------------------------------------------------
 class SurveyCtrl {
 	
 	// props.text is the text to display, translated

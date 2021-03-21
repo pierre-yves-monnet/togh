@@ -1,23 +1,34 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.event;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Map;
 
-import com.togh.entity.ToghUserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
-import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
+import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.repository.ToghUserRepository;
-import com.togh.service.EventService;
+import com.togh.service.EventService.EventOperationResult;
+import com.togh.service.EventService.InvitationResult;
 import com.togh.service.FactoryService;
-import com.togh.service.ToghUserService;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventConductor,                                                                 */
+/*  EventController,                                                                 */
 /*                                                                                  */
 /*  Control what's happen on an event. Pilot all operations                         */
 /*                                                                                  */
@@ -37,6 +48,11 @@ public class EventController {
     
     public static EventController getInstance( EventEntity event ) {
         return new EventController( event );        
+    }
+    
+    
+    public EventEntity getEvent() {
+        return event;
     }
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -81,10 +97,10 @@ public class EventController {
      * @param userId
      * @return
      */
-    public boolean isAccess( long userId ) {
+    public boolean isAccess( ToghUserEntity toghUser ) {
         if (event.getTypeEvent() ==  TypeEventEnum.OPEN)
             return true;
-        return getParticipant( userId ) != null;
+        return getParticipant( toghUser ) != null;
     }
     /**
      * User must be the author, or a partipant, or should be invited
@@ -92,8 +108,8 @@ public class EventController {
      * @param event
      * @return
      */
-    public boolean isActiveParticipant( long userId) {
-        ParticipantEntity participant  = getParticipant( userId );
+    public boolean isActiveParticipant( ToghUserEntity toghUser) {
+        ParticipantEntity participant  = getParticipant( toghUser );
         if (participant==null )
             return false;
         if (ParticipantRoleEnum.OWNER.equals( participant.getRole()) 
@@ -109,8 +125,8 @@ public class EventController {
      * @param userId
      * @return
      */
-    public boolean isOrganizer( long userId) {
-        ParticipantEntity participant  = getParticipant( userId );
+    public boolean isOrganizer(ToghUserEntity toghUser) {
+        ParticipantEntity participant  = getParticipant( toghUser );
         if (participant==null )
             return false;
         return participant.getRole().equals(ParticipantRoleEnum.OWNER) ||participant.getRole().equals(ParticipantRoleEnum.ORGANIZER);
@@ -120,8 +136,8 @@ public class EventController {
      * @param userId
      * @return
      */
-    public ParticipantRoleEnum getRoleEnum( long userId) {
-        ParticipantEntity participant  = getParticipant( userId );
+    public ParticipantRoleEnum getRoleEnum( ToghUserEntity toghUser) {
+        ParticipantEntity participant  = getParticipant( toghUser );
         return (participant==null ? null : participant.getRole());
     }
     
@@ -130,9 +146,9 @@ public class EventController {
      * @param userId
      * @return
      */
-    public ParticipantEntity getParticipant( long userId) {
+    public ParticipantEntity getParticipant(ToghUserEntity toghUser) {
         for (ParticipantEntity participant : event.getParticipants()) {
-            if (participant.getUser() !=null && participant.getUser().getId().equals( userId))
+            if (participant.getUser() !=null && participant.getUser().getId().equals( toghUser.getId()))
                 return participant;
         }
         return null;
@@ -143,7 +159,7 @@ public class EventController {
      * @param event
      * @return
      */
-    public ContextAccess getTypeAccess( long userId ) {
+    public ContextAccess getTypeAccess( ToghUserEntity toghUser ) {
         // event is public : so show onkly what you want to show to public
         if (event.getTypeEvent()== TypeEventEnum.OPEN)
             return ContextAccess.PUBLICACCESS;
@@ -151,7 +167,7 @@ public class EventController {
         if (event.getTypeEvent() == TypeEventEnum.SECRET)
             return ContextAccess.SECRETACCESS;
 
-        ParticipantEntity participant = getParticipant( userId );
+        ParticipantEntity participant = getParticipant( toghUser );
         if (event.getTypeEvent() == TypeEventEnum.OPENCONF) {
             // the user is not accepted : show the minimum.
             if (participant == null)
@@ -173,5 +189,29 @@ public class EventController {
         return ContextAccess.SECRETACCESS;
         
     }
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Invitation                                                                    */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    public  InvitationResult invite(EventEntity event, ToghUserEntity invitedByToghUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
+        EventInvitation eventInvitation = new EventInvitation( this );
+        return eventInvitation.invite( event,  invitedByToghUser, listUsersId,  userInvitedEmail,  role,  message);
+    }
+ 
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Update                                                                    */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    public EventOperationResult update(List<Map<String,Object>>  listSlab) {
+        
+        EventUpdate eventUpdate = new EventUpdate( this );
+        return eventUpdate.update( listSlab);
+        
+    }
+    
 
 }

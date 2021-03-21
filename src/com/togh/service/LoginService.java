@@ -166,28 +166,28 @@ public class LoginService {
     Random random = new Random();
 
     private class UserConnected {
-        public long userId;
+        public ToghUserEntity toghUser;
         public LocalDateTime lastPing = LocalDateTime.now(ZoneOffset.UTC);
         public LocalDateTime lastCheck = LocalDateTime.now(ZoneOffset.UTC);
 
     }
     
     private Map<String,UserConnected> cacheUserConnected  = new HashMap<>();
-    private String connectUser( ToghUserEntity endUser ) {
+    private String connectUser( ToghUserEntity toghUser ) {
         // Generate a ConnectionStamp
         MonitorService monitorService = factoryService.getMonitorService();
 
         String randomStamp = String.valueOf(System.currentTimeMillis())+ String.valueOf( random.nextInt() );
         
-        endUser.setConnectionStamp( randomStamp );
-        endUser.setConnectionTime( LocalDateTime.now(ZoneOffset.UTC));
-        endUser.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
+        toghUser.setConnectionStamp( randomStamp );
+        toghUser.setConnectionTime( LocalDateTime.now(ZoneOffset.UTC));
+        toghUser.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
        
-        factoryService.getToghUserService().saveUser(endUser);
+        factoryService.getToghUserService().saveUser(toghUser);
         
         // keep in the cache to be more efficient
         UserConnected userConnected = new UserConnected();
-        userConnected.userId = endUser.getId();
+        userConnected.toghUser = toghUser;
         cacheUserConnected.put( randomStamp, userConnected);
         return randomStamp;
     }
@@ -197,7 +197,7 @@ public class LoginService {
      * @param connectionStamp
      * @return a user, or null if nobody is connected
      */
-    public Long isConnected( String connectionStamp) {
+    public ToghUserEntity isConnected( String connectionStamp) {
         LocalDateTime timeCheck = LocalDateTime.now();
         // is the user is in the cache AND the last ping was less than 2 mn ? If you, we trust the cache.
         UserConnected userConnected = cacheUserConnected.get( connectionStamp);
@@ -205,7 +205,7 @@ public class LoginService {
             userConnected.lastPing = LocalDateTime.now();
             Duration duration = Duration.between(userConnected.lastCheck, LocalDateTime.now());
             if (duration.toMinutes() < 2) 
-                return userConnected.userId;
+                return userConnected.toghUser;
         }
 
         // more than 2 mn or not in the cache? Get it from the database
@@ -226,11 +226,11 @@ public class LoginService {
         // the cache may have no trace of this user ? Case in a cluster, the user just arrive on this server.
         if (userConnected==null ) {
             userConnected = new UserConnected(); 
-            userConnected.userId = endUserEntity.getId();
+            userConnected.toghUser = endUserEntity;
         }
         userConnected.lastCheck = timeCheck;
         cacheUserConnected.put(connectionStamp, userConnected);
-        return userConnected.userId;                
+        return userConnected.toghUser;                
     }
     
     /**
@@ -238,11 +238,10 @@ public class LoginService {
      * @param userId
      * @return
      */
-    public boolean isAdministrator(long userId ) {
-        ToghUserEntity toghUserEntity = factoryService.getToghUserService().getUserFromId(userId);
-        if (toghUserEntity == null)
+    public boolean isAdministrator(ToghUserEntity toghUser ) {
+        if (toghUser == null)
             return false;
-        return PrivilegeUserEnum.ADMIN.equals(toghUserEntity.getPrivilegeUser());
+        return PrivilegeUserEnum.ADMIN.equals(toghUser.getPrivilegeUser());
     }
     
     
@@ -259,7 +258,7 @@ public class LoginService {
             endUserEntity = factoryService.getToghUserService().getUserFromConnectionStamp( connectionStamp );
         }
         else {
-            endUserEntity = factoryService.getToghUserService().getUserFromId( userConnected.userId);
+            endUserEntity = userConnected.toghUser;
         }
         if (endUserEntity == null)
             return; // already disconnected, or not exist

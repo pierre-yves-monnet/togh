@@ -1,10 +1,11 @@
-// -----------------------------------------------------------
-//
-// EventSurveyList
-//
-// Display one event
-//
-// -----------------------------------------------------------
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl"; 
@@ -13,7 +14,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { PlusCircle} from 'react-bootstrap-icons';
 
 import FactoryService from './service/FactoryService';
-import SlabEvent from './service/SlabEvent';
+import SlabRecord from './service/SlabRecord';
 import EventSectionHeader from './component/EventSectionHeader';
 
 
@@ -23,6 +24,14 @@ import EventCtrl from './controller/EventCtrl';
 import SurveyCtrl from './controller/SurveyCtrl';
 
 import EventSurvey from './EventSurvey';
+
+// -----------------------------------------------------------
+//
+// EventSurveyList
+//
+// Display one event
+//
+// -----------------------------------------------------------
 
 class EventSurveyList extends React.Component {
 	// this.props.updateEvent()
@@ -196,8 +205,8 @@ class EventSurveyList extends React.Component {
 
 		this.setState({ event: currentEvent });
 		
-		var slabEvent = SlabEvent.getUpdate(this.state.event, name, value, completeLocalisation);
-		this.props.updateEvent( slabEvent );
+		var SlabRecord = SlabRecord.getUpdate(this.state.event, name, value, completeLocalisation);
+		this.props.updateEvent( SlabRecord );
 	}
 
 	setAttributeCheckbox(name, value) {

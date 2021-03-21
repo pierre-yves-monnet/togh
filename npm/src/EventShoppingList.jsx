@@ -1,10 +1,11 @@
-// -----------------------------------------------------------
-//
-// EventShoppingList
-//
-// Display one event
-//
-// -----------------------------------------------------------
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
@@ -18,13 +19,20 @@ import Expense from './component/Expense';
 import EventSectionHeader from './component/EventSectionHeader';
 import TagDropdown from './component/TagDropdown';
 
-import SlabEvent from './service/SlabEvent';
+import SlabRecord from './service/SlabRecord';
 
 
 const STATUS_TODO = "TODO";
 const STATUS_DONE = "DONE";
 const STATUS_CANCEL = "CANCEL";
 
+// -----------------------------------------------------------
+//
+// EventShoppingList
+//
+// Display one event
+//
+// -----------------------------------------------------------
 
 
 class EventShoppingList extends React.Component {
