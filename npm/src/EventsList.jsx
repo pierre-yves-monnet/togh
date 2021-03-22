@@ -128,7 +128,7 @@ class EventsList extends React.Component {
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error"});
 			}
-			else if (httpPayload.getData().eventid) {
+			else if (httpPayload.getData().eventId) {
 				this.props.homeSelectEvent(httpPayload.data.eventid)
 			} else {
 				this.setState({ "message": httpPayload.data.message });

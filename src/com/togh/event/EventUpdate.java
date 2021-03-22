@@ -82,10 +82,9 @@ public class EventUpdate {
             try {
                 Slab slab = new Slab( recordSlab);
                 if ( SlabOperation.UPDATE.equals( slab.operation)) {
-                    eventOperationResult.listEvents.addAll( updateOperation( event, slab ));
+                    updateOperation( event, slab,eventOperationResult );
                 } else if (SlabOperation.ADD.equals( slab.operation)) {
-                    EventTaskEntity taskEntity = event.addTask();
-                    eventOperationResult.childEntity = taskEntity;
+                    addOperation( event, slab, eventOperationResult );
                 }
             }catch(Exception e) {
                 eventOperationResult.listEvents.add( new LogEvent(eventInvalidUpdateOperation, e, recordSlab.get("operation")+":"+recordSlab.get("name")));
@@ -97,17 +96,29 @@ public class EventUpdate {
         return eventOperationResult;
     }
     
+    private void addOperation(  EventEntity event, Slab slab, EventOperationResult eventOperationResult) {
+        BaseEntity child=null;
+    
+        if (slab.attributName.equals("tasklist")) {
+            child = event.addTask();
+        }
+        if (child!=null) {
+            updateEntityOperation( child, slab, eventOperationResult);
+            eventOperationResult.listChildEntity.add( child );
+        }
+        return;
+    }
     /**
      * Update the event Eventity with the slab
      * @param event
      * @param slab
      * @return
      */
-    private List<LogEvent> updateOperation(  EventEntity event, Slab slab) {
+    private void updateOperation(  EventEntity event, Slab slab, EventOperationResult eventOperationResult) {
         if (slab.localisation.isEmpty())
-            return updateEntityOperation(event, slab);
+             updateEntityOperation(event, slab, eventOperationResult);
         
-        return new ArrayList<LogEvent>();
+
     }
     
     
@@ -117,8 +128,8 @@ public class EventUpdate {
      * @param slab
      * @return
      */
-    private List<LogEvent> updateEntityOperation( BaseEntity event, Slab slab ) {
-        List<LogEvent> listEvents = new ArrayList<>();
+    private void updateEntityOperation( BaseEntity event, Slab slab,EventOperationResult eventOperationResult ) {
+        
         
         String methodName = "get"+slab.attributName.substring(0,1).toUpperCase()+slab.attributName.substring(1);
         Object value=null;
@@ -160,9 +171,9 @@ public class EventUpdate {
         }
 
         } catch (Exception e) {
-            listEvents.add( new LogEvent(eventInvalidUpdateOperation, e, slab.operation.toString()+":"+slab.attributName+" <="
+            eventOperationResult.listEvents.add( new LogEvent(eventInvalidUpdateOperation, e, slab.operation.toString()+":"+slab.attributName+" <="
                     + (slab.attributValue==null ? "null" : "("+slab.attributValue.getClass().getName()+") "+ slab.attributValue)));
         }
-        return listEvents;
+        return;
     }
 }

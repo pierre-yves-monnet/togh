@@ -402,7 +402,7 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas
 		
-
+CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	Sauvegarde
 	faire marcher la requete JPA "user not register in the event"

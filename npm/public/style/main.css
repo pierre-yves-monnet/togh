@@ -46,7 +46,7 @@ body>div.container {margin-top:10px;}
 	margin-right: 7px;
 }
 .toghfooter { 
-    position: absolute; 
+    position: fixed; 
     left: 0 ; right: 0; bottom: 0;
     margin-top: 5px ;
     height: 15px 

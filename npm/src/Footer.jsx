@@ -26,13 +26,13 @@ class Footer extends React.Component {
 	render() {
 		console.log("Footer.render");
 		return(
-		   <footer class="toghfooter">
+		   <div class="toghfooter">
 		   		<div class="row">
 					<div class="col-xs-12" style={{background:"#e0f9d6"}} >
 						<div style={{color: "black", textAlign: "right", fontSize: "small"}}>Py 2020</div>
 					</div>
 				</div>
-		   </footer>
+		   </div>
 		);
 	}
 	

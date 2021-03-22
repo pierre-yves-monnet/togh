@@ -21,6 +21,7 @@ import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
+import com.togh.entity.base.BaseEntity;
 import com.togh.event.EventController;
 import com.togh.repository.EventRepository;
 
@@ -54,7 +55,7 @@ public class EventService {
     public static class EventOperationResult {
         public EventEntity eventEntity;
         public List<LogEvent> listEvents = new ArrayList<>();
-        public Object childEntity = null;
+        public List<BaseEntity> listChildEntity = new ArrayList<BaseEntity>();
         
         public Long getEventId() {
             return eventEntity !=null ? eventEntity.getId() : null;
