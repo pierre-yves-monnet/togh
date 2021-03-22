@@ -121,7 +121,7 @@ class Event extends React.Component {
 					legend={<FormattedMessage id="Event.DatePolicy" defaultMessage="Date policy" />}
 					onChange={(event) => {
 						console.log("RadioGroup.DatePolicy on change="+event);
-						this.eventCtrl.setAttributType( "datePolicy", event, this.state.event, "", "datePolicyEnum");
+						this.eventCtrl.setAttribut( "datePolicy", event, this.state.event, "");
 					}
 					}
 				>

@@ -40,9 +40,7 @@ class SlabRecord {
 	static getUpdate (event, name, value, localisation) {
 		return new SlabRecord(event, "UPDATE", name, value, localisation, "");
  	}
-	static getUpdateType (event, name, value, localisation, typeData) {
-		return new SlabRecord(event, "UPDATE", name, value, localisation, typeData);
- 	}
+	
 	static getUpdateList(event, name, localisation) {
 		return new SlabRecord(event, "LIST", name, null, localisation, "");
  	}

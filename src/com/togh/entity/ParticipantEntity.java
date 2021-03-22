@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.entity;
 
 import java.util.HashMap;

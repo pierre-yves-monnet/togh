@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.util.StopWatch.TaskInfo;
+
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
@@ -63,12 +65,24 @@ public class EventEntity extends UserEntity {
     
     
     public enum DatePolicyEnum { ONEDATE, PERIOD }
-    @Column( name="datePolicy",length=10, nullable = false)  
+    @Column( name="datepolicy", length=10, nullable = false)  
+    @org.hibernate.annotations.ColumnDefault("'ONEDATE'")
     @Enumerated(EnumType.STRING)
+    private DatePolicyEnum datePolicy; 
+    
+    @Column( name="timeevent",length=5)
+    private String timeevent;
 
-    private DatePolicyEnum datePolicy;
-   
-   
+    @Column( name="durationevent",length=5)
+    private String duration;
+    
+    public enum ScopeEnum { OPEN, OPENCONF, LIMITED, SECRET  }
+    @Column( name="scope", length=10)
+    @Enumerated(EnumType.STRING)
+    private ScopeEnum scope;
+ 
+    
+    
     public EventEntity(ToghUserEntity author, String name) {
         super(author, name);
         setTypeEvent(TypeEventEnum.LIMITED);
@@ -146,9 +160,45 @@ public class EventEntity extends UserEntity {
     public void setParticipants(List<ParticipantEntity> participants) {
         this.participants = participants;
     }
+    
+    
+    public String getTimeevent() {
+        return timeevent;
+    }
+    
+    public void setTimeevent(String timeevent) {
+        this.timeevent = timeevent;
+    }
+    
+    public String getDuration() {
+        return duration;
+    }
+    
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+    
+    public ScopeEnum getScope() {
+        return scope;
+    }
+    
+    public void setScope(ScopeEnum scope) {
+        this.scope = scope;
+    }
     public void touch() {
         this.setDatemodification( LocalDateTime.now( ZoneOffset.UTC ));
     }
+    
+    /**
+     * getRealTimeUtc
+     * Real time is the dateEvent (which contains the time zone) + the time (which contains a jour/mn in the day)
+     */
+    // getDateEventUTC
+    // getDateEndEventUTC
+    // getDelayToStart
+    // getDelayToEnd
+    
+    
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Relation with another table                                                      */
@@ -179,8 +229,25 @@ public class EventEntity extends UserEntity {
         return "Event{" + super.toString() + "}";
     }
     
- 
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "eventid")
+    private List<EventTaskEntity> tasks= new ArrayList<>();
 
+    public EventTaskEntity addTask() {
+        EventTaskEntity task = new EventTaskEntity();
+        tasks.add( task);
+        return task;
+    }
+    public void removeTask( EventTaskEntity task) {
+        for (EventTaskEntity taskIterator : tasks) {
+            if (taskIterator.getId() == task.getId()) {
+                tasks.remove( taskIterator );
+                return;
+            }
+        }
+        return;
+    }
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Serialization                                                                    */

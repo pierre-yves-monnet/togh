@@ -126,11 +126,11 @@ class EventTaskList extends React.Component {
 
 									if (dates.length >= 1) {
 										console.log("SingleDatePicker set Date");
-										this.setAttribut("datebegin", dates[0], item);
+										this.setAttribut("datestarttask", dates[0], item);
 									}
 								}
 								}
-								value={toolService.getDateListFromDate(item.datebegin)}
+								value={toolService.getDateListFromDate(item.datestarttask)}
 							>
 								<DatePickerInput
 									placeholder="mm/dd/yyyy"
@@ -147,11 +147,11 @@ class EventTaskList extends React.Component {
 
 									if (dates.length >= 1) {
 										console.log("SingleDatePicker set Date");
-										this.setAttribut("dateend", dates[0], item);
+										this.setAttribut("dateendtask", dates[0], item);
 									}
 								}
 								}
-								value={toolService.getDateListFromDate(item.dateend)}
+								value={toolService.getDateListFromDate(item.dateendtask)}
 							>
 								<DatePickerInput
 									placeholder="mm/dd/yyyy"
@@ -161,7 +161,7 @@ class EventTaskList extends React.Component {
 							</DatePicker>
 						</td>
 						}
-						<td><TextInput value={item.what} onChange={(event) => this.setAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
+						<td><TextInput value={item.name} onChange={(event) => this.setAttribut("name", event.target.value, item)} labelText="" ></TextInput></td>
 						<td><TextArea labelText="" value={item.description} onChange={(event) => this.setAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
 						<td>
 							<ChooseParticipant userid={item.who} 

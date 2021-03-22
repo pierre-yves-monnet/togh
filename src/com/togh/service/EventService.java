@@ -38,6 +38,7 @@ public class EventService {
 
     private static final LogEvent eventAccessError = new LogEvent(EventService.class.getName(), 1, Level.APPLICATIONERROR, "Can't access this event", "This event can't be accessed", "Operations is not executed", "Check user and permission");
     private static final LogEvent eventSaveError = new LogEvent(EventService.class.getName(), 2, Level.APPLICATIONERROR, "Can't save this event", "This event can't be saved", "Operations are not executed", "Check Database");
+    private static final LogEvent eventFindEventError = new LogEvent(EventService.class.getName(), 3, Level.ERROR, "Can't get the list of event", "The list of events can't be read", "Operations are not executed, list is empty", "Check Exception");
 
     private Logger logger = Logger.getLogger( EventService.class.getName());
     private final static String logHeader = EventService.class.getSimpleName()+": ";
@@ -114,9 +115,22 @@ public class EventService {
         
     }
  
- 
-   public List<EventEntity> getEvents(ToghUserEntity toghUser, String filterEvents) {
-       return eventRepository.findEventsUser( toghUser.getId() );       
+    public class EventResult {
+        public List<EventEntity> listEvents;
+        public List<LogEvent> listLogEvent = new ArrayList();
+    }
+    
+   public EventResult getEvents(ToghUserEntity toghUser, String filterEvents) {
+       EventResult eventResult = new EventResult();
+       try {
+           eventResult.listEvents = eventRepository.findEventsUser( toghUser.getId() );
+       }
+       catch(Exception e) {
+           // something bad arrived
+           logger.severe( logHeader+" Error during finEventsUser toghUser["+toghUser.getId()+"] :"+e.toString());
+           eventResult.listLogEvent.add( new LogEvent(eventFindEventError, e, "User ["+toghUser.getId()));
+       }
+       return eventResult;
     }
     
    

@@ -27,6 +27,7 @@ import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.event.EventController;
 import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
+import com.togh.service.EventService.EventResult;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.FactoryService;
@@ -55,12 +56,16 @@ public class RestEventController {
 
         Map<String, Object> payload = new HashMap<>();
         List<Map<String,Object>> listEventsMap= new ArrayList<>();
-        for (EventEntity event : factoryService.getEventService().getEvents(toghUser, filterEvents)) {
-            EventController eventController = new EventController(event);
-            listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser)));
+        EventResult eventResult = factoryService.getEventService().getEvents(toghUser, filterEvents);
+        if (LogEventFactory.isError( eventResult.listLogEvent)) {
+            payload.put( RestJsonConstants.CST_LISTLOGEVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
+        } else {
+            for (EventEntity event : eventResult.listEvents) {
+                EventController eventController = new EventController(event);
+                listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser)));
+            }
+            payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);
         }
-
-        payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);
 
         return payload;
 

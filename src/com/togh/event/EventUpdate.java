@@ -9,6 +9,7 @@
 package com.togh.event;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventTaskEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
+import com.togh.entity.base.BaseEntity;
 import com.togh.repository.EventRepository;
 import com.togh.service.EventService;
 import com.togh.service.FactoryService;
@@ -51,7 +54,7 @@ public class EventUpdate {
     private static final LogEvent eventInvalidUpdateOperation = new LogEvent(EventUpdate.class.getName(), 1, Level.APPLICATIONERROR, "Invalid operation", "This operation failed", "Operation can't be done", "Check error");
     EventController eventController;
     
-    private enum SlabOperation {UPDATE }
+    private enum SlabOperation {UPDATE, ADD }
     private class Slab {
         public SlabOperation operation;
         public String attributName;
@@ -80,6 +83,9 @@ public class EventUpdate {
                 Slab slab = new Slab( recordSlab);
                 if ( SlabOperation.UPDATE.equals( slab.operation)) {
                     eventOperationResult.listEvents.addAll( updateOperation( event, slab ));
+                } else if (SlabOperation.ADD.equals( slab.operation)) {
+                    EventTaskEntity taskEntity = event.addTask();
+                    eventOperationResult.childEntity = taskEntity;
                 }
             }catch(Exception e) {
                 eventOperationResult.listEvents.add( new LogEvent(eventInvalidUpdateOperation, e, recordSlab.get("operation")+":"+recordSlab.get("name")));
@@ -91,28 +97,65 @@ public class EventUpdate {
         return eventOperationResult;
     }
     
-    private List<LogEvent> updateOperation( EventEntity event, Slab slab ) {
+    /**
+     * Update the event Eventity with the slab
+     * @param event
+     * @param slab
+     * @return
+     */
+    private List<LogEvent> updateOperation(  EventEntity event, Slab slab) {
+        if (slab.localisation.isEmpty())
+            return updateEntityOperation(event, slab);
+        
+        return new ArrayList<LogEvent>();
+    }
+    
+    
+    /**
+     * update an entity
+     * @param event
+     * @param slab
+     * @return
+     */
+    private List<LogEvent> updateEntityOperation( BaseEntity event, Slab slab ) {
         List<LogEvent> listEvents = new ArrayList<>();
-        // change the type
-        if (slab.attributValue !=null && "number".equals( slab.typedata) )
-        {
-            slab.attributValue = Long.valueOf( slab.attributValue.toString());
+        
+        String methodName = "get"+slab.attributName.substring(0,1).toUpperCase()+slab.attributName.substring(1);
+        Object value=null;
+        if (slab.attributValue != null) {
+            for (Method method : event.getClass().getMethods())
+            {
+                if (method.getName().equals( methodName ))
+                {
+                    Class returnType = method.getReturnType();
+                    if (returnType.equals( Double.class)) {
+                        value = Double.valueOf( slab.attributValue.toString());        
+                    }
+                    else if (returnType.equals( Long.class)) {
+                        value = Long.valueOf( slab.attributValue.toString());        
+                    }
+                    else if (returnType.equals( LocalDateTime.class)) {
+                        value =  EngineTool.stringToDate(slab.attributValue.toString());;        
+                    }
+                    else if (returnType.equals( String.class)) {
+                        value = slab.attributValue.toString();
+                    }
+                    else if (returnType.equals( Enum.class)) {
+                        value = Enum.valueOf( returnType,slab.attributValue.toString()); 
+                    }
+                    else  {
+                        value = slab.attributValue;
+                    }
+                }
+            }
         }
-        if (slab.attributValue !=null && "date".equals( slab.typedata) )
-        {
-            slab.attributValue = EngineTool.stringToDate(slab.attributValue.toString());
-        }
-        if (slab.attributValue !=null && "boolean".equals( slab.typedata) )
-        {
-            
-        }
-        if (slab.attributValue !=null && "datePolicyEnum".equals( slab.typedata) ) {
+        /*if (slab.attributValue !=null && "datePolicyEnum".equals( slab.typedata) ) {
             slab.attributValue = DatePolicyEnum.valueOf( slab.attributValue.toString());
         }
-        
+        */
         try {
         if (slab.localisation.isEmpty()) {
-            PropertyUtils.setSimpleProperty(event, slab.attributName, slab.attributValue);
+            PropertyUtils.setSimpleProperty(event, slab.attributName, value);
 
         }
 

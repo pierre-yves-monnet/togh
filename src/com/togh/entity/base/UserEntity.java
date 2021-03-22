@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.entity.base;
 
 import java.util.Map;
@@ -14,6 +22,17 @@ import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 
+
+
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  UserEntity,                                                                     */
+/*                                                                                  */
+/*  Entity is created / modified by an user.                                        */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
 @MappedSuperclass
 @Inheritance
 public abstract class UserEntity extends BaseEntity {
@@ -21,6 +40,7 @@ public abstract class UserEntity extends BaseEntity {
     
     
     @ManyToOne( fetch = FetchType.EAGER)
+    @JoinColumn(name = "authorid")
     private ToghUserEntity author;
     
     @Column(name="ACCESSDATA", length=20)

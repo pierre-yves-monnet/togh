@@ -141,32 +141,17 @@ class EventCtrl {
 	*/
 	setAttribut(name, value, item, localisation) {
 		console.log("EventCtrl.setAttribut: set attribut:" + name + " <= " + value + " localisation=" +  localisation);
-		var type="";
 		 
-		if (value instanceof Date) {
-			type= 'date';			
-		} else if (value instanceof Number ) {
-			type=  'number';
-		} else if (value instanceof Boolean ) {
-			type=  'boolean';
-		} else { 
-			type= '';
-		}
-		this.setAttributType( name, value, item, localisation, type );
-	}
-	setAttributType(name, value, item, localisation, type) {
-			console.log("EventCtrl.setAttribut: set attribut:" + name + " <= " + value + " localisation=" +  localisation);
-		// const currentEvent = this.event;
-		// item is part of the event at one moment
 		item[name] = value;
-
 		// we send a setState to refresh the value
 		this.eventReact.refreshEventfct();
 		
 		let slabRecord; 
-		slabRecord = SlabRecord.getUpdateType(this.event, name, value, localisation, type);				
+		slabRecord = SlabRecord.getUpdate(this.event, name, value, localisation);				
 		this.updateEventfct( slabRecord );
+		
 	}
+	
 	
 	updateEventfct( slabRecord ) {	
 		this.currentBasketSlabRecord.addSlabRecord( slabRecord );
