@@ -57,7 +57,7 @@ const TAB_PREFERENCES= 'Preferences';
 class Event extends React.Component {
 	constructor(props) {
 		super();
-		console.log("Event.constructor eventId="+props.eventid);
+		// console.log("Event.constructor eventId="+props.eventid);
 
 		this.state = {
 			'event': {},

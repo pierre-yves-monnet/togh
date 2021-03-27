@@ -28,19 +28,19 @@ class Menu extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {  }
-		console.log("menu.constructor");
+		// console.log("menu.constructor");
 		this.state = { showMenu: true, events: [], 'wayOfConnect':props.wayOfConnect};
 		this.authCallback = this.authCallback.bind(this);
 	}
 		
 	setVisibleMenu( setNewState ) {
-		console.log("Menu.setVisibleMenu "+setNewState)
+		// console.log("Menu.setVisibleMenu "+setNewState)
 		this.setState ( { showMenu: setNewState} ); 
 		this.props.showMenu( setNewState );
 	}
 		// -------------------------------------------- render
 	render() {
-		console.log("Menu.render");
+		// console.log("Menu.render");
 
 		if (this.state.showMenu) {
 			return ( <div  > 

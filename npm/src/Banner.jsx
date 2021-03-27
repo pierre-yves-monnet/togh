@@ -29,7 +29,7 @@ class Banner extends React.Component {
 
 	render() {
 		var authService = FactoryService.getInstance().getAuthService();
-		console.log("banner.render isconnected="+authService.isConnected());
+		// console.log("banner.render isconnected="+authService.isConnected());
 		// 			<!--  green: #067c04;
 		const FLAG_SELECTOR_OPTION_LIST = [
   	{ id: "en", name: 'US', displayText: 'English', locale: 'en_US', flag: "img/flags/en.svg" },

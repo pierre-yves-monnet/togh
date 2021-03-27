@@ -32,12 +32,12 @@ class EventParticipants extends React.Component {
 	// this.props.updateEvent()
 	constructor( props ) {
 		super();
-		// console.log("RegisterNewUser.constructor");
+		// console.log("EventParticipants.constructor");
 
 		this.state = { 'event' : props.event 
 						};
 		// show : OFF, ON, COLLAPSE
-		console.log("EventParticipant.constructor show="+ this.state.show+" event="+JSON.stringify(this.state.event));
+		// console.log("EventParticipant.constructor ");
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
 		this.participantInvited 	= this.participantInvited.bind( this );
 	}	

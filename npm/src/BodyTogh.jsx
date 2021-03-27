@@ -88,7 +88,7 @@ class BodyTogh extends React.Component {
 	render() {
 		var factory = FactoryService.getInstance();
 		var authService = factory.getAuthService();
-		console.log("BodyTogh.render isConnected="+authService.isConnected()+" frameContent=["+this.state.frameContent+"] sizeMenu["+this.state.sizeMenu+"]");
+		// console.log("BodyTogh.render isConnected="+authService.isConnected()+" frameContent=["+this.state.frameContent+"] sizeMenu["+this.state.sizeMenu+"]");
 
 	
 		if (authService.isConnected() === false) {
