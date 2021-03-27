@@ -17,7 +17,10 @@ import FactoryService from './service/FactoryService';
 import EventSectionHeader from './component/EventSectionHeader';
 import TagDropdown from './component/TagDropdown';
 import ChooseParticipant from './component/ChooseParticipant';
-import LogEvent from './component/LogEvent';
+
+
+import * as userFeedbackConstant from './component/UserFeedback';
+import UserFeedback  from './component/UserFeedback';
 
 const STATUS_PLANNED = "PLANNED";
 const STATUS_ACTIVE = "ACTIVE";
@@ -38,15 +41,24 @@ class EventTaskList extends React.Component {
 			showProperties: {
 				filterState: "ALL",
 				filterParticipant: "ALL"
+			},
+			operation: {
+				inprogress: false,
+				label:"",
+				status:"",
+				result:"",
+				listlogevents: [] 
 			}
 		};
 
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.addItem 					= this.addItem.bind(this);
-		this.changeParticipantCallback	= this.changeParticipantCallback.bind(this);
+		this.addTask 					= this.addTask.bind(this);
+		this.addTaskCallback 			= this.addTaskCallback.bind( this );
+		this.removeTask					= this.removeTask.bind( this );
+		this.removeTaskCallback			= this.removeTaskCallback.bind( this );
+		
 		this.isTaskHidden 				= this.isTaskHidden.bind(this);
-		this.addTasklistCallback 		= this.addTasklistCallback.bind( this );
-		this.removeItemCallback			= this.removeItemCallback.bind( this );
+		this.changeParticipantCallback	= this.changeParticipantCallback.bind(this);
 	}
 
 
@@ -69,7 +81,7 @@ class EventTaskList extends React.Component {
 				showPlusButton={true}
 				showPlusButtonTitle={<FormattedMessage id="EventTaskList.AddTask" defaultMessage="Add a task in the list" />}
 				userTipsText={<FormattedMessage id="EventTaskList.TaskTip" defaultMessage="Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize" />}
-				addItemCallback={this.addItem}
+				addItemCallback={this.addTask}
 			/>
 		);
 
@@ -83,10 +95,10 @@ class EventTaskList extends React.Component {
 					<FormattedMessage id="EventTaskList.NoItem" defaultMessage="You don't have any task in the list." />
 					&nbsp;
 					<button class="btn btn-success btn-xs"
-						onClick={() => this.addItem()}
+						onClick={() => this.addTask()}
 						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a new item in the list" })}
-						disabled={this.state.inprogress} >
-							{ this.state.inprogress && 
+						disabled={this.state.operation.inprogress} >
+							{ this.state.operation.inprogress && 
 								<table><tr><td>
 									<InlineLoading/>
 									</td><td>
@@ -95,14 +107,13 @@ class EventTaskList extends React.Component {
 									</td></tr></table>
 								
 							}							
-							{! this.state.inprogress && <div >
+							{! this.state.operation.inprogress && <div >
 								<PlusCircle />
 								&nbsp;
 								<FormattedMessage id="EventTaskList.AddOne" defaultMessage="Add one !" />
 								</div>
 							}
 					</button>
-					<LogEvent listevents={this.state.listlogevents} />
 				</div>
 			)
 		}
@@ -174,12 +185,12 @@ class EventTaskList extends React.Component {
 
 						<td>
 							{this.isShowDelete(item) && <button class="btn btn-danger btn-xs" 
-															onClick={() => this.removeItem(item)} 
+															onClick={() => this.removeTask(item)} 
 															title={intl.formatMessage({id: "EventTaskList.RemoveThisTask",defaultMessage: "Remove this task"})}
-															disabled={this.state.inprogress}
+															disabled={this.state.operation.inprogress}
 															>
-																{ this.state.inprogress && <InlineLoading/>}															
-																{ ! this.state.inprogress && <DashCircle/> }
+																{ this.state.operation.inprogress && <InlineLoading/>}															
+																{ ! this.state.operation.inprogress && <DashCircle/> }
 														</button>}
 														
 														
@@ -196,7 +207,12 @@ class EventTaskList extends React.Component {
 		
 		return (<div>
 			{headerSection}
-			<LogEvent listevents={this.state.listlogevents} />
+			<UserFeedback inprogress= {this.state.operation.inprogress}
+				label= {this.state.operation.label}
+				status= {this.state.operation.status}
+				result= {this.state.operation.result}
+				listlogevents= {this.state.operation.listlogevents} />
+			
 			{this.getFilterTaskHtml()}
 			<div>
 				<table class="toghtable">
@@ -321,7 +337,7 @@ class EventTaskList extends React.Component {
 			statushidden = true;
 		if (this.state.showProperties.filterParticipant === 'UNAFFECTED' && task.whoid !== '')
 			statushidden = true;
-		console.log("EventTaskList.isTaskHidden: " + statushidden + " task.status=" + task.status + " filterState=[" + this.state.showProperties.filterState + "] ");
+		// console.log("EventTaskList.isTaskHidden: " + statushidden + " task.status=" + task.status + " filterState=[" + this.state.showProperties.filterState + "] ");
 		return statushidden;
 	}
 
@@ -376,79 +392,114 @@ class EventTaskList extends React.Component {
 
 	/**
    */
-	addItem() {
-		console.log("EventTasklist.addItem: addItem item=" + JSON.stringify(this.state.event));
-		this.setState({inprogress:true, listlogevents: [] });
+	addTask() {
+		const intl = this.props.intl;
+
+		console.log("EventTasklist.addTask: addTask item=" + JSON.stringify(this.state.event));
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "EventTaskList.AddingTask",defaultMessage: "Adding a task"}), 
+					listlogevents: [] }});
 		// call the server to get an ID on this taskList
 		var newTask = { "status": "PLANNED", "name": "" };
-		this.eventCtrl.addEventChildFct("tasklist", newTask, "", this.addTasklistCallback);
+		this.eventCtrl.addEventChildFct("tasklist", newTask, "", this.addTaskCallback);
 	}
 
-	addTasklistCallback(httpPayload) {
+	/**
+	* addTaskCallback
+ 	*/
+	addTaskCallback(httpPayload) {
+		const intl = this.props.intl;
 
-		this.setState({inprogress:false});
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
 		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
-			console.log("EventTasklist.addTasklistCallback: HTTP ERROR ");
+			console.log("EventTasklist.addTaskCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				currentOperation.status= userFeedbackConstant.ERROR;
+				currentOperation.result=intl.formatMessage({id: "EventTaskList.CantAddTask",defaultMessage: "A task can't be added"});
+				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
-			console.log("EventTasklist.addTasklistCallback:  BAD RECEPTION");
+			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
+			console.log("EventTasklist.addTaskCallback:  BAD RECEPTION");
+
 		} else {
 			var taskToAdd = httpPayload.getData().childEntity[ 0 ];
 			var event = this.eventCtrl.getEvent();
-			if (httpPayload.getData().status ==="ERROR") {
-				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
-				this.setState({ listlogevents: httpPayload.getData().listLogEvents });
-			}
-			else {
-				console.log("EventTasklist.addTasklistCallback ");
-				var newList = event.tasklist.concat(taskToAdd);
-				event.tasklist = newList;
-				this.setState({ event: event });
-			}
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "EventTaskList.TaskAdded",defaultMessage: "A task is added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+			console.log("EventTasklist.addTaskCallback ");
+			var newList = event.tasklist.concat(taskToAdd);
+			event.tasklist = newList;
+			this.setState({ event: event });
 		}
+		this.setState({operation: currentOperation});
 	}
 
 
 
-	removeItem(item) {
-		console.log("EventTasklist.removeItem: event=" + JSON.stringify(this.state.event));
-		this.setState({inprogress:true, listlogevents: [] });
+	removeTask(item) {
+		const intl = this.props.intl;
 
+		console.log("EventTasklist.removeTask: event=" + JSON.stringify(this.state.event));
+
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "EventTaskList.RemovingTask",defaultMessage: "Removing a task"}), 
+					listlogevents: [] }});
+	
 		var currentEvent = this.state.event;
 		var listTasks = currentEvent.tasklist;
 		var index = listTasks.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("tasklist", listTasks[index].id, "", this.removeItemCallback);
+			this.eventCtrl.removeEventChild("tasklist", listTasks[index].id, "", this.removeTaskCallback);
 			// listTasks.splice(index, 1);
 		}
-		// console.log("EventTasklist.removeItem: " + JSON.stringify(listTask));
+		// console.log("EventTasklist.removeTask: " + JSON.stringify(listTask));
 		// currentEvent.tasklist = listTasks;
-		// console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
+		// console.log("EventTasklist.removeTask: eventAfter=" + JSON.stringify(this.state.event));
 
-		this.setState({ "event": currentEvent });
+		this.setState({ event: currentEvent });
 
 	}
-	removeItemCallback(httpPayLoad) {
-		this.setState({inprogress:false});
+	removeTaskCallback(httpPayload) {
+		const intl = this.props.intl;
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
+
 		// find the task item to delete
-		if (httpPayLoad.isError()) {
-			// feedback to user is required
-			console.log("EventTasklist.addTasklistCallback: HTTP ERROR ");
-		}
-		else if (httpPayLoad.getData().status==="OK") {
+		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
+			console.log("EventTasklist.addTaskCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				currentOperation.status= userFeedbackConstant.ERROR;
+				currentOperation.result=intl.formatMessage({id: "EventTaskList.CantRemoveTask",defaultMessage: "The task can't be removed"});
+				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+		} else {
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "EventTaskList.TaskRemoved",defaultMessage: "The task is removed"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
 			var currentEvent = this.state.event;
-			let childId = httpPayLoad.getData().childEntityId[ 0 ];
+			let childId = httpPayload.getData().childEntityId[ 0 ];
 			for( var i in currentEvent.tasklist) {
 				if ( currentEvent.tasklist[ i ].id === childId) {
 					currentEvent.tasklist.splice( currentEvent.tasklist[ i ], 1);
 					break;
 				}
 			}
-			this.setState({ "event": currentEvent });
+			this.setState({ event: currentEvent });
 		}
-		else {
-			// feedback to user is required
-		}
+		
+		this.setState({ operation: currentOperation});
+
 	}
 	
 
