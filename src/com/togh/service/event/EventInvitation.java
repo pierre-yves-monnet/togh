@@ -110,7 +110,7 @@ public class EventInvitation {
             ParticipantEntity participant = this.eventController.getParticipant(toghUser);
             if (participant != null) {
                 doubleInvitation = true;
-                invitationResult.errorMessage.append(toghUser.getFirstname() + " " + toghUser.getLastName() + ", ");
+                invitationResult.errorMessage.append(toghUser.getFirstName() + " " + toghUser.getLastName() + ", ");
             } else {
                 // send the invitation and register the guy
                 notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, event);
