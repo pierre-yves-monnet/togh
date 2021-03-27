@@ -10,11 +10,6 @@ import BodyTogh from './BodyTogh.jsx';
 import FactoryService from './service/FactoryService'
 
 
-import { IntlProvider } from 'react-intl';
-import {IntlShape} from 'react-intl';
-
-
-
 import fr from "./lang/fr.json";
 import en from "./lang/en.json";
 
@@ -39,18 +34,9 @@ const messages = {
 	};
 
 
-
 console.log("index.js local=["+language+"]")
-// 
-// ReactDOM.render(
-// 		<IntlProvider locale={language}  messages={messages[ language  ]} >
-// 			<BodyTogh language={language}/>
-// 		</IntlProvider>
-// 		, document.getElementById('reactBodyTogh'));
 
-ReactDOM.render(
-			<BodyTogh language={language}/>
-		, document.getElementById('reactBodyTogh'));
+ReactDOM.render(<BodyTogh language={language}/>, document.getElementById('reactBodyTogh'));
 
 
 
@@ -58,7 +44,7 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(console.log);
 
 
 
