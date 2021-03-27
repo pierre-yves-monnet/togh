@@ -104,12 +104,12 @@ class EventItinerary extends React.Component {
 		if (this.state.event.datePolicy === 'ONEDATE') {
 			console.log("EventItinerary : policy="+this.state.event.datePolicy+" dateEvent="+JSON.stringify(this.state.event.dateEvent));
 			dateStart = toolService.getDateFromString( this.state.event.dateEvent);
-			dateEnd   = new Date( dateStart.getTime() ); // clone the date
-			
 			if ( ! dateStart ) {
 				resultHtml.push(<FormattedMessage id="EventItinerary.ProvideDateInEvent" defaultMessage="Select a date for this event" />);
 				return resultHtml;
 			}
+			dateEnd   = new Date( dateStart.getTime() ); // clone the date
+			
 		} else {
 			console.log("EventItinerary : policy="+this.state.event.datePolicy+" datePeriod="+JSON.stringify(this.state.event.dateStartEvent) +" =>" +JSON.stringify(this.state.event.dateEndEvent));
 
@@ -265,7 +265,7 @@ class EventItinerary extends React.Component {
 	 */
 	renderList() {
 		var listItineraryListHtml = [];
-		listItineraryListHtml.push( this.renderHeader( true, -1 ));
+		
 		for (var j in this.state.event.itinerarylist) {
 			var stepinlist = this.state.event.itinerarylist[ j ];
 			listItineraryListHtml.push( 

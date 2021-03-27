@@ -70,10 +70,10 @@ public class RestEventController {
 
         EventEntity event = factoryService.getEventService().getAllowedEventById(toghUser, eventId);
         if (event == null)
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "event not found");
+            throw new ResponseStatusException( HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put( RestJsonConstants.CST_EVENT, event.getMap( EventController.getInstance(event).getTypeAccess(toghUser)));
+        payload.put( RestJsonConstants.CST_EVENT, event.getMap( EventController.getInstance( factoryService.getEventService(), event).getTypeAccess(toghUser)));
 
         return payload;
 
@@ -88,16 +88,18 @@ public class RestEventController {
     @CrossOrigin
     @PostMapping(value = "/api/event/create", produces = "application/json")
     @ResponseBody
-    public Map<String, Object> createEvent(@Param("getlist") Boolean getList,
+    public Map<String, Object> createEvent(
+            @RequestParam( RestJsonConstants.CST_PARAM_NAME ) String eventName,
+            @Param("getlist") Boolean getList,
             @Param( RestJsonConstants.CST_PARAM_FILTER_EVENTS ) String filterEvents,
             @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         Map<String, Object> payload = new HashMap<>();
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
-            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, "Not connected");
+            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         
-        EventOperationResult eventOperationResult = factoryService.getEventService().createEvent(toghUser);
+        EventOperationResult eventOperationResult = factoryService.getEventService().createEvent(toghUser, eventName );
         if (Boolean.TRUE.equals(getList)) {
             completePayloadListEvents(payload, toghUser, filterEvents);
         }
@@ -139,7 +141,7 @@ public class RestEventController {
     public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
-            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, "Not connected");
+            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         Long eventId = RestTool.getLong(inviteData, "eventid", null);
         List<Long> listUsersId= RestTool.getListLong(inviteData, "listUsersid", null);
@@ -206,8 +208,9 @@ public class RestEventController {
         payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId());
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
         payload.put( RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
+        payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
         payload.put( RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity);
-        payload.put( RestJsonConstants.CST_STATUS, LogEventFactory.isError( eventOperationResult.listEvents) ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
+        payload.put( RestJsonConstants.CST_STATUS, LogEventFactory.isError( eventOperationResult.listLogEvents) ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
 
         return payload;
     }
@@ -226,7 +229,7 @@ public class RestEventController {
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
     } else {
         for (EventEntity event : eventResult.listEvents) {
-            EventController eventController = new EventController(event);
+            EventController eventController = new EventController(factoryService.getEventService(), event);
             listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser)));
         }
         payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);

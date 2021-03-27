@@ -60,6 +60,7 @@ class AuthService {
 	//--------------------------------------- Login
 	login( connectMethod, param, objToCall, fctToCallback ) {
 		console.log("AuthService.login, param="+JSON.stringify(param));
+		
 		this.connectMethod = connectMethod;
 		var self=this;
 		try {

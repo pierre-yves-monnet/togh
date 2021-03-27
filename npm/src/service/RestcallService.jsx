@@ -29,7 +29,11 @@ class RestcallService {
 	
 	// From the URL, complete to have a complete URL
 	getUrl( uri ) {
-		return 'http://localhost:7080/togh'+uri;
+		// console.log("RestCall.geturl : "+window.location.href);
+		var i = window.location.href.indexOf(":",7); // skyp http: or https:
+		var headerUrl = window.location.href.substring(0,i)+":7080/togh";
+		// search something like http://localhost:3000/#
+		return headerUrl+uri; 
 	}
 	
 	

@@ -207,7 +207,7 @@ class Event extends React.Component {
 		//					</div>
 
 		// -----------------	
-		console.log("Event.render : statusEvent="+JSON.stringify(this.state.event.statusEvent)+" Participants="+JSON.stringify(this.state.event.participants)); 
+		// console.log("Event.render : statusEvent="+JSON.stringify(this.state.event.statusEvent)+" Participants="+JSON.stringify(this.state.event.participants)); 
 		return (
 			<div>
 				<div class="row">

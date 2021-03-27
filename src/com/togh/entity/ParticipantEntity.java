@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -44,6 +45,7 @@ public class ParticipantEntity extends UserEntity {
 
     // User attached to this participant
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userid")
     private ToghUserEntity user;
 
     public enum StatusEnum {  INVITED, ACTIF, LEFT }

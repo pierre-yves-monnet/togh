@@ -6,10 +6,16 @@
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-package com.togh.event;
+package com.togh.service.event;
 
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
@@ -19,9 +25,11 @@ import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.repository.EventTaskRepository;
 import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.InvitationResult;
+import com.togh.service.FactoryService;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -37,6 +45,9 @@ public class EventController {
     
     private EventEntity event;
     
+    @Autowired
+    private EventTaskRepository eventTaskRepository;
+
     public EventController(EventService eventService, EventEntity event ) {
         this.event = event;
         this.eventService = eventService;

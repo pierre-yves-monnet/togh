@@ -14,6 +14,8 @@ import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.base.BaseEntity;
 
+import lombok.Data;
+
 /* ******************************************************************************** */
 /*                                                                                  */
 /* For each physical user, an endUser is registered */
@@ -23,7 +25,7 @@ import com.togh.entity.base.BaseEntity;
 
 @Entity
 @Table(name = "TOGHUSER")
-public class ToghUserEntity extends BaseEntity {
+public @Data class ToghUserEntity extends BaseEntity {
 
     @Column(name = "googleid", length = 100)
     private String googleId;
@@ -92,6 +94,7 @@ public class ToghUserEntity extends BaseEntity {
 		return passwordToCompare.equals(password);
 	}
 
+	/*
 	public String getFirstname() {
 		return firstName;
 	}
@@ -115,7 +118,7 @@ public class ToghUserEntity extends BaseEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+*/
 	/**
 	 * INVITED : an invitation is sent, the user did not confirm yet
 	 *
@@ -127,12 +130,14 @@ public class ToghUserEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	 
 	SourceUserEnum source;
+	/*
 	public void setSource(SourceUserEnum sourceUser) {
         this.source= sourceUser;
     }
     public SourceUserEnum getSource() {
         return source;
     }
+    */
 
     /**
      * Level of privilege
@@ -145,14 +150,39 @@ public class ToghUserEntity extends BaseEntity {
     
     @Column( name="privilegeuser", length=10)
     @Enumerated(EnumType.STRING)
-     
+    @org.hibernate.annotations.ColumnDefault("'USER'")
     PrivilegeUserEnum privilegeUser;
+    
+    /*
     public void setPrivilegeUser(PrivilegeUserEnum privilegeUser) {
         this.privilegeUser= privilegeUser;
     }
     public PrivilegeUserEnum getPrivilegeUser() {
         return privilegeUser;
     }
+    */
+   public enum SubscriptionUserEnum { FREE, PREMIUM, ILLIMITED }
+    
+    @Column( name="subscriptionuser", length=10)
+    @Enumerated(EnumType.STRING)     
+    @org.hibernate.annotations.ColumnDefault("'FREE'")
+    SubscriptionUserEnum subscriptionUser;
+    
+    
+    @Column( name="showtipsuser")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    Boolean showTipsUser;
+    
+    /* 
+      public void setSubscriptionUser(SubscriptionUserEnum subscriptionUser) {
+    
+        this.subscriptionUser= subscriptionUser;
+    }
+    public SubscriptionUserEnum getSubscriptionUser() {
+        return subscriptionUser;
+    }
+    
+    
 	public String getEmail() {
 		return email;
 	}
@@ -199,11 +229,13 @@ public class ToghUserEntity extends BaseEntity {
 	public void setSearchable(boolean searchable ) {
 	    this.searchable = searchable;
 	}
-	
+	*/
+    
+    
 	public String toString() {
 		return getId()+":"+getName() 
 		    + (getGoogleId()!=null ? " Gid@" + getGoogleId() : "")		           
-		    + (getFirstname()!=null ? " " + getFirstname() + " " + getLastName() : "" )
+		    + (getFirstName()!=null ? " " + getFirstName() + " " + getLastName() : "" )
 		    + (getEmail()!=null ? " email:"+ getEmail(): "")
 		    + ")";
 	}
@@ -223,7 +255,8 @@ public class ToghUserEntity extends BaseEntity {
 	// FRIENDACCESS : access is from an LimitedEvent. The user who want to access is registered in this LimitedEvent, so show what the user want to shopw to hist friend
 	// SECRETEVENT : access is from a SECRET event, then show only a first name, nothing else
 	// ADMIN : administrator access, give back everything
-	public enum ContextAccess { SEARCH, PUBLICACCESS, FRIENDACCESS, SECRETACCESS, ADMIN }
+	// MYPROFILE : I want to access my profile
+	public enum ContextAccess { SEARCH, PUBLICACCESS, FRIENDACCESS, SECRETACCESS, ADMIN, MYPROFILE }
 	  /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * @param levelInformation
@@ -273,6 +306,14 @@ public class ToghUserEntity extends BaseEntity {
         
         resultMap.put("label", label.toString());
         resultMap.put("longlabel", longlabel.toString());
+        
+        
+        if (contextAccess == ContextAccess.MYPROFILE) {
+            resultMap.put("subscription", subscriptionUser.toString());
+            resultMap.put("showtipsuser", showTipsUser);
+                
+        }
+            
         return resultMap;
 	}
 

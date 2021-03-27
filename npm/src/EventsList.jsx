@@ -123,7 +123,7 @@ class EventsList extends React.Component {
 		console.log("EventsList.createEvent: http[event/create?]");
 
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.postJson('/api/event/create', this, {}, httpPayload => {
+		restCallService.postJson('/api/event/create', this, {name:"new event"}, httpPayload => {
 			httpPayload.trace("EventList.createEventCallback");
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error"});

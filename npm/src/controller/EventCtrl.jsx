@@ -196,20 +196,12 @@ class EventCtrl {
 	}
 	removeEventChild(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl.removeEventChildFct."+this.ctrlId+" child="+listname)
-		var dataHttp ={ child : value};
-		var httpResponse = new HttpResponseMockup(dataHttp);
 		
-		console.log("EventCtrl.removeEventChildFct callBack now")
- 
-		callbackfct( httpResponse );
-		
-		/*
-		var SlabRecord = SlabRecord.getRemoveList(this.event, listname, value, localisation);
-		this.currentBasketSlabRecord.addSlabRecord( SlabRecord );
+		var slabRemove = SlabRecord.getRemoveList(this.event, listname, value, localisation);
+		this.currentBasketSlabRecord.addSlabRecord( slabRemove );
 		var readyToSendBasket = this.currentBasketSlabRecord;
 		this.currentBasketSlabRecord = new BasketSlabRecord( this );
-		readyToSendBasket.sendToServer( callbackfct );
-		*/
+		readyToSendBasket.sendToServer( callbackfct );		
 	}
 	updateEventChild( listname,value, localisation, callbackfct) {
 		console.log("EventCtrl.updateEventChild."+this.ctrlId+" child="+listname)

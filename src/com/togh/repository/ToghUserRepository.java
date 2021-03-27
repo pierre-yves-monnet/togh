@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.repository;
 
 import java.util.List;
@@ -12,7 +20,7 @@ import com.togh.entity.ToghUserEntity.SourceUserEnum;
 
 public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long>  {
     
-    public ToghUserEntity findById(long id);
+    // public ToghUserEntity findById(long id);
     
     public ToghUserEntity findByEmail(String email);
     

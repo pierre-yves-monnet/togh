@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +26,11 @@ public abstract class BaseEntity {
 
     private String name;
     
-    private LocalDateTime datecreation;
+    @Column(name="datecreation")    
+    private LocalDateTime datecreation =LocalDateTime.now(ZoneOffset.UTC);
 
-    private LocalDateTime datemodification;
+    @Column(name="datemodification")    
+    private LocalDateTime datemodification = LocalDateTime.now(ZoneOffset.UTC);
          
     public BaseEntity( String name ) {
         this.name= name;
@@ -69,7 +72,9 @@ public abstract class BaseEntity {
 		this.datemodification = datemodification;
 	}
 	
-	
+	public void touch() {
+	   this.datemodification = LocalDateTime.now(ZoneOffset.UTC);
+	}
     
 	  /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example

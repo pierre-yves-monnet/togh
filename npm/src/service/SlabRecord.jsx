@@ -51,6 +51,13 @@ class SlabRecord {
 	static getAddList(event, listname, value, localisation) {
 		return new SlabRecord(event, "ADD", listname, value, localisation);
  	}
+
+	static getRemoveList( event, listname, value, localisation) {
+		return new SlabRecord(event, "REMOVE", listname, value, localisation);
+		
+	}
+
+
 	getString() {
 		return this.slabid+" "+this.operation+": ["+this.name+"]="+this.value;
 	}

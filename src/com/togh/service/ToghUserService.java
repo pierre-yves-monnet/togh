@@ -1,6 +1,17 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +27,14 @@ import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
+import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
 import com.togh.repository.ToghUserRepository;
 
 @Service
 public class ToghUserService {
 
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
-    private final static String logHeader = "ThogUserService:";
+    private static final String LOG_HEADER = ToghUserService.class.getName()+":";
 
     @Autowired
     FactoryService factoryService;
@@ -36,7 +48,10 @@ public class ToghUserService {
     private TransactionTemplate transactionTemplate;
 
     public ToghUserEntity getUserFromId(long userId) {
-        return endUserRepository.findById(userId);
+        Optional<ToghUserEntity> toghUserEntity= endUserRepository.findById(userId);
+        if (toghUserEntity.isPresent())
+            return toghUserEntity.get();
+        return null;
     }
 
     public ToghUserEntity getFromEmail(String email) {
@@ -48,15 +63,15 @@ public class ToghUserService {
     }
 
     public void saveUser(ToghUserEntity user) {
-        transactionTemplate = new TransactionTemplate(transactionManager);
-        DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
-        TransactionStatus status = transactionManager.getTransaction(definition);
+        // transactionTemplate = new TransactionTemplate(transactionManager);
+        // DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
+        // TransactionStatus status = transactionManager.getTransaction(definition);
 
         try {
             endUserRepository.save(user);
-            transactionManager.commit(status);
+            // transactionManager.commit(status);
         } catch (Exception ex) {
-            transactionManager.rollback(status);
+            // transactionManager.rollback(status);
         }
 
     }
@@ -70,7 +85,7 @@ public class ToghUserService {
             factoryService.getToghUserService().saveUser(endUser);
             return endUser;
         } catch (Exception e) {
-            logger.severe(logHeader + "Can't create new user: " + e.toString());
+            logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
             return null;
         }
     }
@@ -113,7 +128,7 @@ public class ToghUserService {
 
             return invitationStatus;
         } catch (Exception e) {
-            logger.severe(logHeader + "Can't create new user: " + e.toString());
+            logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
             invitationStatus.toghUser = null;
             return invitationStatus;
         }
@@ -156,4 +171,40 @@ public class ToghUserService {
         searchResult.countUsers = endUserRepository.countPublicUsersOutEvent(firstName, lastName, phoneNumber, email, eventId);
         return searchResult;
     }
+    
+    
+
+
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Privilege */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+    /**
+     * How many item an user can creates in an event ?
+     * @param userEntity
+     * @return
+     */
+    public int getPrivilegesNumberOfItems( ToghUserEntity toghUser ) {
+        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.FREE)
+            return 15;
+        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
+            return 100;
+        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.ILLIMITED)
+            return 1000;
+        // not a FREE user, so this is a very limited one
+        return 2;
+    }
+    /**
+     * Return the map of privilege for this user. Then, the interface can work with these privilege
+     * @param toghUserEntity
+     * @return
+     */
+    public Map<String,Object> getPrivileges(ToghUserEntity toghUser ) {
+        Map<String,Object> result = new HashMap<>();
+        result.put("NBITEMS", getPrivilegesNumberOfItems( toghUser));
+        result.put("PRIVILEGEUSER", toghUser.getPrivilegeUser().toString());
+        return result;
+    }
+
 }

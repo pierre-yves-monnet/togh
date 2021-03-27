@@ -36,7 +36,6 @@ class EventTaskList extends React.Component {
 			event: this.eventCtrl.getEvent(),
 			listlogevents: [],
 			showProperties: {
-				showdates: true,				
 				filterState: "ALL",
 				filterParticipant: "ALL"
 			}
@@ -44,9 +43,10 @@ class EventTaskList extends React.Component {
 
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.addItem 					= this.addItem.bind(this);
-		this.changeParticipant 			= this.changeParticipant.bind(this);
+		this.changeParticipantCallback	= this.changeParticipantCallback.bind(this);
 		this.isTaskHidden 				= this.isTaskHidden.bind(this);
 		this.addTasklistCallback 		= this.addTasklistCallback.bind( this );
+		this.removeItemCallback			= this.removeItemCallback.bind( this );
 	}
 
 
@@ -119,7 +119,7 @@ class EventTaskList extends React.Component {
 				return (
 					<tr key={index}>
 						<td> {this.getTagState(item)}</td>
-						{this.state.showProperties.showdates && <td>
+						{this.state.event.tasklistshowdates && <td>
 							<DatePicker datePickerType="single"
 								onChange={(dates) => {
 									console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
@@ -140,7 +140,7 @@ class EventTaskList extends React.Component {
 							</DatePicker>
 						</td>
 						}
-						{this.state.showProperties.showdates && <td>
+						{this.state.event.tasklistshowdates && <td>
 							<DatePicker datePickerType="single"
 								onChange={(dates) => {
 									console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
@@ -164,19 +164,22 @@ class EventTaskList extends React.Component {
 						<td><TextInput value={item.name} onChange={(event) => this.setAttribut("name", event.target.value, item)} labelText="" ></TextInput></td>
 						<td><TextArea labelText="" value={item.description} onChange={(event) => this.setAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
 						<td>
-							<ChooseParticipant userid={item.who} 
+							<ChooseParticipant userid={item.whoid} 
 								event={this.state.event} 
 								modifyParticipant={true}
 								item={item} 
-								onChangeParticipantfct={this.changeParticipant} />
+								onChangeParticipantfct={this.changeParticipantCallback} />
 						</td>
 
 
 						<td>
 							{this.isShowDelete(item) && <button class="btn btn-danger btn-xs" 
 															onClick={() => this.removeItem(item)} 
-															title={intl.formatMessage({id: "EventTaskList.RemoveThisTask",defaultMessage: "Remove this task"})}>
-															<DashCircle/>
+															title={intl.formatMessage({id: "EventTaskList.RemoveThisTask",defaultMessage: "Remove this task"})}
+															disabled={this.state.inprogress}
+															>
+																{ this.state.inprogress && <InlineLoading/>}															
+																{ ! this.state.inprogress && <DashCircle/> }
 														</button>}
 														
 														
@@ -200,8 +203,8 @@ class EventTaskList extends React.Component {
 					<thead>
 						<tr >
 							<th><FormattedMessage id="EventTaskList.State" defaultMessage="State" /></th>
-							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin" /></th>}
-							{this.state.showProperties.showdates && <th> <FormattedMessage id="EventTaskList.End" defaultMessage="End" /></th>}
+							{this.state.event.tasklistshowdates && <th> <FormattedMessage id="EventTaskList.Begin" defaultMessage="Begin" /></th>}
+							{this.state.event.tasklistshowdates && <th> <FormattedMessage id="EventTaskList.End" defaultMessage="End" /></th>}
 							<th><FormattedMessage id="EventTaskList.Subject" defaultMessage="Subject" /></th>
 							<th><FormattedMessage id="EventTaskList.Description" defaultMessage="Description" /></th>
 							<th><FormattedMessage id="EventTaskList.Who" defaultMessage="Who" /></th>
@@ -220,12 +223,12 @@ class EventTaskList extends React.Component {
 				<table width="100%"><tr>
 					<td style={{ paddingRight: "60px" }}>
 
-						<Toggle labelText="" aria-label="" toggled={this.state.showProperties.showdates}
-							selectorPrimaryFocus={this.state.showProperties.showdates}
+						<Toggle labelText="" aria-label="" toggled={this.state.event.tasklistshowdates}
+							selectorPrimaryFocus={this.state.event.tasklistshowdates}
 							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							onChange={(event) => {
-								this.setCheckboxValue("showdates", event);}}
+								this.setAttributCheckbox("tasklistshowdates", event);}}
 							id="showDates" />
 							
 							
@@ -314,9 +317,9 @@ class EventTaskList extends React.Component {
 			statushidden = true;
 
 		// participant filter now
-		if (this.state.showProperties.filterParticipant === 'MYTASKS' && task.who !== myself.id)
+		if (this.state.showProperties.filterParticipant === 'MYTASKS' && task.whoid !== myself.id)
 			statushidden = true;
-		if (this.state.showProperties.filterParticipant === 'UNAFFECTED' && task.who !== '')
+		if (this.state.showProperties.filterParticipant === 'UNAFFECTED' && task.whoid !== '')
 			statushidden = true;
 		console.log("EventTaskList.isTaskHidden: " + statushidden + " task.status=" + task.status + " filterState=[" + this.state.showProperties.filterState + "] ");
 		return statushidden;
@@ -324,7 +327,7 @@ class EventTaskList extends React.Component {
 
 	// only if the task is not empty	
 	isShowDelete(task) {
-		if (task.what && task.what.length > 0)
+		if (task.name && task.name.length > 0)
 			return false;
 		if (task.description && task.description.length > 0)
 			return false;
@@ -335,30 +338,27 @@ class EventTaskList extends React.Component {
 	setAttribut(name, value, item) {
 		console.log("EventTasklist.setAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 		
-		this.eventCtrl.setAttribut(name, value, item, "/tasklist");
-	/*
-		const { event } = { ...this.state };
-		const currentEvent = event;
-
-		item[name] = value;
-
-		// currentEvent.shoppinglist[0].[name] = value;
-
-		this.setState({ "event": currentEvent });
-		this.props.updateEvent();
-		*/
+		this.eventCtrl.setAttribut(name, value, item, "/tasklist/"+item.id);
+	
 	}
-
-
-	setCheckboxValue(name, value) {
-		let showPropertiesValue = this.state.showProperties;
-		console.log("EventTaskList.setCheckBoxValue set " + name + "<=" + value.target.checked + " showProperties =" + JSON.stringify(showPropertiesValue));
+	setAttributCheckbox(name, value) {		
+		console.log("EventTaskList.setAttributCheckbox set " + name + "<=" + value.target.checked);
 		if (value.target.checked)
-			showPropertiesValue[name] = true;
+			this.state.event[name] = true;
 		else
-			showPropertiesValue[name] = false;
-		this.setState({ "showProperties": showPropertiesValue })
+			this.state.event[name] = false;
+		this.eventCtrl.setAttribut(name, this.state.event[name], this.state.event, "" );
+		this.setState({ event: this.state.event });
 	}
+	changeParticipantCallback( task, userid) {
+		console.log("EventTaskList.changeParticipantCallback user="+JSON.stringify(userid));
+		this.eventCtrl.setAttribut("whoid", userid, task, "/tasklist/"+task.id );
+		task.whoid = userid;
+		this.setState({ event: this.state.event });
+		// console.log("EventShoppinglist.changeParticipantCallback event="+JSON.stringify(this.state.event));
+	}
+
+	
 
 	setSwitcherValue(name, value) {
 		let showPropertiesValue = this.state.showProperties;
@@ -380,7 +380,7 @@ class EventTaskList extends React.Component {
 		console.log("EventTasklist.addItem: addItem item=" + JSON.stringify(this.state.event));
 		this.setState({inprogress:true, listlogevents: [] });
 		// call the server to get an ID on this taskList
-		var newTask = { "status": "PLANNED", "what": "" };
+		var newTask = { "status": "PLANNED", "name": "" };
 		this.eventCtrl.addEventChildFct("tasklist", newTask, "", this.addTasklistCallback);
 	}
 
@@ -390,8 +390,10 @@ class EventTaskList extends React.Component {
 		if (httpPayload.isError()) {
 			// feedback to user is required
 			console.log("EventTasklist.addTasklistCallback: HTTP ERROR ");
+		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+			console.log("EventTasklist.addTasklistCallback:  BAD RECEPTION");
 		} else {
-			var taskToAdd = httpPayload.getData().child;
+			var taskToAdd = httpPayload.getData().childEntity[ 0 ];
 			var event = this.eventCtrl.getEvent();
 			if (httpPayload.getData().status ==="ERROR") {
 				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
@@ -410,32 +412,45 @@ class EventTaskList extends React.Component {
 
 	removeItem(item) {
 		console.log("EventTasklist.removeItem: event=" + JSON.stringify(this.state.event));
+		this.setState({inprogress:true, listlogevents: [] });
 
 		var currentEvent = this.state.event;
 		var listTasks = currentEvent.tasklist;
 		var index = listTasks.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("tasklist", listTasks[index], "", this.removeStepCallback);
-			listTasks.splice(index, 1);
+			this.eventCtrl.removeEventChild("tasklist", listTasks[index].id, "", this.removeItemCallback);
+			// listTasks.splice(index, 1);
 		}
 		// console.log("EventTasklist.removeItem: " + JSON.stringify(listTask));
-		currentEvent.tasklist = listTasks;
+		// currentEvent.tasklist = listTasks;
 		// console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
 
 		this.setState({ "event": currentEvent });
 
 	}
-	removeStepCallback(httpPayLoad) {
-		// already done
+	removeItemCallback(httpPayLoad) {
+		this.setState({inprogress:false});
+		// find the task item to delete
+		if (httpPayLoad.isError()) {
+			// feedback to user is required
+			console.log("EventTasklist.addTasklistCallback: HTTP ERROR ");
+		}
+		else if (httpPayLoad.getData().status==="OK") {
+			var currentEvent = this.state.event;
+			let childId = httpPayLoad.getData().childEntityId[ 0 ];
+			for( var i in currentEvent.tasklist) {
+				if ( currentEvent.tasklist[ i ].id === childId) {
+					currentEvent.tasklist.splice( currentEvent.tasklist[ i ], 1);
+					break;
+				}
+			}
+			this.setState({ "event": currentEvent });
+		}
+		else {
+			// feedback to user is required
+		}
 	}
-	changeParticipant( task, userid) {
-		console.log("EventShoppinglist.changeParticipant user="+JSON.stringify(userid));
-		this.eventCtrl.setAttribut("who", userid, task, "/tasklist" );
-		task.who = userid;
-		this.setState({ event: this.state.event });
-		console.log("EventShoppinglist.changeParticipant event="+JSON.stringify(this.state.event));
-
-	}
+	
 
 
 	getTagState( item ) {

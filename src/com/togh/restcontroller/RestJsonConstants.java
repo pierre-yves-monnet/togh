@@ -20,11 +20,13 @@ package com.togh.restcontroller;
 public class RestJsonConstants {
 
     public static final String CST_PARAM_FILTER_EVENTS = "filterEvents";
+    public static final String CST_PARAM_NAME = "name";
     public static final String CST_LISTLOGEVENTS = "listLogEvents";
     public static final String CST_EVENTID = "eventId";
     public static final String CST_EVENT = "event";
     public static final String CST_LISTEVENTS = "events";
     public static final String CST_CHILDENTITY ="childEntity";
+    public static final String CST_CHILDENTITYID = "childEntityId";
     /**
      * Status may have multiple value (in case of invitation for example), and 2 default value, OK and ERROR, are proposed
      */

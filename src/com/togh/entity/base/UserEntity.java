@@ -16,11 +16,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 
 
 
@@ -43,7 +41,7 @@ public abstract class UserEntity extends BaseEntity {
     @JoinColumn(name = "authorid")
     private ToghUserEntity author;
     
-    @Column(name="ACCESSDATA", length=20)
+    @Column(name="accessdata", length=20)
     private String accessdata = "local";
 
     public UserEntity(ToghUserEntity author, String name) {
@@ -81,7 +79,7 @@ public abstract class UserEntity extends BaseEntity {
 	 */
     public Map<String,Object> getMap(ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
-        if (contextAccess== contextAccess.ADMIN)
+        if (contextAccess== ContextAccess.ADMIN)
             resultMap.put("authorid", this.getAuthorId());
         return resultMap;
     }
