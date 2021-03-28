@@ -32,7 +32,7 @@ class EventPreferences {
 	}
 	
 	getCurrencySymbolPrefix(){
-		console.log("EventPreferences.Prefix ==== entering function")
+		// console.log("EventPreferences.Prefix ==== entering function")
 		var currencyService = FactoryService.getInstance().getCurrencyService();
 		var set = currencyService.getCurrencyInfoByCode(this.currencyCode);
 		console.log("EventPreferences.Prefix.currencycode ==== "+JSON.stringify(this.currencyCode));
