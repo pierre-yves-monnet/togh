@@ -65,7 +65,7 @@ class EventPreferenceCtrl {
 	}
 	
 	getCurrencySymbolPrefix(){
-		console.log("EventPreferenceEntity.getCurrencySymbolPrefix");
+		// console.log("EventPreferenceCtrl.getCurrencySymbolPrefix");
 		var currency = this.getCurrency();
 		if (currency)
 			return currency.prefix;
@@ -75,7 +75,7 @@ class EventPreferenceCtrl {
 	
 	
 	getCurrencySymbolSuffix(){
-		console.log("EventPreferenceEntity.getCurrencySymbolSuffix");
+		// console.log("EventPreferenceCtrl.getCurrencySymbolSuffix");
 		var currency = this.getCurrency();
 		if (currency)
 			return currency.suffix;
