@@ -165,7 +165,11 @@ class Event extends React.Component {
 										labelText={<FormattedMessage id="Event.DurationEvent" defaultMessage="Duration" />}
 										value={this.state.event.durationEvent}
 										onChange={(event) => this.setAttribut("durationEvent", event.target.value)} />
-								</td></tr></table>
+								</td></tr>
+								<tr><td colspan="2">
+									<FormattedMessage id="Event.ExplanationYourTimeZone" defaultMessage="This date is calculated in your time zone" />
+								</td></tr>
+								</table>
 					</div>)
 				}
 				{this.state.event.datePolicy !== 'ONEDATE' && (
