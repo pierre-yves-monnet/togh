@@ -8,61 +8,38 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
 import lombok.Data;
-
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventTask,                                                                      */
+/*  EventExpenseEntity,                                                             */
 /*                                                                                  */
-/*  Manage task in a event                                                          */
+/*  Manage an expense. An expense can be attached in different position :           */ 
+/*   ItineraryStep, ShoppingList, in direct                                         */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
 @Entity
 
-@Table(name = "EVTTASK")
-public @Data class EventTaskEntity extends UserEntity {
+@Table(name = "EVTEXPENSE")
+public @Data class EventExpenseEntity  extends UserEntity {
 
-    public enum TaskStatusEnum {
-        PLANNED, ACTIVE, DONE, CANCEL
-    }
-    @Column(name = "status", length=10)
-    @Enumerated(EnumType.STRING)    
-    private TaskStatusEnum status;
-
+    @Column(name = "budget")
+    private BigDecimal  budget;
     
-    @Column(name = "datestarttask")
-    private LocalDateTime dateStartTask;
-    @Column(name = "dateendtask")
-    private LocalDateTime dateEndTask;
     
-    // name is part of the baseEntity
-    @Column( name="description", length=400)
-    private String description;
-   
-    // User attached to this task (maybe an external user, why not ?
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "whoid")
-    private ToghUserEntity whoId;
-
-    
+    @Column(name = "cost")
+    private BigDecimal  cost;
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * @param levelInformation
@@ -73,15 +50,8 @@ public @Data class EventTaskEntity extends UserEntity {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         
 
-        resultMap.put("status",status==null ? null : status.toString());
-        resultMap.put("datestarttask", EngineTool.dateToString( dateStartTask));
-        resultMap.put("dateendtask", EngineTool.dateToString( dateEndTask));
-        resultMap.put("description", description);
-
-        // we just return the ID here
-        resultMap.put("whoid",whoId==null ? null :  whoId.getId());
-
+        resultMap.put("budget",budget);
+        resultMap.put("cost", cost);
         return resultMap;
     }
-
 }

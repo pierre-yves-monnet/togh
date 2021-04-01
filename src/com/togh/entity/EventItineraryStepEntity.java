@@ -8,7 +8,8 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -21,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.togh.engine.tool.EngineTool;
+
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
@@ -28,7 +30,7 @@ import lombok.Data;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventTask,                                                                      */
+/*  EventItineraryStep,                                                                      */
 /*                                                                                  */
 /*  Manage task in a event                                                          */
 /*                                                                                  */
@@ -37,32 +39,65 @@ import lombok.Data;
 
 @Entity
 
-@Table(name = "EVTTASK")
-public @Data class EventTaskEntity extends UserEntity {
+@Table(name = "EVTITINERARYSTEP")
+public @Data class EventItineraryStepEntity extends UserEntity {
 
-    public enum TaskStatusEnum {
-        PLANNED, ACTIVE, DONE, CANCEL
+    public enum CategoryEnum {
+        POI,BEGIN,END,SHOPPING,AIRPORT,BUS,TRAIN,BOAT,NIGHT,VISIT,RESTAURANT,ENTERTAINMENT
     }
-    @Column(name = "status", length=10)
+    @Column(name = "category", length=15)
     @Enumerated(EnumType.STRING)    
-    private TaskStatusEnum status;
+    private CategoryEnum category;
 
-    
-    @Column(name = "datestarttask")
-    private LocalDateTime dateStartTask;
-    @Column(name = "dateendtask")
-    private LocalDateTime dateEndTask;
-    
     // name is part of the baseEntity
     @Column( name="description", length=400)
     private String description;
-   
-    // User attached to this task (maybe an external user, why not ?
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "whoid")
-    private ToghUserEntity whoId;
 
     
+    @Column( name="datestep", nullable = false)
+    private LocalDate dateStep;
+
+    @Column( name="rownumber", nullable = false)
+    private Integer rownumber;
+
+    
+    // format is HH:MM
+    @Column(name = "visittime", length=5)
+    private String visitTime;
+    
+    
+    @Column(name = "durationtime", length=5)
+    private String durationTime;
+    
+    
+    @Column(name = "geoaddress", length=300)
+    private String geoaddress;
+
+    @Column(name = "geolat")
+    private Double geolat;
+
+    
+    @Column(name = "geolng")
+    private Double geolng;
+
+    
+    @Column(name = "website", length=300)
+    private String website;
+
+    // User attached to this task (maybe an external user, why not ?
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "expenseid")
+    private EventExpenseEntity expense;
+
+    /**
+     * The dateStep is manipulate by the interface, not by the user.
+     */
+    public boolean isAbsoluteLocalDate(String attributName ) {
+        if ("dateStep".equalsIgnoreCase(attributName))
+            return true;
+        return false;
+    }
+
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * @param levelInformation
@@ -72,16 +107,23 @@ public @Data class EventTaskEntity extends UserEntity {
     public Map<String,Object> getMap( ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         
+        resultMap.put("dateStep", EngineTool.dateToString( dateStep));
+        resultMap.put("rownumber", rownumber);
 
-        resultMap.put("status",status==null ? null : status.toString());
-        resultMap.put("datestarttask", EngineTool.dateToString( dateStartTask));
-        resultMap.put("dateendtask", EngineTool.dateToString( dateEndTask));
+        resultMap.put("category",category==null ? null : category.toString());
+        resultMap.put("visitTime", visitTime);
+        resultMap.put("durationTime", durationTime);
         resultMap.put("description", description);
-
-        // we just return the ID here
-        resultMap.put("whoid",whoId==null ? null :  whoId.getId());
+        resultMap.put("geoaddress", geoaddress);
+        resultMap.put("geolat", geolat);
+        resultMap.put("geolng", geolng);
+        resultMap.put("website", website);
+        
+        
+        // Here we attached directly the expense information
+        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess));
+        
 
         return resultMap;
     }
-
 }

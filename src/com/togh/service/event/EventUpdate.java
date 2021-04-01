@@ -9,29 +9,30 @@
 package com.togh.service.event;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.base.BaseEntity;
-import com.togh.repository.EventTaskRepository;
 import com.togh.service.EventService.EventOperationResult;
-import com.togh.service.EventService;
-import com.togh.service.FactoryService;
+import com.togh.service.EventService.LoadEntityResult;
+import com.togh.service.EventService.UpdateContext;
+import com.togh.service.event.EventUpdate.Slab;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -45,31 +46,44 @@ import com.togh.service.FactoryService;
 public class EventUpdate {
 
     private Logger logger = Logger.getLogger(EventUpdate.class.getName());
-    private final static String logHeader = EventUpdate.class.getSimpleName() + ": ";
-
-    @Autowired
-    private EventTaskRepository eventTaskRepository;
+    private static final String LOG_HEADER = EventUpdate.class.getSimpleName() + ": ";
 
     private static final LogEvent eventInvalidUpdateOperation = new LogEvent(EventUpdate.class.getName(), 1, Level.APPLICATIONERROR, "Invalid operation", "This operation failed", "Operation can't be done", "Check error");
+    private static final LogEvent eventCantLocalise = new LogEvent(EventUpdate.class.getName(), 2, Level.ERROR, "Can't localise", "A localisation can't be found, maybe the item is deleted by an another user?", "Operation can't be done", "Refresh your event");
     EventController eventController;
 
-    private enum SlabOperation {
-        UPDATE, ADD
+    public enum SlabOperation {
+        UPDATE, ADD, REMOVE
     }
 
-    private class Slab {
+    public static class Slab {
 
         public SlabOperation operation;
         public String attributName;
         public Object attributValue;
         public String localisation;
+        public BaseEntity baseEntity = null;
 
-
-        protected Slab(Map<String, Object> record) {
+        public Slab(Map<String, Object> record) {
             operation = SlabOperation.valueOf((String) record.get("operation"));
             attributName = (String) record.get("name");
             attributValue = record.get("value");
             localisation = (String) record.get("localisation");
+        }
+
+        public Slab(SlabOperation operation, String attributName, String attributValue, BaseEntity baseEntity) {
+            this.operation = operation;
+            this.attributName = attributName;
+            this.attributValue = attributValue;
+            this.baseEntity = baseEntity;
+        }
+
+        public Long getAttributValueLong() {
+            try {
+                return Long.parseLong(attributValue.toString());
+            } catch (Exception e) {
+                return null;
+            }
         }
     }
 
@@ -77,19 +91,20 @@ public class EventUpdate {
         this.eventController = eventController;
     }
 
-    public EventOperationResult update(List<Map<String, Object>> listSlab) {
+    public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
         EventEntity event = this.eventController.getEvent();
         EventOperationResult eventOperationResult = new EventOperationResult();
-        for (Map<String, Object> recordSlab : listSlab) {
+        for (Slab slab : listSlab) {
             try {
-                Slab slab = new Slab(recordSlab);
                 if (SlabOperation.UPDATE.equals(slab.operation)) {
-                    updateOperation(event, slab, eventOperationResult);
+                    updateOperation(event, slab, updateContext, eventOperationResult);
                 } else if (SlabOperation.ADD.equals(slab.operation)) {
-                    addOperation(event, slab, eventOperationResult);
+                    addOperation(event, slab, updateContext, eventOperationResult);
+                } else if (SlabOperation.REMOVE.equals(slab.operation)) {
+                    removeOperation(event, slab, eventOperationResult);
                 }
             } catch (Exception e) {
-                eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, recordSlab.get("operation") + ":" + recordSlab.get("name")));
+                eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, slab.operation + ":" + slab.attributName));
             }
         }
         if (!listSlab.isEmpty())
@@ -98,20 +113,48 @@ public class EventUpdate {
         return eventOperationResult;
     }
 
-    private void addOperation(EventEntity event, Slab slab, EventOperationResult eventOperationResult) {
+    private void addOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         BaseEntity child = null;
 
-        if (slab.attributName.equals("tasklist")) {
-            child = eventController.getEventService().addTask(event);
+        if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
+            child = new EventTaskEntity();
+        } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
+            child = new EventItineraryStepEntity();
         }
         if (child != null) {
+            @SuppressWarnings("unchecked")
             Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
             for (Entry<String, Object> entrySlab : valueDefault.entrySet()) {
-                updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), eventOperationResult);
+                updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext, eventOperationResult);
+            }
+            // save it now
+            if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
+                child = eventController.getEventService().addTask(event, (EventTaskEntity) child);
+            } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
+                child = eventController.getEventService().addItineraryStep(event, (EventItineraryStepEntity) child);
             }
             eventOperationResult.listChildEntity.add(child);
         }
-        return;
+    }
+
+    /**
+     * Remove operation
+     * 
+     * @param event
+     * @param slab
+     * @param eventOperationResult
+     */
+    private void removeOperation(EventEntity event, Slab slab, EventOperationResult eventOperationResult) {
+
+        if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
+            eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
+            eventOperationResult.listLogEvents.addAll(eventController.getEventService().removeTask(event, slab.getAttributValueLong()));
+        }
+        if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
+            eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
+            eventOperationResult.listLogEvents.addAll(eventController.getEventService().removeItineraryStep(event, slab.getAttributValueLong()));
+        }
+
     }
 
     /**
@@ -121,14 +164,17 @@ public class EventUpdate {
      * @param slab
      * @return
      */
-    private void updateOperation(EventEntity event, Slab slab, EventOperationResult eventOperationResult) {
-        if (slab.localisation.isEmpty())
-            updateEntityOperation(event, slab.attributName, slab.attributValue, eventOperationResult);
+    private void updateOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
+        if (slab.localisation == null || slab.localisation.isEmpty())
+            updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
         else {
             BaseEntity baseEntity = localise(event, slab.localisation);
             if (baseEntity != null) {
-                updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, eventOperationResult);
+                updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
+            } else {
+                eventOperationResult.listLogEvents.add(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
             }
+
         }
         event.touch();
     }
@@ -140,48 +186,124 @@ public class EventUpdate {
      * @param slab
      * @return
      */
-    private void updateEntityOperation(BaseEntity baseEntity, String attributName, Object attributValue, EventOperationResult eventOperationResult) {
-
+    @SuppressWarnings("unchecked")
+    private void updateEntityOperation(BaseEntity baseEntity, String attributName, Object attributValue, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         Object value = null;
-        if (attributValue != null) {
-            Method methodAttribut = searchMethodByName(baseEntity, attributName);
-            if (methodAttribut == null) {
-                eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
-                        + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
-                return;
-            }
-
-            Class returnType = methodAttribut.getReturnType();
-            if (returnType.equals(Double.class)) {
-                value = Double.valueOf(attributValue.toString());
-            } else if (returnType.equals(Long.class)) {
-                value = Long.valueOf(attributValue.toString());
-            } else if (returnType.equals(LocalDateTime.class)) {
-                value = EngineTool.stringToDate(attributValue.toString());;
-            } else if (returnType.equals(String.class)) {
-                value = attributValue.toString();
-            } else if (returnType.isEnum()) {
-                value = Enum.valueOf(returnType, attributValue.toString());
-            } else {
-                value = attributValue;
-            }
+        Method methodAttribut = searchMethodByName(baseEntity, attributName);
+        if (methodAttribut == null) {
+            eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
+                    + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
+            return;
         }
-
-        /*
-         * if (slab.attributValue !=null && "datePolicyEnum".equals( slab.typedata) ) {
-         * slab.attributValue = DatePolicyEnum.valueOf( slab.attributValue.toString());
-         * }
-         */
+        String jpaAttributName = methodAttribut.getName().substring(3);
+        // first letter is a lower case
+        jpaAttributName = jpaAttributName.substring(0, 1).toLowerCase() + jpaAttributName.substring(1);
         try {
-            PropertyUtils.setSimpleProperty(baseEntity, attributName, value);
+            if (attributValue != null) {
+
+                @SuppressWarnings("rawtypes")
+                Class returnType = methodAttribut.getReturnType();
+                if (returnType.equals(Double.class)) {
+                    value = Double.valueOf(attributValue.toString());
+
+                } else if (returnType.equals(BigDecimal.class)) {
+                    value = getBigDecimalFromString(attributValue.toString());
+
+                } else if (returnType.equals(Long.class)) {
+                    value = Long.valueOf(attributValue.toString());
+
+                } else if (returnType.equals(LocalDateTime.class)) {
+                    value = EngineTool.stringToDateTime(attributValue.toString());
+                } else if (returnType.equals(LocalDate.class)) {
+                    long timeZoneOffset = updateContext.timeZoneOffset;
+                    if (baseEntity.isAbsoluteLocalDate(attributName))
+                        timeZoneOffset = 0;
+                    value = EngineTool.stringToDate(attributValue.toString(), timeZoneOffset);
+
+                } else if (returnType.equals(String.class)) {
+                    value = attributValue.toString();
+
+                } else if (returnType.isEnum()) {
+                    value = Enum.valueOf(returnType, attributValue.toString());
+
+                } else if (isClassBaseEntity(returnType)) {
+                    LoadEntityResult loadResult = this.eventController.getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
+                    value = loadResult.entity;
+                    eventOperationResult.listLogEvents.addAll(loadResult.listLogEvents);
+
+                } else
+                    value = attributValue;
+
+            }
+
+            PropertyUtils.setSimpleProperty(baseEntity, jpaAttributName, value);
             baseEntity.touch();
 
         } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, attributName + " <="
+            eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, attributName
+                    + " (JPA=" + jpaAttributName + ")"
+                    + " <="
                     + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
         }
     }
 
+    /**
+     * IsClassEntity
+     */
+    private boolean isClassBaseEntity(Class<?> classToStudy) {
+        while (classToStudy != null) {
+            if (classToStudy.equals(BaseEntity.class))
+                return true;
+            classToStudy = classToStudy.getSuperclass();
+        }
+        return false;
+    }
+
+    /**
+     * value may be a currency, like $33.344. So, remove all non numric expression.
+     * 
+     * @param valueSt
+     * @return
+     * @throws Exception
+     */
+    private BigDecimal getBigDecimalFromString(String valueSt) throws Exception {
+        // french is 2 334,44 ===> One comma only
+        // americain is 2,334.44 ==> One comma and one point. 
+        // so we detect first the format
+        int countComma = 0;
+        int countDot = 0;
+        for (int i = 0; i < valueSt.length(); i++) {
+            if (valueSt.charAt(i) == ',')
+                countComma++;
+            if (valueSt.charAt(i) == '.')
+                countDot++;
+        }
+        NumberFormat numberFormat = null;
+        if ((countComma > 0 && countDot > 0) || countDot == 1) {
+            // americain format, remove ,
+            numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        } else {
+            numberFormat = NumberFormat.getNumberInstance(Locale.FRANCE);
+        }
+        StringBuilder valueExpurged = new StringBuilder();
+        for (int i = 0; i < valueSt.length(); i++) {
+            if (valueSt.charAt(i) >= '0' && valueSt.charAt(i) <= '9')
+                valueExpurged.append(valueSt.charAt(i));
+            if (valueSt.charAt(i) == '.' || valueSt.charAt(i) == ',')
+                valueExpurged.append(valueSt.charAt(i));
+        }
+
+        return new BigDecimal(numberFormat.parse(valueExpurged.toString()).toString());
+    }
+
+    /**
+     * Localise the BaseEntity according the localisation. Localisation is a string like "/tasklist/1"
+     * 
+     * @param baseEntity
+     * @param localisation
+     * @return
+     */
+    @SuppressWarnings("unchecked")
     private BaseEntity localise(BaseEntity baseEntity, String localisation) {
 
         // source is <name>/id/ <<something else 
@@ -197,7 +319,6 @@ public class EventUpdate {
                 if (method == null)
                     return null;
 
-                BaseEntity childIdentify = null;
                 // get the object
                 Object getObject = method.invoke(indexEntity);
                 if (getObject instanceof List) {
@@ -207,8 +328,9 @@ public class EventUpdate {
                     List<BaseEntity> listChildrenEntity = (List<BaseEntity>) getObject;
                     BaseEntity childEntityById = null;
                     for (BaseEntity child : listChildrenEntity) {
-                        if (child.getId() == idEntityLong) {
+                        if (child.getId().equals(idEntityLong)) {
                             childEntityById = child;
+                            break;
                         }
                     }
                     if (childEntityById == null)
@@ -216,21 +338,27 @@ public class EventUpdate {
                     indexEntity = childEntityById;
                 } else if (getObject instanceof BaseEntity)
                     indexEntity = (BaseEntity) getObject;
-                else
-                    return null;
+                else if (getObject == null) {
+                    // time to add this object
+
+                    indexEntity = this.eventController.getEventService().add(nameEntity, indexEntity);
+                    if (indexEntity == null)
+                        return null;
+                }
+
             }
         } catch (Exception e) {
-            logger.severe(logHeader + "Can't localise item [" + localisation + "] currentIndexItem[" + indexEntity.getClass().getName() + "]");
+            logger.severe(LOG_HEADER + "Can't localise item [" + localisation + "] currentIndexItem[" + indexEntity.getClass().getName() + "]");
             return null;
         }
         return indexEntity;
     }
 
     private Method searchMethodByName(BaseEntity baseEntity, String attributName) {
-        String methodName = "get" + attributName.substring(0, 1).toUpperCase() + attributName.substring(1);
-        Method methodAttribut = null;
+        String methodName = "get" + attributName;
+
         for (Method method : baseEntity.getClass().getMethods()) {
-            if (method.getName().equals(methodName))
+            if (method.getName().equalsIgnoreCase(methodName))
                 return method;
         }
         return null;

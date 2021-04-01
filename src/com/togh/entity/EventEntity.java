@@ -44,6 +44,10 @@ import lombok.Data;
 @Table(name = "EVT")
 public @Data class EventEntity extends UserEntity {
 
+    
+    public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
+    public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
+ 
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
 
@@ -106,76 +110,10 @@ public @Data class EventEntity extends UserEntity {
     }
 
     public EventEntity() {
-    };
+    }
 
-    /*
-     * public LocalDateTime getDateEvent() {
-     * return dateEvent;
-     * }
-     * public void setDateEvent(LocalDateTime dateEvent) {
-     * this.dateEvent = dateEvent;
-     * }
-     * public void setTypeEvent(TypeEventEnum typeEvent) {
-     * this.typeEvent = typeEvent;
-     * }
-     * public TypeEventEnum getTypeEvent() {
-     * return typeEvent;
-     * }
-     * public StatusEventEnum getStatusEvent() {
-     * return statusEvent;
-     * }
-     * public void setStatusEvent(StatusEventEnum statusEvent) {
-     * this.statusEvent = statusEvent;
-     * }
-     * public String getDescription() {
-     * return description;
-     * }
-     * public void setDescription(String description) {
-     * this.description = description;
-     * }
-     * public boolean isActif() {
-     * return getStatusEvent().equals(StatusEventEnum.INPREPAR) || getStatusEvent().equals(StatusEventEnum.INPROG);
-     * }
-     * public DatePolicyEnum getDatePolicy() {
-     * return datePolicy;
-     * }
-     * public void setDatePolicy(DatePolicyEnum datePolicy) {
-     * this.datePolicy = datePolicy;
-     * }
-     * public LocalDateTime getDateStartEvent() {
-     * return dateStartEvent;
-     * }
-     * public void setDateStartEvent(LocalDateTime dateStartEvent) {
-     * this.dateStartEvent = dateStartEvent;
-     * }
-     * public LocalDateTime getDateEndEvent() {
-     * return dateEndEvent;
-     * }
-     * public void setDateEndEvent(LocalDateTime dateEndEvent) {
-     * this.dateEndEvent = dateEndEvent;
-     * }
-     * public void setParticipants(List<ParticipantEntity> participants) {
-     * this.participants = participants;
-     * }
-     * public String getTimeevent() {
-     * return timeevent;
-     * }
-     * public void setTimeevent(String timeevent) {
-     * this.timeevent = timeevent;
-     * }
-     * public String getDuration() {
-     * return duration;
-     * }
-     * public void setDuration(String duration) {
-     * this.duration = duration;
-     * }
-     * public ScopeEnum getScope() {
-     * return scope;
-     * }
-     * public void setScope(ScopeEnum scope) {
-     * this.scope = scope;
-     * }
-     */
+
+    
 
     /**
      * getRealTimeUtc
@@ -188,7 +126,7 @@ public @Data class EventEntity extends UserEntity {
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Participants                                                                     */
+    /* Participants */
     /*                                                                                  */
     /* ******************************************************************************** */
 
@@ -214,6 +152,49 @@ public @Data class EventEntity extends UserEntity {
         participants.add(participant);
         return participant;
     }
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Itinerary */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    @Column(name = "itineraryshowmap")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean itineraryShowMap;
+
+    @Column(name = "itineraryshowdetails")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean itineraryShowDetails;
+
+    @Column(name = "itineraryshowexpenses")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean itineraryShowExpenses;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "eventid")
+    @OrderBy("rownumber")
+    private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
+
+    public EventItineraryStepEntity addItineraryStep(EventItineraryStepEntity oneStep) {
+        itineraryStepList.add(oneStep);
+        return oneStep;
+    }
+
+    /**
+     * Remove a task.
+     * 
+     * @param task
+     * @return true if the task exist and is removed, false else
+     */
+    public boolean removeItineraryStep(EventItineraryStepEntity oneStep) {
+        for (EventItineraryStepEntity stepIterator : itineraryStepList) {
+            if (stepIterator.getId().equals(oneStep.getId())) {
+                taskList.remove(stepIterator);
+                return true;
+            }
+        }
+        return false;
+    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -234,10 +215,11 @@ public @Data class EventEntity extends UserEntity {
         return onetask;
     }
 
-   /* public List<EventTaskEntity> getTasksList() {
-        return taskList;
-    }
-*/
+    /*
+     * public List<EventTaskEntity> getTasksList() {
+     * return taskList;
+     * }
+     */
     /**
      * Remove a task.
      * 
@@ -253,8 +235,7 @@ public @Data class EventEntity extends UserEntity {
         }
         return false;
     }
-    
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Serialization */
@@ -270,8 +251,12 @@ public @Data class EventEntity extends UserEntity {
         resultMap.put("typeEvent", typeEvent == null ? null : typeEvent.toString());
         resultMap.put("statusEvent", statusEvent == null ? null : statusEvent.toString());
         resultMap.put("description", description);
-        resultMap.put("tasklistshowdates", taskListShowDates);
         
+        resultMap.put("tasklistshowdates", taskListShowDates);
+        resultMap.put("itineraryshowmap", itineraryShowMap);
+        resultMap.put("itineraryshowdetails",itineraryShowDetails);
+        resultMap.put("itineraryshowexpenses", itineraryShowExpenses);
+
         if (contextAccess != ContextAccess.PUBLICACCESS) {
             resultMap.put("datePolicy", datePolicy == null ? null : datePolicy.toString());
         }
@@ -287,7 +272,16 @@ public @Data class EventEntity extends UserEntity {
             for (EventTaskEntity tasks : taskList) {
                 listTasksMap.add(tasks.getMap(contextAccess));
             }
-            resultMap.put("tasklist", listTasksMap);
+            resultMap.put(CST_SLABOPERATION_TASKLIST, listTasksMap);
+            
+            // get task
+            List<Map<String, Object>> listItineraryStepMap = new ArrayList<>();
+            for (EventItineraryStepEntity itineraryStep : itineraryStepList) {
+                listItineraryStepMap.add(itineraryStep.getMap(contextAccess));
+            }
+            resultMap.put(CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
+       
+            
         }
 
         return resultMap;
@@ -303,6 +297,9 @@ public @Data class EventEntity extends UserEntity {
         resultMap.put("datePolicy", datePolicy.toString());
         resultMap.put("typeEvent", typeEvent == null ? null : typeEvent.toString());
         resultMap.put("statusEvent", statusEvent == null ? null : statusEvent.toString());
+
+
+        
         return resultMap;
     }
 

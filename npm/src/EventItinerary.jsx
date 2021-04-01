@@ -25,6 +25,8 @@ import * as GeocodeConstant from  './component/GoogleAddressGeocode';
 
 import GoogleMapDisplay from './component/GoogleMapDisplay';
 
+import * as userFeedbackConstant from './component/UserFeedback';
+import UserFeedback  from './component/UserFeedback';
 
 const ITINERARYITEM_POI 		= "POI";
 const ITINERARYITEM_BEGIN		= "BEGIN";
@@ -35,7 +37,7 @@ const ITINERARYITEM_BUS			= "BUS";
 const ITINERARYITEM_TRAIN		= "TRAIN";
 const ITINERARYITEM_BOAT		= "BOAT";
 const ITINERARYITEM_NIGHT		= "NIGHT";
-const ITINERARYITEM_VISITE		= "VISITE";
+const ITINERARYITEM_VISIT		= "VISIT";
 const ITINERARYITEM_RESTAURANT	= "RESTAURANT";
 const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
 
@@ -57,23 +59,29 @@ class EventItinerary extends React.Component {
 		
 		this.state = {
 			event: this.eventCtrl.getEvent(),
-			show : {
-				showItineraryMap: true,
-				showExpense : false
-				
+			operation: {
+				inprogress: false,
+				label:"",
+				status:"",
+				result:"",
+				listlogevents: [] 
 			}
 		};
-		console.log("EventItinerary.constructor event="+JSON.stringify(props.event));
+		console.log("EventItinerary.constructor event="+JSON.stringify(this.eventCtrl.getEvent()));
 		
 		// show : OFF, ON, COLLAPSE
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.addStep 				= this.addStep.bind(this);
-		this.upItem					= this.upItem.bind( this );
-		this.setCheckboxValue	 	= this.setCheckboxValue.bind( this);
-		this.downItem				= this.downItem.bind( this );
-		this.moveItemOneDirection	= this.moveItemOneDirection.bind( this );
 		this.addStepCallback		= this.addStepCallback.bind( this );
+
+		this.removeStep				= this.removeStep.bind(this );
 		this.removeStepCallback		= this.removeStepCallback.bind( this );
+		this.upItem					= this.upItem.bind( this );
+		this.downItem				= this.downItem.bind( this );
+		this.moveStepOneDirection	= this.moveStepOneDirection.bind( this );
+
+		this.setAttributCheckbox	 	= this.setAttributCheckbox.bind( this);
+		this.reorderList				= this.reorderList.bind( this);
 	}
 
 
@@ -85,7 +93,7 @@ class EventItinerary extends React.Component {
 
 	// --------------------------------- render
 	render() {
-		console.log("EventItinerary.render: showProperties=" + JSON.stringify(this.state.showPropertiesValue)+" event="+JSON.stringify(this.state.event));
+		console.log("EventItinerary.render:  itineraryList="+JSON.stringify(this.state.event.itinerarysteplist));
 
 		var toolService = FactoryService.getInstance().getToolService();
 
@@ -98,6 +106,15 @@ class EventItinerary extends React.Component {
 				userTipsText={<FormattedMessage id="EventItinerary.ItineraryTip" defaultMessage="List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary" />}
 				/>
 				);
+		resultHtml.push(
+			<UserFeedback inprogress= {this.state.operation.inprogress}
+				label= {this.state.operation.label}
+				status= {this.state.operation.status}
+				result= {this.state.operation.result}
+				listlogevents= {this.state.operation.listlogevents} />
+		);
+
+				
 		// let's create a list of days.
 		var dateStart = null;
 		var dateEnd = null;
@@ -136,27 +153,31 @@ class EventItinerary extends React.Component {
 			(<div class="row">
 				<div class="col">
 					<Toggle labelText="" aria-label="" 
+						toggled={this.state.event.itineraryshowmap}
+						selectorPrimaryFocus={this.state.event.itineraryshowmap}
 						labelA={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowItineraryMap" defaultMessage="Show itinerary map"/>}
-						onChange={(event) => this.setCheckboxValue( "showItineraryMap", event )}
-						defaultToggled={this.state.show.showItineraryMap}
+						onChange={(event) => this.setAttributCheckbox( "itineraryshowmap", event )}
 						id="showitinerarymap" />
 				</div>
 				<div class="col">
 					<Toggle labelText="" aria-label="" 
+						toggled={this.state.event.itineraryshowdetails}
+						selectorPrimaryFocus={this.state.event.itineraryshowdetails}
 						labelA={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowDetail" defaultMessage="Show Detail"/>}
-						onChange={(event) => {console.log("Eventitinerary.toggleDetail:"+ event);this.setCheckboxValue( "showDetail", event )} }
-						defaultToggled={this.state.show.showDetail}
+						onChange={(event) => {this.setAttributCheckbox( "itineraryshowdetails", event )} }
 						id="showDetail" />
 				</div>
 				<div class="col">
 					<Toggle  labelText="" aria-label="" 
+						toggled={this.state.event.itineraryshowexpenses}
+						selectorPrimaryFocus={this.state.event.itineraryshowexpenses}
 						labelA={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
 						labelB={<FormattedMessage id="EventItinerary.ShowExpense" defaultMessage="Show Expense"/>}
-						onChange={(event) => this.setCheckboxValue( "showExpense", event )}
-						defaultToggled={this.state.show.showExpense}
-						disabled={this.state.show.showDetail === false}
+						onChange={(event) => this.setAttributCheckbox( "itineraryshowexpenses", event )}
+						defaultToggled={this.state.event.itineraryshowexpenses}
+						disabled={this.state.event.itineraryshowDetail === false}
 						id="showexpense" />
 				</div>
 			</div> )
@@ -225,9 +246,9 @@ class EventItinerary extends React.Component {
 			// now attach all events on this day - ok, we parse again the list, but reminber this is a 31 lines * 200 lines each so total is 6000 iteration - moden browser can hander that isn't it?
 			var listMarkers = [];
 			var countStepsInTheDay=0;
-			for (var j in this.state.event.itinerarylist) {
-				var stepinlist = this.state.event.itinerarylist[ j ];
-				if (toolService.getDayOfDate(stepinlist.datestep) === toolService.getDayOfDate(dateIndex)) {
+			for (var j in this.state.event.itinerarysteplist) {
+				var stepinlist = this.state.event.itinerarysteplist[ j ];
+				if (toolService.getDayOfDate(stepinlist.dateStep) === toolService.getDayOfDate(dateIndex)) {
 					// console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
 					var line = (<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
 										<div class="container">
@@ -236,13 +257,13 @@ class EventItinerary extends React.Component {
 									</div> );
 					countStepsInTheDay++;
 					if (stepinlist.geolat)
-						listMarkers.push({ lat: stepinlist.geolat, lng: stepinlist.geolng, text:stepinlist.title, category:stepinlist.category });
+						listMarkers.push({ lat: stepinlist.geolat, lng: stepinlist.geolng, text:stepinlist.name, category:stepinlist.category });
 					listItineraryListHtml.push( line ); 									
 				}
 			}
 			
 			// calculate the itinerary of the day
-			if ( this.state.show.showItineraryMap && countStepsInTheDay>0) {
+			if ( this.state.event.itineraryshowmap && countStepsInTheDay>0) {
 				// console.log("EventItinerary.renderCalendar: Draw map of the day "+JSON.stringify(listMarkers));
 
 				if (listMarkers.length ==0) 
@@ -254,7 +275,7 @@ class EventItinerary extends React.Component {
 			// advance one day
 			dateIndex.setDate( dateIndex.getDate() + 1);
 		}
-		console.log("EventItinerary.renderCalendar : end")
+		// console.log("EventItinerary.renderCalendar : end")
 		return (  listItineraryListHtml );
 		
 		
@@ -266,8 +287,8 @@ class EventItinerary extends React.Component {
 	renderList() {
 		var listItineraryListHtml = [];
 		
-		for (var j in this.state.event.itinerarylist) {
-			var stepinlist = this.state.event.itinerarylist[ j ];
+		for (var j in this.state.event.itinerarysteplist) {
+			var stepinlist = this.state.event.itinerarysteplist[ j ];
 			listItineraryListHtml.push( 
 				<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
 					<div class="container"> 
@@ -299,7 +320,7 @@ class EventItinerary extends React.Component {
 				icon: "img/panorama.svg", 
 			 	type: "teal" },
 			{ 	label: intl.formatMessage({id: "EventItineray.Visite",defaultMessage: "Visite"}),
-			 	value: ITINERARYITEM_VISITE,
+			 	value: ITINERARYITEM_VISIT,
 				icon: "img/museum.svg",
 			 	type: "green" },
 			{ 	label: intl.formatMessage({id: "EventItineray.Shopping",defaultMessage: "Shopping"}),
@@ -342,10 +363,7 @@ class EventItinerary extends React.Component {
 		
 		];
 					
-
-				
-							
-		console.log("EventItinerary.renderOneStep showdetails="+this.state.show.showDetail);	
+		// console.log("EventItinerary.renderOneStep showdetails="+this.state.event.itineraryshowdetails);	
 						
 		listLines.push(<div class="row">
 				<div class="col-1">
@@ -353,6 +371,7 @@ class EventItinerary extends React.Component {
 						<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><ArrowUp width="20px"/></button><br/>
 					</div>
 					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )} title="Down this line"><ArrowDown width="20px"/></button>
+					{this.rownumber}
 				</div>	
 				
 				<div class="col-2">
@@ -366,7 +385,7 @@ class EventItinerary extends React.Component {
 										labelText={<FormattedMessage id="EventItineray.VisitTime" defaultMessage="Visit time" />}
 										onChange={(event) => this.setChildAttribut( "visitTime", event.target.value,item )}	/>
 									</td>
-									{ (item.category === ITINERARYITEM_VISITE 
+									{ (item.category === ITINERARYITEM_VISIT 
 										|| item.category === ITINERARYITEM_ENTERTAINMENT
 										|| item.category === ITINERARYITEM_SHOPPING) && (
 										<td style={{paddingLeft: "10px"}}>
@@ -384,10 +403,10 @@ class EventItinerary extends React.Component {
 				<div class="col-2">
 					<TextInput 
 						labelText={<FormattedMessage id="EventItineray.Title" defaultMessage="Title" />} 
-						value={item.title} onChange={(event) => this.setChildAttribut("title", event.target.value, item)} />
+						value={item.name} onChange={(event) => this.setChildAttribut("name", event.target.value, item)} />
 				</div>
 				
-				{this.state.show.showDetail && (<div class="col-4"> 
+				{this.state.event.itineraryshowdetails && (<div class="col-4"> 
 						<TextArea
 							labelText={<FormattedMessage id="EventItineray.Description" defaultMessage="Description" />} 
 							value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" />
@@ -396,17 +415,17 @@ class EventItinerary extends React.Component {
 				<div class="col-1">
 					<table><tr>
 					<td>
-					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} 
+					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeStep(item)} 
 						title={intl.formatMessage({id: "EventItineray.RemoveThisStep",defaultMessage: "Remove this step"})}>
 					<DashCircle/></button>}
 					</td><td>
-						<button class="btn btn-primary btn-xs" onClick={() => this.addStep( item.datestep, item.rownumber+5)} ><PlusCircle/></button>
+						<button class="btn btn-primary btn-xs" onClick={() => this.addStep( item.dateStep, item.rownumber+5)} ><PlusCircle/></button>
 					</td>
 					</tr></table>
 				</div>
 			</div>);
 			
-			if ( this.state.show.showDetail) {
+			if ( this.state.event.itineraryshowdetails) {
 				listLines.push(
 					<div class="row">
 						<div class="col-xl">
@@ -425,10 +444,10 @@ class EventItinerary extends React.Component {
 			
 						</div>
 						<div class="col-md">
-							{ this.state.show.showExpense &&  
+							{this.state.event.itineraryshowexpenses &&  
 								<Expense item={item.expense} 
 									eventCtrl={this.eventCtrl} 
-									parentLocalisation={"/itinerarylist/"+item.id}/>
+									parentLocalisation={"/itinerarysteplist/"+item.id+"/expense"}/>
 							}
 						</div>
 					</div>
@@ -460,20 +479,19 @@ class EventItinerary extends React.Component {
  	*/
 	setChildAttribut(name, value, item) {
 		console.log("EventTasklist.setChildAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
-		this.eventCtrl.setAttribut(name, value, item, "/itinerarylist");
+		this.eventCtrl.setAttribut(name, value, item, "/itinerarysteplist/"+item.id);
 	}
 
 	/** --------------------
  	*/
-	setCheckboxValue(name, value) {
-		
-		let showPropertiesValue = this.state.show;
+	setAttributCheckbox(name, value) {		
+		console.log("EventItinerary.setAttributCheckbox set " + name + "<=" + value.target.checked);
 		if (value.target.checked)
-			showPropertiesValue[name] = true;
+			this.state.event[name] = true;
 		else
-			showPropertiesValue[name] = false;
-		console.log("EventTaskList.setAttributCheckbox set "+name+"="+value.target.checked +" showProperties =" + JSON.stringify(showPropertiesValue));
-		this.setState({ show: showPropertiesValue })
+			this.state.event[name] = false;
+		this.eventCtrl.setAttribut(name, this.state.event[name], this.state.event, "" );
+		this.setState({ event: this.state.event });
 	}
 	
 	// only if the task is not empty	
@@ -505,23 +523,22 @@ class EventItinerary extends React.Component {
 	// same with the down: if this is a ! showdate policy, then the row number does not change and a day +1 is added
 	upItem( showDates, item ) {
 		// console.log("EventItinerary.upItem");
-		this.moveItemOneDirection( item, -1);
+		this.moveStepOneDirection( item, -1);
 	}
 	
 	
 	downItem( showDates, item ) {
 		// console.log("EventItinerary.downItem");
-		this.moveItemOneDirection( item, 1);		
+		this.moveStepOneDirection( item, 1);		
 	}
 
 	/**
 	 */
-	moveItemOneDirection( item, direction) {
+	moveStepOneDirection( item, direction) {
 		var toolService = FactoryService.getInstance().getToolService();
 
 		var	dateStartEvent = toolService.getDateFromString( this.state.event.dateStartEvent );
 		var dateEndEvent   = toolService.getDateFromString( this.state.event.dateEndEvent );
-
 
 		var indexInList = this.getIndexInList ( item );
 		if (indexInList === null) {
@@ -531,50 +548,54 @@ class EventItinerary extends React.Component {
 		// Move top but first in the list
 		if (direction === -1 && indexInList === 0 ) {
 			// first in the list, maybe back for one day ?
-			var newDate = new Date( item.datestep.getTime() - 86400000 );			
+			var newDate = new Date( this.getDateItem(item).getTime() - 86400000 );			
 			// something is wrong here if we are before the startDate!
 			if (newDate.getTime() >= dateStartEvent.getTime() ) {
-				item.datestep = newDate;
+				item.dateStep = newDate;
+				this.setChildAttribut( "dateStep",item.dateStep ,item );
 			}
 			
 		// index start at 0
-		} else if (direction === 1 && indexInList === this.state.event.itinerarylist.length-1 ) {
+		} else if (direction === 1 && indexInList === this.state.event.itinerarysteplist.length-1 ) {
 			// Last in the list, maybe advance for one day ?
-			var newDate = new Date( item.datestep.getTime() + 86400000 );			
+			var newDate = new Date( this.getDateItem( item ).getTime() + 86400000 );			
 			// something is wrong here if we are before the startDate!
 			if (newDate.getTime() <= dateEndEvent.getTime() ) {
-				item.datestep = newDate;
+				item.dateStep = newDate;
+				this.setChildAttribut( "dateStep",item.dateStep ,item );
 			}
 			
 		} else {
 			// we have a guy before (or after). If the guy before is the same day? THen go before it
-			var stepGuy = this.state.event.itinerarylist[ indexInList + direction ];
+			var stepGuy = this.state.event.itinerarysteplist[ indexInList + direction ];
 			if (stepGuy==null) {
 				// not normal : we are not the last in the list ??
 				return;
 			}
 			
-			if ( toolService.getDayOfDate(stepGuy.datestep) === toolService.getDayOfDate(item.datestep  ))
+			if ( toolService.getDayOfDate( this.getDateItem(stepGuy )) === toolService.getDayOfDate( this.getDateItem( item)  ))
 			{
 				// we just past before it
 				item.rownumber = stepGuy.rownumber + (direction * 5);
+				// row number will be recalculated and change after the reorder
 			}
 			else 
 			{
 				// move the day before, keep the same rownumber
-				item.datestep = stepGuy.datestep;
+				item.dateStep = stepGuy.dateStep;
+				this.setChildAttribut( "dateStep",item.dateStep ,item );
 			}
 		}	
 		var currentEvent = this.eventCtrl.getEvent();
-		currentEvent.itinerarylist = this.reorderList( currentEvent.itinerarylist );
+		currentEvent.itinerarysteplist = this.reorderList( currentEvent.itinerarysteplist );
 		this.setState({ "event": currentEvent });
-		this.eventCtrl.updateEventChild( "itinerarylist", currentEvent.itinerarylist, "", (httpPayLoad) => {console.log("EventItinerary.uploadList")});
+		
 			
 	}
 
 	getIndexInList( item ) {
-		for (var i in this.state.event.itinerarylist) {
-			if (item === this.state.event.itinerarylist[ i ]) {
+		for (var i in this.state.event.itinerarysteplist) {
+			if (item === this.state.event.itinerarysteplist[ i ]) {
 				console.log("EventItinerary.getIndexInList found i="+i);
 				return parseInt(i);
 			}
@@ -590,43 +611,67 @@ class EventItinerary extends React.Component {
 			console.log("Eventitinerary.addStep: date is NULL !");
 			return;
 		}
-		
+		var toolService = FactoryService.getInstance().getToolService();
+
 		var datestep = new Date( datestepSt);
 		var currentEvent = this.state.event;
 		
-		console.log("Eventitinerary.addStep: addStep datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarylist));
+		console.log("Eventitinerary.addStep: addStep datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarysteplist));
 
 		
 		if (! rownumber) {
 			// then find it
 			rownumber=0;
-			for (var i in currentEvent.itinerarylist) {
+			for (var i in currentEvent.itinerarysteplist) {
 				// qame date : continue to advance, idea is to be at the end of this step
-				if (currentEvent.itinerarylist[ i ].datestep.getTime() <= datestep )
-					rownumber=currentEvent.itinerarylist[ i ].rownumber;
+				let dateStepIndex = toolService.getDateFromString( currentEvent.itinerarysteplist[ i ].dateStep);
+				
+				if (dateStepIndex.getTime() <= datestep.getTime() )
+					rownumber=currentEvent.itinerarysteplist[ i ].rownumber;
 			}
 			rownumber = rownumber+5;
 		}
 		
 
-		let stepToAdd ={ datestep: datestep, title:"", category: "POI", rownumber: rownumber, expense: {} };
+		let stepToAdd ={ datestep: toolService.getDayStringFromDate( datestep ), name:"", category: "POI", rownumber: rownumber};
 		// call the server to get an ID on this survey
- 		this.eventCtrl.addEventChildFct( "itinerary", stepToAdd, "/", this.addStepCallback);
+		const intl = this.props.intl;
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "EventItinerary.AddingStep",defaultMessage: "Adding a step"}), 
+					listlogevents: [] }});
+
+
+ 		this.eventCtrl.addEventChildFct( "itinerarysteplist", stepToAdd, "", this.addStepCallback);
 	}
 
 	addStepCallback(httpPayload) {
-		console.log("EventItinerary.addStepCallback" );
-	
+		const intl = this.props.intl;
+
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
+		
 		if (httpPayload.isError()) {
-				// feedback to user is required
-				console.log("EventItinerary.addStepCallback: ERROR ");
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
+			console.log("EventItinerary.addStepCallback: ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+				console.log("EventItinerary.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				currentOperation.status= userFeedbackConstant.ERROR;
+				currentOperation.result=intl.formatMessage({id: "EventItinerary.CantAddStep",defaultMessage: "A step can't be added"});
+				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else {
-			var stepToAdd = httpPayload.getData().child;
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "EventItinerary.StepAdded",defaultMessage: "A step is added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+			var stepToAdd = httpPayload.getData().childEntity[0];
+			stepToAdd.expense={};
 			var event = this.eventCtrl.getEvent();
-			var newList= event.itinerarylist.concat( stepToAdd);
-			event.itinerarylist = this.reorderList( newList );
+			var newList= event.itinerarysteplist.concat( stepToAdd );
+			event.itinerarysteplist = this.reorderList( newList );
 			this.setState( { event: event});
 		}
+		this.setState({operation: currentOperation});
 	}
 
 
@@ -636,24 +681,61 @@ class EventItinerary extends React.Component {
 
 	/** --------------------
  	*/
-	removeItem(item) {
-		console.log("Eventitinerary.removeItem: event=" + JSON.stringify(this.state.event));
+	removeStep(item) {
+		const intl = this.props.intl;
+		console.log("Eventitinerary.removeStep: event=" + JSON.stringify(this.state.event));
 
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "Eventitinerary.RemovingStep",defaultMessage: "Removing a step"}), 
+					listlogevents: [] }});
+	
 		var currentEvent = this.eventCtrl.getEvent();
-		var listSteps = currentEvent.itinerarylist;
+		var listSteps = currentEvent.itinerarysteplist;
 		var index = listSteps.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("itinerarylist", listSteps[ index ], "", this.removeStepCallback);
-			listSteps.splice(index, 1);
+			this.eventCtrl.removeEventChild("itinerarysteplist", listSteps[ index ].id, "", this.removeStepCallback);
+			// listSteps.splice(index, 1);
 		}
-		currentEvent.itinerarylist = listSteps;
-		console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.currentEvent));
+		// currentEvent.itineraryStepList = listSteps;
+		console.log("Eventitinerary.removeStep: eventAfter=" + JSON.stringify(this.currentEvent));
 
 		this.setState({ "event": currentEvent });
 	}
 
-	removeStepCallback( httpPayLoad) {
-		// we already delete the steps.
+	removeStepCallback( httpPayload) {
+		const intl = this.props.intl;
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
+
+		// find the task item to delete
+		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
+			console.log("Eventitinerary.addTaskCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+				console.log("Eventitinerary.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				currentOperation.status= userFeedbackConstant.ERROR;
+				currentOperation.result=intl.formatMessage({id: "Eventitinerary.CantRemoveStep",defaultMessage: "The step can't be removed"});
+				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+		} else {
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "Eventitinerary.StepRemoved",defaultMessage: "The step is removed"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+			var currentEvent = this.state.event;
+			let childId = httpPayload.getData().childEntityId[ 0 ];
+			for( var i in currentEvent.itinerarysteplist) {
+				if ( currentEvent.itinerarysteplist[ i ].id === childId) {
+					currentEvent.itinerarysteplist.splice( currentEvent.itinerarysteplist[ i ], 1);
+					break;
+				}
+			}
+			this.setState({ event: currentEvent });
+		}
+		
+		this.setState({ operation: currentOperation});
+
 	}
 	/** --------------------
  	*/
@@ -671,6 +753,9 @@ class EventItinerary extends React.Component {
 		listSteps = listSteps.sort((a, b) => a.rownumber > b.rownumber ? 1 : -1);
 		var rownumber=10;
 		for (var i in listSteps) {
+			if (listSteps[ i ].rownumber !== rownumber) {
+				this.setChildAttribut("rownumber", rownumber, listSteps[ i ]);
+			}
 			listSteps[ i ].rownumber = rownumber;
 			rownumber = rownumber+10;
 		}
@@ -679,7 +764,17 @@ class EventItinerary extends React.Component {
 		return listSteps;	
 	}
 
-	
+	// dateState may be a date or a String
+	getDateItem( item ) {
+		if ( item.dateStep instanceof Date)
+			return item.dateStep;
+		var dateInTimeZone= new Date( item.dateStep);
+		// the dateStap is something like this : "2021-08-02", meaning 08-02 IN MY TIMEZONE.
+		// Buit JS think this is a UTC time, so now we need to move to the UTC date 
+		let timezoneoffset = new Date().getTimezoneOffset();
+		dateInTimeZone= new Date( dateInTimeZone.getTime() + timezoneoffset*60000);
+		return dateInTimeZone;
+	}
 
 }
 export default injectIntl(EventItinerary);

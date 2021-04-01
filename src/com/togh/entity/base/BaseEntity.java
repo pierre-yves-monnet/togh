@@ -16,9 +16,11 @@ import javax.persistence.MappedSuperclass;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 
+import lombok.Data;
+
 @MappedSuperclass
 @Inheritance
-public abstract class BaseEntity {
+public abstract @Data class BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -40,6 +42,8 @@ public abstract class BaseEntity {
     public BaseEntity() {
         
     }
+    
+    /*
 	public Long getId() {
 		return id;
 	}
@@ -70,6 +74,17 @@ public abstract class BaseEntity {
 
 	public void setDatemodification(LocalDateTime datemodification) {
 		this.datemodification = datemodification;
+	}
+	*/
+	/**
+	 * A date may be manipulate by the interface as an Absolute Date. Example, in the InineraryStep, the dateStep is manipulate by the interface as "2021-08_01T00:00:00Z". 
+	 * Then, the time offset must not be calulated here to save the UTC value.
+	 * Each entity MUST redifine this method
+	 * @param attributName
+	 * @return
+	 */
+	public boolean isAbsoluteLocalDate(String attributName ) {
+	    return false;
 	}
 	
 	public void touch() {

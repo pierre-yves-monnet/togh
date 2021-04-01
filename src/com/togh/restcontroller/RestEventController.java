@@ -25,12 +25,14 @@ import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.event.EventController;
+import com.togh.entity.base.BaseEntity;
+import com.togh.service.event.EventController;
 import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.EventResult;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
+import com.togh.service.EventService.UpdateContext;
 import com.togh.service.FactoryService;
 
 /* -------------------------------------------------------------------- */
@@ -192,6 +194,7 @@ public class RestEventController {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         Long eventId = RestTool.getLong(updateMap, "eventid", null);
+        Long timezoneOffset = RestTool.getLong(updateMap, "timezoneoffset", 0L);
         @SuppressWarnings("unchecked")
         List<Map<String,Object>> slabEventList = RestTool.getList(updateMap, "listslab", new ArrayList<>() );
 
@@ -201,15 +204,24 @@ public class RestEventController {
             throw new ResponseStatusException( HttpStatus.NOT_FOUND,  RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
         }
 
-        
-        EventOperationResult eventOperationResult = factoryService.getEventService().updateEvent(toghUser, event, slabEventList);
+        UpdateContext updateContext  = new UpdateContext();
+        updateContext.toghUser = toghUser;
+        updateContext.timeZoneOffset = timezoneOffset;
+        EventOperationResult eventOperationResult = factoryService.getEventService().updateEvent( event, slabEventList, updateContext);
         
         Map<String, Object> payload = new HashMap<>();
         payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId());
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
-        payload.put( RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
+        
+        ContextAccess contextAccess = EventController.getInstance( factoryService.getEventService(), event).getTypeAccess(toghUser);
+        List<Map<String,Object>> listEntity = new ArrayList<>();
+        for(BaseEntity entity : eventOperationResult.listChildEntity) {
+            listEntity.add( entity.getMap(contextAccess));
+        }
+        payload.put( RestJsonConstants.CST_CHILDENTITY, listEntity);
+        
         payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
-        payload.put( RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity);
+        payload.put( RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity ==null? null : eventOperationResult.eventEntity.getMap(contextAccess) );
         payload.put( RestJsonConstants.CST_STATUS, LogEventFactory.isError( eventOperationResult.listLogEvents) ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
 
         return payload;

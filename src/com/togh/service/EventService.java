@@ -1,8 +1,6 @@
 package com.togh.service;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,18 +14,21 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
-import com.togh.entity.EventTaskEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
+import com.togh.entity.EventExpenseEntity;
+import com.togh.entity.EventItineraryStepEntity;
+import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
-import com.togh.event.EventController;
+import com.togh.repository.EventExpenseRepository;
+import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
 import com.togh.repository.EventTaskRepository;
-import com.togh.repository.ToghUserRepository;
+import com.togh.service.event.EventController;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -58,8 +59,14 @@ public class EventService {
     private EventRepository eventRepository;
 
     @Autowired
+    private EventItineraryStepRepository eventItineraryStepRepository;
+    
+    @Autowired
     private EventTaskRepository eventTaskRepository;
 
+    @Autowired
+    private EventExpenseRepository eventExpenseRepository;
+    
     @Autowired
     private ToghUserService toghUserService;
 
@@ -78,6 +85,11 @@ public class EventService {
 
         public List<Map<String, Serializable>> getEventsJson() {
             return LogEventFactory.getJson(listLogEvents);
+        }
+        public void add(EventOperationResult complement ) {
+            this.listLogEvents.addAll( complement.listLogEvents);
+            this.listChildEntity.addAll( complement.listChildEntity);
+            this.listChildEntityId.addAll( complement.listChildEntityId);
         }
 
     }
@@ -107,19 +119,23 @@ public class EventService {
 
     }
 
-    public EventOperationResult updateEvent(ToghUserEntity toghUser, EventEntity event, List<Map<String, Object>> listSlab) {
+    public static class UpdateContext {
+        public ToghUserEntity toghUser;
+        public long timeZoneOffset;
+    }
+    public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab,UpdateContext updateContext) {
 
         EventController eventConductor = new EventController(this, event);
-        if (!eventConductor.isAccess(toghUser)) {
+        if (!eventConductor.isAccess(updateContext.toghUser)) {
             EventOperationResult eventOperationResult = new EventOperationResult();
             eventOperationResult.listLogEvents.add(eventAccessError);
             return eventOperationResult;
         }
 
-        EventOperationResult eventOperationResult = eventConductor.update(listSlab);
+        EventOperationResult eventOperationResult = eventConductor.update(listSlab, updateContext);
 
         try {
-            event.touch();
+            
             eventRepository.save(event);
         } catch (Exception e) {
             eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
@@ -132,7 +148,7 @@ public class EventService {
     public class EventResult {
 
         public List<EventEntity> listEvents;
-        public List<LogEvent> listLogEvent = new ArrayList();
+        public List<LogEvent> listLogEvent = new ArrayList<>();
     }
 
     public EventResult getEvents(ToghUserEntity toghUser, String filterEvents) {
@@ -207,7 +223,6 @@ public class EventService {
         return eventControler.invite(event, invitedByUser, listUsersId, userInvitedEmail, role, message);
 
     }
-
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Data operation, */
@@ -221,11 +236,37 @@ public class EventService {
      * @param event
      * @return
      */
-    public EventTaskEntity addTask(EventEntity event) {
-        EventTaskEntity child = new EventTaskEntity();
-        eventTaskRepository.save(child);
-        event.addTask(child);
-        return child;
+    public EventItineraryStepEntity addItineraryStep(EventEntity event, EventItineraryStepEntity itineraryStep) {        
+        eventItineraryStepRepository.save(itineraryStep);
+        event.addItineraryStep(itineraryStep);
+        return itineraryStep;
+    }
+    public List<LogEvent> removeItineraryStep(EventEntity event, Long taskId) {
+        List<LogEvent> listLogEvent = new ArrayList<>();
+        Optional<EventItineraryStepEntity> child = eventItineraryStepRepository.findById(taskId);
+        if (child.isPresent()) {
+            eventItineraryStepRepository.delete(child.get());
+            event.removeItineraryStep( child.get() );
+        }
+        return listLogEvent;
+    }
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Data operation, */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    /** Add a task in the event
+     * task is saved, then it got an id. Event is not saved.
+     * @param event
+     * @return
+     */
+    public EventTaskEntity addTask(EventEntity event, EventTaskEntity task) {
+        eventTaskRepository.save(task);
+        event.addTask(task);
+        return task;
     }
     public List<LogEvent> removeTask(EventEntity event, Long taskId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
@@ -236,6 +277,23 @@ public class EventService {
         }
         return listLogEvent;
     }
+    
+    
+    
+    
+    public BaseEntity add(String nameEntity, BaseEntity parentEntity) {
+        if ("expense".equalsIgnoreCase(nameEntity) 
+                && (parentEntity instanceof EventItineraryStepEntity)) {
+            EventExpenseEntity expense = new EventExpenseEntity();            
+            eventExpenseRepository.save(expense);
+            if (parentEntity instanceof EventItineraryStepEntity)
+                ((EventItineraryStepEntity)parentEntity).setExpense(expense);
+            return expense;
+            
+        }
+        return null;
+    }
+
     
     /**
      * Load an entity by its class and an ID
