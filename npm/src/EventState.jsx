@@ -8,13 +8,16 @@
 
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 
 
 // import { Button } from 'carbon-components-react';
 import { Tag } from 'carbon-components-react';
 import { OverflowMenu } from 'carbon-components-react';
 import { OverflowMenuItem } from 'carbon-components-react';
+
+import TagDropdown from './component/TagDropdown';
+
 
 class EventState extends React.Component {
 	// this.props.changeState();
@@ -29,11 +32,39 @@ class EventState extends React.Component {
 	
 //----------------------------------- Render
 	render() {
-		// console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
+		console.log("EventState.render Status="+JSON.stringify(this.state.statusEvent));
 
-		var tagHtml = null;
+		const intl = this.props.intl;
+		
+		const listOptions = [
+			{ label: intl.formatMessage({id: "EventState.InPreparation",defaultMessage: "In Preparation"}),
+			 value: "INPREPAR",
+			 type: "teal" },			
+			{ label: intl.formatMessage({id: "EventState.Actif",defaultMessage: "Actif"}),
+			 value:  "INPROG",
+			 type: "green" },
+			{ label: intl.formatMessage({id: "EventState.Done",defaultMessage: "Done"}),
+			 value:  "CLOSED",
+			 type: "warm-gray" },
+			{ label: intl.formatMessage({id: "EventState.Cancelled",defaultMessage: "Cancelled"}),
+			 value:  "CANCEL",
+			 type: "red" },
+		];
+	
+		
+			
+		return (<TagDropdown listOptions={listOptions} value={this.state.statusEvent} 
+					readWrite={this.state.modifyEvent} 
+				changeState={(value) => {
+					this.props.changeState( value );
+					}} />);
+			
+			
+			
+			/*
+			var tagHtml = null;
 		var dropDownChangeHtml = (<div></div>);
-		if (this.state.modifyEvent) {
+			
 			dropDownChangeHtml = (
 				<OverflowMenu
       				selectorPrimaryFocus={'.'+ this.state.statusEvent}
@@ -57,6 +88,7 @@ class EventState extends React.Component {
                     </FormattedMessage>
 						
 				</OverflowMenu>)
+				
 		}
       
       	if (this.state.statusEvent === 'INPREPAR')
@@ -84,6 +116,7 @@ class EventState extends React.Component {
 
 
 		return (<div>{tagHtml}</div>);
+		*/
 	};
 };
-export default EventState;
+export default injectIntl(EventState);

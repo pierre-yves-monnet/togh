@@ -50,14 +50,14 @@ class EventsList extends React.Component {
 
 	// -------------------------------------------- render
 	render() {
-		console.log("EventList.render listEvents " + JSON.stringify(this.state.events));
+		console.log("EventList.render listEvents=" + JSON.stringify(this.state.events));
 		// no map read, return
 		var listEventsHtml = [];
 		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button>
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event,index) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={index}>
-					<td><button title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}>
+					<td style={{padding: ".5rem .5rem"}}><button title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}>
 							<DropletFill/>
 						</button></td>
 					<td>
@@ -88,11 +88,14 @@ class EventsList extends React.Component {
 					</div>
 				</div>
 				<div class="row">
-					<table class="table table-striped toghtable">
+					<table class="toghtable" style={{padding: ".5rem .5rem", 
+							borderBottomWidth: "1px", 
+							boxShadow: "inset 0 0 0 9999px var(--bs-table-accent-bg)",
+							borderBottomColor: "currentColor"}}>
 						<thead>
-						<tr>
-							<th></th>
-							<th colSpan="2"><FormattedMessage id="EventList.Name" defaultMessage="Name"/></th>
+						<tr >
+							<th ></th>
+							<th colSpan="2" style={{padding: ".5rem .5rem"}}><FormattedMessage id="EventList.Name" defaultMessage="Name"/></th>
 							<th><FormattedMessage id="EventList.Dae" defaultMessage="Date"/></th>
 							<th><FormattedMessage id="EventList.Participants" defaultMessage="Participants"/></th>
 						</tr>
@@ -101,6 +104,7 @@ class EventsList extends React.Component {
 					</table>
 				</div>
 			</div>)
+			// class="table table-striped toghtable"
 	}
 
 	
