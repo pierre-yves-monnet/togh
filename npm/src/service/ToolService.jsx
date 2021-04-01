@@ -52,6 +52,13 @@ class ToolService {
 		return dateReal.toISOString().slice(0,10);
 	}
 	
+	
+	getDayStringFromDate( date) {
+		if (date === null)
+			return null;
+		var st = date.toISOString();
+		return st.substring(0,10);
+	}
 	/**
 	Look all existing code, then return an uniq number
 	In fact, return max( code )+1.

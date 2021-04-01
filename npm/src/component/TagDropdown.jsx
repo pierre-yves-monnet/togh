@@ -36,7 +36,6 @@ class TagDropDown extends React.Component {
 //----------------------------------- Render
 	render() {
 		// console.log("TagDropDown.render value="+this.state.value);
-
 		var tagHtml = null;
 		var dropDownChangeHtml = (<div/>);
 		if (this.state.readWrite) {
@@ -55,8 +54,10 @@ class TagDropDown extends React.Component {
 							);
 						}) }
 				</OverflowMenu>)
+				
 		}
-		var tagHtml= (<div>{dropDownChangeHtml}</div>);
+		// default value if the current option is not found: display the menu then
+		var tagHtml= (<div>{dropDownChangeHtml}</div>);		
 		
 		for (var i in this.state.listOptions) {
 			var option=this.state.listOptions[ i ];

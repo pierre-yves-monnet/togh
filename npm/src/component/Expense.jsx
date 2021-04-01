@@ -67,7 +67,7 @@ class Expense extends React.Component {
 				</div>
 				<div class="card-body">
 					<table><tr><td>
-{<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}<br/>
+						{<FormattedMessage id="Expense.Budget" defaultMessage="Budget" />}<br/>
 					<CurrencyInput class="bx--text-input bx--text__input" 
 						value={this.state.item.budget} 
 						onChangeEvent={(event) => this.setAttribut("budget", event.target.value)}
@@ -79,7 +79,8 @@ class Expense extends React.Component {
 					 
 					</td><td style={{paddingLeft: "10px"}}>
 					{<FormattedMessage id="Expense.Cost" defaultMessage="Cost" />}<br/>
-					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.price} onChangeEvent={(event) => this.setAttribut("price", event.target.value)}
+					<CurrencyInput class="bx--text-input bx--text__input" value={this.state.item.cost} 
+						onChangeEvent={(event) => this.setAttribut("cost", event.target.value)}
 						decimalSeparator="." thousandSeparator=","
 						precision="2"
 						prefix={this.eventCtrl.getEventPreferences().getCurrencySymbolPrefix()}

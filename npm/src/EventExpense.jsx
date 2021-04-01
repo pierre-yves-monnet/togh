@@ -33,17 +33,7 @@ class EventExpense extends React.Component {
 		// console.log("RegisterNewUser.constructor");
 
 		this.state = {
-			event: props.event,
-
-			listexpenses: [{
-				name: 'helko',
-			},
-			{
-				name: 'the',
-			},
-			{
-				name: 'word',
-			}]
+			event: props.event
 
 		};
 		// show : OFF, ON, COLLAPSE

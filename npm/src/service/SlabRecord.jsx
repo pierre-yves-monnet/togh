@@ -17,19 +17,18 @@
 class SlabRecord {
 	
 	
-	constructor( event, operation, name, value, localisation, typeData) {
+	constructor( event, operation, name, value, localisation) {
 		this.operation=operation;
 		this.event = event;
 		this.name = name;
 		this.value = value;
 		this.localisation = localisation;
-		this.typeData = typeData;
 		this.slabid = new Date().getTime();
 		
 	};
 	
 	getJson() {
-		return { operation: this.operation, name: this.name, value: this.value, localisation:this.localisation, typedata: this.typeData};
+		return { operation: this.operation, name: this.name, value: this.value, localisation:this.localisation};
 	}
 	/**
 	* UPDATE name value localisation
@@ -38,11 +37,11 @@ class SlabRecord {
 	*  UPDATE "name" "My birthday" "/"
 	 */
 	static getUpdate (event, name, value, localisation) {
-		return new SlabRecord(event, "UPDATE", name, value, localisation, "");
+		return new SlabRecord(event, "UPDATE", name, value, localisation);
  	}
 	
 	static getUpdateList(event, name, localisation) {
-		return new SlabRecord(event, "LIST", name, null, localisation, "");
+		return new SlabRecord(event, "LIST", name, null, localisation);
  	}
 
 	/**

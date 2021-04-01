@@ -239,7 +239,8 @@ class EventTaskList extends React.Component {
 				<table width="100%"><tr>
 					<td style={{ paddingRight: "60px" }}>
 
-						<Toggle labelText="" aria-label="" toggled={this.state.event.tasklistshowdates}
+						<Toggle labelText="" aria-label="" 
+							toggled={this.state.event.tasklistshowdates}
 							selectorPrimaryFocus={this.state.event.tasklistshowdates}
 							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
 							labelB={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}

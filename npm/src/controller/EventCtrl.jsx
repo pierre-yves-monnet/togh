@@ -84,10 +84,14 @@ class EventCtrl {
 			this.event.participants = [];
 		}
 		
-		if (!this.event.itinerarylist) {
-			log = log.concat("create ItineraryList;");
+		if (!this.event.itinerarysteplist) {
+			log = log.concat("create itinerarysteplist;");
 			this.event.itinerarylist = [];
 		}
+		 this.event.itinerarysteplist.map( (item) => {
+			if (! item.expense)
+				item.expense = {};
+			} );
 
 		if (!this.event.chatlist) {
 			log = log.concat("create chatlist;");

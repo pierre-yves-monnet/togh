@@ -153,7 +153,7 @@ class AdminTranslator extends React.Component {
 		console.log("AdminTranslator.completeDictionary:");
 		this.setState({inprogress: true });
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.getJson('/api/admin/translator/status', this, httpPayload =>{
+		restCallService.getJson('/api/admin/translator/status?', this, httpPayload =>{
 			httpPayload.trace("AdminTranslator.checkDictionary");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {

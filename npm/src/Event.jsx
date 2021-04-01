@@ -79,7 +79,7 @@ class Event extends React.Component {
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.loadEvent 					= this.loadEvent.bind(this);
-		this.changeState 				= this.changeState.bind(this);
+		this.changeStateCallback 		= this.changeStateCallback.bind(this);
 		this.setAttribut 				= this.setAttribut.bind(this);
 		this.updateEventfct 			= this.updateEventfct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
@@ -228,7 +228,7 @@ class Event extends React.Component {
 					</div>
 					<div class="col-sm-5">
 						<div class="fieldlabel">{<FormattedMessage id="Event.Status" defaultMessage="Status" />}</div>
-						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeState} />
+						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeStateCallback} />
 					</div>
 					<div class="col-sm-2">
 						<Select labelText={<FormattedMessage id="Event.Scope" defaultMessage="Scope" />}
@@ -400,9 +400,9 @@ class Event extends React.Component {
 	} //---------------------------- end Render
 
 
-	changeState(event) {
+	changeStateCallback(event) {
 		console.log("Event.setState event ");
-		// this.setAttribut("eventState", event);
+		this.setAttribut("statusEvent", event);
 	}
 
 	
@@ -411,15 +411,6 @@ class Event extends React.Component {
 	setAttribut(name, value) {
 		console.log("Event.setAttribute: attribut:" + name + " <= " + value + " typeof=" + (typeof value) + " EventinProgress=" + JSON.stringify(this.state.event));
 		this.eventCtrl.setAttribut( name, value, this.state.event, "");
-		/*
-		var eventValue = this.state.event;
-		eventValue[name] = value;
-
-		this.setState({ "event": eventValue });
-		if (this.timer)
-			clearTimeout(this.timer);
-		this.timer = this.timer = setTimeout(() => { this.automaticSave(); }, 2000);
-		*/
 	}
 
 
