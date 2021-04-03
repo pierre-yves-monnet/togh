@@ -19,12 +19,16 @@ import Expense from './component/Expense';
 import EventSectionHeader from './component/EventSectionHeader';
 import TagDropdown from './component/TagDropdown';
 
-import SlabRecord from './service/SlabRecord';
+
+import * as userFeedbackConstant from './component/UserFeedback';
+import UserFeedback  from './component/UserFeedback';
 
 
 const STATUS_TODO = "TODO";
 const STATUS_DONE = "DONE";
 const STATUS_CANCEL = "CANCEL";
+
+const NAMEENTITY = "shoppinglist";
 
 // -----------------------------------------------------------
 //
@@ -45,17 +49,26 @@ class EventShoppingList extends React.Component {
 
 		this.state = {
 			event: this.eventCtrl.getEvent(),
-			showProperties: {
-				showDetail: true,
-				showExpense: false
+			operation: {
+				inprogress: false,
+				label:"",
+				status:"",
+				result:"",
+				listlogevents: [] 
 			}
+			
 		};
 		// show : OFF, ON, COLLAPSE
 		console.log("secShoppinglist.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.setAttribut = this.setAttribut.bind(this);
-		this.changeParticipant = this.changeParticipant.bind(this);
-		this.setCheckboxValue = this.setCheckboxValue.bind(this);
-		this.addItem = this.addItem.bind(this);
+		this.setAttribut 					= this.setAttribut.bind(this);
+		this.changeParticipantCallback 		= this.changeParticipantCallback.bind(this);
+		this.setAttributCheckbox 				= this.setAttributCheckbox.bind(this);
+
+		this.addItem 						= this.addItem.bind(this);
+		this.addItemCallback 				= this.addItemCallback.bind( this );
+		this.removeItem						= this.removeItem.bind( this );
+		this.removeItemCallback				= this.removeItemCallback.bind( this );
+		
 	}
 
 
@@ -102,31 +115,30 @@ class EventShoppingList extends React.Component {
 		}
 
 		//------------------------------ show the list
-		var listShoppingListHtml = [];
 
-
-		console.log("EventShoppinglist.render: list calculated from " + JSON.stringify(this.state.event.shoppinglist));
+		console.log("EventShoppinglist.render: list calculated from " + JSON.stringify(this.state.event[ NAMEENTITY ]));
 
 		// class="table table-striped toghtable"
 		return (<div>
 			{headerSection}
-
+			Inproress={this.state.operation.inprogress}
+			<UserFeedback inprogress= {this.state.operation.inprogress}
+				label= {this.state.operation.label}
+				status= {this.state.operation.status}
+				result= {this.state.operation.result}
+				listlogevents= {this.state.operation.listlogevents} />
+			
 			{this.getFilterTaskHtml()}
 
-			<table class="toghtable">
-				<thead>
-					<tr >
-						<th></th>
-						<th><FormattedMessage id="EventShoppingList.What" defaultMessage="What" /></th>
-						{this.state.show.showDetail && <th><FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" /></th>}
-						<th><FormattedMessage id="EventShoppingList.Who" defaultMessage="Who" /></th>
-						<th></th>
-					</tr>
-				</thead>
-				{this.state.event.shoppinglist.map((item, index) => { return (this.getLineShopping(item, index)) })}
+			{this.state.event.shoppinglist.map((item, index) => { return (
+					<div class="toghBlock" style={{backgroundColor: "#fed9a691"}}>
+						<div class="container">
+							{this.getLineShopping(item, index) }
+						</div>
+					</div>)
+				})}
 
-			</table>
-
+			
 		</div>
 		);
 	}
@@ -138,18 +150,20 @@ class EventShoppingList extends React.Component {
 		return (<div class="row">
 			<div class="col">
 				<Toggle labelText="" aria-label=""
+					toggled={this.state.event.shoppinglistshowdetails}
+					selectorPrimaryFocus={this.state.event.shoppinglistshowdetails}
 					labelA={<FormattedMessage id="EventShoppingList.ShowDetails" defaultMessage="Detail" />}
 					labelB={<FormattedMessage id="EventShoppingList.ShowDetails" defaultMessage="Detail" />}
-					onChange={(event) => this.setCheckboxValue("showDetail", event.target.value)}
-					defaultToggled={this.state.showProperties.showDetail}
+					onChange={(event) => this.setAttributCheckbox("shoppinglistshowdetails", event)}
 					id="showDetail" />
 			</div>
 			<div class="col">
 				<Toggle labelText="" aria-label=""
+					toggled={this.state.event.shoppinglistshowexpenses}
+					selectorPrimaryFocus={this.state.event.shoppinglistshowexpenses}
 					labelA={<FormattedMessage id="EventShoppingList.ShowExpense" defaultMessage="Show Expense" />}
 					labelB={<FormattedMessage id="EventShoppingList.ShowExpense" defaultMessage="Show Expense" />}
-					onChange={(event) => this.setCheckboxValue("showExpense", event.target.value)}
-					defaultToggled={this.state.showProperties.showExpense}
+					onChange={(event) => this.setAttributCheckbox("shoppinglistshowexpenses", event)}
 					id="showexpense" />
 			</div>
 		</div>)
@@ -164,19 +178,30 @@ class EventShoppingList extends React.Component {
 		return (
 			<tr key={index}>
 				<td> {this.getTagState(item)}</td>
-				<td><TextInput value={item.what} onChange={(event) => this.setAttribut("what", event.target.value, item)} labelText="" ></TextInput></td>
-				{this.state.show.showDetail && (<td><TextArea labelText="" value={item.description} onChange={(event) => this.setAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>)}
+				<td><TextInput
+					 labelText={<FormattedMessage id="EventShoppingList.What" defaultMessage="What" />}
+						value={item.name} 
+						onChange={(event) => this.setAttribut("name", event.target.value, item)} 
+						class="toghinput"></TextInput></td>
+				{this.state.event.shoppinglistshowdetails && (
+						<td>
+							<TextArea labelText={<FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" />} 
+								value={item.description} 
+								onChange={(event) => this.setAttribut("description", event.target.value, item)} 
+								class="toghinput"></TextArea>
+						</td>)}
 				<td>
-					<ChooseParticipant userid={item.who}
+					<ChooseParticipant userid={item.whoid}
 						event={this.state.event}
 						modifyParticipant={true}
 						item={item}
-						onChangeParticipantfct={this.changeParticipant} />
+						label={<FormattedMessage id="EventShoppingList.Who" defaultMessage="Who" />}
+						onChangeParticipantfct={this.changeParticipantCallback} />
 
-					{this.state.show.showExpense &&
+					{this.state.event.shoppinglistshowexpenses &&
 						<Expense item={item.expense}
 							eventCtrl={this.eventCtrl}
-							parentLocalisation={"/shoppinglist/" + item.id} />
+							parentLocalisation={ NAMEENTITY+"/" + item.id+"/expense"} />
 					}
 
 				</td>
@@ -198,24 +223,31 @@ class EventShoppingList extends React.Component {
 	/** --------------------
 	 * Set attribut 
 		  */
-	setCheckboxValue(name, value) {
-		let showPropertiesValue = this.state.showProperties;
-		console.log("EventTaskList.setCheckBoxValue set " + name + "<=" + value.target.checked + " showProperties =" + JSON.stringify(showPropertiesValue));
+	setAttributCheckbox(name, value) {		
+		console.log("EventShoppinglist.setAttributCheckbox set " + name + "<=" + value.target.checked);
 		if (value.target.checked)
-			showPropertiesValue[name] = true;
+			this.state.event[name] = true;
 		else
-			showPropertiesValue[name] = false;
-		this.setState({ "showProperties": showPropertiesValue })
+			this.state.event[name] = false;
+		this.eventCtrl.setAttribut(name, this.state.event[name], this.state.event, "" );
+		this.setState({ event: this.state.event });
 	}
 
 
 	setAttribut(name, value, item) {
 		console.log("EventTasklist.setAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 
-		this.eventCtrl.setAttribut(name, value, item, "/tasklist");
+		this.eventCtrl.setAttribut(name, value, item, NAMEENTITY+"/"+item.id);
 
 	}
-	
+	changeParticipantCallback(shoppingitem, userid) {
+		console.log("EventShoppinglist.changeParticipant user=" + JSON.stringify(userid));
+		this.eventCtrl.setAttribut("whoid", userid, shoppingitem, NAMEENTITY+"/"+shoppingitem.id);
+		shoppingitem.whoid = userid;
+		this.setState({ event: this.state.event });
+		console.log("EventShoppinglist.changeParticipant event=" + JSON.stringify(this.state.event));
+
+	}
 	// --------------------------------------------------------------
 	// 
 	// Component controls
@@ -224,49 +256,108 @@ class EventShoppingList extends React.Component {
 
 
 	addItem() {
-		console.log("EventShoppinglist.addItem: addItem item=" + JSON.stringify(this.state.event));
+		const intl = this.props.intl;
+
+		console.log("EventShoppinglist.addItem: item=" + JSON.stringify(this.state.event));
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "EventTaskList.AddingItem",defaultMessage: "Adding a item"}), 
+					listlogevents: [] }});
 		// call the server to get an ID on this taskList
-		var newLine = { status: "TODO", what: "", expense: {} };;
-		this.eventCtrl.addEventChildFct("tasklist", newLine, "", this.addItemlistCallback);
+		var newItem = { status: "TODO", name: "" };;
+		this.eventCtrl.addEventChildFct( NAMEENTITY, newItem, "", this.addItemCallback);
 	}
 
-	addItemlistCallback(httpPayload) {
-		console.log("EventShoppinglist.addItemlistCallback ");
+	addItemCallback(httpPayload) {
+		const intl = this.props.intl;
+
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
 		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
-			console.log("EventShoppinglist.addItemlistCallback: ERROR ");
+			console.log("EventShoppinglist.addTaskCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+			console.log("EventShoppinglist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventShoppingList.CantAddTask",defaultMessage: "An item can't be added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
+			console.log("EventTasklist.addTaskCallback:  BAD RECEPTION");
+
 		} else {
-			var taskToAdd = httpPayload.getData().child;
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "EventShoppingList.TaskAdded",defaultMessage: "The item is added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+			var itemToAdd = httpPayload.getData().childEntity[ 0 ];
+			itemToAdd.expense={};
 			var event = this.eventCtrl.getEvent();
-			var newList = event.shoppinglist.concat(taskToAdd);
+			console.log("EventShoppingList.addItemCallback ");
+			var newList = event.shoppinglist.concat(itemToAdd);
 			event.shoppinglist = newList;
 			this.setState({ event: event });
 		}
+		this.setState({operation: currentOperation});
 	}
 
 
 
 	removeItem(item) {
-		console.log("EventShoppinglist.removeItem: event=" + JSON.stringify(this.state.event));
+		const intl = this.props.intl;
 
+		console.log("EventShoppingList.removeTask: event=" + JSON.stringify(this.state.event));
+
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "EventShoppingList.RemovingItem",defaultMessage: "Removing an item"}), 
+					listlogevents: [] }});
+	
 		var currentEvent = this.state.event;
-		var listItems = currentEvent.shoppinglist;
-		var index = listItems.indexOf(item);
+		var listShopping = currentEvent.shoppinglist;
+		var index = listShopping.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("shoppinglist", listItems[index], "", this.removeStepCallback);
-			listItems.splice(index, 1);
+			this.eventCtrl.removeEventChild( NAMEENTITY, listShopping[index].id, "", this.removeItemCallback);
 		}
-		// console.log("EventTasklist.removeItem: " + JSON.stringify(listTask));
-		currentEvent.shoppinglist = listItems;
-		// console.log("EventTasklist.removeItem: eventAfter=" + JSON.stringify(this.state.event));
-
-		this.setState({ "event": currentEvent });
+		
+		this.setState({ event: currentEvent });
 
 	}
-	removeStepCallback(httpPayLoad) {
-		// already done
-	}
+	removeItemCallback(httpPayload) {
+		const intl = this.props.intl;
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
 
+		// find the task item to delete
+		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
+			console.log("EventShoppingList.removeItemCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+				console.log("EventShoppingList.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				currentOperation.status= userFeedbackConstant.ERROR;
+				currentOperation.result=intl.formatMessage({id: "EventShoppingList.CantRemoveItem",defaultMessage: "The item can't be removed"});
+				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+		} else {
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "EventShoppingList.ItemRemoved",defaultMessage: "The item is removed"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+			var currentEvent = this.state.event;
+			let childId = httpPayload.getData().childEntityId[ 0 ];
+			for( var i in currentEvent.shoppinglist) {
+				if ( currentEvent.shoppinglist[ i ].id === childId) {
+					currentEvent.shoppinglist.splice( currentEvent.shoppinglist[ i ], 1);
+					break;
+				}
+			}
+			this.setState({ event: currentEvent });
+		}
+		
+		this.setState({ operation: currentOperation});
+
+	}
 
 
 
@@ -298,13 +389,6 @@ class EventShoppingList extends React.Component {
 			}} />);
 	}
 
-	changeParticipant(task, userid) {
-		console.log("EventShoppinglist.changeParticipant user=" + JSON.stringify(userid));
-		this.eventCtrl.setAttribut("who", userid, task, "/tasklist");
-		task.who = userid;
-		this.setState({ event: this.state.event });
-		console.log("EventShoppinglist.changeParticipant event=" + JSON.stringify(this.state.event));
-
-	}
+	
 }
 export default injectIntl(EventShoppingList);

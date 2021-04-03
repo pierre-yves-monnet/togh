@@ -26,7 +26,6 @@ import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.BaseEntity;
-import com.togh.service.event.EventController;
 import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.EventResult;
@@ -34,6 +33,7 @@ import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.FactoryService;
+import com.togh.service.event.EventController;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -222,7 +222,7 @@ public class RestEventController {
         
         payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
         payload.put( RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity ==null? null : eventOperationResult.eventEntity.getMap(contextAccess) );
-        payload.put( RestJsonConstants.CST_STATUS, LogEventFactory.isError( eventOperationResult.listLogEvents) ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
+        payload.put( RestJsonConstants.CST_STATUS, eventOperationResult.isError() ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
 
         return payload;
     }

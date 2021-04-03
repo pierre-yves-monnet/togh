@@ -27,12 +27,14 @@ import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventItineraryStepEntity;
+import com.togh.entity.EventShoppingListEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.entity.base.UserEntity;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.LoadEntityResult;
 import com.togh.service.EventService.UpdateContext;
-import com.togh.service.event.EventUpdate.Slab;
+
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -104,7 +106,7 @@ public class EventUpdate {
                     removeOperation(event, slab, eventOperationResult);
                 }
             } catch (Exception e) {
-                eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, slab.operation + ":" + slab.attributName));
+                eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, e, slab.operation + ":" + slab.attributName));
             }
         }
         if (!listSlab.isEmpty())
@@ -120,6 +122,8 @@ public class EventUpdate {
             child = new EventTaskEntity();
         } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
             child = new EventItineraryStepEntity();
+        } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
+            child = new EventShoppingListEntity();
         }
         if (child != null) {
             @SuppressWarnings("unchecked")
@@ -132,6 +136,8 @@ public class EventUpdate {
                 child = eventController.getEventService().addTask(event, (EventTaskEntity) child);
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
                 child = eventController.getEventService().addItineraryStep(event, (EventItineraryStepEntity) child);
+            } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
+                child = eventController.getEventService().addShoppingList(event, (EventShoppingListEntity) child);
             }
             eventOperationResult.listChildEntity.add(child);
         }
@@ -148,13 +154,16 @@ public class EventUpdate {
 
         if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
-            eventOperationResult.listLogEvents.addAll(eventController.getEventService().removeTask(event, slab.getAttributValueLong()));
+            eventOperationResult.addLogEvents(eventController.getEventService().removeTask(event, slab.getAttributValueLong()));
         }
-        if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
+        else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
-            eventOperationResult.listLogEvents.addAll(eventController.getEventService().removeItineraryStep(event, slab.getAttributValueLong()));
+            eventOperationResult.addLogEvents(eventController.getEventService().removeItineraryStep(event, slab.getAttributValueLong()));
         }
-
+        else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
+            eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
+            eventOperationResult.addLogEvents(eventController.getEventService().removeShoppingList(event, slab.getAttributValueLong()));
+        }
     }
 
     /**
@@ -172,7 +181,7 @@ public class EventUpdate {
             if (baseEntity != null) {
                 updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
             } else {
-                eventOperationResult.listLogEvents.add(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
+                eventOperationResult.addLogEvent(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
             }
 
         }
@@ -191,7 +200,7 @@ public class EventUpdate {
         Object value = null;
         Method methodAttribut = searchMethodByName(baseEntity, attributName);
         if (methodAttribut == null) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
+            eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
                     + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
             return;
         }
@@ -341,7 +350,7 @@ public class EventUpdate {
                 else if (getObject == null) {
                     // time to add this object
 
-                    indexEntity = this.eventController.getEventService().add(nameEntity, indexEntity);
+                    indexEntity = this.eventController.getEventService().add(nameEntity, (UserEntity) indexEntity);
                     if (indexEntity == null)
                         return null;
                 }

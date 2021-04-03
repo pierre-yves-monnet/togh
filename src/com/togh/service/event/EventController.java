@@ -25,7 +25,6 @@ import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.event.EventUpdate.Slab;
-import com.togh.service.event.EventUpdate.SlabOperation;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -219,7 +218,7 @@ public class EventController {
         
         EventOperationResult operationResult= eventUpdate.update( listSlab, updateContext);
         List<Slab> listComplementSlab = completeConsistant();
-        operationResult.add(  eventUpdate.update( listSlab, updateContext));
+        operationResult.add(  eventUpdate.update( listComplementSlab, updateContext));
         return operationResult;
     }
     

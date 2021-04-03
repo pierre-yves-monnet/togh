@@ -419,10 +419,10 @@ class EventTaskList extends React.Component {
 			// feedback to user is required
 			console.log("EventTasklist.addTaskCallback: HTTP ERROR ");
 		} else if (httpPayload.getData().status ==="ERROR") {
-				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
-				currentOperation.status= userFeedbackConstant.ERROR;
-				currentOperation.result=intl.formatMessage({id: "EventTaskList.CantAddTask",defaultMessage: "A task can't be added"});
-				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+			console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventTaskList.CantAddTask",defaultMessage: "A task can't be added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
 			console.log("EventTasklist.addTaskCallback:  BAD RECEPTION");

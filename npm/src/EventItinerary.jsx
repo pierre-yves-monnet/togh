@@ -250,7 +250,7 @@ class EventItinerary extends React.Component {
 				var stepinlist = this.state.event.itinerarysteplist[ j ];
 				if (toolService.getDayOfDate(stepinlist.dateStep) === toolService.getDayOfDate(dateIndex)) {
 					// console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
-					var line = (<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
+					var line = (<div class="toghBlock" style={{backgroundColor: "#fed9a691"}}>
 										<div class="container">
 											{this.renderOneStep( stepinlist,false, j )}
 										</div>
@@ -409,7 +409,8 @@ class EventItinerary extends React.Component {
 				{this.state.event.itineraryshowdetails && (<div class="col-4"> 
 						<TextArea
 							labelText={<FormattedMessage id="EventItineray.Description" defaultMessage="Description" />} 
-							value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} class="toghinput" />
+							value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} 
+							class="toghinput" />
 					</div> ) }
 				
 				<div class="col-1">

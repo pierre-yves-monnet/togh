@@ -1,6 +1,5 @@
 package com.togh.admin.translate;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 /* ******************************************************************************** */
@@ -18,24 +17,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.google.api.pathtemplate.TemplatedResourceName;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 
@@ -137,7 +131,7 @@ public class ToghDictionary {
 
             // don't use JSONObject.writeJSONString(dictionary, writer) : it write all in one line
             // Move the dictionnary to sentence to the brut dictionnary
-            List<SentenceItem> listSentences = new ArrayList();
+            List<SentenceItem> listSentences = new ArrayList<>();
             for (Entry<String, SentenceItem> entry : dictionary.entrySet())
                 listSentences.add(entry.getValue());
 
@@ -217,7 +211,7 @@ public class ToghDictionary {
 
     public Collection<SentenceItem> getDictionary() {
         if (dictionary == null)
-            return new HashMap().entrySet();
+            return new HashMap<String, SentenceItem>().values();
         return dictionary.values();
     }
 

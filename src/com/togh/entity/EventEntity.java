@@ -30,6 +30,7 @@ import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -42,12 +43,13 @@ import lombok.Data;
 
 @Entity
 @Table(name = "EVT")
+@EqualsAndHashCode(callSuper=true)
 public @Data class EventEntity extends UserEntity {
-
     
     public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
     public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
- 
+    public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
+    
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
 
@@ -189,7 +191,7 @@ public @Data class EventEntity extends UserEntity {
     public boolean removeItineraryStep(EventItineraryStepEntity oneStep) {
         for (EventItineraryStepEntity stepIterator : itineraryStepList) {
             if (stepIterator.getId().equals(oneStep.getId())) {
-                taskList.remove(stepIterator);
+                itineraryStepList.remove(stepIterator);
                 return true;
             }
         }
@@ -238,6 +240,50 @@ public @Data class EventEntity extends UserEntity {
 
     /* ******************************************************************************** */
     /*                                                                                  */
+    /* ShoppingList */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    @Column(name = "shoppinglistshowdetails")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean shoppingListShowDetails;
+
+    @Column(name = "shoppinglistshowexpenses")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean shoppinglistShowExpenses;
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventShoppingListEntity> shoppingList = new ArrayList<>();
+
+    public EventShoppingListEntity addShoppingList(EventShoppingListEntity onetask) {
+        shoppingList.add(onetask);
+        return onetask;
+    }
+
+    /*
+     * public List<EventTaskEntity> getTasksList() {
+     * return taskList;
+     * }
+     */
+    /**
+     * Remove a task.
+     * 
+     * @param task
+     * @return true if the task exist and is removed, false else
+     */
+    public boolean removeShoppingList(EventShoppingListEntity task) {
+        for (EventShoppingListEntity shoppingListIterator : shoppingList) {
+            if (shoppingListIterator.getId().equals(task.getId())) {
+                shoppingList.remove(shoppingListIterator);
+                return true;
+            }
+        }
+        return false;
+    }
+    /* ******************************************************************************** */
+    /*                                                                                  */
     /* Serialization */
     /*                                                                                  */
     /* ******************************************************************************** */
@@ -252,10 +298,14 @@ public @Data class EventEntity extends UserEntity {
         resultMap.put("statusEvent", statusEvent == null ? null : statusEvent.toString());
         resultMap.put("description", description);
         
-        resultMap.put("tasklistshowdates", taskListShowDates);
-        resultMap.put("itineraryshowmap", itineraryShowMap);
-        resultMap.put("itineraryshowdetails",itineraryShowDetails);
-        resultMap.put("itineraryshowexpenses", itineraryShowExpenses);
+        resultMap.put("tasklistshowdates",          taskListShowDates);
+        
+        resultMap.put("itineraryshowmap",           itineraryShowMap);
+        resultMap.put("itineraryshowdetails",       itineraryShowDetails);
+        resultMap.put("itineraryshowexpenses",      itineraryShowExpenses);
+
+        resultMap.put("shoppinglistshowdetails",    shoppingListShowDetails);
+        resultMap.put("shoppinglistshowexpenses",   shoppinglistShowExpenses);
 
         if (contextAccess != ContextAccess.PUBLICACCESS) {
             resultMap.put("datePolicy", datePolicy == null ? null : datePolicy.toString());
@@ -281,6 +331,12 @@ public @Data class EventEntity extends UserEntity {
             }
             resultMap.put(CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
        
+            // get Shoppinglist
+            List<Map<String, Object>> listShoppinglistMap = new ArrayList<>();
+            for (EventShoppingListEntity shoppingListStep : shoppingList) {
+                listShoppinglistMap.add(shoppingListStep.getMap(contextAccess));
+            }
+            resultMap.put(CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
             
         }
 

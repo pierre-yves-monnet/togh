@@ -19,14 +19,17 @@ import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.EventItineraryStepEntity;
+import com.togh.entity.EventShoppingListEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.entity.base.UserEntity;
 import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
+import com.togh.repository.EventShoppingListRepository;
 import com.togh.repository.EventTaskRepository;
 import com.togh.service.event.EventController;
 
@@ -65,6 +68,9 @@ public class EventService {
     private EventTaskRepository eventTaskRepository;
 
     @Autowired
+    private EventShoppingListRepository eventShoppingListRepository;
+    
+    @Autowired
     private EventExpenseRepository eventExpenseRepository;
     
     @Autowired
@@ -91,7 +97,15 @@ public class EventService {
             this.listChildEntity.addAll( complement.listChildEntity);
             this.listChildEntityId.addAll( complement.listChildEntityId);
         }
-
+        public void addLogEvent( LogEvent event ) {
+            listLogEvents.add( event );
+        }
+        public void addLogEvents( List<LogEvent> listEvents ) {
+            listLogEvents.addAll( listEvents );
+        }
+        public boolean isError() {
+            return LogEventFactory.isError( listLogEvents);
+        }
     }
 
     /**
@@ -128,7 +142,7 @@ public class EventService {
         EventController eventConductor = new EventController(this, event);
         if (!eventConductor.isAccess(updateContext.toghUser)) {
             EventOperationResult eventOperationResult = new EventOperationResult();
-            eventOperationResult.listLogEvents.add(eventAccessError);
+            eventOperationResult.addLogEvent(eventAccessError);
             return eventOperationResult;
         }
 
@@ -225,7 +239,7 @@ public class EventService {
     }
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Data operation, */
+    /* Data ItineraryStep                                                               */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
@@ -247,6 +261,33 @@ public class EventService {
         if (child.isPresent()) {
             eventItineraryStepRepository.delete(child.get());
             event.removeItineraryStep( child.get() );
+        } else {
+            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find itineraryStep "+taskId));
+        }
+
+        return listLogEvent;
+    }
+    
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Data ShoppingList                                                               */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    public EventShoppingListEntity addShoppingList(EventEntity event, EventShoppingListEntity shoppingListEntity) {        
+        eventShoppingListRepository.save(shoppingListEntity);
+        event.addShoppingList(shoppingListEntity);
+        return shoppingListEntity;
+    }
+    public List<LogEvent> removeShoppingList(EventEntity event, Long shoppingListId) {
+        List<LogEvent> listLogEvent = new ArrayList<>();
+        Optional<EventShoppingListEntity> child = eventShoppingListRepository.findById(shoppingListId);
+        if (child.isPresent()) {
+            eventShoppingListRepository.delete(child.get());
+            event.removeShoppingList( child.get() );
+        } else {
+            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find ShoppingId "+shoppingListId));
         }
         return listLogEvent;
     }
@@ -274,20 +315,22 @@ public class EventService {
         if (task.isPresent()) {
             eventTaskRepository.delete(task.get());
             event.removeTask( task.get() );
+        } else {
+            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find taskId "+taskId));
         }
+
         return listLogEvent;
     }
     
     
     
     
-    public BaseEntity add(String nameEntity, BaseEntity parentEntity) {
-        if ("expense".equalsIgnoreCase(nameEntity) 
-                && (parentEntity instanceof EventItineraryStepEntity)) {
+    public BaseEntity add(String nameEntity, UserEntity parentEntity) {
+        if ("expense".equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
             EventExpenseEntity expense = new EventExpenseEntity();            
             eventExpenseRepository.save(expense);
-            if (parentEntity instanceof EventItineraryStepEntity)
-                ((EventItineraryStepEntity)parentEntity).setExpense(expense);
+            parentEntity.setExpense(expense);
+           
             return expense;
             
         }

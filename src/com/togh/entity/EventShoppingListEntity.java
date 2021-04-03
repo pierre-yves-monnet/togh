@@ -8,7 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
+
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -20,7 +20,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
@@ -29,31 +28,28 @@ import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventTask,                                                                      */
+/*  EventShoppingList                                                                      */
 /*                                                                                  */
-/*  Manage task in a event                                                          */
+/*  Manage shopping list                                                          */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
 @Entity
 
-@Table(name = "EVTTASK")
+@Table(name = "EVTSHOPPINGLIST")
 @EqualsAndHashCode(callSuper=true)
-public @Data class EventTaskEntity extends UserEntity {
+public @Data class EventShoppingListEntity extends UserEntity {
 
-    public enum TaskStatusEnum {
-        PLANNED, ACTIVE, DONE, CANCEL
+    public enum ShoppingStatusEnum {
+        TODO, DONE, CANCEL
     }
-    @Column(name = "status", length=10, nullable= false)
+    @Column(name = "status", length=10, nullable=false)
+    @org.hibernate.annotations.ColumnDefault("'TODO'")
     @Enumerated(EnumType.STRING)    
-    private TaskStatusEnum status;
+    private ShoppingStatusEnum status;
 
     
-    @Column(name = "datestarttask")
-    private LocalDateTime dateStartTask;
-    @Column(name = "dateendtask")
-    private LocalDateTime dateEndTask;
     
     // name is part of the baseEntity
     @Column( name="description", length=400)
@@ -64,7 +60,15 @@ public @Data class EventTaskEntity extends UserEntity {
     @JoinColumn(name = "whoid")
     private ToghUserEntity whoId;
 
-    
+    // Expense attached to this task 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "expenseid")
+    private EventExpenseEntity expense;
+
+    @Override
+    public boolean acceptExpense() {
+        return true;
+    }
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * @param levelInformation
@@ -76,13 +80,13 @@ public @Data class EventTaskEntity extends UserEntity {
         
 
         resultMap.put("status",status==null ? null : status.toString());
-        resultMap.put("datestarttask", EngineTool.dateToString( dateStartTask));
-        resultMap.put("dateendtask", EngineTool.dateToString( dateEndTask));
         resultMap.put("description", description);
 
         // we just return the ID here
         resultMap.put("whoid",whoId==null ? null :  whoId.getId());
-
+        // Here we attached directly the expense information
+        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess));
+ 
         return resultMap;
     }
 

@@ -48,7 +48,7 @@
   "Event.DatePolicy" : "Politique de date",
 
   "__Event.Description" : "Description",
-  "Event.Description" : "La description",
+  "Event.Description" : "Description",
 
   "__Event.DurationEvent" : "Duration",
   "Event.DurationEvent" : "Durée",
@@ -237,7 +237,7 @@
   "EventItineray.BusStation" : "Station de bus",
 
   "__EventItineray.Description" : "Description",
-  "EventItineray.Description" : "La description",
+  "EventItineray.Description" : "Description",
 
   "__EventItineray.Duration" : "Duration",
   "EventItineray.Duration" : "Durée",
@@ -369,7 +369,7 @@
   "EventShoppingList.Cancelled" : "Annulé",
 
   "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "La description",
+  "EventShoppingList.Description" : "Description",
 
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "Terminé",
@@ -417,7 +417,7 @@
   "EventSurvey.Closed" : "fermé",
 
   "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "La description",
+  "EventSurvey.Description" : "Description",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "En préparation",
@@ -480,7 +480,7 @@
   "EventTaskList.CantRemoveTask" : "La tâche ne peut pas être supprimée",
 
   "__EventTaskList.Description" : "Description",
-  "EventTaskList.Description" : "La description",
+  "EventTaskList.Description" : "Description",
 
   "__EventTaskList.Done" : "Done",
   "EventTaskList.Done" : "Terminé",
@@ -534,7 +534,7 @@
   "EventTaskList.StatePlanned" : "Prévu",
 
   "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "Matière",
+  "EventTaskList.Subject" : "Sujet",
 
   "__EventTaskList.TaskAdded" : "A task is added",
   "EventTaskList.TaskAdded" : "Une tâche est ajoutée",

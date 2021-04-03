@@ -9,7 +9,6 @@
 package com.togh.entity;
 
 import java.time.LocalDate;
-
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -22,11 +21,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.togh.engine.tool.EngineTool;
-
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -40,6 +39,7 @@ import lombok.Data;
 @Entity
 
 @Table(name = "EVTITINERARYSTEP")
+@EqualsAndHashCode(callSuper=true)
 public @Data class EventItineraryStepEntity extends UserEntity {
 
     public enum CategoryEnum {
@@ -84,11 +84,17 @@ public @Data class EventItineraryStepEntity extends UserEntity {
     @Column(name = "website", length=300)
     private String website;
 
-    // User attached to this task (maybe an external user, why not ?
+    // Expense attached to this task 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "expenseid")
     private EventExpenseEntity expense;
 
+    @Override
+    public boolean acceptExpense() {
+        return true;
+    }
+   
+    
     /**
      * The dateStep is manipulate by the interface, not by the user.
      */

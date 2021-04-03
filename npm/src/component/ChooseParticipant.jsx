@@ -24,6 +24,7 @@ class ChooseParticipant extends React.Component {
 		// modifyParticipant : true/false to say if the user can be modified
 		this.state = {
 			value: '',
+			label: props.label,
 			suggestions: [],
 			event: props.event,
 			modifyParticipant: props.modifyParticipant,
@@ -95,6 +96,8 @@ class ChooseParticipant extends React.Component {
 
 
 		return (
+			<div>
+				{this.state.label && (this.state.label)}
 			<Autosuggest
 				suggestions={this.state.suggestions}
 				onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -104,6 +107,7 @@ class ChooseParticipant extends React.Component {
 				inputProps={inputSelectParticipant}
 				renderInputComponent={this.renderInputComponent}
 			/>
+			</div>
 		);
 	}
 

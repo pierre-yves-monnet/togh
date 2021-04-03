@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.togh.entity.ToghUserEntity;
-import com.togh.entity.ToghUserEntity.SourceUserEnum;
 
 public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long>  {
     
