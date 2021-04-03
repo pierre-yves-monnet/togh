@@ -438,8 +438,9 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	Sauvegarde
-	faire marcher la requete JPA "user not register in the event"
-	
+	Factory clée d'API
+	Administration user
+	Administration Statistics usage
 	Depenses
 	Integrer weather  : https://openweathermap.org/api
 	My profile

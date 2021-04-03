@@ -62,6 +62,7 @@ public class TranslateDictionary {
 
     private static final LogEvent eventDictionaryOperationError = new LogEvent(TranslateDictionary.class.getName(), 1, Level.ERROR, "During Dictionary operation", "Operation on dictionnary will failed", "Dictionary is empty", "Check Exception");
     private static final LogEvent eventDictionaryPathNotDefined = new LogEvent(TranslateDictionary.class.getName(), 2, Level.ERROR, "Path to access dictionnary is not setted in the configuration file", "Operation on dictionnaries are not possible", "Dictionaries will not change", "Check configuration file");
+    private static final LogEvent eventDictionaryTranslationSuccess = new LogEvent(TranslateDictionary.class.getName(), 3, Level.SUCCESS, "Translation success", "Translation done with success");
 
     private Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
     private static final String logHeader = TranslateDictionary.class.getName()+":";
@@ -204,6 +205,11 @@ public class TranslateDictionary {
             logger.severe(logHeader + "During operationDictionary " + e + " at " + exceptionDetails);
             translateResult.listEvents.add(new LogEvent(eventDictionaryOperationError, e, e.getMessage()));
         }
+        
+        if (translate && ! LogEventFactory.isError(translateResult.listEvents))
+            translateResult.listEvents.add(eventDictionaryTranslationSuccess);
+        
+        
         return translateResult;
     }
 

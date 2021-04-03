@@ -251,7 +251,7 @@ public class LogEvent {
      * @return
      */
     public Map<String, Serializable> getJson(final boolean withHtml) {
-        final Map<String, Serializable> json = new HashMap<String, Serializable>();
+        final Map<String, Serializable> json = new HashMap<>();
         json.put("number", getNumber());
         json.put("level", getLevel().toString());
         json.put("packageName", stringToJson(getPackageName()));
@@ -261,6 +261,7 @@ public class LogEvent {
         json.put("consequence", stringToJson(getConsequence()));
         json.put("key", getKey());
         json.put("parameters", stringToJson(getParameters()));
+        json.put("eventClassName", getEventClassName() );
         if (withHtml) {
             json.put("html", stringToJson(getHtml()));
         }
@@ -316,9 +317,6 @@ public class LogEvent {
 
     public String getHtmlTitle() {
         final StringBuilder htmlEvent = new StringBuilder();
-
-
-         String className="";
         String titlePopover=getKey();
         StringBuilder contentPopover = new StringBuilder();
         if (getCause() != null && getCause().length() > 0)
@@ -328,24 +326,27 @@ public class LogEvent {
         if (getAction()!=null && getAction().length()>0)
             contentPopover.append("\nAction:" + getAction());
         
-        if (getLevel() == Level.CRITICAL || getLevel() == Level.ERROR) {
-            className="badge bg-danger";
-        } else if (getLevel() == Level.APPLICATIONERROR) {
-            className="badge bg-warning text-dark";
-        } else if (getLevel() == Level.SUCCESS) {
-            className="badge bg-success";
-        } else {
-            className="badge bg-info text-dark";
-        }
+       
 
         // <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
             htmlEvent.append("<button type=\"button\" ");
-            htmlEvent.append(" class=\""+className+"\" ");
+            htmlEvent.append(" class=\""+getEventClassName()+"\" ");
             htmlEvent.append(" data-bs-toggle=\"popover\" ");
             htmlEvent.append(" title=\""+titlePopover+"\"");
             htmlEvent.append(" data-bs-content=\""+ contentPopover.toString()+"\" >");
             htmlEvent.append( getTitle()+"</button>");
         return htmlEvent.toString();
+    }
+    public String getEventClassName() {
+        if (getLevel() == Level.CRITICAL || getLevel() == Level.ERROR) {
+            return "badge bg-danger";
+        } else if (getLevel() == Level.APPLICATIONERROR) {
+            return "badge bg-warning text-dark";
+        } else if (getLevel() == Level.SUCCESS) {
+            return "badge bg-success";
+        } else {
+            return "badge bg-info text-dark";
+        }
     }
 
     /**

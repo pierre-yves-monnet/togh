@@ -27,7 +27,6 @@ class AdminTranslator extends React.Component {
 
 		this.state = {
 			inprogress : false,
-			translateresult: null,
 			message: '',
 			show:'ON',
 			translate : {}
@@ -47,7 +46,7 @@ class AdminTranslator extends React.Component {
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("AdminTranslator.render: visible=" + this.state.show);
+		console.log("AdminTranslator.render: visible=" + this.state.show+ " listevent="+this.state.translate.listEvents);
 		if (this.state.translate) {				
 			console.log("AdminTranslater.render: translate="+JSON.stringify(this.state.translate) );
 		}
@@ -114,16 +113,17 @@ class AdminTranslator extends React.Component {
 							<FormattedMessage id="AdminTranslator.CompleteDictionary" defaultMessage="Complete Dictionary"/>
 						</button>
 						
-
+						<br/><br/>
 
 						<LogEvents listEvents={this.state.translate.listEvents} />
-						{this.state.translateresult && (<div>
+						
+						{this.state.translate && this.state.translate.chronometers && (<div>
 							<FormattedMessage id="AdminTranslator.nbTransations" defaultMessage="Number of translation"/>&nbsp;:&nbsp;
-							{this.state.translateresult.chronometers.translate.nbexecutions}
+							{this.state.translate.chronometers.translate.nbexecutions}
 							&nbsp;,&nbsp;<FormattedMessage id="AdminTranslator.TimeTranslation" defaultMessage="Time of translation"/>&nbsp;:&nbsp;
-							{this.state.translateresult.chronometers.translate.timeinms}
+							{this.state.translate.chronometers.translate.timeinms}
 							&nbsp;,&nbsp;<FormattedMessage id="AdminTranslator.AverageTranslation" defaultMessage="Average (in Milliseconds)"/>&nbsp;:&nbsp;
-							{this.state.translateresult.chronometers.translate.average}
+							{this.state.translate.chronometers.translate.average}
 							</div>
 						)}
 					</div>
@@ -185,7 +185,7 @@ class AdminTranslator extends React.Component {
 			}
 			else {
 				this.setState({ "message": httpPayload.getData().message, 
-						"translateresult": httpPayload.getData() });
+						"translate": httpPayload.getData() });
 			}
 		});
 	}
