@@ -78,6 +78,7 @@ class UserFeedback extends React.Component {
 		if (this.state.status === ERROR) {
 			return (<div style={{fontStyle: "italic", color:"red"}}>{this.state.label} :
 						<FormattedMessage id="UserFeedback.OperationFailed" defaultMessage="Operation Failed" />
+						&nbsp;
 						{this.state.result}
 						)
 						<LogEvents listEvents={this.state.listlogevents} />
@@ -87,6 +88,7 @@ class UserFeedback extends React.Component {
 		
 		return (<div style={{fontStyle: "italic"}}>{this.state.label} :
 						<FormattedMessage id="UserFeedback.OperationSuccessfull" defaultMessage="Success" />
+						&nbsp;
 						{this.state.result}						
 						<LogEvents listEvents={this.state.listlogevents} />
 				</div>) 
