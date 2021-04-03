@@ -56,15 +56,17 @@ class EventsList extends React.Component {
 		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button>
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event,index) =>
-				<tr onClick={() => this.props.homeSelectEvent(event.id)} class="itemcontent" key={index}>
-					<td style={{padding: ".5rem .5rem"}}><button title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}>
-							<DropletFill/>
-						</button></td>
-					<td>
+				<tr onClick={() => this.props.homeSelectEvent(event.id)} 
+				 key={index}>
+					<td >
+						
+							<img src="img/toghEvent.jpg" style={{ width: 60 }}     />
+					</td>
+					<td style={{verticalAlign: "middle"}}>
 						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
 					</td>
-					<td>{event.name}</td>
-					<td>{event.dateevent}</td>
+					<td style={{verticalAlign: "middle"}}>{event.name}</td>
+					<td style={{verticalAlign: "middle"}}>{event.dateevent}</td>
 				</tr>
 			);
 		}
