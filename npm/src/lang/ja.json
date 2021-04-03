@@ -1,7 +1,16 @@
 {
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "請求",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "ダッシュボード",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "グーグル",
+
   "AdminHome.Title" : "管理",
 
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "管理",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -383,11 +392,20 @@
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "1つ追加してください！",
 
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "アイテムの追加",
+
   "__EventShoppingList.Cancel" : "Cancelled",
   "EventShoppingList.Cancel" : "キャンセル",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "キャンセル",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "アイテムを追加できません",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "アイテムを削除できません",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "説明",
@@ -395,11 +413,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "完了",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "アイテムが削除されます",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "買い物リスト",
 
-  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
   "EventShoppingList.NoItem" : "リストにアイテムがありません。",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "アイテムの削除",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "イベントに参加するアイテムのリストがあります。それらをリストし、誰がそれらを購入しなければならないかを決定します",
@@ -409,6 +433,9 @@
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "経費を表示",
+
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "アイテムが追加されます",
 
   "__EventShoppingList.Title" : "Shopping List",
   "EventShoppingList.Title" : "買い物リスト",
@@ -669,6 +696,12 @@
 
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "電話番号",
+
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "アクション",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "結果",
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "サーバーに接続できません",

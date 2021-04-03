@@ -1,7 +1,16 @@
 {
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "청구",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "계기반",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "구글",
+
   "AdminHome.Title" : "관리",
 
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "관리",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -383,11 +392,20 @@
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "하나 추가!",
 
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "항목 추가",
+
   "__EventShoppingList.Cancel" : "Cancelled",
   "EventShoppingList.Cancel" : "취소 된",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "취소 된",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "항목을 추가 할 수 없습니다.",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "항목을 제거 할 수 없습니다.",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "기술",
@@ -395,11 +413,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "끝난",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "항목이 제거되었습니다.",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "쇼핑리스트",
 
-  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
   "EventShoppingList.NoItem" : "목록에 항목이 없습니다.",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "항목 제거",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "이벤트에 참여할 항목 목록이 있습니다. 목록을 작성하고 누가 구입해야하는지 결정하십시오.",
@@ -409,6 +433,9 @@
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "비용 표시",
+
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "항목이 추가됩니다",
 
   "__EventShoppingList.Title" : "Shopping List",
   "EventShoppingList.Title" : "쇼핑리스트",
@@ -669,6 +696,12 @@
 
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "전화 번호",
+
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "동작",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "결과",
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "서버에 연결할 수 없습니다",

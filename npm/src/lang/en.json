@@ -1,5 +1,14 @@
 {
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "Billing",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "Dashboard",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "Google",
+
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "Administration",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -365,8 +374,20 @@
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Add a item in the list",
 
+  "__EventShoppingList.AddOne" : "Add one !",
+  "EventShoppingList.AddOne" : "Add one !",
+
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "Adding a item",
+
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "Cancelled",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "An item can't be added",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "The item can't be removed",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "Description",
@@ -374,8 +395,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "Done",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "The item is removed",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Shopping List",
+
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
+  "EventShoppingList.NoItem" : "You don't have any task in the list.",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "Removing an item",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
@@ -386,6 +416,9 @@
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "Show Expense",
 
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "The item is added",
+
   "__EventShoppingList.ToBring" : "To bring",
   "EventShoppingList.ToBring" : "To bring",
 
@@ -394,6 +427,9 @@
 
   "__EventShoppingList.Who" : "Who",
   "EventShoppingList.Who" : "Who",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+  "EventShoppingList.addItem" : "Add a new item in the list",
 
   "__EventShoppingList.removeItem" : "Remove this item",
   "EventShoppingList.removeItem" : "Remove this item",
@@ -614,6 +650,12 @@
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "Phone number",
 
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "Action",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "Consequence",
+
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Can't Connect To The Server",
 
@@ -684,5 +726,4 @@
   "UserFeedback.OperationSuccessfull" : "Success",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference"
-}
+  "UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference"}

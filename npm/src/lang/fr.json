@@ -1,5 +1,14 @@
 {
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "Facturation",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "Tableau de bord",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "Google",
+
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "Administration",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -9,7 +18,7 @@
   "AdminTranslator.CheckDictionary" : "Vérifier le dictionnaire",
 
   "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-  "AdminTranslator.CompleteDictionary" : "Dictionnaire complet",
+  "AdminTranslator.CompleteDictionary" : "Completer le Dictionnaire",
 
   "__AdminTranslator.MissingSentences" : "Missing sentences",
   "AdminTranslator.MissingSentences" : "Phrases manquantes",
@@ -365,8 +374,20 @@
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Ajouter un élément dans la liste",
 
+  "__EventShoppingList.AddOne" : "Add one !",
+  "EventShoppingList.AddOne" : "Ajoute un !",
+
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "Ajouter un article",
+
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "Annulé",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "Un élément ne peut pas être ajouté",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "L'élément ne peut pas être supprimé",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "Description",
@@ -374,8 +395,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "Terminé",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "L'élément est supprimé",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Liste de courses",
+
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
+  "EventShoppingList.NoItem" : "Vous n'avez aucune tâche dans la liste.",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "Supprimer un élément",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "Vous avez une liste d'éléments à ajouter à l'événement. Listez-les, décidez qui doit les acheter",
@@ -386,6 +416,9 @@
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "Afficher les dépenses",
 
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "L'élément est ajouté",
+
   "__EventShoppingList.ToBring" : "To bring",
   "EventShoppingList.ToBring" : "Apporter",
 
@@ -394,6 +427,9 @@
 
   "__EventShoppingList.Who" : "Who",
   "EventShoppingList.Who" : "Qui",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+  "EventShoppingList.addItem" : "Ajouter un nouvel élément dans la liste",
 
   "__EventShoppingList.removeItem" : "Remove this item",
   "EventShoppingList.removeItem" : "enlever cet article",
@@ -613,6 +649,12 @@
 
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "Numéro de téléphone",
+
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "action",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "Conséquence",
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Impossible de se connecter au serveur",

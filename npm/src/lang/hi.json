@@ -1,7 +1,16 @@
 {
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "बिलिंग",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "डैशबोर्ड",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "गूगल",
+
   "AdminHome.Title" : "शासन प्रबंध",
 
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "शासन प्रबंध",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -383,11 +392,20 @@
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "एक जोड़ें !",
 
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "एक आइटम जोड़ना",
+
   "__EventShoppingList.Cancel" : "Cancelled",
   "EventShoppingList.Cancel" : "रद्द",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "रद्द",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "एक आइटम नहीं जोड़ा जा सकता है",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "आइटम हटाया नहीं जा सकता",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "विवरण",
@@ -395,11 +413,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "किया हुआ",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "आइटम हटा दिया गया है",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "खरीदारी की सूची",
 
-  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
   "EventShoppingList.NoItem" : "आपके पास सूची में कोई आइटम नहीं है।",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "किसी वस्तु को निकालना",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "ईवेंट के लिए आपके पास आइटम की एक सूची है। उन्हें सूचीबद्ध करें, तय करें कि उन्हें किसे खरीदना है",
@@ -409,6 +433,9 @@
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "व्यय दिखाओ",
+
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "आइटम जोड़ा जाता है",
 
   "__EventShoppingList.Title" : "Shopping List",
   "EventShoppingList.Title" : "खरीदारी की सूची",
@@ -669,6 +696,12 @@
 
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "फ़ोन नंबर",
+
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "कार्य",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "परिणाम",
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "सर्वर से कनेक्ट नहीं किया जा सकता",

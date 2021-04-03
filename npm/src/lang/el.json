@@ -1,5 +1,14 @@
 {
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "Χρέωση",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "Ταμπλό",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "Google",
+
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "Διαχείριση",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -365,8 +374,20 @@
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Προσθέστε ένα στοιχείο στη λίστα",
 
+  "__EventShoppingList.AddOne" : "Add one !",
+  "EventShoppingList.AddOne" : "Προσθέστε ένα!",
+
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "Προσθήκη αντικειμένου",
+
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "Ακυρώθηκε",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "Δεν είναι δυνατή η προσθήκη ενός αντικειμένου",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "Δεν είναι δυνατή η κατάργηση του αντικειμένου",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "Περιγραφή",
@@ -374,8 +395,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "Εγινε",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "Το στοιχείο αφαιρείται",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Λίστα με τα ψώνια",
+
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
+  "EventShoppingList.NoItem" : "Δεν έχετε καμία εργασία στη λίστα.",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "Αφαίρεση αντικειμένου",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "Έχετε μια λίστα αντικειμένων για να μπείτε στο συμβάν. Λίστα τους, αποφασίστε ποιος πρέπει να τα αγοράσει",
@@ -386,6 +416,9 @@
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "Εμφάνιση εξόδων",
 
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "Το αντικείμενο προστίθεται",
+
   "__EventShoppingList.ToBring" : "To bring",
   "EventShoppingList.ToBring" : "Να φέρει",
 
@@ -394,6 +427,9 @@
 
   "__EventShoppingList.Who" : "Who",
   "EventShoppingList.Who" : "Οι οποίοι",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+  "EventShoppingList.addItem" : "Προσθέστε ένα νέο στοιχείο στη λίστα",
 
   "__EventShoppingList.removeItem" : "Remove this item",
   "EventShoppingList.removeItem" : "Αφαιρέστε αυτό το αντικείμενο",
@@ -613,6 +649,12 @@
 
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "Τηλεφωνικό νούμερο",
+
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "Δράση",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "Συνέπεια",
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Δεν είναι δυνατή η σύνδεση στον διακομιστή",

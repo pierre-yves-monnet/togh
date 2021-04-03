@@ -1,5 +1,14 @@
 {
-  "__AdminTransaltor.Title" : "Administration",
+  "__AdminGoogle.Billing" : "Billing",
+  "AdminGoogle.Billing" : "الفواتير",
+
+  "__AdminGoogle.Dahsboard" : "Dashboard",
+  "AdminGoogle.Dahsboard" : "لوحة القيادة",
+
+  "__AdminGoogle.Google" : "Google",
+  "AdminGoogle.Google" : "غوغل",
+
+  "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "إدارة",
 
   "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
@@ -365,8 +374,20 @@
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "إضافة عنصر في القائمة",
 
+  "__EventShoppingList.AddOne" : "Add one !",
+  "EventShoppingList.AddOne" : "أضف واحدا !",
+
+  "__EventShoppingList.AddingItem" : "Adding a item",
+  "EventShoppingList.AddingItem" : "إضافة عنصر",
+
   "__EventShoppingList.Cancelled" : "Cancelled",
   "EventShoppingList.Cancelled" : "ألغيت",
+
+  "__EventShoppingList.CantAddTask" : "An item can't be added",
+  "EventShoppingList.CantAddTask" : "لا يمكن إضافة عنصر",
+
+  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
+  "EventShoppingList.CantRemoveItem" : "لا يمكن إزالة العنصر",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "وصف",
@@ -374,8 +395,17 @@
   "__EventShoppingList.Done" : "Done",
   "EventShoppingList.Done" : "منتهي",
 
+  "__EventShoppingList.ItemRemoved" : "The item is removed",
+  "EventShoppingList.ItemRemoved" : "تمت إزالة العنصر",
+
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "قائمة التسوق",
+
+  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
+  "EventShoppingList.NoItem" : "ليس لديك أي مهمة في القائمة.",
+
+  "__EventShoppingList.RemovingItem" : "Removing an item",
+  "EventShoppingList.RemovingItem" : "إزالة عنصر",
 
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "لديك قائمة من العناصر التي تريدها إلى الحدث. قم بإدراجها ، وقرر من يجب أن يشتريها",
@@ -386,6 +416,9 @@
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "إظهار المصاريف",
 
+  "__EventShoppingList.TaskAdded" : "The item is added",
+  "EventShoppingList.TaskAdded" : "تمت إضافة العنصر",
+
   "__EventShoppingList.ToBring" : "To bring",
   "EventShoppingList.ToBring" : "لجلب",
 
@@ -394,6 +427,9 @@
 
   "__EventShoppingList.Who" : "Who",
   "EventShoppingList.Who" : "متى",
+
+  "__EventShoppingList.addItem" : "Add a new item in the list",
+  "EventShoppingList.addItem" : "إضافة عنصر جديد في القائمة",
 
   "__EventShoppingList.removeItem" : "Remove this item",
   "EventShoppingList.removeItem" : "أزل هذا البند",
@@ -613,6 +649,12 @@
 
   "__Invitation.UserPhoneNumber" : "Phone number",
   "Invitation.UserPhoneNumber" : "رقم التليفون",
+
+  "__LogEvent.Action" : "Action",
+  "LogEvent.Action" : "عمل",
+
+  "__LogEvent.Consequence" : "Consequence",
+  "LogEvent.Consequence" : "عاقبة",
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "لا يمكن الاتصال بالخادم",
