@@ -1,6 +1,15 @@
 {
+  "AdminGoogle.Billing": {
+    "defaultMessage": "Billing"
+  },
+  "AdminGoogle.Dahsboard": {
+    "defaultMessage": "Dashboard"
+  },
+  "AdminGoogle.Google": {
+    "defaultMessage": "Google"
+  },
   "AdminTransaltor.Title": {
-    "defaultMessage": "Administration"
+    "defaultMessage": "Translation"
   },
   "AdminTranslator.AverageTranslation": {
     "defaultMessage": "Average (in Milliseconds)"
@@ -284,9 +293,6 @@
   "EventItineray.WebSite": {
     "defaultMessage": "WebSite"
   },
-  "EventList.AccessThisEvent": {
-    "defaultMessage": "Access this event"
-  },
   "EventList.AllEvents": {
     "defaultMessage": "All events"
   },
@@ -365,8 +371,20 @@
   "EventShoppingList.AddItem": {
     "defaultMessage": "Add a item in the list"
   },
+  "EventShoppingList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventShoppingList.AddingItem": {
+    "defaultMessage": "Adding a item"
+  },
   "EventShoppingList.Cancelled": {
     "defaultMessage": "Cancelled"
+  },
+  "EventShoppingList.CantAddTask": {
+    "defaultMessage": "An item can't be added"
+  },
+  "EventShoppingList.CantRemoveItem": {
+    "defaultMessage": "The item can't be removed"
   },
   "EventShoppingList.Description": {
     "defaultMessage": "Description"
@@ -374,8 +392,17 @@
   "EventShoppingList.Done": {
     "defaultMessage": "Done"
   },
+  "EventShoppingList.ItemRemoved": {
+    "defaultMessage": "The item is removed"
+  },
   "EventShoppingList.MainTitleShoppingList": {
     "defaultMessage": "Shopping List"
+  },
+  "EventShoppingList.NoItem": {
+    "defaultMessage": "You don't have any task in the list."
+  },
+  "EventShoppingList.RemovingItem": {
+    "defaultMessage": "Removing an item"
   },
   "EventShoppingList.ShoppingListTip": {
     "defaultMessage": "You have a list of item to bing to the event. List them, decide who have to bought them"
@@ -386,6 +413,9 @@
   "EventShoppingList.ShowExpense": {
     "defaultMessage": "Show Expense"
   },
+  "EventShoppingList.TaskAdded": {
+    "defaultMessage": "The item is added"
+  },
   "EventShoppingList.ToBring": {
     "defaultMessage": "To bring"
   },
@@ -394,6 +424,9 @@
   },
   "EventShoppingList.Who": {
     "defaultMessage": "Who"
+  },
+  "EventShoppingList.addItem": {
+    "defaultMessage": "Add a new item in the list"
   },
   "EventShoppingList.removeItem": {
     "defaultMessage": "Remove this item"
@@ -613,6 +646,12 @@
   },
   "Invitation.UserPhoneNumber": {
     "defaultMessage": "Phone number"
+  },
+  "LogEvent.Action": {
+    "defaultMessage": "Action"
+  },
+  "LogEvent.Consequence": {
+    "defaultMessage": "Consequence"
   },
   "Login.CantConnectToTheServer": {
     "defaultMessage": "Can't Connect To The Server"
