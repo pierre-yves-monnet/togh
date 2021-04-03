@@ -101,14 +101,14 @@ class EventShoppingList extends React.Component {
 			return (
 				<div>
 					{headerSection}
-					<FormattedMessage id="EventTaskList.NoItem" defaultMessage="You don't have any task in the list." />
+					<FormattedMessage id="EventShoppingList.NoItem" defaultMessage="You don't have any task in the list." />
 					&nbsp;
 					<button class="btn btn-success btn-xs"
 						onClick={() => this.addItem()}
-						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a new item in the list" })}>
+						title={intl.formatMessage({ id: "EventShoppingList.addItem", defaultMessage: "Add a new item in the list" })}>
 
 						<PlusCircle />&nbsp;
-						<FormattedMessage id="EventTaskList.AddOne" defaultMessage="Add one !" />
+						<FormattedMessage id="EventShoppingList.AddOne" defaultMessage="Add one !" />
 					</button>
 				</div>
 			)
@@ -121,7 +121,7 @@ class EventShoppingList extends React.Component {
 		// class="table table-striped toghtable"
 		return (<div>
 			{headerSection}
-			Inproress={this.state.operation.inprogress}
+
 			<UserFeedback inprogress= {this.state.operation.inprogress}
 				label= {this.state.operation.label}
 				status= {this.state.operation.status}
@@ -176,40 +176,47 @@ class EventShoppingList extends React.Component {
 		const intl = this.props.intl;
 
 		return (
-			<tr key={index}>
-				<td> {this.getTagState(item)}</td>
-				<td><TextInput
+			<div class="container">
+			<div class="row">
+				<div class="col-1">
+					 {this.getTagState(item)}
+				</div>
+				<div class="col-2">
+					<TextInput
 					 labelText={<FormattedMessage id="EventShoppingList.What" defaultMessage="What" />}
 						value={item.name} 
 						onChange={(event) => this.setAttribut("name", event.target.value, item)} 
-						class="toghinput"></TextInput></td>
+						class="toghinput"></TextInput>
+				</div>
 				{this.state.event.shoppinglistshowdetails && (
-						<td>
+					<div class="col-4">
 							<TextArea labelText={<FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" />} 
 								value={item.description} 
 								onChange={(event) => this.setAttribut("description", event.target.value, item)} 
 								class="toghinput"></TextArea>
-						</td>)}
-				<td>
+					</div>)}
+				<div class="col-4">
 					<ChooseParticipant userid={item.whoid}
 						event={this.state.event}
 						modifyParticipant={true}
 						item={item}
 						label={<FormattedMessage id="EventShoppingList.Who" defaultMessage="Who" />}
 						onChangeParticipantfct={this.changeParticipantCallback} />
-
+				
 					{this.state.event.shoppinglistshowexpenses &&
 						<Expense item={item.expense}
 							eventCtrl={this.eventCtrl}
 							parentLocalisation={ NAMEENTITY+"/" + item.id+"/expense"} />
 					}
-
-				</td>
-				<td><button class="btn btn-danger btn-xs"
-					title={intl.formatMessage({ id: "EventShoppingList.removeItem", defaultMessage: "Remove this item" })}>
-					<DashCircle onClick={() => this.removeItem(item)} />
-				</button></td>
-			</tr>
+				</div>
+				<div class="col-1">
+					<button class="btn btn-danger btn-xs"
+						title={intl.formatMessage({ id: "EventShoppingList.removeItem", defaultMessage: "Remove this item" })}>
+						<DashCircle onClick={() => this.removeItem(item)} />
+					</button>
+				</div>
+			</div>
+			</div>
 		);
 	}
 
@@ -235,7 +242,7 @@ class EventShoppingList extends React.Component {
 
 
 	setAttribut(name, value, item) {
-		console.log("EventTasklist.setAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
+		console.log("EventShoppingList.setAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 
 		this.eventCtrl.setAttribut(name, value, item, NAMEENTITY+"/"+item.id);
 
@@ -261,7 +268,7 @@ class EventShoppingList extends React.Component {
 		console.log("EventShoppinglist.addItem: item=" + JSON.stringify(this.state.event));
 		this.setState({operation:{
 					inprogress:true,
-					label: intl.formatMessage({id: "EventTaskList.AddingItem",defaultMessage: "Adding a item"}), 
+					label: intl.formatMessage({id: "EventShoppingList.AddingItem",defaultMessage: "Adding a item"}), 
 					listlogevents: [] }});
 		// call the server to get an ID on this taskList
 		var newItem = { status: "TODO", name: "" };;
@@ -284,7 +291,7 @@ class EventShoppingList extends React.Component {
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
-			console.log("EventTasklist.addTaskCallback:  BAD RECEPTION");
+			console.log("EventShoppingList.addTaskCallback:  BAD RECEPTION");
 
 		} else {
 			currentOperation.status= UserFeedback.OK;
