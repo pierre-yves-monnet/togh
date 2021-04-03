@@ -62,6 +62,9 @@
   "Event.Expense": {
     "defaultMessage": "Expense"
   },
+  "Event.ExplanationYourTimeZone": {
+    "defaultMessage": "This date is calculated in your time zone"
+  },
   "Event.Geolocalisation": {
     "defaultMessage": "Geolocalisation"
   },
@@ -149,6 +152,21 @@
   "Event.TitleTasks": {
     "defaultMessage": "Tasks"
   },
+  "EventChat.ChatTip": {
+    "defaultMessage": "Chat with all participants"
+  },
+  "EventChat.MainTitleChat": {
+    "defaultMessage": "Chat"
+  },
+  "EventChat.SendBy": {
+    "defaultMessage": "Send by"
+  },
+  "EventChat.The": {
+    "defaultMessage": "The"
+  },
+  "EventChat.WhatYouWantToSay": {
+    "defaultMessage": "What you want to say?"
+  },
   "EventExpense.AddExpense": {
     "defaultMessage": "Add a expense"
   },
@@ -173,6 +191,12 @@
   "EventGeolocalisation.ShareMyLocation": {
     "defaultMessage": "Share my localisation during the event"
   },
+  "EventItinerary.AddingStep": {
+    "defaultMessage": "Adding a step"
+  },
+  "EventItinerary.CantAddStep": {
+    "defaultMessage": "A step can't be added"
+  },
   "EventItinerary.ItineraryTip": {
     "defaultMessage": "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary"
   },
@@ -196,6 +220,9 @@
   },
   "EventItinerary.ShowItineraryMap": {
     "defaultMessage": "Show itinerary map"
+  },
+  "EventItinerary.StepAdded": {
+    "defaultMessage": "A step is added"
   },
   "EventItineray.Address": {
     "defaultMessage": "Address"
@@ -437,11 +464,20 @@
   "EventTaskList.AddTask": {
     "defaultMessage": "Add a task in the list"
   },
+  "EventTaskList.AddingTask": {
+    "defaultMessage": "Adding a task"
+  },
   "EventTaskList.Begin": {
     "defaultMessage": "Begin"
   },
   "EventTaskList.Cancelled": {
     "defaultMessage": "Cancelled"
+  },
+  "EventTaskList.CantAddTask": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventTaskList.CantRemoveTask": {
+    "defaultMessage": "The task can't be removed"
   },
   "EventTaskList.Description": {
     "defaultMessage": "Description"
@@ -485,6 +521,9 @@
   "EventTaskList.RemoveThisTask": {
     "defaultMessage": "Remove this task"
   },
+  "EventTaskList.RemovingTask": {
+    "defaultMessage": "Removing a task"
+  },
   "EventTaskList.ShowDate": {
     "defaultMessage": "Show dates"
   },
@@ -497,6 +536,12 @@
   "EventTaskList.Subject": {
     "defaultMessage": "Subject"
   },
+  "EventTaskList.TaskAdded": {
+    "defaultMessage": "A task is added"
+  },
+  "EventTaskList.TaskRemoved": {
+    "defaultMessage": "The task is removed"
+  },
   "EventTaskList.TaskTip": {
     "defaultMessage": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize"
   },
@@ -505,6 +550,15 @@
   },
   "EventTaskList.addItem": {
     "defaultMessage": "Add a new item in the list"
+  },
+  "Eventitinerary.CantRemoveStep": {
+    "defaultMessage": "The step can't be removed"
+  },
+  "Eventitinerary.RemovingStep": {
+    "defaultMessage": "Removing a step"
+  },
+  "Eventitinerary.StepRemoved": {
+    "defaultMessage": "The step is removed"
   },
   "Expense.Budget": {
     "defaultMessage": "Budget"
@@ -616,6 +670,18 @@
   },
   "Menu.MyProfileExplanation": {
     "defaultMessage": "Manage your preferences, set up an avatar."
+  },
+  "UserFeedback.OperationFailed": {
+    "defaultMessage": "Operation Failed"
+  },
+  "UserFeedback.OperationHttpError": {
+    "defaultMessage": "Connection to the server lost"
+  },
+  "UserFeedback.OperationSuccess": {
+    "defaultMessage": "Operation successful"
+  },
+  "UserFeedback.OperationSuccessfull": {
+    "defaultMessage": "Success"
   },
   "UserTips.DeactivateTipInPreference": {
     "defaultMessage": "Tips can be deactived in your preference"

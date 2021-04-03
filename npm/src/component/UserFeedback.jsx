@@ -12,7 +12,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 
 import { InlineLoading } from 'carbon-components-react';
 
-import LogEvent from './../component/LogEvent';
+import LogEvents from './../component/LogEvents';
 
 export const ERRORHTTP = 'ERRORHTTP';
 export const ERRORCONTRACT = 'ERRORCONTRACT';
@@ -80,7 +80,7 @@ class UserFeedback extends React.Component {
 						<FormattedMessage id="UserFeedback.OperationFailed" defaultMessage="Operation Failed" />
 						{this.state.result}
 						)
-						<LogEvent listevents={this.state.listlogevents} />
+						<LogEvents listEvents={this.state.listlogevents} />
 				</div>) 
 			
 		}
@@ -88,7 +88,7 @@ class UserFeedback extends React.Component {
 		return (<div style={{fontStyle: "italic"}}>{this.state.label} :
 						<FormattedMessage id="UserFeedback.OperationSuccessfull" defaultMessage="Success" />
 						{this.state.result}						
-						<LogEvent listevents={this.state.listlogevents} />
+						<LogEvents listEvents={this.state.listlogevents} />
 				</div>) 
 	}		
 		

@@ -29,25 +29,36 @@ class LogEvent extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
-			listevents: props.listevents
+			listEvents: props.listEvents
 		};
 				
-		console.log("LogEvent: constructor "+JSON.stringify(this.state.listevents));
+		console.log("LogEvent: constructor "+JSON.stringify(this.state.listEvents));
 
 	}
 	componentDidUpdate(prevProps) {
-		console.log("LogEvent.componentDidUpdate listevents=" + JSON.stringify(this.props.listevents));
-		if (prevProps.listevents !== this.props.listevents) {
-			this.setState({ listevents: this.props.listevents });
+		console.log("LogEvent.componentDidUpdate listEvents=" + JSON.stringify(this.props.listEvents));
+		if (prevProps.listEvents !== this.props.listEvents) {
+			this.setState({ listEvents: this.props.listEvents });
 		}
 	}
 
+	
 
+  
 	render() {
-		console.log("LogEvent: render "+JSON.stringify(this.state.listevents));
-		if (! this.state.listevents || this.state.listevents.length===0)
+		console.log("LogEvent: render "+JSON.stringify(this.state.listEvents));
+		
+		
+		if (! this.state.listEvents || this.state.listEvents.length===0)
 			return (<div/>);
-		return (<div>UNE ERREUR ! </div>);
+		return (<div>
+				{this.state.listEvents.map((event) =>
+						<div>
+							<div dangerouslySetInnerHTML={{__html: event.html}}></div>
+							<br/>						
+						</div>
+					)}
+				</div>);
 	}
 }
 export default LogEvent

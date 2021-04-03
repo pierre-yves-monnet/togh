@@ -14,7 +14,7 @@ import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
 import FactoryService from '../service/FactoryService';
 
-import LogEvents from '../tools/LogEvents';
+import LogEvents from '../component/LogEvents';
 
 
 
@@ -71,7 +71,7 @@ class AdminTranslator extends React.Component {
 		return (
 			<div class="card" style={{marginTop: "10px"}}>
 				<div class="card-header" style={{backgroundColor:"#decbe4"}}>
-					<FormattedMessage id="AdminTransaltor.Title" defaultMessage="Administration" />
+					<FormattedMessage id="AdminTransaltor.Title" defaultMessage="Translation" />
 				</div>
 				<div class="card-body">
 					 {inprogresshtml}
@@ -102,7 +102,7 @@ class AdminTranslator extends React.Component {
 							</tr>
 							{this.state.translate && this.state.translate.listLanguages && this.state.translate.listLanguages.map((language,index) =>
 								<tr key={index}>
-									<td><img src={this.getIcon( language ) }  style={{width: "30px"}}/></td>
+									<td><img src={this.getIcon( language ) }  style={{width: "40px", verticalAlign: "middle"}}/></td>
 									<td>{language.name}</td>
 									<td>{language.nbMissingSentences}</td>
 				        			<td>{language.nbTranslatedSentences}</td>
@@ -113,6 +113,10 @@ class AdminTranslator extends React.Component {
 						<button class="btn btn-info btn-sm" onClick={this.completeDictionary}>
 							<FormattedMessage id="AdminTranslator.CompleteDictionary" defaultMessage="Complete Dictionary"/>
 						</button>
+						
+
+
+						<LogEvents listEvents={this.state.translate.listEvents} />
 						{this.state.translateresult && (<div>
 							<FormattedMessage id="AdminTranslator.nbTransations" defaultMessage="Number of translation"/>&nbsp;:&nbsp;
 							{this.state.translateresult.chronometers.translate.nbexecutions}

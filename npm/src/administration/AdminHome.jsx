@@ -13,6 +13,7 @@ import { FormattedMessage } from "react-intl";
 // import { Button } from 'carbon-components-react';
 
 import AdminTranslator from './AdminTranslator';
+import AdminGoogle from './AdminGoogle';
 import FactoryService from '../service/FactoryService';
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';
@@ -55,6 +56,9 @@ class AdminHome extends React.Component {
 				<div class="row">
 					<div class="col-6"> 
 						<AdminTranslator/>
+					</div>
+					<div class="col-6"> 
+						<AdminGoogle/>
 					</div>
 				</div>
 			</div>)	

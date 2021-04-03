@@ -1,6 +1,4 @@
 {
-  "AdminHome.Title" : "Administración",
-
   "__AdminTransaltor.Title" : "Administration",
   "AdminTransaltor.Title" : "Administración",
 
@@ -35,7 +33,7 @@
   "AdminTranslator.nbTransations" : "Número de traducción",
 
   "__BodyTogh.welcome" : "Welcome to Togh D",
-  "BodyTogh.welcome" : "Bienvenido a Togh",
+  "BodyTogh.welcome" : "Bienvenido a Togh D",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "Presupuesto",
@@ -61,10 +59,11 @@
   "__Event.EventDate" : "Date",
   "Event.EventDate" : "Fecha",
 
-  "Event.EventName" : "Nombre",
-
   "__Event.Expense" : "Expense",
   "Event.Expense" : "Gastos",
+
+  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone" : "Esta fecha se calcula en su zona horaria",
 
   "__Event.Geolocalisation" : "Geolocalisation",
   "Event.Geolocalisation" : "Geolocalización",
@@ -120,6 +119,9 @@
   "__Event.TimeEvent" : "Time",
   "Event.TimeEvent" : "Hora",
 
+  "__Event.TitleBudget" : "Budget",
+  "Event.TitleBudget" : "Presupuesto",
+
   "__Event.TitleChat" : "Chat",
   "Event.TitleChat" : "Chat",
 
@@ -150,11 +152,23 @@
   "__Event.TitleTasks" : "Tasks",
   "Event.TitleTasks" : "Tareas",
 
+  "__EventChat.ChatTip" : "Chat with all participants",
+  "EventChat.ChatTip" : "Chatear con todos los participantes",
+
+  "__EventChat.MainTitleChat" : "Chat",
+  "EventChat.MainTitleChat" : "Chat",
+
+  "__EventChat.SendBy" : "Send by",
+  "EventChat.SendBy" : "Enviado por",
+
+  "__EventChat.The" : "The",
+  "EventChat.The" : "los",
+
+  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "EventChat.WhatYouWantToSay" : "¿Qué quieres decir?",
+
   "__EventExpense.AddExpense" : "Add a expense",
   "EventExpense.AddExpense" : "Agregar un gasto",
-
-  "__EventExpense.CurrencyOnEvent" : "Currency used in this event",
-  "EventExpense.CurrencyOnEvent" : "Moneda utilizada en este evento",
 
   "__EventExpense.ExpenseTip" : "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here",
   "EventExpense.ExpenseTip" : "Registra todos los gastos en el Evento. Los gastos de otra sección (Itinerario, Lista de compras) son visibles aquí",
@@ -165,11 +179,23 @@
   "__EventGeolocalisation.Address" : "Address",
   "EventGeolocalisation.Address" : "Dirección",
 
+  "__EventGeolocalisation.GeolocalisationTip" : "Where is the event? Do I want to share my position ? Note: for a multi place event, use the Itinerary.",
+  "EventGeolocalisation.GeolocalisationTip" : "¿Dónde es el evento? ¿Quiero compartir mi puesto? Nota: para un evento de varios lugares, use el Itinerario.",
+
+  "__EventGeolocalisation.Instructions" : "Instructions",
+  "EventGeolocalisation.Instructions" : "Instrucciones",
+
   "__EventGeolocalisation.MainTitleGeolocation" : "Geolocalisation",
   "EventGeolocalisation.MainTitleGeolocation" : "Geolocalización",
 
   "__EventGeolocalisation.ShareMyLocation" : "Share my localisation during the event",
   "EventGeolocalisation.ShareMyLocation" : "Comparte mi localización durante el evento",
+
+  "__EventItinerary.AddingStep" : "Adding a step",
+  "EventItinerary.AddingStep" : "Agregar un paso",
+
+  "__EventItinerary.CantAddStep" : "A step can't be added",
+  "EventItinerary.CantAddStep" : "No se puede agregar un paso",
 
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "Enumere todos los lugares que desea visitar durante este evento. Si el evento es de varios días, puede configurar día por día su itinerario",
@@ -195,6 +221,9 @@
   "__EventItinerary.ShowItineraryMap" : "Show itinerary map",
   "EventItinerary.ShowItineraryMap" : "Mostrar mapa de itinerario",
 
+  "__EventItinerary.StepAdded" : "A step is added",
+  "EventItinerary.StepAdded" : "Se agrega un paso",
+
   "__EventItineray.Address" : "Address",
   "EventItineray.Address" : "Dirección",
 
@@ -204,12 +233,8 @@
   "__EventItineray.Begin" : "Begin",
   "EventItineray.Begin" : "Comenzar",
 
-  "EventItineray.Budget" : "Presupuesto",
-
   "__EventItineray.BusStation" : "Bus Station",
   "EventItineray.BusStation" : "Estación de autobuses",
-
-  "EventItineray.Category" : "Categoría",
 
   "__EventItineray.Description" : "Description",
   "EventItineray.Description" : "Descripción",
@@ -235,8 +260,6 @@
   "__EventItineray.PointOfInterest" : "Point Of Interest",
   "EventItineray.PointOfInterest" : "Punto de interés",
 
-  "EventItineray.Price" : "Precio",
-
   "__EventItineray.RemoveThisStep" : "Remove this step",
   "EventItineray.RemoveThisStep" : "Quitar este paso",
 
@@ -256,12 +279,10 @@
   "EventItineray.VisitTime" : "Tiempo de visita",
 
   "__EventItineray.Visite" : "Visite",
-  "EventItineray.Visite" : "Visita",
+  "EventItineray.Visite" : "Visite",
 
   "__EventItineray.WebSite" : "WebSite",
   "EventItineray.WebSite" : "Sitio web",
-
-  "EventItineray.What" : "Qué",
 
   "__EventList.AccessThisEvent" : "Access this event",
   "EventList.AccessThisEvent" : "Accede a este evento",
@@ -332,6 +353,9 @@
   "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
   "EventParticipant.Titleinvited" : "Participante invitado: no se recibe confirmación en este momento",
 
+  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent" : "Moneda utilizada en este evento",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "Configure todas las preferencias para el evento",
 
@@ -341,11 +365,8 @@
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Agregar un elemento a la lista",
 
-  "__EventShoppingList.AddOne" : "Add one !",
-  "EventShoppingList.AddOne" : "Agrega uno !",
-
-  "__EventShoppingList.Cancel" : "Cancelled",
-  "EventShoppingList.Cancel" : "Cancelado",
+  "__EventShoppingList.Cancelled" : "Cancelled",
+  "EventShoppingList.Cancelled" : "Cancelado",
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "Descripción",
@@ -356,9 +377,6 @@
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Lista de la compra",
 
-  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
-  "EventShoppingList.NoItem" : "No tienes ningún elemento en la lista.",
-
   "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
   "EventShoppingList.ShoppingListTip" : "Tienes una lista de artículos para llevar al evento. Listarlos, decidir quién tiene que comprarlos",
 
@@ -368,9 +386,6 @@
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "Mostrar gastos",
 
-  "__EventShoppingList.Title" : "Shopping List",
-  "EventShoppingList.Title" : "Lista de la compra",
-
   "__EventShoppingList.ToBring" : "To bring",
   "EventShoppingList.ToBring" : "Traer",
 
@@ -379,9 +394,6 @@
 
   "__EventShoppingList.Who" : "Who",
   "EventShoppingList.Who" : "Quién",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "Agregar un nuevo elemento en la lista",
 
   "__EventShoppingList.removeItem" : "Remove this item",
   "EventShoppingList.removeItem" : "Eliminar este elemento",
@@ -398,8 +410,6 @@
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "En la preparación de",
 
-  "EventSurvey.AddOne" : "Agrega uno !",
-
   "__EventSurvey.AddOption" : "Option",
   "EventSurvey.AddOption" : "Opción",
 
@@ -415,12 +425,8 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "En progreso",
 
-  "EventSurvey.MainTitleSurveyList" : "Encuesta",
-
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "Esta encuesta está en preparación. No puedes acceder a él por el momento.",
-
-  "EventSurvey.NoItem" : "No tienes ninguna encuesta lista en la lista.",
 
   "__EventSurvey.Option" : "Option",
   "EventSurvey.Option" : "Opción",
@@ -428,12 +434,8 @@
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "Esta encuesta está en preparación. Los participantes no son visibles",
 
-  "EventSurvey.SurveyTip" : "¿Los participantes prefieren visitar un museo de arte o aeroespacial? ¿Prefieres un restaurante japonés, italiano o francés? Cree una encuesta y recopile opiniones.",
-
   "__EventSurvey.Title" : "Title",
   "EventSurvey.Title" : "Título",
-
-  "EventSurvey.addItem" : "Crea una nueva encuesta en la lista",
 
   "__EventSurvey.removeItem" : "Remove this item",
   "EventSurvey.removeItem" : "Eliminar este elemento",
@@ -444,14 +446,8 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "Agregar una encuesta en la lista",
 
-  "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
-  "EventSurveyList.ItineraryTip" : "Enumere todos los lugares que desea visitar durante este evento. Si el evento es de varios días, puede configurar día por día su itinerario",
-
-  "__EventSurveyList.MainTitleItinerary" : "Itinerary",
-  "EventSurveyList.MainTitleItinerary" : "Itinerario",
-
   "__EventSurveyList.MainTitleSurveyList" : "Surveys",
-  "EventSurveyList.MainTitleSurveyList" : "Encuesta",
+  "EventSurveyList.MainTitleSurveyList" : "Encuestas",
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "No tienes ninguna encuesta lista en la lista.",
@@ -465,16 +461,23 @@
   "__EventTaskList.AddOne" : "Add one !",
   "EventTaskList.AddOne" : "Agrega uno !",
 
-  "EventTaskList.AddSurvey" : "Agregar una encuesta en la lista",
-
   "__EventTaskList.AddTask" : "Add a task in the list",
   "EventTaskList.AddTask" : "Agregar una tarea en la lista",
+
+  "__EventTaskList.AddingTask" : "Adding a task",
+  "EventTaskList.AddingTask" : "Agregar una tarea",
 
   "__EventTaskList.Begin" : "Begin",
   "EventTaskList.Begin" : "Comenzar",
 
   "__EventTaskList.Cancelled" : "Cancelled",
   "EventTaskList.Cancelled" : "Cancelado",
+
+  "__EventTaskList.CantAddTask" : "A task can't be added",
+  "EventTaskList.CantAddTask" : "No se puede agregar una tarea",
+
+  "__EventTaskList.CantRemoveTask" : "The task can't be removed",
+  "EventTaskList.CantRemoveTask" : "La tarea no se puede eliminar",
 
   "__EventTaskList.Description" : "Description",
   "EventTaskList.Description" : "Descripción",
@@ -513,10 +516,13 @@
   "EventTaskList.MainTitleTaskList" : "Lista de tareas",
 
   "__EventTaskList.NoItem" : "You don't have any task in the list.",
-  "EventTaskList.NoItem" : "No tienes ningún elemento en la lista. Agrega uno !",
+  "EventTaskList.NoItem" : "No tienes ninguna tarea en la lista.",
 
   "__EventTaskList.RemoveThisTask" : "Remove this task",
   "EventTaskList.RemoveThisTask" : "Eliminar esta tarea",
+
+  "__EventTaskList.RemovingTask" : "Removing a task",
+  "EventTaskList.RemovingTask" : "Eliminar una tarea",
 
   "__EventTaskList.ShowDate" : "Show dates",
   "EventTaskList.ShowDate" : "Mostrar fechas",
@@ -530,6 +536,12 @@
   "__EventTaskList.Subject" : "Subject",
   "EventTaskList.Subject" : "Sujeto",
 
+  "__EventTaskList.TaskAdded" : "A task is added",
+  "EventTaskList.TaskAdded" : "Se agrega una tarea",
+
+  "__EventTaskList.TaskRemoved" : "The task is removed",
+  "EventTaskList.TaskRemoved" : "La tarea se elimina",
+
   "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
   "EventTaskList.TaskTip" : "Utilice tareas para hacer referencia a lo que tiene que hacer para su evento. Puede asignar participante y marcar el estado de la tarea: planificada, realizada ... Según su preferencia, puede recibir una anotación cuando tenga una tarea que realizar.",
 
@@ -539,13 +551,20 @@
   "__EventTaskList.addItem" : "Add a new item in the list",
   "EventTaskList.addItem" : "Agregar un nuevo elemento en la lista",
 
+  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
+  "Eventitinerary.CantRemoveStep" : "El paso no se puede quitar",
+
+  "__Eventitinerary.RemovingStep" : "Removing a step",
+  "Eventitinerary.RemovingStep" : "Eliminar un paso",
+
+  "__Eventitinerary.StepRemoved" : "The step is removed",
+  "Eventitinerary.StepRemoved" : "Se quita el paso",
+
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "Presupuesto",
 
   "__Expense.Cost" : "Cost",
   "Expense.Cost" : "Costo",
-
-  "Expense.Price" : "Precio",
 
   "__Invitation.ByEmail" : "Send an Email",
   "Invitation.ByEmail" : "Enviar un correo electrónico",
@@ -570,12 +589,6 @@
 
   "__Invitation.PhoneNumber" : "Phone number",
   "Invitation.PhoneNumber" : "Número de teléfono",
-
-  "Invitation.RoleObserver" : "Observador",
-
-  "Invitation.RoleOrganizer" : "Organizador",
-
-  "Invitation.RoleParticipant" : "Partícipe",
 
   "__Invitation.Search" : "Search",
   "Invitation.Search" : "Buscar",
@@ -604,17 +617,11 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "No puedo conectarme al servidor",
 
-  "Login.badConnection" : "Mala conexi�n: compruebe sus credenciales",
-
   "__Login.connection" : "Connection",
-  "Login.connection" : "Conexi�n",
+  "Login.connection" : "Conexión",
 
   "__Login.email" : "Email",
-  "Login.email" : "Correo electr�nico",
-
-  "Login.googleLogin" : "Iniciar sesi�n",
-
-  "Login.googleLogout" : "Cerrar sesi�n",
+  "Login.email" : "Correo electrónico",
 
   "__Login.googlelogin" : "Login",
   "Login.googlelogin" : "Acceso",
@@ -623,10 +630,10 @@
   "Login.googlelogout" : "Acceso",
 
   "__Login.logout" : "Logout",
-  "Login.logout" : "Cerrar sesi�n",
+  "Login.logout" : "Cerrar sesión",
 
   "__Login.password" : "Password",
-  "Login.password" : "Contrase�a",
+  "Login.password" : "Contraseña",
 
   "__Menu.AdmininstratorExplanation" : "Administrator function.",
   "Menu.AdmininstratorExplanation" : "Función de administrador.",
@@ -664,397 +671,17 @@
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "Administre sus preferencias, configure un avatar.",
 
+  "__UserFeedback.OperationFailed" : "Operation Failed",
+  "UserFeedback.OperationFailed" : "Operación fallida",
+
+  "__UserFeedback.OperationHttpError" : "Connection to the server lost",
+  "UserFeedback.OperationHttpError" : "Se perdió la conexión al servidor",
+
+  "__UserFeedback.OperationSuccess" : "Operation successful",
+  "UserFeedback.OperationSuccess" : "Operación exitosa",
+
+  "__UserFeedback.OperationSuccessfull" : "Success",
+  "UserFeedback.OperationSuccessfull" : "Éxito",
+
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "Las propinas se pueden desactivar según sus preferencias",
-
-  "__AdminTransaltor.Title" : "Administration",
-
-  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
-
-  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
-
-  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-
-  "__AdminTranslator.MissingSentences" : "Missing sentences",
-
-  "__AdminTranslator.Name" : "Name",
-
-  "__AdminTranslator.TimeTranslation" : "Time of translation",
-
-  "__AdminTranslator.Title" : "Translation",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-
-  "__BodyTogh.welcome" : "Welcome to Togh D",
-
-  "__Event.Chat" : "Chat",
-
-  "__Event.DateEvent" : "Date Event",
-
-  "__Event.DatePolicy" : "Date policy",
-
-  "__Event.Description" : "Description",
-
-  "__Event.DurationEvent" : "Duration",
-
-  "__Event.EndDate" : "End Date",
-
-  "__Event.EventDate" : "Date",
-
-  "__Event.Expense" : "Expense",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-
-  "__Event.Itinerary" : "itinerary",
-
-  "__Event.OneDate" : "One date",
-
-  "__Event.Participants" : "Participants",
-
-  "__Event.Period" : "Period",
-
-  "__Event.Photos" : "Photos",
-
-  "__Event.Scope" : "Scope",
-
-  "__Event.ScopeLimited" : "Limited",
-
-  "__Event.ScopeOpen" : "Open",
-
-  "__Event.ScopeOpenConfirmation" : "Open on confirmation",
-
-  "__Event.ScopeSecret" : "Secret",
-
-  "__Event.ShoppingList" : "Shopping List",
-
-  "__Event.StartDate" : "Start Date",
-
-  "__Event.Status" : "Status",
-
-  "__Event.Survey" : "Survey",
-
-  "__Event.Tasks" : "Tasks",
-
-  "__Event.TimeEvent" : "Time",
-
-  "__Event.TitleChat" : "Chat",
-
-  "__Event.TitleExpense" : "Manage and share expenses",
-
-  "__Event.TitleGeolocalisation" : "Where is the event?",
-
-  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-
-  "__Event.TitlePhotos" : "Photos",
-
-  "__Event.TitleShoppingList" : "Shopping list : what to brings?",
-
-  "__Event.TitleSurvey" : "Survey",
-
-  "__Event.TitleTasks" : "Tasks",
-
-  "__EventExpense.AddExpense" : "Add a expense",
-
-  "__EventExpense.CurrencyOnEvent" : "Currency used in this event",
-
-  "__EventExpense.ExpenseTip" : "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here",
-
-  "__EventExpense.MainTitleExpense" : "Expense",
-
-  "__EventGeolocalisation.Address" : "Address",
-
-  "__EventGeolocalisation.MainTitleGeolocation" : "Geolocalisation",
-
-  "__EventGeolocalisation.ShareMyLocation" : "Share my localisation during the event",
-
-  "__EventItinerary.ProvideDateInEvent" : "Select a date for this event",
-
-  "__EventItinerary.ProvidePeriodDateInEvent" : "Select a start and a end date for this event",
-
-  "__EventItinerary.ShowDetail" : "Show Detail",
-
-  "__EventItinerary.ShowExpense" : "Show Expense",
-
-  "__EventItinerary.ShowItineraryMap" : "Show itinerary map",
-
-  "__EventItineray.Address" : "Address",
-
-  "__EventItineray.Airport" : "Airport",
-
-  "__EventItineray.Begin" : "Begin",
-
-  "__EventItineray.BusStation" : "Bus Station",
-
-  "__EventItineray.Description" : "Description",
-
-  "__EventItineray.Duration" : "Duration",
-
-  "__EventItineray.End" : "End",
-
-  "__EventItineray.Entertainment" : "Entertainment",
-
-  "__EventItineray.Expense" : "Expense",
-
-  "__EventItineray.Harbor" : "Harbor",
-
-  "__EventItineray.Night" : "Night",
-
-  "__EventItineray.PointOfInterest" : "Point Of Interest",
-
-  "__EventItineray.Restaurant" : "Restaurant",
-
-  "__EventItineray.Shopping" : "Shopping",
-
-  "__EventItineray.Title" : "Title",
-
-  "__EventItineray.TrainStation" : "Train Station",
-
-  "__EventItineray.VisitTime" : "Visit time",
-
-  "__EventItineray.Visite" : "Visite",
-
-  "__EventItineray.WebSite" : "WebSite",
-
-  "__EventList.AccessThisEvent" : "Access this event",
-
-  "__EventList.AllEvents" : "All events",
-
-  "__EventList.CreateAnEvent" : "Create an Event",
-
-  "__EventList.Dae" : "Date",
-
-  "__EventList.MyEvents" : "My events",
-
-  "__EventList.Name" : "Name",
-
-  "__EventList.Participants" : "Participants",
-
-  "__EventList.Refresh" : "Refresh",
-
-  "__EventParticipant.Actif" : "Actif",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-
-  "__EventParticipant.Invited" : "Invited",
-
-  "__EventParticipant.Left" : "Left",
-
-  "__EventParticipant.MainTitleParticipant" : "Participants",
-
-  "__EventParticipant.Owner" : "Owner",
-
-  "__EventParticipant.Person" : "Person",
-
-  "__EventParticipant.Role" : "Role",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-
-  "__EventParticipant.Status" : "Status",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-
-  "__EventShoppingList.AddOne" : "Add one !",
-
-  "__EventShoppingList.Cancel" : "Cancelled",
-
-  "__EventShoppingList.Description" : "Description",
-
-  "__EventShoppingList.Done" : "Done",
-
-  "__EventShoppingList.NoItem" : "You don't have any item in the list.",
-
-  "__EventShoppingList.ShowDetails" : "Detail",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
-
-  "__EventShoppingList.Title" : "Shopping List",
-
-  "__EventShoppingList.ToBring" : "To bring",
-
-  "__EventShoppingList.What" : "What",
-
-  "__EventShoppingList.Who" : "Who",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-
-  "__EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-
-  "__EventState.Done" : "Done",
-
-  "__EventState.InPreparation" : "In Preparation",
-
-  "__EventSurvey.AddOption" : "Option",
-
-  "__EventSurvey.Closed" : "closed",
-
-  "__EventSurvey.Description" : "Description",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-
-  "__EventSurvey.InProgress" : "In progress",
-
-  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
-
-  "__EventSurvey.Option" : "Option",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-
-  "__EventSurvey.Title" : "Title",
-
-  "__EventSurvey.removeItem" : "Remove this item",
-
-  "__EventSurveyList.AddOne" : "Add one !",
-
-  "__EventSurveyList.AddSurvey" : "Add a survey in the list",
-
-  "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
-
-  "__EventSurveyList.MainTitleItinerary" : "Itinerary",
-
-  "__EventSurveyList.MainTitleSurveyList" : "Surveys",
-
-  "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
-
-  "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
-
-  "__EventSurveyList.addItem" : "Create a new survey in the list",
-
-  "__EventTaskList.AddTask" : "Add a task in the list",
-
-  "__EventTaskList.Begin" : "Begin",
-
-  "__EventTaskList.Cancelled" : "Cancelled",
-
-  "__EventTaskList.Description" : "Description",
-
-  "__EventTaskList.Done" : "Done",
-
-  "__EventTaskList.End" : "End",
-
-  "__EventTaskList.FilterAllParticipants" : "All participants",
-
-  "__EventTaskList.FilterAllStates" : "All states",
-
-  "__EventTaskList.FilterDone" : "Done",
-
-  "__EventTaskList.FilterInProgress" : "In progress",
-
-  "__EventTaskList.FilterMyTasks" : "My tasks",
-
-  "__EventTaskList.FilterPlanned" : "Planned",
-
-  "__EventTaskList.FilterUnaffected" : "Unaffected",
-
-  "__EventTaskList.InProgress" : "In progress",
-
-  "__EventTaskList.MainTitleTaskList" : "Tasks List",
-
-  "__EventTaskList.NoItem" : "You don't have any item in the list. Add one !",
-
-  "__EventTaskList.ShowDate" : "Show dates",
-
-  "__EventTaskList.State" : "State",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-
-  "__EventTaskList.Subject" : "Subject",
-
-  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
-
-  "__EventTaskList.Who" : "Who",
-
-  "__EventTaskList.addItem" : "Add a new item in the list",
-
-  "__Expense.Budget" : "Budget",
-
-  "__Expense.Cost" : "Cost",
-
-  "__Invitation.ByEmail" : "Send an Email",
-
-  "__Invitation.Close" : "Close",
-
-  "__Invitation.Email" : "Email",
-
-  "__Invitation.FirstName" : "First name",
-
-  "__Invitation.Invitation" : "Invitation",
-
-  "__Invitation.LastName" : "Last name",
-
-  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
-
-  "__Invitation.PhoneNumber" : "Phone number",
-
-  "__Invitation.Search" : "Search",
-
-  "__Invitation.SearchAUser" : "Search a user",
-
-  "__Invitation.Searching" : "Searching",
-
-  "__Invitation.SendInvitation" : "Send Invitation",
-
-  "__Invitation.UserEmail" : "Email",
-
-  "__Invitation.UserFound" : "UsersFound",
-
-  "__Invitation.UserName" : "Name",
-
-  "__Invitation.UserPhoneNumber" : "Phone number",
-
-  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
-
-  "__Login.connection" : "Connection",
-
-  "__Login.email" : "Email",
-
-  "__Login.googlelogin" : "Login",
-
-  "__Login.googlelogout" : "Login",
-
-  "__Login.logout" : "Logout",
-
-  "__Login.password" : "Password",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-
-  "__Menu.Administration" : "Administration",
-
-  "__Menu.Events" : "Events",
-
-  "__Menu.EventsExplanation" : "Access all events you can access",
-
-  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
-
-  "__Menu.Join" : "Join an event",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-
-  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
-
-  "__Menu.MyFriends" : "My Friends",
-
-  "__Menu.MyInvitations" : "My Invitations",
-
-  "__Menu.MyProfile" : "My Profile",
-
-  "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
-
-  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference"}
+  "UserTips.DeactivateTipInPreference" : "Las propinas se pueden desactivar según sus preferencias"}

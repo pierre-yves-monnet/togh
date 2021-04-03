@@ -44,6 +44,28 @@ com.together.service : Service to access information and data
 
 https://start.spring.io/
 
+## Date management
+There is two king of date : Date+Time (Zoned) and Date
+ *  Date+Time (Zoned) : this is an Instant. When I give for the event date, Feb 1, 14:00 ==> in Pacific time. A user in Paris time shoud see Feb 1, 23:00 (depends of the date, there is 8 or 9 hours delay)
+ * Date : an absolute date. In an itinerary I give "Feb 3", that's mean it's Feb 3 and that it.
+ 
+In Database, a Date+Time is saved as a LocalDateTime, UTC ( SPRING use a string: 2021-03-31 07:00:00), 
+a Date in LocalDate. SPRING use a string : 2021-03-31
+
+Browser return in all case a UTC Date, whatever the widget 
+	"2026-08-07T07:00:00.000Z"
+	+ the timezoneoffset: 480
+
+So:
+- for a LocalDateTime, there is nothing to do, it's already a UTC date
+- for a LocalDateTime, calculation must be 1/ calculate the local time (date - offset), the get the date 	
+     For example, if I give "Feb 3" in my widget at 20:00 in California, browser send "2021-02-04T05:00:00Z", timeoffset= 480. Then calculation get Feb3
+
+
+
+ 
+Example : date of the event is a Date + Time (Zoned)
+  That's mean 
  
 # google 
 API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
@@ -56,7 +78,7 @@ https://cloud.google.com/translate/docs/quickstarts
 API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
  	
 
-# docker
+# Cloud & docker
 user togh: pass4togh
 
 
@@ -112,8 +134,10 @@ https://fr.reactjs.org/docs/getting-started.html
 https://www.taniarascia.com/getting-started-with-react/
 
 
-Spring;
-https://www.baeldung.com/spring-new-requestmapping-shortcuts
+https://www.pluralsight.com/guides/how-to-use-react-bootstrap's-popover
+Mais ca ne marche pas car il faut du JS Voici comme il fait 
+https://www.codeply.com/p/p5euzBO22C
+
 
 
 13 date picker
@@ -134,6 +158,10 @@ mvn clean install
 
 https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
+
+
+# Spring;
+https://www.baeldung.com/spring-new-requestmapping-shortcuts
 
 
 # icon
@@ -197,10 +225,15 @@ const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
 
 
 
+# React
 
-
-
-
+##Structure
+componentDidUpdate(prevProps) {
+		 JSON.stringify(this.props.positions));
+		if (prevProps.positions !== this.props.positions) {
+			this.setState({ positions: this.props.positions });
+		}
+		
 
 ## React structure
  {names.map(function(name, index){

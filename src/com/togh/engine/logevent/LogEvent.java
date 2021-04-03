@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.engine.logevent;
 
 import java.io.PrintWriter;
@@ -291,29 +299,14 @@ public class LogEvent {
         final StringBuilder htmlEvent = new StringBuilder();
         htmlEvent.append("<div style=\"border:1px solid black;padding-right: 20px;\">");
 
-        htmlEvent.append(getHtmlTitle());
+        htmlEvent.append( getHtmlTitle());
         if (getParameters() != null) {
-            htmlEvent.append("<br><span style=\"margin-left:30px;\">" + getParameters() + "</span>");
-            if (getCause() != null) {
-                htmlEvent.append("<br><span style=\"margin-left:30px;font-style: italic;font-size: 75%;\">Cause: "
-                        + getCause() + "</span>");
-            }
+            htmlEvent.append("<br><span style=\"margin-left:20px;\">" + getParameters() + "</span>");
             if (getExceptionDetails() != null) {
-                htmlEvent.append("<br><span style=\"margin-left:30px;font-style: italic;font-size: 75%;\">"
+                htmlEvent.append("<br><span style=\"margin-left:20px;font-style: italic;font-size: 75%;\">"
                         + getExceptionDetails() + "</span>");
             }
 
-        }
-        if (getConsequence() != null) {
-            htmlEvent.append(
-                    "<br><span style=\"margin-left:30px;font-style: italic;font-weight: bold; font-size: 75%;\">Consequence: "
-                            + getConsequence()
-                            + "</span>");
-        }
-        if (getAction() != null) {
-            htmlEvent.append(
-                    "<br><span style=\"margin-left:30px;font-style: italic;font-weight: bold; font-size: 75%;\">Action: "
-                            + getAction() + "</span>");
         }
         htmlEvent.append("</div>");
 
@@ -324,29 +317,34 @@ public class LogEvent {
     public String getHtmlTitle() {
         final StringBuilder htmlEvent = new StringBuilder();
 
-        StringBuilder title = new StringBuilder();
-        title.append(getKey());
 
-        htmlEvent.append("<a href='#' ");
+         String className="";
+        String titlePopover=getKey();
+        StringBuilder contentPopover = new StringBuilder();
+        if (getCause() != null && getCause().length() > 0)
+            contentPopover.append("\nCause:"+ getCause() );
+        if (getConsequence() != null && getConsequence().length() > 0)
+            contentPopover.append("\nConsequence:"+ getConsequence() );
+        if (getAction()!=null && getAction().length()>0)
+            contentPopover.append("\nAction:" + getAction());
+        
         if (getLevel() == Level.CRITICAL || getLevel() == Level.ERROR) {
-            htmlEvent.append("class=\"label label-danger\" style=\"color:white;\" ");
-            if (getConsequence() != null && getConsequence().length() > 0)
-                title.append("\nConsequence:" + getConsequence());
-            title.append("\nAction:" + getAction());
+            className="badge bg-danger";
         } else if (getLevel() == Level.APPLICATIONERROR) {
-            htmlEvent.append("class=\"label label-warning\" style=\"color:white;\" ");
-            if (getConsequence() != null && getConsequence().length() > 0)
-                title.append("\nConsequence:" + getConsequence());
-            title.append("\nAction:" + getAction());
+            className="badge bg-warning text-dark";
         } else if (getLevel() == Level.SUCCESS) {
-            htmlEvent.append("class=\"label label-success\" style=\"color:white;\" ");
+            className="badge bg-success";
         } else {
-            htmlEvent.append("class=\"label label-info\" style=\"color:white;\" ");
+            className="badge bg-info text-dark";
         }
 
-        htmlEvent.append("\" title=\"" + title + "\"");
-        htmlEvent.append(">" + getTitle());
-        htmlEvent.append("</a>");
+        // <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+            htmlEvent.append("<button type=\"button\" ");
+            htmlEvent.append(" class=\""+className+"\" ");
+            htmlEvent.append(" data-bs-toggle=\"popover\" ");
+            htmlEvent.append(" title=\""+titlePopover+"\"");
+            htmlEvent.append(" data-bs-content=\""+ contentPopover.toString()+"\" >");
+            htmlEvent.append( getTitle()+"</button>");
         return htmlEvent.toString();
     }
 

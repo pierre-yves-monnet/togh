@@ -85,7 +85,7 @@ public class ToghDictionary {
     public List<LogEvent> read() {
         List<LogEvent> listEvents = new ArrayList<>();
         // clear the dictionnary
-        dictionary = new HashMap<String, SentenceItem>();
+        dictionary = new HashMap<>();
         File file = getFile();
         try (FileInputStream fis = new FileInputStream(file);
                 InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8)) {
@@ -95,7 +95,7 @@ public class ToghDictionary {
             Map<String, String> brutDictionary = (Map<String, String>) ((Object) object.toMap());
             // rebuild the SentenceItem dictionnary
             for (Entry<String, String> entry : brutDictionary.entrySet()) {
-                if (entry.getValue().startsWith("__"))
+                if (entry.getKey().startsWith("__"))
                     continue;
                 String originalTranslation = brutDictionary.get("__" + entry.getKey());
                 dictionary.put(entry.getKey(), new SentenceItem(entry.getKey(), entry.getValue(), originalTranslation));
