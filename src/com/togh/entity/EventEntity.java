@@ -18,10 +18,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
@@ -49,6 +53,8 @@ public @Data class EventEntity extends UserEntity {
     public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
     public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
     public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
+    public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
+    
     
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
@@ -132,7 +138,8 @@ public @Data class EventEntity extends UserEntity {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "eventid")
     private List<ParticipantEntity> participants = new ArrayList<>();
 
@@ -172,7 +179,7 @@ public @Data class EventEntity extends UserEntity {
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean itineraryShowExpenses;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "eventid")
     @OrderBy("rownumber")
     private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
@@ -207,7 +214,7 @@ public @Data class EventEntity extends UserEntity {
     @Column(name = "tasklistshowdates")
     private Boolean taskListShowDates;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventTaskEntity> taskList = new ArrayList<>();
@@ -252,7 +259,7 @@ public @Data class EventEntity extends UserEntity {
     private Boolean shoppinglistShowExpenses;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventShoppingListEntity> shoppingList = new ArrayList<>();
@@ -282,6 +289,44 @@ public @Data class EventEntity extends UserEntity {
         }
         return false;
     }
+    
+    
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Survey */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    // @Column(name = "tasklistshowdates")
+    //     private Boolean surveyListShowDates;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventSurveyEntity> surveyList = new ArrayList<>();
+
+    public EventSurveyEntity addSurvey(EventSurveyEntity onesurvey) {
+        surveyList.add(onesurvey);
+        return onesurvey;
+    }
+
+   
+    /**
+     * Remove a task.
+     * 
+     * @param task
+     * @return true if the task exist and is removed, false else
+     */
+    public boolean removeSurvey(EventSurveyEntity task) {
+        for (EventSurveyEntity surveyIterator : surveyList) {
+            if (surveyIterator.getId().equals(task.getId())) {
+                surveyList.remove(surveyIterator);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Serialization */
@@ -338,6 +383,13 @@ public @Data class EventEntity extends UserEntity {
             }
             resultMap.put(CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
             
+            // get Surveylist
+            List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
+            /* bob for (EventSurveyEntity surveyStep : surveyList) {
+                listSurveylistMap.add(surveyStep.getMap(contextAccess));
+            }*/
+            resultMap.put(CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
+         
         }
 
         return resultMap;

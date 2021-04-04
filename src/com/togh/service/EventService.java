@@ -20,6 +20,7 @@ import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
+import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
@@ -30,6 +31,7 @@ import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
 import com.togh.repository.EventShoppingListRepository;
+import com.togh.repository.EventSurveyRepository;
 import com.togh.repository.EventTaskRepository;
 import com.togh.service.event.EventController;
 
@@ -74,8 +76,12 @@ public class EventService {
     private EventExpenseRepository eventExpenseRepository;
     
     @Autowired
+    private EventSurveyRepository surveyRepository;
+    
+    @Autowired
     private ToghUserService toghUserService;
 
+    
     public static class EventOperationResult {
 
         public EventEntity eventEntity;
@@ -323,8 +329,39 @@ public class EventService {
     }
     
     
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Data Survey                                                               */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    public EventSurveyEntity addSurvey(EventEntity event, EventSurveyEntity surveyEntity) {        
+        surveyRepository.save(surveyEntity);
+        /* bob event.addSurvey(surveyEntity); */
+        return surveyEntity;
+    }
+    public List<LogEvent> removeSurvey(EventEntity event, Long surveyId) {
+        List<LogEvent> listLogEvent = new ArrayList<>();
+        Optional<EventSurveyEntity> child = surveyRepository.findById(surveyId);
+        if (child.isPresent()) {
+            surveyRepository.delete(child.get());
+            /* bob event.removeSurvey( child.get() );*/
+        } else {
+            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find SurveyId "+surveyId));
+        }
+        return listLogEvent;
+    }
     
     
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Add child                                                              */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
     public BaseEntity add(String nameEntity, UserEntity parentEntity) {
         if ("expense".equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
             EventExpenseEntity expense = new EventExpenseEntity();            

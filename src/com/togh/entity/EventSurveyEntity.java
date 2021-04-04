@@ -8,16 +8,23 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -32,81 +39,47 @@ import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventItineraryStep,                                                                      */
+/*  EventSurveyEntity,                                                                      */
 /*                                                                                  */
-/*  Manage task in a event                                                          */
+/*  Manage Survey in a event                                                          */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
 @Entity
 
-@Table(name = "EVTITINERARYSTEP")
+@Table(name = "EVTSURVEY")
 @EqualsAndHashCode(callSuper=true)
-public @Data class EventItineraryStepEntity extends UserEntity {
+public @Data class EventSurveyEntity extends UserEntity {
 
-    public enum CategoryEnum {
-        POI,BEGIN,END,SHOPPING,AIRPORT,BUS,TRAIN,BOAT,NIGHT,VISIT,RESTAURANT,ENTERTAINMENT
+    public enum SurveyStatusEnum {
+        INPREPAR, OPEN,CLOSE
     }
-    @Column(name = "category", length=15)
+    @Column(name = "status", length=10, nullable= false)
     @Enumerated(EnumType.STRING)    
-    private CategoryEnum category;
+    private SurveyStatusEnum status;
 
     // name is part of the baseEntity
     @Column( name="description", length=400)
     private String description;
-
+  
     
-    @Column( name="datestep", nullable = false)
-    private LocalDate dateStep;
-
-    @Column( name="rownumber", nullable = false)
-    private Integer rownumber;
-
-    
-    // format is HH:MM
-    @Column(name = "visittime", length=5)
-    private String visitTime;
-    
-    
-    @Column(name = "durationtime", length=5)
-    private String durationTime;
-    
-    
-    @Column(name = "geoaddress", length=300)
-    private String geoaddress;
-
-    @Column(name = "geolat")
-    private Double geolat;
-
-    
-    @Column(name = "geolng")
-    private Double geolng;
-
-    
-    @Column(name = "website", length=300)
-    private String website;
-
-    // Expense attached to this task 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "expenseid")
-    private EventExpenseEntity expense;
+    @JoinColumn(name = "whoid")
+    private ToghUserEntity whoId;
 
-    @Override
-    public boolean acceptExpense() {
-        return true;
-    }
-   
+    @ElementCollection( fetch = FetchType.EAGER)
+    @CollectionTable(name = "EVTSURVEYCHOICE", joinColumns = @JoinColumn(name = "id"))
+    @Fetch(value = FetchMode.SUBSELECT)
+    @Column(name = "choice", length=100)
+    private List<String> choicelist;
+  
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @JoinColumn(name = "surveyid")
+    @OrderBy("id")
+    private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
+ 
     
-    /**
-     * The dateStep is manipulate by the interface, not by the user.
-     */
-    public boolean isAbsoluteLocalDate(String attributName ) {
-        if ("dateStep".equalsIgnoreCase(attributName))
-            return true;
-        return false;
-    }
-
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * @param levelInformation
@@ -116,23 +89,13 @@ public @Data class EventItineraryStepEntity extends UserEntity {
     public Map<String,Object> getMap( ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         
-        resultMap.put("dateStep", EngineTool.dateToString( dateStep));
-        resultMap.put("rownumber", rownumber);
 
-        resultMap.put("category",category==null ? null : category.toString());
-        resultMap.put("visitTime", visitTime);
-        resultMap.put("durationTime", durationTime);
+        resultMap.put("status",status==null ? null : status.toString());
         resultMap.put("description", description);
-        resultMap.put("geoaddress", geoaddress);
-        resultMap.put("geolat", geolat);
-        resultMap.put("geolng", geolng);
-        resultMap.put("website", website);
-        
-        
-        // Here we attached directly the expense information
-        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess));
-        
+        resultMap.put("choice", choicelist);
 
+      
         return resultMap;
     }
+
 }

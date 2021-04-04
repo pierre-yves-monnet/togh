@@ -8,16 +8,16 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -26,75 +26,55 @@ import org.hibernate.annotations.FetchMode;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /* ******************************************************************************** */
 /*                                                                                  */
-/* Participant to an event */
+/*  EventSurveyEntity,                                                                      */
+/*                                                                                  */
+/*  Manage Survey in a event                                                          */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
 @Entity
 
-@Table(name = "EVTPARTICIPANT")
-public class ParticipantEntity extends UserEntity {
+@Table(name = "EVTSURVEYANSWER")
+@EqualsAndHashCode(callSuper=true)
+public @Data class EventSurveyAnswerEntity extends UserEntity {
 
-    public enum ParticipantRoleEnum {
-        OWNER, ORGANIZER, PARTICIPANT, OBSERVER, WAITCONFIR, EXTERNAL
-    }
-
-    @Column(name = "role", length=15, nullable = false)
-    @Enumerated(EnumType.STRING)    
-    private ParticipantRoleEnum role;
-
-    // User attached to this participant
+    // User attached to this task (maybe an external user, why not ?
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userid")
-    private ToghUserEntity user;
+    @JoinColumn(name = "whoid")
+    private ToghUserEntity whoId;
 
-    public enum StatusEnum {  INVITED, ACTIF, LEFT }
+    @ElementCollection(  fetch = FetchType.EAGER )
+    @CollectionTable(name = "evtsurveyanswerchoice", 
+      joinColumns = {@JoinColumn(name = "survey_id", referencedColumnName = "id")})
+    @Fetch(value = FetchMode.SUBSELECT)
+    @MapKeyColumn(name = "choice")
+    @Column(name = "answer")
+    
+    private Map<String, Boolean> answer;
 
-    @Column(name = "status", length=10, nullable = false)
-    @Enumerated(EnumType.STRING)    
-    private StatusEnum status;
-
-    public ParticipantRoleEnum getRole() {
-        return role;
-    }
-
-    public void setRole(ParticipantRoleEnum role) {
-        this.role = role;
-    }
-
-    public ToghUserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(ToghUserEntity endUser) {
-        this.user = endUser;
-    }
-
-   
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
-   
+    
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * @param levelInformation
      * @return
      */
+    @Override
     public Map<String,Object> getMap( ContextAccess contextAccess) {
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("role", role==null ? null : role.toString());
-        resultMap.put("user", user.getMap(contextAccess ));
-        resultMap.put("id", getId());
-        resultMap.put("status", status==null ? null : status.toString());
+        Map<String,Object> resultMap = super.getMap( contextAccess );
+        
+
+        resultMap.put("answer",answer);
+
+        // we just return the ID here
+        resultMap.put("whoid",whoId==null ? null :  whoId.getId());
 
         return resultMap;
     }
+
 }

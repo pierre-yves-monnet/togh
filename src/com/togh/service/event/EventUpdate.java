@@ -28,6 +28,7 @@ import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
+import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.UserEntity;
@@ -124,6 +125,8 @@ public class EventUpdate {
             child = new EventItineraryStepEntity();
         } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
             child = new EventShoppingListEntity();
+        } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
+            child = new EventSurveyEntity();
         }
         if (child != null) {
             @SuppressWarnings("unchecked")
@@ -138,6 +141,8 @@ public class EventUpdate {
                 child = eventController.getEventService().addItineraryStep(event, (EventItineraryStepEntity) child);
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
                 child = eventController.getEventService().addShoppingList(event, (EventShoppingListEntity) child);
+            } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
+                child = eventController.getEventService().addSurvey(event, (EventSurveyEntity) child);
             }
             eventOperationResult.listChildEntity.add(child);
         }
