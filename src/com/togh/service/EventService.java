@@ -53,6 +53,7 @@ public class EventService {
     private static final LogEvent eventEntityNotFound = new LogEvent(EventService.class.getName(), 4, Level.APPLICATIONERROR, "Entity not found", "The entity requested can't be found, it may be deleted by an another user in the mean time", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventNoId = new LogEvent(EventService.class.getName(), 5, Level.ERROR, "No ID", "To load an entity, an ID must be give", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventBadEntity = new LogEvent(EventService.class.getName(), 6, Level.ERROR, "Bad Entity", "This Entity can't be load", "Entity is not found, can't be linked in this object", "Check the Entity");
+    private static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventService.class.getName(), 7, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
 
     private Logger logger = Logger.getLogger(EventService.class.getName());
     private final static String logHeader = EventService.class.getSimpleName() + ": ";
@@ -261,6 +262,12 @@ public class EventService {
         event.addItineraryStep(itineraryStep);
         return itineraryStep;
     }
+    /**
+     * removeItineraryStep
+     * @param event
+     * @param taskId
+     * @return
+     */
     public List<LogEvent> removeItineraryStep(EventEntity event, Long taskId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventItineraryStepEntity> child = eventItineraryStepRepository.findById(taskId);
@@ -268,7 +275,7 @@ public class EventService {
             eventItineraryStepRepository.delete(child.get());
             event.removeItineraryStep( child.get() );
         } else {
-            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find itineraryStep "+taskId));
+            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find itineraryStep "+taskId));
         }
 
         return listLogEvent;
@@ -286,6 +293,12 @@ public class EventService {
         event.addShoppingList(shoppingListEntity);
         return shoppingListEntity;
     }
+    /**
+     * RemoveShoppingList
+     * @param event
+     * @param shoppingListId
+     * @return
+     */
     public List<LogEvent> removeShoppingList(EventEntity event, Long shoppingListId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventShoppingListEntity> child = eventShoppingListRepository.findById(shoppingListId);
@@ -293,7 +306,7 @@ public class EventService {
             eventShoppingListRepository.delete(child.get());
             event.removeShoppingList( child.get() );
         } else {
-            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find ShoppingId "+shoppingListId));
+            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find ShoppingId "+shoppingListId));
         }
         return listLogEvent;
     }
@@ -315,6 +328,12 @@ public class EventService {
         event.addTask(task);
         return task;
     }
+    /**
+     * RemoveTask
+     * @param event
+     * @param taskId
+     * @return
+     */
     public List<LogEvent> removeTask(EventEntity event, Long taskId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventTaskEntity> task = eventTaskRepository.findById(taskId);
@@ -322,7 +341,7 @@ public class EventService {
             eventTaskRepository.delete(task.get());
             event.removeTask( task.get() );
         } else {
-            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find taskId "+taskId));
+            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId "+taskId));
         }
 
         return listLogEvent;
@@ -338,17 +357,23 @@ public class EventService {
     /* ******************************************************************************** */
     public EventSurveyEntity addSurvey(EventEntity event, EventSurveyEntity surveyEntity) {        
         surveyRepository.save(surveyEntity);
-        /* bob event.addSurvey(surveyEntity); */
+        event.addSurvey( surveyEntity);
         return surveyEntity;
+ 
     }
+    /**
+     * RemoveSurvey
+     * @param event
+     * @param surveyId
+     * @return
+     */
     public List<LogEvent> removeSurvey(EventEntity event, Long surveyId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventSurveyEntity> child = surveyRepository.findById(surveyId);
         if (child.isPresent()) {
             surveyRepository.delete(child.get());
-            /* bob event.removeSurvey( child.get() );*/
         } else {
-            listLogEvent.add( new LogEvent(eventBadEntity, "Can't find SurveyId "+surveyId));
+            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find SurveyId "+surveyId));
         }
         return listLogEvent;
     }

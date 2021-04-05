@@ -121,7 +121,7 @@ class EventSurvey extends React.Component {
 				<td> 
 					<TextInput value={item.propositiontext} 
 						onChange={(event) => {
-						this.surveyCtrl.setChoiceValue("propositiontext", event.target.value, item);
+						this.surveyCtrl.setChoiceValue("choice", event.target.value, item);
 						this.setState( {survey: this.surveyCtrl.getValue()});
 					}}
 					 labelText="" ></TextInput>
@@ -155,6 +155,7 @@ class EventSurvey extends React.Component {
 									}
 								} 
 								labelText={<FormattedMessage id="EventSurvey.Title" defaultMessage="Title" />} />
+								bob id={survey.it}
 						</div>
 						<div class="col-2" style={{ float: "right" }}>
 							<button  class="btn btn-primary btn-xs" 

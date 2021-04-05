@@ -268,11 +268,6 @@ public @Data class EventEntity extends UserEntity {
         return onetask;
     }
 
-    /*
-     * public List<EventTaskEntity> getTasksList() {
-     * return taskList;
-     * }
-     */
     /**
      * Remove a task.
      * 
