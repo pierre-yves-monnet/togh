@@ -10,12 +10,12 @@ import FactoryService from './../service/FactoryService';
 
 import SlabRecord from './../service/SlabRecord';
 
-export const STATUS_INPREPARATION = 'INPREPARATION';
+export const STATUS_INPREPAR = 'INPREPAR';
 export const STATUS_OPEN = 'OPEN';
 export const STATUS_CLOSE = 'CLOSE';
 
-const CHILD_CHOICES="choices";
-const CHILD_ANSWER="answers";
+const CHILD_CHOICE="choicelist";
+const CHILD_ANSWER="answerlist";
 
 // -----------------------------------------------------------
 //
@@ -39,7 +39,7 @@ class SurveyCtrl {
 			this.survey= SurveyCtrl.getDefaultSurvey();
 		}
 		if (! this.survey.status) {
-			this.survey.status= STATUS_INPREPARATION;
+			this.survey.status= STATUS_INPREPAR;
 		}
 		if (! this.survey.choices)
 			this.survey.choices=[];
@@ -70,12 +70,12 @@ class SurveyCtrl {
 
 		var uniqCode = toolService.getUniqueCodeInList( this.survey.choices, "code");
 		var newchoices = this.survey.choices.concat( { code:uniqCode, propositiontext:''});
-		this.setChildAttribut( CHILD_CHOICES, newchoices, "");
+		this.setChildAttribut( CHILD_CHOICE, newchoices, "");
 	}
 
 	removeChoice( code ) {
 		const newChoices = this.survey.choices.filter((index) => index.code !== code);
- 		this.setChildAttribut( CHILD_CHOICES,newChoices, "");
+ 		this.setChildAttribut( CHILD_CHOICE,newChoices, "");
 	}
 	
 	/** ------------------------------------------------------
@@ -130,7 +130,7 @@ class SurveyCtrl {
 		console.log("Survey.setChoiceValue: set attribut:" + name + " <= " + value + " survey=" + JSON.stringify(this.survey));
 		item[name] = value;
 		// the choice is updated
-		this.setChildAttribut(CHILD_CHOICES, this.survey.choices, "" );
+		this.setChildAttribut(CHILD_CHOICE, this.survey.choices, "" );
 	} 
 	/**
 	 * 
@@ -154,7 +154,7 @@ class SurveyCtrl {
 	* Return a default survey 
  	*/	
 	static getDefaultSurvey() {
-		return {status: STATUS_INPREPARATION, choices: [], answers:[] };
+		return {status: STATUS_INPREPAR };
 	}
 	
 	

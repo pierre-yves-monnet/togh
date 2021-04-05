@@ -27,6 +27,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -69,12 +70,14 @@ public @Data class EventSurveyEntity extends UserEntity {
     private ToghUserEntity whoId;
 
     @ElementCollection( fetch = FetchType.EAGER)
-    @CollectionTable(name = "EVTSURVEYCHOICE", joinColumns = @JoinColumn(name = "id"))
-    @Fetch(value = FetchMode.SUBSELECT)
+    @CollectionTable(name = "EVTSURVEYCHOICE", joinColumns = @JoinColumn(name = "surveyid"))
+    @Fetch(value = FetchMode.JOIN)
     @Column(name = "choice", length=100)
     private List<String> choicelist;
   
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @Column(name = "answer", length=100)
     @JoinColumn(name = "surveyid")
     @OrderBy("id")
     private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();

@@ -10,7 +10,7 @@ import React from 'react';
 import { injectIntl, FormattedMessage } from "react-intl";
 
 import { TextInput, DatePicker, DatePickerInput, TextArea, InlineLoading, Toggle } from 'carbon-components-react';
-import { PlusCircle, DashCircle, List, ListTask, ListUl, ListCheck } from 'react-bootstrap-icons';
+import { PlusCircle, DashCircle, List } from 'react-bootstrap-icons';
 
 import FactoryService from './service/FactoryService';
 
@@ -27,6 +27,7 @@ const STATUS_ACTIVE = "ACTIVE";
 const STATUS_DONE = "DONE";
 const STATUS_CANCEL = "CANCEL";
 
+const NAMEENTITY = "tasklist";
 
 class EventTaskList extends React.Component {
 
@@ -52,8 +53,8 @@ class EventTaskList extends React.Component {
 		};
 
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.addTask 					= this.addTask.bind(this);
-		this.addTaskCallback 			= this.addTaskCallback.bind( this );
+		this.addItem 					= this.addItem.bind(this);
+		this.addItemCallback 			= this.addItemCallback.bind( this );
 		this.removeTask					= this.removeTask.bind( this );
 		this.removeTaskCallback			= this.removeTaskCallback.bind( this );
 		
@@ -79,9 +80,9 @@ class EventTaskList extends React.Component {
 				image="img/btnTask.png"
 				title={<FormattedMessage id="EventTaskList.MainTitleTaskList" defaultMessage="Tasks List" />}
 				showPlusButton={true}
-				showPlusButtonTitle={<FormattedMessage id="EventTaskList.AddTask" defaultMessage="Add a task in the list" />}
+				showPlusButtonTitle={<FormattedMessage id="EventTaskList.addItem" defaultMessage="Add a task in the list" />}
 				userTipsText={<FormattedMessage id="EventTaskList.TaskTip" defaultMessage="Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize" />}
-				addItemCallback={this.addTask}
+				addItemCallback={this.addItem}
 			/>
 		);
 
@@ -95,7 +96,7 @@ class EventTaskList extends React.Component {
 					<FormattedMessage id="EventTaskList.NoItem" defaultMessage="You don't have any task in the list." />
 					&nbsp;
 					<button class="btn btn-success btn-xs"
-						onClick={() => this.addTask()}
+						onClick={() => this.addItem()}
 						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a new item in the list" })}
 						disabled={this.state.operation.inprogress} >
 							{ this.state.operation.inprogress && 
@@ -355,7 +356,7 @@ class EventTaskList extends React.Component {
 	setAttribut(name, value, item) {
 		console.log("EventTasklist.setAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
 		
-		this.eventCtrl.setAttribut(name, value, item, "/tasklist/"+item.id);
+		this.eventCtrl.setAttribut(name, value, item, NAMEENTITY+"/"+item.id);
 	
 	}
 	setAttributCheckbox(name, value) {		
@@ -369,7 +370,7 @@ class EventTaskList extends React.Component {
 	}
 	changeParticipantCallback( task, userid) {
 		console.log("EventTaskList.changeParticipantCallback user="+JSON.stringify(userid));
-		this.eventCtrl.setAttribut("whoid", userid, task, "/tasklist/"+task.id );
+		this.eventCtrl.setAttribut("whoid", userid, task, NAMEENTITY+"/"+task.id );
 		task.whoid = userid;
 		this.setState({ event: this.state.event });
 		// console.log("EventShoppinglist.changeParticipantCallback event="+JSON.stringify(this.state.event));
@@ -393,23 +394,23 @@ class EventTaskList extends React.Component {
 
 	/**
    */
-	addTask() {
+	addItem() {
 		const intl = this.props.intl;
 
-		console.log("EventTasklist.addTask: addTask item=" + JSON.stringify(this.state.event));
+		console.log("EventTasklist.addItem: addItem item=" + JSON.stringify(this.state.event));
 		this.setState({operation:{
 					inprogress:true,
 					label: intl.formatMessage({id: "EventTaskList.AddingTask",defaultMessage: "Adding a task"}), 
 					listlogevents: [] }});
 		// call the server to get an ID on this taskList
 		var newTask = { "status": "PLANNED", "name": "" };
-		this.eventCtrl.addEventChildFct("tasklist", newTask, "", this.addTaskCallback);
+		this.eventCtrl.addEventChildFct(NAMEENTITY, newTask, "", this.addItemCallback);
 	}
 
 	/**
-	* addTaskCallback
+	* addItemCallback
  	*/
-	addTaskCallback(httpPayload) {
+	addItemCallback(httpPayload) {
 		const intl = this.props.intl;
 
 		let currentOperation = this.state.operation;
@@ -417,15 +418,15 @@ class EventTaskList extends React.Component {
 		if (httpPayload.isError()) {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
-			console.log("EventTasklist.addTaskCallback: HTTP ERROR ");
+			console.log("EventTasklist.addItemCallback: HTTP ERROR ");
 		} else if (httpPayload.getData().status ==="ERROR") {
 			console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 			currentOperation.status= userFeedbackConstant.ERROR;
-			currentOperation.result=intl.formatMessage({id: "EventTaskList.CantAddTask",defaultMessage: "A task can't be added"});
+			currentOperation.result=intl.formatMessage({id: "EventTaskList.CantaddItem",defaultMessage: "A task can't be added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
-			console.log("EventTasklist.addTaskCallback:  BAD RECEPTION");
+			console.log("EventTasklist.addItemCallback:  BAD RECEPTION");
 
 		} else {
 			var taskToAdd = httpPayload.getData().childEntity[ 0 ];
@@ -434,7 +435,7 @@ class EventTaskList extends React.Component {
 			currentOperation.result=intl.formatMessage({id: "EventTaskList.TaskAdded",defaultMessage: "A task is added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
-			console.log("EventTasklist.addTaskCallback ");
+			console.log("EventTasklist.addItemCallback ");
 			var newList = event.tasklist.concat(taskToAdd);
 			event.tasklist = newList;
 			this.setState({ event: event });
@@ -458,7 +459,7 @@ class EventTaskList extends React.Component {
 		var listTasks = currentEvent.tasklist;
 		var index = listTasks.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("tasklist", listTasks[index].id, "", this.removeTaskCallback);
+			this.eventCtrl.removeEventChild(NAMEENTITY, listTasks[index].id, "", this.removeTaskCallback);
 			// listTasks.splice(index, 1);
 		}
 		// console.log("EventTasklist.removeTask: " + JSON.stringify(listTask));
@@ -476,7 +477,7 @@ class EventTaskList extends React.Component {
 		// find the task item to delete
 		if (httpPayload.isError()) {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
-			console.log("EventTasklist.addTaskCallback: HTTP ERROR ");
+			console.log("EventTasklist.addItemCallback: HTTP ERROR ");
 		} else if (httpPayload.getData().status ==="ERROR") {
 				console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 				currentOperation.status= userFeedbackConstant.ERROR;

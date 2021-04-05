@@ -17,13 +17,17 @@ import FactoryService from './service/FactoryService';
 import SlabRecord from './service/SlabRecord';
 import EventSectionHeader from './component/EventSectionHeader';
 
+import * as userFeedbackConstant from './component/UserFeedback';
+import UserFeedback  from './component/UserFeedback';
 
 
 import * as surveyConstant from './controller/SurveyCtrl';
+
 import EventCtrl from './controller/EventCtrl';
 import SurveyCtrl from './controller/SurveyCtrl';
 
 import EventSurvey from './EventSurvey';
+
 
 // -----------------------------------------------------------
 //
@@ -32,6 +36,10 @@ import EventSurvey from './EventSurvey';
 // Display one event
 //
 // -----------------------------------------------------------
+
+
+export const NAMEENTITY = "surveylist";
+
 
 class EventSurveyList extends React.Component {
 	// this.props.updateEvent()
@@ -48,13 +56,20 @@ class EventSurveyList extends React.Component {
 				showOnlyNonAnswered : false,
 				showOnlyAnswered : false,
 				showSurveyAdmin:false
+			},
+			operation: {
+				inprogress: false,
+				label:"",
+				status:"",
+				result:"",
+				listlogevents: [] 
 			}
 		};
 		// show : OFF, ON, COLLAPSE
 		// console.log("EventSurveyList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.setAttributeCheckbox		= this.setAttributeCheckbox.bind( this );
-		this.addSurvey 					= this.addSurvey.bind(this);
-		this.addSurveyCallback			= this.addSurveyCallback.bind( this );		
+		this.addItem 					= this.addItem.bind(this);
+		this.addItemCallback			= this.addItemCallback.bind( this );		
 		
 	}
 	
@@ -88,7 +103,7 @@ class EventSurveyList extends React.Component {
 				showPlusButton  = {true}
 				showPlusButtonTitle={<FormattedMessage id="EventSurveyList.AddSurvey" defaultMessage="Add a survey in the list" />}
 				userTipsText={<FormattedMessage id="EventSurveyList.SurveyTip" defaultMessage="Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review." />}
-				addItemCallback={this.addSurvey}
+				addItemCallback={this.addItem}
 				/>
 				);
 
@@ -100,9 +115,9 @@ class EventSurveyList extends React.Component {
 					<FormattedMessage id="EventSurveyList.NoItem" defaultMessage="You don't have any survey ready in the list." />
 					{ userParticipant.isParticipant() && 
 						<button class="btn btn-success btn-xs" 
-							onClick={() => this.addSurvey()}
+							onClick={() => this.addItem()}
 							title={intl.formatMessage({id: "EventSurveyList.addItem",defaultMessage: "Create a new survey in the list"})}>
-							<PlusCircle onClick={() => this.addSurvey()} />
+							<PlusCircle onClick={() => this.addItem()} />
 							<FormattedMessage id="EventSurveyList.AddOne" defaultMessage="Add one !" />
 						</button>
 					}
@@ -116,7 +131,7 @@ class EventSurveyList extends React.Component {
 				var classSurvey = "";
 				var styleSurvey="";
 				// color
-				if (item.status === surveyConstant.STATUS_INPREPARATION)
+				if (item.status === surveyConstant.STATUS_INPREPAR)
 					classSurvey= "list-group-item list-group-item-dark"
 				else if (item.status === surveyConstant.STATUS_OPEN)
 					classSurvey= "list-group-item list-group-item-warning"
@@ -178,6 +193,12 @@ class EventSurveyList extends React.Component {
 		return (
 			<div>
 				{headerSection}
+				<UserFeedback inprogress= {this.state.operation.inprogress}
+					label= {this.state.operation.label}
+					status= {this.state.operation.status}
+					result= {this.state.operation.result}
+					listlogevents= {this.state.operation.listlogevents} />
+			
 				{contentPage}<br/><br/>
 			</div>
 			
@@ -224,28 +245,64 @@ class EventSurveyList extends React.Component {
 	// Component controls
 	// 
 	// --------------------------------------------------------------
-
-
-	addSurvey() {
-		console.log("EventSurveyList.addSurvey" );
-		
-		var surveyToAdd = SurveyCtrl.getDefaultSurvey();
-		
-		// call the server to get an ID on this survey
- 		this.eventCtrl.addEventChildFct( "surveylist", surveyToAdd, "/", this.addSurveyCallback);
-	}
 	
-	addSurveyCallback(httpPayload) {
-		console.log("EventSurveyList.addSurveyCallback ");
-		if (httpPayload.isError()) {
-				// feedback to user is required
-				console.log("EventSurveyList.addSurveyCallback: ERROR ");
-		} else {
-			var surveyToAdd = httpPayload.getData().child;
-			this.eventCtrl.addSurveyInEvent( surveyToAdd );
-			this.setState( { event: this.eventCtrl.getEvent(), show: { showSurveyAdmin : true} });
-		}
+	// --------------------------------------------------------------
+	// 
+	// Component controls
+	// 
+	// --------------------------------------------------------------
+
+
+	/**
+   */
+	addItem() {
+		const intl = this.props.intl;
+
+		console.log("EventSurvey.addItem: addItem item=" + JSON.stringify(this.state.event));
+		this.setState({operation:{
+					inprogress:true,
+					label: intl.formatMessage({id: "EventSurvey.AddingTask",defaultMessage: "Adding a task"}), 
+					listlogevents: [] }});
+		// call the server to get an ID on this taskList		
+		var surveyToAdd = SurveyCtrl.getDefaultSurvey();
+		this.eventCtrl.addEventChildFct(NAMEENTITY, surveyToAdd, "", this.addItemCallback);
 	}
+
+	/**
+	* addItemCallback
+ 	*/
+	addItemCallback(httpPayload) {
+		const intl = this.props.intl;
+
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
+		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;
+			// feedback to user is required
+			console.log("EventSurvey.addItemCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+			console.log("EventSurvey.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventSurvey.CantaddItem",defaultMessage: "A task can't be added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
+			console.log("EventSurvey.addItemCallback:  BAD RECEPTION");
+
+		} else {
+			var surveyToAdd = httpPayload.getData().childEntity[ 0 ];
+			var event = this.eventCtrl.getEvent();
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result=intl.formatMessage({id: "EventSurvey.TaskAdded",defaultMessage: "A task is added"});
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
+			console.log("EventSurvey.addItemCallback ");
+			this.eventCtrl.addSurveyInEvent( surveyToAdd );
+			this.setState({ event: event,show: { showSurveyAdmin : true} });
+		}
+		this.setState({operation: currentOperation});
+	}
+
 	
 	
 	

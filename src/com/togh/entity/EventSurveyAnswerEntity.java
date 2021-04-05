@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -52,7 +53,7 @@ public @Data class EventSurveyAnswerEntity extends UserEntity {
     @ElementCollection(  fetch = FetchType.EAGER )
     @CollectionTable(name = "evtsurveyanswerchoice", 
       joinColumns = {@JoinColumn(name = "survey_id", referencedColumnName = "id")})
-    @Fetch(value = FetchMode.SUBSELECT)
+    @Fetch(value = FetchMode.SELECT)
     @MapKeyColumn(name = "choice")
     @Column(name = "answer")
     

@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -139,15 +140,12 @@ public @Data class EventEntity extends UserEntity {
     /* ******************************************************************************** */
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size=100)
     @JoinColumn(name = "eventid")
     private List<ParticipantEntity> participants = new ArrayList<>();
 
-    /*
-     * public List<ParticipantEntity> getParticipants() {
-     * return participants;
-     * }
-     */
+   
     /**
      * do not add a participant, which is a private information. So, don't take the risk to add accidentaly a participant from an another event
      * 
@@ -180,6 +178,8 @@ public @Data class EventEntity extends UserEntity {
     private Boolean itineraryShowExpenses;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size=100)
     @JoinColumn(name = "eventid")
     @OrderBy("rownumber")
     private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
@@ -215,6 +215,8 @@ public @Data class EventEntity extends UserEntity {
     private Boolean taskListShowDates;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size=100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventTaskEntity> taskList = new ArrayList<>();
@@ -223,12 +225,7 @@ public @Data class EventEntity extends UserEntity {
         taskList.add(onetask);
         return onetask;
     }
-
-    /*
-     * public List<EventTaskEntity> getTasksList() {
-     * return taskList;
-     * }
-     */
+   
     /**
      * Remove a task.
      * 
@@ -260,6 +257,8 @@ public @Data class EventEntity extends UserEntity {
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size=100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventShoppingListEntity> shoppingList = new ArrayList<>();
@@ -301,6 +300,8 @@ public @Data class EventEntity extends UserEntity {
     //     private Boolean surveyListShowDates;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size=100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventSurveyEntity> surveyList = new ArrayList<>();
@@ -385,9 +386,9 @@ public @Data class EventEntity extends UserEntity {
             
             // get Surveylist
             List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
-            /* bob for (EventSurveyEntity surveyStep : surveyList) {
+            for (EventSurveyEntity surveyStep : surveyList) {
                 listSurveylistMap.add(surveyStep.getMap(contextAccess));
-            }*/
+            }
             resultMap.put(CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
          
         }
