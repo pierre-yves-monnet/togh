@@ -91,7 +91,7 @@ public class RestEventController {
     @PostMapping(value = "/api/event/create", produces = "application/json")
     @ResponseBody
     public Map<String, Object> createEvent(
-            @RequestParam( RestJsonConstants.CST_PARAM_NAME ) String eventName,
+            @Param( RestJsonConstants.CST_PARAM_NAME ) String eventName,
             @Param("getlist") Boolean getList,
             @Param( RestJsonConstants.CST_PARAM_FILTER_EVENTS ) String filterEvents,
             @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
@@ -100,7 +100,8 @@ public class RestEventController {
         if (toghUser == null) {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        
+        if (eventName ==null || eventName.trim().length()==0)
+            eventName="New event";
         EventOperationResult eventOperationResult = factoryService.getEventService().createEvent(toghUser, eventName );
         if (Boolean.TRUE.equals(getList)) {
             completePayloadListEvents(payload, toghUser, filterEvents);
