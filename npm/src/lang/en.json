@@ -206,6 +206,9 @@
   "__EventItinerary.CantAddStep" : "A step can't be added",
   "EventItinerary.CantAddStep" : "A step can't be added",
 
+  "__EventItinerary.CantaddItem" : "A step can't be added",
+  "EventItinerary.CantaddItem" : "A step can't be added",
+
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
 
@@ -446,8 +449,26 @@
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "In Preparation",
 
+  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "EventSurvey.AddAnswer" : "Adding your answer",
+
   "__EventSurvey.AddOption" : "Option",
   "EventSurvey.AddOption" : "Option",
+
+  "__EventSurvey.AddingChoice" : "Adding a choice",
+  "EventSurvey.AddingChoice" : "Adding a choice",
+
+  "__EventSurvey.AddingTask" : "Adding a task",
+  "EventSurvey.AddingTask" : "Adding a task",
+
+  "__EventSurvey.AnswerAdded" : "answer added",
+  "EventSurvey.AnswerAdded" : "answer added",
+
+  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
+  "EventSurvey.CantaddAnswer" : "Can't add the answer",
+
+  "__EventSurvey.CantaddItem" : "A task can't be added",
+  "EventSurvey.CantaddItem" : "A task can't be added",
 
   "__EventSurvey.Closed" : "closed",
   "EventSurvey.Closed" : "closed",
@@ -467,8 +488,14 @@
   "__EventSurvey.Option" : "Option",
   "EventSurvey.Option" : "Option",
 
+  "__EventSurvey.RemovingChoice" : "Removing a choice",
+  "EventSurvey.RemovingChoice" : "Removing a choice",
+
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
+
+  "__EventSurvey.TaskAdded" : "A task is added",
+  "EventSurvey.TaskAdded" : "A task is added",
 
   "__EventSurvey.Title" : "Title",
   "EventSurvey.Title" : "Title",
@@ -514,6 +541,9 @@
 
   "__EventTaskList.CantRemoveTask" : "The task can't be removed",
   "EventTaskList.CantRemoveTask" : "The task can't be removed",
+
+  "__EventTaskList.CantaddItem" : "A task can't be added",
+  "EventTaskList.CantaddItem" : "A task can't be added",
 
   "__EventTaskList.Description" : "Description",
   "EventTaskList.Description" : "Description",
@@ -589,6 +619,9 @@
 
   "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
   "Eventitinerary.CantRemoveStep" : "The step can't be removed",
+
+  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
+  "Eventitinerary.CantremoveItem" : "The step can't be removed",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "Removing a step",

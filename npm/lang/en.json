@@ -203,7 +203,7 @@
   "EventItinerary.AddingStep": {
     "defaultMessage": "Adding a step"
   },
-  "EventItinerary.CantAddStep": {
+  "EventItinerary.CantaddItem": {
     "defaultMessage": "A step can't be added"
   },
   "EventItinerary.ItineraryTip": {
@@ -443,8 +443,26 @@
   "EventState.InPreparation": {
     "defaultMessage": "In Preparation"
   },
+  "EventSurvey.AddAnswer": {
+    "defaultMessage": "Adding your answer"
+  },
   "EventSurvey.AddOption": {
     "defaultMessage": "Option"
+  },
+  "EventSurvey.AddingChoice": {
+    "defaultMessage": "Adding a choice"
+  },
+  "EventSurvey.AddingTask": {
+    "defaultMessage": "Adding a task"
+  },
+  "EventSurvey.AnswerAdded": {
+    "defaultMessage": "answer added"
+  },
+  "EventSurvey.CantaddAnswer": {
+    "defaultMessage": "Can't add the answer"
+  },
+  "EventSurvey.CantaddItem": {
+    "defaultMessage": "A task can't be added"
   },
   "EventSurvey.Closed": {
     "defaultMessage": "closed"
@@ -464,8 +482,14 @@
   "EventSurvey.Option": {
     "defaultMessage": "Option"
   },
+  "EventSurvey.RemovingChoice": {
+    "defaultMessage": "Removing a choice"
+  },
   "EventSurvey.SurveyInPreparationNoParticipantsVisible": {
     "defaultMessage": "This survey is in preparation. Participants are not visible"
+  },
+  "EventSurvey.TaskAdded": {
+    "defaultMessage": "A task is added"
   },
   "EventSurvey.Title": {
     "defaultMessage": "Title"
@@ -494,9 +518,6 @@
   "EventTaskList.AddOne": {
     "defaultMessage": "Add one !"
   },
-  "EventTaskList.AddTask": {
-    "defaultMessage": "Add a task in the list"
-  },
   "EventTaskList.AddingTask": {
     "defaultMessage": "Adding a task"
   },
@@ -506,11 +527,11 @@
   "EventTaskList.Cancelled": {
     "defaultMessage": "Cancelled"
   },
-  "EventTaskList.CantAddTask": {
-    "defaultMessage": "A task can't be added"
-  },
   "EventTaskList.CantRemoveTask": {
     "defaultMessage": "The task can't be removed"
+  },
+  "EventTaskList.CantaddItem": {
+    "defaultMessage": "A task can't be added"
   },
   "EventTaskList.Description": {
     "defaultMessage": "Description"
@@ -584,7 +605,7 @@
   "EventTaskList.addItem": {
     "defaultMessage": "Add a new item in the list"
   },
-  "Eventitinerary.CantRemoveStep": {
+  "Eventitinerary.CantremoveItem": {
     "defaultMessage": "The step can't be removed"
   },
   "Eventitinerary.RemovingStep": {
