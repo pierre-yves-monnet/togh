@@ -18,6 +18,7 @@ import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.repository.EventRepository;
+import com.togh.service.EventService;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.FactoryService;
@@ -39,16 +40,15 @@ import com.togh.service.ToghUserService.CreationResult;
 
 public class EventInvitation {
 
-    @Autowired
     private FactoryService factoryService;
 
-    @Autowired
-    private EventRepository eventRepository;
+    // private EventRepository eventRepository;
 
     EventController eventController;
 
-    protected EventInvitation(EventController eventController) {
+    protected EventInvitation(EventController eventController,FactoryService factoryService) {
         this.eventController = eventController;
+        this.factoryService = factoryService;
     }
 
     public InvitationResult invite(EventEntity event,
@@ -89,7 +89,7 @@ public class EventInvitation {
                 // Javascript will pass a Integer or a String (JS doesn not manage correctly large Long number as Integer)
                 ToghUserEntity toghUser = null;
                 if (userId != null)
-                    toghUser = userService.getUserFromId(userId);
+                    toghUser = userService.getUserFromId( userId );
                 if (toghUser == null) {
 
                     // caller has supposed to give a valid userId. Stop immediatelly
@@ -118,9 +118,9 @@ public class EventInvitation {
                 invitationResult.okMessage.append(toghUser.getLabel() + ", ");
             }
         }
-
-        eventRepository.save(event);
-
+        
+        // save of the event has to be done by the caller
+        
         // status now
         if (invitationResult.listThogUserInvited.isEmpty())
             invitationResult.status = InvitationStatus.NOUSERSGIVEN;

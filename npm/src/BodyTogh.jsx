@@ -95,8 +95,7 @@ class BodyTogh extends React.Component {
 			return (	
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
 					<div>
-						<Banner language={this.state.language} changeLanguage={this.changeLanguage} />
-	
+						<Banner language={this.state.language} changeLanguage={this.changeLanguage} />						
 						<div class="container">
 	  						<div class="row">
 								<div class="col-sm-2" >

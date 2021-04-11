@@ -34,6 +34,9 @@ Note:
 le projet doit etre not� "Dynamic web application" sinon Spring ne veut pas d�marr� ( ? )
 Click droit => Properties => Project Facet => Dynamic Web Application
 
+## Lombok 
+The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
+
 ## mobile
 https://flutter.dev/
 
@@ -118,6 +121,12 @@ https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gk
  
 ## Arret de docker
   wsl --shutdown
+  
+  
+# domain:
+
+www.1and1.com
+
   
 # CI
 https://tomgregory.com/building-a-spring-boot-application-in-jenkins/

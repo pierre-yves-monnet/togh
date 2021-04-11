@@ -8,12 +8,8 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -24,15 +20,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.togh.engine.tool.EngineTool;
+import com.togh.entity.EventShoppingListEntity.ShoppingStatusEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
@@ -50,70 +44,21 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 
-@Table(name = "EVTSURVEY")
+@Table(name = "EVTSURVEYCHOICE")
 @EqualsAndHashCode(callSuper=true)
-public @Data class EventSurveyEntity extends UserEntity {
+public @Data class EventSurveyChoiceEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_CHOICELIST = "choicelist";
-    public static final String CST_SLABOPERATION_ANSWERLIST = "answerlist";
+    @Column(name = "code", nullable=false)
+    private Integer code;
 
-    public enum SurveyStatusEnum {
-        INPREPAR, OPEN,CLOSE
-    }
-    @Column(name = "status", length=10, nullable= false)
-    @Enumerated(EnumType.STRING)    
-    private SurveyStatusEnum status;
-
-    // name is part of the baseEntity
-    @Column( name="description", length=400)
-    private String description;
-  
-    // choice : list of "code/ proposition"
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
-    @JoinColumn(name = "surveyid")
-    @OrderBy("id")
-    private List<EventSurveyChoiceEntity> choicelist = new ArrayList<>();
-
+    @Column(name = "proptext", length=50)
+    private String proptext;
     
-  
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @Column(name = "answer", length=100)
-    @JoinColumn(name = "surveyid")
-    @OrderBy("id")
-    private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
- 
-    
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
-     * @return
-     */
     @Override
     public Map<String,Object> getMap( ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
-        
-
-        resultMap.put("status",status==null ? null : status.toString());
-        resultMap.put("description", description);
-
-        List<Map<String, Object>> listChoiceMap = new ArrayList<>();
-        if (choicelist!=null)
-            for (EventSurveyChoiceEntity choice : choicelist) {
-                listChoiceMap.add(choice.getMap(contextAccess));
-            }
-        resultMap.put( CST_SLABOPERATION_CHOICELIST, listChoiceMap);
-        
-        List<Map<String, Object>> listAnswerMap = new ArrayList<>();
-        if (answerlist!=null)
-            for (EventSurveyAnswerEntity answer : answerlist) {
-                listAnswerMap.add(answer.getMap(contextAccess));
-            }
-        resultMap.put( CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
-
-      
+        resultMap.put("code", code);
+        resultMap.put("proptext", proptext);
         return resultMap;
     }
 

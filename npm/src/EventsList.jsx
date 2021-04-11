@@ -8,13 +8,16 @@
 
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
-import { DropletFill, PlusCircle,ArrowRepeat,ClipboardData,PersonCircle } from 'react-bootstrap-icons';
+import { injectIntl, FormattedMessage } from "react-intl";
+
+import { PlusCircle,ArrowRepeat,ClipboardData,PersonCircle } from 'react-bootstrap-icons';
 
 
 import FactoryService from './service/FactoryService';
 
 import EventState from './EventState';
+import * as userFeedbackConstant from './component/UserFeedback';
+import UserFeedback  from './component/UserFeedback';
 
 class EventsList extends React.Component {
 
@@ -25,7 +28,14 @@ class EventsList extends React.Component {
 		this.state = {}
 		console.log("EventsList.constructor");
 		this.state = { filterEvents: "", "message": "", 
-					events: [] };
+					events: [],
+					operation: {
+						inprogress: false,
+						label:"",
+						status:"",
+						result:"",
+						listlogevents: [] 
+					} };
 		// this is mandatory to have access to the variable in the method... thank you React!   
 
 		this.createEvent = this.createEvent.bind(this);
@@ -89,6 +99,12 @@ class EventsList extends React.Component {
 						</div>
 					</div>
 				</div>
+				<UserFeedback inprogress= {this.state.operation.inprogress}
+							label= {this.state.operation.label}
+							status= {this.state.operation.status}
+							result= {this.state.operation.result}
+							listlogevents= {this.state.operation.listlogevents} />
+					
 				<div class="row">
 					<table class="toghtable" style={{padding: ".5rem .5rem", 
 							borderBottomWidth: "1px", 
@@ -160,13 +176,34 @@ class EventsList extends React.Component {
 
 		var restCallService = FactoryService.getInstance().getRestcallService();
 
-		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, this, httpPayload => {
-			httpPayload.trace("EventsList.refreshListEventsCallback");
+		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, this, this.refreshListEventsCallback );
+
+	}
+	refreshListEventsCallback( httpPayload) {
+		httpPayload.trace("EventsList.refreshListEventsCallback");
+		let currentOperation = this.state.operation;
+		currentOperation.inprogress = false;
+		const intl = this.props.intl;
+			
+		if (httpPayload.isError()) {
+			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
+			console.log("EventItinerary.addItemCallback: ERROR ");
+		} else if (httpPayload.getData().status ==="ERROR") {
+				console.log("EventsList.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
+				currentOperation.status= userFeedbackConstant.ERROR;
+				currentOperation.result=intl.formatMessage({id: "EventsList.CantGetListItem",defaultMessage: "Can't access the list of item'"});
+				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+		} else {
+			currentOperation.status= UserFeedback.OK;
+			currentOperation.result="";
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
+
 			this.setState({ events: httpPayload.getData().events });
-		});
+		}
+
 
 	}
 
 }
 
-export default EventsList;
+export default injectIntl(EventsList);

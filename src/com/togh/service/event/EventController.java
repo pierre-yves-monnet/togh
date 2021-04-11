@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
@@ -24,6 +25,7 @@ import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.UpdateContext;
+import com.togh.service.FactoryService;
 import com.togh.service.event.EventUpdate.Slab;
 
 /* ******************************************************************************** */
@@ -36,17 +38,17 @@ import com.togh.service.event.EventUpdate.Slab;
 /* ******************************************************************************** */
 public class EventController {
 
-    private EventService eventService;
+    private FactoryService factoryService;
     
     private EventEntity event;
     
-    public EventController(EventService eventService, EventEntity event ) {
+    public EventController(EventEntity event, FactoryService factoryService ) {
         this.event = event;
-        this.eventService = eventService;
+        this.factoryService = factoryService;
     }
     
-    public static EventController getInstance( EventService eventService, EventEntity event ) {
-        return new EventController(eventService, event );        
+    public static EventController getInstance( EventEntity event, FactoryService factoryService  ) {
+        return new EventController( event, factoryService );        
     }
     
     
@@ -68,7 +70,7 @@ public class EventController {
         
         // the author is a Organizer participant
         boolean authorIsReferenced=false;
-        for (ParticipantEntity participant : event.getParticipants()) {
+        for (ParticipantEntity participant : event.getParticipantList()) {
             if (participant.getUser() != null && participant.getUser().getId().equals( event.getAuthorId())) {
                 authorIsReferenced=true;
                 participant.setRole( ParticipantRoleEnum.OWNER);
@@ -149,7 +151,7 @@ public class EventController {
      * @return
      */
     public ParticipantEntity getParticipant(ToghUserEntity toghUser) {
-        for (ParticipantEntity participant : event.getParticipants()) {
+        for (ParticipantEntity participant : event.getParticipantList()) {
             if (participant.getUser() !=null && participant.getUser().getId().equals( toghUser.getId()))
                 return participant;
         }
@@ -198,7 +200,7 @@ public class EventController {
     /*                                                                                  */
     /* ******************************************************************************** */
     public  InvitationResult invite(EventEntity event, ToghUserEntity invitedByToghUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
-        EventInvitation eventInvitation = new EventInvitation( this );
+        EventInvitation eventInvitation = new EventInvitation( this, factoryService );
         return eventInvitation.invite( event,  invitedByToghUser, listUsersId,  userInvitedEmail,  role,  message);
     }
  
@@ -216,14 +218,14 @@ public class EventController {
         }
         
         
-        EventOperationResult operationResult= eventUpdate.update( listSlab, updateContext);
+        EventOperationResult eventOperationResult= eventUpdate.update( listSlab, updateContext);
         List<Slab> listComplementSlab = completeConsistant();
-        operationResult.add(  eventUpdate.update( listComplementSlab, updateContext));
-        return operationResult;
+        eventOperationResult.add( eventUpdate.update( listComplementSlab, updateContext));
+        return eventOperationResult;
     }
     
     protected EventService getEventService() {
-        return eventService;
+        return factoryService.getEventService();
     }
 
 }

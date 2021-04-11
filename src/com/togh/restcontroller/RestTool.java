@@ -45,13 +45,22 @@ public class RestTool {
             return defaultValue;
         }
     }
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static List<Long> getListLong(Map<String,Object> content, String key, List<Long> defaultValue) {
         try
         { 
-            if (content.get(key) instanceof List)
-                return (List<Long>) content.get(key);
+            if (content.get(key) instanceof List) {
+                // if the ID is very large, the object may be send as a STRING. So, this is the moment to translate it
+                List<Object> listValues = (List<Object>) content.get(key);
+
+                for (int i=0;i<listValues.size();i++) {
+                    if ((! (listValues.get( i ) instanceof Long)) && listValues.get( i ) != null)
+                        listValues.set( i , Long.parseLong( listValues.get( i ).toString()));
+                }
+                return (List) listValues;
+            }
             return defaultValue;
+
         }
         catch(Exception e) {
             return defaultValue;

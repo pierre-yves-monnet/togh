@@ -47,7 +47,7 @@ class EventState extends React.Component {
 			 value:  "CLOSED",
 			 type: "warm-gray" },
 			{ label: intl.formatMessage({id: "EventState.Cancelled",defaultMessage: "Cancelled"}),
-			 value:  "CANCEL",
+			 value:  "CANCELLED",
 			 type: "red" },
 		];
 	

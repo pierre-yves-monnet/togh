@@ -14,8 +14,8 @@ export const STATUS_INPREPAR = 'INPREPAR';
 export const STATUS_OPEN = 'OPEN';
 export const STATUS_CLOSE = 'CLOSE';
 
-const CHILD_CHOICE="choicelist";
-const CHILD_ANSWER="answerlist";
+export const CHILD_CHOICE="choicelist";
+export const CHILD_ANSWER="answerlist";
 
 // -----------------------------------------------------------
 //
@@ -41,10 +41,10 @@ class SurveyCtrl {
 		if (! this.survey.status) {
 			this.survey.status= STATUS_INPREPAR;
 		}
-		if (! this.survey.choices)
-			this.survey.choices=[];
-		if (! this.survey.answers)
-			this.survey.answers=[];
+		if (! this.survey.choicelist)
+			this.survey.choicelist=[];
+		if (! this.survey.answerlist)
+			this.survey.answerlist=[];
 
 	
 	}
@@ -61,38 +61,26 @@ class SurveyCtrl {
 		return this.eventCtrl;
 	}
 	
-	/** ------------------------------------------------------
-	*   Choice
-	*/
-	addChoice() {
-		console.log("SurveyEntity.addChoice !!")
-		var toolService = FactoryService.getInstance().getToolService();
-
-		var uniqCode = toolService.getUniqueCodeInList( this.survey.choices, "code");
-		var newchoices = this.survey.choices.concat( { code:uniqCode, propositiontext:''});
-		this.setChildAttribut( CHILD_CHOICE, newchoices, "");
-	}
-
-	removeChoice( code ) {
-		const newChoices = this.survey.choices.filter((index) => index.code !== code);
- 		this.setChildAttribut( CHILD_CHOICE,newChoices, "");
-	}
+	
 	
 	/** ------------------------------------------------------
 	*   Answer
 	*/
-	setAnswer( answerParticipant, surveyChoiceCode, value) {
+	setDecision( answerParticipant, surveyChoiceCode, value) {
 		console.log("SurveyEntity.setAnswer: userId "+answerParticipant.userid+" choice:"+surveyChoiceCode+" value="+value);
 		// answerParticipant && surveyChoice are correctly pointed to the value expected
-		
+		debugger;
+		let surveyAnswer=null;
 		// avoid the JSON Circular
-		for (var i in this.survey.answers) {
-			if (this.survey.answers[ i ].userid === answerParticipant.userid ) {
-				this.survey.answers[ i ].decision [ surveyChoiceCode ] = value;
+		for (var i in this.survey[ CHILD_ANSWER ]) {
+			if (this.survey[ CHILD_ANSWER ] [ i ].whoid === answerParticipant.whoid ) {
+				surveyAnswer=this.survey[ CHILD_ANSWER ] [ i ];
+				surveyAnswer.decision[ surveyChoiceCode ] = value;
+ 				this.setChildAttribut( "decision", surveyAnswer.decision, "/"+CHILD_ANSWER+"/"+answerParticipant.id);
+				return;
 			}
 		}
 		
- 		this.setChildAttribut( CHILD_ANSWER, this.survey.answers, "");
 	
 	}
 
@@ -102,22 +90,8 @@ class SurveyCtrl {
 	// Tools
 	/**
 	 */
-	completeSurveyWithMe() {
-		// Ok, I must be part on this survey, ins't ?
-		for (var i in this.survey.answers) {
-			if (this.userParticipant.getUser() && this.survey.answers[ i ].userid === this.userParticipant.getUser().id) {
-				// I'm in !
-				return;
-			}
-		}
-		// so, add me
-		var newlist = this.survey.answers.concat( { userid : this.userParticipant.getUser().id,
-													username: this.userParticipant.getUser().label,
-													 decision: {}});
-		this.survey.answers = newlist;
-		this.setChildAttribut( CHILD_ANSWER, newlist, "/");
-	}
-
+	
+	
 	// -----------------------------------------------
 	// Set value to update the survey
 	/**
@@ -130,7 +104,7 @@ class SurveyCtrl {
 		console.log("Survey.setChoiceValue: set attribut:" + name + " <= " + value + " survey=" + JSON.stringify(this.survey));
 		item[name] = value;
 		// the choice is updated
-		this.setChildAttribut(CHILD_CHOICE, this.survey.choices, "" );
+		this.eventCtrl.setAttribut(name, value,  this.survey, "/surveylist/"+this.survey.id+"/"+CHILD_CHOICE+"/"+item.id );
 	} 
 	/**
 	 * 

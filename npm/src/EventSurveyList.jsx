@@ -78,7 +78,8 @@ class EventSurveyList extends React.Component {
 		console.log("EventSurveyList.componentDidMount");
 		if (this.eventCtrl.getSurveyList().length >0 ) {
 			// current survey is the first one then
-			this.eventCtrl.setCurrentSurveyId( this.getSurveyList()[ 0 ].id );
+			let survey = this.eventCtrl.getSurveyList()[ 0 ];
+			this.eventCtrl.setCurrentSurveyId( survey.id );
 			
 		}
 	}
@@ -146,7 +147,7 @@ class EventSurveyList extends React.Component {
 				else {
 					styleSurvey = {borderRight:"2px solid black"};
 				}
-				
+				debugger;
 				return(
 					<li class={classSurvey} style={styleSurvey}
 						key={index}
@@ -157,8 +158,8 @@ class EventSurveyList extends React.Component {
 								// do a setState to force to redisplay the component -- maybe use the context ?
 								this.setState({currentSurveyId: event.target.id}  );
 								}} > 
-						{item.title}&nbsp;						
-						<span class="badge bg-primary rounded-pill">{item.answers.length + "/"+nbParticipants}</span>
+						{item.name}&nbsp;						
+						<span class="badge bg-primary rounded-pill">{item.answerlist.length + "/"+nbParticipants}</span>
 					</li>
 					) }
 					)
@@ -184,6 +185,7 @@ class EventSurveyList extends React.Component {
 							eventCtrl={this.eventCtrl}
 							forceUpdatefct={() => {
 								console.log("EventSurveyList.forceUpdate");
+								// forceUpdate is a React function
 								this.forceUpdate()}}
 							 />
 					</div>

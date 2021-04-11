@@ -43,8 +43,9 @@ class Invitation extends React.Component {
 						};
 
 		// this is mandatory to have access to the variable in the method... thank you React!   
-		this.sendInvitation = this.sendInvitation.bind(this);
-		this.searchToghUser	= this.searchToghUser.bind(this);
+		this.sendInvitation 			= this.sendInvitation.bind(this);
+		this.sendInvitationCallback		= this.sendInvitationCallback.bind(this);
+		this.searchToghUser				= this.searchToghUser.bind(this);
 		// this is mandatory to have access to the variable in the method... thank you React!   
 
 	}
@@ -298,28 +299,29 @@ class Invitation extends React.Component {
 		
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		this.setState( {inprogressinvitation: true, statusErrorInvitation: '', statusOkInvitation:'' });
-		restCallService.postJson('/api/event/invitation', this, param, httpPayload => {
-			httpPayload.trace("Invitation.callback");
-			this.setState( {inprogressinvitation: false });
-			if (httpPayload.isError() ) {
-				this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });
-			}
-			else if (httpPayload.getData().status === 'INVITATIONSENT') {
-				this.setState({ "statusOkInvitation": "Invitation sent with success to "+httpPayload.getData().okMessage });
-				console.log("Invitation.callback : register this new participant =" + JSON.stringify(httpPayload.getData()));
-			} else if (httpPayload.getData().status === 'ALREADYAPARTICIPANT') {
-				this.setState({ "statusErrorInvitation": "This participant is already registered: "+httpPayload.getData().errorMessage  });
-				this.setState({ "statusOkInvitation": "Invitation sent with success"+httpPayload.getData().okMessage });
-
-			} else {
-				this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });
-			}
-			this.props.participantInvited(httpPayload.getData().participants);
-
-		});
+		restCallService.postJson('/api/event/invitation', this, param, this.sendInvitationCallback );
 	}
 
+	sendInvitationCallback(httpPayload) {
+		httpPayload.trace("Invitation.callback");
+		this.setState( {inprogressinvitation: false });
+		debugger;
+		if (httpPayload.isError() ) {
+			this.setState({ "statusErrorInvitation": "An error arrived " });
+		}
+		else if (httpPayload.getData().status === 'INVITATIONSENT') {
+			this.setState({ "statusOkInvitation": "Invitation sent with success to "+httpPayload.getData().okMessage });
+			console.log("Invitation.callback : register this new participant =" + JSON.stringify(httpPayload.getData()));
+			this.props.participantInvited(httpPayload.getData().participants);
+		} else if (httpPayload.getData().status === 'ALREADYAPARTICIPANT') {
+			this.setState({ "statusErrorInvitation": "This participant is already registered: "+httpPayload.getData().errorMessage  });
+			this.setState({ "statusOkInvitation": "Invitation sent with success"+httpPayload.getData().okMessage });
+			this.props.participantInvited(httpPayload.getData().participants);
+		} else {
+			this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });
+		}
 
+	} 
 
 	
 	pingParent() {

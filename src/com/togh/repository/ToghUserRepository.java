@@ -21,6 +21,7 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
     
     // public ToghUserEntity findById(long id);
     
+    @Query("select toghuser from ToghUserEntity toghuser where upper(toghuser.email) like upper(?1)")
     public ToghUserEntity findByEmail(String email);
     
     public ToghUserEntity findByConnectionStamp(String connectionStamp );

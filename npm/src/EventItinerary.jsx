@@ -71,11 +71,11 @@ class EventItinerary extends React.Component {
 		
 		// show : OFF, ON, COLLAPSE
 		console.log("secTaskList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.addStep 				= this.addStep.bind(this);
-		this.addStepCallback		= this.addStepCallback.bind( this );
+		this.addItem 				= this.addItem.bind(this);
+		this.addItemCallback		= this.addItemCallback.bind( this );
 
-		this.removeStep				= this.removeStep.bind(this );
-		this.removeStepCallback		= this.removeStepCallback.bind( this );
+		this.removeItem				= this.removeItem.bind(this );
+		this.removeItemCallback		= this.removeItemCallback.bind( this );
 		this.upItem					= this.upItem.bind( this );
 		this.downItem				= this.downItem.bind( this );
 		this.moveStepOneDirection	= this.moveStepOneDirection.bind( this );
@@ -230,7 +230,7 @@ class EventItinerary extends React.Component {
 									id={dateIndexPublish.toISOString()}
 									onClick={(event) => {
 										console.log("EventItinerary.addFromButton :  id="+event.target.id);
-										this.addStep( event.target.id, null );
+										this.addItem( event.target.id, null );
 									}}>
 									<PlusCircle id={dateIndexPublish.toISOString()}/>
 								</button>
@@ -416,11 +416,11 @@ class EventItinerary extends React.Component {
 				<div class="col-1">
 					<table><tr>
 					<td>
-					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeStep(item)} 
+					{this.isShowDelete( item ) && <button class="btn btn-danger btn-xs" onClick={() => this.removeItem(item)} 
 						title={intl.formatMessage({id: "EventItineray.RemoveThisStep",defaultMessage: "Remove this step"})}>
 					<DashCircle/></button>}
 					</td><td>
-						<button class="btn btn-primary btn-xs" onClick={() => this.addStep( item.dateStep, item.rownumber+5)} ><PlusCircle/></button>
+						<button class="btn btn-primary btn-xs" onClick={() => this.addItem( item.dateStep, item.rownumber+5)} ><PlusCircle/></button>
 					</td>
 					</tr></table>
 				</div>
@@ -607,9 +607,9 @@ class EventItinerary extends React.Component {
 	/** --------------------
 	 *
  	*/
-	addStep(datestepSt, rownumber) {
+	addItem(datestepSt, rownumber) {
 		if (! datestepSt) {
-			console.log("Eventitinerary.addStep: date is NULL !");
+			console.log("Eventitinerary.addItem: date is NULL !");
 			return;
 		}
 		var toolService = FactoryService.getInstance().getToolService();
@@ -617,7 +617,7 @@ class EventItinerary extends React.Component {
 		var datestep = new Date( datestepSt);
 		var currentEvent = this.state.event;
 		
-		console.log("Eventitinerary.addStep: addStep datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarysteplist));
+		console.log("Eventitinerary.addItem: addItem datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarysteplist));
 
 		
 		if (! rownumber) {
@@ -643,10 +643,10 @@ class EventItinerary extends React.Component {
 					listlogevents: [] }});
 
 
- 		this.eventCtrl.addEventChildFct( "itinerarysteplist", stepToAdd, "", this.addStepCallback);
+ 		this.eventCtrl.addEventChildFct( "itinerarysteplist", stepToAdd, "", this.addItemCallback);
 	}
 
-	addStepCallback(httpPayload) {
+	addItemCallback(httpPayload) {
 		const intl = this.props.intl;
 
 		let currentOperation = this.state.operation;
@@ -654,11 +654,11 @@ class EventItinerary extends React.Component {
 		
 		if (httpPayload.isError()) {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
-			console.log("EventItinerary.addStepCallback: ERROR ");
+			console.log("EventItinerary.addItemCallback: ERROR ");
 		} else if (httpPayload.getData().status ==="ERROR") {
 				console.log("EventItinerary.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 				currentOperation.status= userFeedbackConstant.ERROR;
-				currentOperation.result=intl.formatMessage({id: "EventItinerary.CantAddStep",defaultMessage: "A step can't be added"});
+				currentOperation.result=intl.formatMessage({id: "EventItinerary.CantaddItem",defaultMessage: "A step can't be added"});
 				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else {
 			currentOperation.status= UserFeedback.OK;
@@ -682,9 +682,9 @@ class EventItinerary extends React.Component {
 
 	/** --------------------
  	*/
-	removeStep(item) {
+	removeItem(item) {
 		const intl = this.props.intl;
-		console.log("Eventitinerary.removeStep: event=" + JSON.stringify(this.state.event));
+		console.log("Eventitinerary.removeItem: event=" + JSON.stringify(this.state.event));
 
 		this.setState({operation:{
 					inprogress:true,
@@ -695,16 +695,16 @@ class EventItinerary extends React.Component {
 		var listSteps = currentEvent.itinerarysteplist;
 		var index = listSteps.indexOf(item);
 		if (index > -1) {
-			this.eventCtrl.removeEventChild("itinerarysteplist", listSteps[ index ].id, "", this.removeStepCallback);
+			this.eventCtrl.removeEventChild("itinerarysteplist", listSteps[ index ].id, "", this.removeItemCallback);
 			// listSteps.splice(index, 1);
 		}
 		// currentEvent.itineraryStepList = listSteps;
-		console.log("Eventitinerary.removeStep: eventAfter=" + JSON.stringify(this.currentEvent));
+		console.log("Eventitinerary.removeItem: eventAfter=" + JSON.stringify(this.currentEvent));
 
 		this.setState({ "event": currentEvent });
 	}
 
-	removeStepCallback( httpPayload) {
+	removeItemCallback( httpPayload) {
 		const intl = this.props.intl;
 		let currentOperation = this.state.operation;
 		currentOperation.inprogress = false;
@@ -716,7 +716,7 @@ class EventItinerary extends React.Component {
 		} else if (httpPayload.getData().status ==="ERROR") {
 				console.log("Eventitinerary.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 				currentOperation.status= userFeedbackConstant.ERROR;
-				currentOperation.result=intl.formatMessage({id: "Eventitinerary.CantRemoveStep",defaultMessage: "The step can't be removed"});
+				currentOperation.result=intl.formatMessage({id: "Eventitinerary.CantremoveItem",defaultMessage: "The step can't be removed"});
 				currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
 		} else {

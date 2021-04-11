@@ -19,6 +19,7 @@ import HttpResponseMockup from './../service/HttpResponseMockup';
 import EventPreferencesCtrl from './EventPreferencesCtrl';
 
 import * as participantConstant from './../EventParticipants';
+import * as surveyConstant from './../controller/SurveyCtrl';
 
 // -----------------------------------------------------------
 //
@@ -124,6 +125,18 @@ class EventCtrl {
 			log = log.concat("create surveylist");
 			this.event.surveylist = [];
 		}
+		
+		this.event.surveylist.map( (survey) => {
+			if (! survey[ surveyConstant.CHILD_ANSWER ])
+				survey[ surveyConstant.CHILD_ANSWER ] = {};
+			
+			survey[ surveyConstant.CHILD_ANSWER ].map( (surveyAnswer) => {
+			
+				if (! surveyAnswer.decision)
+					surveyAnswer.decision = {};
+			} );
+		});		
+		
 		if (!this.event.preferences) {
 			log = log.concat("create preferences");
 			this.event.preferences = {};
@@ -268,6 +281,22 @@ class EventCtrl {
 		return new UserParticipantCtrl(this.event, null);
 	}
 
+	getUserParticipantFromUserId( userId ) {
+		for (var i in this.event.participants) {
+			if (this.event.participants[i].user && this.event.participants[i].user.id === userId) {
+				return new UserParticipantCtrl(this.event, this.event.participants[i])
+			}
+		}
+		return null;
+	}
+
+	getParticipantName( userId ) {
+		// UserParticipantCtrl
+		let userParticipant = this.getUserParticipantFromUserId( userId );
+		if (userParticipant==null)
+			return "";
+		return userParticipant.getUser().label;
+	}
 	getTotalParticipants() {
 		var total = 0;
 		for (var i in this.event.participants) {

@@ -56,7 +56,6 @@ public @Data class EventEntity extends UserEntity {
     public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
     public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
     
-    
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
 
@@ -143,7 +142,7 @@ public @Data class EventEntity extends UserEntity {
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size=100)
     @JoinColumn(name = "eventid")
-    private List<ParticipantEntity> participants = new ArrayList<>();
+    private List<ParticipantEntity> participantList = new ArrayList<>();
 
    
     /**
@@ -156,7 +155,7 @@ public @Data class EventEntity extends UserEntity {
         participant.setUser(userParticipant);
         participant.setRole(role);
         participant.setStatus(status);
-        participants.add(participant);
+        participantList.add(participant);
         return participant;
     }
     /* ******************************************************************************** */
@@ -353,7 +352,7 @@ public @Data class EventEntity extends UserEntity {
         }
         if (typeEvent == TypeEventEnum.OPEN || contextAccess != ContextAccess.PUBLICACCESS) {
             List<Map<String, Object>> listParticipantsMap = new ArrayList<>();
-            for (ParticipantEntity participant : participants) {
+            for (ParticipantEntity participant : participantList) {
                 listParticipantsMap.add(participant.getMap(contextAccess));
             }
             resultMap.put("participants", listParticipantsMap);

@@ -8,6 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -20,7 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -51,13 +51,13 @@ public @Data class EventSurveyAnswerEntity extends UserEntity {
     private ToghUserEntity whoId;
 
     @ElementCollection(  fetch = FetchType.EAGER )
-    @CollectionTable(name = "evtsurveyanswerchoice", 
-      joinColumns = {@JoinColumn(name = "survey_id", referencedColumnName = "id")})
+    @CollectionTable(name = "EVTSURVEYANSWERCHOICE", 
+      joinColumns = {@JoinColumn(name = "surveyid", referencedColumnName = "id")})
     @Fetch(value = FetchMode.SELECT)
     @MapKeyColumn(name = "choice")
-    @Column(name = "answer")
+    @Column(name = "decision")
     
-    private Map<String, Boolean> answer;
+    private Map<String, Boolean> decision;
 
     
     /**
@@ -69,8 +69,7 @@ public @Data class EventSurveyAnswerEntity extends UserEntity {
     public Map<String,Object> getMap( ContextAccess contextAccess) {
         Map<String,Object> resultMap = super.getMap( contextAccess );
         
-
-        resultMap.put("answer",answer);
+        resultMap.put("decision", decision ==null ? new HashMap<>() : decision);
 
         // we just return the ID here
         resultMap.put("whoid",whoId==null ? null :  whoId.getId());

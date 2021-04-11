@@ -75,7 +75,7 @@ public class RestEventController {
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put( RestJsonConstants.CST_EVENT, event.getMap( EventController.getInstance( factoryService.getEventService(), event).getTypeAccess(toghUser)));
+        payload.put( RestJsonConstants.CST_EVENT, event.getMap( EventController.getInstance( event, factoryService).getTypeAccess(toghUser)));
 
         return payload;
 
@@ -162,8 +162,7 @@ public class RestEventController {
         if (eventId == null)
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Event not found");
 
-        // get servicice
-        
+        // get service        
         EventService eventService = factoryService.getEventService();
         EventEntity event = eventService.getAllowedEventById(toghUser, eventId);
         if (event==null) {
@@ -214,7 +213,7 @@ public class RestEventController {
         payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId());
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
         
-        ContextAccess contextAccess = EventController.getInstance( factoryService.getEventService(), event).getTypeAccess(toghUser);
+        ContextAccess contextAccess = EventController.getInstance(  event, factoryService).getTypeAccess(toghUser);
         List<Map<String,Object>> listEntity = new ArrayList<>();
         for(BaseEntity entity : eventOperationResult.listChildEntity) {
             listEntity.add( entity.getMap(contextAccess));
@@ -236,13 +235,12 @@ public class RestEventController {
      */
     private void completePayloadListEvents(Map<String,Object> payload, ToghUserEntity toghUser, String filterEvents) { 
         List<Map<String,Object>> listEventsMap= new ArrayList<>();
-    
-    EventResult eventResult = factoryService.getEventService().getEvents(toghUser, filterEvents);
+        EventResult eventResult = factoryService.getEventService().getEvents(toghUser, filterEvents);
     if (LogEventFactory.isError( eventResult.listLogEvent)) {
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
     } else {
         for (EventEntity event : eventResult.listEvents) {
-            EventController eventController = new EventController(factoryService.getEventService(), event);
+            EventController eventController = new EventController( event, factoryService);
             listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser)));
         }
         payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);

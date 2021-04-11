@@ -20,6 +20,8 @@ import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
+import com.togh.entity.EventSurveyAnswerEntity;
+import com.togh.entity.EventSurveyChoiceEntity;
 import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ParticipantEntity;
@@ -31,6 +33,8 @@ import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
 import com.togh.repository.EventShoppingListRepository;
+import com.togh.repository.EventSurveyAnswerRepository;
+import com.togh.repository.EventSurveyChoiceRepository;
 import com.togh.repository.EventSurveyRepository;
 import com.togh.repository.EventTaskRepository;
 import com.togh.service.event.EventController;
@@ -78,6 +82,13 @@ public class EventService {
     
     @Autowired
     private EventSurveyRepository surveyRepository;
+    
+    @Autowired
+    private EventSurveyChoiceRepository surveyChoiceRepository;
+
+    @Autowired
+    private EventSurveyAnswerRepository surveyAnswerRepository;
+
     
     @Autowired
     private ToghUserService toghUserService;
@@ -128,7 +139,7 @@ public class EventService {
         event.setTypeEvent(TypeEventEnum.LIMITED);
         event.setDatePolicy(DatePolicyEnum.ONEDATE);
 
-        EventController eventController = new EventController(this, event);
+        EventController eventController = new EventController( event, factoryService);
         // let's the conductor create the participant and all needed information
         eventController.completeConsistant();
         eventRepository.save(event);
@@ -146,7 +157,7 @@ public class EventService {
     }
     public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab,UpdateContext updateContext) {
 
-        EventController eventConductor = new EventController(this, event);
+        EventController eventConductor = new EventController( event, factoryService);
         if (!eventConductor.isAccess(updateContext.toghUser)) {
             EventOperationResult eventOperationResult = new EventOperationResult();
             eventOperationResult.addLogEvent(eventAccessError);
@@ -155,8 +166,7 @@ public class EventService {
 
         EventOperationResult eventOperationResult = eventConductor.update(listSlab, updateContext);
 
-        try {
-            
+        try {            
             eventRepository.save(event);
         } catch (Exception e) {
             eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
@@ -175,7 +185,10 @@ public class EventService {
     public EventResult getEvents(ToghUserEntity toghUser, String filterEvents) {
         EventResult eventResult = new EventResult();
         try {
-            eventResult.listEvents = eventRepository.findEventsUser(toghUser.getId());
+            if (filterEvents.equals("myevents"))
+                eventResult.listEvents = eventRepository.findMyEventsUser(toghUser.getId());
+            else
+                eventResult.listEvents = eventRepository.findEventsUser(toghUser.getId());
         } catch (Exception e) {
             // something bad arrived
             logger.severe(logHeader + " Error during finEventsUser toghUser[" + toghUser.getId() + "] :" + e.toString());
@@ -190,7 +203,7 @@ public class EventService {
         EventEntity event = eventRepository.findByEventId(eventId);
         if (event == null)
             return null;
-        EventController eventConductor = new EventController(this, event);
+        EventController eventConductor = new EventController( event, factoryService);
 
         // check consistant now
         eventConductor.completeConsistant();
@@ -208,7 +221,7 @@ public class EventService {
         EventEntity event = getEventById(eventId);
         if (event == null)
             return null;
-        EventController eventConductor = new EventController(this, event);
+        EventController eventConductor = new EventController( event, factoryService);
         if (!eventConductor.isAccess(toghUser))
             return null;
         return event;
@@ -229,11 +242,12 @@ public class EventService {
         public List<ParticipantEntity> newParticipants = new ArrayList<>();
         public StringBuilder errorMessage = new StringBuilder();
         public StringBuilder okMessage = new StringBuilder();
+        public List<LogEvent> listLogEvents = new ArrayList<>();
     }
 
     public InvitationResult invite(EventEntity event, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
 
-        EventController eventControler = new EventController(this, event);
+        EventController eventControler = new EventController( event, factoryService);
         if (!eventControler.isOrganizer(invitedByUser)) {
             InvitationResult invitationResult = new InvitationResult();
             invitationResult.status = InvitationStatus.NOTAUTHORIZED;
@@ -241,9 +255,15 @@ public class EventService {
         }
 
         // this operation is delegated to the evenController
-        return eventControler.invite(event, invitedByUser, listUsersId, userInvitedEmail, role, message);
-
+        InvitationResult invitationResult = eventControler.invite(event, invitedByUser, listUsersId, userInvitedEmail, role, message);
+        try {            
+            eventRepository.save(event);
+        } catch (Exception e) {
+            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+        }
+        return invitationResult;
     }
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Data ItineraryStep                                                               */
@@ -343,7 +363,6 @@ public class EventService {
         } else {
             listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId "+taskId));
         }
-
         return listLogEvent;
     }
     
@@ -358,9 +377,27 @@ public class EventService {
     public EventSurveyEntity addSurvey(EventEntity event, EventSurveyEntity surveyEntity) {        
         surveyRepository.save(surveyEntity);
         event.addSurvey( surveyEntity);
-        return surveyEntity;
- 
+        return surveyEntity; 
     }
+    public EventSurveyChoiceEntity addSurveyChoice(EventEntity event, EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {        
+        surveyChoiceRepository.save(surveyChoice);
+        List< EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
+        choicelist.add( surveyChoice);
+        surveyEntity.setChoicelist(choicelist);
+        surveyRepository.save(surveyEntity);
+        return surveyChoice;
+    }
+    
+    public EventSurveyAnswerEntity addSurveyAnswser(EventEntity event, EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {        
+        surveyAnswerRepository.save(surveyAnswerEntity);
+        List< EventSurveyAnswerEntity> answerlist = surveyEntity.getAnswerlist();
+        answerlist.add( surveyAnswerEntity);
+        surveyEntity.setAnswerlist(answerlist);
+        surveyRepository.save(surveyEntity);
+        return surveyAnswerEntity;
+    }
+    
+    
     /**
      * RemoveSurvey
      * @param event
@@ -377,7 +414,20 @@ public class EventService {
         }
         return listLogEvent;
     }
-    
+    public List<LogEvent> removeSurveyChoice(EventEntity event, EventSurveyEntity surveyEntity, Long choiceId) {
+        List<LogEvent> listLogEvent = new ArrayList<>();
+        Optional<EventSurveyChoiceEntity> choice = surveyChoiceRepository.findById(choiceId);
+        if (choice.isPresent()) {
+            surveyChoiceRepository.delete(choice.get());
+            List< EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
+            choicelist.remove( choice.get());
+            surveyEntity.setChoicelist(choicelist);
+        } else {
+            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find choiceId["+choiceId+"]"));
+        }
+
+        return listLogEvent;
+    }
     
     /* ******************************************************************************** */
     /*                                                                                  */

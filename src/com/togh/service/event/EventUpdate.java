@@ -28,10 +28,13 @@ import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
+import com.togh.entity.EventSurveyAnswerEntity;
+import com.togh.entity.EventSurveyChoiceEntity;
 import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.UserEntity;
+import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.LoadEntityResult;
 import com.togh.service.EventService.UpdateContext;
@@ -53,6 +56,10 @@ public class EventUpdate {
 
     private static final LogEvent eventInvalidUpdateOperation = new LogEvent(EventUpdate.class.getName(), 1, Level.APPLICATIONERROR, "Invalid operation", "This operation failed", "Operation can't be done", "Check error");
     private static final LogEvent eventCantLocalise = new LogEvent(EventUpdate.class.getName(), 2, Level.ERROR, "Can't localise", "A localisation can't be found, maybe the item is deleted by an another user?", "Operation can't be done", "Refresh your event");
+    private static final LogEvent eventBadLocalisationEntity = new LogEvent(EventUpdate.class.getName(), 3, Level.ERROR, "Entity found is not the one expected", "An entity with a special type is search, and an another one if found.", "Operation can't be executed", "Check the localisation and the entity found");
+    private static final LogEvent eventAlreadyDeleted = new LogEvent(EventUpdate.class.getName(), 4, Level.INFO, "Entity already deleted", "The entity is already deleted");
+    
+
     EventController eventController;
 
     public enum SlabOperation {
@@ -127,7 +134,15 @@ public class EventUpdate {
             child = new EventShoppingListEntity();
         } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
             child = new EventSurveyEntity();
+        } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
+            child = new EventSurveyChoiceEntity();
+        } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
+            child = new EventSurveyAnswerEntity();
         }
+        
+        
+        
+        
         if (child != null) {
             @SuppressWarnings("unchecked")
             Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
@@ -143,8 +158,17 @@ public class EventUpdate {
                 child = eventController.getEventService().addShoppingList(event, (EventShoppingListEntity) child);
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
                 child = eventController.getEventService().addSurvey(event, (EventSurveyEntity) child);
-            }
-            eventOperationResult.listChildEntity.add(child);
+            } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
+                BaseEntity surveyEntity = localise(event, slab.localisation);
+                if (surveyEntity instanceof EventSurveyEntity)
+                    child = eventController.getEventService().addSurveyChoice(event, (EventSurveyEntity) surveyEntity,  (EventSurveyChoiceEntity) child);
+        } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
+            BaseEntity surveyEntity = localise(event, slab.localisation);
+            if (surveyEntity instanceof EventSurveyEntity)
+                child = eventController.getEventService().addSurveyAnswser(event, (EventSurveyEntity) surveyEntity,  (EventSurveyAnswerEntity) child);
+        }
+            if (child!=null)
+                eventOperationResult.listChildEntity.add(child);
         }
     }
 
@@ -168,6 +192,19 @@ public class EventUpdate {
         else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
             eventOperationResult.addLogEvents(eventController.getEventService().removeShoppingList(event, slab.getAttributValueLong()));
+        }
+        else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
+            eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
+            BaseEntity surveyEntity = localise(event, slab.localisation);
+            if (surveyEntity instanceof EventSurveyEntity)
+                eventOperationResult.addLogEvents(eventController.getEventService().removeSurveyChoice(event, (EventSurveyEntity) surveyEntity, slab.getAttributValueLong()));
+            else if (surveyEntity ==null) {
+                // already deleted
+                eventOperationResult.addLogEvent( eventAlreadyDeleted);
+            }
+            else
+                eventOperationResult.addLogEvent( new LogEvent(eventBadLocalisationEntity, "Can't find SurveyEntity localisation["+slab.localisation+"] found ["+(surveyEntity==null ? null : surveyEntity.getClass().getName())));
+
         }
     }
 
@@ -214,7 +251,6 @@ public class EventUpdate {
         jpaAttributName = jpaAttributName.substring(0, 1).toLowerCase() + jpaAttributName.substring(1);
         try {
             if (attributValue != null) {
-
                 @SuppressWarnings("rawtypes")
                 Class returnType = methodAttribut.getReturnType();
                 if (returnType.equals(Double.class)) {
@@ -228,6 +264,7 @@ public class EventUpdate {
 
                 } else if (returnType.equals(LocalDateTime.class)) {
                     value = EngineTool.stringToDateTime(attributValue.toString());
+                    
                 } else if (returnType.equals(LocalDate.class)) {
                     long timeZoneOffset = updateContext.timeZoneOffset;
                     if (baseEntity.isAbsoluteLocalDate(attributName))
@@ -245,7 +282,7 @@ public class EventUpdate {
                     value = loadResult.entity;
                     eventOperationResult.listLogEvents.addAll(loadResult.listLogEvents);
 
-                } else
+                } else // ArrayList, String
                     value = attributValue;
 
             }
