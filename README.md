@@ -446,12 +446,18 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 		
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
-Py	Sauvegarde
+Py	Sauvegarde Chat
+	Preference affichage
+	Expense
+	Budget
+	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
+	
 	Factory clée d'API
 	Administration user
 	Administration Statistics usage
-	Depenses
+	
 	Integrer weather  : https://openweathermap.org/api
+	
 	My profile
 	My Friend = recuperer les users de google
 	Integrate in Google Calendar
