@@ -97,6 +97,20 @@ class Event extends React.Component {
 		
 		
 	}
+	
+	// EXAMPLE OF FUNCTION THAT WOULD HELP TO DETECT WHICH FORMAT THE DATE IS IN BASED ON THE LOCAL
+	deriveDateFormat = () => {
+	  const isoString = '2018-09-25' // example date!
+	
+	  const intlString = this.formatDate(isoString) // generate a formatted date
+	  const dateParts = isoString.split('-') // prepare to replace with pattern parts
+	
+	  return intlString
+	    .replace(dateParts[2], 'dd')
+	    .replace(dateParts[1], 'mm')
+	    .replace(dateParts[0], 'yyyy')
+	}
+	//
 
 	//----------------------------------- Render
 	render() {
@@ -133,6 +147,7 @@ class Event extends React.Component {
 						<table><tr>
 							<td colspan="2">
 								<DatePicker datePickerType="single"
+									// dateFormat='d/m/Y' // To get from a service that returns the format based on the language selected
 									onChange={(dates) => {
 										console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
 
@@ -147,6 +162,7 @@ class Event extends React.Component {
 								>
 
 									<DatePickerInput
+										// placeholder='mm/dd/yyyy' // To get from a service that returns the format based on the language selected
 										placeholder="mm/dd/yyyy"
 										labelText={<FormattedMessage id="Event.DateEvent" defaultMessage="Date Event" />}
 										id="date-picker-simple"
