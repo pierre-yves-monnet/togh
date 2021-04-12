@@ -87,15 +87,37 @@ class Invitation extends React.Component {
 		}
 		// console.log("Invitation.listSearchHtml="+listSearchUsersHtml);
 		
+		// Original Modal:
+//			 <ModalWrapper
+//     			buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
+//     			modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}  
+//				primaryButtonText='Ok'
+//				secondaryButtonText={intl.formatMessage({id: "Invitation.Close", defaultMessage: "Close"})}
+//				onRequestClose= {() => { console.log("Inviration.Modal.onRequestClose")}}
+//				handleSubmit={() => { console.log("Invitation.Modal.handleSubmit")}}
+//				shouldCloseAfterSubmit={true}
+//				size='lg'>
+		
+		
+		// Alternatives:
+		// passiveModal: no button at the bottom, in terms of design it's probably what should be used here
+//		<ModalWrapper
+//				passiveModal
+//				buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
+//     			modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}
+//				size='lg'>
+		//
+		//	
+		// AcknowledgmentModal: a single button at the bottom. Can't find how to make it work :-(
+		// keyword is recognized, but we still get the defaut modal..
+			
+		
+		
 		return ( 
-			 <ModalWrapper
-     			 buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
-     			 modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}
-				primaryButtonText={intl.formatMessage({id: "Invitation.Close", defaultMessage: "Close"})}
-				secondaryButtonText=''
-				onRequestClose= {() => { console.log("Inviration.Modal.onRequestClose")}}
-				handleSubmit={() => { console.log("Invitation.Modal.handleSubmit")}}
-				shouldCloseAfterSubmit
+			  <ModalWrapper
+				passiveModal
+				buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
+     			modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}
 				size='lg'>
 					<div style={{display: "inline-block"}}>
 					
