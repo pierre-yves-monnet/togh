@@ -5,6 +5,7 @@
 //  var toolService = FactoryService.getInstance().getToolService();
 
 // -----------------------------------------------------------
+import { FormattedMessage } from "react-intl";
 
 
 class ToolService {
@@ -18,6 +19,34 @@ class ToolService {
 		return listDates;
 	}
 	
+	
+	// Generate the date picker format.
+	// we used a ISO date (2018-09-25) ans ask the ReactIntl to transform it in the local. 
+	// it return for example 25/09/2018 for France
+	// then, replace 25 by d, 09 by m, 2018 by y. So format is d/m/y
+	
+	getDatePickerFormat() {
+	
+	  const isoString = '2018-09-25'; // example date!
+	  const dateParts = isoString.split('-') // prepare to replace with pattern parts
+	
+	  const intlString = this.formatDate(isoString) // generate a formatted date
+	
+	  return intlString
+	    .replace(dateParts[2], 'd')
+	    .replace(dateParts[1], 'm')
+	    .replace(dateParts[0], 'y')
+	}
+	
+	getDateToCarbonPicker(isoDate) {
+		return this.formatDate(isoDate)
+	}
+	/* We get a format like d/m/y or d.m.y for russia, or m/d/y in the US
+	*/
+	getCarbonPickerToDate() {
+		
+	}
+
 	/**
 	return the number of day between two date. Is negative if dateone > datetwo 
 	 */
