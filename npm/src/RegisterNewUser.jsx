@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { TextInput } from 'carbon-components-react';
+import { IntlProvider, FormattedMessage } from "react-intl";
 
 
 import FactoryService from './service/FactoryService';
@@ -61,24 +62,30 @@ class RegisterNewUser extends React.Component {
 				<div class="panel-heading">
 					Registration 
 					<div style={{float: "right"}}>
-						<button class="glyphicon glyphicon-remove" onClick={this.hideRegistration} title="Close registration"></button>
+						<button class="glyphicon glyphicon-remove" onClick={this.hideRegistration} 
+							title={<FormattedMessage id="RegisterNewUser.CloseRegistration" defaultMessage="Close registration"/>} ></button>
 					</div>
 				</div>
 				<div class="panel-body">
 					<br />
-					<TextInput labelText="Email" type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
+					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Email" defaultMessage="Email"/>} 
+						type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
 
-					<TextInput labelText="First name" type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })}  required></TextInput><br />
+					<TextInput labelText={<FormattedMessage id="RegisterNewUser.FirstName" defaultMessage="First name"/>} 
+						type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })}  required></TextInput><br />
 
-					<TextInput labelText="Last name" type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })}  ></TextInput><br />
+					<TextInput labelText={<FormattedMessage id="RegisterNewUser.LastName" defaultMessage="Last name"/>}
+						 type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })}  ></TextInput><br />
 
-					<TextInput labelText="Password" type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  required></TextInput><br />
+					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Password" defaultMessage="Password"/>} 
+						type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  required></TextInput><br />
 
-					<TextInput labelText="Retype password" type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} required></TextInput><br />
+					<TextInput labelText={<FormattedMessage id="RegisterNewUser.RetypePassword" defaultMessage="Retype password"/>} 
+						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} required></TextInput><br />
 					<div dangerouslySetInnerHTML={{ __html: messageBadPassword}}></div>
 					
 					<button class="btn btn-info" onClick={this.registerUser} disabled={ ! this.checkPassword() || ! this.validateForm()}>
-						{this.state.loading && <span class="loading">.</span>} Registration</button><p />
+						{this.state.loading && <span class="loading">.</span>} <FormattedMessage id="RegisterNewUser.Registration" defaultMessage="Registration"/></button><p />
 					<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
 				</div>
 			</div>
@@ -86,7 +93,19 @@ class RegisterNewUser extends React.Component {
 		}
 		else {
 			return 	(
+				<div>
 				<button  class="btn btn-primary" onClick={this.showRegistration} >Register New User</button>
+				
+				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whatisToghTitle" defaultMessage="What is Togh?" /></div>
+				<FormattedMessage id="BodyTogh.whatisToghExplanation" defaultMessage="Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who." />
+									
+				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whyTogh" defaultMessage="Why Togh?" /></div>
+				
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghMotivation" defaultMessage="I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghBorn" defaultMessage="Here Togh was born. I was thinking of this application for five years now."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghHistory" defaultMessage="Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghConclusion" defaultMessage="So this application was really needed at this moment."/></div>
+				</div>				
 				)
 		}
 	}
