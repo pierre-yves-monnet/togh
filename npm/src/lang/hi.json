@@ -1,4 +1,10 @@
 {
+  "__AdminAPIKey.Title" : "API Keys",
+  "AdminAPIKey.Title" : "एपीआई कुंजी",
+
+  "__AdminAPIKey.updateKey" : "Update key",
+  "AdminAPIKey.updateKey" : "अद्यतन कुंजी",
+
   "__AdminGoogle.Billing" : "Billing",
   "AdminGoogle.Billing" : "बिलिंग",
 
@@ -43,8 +49,29 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "अनुवाद की संख्या",
 
-  "__BodyTogh.welcome" : "Welcome to Togh D",
+  "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "तोगड़ में आपका स्वागत है",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghExplanation" : "Togh अपने कार्यक्रम का प्रबंधन करने के लिए एक आवेदन पत्र है। स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है। एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
+
+  "__BodyTogh.whatisToghTitle" : "What is Togh?",
+  "BodyTogh.whatisToghTitle" : "तोग क्या है?",
+
+  "__BodyTogh.whyTogh" : "Why Togh?",
+  "BodyTogh.whyTogh" : "क्यों तोग?",
+
+  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn" : "यहाँ तोग का जन्म हुआ था। मैं अब पांच साल के लिए इस आवेदन के बारे में सोच रहा था।",
+
+  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion" : "इसलिए इस क्षण में इस एप्लिकेशन की आवश्यकता थी।",
+
+  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory" : "पिछले साल, जब मैंने अपने परिवार के लिए एक रोड ट्रिप का आयोजन किया (जो कोविद के कारण रद्द हो गया था), मुझे यात्रा के निर्माण के लिए फुरकोट का उपयोग करना पड़ा, सर्वेक्षण के लिए Doogle बना, खर्च को साझा करने के लिए एक स्प्लिटवाइज़ खोलना, एक Google डॉक विचार विनिमय करने के लिए यात्रा कार्यक्रम, फेसबुक समूह का वर्णन करें।",
+
+  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation" : "मैं रिएक्ट, स्प्रिंग सीखना चाहता था। इसके अलावा, मैं अपना हाथ क्लाउड की तैनाती में लगाना चाहता था। तो, इन सभी तकनीकों का उपयोग करते हुए एक एप्लिकेशन क्यों न बनाएं, और देखें कि क्या चल रहा है?",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "बजट",
@@ -212,6 +239,9 @@
 
   "__EventItinerary.CantAddStep" : "A step can't be added",
   "EventItinerary.CantAddStep" : "एक कदम नहीं जोड़ा जा सकता है",
+
+  "__EventItinerary.CantaddItem" : "A step can't be added",
+  "EventItinerary.CantaddItem" : "एक कदम नहीं जोड़ा जा सकता है",
 
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "इस घटना के दौरान उन सभी स्थानों की सूची बनाएं, जिन्हें आप देखना चाहते हैं। यदि घटना कई दिनों की है, तो आप प्रति दिन अपने यात्रा कार्यक्रम के लिए दिन निर्धारित कर सकते हैं",
@@ -467,10 +497,28 @@
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "तैयारी में",
 
+  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "EventSurvey.AddAnswer" : "अपना उत्तर जोड़ना",
+
   "EventSurvey.AddOne" : "एक जोड़ें !",
 
   "__EventSurvey.AddOption" : "Option",
   "EventSurvey.AddOption" : "विकल्प",
+
+  "__EventSurvey.AddingChoice" : "Adding a choice",
+  "EventSurvey.AddingChoice" : "एक विकल्प जोड़ना",
+
+  "__EventSurvey.AddingTask" : "Adding a task",
+  "EventSurvey.AddingTask" : "किसी कार्य को जोड़ना",
+
+  "__EventSurvey.AnswerAdded" : "answer added",
+  "EventSurvey.AnswerAdded" : "उत्तर जोड़ा गया",
+
+  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
+  "EventSurvey.CantaddAnswer" : "उत्तर नहीं जोड़ सकते",
+
+  "__EventSurvey.CantaddItem" : "A task can't be added",
+  "EventSurvey.CantaddItem" : "कोई कार्य जोड़ा नहीं जा सकता",
 
   "__EventSurvey.Closed" : "closed",
   "EventSurvey.Closed" : "बंद किया हुआ",
@@ -494,10 +542,16 @@
   "__EventSurvey.Option" : "Option",
   "EventSurvey.Option" : "विकल्प",
 
+  "__EventSurvey.RemovingChoice" : "Removing a choice",
+  "EventSurvey.RemovingChoice" : "एक विकल्प निकालना",
+
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "यह सर्वेक्षण तैयारी में है। प्रतिभागी दिखाई नहीं दे रहे हैं",
 
   "EventSurvey.SurveyTip" : "प्रतिभागियों को एक कला या एक एयरोस्पेस संग्रहालय का दौरा करना पसंद है? Japanase, इतालवी या फ्रेंच रेस्तरां पसंद करते हैं? एक सर्वेक्षण बनाएं और समीक्षा एकत्र करें।",
+
+  "__EventSurvey.TaskAdded" : "A task is added",
+  "EventSurvey.TaskAdded" : "एक कार्य जोड़ा गया है",
 
   "__EventSurvey.Title" : "Title",
   "EventSurvey.Title" : "शीर्षक",
@@ -553,6 +607,9 @@
 
   "__EventTaskList.CantRemoveTask" : "The task can't be removed",
   "EventTaskList.CantRemoveTask" : "कार्य हटाया नहीं जा सकता",
+
+  "__EventTaskList.CantaddItem" : "A task can't be added",
+  "EventTaskList.CantaddItem" : "कोई कार्य जोड़ा नहीं जा सकता",
 
   "__EventTaskList.Description" : "Description",
   "EventTaskList.Description" : "विवरण",
@@ -623,17 +680,23 @@
   "__EventTaskList.Who" : "Who",
   "EventTaskList.Who" : "Who",
 
-  "__EventTaskList.addItem" : "Add a new item in the list",
+  "__EventTaskList.addItem" : "Add a task in the list",
   "EventTaskList.addItem" : "सूची में एक नया आइटम जोड़ें",
 
   "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
   "Eventitinerary.CantRemoveStep" : "कदम हटाया नहीं जा सकता",
+
+  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
+  "Eventitinerary.CantremoveItem" : "कदम हटाया नहीं जा सकता",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "एक कदम हटाना",
 
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "कदम हटा दिया है",
+
+  "__EventsList.CantGetListItem" : "Can't access the list of item'",
+  "EventsList.CantGetListItem" : "आइटम की सूची तक नहीं पहुंच सकते '",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "बजट",
@@ -765,6 +828,27 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "अपनी प्राथमिकताएँ प्रबंधित करें, एक अवतार सेट करें।",
+
+  "__RegisterNewUser.CloseRegistration" : "Close registration",
+  "RegisterNewUser.CloseRegistration" : "पंजीकरण बंद करें",
+
+  "__RegisterNewUser.Email" : "Email",
+  "RegisterNewUser.Email" : "ईमेल",
+
+  "__RegisterNewUser.FirstName" : "First name",
+  "RegisterNewUser.FirstName" : "पहला नाम",
+
+  "__RegisterNewUser.LastName" : "Last name",
+  "RegisterNewUser.LastName" : "अंतिम नाम",
+
+  "__RegisterNewUser.Password" : "Password",
+  "RegisterNewUser.Password" : "कुंजिका",
+
+  "__RegisterNewUser.Registration" : "Registration",
+  "RegisterNewUser.Registration" : "पंजीकरण",
+
+  "__RegisterNewUser.RetypePassword" : "Retype password",
+  "RegisterNewUser.RetypePassword" : "पासवर्ड फिर से लिखें",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "प्रचालन विफल रहा",

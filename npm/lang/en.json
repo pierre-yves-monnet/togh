@@ -1,4 +1,10 @@
 {
+  "AdminAPIKey.Title": {
+    "defaultMessage": "API Keys"
+  },
+  "AdminAPIKey.updateKey": {
+    "defaultMessage": "Update key"
+  },
   "AdminGoogle.Billing": {
     "defaultMessage": "Billing"
   },
@@ -42,7 +48,28 @@
     "defaultMessage": "Number of translation"
   },
   "BodyTogh.welcome": {
-    "defaultMessage": "Welcome to Togh D"
+    "defaultMessage": "Welcome to Togh"
+  },
+  "BodyTogh.whatisToghExplanation": {
+    "defaultMessage": "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who."
+  },
+  "BodyTogh.whatisToghTitle": {
+    "defaultMessage": "What is Togh?"
+  },
+  "BodyTogh.whyTogh": {
+    "defaultMessage": "Why Togh?"
+  },
+  "BodyTogh.whyToghBorn": {
+    "defaultMessage": "Here Togh was born. I was thinking of this application for five years now."
+  },
+  "BodyTogh.whyToghConclusion": {
+    "defaultMessage": "So this application was really needed at this moment."
+  },
+  "BodyTogh.whyToghHistory": {
+    "defaultMessage": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea."
+  },
+  "BodyTogh.whyToghMotivation": {
+    "defaultMessage": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"
   },
   "Event.Budget": {
     "defaultMessage": "Budget"
@@ -603,7 +630,7 @@
     "defaultMessage": "Who"
   },
   "EventTaskList.addItem": {
-    "defaultMessage": "Add a new item in the list"
+    "defaultMessage": "Add a task in the list"
   },
   "Eventitinerary.CantremoveItem": {
     "defaultMessage": "The step can't be removed"
@@ -614,6 +641,9 @@
   "Eventitinerary.StepRemoved": {
     "defaultMessage": "The step is removed"
   },
+  "EventsList.CantGetListItem": {
+    "defaultMessage": "Can't access the list of item'"
+  },
   "Expense.Budget": {
     "defaultMessage": "Budget"
   },
@@ -622,9 +652,6 @@
   },
   "Invitation.ByEmail": {
     "defaultMessage": "Send an Email"
-  },
-  "Invitation.Close": {
-    "defaultMessage": "Close"
   },
   "Invitation.Email": {
     "defaultMessage": "Email"
@@ -730,6 +757,27 @@
   },
   "Menu.MyProfileExplanation": {
     "defaultMessage": "Manage your preferences, set up an avatar."
+  },
+  "RegisterNewUser.CloseRegistration": {
+    "defaultMessage": "Close registration"
+  },
+  "RegisterNewUser.Email": {
+    "defaultMessage": "Email"
+  },
+  "RegisterNewUser.FirstName": {
+    "defaultMessage": "First name"
+  },
+  "RegisterNewUser.LastName": {
+    "defaultMessage": "Last name"
+  },
+  "RegisterNewUser.Password": {
+    "defaultMessage": "Password"
+  },
+  "RegisterNewUser.Registration": {
+    "defaultMessage": "Registration"
+  },
+  "RegisterNewUser.RetypePassword": {
+    "defaultMessage": "Retype password"
   },
   "UserFeedback.OperationFailed": {
     "defaultMessage": "Operation Failed"

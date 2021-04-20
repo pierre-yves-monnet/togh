@@ -1,4 +1,10 @@
 {
+  "__AdminAPIKey.Title" : "API Keys",
+  "AdminAPIKey.Title" : "Chaves API",
+
+  "__AdminAPIKey.updateKey" : "Update key",
+  "AdminAPIKey.updateKey" : "Chave de atualização",
+
   "__AdminGoogle.Billing" : "Billing",
   "AdminGoogle.Billing" : "Cobrança",
 
@@ -43,8 +49,29 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "Número de tradução",
 
-  "__BodyTogh.welcome" : "Welcome to Togh D",
+  "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Bem-vindo a Togh",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghExplanation" : "Togh é um aplicativo para gerenciar seu evento. Potluck com a escola? Churrasco com amigos? Viagem com a família em m? vários dias? Este é um evento. Em um evento, organize os participantes, registre tarefas e lista de compras, dê o endereço, especifique os passos de sua viagem. Você pode perguntar ao participante qualquer pesquisa: eles preferem visitar Hollywood Bld, ou o Observatório Griffith (Paul quer visitar os dois!) Visualize o roteiro no mapa. Calcule despesas. Togh dirá quem é o dono de quem.",
+
+  "__BodyTogh.whatisToghTitle" : "What is Togh?",
+  "BodyTogh.whatisToghTitle" : "O que é Togh?",
+
+  "__BodyTogh.whyTogh" : "Why Togh?",
+  "BodyTogh.whyTogh" : "Por que Togh?",
+
+  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn" : "Aqui Togh nasceu. Eu estava pensando neste aplicativo há cinco anos.",
+
+  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion" : "Portanto, este aplicativo era realmente necessário neste momento.",
+
+  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory" : "Ano passado, quando organizei uma road trip para minha família (que foi cancelada, por conta da Covid), tive que usar o Furkot para montar o roteiro, fazer o Doogle para a pesquisa, abrindo um Splitwise para dividir as despesas, um Google Doc para descreva o itinerário, grupo no Facebook para trocar ideias.",
+
+  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation" : "Eu queria aprender React, Spring. Além disso, eu queria colocar minha mão na implantação da nuvem. Então, por que não construir um aplicativo usando todas essas tecnologias e ver o que está acontecendo?",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "Orçamento",
@@ -174,7 +201,7 @@
   "__EventChat.SendBy" : "Send by",
   "EventChat.SendBy" : "Enviar por",
 
-  "__EventChat.The" : "The",
+  "__EveChat.The" : "The",
   "EventChat.The" : "O",
 
   "__EventChat.WhatYouWantToSay" : "What you want to say?",
@@ -212,6 +239,9 @@
 
   "__EventItinerary.CantAddStep" : "A step can't be added",
   "EventItinerary.CantAddStep" : "Uma etapa não pode ser adicionada",
+
+  "__EventItinerary.CantaddItem" : "A step can't be added",
+  "EventItinerary.CantaddItem" : "Uma etapa não pode ser adicionada",
 
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "Liste todos os lugares que você deseja visitar durante este evento. Se o evento ocorrer em vários dias, você pode configurar dia por dia o seu itinerário",
@@ -467,10 +497,28 @@
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "Em preparação",
 
+  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "EventSurvey.AddAnswer" : "Adicionando sua resposta",
+
   "EventSurvey.AddOne" : "Adicione um !",
 
   "__EventSurvey.AddOption" : "Option",
   "EventSurvey.AddOption" : "Opção",
+
+  "__EventSurvey.AddingChoice" : "Adding a choice",
+  "EventSurvey.AddingChoice" : "Adicionando uma escolha",
+
+  "__EventSurvey.AddingTask" : "Adding a task",
+  "EventSurvey.AddingTask" : "Adicionando uma tarefa",
+
+  "__EventSurvey.AnswerAdded" : "answer added",
+  "EventSurvey.AnswerAdded" : "resposta adicionada",
+
+  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
+  "EventSurvey.CantaddAnswer" : "Não consigo adicionar a resposta",
+
+  "__EventSurvey.CantaddItem" : "A task can't be added",
+  "EventSurvey.CantaddItem" : "Uma tarefa não pode ser adicionada",
 
   "__EventSurvey.Closed" : "closed",
   "EventSurvey.Closed" : "fechado",
@@ -494,10 +542,16 @@
   "__EventSurvey.Option" : "Option",
   "EventSurvey.Option" : "Opção",
 
+  "__EventSurvey.RemovingChoice" : "Removing a choice",
+  "EventSurvey.RemovingChoice" : "Removendo uma escolha",
+
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "Esta pesquisa está em preparação. Os participantes não são visíveis",
 
   "EventSurvey.SurveyTip" : "Os participantes preferem visitar um museu de arte ou aeroespacial? Prefere um restaurante japonês, italiano ou francês? Crie uma pesquisa e colete comentários.",
+
+  "__EventSurvey.TaskAdded" : "A task is added",
+  "EventSurvey.TaskAdded" : "Uma tarefa é adicionada",
 
   "__EventSurvey.Title" : "Title",
   "EventSurvey.Title" : "Título",
@@ -553,6 +607,9 @@
 
   "__EventTaskList.CantRemoveTask" : "The task can't be removed",
   "EventTaskList.CantRemoveTask" : "A tarefa não pode ser removida",
+
+  "__EventTaskList.CantaddItem" : "A task can't be added",
+  "EventTaskList.CantaddItem" : "Uma tarefa não pode ser adicionada",
 
   "__EventTaskList.Description" : "Description",
   "EventTaskList.Description" : "Descrição",
@@ -623,17 +680,23 @@
   "__EventTaskList.Who" : "Who",
   "EventTaskList.Who" : "Quem",
 
-  "__EventTaskList.addItem" : "Add a new item in the list",
+  "__EventTaskList.addItem" : "Add a task in the list",
   "EventTaskList.addItem" : "Adicione um novo item na lista",
 
   "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
   "Eventitinerary.CantRemoveStep" : "A etapa não pode ser removida",
+
+  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
+  "Eventitinerary.CantremoveItem" : "A etapa não pode ser removida",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "Removendo uma etapa",
 
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "A etapa foi removida",
+
+  "__EventsList.CantGetListItem" : "Can't access the list of item'",
+  "EventsList.CantGetListItem" : "Não é possível acessar a lista de itens '",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "Orçamento",
@@ -766,6 +829,27 @@
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "Gerencie suas preferências, configure um avatar.",
 
+  "__RegisterNewUser.CloseRegistration" : "Close registration",
+  "RegisterNewUser.CloseRegistration" : "Fechar registro",
+
+  "__RegisterNewUser.Email" : "Email",
+  "RegisterNewUser.Email" : "E-mail",
+
+  "__RegisterNewUser.FirstName" : "First name",
+  "RegisterNewUser.FirstName" : "Primeiro nome",
+
+  "__RegisterNewUser.LastName" : "Last name",
+  "RegisterNewUser.LastName" : "Sobrenome",
+
+  "__RegisterNewUser.Password" : "Password",
+  "RegisterNewUser.Password" : "Senha",
+
+  "__RegisterNewUser.Registration" : "Registration",
+  "RegisterNewUser.Registration" : "Cadastro",
+
+  "__RegisterNewUser.RetypePassword" : "Retype password",
+  "RegisterNewUser.RetypePassword" : "Digite novamente a senha",
+
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "Operação falhou",
 
@@ -779,4 +863,5 @@
   "UserFeedback.OperationSuccessfull" : "Sucesso",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "As dicas podem ser desativadas em sua preferência"}
+  "UserTips.DeactivateTipInPreference" : "As dicas podem ser desativadas em sua preferência"
+}
