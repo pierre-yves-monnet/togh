@@ -1,4 +1,10 @@
 {
+  "__AdminAPIKey.Title" : "API Keys",
+  "AdminAPIKey.Title" : "مفاتيح API",
+
+  "__AdminAPIKey.updateKey" : "Update key",
+  "AdminAPIKey.updateKey" : "مفتاح التحديث",
+
   "__AdminGoogle.Billing" : "Billing",
   "AdminGoogle.Billing" : "الفواتير",
 
@@ -41,8 +47,29 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "عدد الترجمة",
 
-  "__BodyTogh.welcome" : "Welcome to Togh D",
+  "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "مرحبا بكم في طوق د",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghExplanation" : "توغ هو تطبيق لإدارة الحدث الخاص بك. الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث. في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
+
+  "__BodyTogh.whatisToghTitle" : "What is Togh?",
+  "BodyTogh.whatisToghTitle" : "ما هو طوغ؟",
+
+  "__BodyTogh.whyTogh" : "Why Togh?",
+  "BodyTogh.whyTogh" : "لماذا توج؟",
+
+  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn" : "هنا ولد طوغ. كنت أفكر في هذا التطبيق لمدة خمس سنوات حتى الآن.",
+
+  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion" : "لذلك كان هذا التطبيق مطلوبًا حقًا في هذه اللحظة.",
+
+  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory" : "في العام الماضي ، عندما نظمت رحلة برية لعائلتي (والتي تم إلغاؤها بسبب Covid) ، اضطررت إلى استخدام Furkot لبناء مسار الرحلة ، وجعل Doogle للمسح ، وفتح Splitwise لمشاركة النفقات ، مستند Google إلى وصف خط سير الرحلة ، مجموعة Facebook لتبادل الأفكار.",
+
+  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation" : "كنت أرغب في تعلم React ، Spring. بالإضافة إلى ذلك ، أردت أن أضع يدي في نشر السحابة. فلماذا لا نبني تطبيقًا باستخدام كل هذه التقنيات ، ونرى ما الذي يحدث؟",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "ميزانية",
@@ -205,6 +232,9 @@
 
   "__EventItinerary.CantAddStep" : "A step can't be added",
   "EventItinerary.CantAddStep" : "لا يمكن إضافة خطوة",
+
+  "__EventItinerary.CantaddItem" : "A step can't be added",
+  "EventItinerary.CantaddItem" : "لا يمكن إضافة خطوة",
 
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "ضع قائمة بجميع الأماكن التي تريد زيارتها خلال هذا الحدث. إذا كان الحدث في عدة أيام ، فيمكنك إعداد خط سير الرحلة يوميًا",
@@ -446,8 +476,26 @@
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "قيد التحضير",
 
+  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "EventSurvey.AddAnswer" : "مضيفا إجابتك",
+
   "__EventSurvey.AddOption" : "Option",
   "EventSurvey.AddOption" : "خيار",
+
+  "__EventSurvey.AddingChoice" : "Adding a choice",
+  "EventSurvey.AddingChoice" : "مضيفا اختيار",
+
+  "__EventSurvey.AddingTask" : "Adding a task",
+  "EventSurvey.AddingTask" : "مضيفا مهمة",
+
+  "__EventSurvey.AnswerAdded" : "answer added",
+  "EventSurvey.AnswerAdded" : "تمت إضافة الإجابة",
+
+  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
+  "EventSurvey.CantaddAnswer" : "لا يمكن إضافة الإجابة",
+
+  "__EventSurvey.CantaddItem" : "A task can't be added",
+  "EventSurvey.CantaddItem" : "لا يمكن إضافة مهمة",
 
   "__EventSurvey.Closed" : "closed",
   "EventSurvey.Closed" : "مغلق",
@@ -467,8 +515,14 @@
   "__EventSurvey.Option" : "Option",
   "EventSurvey.Option" : "خيار",
 
+  "__EventSurvey.RemovingChoice" : "Removing a choice",
+  "EventSurvey.RemovingChoice" : "إزالة الاختيار",
+
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "هذا المسح قيد الإعداد. المشاركون غير مرئيين",
+
+  "__EventSurvey.TaskAdded" : "A task is added",
+  "EventSurvey.TaskAdded" : "تمت إضافة مهمة",
 
   "__EventSurvey.Title" : "Title",
   "EventSurvey.Title" : "لقب",
@@ -514,6 +568,9 @@
 
   "__EventTaskList.CantRemoveTask" : "The task can't be removed",
   "EventTaskList.CantRemoveTask" : "لا يمكن إزالة المهمة",
+
+  "__EventTaskList.CantaddItem" : "A task can't be added",
+  "EventTaskList.CantaddItem" : "لا يمكن إضافة مهمة",
 
   "__EventTaskList.Description" : "Description",
   "EventTaskList.Description" : "وصف",
@@ -584,17 +641,23 @@
   "__EventTaskList.Who" : "Who",
   "EventTaskList.Who" : "متى",
 
-  "__EventTaskList.addItem" : "Add a new item in the list",
+  "__EventTaskList.addItem" : "Add a task in the list",
   "EventTaskList.addItem" : "إضافة عنصر جديد في القائمة",
 
   "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
   "Eventitinerary.CantRemoveStep" : "لا يمكن إزالة الخطوة",
+
+  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
+  "Eventitinerary.CantremoveItem" : "لا يمكن إزالة الخطوة",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "إزالة خطوة",
 
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "تم حذف الخطوة",
+
+  "__EventsList.CantGetListItem" : "Can't access the list of item'",
+  "EventsList.CantGetListItem" : "لا يمكن الوصول إلى قائمة العناصر &quot;",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "ميزانية",
@@ -712,6 +775,27 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "إدارة تفضيلاتك ، وإعداد الصورة الرمزية.",
+
+  "__RegisterNewUser.CloseRegistration" : "Close registration",
+  "RegisterNewUser.CloseRegistration" : "إغلاق التسجيل",
+
+  "__RegisterNewUser.Email" : "Email",
+  "RegisterNewUser.Email" : "بريد إلكتروني",
+
+  "__RegisterNewUser.FirstName" : "First name",
+  "RegisterNewUser.FirstName" : "الاسم الأول",
+
+  "__RegisterNewUser.LastName" : "Last name",
+  "RegisterNewUser.LastName" : "الكنية",
+
+  "__RegisterNewUser.Password" : "Password",
+  "RegisterNewUser.Password" : "كلمه السر",
+
+  "__RegisterNewUser.Registration" : "Registration",
+  "RegisterNewUser.Registration" : "تسجيل",
+
+  "__RegisterNewUser.RetypePassword" : "Retype password",
+  "RegisterNewUser.RetypePassword" : "أعد إدخال كلمة السر",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "فشلت العملية",
