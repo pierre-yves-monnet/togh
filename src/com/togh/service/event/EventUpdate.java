@@ -244,6 +244,7 @@ public class EventUpdate {
         if (methodAttribut == null) {
             eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
                     + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
+            logger.severe(LOG_HEADER+" Invalid operation ["+attributName+"] on entity["+baseEntity.getClass().getName()+"]");
             return;
         }
         String jpaAttributName = methodAttribut.getName().substring(3);
