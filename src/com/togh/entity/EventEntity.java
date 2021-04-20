@@ -110,6 +110,20 @@ public @Data class EventEntity extends UserEntity {
     @Enumerated(EnumType.STRING)
     private ScopeEnum scope;
 
+    
+    @Column(name = "geoaddress", length=300)
+    private String geoaddress;
+
+    @Column(name = "geolat")
+    private Double geolat;
+
+    
+    @Column(name = "geolng")
+    private Double geolng;
+    
+    @Column(name = "geoinstructions", length = 400)
+    private String geoinstructions;
+
     public EventEntity(ToghUserEntity author, String name) {
         super(author, name);
         setTypeEvent(TypeEventEnum.LIMITED);
