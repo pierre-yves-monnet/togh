@@ -27,12 +27,19 @@ import com.togh.repository.ApiKeyEntityRepository;
 @Service
 public class ApiKeyService {
 
+    private static final String GEOCODE_API_KEY = "geocodeAPIKey";
+
+    private static final String GOOGLE_API_KEY = "googleAPIKey";
+
     private static final String TRANSLATE_KEY_API = "TranslateKeyAPI";
 
     @Autowired
     ApiKeyEntityRepository apiKeyRepository;
 
-    public List<String> listKeysPremium = Arrays.asList(TRANSLATE_KEY_API);
+    public List<String> listKeysSystem = Arrays.asList(TRANSLATE_KEY_API);
+    public List<String> listKeysPremium = Arrays.asList(GOOGLE_API_KEY, GEOCODE_API_KEY);
+
+    public List<PrivilegeKeyEnum> listSuffixPrivilege = Arrays.asList(PrivilegeKeyEnum.PREMIUM);
 
     private static final LogEvent eventUnknowCode = new LogEvent(ApiKeyService.class.getName(), 1, Level.ERROR, "Unknow code", "This APIKey is unknow",
             "A code is unknow, and can't be updated in the database", "Verify the code");
@@ -40,13 +47,24 @@ public class ApiKeyService {
     @PostConstruct
     public void init() {
         // Verify that all key are here
-        for (String codeApi : listKeysPremium) {
+        for (String codeApi : listKeysSystem) {
             APIKeyEntity codeApiEntity = apiKeyRepository.findByName(codeApi);
             if (codeApiEntity == null) {
                 codeApiEntity = new APIKeyEntity();
                 codeApiEntity.setName(codeApi);
                 codeApiEntity.setPrivilegeKey(PrivilegeKeyEnum.PREMIUM);
                 apiKeyRepository.save(codeApiEntity);
+            }
+        }
+        for (String codeApi : listKeysPremium) {
+            for (PrivilegeKeyEnum priviledge : listSuffixPrivilege) {
+                APIKeyEntity codeApiEntity = apiKeyRepository.findByName(codeApi + "_" + priviledge.toString());
+                if (codeApiEntity == null) {
+                    codeApiEntity = new APIKeyEntity();
+                    codeApiEntity.setName(codeApi + "_" + priviledge.toString());
+                    codeApiEntity.setPrivilegeKey(priviledge);
+                    apiKeyRepository.save(codeApiEntity);
+                }
             }
         }
     }
