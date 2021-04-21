@@ -73,7 +73,6 @@ Example : date of the event is a Date + Time (Zoned)
 # google 
 API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
 
-TranslaterAPIKey = AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
 
 
 https://console.cloud.google.com/apis
