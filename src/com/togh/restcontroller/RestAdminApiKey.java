@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +22,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.togh.admin.translate.TranslateDictionary;
-import com.togh.admin.translate.TranslateDictionary.TranslateResult;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.APIKeyEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.service.ApiKeyService;
-import com.togh.service.FactoryService;
 import com.togh.service.LoginService;
 
 /* -------------------------------------------------------------------- */

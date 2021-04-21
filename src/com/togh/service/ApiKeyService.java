@@ -10,6 +10,7 @@ package com.togh.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,8 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.APIKeyEntity;
 import com.togh.entity.APIKeyEntity.PrivilegeKeyEnum;
+import com.togh.entity.ToghUserEntity;
+import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
 import com.togh.repository.ApiKeyEntityRepository;
 
 @Service
@@ -37,12 +40,16 @@ public class ApiKeyService {
     ApiKeyEntityRepository apiKeyRepository;
 
     public List<String> listKeysSystem = Arrays.asList(TRANSLATE_KEY_API);
-    public List<String> listKeysPremium = Arrays.asList(GOOGLE_API_KEY, GEOCODE_API_KEY);
+    public List<String> listKeysBrowser = Arrays.asList(GOOGLE_API_KEY, GEOCODE_API_KEY);
 
-    public List<PrivilegeKeyEnum> listSuffixPrivilege = Arrays.asList(PrivilegeKeyEnum.PREMIUM);
+    /**
+     * A premium API Key is not limited as the FREE key are.
+     */
+    public List<PrivilegeKeyEnum> listSuffixPrivilege = Arrays.asList(PrivilegeKeyEnum.PREMIUM, PrivilegeKeyEnum.FREE);
 
     private static final LogEvent eventUnknowCode = new LogEvent(ApiKeyService.class.getName(), 1, Level.ERROR, "Unknow code", "This APIKey is unknow",
             "A code is unknow, and can't be updated in the database", "Verify the code");
+    private static final LogEvent eventKeysUpdated = new LogEvent(ApiKeyService.class.getName(), 2, Level.SUCCESS, "Keys updated", "API Key are updated with success");
 
     @PostConstruct
     public void init() {
@@ -56,9 +63,9 @@ public class ApiKeyService {
                 apiKeyRepository.save(codeApiEntity);
             }
         }
-        for (String codeApi : listKeysPremium) {
+        for (String codeApi : listKeysBrowser) {
             for (PrivilegeKeyEnum priviledge : listSuffixPrivilege) {
-                APIKeyEntity codeApiEntity = apiKeyRepository.findByName(codeApi + "_" + priviledge.toString());
+                APIKeyEntity codeApiEntity = apiKeyRepository.findByName( getFinalCode(codeApi,priviledge));
                 if (codeApiEntity == null) {
                     codeApiEntity = new APIKeyEntity();
                     codeApiEntity.setName(codeApi + "_" + priviledge.toString());
@@ -72,10 +79,19 @@ public class ApiKeyService {
     public List<APIKeyEntity> getListKeys() {
         List<APIKeyEntity> listKey = new ArrayList<>();
 
-        for (String codeApi : listKeysPremium) {
+        for (String codeApi : listKeysSystem) {
             APIKeyEntity codeApiEntity = apiKeyRepository.findByName(codeApi);
             if (codeApiEntity != null) {
                 listKey.add(codeApiEntity);
+            }
+        }
+        
+        for (String codeApi : listKeysBrowser) {
+            for (PrivilegeKeyEnum priviledge : listSuffixPrivilege) {
+                APIKeyEntity codeApiEntity = apiKeyRepository.findByName( getFinalCode(codeApi, priviledge));
+                if (codeApiEntity != null) {
+                 listKey.add(codeApiEntity);
+                }
             }
         }
         return listKey;
@@ -97,9 +113,36 @@ public class ApiKeyService {
             } else
                 listLogEvent.add(new LogEvent(eventUnknowCode, "Code[" + oneKey.get("name") + "]"));
         }
+        if (listLogEvent.isEmpty())
+            listLogEvent.add( eventKeysUpdated);
         return listLogEvent;
     }
 
+    
+    /**
+     * Return all the key according the user, and it's accredidation
+     * @param toghUser
+     * @return
+     */
+    public Map<String,String> getApiKeyForUser( ToghUserEntity toghUser ) {
+        Map<String,String> result = new HashMap<>();
+    
+        PrivilegeKeyEnum priviledge= PrivilegeKeyEnum.FREE;
+        // SubscriptionUserEnum { FREE, PREMIUM, ILLIMITED }
+        if ((toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM) 
+            || (toghUser.getSubscriptionUser() == SubscriptionUserEnum.ILLIMITED))
+            priviledge = PrivilegeKeyEnum.PREMIUM;
+        
+        for (String codeApi : listKeysBrowser) {
+                APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi,priviledge));
+                if (codeApiEntity!=null)
+                    result.put( codeApi, codeApiEntity.getKeyApi());
+        }
+        return result;
+    }
+    
+        
+        
     /**
      * Return the Translate Key API
      * 
@@ -111,6 +154,15 @@ public class ApiKeyService {
             return codeApiEntity.getKeyApi();
         }
         return null;
-
+    }
+    
+    /**
+     * getFinalCode
+     * @param codeApi
+     * @param priviledge
+     * @return
+     */
+    private String getFinalCode( String codeApi, PrivilegeKeyEnum priviledge) {
+        return codeApi+"_"+priviledge.toString();
     }
 }

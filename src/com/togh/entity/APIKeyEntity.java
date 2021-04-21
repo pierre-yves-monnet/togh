@@ -14,7 +14,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;

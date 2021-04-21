@@ -15,13 +15,17 @@ class ApiKeyService {
 		
 		this.googleAPIKey= "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es";
 		this.geocodeAPIKey = "AIzaSyBH4nfLPRIghcsU26YguJIVNjbI5RG-QZo"
+		this.setKeysForUser = this.setKeysForUser.bind( this );
 	}
 	
 	init() {
-		// call the server to get all keys
-		
 	}
-		
+	
+	setKeysForUser( apikeys ) {
+		debugger;
+		this.googleAPIKey= apikeys.googleAPIKey;
+		this.geocodeAPIKey= apikeys.geocodeAPIKey;
+	}
 	getGoogleAPIKey(){
 		
 		return this.googleAPIKey;

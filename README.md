@@ -484,3 +484,11 @@ Py	Sauvegarde Chat
  Survey : j'avais pas choisi que le survey etait deja 1/1. Il faut mettre 1/1 quand on a repondu a au moins 1 event
 Plus possible de choisir une date          
           
+
+          
+          
+# tool for react : 
+  
+  vscode
+  react hooks
+      

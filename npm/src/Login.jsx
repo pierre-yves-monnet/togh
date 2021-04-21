@@ -120,13 +120,13 @@ class Login extends React.Component {
 	loginConnect() {
 		console.log("Login.connect state="+JSON.stringify(this.state));
 		this.setState( {badConnection: false, inprogress:true, messageConnection:''});
-		
+		debugger;
 		var param = { email: this.state.email, password: this.state.password };
 		
 		FactoryService.getInstance().getAuthService().login( 'DIRECT', param, this, httpPayload => 
 			{
 				const intl = this.props.intl;
-
+				debugger;
 				httpPayload.trace("Login.directConnectCallback");
 				if (httpPayload.isError()) {
 					// Server is not started
@@ -138,6 +138,12 @@ class Login extends React.Component {
 				else if (httpPayload.getData().isConnected) {
 					// call the frame event to refresh all - the fact that the user is connected is saved in the authService, not here
 					this.setState({ badConnection: false, inprogress:false });
+					
+					// setyup the API Key
+					var factory = FactoryService.getInstance();
+					var apiKeyService = factory.getApiKeyService();
+					apiKeyService.setKeysForUser( httpPayload.getData().apikeys);
+
 					this.props.authCallback( true );
 				} else {
 					const label="Bad connection";

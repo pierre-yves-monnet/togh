@@ -39,6 +39,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
+import com.togh.service.ApiKeyService;
 import com.togh.service.FactoryService;
 import com.togh.service.LoginService.LoginStatus;
 
@@ -50,6 +51,9 @@ public class RestLoginController {
     
     @Autowired
     private FactoryService factoryService;
+
+    @Autowired
+    private ApiKeyService apiKeyService;
 
     @Value("${dictionary.lang-path}")
     private String propertyDictionaryPath;
@@ -67,7 +71,12 @@ public class RestLoginController {
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginStatus loginStatus = factoryService.getLoginService().connectWithEmail(userData.get("email"), userData.get("password"));
-        return loginStatus.getMap();
+        Map<String, Object> finalStatus = new HashMap<>();
+        finalStatus.putAll( loginStatus.getMap());
+        if (loginStatus.isConnected) {
+            finalStatus.put("apikeys", apiKeyService.getApiKeyForUser( loginStatus.userConnected));
+        }
+        return finalStatus;
     }
     
     /**
