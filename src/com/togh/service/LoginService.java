@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.service;
 
 import java.time.Duration;
@@ -16,14 +24,25 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
+import com.togh.restcontroller.RestHttpConstant;
 import com.togh.service.MonitorService.Chrono;
 
 
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  LoginService,                                                                 */
+/*                                                                                  */
+/*  Manage the login service part    */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
 @Service
 public class LoginService {
@@ -34,6 +53,8 @@ public class LoginService {
     private Logger logger = Logger.getLogger(LoginService.class.getName());
     private final static String logHeader ="LoginService:";
     
+    
+   
     
     public static class LoginStatus {
         public boolean isConnected=false;
@@ -57,18 +78,19 @@ public class LoginService {
      * @param password
      * @return
      */
-    public LoginStatus connectWithEmail(String email, String password) {
+    public LoginStatus connectWithEmail(String emailOrName, String password) {
         LoginStatus loginStatus = new LoginStatus();
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("ConnectUserWithEmail");
         
-        ToghUserEntity endUser = factoryService.getToghUserService().getFromEmail( email );
+        ToghUserEntity endUser = factoryService.getToghUserService().findToConnect( emailOrName );
         if (endUser==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
         }
         // this user must be registered on the portal
-        if (! SourceUserEnum.PORTAL.equals( endUser.getSource())) {
+        if (! (SourceUserEnum.PORTAL.equals( endUser.getSource()) 
+                || SourceUserEnum.SYSTEM.equals( endUser.getSource() ))) {
             monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
             return loginStatus;
         }
@@ -242,7 +264,25 @@ public class LoginService {
         return PrivilegeUserEnum.ADMIN.equals(toghUser.getPrivilegeUser());
     }
     
-    
+    /**
+     * check that the user can access this RestAdminTranslator
+     * @param connectionStamp
+     * @return
+     * @throws ResponseStatusException
+     * bob
+     */
+    public ToghUserEntity isAdministratorConnected( String connectionStamp ) throws ResponseStatusException {
+        ToghUserEntity toghUser = isConnected(connectionStamp);
+
+        if (toghUser == null)
+            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+
+        // check if the user is an administrator
+        if  ( ! isAdministrator( toghUser)) {
+            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTANADMINISTRATOR);
+        }
+        return toghUser;
+    }
     /**
      * Disconnect
      * @param connectionStamp

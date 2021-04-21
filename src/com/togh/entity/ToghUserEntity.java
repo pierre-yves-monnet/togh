@@ -122,7 +122,7 @@ public @Data class ToghUserEntity extends BaseEntity {
 	 *
 	 */
 
-	public enum SourceUserEnum { PORTAL, GOOGLE, INVITED }
+	public enum SourceUserEnum { PORTAL, GOOGLE, INVITED, SYSTEM }
 	
 	@Column( name="source", length=10,  nullable = false)
 	@Enumerated(EnumType.STRING)

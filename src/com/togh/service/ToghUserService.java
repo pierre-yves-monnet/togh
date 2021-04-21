@@ -14,23 +14,31 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
+import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
 import com.togh.repository.ToghUserRepository;
+import com.togh.restcontroller.RestHttpConstant;
 
 @Service
 public class ToghUserService {
 
+    private static final String TOGHADMIN = "admintogh";
+    private static final String TOGHADMINPASSWORD= "togh";
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     private static final String LOG_HEADER = ToghUserService.class.getName()+":";
 
@@ -45,6 +53,26 @@ public class ToghUserService {
 
     private TransactionTemplate transactionTemplate;
 
+    
+    /**
+     * Check if the user toghadmin exist. If not, create it
+     */
+    @PostConstruct
+    public void init() {
+        ToghUserEntity adminUser = endUserRepository.findByName( TOGHADMIN );
+        if (adminUser == null ) {
+            adminUser = new ToghUserEntity();
+            adminUser.setName( TOGHADMIN );
+            adminUser.setPassword( TOGHADMINPASSWORD );
+            adminUser.setEmail("toghadmin@togh.com");
+            adminUser.setPrivilegeUser(PrivilegeUserEnum.ADMIN);
+            adminUser.setSource( SourceUserEnum.SYSTEM);
+            endUserRepository.save( adminUser );
+        }
+        
+    }
+    
+    
     public ToghUserEntity getUserFromId(long userId) {
         Optional<ToghUserEntity> toghUserEntity= endUserRepository.findById(userId);
         if (toghUserEntity.isPresent())
@@ -54,6 +82,10 @@ public class ToghUserService {
 
     public ToghUserEntity getFromEmail(String email) {
         return endUserRepository.findByEmail(email);
+    }
+    
+    public ToghUserEntity findToConnect(String emailOrName) {
+        return endUserRepository.findToConnect(emailOrName);
     }
 
     public ToghUserEntity getUserFromConnectionStamp(String connectionStamp) {
@@ -204,5 +236,7 @@ public class ToghUserService {
         result.put("PRIVILEGEUSER", toghUser.getPrivilegeUser().toString());
         return result;
     }
+    
+   
 
 }

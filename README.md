@@ -73,6 +73,9 @@ Example : date of the event is a Date + Time (Zoned)
 # google 
 API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
 
+TranslaterAPIKey = AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
+
+
 https://console.cloud.google.com/apis
 
 https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
@@ -80,6 +83,8 @@ https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
 https://cloud.google.com/translate/docs/quickstarts
 API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
  	
+stocker les photo de l'API Key pour Flick
+
 
 # Cloud & docker
 user togh: pass4togh
@@ -435,7 +440,7 @@ React:
 	 
 	
 	
-Simon ? Modal click sur Fermer ne ferme pas le modal (Invitation). POurtant j'ai mis la propriété shouldCloseAfterSubmit
+
 Simon 	Anchor
 Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie existe google-maps-react)
 
@@ -447,22 +452,36 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	Sauvegarde Chat
-	Preference affichage
-	Expense
-	Budget
+	GoogleKey en base
+	Verifier invitation
 	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
+	Limiter le nombre d'elements par event, le nombre d'event / mois
+	user "premium", "excellence" => event"premium" / "excellence"
+	Graph sur le nombre d'acces
+	Administration user
+	My profile
+	Lost my password
+	Close event automatically
+		
+	Expense
+	
+	
+	Preference affichage
+	Budget
 	
 	Factory clée d'API
-	Administration user
 	Administration Statistics usage
 	
 	Integrer weather  : https://openweathermap.org/api
 	
-	My profile
 	My Friend = recuperer les users de google
 	Integrate in Google Calendar
 	Integrate in Google Drive
-	
-          
-          
+	Coder whatismyip dans l'administration
+		
+    Survey : first, present the VIEW display if there is an survey      
+# bugs
+
+ Survey : j'avais pas choisi que le survey etait deja 1/1. Il faut mettre 1/1 quand on a repondu a au moins 1 event
+Plus possible de choisir une date          
           

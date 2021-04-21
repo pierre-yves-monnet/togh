@@ -5,7 +5,6 @@
 //  var toolService = FactoryService.getInstance().getToolService();
 
 // -----------------------------------------------------------
-import { FormattedMessage } from "react-intl";
 
 
 class ToolService {

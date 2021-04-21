@@ -1,7 +1,17 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.togh.repository.ToghUserRepository;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -32,12 +42,16 @@ public class FactoryService {
     @Autowired
     private NotifyService notifyService;
 
+    @Autowired
+    private ApiKeyService apiKeyService;
+ 
     /*private static FactoryService factoryService = new FactoryService();
     public static FactoryService getInstance() {
         return factoryService;
     }
     */
     
+   
     public LoginService getLoginService() {
         return loginService;
     }

@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -24,6 +25,7 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
+import com.togh.service.ApiKeyService;
 
 @Configuration
 @PropertySource("classpath:secret.properties")
@@ -36,11 +38,14 @@ public class TranslatorGoogle {
     private final static LogEvent eventGoogleInvalidKey = new LogEvent(TranslatorGoogle.class.getName(), 1, Level.ERROR, "Google InvalidKey", "To connect to Google Service, an authentication key is necessary. This key is incorrect", "No google service are available", "Check source of the file");
     // final String KEY = "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es";
 
+    @Autowired
+    private ApiKeyService apiKeyService;
+    
     private static Translate translate;
 
     
-    @Value( "${google.TranslateKeyAPI}" )
-    private String googleApiKey;
+    // @Value( "${google.TranslateKeyAPI}" )
+    // private String googleApiKey;
     
     
     @SuppressWarnings("deprecation")
@@ -50,8 +55,9 @@ public class TranslatorGoogle {
         // String googleFileName = "D:/dev/git/togh/configuration/client_secret.json";
 
         try {
+            String googleApikey = apiKeyService.getApiKeyGoogleTranslate(); 
             // authExplicit(googleFileName);
-            translate = TranslateOptions.newBuilder().setApiKey( googleApiKey ).build().getService();
+            translate = TranslateOptions.newBuilder().setApiKey( googleApikey ).build().getService();
 
             
              /* } catch (IOException e) {

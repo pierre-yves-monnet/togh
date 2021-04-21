@@ -8,15 +8,6 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
-import { Loading } from 'carbon-components-react';
-
-import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
-
-import FactoryService from '../service/FactoryService';
-
-import LogEvents from '../component/LogEvents';
-
-
 
 // -----------------------------------------------------------
 //

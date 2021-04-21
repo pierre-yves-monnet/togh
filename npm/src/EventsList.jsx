@@ -39,7 +39,6 @@ class EventsList extends React.Component {
 		// this is mandatory to have access to the variable in the method... thank you React!   
 
 		this.createEvent = this.createEvent.bind(this);
-		this.createEventCallback = this.createEventCallback.bind(this);
 		this.refreshListEvents = this.refreshListEvents.bind(this);
 
 
@@ -147,26 +146,19 @@ class EventsList extends React.Component {
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.postJson('/api/event/create', this, {name:"new event"}, httpPayload => {
 			httpPayload.trace("EventList.createEventCallback");
+			debugger;
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error"});
 			}
 			else if (httpPayload.getData().eventId) {
-				this.props.homeSelectEvent(httpPayload.data.eventid)
+				this.props.homeSelectEvent(httpPayload.getData().eventId)
 			} else {
-				this.setState({ "message": httpPayload.data.message });
+				this.setState({ "message": httpPayload.getData().message });
 			}
 		});
 	}
 
-	createEventCallback(httpPayload) {
-		console.log("EventList.createEventCallback payload=");
-		if (httpPayload.eventid) {
-			this.props.selectEvent(httpPayload.eventid)
-		} else {
-			this.setState({ "message": httpPayload.message });
-		}
-
-	}
+	
 
 	// ----------- refresh list event
 	refreshListEvents() {

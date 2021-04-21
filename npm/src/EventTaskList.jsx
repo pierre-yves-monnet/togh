@@ -97,7 +97,7 @@ class EventTaskList extends React.Component {
 					&nbsp;
 					<button class="btn btn-success btn-xs"
 						onClick={() => this.addItem()}
-						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a new item in the list" })}
+						title={intl.formatMessage({ id: "EventTaskList.addItem", defaultMessage: "Add a task in the list" })}
 						disabled={this.state.operation.inprogress} >
 							{ this.state.operation.inprogress && 
 								<table><tr><td>

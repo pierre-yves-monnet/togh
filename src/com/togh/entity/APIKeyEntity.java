@@ -8,19 +8,13 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import com.togh.entity.EventEntity.DatePolicyEnum;
-import com.togh.entity.EventEntity.ScopeEnum;
-import com.togh.entity.EventEntity.StatusEventEnum;
-import com.togh.entity.EventEntity.TypeEventEnum;
+import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;
@@ -32,7 +26,6 @@ import lombok.EqualsAndHashCode;
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-
 
 
 @Entity
@@ -48,10 +41,19 @@ public @Data class APIKeyEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TypeProviderEnum providerEnum;
 
-    @Column(name = "code" length = 20)
-    private String code;
+    @Column(name = "keyapi", length = 200)
+   private String keyApi;
 
-    @Column(name = "apikey" length = 200)
-    private String apikey;
+    /**
+     * Key may be different according the privilege of the user
+     *
+     */
+    public enum PrivilegeKeyEnum { FREE, PREMIUM }
+    
+    @Column( name="privilegekey", length=10)
+    @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.ColumnDefault("'FREE'")
+    PrivilegeKeyEnum privilegeKey;
+    
 
 }

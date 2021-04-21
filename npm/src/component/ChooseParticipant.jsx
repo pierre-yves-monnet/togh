@@ -82,7 +82,7 @@ class ChooseParticipant extends React.Component {
 			);
 		};
 
-		const { value } = this.state;
+		let value = this.state;
 		if (typeof this.state.participant !== 'undefined') {
 			if (typeof this.state.participant.user !== 'undefined') {
 				value = this.getValueFromParticipant( this.state.participant );

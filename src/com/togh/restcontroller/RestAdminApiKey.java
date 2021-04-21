@@ -8,18 +8,28 @@
 /* ******************************************************************************** */
 package com.togh.restcontroller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.admin.translate.TranslateDictionary;
 import com.togh.admin.translate.TranslateDictionary.TranslateResult;
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEventFactory;
+import com.togh.entity.APIKeyEntity;
 import com.togh.entity.ToghUserEntity;
+import com.togh.service.ApiKeyService;
 import com.togh.service.FactoryService;
 import com.togh.service.LoginService;
 
@@ -30,34 +40,38 @@ import com.togh.service.LoginService;
 /* -------------------------------------------------------------------- */
 
 @RestController
-public class RestAdminTranslator {
+public class RestAdminApiKey {
     
     @Autowired
     private LoginService loginService;
 
     @Autowired
-    private TranslateDictionary translateDictionnary;
+    private ApiKeyService apiKeyService;
     
     
     @CrossOrigin
-    @GetMapping(value ="/api/admin/translator/status",  produces = "application/json")
-      public TranslateResult translatorStatus( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
+    @GetMapping(value ="/api/admin/apikey/get",  produces = "application/json")
+      public List<APIKeyEntity> getApiKeys( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         
         loginService.isAdministratorConnected(connectionStamp);
-   
-        return translateDictionnary.check(); 
-        
+        return apiKeyService.getListKeys();
+            
     }
-
     @CrossOrigin
-    @PostMapping(value ="/api/admin/translator/complete",  produces = "application/json")
-      public TranslateResult translator( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
+    @PostMapping(value = "/api/admin/apikey/update", produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> updateKey(
+            @RequestBody Map<String, Object> updateMap,
+            @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         
+        Map<String,Object> payload = new HashMap<>();
         loginService.isAdministratorConnected(connectionStamp);
 
-        return translateDictionnary.complete(); 
+        List<Map<String,Object>> listApiKey = RestTool.getList(updateMap, "listkeys", new ArrayList<>() );
+        List<LogEvent> listLogEvent = apiKeyService.updateKeys( listApiKey );
         
+        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, LogEventFactory.getJson(listLogEvent));
+        
+        return payload;
     }
-    
-    
 }

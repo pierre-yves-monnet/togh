@@ -1,5 +1,13 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.restcontroller;
-/* -------------------------------------------------------------------- */
+
 
 import java.util.ArrayList;
 import java.util.HashMap;

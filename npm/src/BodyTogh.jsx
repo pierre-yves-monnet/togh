@@ -92,6 +92,7 @@ class BodyTogh extends React.Component {
 
 	
 		if (authService.isConnected() === false) {
+			// Explanation are in the registerNewUser
 			return (	
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
 					<div>
@@ -99,7 +100,7 @@ class BodyTogh extends React.Component {
 						<div class="container">
 	  						<div class="row">
 								<div class="col-sm-2" >
-									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh D" />
+									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
 									
 								<br/><br/>
 									<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
@@ -110,6 +111,7 @@ class BodyTogh extends React.Component {
 								</div>
 								<div class="col-sm-5">
 									<RegisterNewUser authCallback={this.authCallback}/>
+									
 								</div>
 							  
 							</div>
