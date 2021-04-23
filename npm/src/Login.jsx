@@ -120,13 +120,11 @@ class Login extends React.Component {
 	loginConnect() {
 		console.log("Login.connect state="+JSON.stringify(this.state));
 		this.setState( {badConnection: false, inprogress:true, messageConnection:''});
-		debugger;
 		var param = { email: this.state.email, password: this.state.password };
 		
 		FactoryService.getInstance().getAuthService().login( 'DIRECT', param, this, httpPayload => 
 			{
 				const intl = this.props.intl;
-				debugger;
 				httpPayload.trace("Login.directConnectCallback");
 				if (httpPayload.isError()) {
 					// Server is not started

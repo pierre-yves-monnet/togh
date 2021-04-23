@@ -69,7 +69,7 @@ class SurveyCtrl {
 	setDecision( answerParticipant, surveyChoiceCode, value) {
 		console.log("SurveyEntity.setAnswer: userId "+answerParticipant.userid+" choice:"+surveyChoiceCode+" value="+value);
 		// answerParticipant && surveyChoice are correctly pointed to the value expected
-		debugger;
+
 		let surveyAnswer=null;
 		// avoid the JSON Circular
 		for (var i in this.survey[ CHILD_ANSWER ]) {

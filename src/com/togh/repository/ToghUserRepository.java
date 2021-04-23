@@ -122,7 +122,7 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
                     + " and (toghuser.id > :eventId or toghuser.id <= :eventId)"
                     + " and (toghuser.source != 'INVITED' )"
             )
-                    List<ToghUserEntity> findPublicUsersOutEvent(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("phoneNumber") String phoneNumber,
+   List<ToghUserEntity> findPublicUsersOutEvent(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("phoneNumber") String phoneNumber,
             @Param("email") String email, 
             @Param("eventId") Long eventId,
             Pageable pageable);
@@ -143,4 +143,32 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
             @Param("email") String email,
             @Param("eventId") Long eventId);
  
+    
+    @Query(value="select toghuser from ToghUserEntity toghuser "
+            + "where "
+            + " upper(toghuser.firstName) like concat('%', upper( :sentence ), '%') "
+            + " or  upper(toghuser.lastName) like concat('%', upper( :sentence ), '%') "
+            + " or  upper(toghuser.phoneNumber) like concat('%', upper( :sentence ), '%')"
+            + " or  upper(toghuser.email) like concat('%', upper( :sentence ), '%')"
+            + " order by toghuser.firstName, toghuser.lastName, toghuser.phoneNumber, toghuser.email",
+           // + "\n-- #pageable\n",
+            countQuery = "select count( toghuser ) from ToghUserEntity toghuser "
+                    + "where "
+                    + " upper(toghuser.firstName) like concat('%', upper( :sentence ), '%') "
+                    + " or  upper(toghuser.lastName) like concat('%', upper( :sentence ), '%') "
+                    + " or  upper(toghuser.phoneNumber) like concat('%', upper( :sentence ), '%')"
+                    + " or  upper(toghuser.email) like concat('%', upper( :sentence ), '%')"
+            )
+    List<ToghUserEntity> findSentenceUsers(@Param("sentence") String searchUserSentence, Pageable pageable);
+    
+    @Query(value="select count( toghuser ) from ToghUserEntity toghuser "
+            + "where "
+            + " upper(toghuser.firstName) like concat('%', upper( :sentence ), '%') "
+            + " or  upper(toghuser.lastName) like concat('%', upper( :sentence ), '%') "
+            + " or  upper(toghuser.phoneNumber) like concat('%', upper( :sentence ), '%')"
+            + " or  upper(toghuser.email) like concat('%', upper( :sentence ), '%')"
+    )
+    Long countSentenceUsers(@Param("sentence") String searchUserSentence );
+
+    
 }

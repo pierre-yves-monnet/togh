@@ -22,7 +22,6 @@ class ApiKeyService {
 	}
 	
 	setKeysForUser( apikeys ) {
-		debugger;
 		this.googleAPIKey= apikeys.googleAPIKey;
 		this.geocodeAPIKey= apikeys.geocodeAPIKey;
 	}

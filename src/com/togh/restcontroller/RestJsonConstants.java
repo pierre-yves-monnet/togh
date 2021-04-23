@@ -47,5 +47,11 @@ public class RestJsonConstants {
     protected static final String CST_PARAM_PHONE_NUMBER = "phoneNumber";
     protected static final String CST_PARAM_FIRST_NAME = "firstName";
     protected static final String CST_PARAM_LAST_NAME = "lastName";
-
+    
+    static final String CST_PARAM_SEARCHUSERSENTENCE = "searchusersentence";
+    static final String CST_PARAM_USERID = "userid";
+    static final String CST_PARAM_ATTRIBUT ="attribut";
+    static final String CST_PARAM_VALUE = "value";
+    
+    
 }

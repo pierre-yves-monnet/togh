@@ -327,7 +327,6 @@ class Invitation extends React.Component {
 	sendInvitationCallback(httpPayload) {
 		httpPayload.trace("Invitation.callback");
 		this.setState( {inprogressinvitation: false });
-		debugger;
 		if (httpPayload.isError() ) {
 			this.setState({ "statusErrorInvitation": "An error arrived " });
 		}

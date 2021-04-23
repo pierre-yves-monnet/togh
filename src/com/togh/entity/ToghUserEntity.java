@@ -64,6 +64,16 @@ public @Data class ToghUserEntity extends BaseEntity {
 	@Column(name = "connectionlastactivity")
 	public LocalDateTime connectionLastActivity;
 
+	
+	public enum StatusUserEnum { ACTIF, DISABLED, BLOCKED }
+    
+    @Column( name="statususer", length=10)
+    @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.ColumnDefault("'ACTIF'")
+    StatusUserEnum statusUser;
+   
+    
+    
 	/**
 	 * The user accept to be part of a search result, to be invited directly in an event
 	 */
@@ -92,31 +102,7 @@ public @Data class ToghUserEntity extends BaseEntity {
 		return passwordToCompare.equals(password);
 	}
 
-	/*
-	public String getFirstname() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-*/
+	
 	/**
 	 * INVITED : an invitation is sent, the user did not confirm yet
 	 *
@@ -275,11 +261,13 @@ public @Data class ToghUserEntity extends BaseEntity {
 	        
         resultMap.put("name", getName());
         resultMap.put("firstName",firstName);
+        resultMap.put("statusUser", statusUser.toString());
+        
 	    // if the context is SECRET, the last name is not visible
 	    if (contextAccess != ContextAccess.SECRETACCESS)
 	        resultMap.put("lastName", lastName);
 	    
-	    if (isVisible(  emailVisibility, contextAccess)) {
+	    if (isVisible( emailVisibility, contextAccess)) {
 	        resultMap.put("email", email);
 	        if (email!=null && email.trim().length()>0) {
 	            // the label is the email only if there is no label at this moment

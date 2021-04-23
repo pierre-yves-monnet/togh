@@ -288,7 +288,6 @@ class EventSurvey extends React.Component {
 											style={{ width: "1rem", height:"1rem",  margin: "0.125rem"}}
 											defaultChecked={answerParticipant.decision[ surveyChoice.code ]}
 											onChange={( event ) => {
-												debugger;
 												console.log("EventSurvey.clickOnCheckBox code="+surveyChoice.code);
 												this.surveyCtrl.setDecision( answerParticipant, surveyChoice.code, event.target.checked );
 												this.setState({ survey: this.surveyCtrl.getValue() });
@@ -565,8 +564,6 @@ class EventSurvey extends React.Component {
 			}
 		}
 		// so, add me
-		debugger;			
-		
 		this.setState({operation:{
 					inprogress:true,
 					label: intl.formatMessage({id: "EventSurvey.AddAnswer",defaultMessage: "Adding your answer"}), 
@@ -601,7 +598,6 @@ class EventSurvey extends React.Component {
 			currentOperation.status= UserFeedback.OK;
 			currentOperation.result=intl.formatMessage({id: "EventSurvey.AnswerAdded",defaultMessage: "answer added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
-			debugger;
 			
 			if (! answerParticipant.decision )
 				answerParticipant.decision={};

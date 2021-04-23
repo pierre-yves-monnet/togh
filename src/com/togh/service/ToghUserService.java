@@ -8,6 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,6 +204,14 @@ public class ToghUserService {
     }
     
     
+    public SearchUsersResult searchAdminUsers(String searchUserSentence, int page, int numberPerPage) {
+        SearchUsersResult searchResult = new SearchUsersResult();
+        searchResult.page = page;
+        searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
+        searchResult.listUsers = endUserRepository.findSentenceUsers(searchUserSentence, PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = endUserRepository.countSentenceUsers(searchUserSentence);
+        return searchResult;
+    }
 
 
     /* -------------------------------------------------------------------- */
@@ -236,7 +245,23 @@ public class ToghUserService {
         result.put("PRIVILEGEUSER", toghUser.getPrivilegeUser().toString());
         return result;
     }
-    
-   
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Update user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+
+    /**
+     * Update an user
+     * @param userId
+     * @param attribut
+     * @param value
+     * @return
+     */
+    public List<LogEvent> updateUser( Long userId, String attribut, Object value) {
+        List<LogEvent> listEvents= new ArrayList<>();
+        
+        return listEvents;
+    }
 
 }

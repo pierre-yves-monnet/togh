@@ -147,7 +147,6 @@ class EventSurveyList extends React.Component {
 				else {
 					styleSurvey = {borderRight:"2px solid black"};
 				}
-				debugger;
 				return(
 					<li class={classSurvey} style={styleSurvey}
 						key={index}

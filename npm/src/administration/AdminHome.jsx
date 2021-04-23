@@ -12,6 +12,7 @@ import { FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
 
+import AdminUsers from './AdminUsers';
 import AdminTranslator from './AdminTranslator';
 import AdminGoogle from './AdminGoogle';
 import AdminAPIKey from './AdminAPIKey';
@@ -54,6 +55,11 @@ class AdminHome extends React.Component {
 		// -----------------	 
 		return ( 
 			<div>
+				<div class="row">
+					<div class="col-12"> 
+						<AdminUsers/>
+					</div>
+				</div>		
 				<div class="row">
 					<div class="col-6"> 
 						<AdminTranslator/>
