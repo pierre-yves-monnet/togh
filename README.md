@@ -42,7 +42,26 @@ https://flutter.dev/
 
 # Architecture
 
-com.together.spring.SprintApplication : this is the REST call
+com.together.spring.ServletInitializer : this is the REST call
+
+-----------------------------------------
+com.togh.Application
+package com.togh;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+}
+-----------------------------------------
+
+
+
 com.together.service : Service to access information and data
 
 https://start.spring.io/
