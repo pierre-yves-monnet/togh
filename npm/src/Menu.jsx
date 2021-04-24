@@ -12,6 +12,7 @@ import { FormattedMessage } from "react-intl";
 import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
 
 import Login from './Login';
+import FactoryService from './service/FactoryService';
 
 
 export const MENU_NAME = {
@@ -41,7 +42,9 @@ class Menu extends React.Component {
 		// -------------------------------------------- render
 	render() {
 		// console.log("Menu.render");
-
+		var authService = FactoryService.getInstance().getAuthService();
+		var user = authService.getUser();
+		
 		if (this.state.showMenu) {
 			return ( <div  > 
 				
@@ -86,13 +89,17 @@ class Menu extends React.Component {
 				<div class="toghmenulabel">
 					<FormattedMessage id="Menu.MyProfileExplanation" defaultMessage="Manage your preferences, set up an avatar." />
 				</div>
-
-				<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghmenu">
-					<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
-				</a>
-				<div class="toghmenulabel">
-					<FormattedMessage id="Menu.AdmininstratorExplanation" defaultMessage="Administrator function." />
-				</div>
+				
+				{ user.privilegeUser =="ADMIN" &&
+					<div> 
+						<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghmenu">
+							<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
+						</a>
+						<div class="toghmenulabel">
+							<FormattedMessage id="Menu.AdmininstratorExplanation" defaultMessage="Administrator function." />
+						</div>
+					</div>
+				}
 				&nbsp;<p />
 				&nbsp;<p />
 				<Login authCallback={this.authCallback} />
