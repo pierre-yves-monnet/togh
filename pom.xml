@@ -12,10 +12,10 @@
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<properties>
-		<!--<start-class>com.togh.Application</start-class> -->
+		<start-class>com.togh.ServletInitializer</start-class>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<npm.output.directory>build</npm.output.directory>
-
+	  	
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -30,9 +30,7 @@
 	</dependencyManagement>
 	<dependencies>
 
-		<!-- mvn install:install-file -Dfile=scenario-utils-2.0.jar -DgroupId=com.bonitasoft.scenario -DartifactId=scenario-utils -Dversion=2.0 -Dpackaging=jar -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
