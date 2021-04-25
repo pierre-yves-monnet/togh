@@ -17,28 +17,20 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.togh.admin.translate.TranslateDictionary;
 import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.engine.tool.JpaTool;
-import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
-import com.togh.entity.base.BaseEntity;
 import com.togh.repository.ToghUserRepository;
-import com.togh.restcontroller.RestHttpConstant;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 
@@ -57,10 +49,6 @@ public class ToghUserService {
     @Autowired
     private ToghUserRepository endUserRepository;
 
-    @Autowired
-    private PlatformTransactionManager transactionManager;
-
-    private TransactionTemplate transactionTemplate;
 
     
     /**
