@@ -97,7 +97,9 @@ class RegisterNewUser extends React.Component {
 				<button  class="btn btn-primary" onClick={this.showRegistration} >Register New User</button>
 				
 				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whatisToghTitle" defaultMessage="What is Togh?" /></div>
-				<FormattedMessage id="BodyTogh.whatisToghExplanation" defaultMessage="Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who." />
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExplanation" defaultMessage="Togh is an application to manage your event."/></div> 
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExample" defaultMessage="Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event."/></div> 
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghPossibility" defaultMessage="In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who." /></div>
 									
 				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whyTogh" defaultMessage="Why Togh?" /></div>
 				

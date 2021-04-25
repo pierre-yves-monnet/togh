@@ -48,10 +48,7 @@
   "AdminTranslator.nbTransations" : "Nombre de traductions",
 
   "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "Bienvenue à Togh D",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
-  "BodyTogh.whatisToghExplanation" : "Togh est une application pour gérer votre événement. Potluck avec l'école? Barbecue entre amis? Road trip en famille sur m? plusieurs jours? Ceci est un événement. Dans un événement, organisez les participants, enregistrez les tâches et la liste de courses, donnez l'adresse, spécifiez les étapes de votre road trip. Vous pouvez demander au participant n'importe quelle enquête: préfèrent-ils visiter Hollywood Bld, ou l'Observatoire Griffith (Paul veut visiter les deux!) Visualisez l'itinéraire sur la carte. Calculez les dépenses. Togh dira à qui appartient qui.",
+  "BodyTogh.welcome" : "Bienvenue à Togh",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "Qu'est-ce que Togh?",

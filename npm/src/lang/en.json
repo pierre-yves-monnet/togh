@@ -48,10 +48,8 @@
   "AdminTranslator.nbTransations" : "Number of translation",
 
   "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "Welcome to Togh D",
+  "BodyTogh.welcome" : "Welcome to Togh",
 
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
-  "BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "What is Togh?",
