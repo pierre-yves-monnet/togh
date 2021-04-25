@@ -20,9 +20,11 @@ import com.togh.entity.ToghUserEntity;
 public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long>  {
     
     // public ToghUserEntity findById(long id);
+    // @Query("select toghuser from ToghUserEntity toghuser where toghuser.id = ?1")
+    // public ToghUserEntity findById(long id);
     
     @Query("select toghuser from ToghUserEntity toghuser where upper(toghuser.name) like upper(?1)")
-    public ToghUserEntity findByName(String email);
+    public ToghUserEntity findByName(String name);
    
     
     @Query("select toghuser from ToghUserEntity toghuser where upper(toghuser.email) like upper(?1)")

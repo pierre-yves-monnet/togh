@@ -154,8 +154,9 @@ public class EventService {
     public static class UpdateContext {
         public ToghUserEntity toghUser;
         public long timeZoneOffset;
+        public EventService eventService;
     }
-    public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab,UpdateContext updateContext) {
+    public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab, UpdateContext updateContext) {
 
         EventController eventConductor = new EventController( event, factoryService);
         if (!eventConductor.isAccess(updateContext.toghUser)) {
@@ -173,7 +174,6 @@ public class EventService {
         }
         eventOperationResult.eventEntity = event;
         return eventOperationResult;
-
     }
 
     public class EventResult {

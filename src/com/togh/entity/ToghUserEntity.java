@@ -67,7 +67,7 @@ public @Data class ToghUserEntity extends BaseEntity {
 	
 	public enum StatusUserEnum { ACTIF, DISABLED, BLOCKED }
     
-    @Column( name="statususer", length=10)
+    @Column( name="statususer", length=10, nullable=false)
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'ACTIF'")
     StatusUserEnum statusUser;
@@ -92,6 +92,8 @@ public @Data class ToghUserEntity extends BaseEntity {
         endUser.setDatecreation( dateNow );
         endUser.setDatemodification( dateNow );
         endUser.setPrivilegeUser( PrivilegeUserEnum.USER);
+        endUser.setStatusUser( StatusUserEnum.ACTIF);
+        endUser.setSubscriptionUser( SubscriptionUserEnum.FREE);
         return endUser;
 	}
 	
@@ -137,17 +139,10 @@ public @Data class ToghUserEntity extends BaseEntity {
     @org.hibernate.annotations.ColumnDefault("'USER'")
     PrivilegeUserEnum privilegeUser;
     
-    /*
-    public void setPrivilegeUser(PrivilegeUserEnum privilegeUser) {
-        this.privilegeUser= privilegeUser;
-    }
-    public PrivilegeUserEnum getPrivilegeUser() {
-        return privilegeUser;
-    }
-    */
+ 
    public enum SubscriptionUserEnum { FREE, PREMIUM, ILLIMITED }
     
-    @Column( name="subscriptionuser", length=10)
+    @Column( name="subscriptionuser", length=10, nullable=false)
     @Enumerated(EnumType.STRING)     
     @org.hibernate.annotations.ColumnDefault("'FREE'")
     SubscriptionUserEnum subscriptionUser;
@@ -156,64 +151,6 @@ public @Data class ToghUserEntity extends BaseEntity {
     @Column( name="showtipsuser")
     @org.hibernate.annotations.ColumnDefault("'1'")
     Boolean showTipsUser;
-    
-    /* 
-      public void setSubscriptionUser(SubscriptionUserEnum subscriptionUser) {
-    
-        this.subscriptionUser= subscriptionUser;
-    }
-    public SubscriptionUserEnum getSubscriptionUser() {
-        return subscriptionUser;
-    }
-    
-    
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getGoogleId() {
-		return googleId;
-	}
-
-	public void setGoogleId(String googleId) {
-		this.googleId = googleId;
-	}
-
-	public String getConnectionStamp() {
-		return connectionStamp;
-	}
-
-	public void setConnectionStamp(String connectionStamp) {
-		this.connectionStamp = connectionStamp;
-	}
-
-	public LocalDateTime getConnectionTime() {
-		return connectionTime;
-	}
-
-	public void setConnectionTime(LocalDateTime connectionTime) {
-		this.connectionTime = connectionTime;
-	}
-
-	public LocalDateTime getConnectionLastActivity() {
-		return connectionLastActivity;
-	}
-
-	public void setConnectionLastActivity(LocalDateTime connectionLastActivity) {
-		this.connectionLastActivity = connectionLastActivity;
-	}
-
-	public boolean isSearchable() {
-	    return searchable;
-	}
-	public void setSearchable(boolean searchable ) {
-	    this.searchable = searchable;
-	}
-	*/
     
     
 	public String toString() {
@@ -294,12 +231,16 @@ public @Data class ToghUserEntity extends BaseEntity {
         resultMap.put("longlabel", longlabel.toString());
         
         
-        if (contextAccess == ContextAccess.MYPROFILE) {
-            resultMap.put("subscription", subscriptionUser.toString());
+        if (contextAccess == ContextAccess.MYPROFILE || contextAccess == ContextAccess.ADMIN) {
+            resultMap.put("subscriptionuser", subscriptionUser.toString());
             resultMap.put("showtipsuser", showTipsUser);
-                
-        }
             
+        }
+        if (contextAccess == ContextAccess.ADMIN) {
+            resultMap.put("privilegeuser", privilegeUser.toString());
+            
+            resultMap.put("connected", connectionStamp==null ? "OFFLINE" : "ONLINE");
+        }
         return resultMap;
 	}
 

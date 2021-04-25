@@ -11,12 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.service.FactoryService;
@@ -83,7 +85,7 @@ public class RestUserController {
     }
 
     @CrossOrigin
-    @GetMapping("/api/user/admin/search")
+    @GetMapping( value="/api/user/admin/search",  produces = "application/json")
     public Map<String, Object> searchAdminUser( 
             @RequestParam( RestJsonConstants.CST_PARAM_SEARCHUSERSENTENCE) String searchUserSentence,            
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
@@ -99,7 +101,7 @@ public class RestUserController {
         
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
         for (ToghUserEntity togUser : searchUsers.listUsers) {
-            listUsersMap.add( togUser.getMap( ContextAccess.SEARCH));
+            listUsersMap.add( togUser.getMap( ContextAccess.ADMIN));
         }
         
         payload.put( RestJsonConstants.CST_USERS, listUsersMap);
@@ -113,23 +115,23 @@ public class RestUserController {
 
     @CrossOrigin
     @PostMapping(value="/api/user/admin/update", produces = "application/json")
-    @ResponseBody
-
-    public Map<String, Object> updateUser( 
-            @RequestParam( RestJsonConstants.CST_PARAM_USERID) Long userId,            
-            @RequestParam( RestJsonConstants.CST_PARAM_ATTRIBUT) String attribut,            
-            @RequestParam( RestJsonConstants.CST_PARAM_VALUE) String value,            
+    public Map<String, Object> updateUser( @RequestBody Map<String, Object> updateMap,                     
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
+        // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
+        Long userId                     = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
+        String attribut                 = RestTool.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
+        Object value                    = updateMap.get( RestJsonConstants.CST_PARAM_VALUE);
+        
         Map<String, Object> payload = new HashMap<>();
-        SearchUsersResult searchUsers;
-        factoryService.getToghUserService().updateUser( userId, attribut, value);
+        List<LogEvent> listLogEvents = factoryService.getToghUserService().updateUser( userId, attribut, value);
         
-        
+        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, listLogEvents );
+
         
         return payload;
 

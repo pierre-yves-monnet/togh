@@ -9,22 +9,15 @@
 package com.togh.service.event;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.apache.commons.beanutils.PropertyUtils;
-
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
-import com.togh.engine.tool.EngineTool;
+import com.togh.engine.tool.JpaTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
@@ -34,9 +27,7 @@ import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.UserEntity;
-import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
-import com.togh.service.EventService.LoadEntityResult;
 import com.togh.service.EventService.UpdateContext;
 
 
@@ -147,7 +138,7 @@ public class EventUpdate {
             @SuppressWarnings("unchecked")
             Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
             for (Entry<String, Object> entrySlab : valueDefault.entrySet()) {
-                updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext, eventOperationResult);
+                JpaTool.updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext, eventOperationResult);
             }
             // save it now
             if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
@@ -217,11 +208,11 @@ public class EventUpdate {
      */
     private void updateOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         if (slab.localisation == null || slab.localisation.isEmpty())
-            updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
+            JpaTool.updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
         else {
             BaseEntity baseEntity = localise(event, slab.localisation);
             if (baseEntity != null) {
-                updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
+                JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
             } else {
                 eventOperationResult.addLogEvent(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
             }
@@ -230,123 +221,12 @@ public class EventUpdate {
         event.touch();
     }
 
-    /**
-     * update an entity
-     * 
-     * @param event
-     * @param slab
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    private void updateEntityOperation(BaseEntity baseEntity, String attributName, Object attributValue, UpdateContext updateContext, EventOperationResult eventOperationResult) {
-        Object value = null;
-        Method methodAttribut = searchMethodByName(baseEntity, attributName);
-        if (methodAttribut == null) {
-            eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
-                    + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
-            logger.severe(LOG_HEADER+" Invalid operation ["+attributName+"] on entity["+baseEntity.getClass().getName()+"]");
-            return;
-        }
-        String jpaAttributName = methodAttribut.getName().substring(3);
-        // first letter is a lower case
-        jpaAttributName = jpaAttributName.substring(0, 1).toLowerCase() + jpaAttributName.substring(1);
-        try {
-            if (attributValue != null) {
-                @SuppressWarnings("rawtypes")
-                Class returnType = methodAttribut.getReturnType();
-                if (returnType.equals(Double.class)) {
-                    value = Double.valueOf(attributValue.toString());
+  
 
-                } else if (returnType.equals(BigDecimal.class)) {
-                    value = getBigDecimalFromString(attributValue.toString());
-
-                } else if (returnType.equals(Long.class)) {
-                    value = Long.valueOf(attributValue.toString());
-
-                } else if (returnType.equals(LocalDateTime.class)) {
-                    value = EngineTool.stringToDateTime(attributValue.toString());
-                    
-                } else if (returnType.equals(LocalDate.class)) {
-                    long timeZoneOffset = updateContext.timeZoneOffset;
-                    if (baseEntity.isAbsoluteLocalDate(attributName))
-                        timeZoneOffset = 0;
-                    value = EngineTool.stringToDate(attributValue.toString(), timeZoneOffset);
-
-                } else if (returnType.equals(String.class)) {
-                    value = attributValue.toString();
-
-                } else if (returnType.isEnum()) {
-                    value = Enum.valueOf(returnType, attributValue.toString());
-
-                } else if (isClassBaseEntity(returnType)) {
-                    LoadEntityResult loadResult = this.eventController.getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
-                    value = loadResult.entity;
-                    eventOperationResult.listLogEvents.addAll(loadResult.listLogEvents);
-
-                } else // ArrayList, String
-                    value = attributValue;
-
-            }
-
-            PropertyUtils.setSimpleProperty(baseEntity, jpaAttributName, value);
-            baseEntity.touch();
-
-        } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, attributName
-                    + " (JPA=" + jpaAttributName + ")"
-                    + " <="
-                    + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
-        }
-    }
-
-    /**
-     * IsClassEntity
-     */
-    private boolean isClassBaseEntity(Class<?> classToStudy) {
-        while (classToStudy != null) {
-            if (classToStudy.equals(BaseEntity.class))
-                return true;
-            classToStudy = classToStudy.getSuperclass();
-        }
-        return false;
-    }
-
-    /**
-     * value may be a currency, like $33.344. So, remove all non numric expression.
-     * 
-     * @param valueSt
-     * @return
-     * @throws Exception
-     */
-    private BigDecimal getBigDecimalFromString(String valueSt) throws Exception {
-        // french is 2 334,44 ===> One comma only
-        // americain is 2,334.44 ==> One comma and one point. 
-        // so we detect first the format
-        int countComma = 0;
-        int countDot = 0;
-        for (int i = 0; i < valueSt.length(); i++) {
-            if (valueSt.charAt(i) == ',')
-                countComma++;
-            if (valueSt.charAt(i) == '.')
-                countDot++;
-        }
-        NumberFormat numberFormat = null;
-        if ((countComma > 0 && countDot > 0) || countDot == 1) {
-            // americain format, remove ,
-            numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        } else {
-            numberFormat = NumberFormat.getNumberInstance(Locale.FRANCE);
-        }
-        StringBuilder valueExpurged = new StringBuilder();
-        for (int i = 0; i < valueSt.length(); i++) {
-            if (valueSt.charAt(i) >= '0' && valueSt.charAt(i) <= '9')
-                valueExpurged.append(valueSt.charAt(i));
-            if (valueSt.charAt(i) == '.' || valueSt.charAt(i) == ',')
-                valueExpurged.append(valueSt.charAt(i));
-        }
-
-        return new BigDecimal(numberFormat.parse(valueExpurged.toString()).toString());
-    }
+    
+    
+    
+ 
 
     /**
      * Localise the BaseEntity according the localisation. Localisation is a string like "/tasklist/1"
@@ -367,7 +247,7 @@ public class EventUpdate {
             while (stLocalisation.hasMoreTokens()) {
                 String nameEntity = stLocalisation.nextToken();
 
-                Method method = searchMethodByName(indexEntity, nameEntity);
+                Method method = JpaTool.searchMethodByName(indexEntity, nameEntity);
                 if (method == null)
                     return null;
 
@@ -406,13 +286,5 @@ public class EventUpdate {
         return indexEntity;
     }
 
-    private Method searchMethodByName(BaseEntity baseEntity, String attributName) {
-        String methodName = "get" + attributName;
-
-        for (Method method : baseEntity.getClass().getMethods()) {
-            if (method.getName().equalsIgnoreCase(methodName))
-                return method;
-        }
-        return null;
-    }
+   
 }

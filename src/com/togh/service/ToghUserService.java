@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -25,15 +26,21 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.togh.admin.translate.TranslateDictionary;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEventFactory;
+import com.togh.engine.tool.JpaTool;
+import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
+import com.togh.entity.base.BaseEntity;
 import com.togh.repository.ToghUserRepository;
 import com.togh.restcontroller.RestHttpConstant;
+import com.togh.service.EventService.EventOperationResult;
+import com.togh.service.EventService.UpdateContext;
 
 @Service
 public class ToghUserService {
@@ -42,6 +49,7 @@ public class ToghUserService {
     private static final String TOGHADMINPASSWORD= "togh";
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     private static final String LOG_HEADER = ToghUserService.class.getName()+":";
+    private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
 
     @Autowired
     FactoryService factoryService;
@@ -258,9 +266,31 @@ public class ToghUserService {
      * @param value
      * @return
      */
-    public List<LogEvent> updateUser( Long userId, String attribut, Object value) {
+    public List<LogEvent> updateUser( Long userId, String attributName, Object attributValue) {
         List<LogEvent> listEvents= new ArrayList<>();
         
+        Optional<ToghUserEntity> toghUser = endUserRepository.findById( userId );
+        if (! toghUser.isPresent()) {
+            listEvents.add( new LogEvent(eventUnknowId, "Id["+userId+"]"));
+            return listEvents;
+        }
+        
+        UpdateContext updateContext  = new UpdateContext();
+        updateContext.toghUser = null;
+        updateContext.timeZoneOffset = 0; 
+        updateContext.eventService = null;
+       
+        EventOperationResult eventOperationResult = new EventOperationResult();
+
+        JpaTool.updateEntityOperation(toghUser.get(), 
+                attributName, 
+                attributValue, 
+                updateContext, 
+                eventOperationResult); 
+        listEvents.addAll( eventOperationResult.listLogEvents);
+            
+        
+        factoryService.getToghUserService().saveUser(toghUser.get() );
         return listEvents;
     }
 

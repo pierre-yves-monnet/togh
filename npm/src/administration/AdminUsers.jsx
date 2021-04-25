@@ -7,8 +7,9 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
-import { TextInput,Select } from 'carbon-components-react';
+import { injectIntl, FormattedMessage } from "react-intl";
+import { TextInput,Select, TooltipIcon } from 'carbon-components-react';
+import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts  } from 'react-bootstrap-icons';
 
 import { Loading } from 'carbon-components-react';
 
@@ -32,7 +33,7 @@ class AdminUsers extends React.Component {
 		super();
 		// console.log("RegisterNewUser.constructor");
 
-		this.state = {searchUserSentence:'', listusers:[] };
+		this.state = {searchUserSentence:'', listusers:[], filterevent:'all' };
 		
 		this.searchUsers 			= this.searchUsers.bind( this );	
 		this.searchUsersCallback	= this.searchUsersCallback.bind( this);
@@ -49,6 +50,8 @@ class AdminUsers extends React.Component {
 
 
 	render() {
+		const intl = this.props.intl;
+
 		console.log("AdminAPIKey.render : inprogress="+this.state.inprogress+", listkeys="+JSON.stringify(this.state.listkeys));
 		let inprogresshtml=(<div/>);
 		if (this.state.inprogress )
@@ -66,20 +69,37 @@ class AdminUsers extends React.Component {
 				 	{inprogresshtml}
 					<div class="row">
 						<div class="col-6"> 
-				
 							<TextInput
 								labelText={<FormattedMessage id="AdminUsers.searchSentence" defaultMessage="Search"/>} 
 								value={this.state.searchUserSentence} onChange={ (event) => this.setState({searchUserSentence: event.target.value})}/>
 						</div>
+						<div class="col-sm">
+							<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
+								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"all"})}}><FormattedMessage id="AdminUsers.AllUsers" defaultMessage="All Users"/></button>
+								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"connected"})}}><FormattedMessage id="AdminUsers.Connected" defaultMessage="Connected"/></button>
+								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"block"})}}><FormattedMessage id="AdminUsers.Blocked" defaultMessage="Blocked"/></button>
+								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"administrator"})}}><FormattedMessage id="AdminUsers.Administrator" defaultMessage="Administrator"/></button>
+								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"Premium"})}}><FormattedMessage id="AdminUsers.Premium" defaultMessage="Premium"/></button>
+								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"Illimited"})}}><FormattedMessage id="AdminUsers.Premium" defaultMessage="Illimited"/></button>
+							</div>
+						</div>
+					</div>				
+					<div class="row">
 						<div class="col-6"> 
 							<button class="btn btn-info btn-sm"
-							 onClick={this.searchUser}>
+							 onClick={this.searchUsers}>
 								<FormattedMessage id="AdminUsers.Search" defaultMessage="Search"/>
 							</button>
+							<div style={{color: "red"}}>{this.state.message}</div>
 						</div>
 					</div>
+					
+					
+					{this.state.inprogresshtml && <Loading
+      						description="Active loading indicator" withOverlay={true}
+    						/>}
 					<table  class="toghtable table table-stripped" style={{marginTop:"10px"}}><tr>
-							
+							<th></th>
 							<th><FormattedMessage id="AdminUsers.UserName" defaultMessage="User Name"/></th>
 							<th><FormattedMessage id="AdminUsers.CompleteName" defaultMessage="Complete Name"/></th>
 							<th><FormattedMessage id="AdminUsers.Email" defaultMessage="Email"/></th>
@@ -91,9 +111,74 @@ class AdminUsers extends React.Component {
 							console.log("item="+JSON.stringify(item));
 							return (
 								<tbody>
-								<tr  key={index} stype={{borderTop: "1px solid;"}}>
+								<tr  key={index} style={{borderTop: "1px solid"}}>
 									
+									<td> 
+										{item.connected === 'ONLINE' && 
+											<TooltipIcon
+      											tooltipText={intl.formatMessage({id: "AdminUsers.ConnectedOnLine",defaultMessage: "User connected"})} >
+												<LampFill style={{color:"green", fill:"green"}}/>
+											</TooltipIcon>}
+										{item.connected === 'OFFLINE' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.ConnectedOffline", defaultMessage: "User offline"})}>
+												<Lamp />
+											</TooltipIcon>}
+										
+										{item.statusUser === 'ACTIF' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.StatusUserDisabledActif", defaultMessage: "User actif"})}>
+												<PersonBadge style={{color:"green", fill:"green"}} />
+											</TooltipIcon>}
+											
+											
+											
+											
+										{item.statusUser === 'DISABLED' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.StatusUserDisabled", defaultMessage: "User disabled"})}>
+												<PersonBadge style={{color:"gray", fill:"gray"}}/>
+											</TooltipIcon>}
+										{item.statusUser === 'BLOCK' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.StatusUserBlock", defaultMessage: "User Blocked"})}>
+												<PersonBadge style={{color:"red", fill:"red"}}/>
+											</TooltipIcon>}
+											
+										
+										
+										
+										{item.subscription === 'FREE' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionFree", defaultMessage: "Free subscription"})}>
+												<Bookmark />
+											</TooltipIcon>}
+										{item.subscription === 'PREMIUM' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionPremium", defaultMessage: "Premium subscription"})}>
+												<BookmarkStar style={{color:"#ff6666", fill:"#ff6666"}}/>
+											</TooltipIcon>}
+										{item.subscription === 'ILLIMITED' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionIllimited", defaultMessage: "Illimited subscription"})}>
+												<BookmarkStar style={{color:"a17f1a", backgroundColor:"a17f1a", fill:"a17f1a"}}/>
+											</TooltipIcon>}
 
+
+
+										{item.privilegeuser === 'ADMIN' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.privilegeAdmin", defaultMessage: "Administrator"})}>
+												<AwardFill style={{color:"a17f1a"}}/>
+											</TooltipIcon>}
+										{item.privilegeuser === 'TRANS' && 
+											<TooltipIcon
+												tooltipText={intl.formatMessage({id: "AdminUsers.privilegeTrans", defaultMessage: "Translator"})}>
+												<Fonts />
+											</TooltipIcon>}
+										{item.privilegeuser === 'USER' && <div />}
+ 
+									</td>
 									<td> {item.name} </td>
 									<td> {item.firstname}&nbsp;{item.lastname}	</td>
 									<td> {item.email}	</td>
@@ -108,9 +193,9 @@ class AdminUsers extends React.Component {
 											<tr>
 											<td>
 												<Select labelText={<FormattedMessage id="AdminUsers.Status" defaultMessage="Status" />}
-													id="status"
-													value={item.subscriptionUser}
-													onChange={(event) => this.setAttributUser( item, "status", event.target.value)}>
+													id="statusUser"
+													value={item.statusUser}
+													onChange={(event) => this.setAttributUser( item, "statusUser", event.target.value)}>
 		
 													<FormattedMessage id="AdminUsers.StatusUserActif" defaultMessage="Actif">
 														{(message) => <option value="ACTIF">{message}</option>}
@@ -125,10 +210,27 @@ class AdminUsers extends React.Component {
 													</FormattedMessage>
 												</Select>
 											</td><td>
+												<Select labelText={<FormattedMessage id="AdminUsers.SubscriptionEnum" defaultMessage="Subscription" />}
+													id="subscription"
+													value={item.subscriptionuser}
+													onChange={(event) => this.setAttributUser( item, "subscriptionuser", event.target.value)}>
+		
+													<FormattedMessage id="AdminUsers.SubscriptionUserFree" defaultMessage="Free">
+														{(message) => <option value="FREE">{message}</option>}
+													</FormattedMessage>
+						
+													<FormattedMessage id="AdminUsers.SubscriptionUserPremium" defaultMessage="Premium">
+														{(message) => <option value="PREMIUM">{message}</option>}
+													</FormattedMessage>
+						
+													<FormattedMessage id="AdminUsers.SubscriptionUserPremium" defaultMessage="Illimited">
+														{(message) => <option value="ILLIMITED">{message}</option>}
+													</FormattedMessage>
+												</Select></td><td>
 												<Select labelText={<FormattedMessage id="AdminUsers.PrivilegeUser" defaultMessage="Privilege" />}
-													id="TypePrivilege"
-													value={item.privilegeUser}
-													onChange={(event) => this.setAttributUser( item, "prilegeUser", event.target.value)}>
+													id="privilegeuser"
+													value={item.privilegeuser}
+													onChange={(event) => this.setAttributUser( item, "privilegeuser", event.target.value)}>
 		
 													<FormattedMessage id="AdminUsers.PrivilegeUserAdmin" defaultMessage="Administrator">
 														{(message) => <option value="ADMIN">{message}</option>}
@@ -142,24 +244,7 @@ class AdminUsers extends React.Component {
 														{(message) => <option value="USER">{message}</option>}
 													</FormattedMessage>
 												</Select>
-											</td><td>
-												<Select labelText={<FormattedMessage id="AdminUsers.SubscriptionEnum" defaultMessage="Subscription" />}
-													id="subscription"
-													value={item.subscriptionUser}
-													onChange={(event) => this.setAttributUser( item, "subscriptionUser", event.target.value)}>
-		
-													<FormattedMessage id="AdminUsers.SubscriptionUserFree" defaultMessage="Free">
-														{(message) => <option value="FREE">{message}</option>}
-													</FormattedMessage>
-						
-													<FormattedMessage id="AdminUsers.SubscriptionUserPremium" defaultMessage="Premium">
-														{(message) => <option value="PREMIUM">{message}</option>}
-													</FormattedMessage>
-						
-													<FormattedMessage id="AdminUsers.SubscriptionUserPremium" defaultMessage="Illimited">
-														{(message) => <option value="ILLIMITED">{message}</option>}
-													</FormattedMessage>
-												</Select>
+											
 											</td></tr></table>
 									 </td>
 								</tr>
@@ -177,7 +262,8 @@ class AdminUsers extends React.Component {
 			// 
 	}
 	
-	searchUsers () {
+	searchUsers () {	
+		this.setState({ message:"", inprogress:true});
 		var restCallService = FactoryService.getInstance().getRestcallService();
 
 		restCallService.getJson('/api/user/admin/search?searchusersentence='+this.state.searchUserSentence, this, this.searchUsersCallback);
@@ -203,26 +289,31 @@ class AdminUsers extends React.Component {
 	}
 
 	setAttributUser(user, attribut, value) {
-		console.log("AdminUsers.updateKey:");
+		console.log("AdminUsers.setAttributUser:");
 		this.setState({inprogress: true });
 		
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		var param={userid: user.id,
 					attribut: attribut,
 					value: value};
-		restCallService.postJson('/api/admin/apikey/update', this, param, httpPayload =>{
-			httpPayload.trace("AdminAPIKey.updateKey");
+		restCallService.postJson('/api/user/admin/update', this, param, httpPayload =>{
+			httpPayload.trace("AdminUsers.setAttributUser");
+			debugger;
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});
 			}
 			else {
-				this.setState({ "message": httpPayload.getData().message, listEvents: httpPayload.getData().listEvents }); 						
+				this.setState({ "message": httpPayload.getData().message, listEvents: httpPayload.getData().listEvents }); 	
+				// update the attribut now
+				var listusers = this.state.listusers;
+				user[ attribut ] = value;
+				this.setState( { listusers : listusers});			
 			}
 		});
 	
 	}
 }
 
-export default AdminUsers;
+export default injectIntl(AdminUsers);
 

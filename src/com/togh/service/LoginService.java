@@ -53,7 +53,6 @@ public class LoginService {
     private Logger logger = Logger.getLogger(LoginService.class.getName());
     private final static String logHeader ="LoginService:";
     
-    
    
     
     public static class LoginStatus {
@@ -83,26 +82,26 @@ public class LoginService {
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("ConnectUserWithEmail");
         
-        ToghUserEntity endUser = factoryService.getToghUserService().findToConnect( emailOrName );
-        if (endUser==null) {
+        ToghUserEntity endUserEntity = factoryService.getToghUserService().findToConnect( emailOrName );
+        if (endUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
         }
         // this user must be registered on the portal
-        if (! (SourceUserEnum.PORTAL.equals( endUser.getSource()) 
-                || SourceUserEnum.SYSTEM.equals( endUser.getSource() ))) {
+        if (! (SourceUserEnum.PORTAL.equals( endUserEntity.getSource()) 
+                || SourceUserEnum.SYSTEM.equals( endUserEntity.getSource() ))) {
             monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
             return loginStatus;
         }
         
         // check the password
-        if (! endUser.checkPassword(password)) {
+        if (! endUserEntity.checkPassword(password)) {
             monitorService.endOperationWithStatus(chronoConnection, "BadPassword");
             return loginStatus;
         }
         loginStatus.isConnected=true;
-        loginStatus.userConnected = endUser;
-        loginStatus.connectionToken = connectUser( endUser);
+        loginStatus.userConnected = endUserEntity;
+        loginStatus.connectionToken = connectUser( endUserEntity );
         monitorService.endOperation(chronoConnection);
         return loginStatus;
     }
@@ -117,14 +116,14 @@ public class LoginService {
 
         Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
         
-        ToghUserEntity endUser =  factoryService.getToghUserService().getFromEmail( email );
-        if (endUser==null) {
+        ToghUserEntity endUserEntity =  factoryService.getToghUserService().getFromEmail( email );
+        if (endUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
         }
         loginStatus.isConnected=true;
-        loginStatus.userConnected = endUser;        
-        loginStatus.connectionToken = connectUser( endUser);
+        loginStatus.userConnected = endUserEntity;        
+        loginStatus.connectionToken = connectUser( endUserEntity );
         loginStatus.isCorrect=true;
         monitorService.endOperation(chronoConnection);
         return loginStatus;
@@ -139,18 +138,18 @@ public class LoginService {
 
         Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
         
-        ToghUserEntity endUser = factoryService.getToghUserService().getFromEmail(email);
-        if (endUser==null) {
+        ToghUserEntity endUserEntity = factoryService.getToghUserService().getFromEmail(email);
+        if (endUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
         }
         // not correct is the source is not the correct one
-        if (isGoogle && (! endUser.getSource().equals(SourceUserEnum.GOOGLE)))
+        if (isGoogle && (! endUserEntity.getSource().equals(SourceUserEnum.GOOGLE)))
             return loginStatus;
         
         loginStatus.isConnected=true;
-        loginStatus.userConnected = endUser;
-        loginStatus.connectionToken = connectUser( endUser);
+        loginStatus.userConnected = endUserEntity;
+        loginStatus.connectionToken = connectUser( endUserEntity );
         monitorService.endOperation(chronoConnection);
         return loginStatus;
         
@@ -159,14 +158,14 @@ public class LoginService {
     // create a new user
     public LoginStatus registerNewUser(String email, String firstName, String lastName, String password, SourceUserEnum sourceUser)  {
         LoginStatus loginStatus = new LoginStatus();
-        ToghUserEntity endUser = factoryService.getToghUserService().getFromEmail( email );
-        if (endUser !=null) {
+        ToghUserEntity endUserEntity = factoryService.getToghUserService().getFromEmail( email );
+        if (endUserEntity !=null) {
             return loginStatus;
         }
-        endUser = ToghUserEntity.getNewUser(firstName, lastName, email, password, sourceUser);
+        endUserEntity = ToghUserEntity.getNewUser(firstName, lastName, email, password, sourceUser);
         
         try {
-            factoryService.getToghUserService().saveUser(endUser);
+            factoryService.getToghUserService().saveUser( endUserEntity );
             loginStatus.isCorrect=true;
         } catch(Exception e) {
             logger.severe(logHeader+"Can't create new user: "+e.toString());
@@ -195,7 +194,7 @@ public class LoginService {
     private Map<String,UserConnected> cacheUserConnected  = new HashMap<>();
     private String connectUser( ToghUserEntity toghUser ) {
         // Generate a ConnectionStamp
-        MonitorService monitorService = factoryService.getMonitorService();
+        // MonitorService monitorService = factoryService.getMonitorService();
 
         String randomStamp = String.valueOf(System.currentTimeMillis())+ String.valueOf( random.nextInt() );
         
@@ -223,7 +222,7 @@ public class LoginService {
         UserConnected userConnected = cacheUserConnected.get( connectionStamp);
         if (userConnected != null) {
             userConnected.lastPing = LocalDateTime.now();
-            Duration duration = Duration.between(userConnected.lastCheck, LocalDateTime.now());
+            Duration duration = Duration.between(userConnected.lastCheck, userConnected.lastPing);
             if (duration.toMinutes() < 2) 
                 return userConnected.toghUser;
         }
@@ -302,6 +301,8 @@ public class LoginService {
             return; // already disconnected, or not exist
 
         endUserEntity.setConnectionStamp(null);
+        factoryService.getToghUserService().saveUser(endUserEntity);
+
         cacheUserConnected.remove(connectionStamp);
     }
 

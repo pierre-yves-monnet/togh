@@ -201,8 +201,8 @@ public class RestEventController {
         if (toghUser == null) {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long eventId = RestTool.getLong(updateMap, "eventid", null);
-        Long timezoneOffset = RestTool.getLong(updateMap, "timezoneoffset", 0L);
+        Long eventId                            = RestTool.getLong(updateMap, "eventid", null);
+        Long timezoneOffset                     = RestTool.getLong(updateMap, "timezoneoffset", 0L);
         @SuppressWarnings("unchecked")
         List<Map<String,Object>> slabEventList = RestTool.getList(updateMap, "listslab", new ArrayList<>() );
 
@@ -215,6 +215,7 @@ public class RestEventController {
         UpdateContext updateContext  = new UpdateContext();
         updateContext.toghUser = toghUser;
         updateContext.timeZoneOffset = timezoneOffset;
+        updateContext.eventService = factoryService.getEventService();
         EventOperationResult eventOperationResult = factoryService.getEventService().updateEvent( event, slabEventList, updateContext);
         
         Map<String, Object> payload = new HashMap<>();
