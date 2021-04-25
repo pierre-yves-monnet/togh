@@ -14,7 +14,7 @@ import {  InfoCircle } from 'react-bootstrap-icons';
 
 
 import FactoryService from './../service/FactoryService';
-import UserService from './../service/UserService';
+
 
 class UserTips extends React.Component {
 	

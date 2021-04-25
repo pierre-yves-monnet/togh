@@ -8,7 +8,7 @@
 //
 import React from 'react';
 
-import { injectIntl, FormattedMessage } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 import { InlineLoading } from 'carbon-components-react';
 
