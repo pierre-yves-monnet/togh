@@ -54,25 +54,14 @@ class ChooseParticipant extends React.Component {
 		this.renderInputComponent			= this.renderInputComponent.bind( this );
 	}
 
-	onChange = (event, { newValue, method }) => {
-		console.log("ChooseParticpant : onChange, newValue="+newValue);
-		this.setState({
-			value: newValue,
-		});
-		// search if the new value mache a participant : if this is the cass, do the callback
-		for(var i in this.state.event.participants) {
-			console.log(" Compare [" + this.state.event.participants[ i ].user.longlabel+"] <=> ["+newValue+"]");
-			if (this.getValueFromParticipant( this.state.event.participants[ i ]) === newValue) {
-				this.onChangeParticipantfct( this.itemToCarry,  this.state.event.participants[ i ].user.id );
-			}
-		}
-	};
+	
 
 
 	
 	
 	//  -------------------------------------------- Render
 	render() {
+		
 		if (!this.state.modifyParticipant) {
 			return (
 				<div>
@@ -81,8 +70,8 @@ class ChooseParticipant extends React.Component {
 				</div>
 			);
 		};
-
-		let value = this.state;
+	
+		var value = this.state.value;
 		if (typeof this.state.participant !== 'undefined') {
 			if (typeof this.state.participant.user !== 'undefined') {
 				value = this.getValueFromParticipant( this.state.participant );
@@ -94,21 +83,23 @@ class ChooseParticipant extends React.Component {
 			onChange: this.onChange
 		};
 
-
 		return (
 			<div>
-				{this.state.label && (this.state.label)}
-			<Autosuggest
-				suggestions={this.state.suggestions}
-				onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-				onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-				getSuggestionValue={this.getSuggestionValue}
-				renderSuggestion={this.renderSuggestion}
-				inputProps={inputSelectParticipant}
-				renderInputComponent={this.renderInputComponent}
-			/>
+				{this.state.label && <div>{this.state.label}</div>}
+
+				<Autosuggest
+					suggestions={this.state.suggestions}
+					onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+					onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+					getSuggestionValue={this.getSuggestionValue}
+					renderSuggestion={this.renderSuggestion}
+					inputProps={inputSelectParticipant}
+					renderInputComponent={this.renderInputComponent}
+					renderSuggestionsContainer={this.renderSuggestionsContainer}
+				/>
 			</div>
 		);
+		
 	}
 
 	
@@ -116,16 +107,39 @@ class ChooseParticipant extends React.Component {
 	// 
 	// function for the autosuggest
 	// 
-	// --------------------------------------------------------------	
+	// --------------------------------------------------------------
+	/**
+	 * 
+	 */	
 
+	onChange = (event, { newValue, method }) => {
+		console.log("ChooseParticipant.onChange: newValue="+newValue);
+		this.setState({
+			value: newValue,
+		});
+		// search if the new value mache a participant : if this is the cass, do the callback
+		for(var i in this.state.event.participants) {
+			console.log(" Compare [" + this.state.event.participants[ i ].user.longlabel+"] <=> ["+newValue+"]");
+			if (this.getValueFromParticipant( this.state.event.participants[ i ]) === newValue) {
+				this.onChangeParticipantfct( this.itemToCarry,  this.state.event.participants[ i ].user.id );
+			}
+		}
+	};
+	
+	
 	// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 	escapeRegexCharacters(str) {
 		return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	}
 
+	/**
+	* return a list of Object Participant from the value which is what the user gave
+ 	*/
 	getSuggestions(value, participants) {
-		const escapedValue = this.escapeRegexCharacters(value.trim());
+		console.log("ChooseParticipant.getSuggestions:");
 
+		const escapedValue = this.escapeRegexCharacters(value.trim());
+		
 		if (escapedValue === '') {
 			return [];
 		}
@@ -133,35 +147,67 @@ class ChooseParticipant extends React.Component {
 		// const regex = new RegExp('^' + escapedValue, 'i');
 		const regex = new RegExp('.*' + escapedValue + '.*', 'i');
 
-		return participants.filter(participant => regex.test(participant.user.longlabel));
+		var result= participants.filter(participant => regex.test(participant.user.longlabel));
+		console.log("ChooseParticipant.getSuggestions: result = "+JSON.stringify(result));
+		return result;
 	}
 
 
-
+	
 	renderSuggestion(suggestionParticipant) {
+		console.log("ChooseParticipant.renderSuggestion: for participant["+JSON.stringify(suggestionParticipant)+"]");
 		return (
 			<span>{this.getValueFromParticipant( suggestionParticipant) }</span>
 		);
 	}
 
 	renderInputComponent(inputProps) {
+		console.log("ChooseParticipant.renderInputComponent:");
 		return (
 			<div><Search id="search-1" labelText="" {...inputProps} /></div>
 		);
 	}
 	
+	/**
+	* For a participant, get back the label.
+	Call by the autosuggest via getSuggestionValue(), or when the value has to be displayed
+	*/
 	getValueFromParticipant( participant ) {
-		console.log("ChoosePartipant : getValueFormPartipant "+participant.user.id+" : "+participant.user.longlabel);
-		if (participant.user)
-			return participant.user.longlabel;
+		if (participant && participant.user) {
+			console.log("ChoosePartipant.getValueFormPartipant: "+participant.user.id+" : "+participant.user.longlabel);
+			return participant.user.longlabel.toString();
+		}
+		
+		console.log("ChoosePartipant.getValueFormPartipant [unknown] ?? ");
 		return "";
 	}
+	
+	renderSuggestionsContainer({ containerProps, children, query }) {
+		if (! children)
+			return "";
+	  return (
+		<div style={{ boxShadow: "3px 3px #888888", 
+			border: "1px solid", 
+			marginLeft: "15px", 
+			marginBottom: "20px", 
+			padding: "0px 4px 0px 4px",
+			lineHeight : "160%"}} {...containerProps}>
+	      {children}	      
+	    </div>
+	  );
+	}
+	
 	// --------------------------------------------------------------
 	// 
 	// manage suggestion
 	// 
 	// --------------------------------------------------------------	
+	/**
+	When the user clicks on a suggestion, this method is called
+	
+	 */
 	onSuggestionsFetchRequested = ({ value }) => {
+		console.log("ChoosePartipant.onSuggestionsFetchRequested value=["+value+"]");
 		this.setState({
 			suggestions: this.getSuggestions(value, this.state.event.participants)
 		});
@@ -173,6 +219,7 @@ class ChooseParticipant extends React.Component {
 		});
 	};
 	getSuggestionValue(suggestionParticipant) {
+		console.log("ChoosePartipant.getSuggestionValue["+suggestionParticipant+"]");
 		return this.getValueFromParticipant( suggestionParticipant );
 	}
 	

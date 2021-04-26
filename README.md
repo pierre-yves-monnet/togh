@@ -208,6 +208,11 @@ https://www.flaticon.com/
 Rendre une image fond transparent
 https://www.remove.bg/fr/upload 
 
+
+import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+
+
+
 Lounes : $5 / icons
 
 Chat 				: OK
@@ -470,24 +475,20 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	Sauvegarde Chat
-	GoogleKey en base
 	Verifier invitation
 	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
 	Limiter le nombre d'elements par event, le nombre d'event / mois
 	user "premium", "excellence" => event"premium" / "excellence"
-	Graph sur le nombre d'acces
-	Administration user
+	
+	Administration user / Graph sur le nombre d'acces
 	My profile
 	Lost my password
 	Close event automatically
 		
+V2		
 	Expense
-	
-	
 	Preference affichage
 	Budget
-	
-	Factory clée d'API
 	Administration Statistics usage
 	
 	Integrer weather  : https://openweathermap.org/api
@@ -499,6 +500,7 @@ Py	Sauvegarde Chat
 		
     Survey : first, present the VIEW display if there is an survey      
 # bugs
+	Invitation en cours : affichage pas super dans le panneau des invitations
 
  Survey : j'avais pas choisi que le survey etait deja 1/1. Il faut mettre 1/1 quand on a repondu a au moins 1 event
 Plus possible de choisir une date          

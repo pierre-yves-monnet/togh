@@ -298,7 +298,6 @@ class AdminUsers extends React.Component {
 					value: value};
 		restCallService.postJson('/api/user/admin/update', this, param, httpPayload =>{
 			httpPayload.trace("AdminUsers.setAttributUser");
-			debugger;
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});

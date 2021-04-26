@@ -31,6 +31,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
+import com.togh.entity.ToghUserEntity.StatusUserEnum;
 import com.togh.restcontroller.RestHttpConstant;
 import com.togh.service.MonitorService.Chrono;
 
@@ -93,7 +94,11 @@ public class LoginService {
             monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
             return loginStatus;
         }
-        
+        // password inactif or block: remove it
+        if (! StatusUserEnum.ACTIF.equals(endUserEntity.getStatusUser()))  {
+            monitorService.endOperationWithStatus(chronoConnection, "UserBlockedOrDisabled");
+            return loginStatus;
+        }
         // check the password
         if (! endUserEntity.checkPassword(password)) {
             monitorService.endOperationWithStatus(chronoConnection, "BadPassword");
