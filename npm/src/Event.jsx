@@ -298,7 +298,7 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_PARTICIPANT )}
 								title={<FormattedMessage id="Event.TitleParticipant" defaultMessage="Invite participant to your event" />}
-								 class="btn btn-primary">
+								 class="btn" style={{marginBottom:"10px", backgroundColor:"#bd7d49"}}>
 							<img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Participants" defaultMessage="Participants" />
 						</button>
@@ -306,15 +306,15 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_ITINERARY )}
 								title={<FormattedMessage id="Event.TitleItinerary" defaultMessage="Define your itinerary, and point of interest" />} 
-								class="btn btn-primary" style={{ "marginLeft ": "10px" }}>
+								class="btn" style={{ marginLeft: "10px", marginBottom:"10px", backgroundColor:"#bd7d49"}}>
 							<img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Itinerary" defaultMessage="itinerary" />
 						</button>
 						&nbsp;
 
 						<button onClick={() => this.accessTab( TAB_CHAT) } 
-							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} class="btn btn-primary"
-							style={{ "marginLeft ": "10px" }} >
+							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} 
+							class="btn"	style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }} >
 							<img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Chat" defaultMessage="Chat" />
 						</button>
@@ -322,7 +322,7 @@ class Event extends React.Component {
 
 						<button  onClick={() => this.accessTab( TAB_TASKLIST )} 
 							title={<FormattedMessage id="Event.TitleTasks" defaultMessage="Tasks" />} 
-							class="btn btn-primary" style={{ "marginLeft ": "10px" }}>
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Tasks" defaultMessage="Tasks" />
 						</button>
@@ -330,7 +330,7 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_SHOPPINGLIST)} 
 							title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?" />} 
-							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.ShoppingList" defaultMessage="Shopping List" />
 						</button>
@@ -338,7 +338,7 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_SURVEY )} 
 							title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />}  
-							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Survey" defaultMessage="Survey" />
 						</button>
@@ -346,7 +346,7 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_GEOLOCALISATION )} 
 							title={<FormattedMessage id="Event.TitleGeolocalisation" defaultMessage="Where is the event?" />} 
-							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Geolocalisation" defaultMessage="Geolocalisation" />
 						</button>
@@ -355,7 +355,7 @@ class Event extends React.Component {
 						<button onClick={() => this.accessTab( TAB_PHOTO )} 
 							title={<FormattedMessage id="Event.TitlePhotos" defaultMessage="Photos" />} 
 							disabled={true} 
-							class="btn btn-primary" style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Photos" defaultMessage="Photos" />
 						</button>
@@ -363,7 +363,7 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_EXPENSE )} 
 							title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} 
-							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img src="img/btnExpense.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
 						</button>
@@ -371,7 +371,7 @@ class Event extends React.Component {
 						
 						<button onClick={() => this.accessTab( TAB_BUDGET )} 
 							title={<FormattedMessage id="Event.TitleBudget" defaultMessage="Budget" />} 
-							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Budget" defaultMessage="Budget" />
 						</button>
@@ -379,7 +379,7 @@ class Event extends React.Component {
 						
 						<button onClick={() => this.accessTab( TAB_PREFERENCES )} 
 							title={<FormattedMessage id="Event.TitlePreferences" defaultMessage="Preferences" />} 
-							class="btn btn-primary"  style={{ "marginLeft ": "10px" }} >
+							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Preferences" defaultMessage="Preferences" />
 						</button>

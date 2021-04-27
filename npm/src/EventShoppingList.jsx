@@ -86,7 +86,7 @@ class EventShoppingList extends React.Component {
 
 		var headerSection = (
 			<EventSectionHeader id="task"
-				image="img/btnTask.png"
+				image="img/btnShoppingList.png"
 				title={<FormattedMessage id="EventShoppingList.MainTitleShoppingList" defaultMessage="Shopping List" />}
 				showPlusButton={true}
 				showPlusButtonTitle={<FormattedMessage id="EventShoppingList.AddItem" defaultMessage="Add a item in the list" />}

@@ -74,7 +74,7 @@ class EventChat extends React.Component {
 
 		var headerSection = (
 			<EventSectionHeader id="chat"
-				image="img/btnTask.png"
+				image="img/btnChat.png"
 				title={<FormattedMessage id="EventChat.MainTitleChat" defaultMessage="Chat" />}
 				showPlusButton={false}
 				userTipsText={<FormattedMessage id="EventChat.ChatTip" defaultMessage="Chat with all participants" />}
