@@ -186,10 +186,13 @@ Install react in tomcat
 https://frugalisminds.com/deploy-react-js-in-tomcat/
 npm install
 mvn clean install
-
-
-https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
+
+
+# CSS et Color
+https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
+http://colrd.com/color/0xffff6666/
+
 
 
 # Spring;
@@ -212,15 +215,20 @@ https://www.remove.bg/fr/upload
 import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
 
-
+Marron : 210/165/108	#d2a66c
+   		206/139/84		#ce8b54
+		189/126/73		#bd7d49
+		150/98/61		#96623d
+		130/80/45		#82502d
+		
 Lounes : $5 / icons
 
 Chat 				: OK
 Task 				: OK
 Shopping List 		: OK
-
-Participant 		: 4 personnages          
-Itinerary 			: a revoir
+Cypris				: OK
+Participant 		: OK          
+Itinerary 			: Ok
 Survey 				: Revoir un peu la ligne pour ne pas faire 3 zones identiques 
 Geolocalisation 	: a revoir
 Photo 				: a revoir
@@ -484,6 +492,11 @@ Py	Sauvegarde Chat
 	My profile
 	Lost my password
 	Close event automatically
+	Remember me : savuer localement mon login
+	Refresh sur plusieurs poste : Walter modifie une valeur, elle doit etre repercutée ailleurs
+	
+	
+	
 		
 V2		
 	Expense

@@ -17,6 +17,10 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 import FactoryService from './service/FactoryService';
 
+const LOCALSTORAGE_REMEMBERME = "loginRememberMe";
+const LOCALSTORAGE_EMAIL = "loginEmail";
+
+
 var staticLogin=null;
 
 class Login extends React.Component {
@@ -26,11 +30,18 @@ class Login extends React.Component {
 		super();
 		// console.log("Login.constructor");
 
-		this.state = { email: 'pierre-yves.monnet@laposte.net', password: 'tog', 
+		let rememberme=localStorage.getItem( LOCALSTORAGE_REMEMBERME );
+		let email=localStorage.getItem( LOCALSTORAGE_EMAIL );
+		
+		this.state = { email: email, 
+			password: '', 
+			rememberme: rememberme,
 			badConnection: false,
 			messageConnection:'',
 			inprogress: false }
 
+		// get from the local storage ? 
+		
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		this.loginConnect = this.loginConnect.bind(this);
 		this.directLogout = this.directLogout.bind( this );
@@ -76,7 +87,13 @@ class Login extends React.Component {
 				 <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>}
 					id="loginemail" 
 					value={this.state.email} 
-					onChange={(event) => this.setState({ email: event.target.value })} /><p />
+					onChange={(event) => 
+						{ this.setState({ email: event.target.value });
+							if (this.state.rememberme) {
+								localStorage.setItem(LOCALSTORAGE_EMAIL,  event.target.value);
+							}
+						}
+						} /><p />
 				
 				<TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>} 
 					type="password"
@@ -84,10 +101,27 @@ class Login extends React.Component {
 					value={this.state.password} 
 					onChange={(event) => this.setState({ password: event.target.value })} /><p />
 				<br/>
+				
+				
+					
 				<table >
 				<tr>
 				<td style={{"paddingRight" : "40px", "paddingLeft" : "150px"}}>
+					
 					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
+					<input type="checkbox"
+						onChange={(event) => { 
+								let rememberBool = event.target.value==='on';
+								this.setState( {"rememberme":  rememberBool});
+								localStorage.setItem(LOCALSTORAGE_REMEMBERME, rememberBool);
+								if (! event.target.value) {
+									localStorage.setItem(LOCALSTORAGE_EMAIL, "");
+									}
+								}
+						}
+						defaultChecked={this.state.rememberme ? 'checked': ''} />
+					<FormattedMessage id="Login.RememberMe" defaultMessage="Remember Me" />
+				
 					{messageConnectionHtml}
 				</td>
 				<td>
