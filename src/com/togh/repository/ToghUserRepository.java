@@ -173,4 +173,6 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
     Long countSentenceUsers(@Param("sentence") String searchUserSentence );
 
     
+   
+    
 }

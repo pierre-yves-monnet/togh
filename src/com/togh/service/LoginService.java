@@ -50,6 +50,9 @@ public class LoginService {
  
     @Autowired
     FactoryService factoryService;
+
+    @Autowired 
+    StatsService statsService;
     
     private Logger logger = Logger.getLogger(LoginService.class.getName());
     private final static String logHeader ="LoginService:";
@@ -208,6 +211,8 @@ public class LoginService {
         toghUser.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
        
         factoryService.getToghUserService().saveUser(toghUser);
+        
+        statsService.registerLogin();
         
         // keep in the cache to be more efficient
         UserConnected userConnected = new UserConnected();

@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 import { TextInput,Select, TooltipIcon } from 'carbon-components-react';
-import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts  } from 'react-bootstrap-icons';
+import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import { Loading } from 'carbon-components-react';
 
@@ -33,11 +33,21 @@ class AdminUsers extends React.Component {
 		super();
 		// console.log("RegisterNewUser.constructor");
 
-		this.state = {searchUserSentence:'', listusers:[], filterevent:'all' };
+		this.state = {searchUserSentence:'', listusers:[], 
+			filterusers: {
+					all: true,
+					connected:false, 
+					block:false, 
+					administrator:false,
+					premium:false,
+					illimited:false
+			} 
+		};
 		
 		this.searchUsers 			= this.searchUsers.bind( this );	
 		this.searchUsersCallback	= this.searchUsersCallback.bind( this);
-		this.setAttributUser 		= this.setAttributUser.bind( this );		
+		this.setAttributUser 		= this.setAttributUser.bind( this );
+		this.managerfilter			= this.managerfilter.bind( this );
 	}
 	
 	// Calculate the state to display
@@ -74,14 +84,51 @@ class AdminUsers extends React.Component {
 								value={this.state.searchUserSentence} onChange={ (event) => this.setState({searchUserSentence: event.target.value})}/>
 						</div>
 						<div class="col-sm">
-							<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
-								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"all"})}}><FormattedMessage id="AdminUsers.AllUsers" defaultMessage="All Users"/></button>
-								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"connected"})}}><FormattedMessage id="AdminUsers.Connected" defaultMessage="Connected"/></button>
-								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"block"})}}><FormattedMessage id="AdminUsers.Blocked" defaultMessage="Blocked"/></button>
-								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"administrator"})}}><FormattedMessage id="AdminUsers.Administrator" defaultMessage="Administrator"/></button>
-								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"Premium"})}}><FormattedMessage id="AdminUsers.Premium" defaultMessage="Premium"/></button>
-								<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={(event) => {this.setState({filterevent:"Illimited"})}}><FormattedMessage id="AdminUsers.Premium" defaultMessage="Illimited"/></button>
+							<div class="btn-group btn-group-sm" role="groupstate" aria-label="Basic radio toggle button group" style={{ padding: "10px 10px 10px 10px" }}>
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterALL" autocomplete="off" 
+									checked={this.state.filterusers.all}
+									onChange={() => this.managerfilter('all')}/>
+							  	<label class="btn btn-outline-primary" for="filterALL">
+									<List />&nbsp;<FormattedMessage id="AdminUsers.AllUsers" defaultMessage="All Users"/>
+								</label>
+						
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterConnected" autocomplete="off" 
+									checked={this.state.filterusers.connected}
+									onChange={() => this.managerfilter('connected') }/>
+							  	<label class="btn btn-outline-primary" for="filterConnected">
+									<LampFill style={{color:"green", fill:"green"}}/>&nbsp;<FormattedMessage id="AdminUsers.Connected" defaultMessage="Connected"/>
+								</label>
+							
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterBlock" autocomplete="off" 
+									checked={this.state.filterusers.block}
+									onChange={() => this.managerfilter('block') }/>
+							  	<label class="btn btn-outline-primary" for="filterBlock">
+									<PersonBadge style={{color:"red", fill:"red"}}/>&nbsp;<FormattedMessage id="AdminUsers.Blocked" defaultMessage="Blocked"/>
+								</label>
+								
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterAdministrator" autocomplete="off" 
+									checked={this.state.filterusers.administrator}
+									onChange={() => this.managerfilter('administrator') }/>
+							  	<label class="btn btn-outline-primary" for="filterAdministrator">
+									<AwardFill style={{color:"a17f1a"}}/>&nbsp;<FormattedMessage id="AdminUsers.Administrator" defaultMessage="Administrator"/>
+								</label>
+
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterPremium" autocomplete="off" 
+									checked={this.state.filterusers.premium}
+									onChange={() => this.managerfilter('premium') }/>
+							  	<label class="btn btn-outline-primary" for="filterPremium">
+									<BookmarkStar style={{color:"#ff6666", fill:"#ff6666"}}/>&nbsp;<FormattedMessage id="AdminUsers.Premium" defaultMessage="Premium"/>
+								</label>
+								
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterIllimited" autocomplete="off" 
+									checked={this.state.filterusers.illimited}
+									onChange={() => this.managerfilter('illimited') }/> 
+							  	<label class="btn btn-outline-primary" for="filterIllimited">
+									<BookmarkStar style={{color:"a17f1a",  fill:"a17f1a"}}/>&nbsp;<FormattedMessage id="AdminUsers.Illimited" defaultMessage="Illimited"/>
+								</label>
+								
 							</div>
+							
 						</div>
 					</div>				
 					<div class="row">
@@ -161,7 +208,7 @@ class AdminUsers extends React.Component {
 										{item.subscription === 'ILLIMITED' && 
 											<TooltipIcon
 												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionIllimited", defaultMessage: "Illimited subscription"})}>
-												<BookmarkStar style={{color:"a17f1a", backgroundColor:"a17f1a", fill:"a17f1a"}}/>
+												<BookmarkStar style={{color:"a17f1a",  fill:"a17f1a"}}/>
 											</TooltipIcon>}
 
 
@@ -183,7 +230,7 @@ class AdminUsers extends React.Component {
 									<td> {item.firstname}&nbsp;{item.lastname}	</td>
 									<td> {item.email}	</td>
 									<td> {item.phonenumber} </td>
-									<td> {item.connectionlastactivity} </td>
+									<td> {item.connectiontime} </td>
 								</tr>
 								<tr>
 									<td colspan="2"></td>
@@ -261,12 +308,43 @@ class AdminUsers extends React.Component {
 			);
 			// 
 	}
+
+	/**
+	Manage the filter button. 
+	- When ALL is selected, uncheck all other
+	- On opposite, when a button is clicked, uncheck all
+	- Last, when all button are uncheck, click ALL
+	*/	
+	managerfilter( attribut) {
+		var filter = this.state.filterusers;
+		if (attribut === 'all') {
+			filter={all:true, connected:false, block:false, administrator:false,premium:false,illimited:false};
+		} else {
+			// change the attribut 
+			filter[ attribut ] = ! filter[ attribut ];
+			// if all filter are uncheck, then check back all
+			var oneIsTrue=false;
+			for (var index in filter) {
+				if (index !== 'all' && filter[index] === true)
+					oneIsTrue=true;
+			}
+			if (oneIsTrue) {
+				filter.all=false;
+			} else
+				filter.all=true;
+		}
+		this.setState({ filterusers: filter});
+	}
+	
 	
 	searchUsers () {	
 		this.setState({ message:"", inprogress:true});
 		var restCallService = FactoryService.getInstance().getRestcallService();
-
-		restCallService.getJson('/api/user/admin/search?searchusersentence='+this.state.searchUserSentence, this, this.searchUsersCallback);
+		var filterUrl="";
+		for (var index in this.state.filterusers)
+			filterUrl += "&"+index+"="+this.state.filterusers[ index ];
+		
+		restCallService.getJson('/api/user/admin/search?searchusersentence='+this.state.searchUserSentence+filterUrl, this, this.searchUsersCallback);
 
 	}
 	

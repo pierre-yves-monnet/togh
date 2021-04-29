@@ -11,8 +11,6 @@ package com.togh.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.togh.repository.ToghUserRepository;
-
 /* ******************************************************************************** */
 /*                                                                                  */
 /*  FactoryService,                                                                 */
@@ -45,6 +43,9 @@ public class FactoryService {
     @Autowired
     private ApiKeyService apiKeyService;
  
+    @Autowired
+    private StatsService statsService;
+ 
     /*private static FactoryService factoryService = new FactoryService();
     public static FactoryService getInstance() {
         return factoryService;
@@ -70,4 +71,14 @@ public class FactoryService {
     public NotifyService getNotifyService() {
         return notifyService;
     }
+    
+    
+    public ApiKeyService getApiKeyService() {
+        return apiKeyService;
+    }
+ 
+    public StatsService getStatsService() {
+        return statsService;
+    }
+ 
 }

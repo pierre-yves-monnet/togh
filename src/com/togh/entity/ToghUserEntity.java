@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import com.togh.engine.tool.EngineTool;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;
@@ -238,7 +239,7 @@ public @Data class ToghUserEntity extends BaseEntity {
         }
         if (contextAccess == ContextAccess.ADMIN) {
             resultMap.put("privilegeuser", privilegeUser.toString());
-            
+            resultMap.put("connectiontime", EngineTool.dateToString(connectionTime));
             resultMap.put("connected", connectionStamp==null ? "OFFLINE" : "ONLINE");
         }
         return resultMap;

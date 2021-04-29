@@ -3,10 +3,13 @@ package com.togh.restcontroller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,8 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.service.FactoryService;
+import com.togh.service.ToghUserService;
+import com.togh.service.ToghUserService.CriteriaSearchUser;
 import com.togh.service.ToghUserService.SearchUsersResult;
 
 /* -------------------------------------------------------------------- */
@@ -36,6 +41,8 @@ public class RestUserController {
     @Autowired
     private FactoryService factoryService;
 
+    @Autowired
+    private ToghUserService thogUserService;
     
     /**
      * Call for the invitation for example, to search a user according some criteria. User should accept to publish some information
@@ -87,16 +94,32 @@ public class RestUserController {
     @CrossOrigin
     @GetMapping( value="/api/user/admin/search",  produces = "application/json")
     public Map<String, Object> searchAdminUser( 
-            @RequestParam( RestJsonConstants.CST_PARAM_SEARCHUSERSENTENCE) String searchUserSentence,            
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_SENTENCE, required = false) String searchUserSentence,            
+           
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_CONNECTED, required = false) boolean filterConnected,             
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_BLOCK, required = false) boolean filterBlock, 
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_ADMINSTRATOR, required = false) boolean filterAdministrator,
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_PREMIUM, required = false) boolean filterPremium,
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_ILLIMITED, required = false) boolean filterIllimited,
+            
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
+        CriteriaSearchUser criteriaSearch = new CriteriaSearchUser();
+        criteriaSearch.searchSentence = searchUserSentence;
+        criteriaSearch.connected = filterConnected;
+        criteriaSearch.block = filterBlock;
+        criteriaSearch.administrator = filterAdministrator;
+        criteriaSearch.premium = filterPremium;
+        criteriaSearch.illimited = filterIllimited;
+        
         Map<String, Object> payload = new HashMap<>();
+        
         SearchUsersResult searchUsers;
-        searchUsers = factoryService.getToghUserService().searchAdminUsers( searchUserSentence, 0,20);
+        searchUsers = thogUserService.findUserByCriterias( criteriaSearch, 0,20);
         
         
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
