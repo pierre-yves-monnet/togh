@@ -66,8 +66,8 @@ public @Data class EventSurveyAnswerEntity extends UserEntity {
      * @return
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess) {
-        Map<String,Object> resultMap = super.getMap( contextAccess );
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
         
         resultMap.put("decision", decision ==null ? new HashMap<>() : decision);
 

@@ -11,6 +11,7 @@ package com.togh.service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -19,6 +20,7 @@ import java.time.ZoneOffset;
 /* -------------------------------------------------------------------- */
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -28,12 +30,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.StatusUserEnum;
 import com.togh.restcontroller.RestHttpConstant;
 import com.togh.service.MonitorService.Chrono;
+import com.togh.service.ToghUserService.SearchUsersResult;
 
 
 /* ******************************************************************************** */
@@ -52,12 +57,18 @@ public class LoginService {
     FactoryService factoryService;
 
     @Autowired 
+    ToghUserService toghUserService;
+    
+    @Autowired 
     StatsService statsService;
     
+    private static final LogEvent eventUnknowId = new LogEvent(LoginService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
+    private static final LogEvent eventUserDisconnected = new LogEvent(LoginService.class.getName(), 2, Level.SUCCESS, "User disconnected", "User disconnected with success");
+
     private Logger logger = Logger.getLogger(LoginService.class.getName());
     private final static String logHeader ="LoginService:";
     
-   
+   private int delayMinutesDisconnectInactiveUser=30;
     
     public static class LoginStatus {
         public boolean isConnected=false;
@@ -86,7 +97,7 @@ public class LoginService {
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("ConnectUserWithEmail");
         
-        ToghUserEntity endUserEntity = factoryService.getToghUserService().findToConnect( emailOrName );
+        ToghUserEntity endUserEntity = toghUserService.findToConnect( emailOrName );
         if (endUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
@@ -124,7 +135,7 @@ public class LoginService {
 
         Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
         
-        ToghUserEntity endUserEntity =  factoryService.getToghUserService().getFromEmail( email );
+        ToghUserEntity endUserEntity =  toghUserService.getFromEmail( email );
         if (endUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
@@ -146,7 +157,7 @@ public class LoginService {
 
         Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
         
-        ToghUserEntity endUserEntity = factoryService.getToghUserService().getFromEmail(email);
+        ToghUserEntity endUserEntity = toghUserService.getFromEmail(email);
         if (endUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
@@ -166,14 +177,14 @@ public class LoginService {
     // create a new user
     public LoginStatus registerNewUser(String email, String firstName, String lastName, String password, SourceUserEnum sourceUser)  {
         LoginStatus loginStatus = new LoginStatus();
-        ToghUserEntity endUserEntity = factoryService.getToghUserService().getFromEmail( email );
+        ToghUserEntity endUserEntity = toghUserService.getFromEmail( email );
         if (endUserEntity !=null) {
             return loginStatus;
         }
         endUserEntity = ToghUserEntity.getNewUser(firstName, lastName, email, password, sourceUser);
         
         try {
-            factoryService.getToghUserService().saveUser( endUserEntity );
+            toghUserService.saveUser( endUserEntity );
             loginStatus.isCorrect=true;
         } catch(Exception e) {
             logger.severe(logHeader+"Can't create new user: "+e.toString());
@@ -210,7 +221,7 @@ public class LoginService {
         toghUser.setConnectionTime( LocalDateTime.now(ZoneOffset.UTC));
         toghUser.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
        
-        factoryService.getToghUserService().saveUser(toghUser);
+        toghUserService.saveUser(toghUser);
         
         statsService.registerLogin();
         
@@ -227,24 +238,24 @@ public class LoginService {
      * @return a user, or null if nobody is connected
      */
     public ToghUserEntity isConnected( String connectionStamp) {
-        LocalDateTime timeCheck = LocalDateTime.now();
+        LocalDateTime timeCheck =LocalDateTime.now( ZoneOffset.UTC);
         // is the user is in the cache AND the last ping was less than 2 mn ? If you, we trust the cache.
         UserConnected userConnected = cacheUserConnected.get( connectionStamp);
         if (userConnected != null) {
-            userConnected.lastPing = LocalDateTime.now();
-            Duration duration = Duration.between(userConnected.lastCheck, userConnected.lastPing);
-            if (duration.toMinutes() < 2) 
+            userConnected.lastPing = LocalDateTime.now( ZoneOffset.UTC );
+            Duration duration = Duration.between(userConnected.lastCheck,userConnected.lastPing );
+            if (duration.toMinutes() < 1) 
                 return userConnected.toghUser;
         }
 
         // more than 2 mn or not in the cache? Get it from the database
-        ToghUserEntity endUserEntity = factoryService.getToghUserService().getUserFromConnectionStamp( connectionStamp );
+        ToghUserEntity endUserEntity = toghUserService.getUserFromConnectionStamp( connectionStamp );
         // if not exist ==> It's disconnected in fact !
         if (endUserEntity == null) 
             return null;
         // maybe the last check was too old in the database too?
         LocalDateTime lastActivity = endUserEntity.getConnectionLastActivity();
-        if (lastActivity==null || Duration.between(lastActivity,timeCheck).toMinutes()>30) {
+        if (lastActivity==null || Duration.between(lastActivity,timeCheck).toMinutes() > delayMinutesDisconnectInactiveUser) {
             // incoherent, or too old disconnect it
             endUserEntity.setConnectionStamp(null);
             cacheUserConnected.remove(connectionStamp);        
@@ -257,7 +268,7 @@ public class LoginService {
             userConnected = new UserConnected(); 
             userConnected.toghUser = endUserEntity;
         }
-        userConnected.lastCheck = timeCheck;
+        userConnected.lastCheck = timeCheck ;
         cacheUserConnected.put(connectionStamp, userConnected);
         return userConnected.toghUser;                
     }
@@ -298,24 +309,64 @@ public class LoginService {
      */
     public void disconnectUser(String connectionStamp ) {
         UserConnected userConnected = cacheUserConnected.get( connectionStamp);
-        ToghUserEntity endUserEntity = null;
+        ToghUserEntity toghUserEntity = null;
 
         if (userConnected==null) {
             // search in the database
-            endUserEntity = factoryService.getToghUserService().getUserFromConnectionStamp( connectionStamp );
+            toghUserEntity = toghUserService.getUserFromConnectionStamp( connectionStamp );
         }
         else {
-            endUserEntity = userConnected.toghUser;
+            toghUserEntity = userConnected.toghUser;
         }
-        if (endUserEntity == null)
+        if (toghUserEntity == null)
             return; // already disconnected, or not exist
 
-        endUserEntity.setConnectionStamp(null);
-        factoryService.getToghUserService().saveUser(endUserEntity);
+        cacheUserConnected.remove( connectionStamp );
+        
+        toghUserEntity.setConnectionStamp(null);
+        toghUserService.saveUser(toghUserEntity);
 
         cacheUserConnected.remove(connectionStamp);
     }
 
+    /**
+     * Search, then disconnect all users with no activity for delayMinutesDisconnectInactiveUser, a constant
+     */
+    public void disconnectInactiveUsers() {
+        LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
+        timeCheck = timeCheck.minusMinutes( delayMinutesDisconnectInactiveUser );
+        SearchUsersResult searchUsersResult = toghUserService.searchConnectedUsersNoActivity( timeCheck,0,1000 );
+        logger.info(logHeader+"disconnectInactiveUsers found "+ searchUsersResult.listUsers.size());
+        for (ToghUserEntity toghUserEntity : searchUsersResult.listUsers) {
+            logger.info(logHeader+"disconnectInactiveUsers Disconnect["+ toghUserEntity.getLabel()+"]");
+            toghUserEntity.setConnectionStamp(null);
+            toghUserService.saveUser( toghUserEntity );
+        }
+    }
     
-  
+    /**
+     * Disconnect explicitaly a user
+     * @param userId
+     * @return
+     */
+    public class OperationLoginUser{
+        public List<LogEvent> listLogEvents = new ArrayList<>();
+        public ToghUserEntity toghUserEntity= null;
+    }
+    public OperationLoginUser disconnectUser( long userId) {
+        OperationLoginUser operationUser = new OperationLoginUser();
+
+        operationUser.toghUserEntity =   toghUserService.getUserFromId(userId);
+
+        if (operationUser.toghUserEntity == null) {
+            operationUser.listLogEvents.add(new LogEvent(eventUnknowId, "Id[" + userId + "]"));
+            return operationUser;
+        }
+        cacheUserConnected.remove( operationUser.toghUserEntity.getConnectionStamp() );
+        operationUser.toghUserEntity.setConnectionStamp( null );
+        toghUserService.saveUser( operationUser.toghUserEntity );
+        operationUser.listLogEvents.add( eventUserDisconnected );
+        return operationUser;
+
+    }
 }

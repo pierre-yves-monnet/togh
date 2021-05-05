@@ -8,22 +8,17 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -32,7 +27,6 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
@@ -92,8 +86,8 @@ public @Data class EventSurveyEntity extends UserEntity {
      * @return
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess) {
-        Map<String,Object> resultMap = super.getMap( contextAccess );
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
         
 
         resultMap.put("status",status==null ? null : status.toString());
@@ -102,14 +96,14 @@ public @Data class EventSurveyEntity extends UserEntity {
         List<Map<String, Object>> listChoiceMap = new ArrayList<>();
         if (choicelist!=null)
             for (EventSurveyChoiceEntity choice : choicelist) {
-                listChoiceMap.add(choice.getMap(contextAccess));
+                listChoiceMap.add(choice.getMap(contextAccess, timezoneOffset));
             }
         resultMap.put( CST_SLABOPERATION_CHOICELIST, listChoiceMap);
         
         List<Map<String, Object>> listAnswerMap = new ArrayList<>();
         if (answerlist!=null)
             for (EventSurveyAnswerEntity answer : answerlist) {
-                listAnswerMap.add(answer.getMap(contextAccess));
+                listAnswerMap.add(answer.getMap(contextAccess, timezoneOffset));
             }
         resultMap.put( CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
 

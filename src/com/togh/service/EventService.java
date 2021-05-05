@@ -153,7 +153,7 @@ public class EventService {
 
     public static class UpdateContext {
         public ToghUserEntity toghUser;
-        public long timeZoneOffset;
+        public long timezoneOffset;
         public EventService eventService;
     }
     public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab, UpdateContext updateContext) {

@@ -88,10 +88,10 @@ public class ParticipantEntity extends UserEntity {
      * @param levelInformation
      * @return
      */
-    public Map<String,Object> getMap( ContextAccess contextAccess) {
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("role", role==null ? null : role.toString());
-        resultMap.put("user", user.getMap(contextAccess ));
+        resultMap.put("user", user.getMap(contextAccess, timezoneOffset ));
         resultMap.put("id", getId());
         resultMap.put("status", status==null ? null : status.toString());
 

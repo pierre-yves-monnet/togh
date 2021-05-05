@@ -8,8 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.restcontroller;
 
-import org.springframework.data.repository.query.Param;
-
 /* ******************************************************************************** */
 /*                                                                                  */
 /* EventController, */
@@ -42,7 +40,8 @@ public class RestJsonConstants {
     static final String CST_NUMBERPERPAGE = "numberperpage";
     static final String CST_PAGE = "page";
     static final String CST_COUNTUSERS = "countusers";
-    static final String CST_USERS = "users";
+    static final String CST_LISTUSERS = "users";
+    static final String CST_USER = "user";
     static final String CST_PARAM_ONLY_NON_INVITED_USER = "onlyNonInvitedUser";
     static final String CST_PARAM_EMAIL = "email";
     protected static final String CST_PARAM_PHONE_NUMBER = "phoneNumber";
@@ -56,7 +55,9 @@ public class RestJsonConstants {
     static final String CST_PARAM_SEARCHUSER_ADMINSTRATOR = "administrator";
     static final String CST_PARAM_SEARCHUSER_PREMIUM = "premium";
     static final String CST_PARAM_SEARCHUSER_ILLIMITED = "illimited";
-
+    static final String CST_PARAM_SEARCHUSER_TIMEZONEOFFSET = "timezoneoffset";
+    
+    
     static final String CST_PARAM_USERID = "userid";
     static final String CST_PARAM_ATTRIBUT = "attribut";
     static final String CST_PARAM_VALUE = "value";

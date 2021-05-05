@@ -90,8 +90,9 @@ public abstract class UserEntity extends BaseEntity {
 	 * @param levelInformation
 	 * @return
 	 */
-    public Map<String,Object> getMap(ContextAccess contextAccess) {
-        Map<String,Object> resultMap = super.getMap( contextAccess );
+    @Override
+    public Map<String,Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
         if (contextAccess== ContextAccess.ADMIN)
             resultMap.put("authorid", this.getAuthorId());
         return resultMap;

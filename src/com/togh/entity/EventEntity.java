@@ -342,8 +342,9 @@ public @Data class EventEntity extends UserEntity {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    public Map<String, Object> getMap(ContextAccess contextAccess) {
-        Map<String, Object> resultMap = super.getMap(contextAccess);
+    @Override
+    public Map<String, Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
 
         resultMap.put("dateEvent", EngineTool.dateToString(dateEvent));
         resultMap.put("dateStartEvent", EngineTool.dateToString(dateStartEvent));
@@ -367,35 +368,35 @@ public @Data class EventEntity extends UserEntity {
         if (typeEvent == TypeEventEnum.OPEN || contextAccess != ContextAccess.PUBLICACCESS) {
             List<Map<String, Object>> listParticipantsMap = new ArrayList<>();
             for (ParticipantEntity participant : participantList) {
-                listParticipantsMap.add(participant.getMap(contextAccess));
+                listParticipantsMap.add(participant.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put("participants", listParticipantsMap);
 
             // get task
             List<Map<String, Object>> listTasksMap = new ArrayList<>();
             for (EventTaskEntity tasks : taskList) {
-                listTasksMap.add(tasks.getMap(contextAccess));
+                listTasksMap.add(tasks.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_TASKLIST, listTasksMap);
             
             // get task
             List<Map<String, Object>> listItineraryStepMap = new ArrayList<>();
             for (EventItineraryStepEntity itineraryStep : itineraryStepList) {
-                listItineraryStepMap.add(itineraryStep.getMap(contextAccess));
+                listItineraryStepMap.add(itineraryStep.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
        
             // get Shoppinglist
             List<Map<String, Object>> listShoppinglistMap = new ArrayList<>();
             for (EventShoppingListEntity shoppingListStep : shoppingList) {
-                listShoppinglistMap.add(shoppingListStep.getMap(contextAccess));
+                listShoppinglistMap.add(shoppingListStep.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
             
             // get Surveylist
             List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
             for (EventSurveyEntity surveyStep : surveyList) {
-                listSurveylistMap.add(surveyStep.getMap(contextAccess));
+                listSurveylistMap.add(surveyStep.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
          
@@ -405,8 +406,9 @@ public @Data class EventEntity extends UserEntity {
 
     }
 
-    public Map<String, Object> getHeaderMap(ContextAccess contextAccess) {
-        Map<String, Object> resultMap = super.getMap(contextAccess);
+    
+    public Map<String, Object> getHeaderMap(ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
         resultMap.put("name", getName());
         resultMap.put("dateEvent", EngineTool.dateToString(dateEvent));
         resultMap.put("dateStartEvent", EngineTool.dateToString(dateStartEvent));

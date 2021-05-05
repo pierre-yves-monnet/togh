@@ -494,6 +494,7 @@ Py	Sauvegarde Chat
 	Close event automatically
 	Remember me : savuer localement mon login
 	Refresh sur plusieurs poste : Walter modifie une valeur, elle doit etre repercutée ailleurs
+	Not connected=>Redirect to home page
 	
 	
 	

@@ -113,8 +113,8 @@ public @Data class EventItineraryStepEntity extends UserEntity {
      * @return
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess) {
-        Map<String,Object> resultMap = super.getMap( contextAccess );
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
         
         resultMap.put("dateStep", EngineTool.dateToString( dateStep));
         resultMap.put("rownumber", rownumber);
@@ -130,7 +130,7 @@ public @Data class EventItineraryStepEntity extends UserEntity {
         
         
         // Here we attached directly the expense information
-        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess));
+        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess, timezoneOffset));
         
 
         return resultMap;

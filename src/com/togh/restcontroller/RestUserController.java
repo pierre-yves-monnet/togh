@@ -25,8 +25,11 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.service.FactoryService;
+import com.togh.service.LoginService;
+import com.togh.service.LoginService.OperationLoginUser;
 import com.togh.service.ToghUserService;
 import com.togh.service.ToghUserService.CriteriaSearchUser;
+import com.togh.service.ToghUserService.OperationUser;
 import com.togh.service.ToghUserService.SearchUsersResult;
 
 /* -------------------------------------------------------------------- */
@@ -42,7 +45,11 @@ public class RestUserController {
     private FactoryService factoryService;
 
     @Autowired
-    private ToghUserService thogUserService;
+    private ToghUserService toghUserService;
+
+    @Autowired
+    private LoginService loginService;
+    
     
     /**
      * Call for the invitation for example, to search a user according some criteria. User should accept to publish some information
@@ -63,6 +70,7 @@ public class RestUserController {
             @RequestParam( RestJsonConstants.CST_PARAM_EMAIL) String email, 
             @RequestParam( RestJsonConstants.CST_PARAM_ONLY_NON_INVITED_USER) Boolean onlyNonInvitedUser,
             @RequestParam( RestJsonConstants.CST_INJSON_EVENTID ) Long eventId,
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
@@ -79,10 +87,10 @@ public class RestUserController {
         
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
         for (ToghUserEntity togUser : searchUsers.listUsers) {
-            listUsersMap.add( togUser.getMap( ContextAccess.SEARCH));
+            listUsersMap.add( togUser.getMap( ContextAccess.SEARCH, timezoneOffset));
         }
         
-        payload.put( RestJsonConstants.CST_USERS, listUsersMap);
+        payload.put( RestJsonConstants.CST_LISTUSERS, listUsersMap);
         payload.put( RestJsonConstants.CST_COUNTUSERS, searchUsers.countUsers);
         payload.put( RestJsonConstants.CST_PAGE, searchUsers.page);
         payload.put( RestJsonConstants.CST_NUMBERPERPAGE, searchUsers.numberPerPage);
@@ -101,12 +109,15 @@ public class RestUserController {
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_ADMINSTRATOR, required = false) boolean filterAdministrator,
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_PREMIUM, required = false) boolean filterPremium,
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_ILLIMITED, required = false) boolean filterIllimited,
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+
+        
 
         CriteriaSearchUser criteriaSearch = new CriteriaSearchUser();
         criteriaSearch.searchSentence = searchUserSentence;
@@ -119,15 +130,15 @@ public class RestUserController {
         Map<String, Object> payload = new HashMap<>();
         
         SearchUsersResult searchUsers;
-        searchUsers = thogUserService.findUserByCriterias( criteriaSearch, 0,20);
+        searchUsers = toghUserService.findUserByCriterias( criteriaSearch, 0,20);
         
         
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
         for (ToghUserEntity togUser : searchUsers.listUsers) {
-            listUsersMap.add( togUser.getMap( ContextAccess.ADMIN));
+            listUsersMap.add( togUser.getMap( ContextAccess.ADMIN, timezoneOffset));
         }
         
-        payload.put( RestJsonConstants.CST_USERS, listUsersMap);
+        payload.put( RestJsonConstants.CST_LISTUSERS, listUsersMap);
         payload.put( RestJsonConstants.CST_COUNTUSERS, searchUsers.countUsers);
         payload.put( RestJsonConstants.CST_PAGE, searchUsers.page);
         payload.put( RestJsonConstants.CST_NUMBERPERPAGE, searchUsers.numberPerPage);
@@ -138,7 +149,7 @@ public class RestUserController {
 
     @CrossOrigin
     @PostMapping(value="/api/user/admin/update", produces = "application/json")
-    public Map<String, Object> updateUser( @RequestBody Map<String, Object> updateMap,                     
+    public Map<String, Object> updateUser( @RequestBody Map<String, Object> updateMap,        
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
@@ -146,17 +157,44 @@ public class RestUserController {
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
+        Long timezoneOffset             = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+
         Long userId                     = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
         String attribut                 = RestTool.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
         Object value                    = updateMap.get( RestJsonConstants.CST_PARAM_VALUE);
         
         Map<String, Object> payload = new HashMap<>();
-        List<LogEvent> listLogEvents = factoryService.getToghUserService().updateUser( userId, attribut, value);
+        OperationUser operationUser = toghUserService.updateUser( userId, attribut, value);
         
-        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, listLogEvents );
+        payload.put( RestJsonConstants.CST_USER, operationUser.toghUserEntity==null ? null :  operationUser.toghUserEntity.getMap( ContextAccess.ADMIN, timezoneOffset));
+        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, operationUser.listLogEvents );
 
-        
+
         return payload;
 
     }
+    
+    @CrossOrigin
+    @PostMapping(value="/api/user/admin/disconnect", produces = "application/json")
+    public Map<String, Object> disconnectUser( @RequestBody Map<String, Object> updateMap, 
+            @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
+        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUser == null)
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+        Long timezoneOffset             = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+        // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
+        Long userId                     = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
+        Map<String, Object> payload = new HashMap<>();
+        OperationLoginUser operationUser = loginService.disconnectUser( userId );
+        
+        payload.put( RestJsonConstants.CST_USER, operationUser.toghUserEntity==null ? null :  operationUser.toghUserEntity.getMap( ContextAccess.ADMIN, timezoneOffset));
+
+        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, operationUser.listLogEvents );
+
+        
+        return payload;
+ }
+    
+    
 }

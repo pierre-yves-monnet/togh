@@ -94,7 +94,7 @@ public abstract @Data class BaseEntity {
      * @param levelInformation
      * @return
      */
-    public Map<String,Object> getMap(ContextAccess contextAccess) {
+    public Map<String,Object> getMap(ContextAccess contextAccess, Long timeZoneOffset) {
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("id", id);
         resultMap.put("name", name);

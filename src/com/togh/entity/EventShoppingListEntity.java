@@ -78,8 +78,8 @@ public @Data class EventShoppingListEntity extends UserEntity {
      * @return
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess) {
-        Map<String,Object> resultMap = super.getMap( contextAccess );
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
         
 
         resultMap.put("status",status==null ? null : status.toString());
@@ -88,7 +88,7 @@ public @Data class EventShoppingListEntity extends UserEntity {
         // we just return the ID here
         resultMap.put("whoid",whoId==null ? null :  whoId.getId());
         // Here we attached directly the expense information
-        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess));
+        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess, timezoneOffset));
  
         return resultMap;
     }

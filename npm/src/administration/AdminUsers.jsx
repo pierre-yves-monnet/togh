@@ -48,6 +48,8 @@ class AdminUsers extends React.Component {
 		this.searchUsersCallback	= this.searchUsersCallback.bind( this);
 		this.setAttributUser 		= this.setAttributUser.bind( this );
 		this.managerfilter			= this.managerfilter.bind( this );
+		this.disconnectUser			= this.disconnectUser.bind( this);
+		
 	}
 	
 	// Calculate the state to display
@@ -134,7 +136,7 @@ class AdminUsers extends React.Component {
 					<div class="row">
 						<div class="col-6"> 
 							<button class="btn btn-info btn-sm"
-							 onClick={this.searchUsers}>
+							 onClick={this.searchUsers} style={{marginTop: "5px"}}>
 								<FormattedMessage id="AdminUsers.Search" defaultMessage="Search"/>
 							</button>
 							<div style={{color: "red"}}>{this.state.message}</div>
@@ -147,11 +149,13 @@ class AdminUsers extends React.Component {
     						/>}
 					<table  class="toghtable table table-stripped" style={{marginTop:"10px"}}><tr>
 							<th></th>
+							<th></th>
 							<th><FormattedMessage id="AdminUsers.UserName" defaultMessage="User Name"/></th>
 							<th><FormattedMessage id="AdminUsers.CompleteName" defaultMessage="Complete Name"/></th>
 							<th><FormattedMessage id="AdminUsers.Email" defaultMessage="Email"/></th>
 							<th><FormattedMessage id="AdminUsers.PhoneNumber" defaultMessage="PhoneNumber"/></th>
-							<th><FormattedMessage id="AdminUsers.LastConnectionTime" defaultMessage="LastConnectionTime"/></th>
+							<th><FormattedMessage id="AdminUsers.LastConnectionTime" defaultMessage="Last Connection"/></th>
+							<th><FormattedMessage id="AdminUsers.LastActivityTime" defaultMessage="Last Activiy"/></th>
 							
 						</tr>
 						{this.state.listusers && this.state.listusers.map( (item, index) => {
@@ -208,7 +212,7 @@ class AdminUsers extends React.Component {
 										{item.subscription === 'ILLIMITED' && 
 											<TooltipIcon
 												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionIllimited", defaultMessage: "Illimited subscription"})}>
-												<BookmarkStar style={{color:"a17f1a",  fill:"a17f1a"}}/>
+												<BookmarkStar style={{color:"#a17f1a",  fill:"#a17f1a"}}/>
 											</TooltipIcon>}
 
 
@@ -216,7 +220,7 @@ class AdminUsers extends React.Component {
 										{item.privilegeuser === 'ADMIN' && 
 											<TooltipIcon
 												tooltipText={intl.formatMessage({id: "AdminUsers.privilegeAdmin", defaultMessage: "Administrator"})}>
-												<AwardFill style={{color:"a17f1a"}}/>
+												<AwardFill style={{fill:"#ff6666"}}/>
 											</TooltipIcon>}
 										{item.privilegeuser === 'TRANS' && 
 											<TooltipIcon
@@ -226,11 +230,16 @@ class AdminUsers extends React.Component {
 										{item.privilegeuser === 'USER' && <div />}
  
 									</td>
+									<td> 
+										{this.canBeDisconnected( item ) && <button class="btn btn-info btn-sm"
+							 				onClick={(event) => this.disconnectUser( item)}><FormattedMessage id="AdminUsers.Disconnect" defaultMessage="Disconnect"/></button>}
+									 </td>
 									<td> {item.name} </td>
 									<td> {item.firstname}&nbsp;{item.lastname}	</td>
 									<td> {item.email}	</td>
 									<td> {item.phonenumber} </td>
-									<td> {item.connectiontime} </td>
+									<td> <div style={{fontSize:"12px", whiteSpace: "nowrap"}}> {item.connectiontimest}</div> </td>
+									<td> <div style={{fontSize:"12px", whiteSpace: "nowrap"}}> {item.connectionlastactivityst} </div></td>
 								</tr>
 								<tr>
 									<td colspan="2"></td>
@@ -389,6 +398,43 @@ class AdminUsers extends React.Component {
 			}
 		});
 	
+	}
+	
+	canBeDisconnected( user ) {
+		if (user.connected === 'ONLINE') {
+			var authService = FactoryService.getInstance().getAuthService();
+
+			if (authService.getUser().id == user.id)
+				return false; // myself
+			return true;
+		}
+		return false;
+	}
+	
+	
+	disconnectUser( user ) {
+		this.setState({inprogress: true });
+		
+		var restCallService = FactoryService.getInstance().getRestcallService();
+		var param={userid: user.id};
+		restCallService.postJson('/api/user/admin/disconnect', this, param, httpPayload =>{
+			httpPayload.trace("AdminUsers.disconnectUser");
+			this.setState({inprogress: false });
+			if (httpPayload.isError()) {
+				this.setState({ message: "Server connection error"});
+			} else {
+				debugger;
+				this.setState({ "message": httpPayload.getData().message, listEvents: httpPayload.getData().listEvents }); 	
+				// update the attribut now
+				var listusers = this.state.listusers;
+				// search the user
+				for( var user in listusers) {
+					if (listusers[ user ].id ===  httpPayload.getData().user.id)
+						listusers[ user ] = httpPayload.getData().user;
+				}
+				this.setState( { listusers : listusers});			
+			}
+		});
 	}
 }
 

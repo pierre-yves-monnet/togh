@@ -186,8 +186,8 @@ public @Data class ToghUserEntity extends BaseEntity {
      * @return
      */
 	@Override
-	public Map<String,Object> getMap(ContextAccess contextAccess) {
-	    Map<String,Object> resultMap =super.getMap( contextAccess );
+	public Map<String,Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
+	    Map<String,Object> resultMap =super.getMap( contextAccess,timezoneOffset );
 	    
 	    StringBuilder label = new StringBuilder();
         StringBuilder longlabel = new StringBuilder();
@@ -239,7 +239,17 @@ public @Data class ToghUserEntity extends BaseEntity {
         }
         if (contextAccess == ContextAccess.ADMIN) {
             resultMap.put("privilegeuser", privilegeUser.toString());
+            
             resultMap.put("connectiontime", EngineTool.dateToString(connectionTime));
+            
+            LocalDateTime connectionTimeLocal = connectionTime.minusMinutes( timezoneOffset );
+            resultMap.put("connectiontimest", EngineTool.dateToHumanString( connectionTimeLocal));
+            
+            resultMap.put("connectionlastactivity", EngineTool.dateToString(connectionLastActivity));
+            
+            LocalDateTime connectionLastActivityLocal = connectionLastActivity.minusMinutes( timezoneOffset);
+            resultMap.put("connectionlastactivityst", EngineTool.dateToHumanString( connectionLastActivityLocal ));
+            
             resultMap.put("connected", connectionStamp==null ? "OFFLINE" : "ONLINE");
         }
         return resultMap;

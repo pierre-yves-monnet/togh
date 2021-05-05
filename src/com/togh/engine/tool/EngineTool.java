@@ -33,11 +33,21 @@ public class EngineTool {
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         return time.format(sdt);
     }
-
+    /**
+     * Transform the date for Human 
+     * @param time
+     * @return
+     */
+    public static String dateToHumanString(LocalDateTime time) {
+        if (time == null)
+            return null;
+        //  datecreation: "2021-01-30T18:52:10.973"
+        DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm:ss");
+        return time.format(sdt);
+    }
     /**
      * The local date is saved as absolute. But to send it back to the browser (which are in a time zone), a translation is mandatory 
      * @param time
-     * @param timeZoneOffset
      * @return
      */
     public static String dateToString(LocalDate time) {
@@ -53,16 +63,16 @@ public class EngineTool {
      * Transform the date to a complete string using the TimeZone. Browser received form example "2021-04-12T08:00:00Z" in it is in the Pacific time zone (and for him, it's 2021-04-12'). 
      * If it received 2021-04-12T00:00:00Z, it will display March 11, because Midnigh UTC = day before in California 
      * @param time
-     * @param timeZoneOffset
+     * @param timezoneOffset
      * @return
      */
-    public static String dateToTimeString(LocalDate time,long timeZoneOffset) {
+    public static String dateToTimeString(LocalDate time,long timezoneOffset) {
         if (time == null)
             return null;
         // Attention, we have to get the time in UTC first
         //  datecreation: "2021-01-30T18:52:10.973"
         LocalDateTime localDateTime = time.atStartOfDay( ZoneId.of(ZoneOffset.UTC.getId())).toLocalDateTime();
-        localDateTime= localDateTime.minusMinutes( - timeZoneOffset);
+        localDateTime= localDateTime.minusMinutes( - timezoneOffset);
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         return time.format(sdt);
     }
@@ -75,7 +85,7 @@ public class EngineTool {
         return LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));       
     }
 
-    public static LocalDate stringToDate(String dateInString, long timeZoneOffset) {
+    public static LocalDate stringToDate(String dateInString, long timezoneOffset) {
         if (dateInString == null)
             return null;
         if (dateInString.length()==10) {
@@ -84,7 +94,7 @@ public class EngineTool {
         }
         Instant instant = Instant.parse(dateInString);
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
-        localDateTime = localDateTime.minusMinutes( timeZoneOffset);
+        localDateTime = localDateTime.minusMinutes( timezoneOffset);
         return localDateTime.toLocalDate();        
     }
 }

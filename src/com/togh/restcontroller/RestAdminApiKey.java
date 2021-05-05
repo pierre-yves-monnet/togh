@@ -62,6 +62,7 @@ public class RestAdminApiKey {
         Map<String,Object> payload = new HashMap<>();
         loginService.isAdministratorConnected(connectionStamp);
 
+        @SuppressWarnings("unchecked")
         List<Map<String,Object>> listApiKey = RestTool.getList(updateMap, "listkeys", new ArrayList<>() );
         List<LogEvent> listLogEvent = apiKeyService.updateKeys( listApiKey );
         

@@ -8,6 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -49,6 +46,7 @@ public class ToghUserService {
     private static final String TOGHADMINPASSWORD = "togh";
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     private static final String LOG_HEADER = ToghUserService.class.getName() + ":";
+
     private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
 
     @Autowired
@@ -212,6 +210,24 @@ public class ToghUserService {
         return searchResult;
     }
 
+    
+    /**
+     * Search users connected, but with no activity after the limeSearch time
+     * @param limitSearch
+     * @param page
+     * @param numberPerPage
+     * @return
+     */
+    public SearchUsersResult searchConnectedUsersNoActivity( LocalDateTime limitSearch,int page, int numberPerPage) {
+        SearchUsersResult searchResult = new SearchUsersResult();
+        searchResult.page = page;
+        searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
+        searchResult.listUsers = endUserRepository.findConnectedUsersNoActivity(limitSearch,PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = endUserRepository.countConnectedUsersNoActivity(limitSearch);
+        return searchResult;
+    }
+    
+    
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -232,9 +248,6 @@ public class ToghUserService {
     }
 
     public SearchUsersResult findUserByCriterias(CriteriaSearchUser criteriaSearch, int page, int numberPerPage) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        // TypedQuery<ToghUserEntity> query = cb.createQuery(ToghUserEntity.class);
         
         StringBuilder sqlRequest = new StringBuilder();
                 sqlRequest.append( "select toghuser from ToghUserEntity toghuser where 1=1 " );
@@ -337,18 +350,23 @@ public class ToghUserService {
      * @param value
      * @return
      */
-    public List<LogEvent> updateUser(Long userId, String attributName, Object attributValue) {
-        List<LogEvent> listEvents = new ArrayList<>();
+    public class OperationUser{
+        public List<LogEvent> listLogEvents = new ArrayList<>();
+        public ToghUserEntity toghUserEntity= null;
+    }
+
+    public OperationUser updateUser(Long userId, String attributName, Object attributValue) {
+        OperationUser operationUser = new OperationUser();
 
         Optional<ToghUserEntity> toghUser = endUserRepository.findById(userId);
         if (!toghUser.isPresent()) {
-            listEvents.add(new LogEvent(eventUnknowId, "Id[" + userId + "]"));
-            return listEvents;
+            operationUser.listLogEvents.add(new LogEvent(eventUnknowId, "Id[" + userId + "]"));
+            return operationUser;
         }
-
+        operationUser.toghUserEntity = toghUser.get();
         UpdateContext updateContext = new UpdateContext();
         updateContext.toghUser = null;
-        updateContext.timeZoneOffset = 0;
+        updateContext.timezoneOffset = 0;
         updateContext.eventService = null;
 
         EventOperationResult eventOperationResult = new EventOperationResult();
@@ -358,10 +376,11 @@ public class ToghUserService {
                 attributValue,
                 updateContext,
                 eventOperationResult);
-        listEvents.addAll(eventOperationResult.listLogEvents);
+        operationUser.listLogEvents.addAll(eventOperationResult.listLogEvents);
 
-        factoryService.getToghUserService().saveUser(toghUser.get());
-        return listEvents;
+        factoryService.getToghUserService().saveUser(operationUser.toghUserEntity );
+        return operationUser;
     }
 
+   
 }

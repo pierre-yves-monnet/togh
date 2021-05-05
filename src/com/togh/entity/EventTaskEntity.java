@@ -20,9 +20,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
@@ -74,8 +71,8 @@ public @Data class EventTaskEntity extends UserEntity {
      * @return
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess) {
-        Map<String,Object> resultMap = super.getMap( contextAccess );
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
         
 
         resultMap.put("status",status==null ? null : status.toString());

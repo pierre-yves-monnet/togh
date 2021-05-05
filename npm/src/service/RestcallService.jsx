@@ -51,18 +51,23 @@ class RestcallService {
 	    };
 		uri = uri+"&timezoneoffset="+(new Date()).getTimezoneOffset();
 		console.log("RestCallService.getJson: uri="+uri);
-
-		console.log("RestCallServer call ["+uri+"]");
 		var fct=fctToCallback;
     	axios.get( this.getUrl( uri ), requestOptions)
         	.then( axiosPayload => { 
+
+					
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
 				var httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
-			.catch(err => {
-				console.error("RestCallService.getJson: catch error:"+err);	
-				var httpResponse =  new HttpResponse( {}, err);
+			.catch(error => {
+				if (error.response.status==401) {
+					console.log("Redirect");
+					window.location.href = window.location.href;
+					return;
+				}
+				console.error("RestCallService.getJson: catch error:"+error);	
+				var httpResponse =  new HttpResponse( {}, error);
 				fctToCallback.call(objToCall, httpResponse); 
 
 				});
@@ -83,9 +88,14 @@ class RestcallService {
 				var httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
-			.catch(err => {
-				console.error("RestCallService.getJson: catch error:"+err);	
-				var httpResponse =  new HttpResponse( {}, err)
+			.catch(error => {
+				console.error("RestCallService.getJson: catch error:"+error);	
+				if (error.response.status==401) {
+					console.log("Redirect");
+					window.location.href = window.location.href;
+					return;
+				}
+				var httpResponse =  new HttpResponse( {}, error)
 				fctToCallback.call(objToCall, httpResponse); 
 
 				});

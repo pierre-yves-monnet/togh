@@ -8,6 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -172,7 +173,20 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
     )
     Long countSentenceUsers(@Param("sentence") String searchUserSentence );
 
-    
-   
+    @Query(value="select toghuser from ToghUserEntity toghuser "
+            + "where "
+            + " toghuser.connectionStamp is not null"
+            + " and toghuser.connectionLastActivity < :connectionLastActivity"
+    )
+
+    List<ToghUserEntity> findConnectedUsersNoActivity(@Param("connectionLastActivity") LocalDateTime connectionLastActivity, 
+            Pageable pageable);
+
+    @Query(value= "select count( toghuser ) from ToghUserEntity toghuser "
+            + "where "
+            + " toghuser.connectionStamp is not null"
+            + " and toghuser.connectionLastActivity < :connectionLastActivity")    
+    Long countConnectedUsersNoActivity(@Param("connectionLastActivity") LocalDateTime connectionLastActivity );
+
     
 }
