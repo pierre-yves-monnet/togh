@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon } from 'carbon-components-react';
+import { TextInput,Select, TooltipIcon, Tag } from 'carbon-components-react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import { Loading } from 'carbon-components-react';
@@ -40,7 +40,7 @@ class AdminUsers extends React.Component {
 					block:false, 
 					administrator:false,
 					premium:false,
-					illimited:false
+					excellence:false
 			} 
 		};
 		
@@ -122,11 +122,11 @@ class AdminUsers extends React.Component {
 									<BookmarkStar style={{color:"#ff6666", fill:"#ff6666"}}/>&nbsp;<FormattedMessage id="AdminUsers.Premium" defaultMessage="Premium"/>
 								</label>
 								
-								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterIllimited" autocomplete="off" 
-									checked={this.state.filterusers.illimited}
-									onChange={() => this.managerfilter('illimited') }/> 
-							  	<label class="btn btn-outline-primary" for="filterIllimited">
-									<BookmarkStar style={{color:"a17f1a",  fill:"a17f1a"}}/>&nbsp;<FormattedMessage id="AdminUsers.Illimited" defaultMessage="Illimited"/>
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterExcellence" autocomplete="off" 
+									checked={this.state.filterusers.excellence}
+									onChange={() => this.managerfilter('excellence') }/> 
+							  	<label class="btn btn-outline-primary" for="filterExcellence">
+									<BookmarkStar style={{color:"a17f1a",  fill:"a17f1a"}}/>&nbsp;<FormattedMessage id="AdminUsers.Excellence" defaultMessage="Excellence"/>
 								</label>
 								
 							</div>
@@ -209,9 +209,9 @@ class AdminUsers extends React.Component {
 												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionPremium", defaultMessage: "Premium subscription"})}>
 												<BookmarkStar style={{color:"#ff6666", fill:"#ff6666"}}/>
 											</TooltipIcon>}
-										{item.subscription === 'ILLIMITED' && 
+										{item.subscription === 'EXCELLENCE' && 
 											<TooltipIcon
-												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionIllimited", defaultMessage: "Illimited subscription"})}>
+												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionExcellence", defaultMessage: "Excellence subscription"})}>
 												<BookmarkStar style={{color:"#a17f1a",  fill:"#a17f1a"}}/>
 											</TooltipIcon>}
 
@@ -231,8 +231,9 @@ class AdminUsers extends React.Component {
  
 									</td>
 									<td> 
-										{this.canBeDisconnected( item ) && <button class="btn btn-info btn-sm"
+										{this.canBeDisconnected( item ) =='YES' && <button class="btn btn-info btn-sm"
 							 				onClick={(event) => this.disconnectUser( item)}><FormattedMessage id="AdminUsers.Disconnect" defaultMessage="Disconnect"/></button>}
+										{this.canBeDisconnected( item ) =='MYSELF' && <Tag type="teal"><FormattedMessage id="AdminUsers.Myself" defaultMessage="Myself"/></Tag>}
 									 </td>
 									<td> {item.name} </td>
 									<td> {item.firstname}&nbsp;{item.lastname}	</td>
@@ -279,8 +280,8 @@ class AdminUsers extends React.Component {
 														{(message) => <option value="PREMIUM">{message}</option>}
 													</FormattedMessage>
 						
-													<FormattedMessage id="AdminUsers.SubscriptionUserPremium" defaultMessage="Illimited">
-														{(message) => <option value="ILLIMITED">{message}</option>}
+													<FormattedMessage id="AdminUsers.SubscriptionUserExcellence" defaultMessage="Excellence">
+														{(message) => <option value="EXCELLENCE">{message}</option>}
 													</FormattedMessage>
 												</Select></td><td>
 												<Select labelText={<FormattedMessage id="AdminUsers.PrivilegeUser" defaultMessage="Privilege" />}
@@ -327,7 +328,7 @@ class AdminUsers extends React.Component {
 	managerfilter( attribut) {
 		var filter = this.state.filterusers;
 		if (attribut === 'all') {
-			filter={all:true, connected:false, block:false, administrator:false,premium:false,illimited:false};
+			filter={all:true, connected:false, block:false, administrator:false,premium:false, excellence:false};
 		} else {
 			// change the attribut 
 			filter[ attribut ] = ! filter[ attribut ];
@@ -400,15 +401,20 @@ class AdminUsers extends React.Component {
 	
 	}
 	
+	
+	/**
+	Is this user can be disconnected ? Yes, if it is connected and not me !
+	return MYSELF, YES, NO
+	 */
 	canBeDisconnected( user ) {
 		if (user.connected === 'ONLINE') {
 			var authService = FactoryService.getInstance().getAuthService();
 
 			if (authService.getUser().id == user.id)
-				return false; // myself
-			return true;
+				return "MYSELF"; // myself
+			return "YES";
 		}
-		return false;
+		return "NO";
 	}
 	
 	

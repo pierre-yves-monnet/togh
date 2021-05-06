@@ -130,7 +130,7 @@ public class ApiKeyService {
         PrivilegeKeyEnum priviledge= PrivilegeKeyEnum.FREE;
         // SubscriptionUserEnum { FREE, PREMIUM, ILLIMITED }
         if ((toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM) 
-            || (toghUser.getSubscriptionUser() == SubscriptionUserEnum.ILLIMITED))
+            || (toghUser.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE))
             priviledge = PrivilegeKeyEnum.PREMIUM;
         
         for (String codeApi : listKeysBrowser) {

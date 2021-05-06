@@ -16,6 +16,7 @@ import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
+import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.EventItineraryStepEntity;
@@ -130,14 +131,25 @@ public class EventService {
      * @param user
      * @return
      */
-    public EventOperationResult createEvent(ToghUserEntity toghUser, String eventName) {
+    public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
 
         EventEntity event = new EventEntity();
-        event.setAuthor(toghUser);
+        event.setAuthor(toghUserEntity);
         event.setName(eventName);
         event.setStatusEvent(StatusEventEnum.INPREPAR);
         event.setTypeEvent(TypeEventEnum.LIMITED);
         event.setDatePolicy(DatePolicyEnum.ONEDATE);
+        switch (toghUserEntity.getSubscriptionUser()) {
+            case PREMIUM:
+                event.setSubscriptionEvent( SubscriptionEventEnum.PREMIUM);
+                break;
+            case EXCELLENCE:
+                event.setSubscriptionEvent( SubscriptionEventEnum.EXCELLENCE);
+                break;
+             default:
+                 event.setSubscriptionEvent( SubscriptionEventEnum.FREE);
+        }
+        
 
         EventController eventController = new EventController( event, factoryService);
         // let's the conductor create the participant and all needed information

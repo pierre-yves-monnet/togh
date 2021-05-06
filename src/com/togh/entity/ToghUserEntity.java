@@ -14,6 +14,7 @@ import com.togh.engine.tool.EngineTool;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -24,6 +25,7 @@ import lombok.Data;
 
 @Entity
 @Table(name = "TOGHUSER")
+@EqualsAndHashCode(callSuper=false)
 public @Data class ToghUserEntity extends BaseEntity {
 
     @Column(name = "googleid", length = 100)
@@ -141,7 +143,7 @@ public @Data class ToghUserEntity extends BaseEntity {
     PrivilegeUserEnum privilegeUser;
     
  
-   public enum SubscriptionUserEnum { FREE, PREMIUM, ILLIMITED }
+   public enum SubscriptionUserEnum { FREE, PREMIUM, EXCELLENCE }
     
     @Column( name="subscriptionuser", length=10, nullable=false)
     @Enumerated(EnumType.STRING)     

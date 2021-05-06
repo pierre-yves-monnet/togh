@@ -482,24 +482,21 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 		
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
-Py	Sauvegarde Chat
-	Verifier invitation
-	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
-	Limiter le nombre d'elements par event, le nombre d'event / mois
-	user "premium", "excellence" => event"premium" / "excellence"
-	
-	Administration user / Graph sur le nombre d'acces
-	My profile
-	Lost my password
-	Close event automatically
-	Remember me : savuer localement mon login
-	Refresh sur plusieurs poste : Walter modifie une valeur, elle doit etre repercutée ailleurs
-	Not connected=>Redirect to home page
-	
+Py	
+1. Sauvegarde Chat
+2.	Verifier invitation
+3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
+4.	Limiter le nombre d'elements par event, le nombre d'event / mois
+6.	Graph sur le nombre d'acces
+7.	My profile
+8.	Lost my password
+9.	Close event automatically
+10.	Refresh sur plusieurs poste : Walter modifie une valeur, elle doit etre repercutée ailleurs
 	
 	
 		
 V2		
+	Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer
 	Expense
 	Preference affichage
 	Budget

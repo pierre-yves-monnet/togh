@@ -55,8 +55,8 @@ class EventState extends React.Component {
 			
 		return (<TagDropdown listOptions={listOptions} value={this.state.statusEvent} 
 					readWrite={this.state.modifyEvent} 
-				changeState={(value) => {
-					this.props.changeState( value );
+					changeState={(value) => {
+						this.props.changeState( value );
 					}} />);
 			
 			

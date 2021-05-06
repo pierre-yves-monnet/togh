@@ -3,13 +3,10 @@ package com.togh.restcontroller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.service.FactoryService;
@@ -108,7 +103,7 @@ public class RestUserController {
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_BLOCK, required = false) boolean filterBlock, 
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_ADMINSTRATOR, required = false) boolean filterAdministrator,
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_PREMIUM, required = false) boolean filterPremium,
-            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_ILLIMITED, required = false) boolean filterIllimited,
+            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_EXCELLENCE, required = false) boolean filterExcellence,
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
@@ -125,7 +120,7 @@ public class RestUserController {
         criteriaSearch.block = filterBlock;
         criteriaSearch.administrator = filterAdministrator;
         criteriaSearch.premium = filterPremium;
-        criteriaSearch.illimited = filterIllimited;
+        criteriaSearch.excellence = filterExcellence;
         
         Map<String, Object> payload = new HashMap<>();
         

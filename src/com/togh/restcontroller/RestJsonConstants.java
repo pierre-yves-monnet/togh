@@ -54,7 +54,7 @@ public class RestJsonConstants {
     static final String CST_PARAM_SEARCHUSER_BLOCK = "block";
     static final String CST_PARAM_SEARCHUSER_ADMINSTRATOR = "administrator";
     static final String CST_PARAM_SEARCHUSER_PREMIUM = "premium";
-    static final String CST_PARAM_SEARCHUSER_ILLIMITED = "illimited";
+    static final String CST_PARAM_SEARCHUSER_EXCELLENCE = "excellence";
     static final String CST_PARAM_SEARCHUSER_TIMEZONEOFFSET = "timezoneoffset";
     
     

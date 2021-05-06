@@ -108,7 +108,7 @@
   "Event.OneDate" : "Rendez-vous",
 
   "__Event.Participants" : "Participants",
-  "Event.Participants" : "Les participants",
+  "Event.Participants" : "Participants",
 
   "__Event.Period" : "Period",
   "Event.Period" : "Période",
@@ -339,7 +339,7 @@
   "EventList.Name" : "Nom",
 
   "__EventList.Participants" : "Participants",
-  "EventList.Participants" : "Les participants",
+  "EventList.Participants" : "Participants",
 
   "__EventList.Refresh" : "Refresh",
   "EventList.Refresh" : "Rafraîchir",
@@ -357,7 +357,7 @@
   "EventParticipant.Left" : "La gauche",
 
   "__EventParticipant.MainTitleParticipant" : "Participants",
-  "EventParticipant.MainTitleParticipant" : "Les participants",
+  "EventParticipant.MainTitleParticipant" : "Participants",
 
   "__EventParticipant.Owner" : "Owner",
   "EventParticipant.Owner" : "Propriétaire",
@@ -395,8 +395,8 @@
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "Configurer toutes les préférences pour l'événement",
 
-  "__EventPreferences.MainTitlePreferences" : "Preference",
-  "EventPreferences.MainTitlePreferences" : "Préférence",
+  "__EventPreferences.MainTitlePreferences" : "Preferences",
+  "EventPreferences.MainTitlePreferences" : "Préférences",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Ajouter un élément dans la liste",

@@ -29,7 +29,6 @@ import EventState from './EventState';
 import EventExpense from './EventExpense';
 import EventSurveyList from './EventSurveyList';
 import EventChat from './EventChat';
-
 import EventPreferences from './EventPreferences';
 
 import EventCtrl from './controller/EventCtrl';
@@ -83,11 +82,6 @@ class Event extends React.Component {
 		this.setAttribut 				= this.setAttribut.bind(this);
 		this.updateEventfct 			= this.updateEventfct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
-		
-
-
-		// Event preferences
-		this.eventPreferences           = new EventPreferences(this.state.event)
 
 
 	}
@@ -389,8 +383,7 @@ class Event extends React.Component {
 				</div>
 				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} 
 																			updateEvent={this.updateEventfct}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+																			getUserParticipant={this.getUserParticipant}/>}
 				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary eventCtrl={this.eventCtrl} />}
 				
 				{this.state.show.currentSection === TAB_CHAT && <EventChat eventCtrl={this.eventCtrl} />}
@@ -404,8 +397,7 @@ class Event extends React.Component {
 				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
 																			updateEvent={this.updateEventfct}
-																			getUserParticipant={this.getUserParticipant}
-																			eventPreferences={this.eventPreferences}/>}
+																			getUserParticipant={this.getUserParticipant}/>}
 				{this.state.show.currentSection === TAB_PREFERENCES  && <EventPreferences eventCtrl={this.eventCtrl} />}
 		</div>)
 

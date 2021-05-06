@@ -51,6 +51,25 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventEntity extends UserEntity {
     
+    private static final String CST_JSONOUT_STATUS_EVENT = "statusEvent";
+
+    private static final String CST_JSONOUT_TYPE_EVENT = "typeEvent";
+
+    private static final String CST_JSONOUT_DATE_POLICY = "datePolicy";
+
+    private static final String CST_JSONOUT_DATE_END_EVENT = "dateEndEvent";
+
+    private static final String CST_JSONOUT_DATE_START_EVENT = "dateStartEvent";
+
+    private static final String CST_JSONOUT_NAME = "name";
+
+    private static final String CST_JSONOUT_SUBSCRIPTION_EVENT = "subscriptionEvent";
+
+    /**
+     * All verbe used to produce the JSON Output information
+     */
+    private static final String CST_JSONOUT_DATE_EVENT = "dateEvent";
+    
     public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
     public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
     public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
@@ -124,6 +143,15 @@ public @Data class EventEntity extends UserEntity {
     @Column(name = "geoinstructions", length = 400)
     private String geoinstructions;
 
+    
+   public enum SubscriptionEventEnum { FREE, PREMIUM, EXCELLENCE }
+    
+    @Column( name="subscriptionevent", length=10, nullable=false)
+    @Enumerated(EnumType.STRING)     
+    @org.hibernate.annotations.ColumnDefault("'FREE'")
+    SubscriptionEventEnum subscriptionEvent;
+
+    
     public EventEntity(ToghUserEntity author, String name) {
         super(author, name);
         setTypeEvent(TypeEventEnum.LIMITED);
@@ -346,24 +374,25 @@ public @Data class EventEntity extends UserEntity {
     public Map<String, Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
 
-        resultMap.put("dateEvent", EngineTool.dateToString(dateEvent));
-        resultMap.put("dateStartEvent", EngineTool.dateToString(dateStartEvent));
-        resultMap.put("dateEndEvent", EngineTool.dateToString(dateEndEvent));
-        resultMap.put("typeEvent", typeEvent == null ? null : typeEvent.toString());
-        resultMap.put("statusEvent", statusEvent == null ? null : statusEvent.toString());
-        resultMap.put("description", description);
+        resultMap.put( CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
+        resultMap.put( CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
+        resultMap.put( CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
+        resultMap.put( CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
+        resultMap.put( CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
+        resultMap.put( "description", description);
+        resultMap.put( CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
         
-        resultMap.put("tasklistshowdates",          taskListShowDates);
+        resultMap.put( "tasklistshowdates",          taskListShowDates);
         
-        resultMap.put("itineraryshowmap",           itineraryShowMap);
-        resultMap.put("itineraryshowdetails",       itineraryShowDetails);
-        resultMap.put("itineraryshowexpenses",      itineraryShowExpenses);
+        resultMap.put( "itineraryshowmap",           itineraryShowMap);
+        resultMap.put( "itineraryshowdetails",       itineraryShowDetails);
+        resultMap.put( "itineraryshowexpenses",      itineraryShowExpenses);
 
-        resultMap.put("shoppinglistshowdetails",    shoppingListShowDetails);
-        resultMap.put("shoppinglistshowexpenses",   shoppinglistShowExpenses);
+        resultMap.put( "shoppinglistshowdetails",    shoppingListShowDetails);
+        resultMap.put( "shoppinglistshowexpenses",   shoppinglistShowExpenses);
 
         if (contextAccess != ContextAccess.PUBLICACCESS) {
-            resultMap.put("datePolicy", datePolicy == null ? null : datePolicy.toString());
+            resultMap.put(CST_JSONOUT_DATE_POLICY, datePolicy == null ? null : datePolicy.toString());
         }
         if (typeEvent == TypeEventEnum.OPEN || contextAccess != ContextAccess.PUBLICACCESS) {
             List<Map<String, Object>> listParticipantsMap = new ArrayList<>();
@@ -409,13 +438,14 @@ public @Data class EventEntity extends UserEntity {
     
     public Map<String, Object> getHeaderMap(ContextAccess contextAccess, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
-        resultMap.put("name", getName());
-        resultMap.put("dateEvent", EngineTool.dateToString(dateEvent));
-        resultMap.put("dateStartEvent", EngineTool.dateToString(dateStartEvent));
-        resultMap.put("dateEndEvent", EngineTool.dateToString(dateEndEvent));
-        resultMap.put("datePolicy", datePolicy.toString());
-        resultMap.put("typeEvent", typeEvent == null ? null : typeEvent.toString());
-        resultMap.put("statusEvent", statusEvent == null ? null : statusEvent.toString());
+        resultMap.put( CST_JSONOUT_NAME, getName());
+        resultMap.put( CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
+        resultMap.put( CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
+        resultMap.put( CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
+        resultMap.put( CST_JSONOUT_DATE_POLICY, datePolicy.toString());
+        resultMap.put( CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
+        resultMap.put( CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
+        resultMap.put( CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
 
 
         

@@ -243,7 +243,7 @@ public class ToghUserService {
         public boolean block = false;
         public boolean administrator = false;
         public boolean premium = false;
-        public boolean illimited = false;
+        public boolean excellence = false;
 
     }
 
@@ -272,8 +272,8 @@ public class ToghUserService {
         if (criteriaSearch.premium) {
             sqlRequest.append(" and toghuser.subscriptionUser = "+registerParameter( listParameters, SubscriptionUserEnum.PREMIUM));
         }
-        if (criteriaSearch.illimited) {
-            sqlRequest.append(" and toghuser.subscriptionUser = "+registerParameter( listParameters, SubscriptionUserEnum.ILLIMITED));
+        if (criteriaSearch.excellence) {
+            sqlRequest.append(" and toghuser.subscriptionUser = "+registerParameter( listParameters, SubscriptionUserEnum.EXCELLENCE));
         }
         sqlRequest.append(" order by toghuser.firstName asc");
         TypedQuery<ToghUserEntity> query = entityManager.createQuery(sqlRequest.toString(), ToghUserEntity.class);
@@ -318,7 +318,7 @@ public class ToghUserService {
             return 15;
         if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
             return 100;
-        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.ILLIMITED)
+        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE)
             return 1000;
         // not a FREE user, so this is a very limited one
         return 2;
