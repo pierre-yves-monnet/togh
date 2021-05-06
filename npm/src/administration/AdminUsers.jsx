@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon, Tag } from 'carbon-components-react';
+import { TextInput,Select, TooltipIcon, Tag,Toggle,ToggleSmall } from 'carbon-components-react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import { Loading } from 'carbon-components-react';
@@ -41,7 +41,9 @@ class AdminUsers extends React.Component {
 					administrator:false,
 					premium:false,
 					excellence:false
-			} 
+			},
+			show : { details: false}
+			 
 		};
 		
 		this.searchUsers 			= this.searchUsers.bind( this );	
@@ -134,13 +136,26 @@ class AdminUsers extends React.Component {
 						</div>
 					</div>				
 					<div class="row">
-						<div class="col-6"> 
+						<div class="col-4"> 
 							<button class="btn btn-info btn-sm"
 							 onClick={this.searchUsers} style={{marginTop: "5px"}}>
 								<FormattedMessage id="AdminUsers.Search" defaultMessage="Search"/>
 							</button>
 							<div style={{color: "red"}}>{this.state.message}</div>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<ToggleSmall class="sm" labelText="" aria-label="" 
+							toggled={this.state.show.details}
+							selectorPrimaryFocus={this.state.show.details}
+							labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+							labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+							onChange={(event) => {
+								this.setState( { show: { details : event.target.checked}} );
+								}}
+							id="showDetails" />
+						</div> 
 					</div>
 					
 					
@@ -242,9 +257,9 @@ class AdminUsers extends React.Component {
 									<td> <div style={{fontSize:"12px", whiteSpace: "nowrap"}}> {item.connectiontimest}</div> </td>
 									<td> <div style={{fontSize:"12px", whiteSpace: "nowrap"}}> {item.connectionlastactivityst} </div></td>
 								</tr>
-								<tr>
+								{this.state.show.details && <tr>
 									<td colspan="2"></td>
-									 <td colspan="3">
+									<td colspan="3">
 								
 										<table>
 											<tr>
@@ -304,7 +319,8 @@ class AdminUsers extends React.Component {
 											
 											</td></tr></table>
 									 </td>
-								</tr>
+								</tr> }
+								
 								</tbody>
 							)
 							})
