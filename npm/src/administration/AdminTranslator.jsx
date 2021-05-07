@@ -12,9 +12,9 @@ import { Loading } from 'carbon-components-react';
 
 import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
-import FactoryService from '../service/FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
-import LogEvents from '../component/LogEvents';
+import LogEvents 			from 'component/LogEvents';
 
 
 

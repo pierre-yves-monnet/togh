@@ -11,7 +11,7 @@ import { TextInput } from 'carbon-components-react';
 import { IntlProvider, FormattedMessage } from "react-intl";
 
 
-import FactoryService from './service/FactoryService';
+import FactoryService 	from 'service/FactoryService';
 
 
 class RegisterNewUser extends React.Component {

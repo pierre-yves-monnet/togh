@@ -9,8 +9,8 @@
 import React, {useState} from 'react';
 import {IntlProvider} from 'react-intl';
 
-import French from './lang/fr.json';
-import English from './lang/en.json';
+import French 		from 'lang/fr.json';
+import English 		from 'lang/en.json';
 
 
 const Context = React.createContext();

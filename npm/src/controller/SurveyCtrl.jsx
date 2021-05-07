@@ -6,9 +6,9 @@
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-import FactoryService from './../service/FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
-import SlabRecord from './../service/SlabRecord';
+import SlabRecord 			from 'service/SlabRecord';
 
 export const STATUS_INPREPAR = 'INPREPAR';
 export const STATUS_OPEN = 'OPEN';

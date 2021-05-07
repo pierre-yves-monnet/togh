@@ -13,7 +13,7 @@
 //
 // User modifidy one item, then send to to the server.
 // -----------------------------------------------------------
-import FactoryService from './FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
 class BasketSlabRecord {
 	

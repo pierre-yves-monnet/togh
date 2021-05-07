@@ -13,7 +13,7 @@ import React from 'react';
 
 import {  PlusCircle } from 'react-bootstrap-icons';
 
-import UserTips from './UserTips';
+import UserTips 		from 'component/UserTips';
 
 // -----------------------------------------------------------
 //

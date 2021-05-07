@@ -11,10 +11,8 @@
 
 import axios from 'axios';
 
-// import FactoryService from './FactoryService';
-// import RestcallService from './RestcallService';
 
-import HttpResponse  from './HttpResponse';
+import HttpResponse  		from 'service/HttpResponse';
 
 
 

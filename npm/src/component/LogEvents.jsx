@@ -16,7 +16,8 @@ import { Tooltip } from 'carbon-components-react';
 
 import {  PatchQuestion  } from 'react-bootstrap-icons';
 
-import UserTips from './UserTips';
+import UserTips 			from 'component/UserTips';
+
 
 // -----------------------------------------------------------
 //

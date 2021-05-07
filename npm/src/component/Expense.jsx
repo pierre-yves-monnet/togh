@@ -16,11 +16,11 @@ import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem,
 import CurrencyInput from 'react-currency-input';
  
 
-import SlabRecord from './../service/SlabRecord';
-import FactoryService from './../service/FactoryService'
+import SlabRecord from 'service/SlabRecord';
+import FactoryService from 'service/FactoryService'
 
 
-import * as expenseConstant from './../EventExpense';
+import * as expenseConstant from 'event/EventExpense';
 
 
 // -----------------------------------------------------------

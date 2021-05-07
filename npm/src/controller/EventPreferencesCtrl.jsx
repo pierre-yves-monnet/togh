@@ -6,9 +6,10 @@
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-import FactoryService from './../service/FactoryService';
-// CurrencyService from './../service/CurrencyService';
-import SlabRecord from './../service/SlabRecord';
+
+import FactoryService 		from 'service/FactoryService';
+// CurrencyService 			from 'service/CurrencyService';
+import SlabRecord 			from 'service/SlabRecord';
 
 const CURRENCY_ATTRIBUT_NAME= "currency";
 

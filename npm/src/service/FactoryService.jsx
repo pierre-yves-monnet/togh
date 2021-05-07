@@ -6,13 +6,13 @@
 //
 // -----------------------------------------------------------
 
-import AuthService from './AuthService';
-import RestcallService from './RestcallService';
-import ToolService from './ToolService';
-import UserService from './UserService';
-import CurrencyService from './CurrencyService';
-import ApiKeyService from './ApiKeyService';
-import GoogleMapService from './GoogleMapService';
+import AuthService 					from 'service/AuthService';
+import RestcallService 				from 'service/RestcallService';
+import ToolService 					from 'service/ToolService';
+import UserService 					from 'service/UserService';
+import CurrencyService 				from 'service/CurrencyService';
+import ApiKeyService 				from 'service/ApiKeyService';
+import GoogleMapService 			from 'service/GoogleMapService';
 
 
 var instanceFactory;

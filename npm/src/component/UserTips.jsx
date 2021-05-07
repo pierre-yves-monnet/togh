@@ -13,7 +13,7 @@ import { FormattedMessage } from "react-intl";
 import {  InfoCircle } from 'react-bootstrap-icons';
 
 
-import FactoryService from './../service/FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
 
 class UserTips extends React.Component {

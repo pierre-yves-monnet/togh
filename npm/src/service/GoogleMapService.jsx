@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 import Geocode from "react-geocode";
 
-import FactoryService from './FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
 class GoogleMapService {
 	constructor(factoryService ) {

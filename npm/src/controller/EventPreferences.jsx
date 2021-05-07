@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 //
 
-import FactoryService from './../service/FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
 
 class EventPreferences {

@@ -13,11 +13,11 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { PlusCircle,ArrowRepeat,ClipboardData,PersonCircle } from 'react-bootstrap-icons';
 
 
-import FactoryService from './service/FactoryService';
+import FactoryService from 'service/FactoryService';
 
-import EventState from './EventState';
-import * as userFeedbackConstant from './component/UserFeedback';
-import UserFeedback  from './component/UserFeedback';
+import EventState from 'event/EventState';
+import * as userFeedbackConstant from 'component/UserFeedback';
+import UserFeedback  from 'component/UserFeedback';
 
 class EventsList extends React.Component {
 

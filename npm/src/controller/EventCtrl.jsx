@@ -7,19 +7,19 @@
 /*                                                                                  */
 /* ******************************************************************************** */
 
-import SurveyCtrl from './SurveyCtrl';
-import UserParticipantCtrl from './UserParticipantCtrl';
 
-import FactoryService from './../service/FactoryService'
-import SlabRecord from './../service/SlabRecord';
-import BasketSlabRecord from './../service/BasketSlabRecord';
-import HttpResponseMockup from './../service/HttpResponseMockup';
+import UserParticipantCtrl 			from 'controller/UserParticipantCtrl';
+import * as surveyConstant 			from 'controller/SurveyCtrl';
+import EventPreferencesCtrl 		from 'controller/EventPreferencesCtrl';
+import SurveyCtrl 					from 'controller/SurveyCtrl';
+
+import FactoryService 				from 'service/FactoryService'
+import SlabRecord 					from 'service/SlabRecord';
+import BasketSlabRecord 			from 'service/BasketSlabRecord';
+import HttpResponseMockup 			from 'service/HttpResponseMockup';
 
 
-import EventPreferencesCtrl from './EventPreferencesCtrl';
-
-import * as participantConstant from './../EventParticipants';
-import * as surveyConstant from './../controller/SurveyCtrl';
+import * as participantConstant 	from 'event/EventParticipants';
 
 // -----------------------------------------------------------
 //

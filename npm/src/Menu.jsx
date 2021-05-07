@@ -11,8 +11,8 @@ import { FormattedMessage } from "react-intl";
 
 import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
 
-import Login from './Login';
-import FactoryService from './service/FactoryService';
+import Login 				from 'Login';
+import FactoryService 		from 'service/FactoryService';
 
 
 export const MENU_NAME = {

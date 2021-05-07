@@ -16,7 +16,7 @@ import { Tag } from 'carbon-components-react';
 import { OverflowMenu } from 'carbon-components-react';
 import { OverflowMenuItem } from 'carbon-components-react';
 
-import TagDropdown from './component/TagDropdown';
+import TagDropdown from 'component/TagDropdown';
 
 
 class EventState extends React.Component {

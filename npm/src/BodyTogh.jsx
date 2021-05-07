@@ -10,15 +10,15 @@ import React from 'react';
 
 import { IntlProvider, FormattedMessage } from "react-intl";
 
-import Login from './Login';
-import Banner from './Banner';
-import Footer from './Footer';
-import Menu from './Menu';
-import{ MENU_NAME} from './Menu';
-import RegisterNewUser from './RegisterNewUser';
-import EventsList from './EventsList';
-import Event from './Event';
-import AdminHome from './administration/AdminHome';
+import Login 			from 'Login';
+import Banner 			from 'Banner';
+import Footer 			from 'Footer';
+import Menu 			from 'Menu';
+import{ MENU_NAME} 		from 'Menu';
+import RegisterNewUser 	from 'RegisterNewUser';
+import EventsList 		from 'EventsList';
+import Event 			from 'event/Event';
+import AdminHome 		from 'administration/AdminHome';
 
 
 import FactoryService from './service/FactoryService';

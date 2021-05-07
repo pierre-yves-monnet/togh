@@ -16,7 +16,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { ModalWrapper, RadioButtonGroup, RadioButton, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
 
 
-import FactoryService from './service/FactoryService';
+import FactoryService from 'service/FactoryService';
 
 class Invitation extends React.Component {
 	constructor( props ) {

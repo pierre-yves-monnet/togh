@@ -18,8 +18,9 @@ import React from 'react';
 
 import { GeoAltFill } from 'react-bootstrap-icons';
 import GoogleMapReact from 'google-map-react';
-import FactoryService from './../service/FactoryService';
-import GoogleMapService from './../service/GoogleMapService';
+
+import FactoryService 		from 'service/FactoryService';
+import GoogleMapService 	from 'service/GoogleMapService';
 
 
 

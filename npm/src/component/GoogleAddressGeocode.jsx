@@ -13,7 +13,7 @@ import Autosuggest from 'react-autosuggest';
 import { TextInput } from 'carbon-components-react';
 
 
-import FactoryService from './../service/FactoryService';
+import FactoryService 		from 'service/FactoryService';
 
 export const CHANGE_ADDRESS= "Address";
 export const CHANGE_LATLNG= "LatLong";

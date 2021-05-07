@@ -10,9 +10,7 @@
 
 import axios from 'axios';
 
-// import FactoryService from './FactoryService';
-// import AuthService from './AuthService';
-import HttpResponse  from './HttpResponse';
+import HttpResponse  		from 'service/HttpResponse';
 
 
 class RestcallService {
@@ -44,30 +42,28 @@ class RestcallService {
 	//      httpPayLoad.status => http status except 400 / 500 which come with error
 	//      httpPayload.err => contains boolean lile err.response 
 	getJson(uri, objToCall, fctToCallback) {
-		var headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
+		let headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
 		
 		const requestOptions = {
 	        headers: headers
 	    };
 		uri = uri+"&timezoneoffset="+(new Date()).getTimezoneOffset();
-		console.log("RestCallService.getJson: uri="+uri);
-		var fct=fctToCallback;
+		console.log("RestCallService.getJson: uri="+uri);		
     	axios.get( this.getUrl( uri ), requestOptions)
         	.then( axiosPayload => { 
-
-					
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
-				var httpResponse = new HttpResponse( axiosPayload, null);
+				let httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
 			.catch(error => {
-				if (error.response.status==401) {
-					console.log("Redirect");
-					window.location.href = window.location.href;
+				if (error.response.status === 401) {
+					let homeTogh=window.location.href;
+					console.log("Redirect : to["+homeTogh+"]");
+					window.location.href = homeTogh;
 					return;
 				}
 				console.error("RestCallService.getJson: catch error:"+error);	
-				var httpResponse =  new HttpResponse( {}, error);
+				let httpResponse =  new HttpResponse( {}, error);
 				fctToCallback.call(objToCall, httpResponse); 
 
 				});
@@ -75,7 +71,7 @@ class RestcallService {
 	
 	// PostJson
 	postJson(uri, objToCall, param, fctToCallback ) {
-		var headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
+		let headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
 		param.timezoneoffset=(new Date()).getTimezoneOffset();
 		console.log("RestCallService.postJson: timezoneoffset="+param.timezoneoffset);
 		
@@ -85,17 +81,18 @@ class RestcallService {
     	axios.post( this.getUrl( uri), param, requestOptions)
         	.then( axiosPayload => { 
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
-				var httpResponse = new HttpResponse( axiosPayload, null);
+				let httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
 			.catch(error => {
 				console.error("RestCallService.getJson: catch error:"+error);	
-				if (error.response.status==401) {
-					console.log("Redirect");
-					window.location.href = window.location.href;
-					return;
+				if (error.response.status === 401) {
+					let homeTogh=window.location.href;
+					console.log("Redirect : to["+homeTogh+"]");
+					window.location.href = homeTogh;
+				return;
 				}
-				var httpResponse =  new HttpResponse( {}, error)
+				let httpResponse =  new HttpResponse( {}, error)
 				fctToCallback.call(objToCall, httpResponse); 
 
 				});

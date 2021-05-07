@@ -12,7 +12,7 @@ import { FormattedMessage } from "react-intl";
 
 import { InlineLoading } from 'carbon-components-react';
 
-import LogEvents from './../component/LogEvents';
+import LogEvents 			from 'component/LogEvents';
 
 export const ERRORHTTP = 'ERRORHTTP';
 export const ERRORCONTRACT = 'ERRORCONTRACT';

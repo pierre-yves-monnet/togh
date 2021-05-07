@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 //
 
-import * as participantConstant from './../EventParticipants';
+import * as participantConstant from 'event/EventParticipants';
 
 
 class UserParticipantCtrl {

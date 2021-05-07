@@ -486,14 +486,11 @@ Py
 1. Sauvegarde Chat
 2.	Verifier invitation
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
-4.	Limiter le nombre d'elements par event, le nombre d'event / mois
-"You reach the limit of events allowed in the last period. Go to your profile to see your subscription"
-"You reach the limit of tasks allowed in the event. Go to your profile to see your subscription"
 
 7.	My profile
 8.	Lost my password
 9.	Close event automatically
-10.	Refresh sur plusieurs poste : Walter modifie une valeur, elle doit etre repercutée ailleurs
+10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 	
 	
 		

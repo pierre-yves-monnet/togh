@@ -12,11 +12,12 @@ import { FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
 
-import AdminUsers from './AdminUsers';
-import AdminTranslator from './AdminTranslator';
-import AdminGoogle from './AdminGoogle';
-import AdminAPIKey from './AdminAPIKey';
-import FactoryService from '../service/FactoryService';
+import AdminUsers 				from 'administration/AdminUsers';
+import AdminTranslator 			from 'administration/AdminTranslator';
+import AdminGoogle 				from 'administration/AdminGoogle';
+import AdminAPIKey 				from 'administration/AdminAPIKey';
+
+import FactoryService 			from 'service/FactoryService';
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';
 

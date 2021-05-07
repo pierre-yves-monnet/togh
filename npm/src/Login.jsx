@@ -15,7 +15,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 
-import FactoryService from './service/FactoryService';
+import FactoryService from 'service/FactoryService';
 
 const LOCALSTORAGE_REMEMBERME = "loginRememberMe";
 const LOCALSTORAGE_EMAIL = "loginEmail";
