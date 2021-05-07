@@ -19,6 +19,7 @@ import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 /* ******************************************************************************** */
 /*                                                                                  */
 /*  EventExpenseEntity,                                                             */
@@ -32,6 +33,7 @@ import lombok.Data;
 @Entity
 
 @Table(name = "EVTEXPENSE")
+@EqualsAndHashCode(callSuper=false)
 public @Data class EventExpenseEntity  extends UserEntity {
 
     @Column(name = "budget")
