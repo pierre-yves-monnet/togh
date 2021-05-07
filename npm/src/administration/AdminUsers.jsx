@@ -193,7 +193,7 @@ class AdminUsers extends React.Component {
 										
 										{item.statusUser === 'ACTIF' && 
 											<TooltipIcon
-												tooltipText={intl.formatMessage({id: "AdminUsers.StatusUserDisabledActif", defaultMessage: "User actif"})}>
+												tooltipText={intl.formatMessage({id: "AdminUsers.LongStatusUserActif", defaultMessage: "User actif"})}>
 												<PersonBadge style={{color:"green", fill:"green"}} />
 											</TooltipIcon>}
 											
@@ -202,12 +202,12 @@ class AdminUsers extends React.Component {
 											
 										{item.statusUser === 'DISABLED' && 
 											<TooltipIcon
-												tooltipText={intl.formatMessage({id: "AdminUsers.StatusUserDisabled", defaultMessage: "User disabled"})}>
+												tooltipText={intl.formatMessage({id: "AdminUsers.LongStatusUserDisabled", defaultMessage: "User disabled"})}>
 												<PersonBadge style={{color:"gray", fill:"gray"}}/>
 											</TooltipIcon>}
 										{item.statusUser === 'BLOCK' && 
 											<TooltipIcon
-												tooltipText={intl.formatMessage({id: "AdminUsers.StatusUserBlock", defaultMessage: "User Blocked"})}>
+												tooltipText={intl.formatMessage({id: "AdminUsers.LongStatusUserBlock", defaultMessage: "User Blocked"})}>
 												<PersonBadge style={{color:"red", fill:"red"}}/>
 											</TooltipIcon>}
 											

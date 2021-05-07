@@ -73,6 +73,13 @@ public class RestEventController {
         return payload;
 
     }
+    /**
+     * Get an event to display it
+     * @param eventId
+     * @param timezoneOffset
+     * @param connectionStamp
+     * @return
+     */
     @CrossOrigin
     @GetMapping("/api/event")
     public Map<String, Object> event(@RequestParam("id") Long eventId,
@@ -121,6 +128,7 @@ public class RestEventController {
         if (Boolean.TRUE.equals(getList)) {
             completePayloadListEvents(payload, toghUser, filterEvents, timezoneOffset);
         }
+        payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
         payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId() );
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
         payload.put( RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
@@ -224,7 +232,8 @@ public class RestEventController {
         UpdateContext updateContext  = new UpdateContext();
         updateContext.toghUser = toghUser;
         updateContext.timezoneOffset = timezoneOffset;
-        updateContext.eventService = factoryService.getEventService();
+        updateContext.factoryService = factoryService;
+        
         EventOperationResult eventOperationResult = factoryService.getEventService().updateEvent( event, slabEventList, updateContext);
         
         Map<String, Object> payload = new HashMap<>();
@@ -237,7 +246,8 @@ public class RestEventController {
             listEntity.add( entity.getMap(contextAccess, timezoneOffset));
         }
         payload.put( RestJsonConstants.CST_CHILDENTITY, listEntity);
-        
+        payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
+
         payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
         payload.put( RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity ==null? null : eventOperationResult.eventEntity.getMap(contextAccess, timezoneOffset) );
         payload.put( RestJsonConstants.CST_STATUS, eventOperationResult.isError() ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);

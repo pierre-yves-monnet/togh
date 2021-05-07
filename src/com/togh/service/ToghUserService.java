@@ -367,7 +367,7 @@ public class ToghUserService {
         UpdateContext updateContext = new UpdateContext();
         updateContext.toghUser = null;
         updateContext.timezoneOffset = 0;
-        updateContext.eventService = null;
+        updateContext.factoryService = null;
 
         EventOperationResult eventOperationResult = new EventOperationResult();
 

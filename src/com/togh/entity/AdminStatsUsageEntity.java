@@ -14,15 +14,16 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import com.togh.entity.APIKeyEntity.TypeProviderEnum;
+import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
 import com.togh.entity.base.BaseEntity;
+import com.togh.service.SubscriptionService.LimitReach;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/* AdminStatsConnection, Keep connection day per day of the connection              */
+/* AdminStatsConnection, Keep connection day per day of the connection              */  
 /*                                                                                  */
 /*   yearMonthDay is yyyy-mm-dd                                                       */ 
 /*                                                                                  */
@@ -31,19 +32,27 @@ import lombok.EqualsAndHashCode;
 
 
 @Entity
-@Table(name = "ADMSTATSCONNECTION")
+@Table(name = "ADMSTATSUSAGE")
 @EqualsAndHashCode(callSuper=true)
-public @Data class AdminStatsConnectionEntity extends BaseEntity {
+public @Data class AdminStatsUsageEntity extends BaseEntity {
 
     @Column(name = "yearmonthday", length = 10)
     public String yearMonthDay;
 
-    public enum TypeStatsEnum { CONNECTION, ACCESS};
+    public enum TypeStatsEnum { CONNECTION, ACCESS, LIMITSUBSCRIPT};
     @Column(name = "typestats", length = 15)
     @Enumerated(EnumType.STRING)
-    private TypeStatsEnum typeStatistique;
+    public TypeStatsEnum typeStatistique;
 
+    @Column(name = "subscriptionuser", length = 10)
+    @Enumerated(EnumType.STRING)
+    public SubscriptionUserEnum subscriptionUser; 
 
+    @Column(name = "limitreach", length = 15)
+    @Enumerated(EnumType.STRING)
+    public LimitReach limitReach;
+    
+    
     @Column(name = "value")
     public Long value;
 

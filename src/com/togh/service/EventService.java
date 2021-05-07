@@ -1,6 +1,16 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.service;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +48,7 @@ import com.togh.repository.EventSurveyAnswerRepository;
 import com.togh.repository.EventSurveyChoiceRepository;
 import com.togh.repository.EventSurveyRepository;
 import com.togh.repository.EventTaskRepository;
+import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventController;
 
 /* ******************************************************************************** */
@@ -66,6 +77,9 @@ public class EventService {
     @Autowired
     FactoryService factoryService;
 
+    
+    @Autowired
+    SubscriptionService subscriptionService;
     @Autowired
     private EventRepository eventRepository;
 
@@ -98,6 +112,7 @@ public class EventService {
     public static class EventOperationResult {
 
         public EventEntity eventEntity;
+        public boolean limitSubscription=false;
         public List<LogEvent> listLogEvents = new ArrayList<>();
         public List<BaseEntity> listChildEntity = new ArrayList<>();
         
@@ -133,13 +148,30 @@ public class EventService {
      */
     public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
 
+        LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
+        timeCheck = timeCheck.minusDays( 60 );
+
+        
+        // Do we access the maximum number of event for this users?
+        Long numberOfEvents = eventRepository.countLastEventsUser( toghUserEntity.getId(), ParticipantRoleEnum.OWNER, timeCheck );
+        int maximumSubscription = subscriptionService.getMaximumEventsPerMonth( toghUserEntity.getSubscriptionUser() );
+        if (numberOfEvents >= maximumSubscription ) {
+            /// reject it
+            subscriptionService.registerTouchLimitSubscription(toghUserEntity, LimitReach.CREATIONEVENT);
+            
+            EventOperationResult eventOperationResult = new EventOperationResult();
+            eventOperationResult.limitSubscription = true;
+            return eventOperationResult;
+        }
+            
+        
         EventEntity event = new EventEntity();
         event.setAuthor(toghUserEntity);
         event.setName(eventName);
         event.setStatusEvent(StatusEventEnum.INPREPAR);
         event.setTypeEvent(TypeEventEnum.LIMITED);
         event.setDatePolicy(DatePolicyEnum.ONEDATE);
-        switch (toghUserEntity.getSubscriptionUser()) {
+        switch ( toghUserEntity.getSubscriptionUser()) {
             case PREMIUM:
                 event.setSubscriptionEvent( SubscriptionEventEnum.PREMIUM);
                 break;
@@ -150,8 +182,8 @@ public class EventService {
                  event.setSubscriptionEvent( SubscriptionEventEnum.FREE);
         }
         
-
         EventController eventController = new EventController( event, factoryService);
+
         // let's the conductor create the participant and all needed information
         eventController.completeConsistant();
         eventRepository.save(event);
@@ -166,7 +198,7 @@ public class EventService {
     public static class UpdateContext {
         public ToghUserEntity toghUser;
         public long timezoneOffset;
-        public EventService eventService;
+        public FactoryService factoryService;
     }
     public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab, UpdateContext updateContext) {
 

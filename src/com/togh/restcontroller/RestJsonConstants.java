@@ -26,6 +26,7 @@ public class RestJsonConstants {
     public static final String CST_LISTEVENTS = "events";
     public static final String CST_CHILDENTITY = "childEntity";
     public static final String CST_CHILDENTITYID = "childEntityId";
+    public static final String CST_LIMITSUBSCRIPTION = "limitsubscription";
     /**
      * Status may have multiple value (in case of invitation for example), and 2 default value, OK and ERROR, are proposed
      */

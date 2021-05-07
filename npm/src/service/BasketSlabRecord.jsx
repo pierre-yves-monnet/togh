@@ -50,7 +50,7 @@ class BasketSlabRecord {
 		restCallService.postJson('/api/event/update', this, param, httpPayload => {
 			// console.log("BasketSlabRecord.Callback ! ");
 			httpPayload.trace("BasketSlabRecord.callback");
-			callbackfct( httpPayload);
+			callbackfct( httpPayload );
 			}
 		);
 	}

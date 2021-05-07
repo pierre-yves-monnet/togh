@@ -47,8 +47,137 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "Nombre de traductions",
 
+  "__AdminUsers.Administrator" : "Administrator",
+  "AdminUsers.Administrator" : "Administrateur",
+
+  "__AdminUsers.AllUsers" : "All Users",
+  "AdminUsers.AllUsers" : "Tous les utilisateurs",
+
+  "__AdminUsers.Blocked" : "Blocked",
+  "AdminUsers.Blocked" : "Bloqué",
+
+  "__AdminUsers.CompleteName" : "Complete Name",
+  "AdminUsers.CompleteName" : "Nom complet",
+
+  "__AdminUsers.Connected" : "Connected",
+  "AdminUsers.Connected" : "Lié",
+
+  "__AdminUsers.ConnectedOffline" : "User offline",
+  "AdminUsers.ConnectedOffline" : "Utilisateur hors ligne",
+
+  "__AdminUsers.ConnectedOnLine" : "User connected",
+  "AdminUsers.ConnectedOnLine" : "Utilisateur connecté",
+
+  "__AdminUsers.Disconnect" : "Disconnect",
+  "AdminUsers.Disconnect" : "Déconnecter",
+
+  "__AdminUsers.Email" : "Email",
+  "AdminUsers.Email" : "E-mail",
+
+  "__AdminUsers.Excellence" : "Excellence",
+  "AdminUsers.Excellence" : "Excellence",
+
+  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "AdminUsers.LastActivityTime" : "Dernière activité",
+
+  "__AdminUsers.LastConnectionTime" : "Last Connection",
+  "AdminUsers.LastConnectionTime" : "Dernière connexion",
+
+  "__AdminUsers.LongStatusUserActif" : "User actif",
+  "AdminUsers.LongStatusUserActif" : "Utilisateur actif",
+
+  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
+  "AdminUsers.LongStatusUserBlock" : "Utilisateur bloqué",
+
+  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
+  "AdminUsers.LongStatusUserDisabled" : "Utilisateur désactivé",
+
+  "__AdminUsers.Myself" : "Myself",
+  "AdminUsers.Myself" : "Moi-même",
+
+  "__AdminUsers.PhoneNumber" : "PhoneNumber",
+  "AdminUsers.PhoneNumber" : "Numéro de téléphone",
+
+  "__AdminUsers.Premium" : "Premium",
+  "AdminUsers.Premium" : "Prime",
+
+  "__AdminUsers.PrivilegeUser" : "Privilege",
+  "AdminUsers.PrivilegeUser" : "Privilège",
+
+  "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
+  "AdminUsers.PrivilegeUserAdmin" : "Administrateur",
+
+  "__AdminUsers.PrivilegeUserAdminTRANS" : "Translator",
+  "AdminUsers.PrivilegeUserAdminTRANS" : "Traducteur",
+
+  "__AdminUsers.PrivilegeUserUser" : "User",
+  "AdminUsers.PrivilegeUserUser" : "Utilisateur",
+
+  "__AdminUsers.Search" : "Search",
+  "AdminUsers.Search" : "Rechercher",
+
+  "__AdminUsers.ShowDetails" : "Details",
+  "AdminUsers.ShowDetails" : "Des détails",
+
+  "__AdminUsers.Status" : "Status",
+  "AdminUsers.Status" : "Statut",
+
+  "__AdminUsers.StatusUserActif" : "Actif",
+  "AdminUsers.StatusUserActif" : "Actif",
+
+  "__AdminUsers.StatusUserBlocked" : "Blocked",
+  "AdminUsers.StatusUserBlocked" : "Bloqué",
+
+  "__AdminUsers.StatusUserDisabled" : "Disabled",
+  "AdminUsers.StatusUserDisabled" : "Désactivée",
+
+  "__AdminUsers.SubscriptionEnum" : "Subscription",
+  "AdminUsers.SubscriptionEnum" : "Abonnement",
+
+  "__AdminUsers.SubscriptionUserExcellence" : "Excellence",
+  "AdminUsers.SubscriptionUserExcellence" : "Excellence",
+
+  "__AdminUsers.SubscriptionUserFree" : "Free",
+  "AdminUsers.SubscriptionUserFree" : "Libérer",
+
+  "__AdminUsers.SubscriptionUserPremium" : "Premium",
+  "AdminUsers.SubscriptionUserPremium" : "Prime",
+
+  "__AdminUsers.Title" : "Users",
+  "AdminUsers.Title" : "Utilisateurs",
+
+  "__AdminUsers.UserName" : "User Name",
+  "AdminUsers.UserName" : "Nom d'utilisateur",
+
+  "__AdminUsers.privilegeAdmin" : "Administrator",
+  "AdminUsers.privilegeAdmin" : "Administrateur",
+
+  "__AdminUsers.privilegeTrans" : "Translator",
+  "AdminUsers.privilegeTrans" : "Traducteur",
+
+  "__AdminUsers.searchSentence" : "Search",
+  "AdminUsers.searchSentence" : "Rechercher",
+
+  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
+  "AdminUsers.subscriptionExcellence" : "Abonnement Excellence",
+
+  "__AdminUsers.subscriptionFree" : "Free subscription",
+  "AdminUsers.subscriptionFree" : "Abonnement gratuit",
+
+  "__AdminUsers.subscriptionPremium" : "Premium subscription",
+  "AdminUsers.subscriptionPremium" : "Abonnement Premium",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Bienvenue sur Togh",
+
+  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample" : "Potluck avec l'école? Barbecue entre amis? Road trip en famille sur m? plusieurs jours? Ceci est un événement.",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation" : "Togh est une application pour gérer votre événement.",
+
+  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility" : "Dans un événement, organisez les participants, enregistrez les tâches et la liste de courses, donnez l'adresse, spécifiez les étapes de votre road trip. Vous pouvez demander au participant n'importe quelle enquête: préfèrent-ils visiter Hollywood Bld, ou l'Observatoire Griffith (Paul veut visiter les deux!) Visualisez l'itinéraire sur la carte. Calculez les dépenses. Togh dira à qui appartient qui.",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "Qu'est-ce que Togh?",
@@ -236,6 +365,9 @@
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "Dressez la liste de tous les lieux que vous souhaitez visiter lors de cet événement. Si l'événement se déroule sur plusieurs jours, vous pouvez configurer jour par jour votre itinéraire",
 
+  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription" : "Vous atteignez la limite de pas autorisée dans l'événement. Accédez à votre profil pour voir votre abonnement",
+
   "__EventItinerary.MainTitleItinerary" : "Itinerary",
   "EventItinerary.MainTitleItinerary" : "Itinéraire",
 
@@ -392,11 +524,26 @@
   "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
   "EventPreferences.CurrencyOnEvent" : "Devise utilisée dans cet événement",
 
+  "__EventPreferences.EventSubscription" : "Subscription",
+  "EventPreferences.EventSubscription" : "Abonnement",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "Configurer toutes les préférences pour l'événement",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "Préférences",
+
+  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip" : "Configurer toutes les préférences pour l'événement",
+
+  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation" : "Un événement Excellence contient toutes les fonctions et une limite de 1000 par élément",
+
+  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation" : "Un événement gratuit contient toutes les fonctions sauf le budget et est limité en nombre de participants (20) et d'articles (50)",
+
+  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation" : "Un événement Premium contient toutes les fonctions, les participants à la limitation supérieure (100) et les éléments (100)",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Ajouter un élément dans la liste",
@@ -424,6 +571,9 @@
 
   "__EventShoppingList.ItemRemoved" : "The item is removed",
   "EventShoppingList.ItemRemoved" : "L'élément est supprimé",
+
+  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription" : "Vous atteignez la limite d'éléments autorisés dans l'événement. Accédez à votre profil pour voir votre abonnement",
 
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Liste de courses",
@@ -506,6 +656,9 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "En cours",
 
+  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription" : "Vous atteignez la limite de choix autorisée dans l'événement. Accédez à votre profil pour voir votre abonnement",
+
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "Cette enquête est en préparation. Vous ne pouvez pas y accéder pour le moment.",
 
@@ -533,11 +686,20 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "Ajouter une enquête dans la liste",
 
+  "__EventSurveyList.CantaddItem" : "A task can't be added",
+  "EventSurveyList.CantaddItem" : "Une tâche ne peut pas être ajoutée",
+
+  "__EventSurveyList.LimitSubsscription" : "You reach the limit of survey allowed in the event. Go to your profile to see your subscription",
+  "EventSurveyList.LimitSubsscription" : "Vous atteignez la limite d'enquête autorisée dans l'événement. Accédez à votre profil pour voir votre abonnement",
+
   "__EventSurveyList.MainTitleSurveyList" : "Surveys",
   "EventSurveyList.MainTitleSurveyList" : "Enquêtes",
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "Vous n'avez aucune enquête prête dans la liste.",
+
+  "__EventSurveyList.SurveyAdded" : "A survey is added",
+  "EventSurveyList.SurveyAdded" : "Une enquête est ajoutée",
 
   "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
   "EventSurveyList.SurveyTip" : "Les participants préfèrent visiter un musée d'art ou un musée aérospatial? Vous préférez un restaurant japonais, italien ou français? Créez une enquête et recueillez des avis.",
@@ -602,6 +764,9 @@
   "__EventTaskList.InProgress" : "In progress",
   "EventTaskList.InProgress" : "En cours",
 
+  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription" : "Vous atteignez la limite des tâches autorisées dans l'événement. Accédez à votre profil pour voir votre abonnement",
+
   "__EventTaskList.MainTitleTaskList" : "Tasks List",
   "EventTaskList.MainTitleTaskList" : "Liste des tâches",
 
@@ -655,6 +820,12 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Impossible d'accéder à la liste des éléments &quot;",
+
+  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription" : "Vous atteignez la limite des événements autorisés dans la dernière période. Accédez à votre profil pour voir votre abonnement",
+
+  "__EventsList.ServerConnectionError" : "Server connection error",
+  "EventsList.ServerConnectionError" : "Erreur de connexion au serveur",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "Budget",
@@ -718,6 +889,9 @@
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Impossible de se connecter au serveur",
+
+  "__Login.RememberMe" : "Remember Me",
+  "Login.RememberMe" : "Souviens-toi de moi",
 
   "__Login.connection" : "Connection",
   "Login.connection" : "Connexion",

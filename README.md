@@ -241,7 +241,7 @@ Visite
 Achat 			: sac de courses
 Divertissement
 Aeroport
-Stateus de bus
+Stations de bus
 gare
 port
 restaurant
@@ -487,7 +487,9 @@ Py
 2.	Verifier invitation
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
 4.	Limiter le nombre d'elements par event, le nombre d'event / mois
-6.	Graph sur le nombre d'acces
+"You reach the limit of events allowed in the last period. Go to your profile to see your subscription"
+"You reach the limit of tasks allowed in the event. Go to your profile to see your subscription"
+
 7.	My profile
 8.	Lost my password
 9.	Close event automatically

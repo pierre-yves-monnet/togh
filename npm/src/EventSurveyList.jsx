@@ -281,10 +281,15 @@ class EventSurveyList extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
 			console.log("EventSurvey.addItemCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().limitsubscription) {
+			console.log("EventTasklist.callbackdata: Limit Subscription");
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventSurveyList.LimitSubsscription",defaultMessage: "You reach the limit of survey allowed in the event. Go to your profile to see your subscription"})
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if (httpPayload.getData().status ==="ERROR") {
 			console.log("EventSurvey.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 			currentOperation.status= userFeedbackConstant.ERROR;
-			currentOperation.result=intl.formatMessage({id: "EventSurvey.CantaddItem",defaultMessage: "A task can't be added"});
+			currentOperation.result=intl.formatMessage({id: "EventSurveyList.CantaddItem",defaultMessage: "A task can't be added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
@@ -294,7 +299,7 @@ class EventSurveyList extends React.Component {
 			var surveyToAdd = httpPayload.getData().childEntity[ 0 ];
 			var event = this.eventCtrl.getEvent();
 			currentOperation.status= UserFeedback.OK;
-			currentOperation.result=intl.formatMessage({id: "EventSurvey.TaskAdded",defaultMessage: "A task is added"});
+			currentOperation.result=intl.formatMessage({id: "EventSurveyList.SurveyAdded",defaultMessage: "A survey is added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
 			console.log("EventSurvey.addItemCallback ");

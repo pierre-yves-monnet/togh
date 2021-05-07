@@ -45,6 +45,9 @@ public class FactoryService {
  
     @Autowired
     private StatsService statsService;
+    
+    @Autowired
+    private SubscriptionService subscriptionService;
  
     /*private static FactoryService factoryService = new FactoryService();
     public static FactoryService getInstance() {
@@ -80,5 +83,7 @@ public class FactoryService {
     public StatsService getStatsService() {
         return statsService;
     }
- 
+    public SubscriptionService getSubscriptionService() {
+        return subscriptionService;
+    }
 }

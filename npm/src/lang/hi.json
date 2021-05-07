@@ -49,11 +49,137 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "अनुवाद की संख्या",
 
+  "__AdminUsers.Administrator" : "Administrator",
+  "AdminUsers.Administrator" : "प्रशासक",
+
+  "__AdminUsers.AllUsers" : "All Users",
+  "AdminUsers.AllUsers" : "सभी उपयोगकर्ता",
+
+  "__AdminUsers.Blocked" : "Blocked",
+  "AdminUsers.Blocked" : "अवरोधित",
+
+  "__AdminUsers.CompleteName" : "Complete Name",
+  "AdminUsers.CompleteName" : "पूरा नाम",
+
+  "__AdminUsers.Connected" : "Connected",
+  "AdminUsers.Connected" : "जुड़े हुए",
+
+  "__AdminUsers.ConnectedOffline" : "User offline",
+  "AdminUsers.ConnectedOffline" : "उपयोगकर्ता ऑफ़लाइन",
+
+  "__AdminUsers.ConnectedOnLine" : "User connected",
+  "AdminUsers.ConnectedOnLine" : "उपयोगकर्ता जुड़ा हुआ है",
+
+  "__AdminUsers.Disconnect" : "Disconnect",
+  "AdminUsers.Disconnect" : "डिस्कनेक्ट",
+
+  "__AdminUsers.Email" : "Email",
+  "AdminUsers.Email" : "ईमेल",
+
+  "__AdminUsers.Excellence" : "Excellence",
+  "AdminUsers.Excellence" : "उत्कृष्टता",
+
+  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "AdminUsers.LastActivityTime" : "अंतिम सक्रियता",
+
+  "__AdminUsers.LastConnectionTime" : "Last Connection",
+  "AdminUsers.LastConnectionTime" : "अंतिम कनेक्शन",
+
+  "__AdminUsers.LongStatusUserActif" : "User actif",
+  "AdminUsers.LongStatusUserActif" : "उपयोगकर्ता कार्य",
+
+  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
+  "AdminUsers.LongStatusUserBlock" : "उपयोगकर्ता अवरोधित किया गया",
+
+  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
+  "AdminUsers.LongStatusUserDisabled" : "उपयोगकर्ता अक्षम किया गया",
+
+  "__AdminUsers.Myself" : "Myself",
+  "AdminUsers.Myself" : "मैं खुद",
+
+  "__AdminUsers.PhoneNumber" : "PhoneNumber",
+  "AdminUsers.PhoneNumber" : "फ़ोन नंबर",
+
+  "__AdminUsers.Premium" : "Premium",
+  "AdminUsers.Premium" : "प्रीमियम",
+
+  "__AdminUsers.PrivilegeUser" : "Privilege",
+  "AdminUsers.PrivilegeUser" : "विशेषाधिकार",
+
+  "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
+  "AdminUsers.PrivilegeUserAdmin" : "प्रशासक",
+
+  "__AdminUsers.PrivilegeUserAdminTRANS" : "Translator",
+  "AdminUsers.PrivilegeUserAdminTRANS" : "अनुवादक",
+
+  "__AdminUsers.PrivilegeUserUser" : "User",
+  "AdminUsers.PrivilegeUserUser" : "उपयोगकर्ता",
+
+  "__AdminUsers.Search" : "Search",
+  "AdminUsers.Search" : "खोज",
+
+  "__AdminUsers.ShowDetails" : "Details",
+  "AdminUsers.ShowDetails" : "विवरण",
+
+  "__AdminUsers.Status" : "Status",
+  "AdminUsers.Status" : "स्थिति",
+
+  "__AdminUsers.StatusUserActif" : "Actif",
+  "AdminUsers.StatusUserActif" : "एक्टिफ",
+
+  "__AdminUsers.StatusUserBlocked" : "Blocked",
+  "AdminUsers.StatusUserBlocked" : "अवरोधित",
+
+  "__AdminUsers.StatusUserDisabled" : "Disabled",
+  "AdminUsers.StatusUserDisabled" : "विकलांग",
+
+  "__AdminUsers.SubscriptionEnum" : "Subscription",
+  "AdminUsers.SubscriptionEnum" : "अंशदान",
+
+  "__AdminUsers.SubscriptionUserExcellence" : "Excellence",
+  "AdminUsers.SubscriptionUserExcellence" : "उत्कृष्टता",
+
+  "__AdminUsers.SubscriptionUserFree" : "Free",
+  "AdminUsers.SubscriptionUserFree" : "नि: शुल्क",
+
+  "__AdminUsers.SubscriptionUserPremium" : "Premium",
+  "AdminUsers.SubscriptionUserPremium" : "प्रीमियम",
+
+  "__AdminUsers.Title" : "Users",
+  "AdminUsers.Title" : "उपयोगकर्ताओं",
+
+  "__AdminUsers.UserName" : "User Name",
+  "AdminUsers.UserName" : "उपयोगकर्ता नाम",
+
+  "__AdminUsers.privilegeAdmin" : "Administrator",
+  "AdminUsers.privilegeAdmin" : "प्रशासक",
+
+  "__AdminUsers.privilegeTrans" : "Translator",
+  "AdminUsers.privilegeTrans" : "अनुवादक",
+
+  "__AdminUsers.searchSentence" : "Search",
+  "AdminUsers.searchSentence" : "खोज",
+
+  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
+  "AdminUsers.subscriptionExcellence" : "उत्कृष्टता सदस्यता",
+
+  "__AdminUsers.subscriptionFree" : "Free subscription",
+  "AdminUsers.subscriptionFree" : "मुफ्त सदस्यता",
+
+  "__AdminUsers.subscriptionPremium" : "Premium subscription",
+  "AdminUsers.subscriptionPremium" : "प्रीमियम सदस्यता",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "तोगड़ में आपका स्वागत है",
 
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample" : "स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है।",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation" : "Togh अपने कार्यक्रम का प्रबंधन करने के लिए एक आवेदन पत्र है। स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है। एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
+
+  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility" : "एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "तोग क्या है?",
@@ -246,6 +372,9 @@
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "इस घटना के दौरान उन सभी स्थानों की सूची बनाएं, जिन्हें आप देखना चाहते हैं। यदि घटना कई दिनों की है, तो आप प्रति दिन अपने यात्रा कार्यक्रम के लिए दिन निर्धारित कर सकते हैं",
 
+  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription" : "आप घटना में अनुमत चरणों की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+
   "__EventItinerary.MainTitleItinerary" : "Itinerary",
   "EventItinerary.MainTitleItinerary" : "यात्रा कार्यक्रम",
 
@@ -410,11 +539,26 @@
   "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
   "EventPreferences.CurrencyOnEvent" : "इस घटना में इस्तेमाल की गई मुद्रा",
 
+  "__EventPreferences.EventSubscription" : "Subscription",
+  "EventPreferences.EventSubscription" : "अंशदान",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "घटना के लिए सभी वरीयताओं को सेट करें",
 
-  "__EventPreferences.MainTitlePreferences" : "Preference",
+  "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "पसंद",
+
+  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip" : "घटना के लिए सभी वरीयताओं को सेट करें",
+
+  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation" : "एक्सीलेंस इवेंट में सभी कार्य होते हैं, और प्रति आइटम 1000 की सीमा होती है",
+
+  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation" : "एक निशुल्क घटना में बजट को छोड़कर सभी कार्य शामिल होते हैं और प्रतिभागियों की संख्या (20) और आइटम (50) तक सीमित होते हैं",
+
+  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation" : "एक प्रीमियम ईवेंट में सभी फ़ंक्शन, ऊपरी सीमा वाले प्रतिभागी (100) और आइटम (100) शामिल होते हैं",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "सूची में एक आइटम जोड़ें",
@@ -445,6 +589,9 @@
 
   "__EventShoppingList.ItemRemoved" : "The item is removed",
   "EventShoppingList.ItemRemoved" : "आइटम हटा दिया गया है",
+
+  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription" : "आप घटना में अनुमत वस्तुओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
 
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "खरीदारी की सूची",
@@ -532,6 +679,9 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "चालू",
 
+  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription" : "आप घटना में अनुमति दी गई पसंद की सीमा तक पहुंच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+
   "EventSurvey.MainTitleSurveyList" : "सर्वेक्षण",
 
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
@@ -567,8 +717,14 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "सूची में एक सर्वेक्षण जोड़ें",
 
+  "__EventSurveyList.CantaddItem" : "A task can't be added",
+  "EventSurveyList.CantaddItem" : "कोई कार्य जोड़ा नहीं जा सकता",
+
   "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventSurveyList.ItineraryTip" : "इस घटना के दौरान आप जिस भी स्थान पर जाना चाहते हैं, उसे सूचीबद्ध करें। यदि घटना कई दिनों की है, तो आप प्रति दिन अपने यात्रा कार्यक्रम के लिए दिन निर्धारित कर सकते हैं",
+
+  "__EventSurveyList.LimitSubsscription" : "You reach the limit of survey allowed in the event. Go to your profile to see your subscription",
+  "EventSurveyList.LimitSubsscription" : "आप घटना में अनुमत सर्वेक्षण की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
 
   "__EventSurveyList.MainTitleItinerary" : "Itinerary",
   "EventSurveyList.MainTitleItinerary" : "यात्रा कार्यक्रम",
@@ -578,6 +734,9 @@
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "आपके पास सूची में कोई भी सर्वेक्षण तैयार नहीं है।",
+
+  "__EventSurveyList.SurveyAdded" : "A survey is added",
+  "EventSurveyList.SurveyAdded" : "एक सर्वेक्षण जोड़ा जाता है",
 
   "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
   "EventSurveyList.SurveyTip" : "प्रतिभागियों को एक कला या एक एयरोस्पेस संग्रहालय का दौरा करना पसंद है? Japanase, इतालवी या फ्रेंच रेस्तरां पसंद करते हैं? एक सर्वेक्षण बनाएं और समीक्षा एकत्र करें।",
@@ -644,6 +803,9 @@
   "__EventTaskList.InProgress" : "In progress",
   "EventTaskList.InProgress" : "चालू",
 
+  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription" : "आप ईवेंट में अनुमत कार्यों की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+
   "__EventTaskList.MainTitleTaskList" : "Tasks List",
   "EventTaskList.MainTitleTaskList" : "कार्य सूची",
 
@@ -697,6 +859,12 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "आइटम की सूची तक नहीं पहुंच सकते '",
+
+  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription" : "आप अंतिम अवधि में अनुमत घटनाओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+
+  "__EventsList.ServerConnectionError" : "Server connection error",
+  "EventsList.ServerConnectionError" : "सर्वर कनेक्शन त्रुटि",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "बजट",
@@ -768,6 +936,9 @@
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "सर्वर से कनेक्ट नहीं किया जा सकता",
+
+  "__Login.RememberMe" : "Remember Me",
+  "Login.RememberMe" : "मुझे याद रखें",
 
   "Login.badConnection" : "खराब कनेक्शन - अपनी साख जांचें",
 

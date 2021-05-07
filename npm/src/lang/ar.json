@@ -47,11 +47,137 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "عدد الترجمة",
 
+  "__AdminUsers.Administrator" : "Administrator",
+  "AdminUsers.Administrator" : "مدير",
+
+  "__AdminUsers.AllUsers" : "All Users",
+  "AdminUsers.AllUsers" : "جميع المستخدمين",
+
+  "__AdminUsers.Blocked" : "Blocked",
+  "AdminUsers.Blocked" : "ممنوع",
+
+  "__AdminUsers.CompleteName" : "Complete Name",
+  "AdminUsers.CompleteName" : "اكمل الاسم",
+
+  "__AdminUsers.Connected" : "Connected",
+  "AdminUsers.Connected" : "متصل",
+
+  "__AdminUsers.ConnectedOffline" : "User offline",
+  "AdminUsers.ConnectedOffline" : "المستخدم حاليا",
+
+  "__AdminUsers.ConnectedOnLine" : "User connected",
+  "AdminUsers.ConnectedOnLine" : "المستخدم متصل",
+
+  "__AdminUsers.Disconnect" : "Disconnect",
+  "AdminUsers.Disconnect" : "قطع الاتصال",
+
+  "__AdminUsers.Email" : "Email",
+  "AdminUsers.Email" : "بريد إلكتروني",
+
+  "__AdminUsers.Excellence" : "Excellence",
+  "AdminUsers.Excellence" : "تفوق",
+
+  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "AdminUsers.LastActivityTime" : "آخر نشاط",
+
+  "__AdminUsers.LastConnectionTime" : "Last Connection",
+  "AdminUsers.LastConnectionTime" : "آخر اتصال",
+
+  "__AdminUsers.LongStatusUserActif" : "User actif",
+  "AdminUsers.LongStatusUserActif" : "اكتيف المستخدم",
+
+  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
+  "AdminUsers.LongStatusUserBlock" : "المستخدم المحظور",
+
+  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
+  "AdminUsers.LongStatusUserDisabled" : "تم تعطيل المستخدم",
+
+  "__AdminUsers.Myself" : "Myself",
+  "AdminUsers.Myself" : "نفسي",
+
+  "__AdminUsers.PhoneNumber" : "PhoneNumber",
+  "AdminUsers.PhoneNumber" : "رقم الهاتف",
+
+  "__AdminUsers.Premium" : "Premium",
+  "AdminUsers.Premium" : "غالي",
+
+  "__AdminUsers.PrivilegeUser" : "Privilege",
+  "AdminUsers.PrivilegeUser" : "شرف",
+
+  "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
+  "AdminUsers.PrivilegeUserAdmin" : "مدير",
+
+  "__AdminUsers.PrivilegeUserAdminTRANS" : "Translator",
+  "AdminUsers.PrivilegeUserAdminTRANS" : "مترجم",
+
+  "__AdminUsers.PrivilegeUserUser" : "User",
+  "AdminUsers.PrivilegeUserUser" : "المستعمل",
+
+  "__AdminUsers.Search" : "Search",
+  "AdminUsers.Search" : "يبحث",
+
+  "__AdminUsers.ShowDetails" : "Details",
+  "AdminUsers.ShowDetails" : "تفاصيل",
+
+  "__AdminUsers.Status" : "Status",
+  "AdminUsers.Status" : "حالة",
+
+  "__AdminUsers.StatusUserActif" : "Actif",
+  "AdminUsers.StatusUserActif" : "أكتيف",
+
+  "__AdminUsers.StatusUserBlocked" : "Blocked",
+  "AdminUsers.StatusUserBlocked" : "ممنوع",
+
+  "__AdminUsers.StatusUserDisabled" : "Disabled",
+  "AdminUsers.StatusUserDisabled" : "معاق",
+
+  "__AdminUsers.SubscriptionEnum" : "Subscription",
+  "AdminUsers.SubscriptionEnum" : "الاشتراك",
+
+  "__AdminUsers.SubscriptionUserExcellence" : "Excellence",
+  "AdminUsers.SubscriptionUserExcellence" : "تفوق",
+
+  "__AdminUsers.SubscriptionUserFree" : "Free",
+  "AdminUsers.SubscriptionUserFree" : "حر",
+
+  "__AdminUsers.SubscriptionUserPremium" : "Premium",
+  "AdminUsers.SubscriptionUserPremium" : "غالي",
+
+  "__AdminUsers.Title" : "Users",
+  "AdminUsers.Title" : "المستخدمون",
+
+  "__AdminUsers.UserName" : "User Name",
+  "AdminUsers.UserName" : "اسم االمستخدم",
+
+  "__AdminUsers.privilegeAdmin" : "Administrator",
+  "AdminUsers.privilegeAdmin" : "مدير",
+
+  "__AdminUsers.privilegeTrans" : "Translator",
+  "AdminUsers.privilegeTrans" : "مترجم",
+
+  "__AdminUsers.searchSentence" : "Search",
+  "AdminUsers.searchSentence" : "يبحث",
+
+  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
+  "AdminUsers.subscriptionExcellence" : "اشتراك التميز",
+
+  "__AdminUsers.subscriptionFree" : "Free subscription",
+  "AdminUsers.subscriptionFree" : "اشتراك مجاني",
+
+  "__AdminUsers.subscriptionPremium" : "Premium subscription",
+  "AdminUsers.subscriptionPremium" : "اشتراك بريميوم",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "مرحبا بكم في طوق د",
 
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample" : "الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث.",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation" : "توغ هو تطبيق لإدارة الحدث الخاص بك. الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث. في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
+
+  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility" : "في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "ما هو طوغ؟",
@@ -239,6 +365,9 @@
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "ضع قائمة بجميع الأماكن التي تريد زيارتها خلال هذا الحدث. إذا كان الحدث في عدة أيام ، فيمكنك إعداد خط سير الرحلة يوميًا",
 
+  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription" : "تصل إلى الحد الأقصى من الخطوات المسموح بها في هذا الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+
   "__EventItinerary.MainTitleItinerary" : "Itinerary",
   "EventItinerary.MainTitleItinerary" : "مسار الرحلة",
 
@@ -395,11 +524,26 @@
   "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
   "EventPreferences.CurrencyOnEvent" : "العملة المستخدمة في هذا الحدث",
 
+  "__EventPreferences.EventSubscription" : "Subscription",
+  "EventPreferences.EventSubscription" : "الاشتراك",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "قم بإعداد كل التفضيلات لهذا الحدث",
 
-  "__EventPreferences.MainTitlePreferences" : "Preference",
+  "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "الأفضلية",
+
+  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip" : "قم بإعداد كل التفضيلات لهذا الحدث",
+
+  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation" : "يحتوي حدث التميز على جميع الوظائف ، وبحد 1000 لكل عنصر",
+
+  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation" : "حدث مجاني يحتوي على جميع الوظائف باستثناء الميزانية ويقتصر على عدد المشاركين (20) والبنود (50)",
+
+  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation" : "يحتوي حدث Premium على جميع الوظائف والمشاركين في الحد الأعلى (100) والعناصر (100)",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "إضافة عنصر في القائمة",
@@ -427,6 +571,9 @@
 
   "__EventShoppingList.ItemRemoved" : "The item is removed",
   "EventShoppingList.ItemRemoved" : "تمت إزالة العنصر",
+
+  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription" : "تصل إلى الحد الأقصى من العناصر المسموح بها في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
 
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "قائمة التسوق",
@@ -509,6 +656,9 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "في تقدم",
 
+  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription" : "تصل إلى حد الاختيار المسموح به في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "هذا المسح قيد الإعداد. لا يمكنك الوصول إليه في الوقت الحالي.",
 
@@ -536,11 +686,20 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "أضف استطلاع في القائمة",
 
+  "__EventSurveyList.CantaddItem" : "A task can't be added",
+  "EventSurveyList.CantaddItem" : "لا يمكن إضافة مهمة",
+
+  "__EventSurveyList.LimitSubsscription" : "You reach the limit of survey allowed in the event. Go to your profile to see your subscription",
+  "EventSurveyList.LimitSubsscription" : "تصل إلى الحد المسموح به من الاستطلاع في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+
   "__EventSurveyList.MainTitleSurveyList" : "Surveys",
   "EventSurveyList.MainTitleSurveyList" : "الدراسات الاستقصائية",
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "ليس لديك أي استطلاع جاهز في القائمة.",
+
+  "__EventSurveyList.SurveyAdded" : "A survey is added",
+  "EventSurveyList.SurveyAdded" : "يضاف مسح",
 
   "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
   "EventSurveyList.SurveyTip" : "هل يفضل المشاركون زيارة متحف للفنون أو الفضاء؟ هل تفضل مطعم Japanase أو إيطالي أو فرنسي؟ قم بإنشاء استطلاع وجمع المراجعة.",
@@ -605,6 +764,9 @@
   "__EventTaskList.InProgress" : "In progress",
   "EventTaskList.InProgress" : "في تقدم",
 
+  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription" : "تصل إلى الحد الأقصى من المهام المسموح بها في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+
   "__EventTaskList.MainTitleTaskList" : "Tasks List",
   "EventTaskList.MainTitleTaskList" : "قائمة المهام",
 
@@ -658,6 +820,12 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "لا يمكن الوصول إلى قائمة العناصر &quot;",
+
+  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription" : "تصل إلى الحد الأقصى من الأحداث المسموح بها في الفترة الماضية. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+
+  "__EventsList.ServerConnectionError" : "Server connection error",
+  "EventsList.ServerConnectionError" : "خطأ في الاتصال بالخادم",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "ميزانية",
@@ -721,6 +889,9 @@
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "لا يمكن الاتصال بالخادم",
+
+  "__Login.RememberMe" : "Remember Me",
+  "Login.RememberMe" : "تذكرنى",
 
   "__Login.connection" : "Connection",
   "Login.connection" : "اتصال",

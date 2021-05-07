@@ -47,11 +47,137 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "Αριθμός μετάφρασης",
 
+  "__AdminUsers.Administrator" : "Administrator",
+  "AdminUsers.Administrator" : "Διαχειριστής",
+
+  "__AdminUsers.AllUsers" : "All Users",
+  "AdminUsers.AllUsers" : "Ολοι οι χρήστες",
+
+  "__AdminUsers.Blocked" : "Blocked",
+  "AdminUsers.Blocked" : "Αποκλείστηκε",
+
+  "__AdminUsers.CompleteName" : "Complete Name",
+  "AdminUsers.CompleteName" : "Πλήρες όνομα",
+
+  "__AdminUsers.Connected" : "Connected",
+  "AdminUsers.Connected" : "Συνδεδεμένος",
+
+  "__AdminUsers.ConnectedOffline" : "User offline",
+  "AdminUsers.ConnectedOffline" : "Χρήστης εκτός σύνδεσης",
+
+  "__AdminUsers.ConnectedOnLine" : "User connected",
+  "AdminUsers.ConnectedOnLine" : "Συνδεδεμένος χρήστης",
+
+  "__AdminUsers.Disconnect" : "Disconnect",
+  "AdminUsers.Disconnect" : "Αποσυνδέω",
+
+  "__AdminUsers.Email" : "Email",
+  "AdminUsers.Email" : "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+
+  "__AdminUsers.Excellence" : "Excellence",
+  "AdminUsers.Excellence" : "Υπεροχή",
+
+  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "AdminUsers.LastActivityTime" : "Τελευταία δραστηριότητα",
+
+  "__AdminUsers.LastConnectionTime" : "Last Connection",
+  "AdminUsers.LastConnectionTime" : "Τελευταία σύνδεση",
+
+  "__AdminUsers.LongStatusUserActif" : "User actif",
+  "AdminUsers.LongStatusUserActif" : "Χρήστης actif",
+
+  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
+  "AdminUsers.LongStatusUserBlock" : "Ο χρήστης αποκλείστηκε",
+
+  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
+  "AdminUsers.LongStatusUserDisabled" : "Ο χρήστης απενεργοποιήθηκε",
+
+  "__AdminUsers.Myself" : "Myself",
+  "AdminUsers.Myself" : "Εγώ ο ίδιος",
+
+  "__AdminUsers.PhoneNumber" : "PhoneNumber",
+  "AdminUsers.PhoneNumber" : "Τηλεφωνικό νούμερο",
+
+  "__AdminUsers.Premium" : "Premium",
+  "AdminUsers.Premium" : "Ασφάλιστρο",
+
+  "__AdminUsers.PrivilegeUser" : "Privilege",
+  "AdminUsers.PrivilegeUser" : "Προνόμιο",
+
+  "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
+  "AdminUsers.PrivilegeUserAdmin" : "Διαχειριστής",
+
+  "__AdminUsers.PrivilegeUserAdminTRANS" : "Translator",
+  "AdminUsers.PrivilegeUserAdminTRANS" : "Μεταφράστης",
+
+  "__AdminUsers.PrivilegeUserUser" : "User",
+  "AdminUsers.PrivilegeUserUser" : "Χρήστης",
+
+  "__AdminUsers.Search" : "Search",
+  "AdminUsers.Search" : "Αναζήτηση",
+
+  "__AdminUsers.ShowDetails" : "Details",
+  "AdminUsers.ShowDetails" : "Λεπτομέριες",
+
+  "__AdminUsers.Status" : "Status",
+  "AdminUsers.Status" : "Κατάσταση",
+
+  "__AdminUsers.StatusUserActif" : "Actif",
+  "AdminUsers.StatusUserActif" : "Actif",
+
+  "__AdminUsers.StatusUserBlocked" : "Blocked",
+  "AdminUsers.StatusUserBlocked" : "Αποκλείστηκε",
+
+  "__AdminUsers.StatusUserDisabled" : "Disabled",
+  "AdminUsers.StatusUserDisabled" : "άτομα με ειδικές ανάγκες",
+
+  "__AdminUsers.SubscriptionEnum" : "Subscription",
+  "AdminUsers.SubscriptionEnum" : "Συνδρομή",
+
+  "__AdminUsers.SubscriptionUserExcellence" : "Excellence",
+  "AdminUsers.SubscriptionUserExcellence" : "Υπεροχή",
+
+  "__AdminUsers.SubscriptionUserFree" : "Free",
+  "AdminUsers.SubscriptionUserFree" : "Ελεύθερος",
+
+  "__AdminUsers.SubscriptionUserPremium" : "Premium",
+  "AdminUsers.SubscriptionUserPremium" : "Ασφάλιστρο",
+
+  "__AdminUsers.Title" : "Users",
+  "AdminUsers.Title" : "Χρήστες",
+
+  "__AdminUsers.UserName" : "User Name",
+  "AdminUsers.UserName" : "Ονομα χρήστη",
+
+  "__AdminUsers.privilegeAdmin" : "Administrator",
+  "AdminUsers.privilegeAdmin" : "Διαχειριστής",
+
+  "__AdminUsers.privilegeTrans" : "Translator",
+  "AdminUsers.privilegeTrans" : "Μεταφράστης",
+
+  "__AdminUsers.searchSentence" : "Search",
+  "AdminUsers.searchSentence" : "Αναζήτηση",
+
+  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
+  "AdminUsers.subscriptionExcellence" : "Συνδρομή Excellence",
+
+  "__AdminUsers.subscriptionFree" : "Free subscription",
+  "AdminUsers.subscriptionFree" : "Δωρεάν συνδρομή",
+
+  "__AdminUsers.subscriptionPremium" : "Premium subscription",
+  "AdminUsers.subscriptionPremium" : "Premium συνδρομή",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Καλώς ήλθατε στο Togh D",
 
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample" : "Potluck με το σχολείο; Μπάρμπεκιου με φίλους; Οδικό ταξίδι με την οικογένεια στο m; πολλές ημέρες; Αυτό είναι ένα γεγονός.",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation" : "Το Togh είναι μια εφαρμογή για τη διαχείριση της εκδήλωσής σας. Potluck με το σχολείο; Μπάρμπεκιου με φίλους; Οδικό ταξίδι με την οικογένεια στο m; πολλές ημέρες; Αυτό είναι ένα γεγονός. Σε μία εκδήλωση, οργανώστε τους συμμετέχοντες, εγγραφείτε εργασίες και λίστα αγορών, δώστε διεύθυνση, προσδιορίστε τα βήματα του οδικού σας ταξιδιού. Μπορείτε να ρωτήσετε τον συμμετέχοντα οποιαδήποτε έρευνα: προτιμούν να επισκεφθούν το Hollywood Bld ή το Παρατηρητήριο Griffith (ο Paul θέλει να επισκεφτεί και τα δύο!) Οπτικοποιήστε το δρομολόγιο στο χάρτη. Υπολογίστε τα έξοδα. Ο Togh θα πει ποιος κατέχει ποιος.",
+
+  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility" : "Σε μία εκδήλωση, οργανώστε τους συμμετέχοντες, εγγραφείτε εργασίες και λίστα αγορών, δώστε διεύθυνση, προσδιορίστε τα βήματα του οδικού σας ταξιδιού. Μπορείτε να ρωτήσετε τον συμμετέχοντα οποιαδήποτε έρευνα: προτιμούν να επισκεφθούν το Hollywood Bld ή το Παρατηρητήριο Griffith (ο Paul θέλει να επισκεφτεί και τα δύο!) Οπτικοποιήστε το δρομολόγιο στο χάρτη. Υπολογίστε τα έξοδα. Ο Togh θα πει ποιος κατέχει.",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "Τι είναι το Togh;",
@@ -239,6 +365,9 @@
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "Αναφέρετε όλα τα μέρη που θέλετε να επισκεφθείτε κατά τη διάρκεια αυτής της εκδήλωσης. Εάν το συμβάν είναι πολλές ημέρες, τότε μπορείτε να ρυθμίσετε την ημέρα το δρομολόγιό σας την ημέρα",
 
+  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription" : "Φτάνετε στο όριο των βημάτων που επιτρέπονται στην εκδήλωση Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+
   "__EventItinerary.MainTitleItinerary" : "Itinerary",
   "EventItinerary.MainTitleItinerary" : "Δρομολόγιο",
 
@@ -395,11 +524,26 @@
   "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
   "EventPreferences.CurrencyOnEvent" : "Νόμισμα που χρησιμοποιείται σε αυτό το συμβάν",
 
+  "__EventPreferences.EventSubscription" : "Subscription",
+  "EventPreferences.EventSubscription" : "Συνδρομή",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "Ρυθμίστε όλες τις προτιμήσεις για την εκδήλωση",
 
-  "__EventPreferences.MainTitlePreferences" : "Preference",
+  "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "Προτίμηση",
+
+  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip" : "Ρυθμίστε όλες τις προτιμήσεις για την εκδήλωση",
+
+  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation" : "Μια εκδήλωση Excellence περιέχει όλες τις λειτουργίες και ένα όριο 1000 ανά αντικείμενα",
+
+  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation" : "Μια δωρεάν εκδήλωση περιέχει όλες τις λειτουργίες εκτός από τον προϋπολογισμό και περιορίζεται στον αριθμό των συμμετεχόντων (20) και σε αντικείμενα (50)",
+
+  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation" : "Ένα συμβάν Premium περιέχει όλες τις λειτουργίες, τους συμμετέχοντες με ανώτατο όριο (100) και τα στοιχεία (100)",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Προσθέστε ένα στοιχείο στη λίστα",
@@ -427,6 +571,9 @@
 
   "__EventShoppingList.ItemRemoved" : "The item is removed",
   "EventShoppingList.ItemRemoved" : "Το στοιχείο αφαιρείται",
+
+  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription" : "Συμπληρώνετε το όριο των στοιχείων που επιτρέπονται στην εκδήλωση. Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
 
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Λίστα με τα ψώνια",
@@ -509,6 +656,9 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "Σε εξέλιξη",
 
+  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription" : "Φτάνετε στο όριο επιλογής που επιτρέπεται στην εκδήλωση. Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "Αυτή η έρευνα βρίσκεται σε προετοιμασία. Δεν μπορείτε να αποκτήσετε πρόσβαση αυτήν τη στιγμή.",
 
@@ -536,11 +686,20 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "Προσθέστε μια έρευνα στη λίστα",
 
+  "__EventSurveyList.CantaddItem" : "A task can't be added",
+  "EventSurveyList.CantaddItem" : "Δεν είναι δυνατή η προσθήκη μιας εργασίας",
+
+  "__EventSurveyList.LimitSubsscription" : "You reach the limit of survey allowed in the event. Go to your profile to see your subscription",
+  "EventSurveyList.LimitSubsscription" : "Συμπληρώνετε το όριο της επιτρεπόμενης έρευνας στην εκδήλωση. Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+
   "__EventSurveyList.MainTitleSurveyList" : "Surveys",
   "EventSurveyList.MainTitleSurveyList" : "Ερευνες",
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "Δεν έχετε έτοιμη έρευνα στη λίστα.",
+
+  "__EventSurveyList.SurveyAdded" : "A survey is added",
+  "EventSurveyList.SurveyAdded" : "Προστίθεται μια έρευνα",
 
   "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
   "EventSurveyList.SurveyTip" : "Οι συμμετέχοντες προτιμούν να επισκεφθούν ένα μουσείο τέχνης ή αεροδιαστημικής; Προτιμάτε το Japanase, το ιταλικό ή το γαλλικό εστιατόριο; Δημιουργήστε μια έρευνα και συλλέξτε κριτική.",
@@ -605,6 +764,9 @@
   "__EventTaskList.InProgress" : "In progress",
   "EventTaskList.InProgress" : "Σε εξέλιξη",
 
+  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription" : "Φτάνετε στο όριο των επιτρεπόμενων εργασιών στην εκδήλωση. Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+
   "__EventTaskList.MainTitleTaskList" : "Tasks List",
   "EventTaskList.MainTitleTaskList" : "Λίστα εργασιών",
 
@@ -658,6 +820,12 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Δεν είναι δυνατή η πρόσβαση στη λίστα του αντικειμένου '",
+
+  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription" : "Φτάνετε στο όριο των επιτρεπόμενων συμβάντων την τελευταία περίοδο Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+
+  "__EventsList.ServerConnectionError" : "Server connection error",
+  "EventsList.ServerConnectionError" : "Σφάλμα σύνδεσης διακομιστή",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "Προϋπολογισμός",
@@ -721,6 +889,9 @@
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Δεν είναι δυνατή η σύνδεση στον διακομιστή",
+
+  "__Login.RememberMe" : "Remember Me",
+  "Login.RememberMe" : "Θυμήσου με",
 
   "__Login.connection" : "Connection",
   "Login.connection" : "Σύνδεση",

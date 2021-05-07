@@ -95,8 +95,8 @@ public class JpaTool {
                     value = Enum.valueOf(returnType, attributValue.toString());
 
                 } else if (isClassBaseEntity(returnType)) {
-                    if (updateContext.eventService!=null) {
-                        LoadEntityResult loadResult = updateContext.eventService.loadEntity(returnType, Long.valueOf(attributValue.toString()));
+                    if (updateContext.factoryService.getEventService()!=null) {
+                        LoadEntityResult loadResult = updateContext.factoryService.getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
                         value = loadResult.entity;
                         eventOperationResult.listLogEvents.addAll(loadResult.listLogEvents);
                     }

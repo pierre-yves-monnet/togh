@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -30,34 +30,33 @@ import com.togh.service.event.EventUpdate.Slab;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventController,                                                                 */
+/* EventController, */
 /*                                                                                  */
-/*  Control what's happen on an event. Pilot all operations                         */
+/* Control what's happen on an event. Pilot all operations */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 public class EventController {
 
     private FactoryService factoryService;
-    
+
     private EventEntity event;
-    
-    public EventController(EventEntity event, FactoryService factoryService ) {
+
+    public EventController(EventEntity event, FactoryService factoryService) {
         this.event = event;
         this.factoryService = factoryService;
     }
-    
-    public static EventController getInstance( EventEntity event, FactoryService factoryService  ) {
-        return new EventController( event, factoryService );        
+
+    public static EventController getInstance(EventEntity event, FactoryService factoryService) {
+        return new EventController(event, factoryService);
     }
-    
-    
+
     public EventEntity getEvent() {
         return event;
     }
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* operations on event                                                      */
+    /* operations on event */
     /*                                                                                  */
     /* ******************************************************************************** */
 
@@ -67,111 +66,127 @@ public class EventController {
      */
     public List<Slab> completeConsistant() {
         List<Slab> listSlab = new ArrayList<>();
-        
+
         // the author is a Organizer participant
-        boolean authorIsReferenced=false;
+        boolean authorIsReferenced = false;
         for (ParticipantEntity participant : event.getParticipantList()) {
-            if (participant.getUser() != null && participant.getUser().getId().equals( event.getAuthorId())) {
-                authorIsReferenced=true;
-                participant.setRole( ParticipantRoleEnum.OWNER);
+            if (participant.getUser() != null && participant.getUser().getId().equals(event.getAuthorId())) {
+                authorIsReferenced = true;
+                participant.setRole(ParticipantRoleEnum.OWNER);
             }
         }
-        if (! authorIsReferenced) {
+        if (!authorIsReferenced) {
             // if the user does not exist, this is an issue.... ==> ToghEvent
-            event.addPartipant( event.getAuthor(), ParticipantRoleEnum.OWNER,StatusEnum.ACTIF  );
+            event.addPartipant(event.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
         }
-        
+
         // a date policy must be set
-        if (event.getDatePolicy()==null)
-            event.setDatePolicy( DatePolicyEnum.ONEDATE);
-        
+        if (event.getDatePolicy() == null)
+            event.setDatePolicy(DatePolicyEnum.ONEDATE);
+
         return listSlab;
     }
-        
-
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Authorisation                                                                    */
+    /* Authorisation */
     /*                                                                                  */
     /* ******************************************************************************** */
 
     /**
      * isRegisteredParticipant. if this user is part of this event?
+     * 
      * @param userId
      * @return
      */
-    public boolean isAccess( ToghUserEntity toghUser ) {
-        if (event.getTypeEvent() ==  TypeEventEnum.OPEN)
+    public boolean isAccess(ToghUserEntity toghUser) {
+        if (event.getTypeEvent() == TypeEventEnum.OPEN)
             return true;
-        return getParticipant( toghUser ) != null;
+        return getParticipant(toghUser) != null;
     }
+
     /**
      * User must be the author, or a partipant, or should be invited
+     * 
      * @param userId
      * @param event
      * @return
      */
-    public boolean isActiveParticipant( ToghUserEntity toghUser) {
-        ParticipantEntity participant  = getParticipant( toghUser );
-        if (participant==null )
+    public boolean isActiveParticipant(ToghUserEntity toghUser) {
+        ParticipantEntity participant = getParticipant(toghUser);
+        if (participant == null)
             return false;
-        if (ParticipantRoleEnum.OWNER.equals( participant.getRole()) 
-                || ParticipantRoleEnum.ORGANIZER.equals(participant.getRole() )
-                || ParticipantRoleEnum.PARTICIPANT.equals( participant.getRole() ))
-        {
-            return StatusEnum.ACTIF.equals( participant.getStatus() );
+        if (ParticipantRoleEnum.OWNER.equals(participant.getRole())
+                || ParticipantRoleEnum.ORGANIZER.equals(participant.getRole())
+                || ParticipantRoleEnum.PARTICIPANT.equals(participant.getRole())) {
+            return StatusEnum.ACTIF.equals(participant.getStatus());
         }
         return false;
     }
+
     /**
      * is this user an organizer? Some operation, like invitation, is allowed only for organizer
+     * 
      * @param userId
      * @return
      */
     public boolean isOrganizer(ToghUserEntity toghUser) {
-        ParticipantEntity participant  = getParticipant( toghUser );
-        if (participant==null )
+        ParticipantEntity participant = getParticipant(toghUser);
+        if (participant == null)
             return false;
-        return participant.getRole().equals(ParticipantRoleEnum.OWNER) ||participant.getRole().equals(ParticipantRoleEnum.ORGANIZER);
+        return participant.getRole().equals(ParticipantRoleEnum.OWNER) || participant.getRole().equals(ParticipantRoleEnum.ORGANIZER);
     }
+
     /**
-     *  get the role of this userId in the event. Return null if the user does not have any participation
+     * Return the owner of the event
+     * @return
+     */
+    public ToghUserEntity getOwner() {
+        for (ParticipantEntity participant : event.getParticipantList()) {
+            if (participant.getRole().equals(ParticipantRoleEnum.OWNER))
+                return participant.getUser();
+        }
+        return null;
+    }
+
+    /**
+     * get the role of this userId in the event. Return null if the user does not have any participation
+     * 
      * @param userId
      * @return
      */
-    public ParticipantRoleEnum getRoleEnum( ToghUserEntity toghUser) {
-        ParticipantEntity participant  = getParticipant( toghUser );
-        return (participant==null ? null : participant.getRole());
+    public ParticipantRoleEnum getRoleEnum(ToghUserEntity toghUser) {
+        ParticipantEntity participant = getParticipant(toghUser);
+        return (participant == null ? null : participant.getRole());
     }
-    
+
     /**
-     * 
      * @param userId
      * @return
      */
     public ParticipantEntity getParticipant(ToghUserEntity toghUser) {
         for (ParticipantEntity participant : event.getParticipantList()) {
-            if (participant.getUser() !=null && participant.getUser().getId().equals( toghUser.getId()))
+            if (participant.getUser() != null && participant.getUser().getId().equals(toghUser.getId()))
                 return participant;
         }
         return null;
     }
-    
+
     /**
      * According the user, and the type of event, the ContextAccess is calculated
+     * 
      * @param event
      * @return
      */
-    public ContextAccess getTypeAccess( ToghUserEntity toghUser ) {
+    public ContextAccess getTypeAccess(ToghUserEntity toghUser) {
         // event is public : so show onkly what you want to show to public
-        if (event.getTypeEvent()== TypeEventEnum.OPEN)
+        if (event.getTypeEvent() == TypeEventEnum.OPEN)
             return ContextAccess.PUBLICACCESS;
         // event is secret : hide all at maximum
         if (event.getTypeEvent() == TypeEventEnum.SECRET)
             return ContextAccess.SECRETACCESS;
 
-        ParticipantEntity participant = getParticipant( toghUser );
+        ParticipantEntity participant = getParticipant(toghUser);
         if (event.getTypeEvent() == TypeEventEnum.OPENCONF) {
             // the user is not accepted : show the minimum.
             if (participant == null)
@@ -191,39 +206,38 @@ public class EventController {
         }
         // should not be here
         return ContextAccess.SECRETACCESS;
-        
+
     }
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Invitation                                                                    */
+    /* Invitation */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public  InvitationResult invite(EventEntity event, ToghUserEntity invitedByToghUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
-        EventInvitation eventInvitation = new EventInvitation( this, factoryService );
-        return eventInvitation.invite( event,  invitedByToghUser, listUsersId,  userInvitedEmail,  role,  message);
+    public InvitationResult invite(EventEntity event, ToghUserEntity invitedByToghUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
+        EventInvitation eventInvitation = new EventInvitation(this, factoryService);
+        return eventInvitation.invite(event, invitedByToghUser, listUsersId, userInvitedEmail, role, message);
     }
- 
+
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Update                                                                    */
+    /* Update */
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    public EventOperationResult update(List<Map<String,Object>> listSlabMap, UpdateContext updateContext) {        
-        EventUpdate eventUpdate = new EventUpdate( this );
+    public EventOperationResult update(List<Map<String, Object>> listSlabMap, UpdateContext updateContext) {
+        EventUpdate eventUpdate = new EventUpdate(this);
         List<Slab> listSlab = new ArrayList<>();
         for (Map<String, Object> recordSlab : listSlabMap) {
-            listSlab.add( new Slab(recordSlab));
+            listSlab.add(new Slab(recordSlab));
         }
-        
-        
-        EventOperationResult eventOperationResult= eventUpdate.update( listSlab, updateContext);
+
+        EventOperationResult eventOperationResult = eventUpdate.update(listSlab, updateContext);
         List<Slab> listComplementSlab = completeConsistant();
-        eventOperationResult.add( eventUpdate.update( listComplementSlab, updateContext));
+        eventOperationResult.add(eventUpdate.update(listComplementSlab, updateContext));
         return eventOperationResult;
     }
-    
+
     protected EventService getEventService() {
         return factoryService.getEventService();
     }

@@ -49,11 +49,137 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "翻訳数",
 
+  "__AdminUsers.Administrator" : "Administrator",
+  "AdminUsers.Administrator" : "管理者",
+
+  "__AdminUsers.AllUsers" : "All Users",
+  "AdminUsers.AllUsers" : "全てのユーザー",
+
+  "__AdminUsers.Blocked" : "Blocked",
+  "AdminUsers.Blocked" : "ブロックされた",
+
+  "__AdminUsers.CompleteName" : "Complete Name",
+  "AdminUsers.CompleteName" : "完全な名前",
+
+  "__AdminUsers.Connected" : "Connected",
+  "AdminUsers.Connected" : "接続済み",
+
+  "__AdminUsers.ConnectedOffline" : "User offline",
+  "AdminUsers.ConnectedOffline" : "オフラインのユーザー",
+
+  "__AdminUsers.ConnectedOnLine" : "User connected",
+  "AdminUsers.ConnectedOnLine" : "ユーザー接続",
+
+  "__AdminUsers.Disconnect" : "Disconnect",
+  "AdminUsers.Disconnect" : "切断する",
+
+  "__AdminUsers.Email" : "Email",
+  "AdminUsers.Email" : "Eメール",
+
+  "__AdminUsers.Excellence" : "Excellence",
+  "AdminUsers.Excellence" : "優秀",
+
+  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "AdminUsers.LastActivityTime" : "最後の活動",
+
+  "__AdminUsers.LastConnectionTime" : "Last Connection",
+  "AdminUsers.LastConnectionTime" : "最後の接続",
+
+  "__AdminUsers.LongStatusUserActif" : "User actif",
+  "AdminUsers.LongStatusUserActif" : "ユーザーの行動",
+
+  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
+  "AdminUsers.LongStatusUserBlock" : "ユーザーがブロックされました",
+
+  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
+  "AdminUsers.LongStatusUserDisabled" : "ユーザーが無効",
+
+  "__AdminUsers.Myself" : "Myself",
+  "AdminUsers.Myself" : "私自身",
+
+  "__AdminUsers.PhoneNumber" : "PhoneNumber",
+  "AdminUsers.PhoneNumber" : "電話番号",
+
+  "__AdminUsers.Premium" : "Premium",
+  "AdminUsers.Premium" : "プレミアム",
+
+  "__AdminUsers.PrivilegeUser" : "Privilege",
+  "AdminUsers.PrivilegeUser" : "特権",
+
+  "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
+  "AdminUsers.PrivilegeUserAdmin" : "管理者",
+
+  "__AdminUsers.PrivilegeUserAdminTRANS" : "Translator",
+  "AdminUsers.PrivilegeUserAdminTRANS" : "翻訳者",
+
+  "__AdminUsers.PrivilegeUserUser" : "User",
+  "AdminUsers.PrivilegeUserUser" : "ユーザー",
+
+  "__AdminUsers.Search" : "Search",
+  "AdminUsers.Search" : "探す",
+
+  "__AdminUsers.ShowDetails" : "Details",
+  "AdminUsers.ShowDetails" : "詳細",
+
+  "__AdminUsers.Status" : "Status",
+  "AdminUsers.Status" : "状態",
+
+  "__AdminUsers.StatusUserActif" : "Actif",
+  "AdminUsers.StatusUserActif" : "Actif",
+
+  "__AdminUsers.StatusUserBlocked" : "Blocked",
+  "AdminUsers.StatusUserBlocked" : "ブロックされた",
+
+  "__AdminUsers.StatusUserDisabled" : "Disabled",
+  "AdminUsers.StatusUserDisabled" : "無効",
+
+  "__AdminUsers.SubscriptionEnum" : "Subscription",
+  "AdminUsers.SubscriptionEnum" : "サブスクリプション",
+
+  "__AdminUsers.SubscriptionUserExcellence" : "Excellence",
+  "AdminUsers.SubscriptionUserExcellence" : "優秀",
+
+  "__AdminUsers.SubscriptionUserFree" : "Free",
+  "AdminUsers.SubscriptionUserFree" : "自由",
+
+  "__AdminUsers.SubscriptionUserPremium" : "Premium",
+  "AdminUsers.SubscriptionUserPremium" : "プレミアム",
+
+  "__AdminUsers.Title" : "Users",
+  "AdminUsers.Title" : "ユーザー",
+
+  "__AdminUsers.UserName" : "User Name",
+  "AdminUsers.UserName" : "ユーザー名",
+
+  "__AdminUsers.privilegeAdmin" : "Administrator",
+  "AdminUsers.privilegeAdmin" : "管理者",
+
+  "__AdminUsers.privilegeTrans" : "Translator",
+  "AdminUsers.privilegeTrans" : "翻訳者",
+
+  "__AdminUsers.searchSentence" : "Search",
+  "AdminUsers.searchSentence" : "探す",
+
+  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
+  "AdminUsers.subscriptionExcellence" : "エクセレンスサブスクリプション",
+
+  "__AdminUsers.subscriptionFree" : "Free subscription",
+  "AdminUsers.subscriptionFree" : "無料サブスクリプション",
+
+  "__AdminUsers.subscriptionPremium" : "Premium subscription",
+  "AdminUsers.subscriptionPremium" : "プレミアムサブスクリプション",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Welcome to Togh",
 
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample" : "学校で持ち寄り？友達とバーベキュー？ mで家族とのロードトリップ？複数日？これはイベントです。",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation" : "Toghは、イベントを管理するためのアプリケーションです。学校で持ち寄り？友達とバーベキュー？ mで家族とのロードトリップ？複数日？これはイベントです。 1つのイベントでは、参加者を整理し、タスクとショッピングリストを登録し、住所を指定し、ロードトリップの手順を指定します。参加者に調査を依頼することができます。彼らはハリウッド大通りを訪問することを好むのか、それともグリフィス天文台を訪問することを好むのか（ポールは両方を訪問したいのです！）地図上で旅程を視覚化します。費用を計算します。 Toghは、誰が誰を所有しているかを教えてくれます。",
+
+  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility" : "1つのイベントでは、参加者を整理し、タスクとショッピングリストを登録し、住所を指定し、ロードトリップの手順を指定します。参加者に調査を依頼することができます。彼らはハリウッド大通りを訪れることを好むのか、それともグリフィス天文台を訪れることを好むのか（ポールは両方を訪れたいのです！）地図上で旅程を視覚化します。費用を計算します。 Toghは、誰が誰を所有しているかを教えてくれます。",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "トグとは何ですか？",
@@ -246,6 +372,9 @@
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "このイベント中に訪問したい場所をすべてリストしてください。イベントが複数日にわたる場合は、1日あたりの旅程を設定できます",
 
+  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription" : "イベントで許可されているステップの制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
+
   "__EventItinerary.MainTitleItinerary" : "Itinerary",
   "EventItinerary.MainTitleItinerary" : "旅程",
 
@@ -410,11 +539,26 @@
   "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
   "EventPreferences.CurrencyOnEvent" : "このイベントで使用される通貨",
 
+  "__EventPreferences.EventSubscription" : "Subscription",
+  "EventPreferences.EventSubscription" : "サブスクリプション",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "イベントのすべての設定を設定します",
 
-  "__EventPreferences.MainTitlePreferences" : "Preference",
+  "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "好み",
+
+  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip" : "イベントのすべての設定を設定します",
+
+  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation" : "エクセレンスイベントにはすべての機能が含まれ、アイテムごとに1000の制限があります",
+
+  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation" : "無料イベントには予算以外のすべての機能が含まれ、参加者（20）とアイテム（50）の数に制限があります",
+
+  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation" : "プレミアムイベントには、すべての機能、上限参加者（100）およびアイテム（100）が含まれます",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "リストにアイテムを追加します",
@@ -445,6 +589,9 @@
 
   "__EventShoppingList.ItemRemoved" : "The item is removed",
   "EventShoppingList.ItemRemoved" : "アイテムが削除されます",
+
+  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription" : "イベントで許可されるアイテムの制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
 
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "買い物リスト",
@@ -532,6 +679,9 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "進行中",
 
+  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription" : "イベントで許可されている選択の制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
+
   "EventSurvey.MainTitleSurveyList" : "調査",
 
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
@@ -567,8 +717,14 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "リストに調査を追加する",
 
+  "__EventSurveyList.CantaddItem" : "A task can't be added",
+  "EventSurveyList.CantaddItem" : "タスクを追加できません",
+
   "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventSurveyList.ItineraryTip" : "このイベント中に訪問したい場所をすべてリストしてください。イベントが複数日にわたる場合は、1日あたりの旅程を設定できます",
+
+  "__EventSurveyList.LimitSubsscription" : "You reach the limit of survey allowed in the event. Go to your profile to see your subscription",
+  "EventSurveyList.LimitSubsscription" : "イベントで許可されている調査の制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
 
   "__EventSurveyList.MainTitleItinerary" : "Itinerary",
   "EventSurveyList.MainTitleItinerary" : "旅程",
@@ -578,6 +734,9 @@
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "リストに調査の準備ができていません。",
+
+  "__EventSurveyList.SurveyAdded" : "A survey is added",
+  "EventSurveyList.SurveyAdded" : "調査が追加されました",
 
   "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
   "EventSurveyList.SurveyTip" : "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
@@ -644,6 +803,9 @@
   "__EventTaskList.InProgress" : "In progress",
   "EventTaskList.InProgress" : "進行中",
 
+  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription" : "イベントで許可されるタスクの制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
+
   "__EventTaskList.MainTitleTaskList" : "Tasks List",
   "EventTaskList.MainTitleTaskList" : "タスクリスト",
 
@@ -697,6 +859,12 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "アイテムのリストにアクセスできません」",
+
+  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription" : "最後の期間に許可されたイベントの制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
+
+  "__EventsList.ServerConnectionError" : "Server connection error",
+  "EventsList.ServerConnectionError" : "サーバー接続エラー",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "予算",
@@ -768,6 +936,9 @@
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "サーバーに接続できません",
+
+  "__Login.RememberMe" : "Remember Me",
+  "Login.RememberMe" : "私を覚えてますか",
 
   "Login.badConnection" : "接続不良-資格情報を確認してください",
 

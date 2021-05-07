@@ -419,6 +419,11 @@ class EventTaskList extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
 			console.log("EventTasklist.addItemCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().limitsubscription) {
+			console.log("EventTasklist.callbackdata: Limit Subscription");
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventTaskList.LimitSubsscription",defaultMessage: "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription"})
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if (httpPayload.getData().status ==="ERROR") {
 			console.log("EventTasklist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 			currentOperation.status= userFeedbackConstant.ERROR;

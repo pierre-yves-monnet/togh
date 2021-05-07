@@ -655,6 +655,11 @@ class EventItinerary extends React.Component {
 		if (httpPayload.isError()) {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;			
 			console.log("EventItinerary.addItemCallback: ERROR ");
+		} else if (httpPayload.getData().limitsubscription) {
+			console.log("EventTasklist.callbackdata: Limit Subscription");
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventItinerary.LimitSubsscription",defaultMessage: "You reach the limit of steps allowed in the event. Go to your profile to see your subscription"})
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if (httpPayload.getData().status ==="ERROR") {
 				console.log("EventItinerary.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 				currentOperation.status= userFeedbackConstant.ERROR;

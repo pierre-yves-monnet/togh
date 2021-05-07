@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.togh.engine.tool.EngineTool;
-import com.togh.entity.AdminStatsConnectionEntity;
-import com.togh.entity.AdminStatsConnectionEntity.TypeStatsEnum;
-import com.togh.repository.AdminStatsConnectionRepository;
+import com.togh.entity.AdminStatsUsageEntity;
+import com.togh.entity.AdminStatsUsageEntity.TypeStatsEnum;
+import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
+import com.togh.repository.AdminStatsUsageRepository;
+import com.togh.service.SubscriptionService.LimitReach;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -27,15 +29,15 @@ import com.togh.repository.AdminStatsConnectionRepository;
 @Service
 public class StatsService {
     @Autowired
-    AdminStatsConnectionRepository adminStatsConnectionRepository;
+    AdminStatsUsageRepository adminStatsConnectionRepository;
 
     
     public void registerLogin() {
         // register the login
         String currentDayString =  EngineTool.dateToString(LocalDate.now(ZoneOffset.UTC));
-        AdminStatsConnectionEntity currentDayEntity=  adminStatsConnectionRepository.findByDate( currentDayString,TypeStatsEnum.CONNECTION );
+        AdminStatsUsageEntity currentDayEntity=  adminStatsConnectionRepository.findByDate( currentDayString,TypeStatsEnum.CONNECTION );
         if (currentDayEntity == null) {
-            currentDayEntity=new AdminStatsConnectionEntity();
+            currentDayEntity=new AdminStatsUsageEntity();
             currentDayEntity.setYearMonthDay(currentDayString);
             currentDayEntity.setValue(0L);
             currentDayEntity.setTypeStatistique( TypeStatsEnum.CONNECTION);
@@ -50,12 +52,31 @@ public class StatsService {
     public void registerAccess() {
         // register the login
         String currentDayString =  EngineTool.dateToString(LocalDate.now(ZoneOffset.UTC));
-        AdminStatsConnectionEntity currentDayEntity=  adminStatsConnectionRepository.findByDate( currentDayString,TypeStatsEnum.ACCESS );
+        AdminStatsUsageEntity currentDayEntity=  adminStatsConnectionRepository.findByDate( currentDayString,TypeStatsEnum.ACCESS );
         if (currentDayEntity == null) {
-            currentDayEntity=new AdminStatsConnectionEntity();
+            currentDayEntity=new AdminStatsUsageEntity();
             currentDayEntity.setYearMonthDay(currentDayString);
             currentDayEntity.setValue(0L);
             currentDayEntity.setTypeStatistique( TypeStatsEnum.ACCESS);
+        }
+        currentDayEntity.setValue( Long.valueOf( currentDayEntity.value+1));
+        adminStatsConnectionRepository.save(currentDayEntity );
+    }
+    
+    /**
+     * Limit Subscription
+     */
+    public void registerLimitSubcription(SubscriptionUserEnum subscriptionUser, LimitReach limit) {
+        // register the login
+        String currentDayString =  EngineTool.dateToString(LocalDate.now(ZoneOffset.UTC));
+        AdminStatsUsageEntity currentDayEntity=  adminStatsConnectionRepository.findByDateLimit( currentDayString, TypeStatsEnum.LIMITSUBSCRIPT, subscriptionUser.toString() , limit.toString() );
+        if (currentDayEntity == null) {
+            currentDayEntity=new AdminStatsUsageEntity();
+            currentDayEntity.setYearMonthDay(currentDayString);
+            currentDayEntity.setValue(0L);
+            currentDayEntity.setTypeStatistique( TypeStatsEnum.LIMITSUBSCRIPT);
+            currentDayEntity.setSubscriptionUser(subscriptionUser);
+            currentDayEntity.setLimitReach(limit);
         }
         currentDayEntity.setValue( Long.valueOf( currentDayEntity.value+1));
         adminStatsConnectionRepository.save(currentDayEntity );

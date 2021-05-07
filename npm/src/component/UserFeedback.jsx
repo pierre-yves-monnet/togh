@@ -51,7 +51,7 @@ class UserFeedback extends React.Component {
 		}
 		if (this.timer)
 			clearTimeout(this.timer);
-		this.timer = setTimeout(() => { if (! this.state.inprogress){ this.setState({ status:""})}; }, 4000);
+		this.timer = setTimeout(() => { if (! this.state.inprogress) { this.setState({ status:""})}; }, 4000);
 
 	}
 	

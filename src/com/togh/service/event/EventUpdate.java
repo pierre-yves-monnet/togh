@@ -25,10 +25,12 @@ import com.togh.entity.EventSurveyAnswerEntity;
 import com.togh.entity.EventSurveyChoiceEntity;
 import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
+import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.UserEntity;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
+import com.togh.service.SubscriptionService.LimitReach;
 
 
 /* ******************************************************************************** */
@@ -50,6 +52,7 @@ public class EventUpdate {
     private static final LogEvent eventBadLocalisationEntity = new LogEvent(EventUpdate.class.getName(), 3, Level.ERROR, "Entity found is not the one expected", "An entity with a special type is search, and an another one if found.", "Operation can't be executed", "Check the localisation and the entity found");
     private static final LogEvent eventAlreadyDeleted = new LogEvent(EventUpdate.class.getName(), 4, Level.INFO, "Entity already deleted", "The entity is already deleted");
     
+
 
     EventController eventController;
 
@@ -116,25 +119,32 @@ public class EventUpdate {
 
     private void addOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         BaseEntity child = null;
-
+        LimitReach limitReach=null;
         if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
             child = new EventTaskEntity();
+            limitReach = LimitReach.TASKLIST;
         } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
             child = new EventItineraryStepEntity();
+            limitReach = LimitReach.ITINERARY;
         } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
             child = new EventShoppingListEntity();
+            limitReach = LimitReach.SHOPPING;
         } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
             child = new EventSurveyEntity();
+            limitReach = LimitReach.SURVEY;
         } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
             child = new EventSurveyChoiceEntity();
+            limitReach = LimitReach.SURVEYCHOICE;
         } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
             child = new EventSurveyAnswerEntity();
         }
         
-        
+        // Check if the subscription allow to add this entity
+        int maxEntity = updateContext.factoryService.getSubscriptionService().getMaximumEntityPerEvent(this.eventController.getEvent().getSubscriptionEvent(), child);
         
         
         if (child != null) {
+            boolean reachTheLimit=false;
             @SuppressWarnings("unchecked")
             Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
             for (Entry<String, Object> entrySlab : valueDefault.entrySet()) {
@@ -142,22 +152,54 @@ public class EventUpdate {
             }
             // save it now
             if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
-                child = eventController.getEventService().addTask(event, (EventTaskEntity) child);
+                if (event.getTaskList().size()>=maxEntity) 
+                    reachTheLimit=true;
+                else
+                    child = eventController.getEventService().addTask(event, (EventTaskEntity) child);
+                
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
-                child = eventController.getEventService().addItineraryStep(event, (EventItineraryStepEntity) child);
+                if (event.getItineraryStepList().size()>=maxEntity) 
+                    reachTheLimit=true;
+                else
+                    child = eventController.getEventService().addItineraryStep(event, (EventItineraryStepEntity) child);
+                
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
-                child = eventController.getEventService().addShoppingList(event, (EventShoppingListEntity) child);
+                if (event.getShoppingList().size()>=maxEntity) 
+                    reachTheLimit=true;
+                else
+                    child = eventController.getEventService().addShoppingList(event, (EventShoppingListEntity) child);
+                
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
-                child = eventController.getEventService().addSurvey(event, (EventSurveyEntity) child);
+                if (event.getSurveyList().size()>=maxEntity) 
+                    reachTheLimit=true;
+                else
+                    child = eventController.getEventService().addSurvey(event, (EventSurveyEntity) child);
+                
             } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
                 BaseEntity surveyEntity = localise(event, slab.localisation);
+                if (surveyEntity instanceof EventSurveyEntity) {
+                    if (((EventSurveyEntity) surveyEntity).getChoicelist().size()>=maxEntity) 
+                        reachTheLimit=true;
+                    else
+                        child = eventController.getEventService().addSurveyChoice(event, (EventSurveyEntity) surveyEntity,  (EventSurveyChoiceEntity) child);
+                }
+            } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
+                // no limitation control on the anwser list
+                BaseEntity surveyEntity = localise(event, slab.localisation);
                 if (surveyEntity instanceof EventSurveyEntity)
-                    child = eventController.getEventService().addSurveyChoice(event, (EventSurveyEntity) surveyEntity,  (EventSurveyChoiceEntity) child);
-        } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
-            BaseEntity surveyEntity = localise(event, slab.localisation);
-            if (surveyEntity instanceof EventSurveyEntity)
-                child = eventController.getEventService().addSurveyAnswser(event, (EventSurveyEntity) surveyEntity,  (EventSurveyAnswerEntity) child);
-        }
+                    child = eventController.getEventService().addSurveyAnswser(event, (EventSurveyEntity) surveyEntity,  (EventSurveyAnswerEntity) child);
+            }
+            
+            if (reachTheLimit) {
+                // We reach the limit per the subscription
+                eventOperationResult.limitSubscription=true;
+                // get the ownser user
+                ToghUserEntity ownerUser = this.eventController.getOwner();
+                if (limitReach!=null)
+                    updateContext.factoryService.getSubscriptionService().registerTouchLimitSubscription( ownerUser,limitReach);
+                child=null;
+            }
+            
             if (child!=null)
                 eventOperationResult.listChildEntity.add(child);
         }

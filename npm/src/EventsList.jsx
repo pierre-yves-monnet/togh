@@ -86,6 +86,8 @@ class EventsList extends React.Component {
 					<div class="col"><div style={{ float: "right" }}>
 						<button class="btn btn-info btn-lg" onClick={this.createEvent}>
 							<PlusCircle/> &nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
+						<br/>
+						<div style={{color: "red"}}> {this.state.message}</div>
 					</div>
 					</div>
 				</div>
@@ -142,18 +144,22 @@ class EventsList extends React.Component {
 	// -------------------------------------------- Call REST
 	createEvent() {
 		console.log("EventsList.createEvent: http[event/create?]");
+		const intl = this.props.intl;
 
+		this.setState({ message :  ""});
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.postJson('/api/event/create', this, {name:"new event"}, httpPayload => {
 			httpPayload.trace("EventList.createEventCallback");
 
 			if (httpPayload.isError()) {
-				this.setState({ "message": "Server connection error"});
+				this.setState({ message: intl.formatMessage({id: "EventsList.ServerConnectionError",defaultMessage: "Server connection error"}) });
 			}
 			else if (httpPayload.getData().eventId) {
 				this.props.homeSelectEvent(httpPayload.getData().eventId)
-			} else {
-				this.setState({ "message": httpPayload.getData().message });
+			} else if (httpPayload.getData().limitsubscription){
+				this.setState({ message: intl.formatMessage({id: "EventsList.LimitSubscription",defaultMessage: "You reach the limit of events allowed in the last period. Go to your profile to see your subscription"}) });
+			} else { 
+				this.setState({ message: httpPayload.getData().message });
 			}
 		});
 	}

@@ -47,11 +47,137 @@
   "AdminTranslator.nbTransations": {
     "defaultMessage": "Number of translation"
   },
+  "AdminUsers.Administrator": {
+    "defaultMessage": "Administrator"
+  },
+  "AdminUsers.AllUsers": {
+    "defaultMessage": "All Users"
+  },
+  "AdminUsers.Blocked": {
+    "defaultMessage": "Blocked"
+  },
+  "AdminUsers.CompleteName": {
+    "defaultMessage": "Complete Name"
+  },
+  "AdminUsers.Connected": {
+    "defaultMessage": "Connected"
+  },
+  "AdminUsers.ConnectedOffline": {
+    "defaultMessage": "User offline"
+  },
+  "AdminUsers.ConnectedOnLine": {
+    "defaultMessage": "User connected"
+  },
+  "AdminUsers.Disconnect": {
+    "defaultMessage": "Disconnect"
+  },
+  "AdminUsers.Email": {
+    "defaultMessage": "Email"
+  },
+  "AdminUsers.Excellence": {
+    "defaultMessage": "Excellence"
+  },
+  "AdminUsers.LastActivityTime": {
+    "defaultMessage": "Last Activiy"
+  },
+  "AdminUsers.LastConnectionTime": {
+    "defaultMessage": "Last Connection"
+  },
+  "AdminUsers.LongStatusUserActif": {
+    "defaultMessage": "User actif"
+  },
+  "AdminUsers.LongStatusUserBlock": {
+    "defaultMessage": "User Blocked"
+  },
+  "AdminUsers.LongStatusUserDisabled": {
+    "defaultMessage": "User disabled"
+  },
+  "AdminUsers.Myself": {
+    "defaultMessage": "Myself"
+  },
+  "AdminUsers.PhoneNumber": {
+    "defaultMessage": "PhoneNumber"
+  },
+  "AdminUsers.Premium": {
+    "defaultMessage": "Premium"
+  },
+  "AdminUsers.PrivilegeUser": {
+    "defaultMessage": "Privilege"
+  },
+  "AdminUsers.PrivilegeUserAdmin": {
+    "defaultMessage": "Administrator"
+  },
+  "AdminUsers.PrivilegeUserAdminTRANS": {
+    "defaultMessage": "Translator"
+  },
+  "AdminUsers.PrivilegeUserUser": {
+    "defaultMessage": "User"
+  },
+  "AdminUsers.Search": {
+    "defaultMessage": "Search"
+  },
+  "AdminUsers.ShowDetails": {
+    "defaultMessage": "Details"
+  },
+  "AdminUsers.Status": {
+    "defaultMessage": "Status"
+  },
+  "AdminUsers.StatusUserActif": {
+    "defaultMessage": "Actif"
+  },
+  "AdminUsers.StatusUserBlocked": {
+    "defaultMessage": "Blocked"
+  },
+  "AdminUsers.StatusUserDisabled": {
+    "defaultMessage": "Disabled"
+  },
+  "AdminUsers.SubscriptionEnum": {
+    "defaultMessage": "Subscription"
+  },
+  "AdminUsers.SubscriptionUserExcellence": {
+    "defaultMessage": "Excellence"
+  },
+  "AdminUsers.SubscriptionUserFree": {
+    "defaultMessage": "Free"
+  },
+  "AdminUsers.SubscriptionUserPremium": {
+    "defaultMessage": "Premium"
+  },
+  "AdminUsers.Title": {
+    "defaultMessage": "Users"
+  },
+  "AdminUsers.UserName": {
+    "defaultMessage": "User Name"
+  },
+  "AdminUsers.privilegeAdmin": {
+    "defaultMessage": "Administrator"
+  },
+  "AdminUsers.privilegeTrans": {
+    "defaultMessage": "Translator"
+  },
+  "AdminUsers.searchSentence": {
+    "defaultMessage": "Search"
+  },
+  "AdminUsers.subscriptionExcellence": {
+    "defaultMessage": "Excellence subscription"
+  },
+  "AdminUsers.subscriptionFree": {
+    "defaultMessage": "Free subscription"
+  },
+  "AdminUsers.subscriptionPremium": {
+    "defaultMessage": "Premium subscription"
+  },
   "BodyTogh.welcome": {
     "defaultMessage": "Welcome to Togh"
   },
+  "BodyTogh.whatisToghExample": {
+    "defaultMessage": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event."
+  },
   "BodyTogh.whatisToghExplanation": {
-    "defaultMessage": "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who."
+    "defaultMessage": "Togh is an application to manage your event."
+  },
+  "BodyTogh.whatisToghPossibility": {
+    "defaultMessage": "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who."
   },
   "BodyTogh.whatisToghTitle": {
     "defaultMessage": "What is Togh?"
@@ -236,6 +362,9 @@
   "EventItinerary.ItineraryTip": {
     "defaultMessage": "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary"
   },
+  "EventItinerary.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of steps allowed in the event. Go to your profile to see your subscription"
+  },
   "EventItinerary.MainTitleItinerary": {
     "defaultMessage": "Itinerary"
   },
@@ -389,11 +518,23 @@
   "EventPreferences.CurrencyOnEvent": {
     "defaultMessage": "Currency used in this event"
   },
-  "EventPreferences.ExpenseTip": {
-    "defaultMessage": "Set up all preferences for the event"
+  "EventPreferences.EventSubscription": {
+    "defaultMessage": "Subscription"
   },
   "EventPreferences.MainTitlePreferences": {
-    "defaultMessage": "Preference"
+    "defaultMessage": "Preferences"
+  },
+  "EventPreferences.PreferencesTip": {
+    "defaultMessage": "Set up all preferences for the event"
+  },
+  "EventPreferences.SubscriptionExcellenceExplanation": {
+    "defaultMessage": "A Excellence event contains all functions, and a limit of 1000 per items"
+  },
+  "EventPreferences.SubscriptionFreeExplanation": {
+    "defaultMessage": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)"
+  },
+  "EventPreferences.SubscriptionPremiumExplanation": {
+    "defaultMessage": "A Premium event contains all functions, upper limitation participants (100) and items (100)"
   },
   "EventShoppingList.AddItem": {
     "defaultMessage": "Add a item in the list"
@@ -421,6 +562,9 @@
   },
   "EventShoppingList.ItemRemoved": {
     "defaultMessage": "The item is removed"
+  },
+  "EventShoppingList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of items allowed in the event. Go to your profile to see your subscription"
   },
   "EventShoppingList.MainTitleShoppingList": {
     "defaultMessage": "Shopping List"
@@ -503,6 +647,9 @@
   "EventSurvey.InProgress": {
     "defaultMessage": "In progress"
   },
+  "EventSurvey.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription"
+  },
   "EventSurvey.NoAccessForSurveyInPreparation": {
     "defaultMessage": "This survey is in preparation. You can't access it for the moment."
   },
@@ -530,11 +677,20 @@
   "EventSurveyList.AddSurvey": {
     "defaultMessage": "Add a survey in the list"
   },
+  "EventSurveyList.CantaddItem": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventSurveyList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of survey allowed in the event. Go to your profile to see your subscription"
+  },
   "EventSurveyList.MainTitleSurveyList": {
     "defaultMessage": "Surveys"
   },
   "EventSurveyList.NoItem": {
     "defaultMessage": "You don't have any survey ready in the list."
+  },
+  "EventSurveyList.SurveyAdded": {
+    "defaultMessage": "A survey is added"
   },
   "EventSurveyList.SurveyTip": {
     "defaultMessage": "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review."
@@ -593,6 +749,9 @@
   "EventTaskList.InProgress": {
     "defaultMessage": "In progress"
   },
+  "EventTaskList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription"
+  },
   "EventTaskList.MainTitleTaskList": {
     "defaultMessage": "Tasks List"
   },
@@ -643,6 +802,12 @@
   },
   "EventsList.CantGetListItem": {
     "defaultMessage": "Can't access the list of item'"
+  },
+  "EventsList.LimitSubscription": {
+    "defaultMessage": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription"
+  },
+  "EventsList.ServerConnectionError": {
+    "defaultMessage": "Server connection error"
   },
   "Expense.Budget": {
     "defaultMessage": "Budget"
@@ -703,6 +868,9 @@
   },
   "Login.CantConnectToTheServer": {
     "defaultMessage": "Can't Connect To The Server"
+  },
+  "Login.RememberMe": {
+    "defaultMessage": "Remember Me"
   },
   "Login.connection": {
     "defaultMessage": "Connection"

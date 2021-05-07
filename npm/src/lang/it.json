@@ -49,11 +49,137 @@
   "__AdminTranslator.nbTransations" : "Number of translation",
   "AdminTranslator.nbTransations" : "Numero di traduzioni",
 
+  "__AdminUsers.Administrator" : "Administrator",
+  "AdminUsers.Administrator" : "Amministratore",
+
+  "__AdminUsers.AllUsers" : "All Users",
+  "AdminUsers.AllUsers" : "Tutti gli utenti",
+
+  "__AdminUsers.Blocked" : "Blocked",
+  "AdminUsers.Blocked" : "Bloccato",
+
+  "__AdminUsers.CompleteName" : "Complete Name",
+  "AdminUsers.CompleteName" : "Nome completo",
+
+  "__AdminUsers.Connected" : "Connected",
+  "AdminUsers.Connected" : "Collegato",
+
+  "__AdminUsers.ConnectedOffline" : "User offline",
+  "AdminUsers.ConnectedOffline" : "Utente offline",
+
+  "__AdminUsers.ConnectedOnLine" : "User connected",
+  "AdminUsers.ConnectedOnLine" : "Utente connesso",
+
+  "__AdminUsers.Disconnect" : "Disconnect",
+  "AdminUsers.Disconnect" : "Disconnetti",
+
+  "__AdminUsers.Email" : "Email",
+  "AdminUsers.Email" : "E-mail",
+
+  "__AdminUsers.Excellence" : "Excellence",
+  "AdminUsers.Excellence" : "Eccellenza",
+
+  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "AdminUsers.LastActivityTime" : "Ultima attività",
+
+  "__AdminUsers.LastConnectionTime" : "Last Connection",
+  "AdminUsers.LastConnectionTime" : "Ultima connessione",
+
+  "__AdminUsers.LongStatusUserActif" : "User actif",
+  "AdminUsers.LongStatusUserActif" : "Attivazione utente",
+
+  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
+  "AdminUsers.LongStatusUserBlock" : "Utente bloccato",
+
+  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
+  "AdminUsers.LongStatusUserDisabled" : "Utente disabilitato",
+
+  "__AdminUsers.Myself" : "Myself",
+  "AdminUsers.Myself" : "Me stessa",
+
+  "__AdminUsers.PhoneNumber" : "PhoneNumber",
+  "AdminUsers.PhoneNumber" : "Numero di telefono",
+
+  "__AdminUsers.Premium" : "Premium",
+  "AdminUsers.Premium" : "Premium",
+
+  "__AdminUsers.PrivilegeUser" : "Privilege",
+  "AdminUsers.PrivilegeUser" : "Privilegio",
+
+  "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
+  "AdminUsers.PrivilegeUserAdmin" : "Amministratore",
+
+  "__AdminUsers.PrivilegeUserAdminTRANS" : "Translator",
+  "AdminUsers.PrivilegeUserAdminTRANS" : "Traduttore",
+
+  "__AdminUsers.PrivilegeUserUser" : "User",
+  "AdminUsers.PrivilegeUserUser" : "Utente",
+
+  "__AdminUsers.Search" : "Search",
+  "AdminUsers.Search" : "Ricerca",
+
+  "__AdminUsers.ShowDetails" : "Details",
+  "AdminUsers.ShowDetails" : "Dettagli",
+
+  "__AdminUsers.Status" : "Status",
+  "AdminUsers.Status" : "Stato",
+
+  "__AdminUsers.StatusUserActif" : "Actif",
+  "AdminUsers.StatusUserActif" : "Actif",
+
+  "__AdminUsers.StatusUserBlocked" : "Blocked",
+  "AdminUsers.StatusUserBlocked" : "Bloccato",
+
+  "__AdminUsers.StatusUserDisabled" : "Disabled",
+  "AdminUsers.StatusUserDisabled" : "Disabilitato",
+
+  "__AdminUsers.SubscriptionEnum" : "Subscription",
+  "AdminUsers.SubscriptionEnum" : "Sottoscrizione",
+
+  "__AdminUsers.SubscriptionUserExcellence" : "Excellence",
+  "AdminUsers.SubscriptionUserExcellence" : "Eccellenza",
+
+  "__AdminUsers.SubscriptionUserFree" : "Free",
+  "AdminUsers.SubscriptionUserFree" : "Gratuito",
+
+  "__AdminUsers.SubscriptionUserPremium" : "Premium",
+  "AdminUsers.SubscriptionUserPremium" : "Premium",
+
+  "__AdminUsers.Title" : "Users",
+  "AdminUsers.Title" : "Utenti",
+
+  "__AdminUsers.UserName" : "User Name",
+  "AdminUsers.UserName" : "Nome utente",
+
+  "__AdminUsers.privilegeAdmin" : "Administrator",
+  "AdminUsers.privilegeAdmin" : "Amministratore",
+
+  "__AdminUsers.privilegeTrans" : "Translator",
+  "AdminUsers.privilegeTrans" : "Traduttore",
+
+  "__AdminUsers.searchSentence" : "Search",
+  "AdminUsers.searchSentence" : "Ricerca",
+
+  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
+  "AdminUsers.subscriptionExcellence" : "Abbonamento Excellence",
+
+  "__AdminUsers.subscriptionFree" : "Free subscription",
+  "AdminUsers.subscriptionFree" : "Abbonamento gratuito",
+
+  "__AdminUsers.subscriptionPremium" : "Premium subscription",
+  "AdminUsers.subscriptionPremium" : "Abbonamento Premium",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Benvenuto in Togh",
 
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event. Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event. In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample" : "Potluck con la scuola? Barbecue con gli amici? Viaggio su strada con la famiglia su m? più giorni? Questo è un evento.",
+
+  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation" : "Togh è un'applicazione per gestire il tuo evento. Potluck con la scuola? Barbecue con gli amici? Viaggio su strada con la famiglia su m? più giorni? Questo è un evento. In un evento, organizza i partecipanti, registra le attività e la lista della spesa, dai l'indirizzo, specifica i passaggi del tuo viaggio. Puoi chiedere al partecipante qualsiasi sondaggio: preferisce visitare Hollywood Bld, o il Griffith Observatory (Paul vuole visitare entrambi!) Visualizza l'itinerario sulla mappa. Calcola la spesa. Togh dirà chi possiede chi.",
+
+  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility" : "In un evento, organizza i partecipanti, registra le attività e la lista della spesa, dai l'indirizzo, specifica i passaggi del tuo viaggio. Puoi chiedere al partecipante qualsiasi sondaggio: preferisce visitare Hollywood Bld, o il Griffith Observatory (Paul vuole visitare entrambi!) Visualizza l'itinerario sulla mappa. Calcola la spesa. Togh dirà chi possiede chi.",
 
   "__BodyTogh.whatisToghTitle" : "What is Togh?",
   "BodyTogh.whatisToghTitle" : "Cos'è Togh?",
@@ -246,6 +372,9 @@
   "__EventItinerary.ItineraryTip" : "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip" : "Elenca tutti i luoghi che desideri visitare durante questo evento. Se l'evento si svolge in più giorni, puoi impostare il tuo itinerario giorno per giorno",
 
+  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription" : "Hai raggiunto il limite di gradini consentiti nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
+
   "__EventItinerary.MainTitleItinerary" : "Itinerary",
   "EventItinerary.MainTitleItinerary" : "Itinerario",
 
@@ -410,11 +539,26 @@
   "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
   "EventPreferences.CurrencyOnEvent" : "Valuta utilizzata in questo evento",
 
+  "__EventPreferences.EventSubscription" : "Subscription",
+  "EventPreferences.EventSubscription" : "Sottoscrizione",
+
   "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
   "EventPreferences.ExpenseTip" : "Imposta tutte le preferenze per l'evento",
 
-  "__EventPreferences.MainTitlePreferences" : "Preference",
+  "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "Preferenza",
+
+  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip" : "Imposta tutte le preferenze per l'evento",
+
+  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation" : "Un evento Excellence contiene tutte le funzioni e un limite di 1000 per articolo",
+
+  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation" : "Un evento gratuito contiene tutte le funzioni tranne il budget ed è limitato nel numero di partecipanti (20) e articoli (50)",
+
+  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation" : "Un evento Premium contiene tutte le funzioni, i partecipanti al limite massimo (100) e gli elementi (100)",
 
   "__EventShoppingList.AddItem" : "Add a item in the list",
   "EventShoppingList.AddItem" : "Aggiungi un elemento all'elenco",
@@ -445,6 +589,9 @@
 
   "__EventShoppingList.ItemRemoved" : "The item is removed",
   "EventShoppingList.ItemRemoved" : "L'articolo viene rimosso",
+
+  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription" : "Hai raggiunto il limite di elementi consentiti nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
 
   "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
   "EventShoppingList.MainTitleShoppingList" : "Lista della spesa",
@@ -532,6 +679,9 @@
   "__EventSurvey.InProgress" : "In progress",
   "EventSurvey.InProgress" : "In corso",
 
+  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription" : "Hai raggiunto il limite di scelta consentito nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
+
   "EventSurvey.MainTitleSurveyList" : "Sondaggio",
 
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
@@ -567,8 +717,14 @@
   "__EventSurveyList.AddSurvey" : "Add a survey in the list",
   "EventSurveyList.AddSurvey" : "Aggiungi un sondaggio nell&#39;elenco",
 
+  "__EventSurveyList.CantaddItem" : "A task can't be added",
+  "EventSurveyList.CantaddItem" : "Impossibile aggiungere un'attività",
+
   "__EventSurveyList.ItineraryTip" : "List all place you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventSurveyList.ItineraryTip" : "Elenca tutti i luoghi che desideri visitare durante questo evento. Se l&#39;evento si svolge in più giorni, puoi impostare il tuo itinerario giorno per giorno",
+
+  "__EventSurveyList.LimitSubsscription" : "You reach the limit of survey allowed in the event. Go to your profile to see your subscription",
+  "EventSurveyList.LimitSubsscription" : "Hai raggiunto il limite di sondaggio consentito nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
 
   "__EventSurveyList.MainTitleItinerary" : "Itinerary",
   "EventSurveyList.MainTitleItinerary" : "Itinerario",
@@ -578,6 +734,9 @@
 
   "__EventSurveyList.NoItem" : "You don't have any survey ready in the list.",
   "EventSurveyList.NoItem" : "Non hai nessun sondaggio pronto nell&#39;elenco.",
+
+  "__EventSurveyList.SurveyAdded" : "A survey is added",
+  "EventSurveyList.SurveyAdded" : "Viene aggiunto un sondaggio",
 
   "__EventSurveyList.SurveyTip" : "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review.",
   "EventSurveyList.SurveyTip" : "I partecipanti preferiscono visitare un&#39;arte o un museo aerospaziale? Preferisci il ristorante giapponese, italiano o francese? Crea un sondaggio e raccogli la recensione.",
@@ -644,6 +803,9 @@
   "__EventTaskList.InProgress" : "In progress",
   "EventTaskList.InProgress" : "In corso",
 
+  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription" : "Hai raggiunto il limite di attività consentite nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
+
   "__EventTaskList.MainTitleTaskList" : "Tasks List",
   "EventTaskList.MainTitleTaskList" : "Elenco attività",
 
@@ -697,6 +859,12 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Non riesco ad accedere all'elenco di elementi &quot;",
+
+  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription" : "Hai raggiunto il limite di eventi consentiti nell'ultimo periodo. Vai al tuo profilo per vedere il tuo abbonamento",
+
+  "__EventsList.ServerConnectionError" : "Server connection error",
+  "EventsList.ServerConnectionError" : "Errore di connessione al server",
 
   "__Expense.Budget" : "Budget",
   "Expense.Budget" : "Budget",
@@ -768,6 +936,9 @@
 
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Impossibile connettersi al server",
+
+  "__Login.RememberMe" : "Remember Me",
+  "Login.RememberMe" : "Ricordati di me",
 
   "Login.badConnection" : "Connessione errata - Controlla le tue credenziali",
 

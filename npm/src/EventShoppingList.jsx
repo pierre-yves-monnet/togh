@@ -10,9 +10,9 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag, Toggle } from 'carbon-components-react';
+import { TextInput, TextArea, Toggle } from 'carbon-components-react';
 
-import { ArrowUp, ArrowDown, Cash, DashCircle, PlusCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+import { DashCircle, PlusCircle } from 'react-bootstrap-icons';
 
 import ChooseParticipant from './component/ChooseParticipant';
 import Expense from './component/Expense';
@@ -284,6 +284,11 @@ class EventShoppingList extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
 			console.log("EventShoppinglist.addTaskCallback: HTTP ERROR ");
+		} else if (httpPayload.getData().limitsubscription) {
+			console.log("EventTasklist.callbackdata: Limit Subscription");
+			currentOperation.status= userFeedbackConstant.ERROR;
+			currentOperation.result=intl.formatMessage({id: "EventShoppingList.LimitSubsscription",defaultMessage: "You reach the limit of items allowed in the event. Go to your profile to see your subscription"})
+			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 		} else if (httpPayload.getData().status ==="ERROR") {
 			console.log("EventShoppinglist.callbackdata: ERROR "+JSON.stringify(httpPayload.getData().listLogEvents));
 			currentOperation.status= userFeedbackConstant.ERROR;
