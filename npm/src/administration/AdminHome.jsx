@@ -16,6 +16,7 @@ import AdminUsers 				from 'administration/AdminUsers';
 import AdminTranslator 			from 'administration/AdminTranslator';
 import AdminGoogle 				from 'administration/AdminGoogle';
 import AdminAPIKey 				from 'administration/AdminAPIKey';
+import AdminInfo 				from 'administration/AdminInfo';
 
 import FactoryService 			from 'service/FactoryService';
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
@@ -67,6 +68,7 @@ class AdminHome extends React.Component {
 					</div>
 					<div class="col-6"> 
 						<AdminGoogle/><br/>
+						<AdminInfo/>
 						<AdminAPIKey/>
 					</div>
 				</div>
