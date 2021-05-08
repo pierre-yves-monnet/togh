@@ -6,11 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.togh.entity.ToghUserEntity.ContextAccess;
 
@@ -18,6 +23,8 @@ import lombok.Data;
 
 @MappedSuperclass
 @Inheritance
+// use for CreatedDate and LatModifiedDate
+@EntityListeners(AuditingEntityListener.class)
 public abstract @Data class BaseEntity {
 	
 	@Id
@@ -26,10 +33,12 @@ public abstract @Data class BaseEntity {
 
     private String name;
     
-    @Column(name="datecreation")    
+    @CreatedDate
+    @Column(name="datecreation", nullable = false)    
     private LocalDateTime datecreation =LocalDateTime.now(ZoneOffset.UTC);
 
-    @Column(name="datemodification")    
+    @LastModifiedDate
+    @Column(name="datemodification", nullable = false)    
     private LocalDateTime datemodification = LocalDateTime.now(ZoneOffset.UTC);
          
     public BaseEntity( String name ) {
