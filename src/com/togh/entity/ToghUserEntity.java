@@ -113,18 +113,24 @@ public @Data class ToghUserEntity extends BaseEntity {
         PORTAL, GOOGLE, INVITED, SYSTEM
     }
 
+   
+
     @Column(name = "source", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
 
     SourceUserEnum source;
-    /*
-     * public void setSource(SourceUserEnum sourceUser) {
-     * this.source= sourceUser;
-     * }
-     * public SourceUserEnum getSource() {
-     * return source;
-     * }
-     */
+    
+    public enum TypePictureEnum {
+        TOGH, CYPRIS, URL, IMAGE
+    }
+    @Column(name = "typepicture", length = 10, nullable = false)
+    @org.hibernate.annotations.ColumnDefault("'TOGH'")
+    @Enumerated(EnumType.STRING)
+
+    TypePictureEnum typePicture;
+
+    @Column(name = "picture", length = 300)
+    String picture;
 
     /**
      * Level of privilege
@@ -205,8 +211,12 @@ public @Data class ToghUserEntity extends BaseEntity {
             longlabel.append(getName());
         }
 
+        resultMap.put("tagid",System.currentTimeMillis() % 10000);
         resultMap.put("name", getName());
         resultMap.put("firstName", firstName);
+        resultMap.put("typePicture", typePicture);
+        resultMap.put("picture", picture);
+        
         resultMap.put("statusUser", statusUser.toString());
 
         // if the context is SECRET, the last name is not visible
@@ -239,7 +249,7 @@ public @Data class ToghUserEntity extends BaseEntity {
 
         if (contextAccess == ContextAccess.MYPROFILE || contextAccess == ContextAccess.ADMIN) {
             resultMap.put("subscriptionuser", subscriptionUser.toString());
-            resultMap.put("showtipsuser", showTipsUser);
+            resultMap.put("showTipsUser", showTipsUser);
 
         }
         if (contextAccess == ContextAccess.ADMIN) {

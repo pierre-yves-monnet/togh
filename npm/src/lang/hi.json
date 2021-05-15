@@ -16,6 +16,9 @@
 
   "AdminHome.Title" : "शासन प्रबंध",
 
+  "__AdminInfo.Information" : "Information",
+  "AdminInfo.Information" : "जानकारी",
+
   "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "शासन प्रबंध",
 
@@ -999,6 +1002,132 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "अपनी प्राथमिकताएँ प्रबंधित करें, एक अवतार सेट करें।",
+
+  "__MyProfile.ChangeEmail" : "Change Email",
+  "MyProfile.ChangeEmail" : "बदले ई - मेल",
+
+  "__MyProfile.Cypris" : "Cypris",
+  "MyProfile.Cypris" : "साइप्रिस",
+
+  "__MyProfile.Email" : "Email",
+  "MyProfile.Email" : "ईमेल",
+
+  "__MyProfile.EmailExplanation" : "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email",
+  "MyProfile.EmailExplanation" : "आपका ईमेल महत्वपूर्ण है। यह प्रत्येक उपयोगकर्ता के लिए विशिष्ट पहचानकर्ता है। यदि आपने अपना पासवर्ड खो दिया है, तो Togh आपको इस ईमेल पर एक नया पासवर्ड भेजेगा",
+
+  "__MyProfile.EmailVisibility" : "Email visibility",
+  "MyProfile.EmailVisibility" : "ईमेल दृश्यता",
+
+  "__MyProfile.EmailVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.EmailVisibilityAlwayButSearch" : "हर जगह सिवाय खोज के",
+
+  "__MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Search does not use your email, but the result display it. A user connected to an event see your email",
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation" : "खोज आपके ईमेल का उपयोग नहीं करती है, लेकिन परिणाम उसे प्रदर्शित करता है। किसी ईवेंट से जुड़ा उपयोगकर्ता आपका ईमेल देखता है",
+
+  "__MyProfile.EmailVisibilityAlways" : "Always",
+  "MyProfile.EmailVisibilityAlways" : "हमेशा",
+
+  "__MyProfile.EmailVisibilityAlwaysExplanation" : "Your email is visible for any user connected to Togh",
+  "MyProfile.EmailVisibilityAlwaysExplanation" : "आपका ईमेल Togh से जुड़े किसी भी उपयोगकर्ता के लिए दिखाई दे रहा है",
+
+  "__MyProfile.EmailVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.EmailVisibilityLimitedEvent" : "सीमित घटना",
+
+  "__MyProfile.EmailVisibilityLimitedEventExplanation" : "Your email is visible only on event, for all users registered in the event",
+  "MyProfile.EmailVisibilityLimitedEventExplanation" : "ईवेंट में पंजीकृत सभी उपयोगकर्ताओं के लिए आपका ईमेल केवल ईवेंट पर दिखाई देता है",
+
+  "__MyProfile.EmailVisibilityNever" : "Never",
+  "MyProfile.EmailVisibilityNever" : "कभी नहीँ",
+
+  "__MyProfile.EmailVisibilityNeverExplanation" : "Your email is not visible at all.",
+  "MyProfile.EmailVisibilityNeverExplanation" : "आपका ईमेल बिल्कुल दिखाई नहीं दे रहा है।",
+
+  "__MyProfile.Image" : "Image",
+  "MyProfile.Image" : "छवि",
+
+  "__MyProfile.PhoneNumber" : "Phone Number",
+  "MyProfile.PhoneNumber" : "फ़ोन नंबर",
+
+  "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
+  "MyProfile.PhoneNumberExplanation" : "Togh इसका उपयोग नहीं करता है, लेकिन आप इसे उसी ईवेंट में उपयोगकर्ताओं के साथ साझा कर सकते हैं",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "खोज को छोड़कर हर जगह",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "खोज आपके फ़ोन नंबर का उपयोग नहीं करती है, लेकिन परिणाम इसे प्रदर्शित करता है। किसी ईवेंट से जुड़ा एक उपयोगकर्ता आपका फ़ोन देखें",
+
+  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
+  "MyProfile.PhoneNumberVisibilityAlways" : "हमेशा",
+
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "आपका फ़ोन नंबर Togh . से जुड़े किसी भी उपयोगकर्ता के लिए दृश्यमान है",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "सीमित घटना",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "आपका फ़ोन नंबर केवल ईवेंट पर ही दिखाई देता है, ईवेंट में पंजीकृत सभी उपयोगकर्ताओं के लिए",
+
+  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
+  "MyProfile.PhoneNumberVisibilityNever" : "कभी नहीँ",
+
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "आपका फ़ोन नंबर बिल्कुल भी दिखाई नहीं दे रहा है।",
+
+  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation" : "आपका उपयोगकर्ता खोज फ़ंक्शन में दिखाई दे सकता है। यदि नहीं, तो आपको आमंत्रित करने का एकमात्र तरीका स्पष्ट रूप से अपना ईमेल देना है।",
+
+  "__MyProfile.Togh" : "Togh",
+  "MyProfile.Togh" : "तोग",
+
+  "__MyProfile.URL" : "Url",
+  "MyProfile.URL" : "यूआरएल",
+
+  "__MyProfile.UserName" : "User name",
+  "MyProfile.UserName" : "उपयोगकर्ता नाम",
+
+  "__MyProfile.firstname" : "FirstName",
+  "MyProfile.firstname" : "नाम",
+
+  "__MyProfile.hideTipsUser" : "Hide tips",
+  "MyProfile.hideTipsUser" : "युक्तियाँ छुपाएं",
+
+  "__MyProfile.lastName" : "LastName",
+  "MyProfile.lastName" : "अंतिम नाम",
+
+  "__MyProfile.searchable" : "Searchable",
+  "MyProfile.searchable" : "खोज सकने",
+
+  "__MyProfile.searchableFalse" : "Never in the search result",
+  "MyProfile.searchableFalse" : "खोज परिणाम में कभी नहीं",
+
+  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
+  "MyProfile.searchableTrue" : "हाँ, मैं खोज पर प्रकट होऊँगा",
+
+  "__MyProfile.showTipsUser" : "Show tips",
+  "MyProfile.showTipsUser" : "सुझाव दिखाएं",
+
+  "__MyProfile.showtipuser" : "ShowTipUsers",
+  "MyProfile.showtipuser" : "शो टिप उपयोगकर्ताUser",
+
+  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation" : "उत्कृष्टता सदस्यता आसमान तक पहुँचती है! बड़ी घटनाएं, कोई वास्तविक सीमा नहीं। और आप एप्लिकेशन को बनाए रखने में मदद करते हैं।",
+
+  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation" : "नि:शुल्क सदस्यता में वह सब शामिल है जो आपको अपने कार्यक्रम आयोजित करने के लिए चाहिए। यह लागत से बचने के लिए ही सीमित है। आप प्रति माह बनाए जा सकने वाले ईवेंट की संख्या, प्रति ईवेंट प्रतिभागियों की संख्या में सीमित हैं।",
+
+  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation" : "प्रीमियम सदस्यता सीमा को धक्का देती है। आप कई कार्यक्रम आयोजित कर सकते हैं, बजट का प्रबंधन कर सकते हैं। पेशेवर के लिए बिल्कुल सही जो सब कुछ ट्रैक और व्यवस्थित करने के लिए एक महान प्रणाली चाहते हैं, या उन उपयोगकर्ताओं के लिए जो बहुत सारे कार्यक्रम आयोजित करते हैं!",
+
+  "__MyProfile.subscriptionUser" : "Subscription",
+  "MyProfile.subscriptionUser" : "अंशदान",
+
+  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation" : "सदस्यता के विभिन्न स्तर मौजूद हैं।",
+
+  "__MyProfile.typeProfile" : "Picture",
+  "MyProfile.typeProfile" : "चित्र",
 
   "__RegisterNewUser.CloseRegistration" : "Close registration",
   "RegisterNewUser.CloseRegistration" : "पंजीकरण बंद करें",

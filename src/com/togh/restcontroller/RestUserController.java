@@ -142,12 +142,43 @@ public class RestUserController {
 
     }
 
+    /**
+     * Update yourself
+     * @param updateMap
+     * @param connectionStamp
+     * @return
+     */
     @CrossOrigin
-    @PostMapping(value="/api/user/admin/update", produces = "application/json")
+    @PostMapping(value="/api/user/update", produces = "application/json")
     public Map<String, Object> updateUser( @RequestBody Map<String, Object> updateMap,        
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
-        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
-        if (toghUser == null)
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null)
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+
+        // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
+        Long timezoneOffset             = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+
+        String attribut                 = RestTool.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
+        Object value                    = updateMap.get( RestJsonConstants.CST_PARAM_VALUE);
+        
+        Map<String, Object> payload = new HashMap<>();
+        OperationUser operationUser = toghUserService.updateUser( toghUserEntity.getId(), attribut, value);
+        
+        payload.put( RestJsonConstants.CST_USER, operationUser.toghUserEntity==null ? null :  operationUser.toghUserEntity.getMap( ContextAccess.ADMIN, timezoneOffset));
+        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, operationUser.listLogEvents );
+
+        return payload;
+    }
+  
+    
+    @CrossOrigin
+    @PostMapping(value="/api/user/admin/update", produces = "application/json")
+    public Map<String, Object> updateAdminUser( @RequestBody Map<String, Object> updateMap,        
+            @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 

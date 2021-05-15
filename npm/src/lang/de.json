@@ -14,6 +14,9 @@
   "__AdminGoogle.Google" : "Google",
   "AdminGoogle.Google" : "Google",
 
+  "__AdminInfo.Information" : "Information",
+  "AdminInfo.Information" : "Information",
+
   "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "Verwaltung",
 
@@ -946,6 +949,132 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "Verwalten Sie Ihre Einstellungen und richten Sie einen Avatar ein.",
+
+  "__MyProfile.ChangeEmail" : "Change Email",
+  "MyProfile.ChangeEmail" : "Ändern Sie die E-Mail",
+
+  "__MyProfile.Cypris" : "Cypris",
+  "MyProfile.Cypris" : "Cypris",
+
+  "__MyProfile.Email" : "Email",
+  "MyProfile.Email" : "Email",
+
+  "__MyProfile.EmailExplanation" : "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email",
+  "MyProfile.EmailExplanation" : "Ihre E-Mail ist wichtig. Dies ist die eindeutige Kennung für jeden Benutzer. Wenn Sie Ihr Passwort verloren haben, sendet Ihnen Togh ein neues Passwort für diese E-Mail",
+
+  "__MyProfile.EmailVisibility" : "Email visibility",
+  "MyProfile.EmailVisibility" : "E-Mail-Sichtbarkeit",
+
+  "__MyProfile.EmailVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.EmailVisibilityAlwayButSearch" : "Überall außer bei der Suche",
+
+  "__MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Search does not use your email, but the result display it. A user connected to an event see your email",
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Die Suche verwendet Ihre E-Mail nicht, aber das Ergebnis zeigt sie an. Ein Benutzer, der mit einem Ereignis verbunden ist, sieht Ihre E-Mail",
+
+  "__MyProfile.EmailVisibilityAlways" : "Always",
+  "MyProfile.EmailVisibilityAlways" : "Immer",
+
+  "__MyProfile.EmailVisibilityAlwaysExplanation" : "Your email is visible for any user connected to Togh",
+  "MyProfile.EmailVisibilityAlwaysExplanation" : "Ihre E-Mail-Adresse ist für jeden Benutzer sichtbar, der mit Togh verbunden ist",
+
+  "__MyProfile.EmailVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.EmailVisibilityLimitedEvent" : "Begrenzte Veranstaltung",
+
+  "__MyProfile.EmailVisibilityLimitedEventExplanation" : "Your email is visible only on event, for all users registered in the event",
+  "MyProfile.EmailVisibilityLimitedEventExplanation" : "Ihre E-Mail-Adresse ist nur während eines Ereignisses für alle im Ereignis registrierten Benutzer sichtbar",
+
+  "__MyProfile.EmailVisibilityNever" : "Never",
+  "MyProfile.EmailVisibilityNever" : "noch nie",
+
+  "__MyProfile.EmailVisibilityNeverExplanation" : "Your email is not visible at all.",
+  "MyProfile.EmailVisibilityNeverExplanation" : "Ihre E-Mail ist überhaupt nicht sichtbar.",
+
+  "__MyProfile.Image" : "Image",
+  "MyProfile.Image" : "Bild",
+
+  "__MyProfile.PhoneNumber" : "Phone Number",
+  "MyProfile.PhoneNumber" : "Telefonnummer",
+
+  "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
+  "MyProfile.PhoneNumberExplanation" : "Togh verwendet es nicht, aber Sie können es im selben Ereignis für Benutzer freigeben",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Überall außer bei der Suche",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Die Suche verwendet nicht Ihre Telefonnummer, aber das Ergebnis zeigt sie an. Ein Benutzer, der mit einem Ereignis verbunden ist, sieht Ihr Telefon",
+
+  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
+  "MyProfile.PhoneNumberVisibilityAlways" : "Immer",
+
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Ihre Telefonnummer ist für jeden Benutzer sichtbar, der mit Togh verbunden ist",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "Begrenzte Veranstaltung",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Ihre Telefonnummer ist nur bei einem Ereignis für alle im Ereignis registrierten Benutzer sichtbar",
+
+  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
+  "MyProfile.PhoneNumberVisibilityNever" : "noch nie",
+
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "Ihre Telefonnummer ist überhaupt nicht sichtbar.",
+
+  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation" : "Ihr Benutzer kann in der Suchfunktion sichtbar sein. Wenn nicht, können Sie Sie nur einladen, indem Sie Ihre E-Mail-Adresse explizit angeben.",
+
+  "__MyProfile.Togh" : "Togh",
+  "MyProfile.Togh" : "Togh",
+
+  "__MyProfile.URL" : "Url",
+  "MyProfile.URL" : "Url",
+
+  "__MyProfile.UserName" : "User name",
+  "MyProfile.UserName" : "Nutzername",
+
+  "__MyProfile.firstname" : "FirstName",
+  "MyProfile.firstname" : "Vorname",
+
+  "__MyProfile.hideTipsUser" : "Hide tips",
+  "MyProfile.hideTipsUser" : "Tipps ausblenden",
+
+  "__MyProfile.lastName" : "LastName",
+  "MyProfile.lastName" : "Nachname",
+
+  "__MyProfile.searchable" : "Searchable",
+  "MyProfile.searchable" : "Durchsuchbar",
+
+  "__MyProfile.searchableFalse" : "Never in the search result",
+  "MyProfile.searchableFalse" : "Niemals im Suchergebnis",
+
+  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
+  "MyProfile.searchableTrue" : "Ja, ich werde bei der Suche erscheinen",
+
+  "__MyProfile.showTipsUser" : "Show tips",
+  "MyProfile.showTipsUser" : "Tipps anzeigen",
+
+  "__MyProfile.showtipuser" : "ShowTipUsers",
+  "MyProfile.showtipuser" : "ShowTipUsers",
+
+  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation" : "Das Excellence-Abonnement erreicht den Himmel! Großveranstaltungen, keine wirkliche Grenze. Und Sie helfen bei der Pflege der Anwendung.",
+
+  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation" : "Das kostenlose Abonnement enthält alles, was Sie zur Organisation Ihrer Veranstaltungen benötigen. Es ist nur begrenzt, um die Kosten zu vermeiden. Die Anzahl der Ereignisse, die Sie pro Monat erstellen können, und die Anzahl der Teilnehmer pro Ereignis sind begrenzt.",
+
+  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation" : "Das Premium-Abonnement überschreitet das Limit. Sie können mehrere Veranstaltungen organisieren und das Budget verwalten. Perfekt für Profis, die ein großartiges System zum Verfolgen und Organisieren von allem haben möchten, oder für Benutzer, die viele Veranstaltungen organisieren!",
+
+  "__MyProfile.subscriptionUser" : "Subscription",
+  "MyProfile.subscriptionUser" : "Abonnement",
+
+  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation" : "Es gibt verschiedene Abonnementstufen.",
+
+  "__MyProfile.typeProfile" : "Picture",
+  "MyProfile.typeProfile" : "Bild",
 
   "__RegisterNewUser.CloseRegistration" : "Close registration",
   "RegisterNewUser.CloseRegistration" : "Registrierung schließen",

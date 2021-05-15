@@ -378,7 +378,12 @@ public class ToghUserService {
                 eventOperationResult);
         operationUser.listLogEvents.addAll(eventOperationResult.listLogEvents);
 
-        factoryService.getToghUserService().saveUser(operationUser.toghUserEntity );
+        factoryService.getToghUserService().saveUser( operationUser.toghUserEntity );
+
+        
+        // we have to propagate this change to any another service
+        factoryService.getLoginService().userIsUpdated(operationUser.toghUserEntity );
+        
         return operationUser;
     }
 

@@ -32,7 +32,6 @@ class UserTips extends React.Component {
 		var userService = FactoryService.getInstance().getUserService();
 		// console.log("UserTip ; display tip Preference= "+userService.prefsDisplayTips());
 		
-		
 		if (userService.prefsDisplayTips()) {
 			return (<div class="toghTips">
 						<div class="row">

@@ -14,6 +14,9 @@
   "AdminGoogle.Google": {
     "defaultMessage": "Google"
   },
+  "AdminInfo.Information": {
+    "defaultMessage": "Information"
+  },
   "AdminTransaltor.Title": {
     "defaultMessage": "Translation"
   },
@@ -925,6 +928,132 @@
   },
   "Menu.MyProfileExplanation": {
     "defaultMessage": "Manage your preferences, set up an avatar."
+  },
+  "MyProfile.ChangeEmail": {
+    "defaultMessage": "Change Email"
+  },
+  "MyProfile.Cypris": {
+    "defaultMessage": "Cypris"
+  },
+  "MyProfile.Email": {
+    "defaultMessage": "Email"
+  },
+  "MyProfile.EmailExplanation": {
+    "defaultMessage": "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email"
+  },
+  "MyProfile.EmailVisibility": {
+    "defaultMessage": "Email visibility"
+  },
+  "MyProfile.EmailVisibilityAlwayButSearch": {
+    "defaultMessage": "Everywhere except search"
+  },
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation": {
+    "defaultMessage": "Search does not use your email, but the result display it. A user connected to an event see your email"
+  },
+  "MyProfile.EmailVisibilityAlways": {
+    "defaultMessage": "Always"
+  },
+  "MyProfile.EmailVisibilityAlwaysExplanation": {
+    "defaultMessage": "Your email is visible for any user connected to Togh"
+  },
+  "MyProfile.EmailVisibilityLimitedEvent": {
+    "defaultMessage": "Limited Event"
+  },
+  "MyProfile.EmailVisibilityLimitedEventExplanation": {
+    "defaultMessage": "Your email is visible only on event, for all users registered in the event"
+  },
+  "MyProfile.EmailVisibilityNever": {
+    "defaultMessage": "Never"
+  },
+  "MyProfile.EmailVisibilityNeverExplanation": {
+    "defaultMessage": "Your email is not visible at all."
+  },
+  "MyProfile.Image": {
+    "defaultMessage": "Image"
+  },
+  "MyProfile.PhoneNumber": {
+    "defaultMessage": "Phone Number"
+  },
+  "MyProfile.PhoneNumberExplanation": {
+    "defaultMessage": "Togh does not use it, but you can share it with users in the same event"
+  },
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": {
+    "defaultMessage": "Everywhere except search"
+  },
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": {
+    "defaultMessage": "Search does not use your phone number, but the result display it. A user connected to an event see your phone"
+  },
+  "MyProfile.PhoneNumberVisibilityAlways": {
+    "defaultMessage": "Always"
+  },
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation": {
+    "defaultMessage": "Your phone number is visible for any user connected to Togh"
+  },
+  "MyProfile.PhoneNumberVisibilityLimitedEvent": {
+    "defaultMessage": "Limited Event"
+  },
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation": {
+    "defaultMessage": "Your Phone number is visible only on event, for all users registered in the event"
+  },
+  "MyProfile.PhoneNumberVisibilityNever": {
+    "defaultMessage": "Never"
+  },
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": {
+    "defaultMessage": "Your phone number is not visible at all."
+  },
+  "MyProfile.SearchableExplanation": {
+    "defaultMessage": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly."
+  },
+  "MyProfile.Togh": {
+    "defaultMessage": "Togh"
+  },
+  "MyProfile.URL": {
+    "defaultMessage": "Url"
+  },
+  "MyProfile.UserName": {
+    "defaultMessage": "User name"
+  },
+  "MyProfile.firstname": {
+    "defaultMessage": "FirstName"
+  },
+  "MyProfile.hideTipsUser": {
+    "defaultMessage": "Hide tips"
+  },
+  "MyProfile.lastName": {
+    "defaultMessage": "LastName"
+  },
+  "MyProfile.searchable": {
+    "defaultMessage": "Searchable"
+  },
+  "MyProfile.searchableFalse": {
+    "defaultMessage": "Never in the search result"
+  },
+  "MyProfile.searchableTrue": {
+    "defaultMessage": "Yes, I will appears on search"
+  },
+  "MyProfile.showTipsUser": {
+    "defaultMessage": "Show tips"
+  },
+  "MyProfile.showtipuser": {
+    "defaultMessage": "ShowTipUsers"
+  },
+  "MyProfile.subscriptionExcellentExplanation": {
+    "defaultMessage": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application."
+  },
+  "MyProfile.subscriptionFreeExplanation": {
+    "defaultMessage": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event."
+  },
+  "MyProfile.subscriptionPremiumExplanation": {
+    "defaultMessage": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!"
+  },
+  "MyProfile.subscriptionUser": {
+    "defaultMessage": "Subscription"
+  },
+  "MyProfile.subscriptionUserExplanation": {
+    "defaultMessage": "Different level of subscription exists."
+  },
+  "MyProfile.typeProfile": {
+    "defaultMessage": "Picture"
   },
   "RegisterNewUser.CloseRegistration": {
     "defaultMessage": "Close registration"

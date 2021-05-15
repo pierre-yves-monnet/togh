@@ -16,7 +16,9 @@ import FactoryService 		from 'service/FactoryService';
 
 
 export const MENU_NAME = {
-		ADMINISTRATION: "Administration"
+		ADMINISTRATION: "Administration",
+		MYPROFILE : "MyProfile",
+		EVENTSLIST: "eventlist"
 	}
 
 class Menu extends React.Component {
@@ -76,14 +78,14 @@ class Menu extends React.Component {
 				</div>
 				
 				
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#"  class="toghmenu">
+				<a onClick={() =>this.props.clickMenu(  MENU_NAME.EVENTSLIST)} href="/#"  class="toghmenu">
 					<FormattedMessage id="Menu.MyFriends" defaultMessage="My Friends" />
 				</a>
 				<div class="toghmenulabel">
 					<FormattedMessage id="Menu.MyFriendExplanation" defaultMessage="See all your friends, invite new, send messages." />
 				</div>
 				
-				<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#"  class="toghmenu">
+				<a onClick={() =>this.props.clickMenu( MENU_NAME.MYPROFILE )} href="/#"  class="toghmenu">
 					<FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
 				</a>
 				<div class="toghmenulabel">

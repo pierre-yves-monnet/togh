@@ -33,6 +33,10 @@ body>div.container {margin-top:10px;}
  	margin-top: 4px; 
  	margin-bottom: 15px;
 */
+.thoginputreadonly {
+    background: aliceblue;
+    font-style: italic;
+}
 .Loading {
 	display: inline-block;
 	vertical-align: middle;

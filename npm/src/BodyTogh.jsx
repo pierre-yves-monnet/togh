@@ -19,12 +19,13 @@ import RegisterNewUser 	from 'RegisterNewUser';
 import EventsList 		from 'EventsList';
 import Event 			from 'event/Event';
 import AdminHome 		from 'administration/AdminHome';
+import MyProfile		from 'user/MyProfile.jsx'
 
 
 import FactoryService from './service/FactoryService';
+
 import AuthService from './service/AuthService';
 
- 
 
 import fr from "./lang/fr.json";
 import en from "./lang/en.json";
@@ -39,6 +40,12 @@ import ar from "./lang/ar.json";
 import es from "./lang/es.json";
 
 
+const FRAME_NAME = {
+		LISTEVENTS: 	"frameListEvents",
+		EVENT:			"frameEvent",
+		ADMINISTRATION: "frameAdministration",
+		MYPROFILE:		"frameMyProfile"
+};
 
 const messages = {
 	    'fr': fr,
@@ -75,7 +82,7 @@ class BodyTogh extends React.Component {
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		// this.connect = this.connect.bind(this);
 		// currenteventid : we keep the ID here, but we don't load it. Component Event will be call, and it will be in charge to load it.
-		this.state = { frameContent: 'frameEvents', 
+		this.state = { frameContent: FRAME_NAME.LISTEVENTS, 
 						showmenu : true, 
 						sizeMenu:  '10%',
 						currenteventid : null,
@@ -129,6 +136,7 @@ class BodyTogh extends React.Component {
 			"borderRight": "2px solid #194063",
 			"paddingLeft" : "30px"
         };
+
 		return (
 			<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >
 			<div>
@@ -142,9 +150,10 @@ class BodyTogh extends React.Component {
 									<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
 								</td>
 								<td style={{padding: "10px", "verticalAlign": "top"}} >
-									{ this.state.frameContent === 'frameEvents' && <EventsList homeSelectEvent={this.homeSelectEvent} />}
-									{ this.state.frameContent === 'event' && <Event eventid={this.state.currenteventid} />}
-									{ this.state.frameContent === 'frameAdministration' && <AdminHome />}
+									{ this.state.frameContent === FRAME_NAME.LISTEVENTS && <EventsList homeSelectEvent={this.homeSelectEvent} />}
+									{ this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currenteventid} />}
+									{ this.state.frameContent === FRAME_NAME.MYPROFILE && <MyProfile  />}
+									{ this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
 			
 								</td>
 							</tr>
@@ -165,15 +174,20 @@ class BodyTogh extends React.Component {
 	
 	homeSelectEvent( eventId ) {
 		console.log("BodyTogh.selectEvent: get it, an event is selected :"+eventId);
-		this.setState( {'currenteventid' : eventId, 'frameContent': 'event' });
+		this.setState( {'currenteventid' : eventId, 'frameContent': FRAME_NAME.EVENT });
 	}
 
 	clickMenu( menuName ) {
-		console.log("BodyTogh.clickMenu: menuAction"+menuName);
-		if (menuName === MENU_NAME.ADMINISTRATION)
-				this.setState( {'currenteventid' : null, 'frameContent':'frameAdministration' });
-		else
-			this.setState( {'currenteventid' : null, 'frameContent':'frameEvents' });
+		console.log("BodyTogh.clickMenu: menuAction="+menuName);
+		if (menuName === MENU_NAME.ADMINISTRATION) {
+				this.setState( {'currenteventid' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
+		}
+		else if (menuName === MENU_NAME.MYPROFILE) {
+				this.setState( {'currenteventid' : null, 'frameContent': FRAME_NAME.MYPROFILE });
+		}
+		else {
+			this.setState( {'currenteventid' : null, 'frameContent': FRAME_NAME.LISTEVENTS });
+		}
 	}
 	
 	

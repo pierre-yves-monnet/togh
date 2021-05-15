@@ -39,6 +39,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
+import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.service.ApiKeyService;
 import com.togh.service.FactoryService;
 import com.togh.service.LoginService.LoginStatus;
@@ -131,7 +132,7 @@ public class RestLoginController {
                 loginStatus = factoryService.getLoginService().connectSSO( email, true);
                 if (! loginStatus.isConnected) {
                     // register it now !
-                    loginStatus = factoryService.getLoginService().registerNewUser( email, firstName, lastName, /** No password */ null, SourceUserEnum.GOOGLE);
+                    loginStatus = factoryService.getLoginService().registerNewUser( email, firstName, lastName, /** No password */ null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
                     if (loginStatus.isCorrect)
                         loginStatus = factoryService.getLoginService().connectNoVerification(email );
                 }
@@ -155,7 +156,14 @@ public class RestLoginController {
     @PostMapping(value = "/api/login/registernewuser",produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), userData.get("firstName"), userData.get("lastName"), userData.get("password"), SourceUserEnum.PORTAL);
+        LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), 
+                userData.get("firstName"), 
+                userData.get("lastName"), 
+                userData.get("password"), 
+                SourceUserEnum.PORTAL,
+                TypePictureEnum.TOGH,
+                null
+                );
         if (loginStatus.isCorrect)
             loginStatus = factoryService.getLoginService().connectNoVerification(userData.get("email"));
             

@@ -16,6 +16,9 @@
 
   "AdminHome.Title" : "管理",
 
+  "__AdminInfo.Information" : "Information",
+  "AdminInfo.Information" : "情報",
+
   "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "管理",
 
@@ -999,6 +1002,132 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "好みを管理し、アバターを設定します。",
+
+  "__MyProfile.ChangeEmail" : "Change Email",
+  "MyProfile.ChangeEmail" : "メールアドレスを変更",
+
+  "__MyProfile.Cypris" : "Cypris",
+  "MyProfile.Cypris" : "キプリス",
+
+  "__MyProfile.Email" : "Email",
+  "MyProfile.Email" : "Eメール",
+
+  "__MyProfile.EmailExplanation" : "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email",
+  "MyProfile.EmailExplanation" : "あなたのメールアドレスは重要です。これは、各ユーザーの一意の識別子です。パスワードを紛失した場合、Toghはこのメールで新しいパスワードを送信します",
+
+  "__MyProfile.EmailVisibility" : "Email visibility",
+  "MyProfile.EmailVisibility" : "メールの可視性",
+
+  "__MyProfile.EmailVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.EmailVisibilityAlwayButSearch" : "検索を除くすべての場所",
+
+  "__MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Search does not use your email, but the result display it. A user connected to an event see your email",
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation" : "検索ではメールは使用されませんが、結果にはメールが表示されます。イベントに接続しているユーザーがあなたのメールを見る",
+
+  "__MyProfile.EmailVisibilityAlways" : "Always",
+  "MyProfile.EmailVisibilityAlways" : "常に",
+
+  "__MyProfile.EmailVisibilityAlwaysExplanation" : "Your email is visible for any user connected to Togh",
+  "MyProfile.EmailVisibilityAlwaysExplanation" : "Toghに接続しているすべてのユーザーにメールが表示されます",
+
+  "__MyProfile.EmailVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.EmailVisibilityLimitedEvent" : "限定イベント",
+
+  "__MyProfile.EmailVisibilityLimitedEventExplanation" : "Your email is visible only on event, for all users registered in the event",
+  "MyProfile.EmailVisibilityLimitedEventExplanation" : "あなたのメールは、イベントに登録されているすべてのユーザーに対して、イベントでのみ表示されます",
+
+  "__MyProfile.EmailVisibilityNever" : "Never",
+  "MyProfile.EmailVisibilityNever" : "決して",
+
+  "__MyProfile.EmailVisibilityNeverExplanation" : "Your email is not visible at all.",
+  "MyProfile.EmailVisibilityNeverExplanation" : "あなたのメールはまったく見えません。",
+
+  "__MyProfile.Image" : "Image",
+  "MyProfile.Image" : "画像",
+
+  "__MyProfile.PhoneNumber" : "Phone Number",
+  "MyProfile.PhoneNumber" : "電話番号",
+
+  "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
+  "MyProfile.PhoneNumberExplanation" : "Toghは使用しませんが、同じイベントでユーザーと共有できます",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "検索を除くすべての場所",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "検索では電話番号は使用されませんが、結果には電話番号が表示されます。イベントに接続しているユーザーがあなたの電話を見る",
+
+  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
+  "MyProfile.PhoneNumberVisibilityAlways" : "常に",
+
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Toghに接続しているすべてのユーザーにあなたの電話番号が表示されます",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "限定イベント",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "あなたの電話番号は、イベントに登録されているすべてのユーザーに対して、イベントでのみ表示されます",
+
+  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
+  "MyProfile.PhoneNumberVisibilityNever" : "決して",
+
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "あなたの電話番号はまったく見えません。",
+
+  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation" : "ユーザーは検索機能で表示できます。そうでない場合、あなたを招待する唯一の方法はあなたの電子メールを明示的に与えることです。",
+
+  "__MyProfile.Togh" : "Togh",
+  "MyProfile.Togh" : "トグ",
+
+  "__MyProfile.URL" : "Url",
+  "MyProfile.URL" : "URL",
+
+  "__MyProfile.UserName" : "User name",
+  "MyProfile.UserName" : "ユーザー名",
+
+  "__MyProfile.firstname" : "FirstName",
+  "MyProfile.firstname" : "ファーストネーム",
+
+  "__MyProfile.hideTipsUser" : "Hide tips",
+  "MyProfile.hideTipsUser" : "ヒントを隠す",
+
+  "__MyProfile.lastName" : "LastName",
+  "MyProfile.lastName" : "苗字",
+
+  "__MyProfile.searchable" : "Searchable",
+  "MyProfile.searchable" : "検索可能",
+
+  "__MyProfile.searchableFalse" : "Never in the search result",
+  "MyProfile.searchableFalse" : "検索結果には表示されません",
+
+  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
+  "MyProfile.searchableTrue" : "はい、検索に表示されます",
+
+  "__MyProfile.showTipsUser" : "Show tips",
+  "MyProfile.showTipsUser" : "ヒントを表示",
+
+  "__MyProfile.showtipuser" : "ShowTipUsers",
+  "MyProfile.showtipuser" : "ShowTipUsers",
+
+  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation" : "Excellenceサブスクリプションが空に届きます！大規模なイベント、実際の制限はありません。そして、あなたはアプリケーションを維持するのを助けます。",
+
+  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation" : "無料サブスクリプションには、イベントを整理するために必要なものがすべて含まれています。コストを回避するために制限されています。 1か月に作成できるイベントの数、イベントごとの参加者の数には制限があります。",
+
+  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation" : "プレミアムサブスクリプションは限界を押し上げます。複数のイベントを開催し、予算を管理することができます。すべてを追跡および整理するための優れたシステムが必要なプロフェッショナル、または多くのイベントを整理するユーザーに最適です。",
+
+  "__MyProfile.subscriptionUser" : "Subscription",
+  "MyProfile.subscriptionUser" : "サブスクリプション",
+
+  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation" : "異なるレベルのサブスクリプションが存在します。",
+
+  "__MyProfile.typeProfile" : "Picture",
+  "MyProfile.typeProfile" : "画像",
 
   "__RegisterNewUser.CloseRegistration" : "Close registration",
   "RegisterNewUser.CloseRegistration" : "登録を閉じる",

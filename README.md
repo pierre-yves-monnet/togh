@@ -233,6 +233,13 @@ Survey 				: Revoir un peu la ligne pour ne pas faire 3 zones identiques
 Geolocalisation 	: a revoir
 Photo 				: a revoir
 Frais 				: a revoir
+references			: todo / Engrenages
+budget				: todo / sac ou tirelire
+Default Boy			: ok (togh)
+Default girl		: Ok (Crispy)
+
+
+
 
 Starter 		: todo
 Ender 			: todo
@@ -246,11 +253,6 @@ gare
 port
 restaurant
 nuit (hotel)
-
-Preferences		: todo / Engrenages
-budget			: todo / sac ou tirelire
-Default Boy		: todo
-Default girl	: todo
 
 
 
@@ -487,11 +489,14 @@ Py
 2.	Verifier invitation
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
 
-7.	My profile
 8.	Lost my password
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
+
+11. cacher les password en base de donnée
 	
+Verifier : admintogh creation et login (admintogh d'un coté, et toghadmin@togh.com de l'autre et j'arrive plus a me connecter
+
 	
 		
 V2		
@@ -511,7 +516,7 @@ V2
     Survey : first, present the VIEW display if there is an survey      
 # bugs
 	Invitation en cours : affichage pas super dans le panneau des invitations
-
+	
  Survey : j'avais pas choisi que le survey etait deja 1/1. Il faut mettre 1/1 quand on a repondu a au moins 1 event
 Plus possible de choisir une date          
           

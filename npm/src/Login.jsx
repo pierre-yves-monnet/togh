@@ -205,7 +205,7 @@ class Login extends React.Component {
 	// when Google call me back, the this is null... it call the method outside of any object.
 	// so, let's save this to "staticLogin" and use it.
 	loginGoogle( googleUser) {
-		// console.log("Login.loginGoogle googleInformation="+JSON.stringify(googleUser));
+		console.log("Login.loginGoogle googleInformation="+JSON.stringify(googleUser));
 		console.log("Login.loginGoogle this="+this+" StaticLogin="+staticLogin);
 		FactoryService.getInstance().getAuthService().loginGoogle( googleUser, staticLogin, staticLogin.loginGoogleCallBack );
 	};

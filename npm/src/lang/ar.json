@@ -14,6 +14,9 @@
   "__AdminGoogle.Google" : "Google",
   "AdminGoogle.Google" : "غوغل",
 
+  "__AdminInfo.Information" : "Information",
+  "AdminInfo.Information" : "معلومة",
+
   "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "إدارة",
 
@@ -946,6 +949,132 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "إدارة تفضيلاتك ، وإعداد الصورة الرمزية.",
+
+  "__MyProfile.ChangeEmail" : "Change Email",
+  "MyProfile.ChangeEmail" : "تغيير البريد الالكتروني",
+
+  "__MyProfile.Cypris" : "Cypris",
+  "MyProfile.Cypris" : "سيبريس",
+
+  "__MyProfile.Email" : "Email",
+  "MyProfile.Email" : "بريد إلكتروني",
+
+  "__MyProfile.EmailExplanation" : "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email",
+  "MyProfile.EmailExplanation" : "بريدك الإلكتروني مهم. هذا هو المعرف الفريد لكل مستخدم. إذا فقدت كلمة مرورك ، فسوف يرسل لك Togh كلمة مرور جديدة على هذا البريد الإلكتروني",
+
+  "__MyProfile.EmailVisibility" : "Email visibility",
+  "MyProfile.EmailVisibility" : "رؤية البريد الإلكتروني",
+
+  "__MyProfile.EmailVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.EmailVisibilityAlwayButSearch" : "في كل مكان ما عدا البحث",
+
+  "__MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Search does not use your email, but the result display it. A user connected to an event see your email",
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation" : "لا يستخدم البحث بريدك الإلكتروني ، لكن النتيجة تعرضه. مستخدم متصل بحدث يرى بريدك الإلكتروني",
+
+  "__MyProfile.EmailVisibilityAlways" : "Always",
+  "MyProfile.EmailVisibilityAlways" : "دائما",
+
+  "__MyProfile.EmailVisibilityAlwaysExplanation" : "Your email is visible for any user connected to Togh",
+  "MyProfile.EmailVisibilityAlwaysExplanation" : "بريدك الإلكتروني مرئي لأي مستخدم متصل بـ Togh",
+
+  "__MyProfile.EmailVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.EmailVisibilityLimitedEvent" : "حدث محدود",
+
+  "__MyProfile.EmailVisibilityLimitedEventExplanation" : "Your email is visible only on event, for all users registered in the event",
+  "MyProfile.EmailVisibilityLimitedEventExplanation" : "بريدك الإلكتروني مرئي فقط في الحدث ، لجميع المستخدمين المسجلين في الحدث",
+
+  "__MyProfile.EmailVisibilityNever" : "Never",
+  "MyProfile.EmailVisibilityNever" : "مطلقا",
+
+  "__MyProfile.EmailVisibilityNeverExplanation" : "Your email is not visible at all.",
+  "MyProfile.EmailVisibilityNeverExplanation" : "بريدك الإلكتروني غير مرئي على الإطلاق.",
+
+  "__MyProfile.Image" : "Image",
+  "MyProfile.Image" : "صورة",
+
+  "__MyProfile.PhoneNumber" : "Phone Number",
+  "MyProfile.PhoneNumber" : "رقم الهاتف",
+
+  "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
+  "MyProfile.PhoneNumberExplanation" : "Togh لا تستخدمه ، ولكن يمكنك مشاركته مع المستخدمين في نفس الحدث",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "في كل مكان ما عدا البحث",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "لا يستخدم البحث رقم هاتفك ، ولكن النتيجة تعرضه. يرى المستخدم المتصل بحدث هاتفك",
+
+  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
+  "MyProfile.PhoneNumberVisibilityAlways" : "دائما",
+
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "رقم هاتفك مرئي لأي مستخدم متصل بـ Togh",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "حدث محدود",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "رقم هاتفك مرئي فقط في الحدث ، لجميع المستخدمين المسجلين في الحدث",
+
+  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
+  "MyProfile.PhoneNumberVisibilityNever" : "مطلقا",
+
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "رقم هاتفك غير مرئي على الإطلاق.",
+
+  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation" : "يمكن أن يكون المستخدم الخاص بك مرئيًا في وظيفة البحث. إذا لم يكن الأمر كذلك ، فإن الطريقة الوحيدة لدعوتك هي إرسال بريدك الإلكتروني بشكل صريح.",
+
+  "__MyProfile.Togh" : "Togh",
+  "MyProfile.Togh" : "توغ",
+
+  "__MyProfile.URL" : "Url",
+  "MyProfile.URL" : "عنوان Url",
+
+  "__MyProfile.UserName" : "User name",
+  "MyProfile.UserName" : "اسم المستخدم",
+
+  "__MyProfile.firstname" : "FirstName",
+  "MyProfile.firstname" : "الاسم الأول",
+
+  "__MyProfile.hideTipsUser" : "Hide tips",
+  "MyProfile.hideTipsUser" : "إخفاء النصائح",
+
+  "__MyProfile.lastName" : "LastName",
+  "MyProfile.lastName" : "الكنية",
+
+  "__MyProfile.searchable" : "Searchable",
+  "MyProfile.searchable" : "قابل للبحث",
+
+  "__MyProfile.searchableFalse" : "Never in the search result",
+  "MyProfile.searchableFalse" : "أبدا في نتيجة البحث",
+
+  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
+  "MyProfile.searchableTrue" : "نعم ، سأظهر في البحث",
+
+  "__MyProfile.showTipsUser" : "Show tips",
+  "MyProfile.showTipsUser" : "عرض نصائح",
+
+  "__MyProfile.showtipuser" : "ShowTipUsers",
+  "MyProfile.showtipuser" : "ShowTipUsers",
+
+  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation" : "اشتراك التميز يصل إلى السماء! أحداث كبيرة ، لا يوجد حد حقيقي. وتساعد في الحفاظ على التطبيق.",
+
+  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation" : "يحتوي الاشتراك المجاني على كل ما تحتاجه لتنظيم الأحداث الخاصة بك. يقتصر الأمر على تجنب التكلفة. أنت مقيد في عدد الأحداث التي يمكنك إنشاؤها شهريًا ، وعدد المشاركين في كل حدث.",
+
+  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation" : "يدفع الاشتراك المميز الحد الأقصى. يمكنك تنظيم أحداث متعددة وإدارة الميزانية. مثالي للمحترفين الذين يرغبون في امتلاك نظام رائع لتتبع وتنظيم كل شيء ، أو للمستخدمين الذين ينظمون الكثير من الأحداث!",
+
+  "__MyProfile.subscriptionUser" : "Subscription",
+  "MyProfile.subscriptionUser" : "الاشتراك",
+
+  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation" : "يوجد مستوى اشتراك مختلف.",
+
+  "__MyProfile.typeProfile" : "Picture",
+  "MyProfile.typeProfile" : "صورة",
 
   "__RegisterNewUser.CloseRegistration" : "Close registration",
   "RegisterNewUser.CloseRegistration" : "إغلاق التسجيل",

@@ -35,10 +35,16 @@ class AuthService {
 		return connection;
 	}
 	
-	// ---- getUser. When the user is connected, return all information about hime
+	// ---- getUser. When the user is connected, return all information about him
 	getUser() {
+				console.log("AuthService user=["+this.user.tagid+"] showTipsUser=["+this.user.showTipsUser+"]");
 		return this.user;
 	};
+	// user can change (in the profile) : save the change
+	setUser( user ) {
+		this.user = user;
+		console.log("AuthService user=["+this.user.tagid+"] showTipsUser=["+this.user.showTipsUser+"]");
+	}
 	
 	getMethodConnection() {
 		return this.connectMethod;

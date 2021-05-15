@@ -16,6 +16,9 @@
 
   "AdminHome.Title" : "관리",
 
+  "__AdminInfo.Information" : "Information",
+  "AdminInfo.Information" : "정보",
+
   "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "관리",
 
@@ -999,6 +1002,132 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "선호도를 관리하고 아바타를 설정하십시오.",
+
+  "__MyProfile.ChangeEmail" : "Change Email",
+  "MyProfile.ChangeEmail" : "이메일을 바꾸다",
+
+  "__MyProfile.Cypris" : "Cypris",
+  "MyProfile.Cypris" : "Cypris",
+
+  "__MyProfile.Email" : "Email",
+  "MyProfile.Email" : "이메일",
+
+  "__MyProfile.EmailExplanation" : "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email",
+  "MyProfile.EmailExplanation" : "귀하의 이메일은 중요합니다. 이것은 각 사용자의 고유 식별자입니다. 비밀번호를 잊어 버린 경우 Togh에서이 이메일로 새 비밀번호를 보내드립니다.",
+
+  "__MyProfile.EmailVisibility" : "Email visibility",
+  "MyProfile.EmailVisibility" : "이메일 가시성",
+
+  "__MyProfile.EmailVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.EmailVisibilityAlwayButSearch" : "검색을 제외한 모든 곳",
+
+  "__MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Search does not use your email, but the result display it. A user connected to an event see your email",
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation" : "검색은 이메일을 사용하지 않지만 결과에 표시됩니다. 이벤트에 연결된 사용자가 귀하의 이메일을 봅니다.",
+
+  "__MyProfile.EmailVisibilityAlways" : "Always",
+  "MyProfile.EmailVisibilityAlways" : "항상",
+
+  "__MyProfile.EmailVisibilityAlwaysExplanation" : "Your email is visible for any user connected to Togh",
+  "MyProfile.EmailVisibilityAlwaysExplanation" : "귀하의 이메일은 Togh에 연결된 모든 사용자에게 표시됩니다.",
+
+  "__MyProfile.EmailVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.EmailVisibilityLimitedEvent" : "한정 이벤트",
+
+  "__MyProfile.EmailVisibilityLimitedEventExplanation" : "Your email is visible only on event, for all users registered in the event",
+  "MyProfile.EmailVisibilityLimitedEventExplanation" : "귀하의 이메일은 이벤트에 등록 된 모든 사용자의 이벤트에만 표시됩니다.",
+
+  "__MyProfile.EmailVisibilityNever" : "Never",
+  "MyProfile.EmailVisibilityNever" : "못",
+
+  "__MyProfile.EmailVisibilityNeverExplanation" : "Your email is not visible at all.",
+  "MyProfile.EmailVisibilityNeverExplanation" : "귀하의 이메일은 전혀 표시되지 않습니다.",
+
+  "__MyProfile.Image" : "Image",
+  "MyProfile.Image" : "영상",
+
+  "__MyProfile.PhoneNumber" : "Phone Number",
+  "MyProfile.PhoneNumber" : "전화 번호",
+
+  "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
+  "MyProfile.PhoneNumberExplanation" : "Togh는 사용하지 않지만 동일한 이벤트에서 사용자와 공유 할 수 있습니다.",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "검색을 제외한 모든 곳",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "검색은 전화 번호를 사용하지 않지만 결과에 표시됩니다. 이벤트에 연결된 사용자가 내 휴대 전화를 봅니다.",
+
+  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
+  "MyProfile.PhoneNumberVisibilityAlways" : "항상",
+
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Togh에 연결된 모든 사용자에게 전화 번호가 표시됩니다.",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "한정 이벤트",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "귀하의 전화 번호는 이벤트에 등록 된 모든 사용자의 이벤트에서만 볼 수 있습니다.",
+
+  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
+  "MyProfile.PhoneNumberVisibilityNever" : "못",
+
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "전화 번호가 전혀 보이지 않습니다.",
+
+  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation" : "사용자는 검색 기능에서 볼 수 있습니다. 그렇지 않은 경우 초대하는 유일한 방법은 이메일을 명시 적으로 제공하는 것입니다.",
+
+  "__MyProfile.Togh" : "Togh",
+  "MyProfile.Togh" : "Togh",
+
+  "__MyProfile.URL" : "Url",
+  "MyProfile.URL" : "URL",
+
+  "__MyProfile.UserName" : "User name",
+  "MyProfile.UserName" : "사용자 이름",
+
+  "__MyProfile.firstname" : "FirstName",
+  "MyProfile.firstname" : "이름",
+
+  "__MyProfile.hideTipsUser" : "Hide tips",
+  "MyProfile.hideTipsUser" : "팁 숨기기",
+
+  "__MyProfile.lastName" : "LastName",
+  "MyProfile.lastName" : "성",
+
+  "__MyProfile.searchable" : "Searchable",
+  "MyProfile.searchable" : "검색 가능",
+
+  "__MyProfile.searchableFalse" : "Never in the search result",
+  "MyProfile.searchableFalse" : "검색 결과에 없음",
+
+  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
+  "MyProfile.searchableTrue" : "예, 검색에 표시됩니다",
+
+  "__MyProfile.showTipsUser" : "Show tips",
+  "MyProfile.showTipsUser" : "팁보기",
+
+  "__MyProfile.showtipuser" : "ShowTipUsers",
+  "MyProfile.showtipuser" : "ShowTipUsers",
+
+  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation" : "Excellence 구독이 하늘에 도달했습니다! 대규모 이벤트, 실제 제한 없음. 그리고 응용 프로그램을 유지하는 데 도움이됩니다.",
+
+  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation" : "무료 구독에는 이벤트를 구성하는 데 필요한 모든 것이 포함되어 있습니다. 비용을 피하기 위해 제한됩니다. 한 달에 만들 수있는 이벤트 수, 이벤트 당 참가자 수에 제한이 있습니다.",
+
+  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation" : "프리미엄 구독은 한계를 뛰어 넘습니다. 여러 이벤트를 구성하고 예산을 관리 할 수 있습니다. 모든 것을 추적하고 구성 할 수있는 훌륭한 시스템을 원하는 전문가 또는 많은 이벤트를 구성하는 사용자에게 적합합니다!",
+
+  "__MyProfile.subscriptionUser" : "Subscription",
+  "MyProfile.subscriptionUser" : "신청",
+
+  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation" : "다른 수준의 구독이 있습니다.",
+
+  "__MyProfile.typeProfile" : "Picture",
+  "MyProfile.typeProfile" : "그림",
 
   "__RegisterNewUser.CloseRegistration" : "Close registration",
   "RegisterNewUser.CloseRegistration" : "등록 닫기",

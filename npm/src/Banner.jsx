@@ -87,7 +87,7 @@ class Banner extends React.Component {
 						<div class="col-xs-12 banner">
 						<table width="100%">
 							<tr><td style={{"color":"#888787", verticalAlign: "top"}}>
-								<img src="img/togh.jpg" style={{width:20}} />
+								<img src="img/togh.png" style={{width:20}} />
 							</td><td style={{"color":"#888787", verticalAlign: "top", fontSize: "16px", fontFamily: "'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif"}}>
 								Togh
 							</td>
@@ -95,8 +95,17 @@ class Banner extends React.Component {
 							
 								{allFlags}
 								</td>
-							<td style={{"color":"#888787", textAlign: "right" , verticalAlign: "top"}}>
+							<td style={{"color":"#888787", textAlign: "right" , verticalAlign: "middle"}}>
 								Welcome {user.name}
+								{ user.typePicture=== 'TOGH' && 
+									<img  src="img/togh.png" style={{width:20}} />
+								}
+								{ user.typePicture=== 'CYPRIS' && 
+									<img  src="img/cypris.png" style={{width:20}} />
+								}
+								{ user.typePicture=== 'URL' && 
+									<img  src={user.picture} style={{width:20}} />
+								}
 							</td>
 							</tr>
 							</table>

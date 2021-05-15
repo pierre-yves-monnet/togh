@@ -76,6 +76,9 @@ public class JpaTool {
                 } else if (returnType.equals(BigDecimal.class)) {
                     value = getBigDecimalFromString(attributValue.toString());
 
+                } else if (returnType.equals(Boolean.class)) {
+                    value = getBooleanFromString(attributValue.toString());
+
                 } else if (returnType.equals(Long.class)) {
                     value = Long.valueOf(attributValue.toString());
 
@@ -130,10 +133,23 @@ public class JpaTool {
         return false;
     }
 
-   
+    /**
+     * return a boolean value from a string
+     * @param valueSt
+     * @return
+     * @throws Exception
+     */
+    public static Boolean getBooleanFromString(String valueSt) throws Exception {
+        if ("ON".equalsIgnoreCase(valueSt) || "TRUE".equalsIgnoreCase(valueSt))
+            return Boolean.TRUE;
+        return Boolean.FALSE;
+    }
+        
+    
+    
     /**
      * value may be a currency, like $33.344. So, remove all non numric expression.
-     * 
+     * french is 2 334,44 ===> One comma only  
      * @param valueSt
      * @return
      * @throws Exception

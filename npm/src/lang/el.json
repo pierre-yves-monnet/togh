@@ -14,6 +14,9 @@
   "__AdminGoogle.Google" : "Google",
   "AdminGoogle.Google" : "Google",
 
+  "__AdminInfo.Information" : "Information",
+  "AdminInfo.Information" : "Πληροφορίες",
+
   "__AdminTransaltor.Title" : "Translation",
   "AdminTransaltor.Title" : "Διαχείριση",
 
@@ -946,6 +949,132 @@
 
   "__Menu.MyProfileExplanation" : "Manage your preferences, set up an avatar.",
   "Menu.MyProfileExplanation" : "Διαχειριστείτε τις προτιμήσεις σας, ρυθμίστε ένα avatar.",
+
+  "__MyProfile.ChangeEmail" : "Change Email",
+  "MyProfile.ChangeEmail" : "Αλλαγή email",
+
+  "__MyProfile.Cypris" : "Cypris",
+  "MyProfile.Cypris" : "Κύπριοι",
+
+  "__MyProfile.Email" : "Email",
+  "MyProfile.Email" : "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+
+  "__MyProfile.EmailExplanation" : "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email",
+  "MyProfile.EmailExplanation" : "Το email σας είναι σημαντικό. Αυτό είναι το μοναδικό αναγνωριστικό για κάθε χρήστη. Εάν χάσατε τον κωδικό πρόσβασής σας, το Togh θα σας στείλει έναν νέο κωδικό πρόσβασης σε αυτό το email",
+
+  "__MyProfile.EmailVisibility" : "Email visibility",
+  "MyProfile.EmailVisibility" : "Ορατότητα μέσω email",
+
+  "__MyProfile.EmailVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.EmailVisibilityAlwayButSearch" : "Παντού εκτός από αναζήτηση",
+
+  "__MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Search does not use your email, but the result display it. A user connected to an event see your email",
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation" : "Η αναζήτηση δεν χρησιμοποιεί το email σας, αλλά το αποτέλεσμα το εμφανίζει. Ένας χρήστης που είναι συνδεδεμένος σε ένα συμβάν βλέπει το email σας",
+
+  "__MyProfile.EmailVisibilityAlways" : "Always",
+  "MyProfile.EmailVisibilityAlways" : "Πάντα",
+
+  "__MyProfile.EmailVisibilityAlwaysExplanation" : "Your email is visible for any user connected to Togh",
+  "MyProfile.EmailVisibilityAlwaysExplanation" : "Το email σας είναι ορατό για κάθε χρήστη που είναι συνδεδεμένος στο Togh",
+
+  "__MyProfile.EmailVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.EmailVisibilityLimitedEvent" : "Περιορισμένη εκδήλωση",
+
+  "__MyProfile.EmailVisibilityLimitedEventExplanation" : "Your email is visible only on event, for all users registered in the event",
+  "MyProfile.EmailVisibilityLimitedEventExplanation" : "Το email σας είναι ορατό μόνο στην εκδήλωση, για όλους τους χρήστες που είναι εγγεγραμμένοι στην εκδήλωση",
+
+  "__MyProfile.EmailVisibilityNever" : "Never",
+  "MyProfile.EmailVisibilityNever" : "Ποτέ",
+
+  "__MyProfile.EmailVisibilityNeverExplanation" : "Your email is not visible at all.",
+  "MyProfile.EmailVisibilityNeverExplanation" : "Το email σας δεν είναι καθόλου ορατό.",
+
+  "__MyProfile.Image" : "Image",
+  "MyProfile.Image" : "Εικόνα",
+
+  "__MyProfile.PhoneNumber" : "Phone Number",
+  "MyProfile.PhoneNumber" : "Τηλεφωνικό νούμερο",
+
+  "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
+  "MyProfile.PhoneNumberExplanation" : "Το Togh δεν το χρησιμοποιεί, αλλά μπορείτε να το μοιραστείτε με χρήστες στην ίδια εκδήλωση",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Παντού εκτός από αναζήτηση",
+
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Η αναζήτηση δεν χρησιμοποιεί τον αριθμό τηλεφώνου σας, αλλά το αποτέλεσμα το εμφανίζει. Ένας χρήστης που είναι συνδεδεμένος σε ένα συμβάν βλέπει το τηλέφωνό σας",
+
+  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
+  "MyProfile.PhoneNumberVisibilityAlways" : "Πάντα",
+
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Ο αριθμός τηλεφώνου σας είναι ορατός για οποιονδήποτε χρήστη είναι συνδεδεμένο στο Togh",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "Περιορισμένη εκδήλωση",
+
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Ο αριθμός τηλεφώνου σας είναι ορατός μόνο στην εκδήλωση, για όλους τους χρήστες που είναι εγγεγραμμένοι στην εκδήλωση",
+
+  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
+  "MyProfile.PhoneNumberVisibilityNever" : "Ποτέ",
+
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "Ο αριθμός τηλεφώνου σας δεν είναι καθόλου ορατός.",
+
+  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation" : "Ο χρήστης σας μπορεί να είναι ορατός στη λειτουργία αναζήτησης. Εάν όχι, ο μόνος τρόπος να σας προσκαλέσουμε είναι να δώσετε ρητά το email σας",
+
+  "__MyProfile.Togh" : "Togh",
+  "MyProfile.Togh" : "Τοχ",
+
+  "__MyProfile.URL" : "Url",
+  "MyProfile.URL" : "Url",
+
+  "__MyProfile.UserName" : "User name",
+  "MyProfile.UserName" : "Ονομα χρήστη",
+
+  "__MyProfile.firstname" : "FirstName",
+  "MyProfile.firstname" : "Ονομα",
+
+  "__MyProfile.hideTipsUser" : "Hide tips",
+  "MyProfile.hideTipsUser" : "Απόκρυψη συμβουλών",
+
+  "__MyProfile.lastName" : "LastName",
+  "MyProfile.lastName" : "Επίθετο",
+
+  "__MyProfile.searchable" : "Searchable",
+  "MyProfile.searchable" : "Ερευνήσιμος",
+
+  "__MyProfile.searchableFalse" : "Never in the search result",
+  "MyProfile.searchableFalse" : "Ποτέ στο αποτέλεσμα αναζήτησης",
+
+  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
+  "MyProfile.searchableTrue" : "Ναι, θα εμφανιστεί στην αναζήτηση",
+
+  "__MyProfile.showTipsUser" : "Show tips",
+  "MyProfile.showTipsUser" : "Εμφάνιση συμβουλών",
+
+  "__MyProfile.showtipuser" : "ShowTipUsers",
+  "MyProfile.showtipuser" : "ShowTipUsers",
+
+  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation" : "Η συνδρομή Excellence φτάνει στον ουρανό! Μεγάλα γεγονότα, χωρίς πραγματικό όριο. Και βοηθάτε στη διατήρηση της εφαρμογής.",
+
+  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation" : "Η δωρεάν συνδρομή περιέχει όλα όσα χρειάζεστε για να οργανώσετε τις εκδηλώσεις σας. Απλώς περιορίζεται για να αποφευχθεί το κόστος. Είστε περιορισμένοι στον αριθμό των εκδηλώσεων που μπορείτε να δημιουργήσετε ανά μήνα, τον αριθμό των συμμετεχόντων ανά εκδήλωση.",
+
+  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation" : "Η συνδρομή Premium αυξάνει το όριο. Μπορείτε να οργανώσετε πολλές εκδηλώσεις, να διαχειριστείτε τον προϋπολογισμό. Ιδανικό για επαγγελματίες που θέλουν να έχουν ένα υπέροχο σύστημα παρακολούθησης και οργάνωσης όλων, ή για χρήστες που οργανώνουν πολλές εκδηλώσεις!",
+
+  "__MyProfile.subscriptionUser" : "Subscription",
+  "MyProfile.subscriptionUser" : "Συνδρομή",
+
+  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation" : "Υπάρχει διαφορετικό επίπεδο συνδρομής.",
+
+  "__MyProfile.typeProfile" : "Picture",
+  "MyProfile.typeProfile" : "Εικόνα",
 
   "__RegisterNewUser.CloseRegistration" : "Close registration",
   "RegisterNewUser.CloseRegistration" : "Κλείσιμο εγγραφής",

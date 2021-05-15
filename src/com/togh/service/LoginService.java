@@ -36,6 +36,7 @@ import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.StatusUserEnum;
+import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.restcontroller.RestHttpConstant;
 import com.togh.service.MonitorService.Chrono;
 import com.togh.service.ToghUserService.SearchUsersResult;
@@ -97,30 +98,30 @@ public class LoginService {
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("ConnectUserWithEmail");
         
-        ToghUserEntity endUserEntity = toghUserService.findToConnect( emailOrName );
-        if (endUserEntity==null) {
+        ToghUserEntity toghUserEntity = toghUserService.findToConnect( emailOrName );
+        if (toghUserEntity==null) {
             monitorService.endOperationWithStatus(chronoConnection, "NotExist");
             return loginStatus;
         }
         // this user must be registered on the portal
-        if (! (SourceUserEnum.PORTAL.equals( endUserEntity.getSource()) 
-                || SourceUserEnum.SYSTEM.equals( endUserEntity.getSource() ))) {
+        if (! (SourceUserEnum.PORTAL.equals( toghUserEntity.getSource()) 
+                || SourceUserEnum.SYSTEM.equals( toghUserEntity.getSource() ))) {
             monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
             return loginStatus;
         }
         // password inactif or block: remove it
-        if (! StatusUserEnum.ACTIF.equals(endUserEntity.getStatusUser()))  {
+        if (! StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser()))  {
             monitorService.endOperationWithStatus(chronoConnection, "UserBlockedOrDisabled");
             return loginStatus;
         }
         // check the password
-        if (! endUserEntity.checkPassword(password)) {
+        if (! toghUserEntity.checkPassword(password)) {
             monitorService.endOperationWithStatus(chronoConnection, "BadPassword");
             return loginStatus;
         }
         loginStatus.isConnected=true;
-        loginStatus.userConnected = endUserEntity;
-        loginStatus.connectionToken = connectUser( endUserEntity );
+        loginStatus.userConnected = toghUserEntity;
+        loginStatus.connectionToken = connectUser( toghUserEntity );
         monitorService.endOperation(chronoConnection);
         return loginStatus;
     }
@@ -175,16 +176,19 @@ public class LoginService {
     }
     
     // create a new user
-    public LoginStatus registerNewUser(String email, String firstName, String lastName, String password, SourceUserEnum sourceUser)  {
+    public LoginStatus registerNewUser(String email, String firstName, String lastName, String password, SourceUserEnum sourceUser,
+            TypePictureEnum typePicture,
+            String picture)  {
         LoginStatus loginStatus = new LoginStatus();
-        ToghUserEntity endUserEntity = toghUserService.getFromEmail( email );
-        if (endUserEntity !=null) {
+        ToghUserEntity toghUserEntity = toghUserService.getFromEmail( email );
+        if (toghUserEntity !=null) {
             return loginStatus;
         }
-        endUserEntity = ToghUserEntity.getNewUser(firstName, lastName, email, password, sourceUser);
-        
+        toghUserEntity = ToghUserEntity.getNewUser(firstName, lastName, email, password, sourceUser);
+        toghUserEntity.setTypePicture( typePicture);
+        toghUserEntity.setPicture(picture);
         try {
-            toghUserService.saveUser( endUserEntity );
+            toghUserService.saveUser( toghUserEntity );
             loginStatus.isCorrect=true;
         } catch(Exception e) {
             logger.severe(logHeader+"Can't create new user: "+e.toString());
@@ -204,32 +208,43 @@ public class LoginService {
     Random random = new Random();
 
     private class UserConnected {
-        public ToghUserEntity toghUser;
+        public ToghUserEntity toghUserEntity;
         public LocalDateTime lastPing = LocalDateTime.now(ZoneOffset.UTC);
         public LocalDateTime lastCheck = LocalDateTime.now(ZoneOffset.UTC);
 
     }
     
     private Map<String,UserConnected> cacheUserConnected  = new HashMap<>();
-    private String connectUser( ToghUserEntity toghUser ) {
+    private String connectUser( ToghUserEntity toghUserEntity ) {
         // Generate a ConnectionStamp
         // MonitorService monitorService = factoryService.getMonitorService();
 
         String randomStamp = String.valueOf(System.currentTimeMillis())+ String.valueOf( random.nextInt() );
         
-        toghUser.setConnectionStamp( randomStamp );
-        toghUser.setConnectionTime( LocalDateTime.now(ZoneOffset.UTC));
-        toghUser.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
+        toghUserEntity.setConnectionStamp( randomStamp );
+        toghUserEntity.setConnectionTime( LocalDateTime.now(ZoneOffset.UTC));
+        toghUserEntity.setConnectionLastActivity( LocalDateTime.now(ZoneOffset.UTC));
        
-        toghUserService.saveUser(toghUser);
+        toghUserService.saveUser(toghUserEntity);
         
         statsService.registerLogin();
         
         // keep in the cache to be more efficient
         UserConnected userConnected = new UserConnected();
-        userConnected.toghUser = toghUser;
+        userConnected.toghUserEntity = toghUserEntity;
         cacheUserConnected.put( randomStamp, userConnected);
         return randomStamp;
+    }
+    
+    /**
+     * User is updated (picture change, name change...) : just refresh this information
+     * @param toghUserEntity
+     */
+    public void userIsUpdated( ToghUserEntity toghUserEntity) {
+        for (UserConnected userConnected: cacheUserConnected.values()) {
+            if (userConnected.toghUserEntity.getId() == toghUserEntity.getId())
+                userConnected.toghUserEntity = toghUserEntity;
+        }
     }
     
     /**
@@ -245,7 +260,7 @@ public class LoginService {
             userConnected.lastPing = LocalDateTime.now( ZoneOffset.UTC );
             Duration duration = Duration.between(userConnected.lastCheck,userConnected.lastPing );
             if (duration.toMinutes() < 1) 
-                return userConnected.toghUser;
+                return userConnected.toghUserEntity;
         }
 
         // more than 2 mn or not in the cache? Get it from the database
@@ -266,11 +281,11 @@ public class LoginService {
         // the cache may have no trace of this user ? Case in a cluster, the user just arrive on this server.
         if (userConnected==null ) {
             userConnected = new UserConnected(); 
-            userConnected.toghUser = endUserEntity;
+            userConnected.toghUserEntity = endUserEntity;
         }
         userConnected.lastCheck = timeCheck ;
         cacheUserConnected.put(connectionStamp, userConnected);
-        return userConnected.toghUser;                
+        return userConnected.toghUserEntity;                
     }
     
     /**
@@ -316,7 +331,7 @@ public class LoginService {
             toghUserEntity = toghUserService.getUserFromConnectionStamp( connectionStamp );
         }
         else {
-            toghUserEntity = userConnected.toghUser;
+            toghUserEntity = userConnected.toghUserEntity;
         }
         if (toghUserEntity == null)
             return; // already disconnected, or not exist
