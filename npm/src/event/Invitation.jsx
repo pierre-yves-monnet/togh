@@ -13,7 +13,7 @@ import React from 'react';
 import { injectIntl, FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
-import { ModalWrapper, RadioButtonGroup, RadioButton, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
+import { ModalWrapper, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
 
 
 import FactoryService from 'service/FactoryService';
@@ -141,8 +141,7 @@ class Invitation extends React.Component {
 					<div style={{display: "inline-block", float: "right"}}>	
 						<button class="btn btn-info btn-lg" 
 							onClick={this.sendInvitation}
-							disabled={! this.enableInvite() }
-							class="btn btn-primary">
+							disabled={! this.enableInvite() }>
 							<div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
 							{this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
 						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.SendInvitation" defaultMessage="Send Invitation"/></div>)}
@@ -176,7 +175,7 @@ class Invitation extends React.Component {
 								}/></td></tr> 
 							</table>
 							<br/>
-							<button class="btn btn-info btn-lg" onClick={this.searchToghUser} class="btn btn-info" disabled={this.state.inprogresssearch}>	
+							<button class="btn btn-info btn-lg" onClick={this.searchToghUser} disabled={this.state.inprogresssearch}>	
 								
 									<div class="glyphicon glyphicon-search" style={{display: "inline-block"}}> </div>
 									{this.state.inprogresssearch && (
@@ -252,7 +251,7 @@ class Invitation extends React.Component {
 	enableInvite() {
 		if (this.state.email.length>0)
 			return true;
-		if (this.state.listSearchUsers.length==0)
+		if (this.state.listSearchUsers.length ===0)
 			return false;
 		// check : one must be check to enable the 
 		for (var i in this.state.listUsersSelected) {
