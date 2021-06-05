@@ -174,7 +174,10 @@ class EventTaskList extends React.Component {
 						</td>
 						}
 						<td><TextInput value={item.name} onChange={(event) => this.setAttribut("name", event.target.value, item)} labelText="" ></TextInput></td>
-						<td><TextArea labelText="" value={item.description} onChange={(event) => this.setAttribut("description", event.target.value, item)} class="toghinput" labelText=""></TextArea></td>
+						<td><TextArea labelText="" 
+								value={item.description} 
+								onChange={(event) => this.setAttribut("description", event.target.value, item)} 
+								class="toghinput" ></TextArea></td>
 						<td>
 							<ChooseParticipant userid={item.whoid} 
 								event={this.state.event} 
@@ -361,12 +364,13 @@ class EventTaskList extends React.Component {
 	}
 	setAttributCheckbox(name, value) {		
 		console.log("EventTaskList.setAttributCheckbox set " + name + "<=" + value.target.checked);
+		let eventVar = this.state.event;
 		if (value.target.checked)
-			this.state.event[name] = true;
+			eventVar[name] = true;
 		else
-			this.state.event[name] = false;
-		this.eventCtrl.setAttribut(name, this.state.event[name], this.state.event, "" );
-		this.setState({ event: this.state.event });
+			eventVar[name] = false;
+		this.eventCtrl.setAttribut(name, this.state.event[name], eventVar, "" );
+		this.setState( {event : eventVar});
 	}
 	changeParticipantCallback( task, userid) {
 		console.log("EventTaskList.changeParticipantCallback user="+JSON.stringify(userid));
