@@ -33,7 +33,7 @@ class TagDropDown extends React.Component {
 	}
 
 	
-//----------------------------------- Render
+	//----------------------------------- Render
 	render() {
 		// console.log("TagDropDown.render value="+this.state.value);
 		var tagHtml = null;
