@@ -56,7 +56,7 @@ class RestcallService {
 				fctToCallback.call(objToCall, httpResponse); 
 				})
 			.catch(error => {
-				if (error.response.status === 401) {
+				if (error.response && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");
 					window.location.href = homeTogh;
@@ -78,15 +78,16 @@ class RestcallService {
 		const requestOptions = {
 	        headers: headers
 	    };
-    	axios.post( this.getUrl( uri), param, requestOptions)
+		var selfUri = uri;
+    	axios.post( this.getUrl( uri ), param, requestOptions)
         	.then( axiosPayload => { 
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
 				let httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
 			.catch(error => {
-				console.error("RestCallService.getJson: catch error:"+error);	
-				if (error.response.status === 401) {
+				console.error("RestCallService.getJson: Uri["+selfUri+"] catch error:"+error);	
+				if (error.response && error.response.status && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");
 					window.location.href = homeTogh;

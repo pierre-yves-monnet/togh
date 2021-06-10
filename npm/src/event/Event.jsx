@@ -132,7 +132,6 @@ class Event extends React.Component {
 								{this.state.event.dateEvent}
 								<DatePicker datePickerType="single"
 									/* dateFormat= { () => {
-										debugger;
 										let dateFormat = this.deriveDateFormat();
 										console.log("format="+dateFormat);
 										return dateFormat;}} // To get from a service that returns the format based on the language selected

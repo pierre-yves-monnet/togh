@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon, Tag,Toggle,ToggleSmall } from 'carbon-components-react';
+import { TextInput,Select, TooltipIcon, Tag,ToggleSmall } from 'carbon-components-react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import { Loading } from 'carbon-components-react';
@@ -88,7 +88,10 @@ class AdminUsers extends React.Component {
 								value={this.state.searchUserSentence} onChange={ (event) => this.setState({searchUserSentence: event.target.value})}/>
 						</div>
 						<div class="col-sm">
-							<div class="btn-group btn-group-sm" role="groupstate" aria-label="Basic radio toggle button group" style={{ padding: "10px 10px 10px 10px" }}>
+							{/* role="groupstate" */}
+							<div class="btn-group btn-group-sm"  
+								aria-label="Basic radio toggle button group" 
+								style={{ padding: "10px 10px 10px 10px" }}>
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterALL" autocomplete="off" 
 									checked={this.state.filterusers.all}
 									onChange={() => this.managerfilter('all')}/>
@@ -246,9 +249,9 @@ class AdminUsers extends React.Component {
  
 									</td>
 									<td> 
-										{this.canBeDisconnected( item ) =='YES' && <button class="btn btn-info btn-sm"
+										{this.canBeDisconnected( item ) === 'YES' && <button class="btn btn-info btn-sm"
 							 				onClick={(event) => this.disconnectUser( item)}><FormattedMessage id="AdminUsers.Disconnect" defaultMessage="Disconnect"/></button>}
-										{this.canBeDisconnected( item ) =='MYSELF' && <Tag type="teal"><FormattedMessage id="AdminUsers.Myself" defaultMessage="Myself"/></Tag>}
+										{this.canBeDisconnected( item ) ==='MYSELF' && <Tag type="teal"><FormattedMessage id="AdminUsers.Myself" defaultMessage="Myself"/></Tag>}
 									 </td>
 									<td> {item.name} </td>
 									<td> {item.firstname}&nbsp;{item.lastname}	</td>
@@ -426,7 +429,7 @@ class AdminUsers extends React.Component {
 		if (user.connected === 'ONLINE') {
 			var authService = FactoryService.getInstance().getAuthService();
 
-			if (authService.getUser().id == user.id)
+			if (authService.getUser().id === user.id)
 				return "MYSELF"; // myself
 			return "YES";
 		}
@@ -445,7 +448,6 @@ class AdminUsers extends React.Component {
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});
 			} else {
-				debugger;
 				this.setState({ "message": httpPayload.getData().message, listEvents: httpPayload.getData().listEvents }); 	
 				// update the attribut now
 				var listusers = this.state.listusers;

@@ -2,10 +2,12 @@ package com.togh.service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
 
+import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.ToghUserEntity;
 
 /* -------------------------------------------------------------------- */
@@ -54,6 +56,15 @@ public class MonitorService {
         // next will be to register that somewhere
     }
     
-   
+    /**
+     * When an error arrived on the server, we want to register it for the adminstrator, and then display it
+     * @param listEvents
+     */
+   public void registerErrorEvents(List<LogEvent> listEvents) {
+       /**
+        * To be saved somewhere, only the error event.
+        * To not register multiple time a day the same error, then we check if it is not already present for this day. If yes, then just add in the counter
+        */
+   }
     
 }

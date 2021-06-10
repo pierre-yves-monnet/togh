@@ -67,8 +67,8 @@ public class RestUserController {
             @RequestParam( RestJsonConstants.CST_INJSON_EVENTID ) Long eventId,
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
-        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
-        if (toghUser == null)
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
@@ -81,8 +81,8 @@ public class RestUserController {
         
         
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
-        for (ToghUserEntity togUser : searchUsers.listUsers) {
-            listUsersMap.add( togUser.getMap( ContextAccess.SEARCH, timezoneOffset));
+        for (ToghUserEntity toghUserEntityIterator : searchUsers.listUsers) {
+            listUsersMap.add( toghUserEntityIterator.getMap( ContextAccess.SEARCH, timezoneOffset));
         }
         
         payload.put( RestJsonConstants.CST_LISTUSERS, listUsersMap);
@@ -107,8 +107,8 @@ public class RestUserController {
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             
             @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
-        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
-        if (toghUser == null)
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
@@ -129,8 +129,8 @@ public class RestUserController {
         
         
         List<Map<String,Object >> listUsersMap = new ArrayList<>();
-        for (ToghUserEntity togUser : searchUsers.listUsers) {
-            listUsersMap.add( togUser.getMap( ContextAccess.ADMIN, timezoneOffset));
+        for (ToghUserEntity toghUserEntityIterator : searchUsers.listUsers) {
+            listUsersMap.add( toghUserEntityIterator.getMap( ContextAccess.ADMIN, timezoneOffset));
         }
         
         payload.put( RestJsonConstants.CST_LISTUSERS, listUsersMap);

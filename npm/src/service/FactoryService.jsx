@@ -19,9 +19,9 @@ var instanceFactory;
 
 class FactoryService  {
 
-	
 	constructor() {
-		console.log("FactoryService.constructor");
+		this.uniqId = new Date().getTime();
+		console.log("FactoryService.constructor id="+this.uniqId);
 		this.authService = new AuthService( this );
 		this.restcallService = new RestcallService( this );
 		this.toolService = new ToolService( this );

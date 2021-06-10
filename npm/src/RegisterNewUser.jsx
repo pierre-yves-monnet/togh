@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { TextInput } from 'carbon-components-react';
-import { IntlProvider, FormattedMessage } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 
 import FactoryService 	from 'service/FactoryService';
@@ -78,10 +78,10 @@ class RegisterNewUser extends React.Component {
 						 type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })}  ></TextInput><br />
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Password" defaultMessage="Password"/>} 
-						type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  required></TextInput><br />
+						type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  maxlength="30" required></TextInput><br />
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.RetypePassword" defaultMessage="Retype password"/>} 
-						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} required></TextInput><br />
+						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} maxlength="30" required></TextInput><br />
 					<div dangerouslySetInnerHTML={{ __html: messageBadPassword}}></div>
 					
 					<button class="btn btn-info" onClick={this.registerUser} disabled={ ! this.checkPassword() || ! this.validateForm()}>

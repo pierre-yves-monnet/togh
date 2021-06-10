@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,17 +33,21 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
+import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.service.ApiKeyService;
 import com.togh.service.FactoryService;
+import com.togh.service.LoginService;
 import com.togh.service.LoginService.LoginStatus;
+import com.togh.service.LoginService.LoginResult;
 
 @RestController
 public class RestLoginController {
@@ -53,6 +58,9 @@ public class RestLoginController {
     @Autowired
     private FactoryService factoryService;
 
+    @Autowired
+    private LoginService loginService;
+    
     @Autowired
     private ApiKeyService apiKeyService;
 
@@ -71,7 +79,7 @@ public class RestLoginController {
     @PostMapping(value = "/api/login",produces = "application/json")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginStatus loginStatus = factoryService.getLoginService().connectWithEmail(userData.get("email"), userData.get("password"));
+        LoginResult loginStatus = loginService.connectWithEmail(userData.get("email"), userData.get("password"));
         Map<String, Object> finalStatus = new HashMap<>();
         finalStatus.putAll( loginStatus.getMap());
         if (loginStatus.isConnected) {
@@ -88,7 +96,7 @@ public class RestLoginController {
     @CrossOrigin
     @PostMapping(value = "/api/logout",produces = "application/json")
     public String logout( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
-        factoryService.getLoginService().disconnectUser(connectionStamp);
+        loginService.disconnectUser(connectionStamp);
         return "{}";
     }
   
@@ -103,7 +111,7 @@ public class RestLoginController {
     @CrossOrigin
     @GetMapping(value="/api/logingoogle" ) 
     public Map<String, Object> loginGoogle(@RequestParam("idtokengoogle") String idTokenGoogle, HttpServletResponse response) {     
-        LoginStatus loginStatus = new LoginStatus();
+        LoginResult loginStatus = new LoginResult();
         try {
 
             final NetHttpTransport transport = new NetHttpTransport();
@@ -129,12 +137,12 @@ public class RestLoginController {
                 String picture = (String) payload.get("picture");
                 // fr, en..
                 String language= (String) payload.get("locale");
-                loginStatus = factoryService.getLoginService().connectSSO( email, true);
+                loginStatus = loginService.connectSSO( email, true);
                 if (! loginStatus.isConnected) {
                     // register it now !
-                    loginStatus = factoryService.getLoginService().registerNewUser( email, firstName, lastName, /** No password */ null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
-                    if (loginStatus.isCorrect)
-                        loginStatus = factoryService.getLoginService().connectNoVerification(email );
+                    loginStatus = loginService.registerNewUser( email, firstName, lastName, /** No password */ null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
+                    if (loginStatus.status == LoginStatus.OK)
+                        loginStatus = loginService.connectNoVerification( email );
                 }
 
                 return loginStatus.getMap();
@@ -156,7 +164,7 @@ public class RestLoginController {
     @PostMapping(value = "/api/login/registernewuser",produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginStatus loginStatus = factoryService.getLoginService().registerNewUser(userData.get("email"), 
+        LoginResult loginStatus = loginService.registerNewUser(userData.get("email"), 
                 userData.get("firstName"), 
                 userData.get("lastName"), 
                 userData.get("password"), 
@@ -164,12 +172,84 @@ public class RestLoginController {
                 TypePictureEnum.TOGH,
                 null
                 );
-        if (loginStatus.isCorrect)
-            loginStatus = factoryService.getLoginService().connectNoVerification(userData.get("email"));
+        if (loginStatus.status == LoginStatus.OK)
+            loginStatus = loginService.connectNoVerification(userData.get("email"));
             
         return loginStatus.getMap();
     }
   
+    
+    /**
+     * Register a new user
+     * @param userData
+     * @param response
+     * @return
+     */
+    @CrossOrigin
+    @PostMapping(value = "/api/login/lostmypassword",produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> lostMyPassword(@RequestBody Map<String, String> userData, HttpServletResponse response) {
+        LoginResult loginStatus = loginService.lostMyPassword(userData.get("email"));
+        Map<String, Object> payLoad=new HashMap<>();
+        switch( loginStatus.status ) {
+            case BADEMAIL:
+                payLoad.put("status", "BADEMAIL");
+                break;
+            case SERVERISSUE:
+                payLoad.put("status", "SERVERISSUE");
+                break;
+            case OK:
+                payLoad.put("status", "OK");
+                break;
+            default:
+                payLoad.put("status", "SERVERISSUE");
+                break;
+        }                    
+
+        return payLoad;
+    }
+    
+    
+    
+    @CrossOrigin
+    @PostMapping(value = "/api/login/resetPasswordInfo",produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> resetPasswordInfo(@RequestBody Map<String, String> userData, HttpServletResponse response) {
+        LoginResult loginStatus = loginService.getFromUUID(userData.get("uuid"));
+        Map<String, Object> finalStatus = new HashMap<>();
+        finalStatus.putAll( loginStatus.getMap());
+        return finalStatus;
+    }
+ 
+    
+    @CrossOrigin
+    @PostMapping(value = "/api/login/resetPassword",produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> resetPassword(@RequestBody Map<String, String> userData, HttpServletResponse response) {
+        LoginResult loginStatus = loginService.changePasswordAndConnect(userData.get("uuid"), userData.get("password"));
+        Map<String, Object> finalStatus = new HashMap<>();
+        finalStatus.putAll( loginStatus.getMap());
+        return finalStatus;
+    }
+    
+    
+    @CrossOrigin
+    @PostMapping(value = "/api/login/changePassword",produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> changePassword(@RequestBody Map<String, String> userData,
+            @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp ) {
+        
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null)
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+
+        LoginResult loginStatus = loginService.changePassword(toghUserEntity, userData.get("password"));
+        Map<String, Object> finalStatus = new HashMap<>();
+        finalStatus.putAll( loginStatus.getMap());
+        return finalStatus;
+    }
+    
     /**
      * 
      * @param message

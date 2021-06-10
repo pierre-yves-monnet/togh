@@ -1,4 +1,11 @@
-# Installation
+# Development Installation
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Installation Developement environnment                                          */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
 Tomcat server : D:\bonita\tomcat\Tomcat-9.0.41, port 7080
 http://localhost:7080/Together
@@ -40,7 +47,30 @@ The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
 ## mobile
 https://flutter.dev/
 
+
+
+## install npm
+npx create-react-app togh
+
+### Install carbon
+https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e
+
+npm add carbon-components carbon-components-react carbon-icons
+npm add node-sass@4.14.1
+
+npm start
+
+
+
 # Architecture
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Architecture							                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
 
 com.together.spring.ServletInitializer : this is the REST call
 
@@ -89,72 +119,18 @@ So:
 Example : date of the event is a Date + Time (Zoned)
   That's mean 
  
-# google 
-API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
+
+# Development
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Development  							                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
 
-
-https://console.cloud.google.com/apis
-
-https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
-
-https://cloud.google.com/translate/docs/quickstarts
-API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
- 	
-stocker les photo de l'API Key pour Flick
-
-
-# Cloud & docker
-user togh: pass4togh
-
-
-## Creation d'une image a partir de tomcat
-pull tomcat ou qq chose comme ca
-
-## Creation du container togh
-docker run --name togh -h localhost -v /tmp/docker:/opt/togh -d -p 8080:8080 togh
-
-Ajout des composants vi & postgres
-apt-get update
-apt-get install vi
-apt-get install postgresql postgresql-contrib
- 
- su - postgres
- pg_ctlcluster 11 main start
- 
- creation de la la base de donnée
- \conninfo
- psql
- CREATE DATABASE together;
- 
- Ajout de npm 
- 
-## cloud
-
-Deployer une image docker: 	
-https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
- 
-Deployer Postgres
-https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
- 
-## Sauvegarder le container
- 
-## importer le container
-  
- 
-## Arret de docker
-  wsl --shutdown
-  
-  
-# domain:
-
-www.1and1.com
-
-  
-# CI
-https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
-
-# React
+## React
 
 Explication sur React:
 https://fr.reactjs.org/docs/state-and-lifecycle.html
@@ -189,17 +165,21 @@ mvn clean install
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 
 
-# CSS et Color
+Comment in HTML/React : 
+{/*this is a comment */}
+
+
+## CSS et Color
 https://colorbrewer2.org/#type=qualitative&scheme=Pastel1&n=7
 http://colrd.com/color/0xffff6666/
 
 
 
-# Spring;
+## Spring;
 https://www.baeldung.com/spring-new-requestmapping-shortcuts
 
 
-# icon
+## icon
 <a href='https://www.freepik.com/vectors/icons'>Icons vector created by freepik - www.freepik.com</a>
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -272,7 +252,6 @@ const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
 
 
 
-# React
 
 ##Structure
 componentDidUpdate(prevProps) {
@@ -351,19 +330,15 @@ https://formatjs.io/docs/getting-started/message-extraction/
 
 
 
-## install npm
-npx create-react-app togh
+# Open question
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Open Question							                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
-### Install carbon
-https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e
-
-npm add carbon-components carbon-components-react carbon-icons
-npm add node-sass@4.14.1
-
-npm start
-
-
-# Spring
  Comment faire marcher le @configuration ?
  
  Comment locker un record dans la table ?
@@ -404,20 +379,10 @@ See https://www.baeldung.com/spring-profiles
 ## JPA
 https://www.baeldung.com/spring-data-jpa-query
  
-# Database 
-update eventuser set name='birthday' where id=31;
-
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(40,'local', 1, 1, 30,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(41,'local', 1, 1, 28,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(42,'local', 1, 1, 29,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(43,'local', 1, 1, 5,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
 
 
-## outils
           
-# Commentaire
+## Commentaire
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -466,9 +431,128 @@ React:
 	// 
 	// --------------------------------------------------------------
 	
+## tool for react : 
+  
+  vscode
+  react hooks
+
+
+# API
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  API										                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+## google  
+API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
+
+
+
+https://console.cloud.google.com/apis
+
+https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
+
+https://cloud.google.com/translate/docs/quickstarts
+API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
+ 	
+stocker les photo de l'API Key pour Flick
+
+
+# Cloud & docker
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Cloud									                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+user togh: pass4togh
+
+
+## Creation d'une image a partir de tomcat
+pull tomcat ou qq chose comme ca
+
+## Creation du container togh
+docker run --name togh -h localhost -v /tmp/docker:/opt/togh -d -p 8080:8080 togh
+
+Ajout des composants vi & postgres
+apt-get update
+apt-get install vi
+apt-get install postgresql postgresql-contrib
+ 
+ su - postgres
+ pg_ctlcluster 11 main start
+ 
+ creation de la la base de donnée
+ \conninfo
+ psql
+ CREATE DATABASE together;
+ 
+ Ajout de npm 
+ 
+## cloud
+
+Deployer une image docker: 	
+https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
+ 
+Deployer Postgres
+https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
+ 
+## Sauvegarder le container
+ 
+## importer le container
+  
+ 
+## Arret de docker
+  wsl --shutdown
+  
+  
+## domain:
+
+www.1and1.com
+
+  
+## CI
+https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
+
+
+# Administration
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Administration							                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+  private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com";
+    private static final String TOGHADMIN_USERNAME = "toghadmin";
+    private static final String TOGHADMIN_PASSWORD = "togh";
+ 
+# Database 
+update eventuser set name='birthday' where id=31;
+
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(40,'local', 1, 1, 30,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(41,'local', 1, 1, 28,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(42,'local', 1, 1, 29,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(43,'local', 1, 1, 5,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31);
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
+
                
 # Tasks
 
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Tasks									                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
 	 
 	
@@ -489,17 +573,19 @@ Py
 2.	Verifier invitation
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
 
-8.	Lost my password
+
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 
-11. cacher les password en base de donnée
-	
-Verifier : admintogh creation et login (admintogh d'un coté, et toghadmin@togh.com de l'autre et j'arrive plus a me connecter
+
+12. Verifier : admintogh creation et login (admintogh d'un coté, et toghadmin@togh.com de l'autre et j'arrive plus a me connecter
+13. Verifier : quand un user se connecter, on recupere bien dans toghentity ses propres tips preference?
 
 	
 		
 V2		
+	MonitorService.registerErrorEvents() ==> Implementer
+	
 	Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer
 	Expense
 	Preference affichage
@@ -514,17 +600,16 @@ V2
 	Coder whatismyip dans l'administration
 		
     Survey : first, present the VIEW display if there is an survey      
-# bugs
+
+
+## bugs
 	Invitation en cours : affichage pas super dans le panneau des invitations
 	
- Survey : j'avais pas choisi que le survey etait deja 1/1. Il faut mettre 1/1 quand on a repondu a au moins 1 event
+
 Plus possible de choisir une date          
           
 
           
           
-# tool for react : 
-  
-  vscode
-  react hooks
+
       

@@ -8,10 +8,12 @@
 
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 
-import { RadioButtonGroup, RadioButton,TextInput,Loading,Select } from 'carbon-components-react';
+import { ModalWrapper, RadioButtonGroup, RadioButton,TextInput,Loading,Select } from 'carbon-components-react';
 
+import AskPassword 				from 'component/AskPassword';
+import UserMessage 				from 'component/UserMessage';
 import FactoryService 			from 'service/FactoryService';
 
 
@@ -20,18 +22,23 @@ class MyProfile extends React.Component {
 	constructor( props ) {
 		super();
 		// console.log("RegisterNewUser.constructor");
-
 		let authService = FactoryService.getInstance().getAuthService();
-		console.log("MyProfile.constructor user.typepicture="+authService.getUser().typePicture);
-		this.state = { user: authService.getUser() };
-
+		this.state = { user: authService.getUser(),
+			passwordIsCorrect: false,
+			newPassword:"",
+			actionPasswordMessage:"" };
+			
+		this.changePasswordCallback = this.changePasswordCallback.bind( this);
+		this.actionChangePassword 	= this.actionChangePassword.bind( this );
 	}
+	/*
 	componentDidMount() {
 		let authService = FactoryService.getInstance().getAuthService();
 		console.log("MyProfile.componentDidMount user.typepicture="+authService.getUser().typePicture);
 		this.state = { user: authService.getUser() };
 
 	}
+	*/
 	//----------------------------------- Render
 	render() {
 		 
@@ -65,13 +72,13 @@ class MyProfile extends React.Component {
 						</RadioButtonGroup><br/>
 						
 						{ this.state.user.typePicture=== 'TOGH' && 
-										<img  src="img/togh.png" style={{width:150}} />
+										<img  src="img/togh.png" style={{width:150}} alt=""/>
 						}
 						{ this.state.user.typePicture=== 'CYPRIS' && 
-										<img  src="img/cypris.png" style={{width:150}} />
+										<img  src="img/cypris.png" style={{width:150}}  alt=""/>
 						}
 						{ this.state.user.typePicture=== 'URL' && 
-										<img  src={this.state.user.picture} style={{width:150}} />
+										<img  src={this.state.user.picture} style={{width:150}}  alt=""/>
 						}
 					</div>
 					<div class="col-sm-4">
@@ -90,6 +97,24 @@ class MyProfile extends React.Component {
 							value={this.state.user.lastName} 
 							onChange={(event) => { this.setAttribut( "lastName", event.target.value ) }	} /><br/>
 						
+ 						<ModalWrapper
+							passiveModal
+							buttonTriggerText={<FormattedMessage id="MyProfile.ChangeMyPassword" defaultMessage="Change my password"/>}
+			     			modalLabel={<FormattedMessage id="MyProfile.SetANewPassword" defaultMessage="Set a new password"/>}
+							size='lg'>
+								<div style={{display: "inline-block"}}>
+									<AskPassword changePasswordCallback={this.changePasswordCallback} />
+									
+									<button onClick={this.actionChangePassword} class="btn btn-primary"
+										disabled={ ! this.state.passwordIsCorrect}>
+										<FormattedMessage id="MyProfile.UpdateMyPassword" defaultMessage="Update my password"/>
+									</button>
+									<br/>
+									<UserMessage message={this.state.actionPasswordMessage} status={this.state.actionPasswordStatus} />
+									
+									
+								</div>
+						</ModalWrapper>	
 					</div>
 					
 				</div>		
@@ -107,8 +132,8 @@ class MyProfile extends React.Component {
 						</div>
 					</div>
 					<div class="col-sm-4">
-							<button onClick={this.changeEmail} class="btn btn-info"><FormattedMessage id="MyProfile.ChangeEmail" defaultMessage="Change Email"/></button>
-							<br/>
+						<button onClick={this.changeEmail} class="btn btn-primary"><FormattedMessage id="MyProfile.ChangeEmail" defaultMessage="Change Email"/></button>
+						<br/>
 					</div>
 				</div>	
 					
@@ -247,16 +272,20 @@ class MyProfile extends React.Component {
 				</div>
 				<div class="row" style={{borderTop: "1px black solid",  marginTop: "40px", paddingTop: "10px"}}>
 					<div class="col-sm-8">				
-					  <TextInput labelText={<FormattedMessage id="MyProfile.subscriptionUser" defaultMessage="Subscription"/>}
+					  	<TextInput labelText={<FormattedMessage id="MyProfile.subscriptionUser" defaultMessage="Subscription"/>}
 							id="email" 
-							value={this.state.user.subscriptionuser} 
+							value={this.state.user.subscriptionUser} 
 							class="thoginputreadonly"
 							/>
+						<FormattedMessage id="MyProfile.subscriptionUser" defaultMessage="Subscription"/><br/>
+						{this.state.user.subscriptionUser} 
+						
 						<div class="toghTips">
+						
 								<FormattedMessage id="MyProfile.subscriptionUserExplanation" defaultMessage="Different level of subscription exists."/><br/>
-								<FormattedMessage id="MyProfile.subscriptionFreeExplanation" defaultMessage="The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event."/><br/>
-								<FormattedMessage id="MyProfile.subscriptionPremiumExplanation" defaultMessage="The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!"/><br/>
-								<FormattedMessage id="MyProfile.subscriptionExcellentExplanation" defaultMessage="The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application."/><br/>
+								<ul><FormattedMessage id="MyProfile.subscriptionFreeExplanation" defaultMessage="The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event."/></ul><br/>
+								<li><FormattedMessage id="MyProfile.subscriptionPremiumExplanation" defaultMessage="The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!"/></li><br/>
+								<li><FormattedMessage id="MyProfile.subscriptionExcellentExplanation" defaultMessage="The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application."/></li><br/>
 						</div>
 					</div>				
 							
@@ -287,7 +316,6 @@ class MyProfile extends React.Component {
 				this.setState({ message: "Server connection error"});
 			}
 			else {
-				debugger;
 				this.setState( { user: httpPayload.getData().user});
 				
 				let authService = FactoryService.getInstance().getAuthService();
@@ -295,8 +323,45 @@ class MyProfile extends React.Component {
 				console.log("MyProfile.setAttributeCallback user.typepicture="+authService.getUser().typePicture);
 
 			}
-		});	}
+		});	
+	}
+	
+	changePasswordCallback( isCorrect, password) {
+		this.setState({passwordIsCorrect: isCorrect, password:password, actionPasswordMessage:"", actionPasswordStatus:"" });
+	}
+	
+	actionChangePassword() {
+
+		const intl = this.props.intl;
+		let restCallService = FactoryService.getInstance().getRestcallService();
+		
+		this.setState( {actionPasswordMessage: intl.formatMessage({id: "MyProfile.passwordChangeInProgress",defaultMessage: "In progress"}),
+					actionPasswordStatus:"",
+					 loading:true});
+
+		var param= {  password: this.state.password };
+		restCallService.postJson('/api/login/changePassword?', this, param, this.changePasswordRestCallback);
+		
+	}
+	/**
+	 * ChangePasswordCallback
+	 */
+	changePasswordRestCallback( httpPayload ) {
+		const intl = this.props.intl;
+
+		console.log("MyProfile.changePasswordCallback: registerStatus = "+JSON.stringify(httpPayload));
+ 		if ( ! httpPayload.isError() ) {
+			console.log("MyProfile.connectStatus : password changed");
+			this.setState( {actionPasswordMessage: intl.formatMessage({id: "MyProfile.passwordChangedOk",defaultMessage: "Password changed"}),
+							actionPasswordStatus : "OK",
+							 loading:false});
+		} else {
+			this.setState( {actionPasswordMessage: intl.formatMessage({id: "MyProfile.passwordChangeFailed",defaultMessage: "Change failed"}),
+							actionPasswordStatus : "FAIL", 
+							loading:false});
+		}
+	} // end changePasswordRestCallback
 
 	
 }
-export default MyProfile;
+export default injectIntl(MyProfile);

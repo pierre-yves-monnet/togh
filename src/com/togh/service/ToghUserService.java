@@ -8,8 +8,12 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -27,7 +33,6 @@ import org.springframework.stereotype.Service;
 
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
-import com.togh.engine.logevent.LogEventFactory;
 import com.togh.engine.tool.JpaTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
@@ -35,15 +40,18 @@ import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
 import com.togh.entity.ToghUserEntity.StatusUserEnum;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
+import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.repository.ToghUserRepository;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
+import com.togh.service.NotifyService.NotificationStatus;
 
 @Service
 public class ToghUserService {
 
-    private static final String TOGHADMIN = "admintogh";
-    private static final String TOGHADMINPASSWORD = "togh";
+    private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com";
+    private static final String TOGHADMIN_USERNAME = "toghadmin";
+    private static final String TOGHADMIN_PASSWORD = "togh";
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     private static final String LOG_HEADER = ToghUserService.class.getName() + ":";
 
@@ -60,14 +68,18 @@ public class ToghUserService {
      */
     @PostConstruct
     public void init() {
-        ToghUserEntity adminUser = endUserRepository.findByName(TOGHADMIN);
+        ToghUserEntity adminUser = endUserRepository.findByName(TOGHADMIN_USERNAME);
         if (adminUser == null) {
             adminUser = new ToghUserEntity();
-            adminUser.setName(TOGHADMIN);
-            adminUser.setPassword(TOGHADMINPASSWORD);
-            adminUser.setEmail("toghadmin@togh.com");
-            adminUser.setPrivilegeUser(PrivilegeUserEnum.ADMIN);
-            adminUser.setSource(SourceUserEnum.SYSTEM);
+            adminUser.setName( TOGHADMIN_USERNAME );
+            setPassword( adminUser, TOGHADMIN_PASSWORD);
+            adminUser.setEmail( TOGHADMIN_EMAIL );
+            adminUser.setPrivilegeUser( PrivilegeUserEnum.ADMIN );
+            adminUser.setStatusUser( StatusUserEnum.ACTIF );
+            adminUser.setSource( SourceUserEnum.SYSTEM );
+            adminUser.setSubscriptionUser(SubscriptionUserEnum.EXCELLENCE);
+            adminUser.setTypePicture(TypePictureEnum.TOGH);
+            
             endUserRepository.save(adminUser);
         }
 
@@ -80,7 +92,7 @@ public class ToghUserService {
         return null;
     }
 
-    public ToghUserEntity getFromEmail(String email) {
+    public ToghUserEntity getUserFromEmail(String email) {
         return endUserRepository.findByEmail(email);
     }
 
@@ -149,12 +161,10 @@ public class ToghUserService {
             // send the email now
             invitationStatus.isEmailSent = true;
             NotifyService notifyService = factoryService.getNotifyService();
-            List<LogEvent> listEvents = notifyService.notifyNewUserInEvent(invitationStatus.toghUser, invitedByUser, event);
-            if (LogEventFactory.isError(listEvents))
-                invitationStatus.isEmailSent = false;
-            else
-                invitationStatus.isEmailSent = true;
-
+            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser, invitedByUser, event);
+            
+            invitationStatus.isEmailSent = notificationStatus.isCorrect();
+            
             return invitationStatus;
         } catch (Exception e) {
             logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
@@ -386,6 +396,43 @@ public class ToghUserService {
         
         return operationUser;
     }
+    
+    
+    // --------------------------------------------------------------
+    // 
+    // Encrypt password
+    // 
+    // --------------------------------------------------------------
+    /**
+     * Set the password in the user. The password will be encrypted at this moment. 
+     * Object toghUser is not saved
+     * @param toghUser
+     * @param password
+     * @param saveImmediately
+     */
+    public void setPassword( ToghUserEntity toghUser, String password) {
+        toghUser.setPassword( encryptPassword( password ) );
+    }
+    
+    private static String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
+    private static final int ITERATIONS = 10000;
+    private static final int KEY_LENGTH = 256;
 
+    public static String encryptPassword(String password) {
+        char[] passwordChar = password.toCharArray();
+        byte[] saltChar = salt.getBytes();
+        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
+        Arrays.fill(passwordChar, Character.MIN_VALUE);
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] securePassword = skf.generateSecret(spec).getEncoded();
+            return Base64.getEncoder().encodeToString(securePassword);
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+        } finally {
+            spec.clearPassword();
+        }
+    }
    
 }

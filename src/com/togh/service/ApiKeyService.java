@@ -30,6 +30,18 @@ import com.togh.repository.ApiKeyEntityRepository;
 @Service
 public class ApiKeyService {
 
+    private static final String HTTP_TOGH_SERVER = "HttpToghServer";
+
+    private static final String SMTP_USER_PASSWORD = "SmtpUserPassword";
+
+    private static final String SMTP_USER_NAME = "SmtpUserName";
+
+    private static final String SMTP_PORT = "StmpPort";
+
+    private static final String SMTP_FROM = "SmtpFrom";
+
+    private static final String SMTP_HOST = "SmtpHost";
+
     private static final String GEOCODE_API_KEY = "geocodeAPIKey";
 
     private static final String GOOGLE_API_KEY = "googleAPIKey";
@@ -39,7 +51,7 @@ public class ApiKeyService {
     @Autowired
     ApiKeyEntityRepository apiKeyRepository;
 
-    public List<String> listKeysSystem = Arrays.asList(TRANSLATE_KEY_API);
+    public List<String> listKeysSystem = Arrays.asList(TRANSLATE_KEY_API, HTTP_TOGH_SERVER, SMTP_HOST, SMTP_FROM, SMTP_PORT, SMTP_USER_NAME, SMTP_USER_PASSWORD);
     public List<String> listKeysBrowser = Arrays.asList(GOOGLE_API_KEY, GEOCODE_API_KEY);
 
     /**
@@ -65,7 +77,7 @@ public class ApiKeyService {
         }
         for (String codeApi : listKeysBrowser) {
             for (PrivilegeKeyEnum priviledge : listSuffixPrivilege) {
-                APIKeyEntity codeApiEntity = apiKeyRepository.findByName( getFinalCode(codeApi,priviledge));
+                APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi, priviledge));
                 if (codeApiEntity == null) {
                     codeApiEntity = new APIKeyEntity();
                     codeApiEntity.setName(codeApi + "_" + priviledge.toString());
@@ -76,7 +88,10 @@ public class ApiKeyService {
         }
     }
 
-    public List<APIKeyEntity> getListKeys() {
+    /**
+     * @return
+     */
+    public List<APIKeyEntity> getListApiKeys() {
         List<APIKeyEntity> listKey = new ArrayList<>();
 
         for (String codeApi : listKeysSystem) {
@@ -85,12 +100,12 @@ public class ApiKeyService {
                 listKey.add(codeApiEntity);
             }
         }
-        
+
         for (String codeApi : listKeysBrowser) {
             for (PrivilegeKeyEnum priviledge : listSuffixPrivilege) {
-                APIKeyEntity codeApiEntity = apiKeyRepository.findByName( getFinalCode(codeApi, priviledge));
+                APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi, priviledge));
                 if (codeApiEntity != null) {
-                 listKey.add(codeApiEntity);
+                    listKey.add(codeApiEntity);
                 }
             }
         }
@@ -114,35 +129,33 @@ public class ApiKeyService {
                 listLogEvent.add(new LogEvent(eventUnknowCode, "Code[" + oneKey.get("name") + "]"));
         }
         if (listLogEvent.isEmpty())
-            listLogEvent.add( eventKeysUpdated);
+            listLogEvent.add(eventKeysUpdated);
         return listLogEvent;
     }
 
-    
     /**
      * Return all the key according the user, and it's accredidation
+     * 
      * @param toghUser
      * @return
      */
-    public Map<String,String> getApiKeyForUser( ToghUserEntity toghUser ) {
-        Map<String,String> result = new HashMap<>();
-    
-        PrivilegeKeyEnum priviledge= PrivilegeKeyEnum.FREE;
+    public Map<String, String> getApiKeyForUser(ToghUserEntity toghUser) {
+        Map<String, String> result = new HashMap<>();
+
+        PrivilegeKeyEnum priviledge = PrivilegeKeyEnum.FREE;
         // SubscriptionUserEnum { FREE, PREMIUM, ILLIMITED }
-        if ((toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM) 
-            || (toghUser.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE))
+        if ((toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
+                || (toghUser.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE))
             priviledge = PrivilegeKeyEnum.PREMIUM;
-        
+
         for (String codeApi : listKeysBrowser) {
-                APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi,priviledge));
-                if (codeApiEntity!=null)
-                    result.put( codeApi, codeApiEntity.getKeyApi());
+            APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi, priviledge));
+            if (codeApiEntity != null)
+                result.put(codeApi, codeApiEntity.getKeyApi());
         }
         return result;
     }
-    
-        
-        
+
     /**
      * Return the Translate Key API
      * 
@@ -155,14 +168,92 @@ public class ApiKeyService {
         }
         return null;
     }
+
+    public String getHttpToghServer(String defaultHttp) {
+        APIKeyEntity codeApiEntity = apiKeyRepository.findByName(HTTP_TOGH_SERVER);
+        if (codeApiEntity != null) {
+            return codeApiEntity.getKeyApi();
+        }
+        return defaultHttp;
+    }
     
     /**
+     * ReturnSmtpHostName
+     * 
+     * @return
+     */
+    public String getSmtpHost() {
+        APIKeyEntity codeApiEntity = apiKeyRepository.findByName(SMTP_HOST);
+        if (codeApiEntity != null) {
+            return codeApiEntity.getKeyApi();
+        }
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public String getSmtpFrom() {
+        APIKeyEntity codeApiEntity = apiKeyRepository.findByName(SMTP_FROM);
+        if (codeApiEntity != null) {
+            return codeApiEntity.getKeyApi();
+        }
+        return null;
+    }
+
+    /**
+     * getSmtpPort
+     * 
+     * @return
+     */
+    public Long getSmtpPort() {
+        APIKeyEntity codeApiEntity = apiKeyRepository.findByName(SMTP_PORT);
+        if (codeApiEntity != null) {
+            try {
+                return Long.parseLong(codeApiEntity.getKeyApi());
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public String getSmtpUserName() {
+        APIKeyEntity codeApiEntity = apiKeyRepository.findByName(SMTP_USER_NAME);
+        if (codeApiEntity != null) {
+            String key = codeApiEntity.getKeyApi();
+            if (key != null && key.isEmpty())
+                return null;
+            return key;
+        }
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public String getSmtpUserPassword() {
+        APIKeyEntity codeApiEntity = apiKeyRepository.findByName(SMTP_USER_PASSWORD);
+        if (codeApiEntity != null) {
+            String key = codeApiEntity.getKeyApi();
+            if (key != null && key.isEmpty())
+                return null;
+            return key;
+        }
+        return null;
+    }
+
+    /**
      * getFinalCode
+     * 
      * @param codeApi
      * @param priviledge
      * @return
      */
-    private String getFinalCode( String codeApi, PrivilegeKeyEnum priviledge) {
-        return codeApi+"_"+priviledge.toString();
+    private String getFinalCode(String codeApi, PrivilegeKeyEnum priviledge) {
+        return codeApi + "_" + priviledge.toString();
     }
 }

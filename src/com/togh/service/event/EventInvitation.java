@@ -66,7 +66,7 @@ public class EventInvitation {
 
         // invitation by the email? 
         if (userInvitedEmail != null && !userInvitedEmail.trim().isEmpty()) {
-            ToghUserEntity toghUser = userService.getFromEmail(userInvitedEmail);
+            ToghUserEntity toghUser = userService.getUserFromEmail(userInvitedEmail);
             if (toghUser == null) {
                 // this is a real new user, register and invite it to join Togh
                 CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, event);

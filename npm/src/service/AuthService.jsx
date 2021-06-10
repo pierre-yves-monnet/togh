@@ -152,6 +152,14 @@ class AuthService {
 		}
 	}
 	
+	/**
+	 User is connected by a different URL than the password (example, in the changePassword method) */
+	setConnection( httpPayload ) {
+		this.token = httpPayload.token;
+		this.user =  httpPayload.user;
+		this.connectMethod='DIRECT';
+		
+	}
 	
 	//--------------------------------------- Logout
 	logout( objToCall, fctToCallback) {

@@ -49,7 +49,7 @@ public class RestAdminApiKey {
       public List<APIKeyEntity> getApiKeys( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
         
         loginService.isAdministratorConnected(connectionStamp);
-        return apiKeyService.getListKeys();
+        return apiKeyService.getListApiKeys();
             
     }
     @CrossOrigin

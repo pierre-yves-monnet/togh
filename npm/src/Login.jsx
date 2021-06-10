@@ -7,13 +7,13 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput,  Loading } from 'carbon-components-react';
+import { TextInput,  Loading,ModalWrapper } from 'carbon-components-react';
 import { injectIntl, FormattedMessage } from "react-intl";
+import { Envelope } from 'react-bootstrap-icons';
 
 // https://www.npmjs.com/package/react-google-login
 // https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-
 
 import FactoryService from 'service/FactoryService';
 
@@ -38,23 +38,28 @@ class Login extends React.Component {
 			rememberme: rememberme,
 			badConnection: false,
 			messageConnection:'',
-			inprogress: false }
+			inprogress: false,
+			showLostPassword:false,
+			messageLostPassword:'',
+			statusresetpassord:'' }
 
 		// get from the local storage ? 
 		
 		// this is mandatory to have access to the variable in the method... thank you React!   
-		this.loginConnect = this.loginConnect.bind(this);
-		this.directLogout = this.directLogout.bind( this );
-		staticLogin = this;
+		this.loginConnect 		= this.loginConnect.bind(this);
+		this.directLogout 		= this.directLogout.bind( this );
+		this.sendEmailPassword 	= this.sendEmailPassword.bind( this);
+		staticLogin 			= this;
 	}
 
 	// ------------------------------ Render
 	render() {
 		
 		let messageConnectionHtml ="";
-		
-		var factory = FactoryService.getInstance();
-		var authService = factory.getAuthService();
+		const intl = this.props.intl;
+
+		let factory = FactoryService.getInstance();
+		let authService = factory.getAuthService();
 
 
 		console.log("Login.render: isConnected="+authService.isConnected()+" badConnection="+this.state.badConnection+" / message=["+this.state.messageConnection+"]");
@@ -106,9 +111,10 @@ class Login extends React.Component {
 					
 				<table >
 				<tr>
-				<td style={{"paddingRight" : "40px", "paddingLeft" : "150px"}}>
+				<td style={{"paddingLeft" : "150px"}}>
 					
 					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
+					
 					<input type="checkbox"
 						onChange={(event) => { 
 								let rememberBool = event.target.value==='on';
@@ -120,19 +126,58 @@ class Login extends React.Component {
 								}
 						}
 						defaultChecked={this.state.rememberme ? 'checked': ''} />
+					&nbsp;
 					<FormattedMessage id="Login.RememberMe" defaultMessage="Remember Me" />
 				
 					{messageConnectionHtml}
 				</td>
-				<td>
-				<GoogleLogin
-				    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
-				    buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
-				    onSuccess={this.loginGoogle}				    
-				    cookiePolicy={'single_host_origin'}
-				  />
-					</td>
-					</tr></table>
+				<td style={{paddingRight : "40px"}} >
+					<GoogleLogin
+					    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
+					    buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
+					    onSuccess={this.loginGoogle}				    
+					    cookiePolicy={'single_host_origin'}
+					  />
+				</td>
+				</tr>
+				<tr>
+				<td colspan="2" style={{paddingRight : "40px", paddingLeft : "150px"}}>
+					
+					<div style={{marginTop: "80px", marginBottom:"10px"}}>
+						<FormattedMessage id="Login.LostMyPasswordExplanation" defaultMessage="You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one"/>
+					</div>
+					<ModalWrapper
+						passiveModal
+						buttonTriggerText={<FormattedMessage id="Login.LostMyPassword" defaultMessage="I lost My password"/>}
+		     			modalLabel={intl.formatMessage({id: "Login.LostMyPasswordLabel", defaultMessage: "Reset my password"})}
+						size='lg'>
+						<div style={{display: "inline-block"}}>
+							<FormattedMessage id="Login.LostPasswordExplanation" defaultMessage="A link to change your password will be send to your email"/>
+							<TextInput 
+									id="loginemail" 
+									value={this.state.email} 
+									onChange={(event) => 
+										{ this.setState({ email: event.target.value });
+											if (this.state.rememberme) {
+												localStorage.setItem(LOCALSTORAGE_EMAIL,  event.target.value);
+											}
+										}
+										} />
+							<button class="btn btn-info"  onClick={ this.sendEmailPassword}>
+								<Envelope/>			
+								&nbsp;					
+								<FormattedMessage id="Login.SendEmail" defaultMessage="Send the email"/>
+							</button>
+							<br/>
+							{ this.state.statusresetpassord === 'OK' && <div style={{color: "green"}}>{this.state.messageLostPassword}</div>}
+							{ this.state.statusresetpassord !== '' && this.state.statusresetpassord !== 'OK'  && <div style={{color: "red"}}>{this.state.messageLostPassword}</div>}
+							
+						</div>
+					</ModalWrapper>
+					
+				</td>
+				</tr>
+				</table>
 				
 								
 			</div>
@@ -234,8 +279,33 @@ class Login extends React.Component {
 			});
 
 	}
-	
+		
+	// -----------------------------------------------
+	// LostMyPassword	
+	// -----------------------------------------------
+	sendEmailPassword() {
+		const intl = this.props.intl;
 
+		this.setState({ messageLostPassword :  ""});
+		let restCallService = FactoryService.getInstance().getRestcallService();
+		restCallService.postJson('/api/login/lostmypassword', this, {email: this.state.email}, httpPayload => {
+				httpPayload.trace("Login.lostmypassword");
+	
+				if (httpPayload.isError()) {
+					this.setState({ messageLostPassword: intl.formatMessage({id: "Login.ServerConnectionError",defaultMessage: "Server connection error"}) });
+				} else {
+					this.setState( { "statusresetpassord":httpPayload.getData().status});
+					
+					if (httpPayload.getData().status === "OK"){ 
+						this.setState( { messageLostPassword: intl.formatMessage({id: "Login.EmailSent",defaultMessage: "An email is sent, check your mailbox"}) });
+					} else if (httpPayload.getData().status === "SERVERISSUE") {
+						this.setState( {messageLostPassword: intl.formatMessage({id: "Login.ServerIssue",defaultMessage: "An error arrived on the server, please try later"}) });
+					} else if (httpPayload.getData().status === "BADEMAIL") {
+						this.setState( {messageLostPassword: intl.formatMessage({id: "Login.EmailIncorrect",defaultMessage: "Email address is incorrect"}) });
+						}		
+			}
+		});
+	}
 }
 export default injectIntl(Login);
 

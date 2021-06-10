@@ -13,7 +13,7 @@ import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 
 import { Select, Tag } from 'carbon-components-react';
 
-import Invitation from 'Invitation';
+import Invitation from 'event/Invitation';
 
 
 export const ROLE_OWNER = 'OWNER';

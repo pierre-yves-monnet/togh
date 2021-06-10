@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/* Togh Project */
+/*                                                                                  */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.entity;
 
 import java.time.LocalDateTime;
@@ -43,6 +51,11 @@ public @Data class ToghUserEntity extends BaseEntity {
     @Column(name = "email", length = 100)
     private String email;
 
+    @Column(name = "language", length = 5 )
+    @org.hibernate.annotations.ColumnDefault("'en'")
+    private String language;
+
+    
     public enum VisibilityEnum {
         ALWAYS, ALWAYBUTSEARCH, LIMITEDEVENT, NEVER
     }
