@@ -572,8 +572,6 @@ Py
 1. Sauvegarde Chat
 2.	Verifier invitation
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
-
-
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 

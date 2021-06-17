@@ -179,8 +179,13 @@ public class NotifyService {
         st.append("<td>"+getDictionarySentence("Togh",lang)+"</td>");
         st.append("</tr></table>");
         
-        if (toghUserEntity !=null)
-            st.append(getDictionarySentence("Dear", lang)+"&nbsp;"+toghUserEntity.getFirstName()+"&nbsp;"+toghUserEntity.getFirstName()+",");
+        if (toghUserEntity !=null) {
+            st.append(getDictionarySentence("Dear", lang));
+            if (toghUserEntity.getFirstName() !=null)
+                st.append("&nbsp;"+toghUserEntity.getFirstName());
+            if (toghUserEntity.getLastName() !=null)
+                st.append("&nbsp;"+toghUserEntity.getLastName()+",");
+        }
         return st.toString();
     }
     

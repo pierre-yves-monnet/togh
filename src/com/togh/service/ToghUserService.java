@@ -152,9 +152,7 @@ public class ToghUserService {
             invitationStatus.isEmailIsCorrect = true;
 
             // fullfill the event
-            invitationStatus.toghUser = new ToghUserEntity();
-            invitationStatus.toghUser.setEmail(email);
-            invitationStatus.toghUser.setSource(SourceUserEnum.INVITED);
+            invitationStatus.toghUser = ToghUserEntity.getInvitedUser(email);
 
             factoryService.getToghUserService().saveUser(invitationStatus.toghUser);
 

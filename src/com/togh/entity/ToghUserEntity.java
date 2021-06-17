@@ -80,8 +80,13 @@ public @Data class ToghUserEntity extends BaseEntity {
     @Column(name = "connectionlastactivity")
     public LocalDateTime connectionLastActivity;
 
+    /**
+     * Invited: email was sent, waiting to be confirmed
+     * @author Firstname Lastname
+     *
+     */
     public enum StatusUserEnum {
-        ACTIF, DISABLED, BLOCKED
+        ACTIF, DISABLED, BLOCKED, INVITED
     }
 
     @Column(name = "statususer", length = 10, nullable = false)
@@ -111,7 +116,17 @@ public @Data class ToghUserEntity extends BaseEntity {
         endUser.setSubscriptionUser(SubscriptionUserEnum.FREE);
         return endUser;
     }
+    public static ToghUserEntity getInvitedUser(String email) 
+    {
+        ToghUserEntity toghUserEntity = new ToghUserEntity();
 
+        toghUserEntity.setEmail(email);
+        toghUserEntity.setSource(SourceUserEnum.INVITED);
+        toghUserEntity.setStatusUser( StatusUserEnum.INVITED);
+        toghUserEntity.setSource(SourceUserEnum.INVITED);
+        return toghUserEntity;
+    }
+    
     public boolean checkPassword(String passwordToCompare) {
         if (passwordToCompare == null)
             return false;
@@ -230,7 +245,7 @@ public @Data class ToghUserEntity extends BaseEntity {
         resultMap.put("typePicture", typePicture);
         resultMap.put("picture", picture);
         
-        resultMap.put("statusUser", statusUser.toString());
+        resultMap.put("statusUser", statusUser==null ? "" : statusUser.toString());
 
         // if the context is SECRET, the last name is not visible
         if (contextAccess != ContextAccess.SECRETACCESS)
