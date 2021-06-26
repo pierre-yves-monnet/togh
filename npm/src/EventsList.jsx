@@ -170,13 +170,10 @@ class EventsList extends React.Component {
 	refreshListEvents() {
 		console.log("EventsList.refreshListEvents http[event/list?filterEvents=" + this.state.filterEvents + "]");
 		this.setState({ events: [] });
-
-
 		var restCallService = FactoryService.getInstance().getRestcallService();
-
 		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, this, this.refreshListEventsCallback );
-
 	}
+	
 	refreshListEventsCallback( httpPayload) {
 		httpPayload.trace("EventsList.refreshListEventsCallback");
 		let currentOperation = this.state.operation;

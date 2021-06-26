@@ -26,6 +26,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.apache.tomcat.util.descriptor.web.ContextResourceEnvRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -129,6 +130,15 @@ public class LoginService {
             loginStatus.status = LoginStatus.UNKNOWUSER;
             return loginStatus;
         }
+        // Special case: a invited user with a password.... this is not normal. When the user register, it set a password and
+        // it must move to Portal. Let's catch that
+        if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource()) 
+                && toghUserEntity.getPassword() !=null
+                && toghUserEntity.getPassword().length()>0) {
+            toghUserEntity.setSource( SourceUserEnum.PORTAL);
+            toghUserService.saveUser(toghUserEntity);
+        }
+        
         // this user must be registered on the portal
         if (!(SourceUserEnum.PORTAL.equals(toghUserEntity.getSource())
                 || SourceUserEnum.SYSTEM.equals(toghUserEntity.getSource()))) {
@@ -223,6 +233,7 @@ public class LoginService {
                 toghUserEntity.setPassword(passwordEncrypted);
                 toghUserEntity.setFirstName(firstName);
                 toghUserEntity.setLastName(lastName);
+                toghUserEntity.calculateName();
                 toghUserEntity.setSource(SourceUserEnum.PORTAL);
                 toghUserService.saveUser(toghUserEntity);
                 toghUserEntity.setTypePicture(typePicture);

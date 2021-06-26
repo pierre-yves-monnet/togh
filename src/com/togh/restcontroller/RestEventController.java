@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity;
@@ -55,6 +56,7 @@ public class RestEventController {
     @Autowired
     private FactoryService factoryService;
 
+    @Autowired EventService eventService;
     
     @CrossOrigin
     @GetMapping("/api/event/list")
@@ -85,16 +87,20 @@ public class RestEventController {
     public Map<String, Object> event(@RequestParam("id") Long eventId,
             @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
-        ToghUserEntity toghUser  = factoryService.getLoginService().isConnected(connectionStamp);
-        if (toghUser == null)
+        ToghUserEntity toghUserEntity  = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null)
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
-        EventEntity event = factoryService.getEventService().getAllowedEventById(toghUser, eventId);
-        if (event == null)
+        EventEntity eventEntity = eventService.getAllowedEventById(toghUserEntity, eventId);
+        if (eventEntity == null)
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
-
+        
+        eventService.accessByUser( eventEntity, toghUserEntity);
+        
+       
         Map<String, Object> payload = new HashMap<>();
-        payload.put( RestJsonConstants.CST_EVENT, event.getMap( EventController.getInstance( event, factoryService).getTypeAccess(toghUser), timezoneOffset));
+        
+        payload.put( RestJsonConstants.CST_EVENT, eventService.getMap( eventEntity, toghUserEntity, timezoneOffset));
 
         return payload;
 

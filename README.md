@@ -576,7 +576,11 @@ Py
 	User exist ==> Propose connection and jump in event
 	
 	Ideal ; si l'user exist, on affiche soit registration, soit connection
-	
+	e,ailM
+	Pierre-Yves MonnetPropose you to join is 
+	 
+	 ensuite on n affiche plus le panneau de registration
+
 	
 	
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
@@ -601,6 +605,9 @@ V2
 	
 	Integrer weather  : https://openweathermap.org/api
 	
+	RestLoginController : google donne la langue preferer de l'utilisateur, quand on cree un user, on pourrais la stocker
+	Permettre a un utilisateur de changer son username
+	
 	My Friend = recuperer les users de google
 	Integrate in Google Calendar
 	Integrate in Google Drive
@@ -608,6 +615,10 @@ V2
 		
     Survey : first, present the VIEW display if there is an survey      
 
+	Admin gestion user
+		- invited + password : c'est un probleme, l'utilisateur ne peut plus se connecter
+		- invited depuis trop longtemps : a purger
+		- inactif depuis trop longtemps : 
 
 ## bugs
 	Invitation en cours : affichage pas super dans le panneau des invitations

@@ -228,12 +228,41 @@ public class EventController {
         return eventInvitation.invite(event, invitedByToghUser, listUsersId, userInvitedEmail, role, message);
     }
 
+    
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Operations */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    /**
+     * A user access to the event.
+     * We can deal with operation. For example, if the user is INVITED, then we moved to ACTIF
+     * @param toghUser
+     * @return true if the event were modified, and need to be saved
+     */
+    public boolean accessByUser( ToghUserEntity toghUserEntity) {
+        boolean isModified=false;
+        ParticipantEntity participant = getParticipant(toghUserEntity);
+        if (participant !=null && participant.getStatus() == StatusEnum.INVITED) {
+            participant.setStatus(StatusEnum.ACTIF);
+            isModified=true;
+            
+        }
+        return isModified;
+    }
+    
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Update */
     /*                                                                                  */
     /* ******************************************************************************** */
 
+    /**
+     * Update the event
+     * @param listSlabMap
+     * @param updateContext
+     * @return
+     */
     public EventOperationResult update(List<Map<String, Object>> listSlabMap, UpdateContext updateContext) {
         EventUpdate eventUpdate = new EventUpdate(this);
         List<Slab> listSlab = new ArrayList<>();

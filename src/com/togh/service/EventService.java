@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -77,7 +77,6 @@ public class EventService {
     @Autowired
     FactoryService factoryService;
 
-    
     @Autowired
     SubscriptionService subscriptionService;
     @Autowired
@@ -85,40 +84,42 @@ public class EventService {
 
     @Autowired
     private EventItineraryStepRepository eventItineraryStepRepository;
-    
+
     @Autowired
     private EventTaskRepository eventTaskRepository;
 
     @Autowired
     private EventShoppingListRepository eventShoppingListRepository;
-    
+
     @Autowired
     private EventExpenseRepository eventExpenseRepository;
-    
+
     @Autowired
     private EventSurveyRepository surveyRepository;
-    
+
     @Autowired
     private EventSurveyChoiceRepository surveyChoiceRepository;
 
     @Autowired
     private EventSurveyAnswerRepository surveyAnswerRepository;
 
-    
     @Autowired
     private ToghUserService toghUserService;
 
-    
     public static class EventOperationResult {
 
         public EventEntity eventEntity;
-        public boolean limitSubscription=false;
+        public boolean limitSubscription = false;
         public List<LogEvent> listLogEvents = new ArrayList<>();
         public List<BaseEntity> listChildEntity = new ArrayList<>();
-        
+
         // in case of Remove, entity are deleted but then we send back the entityId
         public List<Long> listChildEntityId = new ArrayList<>();
-        
+
+        public EventOperationResult(EventEntity eventEntity) {
+            this.eventEntity = eventEntity;
+        }
+
         public Long getEventId() {
             return eventEntity != null ? eventEntity.getId() : null;
         }
@@ -126,19 +127,23 @@ public class EventService {
         public List<Map<String, Serializable>> getEventsJson() {
             return LogEventFactory.getJson(listLogEvents);
         }
-        public void add(EventOperationResult complement ) {
-            this.listLogEvents.addAll( complement.listLogEvents);
-            this.listChildEntity.addAll( complement.listChildEntity);
-            this.listChildEntityId.addAll( complement.listChildEntityId);
+
+        public void add(EventOperationResult complement) {
+            this.listLogEvents.addAll(complement.listLogEvents);
+            this.listChildEntity.addAll(complement.listChildEntity);
+            this.listChildEntityId.addAll(complement.listChildEntityId);
         }
-        public void addLogEvent( LogEvent event ) {
-            listLogEvents.add( event );
+
+        public void addLogEvent(LogEvent event) {
+            listLogEvents.add(event);
         }
-        public void addLogEvents( List<LogEvent> listEvents ) {
-            listLogEvents.addAll( listEvents );
+
+        public void addLogEvents(List<LogEvent> listEvents) {
+            listLogEvents.addAll(listEvents);
         }
+
         public boolean isError() {
-            return LogEventFactory.isError( listLogEvents);
+            return LogEventFactory.isError(listLogEvents);
         }
     }
 
@@ -149,94 +154,130 @@ public class EventService {
     public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
 
         LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
-        timeCheck = timeCheck.minusDays( 60 );
+        timeCheck = timeCheck.minusDays(60);
 
-        
         // Do we access the maximum number of event for this users?
-        Long numberOfEvents = eventRepository.countLastEventsUser( toghUserEntity.getId(), ParticipantRoleEnum.OWNER, timeCheck );
-        int maximumSubscription = subscriptionService.getMaximumEventsPerMonth( toghUserEntity.getSubscriptionUser() );
-        if (numberOfEvents >= maximumSubscription ) {
+        Long numberOfEvents = eventRepository.countLastEventsUser(toghUserEntity.getId(), ParticipantRoleEnum.OWNER, timeCheck);
+        int maximumSubscription = subscriptionService.getMaximumEventsPerMonth(toghUserEntity.getSubscriptionUser());
+        if (numberOfEvents >= maximumSubscription) {
             /// reject it
             subscriptionService.registerTouchLimitSubscription(toghUserEntity, LimitReach.CREATIONEVENT);
-            
-            EventOperationResult eventOperationResult = new EventOperationResult();
+
+            EventOperationResult eventOperationResult = new EventOperationResult(null);
             eventOperationResult.limitSubscription = true;
             return eventOperationResult;
         }
-            
-        
-        EventEntity event = new EventEntity();
-        event.setAuthor(toghUserEntity);
-        event.setName(eventName);
-        event.setStatusEvent(StatusEventEnum.INPREPAR);
-        event.setTypeEvent(TypeEventEnum.LIMITED);
-        event.setDatePolicy(DatePolicyEnum.ONEDATE);
-        switch ( toghUserEntity.getSubscriptionUser()) {
+
+        EventEntity eventEntity = new EventEntity();
+        eventEntity.setAuthor(toghUserEntity);
+        eventEntity.setName(eventName);
+        eventEntity.setStatusEvent(StatusEventEnum.INPREPAR);
+        eventEntity.setTypeEvent(TypeEventEnum.LIMITED);
+        eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
+        switch (toghUserEntity.getSubscriptionUser()) {
             case PREMIUM:
-                event.setSubscriptionEvent( SubscriptionEventEnum.PREMIUM);
+                eventEntity.setSubscriptionEvent(SubscriptionEventEnum.PREMIUM);
                 break;
             case EXCELLENCE:
-                event.setSubscriptionEvent( SubscriptionEventEnum.EXCELLENCE);
+                eventEntity.setSubscriptionEvent(SubscriptionEventEnum.EXCELLENCE);
                 break;
-             default:
-                 event.setSubscriptionEvent( SubscriptionEventEnum.FREE);
+            default:
+                eventEntity.setSubscriptionEvent(SubscriptionEventEnum.FREE);
         }
-        
-        EventController eventController = new EventController( event, factoryService);
+
+        EventController eventController = new EventController(eventEntity, factoryService);
 
         // let's the conductor create the participant and all needed information
         eventController.completeConsistant();
-        eventRepository.save(event);
+        eventRepository.save(eventEntity);
 
-        EventOperationResult eventOperationResult = new EventOperationResult();
-        eventOperationResult.eventEntity = event;
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
 
         return eventOperationResult;
 
     }
 
     public static class UpdateContext {
+
         public ToghUserEntity toghUser;
         public long timezoneOffset;
         public FactoryService factoryService;
     }
-    public EventOperationResult updateEvent( EventEntity event, List<Map<String, Object>> listSlab, UpdateContext updateContext) {
 
-        EventController eventConductor = new EventController( event, factoryService);
+    /**
+     * Update an event
+     * 
+     * @param eventEntity
+     * @param listSlab
+     * @param updateContext
+     * @return
+     */
+    public EventOperationResult updateEvent(EventEntity eventEntity, List<Map<String, Object>> listSlab, UpdateContext updateContext) {
+
+        EventController eventConductor = new EventController(eventEntity, factoryService);
         if (!eventConductor.isAccess(updateContext.toghUser)) {
-            EventOperationResult eventOperationResult = new EventOperationResult();
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
             eventOperationResult.addLogEvent(eventAccessError);
             return eventOperationResult;
         }
 
         EventOperationResult eventOperationResult = eventConductor.update(listSlab, updateContext);
 
-        try {            
-            eventRepository.save(event);
+        try {
+            eventRepository.save(eventEntity);
         } catch (Exception e) {
             eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
         }
-        eventOperationResult.eventEntity = event;
+        eventOperationResult.eventEntity = eventEntity;
         return eventOperationResult;
     }
 
+    /**
+     * a User access an event: do all need information (notification, etc...)
+     * 
+     * @param toghUserEntity
+     */
+    public EventOperationResult accessByUser(EventEntity eventEntity, ToghUserEntity toghUserEntity) {
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+
+        EventController eventControler = EventController.getInstance(eventEntity, factoryService);
+        boolean isModified = eventControler.accessByUser(toghUserEntity);
+        if (isModified) {
+            try {
+
+                eventRepository.save(eventEntity);
+            } catch (Exception e) {
+                eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+            }
+        }
+        return eventOperationResult;
+    }
+
+    
+    
     public class EventResult {
 
         public List<EventEntity> listEvents;
         public List<LogEvent> listLogEvent = new ArrayList<>();
     }
 
-    public EventResult getEvents(ToghUserEntity toghUser, String filterEvents) {
+    /**
+     * Get Events
+     * @param toghUserEntity
+     * @param filterEvents
+     * @return
+     */
+    public EventResult getEvents(ToghUserEntity toghUserEntity, String filterEvents) {
         EventResult eventResult = new EventResult();
         try {
             if (filterEvents.equals("myevents"))
-                eventResult.listEvents = eventRepository.findMyEventsUser(toghUser.getId());
+                eventResult.listEvents = eventRepository.findMyEventsUser(toghUserEntity.getId());
             else
-                eventResult.listEvents = eventRepository.findEventsUser(toghUser.getId());
+                eventResult.listEvents = eventRepository.findEventsUser(toghUserEntity.getId());
         } catch (Exception e) {
             // something bad arrived
-            logger.severe(logHeader + " Error during finEventsUser toghUser[" + toghUser.getId() + "] :" + e.toString());
-            eventResult.listLogEvent.add(new LogEvent(eventFindEventError, e, "User [" + toghUser.getId()));
+            logger.severe(logHeader + " Error during finEventsUser toghUser[" + toghUserEntity.getId() + "] :" + e.toString());
+            eventResult.listLogEvent.add(new LogEvent(eventFindEventError, e, "User [" + toghUserEntity.getId()));
         }
         return eventResult;
     }
@@ -247,13 +288,12 @@ public class EventService {
         EventEntity event = eventRepository.findByEventId(eventId);
         if (event == null)
             return null;
-        EventController eventConductor = new EventController( event, factoryService);
+        EventController eventConductor = new EventController(event, factoryService);
 
         // check consistant now
         eventConductor.completeConsistant();
 
         return event;
-
     }
 
     /**
@@ -261,19 +301,24 @@ public class EventService {
      * @param eventId
      * @return
      */
-    public EventEntity getAllowedEventById(ToghUserEntity toghUser, long eventId) {
+    public EventEntity getAllowedEventById(ToghUserEntity toghUserEntity, long eventId) {
         EventEntity event = getEventById(eventId);
         if (event == null)
             return null;
-        EventController eventConductor = new EventController( event, factoryService);
-        if (!eventConductor.isAccess(toghUser))
+        EventController eventConductor = new EventController(event, factoryService);
+        if (!eventConductor.isAccess(toghUserEntity))
             return null;
         return event;
 
     }
 
+    public Map<String,Object> getMap( EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset ) {
+        EventController eventControler = new EventController(eventEntity, factoryService);
+        return eventEntity.getMap( eventControler.getTypeAccess(toghUserEntity), timezoneOffset);
+    }
+    
     /**
-     * invite
+     * invitation
      */
     public enum InvitationStatus {
         DONE, NOUSERSGIVEN, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
@@ -289,9 +334,9 @@ public class EventService {
         public List<LogEvent> listLogEvents = new ArrayList<>();
     }
 
-    public InvitationResult invite(EventEntity event, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
+    public InvitationResult invite(EventEntity eventEntity, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
 
-        EventController eventControler = new EventController( event, factoryService);
+        EventController eventControler = new EventController(eventEntity, factoryService);
         if (!eventControler.isOrganizer(invitedByUser)) {
             InvitationResult invitationResult = new InvitationResult();
             invitationResult.status = InvitationStatus.NOTAUTHORIZED;
@@ -299,9 +344,9 @@ public class EventService {
         }
 
         // this operation is delegated to the evenController
-         InvitationResult invitationResult = eventControler.invite(event, invitedByUser, listUsersId, userInvitedEmail, role, message);
-        try {            
-            eventRepository.save(event);
+        InvitationResult invitationResult = eventControler.invite(eventEntity, invitedByUser, listUsersId, userInvitedEmail, role, message);
+        try {
+            eventRepository.save(eventEntity);
         } catch (Exception e) {
             invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
         }
@@ -310,67 +355,73 @@ public class EventService {
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Data ItineraryStep                                                               */
+    /* Data ItineraryStep */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    /** Add a task in the event
+    /**
+     * Add a task in the event
      * task is saved, then it got an id. Event is not saved.
-     * @param event
+     * 
+     * @param eventEntity
      * @return
      */
-    public EventItineraryStepEntity addItineraryStep(EventEntity event, EventItineraryStepEntity itineraryStep) {        
+    public EventItineraryStepEntity addItineraryStep(EventEntity eventEntity, EventItineraryStepEntity itineraryStep) {
         eventItineraryStepRepository.save(itineraryStep);
-        event.addItineraryStep(itineraryStep);
+        eventEntity.addItineraryStep(itineraryStep);
         return itineraryStep;
     }
+
     /**
      * removeItineraryStep
-     * @param event
+     * 
+     * @param eventEntity
      * @param taskId
      * @return
      */
-    public List<LogEvent> removeItineraryStep(EventEntity event, Long taskId) {
+    public List<LogEvent> removeItineraryStep(EventEntity eventEntity, Long taskId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventItineraryStepEntity> child = eventItineraryStepRepository.findById(taskId);
         if (child.isPresent()) {
             eventItineraryStepRepository.delete(child.get());
-            event.removeItineraryStep( child.get() );
+            eventEntity.removeItineraryStep(child.get());
         } else {
-            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find itineraryStep "+taskId));
+            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find itineraryStep " + taskId));
         }
 
         return listLogEvent;
     }
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Data ShoppingList                                                               */
+    /* Data ShoppingList */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public EventShoppingListEntity addShoppingList(EventEntity event, EventShoppingListEntity shoppingListEntity) {        
+    public EventShoppingListEntity addShoppingList(EventEntity eventEntity, EventShoppingListEntity shoppingListEntity) {
         eventShoppingListRepository.save(shoppingListEntity);
-        event.addShoppingList(shoppingListEntity);
+        eventEntity.addShoppingList(shoppingListEntity);
         return shoppingListEntity;
     }
+
     /**
      * RemoveShoppingList
-     * @param event
+     * 
+     * @param eventEntity
      * @param shoppingListId
      * @return
      */
-    public List<LogEvent> removeShoppingList(EventEntity event, Long shoppingListId) {
+    public List<LogEvent> removeShoppingList(EventEntity eventEntity, Long shoppingListId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventShoppingListEntity> child = eventShoppingListRepository.findById(shoppingListId);
         if (child.isPresent()) {
             eventShoppingListRepository.delete(child.get());
-            event.removeShoppingList( child.get() );
+            eventEntity.removeShoppingList(child.get());
         } else {
-            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find ShoppingId "+shoppingListId));
+            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find ShoppingId " + shoppingListId));
         }
         return listLogEvent;
     }
@@ -382,100 +433,105 @@ public class EventService {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    /** Add a task in the event
+    /**
+     * Add a task in the event
      * task is saved, then it got an id. Event is not saved.
-     * @param event
+     * 
+     * @param eventEntity
      * @return
      */
-    public EventTaskEntity addTask(EventEntity event, EventTaskEntity task) {
+    public EventTaskEntity addTask(EventEntity eventEntity, EventTaskEntity task) {
         eventTaskRepository.save(task);
-        event.addTask(task);
+        eventEntity.addTask(task);
         return task;
     }
+
     /**
      * RemoveTask
-     * @param event
+     * 
+     * @param eventEntity
      * @param taskId
      * @return
      */
-    public List<LogEvent> removeTask(EventEntity event, Long taskId) {
+    public List<LogEvent> removeTask(EventEntity eventEntity, Long taskId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventTaskEntity> task = eventTaskRepository.findById(taskId);
         if (task.isPresent()) {
             eventTaskRepository.delete(task.get());
-            event.removeTask( task.get() );
+            eventEntity.removeTask(task.get());
         } else {
-            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId "+taskId));
+            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId " + taskId));
         }
         return listLogEvent;
     }
-    
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Data Survey                                                               */
+    /* Data Survey */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public EventSurveyEntity addSurvey(EventEntity event, EventSurveyEntity surveyEntity) {        
+    public EventSurveyEntity addSurvey(EventEntity eventEntity, EventSurveyEntity surveyEntity) {
         surveyRepository.save(surveyEntity);
-        event.addSurvey( surveyEntity);
-        return surveyEntity; 
+        eventEntity.addSurvey(surveyEntity);
+        return surveyEntity;
     }
-    public EventSurveyChoiceEntity addSurveyChoice(EventEntity event, EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {        
+
+    public EventSurveyChoiceEntity addSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {
         surveyChoiceRepository.save(surveyChoice);
-        List< EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
-        choicelist.add( surveyChoice);
+        List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
+        choicelist.add(surveyChoice);
         surveyEntity.setChoicelist(choicelist);
         surveyRepository.save(surveyEntity);
         return surveyChoice;
     }
-    
-    public EventSurveyAnswerEntity addSurveyAnswser(EventEntity event, EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {        
+
+    public EventSurveyAnswerEntity addSurveyAnswser(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {
         surveyAnswerRepository.save(surveyAnswerEntity);
-        List< EventSurveyAnswerEntity> answerlist = surveyEntity.getAnswerlist();
-        answerlist.add( surveyAnswerEntity);
+        List<EventSurveyAnswerEntity> answerlist = surveyEntity.getAnswerlist();
+        answerlist.add(surveyAnswerEntity);
         surveyEntity.setAnswerlist(answerlist);
         surveyRepository.save(surveyEntity);
         return surveyAnswerEntity;
     }
-    
-    
+
     /**
      * RemoveSurvey
-     * @param event
+     * 
+     * @param eventEntity
      * @param surveyId
      * @return
      */
-    public List<LogEvent> removeSurvey(EventEntity event, Long surveyId) {
+    public List<LogEvent> removeSurvey(EventEntity eventEntity, Long surveyId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventSurveyEntity> child = surveyRepository.findById(surveyId);
         if (child.isPresent()) {
             surveyRepository.delete(child.get());
         } else {
-            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find SurveyId "+surveyId));
+            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find SurveyId " + surveyId));
         }
         return listLogEvent;
     }
-    public List<LogEvent> removeSurveyChoice(EventEntity event, EventSurveyEntity surveyEntity, Long choiceId) {
+
+    public List<LogEvent> removeSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, Long choiceId) {
         List<LogEvent> listLogEvent = new ArrayList<>();
         Optional<EventSurveyChoiceEntity> choice = surveyChoiceRepository.findById(choiceId);
         if (choice.isPresent()) {
             surveyChoiceRepository.delete(choice.get());
-            List< EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
-            choicelist.remove( choice.get());
+            List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
+            choicelist.remove(choice.get());
             surveyEntity.setChoicelist(choicelist);
         } else {
-            listLogEvent.add( new LogEvent(eventEntityNotFoundToRemove, "Can't find choiceId["+choiceId+"]"));
+            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find choiceId[" + choiceId + "]"));
         }
 
         return listLogEvent;
     }
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Add child                                                              */
+    /* Add child */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
@@ -483,44 +539,41 @@ public class EventService {
 
     public BaseEntity add(String nameEntity, UserEntity parentEntity) {
         if ("expense".equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
-            EventExpenseEntity expense = new EventExpenseEntity();            
+            EventExpenseEntity expense = new EventExpenseEntity();
             eventExpenseRepository.save(expense);
             parentEntity.setExpense(expense);
-           
+
             return expense;
-            
+
         }
         return null;
     }
 
-    
     /**
      * Load an entity by its class and an ID
-     *
      */
     public class LoadEntityResult {
+
         public BaseEntity entity;
         public List<LogEvent> listLogEvents = new ArrayList<>();
     }
-    public LoadEntityResult loadEntity( Class<?> classEntity, Long id) {
+
+    public LoadEntityResult loadEntity(Class<?> classEntity, Long id) {
         LoadEntityResult loadEntityResult = new LoadEntityResult();
-        if (id==null) {
-            loadEntityResult.listLogEvents.add( new LogEvent(eventNoId, "Entity["+classEntity.getName()+"]"));
+        if (id == null) {
+            loadEntityResult.listLogEvents.add(new LogEvent(eventNoId, "Entity[" + classEntity.getName() + "]"));
             return loadEntityResult;
         }
-        if (ToghUserEntity.class.equals(classEntity))
-        {
+        if (ToghUserEntity.class.equals(classEntity)) {
             loadEntityResult.entity = toghUserService.getUserFromId(id);
+        } else {
+            loadEntityResult.listLogEvents.add(new LogEvent(eventBadEntity, "Entity[" + classEntity.getName() + "] ,Id=[" + id + "]"));
         }
-        else {
-            loadEntityResult.listLogEvents.add( new LogEvent(eventBadEntity, "Entity["+classEntity.getName()+"] ,Id=["+id+"]"));            
-        }
-        
-        
-        if (loadEntityResult.entity==null) {
-            loadEntityResult.listLogEvents.add( new LogEvent(eventEntityNotFound, "Entity["+classEntity.getName()+"] ,Id=["+id+"]"));
+
+        if (loadEntityResult.entity == null) {
+            loadEntityResult.listLogEvents.add(new LogEvent(eventEntityNotFound, "Entity[" + classEntity.getName() + "] ,Id=[" + id + "]"));
         }
         return loadEntityResult;
     }
-    
+
 }

@@ -51,6 +51,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventEntity extends UserEntity {
     
+    private static final String CST_JSONOUT_PARTICIPANTS = "participants";
+
     private static final String CST_JSONOUT_STATUS_EVENT = "statusEvent";
 
     private static final String CST_JSONOUT_TYPE_EVENT = "typeEvent";
@@ -409,7 +411,7 @@ public @Data class EventEntity extends UserEntity {
             for (ParticipantEntity participant : participantList) {
                 listParticipantsMap.add(participant.getMap(contextAccess, timezoneOffset));
             }
-            resultMap.put("participants", listParticipantsMap);
+            resultMap.put(CST_JSONOUT_PARTICIPANTS, listParticipantsMap);
 
             // get task
             List<Map<String, Object>> listTasksMap = new ArrayList<>();

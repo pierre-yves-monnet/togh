@@ -96,23 +96,23 @@ public class EventUpdate {
     }
 
     public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
-        EventEntity event = this.eventController.getEvent();
-        EventOperationResult eventOperationResult = new EventOperationResult();
+        EventEntity eventEntity = this.eventController.getEvent();
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
         for (Slab slab : listSlab) {
             try {
                 if (SlabOperation.UPDATE.equals(slab.operation)) {
-                    updateOperation(event, slab, updateContext, eventOperationResult);
+                    updateOperation(eventEntity, slab, updateContext, eventOperationResult);
                 } else if (SlabOperation.ADD.equals(slab.operation)) {
-                    addOperation(event, slab, updateContext, eventOperationResult);
+                    addOperation(eventEntity, slab, updateContext, eventOperationResult);
                 } else if (SlabOperation.REMOVE.equals(slab.operation)) {
-                    removeOperation(event, slab, eventOperationResult);
+                    removeOperation(eventEntity, slab, eventOperationResult);
                 }
             } catch (Exception e) {
                 eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, e, slab.operation + ":" + slab.attributName));
             }
         }
         if (!listSlab.isEmpty())
-            event.touch();
+            eventEntity.touch();
 
         return eventOperationResult;
     }
@@ -148,7 +148,7 @@ public class EventUpdate {
             @SuppressWarnings("unchecked")
             Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
             for (Entry<String, Object> entrySlab : valueDefault.entrySet()) {
-                JpaTool.updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext, eventOperationResult);
+                eventOperationResult.addLogEvents( JpaTool.updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext));
             }
             // save it now
             if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
@@ -250,11 +250,11 @@ public class EventUpdate {
      */
     private void updateOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         if (slab.localisation == null || slab.localisation.isEmpty())
-            JpaTool.updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
+            eventOperationResult.addLogEvents( JpaTool.updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext));
         else {
             BaseEntity baseEntity = localise(event, slab.localisation);
             if (baseEntity != null) {
-                JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext, eventOperationResult);
+                eventOperationResult.addLogEvents( JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
             } else {
                 eventOperationResult.addLogEvent(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
             }

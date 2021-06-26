@@ -59,7 +59,7 @@ class RestcallService {
 				if (error.response && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");
-					window.location.href = homeTogh;
+					window.location = homeTogh;
 					return;
 				}
 				console.error("RestCallService.getJson: catch error:"+error);	
@@ -90,7 +90,7 @@ class RestcallService {
 				if (error.response && error.response.status && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");
-					window.location.href = homeTogh;
+					window.location = homeTogh;
 				return;
 				}
 				let httpResponse =  new HttpResponse( {}, error)

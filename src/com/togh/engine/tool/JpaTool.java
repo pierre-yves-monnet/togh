@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -50,18 +52,18 @@ public class JpaTool {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static void updateEntityOperation(BaseEntity baseEntity, 
+    public static List<LogEvent> updateEntityOperation(BaseEntity baseEntity, 
                 String attributName, 
                 Object attributValue, 
-                UpdateContext updateContext, 
-                EventOperationResult eventOperationResult) {
+                UpdateContext updateContext) {
+        List<LogEvent> listEvents= new ArrayList<>();
         Object value = null;
         Method methodAttribut = searchMethodByName(baseEntity, attributName);
         if (methodAttribut == null) {
-            eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
+            listEvents.add(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
                     + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
             logger.severe(LOG_HEADER+" Invalid operation ["+attributName+"] on entity["+baseEntity.getClass().getName()+"]");
-            return;
+            return listEvents;
         }
         String jpaAttributName = methodAttribut.getName().substring(3);
         // first letter is a lower case
@@ -101,7 +103,7 @@ public class JpaTool {
                     if (updateContext.factoryService.getEventService()!=null) {
                         LoadEntityResult loadResult = updateContext.factoryService.getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
                         value = loadResult.entity;
-                        eventOperationResult.listLogEvents.addAll(loadResult.listLogEvents);
+                        listEvents.addAll(loadResult.listLogEvents);
                     }
 
                 } else // ArrayList, String
@@ -113,11 +115,12 @@ public class JpaTool {
             baseEntity.touch();
 
         } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventInvalidUpdateOperation, e, attributName
+            listEvents.add(new LogEvent(eventInvalidUpdateOperation, e, attributName
                     + " (JPA=" + jpaAttributName + ")"
                     + " <="
                     + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
         }
+        return listEvents;
     }
     
     

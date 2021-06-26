@@ -19,7 +19,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import com.togh.engine.tool.EngineTool;
-import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;
@@ -111,7 +110,7 @@ public @Data class ToghUserEntity extends BaseEntity {
         endUser.setEmail(email);
         endUser.setFirstName(firstName);
         endUser.setLastName(lastName);
-        endUser.setName( (firstName==null? "": firstName+" ") + (lastName==null? "": lastName));
+        endUser.calculateName();
         endUser.setPassword(password);
         endUser.setSource(sourceUser);
         LocalDateTime dateNow = LocalDateTime.now(ZoneOffset.UTC);
@@ -124,6 +123,7 @@ public @Data class ToghUserEntity extends BaseEntity {
 
         return endUser;
     }
+    
     public static ToghUserEntity createInvitedUser(String email) 
     {
         ToghUserEntity toghUserEntity = createNewUser(null, null, email, null, SourceUserEnum.INVITED);
@@ -131,6 +131,13 @@ public @Data class ToghUserEntity extends BaseEntity {
         toghUserEntity.setStatusUser( StatusUserEnum.ACTIF );
 
         return toghUserEntity;
+    }
+    
+    /**
+     * Calculate the name according the first and last name
+     */
+    public void calculateName() {
+        setName( (firstName==null? "": firstName+" ") + (lastName==null? "": lastName));
     }
     
     public boolean checkPassword(String passwordToCompare) {
@@ -250,6 +257,8 @@ public @Data class ToghUserEntity extends BaseEntity {
         resultMap.put("firstName", firstName);
         resultMap.put("typePicture", typePicture);
         resultMap.put("picture", picture);
+        resultMap.put("source", getSource().toString().toLowerCase());
+
         
         resultMap.put("statusUser", statusUser==null ? "" : statusUser.toString());
 
@@ -288,17 +297,16 @@ public @Data class ToghUserEntity extends BaseEntity {
         }
         if (contextAccess == ContextAccess.ADMIN) {
             resultMap.put("privilegeuser", privilegeUser.toString());
-
             resultMap.put("connectiontime", EngineTool.dateToString(connectionTime));
-
-            LocalDateTime connectionTimeLocal = connectionTime.minusMinutes(timezoneOffset);
-            resultMap.put("connectiontimest", EngineTool.dateToHumanString(connectionTimeLocal));
-
+            if (connectionTime!=null) {
+                LocalDateTime connectionTimeLocal = connectionTime.minusMinutes(timezoneOffset);
+                resultMap.put("connectiontimest", EngineTool.dateToHumanString(connectionTimeLocal));
+            }
             resultMap.put("connectionlastactivity", EngineTool.dateToString(connectionLastActivity));
-
-            LocalDateTime connectionLastActivityLocal = connectionLastActivity.minusMinutes(timezoneOffset);
-            resultMap.put("connectionlastactivityst", EngineTool.dateToHumanString(connectionLastActivityLocal));
-
+            if (connectionLastActivity!=null) {
+                LocalDateTime connectionLastActivityLocal = connectionLastActivity.minusMinutes(timezoneOffset);
+                resultMap.put("connectionlastactivityst", EngineTool.dateToHumanString(connectionLastActivityLocal));
+            }
             resultMap.put("connected", connectionStamp == null ? "OFFLINE" : "ONLINE");
         }
         return resultMap;
