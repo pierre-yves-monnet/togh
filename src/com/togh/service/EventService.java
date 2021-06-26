@@ -299,7 +299,7 @@ public class EventService {
         }
 
         // this operation is delegated to the evenController
-        InvitationResult invitationResult = eventControler.invite(event, invitedByUser, listUsersId, userInvitedEmail, role, message);
+         InvitationResult invitationResult = eventControler.invite(event, invitedByUser, listUsersId, userInvitedEmail, role, message);
         try {            
             eventRepository.save(event);
         } catch (Exception e) {

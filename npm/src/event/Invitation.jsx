@@ -335,7 +335,6 @@ class Invitation extends React.Component {
 			this.props.participantInvited(httpPayload.getData().participants);
 		} else if (httpPayload.getData().status === 'ALREADYAPARTICIPANT') {
 			this.setState({ "statusErrorInvitation": "This participant is already registered: "+httpPayload.getData().errorMessage  });
-			this.setState({ "statusOkInvitation": "Invitation sent with success"+httpPayload.getData().okMessage });
 			this.props.participantInvited(httpPayload.getData().participants);
 		} else {
 			this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });

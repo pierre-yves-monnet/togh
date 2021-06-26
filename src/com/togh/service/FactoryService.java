@@ -49,6 +49,9 @@ public class FactoryService {
     @Autowired
     private SubscriptionService subscriptionService;
  
+    @Autowired
+    private TranslatorService translatorService;
+
     /*private static FactoryService factoryService = new FactoryService();
     public static FactoryService getInstance() {
         return factoryService;
@@ -63,6 +66,7 @@ public class FactoryService {
     public ToghUserService getToghUserService() {
         return userService;
     }
+    
     public EventService getEventService() {
         return eventService;
     }
@@ -74,8 +78,7 @@ public class FactoryService {
     public NotifyService getNotifyService() {
         return notifyService;
     }
-    
-    
+        
     public ApiKeyService getApiKeyService() {
         return apiKeyService;
     }
@@ -83,7 +86,12 @@ public class FactoryService {
     public StatsService getStatsService() {
         return statsService;
     }
+    
     public SubscriptionService getSubscriptionService() {
         return subscriptionService;
+    }
+    
+    public TranslatorService getTranslatorService() {
+        return translatorService;
     }
 }

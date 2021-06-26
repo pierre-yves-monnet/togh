@@ -8,7 +8,9 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -64,6 +66,7 @@ public class EventInvitation {
         ToghUserService userService = factoryService.getToghUserService();
         NotifyService notifyService = factoryService.getNotifyService();
 
+        Set<ToghUserEntity> setUserJustInvited = new HashSet<>();
         // invitation by the email? 
         if (userInvitedEmail != null && !userInvitedEmail.trim().isEmpty()) {
             ToghUserEntity toghUser = userService.getUserFromEmail(userInvitedEmail);
@@ -73,10 +76,11 @@ public class EventInvitation {
                 if (creationStatus.toghUser == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
                     // This is an internal message here , cant sent back to the user error information 
-
                     return invitationResult;
                 }
-                invitationResult.listThogUserInvited.add(creationStatus.toghUser);
+                setUserJustInvited.add( creationStatus.toghUser );
+                
+                invitationResult.listThogUserInvited.add( creationStatus.toghUser);
             } else {
                 invitationResult.listThogUserInvited.add(toghUser);
             }
@@ -113,7 +117,14 @@ public class EventInvitation {
                 invitationResult.errorMessage.append(toghUser.getFirstName() + " " + toghUser.getLastName() + ", ");
             } else {
                 // send the invitation and register the guy
-                notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, event);
+                // attention, if the user is just invited to join TOGH, we don't want to sent a new email.
+                // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
+                if (! setUserJustInvited.contains(toghUser)) {
+                    notifyService.notifyNewUserInEvent(toghUser, true, invitedByToghUser, event);
+                } else {
+                    // notification service will decide how user have to be notified
+                    notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, event);
+                }
                 invitationResult.newParticipants.add(event.addPartipant(toghUser, role, StatusEnum.INVITED));
                 invitationResult.okMessage.append(toghUser.getLabel() + ", ");
             }

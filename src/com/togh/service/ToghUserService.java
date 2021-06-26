@@ -114,6 +114,8 @@ public class ToghUserService {
             // transactionManager.commit(status);
         } catch (Exception ex) {
             // transactionManager.rollback(status);
+            logger.severe(LOG_HEADER + "Can't save user: " + ex.toString());
+            throw ex;
         }
 
     }
@@ -122,7 +124,7 @@ public class ToghUserService {
      * Register a new user
      */
     public ToghUserEntity registerNewUser(String firstName, String lastName, String password, String email, SourceUserEnum sourceUser) {
-        ToghUserEntity endUser = ToghUserEntity.getNewUser(email, firstName, lastName, password, sourceUser);
+        ToghUserEntity endUser = ToghUserEntity.createNewUser(email, firstName, lastName, password, sourceUser);
         try {
             factoryService.getToghUserService().saveUser(endUser);
             return endUser;
@@ -152,14 +154,14 @@ public class ToghUserService {
             invitationStatus.isEmailIsCorrect = true;
 
             // fullfill the event
-            invitationStatus.toghUser = ToghUserEntity.getInvitedUser(email);
+            invitationStatus.toghUser = ToghUserEntity.createInvitedUser(email);
 
             factoryService.getToghUserService().saveUser(invitationStatus.toghUser);
 
             // send the email now
             invitationStatus.isEmailSent = true;
             NotifyService notifyService = factoryService.getNotifyService();
-            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser, invitedByUser, event);
+            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser, true, invitedByUser, event);
             
             invitationStatus.isEmailSent = notificationStatus.isCorrect();
             

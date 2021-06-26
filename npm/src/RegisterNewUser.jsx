@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { TextInput } from 'carbon-components-react';
-import { FormattedMessage } from "react-intl";
+import { injectIntl,FormattedMessage } from "react-intl";
 
 
 import FactoryService 	from 'service/FactoryService';
@@ -26,8 +26,8 @@ class RegisterNewUser extends React.Component {
 			lastName:'',
 			password:'', 
 			confirmPassword:'',
-			email: 'pierre-yves.monnet@laposte.net', 
-			showRegistration:false,
+			email: props.defaultLoginEmail, 
+			showRegistration: props.showRegisterUserForm,
 			badRegistration: false, 
 			registrationOk:false,
 			isLog: false,
@@ -50,12 +50,13 @@ class RegisterNewUser extends React.Component {
 			messageRegistration = messageRegistration.concat("<div style='color:green'>Account created</div>");
 		}
 		// console.log("ResigerNewUser.render: badRegistration=" + this.state.badRegistration+" / message=["+messageRegistration+"]");
+		const intl = this.props.intl;
 
 		let messageBadPassword='';
 		if (! this.checkPassword()) {
-			messageBadPassword="<div style='color:red'>Password are different</div>";
+			messageBadPassword= intl.formatMessage({id: "RegisterUser.PasswordsAreDiffrent", defaultMessage: "Passwords are different"});
 		}
-
+		let	messageBadForm = this.validateForm();
 		if (this.state.showRegistration) {
 			return (
 			<div className="App" class="panel panel-info">
@@ -82,9 +83,11 @@ class RegisterNewUser extends React.Component {
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.RetypePassword" defaultMessage="Retype password"/>} 
 						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} maxlength="30" required></TextInput><br />
-					<div dangerouslySetInnerHTML={{ __html: messageBadPassword}}></div>
+					<div style={{color:"red"}}>{messageBadForm}</div>
+					<div style={{color:"red"}}>{messageBadPassword}</div>
 					
-					<button class="btn btn-info" onClick={this.registerUser} disabled={ ! this.checkPassword() || ! this.validateForm()}>
+					<button class="btn btn-info" onClick={this.registerUser} 
+							disabled={ ! this.checkPassword() || this.validateForm() != ''}>
 						{this.state.loading && <span class="loading">.</span>} <FormattedMessage id="RegisterNewUser.Registration" defaultMessage="Registration"/></button><p />
 					<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
 				</div>
@@ -126,12 +129,16 @@ class RegisterNewUser extends React.Component {
 			return false;
 		return true;
 	}
+	
+	
 	validateForm() {
+		const intl = this.props.intl;
+
 		if (this.state.email.length === 0)
-			return false;
+			return intl.formatMessage({id: "RegisterUser.EmailIsMandatory", defaultMessage: "Email is mandatory"});
 		if (this.state.firstName.length === 0)
-			return false;	
-		return true;		
+			return intl.formatMessage({id: "RegisterUser.FirstNameIsMandatory", defaultMessage: "First Name is mandatory"});	
+		return "";		
 	}
 	toString() {
 		return "email=[" + this.state.email+"],password=["+this.state.password+"] Connection=["+this.state.badConnection+"] isLog["+this.state.isLog+"]";
@@ -162,4 +169,4 @@ class RegisterNewUser extends React.Component {
 	} // end connectStatus
 }
 
-export default RegisterNewUser;
+export default injectIntl(RegisterNewUser);

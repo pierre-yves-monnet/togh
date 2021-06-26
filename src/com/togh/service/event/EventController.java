@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
@@ -87,6 +86,16 @@ public class EventController {
         return listSlab;
     }
 
+    
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Presentation */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    public EventPresentation getEventPresentation() {
+        return new EventPresentation( this, factoryService );
+    }
+    
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Authorisation */

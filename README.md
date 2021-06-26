@@ -571,7 +571,16 @@ CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 Py	
 1. Sauvegarde Chat
 2.	Verifier invitation
+	User not exist ==> Create it and connect and jump in event
+	Double click on the same link ==> propose a "connect with existing user"
+	User exist ==> Propose connection and jump in event
+	
+	Ideal ; si l'user exist, on affiche soit registration, soit connection
+	
+	
+	
 3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
+		
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 

@@ -79,21 +79,50 @@ class BodyTogh extends React.Component {
 		
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		// this.connect = this.connect.bind(this);
-		// currenteventid : we keep the ID here, but we don't load it. Component Event will be call, and it will be in charge to load it.
+		// currentEventId : we keep the ID here, but we don't load it. Component Event will be call, and it will be in charge to load it.
 		this.state = { frameContent: FRAME_NAME.LISTEVENTS, 
 						showmenu : true, 
 						sizeMenu:  '10%',
-						currenteventid : null,
+						showLoginPanel : true,
+						showRegisterUserPanel:true,
+						showRegisterUserForm:false,
+						currentEventId : null,
 						language: props.language,
 						ignoreAction:false};
 		// action: when a URL with an action arrive (like "resetpassword"), we manage it.
 		// But after this management, we stay in the same object, and we do not want to manage this action anymore
 		// so, the toggle "ignoreAction" is set to true
+		const params = new URLSearchParams(window.location.search)
+		let action 		= params.get('action');
+		let eventId 	= params.get("eventid");
+		let email 		= params.get("email");
+
+		if (action && action === 'invitedNewUser') {
+			// switch to the register user page
+			console.log("NewUser: redirect him directly to the register page!")
+			this.state.showLoginPanel= true;
+			this.state.showRegisterUserForm=true;
+			this.state.defaultLoginEmail=email;
+			this.state.currentEventId= eventId;
+			if (eventId)
+				this.state.frameContent=FRAME_NAME.EVENT;
 			
+		}
+		if (action && action === 'invitedUser') {
+			// switch to the register user page
+			console.log("NewUser: redirect him directly to the register page!")
+			this.state.showLoginPanel= true;
+			this.state.showRegisterUserForm=false;
+			this.state.defaultLoginEmail=email;	
+			this.state.currentEventId=eventId;
+			if (eventId)
+				this.state.frameContent=FRAME_NAME.EVENT;		
+		}
 	}
 
+	
 // { this.state.frameContent == 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
-	// 			{ this.state.frameContent == 'event' &&	<Event eventid={this.state.currenteventid} /> }
+	// 			{ this.state.frameContent == 'event' &&	<Event eventid={this.state.currentEventId} /> }
 	render() {
 		var factory = FactoryService.getInstance();
 		var authService = factory.getAuthService();
@@ -135,6 +164,21 @@ class BodyTogh extends React.Component {
 					<div>
 						<Banner language={this.state.language} changeLanguage={this.changeLanguage} />						
 						<div class="container">
+	  						{this.state.currentEventId && <div class="row" >
+									<div class="col-sm-12" >
+									 	<div style={{border:"1px solid", borderColor:"#1f78b4",
+													margin: "5px 5px 5px 5px", 
+													padding: "10px 10px 10px 10px", 
+													backgroundColor: "#337ab7", 
+													borderColor: "#2e6da4",
+													color: "#ffffff"}}>
+                							<center>
+												<FormattedMessage id="BodyTogh.YouAreInvited" defaultMessage="You are invited to an event! Register or Connect to access it" />
+											</center>
+										</div>	
+									</div>
+								</div> }
+								
 	  						<div class="row">
 								<div class="col-sm-2" >
 									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
@@ -144,10 +188,17 @@ class BodyTogh extends React.Component {
 								</div>
 									
 								<div class="col-sm-5">	
-									<Login authCallback={this.authCallback}/>
+									{this.state.showLoginPanel && 
+										<Login authCallback={this.authCallback}
+											defaultLoginEmail={this.state.defaultLoginEmail} 
+										/>}
 								</div>
 								<div class="col-sm-5">
-									<RegisterNewUser authCallback={this.authCallback}/>
+									{this.state.showRegisterUserPanel && 
+										<RegisterNewUser authCallback={this.authCallback} 
+											showRegisterUserForm={this.state.showRegisterUserForm}
+											defaultLoginEmail={this.state.defaultLoginEmail}
+										/>}
 									
 								</div>
 							  
@@ -173,7 +224,6 @@ class BodyTogh extends React.Component {
 					<Banner language={this.state.language} changeLanguage={this.changeLanguage}/>
 					<div class="row">
 						<div class="col-xs-12">
-		
 							<table style={{width: "100%", "height": "100%"}}>
 								<tr>
 									<td style={styleMenu} >
@@ -181,7 +231,7 @@ class BodyTogh extends React.Component {
 									</td>
 									<td style={{padding: "10px", "verticalAlign": "top"}} >
 										{ this.state.frameContent === FRAME_NAME.LISTEVENTS && <EventsList homeSelectEvent={this.homeSelectEvent} />}
-										{ this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currenteventid} />}
+										{ this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currentEventId} />}
 										{ this.state.frameContent === FRAME_NAME.MYPROFILE && <MyProfile  />}
 										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
 				
@@ -200,24 +250,24 @@ class BodyTogh extends React.Component {
 	authCallback( login ) {
 		console.log("BodyTogh.logcallback: "+login );
 		// at this moment, we ignore the action on the URL
-		this.setState( {'currenteventid' : null, ignoreAction: true }); 
+		this.setState( { ignoreAction: true }); 
 	}
 	
 	homeSelectEvent( eventId ) {
 		console.log("BodyTogh.selectEvent: get it, an event is selected :"+eventId);
-		this.setState( {'currenteventid' : eventId, 'frameContent': FRAME_NAME.EVENT });
+		this.setState( {'currentEventId' : eventId, 'frameContent': FRAME_NAME.EVENT });
 	}
 
 	clickMenu( menuName ) {
 		console.log("BodyTogh.clickMenu: menuAction="+menuName);
 		if (menuName === MENU_NAME.ADMINISTRATION) {
-				this.setState( {'currenteventid' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
+				this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
 		}
 		else if (menuName === MENU_NAME.MYPROFILE) {
-				this.setState( {'currenteventid' : null, 'frameContent': FRAME_NAME.MYPROFILE });
+				this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.MYPROFILE });
 		}
 		else {
-			this.setState( {'currenteventid' : null, 'frameContent': FRAME_NAME.LISTEVENTS });
+			this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.LISTEVENTS });
 		}
 	}
 	

@@ -19,6 +19,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import com.togh.engine.tool.EngineTool;
+import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;
@@ -55,6 +56,11 @@ public @Data class ToghUserEntity extends BaseEntity {
     @org.hibernate.annotations.ColumnDefault("'en'")
     private String language;
 
+    /**
+     * Save the user time zone. Then, each communication (email...) will be translated to this time zone 
+     */
+    @Column(name = "usertimezone", length=10)
+    private String userTimeZone;
     
     public enum VisibilityEnum {
         ALWAYS, ALWAYBUTSEARCH, LIMITEDEVENT, NEVER
@@ -100,12 +106,12 @@ public @Data class ToghUserEntity extends BaseEntity {
     @Column(name = "searchable")
     Boolean searchable = true;
 
-    public static ToghUserEntity getNewUser(String firstName, String lastName, String email, String password, SourceUserEnum sourceUser) {
+    public static ToghUserEntity createNewUser(String firstName, String lastName, String email, String password, SourceUserEnum sourceUser) {
         ToghUserEntity endUser = new ToghUserEntity();
         endUser.setEmail(email);
         endUser.setFirstName(firstName);
         endUser.setLastName(lastName);
-        endUser.setName(firstName + " " + lastName);
+        endUser.setName( (firstName==null? "": firstName+" ") + (lastName==null? "": lastName));
         endUser.setPassword(password);
         endUser.setSource(sourceUser);
         LocalDateTime dateNow = LocalDateTime.now(ZoneOffset.UTC);
@@ -114,16 +120,16 @@ public @Data class ToghUserEntity extends BaseEntity {
         endUser.setPrivilegeUser(PrivilegeUserEnum.USER);
         endUser.setStatusUser(StatusUserEnum.ACTIF);
         endUser.setSubscriptionUser(SubscriptionUserEnum.FREE);
+        endUser.setTypePicture(TypePictureEnum.TOGH);
+
         return endUser;
     }
-    public static ToghUserEntity getInvitedUser(String email) 
+    public static ToghUserEntity createInvitedUser(String email) 
     {
-        ToghUserEntity toghUserEntity = new ToghUserEntity();
+        ToghUserEntity toghUserEntity = createNewUser(null, null, email, null, SourceUserEnum.INVITED);
+        toghUserEntity.setStatusUser( StatusUserEnum.INVITED );
+        toghUserEntity.setStatusUser( StatusUserEnum.ACTIF );
 
-        toghUserEntity.setEmail(email);
-        toghUserEntity.setSource(SourceUserEnum.INVITED);
-        toghUserEntity.setStatusUser( StatusUserEnum.INVITED);
-        toghUserEntity.setSource(SourceUserEnum.INVITED);
         return toghUserEntity;
     }
     

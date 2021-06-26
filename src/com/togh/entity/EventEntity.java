@@ -80,13 +80,23 @@ public @Data class EventEntity extends UserEntity {
 
     /**
      * In case of a policy Period, a Start and End event are provide.
+     * Nota: LocalDateTime in UTC timezone
      */
     @Column(name = "datestartevent")
     private LocalDateTime dateStartEvent;
-
+    
     @Column(name = "dateendevent")
     private LocalDateTime dateEndEvent;
 
+    /**
+     * Date are store in UTC, and can be translated in any brower timezone.
+     * But when we publish the event (by Email), we have to translate the time in a time zone: 
+     * for example, when the event is created by John, California, email invitation to new user should be displayed in that time zone.
+     * When we send a email to an existing Togh user, we have it's prefered time zone. 
+     */
+    @Column(name = "eventtimezone", length=10)
+    private String eventTimeZone;
+    
     public enum TypeEventEnum {
         OPEN, OPENCONF, LIMITED, SECRET
     }

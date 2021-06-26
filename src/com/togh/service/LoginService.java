@@ -89,7 +89,7 @@ public class LoginService {
 
     private int delayMinutesDisconnectInactiveUser = 30;
 
-    public enum LoginStatus { OK, BADEMAIL, SERVERISSUE, UNKNOWUSER, NOTREGISTERED, BLOCKED };
+    public enum LoginStatus { OK, BADEMAIL, SERVERISSUE, UNKNOWUSER, ALREADYEXISTUSER, NOTREGISTERED, BLOCKED };
     
     public static class LoginResult {
 
@@ -216,21 +216,45 @@ public class LoginService {
         LoginResult loginStatus = new LoginResult();
         ToghUserEntity toghUserEntity = toghUserService.getUserFromEmail(email);
         if (toghUserEntity != null) {
+            // user already exist: so, time to save it's password
+            if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource())) {
+                // Ok, this is the first time the user join!
+                String passwordEncrypted = ToghUserService.encryptPassword(password);
+                toghUserEntity.setPassword(passwordEncrypted);
+                toghUserEntity.setFirstName(firstName);
+                toghUserEntity.setLastName(lastName);
+                toghUserEntity.setSource(SourceUserEnum.PORTAL);
+                toghUserService.saveUser(toghUserEntity);
+                toghUserEntity.setTypePicture(typePicture);
+                toghUserEntity.setPicture(picture);
+                toghUserEntity.setStatusUser(StatusUserEnum.ACTIF);
+                loginStatus.status = LoginStatus.OK;
+            } else {
+                // Hum, someone try to access an existing user via the registration ? Well try...
+                // Or maybe this is just a duplicate coincidence
+                loginStatus.status = LoginStatus.ALREADYEXISTUSER;
+                toghUserEntity=null;
+            }
             return loginStatus;
         }
+        else {
+            // encrypt the password now
+            String passwordEncrypted = ToghUserService.encryptPassword(password);
+            toghUserEntity = ToghUserEntity.createNewUser(firstName, lastName, email, passwordEncrypted, sourceUser);
+            toghUserEntity.setTypePicture(typePicture);
+            toghUserEntity.setPicture(picture);
+        }
         
-        // encrypt the password now
-        String passwordEncrypted = ToghUserService.encryptPassword(password);
-        toghUserEntity = ToghUserEntity.getNewUser(firstName, lastName, email, passwordEncrypted, sourceUser);
-        toghUserEntity.setTypePicture(typePicture);
-        toghUserEntity.setPicture(picture);
-        try {
-            toghUserService.saveUser(toghUserEntity);
-            loginStatus.status = LoginStatus.OK;
-        } catch (Exception e) {
-            logger.severe(logHeader + "Can't create new user: " + e.toString());
-            loginStatus.status = LoginStatus.SERVERISSUE;
-
+        // save modifications now
+        if (toghUserEntity != null) {
+            try {
+                toghUserService.saveUser(toghUserEntity);
+                loginStatus.status = LoginStatus.OK;
+            } catch (Exception e) {
+                logger.severe(logHeader + "Can't create new user: " + e.toString());
+                loginStatus.status = LoginStatus.SERVERISSUE;
+    
+            }
         }
         return loginStatus;
 

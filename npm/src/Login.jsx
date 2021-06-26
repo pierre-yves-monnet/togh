@@ -32,6 +32,8 @@ class Login extends React.Component {
 
 		let rememberme=localStorage.getItem( LOCALSTORAGE_REMEMBERME );
 		let email=localStorage.getItem( LOCALSTORAGE_EMAIL );
+		if (props.defaultLoginEmail )
+			email=props.defaultLoginEmail ;
 		
 		this.state = { email: email, 
 			password: '', 
