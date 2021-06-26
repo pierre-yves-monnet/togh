@@ -277,8 +277,7 @@ class MyProfile extends React.Component {
 							value={this.state.user.subscriptionUser} 
 							class="thoginputreadonly"
 							/>
-						<FormattedMessage id="MyProfile.subscriptionUser" defaultMessage="Subscription"/><br/>
-						{this.state.user.subscriptionUser} 
+						
 						
 						<div class="toghTips">
 						
