@@ -570,21 +570,7 @@ CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	
 1. Sauvegarde Chat
-2.	Verifier invitation
-	User not exist ==> Create it and connect and jump in event
-	Double click on the same link ==> propose a "connect with existing user"
-	User exist ==> Propose connection and jump in event
 	
-	Ideal ; si l'user exist, on affiche soit registration, soit connection
-	e,ailM
-	Pierre-Yves MonnetPropose you to join is 
-	 
-	 ensuite on n affiche plus le panneau de registration
-
-	
-	
-3.	Invitation / move "invite" to"actif" quand l'utilisateur accede à l'evenemet ou l'accepte
-		
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 
@@ -595,6 +581,10 @@ Py
 	
 		
 V2		
+	Possibilite de supprimer une invitation dans un event (et dans ce cas, l'user peut etre supprimer s'il n'était invoqué que dans un event)
+	
+	Event/Participant: mettre l'icone + un component qui donne toutes les coordonnées
+ 	
 	MonitorService.registerErrorEvents() ==> Implementer
 	
 	Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer
@@ -621,7 +611,6 @@ V2
 		- inactif depuis trop longtemps : 
 
 ## bugs
-	Invitation en cours : affichage pas super dans le panneau des invitations
 	
 
 Plus possible de choisir une date          

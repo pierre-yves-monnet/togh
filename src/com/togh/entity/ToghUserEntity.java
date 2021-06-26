@@ -270,7 +270,7 @@ public @Data class ToghUserEntity extends BaseEntity {
             resultMap.put("email", email);
             if (email != null && email.trim().length() > 0) {
                 // the label is the email only if there is no label at this moment
-                if (label.length() == 0)
+                if (label.toString().trim().length() == 0)
                     label.append(" (" + email + ")");
                 longlabel.append(" (" + email + ")");
             }
