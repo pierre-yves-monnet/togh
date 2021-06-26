@@ -12,15 +12,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity;
-import com.togh.repository.EventRepository;
-import com.togh.service.EventService;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.FactoryService;
@@ -120,9 +116,6 @@ public class EventInvitation {
                 // attention, if the user is just invited to join TOGH, we don't want to sent a new email.
                 // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
                 if (! setUserJustInvited.contains(toghUser)) {
-                    notifyService.notifyNewUserInEvent(toghUser, true, invitedByToghUser, event);
-                } else {
-                    // notification service will decide how user have to be notified
                     notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, event);
                 }
                 invitationResult.newParticipants.add(event.addPartipant(toghUser, role, StatusEnum.INVITED));

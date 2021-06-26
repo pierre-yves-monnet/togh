@@ -10,6 +10,9 @@ import React from 'react';
 import { TextInput } from 'carbon-components-react';
 import { injectIntl,FormattedMessage } from "react-intl";
 
+import { XSquare,InfoCircle } from 'react-bootstrap-icons';
+
+
 
 import FactoryService 	from 'service/FactoryService';
 
@@ -59,16 +62,20 @@ class RegisterNewUser extends React.Component {
 		let	messageBadForm = this.validateForm();
 		if (this.state.showRegistration) {
 			return (
-			<div className="App" class="panel panel-info">
+			<div className="App" class="toghBlock" style={{padding:"10px 10px 20px 10px"}}>
 				<div class="panel-heading">
-					Registration 
-					<div style={{float: "right"}}>
-						<button class="glyphicon glyphicon-remove" onClick={this.hideRegistration} 
-							title={<FormattedMessage id="RegisterNewUser.CloseRegistration" defaultMessage="Close registration"/>} ></button>
+					<div style={{float: "right"}}>						
+						<XSquare onClick={this.hideRegistration} 
+							title={<FormattedMessage id="RegisterNewUser.CloseRegistration" defaultMessage="Close registration"/>} width="25px" height="25px"/>
 					</div>
+					<center><h1>Registration</h1></center> 
 				</div>
 				<div class="panel-body">
-					<br />
+					<div style={{fontStyle: "italic"}}>
+						<FormattedMessage id="RegisterNewUser.Information_1" defaultMessage="Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings."/>
+						<br/>
+						<br />
+					</div>
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Email" defaultMessage="Email"/>} 
 						type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
 
@@ -83,13 +90,29 @@ class RegisterNewUser extends React.Component {
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.RetypePassword" defaultMessage="Retype password"/>} 
 						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} maxlength="30" required></TextInput><br />
-					<div style={{color:"red"}}>{messageBadForm}</div>
-					<div style={{color:"red"}}>{messageBadPassword}</div>
-					
+					<div style={{padding:"10px 10px 10px 10px"}}>
+						<div style={{color:"red"}}>{messageBadForm}</div>
+						<div style={{color:"red"}}>{messageBadPassword}</div>
+					</div>
 					<button class="btn btn-info" onClick={this.registerUser} 
 							disabled={ ! this.checkPassword() || this.validateForm() != ''}>
 						{this.state.loading && <span class="loading">.</span>} <FormattedMessage id="RegisterNewUser.Registration" defaultMessage="Registration"/></button><p />
 					<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
+					
+					<div class="toghTips">
+						<div class="row">
+							<div class="col-1">
+								<InfoCircle width="20px" height="20px" color="#1f78b4"/>
+							</div>
+							<div class="col-9">
+								<div style={{fontWeight: "bold", padding: "5px 0px 5px 2px"}}><FormattedMessage id="RegisterNewUser.InformationLogin" defaultMessage="Login"/></div>
+								<FormattedMessage id="RegisterNewUser.Information_2" defaultMessage="Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password."/>
+								<br/>
+								<div style={{fontWeight: "bold", padding: "5px 0px 5px 2px"}}><FormattedMessage id="RegisterNewUser.InformationVisibility" defaultMessage="Access information"/></div>
+								<FormattedMessage id="RegisterNewUser.Information_3" defaultMessage="In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant."/>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		)
@@ -130,16 +153,25 @@ class RegisterNewUser extends React.Component {
 		return true;
 	}
 	
-	
+	/**
+	 * Check if the registration form is correct
+	 */
 	validateForm() {
 		const intl = this.props.intl;
 
-		if (this.state.email.length === 0)
-			return intl.formatMessage({id: "RegisterUser.EmailIsMandatory", defaultMessage: "Email is mandatory"});
-		if (this.state.firstName.length === 0)
-			return intl.formatMessage({id: "RegisterUser.FirstNameIsMandatory", defaultMessage: "First Name is mandatory"});	
-		return "";		
+		let messages =[];
+		if (! this.state.email )
+			messages.push( intl.formatMessage({id: "RegisterUser.EmailIsMandatory", defaultMessage: "Email is mandatory"})+"; ");
+		if (! this.state.firstName)
+			messages.push( intl.formatMessage({id: "RegisterUser.FirstNameIsMandatory", defaultMessage: "First Name is mandatory"})+"; ");
+		if (!this.state.password)
+			messages.push( intl.formatMessage({id: "RegisterUser.PasswordIsMandatory", defaultMessage: "Password is mandatory"}));
+		else if (this.state.password.length < 4)
+			messages.push( intl.formatMessage({id: "RegisterUser.PasswordSizeMandatory", defaultMessage: "Password must have minimum 4 characters"}));
+		return messages;		
 	}
+	
+	
 	toString() {
 		return "email=[" + this.state.email+"],password=["+this.state.password+"] Connection=["+this.state.badConnection+"] isLog["+this.state.isLog+"]";
 	}

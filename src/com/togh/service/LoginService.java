@@ -242,7 +242,7 @@ public class LoginService {
             String passwordEncrypted = ToghUserService.encryptPassword(password);
             toghUserEntity = ToghUserEntity.createNewUser(firstName, lastName, email, passwordEncrypted, sourceUser);
             toghUserEntity.setTypePicture(typePicture);
-            toghUserEntity.setPicture(picture);
+            toghUserEntity.setPicture(picture);            
         }
         
         // save modifications now

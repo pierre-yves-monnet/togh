@@ -35,7 +35,7 @@ public class TranslatorService {
 
     public enum Sentence {
         FROM, TO, PARTICIPANTS, INVITED_TOGH_EVENT,DEAR,YOU_ARE_INVITED_BY,
-        TO_JOIN_A,TOGH_EVENT,TOGH_EVENT_EXPLANATION,PROPOSE_YOU_TO_JOIN,
+        TO_JOIN_A,TOGH_EVENT,TOGH_EVENT_EXPLANATION,THE_EVENT_WE_PROPOSE_TO_JOIN,
         REGISTER_AND_JOIN_THIS_EVENT, TO_JOIN_EXPLANATION,TO_ACCESS_TOGH,
         YOU_LOST_YOUR_PASSWORD,CLICK_TO_RESET_PASSWORD,RESET_MY_PASSWORD,TOGH_RESET_PASSWORD 
         
@@ -65,10 +65,11 @@ public class TranslatorService {
         dicoEnglish.put(Sentence.YOU_ARE_INVITED_BY.toString(), "You are invited by");
         dicoEnglish.put(Sentence.TO_JOIN_A.toString(), "To join a");
         dicoEnglish.put(Sentence.TOGH_EVENT.toString(), "Togh Event");
-        dicoEnglish.put(Sentence.TOGH_EVENT_EXPLANATION.toString(), "In this event, you will share participants, messages and a lot of more information!");
-        dicoEnglish.put(Sentence.PROPOSE_YOU_TO_JOIN.toString(), "Propose you to join is");
+        dicoEnglish.put(Sentence.TOGH_EVENT_EXPLANATION.toString(), "In this event, you will share participants, messages, and a lot more information!");
+        dicoEnglish.put(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN.toString(), "The event %s invites you to join is");
+        
         dicoEnglish.put(Sentence.REGISTER_AND_JOIN_THIS_EVENT.toString(), "Register and join this event");
-        dicoEnglish.put(Sentence.TO_JOIN_EXPLANATION.toString(), "To join, just click the button. Register yourself with our email address, and welcome to Togh!");
+        dicoEnglish.put(Sentence.TO_JOIN_EXPLANATION.toString(), "To join, click the button. Register yourself with our email address, and welcome to Togh!");
         dicoEnglish.put(Sentence.TO_ACCESS_TOGH.toString(), "You can access the Togh application via this link to have more information:");
         
         dicoEnglish.put(Sentence.YOU_LOST_YOUR_PASSWORD.toString(),"We are sorry to heard that you lost your password");

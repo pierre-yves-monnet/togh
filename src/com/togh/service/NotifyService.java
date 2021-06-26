@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,8 +116,8 @@ public class NotifyService {
 
         st.append(translatorService.getDictionarySentence(Sentence.TOGH_EVENT_EXPLANATION, lang));
         st.append(BR);
-
-        st.append(invitedBy.getLabel() + translatorService.getDictionarySentence(Sentence.PROPOSE_YOU_TO_JOIN, lang));
+        
+        st.append(String.format( translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang), invitedBy.getLabel()));
 
         EventController eventController = EventController.getInstance(event, factoryService);
         EventPresentationAttribut eventPresentationAttribut = new EventPresentationAttribut();

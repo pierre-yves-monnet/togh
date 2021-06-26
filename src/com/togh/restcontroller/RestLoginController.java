@@ -46,8 +46,8 @@ import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.service.ApiKeyService;
 import com.togh.service.FactoryService;
 import com.togh.service.LoginService;
-import com.togh.service.LoginService.LoginStatus;
 import com.togh.service.LoginService.LoginResult;
+import com.togh.service.LoginService.LoginStatus;
 
 @RestController
 public class RestLoginController {
@@ -130,13 +130,13 @@ public class RestLoginController {
             final GoogleIdToken idToken = verifier.verify(idTokenGoogle);
              if (idToken != null) {
                 final Payload payload = idToken.getPayload();
-                String userName = (String) payload.get("name");
+                // String userName = (String) payload.get("name");
                 String email = (String) payload.get("email");
                 String firstName=(String) payload.get("given_name");
                 String lastName=(String) payload.get("family_name");
                 String picture = (String) payload.get("picture");
                 // fr, en..
-                String language= (String) payload.get("locale");
+                // String language= (String) payload.get("locale");
                 loginStatus = loginService.connectSSO( email, true);
                 if (! loginStatus.isConnected) {
                     // register it now !
@@ -148,7 +148,8 @@ public class RestLoginController {
                 return loginStatus.getMap();
              }
         } catch(Exception e) {
-            // TODO ToghEvent
+            logger.info(logHeader+"Error when creating a Google user "+e.toString());
+
         }
         return loginStatus.getMap();
         

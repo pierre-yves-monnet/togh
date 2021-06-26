@@ -100,23 +100,23 @@ class BodyTogh extends React.Component {
 		if (action && action === 'invitedNewUser') {
 			// switch to the register user page
 			console.log("NewUser: redirect him directly to the register page!")
-			this.state.showLoginPanel= true;
-			this.state.showRegisterUserForm=true;
-			this.state.defaultLoginEmail=email;
-			this.state.currentEventId= eventId;
+			this.state.showLoginPanel		= true;
+			this.state.showRegisterUserForm	= true;
+			this.state.defaultLoginEmail	= email;
+			this.state.currentEventId		= eventId;
 			if (eventId)
-				this.state.frameContent=FRAME_NAME.EVENT;
+				this.state.frameContent		= FRAME_NAME.EVENT;
 			
 		}
 		if (action && action === 'invitedUser') {
 			// switch to the register user page
 			console.log("NewUser: redirect him directly to the register page!")
-			this.state.showLoginPanel= true;
-			this.state.showRegisterUserForm=false;
-			this.state.defaultLoginEmail=email;	
-			this.state.currentEventId=eventId;
+			this.state.showLoginPanel		= true;
+			this.state.showRegisterUserForm	= false;
+			this.state.defaultLoginEmail	= email;	
+			this.state.currentEventId		= eventId;
 			if (eventId)
-				this.state.frameContent=FRAME_NAME.EVENT;		
+				this.state.frameContent		= FRAME_NAME.EVENT;		
 		}
 	}
 
@@ -180,7 +180,7 @@ class BodyTogh extends React.Component {
 								</div> }
 								
 	  						<div class="row">
-								<div class="col-sm-2" >
+								<div class="col-sm-2" style={{fontFamily: "Brush Script MT, cursive", fontSize:"40px"}} >
 									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
 									
 								<br/><br/>
