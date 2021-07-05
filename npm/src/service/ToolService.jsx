@@ -9,8 +9,25 @@
 
 class ToolService {
 
+
+	getIsoStringFromDate( datesource) {
+		debugger;
+		if (! datesource)
+			return datesource;
+		console.log("ToolService.getDateFromObject: "+JSON.stringify(datesource)+" isDate ?"+(datesource instanceof Date));
+		if (datesource instanceof Date) {
+			console.log("ToolService.getDateFromObject: this is a date, transform it to a string");			
+			let isoDateString = datesource.toISOString();
+			return isoDateString.slice(0, 10);
+		}
+		if (datesource.length>10)
+			return datesource.slice(0, 10);
+		return datesource;
+	}
+		
+
 	getDateListFromDate( dateone, datetwo ) {
-		// console.log("ToolService.getDateListFromDate: "+JSON.stringify(dateone));
+		console.log("ToolService.getDateListFromDates: "+JSON.stringify(dateone)+" isDate ?"+(dateone instanceof Date));
 		var listDates = [];
 		listDates.push( dateone);
 		if (datetwo)

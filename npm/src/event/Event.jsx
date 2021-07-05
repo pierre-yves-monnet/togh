@@ -129,32 +129,30 @@ class Event extends React.Component {
 					<div>
 						<table><tr>
 							<td colspan="2">
-								{this.state.event.dateEvent}
+							 
+
+								Value={this.state.event.dateEvent}, from tool={toolService.getDateListFromDate(this.state.event.dateEvent,null)}
 								<DatePicker datePickerType="single"
-									/* dateFormat= { () => {
-										let dateFormat = this.deriveDateFormat();
-										console.log("format="+dateFormat);
-										return dateFormat;}} // To get from a service that returns the format based on the language selected
-										*/
-										dateFormat="d.m.y"
 									onChange={(dates) => {
 										console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
-
-										if (dates.length >= 1) {
-											console.log("SingleDatePicker set Date");
-											this.setAttribut("dateEvent", dates[0]);
+											if (dates.length >= 1) {
+												// DatePicker does not accept that we set a Date. We have to set a String...
+												// else we face a "Non React Object" during the setEvent()
+												// and whatever is the value() method
+												let dateSingleSt = dates[0].toISOString();
+												this.setAttribut("dateEvent", dateSingleSt);												
+											}
 										}
 									}
-									}
-									value={toolService.getDateListFromDate(this.state.event.dateEvent)}
-
+									/**Actually, there is no impact here */
+									value={toolService.getIsoStringFromDate(this.state.event.dateEvent) }
 								>
-
 									<DatePickerInput
 										// placeholder='mm/dd/yyyy' // To get from a service that returns the format based on the language selected
 										placeholder="mm/dd/yyyy"
 										labelText={<FormattedMessage id="Event.DateEvent" defaultMessage="Date Event" />}
 										id="date-picker-simple"
+										
 									/>
 								</DatePicker>
 							</td></tr>
@@ -165,7 +163,7 @@ class Event extends React.Component {
 									value={this.state.event.timeEvent}
 									onChange={(event) => this.setAttribut("timeEvent", event.target.value)} />
 							</td><td>
-									<TimePicker
+								<TimePicker
 										id="durationTime"
 										labelText={<FormattedMessage id="Event.DurationEvent" defaultMessage="Duration" />}
 										value={this.state.event.durationEvent}
@@ -182,12 +180,12 @@ class Event extends React.Component {
 						<DatePicker datePickerType="range"
 							onChange={(dates) => {
 								if (dates.length > 1) {
+									debugger;
 									this.setAttribut("dateStartEvent", dates[0]);
 									this.setAttribut("dateEndEvent", dates[1]);
 								}
 							}}
 							value={toolService.getDateListFromDate(this.state.event.dateStartEvent, this.state.event.dateEndEvent)}
-
 						>
 							<DatePickerInput
 								id="date-picker-input-id-start"
