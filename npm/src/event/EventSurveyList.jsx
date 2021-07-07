@@ -162,10 +162,8 @@ class EventSurveyList extends React.Component {
 						
 			
 			var currentSurvey = this.eventCtrl.getCurrentSurvey();
-			var surid=-1;
 			if (currentSurvey) {
 				console.log("EventSurveyList.currentSurveyd = "+currentSurvey.id);
-				var surid=currentSurvey.id;
 			 }
 			contentPage= (
 				<div class="row">
