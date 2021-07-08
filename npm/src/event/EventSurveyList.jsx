@@ -21,7 +21,8 @@ import * as surveyConstant 			from 'controller/SurveyCtrl';
 
 import SurveyCtrl 					from 'controller/SurveyCtrl';
 
-import EventSurvey from 'event/EventSurvey';
+import EventSurvey 					from 'event/EventSurvey';
+import SlabRecord  					from 'service/SlabRecord';
 
 
 // -----------------------------------------------------------
@@ -214,14 +215,16 @@ class EventSurveyList extends React.Component {
 		item[name] = value;
 
 		var completeLocalisation = "/surveylist/"+survey.id+"/"+localisation;
-		var survey = this.state.event.surveylist [ this.state.currentSurveyId ];
+		var survey = this.state.event.surveylist[ this.state.currentSurveyId ];
 
 		// currentEvent.shoppinglist[0].[name] = value;
 
 		this.setState({ event: currentEvent });
 		
-		var SlabRecord = SlabRecord.getUpdate(this.state.event, name, value, completeLocalisation);
-		this.props.updateEvent( SlabRecord );
+		var slabRecord = SlabRecord.getUpdate(this.state.event, name, value, completeLocalisation);
+		this.props.updateEvent( slabRecord );
+		// TODO change to this.eventCtrl.setAttribut(name, value, item, this.parentLocalisation);
+
 	}
 
 	setAttributeCheckbox(name, value) {
