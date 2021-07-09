@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -12,17 +12,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.togh.entity.EventExpenseEntity;
 
-
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventExpenseRepository                                                          */
+/* EventExpenseRepository */
 /*                                                                                  */
-/*  Search expense                                                                  */
+/* Search expense */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public interface EventExpenseRepository extends JpaRepository<EventExpenseEntity, Long>  {
+public interface EventExpenseRepository extends JpaRepository<EventExpenseEntity, Long> {
 
     public EventExpenseEntity findById(long id);
 }

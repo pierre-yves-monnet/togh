@@ -569,9 +569,11 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	
-1. Sauvegarde Chat
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
+
+11. Revoir la deconnection, le feedback user quand on fait un save
+
 
 
 12. Verifier : admintogh creation et login (admintogh d'un coté, et toghadmin@togh.com de l'autre et j'arrive plus a me connecter

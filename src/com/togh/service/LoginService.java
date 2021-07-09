@@ -26,11 +26,9 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.apache.tomcat.util.descriptor.web.ContextResourceEnvRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.engine.logevent.LogEvent;
@@ -44,7 +42,6 @@ import com.togh.entity.ToghUserLostPasswordEntity;
 import com.togh.entity.ToghUserLostPasswordEntity.StatusProcessEnum;
 import com.togh.repository.ToghUserLostPasswordRepository;
 import com.togh.restcontroller.RestHttpConstant;
-import com.togh.restcontroller.RestJsonConstants;
 import com.togh.service.MonitorService.Chrono;
 import com.togh.service.NotifyService.NotificationStatus;
 import com.togh.service.ToghUserService.SearchUsersResult;

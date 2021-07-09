@@ -8,10 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
-import com.togh.entity.EventEntity;
-import com.togh.service.FactoryService;
-
-
 /* ******************************************************************************** */
 /*                                                                                  */
 /*  EventPresentationAttribut,                                                      */

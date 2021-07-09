@@ -27,10 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
-import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;

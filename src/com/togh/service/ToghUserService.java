@@ -42,7 +42,6 @@ import com.togh.entity.ToghUserEntity.StatusUserEnum;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
 import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.repository.ToghUserRepository;
-import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.NotifyService.NotificationStatus;
 

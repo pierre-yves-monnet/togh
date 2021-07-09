@@ -23,7 +23,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.base.BaseEntity;
-import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.LoadEntityResult;
 import com.togh.service.EventService.UpdateContext;
 

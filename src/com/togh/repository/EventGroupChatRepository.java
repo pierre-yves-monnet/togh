@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -12,17 +12,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.togh.entity.EventGroupChatEntity;
 
-
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventGroupChatRepository                                                          */
+/* EventGroupChatRepository */
 /*                                                                                  */
-/*  Search Group Chat                                                                  */
+/* Search Group Chat */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public interface EventGroupChatRepository extends JpaRepository<EventGroupChatEntity, Long>  {
+public interface EventGroupChatRepository extends JpaRepository<EventGroupChatEntity, Long> {
 
     public EventGroupChatEntity findById(long id);
 }

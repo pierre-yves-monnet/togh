@@ -42,7 +42,6 @@ import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
-import com.togh.entity.base.UserEntity;
 import com.togh.repository.EventChatRepository;
 import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventGroupChatRepository;

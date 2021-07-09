@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
-import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

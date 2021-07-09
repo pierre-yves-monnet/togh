@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -14,16 +14,15 @@ import com.togh.entity.EventItineraryStepEntity;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventItineraryStepRepository                                                    */
+/* EventItineraryStepRepository */
 /*                                                                                  */
-/*  Control what's happen on an event. Pilot all operations                         */
+/* Control what's happen on an event. Pilot all operations */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public interface EventItineraryStepRepository extends JpaRepository<EventItineraryStepEntity, Long>  {
+public interface EventItineraryStepRepository extends JpaRepository<EventItineraryStepEntity, Long> {
 
     public EventItineraryStepEntity findById(long id);
-
 
 }

@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -12,17 +12,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.togh.entity.EventSurveyEntity;
 
-
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventSurveyRepository                                                             */
+/* EventSurveyRepository */
 /*                                                                                  */
-/*  Control what's happen on an event. Pilot all operations                         */
+/* Control what's happen on an event. Pilot all operations */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public interface EventSurveyRepository extends JpaRepository<EventSurveyEntity, Long>  {
+public interface EventSurveyRepository extends JpaRepository<EventSurveyEntity, Long> {
 
     public EventSurveyEntity findById(long id);
 

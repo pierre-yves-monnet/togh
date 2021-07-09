@@ -1,8 +1,8 @@
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Togh Project                                                                    */
+/* Togh Project */
 /*                                                                                  */
-/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/* This component is part of the Togh Project, developed by Pierre-Yves Monnet */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -14,7 +14,6 @@ import com.togh.entity.APIKeyEntity;
 
 public interface ApiKeyEntityRepository extends JpaRepository<APIKeyEntity, Long> {
 
-    
     public APIKeyEntity findByName(String codeApi);
 
 }

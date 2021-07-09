@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
 
 import com.togh.engine.logevent.LogEvent;
-import com.togh.entity.ToghUserEntity;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */

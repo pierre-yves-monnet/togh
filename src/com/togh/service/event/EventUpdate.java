@@ -31,7 +31,6 @@ import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
-import com.togh.entity.base.UserEntity;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;

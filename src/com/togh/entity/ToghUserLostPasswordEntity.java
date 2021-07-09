@@ -19,12 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
-import com.togh.entity.ToghUserEntity.SourceUserEnum;
-import com.togh.entity.ToghUserEntity.StatusUserEnum;
-import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
-import com.togh.entity.ToghUserEntity.TypePictureEnum;
-import com.togh.entity.ToghUserEntity.VisibilityEnum;
 import com.togh.entity.base.BaseEntity;
 
 import lombok.Data;
