@@ -52,8 +52,7 @@ class EventChat extends React.Component {
 			}
 		};
 		// show : OFF, ON, COLLAPSE
-		console.log("secShoppinglist.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
-		this.setCheckboxValue 	= this.setCheckboxValue.bind(this);
+		console.log("EventChat.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.addMessage 		= this.addMessage.bind(this);
 		this.addMessageCallback	= this.addMessageCallback.bind( this );
 		
@@ -88,35 +87,39 @@ class EventChat extends React.Component {
 		return (<div>
 			{headerSection}
 
-			{  this.state.event.chatlist && this.state.event.chatlist.map( (event) => {
-				return (
-					<div class="row">
-						<div class="col-12">
-							<div class="toghBlock" style={{ padding: "10px 10px 10px 10px"}}>
-								{event.chat}
-								<div style={{fontSize:"10px", fontStyle:"italic", textAlign:"right"}}>
-									<FormattedMessage id="EventChat.SendBy" defaultMessage="Send by" /> {event.name} 
-									<FormattedMessage id="EventChat.The" defaultMessage="The" />
-									<FormattedDate
-							           	value= {event.datemessage}
-							           	year = 'numeric'
-							           	month= 'long'
-							           	day = 'numeric'
-							           	weekday = 'long'
-							       		/>
-								</div> 
-							</div>
-						</div>
-					</div>)
-			})}
+			{  this.state.event.groupchatlist && this.state.event.groupchatlist.map( (group) => {
+      				return group.chatlist.map((chat) => {
+        				return (
+							<div class="row">
+								<div class="col-12">
+									<div class="toghBlock" style={{ padding: "10px 10px 10px 10px"}}>
+										<span style={{whiteSpace: "pre-line"}}>{chat.message}</span>
+										<div style={{fontSize:"10px", fontStyle:"italic", textAlign:"left", marginTop:"10px"}}>
+											<FormattedMessage id="EventChat.SendBy" defaultMessage="Send by" /> {this.eventCtrl.getParticipantName( chat.whoid)} &nbsp;&nbsp;
+											<FormattedMessage id="EventChat.The" defaultMessage="The" />
+											<FormattedDate
+									           	value= {chat.datemessage}
+									           	year = 'numeric'
+									           	month= 'long'
+									           	day = 'numeric'
+									           	weekday = 'long'
+									       		/>
+										</div> 
+									</div>
+								</div>
+							</div>)
+						})
+					}
+			)}
 			<div class="row">
 				<div class="col-10">
 					<TextArea
-						labelText={<FormattedMessage id="EventChat.WhatYouWantToSay" defaultMessage="What you want to say?" />} 
+						labelText={<FormattedMessage id="EventChat.WhatYouWantToSay" defaultMessage="What do you want to say?" />}
+						value={this.state.chat} 
 						onChange={(event) => this.setState( {"chat": event.target.value })} />
 				</div>
 				<div class="col-2" style={{ paddingTop: "20px"}}>
-					<SkipBackwardCircle onClick={this.addMessage} width="80px" height="80px"/>
+					<SkipBackwardCircle onClick={this.addMessage} width="50px" height="50px"/>
 				</div>
 			</div>
 	
@@ -124,53 +127,15 @@ class EventChat extends React.Component {
 		);
 	}
 
-	/**
-	 * Filter the different task
-	 */
-	getFilterTaskHtml() {
-		return (<div class="row">
-			<div class="col">
-				<Toggle labelText="" aria-label=""
-					labelA={<FormattedMessage id="EventShoppingList.ShowDetails" defaultMessage="Detail" />}
-					labelB={<FormattedMessage id="EventShoppingList.ShowDetails" defaultMessage="Detail" />}
-					onChange={(event) => this.setCheckboxValue("showDetail", event.target.value)}
-					defaultToggled={this.state.showProperties.showDetail}
-					id="showDetail" />
-			</div>
-			<div class="col">
-				<Toggle labelText="" aria-label=""
-					labelA={<FormattedMessage id="EventShoppingList.ShowExpense" defaultMessage="Show Expense" />}
-					labelB={<FormattedMessage id="EventShoppingList.ShowExpense" defaultMessage="Show Expense" />}
-					onChange={(event) => this.setCheckboxValue("showExpense", event.target.value)}
-					defaultToggled={this.state.showProperties.showExpense}
-					id="showexpense" />
-			</div>
-		</div>)
-	}
-
-
 	
+/*
+	
+			*/
 	// --------------------------------------------------------------
 	// 
 	// Direct HTML controls
 	// 
 	// --------------------------------------------------------------
-
-	/** --------------------
-	 * Set attribut 
-		  */
-	setCheckboxValue(name, value) {
-		let showPropertiesValue = this.state.showProperties;
-		console.log("EventTaskList.setCheckBoxValue set " + name + "<=" + value.target.checked + " showProperties =" + JSON.stringify(showPropertiesValue));
-		if (value.target.checked)
-			showPropertiesValue[name] = true;
-		else
-			showPropertiesValue[name] = false;
-		this.setState({ "showProperties": showPropertiesValue })
-	}
-
-
-	
 	
 	// --------------------------------------------------------------
 	// 
@@ -181,8 +146,8 @@ class EventChat extends React.Component {
 
 	addMessage() {
 		console.log("EventChat.addMessage: addItem item=" + JSON.stringify(this.state.event));
-		// call the server to get an ID on this taskList
-		var newLine = { chat: this.state.chat, who:-1 };
+		// don't set the whoId: the server will add the caller
+		var newLine = { message: this.state.chat };
 		this.eventCtrl.addEventChildFct("chat", newLine, "", this.addMessageCallback);
 	}
 
@@ -192,10 +157,9 @@ class EventChat extends React.Component {
 			// feedback to user is required
 			console.log("EventShoppinglist.addMessageCallback: ERROR ");
 		} else {
-			var chatToAdd = httpPayload.getData().child;
+			this.setState({ chat: "" });
 			var event = this.eventCtrl.getEvent();
-			var newList = event.chatlist.concat(chatToAdd);
-			event.chatlist = newList;
+			event.groupchatlist = httpPayload.getData().groupchatlist;
 			this.setState({ event: event });
 		}
 	}

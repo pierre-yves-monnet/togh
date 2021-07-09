@@ -10,8 +10,7 @@
 class ToolService {
 
 
-	getIsoStringFromDate( datesource) {
-		debugger;
+	getIsoStringFromDate( datesource) {		
 		if (! datesource)
 			return datesource;
 		console.log("ToolService.getDateFromObject: "+JSON.stringify(datesource)+" isDate ?"+(datesource instanceof Date));

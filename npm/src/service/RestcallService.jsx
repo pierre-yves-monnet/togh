@@ -51,11 +51,11 @@ class RestcallService {
 		console.log("RestCallService.getJson: uri="+uri);		
     	axios.get( this.getUrl( uri ), requestOptions)
         	.then( axiosPayload => { 
-				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
+				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));
 				let httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
-			.catch(error => {
+			.catch(error => {				
 				if (error.response && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");

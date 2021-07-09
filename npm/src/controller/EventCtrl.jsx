@@ -73,78 +73,83 @@ class EventCtrl {
 
 	// -------------------------------------------- CompleteEvent
 	completeEvent() {
-
-		// console.log("EventCtrl.completeEvent: Start=" + JSON.stringify( this.event ));
-		var log = "";
-		// TextArea must not be null
-		if (!this.event.description)
-			this.event.description = '';
-
-		if (!this.event.participants) {
-			log = log.concat("create participants;");
-			this.event.participants = [];
-		}
-
-		if (!this.event.itinerarysteplist) {
-			log = log.concat("create itinerarysteplist;");
-			this.event.itinerarylist = [];
-		}
-		this.event.itinerarysteplist.map((item) => {
-			if (!item.expense)
-				item.expense = {};
-		});
-
-		if (!this.event.chatlist) {
-			log = log.concat("create chatlist;");
-			this.event.chatlist = [];
-		}
-
-		if (!this.event.expenses) {
-			log = log.concat("create Expenses;");
-			this.event.expenses = {};
-		}
-
-		if (!this.event.geoLocalisation) {
-			log = log.concat("create geoLocalisation");
-			this.event.geoLocalisation = {};
-		}
-		if (!this.event.shoppinglist) {
-			log = log.concat("create shoppinglist");
-			this.event.shoppinglist = [];
-		}
-		this.event.shoppinglist.map( (item) => {
-			if (! item.expense)
-				item.expense = {};
-			} );
-
-		if (!this.event.tasklist) {
-			console.log("Event.completeEvent: no task list exist, create one");
-			this.event.tasklist = [];
-		}
-		if (!this.event.surveylist) {
-			log = log.concat("create surveylist");
-			this.event.surveylist = [];
+		try {
+			// console.log("EventCtrl.completeEvent: Start=" + JSON.stringify( this.event ));
+			var log = "";
+			// TextArea must not be null
+			if (!this.event.description)
+				this.event.description = '';
+	
+			if (!this.event.participants) {
+				log = log.concat("create participants;");
+				this.event.participants = [];
+			}
+	
+			if (!this.event.itinerarysteplist) {
+				log = log.concat("create itinerarysteplist;");
+				this.event.itinerarylist = [];
+			}
+			this.event.itinerarysteplist.map((item) => {
+				if (!item.expense)
+					item.expense = {};
+			});
+	
+			if (!this.event.chatlist) {
+				log = log.concat("create chatlist;");
+				this.event.chatlist = [];
+			}
+	
+			if (!this.event.expenses) {
+				log = log.concat("create Expenses;");
+				this.event.expenses = {};
+			}
+	
+			if (!this.event.geoLocalisation) {
+				log = log.concat("create geoLocalisation");
+				this.event.geoLocalisation = {};
+			}
+			if (!this.event.shoppinglist) {
+				log = log.concat("create shoppinglist");
+				this.event.shoppinglist = [];
+			}
+			this.event.shoppinglist.map( (item) => {
+				if (! item.expense)
+					item.expense = {};
+				} );
+	
+			if (!this.event.tasklist) {
+				console.log("Event.completeEvent: no task list exist, create one");
+				this.event.tasklist = [];
+			}
+			if (!this.event.surveylist) {
+				log = log.concat("create surveylist");
+				this.event.surveylist = [];
+			}
+			
+			this.event.surveylist.map( (survey) => {
+				if (! survey[ surveyConstant.CHILD_ANSWER ])
+					survey[ surveyConstant.CHILD_ANSWER ] = {};
+				
+				survey[ surveyConstant.CHILD_ANSWER ].map( (surveyAnswer) => {
+				
+					if (! surveyAnswer.decision)
+						surveyAnswer.decision = {};
+				} );
+			});		
+			
+			if (!this.event.preferences) {
+				log = log.concat("create preferences");
+				this.event.preferences = {};
+			}
+	
+			// console.log("EventCtrl.loadEvent: completionDone event=" + JSON.stringify(this.event) );
+		} catch( error) {
+			// not normal that...
+			this.event.systemerror="Exception during event Control :"+ error;
+			console.log("EventCtrl.completeEvent: ERROR " + error );
 		}
 		
-		this.event.surveylist.map( (survey) => {
-			if (! survey[ surveyConstant.CHILD_ANSWER ])
-				survey[ surveyConstant.CHILD_ANSWER ] = {};
-			
-			survey[ surveyConstant.CHILD_ANSWER ].map( (surveyAnswer) => {
-			
-				if (! surveyAnswer.decision)
-					surveyAnswer.decision = {};
-			} );
-		});		
-		
-		if (!this.event.preferences) {
-			log = log.concat("create preferences");
-			this.event.preferences = {};
-		}
-
-		// console.log("EventCtrl.loadEvent: completionDone event=" + JSON.stringify(this.event) );
-
-		console.log("Event.preferences: end of " + log + " event=" + JSON.stringify(this.event));
+		console.log("EventCtrl.completeEvent: end of " + log + " event=" + JSON.stringify(this.event));
 	}
 
 

@@ -36,6 +36,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public @Data class EventExpenseEntity  extends UserEntity {
 
+    public static final String CST_ENTITY_NAME="expense";
+    
     @Column(name = "budget")
     private BigDecimal  budget;
     

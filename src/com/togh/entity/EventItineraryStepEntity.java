@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.entity.base.UserEntity;
+import com.togh.entity.base.EventBaseEntity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,7 +40,7 @@ import lombok.EqualsAndHashCode;
 
 @Table(name = "EVTITINERARYSTEP")
 @EqualsAndHashCode(callSuper=true)
-public @Data class EventItineraryStepEntity extends UserEntity {
+public @Data class EventItineraryStepEntity extends EventBaseEntity {
 
     public enum CategoryEnum {
         POI,BEGIN,END,SHOPPING,AIRPORT,BUS,TRAIN,BOAT,NIGHT,VISIT,RESTAURANT,ENTERTAINMENT

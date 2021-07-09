@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.entity.base.UserEntity;
+import com.togh.entity.base.EventBaseEntity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,7 +39,7 @@ import lombok.EqualsAndHashCode;
 
 @Table(name = "EVTSHOPPINGLIST")
 @EqualsAndHashCode(callSuper=true)
-public @Data class EventShoppingListEntity extends UserEntity {
+public @Data class EventShoppingListEntity extends EventBaseEntity {
 
     public enum ShoppingStatusEnum {
         TODO, DONE, CANCEL

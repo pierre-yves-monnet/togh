@@ -217,6 +217,7 @@ class Event extends React.Component {
 		// console.log("Event.render : statusEvent="+JSON.stringify(this.state.event.statusEvent)+" Participants="+JSON.stringify(this.state.event.participants)); 
 		return (
 			<div>
+				{ this.state.event.systemerror && <div class="alert alert-danger">{this.state.event.systemerror}</div>}
 				<div class="row">
 					<div class="col-sm-1">
 						<img src="img/toghEvent.jpg" style={{ width: 90 }}     />

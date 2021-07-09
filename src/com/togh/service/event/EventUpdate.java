@@ -17,8 +17,11 @@ import java.util.logging.Logger;
 
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
+import com.togh.engine.logevent.LogEventFactory;
 import com.togh.engine.tool.JpaTool;
+import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
 import com.togh.entity.EventSurveyAnswerEntity;
@@ -27,11 +30,11 @@ import com.togh.entity.EventSurveyEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.entity.base.EventBaseEntity;
 import com.togh.entity.base.UserEntity;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
-
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -51,8 +54,6 @@ public class EventUpdate {
     private static final LogEvent eventCantLocalise = new LogEvent(EventUpdate.class.getName(), 2, Level.ERROR, "Can't localise", "A localisation can't be found, maybe the item is deleted by an another user?", "Operation can't be done", "Refresh your event");
     private static final LogEvent eventBadLocalisationEntity = new LogEvent(EventUpdate.class.getName(), 3, Level.ERROR, "Entity found is not the one expected", "An entity with a special type is search, and an another one if found.", "Operation can't be executed", "Check the localisation and the entity found");
     private static final LogEvent eventAlreadyDeleted = new LogEvent(EventUpdate.class.getName(), 4, Level.INFO, "Entity already deleted", "The entity is already deleted");
-    
-
 
     EventController eventController;
 
@@ -119,7 +120,7 @@ public class EventUpdate {
 
     private void addOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         BaseEntity child = null;
-        LimitReach limitReach=null;
+        LimitReach limitReach = null;
         if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
             child = new EventTaskEntity();
             limitReach = LimitReach.TASKLIST;
@@ -137,70 +138,83 @@ public class EventUpdate {
             limitReach = LimitReach.SURVEYCHOICE;
         } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
             child = new EventSurveyAnswerEntity();
+        } else if (slab.attributName.equals(EventGroupChatEntity.CST_SLABOPERATION_CHATGROUP)) {
+            child = new EventGroupChatEntity();
+            limitReach = LimitReach.CHATGROUP;
+
+        } else if (slab.attributName.equals(EventChatEntity.CST_SLABOPERATION_CHAT)) {
+            // So, let's search the default group
+            child = new EventChatEntity();
+            ((EventChatEntity)child).setWhoId( updateContext.toghUser);
+            limitReach = LimitReach.CHAT;
         }
-        
         // Check if the subscription allow to add this entity
         int maxEntity = updateContext.factoryService.getSubscriptionService().getMaximumEntityPerEvent(this.eventController.getEvent().getSubscriptionEvent(), child);
-        
-        
+
         if (child != null) {
-            boolean reachTheLimit=false;
+            boolean reachTheLimit = false;
             @SuppressWarnings("unchecked")
             Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
             for (Entry<String, Object> entrySlab : valueDefault.entrySet()) {
-                eventOperationResult.addLogEvents( JpaTool.updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext));
+                eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext));
             }
+            // an error? Stop now.
+            if (LogEventFactory.isError(eventOperationResult.listLogEvents))
+                return;
             // save it now
             if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
-                if (event.getTaskList().size()>=maxEntity) 
-                    reachTheLimit=true;
+                if (event.getTaskList().size() >= maxEntity)
+                    reachTheLimit = true;
                 else
                     child = eventController.getEventService().addTask(event, (EventTaskEntity) child);
-                
+
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
-                if (event.getItineraryStepList().size()>=maxEntity) 
-                    reachTheLimit=true;
+                if (event.getItineraryStepList().size() >= maxEntity)
+                    reachTheLimit = true;
                 else
                     child = eventController.getEventService().addItineraryStep(event, (EventItineraryStepEntity) child);
-                
+
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
-                if (event.getShoppingList().size()>=maxEntity) 
-                    reachTheLimit=true;
+                if (event.getShoppingList().size() >= maxEntity)
+                    reachTheLimit = true;
                 else
                     child = eventController.getEventService().addShoppingList(event, (EventShoppingListEntity) child);
-                
+
             } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SURVEYLIST)) {
-                if (event.getSurveyList().size()>=maxEntity) 
-                    reachTheLimit=true;
+                if (event.getSurveyList().size() >= maxEntity)
+                    reachTheLimit = true;
                 else
                     child = eventController.getEventService().addSurvey(event, (EventSurveyEntity) child);
-                
+
             } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
                 BaseEntity surveyEntity = localise(event, slab.localisation);
                 if (surveyEntity instanceof EventSurveyEntity) {
-                    if (((EventSurveyEntity) surveyEntity).getChoicelist().size()>=maxEntity) 
-                        reachTheLimit=true;
+                    if (((EventSurveyEntity) surveyEntity).getChoicelist().size() >= maxEntity)
+                        reachTheLimit = true;
                     else
-                        child = eventController.getEventService().addSurveyChoice(event, (EventSurveyEntity) surveyEntity,  (EventSurveyChoiceEntity) child);
+                        child = eventController.getEventService().addSurveyChoice(event, (EventSurveyEntity) surveyEntity, (EventSurveyChoiceEntity) child);
                 }
             } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_ANSWERLIST)) {
                 // no limitation control on the anwser list
                 BaseEntity surveyEntity = localise(event, slab.localisation);
                 if (surveyEntity instanceof EventSurveyEntity)
-                    child = eventController.getEventService().addSurveyAnswser(event, (EventSurveyEntity) surveyEntity,  (EventSurveyAnswerEntity) child);
+                    child = eventController.getEventService().addSurveyAnswser(event, (EventSurveyEntity) surveyEntity, (EventSurveyAnswerEntity) child);
+
+            } else if (slab.attributName.equals(EventChatEntity.CST_SLABOPERATION_CHAT)) {
+                EventGroupChatEntity groupChatEntity = getGroupChat(event, slab);
+                child = eventController.getEventService().addChatInGroup(event, groupChatEntity, (EventChatEntity) child, maxEntity);
             }
-            
             if (reachTheLimit) {
                 // We reach the limit per the subscription
-                eventOperationResult.limitSubscription=true;
+                eventOperationResult.limitSubscription = true;
                 // get the ownser user
                 ToghUserEntity ownerUser = this.eventController.getOwner();
-                if (limitReach!=null)
-                    updateContext.factoryService.getSubscriptionService().registerTouchLimitSubscription( ownerUser,limitReach);
-                child=null;
+                if (limitReach != null)
+                    updateContext.factoryService.getSubscriptionService().registerTouchLimitSubscription(ownerUser, limitReach);
+                child = null;
             }
-            
-            if (child!=null)
+
+            if (child != null)
                 eventOperationResult.listChildEntity.add(child);
         }
     }
@@ -217,26 +231,22 @@ public class EventUpdate {
         if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_TASKLIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
             eventOperationResult.addLogEvents(eventController.getEventService().removeTask(event, slab.getAttributValueLong()));
-        }
-        else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
+        } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_ITINERARYSTEPLIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
             eventOperationResult.addLogEvents(eventController.getEventService().removeItineraryStep(event, slab.getAttributValueLong()));
-        }
-        else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
+        } else if (slab.attributName.equals(EventEntity.CST_SLABOPERATION_SHOPPINGLIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
             eventOperationResult.addLogEvents(eventController.getEventService().removeShoppingList(event, slab.getAttributValueLong()));
-        }
-        else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
+        } else if (slab.attributName.equals(EventSurveyEntity.CST_SLABOPERATION_CHOICELIST)) {
             eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
             BaseEntity surveyEntity = localise(event, slab.localisation);
             if (surveyEntity instanceof EventSurveyEntity)
                 eventOperationResult.addLogEvents(eventController.getEventService().removeSurveyChoice(event, (EventSurveyEntity) surveyEntity, slab.getAttributValueLong()));
-            else if (surveyEntity ==null) {
+            else if (surveyEntity == null) {
                 // already deleted
-                eventOperationResult.addLogEvent( eventAlreadyDeleted);
-            }
-            else
-                eventOperationResult.addLogEvent( new LogEvent(eventBadLocalisationEntity, "Can't find SurveyEntity localisation["+slab.localisation+"] found ["+(surveyEntity==null ? null : surveyEntity.getClass().getName())));
+                eventOperationResult.addLogEvent(eventAlreadyDeleted);
+            } else
+                eventOperationResult.addLogEvent(new LogEvent(eventBadLocalisationEntity, "Can't find SurveyEntity localisation[" + slab.localisation + "] found [" + (surveyEntity == null ? null : surveyEntity.getClass().getName())));
 
         }
     }
@@ -250,11 +260,11 @@ public class EventUpdate {
      */
     private void updateOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         if (slab.localisation == null || slab.localisation.isEmpty())
-            eventOperationResult.addLogEvents( JpaTool.updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext));
+            eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(event, slab.attributName, slab.attributValue, updateContext));
         else {
             BaseEntity baseEntity = localise(event, slab.localisation);
             if (baseEntity != null) {
-                eventOperationResult.addLogEvents( JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
+                eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
             } else {
                 eventOperationResult.addLogEvent(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
             }
@@ -262,13 +272,6 @@ public class EventUpdate {
         }
         event.touch();
     }
-
-  
-
-    
-    
-    
- 
 
     /**
      * Localise the BaseEntity according the localisation. Localisation is a string like "/tasklist/1"
@@ -315,7 +318,7 @@ public class EventUpdate {
                 else if (getObject == null) {
                     // time to add this object
 
-                    indexEntity = this.eventController.getEventService().add(nameEntity, (UserEntity) indexEntity);
+                    indexEntity = this.eventController.getEventService().add(nameEntity, (EventBaseEntity) indexEntity);
                     if (indexEntity == null)
                         return null;
                 }
@@ -328,5 +331,36 @@ public class EventUpdate {
         return indexEntity;
     }
 
-   
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Chat operation */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    /**
+     * Get the groupChat. The slab may not refer it : then, use the default one
+     * 
+     * @param event
+     * @param slab
+     * @return
+     */
+    public EventGroupChatEntity getGroupChat(EventEntity event, Slab slab) {
+        BaseEntity groupChatEntity = slab.localisation.length()==0 ? null : localise(event, slab.localisation);
+        if (groupChatEntity != null && groupChatEntity instanceof EventGroupChatEntity) {
+            return (EventGroupChatEntity) groupChatEntity;
+        }
+        // no special group chat are given, so we register this in the General one
+        List<EventGroupChatEntity> listGroupChatEntities = event.getGroupChatList();
+        if (listGroupChatEntities.size() == 0) {
+            groupChatEntity = new EventGroupChatEntity();
+            groupChatEntity.setName(EventGroupChatEntity.CST_DEFAULT_GROUP);
+            groupChatEntity = eventController.getEventService().addGroupChat(event, (EventGroupChatEntity) groupChatEntity);
+
+        } else {
+            groupChatEntity = listGroupChatEntities.get(0);
+        }
+        return (EventGroupChatEntity) groupChatEntity;
+    }
+
 }

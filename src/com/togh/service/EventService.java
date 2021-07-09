@@ -23,12 +23,14 @@ import org.springframework.stereotype.Service;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
+import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
+import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.EventShoppingListEntity;
 import com.togh.entity.EventSurveyAnswerEntity;
@@ -39,8 +41,11 @@ import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.entity.base.EventBaseEntity;
 import com.togh.entity.base.UserEntity;
+import com.togh.repository.EventChatRepository;
 import com.togh.repository.EventExpenseRepository;
+import com.togh.repository.EventGroupChatRepository;
 import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
 import com.togh.repository.EventShoppingListRepository;
@@ -103,6 +108,12 @@ public class EventService {
     @Autowired
     private EventSurveyAnswerRepository surveyAnswerRepository;
 
+    @Autowired
+    private EventGroupChatRepository eventGroupChatRepository;
+    
+    @Autowired
+    private EventChatRepository eventChatRepository;
+    
     @Autowired
     private ToghUserService toghUserService;
 
@@ -531,14 +542,40 @@ public class EventService {
 
     /* ******************************************************************************** */
     /*                                                                                  */
+    /* Chat operation*/
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    public EventGroupChatEntity addGroupChat(EventEntity eventEntity, EventGroupChatEntity groupChatEntity) {        
+        eventGroupChatRepository.save(groupChatEntity);
+        eventEntity.addGroupChat(groupChatEntity);
+        return groupChatEntity;
+    }
+
+    public EventChatEntity addChatInGroup(EventEntity eventEntity, EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity,int maxChatEntity) {        
+        eventChatRepository.save(chatEntity);
+        groupChatEntity.addChat(chatEntity, maxChatEntity);
+        return chatEntity;
+    }
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
     /* Add child */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    public BaseEntity add(String nameEntity, UserEntity parentEntity) {
-        if ("expense".equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
+    /**
+     * Entity is given by its name. Then, it is added to the parent, and saved.
+     * @param nameEntity
+     * @param parentEntity
+     * @return
+     */
+    
+    public BaseEntity add(String nameEntity, EventBaseEntity parentEntity) {
+        if (EventExpenseEntity.CST_ENTITY_NAME.equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
             EventExpenseEntity expense = new EventExpenseEntity();
             eventExpenseRepository.save(expense);
             parentEntity.setExpense(expense);

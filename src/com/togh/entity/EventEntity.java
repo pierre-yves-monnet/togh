@@ -48,9 +48,11 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "EVT")
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public @Data class EventEntity extends UserEntity {
-    
+
+    public static final String CST_JSONOUT_GROUPCHATLIST = "groupchatlist";
+
     private static final String CST_JSONOUT_PARTICIPANTS = "participants";
 
     private static final String CST_JSONOUT_STATUS_EVENT = "statusEvent";
@@ -71,12 +73,12 @@ public @Data class EventEntity extends UserEntity {
      * All verbe used to produce the JSON Output information
      */
     private static final String CST_JSONOUT_DATE_EVENT = "dateEvent";
-    
+
     public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
     public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
     public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
     public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
-    
+
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
 
@@ -86,19 +88,19 @@ public @Data class EventEntity extends UserEntity {
      */
     @Column(name = "datestartevent")
     private LocalDateTime dateStartEvent;
-    
+
     @Column(name = "dateendevent")
     private LocalDateTime dateEndEvent;
 
     /**
      * Date are store in UTC, and can be translated in any brower timezone.
-     * But when we publish the event (by Email), we have to translate the time in a time zone: 
+     * But when we publish the event (by Email), we have to translate the time in a time zone:
      * for example, when the event is created by John, California, email invitation to new user should be displayed in that time zone.
-     * When we send a email to an existing Togh user, we have it's prefered time zone. 
+     * When we send a email to an existing Togh user, we have it's prefered time zone.
      */
-    @Column(name = "eventtimezone", length=10)
+    @Column(name = "eventtimezone", length = 10)
     private String eventTimeZone;
-    
+
     public enum TypeEventEnum {
         OPEN, OPENCONF, LIMITED, SECRET
     }
@@ -141,29 +143,27 @@ public @Data class EventEntity extends UserEntity {
     @Enumerated(EnumType.STRING)
     private ScopeEnum scope;
 
-    
-    @Column(name = "geoaddress", length=300)
+    @Column(name = "geoaddress", length = 300)
     private String geoaddress;
 
     @Column(name = "geolat")
     private Double geolat;
 
-    
     @Column(name = "geolng")
     private Double geolng;
-    
+
     @Column(name = "geoinstructions", length = 400)
     private String geoinstructions;
 
-    
-   public enum SubscriptionEventEnum { FREE, PREMIUM, EXCELLENCE }
-    
-    @Column( name="subscriptionevent", length=10, nullable=false)
-    @Enumerated(EnumType.STRING)     
+    public enum SubscriptionEventEnum {
+        FREE, PREMIUM, EXCELLENCE
+    }
+
+    @Column(name = "subscriptionevent", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'FREE'")
     SubscriptionEventEnum subscriptionEvent;
 
-    
     public EventEntity(ToghUserEntity author, String name) {
         super(author, name);
         setTypeEvent(TypeEventEnum.LIMITED);
@@ -173,9 +173,6 @@ public @Data class EventEntity extends UserEntity {
 
     public EventEntity() {
     }
-
-
-    
 
     /**
      * getRealTimeUtc
@@ -194,11 +191,10 @@ public @Data class EventEntity extends UserEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
+    @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     private List<ParticipantEntity> participantList = new ArrayList<>();
 
-   
     /**
      * do not add a participant, which is a private information. So, don't take the risk to add accidentaly a participant from an another event
      * 
@@ -232,7 +228,7 @@ public @Data class EventEntity extends UserEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
+    @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("rownumber")
     private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
@@ -267,9 +263,9 @@ public @Data class EventEntity extends UserEntity {
     @Column(name = "tasklistshowdates")
     private Boolean taskListShowDates;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
+    @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventTaskEntity> taskList = new ArrayList<>();
@@ -278,7 +274,7 @@ public @Data class EventEntity extends UserEntity {
         taskList.add(onetask);
         return onetask;
     }
-   
+
     /**
      * Remove a task.
      * 
@@ -308,10 +304,9 @@ public @Data class EventEntity extends UserEntity {
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean shoppinglistShowExpenses;
 
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
+    @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventShoppingListEntity> shoppingList = new ArrayList<>();
@@ -336,8 +331,7 @@ public @Data class EventEntity extends UserEntity {
         }
         return false;
     }
-    
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Survey */
@@ -347,9 +341,9 @@ public @Data class EventEntity extends UserEntity {
     // @Column(name = "tasklistshowdates")
     //     private Boolean surveyListShowDates;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
+    @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventSurveyEntity> surveyList = new ArrayList<>();
@@ -359,7 +353,6 @@ public @Data class EventEntity extends UserEntity {
         return onesurvey;
     }
 
-   
     /**
      * Remove a task.
      * 
@@ -375,7 +368,30 @@ public @Data class EventEntity extends UserEntity {
         }
         return false;
     }
-    
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Chat */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventGroupChatEntity> groupChatList = new ArrayList<>();
+
+    public EventGroupChatEntity addGroupChat(EventGroupChatEntity groupChatEntity) {
+        groupChatList.add(groupChatEntity);
+        return groupChatEntity;
+    }
+
+    public EventChatEntity addChat(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity, int maxChatEntity) {
+        groupChatEntity.addChat(chatEntity, maxChatEntity);
+        return chatEntity;
+    }
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Serialization */
@@ -386,22 +402,22 @@ public @Data class EventEntity extends UserEntity {
     public Map<String, Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
 
-        resultMap.put( CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
-        resultMap.put( CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
-        resultMap.put( CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
-        resultMap.put( CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
-        resultMap.put( CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
-        resultMap.put( "description", description);
-        resultMap.put( CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
-        
-        resultMap.put( "tasklistshowdates",          taskListShowDates);
-        
-        resultMap.put( "itineraryshowmap",           itineraryShowMap);
-        resultMap.put( "itineraryshowdetails",       itineraryShowDetails);
-        resultMap.put( "itineraryshowexpenses",      itineraryShowExpenses);
+        resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
+        resultMap.put(CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
+        resultMap.put(CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
+        resultMap.put(CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
+        resultMap.put(CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
+        resultMap.put("description", description);
+        resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
 
-        resultMap.put( "shoppinglistshowdetails",    shoppingListShowDetails);
-        resultMap.put( "shoppinglistshowexpenses",   shoppinglistShowExpenses);
+        resultMap.put("tasklistshowdates", taskListShowDates);
+
+        resultMap.put("itineraryshowmap", itineraryShowMap);
+        resultMap.put("itineraryshowdetails", itineraryShowDetails);
+        resultMap.put("itineraryshowexpenses", itineraryShowExpenses);
+
+        resultMap.put("shoppinglistshowdetails", shoppingListShowDetails);
+        resultMap.put("shoppinglistshowexpenses", shoppinglistShowExpenses);
 
         if (contextAccess != ContextAccess.PUBLICACCESS) {
             resultMap.put(CST_JSONOUT_DATE_POLICY, datePolicy == null ? null : datePolicy.toString());
@@ -419,48 +435,63 @@ public @Data class EventEntity extends UserEntity {
                 listTasksMap.add(tasks.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_TASKLIST, listTasksMap);
-            
+
             // get task
             List<Map<String, Object>> listItineraryStepMap = new ArrayList<>();
             for (EventItineraryStepEntity itineraryStep : itineraryStepList) {
                 listItineraryStepMap.add(itineraryStep.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
-       
+
             // get Shoppinglist
             List<Map<String, Object>> listShoppinglistMap = new ArrayList<>();
             for (EventShoppingListEntity shoppingListStep : shoppingList) {
                 listShoppinglistMap.add(shoppingListStep.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
-            
+
             // get Surveylist
             List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
             for (EventSurveyEntity surveyStep : surveyList) {
                 listSurveylistMap.add(surveyStep.getMap(contextAccess, timezoneOffset));
             }
             resultMap.put(CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
-         
+
+            // get GroupChatList
+           
+            resultMap.put(CST_JSONOUT_GROUPCHATLIST, getGroupChatList(contextAccess, timezoneOffset));
+
         }
 
         return resultMap;
-
+    }
+    
+    /**
+     * Return the groupChatList. This information is important, order is important, so it is updated differently
+     * @param contextAccess
+     * @param timezoneOffset
+     * @return
+     */
+    public List<Map<String, Object>> getGroupChatList(ContextAccess contextAccess, Long timezoneOffset) {
+        List<Map<String, Object>> listGroupChatListMap = new ArrayList<>();
+        for (EventGroupChatEntity groupChat : groupChatList) {
+            listGroupChatListMap.add(groupChat.getMap(contextAccess, timezoneOffset));
+        }
+        return listGroupChatListMap;
+        
     }
 
-    
     public Map<String, Object> getHeaderMap(ContextAccess contextAccess, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
-        resultMap.put( CST_JSONOUT_NAME, getName());
-        resultMap.put( CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
-        resultMap.put( CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
-        resultMap.put( CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
-        resultMap.put( CST_JSONOUT_DATE_POLICY, datePolicy.toString());
-        resultMap.put( CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
-        resultMap.put( CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
-        resultMap.put( CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
+        resultMap.put(CST_JSONOUT_NAME, getName());
+        resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
+        resultMap.put(CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
+        resultMap.put(CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
+        resultMap.put(CST_JSONOUT_DATE_POLICY, datePolicy.toString());
+        resultMap.put(CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
+        resultMap.put(CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
+        resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
 
-
-        
         return resultMap;
     }
 

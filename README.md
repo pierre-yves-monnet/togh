@@ -570,13 +570,12 @@ CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	
 1. Sauvegarde Chat
-	
 9.	Close event automatically
 10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 
 
 12. Verifier : admintogh creation et login (admintogh d'un coté, et toghadmin@togh.com de l'autre et j'arrive plus a me connecter
-13. Verifier : quand un user se connecter, on recupere bien dans toghentity ses propres tips preference?
+13. Verifier : quand un user se connecte, on recupere bien dans toghentity ses propres tips preference?
 
 	
 		
@@ -613,10 +612,13 @@ V2
 ## bugs
 	
 
-Plus possible de choisir une date          
+Plus possible de choisir une date    
+Eventlist : afficher la date et les participants
+Deconnection : ca ne renvoi plus sur la page de login      
           
 
-          
+EventEntity.getMap : normaliser les constante ici avec les SLAB_OPERATION (une seule constante)
+EventSurvey : todo avec SlabRecord          
           
 
       

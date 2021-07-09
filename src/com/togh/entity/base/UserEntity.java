@@ -17,10 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 
@@ -76,15 +72,7 @@ public abstract class UserEntity extends BaseEntity {
 		this.accessdata = accessdata;
 	}
 	
-	/*
-	 * if the entioty accept expense, it has to override this tow method
-	*/
-	public boolean acceptExpense() {
-	    return false;
-	}
-    public void setExpense(EventExpenseEntity expense ) {
-        return;
-    }
+	
 	/**
 	 * 
 	 * @param levelInformation

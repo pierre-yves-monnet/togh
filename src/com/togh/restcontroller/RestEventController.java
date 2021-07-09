@@ -30,6 +30,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
@@ -252,6 +253,9 @@ public class RestEventController {
             listEntity.add( entity.getMap(contextAccess, timezoneOffset));
         }
         payload.put( RestJsonConstants.CST_CHILDENTITY, listEntity);
+
+        // send back all the Chat group at each update - too important to miss one.
+        payload.put( EventEntity.CST_JSONOUT_GROUPCHATLIST, event.getGroupChatList(contextAccess, timezoneOffset));
         payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
 
         payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
