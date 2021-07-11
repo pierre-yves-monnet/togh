@@ -17,20 +17,23 @@ class ToolService {
 		if (datesource instanceof Date) {
 			console.log("ToolService.getDateFromObject: this is a date, transform it to a string");			
 			let isoDateString = datesource.toISOString();
-			return isoDateString.slice(0, 10);
+			return isoDateString.slice(0, 19).concat("Z");
 		}
-		if (datesource.length>10)
-			return datesource.slice(0, 10);
-		return datesource;
+		if (datesource.length>19)
+			return datesource.slice(0, 19).concat("Z"); 
+		return datesource.concat("Z"); /* We should be at 19 exactly, so just need to add the Z */
 	}
 		
 
 	getDateListFromDate( dateone, datetwo ) {
-		console.log("ToolService.getDateListFromDates: "+JSON.stringify(dateone)+" isDate ?"+(dateone instanceof Date));
+		console.log("TITI ToolService.getDateListFromDates: "+JSON.stringify(dateone)+" isDate ?"+(dateone instanceof Date));
+		console.log("Type : "+typeof dateone);
 		var listDates = [];
-		listDates.push( dateone);
+		if (! dateone)
+			return listDates;
+		listDates.push(this.getIsoStringFromDate(dateone));
 		if (datetwo)
-			listDates.push( datetwo);
+			listDates.push(this.getIsoStringFromDate(datetwo));
 		return listDates;
 	}
 	
