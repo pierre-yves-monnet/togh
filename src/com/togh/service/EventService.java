@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.togh.engine.logevent.LogEvent;
@@ -53,6 +54,7 @@ import com.togh.repository.EventSurveyChoiceRepository;
 import com.togh.repository.EventSurveyRepository;
 import com.togh.repository.EventTaskRepository;
 import com.togh.service.SubscriptionService.LimitReach;
+import com.togh.service.ToghUserService.SearchUsersResult;
 import com.togh.service.event.EventController;
 
 /* ******************************************************************************** */
@@ -83,6 +85,7 @@ public class EventService {
 
     @Autowired
     SubscriptionService subscriptionService;
+    
     @Autowired
     private EventRepository eventRepository;
 
@@ -115,6 +118,9 @@ public class EventService {
     
     @Autowired
     private ToghUserService toghUserService;
+
+    @Autowired
+    private NotifyService notifyService;
 
     public static class EventOperationResult {
 
@@ -612,4 +618,55 @@ public class EventService {
         return loadEntityResult;
     }
 
+    
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Close old events                                                                 */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    
+    /**
+     * Close old events
+     */
+    public List<EventEntity>  closeOldEvents( boolean doTheOperation) {
+        LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
+
+        // modified last than 2 H? Keep it open.
+        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
+        timeGrace = timeGrace.minusMinutes(120);
+
+        List<EventEntity> listEventsToClose = eventRepository.findOldEvents(timeCheck, timeGrace,  StatusEventEnum.CLOSED, PageRequest.of(0,1000));
+        if (doTheOperation) {
+            for (EventEntity eventEntity : listEventsToClose) {
+                StatusEventEnum oldStatus = eventEntity.getStatusEvent();
+                eventEntity.setStatusEvent(StatusEventEnum.CLOSED);
+                eventRepository.save(eventEntity);
+                notifyService.notifyEventChangeStatus(eventEntity, oldStatus);
+            }
+        }
+        return listEventsToClose;
+    }
+    
+    
+    /**
+     * Close old events
+     */
+    public List<EventEntity> purgeOldEvents( boolean doTheOperation) {
+
+        // modified last than 2 H? Keep it open.
+        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
+        timeGrace = timeGrace.minusDays(30);
+
+        List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge( timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0,1000));
+        if (doTheOperation) {
+            for (EventEntity eventEntity : listEventsToClose) {
+                eventRepository.delete(eventEntity);
+                notifyService.notifyEventPurge(eventEntity);
+            }
+        }
+        return listEventsToClose;
+    }
 }

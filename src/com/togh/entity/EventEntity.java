@@ -34,6 +34,7 @@ import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -68,6 +69,8 @@ public @Data class EventEntity extends UserEntity {
     private static final String CST_JSONOUT_NAME = "name";
 
     private static final String CST_JSONOUT_SUBSCRIPTION_EVENT = "subscriptionEvent";
+    private static final String CST_JSONOUT_LISTPARTICIPANTS ="listParticipants";
+    
 
     /**
      * All verbe used to produce the JSON Output information
@@ -481,7 +484,14 @@ public @Data class EventEntity extends UserEntity {
         
     }
 
-    public Map<String, Object> getHeaderMap(ContextAccess contextAccess, Long timezoneOffset) {
+    public static class AdditionnalInformationEvent {
+        /**
+         * Participants will be added with a String
+         */
+        public boolean withParticipantsAsString=false;        
+    }
+    
+    public Map<String, Object> getHeaderMap(ContextAccess contextAccess, AdditionnalInformationEvent additionnalInformationEvent, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
         resultMap.put(CST_JSONOUT_NAME, getName());
         resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
@@ -491,7 +501,20 @@ public @Data class EventEntity extends UserEntity {
         resultMap.put(CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
         resultMap.put(CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
         resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
-
+        if (additionnalInformationEvent.withParticipantsAsString) {
+            // create the list of partipants
+            boolean firstPartipant=true;
+            StringBuilder sb = new StringBuilder();
+            for( ParticipantEntity participant : participantList) {
+                if (participant.getUser()==null)
+                    continue;
+                if (! firstPartipant)
+                    sb.append(", ");
+                firstPartipant=false;
+                sb.append(participant.getUser().getLabel());
+            }
+            resultMap.put(CST_JSONOUT_LISTPARTICIPANTS, sb.toString());     
+        }
         return resultMap;
     }
 

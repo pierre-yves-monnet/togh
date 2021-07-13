@@ -114,8 +114,8 @@ public @Data class ToghUserEntity extends BaseEntity {
         endUser.setPassword(password);
         endUser.setSource(sourceUser);
         LocalDateTime dateNow = LocalDateTime.now(ZoneOffset.UTC);
-        endUser.setDatecreation(dateNow);
-        endUser.setDatemodification(dateNow);
+        endUser.setDateCreation(dateNow);
+        endUser.setDateModification(dateNow);
         endUser.setPrivilegeUser(PrivilegeUserEnum.USER);
         endUser.setStatusUser(StatusUserEnum.ACTIF);
         endUser.setSubscriptionUser(SubscriptionUserEnum.FREE);
@@ -218,11 +218,16 @@ public @Data class ToghUserEntity extends BaseEntity {
      * @return
      */
     public String getLabel() {
-        if (firstName != null || lastName != null)
+        if ( isExist(firstName) && isExist(lastName))
             return (firstName != null ? firstName + " " : "") + (lastName != null ? lastName : "");
         return email;
     }
 
+    private boolean isExist(String value) {
+        if (value!=null && value.trim().length()>0)
+            return true;
+        return false;
+    }
     // define the user access :
     // SEARCH : the user show up in a public search
     // PUBLICACCESS : access is from a public event : event is public or limited, but the user who want to access is only an observer, or not yet confirmed. So, show only what user want to show to the public

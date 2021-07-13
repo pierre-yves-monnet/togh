@@ -29,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventEntity.AdditionnalInformationEvent;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
@@ -61,6 +62,7 @@ public class RestEventController {
     @GetMapping("/api/event/list")
       public Map<String, Object> events(@RequestParam( RestJsonConstants.CST_PARAM_FILTER_EVENTS ) String filterEvents,
               @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+              @RequestParam( name="withParticipants", required = false) Boolean withParticipants,
               @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
 
@@ -68,8 +70,11 @@ public class RestEventController {
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
+        AdditionnalInformationEvent additionnalInformation = new AdditionnalInformationEvent();
+        additionnalInformation.withParticipantsAsString=withParticipants;
+        
         Map<String, Object> payload = new HashMap<>();
-       completePayloadListEvents(payload, toghUser, filterEvents,timezoneOffset);
+       completePayloadListEvents(payload, toghUser, filterEvents, additionnalInformation, timezoneOffset);       
 
         return payload;
 
@@ -130,8 +135,8 @@ public class RestEventController {
         if (eventName ==null || eventName.trim().length()==0)
             eventName="New event";
         EventOperationResult eventOperationResult = factoryService.getEventService().createEvent(toghUser, eventName );
-        if (Boolean.TRUE.equals(getList)) {
-            completePayloadListEvents(payload, toghUser, filterEvents, timezoneOffset);
+        if (Boolean.TRUE.equals(getList)) {            
+            completePayloadListEvents(payload, toghUser, filterEvents, new AdditionnalInformationEvent(), timezoneOffset);
         }
         payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
         payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId() );
@@ -263,13 +268,17 @@ public class RestEventController {
         return payload;
     }
     
+   
     /**
      * Get the list of events and populate the payload with it
      * @param payload
      * @param toghUser
      * @param filterEvents
      */
-    private void completePayloadListEvents(Map<String,Object> payload, ToghUserEntity toghUser, String filterEvents,Long timezoneOffset) { 
+    private void completePayloadListEvents(Map<String,Object> payload, ToghUserEntity toghUser, 
+            String filterEvents,
+            AdditionnalInformationEvent additionnalInformationEvent,
+            Long timezoneOffset) { 
         List<Map<String,Object>> listEventsMap= new ArrayList<>();
         EventResult eventResult = factoryService.getEventService().getEvents(toghUser, filterEvents);
     if (LogEventFactory.isError( eventResult.listLogEvent)) {
@@ -277,7 +286,7 @@ public class RestEventController {
     } else {
         for (EventEntity event : eventResult.listEvents) {
             EventController eventController = new EventController( event, factoryService);
-            listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser), timezoneOffset));
+            listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser), additionnalInformationEvent, timezoneOffset));
         }
         payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);
     }

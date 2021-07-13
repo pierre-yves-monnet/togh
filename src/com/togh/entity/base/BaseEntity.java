@@ -35,15 +35,15 @@ public abstract @Data class BaseEntity {
     
     @CreatedDate
     @Column(name="datecreation", nullable = false)    
-    private LocalDateTime datecreation =LocalDateTime.now(ZoneOffset.UTC);
+    private LocalDateTime dateCreation =LocalDateTime.now(ZoneOffset.UTC);
 
     @LastModifiedDate
     @Column(name="datemodification", nullable = false)    
-    private LocalDateTime datemodification = LocalDateTime.now(ZoneOffset.UTC);
+    private LocalDateTime dateModification = LocalDateTime.now(ZoneOffset.UTC);
          
     public BaseEntity( String name ) {
         this.name= name;
-        setDatecreation( LocalDateTime.now(ZoneOffset.UTC));
+        setDateCreation( LocalDateTime.now(ZoneOffset.UTC));
 
     }
     public BaseEntity() {
@@ -95,7 +95,7 @@ public abstract @Data class BaseEntity {
 	}
 	
 	public void touch() {
-	   this.datemodification = LocalDateTime.now(ZoneOffset.UTC);
+	   this.dateModification = LocalDateTime.now(ZoneOffset.UTC);
 	}
     
 	  /**

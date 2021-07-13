@@ -21,6 +21,7 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.service.TranslatorService.Sentence;
 import com.togh.service.event.EventController;
@@ -140,6 +141,32 @@ public class NotifyService {
         return sendEmail(toghUserEntity.getEmail(), subject, st.toString());
     }
 
+    
+    /**
+     * 
+     * A status of an event change
+     * Some person may want to be notify?
+     * @param eventEntity
+     * @param oldStatus status before the change
+     * 
+     */
+    public NotificationStatus notifyEventChangeStatus(@Nonnull EventEntity eventEntity, StatusEventEnum oldStatus) {
+        return new NotificationStatus();
+    }
+        
+    /**
+     * 
+     * Anevent is purged
+     * Some person may want to be notify?
+     * @param eventEntity
+     * @param oldStatus status before the change
+     * 
+     */
+    public NotificationStatus notifyEventPurge(@Nonnull EventEntity eventEntity) {
+        return new NotificationStatus();
+    }
+        
+    
     private String getHttpLink(String defaultHttp) {
         return apiKeyService.getHttpToghServer(defaultHttp); // "http://localhost:7080/togh";
     }

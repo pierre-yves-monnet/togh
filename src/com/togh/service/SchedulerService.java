@@ -23,6 +23,17 @@ public class SchedulerService {
     public void scheduleDisconnectUser() {
       loginService.disconnectInactiveUsers();
     }
+
+    @Autowired
+    EventService eventService; 
+    // 3600000 : 1 H
+    // 60000 : 1 mn
+    @Scheduled(fixedDelay = 60000)
+    public void scheduleCloseEvents() {
+      eventService.closeOldEvents( true );
+      eventService.purgeOldEvents( true );
+    }
+
 }
 
 
