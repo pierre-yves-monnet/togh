@@ -54,7 +54,6 @@ import com.togh.repository.EventSurveyChoiceRepository;
 import com.togh.repository.EventSurveyRepository;
 import com.togh.repository.EventTaskRepository;
 import com.togh.service.SubscriptionService.LimitReach;
-import com.togh.service.ToghUserService.SearchUsersResult;
 import com.togh.service.event.EventController;
 
 /* ******************************************************************************** */
