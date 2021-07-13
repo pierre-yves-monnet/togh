@@ -129,9 +129,7 @@ class Event extends React.Component {
 					<div>
 						<table><tr>
 							<td colspan="2">
-							 
-
-								Value={this.state.event.dateEvent}, from tool={toolService.getDateListFromDate(this.state.event.dateEvent,null)}
+								
 								<DatePicker datePickerType="single"
 									onChange={(dates) => {
 										console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
@@ -180,7 +178,6 @@ class Event extends React.Component {
 						<DatePicker datePickerType="range"
 							onChange={(dates) => {
 								if (dates.length > 1) {
-									debugger;
 									this.setAttribut("dateStartEvent", dates[0]);
 									this.setAttribut("dateEndEvent", dates[1]);
 								}

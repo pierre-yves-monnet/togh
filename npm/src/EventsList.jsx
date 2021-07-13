@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
 
 import { PlusCircle,ArrowRepeat,ClipboardData,PersonCircle } from 'react-bootstrap-icons';
 
@@ -60,22 +60,40 @@ class EventsList extends React.Component {
 	// -------------------------------------------- render
 	render() {
 		console.log("EventList.render listEvents=" + JSON.stringify(this.state.events));
+		const intl = this.props.intl;
+
 		// no map read, return
 		var listEventsHtml = [];
-		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventList.AccessThisEvent" defaultMessage="Access this event" />}></button>
+		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventsList.AccessThisEvent" defaultMessage="Access this event" />}></button>
+		
 		if (this.state.events) {
 			listEventsHtml = this.state.events.map((event,index) =>
 				<tr onClick={() => this.props.homeSelectEvent(event.id)} 
 				 key={index}>
 					<td >
-						
-							<img src="img/toghEvent.jpg" style={{ width: 60 }}     />
+						<img src="img/toghEvent.jpg" style={{ width: 60 }}     />
 					</td>
 					<td style={{verticalAlign: "middle"}}>
 						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
 					</td>
 					<td style={{verticalAlign: "middle"}}>{event.name}</td>
-					<td style={{verticalAlign: "middle"}}>{event.dateevent}</td>
+					<td style={{verticalAlign: "middle"}}>
+						{event.datePolicy === 'ONEDATE' && event.dateEvent && <div><FormattedDate value={new Date(event.dateEvent)}/></div>}
+						
+						{ event.datePolicy === 'PERIOD' && event.dateStartEvent && 
+							<FormattedDate value={new Date(event.dateStartEvent)} />
+						}
+						{ event.datePolicy === 'PERIOD' && <span>
+								&nbsp;
+								<FormattedMessage id="EventsList.DateFromTo" defaultMessage="to"/>
+								&nbsp;
+								</span>
+						}
+						{ event.datePolicy === 'PERIOD' && event.dateEndEvent && 
+							<FormattedDate value={new Date(event.dateEndEvent)} />
+						}
+					</td>
+					<td  style={{verticalAlign: "middle",fontSize: "12px"}}>{event.listParticipants}</td>
 				</tr>
 			);
 		}
@@ -85,7 +103,7 @@ class EventsList extends React.Component {
 					<div class="col"><h1>Events</h1></div>
 					<div class="col"><div style={{ float: "right" }}>
 						<button class="btn btn-info btn-lg" onClick={this.createEvent}>
-							<PlusCircle/> &nbsp;<FormattedMessage id="EventList.CreateAnEvent" defaultMessage="Create an Event"/></button>
+							<PlusCircle/> &nbsp;<FormattedMessage id="EventsList.CreateAnEvent" defaultMessage="Create an Event"/></button>
 						<br/>
 						<div style={{color: "red"}}> {this.state.message}</div>
 					</div>
@@ -94,9 +112,9 @@ class EventsList extends React.Component {
 				<div class="row">
 					<div class="col-sm">
 						<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}><ArrowRepeat/><FormattedMessage id="EventList.Refresh" defaultMessage="Refresh"/></button>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><ClipboardData/> <FormattedMessage id="EventList.AllEvents" defaultMessage="All events"/></button>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><PersonCircle/> <FormattedMessage id="EventList.MyEvents" defaultMessage="My events"/></button>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}><ArrowRepeat/><FormattedMessage id="EventsList.Refresh" defaultMessage="Refresh"/></button>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><ClipboardData/> <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/></button>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><PersonCircle/> <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/></button>
 						</div>
 					</div>
 				</div>
@@ -113,10 +131,10 @@ class EventsList extends React.Component {
 							borderBottomColor: "currentColor"}}>
 						<thead>
 						<tr >
-							<th ></th>
-							<th colSpan="2" style={{padding: ".5rem .5rem"}}><FormattedMessage id="EventList.Name" defaultMessage="Name"/></th>
-							<th><FormattedMessage id="EventList.Dae" defaultMessage="Date"/></th>
-							<th><FormattedMessage id="EventList.Participants" defaultMessage="Participants"/></th>
+							<th colSpan="2"></th>
+							<th style={{padding: ".5rem .5rem"}}><FormattedMessage id="EventsList.Name" defaultMessage="Name"/></th>
+							<th><FormattedMessage id="EventsList.Date" defaultMessage="Date"/></th>
+							<th><FormattedMessage id="EventsList.Participants" defaultMessage="Participants"/></th>
 						</tr>
 						</thead>
 						{listEventsHtml}
@@ -171,7 +189,7 @@ class EventsList extends React.Component {
 		console.log("EventsList.refreshListEvents http[event/list?filterEvents=" + this.state.filterEvents + "]");
 		this.setState({ events: [] });
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.getJson('/api/event/list?filterEvents=' + this.state.filterEvents, this, this.refreshListEventsCallback );
+		restCallService.getJson('/api/event/list?withParticipants=true&filterEvents=' + this.state.filterEvents, this, this.refreshListEventsCallback );
 	}
 	
 	refreshListEventsCallback( httpPayload) {
