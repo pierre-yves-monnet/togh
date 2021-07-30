@@ -48,6 +48,9 @@ public class NotifyService {
 
     @Autowired
     private FactoryService factoryService;
+    
+    @Autowired
+    private EventFactoryRepository factoryRepository;
 
     @Autowired
     private TranslatorService translatorService;
@@ -119,7 +122,7 @@ public class NotifyService {
         
         st.append(String.format( translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang), invitedBy.getLabel()));
 
-        EventController eventController = EventController.getInstance(event, factoryService);
+        EventController eventController = EventController.getInstance(event, factoryService,factoryRepository);
         EventPresentationAttribut eventPresentationAttribut = new EventPresentationAttribut();
         eventPresentationAttribut.bannerAction = "<a href=\"" + getHttpLink(HTTP_DEFAULT_HOST_TOGH)
             + "?action=" + (newUser? "invitedNewUser":"invitedUser")

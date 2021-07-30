@@ -48,8 +48,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventSurveyEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_CHOICELIST = "choicelist";
-    public static final String CST_SLABOPERATION_ANSWERLIST = "answerlist";
+    public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
+
 
     public enum SurveyStatusEnum {
         INPREPAR, OPEN,CLOSE
@@ -98,14 +98,14 @@ public @Data class EventSurveyEntity extends UserEntity {
             for (EventSurveyChoiceEntity choice : choicelist) {
                 listChoiceMap.add(choice.getMap(contextAccess, timezoneOffset));
             }
-        resultMap.put( CST_SLABOPERATION_CHOICELIST, listChoiceMap);
+        resultMap.put(EventSurveyChoiceEntity.CST_SLABOPERATION_CHOICELIST, listChoiceMap);
         
         List<Map<String, Object>> listAnswerMap = new ArrayList<>();
         if (answerlist!=null)
             for (EventSurveyAnswerEntity answer : answerlist) {
                 listAnswerMap.add(answer.getMap(contextAccess, timezoneOffset));
             }
-        resultMap.put( CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
+        resultMap.put( EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
 
       
         return resultMap;

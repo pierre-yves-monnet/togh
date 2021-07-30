@@ -42,6 +42,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventItineraryStepEntity extends EventBaseEntity {
 
+    public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
+
     public enum CategoryEnum {
         POI,BEGIN,END,SHOPPING,AIRPORT,BUS,TRAIN,BOAT,NIGHT,VISIT,RESTAURANT,ENTERTAINMENT
     }

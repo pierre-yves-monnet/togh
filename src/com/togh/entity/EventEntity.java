@@ -34,7 +34,6 @@ import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -52,7 +51,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public @Data class EventEntity extends UserEntity {
 
-    public static final String CST_JSONOUT_GROUPCHATLIST = "groupchatlist";
 
     private static final String CST_JSONOUT_PARTICIPANTS = "participants";
 
@@ -69,7 +67,7 @@ public @Data class EventEntity extends UserEntity {
     private static final String CST_JSONOUT_NAME = "name";
 
     private static final String CST_JSONOUT_SUBSCRIPTION_EVENT = "subscriptionEvent";
-    private static final String CST_JSONOUT_LISTPARTICIPANTS ="listParticipants";
+    private static final String CST_JSONOUT_LISTSYNTHETICPARTICIPANTS ="listParticipants";
     
 
     /**
@@ -77,10 +75,6 @@ public @Data class EventEntity extends UserEntity {
      */
     private static final String CST_JSONOUT_DATE_EVENT = "dateEvent";
 
-    public static final String CST_SLABOPERATION_ITINERARYSTEPLIST = "itinerarysteplist";
-    public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
-    public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
-    public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
 
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
@@ -389,9 +383,18 @@ public @Data class EventEntity extends UserEntity {
         groupChatList.add(groupChatEntity);
         return groupChatEntity;
     }
-
+    public boolean removeGroupChat(EventGroupChatEntity groupChatEntity) {
+        for (EventGroupChatEntity groupChatIterator : groupChatList) {
+            if (groupChatIterator.getId().equals(groupChatEntity.getId())) {
+                groupChatList.remove(groupChatIterator);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public EventChatEntity addChat(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity, int maxChatEntity) {
-        groupChatEntity.addChat(chatEntity, maxChatEntity);
+        groupChatEntity.addChat(chatEntity);
         return chatEntity;
     }
 
@@ -437,32 +440,32 @@ public @Data class EventEntity extends UserEntity {
             for (EventTaskEntity tasks : taskList) {
                 listTasksMap.add(tasks.getMap(contextAccess, timezoneOffset));
             }
-            resultMap.put(CST_SLABOPERATION_TASKLIST, listTasksMap);
+            resultMap.put(EventTaskEntity.CST_SLABOPERATION_TASKLIST, listTasksMap);
 
             // get task
             List<Map<String, Object>> listItineraryStepMap = new ArrayList<>();
             for (EventItineraryStepEntity itineraryStep : itineraryStepList) {
                 listItineraryStepMap.add(itineraryStep.getMap(contextAccess, timezoneOffset));
             }
-            resultMap.put(CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
+            resultMap.put(EventItineraryStepEntity.CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
 
             // get Shoppinglist
             List<Map<String, Object>> listShoppinglistMap = new ArrayList<>();
             for (EventShoppingListEntity shoppingListStep : shoppingList) {
                 listShoppinglistMap.add(shoppingListStep.getMap(contextAccess, timezoneOffset));
             }
-            resultMap.put(CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
+            resultMap.put(EventShoppingListEntity.CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
 
             // get Surveylist
             List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
             for (EventSurveyEntity surveyStep : surveyList) {
                 listSurveylistMap.add(surveyStep.getMap(contextAccess, timezoneOffset));
             }
-            resultMap.put(CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
+            resultMap.put(EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
 
             // get GroupChatList
            
-            resultMap.put(CST_JSONOUT_GROUPCHATLIST, getGroupChatList(contextAccess, timezoneOffset));
+            resultMap.put(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, getGroupChatList(contextAccess, timezoneOffset));
 
         }
 
@@ -513,7 +516,7 @@ public @Data class EventEntity extends UserEntity {
                 firstPartipant=false;
                 sb.append(participant.getUser().getLabel());
             }
-            resultMap.put(CST_JSONOUT_LISTPARTICIPANTS, sb.toString());     
+            resultMap.put(CST_JSONOUT_LISTSYNTHETICPARTICIPANTS, sb.toString());     
         }
         return resultMap;
     }

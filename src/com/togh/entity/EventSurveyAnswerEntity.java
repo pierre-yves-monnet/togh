@@ -45,6 +45,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventSurveyAnswerEntity extends UserEntity {
 
+    
+    public static final String CST_SLABOPERATION_ANSWERLIST = "answerlist";
+
     // User attached to this task (maybe an external user, why not ?
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "whoid")

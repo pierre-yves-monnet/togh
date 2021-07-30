@@ -176,15 +176,27 @@ public class LogEvent {
         return (level == Level.APPLICATIONERROR || level == Level.CRITICAL || level == Level.ERROR);
     }
 
+    public String getSignature(boolean withParameter) {
+        return getPackageName()+"."+getNumber()+":"+(withParameter? getParameters():"");
+    }
+    public String getSignatureParameter() {
+        return getSignature(true);
+    }
+    public String getSignatureKey() {
+        return getSignature(false);
+    }
     /**
      * isSame
      * Compare the new event with this one. They are identical when the number / package / parameters are identical.
      */
     public boolean isIdentical(final LogEvent compareEvent) {
-        return (compareEvent.getNumber() == getNumber()
-                && compareEvent.getPackageName().equals(getPackageName())
-                && compareEvent.getParameters().equals(getParameters()));
+        return compareEvent.getSignatureParameter().equals(getSignatureParameter());
+//        return (compareEvent.getNumber() == getNumber()
+//                && compareEvent.getPackageName().equals(getPackageName())
+//                && compareEvent.getParameters().equals(getParameters()));
     }
+
+   
 
     /**
      * sameEvent compare the number and the packagename, not the parameters.
@@ -193,8 +205,7 @@ public class LogEvent {
      * @return
      */
     public boolean isSameEvent(final LogEvent compareEvent) {
-        return (compareEvent.getNumber() == getNumber()
-                && compareEvent.getPackageName().equals(getPackageName()));
+        return compareEvent.getSignatureKey().equals(getSignatureKey());
     }
 
     /**

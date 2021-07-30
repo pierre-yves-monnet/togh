@@ -87,10 +87,14 @@ public class JpaTool {
                     value = EngineTool.stringToDateTime(attributValue.toString());
                     
                 } else if (returnType.equals(LocalDate.class)) {
-                    long timezoneOffset = updateContext.timezoneOffset;
-                    if (baseEntity.isAbsoluteLocalDate(attributName))
-                        timezoneOffset = 0;
-                    value = EngineTool.stringToDate(attributValue.toString(), timezoneOffset);
+                    if (attributValue instanceof LocalDate) {
+                        value=(LocalDate) attributValue;
+                    } else {
+                        long timezoneOffset = updateContext.timezoneOffset;
+                        if (baseEntity.isAbsoluteLocalDate(attributName))
+                            timezoneOffset = 0;
+                        value = EngineTool.stringToDate(attributValue.toString(), timezoneOffset); 
+                    }
 
                 } else if (returnType.equals(String.class)) {
                     value = attributValue.toString();

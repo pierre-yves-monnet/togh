@@ -51,8 +51,9 @@ import lombok.EqualsAndHashCode;
 
 
 public class EventGroupChatEntity  extends UserEntity {
-    
-    public static final String CST_SLABOPERATION_CHATGROUP = "chatgroup";
+
+    public static final String CST_SLABOPERATION_GROUPCHATLIST = "groupchatlist";
+
     public static final String CST_DEFAULT_GROUP = "general";
 
     // name is part of the baseEntity
@@ -71,16 +72,16 @@ public class EventGroupChatEntity  extends UserEntity {
     public List<EventChatEntity> getListChat() {
         return listChat;
     }
-    
+    public void removeChat( int position) {
+         listChat.remove(position);
+    }
     /**
-     * Add a chat. The size is limited; if a new chat is added and go over the limit, then the first item is removed.
+     * Add a chat. 
      * @param chatEntity
      * @param maxChatEntity
      */
-    public void addChat( EventChatEntity chatEntity, int maxChatEntity) {
+    public void addChat( EventChatEntity chatEntity) {
         listChat.add( chatEntity);
-        if (listChat.size()>maxChatEntity)
-            listChat.remove(0);
     }
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example

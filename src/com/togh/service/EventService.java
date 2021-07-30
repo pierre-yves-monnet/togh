@@ -14,7 +14,6 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,43 +23,33 @@ import org.springframework.stereotype.Service;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
-import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
-import com.togh.entity.EventGroupChatEntity;
-import com.togh.entity.EventItineraryStepEntity;
-import com.togh.entity.EventShoppingListEntity;
-import com.togh.entity.EventSurveyAnswerEntity;
-import com.togh.entity.EventSurveyChoiceEntity;
-import com.togh.entity.EventSurveyEntity;
-import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
+import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
-import com.togh.repository.EventChatRepository;
 import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventGroupChatRepository;
 import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
 import com.togh.repository.EventShoppingListRepository;
-import com.togh.repository.EventSurveyAnswerRepository;
-import com.togh.repository.EventSurveyChoiceRepository;
 import com.togh.repository.EventSurveyRepository;
-import com.togh.repository.EventTaskRepository;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventController;
+import com.togh.service.event.EventUpdate.Slab;
 
 /* ******************************************************************************** */
 /*                                                                                  */
 /* EventService, access and manipulate event */
 /*                                                                                  */
-/* The eventService delegate operation to the com.togh.event.EventController */
+/* The eventService delegate operations to the com.togh.event.EventController */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -83,38 +72,20 @@ public class EventService {
     FactoryService factoryService;
 
     @Autowired
+    EventFactoryRepository factoryRepository;
+
+    @Autowired
     SubscriptionService subscriptionService;
-    
+
     @Autowired
     private EventRepository eventRepository;
 
-    @Autowired
-    private EventItineraryStepRepository eventItineraryStepRepository;
-
-    @Autowired
-    private EventTaskRepository eventTaskRepository;
-
-    @Autowired
-    private EventShoppingListRepository eventShoppingListRepository;
-
+   
     @Autowired
     private EventExpenseRepository eventExpenseRepository;
 
-    @Autowired
-    private EventSurveyRepository surveyRepository;
+ 
 
-    @Autowired
-    private EventSurveyChoiceRepository surveyChoiceRepository;
-
-    @Autowired
-    private EventSurveyAnswerRepository surveyAnswerRepository;
-
-    @Autowired
-    private EventGroupChatRepository eventGroupChatRepository;
-    
-    @Autowired
-    private EventChatRepository eventChatRepository;
-    
     @Autowired
     private ToghUserService toghUserService;
 
@@ -128,6 +99,9 @@ public class EventService {
         public List<LogEvent> listLogEvents = new ArrayList<>();
         public List<BaseEntity> listChildEntity = new ArrayList<>();
 
+        public boolean reachTheLimit=false;
+        
+        
         // in case of Remove, entity are deleted but then we send back the entityId
         public List<Long> listChildEntityId = new ArrayList<>();
 
@@ -200,7 +174,7 @@ public class EventService {
                 eventEntity.setSubscriptionEvent(SubscriptionEventEnum.FREE);
         }
 
-        EventController eventController = new EventController(eventEntity, factoryService);
+        EventController eventController = getEventController(eventEntity);
 
         // let's the conductor create the participant and all needed information
         eventController.completeConsistant();
@@ -219,24 +193,23 @@ public class EventService {
         public FactoryService factoryService;
     }
 
+    
     /**
-     * Update an event
-     * 
+     * Update event: update attribut, create new item, delete item. All operations on event are done via the Slab Mechanism, which is a Updater design
      * @param eventEntity
      * @param listSlab
      * @param updateContext
      * @return
      */
-    public EventOperationResult updateEvent(EventEntity eventEntity, List<Map<String, Object>> listSlab, UpdateContext updateContext) {
-
-        EventController eventConductor = new EventController(eventEntity, factoryService);
-        if (!eventConductor.isAccess(updateContext.toghUser)) {
+    public EventOperationResult updateEvent(EventEntity eventEntity, List<Slab> listSlab, UpdateContext updateContext) {
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isAccess(updateContext.toghUser)) {
             EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
             eventOperationResult.addLogEvent(eventAccessError);
             return eventOperationResult;
         }
 
-        EventOperationResult eventOperationResult = eventConductor.update(listSlab, updateContext);
+        EventOperationResult eventOperationResult = eventController.update(listSlab, updateContext);
 
         try {
             eventRepository.save(eventEntity);
@@ -246,7 +219,6 @@ public class EventService {
         eventOperationResult.eventEntity = eventEntity;
         return eventOperationResult;
     }
-
     /**
      * a User access an event: do all need information (notification, etc...)
      * 
@@ -255,11 +227,10 @@ public class EventService {
     public EventOperationResult accessByUser(EventEntity eventEntity, ToghUserEntity toghUserEntity) {
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
 
-        EventController eventControler = EventController.getInstance(eventEntity, factoryService);
-        boolean isModified = eventControler.accessByUser(toghUserEntity);
+        EventController eventController = getEventController(eventEntity);
+        boolean isModified = eventController.accessByUser(toghUserEntity);
         if (isModified) {
             try {
-
                 eventRepository.save(eventEntity);
             } catch (Exception e) {
                 eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
@@ -268,8 +239,6 @@ public class EventService {
         return eventOperationResult;
     }
 
-    
-    
     public class EventResult {
 
         public List<EventEntity> listEvents;
@@ -278,6 +247,7 @@ public class EventService {
 
     /**
      * Get Events
+     * 
      * @param toghUserEntity
      * @param filterEvents
      * @return
@@ -300,15 +270,15 @@ public class EventService {
     public EventEntity getEventById(Long eventId) {
         if (eventId == null)
             return null;
-        EventEntity event = eventRepository.findByEventId(eventId);
-        if (event == null)
+        EventEntity eventEntity = eventRepository.findByEventId(eventId);
+        if (eventEntity == null)
             return null;
-        EventController eventConductor = new EventController(event, factoryService);
+        EventController eventController = getEventController(eventEntity);
 
         // check consistant now
-        eventConductor.completeConsistant();
+        eventController.completeConsistant();
 
-        return event;
+        return eventEntity;
     }
 
     /**
@@ -317,21 +287,27 @@ public class EventService {
      * @return
      */
     public EventEntity getAllowedEventById(ToghUserEntity toghUserEntity, long eventId) {
-        EventEntity event = getEventById(eventId);
-        if (event == null)
+        EventEntity eventEntity = getEventById(eventId);
+        if (eventEntity == null)
             return null;
-        EventController eventConductor = new EventController(event, factoryService);
-        if (!eventConductor.isAccess(toghUserEntity))
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isAccess(toghUserEntity))
             return null;
-        return event;
+        return eventEntity;
 
     }
 
-    public Map<String,Object> getMap( EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset ) {
-        EventController eventControler = new EventController(eventEntity, factoryService);
-        return eventEntity.getMap( eventControler.getTypeAccess(toghUserEntity), timezoneOffset);
-    }
     
+    public ContextAccess getContextAccess(EventEntity eventEntity, ToghUserEntity toghUser ) {
+        return EventController.getInstance( eventEntity, factoryService, factoryRepository).getTypeAccess(toghUser);
+    }
+
+    
+    public Map<String, Object> getMap( EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset) {
+        EventController eventController = getEventController(eventEntity);
+        return eventEntity.getMap(eventController.getTypeAccess(toghUserEntity), timezoneOffset);
+    }
+
     /**
      * invitation
      */
@@ -351,15 +327,15 @@ public class EventService {
 
     public InvitationResult invite(EventEntity eventEntity, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
 
-        EventController eventControler = new EventController(eventEntity, factoryService);
-        if (!eventControler.isOrganizer(invitedByUser)) {
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isOrganizer(invitedByUser)) {
             InvitationResult invitationResult = new InvitationResult();
             invitationResult.status = InvitationStatus.NOTAUTHORIZED;
             return invitationResult;
         }
 
         // this operation is delegated to the evenController
-        InvitationResult invitationResult = eventControler.invite(eventEntity, invitedByUser, listUsersId, userInvitedEmail, role, message);
+        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByUser, listUsersId, userInvitedEmail, role, message);
         try {
             eventRepository.save(eventEntity);
         } catch (Exception e) {
@@ -382,12 +358,13 @@ public class EventService {
      * 
      * @param eventEntity
      * @return
-     */
-    public EventItineraryStepEntity addItineraryStep(EventEntity eventEntity, EventItineraryStepEntity itineraryStep) {
-        eventItineraryStepRepository.save(itineraryStep);
-        eventEntity.addItineraryStep(itineraryStep);
-        return itineraryStep;
-    }
+//     */
+//    public EventItineraryStepEntity addItineraryStep(EventEntity eventEntity, EventItineraryStepEntity itineraryStep) {
+//        eventItineraryStepRepository.save(itineraryStep);
+//        eventEntity.addItineraryStep(itineraryStep);
+//        return itineraryStep;
+//
+//    }
 
     /**
      * removeItineraryStep
@@ -396,18 +373,18 @@ public class EventService {
      * @param taskId
      * @return
      */
-    public List<LogEvent> removeItineraryStep(EventEntity eventEntity, Long taskId) {
-        List<LogEvent> listLogEvent = new ArrayList<>();
-        Optional<EventItineraryStepEntity> child = eventItineraryStepRepository.findById(taskId);
-        if (child.isPresent()) {
-            eventItineraryStepRepository.delete(child.get());
-            eventEntity.removeItineraryStep(child.get());
-        } else {
-            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find itineraryStep " + taskId));
-        }
-
-        return listLogEvent;
-    }
+//    public List<LogEvent> removeItineraryStep(EventEntity eventEntity, Long taskId) {
+//        List<LogEvent> listLogEvent = new ArrayList<>();
+//        Optional<EventItineraryStepEntity> child = eventItineraryStepRepository.findById(taskId);
+//        if (child.isPresent()) {
+//            eventItineraryStepRepository.delete(child.get());
+//            eventEntity.removeItineraryStep(child.get());
+//        } else {
+//            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find itineraryStep " + taskId));
+//        }
+//
+//        return listLogEvent;
+//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -416,11 +393,11 @@ public class EventService {
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public EventShoppingListEntity addShoppingList(EventEntity eventEntity, EventShoppingListEntity shoppingListEntity) {
-        eventShoppingListRepository.save(shoppingListEntity);
-        eventEntity.addShoppingList(shoppingListEntity);
-        return shoppingListEntity;
-    }
+//    public EventShoppingListEntity addShoppingList(EventEntity eventEntity, EventShoppingListEntity shoppingListEntity) {
+//        eventShoppingListRepository.save(shoppingListEntity);
+//        eventEntity.addShoppingList(shoppingListEntity);
+//        return shoppingListEntity;
+//    }
 
     /**
      * RemoveShoppingList
@@ -429,17 +406,18 @@ public class EventService {
      * @param shoppingListId
      * @return
      */
-    public List<LogEvent> removeShoppingList(EventEntity eventEntity, Long shoppingListId) {
-        List<LogEvent> listLogEvent = new ArrayList<>();
-        Optional<EventShoppingListEntity> child = eventShoppingListRepository.findById(shoppingListId);
-        if (child.isPresent()) {
-            eventShoppingListRepository.delete(child.get());
-            eventEntity.removeShoppingList(child.get());
-        } else {
-            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find ShoppingId " + shoppingListId));
-        }
-        return listLogEvent;
-    }
+//    public List<LogEvent> removeShoppingList(EventEntity eventEntity, Long shoppingListId) {
+//        List<LogEvent> listLogEvent = new ArrayList<>();
+//        Optional<EventShoppingListEntity> child = eventShoppingListRepository.findById(shoppingListId);
+//        if (child.isPresent()) {
+//            eventShoppingListRepository.delete(child.get());
+//            eventEntity.removeShoppingList(child.get());
+//        } else {
+//            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find ShoppingId " + shoppingListId));
+//        }
+//        return listLogEvent;
+//    }
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Data operation, */
@@ -455,11 +433,11 @@ public class EventService {
      * @param eventEntity
      * @return
      */
-    public EventTaskEntity addTask(EventEntity eventEntity, EventTaskEntity task) {
-        eventTaskRepository.save(task);
-        eventEntity.addTask(task);
-        return task;
-    }
+//    public EventTaskEntity addTask(EventEntity eventEntity, EventTaskEntity task, EventOperationResult eventOperationResult) {
+//        EventController eventController = getEventController(eventEntity);
+//        eventController.addTask(task, eventOperationResult);
+//        return task;
+//    }
 
     /**
      * RemoveTask
@@ -468,17 +446,22 @@ public class EventService {
      * @param taskId
      * @return
      */
-    public List<LogEvent> removeTask(EventEntity eventEntity, Long taskId) {
-        List<LogEvent> listLogEvent = new ArrayList<>();
-        Optional<EventTaskEntity> task = eventTaskRepository.findById(taskId);
-        if (task.isPresent()) {
-            eventTaskRepository.delete(task.get());
-            eventEntity.removeTask(task.get());
-        } else {
-            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId " + taskId));
-        }
-        return listLogEvent;
-    }
+//    public void removeTask(EventEntity eventEntity, Long taskId, EventOperationResult eventOperationResult) {
+//        EventController eventController = getEventController(eventEntity);
+//        eventController.removeTaskById(taskId, eventOperationResult);
+//
+//        /*
+//         * List<LogEvent> listLogEvent = new ArrayList<>();
+//         * Optional<EventTaskEntity> task = eventTaskRepository.findById(taskId);
+//         * if (task.isPresent()) {
+//         * EventController eventController = getEventController( eventEntity );
+//         * return eventController.removeTask( eventEntity, task );
+//         * } else {
+//         * listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId " + taskId));
+//         * }
+//         * return listLogEvent;
+//         */
+//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -487,81 +470,98 @@ public class EventService {
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public EventSurveyEntity addSurvey(EventEntity eventEntity, EventSurveyEntity surveyEntity) {
-        surveyRepository.save(surveyEntity);
-        eventEntity.addSurvey(surveyEntity);
-        return surveyEntity;
-    }
-
-    public EventSurveyChoiceEntity addSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {
-        surveyChoiceRepository.save(surveyChoice);
-        List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
-        choicelist.add(surveyChoice);
-        surveyEntity.setChoicelist(choicelist);
-        surveyRepository.save(surveyEntity);
-        return surveyChoice;
-    }
-
-    public EventSurveyAnswerEntity addSurveyAnswser(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {
-        surveyAnswerRepository.save(surveyAnswerEntity);
-        List<EventSurveyAnswerEntity> answerlist = surveyEntity.getAnswerlist();
-        answerlist.add(surveyAnswerEntity);
-        surveyEntity.setAnswerlist(answerlist);
-        surveyRepository.save(surveyEntity);
-        return surveyAnswerEntity;
-    }
-
-    /**
-     * RemoveSurvey
-     * 
-     * @param eventEntity
-     * @param surveyId
-     * @return
-     */
-    public List<LogEvent> removeSurvey(EventEntity eventEntity, Long surveyId) {
-        List<LogEvent> listLogEvent = new ArrayList<>();
-        Optional<EventSurveyEntity> child = surveyRepository.findById(surveyId);
-        if (child.isPresent()) {
-            surveyRepository.delete(child.get());
-        } else {
-            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find SurveyId " + surveyId));
-        }
-        return listLogEvent;
-    }
-
-    public List<LogEvent> removeSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, Long choiceId) {
-        List<LogEvent> listLogEvent = new ArrayList<>();
-        Optional<EventSurveyChoiceEntity> choice = surveyChoiceRepository.findById(choiceId);
-        if (choice.isPresent()) {
-            surveyChoiceRepository.delete(choice.get());
-            List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
-            choicelist.remove(choice.get());
-            surveyEntity.setChoicelist(choicelist);
-        } else {
-            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find choiceId[" + choiceId + "]"));
-        }
-
-        return listLogEvent;
-    }
+//    public EventSurveyEntity addSurvey(EventEntity eventEntity, EventSurveyEntity surveyEntity) {
+//        surveyRepository.save(surveyEntity);
+//        eventEntity.addSurvey(surveyEntity);
+//        return surveyEntity;
+//    }
+//
+//    public EventSurveyChoiceEntity addSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {
+//        EventController eventControler = getEventController(eventEntity);
+//        return eventControler.addSurveyChoice(surveyEntity, surveyChoice);
+//        /*
+//         * Deported
+//         * surveyChoiceRepository.save(surveyChoice);
+//         * List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
+//         * choicelist.add(surveyChoice);
+//         * surveyEntity.setChoicelist(choicelist);
+//         * surveyRepository.save(surveyEntity);
+//         * return surveyChoice;
+//         */
+//    }
+//
+//    public EventSurveyAnswerEntity addSurveyAnswser(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {
+//        EventController eventControler = getEventController(eventEntity);
+//        return eventControler.addSurveyAnswser(surveyEntity, surveyAnswerEntity);
+//        /*
+//         * Deported
+//         * surveyAnswerRepository.save(surveyAnswerEntity);
+//         * List<EventSurveyAnswerEntity> answerlist = surveyEntity.getAnswerlist();
+//         * answerlist.add(surveyAnswerEntity);
+//         * surveyEntity.setAnswerlist(answerlist);
+//         * surveyRepository.save(surveyEntity);
+//         * return surveyAnswerEntity;
+//         */
+//    }
+//
+//    /**
+//     * RemoveSurvey
+//     * 
+//     * @param eventEntity
+//     * @param surveyId
+//     * @return
+//     */
+//    public List<LogEvent> removeSurvey(EventEntity eventEntity, Long surveyId) {
+//        List<LogEvent> listLogEvent = new ArrayList<>();
+//        Optional<EventSurveyEntity> child = surveyRepository.findById(surveyId);
+//        if (child.isPresent()) {
+//            surveyRepository.delete(child.get());
+//        } else {
+//            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find SurveyId " + surveyId));
+//        }
+//        return listLogEvent;
+//    }
+//
+//    public List<LogEvent> removeSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, Long choiceId) {
+//        EventController eventControler = getEventController(eventEntity);
+//        return eventControler.removeSurveyChoice(surveyEntity, choiceId);
+//        /*
+//         * Deported
+//         * List<LogEvent> listLogEvent = new ArrayList<>();
+//         * Optional<EventSurveyChoiceEntity> choice = surveyChoiceRepository.findById(choiceId);
+//         * if (choice.isPresent()) {
+//         * surveyChoiceRepository.delete(choice.get());
+//         * List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
+//         * choicelist.remove(choice.get());
+//         * surveyEntity.setChoicelist(choicelist);
+//         * } else {
+//         * listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find choiceId[" + choiceId + "]"));
+//         * }
+//         * return listLogEvent;
+//         */
+//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Chat operation*/
+    /* Chat operation */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public EventGroupChatEntity addGroupChat(EventEntity eventEntity, EventGroupChatEntity groupChatEntity) {        
-        eventGroupChatRepository.save(groupChatEntity);
-        eventEntity.addGroupChat(groupChatEntity);
-        return groupChatEntity;
-    }
-
-    public EventChatEntity addChatInGroup(EventEntity eventEntity, EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity,int maxChatEntity) {        
-        eventChatRepository.save(chatEntity);
-        groupChatEntity.addChat(chatEntity, maxChatEntity);
-        return chatEntity;
-    }
+//    public EventGroupChatEntity addGroupChat(EventEntity eventEntity, EventGroupChatEntity groupChatEntity) {
+//        eventGroupChatRepository.save(groupChatEntity);
+//        eventEntity.addGroupChat(groupChatEntity);
+//        return groupChatEntity;
+//    }
+//
+//    public EventChatEntity addChatInGroup(EventEntity eventEntity, EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity) {
+//        EventController eventControler = getEventController(eventEntity);
+//        return eventControler.addChatInGroup(groupChatEntity, chatEntity);
+//        /* Deported eventChatRepository.save(chatEntity);
+//        groupChatEntity.addChat(chatEntity);
+//        return chatEntity;
+//        */
+//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -573,11 +573,12 @@ public class EventService {
 
     /**
      * Entity is given by its name. Then, it is added to the parent, and saved.
+     * 
      * @param nameEntity
      * @param parentEntity
      * @return
      */
-    
+
     public BaseEntity add(String nameEntity, EventBaseEntity parentEntity) {
         if (EventExpenseEntity.CST_ENTITY_NAME.equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
             EventExpenseEntity expense = new EventExpenseEntity();
@@ -617,27 +618,25 @@ public class EventService {
         return loadEntityResult;
     }
 
-    
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Close old events */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
 
-    /* ******************************************************************************** */
-    /*                                                                                  */
-    /* Close old events                                                                 */
-    /*                                                                                  */
-    /*                                                                                  */
-    /*                                                                                  */
-    /* ******************************************************************************** */
-    
     /**
      * Close old events
      */
-    public List<EventEntity>  closeOldEvents( boolean doTheOperation) {
+    public List<EventEntity> closeOldEvents(boolean doTheOperation) {
         LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
 
         // modified last than 2 H? Keep it open.
         LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
         timeGrace = timeGrace.minusMinutes(120);
 
-        List<EventEntity> listEventsToClose = eventRepository.findOldEvents(timeCheck, timeGrace,  StatusEventEnum.CLOSED, PageRequest.of(0,1000));
+        List<EventEntity> listEventsToClose = eventRepository.findOldEvents(timeCheck, timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
             for (EventEntity eventEntity : listEventsToClose) {
                 StatusEventEnum oldStatus = eventEntity.getStatusEvent();
@@ -648,18 +647,17 @@ public class EventService {
         }
         return listEventsToClose;
     }
-    
-    
+
     /**
      * Close old events
      */
-    public List<EventEntity> purgeOldEvents( boolean doTheOperation) {
+    public List<EventEntity> purgeOldEvents(boolean doTheOperation) {
 
         // modified last than 2 H? Keep it open.
         LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
         timeGrace = timeGrace.minusDays(30);
 
-        List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge( timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0,1000));
+        List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge(timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
             for (EventEntity eventEntity : listEventsToClose) {
                 eventRepository.delete(eventEntity);
@@ -668,4 +666,15 @@ public class EventService {
         }
         return listEventsToClose;
     }
+
+    /**
+     * return a eventController
+     * 
+     * @param eventEntity
+     * @return
+     */
+    private EventController getEventController(EventEntity eventEntity) {
+        return new EventController(eventEntity, factoryService,factoryRepository);
+    }
+
 }

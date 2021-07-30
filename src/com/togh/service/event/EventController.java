@@ -8,18 +8,33 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.tool.JpaTool;
+import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
+import com.togh.entity.EventGroupChatEntity;
+import com.togh.entity.EventItineraryStepEntity;
+import com.togh.entity.EventShoppingListEntity;
+import com.togh.entity.EventSurveyAnswerEntity;
+import com.togh.entity.EventSurveyChoiceEntity;
+import com.togh.entity.EventSurveyEntity;
+import com.togh.entity.EventTaskEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.entity.base.BaseEntity;
+import com.togh.entity.base.EventBaseEntity;
+import com.togh.service.EventFactoryRepository;
 import com.togh.service.EventService;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.InvitationResult;
@@ -31,27 +46,65 @@ import com.togh.service.event.EventUpdate.Slab;
 /*                                                                                  */
 /* EventController, */
 /*                                                                                  */
-/* Control what's happen on an event. Pilot all operations */
-/*                                                                                  */
+/* Control what's happen on an event. Pilot all operations.
+ * EventController is created for one EventEntity */
+/*
+ * to help on operation, a list of Controller exist for each component.
+ * /*
+ */
 /*                                                                                  */
 /* ******************************************************************************** */
 public class EventController {
 
+    private static Logger logger = Logger.getLogger(EventController.class.getName());
+    private static final String LOG_HEADER = EventController.class.getSimpleName() + ": ";
+
     private FactoryService factoryService;
+    private EventFactoryRepository factoryRepository;
 
-    private EventEntity event;
+    private EventEntity eventEntity;
 
-    public EventController(EventEntity event, FactoryService factoryService) {
-        this.event = event;
+    /**
+     * Declare all friend controller
+     */
+    EventControllerTask eventControllerTask;
+    EventControllerItinerary eventControllerItinerary;
+    EventControllerShopping eventControllerShopping;
+    EventControllerSurvey eventControllerSurvey;
+    eventControllerSurveyChoiceList eventControllerSurveyChoiceList;
+    EventControllerSurveyAnswerList eventControllerSurveyAnswerList;
+    EventControllerGroupChat eventControllerGroupChat;
+    EventControllerChat eventControllerChat;
+    
+    /**
+     * Keep all Reposito
+     * Default Constructor.
+     * @param eventEntity
+     * @param factoryService
+     */
+
+    public EventController(EventEntity eventEntity, FactoryService factoryService, EventFactoryRepository factoryRepository) {
+        this.eventEntity = eventEntity;
         this.factoryService = factoryService;
+        this.factoryRepository = factoryRepository;
+        eventControllerTask = new EventControllerTask(this, eventEntity);
+        eventControllerItinerary = new EventControllerItinerary(this, eventEntity);
+        eventControllerShopping = new EventControllerShopping(this, eventEntity);
+        
+        eventControllerSurvey = new EventControllerSurvey(this, eventEntity);
+        eventControllerSurveyChoiceList = new eventControllerSurveyChoiceList(this, eventControllerSurvey,eventEntity);
+        eventControllerSurveyAnswerList = new EventControllerSurveyAnswerList(this, eventControllerSurvey,eventEntity);
+
+        eventControllerGroupChat = new EventControllerGroupChat(this, eventEntity);
+        eventControllerChat = new EventControllerChat(this,eventControllerGroupChat, eventEntity);
     }
 
-    public static EventController getInstance(EventEntity event, FactoryService factoryService) {
-        return new EventController(event, factoryService);
+    public static EventController getInstance(EventEntity event, FactoryService factoryService, EventFactoryRepository factoryRepository) {
+        return new EventController(event, factoryService, factoryRepository);
     }
 
     public EventEntity getEvent() {
-        return event;
+        return eventEntity;
     }
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -65,37 +118,40 @@ public class EventController {
      */
     public List<Slab> completeConsistant() {
         List<Slab> listSlab = new ArrayList<>();
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
 
         // the author is a Organizer participant
         boolean authorIsReferenced = false;
-        for (ParticipantEntity participant : event.getParticipantList()) {
-            if (participant.getUser() != null && participant.getUser().getId().equals(event.getAuthorId())) {
+        for (ParticipantEntity participant : eventEntity.getParticipantList()) {
+            if (participant.getUser() != null && participant.getUser().getId().equals(eventEntity.getAuthorId())) {
                 authorIsReferenced = true;
                 participant.setRole(ParticipantRoleEnum.OWNER);
             }
         }
         if (!authorIsReferenced) {
             // if the user does not exist, this is an issue.... ==> ToghEvent
-            event.addPartipant(event.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
+            eventEntity.addPartipant(eventEntity.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
         }
 
         // a date policy must be set
-        if (event.getDatePolicy() == null)
-            event.setDatePolicy(DatePolicyEnum.ONEDATE);
+        if (eventEntity.getDatePolicy() == null)
+            eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
 
+        // itinerary: must be in the date
+        listSlab.addAll( eventControllerItinerary.checkItinerary());
+        
         return listSlab;
     }
 
-    
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Presentation */
     /*                                                                                  */
     /* ******************************************************************************** */
     public EventPresentation getEventPresentation() {
-        return new EventPresentation( this, factoryService );
+        return new EventPresentation(this, factoryService);
     }
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Authorisation */
@@ -109,7 +165,7 @@ public class EventController {
      * @return
      */
     public boolean isAccess(ToghUserEntity toghUser) {
-        if (event.getTypeEvent() == TypeEventEnum.OPEN)
+        if (eventEntity.getTypeEvent() == TypeEventEnum.OPEN)
             return true;
         return getParticipant(toghUser) != null;
     }
@@ -118,7 +174,7 @@ public class EventController {
      * User must be the author, or a partipant, or should be invited
      * 
      * @param userId
-     * @param event
+     * @param eventEntity
      * @return
      */
     public boolean isActiveParticipant(ToghUserEntity toghUser) {
@@ -148,10 +204,11 @@ public class EventController {
 
     /**
      * Return the owner of the event
+     * 
      * @return
      */
     public ToghUserEntity getOwner() {
-        for (ParticipantEntity participant : event.getParticipantList()) {
+        for (ParticipantEntity participant : eventEntity.getParticipantList()) {
             if (participant.getRole().equals(ParticipantRoleEnum.OWNER))
                 return participant.getUser();
         }
@@ -174,7 +231,7 @@ public class EventController {
      * @return
      */
     public ParticipantEntity getParticipant(ToghUserEntity toghUser) {
-        for (ParticipantEntity participant : event.getParticipantList()) {
+        for (ParticipantEntity participant : eventEntity.getParticipantList()) {
             if (participant.getUser() != null && participant.getUser().getId().equals(toghUser.getId()))
                 return participant;
         }
@@ -184,19 +241,19 @@ public class EventController {
     /**
      * According the user, and the type of event, the ContextAccess is calculated
      * 
-     * @param event
+     * @param eventEntity
      * @return
      */
     public ContextAccess getTypeAccess(ToghUserEntity toghUser) {
         // event is public : so show onkly what you want to show to public
-        if (event.getTypeEvent() == TypeEventEnum.OPEN)
+        if (eventEntity.getTypeEvent() == TypeEventEnum.OPEN)
             return ContextAccess.PUBLICACCESS;
         // event is secret : hide all at maximum
-        if (event.getTypeEvent() == TypeEventEnum.SECRET)
+        if (eventEntity.getTypeEvent() == TypeEventEnum.SECRET)
             return ContextAccess.SECRETACCESS;
 
         ParticipantEntity participant = getParticipant(toghUser);
-        if (event.getTypeEvent() == TypeEventEnum.OPENCONF) {
+        if (eventEntity.getTypeEvent() == TypeEventEnum.OPENCONF) {
             // the user is not accepted : show the minimum.
             if (participant == null)
                 return ContextAccess.SECRETACCESS;
@@ -205,7 +262,7 @@ public class EventController {
             // user left, or wait for the confirmation 
             return ContextAccess.SECRETACCESS;
         }
-        if (event.getTypeEvent() == TypeEventEnum.LIMITED) {
+        if (eventEntity.getTypeEvent() == TypeEventEnum.LIMITED) {
             if (participant == null)
                 return ContextAccess.SECRETACCESS;
             if (participant.getStatus() == StatusEnum.ACTIF)
@@ -228,7 +285,6 @@ public class EventController {
         return eventInvitation.invite(event, invitedByToghUser, listUsersId, userInvitedEmail, role, message);
     }
 
-    
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Operations */
@@ -237,20 +293,21 @@ public class EventController {
     /**
      * A user access to the event.
      * We can deal with operation. For example, if the user is INVITED, then we moved to ACTIF
+     * 
      * @param toghUser
      * @return true if the event were modified, and need to be saved
      */
-    public boolean accessByUser( ToghUserEntity toghUserEntity) {
-        boolean isModified=false;
+    public boolean accessByUser(ToghUserEntity toghUserEntity) {
+        boolean isModified = false;
         ParticipantEntity participant = getParticipant(toghUserEntity);
-        if (participant !=null && participant.getStatus() == StatusEnum.INVITED) {
+        if (participant != null && participant.getStatus() == StatusEnum.INVITED) {
             participant.setStatus(StatusEnum.ACTIF);
-            isModified=true;
-            
+            isModified = true;
+
         }
         return isModified;
     }
-    
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Update */
@@ -258,17 +315,14 @@ public class EventController {
     /* ******************************************************************************** */
 
     /**
-     * Update the event
+     * Update the event. All update are done via the Slab objects
+     * 
      * @param listSlabMap
      * @param updateContext
      * @return
      */
-    public EventOperationResult update(List<Map<String, Object>> listSlabMap, UpdateContext updateContext) {
+    public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
         EventUpdate eventUpdate = new EventUpdate(this);
-        List<Slab> listSlab = new ArrayList<>();
-        for (Map<String, Object> recordSlab : listSlabMap) {
-            listSlab.add(new Slab(recordSlab));
-        }
 
         EventOperationResult eventOperationResult = eventUpdate.update(listSlab, updateContext);
         List<Slab> listComplementSlab = completeConsistant();
@@ -280,4 +334,145 @@ public class EventController {
         return factoryService.getEventService();
     }
 
+    /**
+     * operation on tasks.
+     * Task is then saved, and can be modified (persistenceid is created)
+     */
+//    public void addTask(EventTaskEntity task, EventOperationResult eventOperationResult) {
+//        eventControllerTask.addEntity(task, slab, eventOperationResult);
+//    }
+//
+//    public void removeTask(EventTaskEntity task, EventOperationResult eventOperationResult) {
+//        eventControllerTask.removeEntity(task, eventOperationResult);
+//    }
+//  
+//    public EventTaskEntity getTask( long taskId) {
+//        return (EventTaskEntity) eventControllerTask.getEntity(taskId);
+//    }
+//    
+    
+//    
+//    public EventSurveyChoiceEntity addSurveyChoice(EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {
+//        return eventControllerSurvey.addSurveyChoice(surveyEntity, surveyChoice);
+//    }
+//    
+//    public EventSurveyAnswerEntity addSurveyAnswser(EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {
+//        return eventControllerSurvey.addSurveyAnswser(surveyEntity, surveyAnswerEntity);
+//    }
+//    
+//    public List<LogEvent> removeSurveyChoice( EventSurveyEntity surveyEntity, Long choiceId) {
+//        return eventControllerSurvey.removeSurveyChoice(surveyEntity, choiceId);
+//    }
+//    
+//    
+//    
+//    
+//    public EventChatEntity addChatInGroup( EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity) {
+//        return eventControllerGroupChat.addChatInGroup(groupChatEntity, chatEntity);
+//    }
+   
+    protected EventFactoryRepository getFactoryRepository() {
+        return factoryRepository;
+    }
+  
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Factory of controller */
+    /*                                                                                  */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    
+    /**
+     * Factory of EventController. According the SlabOperation, created the correct event Controller/
+     * 
+     * @param slabOperation
+     * @return
+     */
+    protected EventControllerAbsChild getEventControllerFromSlabOperation( Slab slab) {
+        if (EventTaskEntity.CST_SLABOPERATION_TASKLIST.equals(slab.attributName)) {
+            return eventControllerTask;
+
+        } else if (EventItineraryStepEntity.CST_SLABOPERATION_ITINERARYSTEPLIST.equals(slab.attributName)) {
+            return eventControllerItinerary;
+
+        } else if (EventShoppingListEntity.CST_SLABOPERATION_SHOPPINGLIST.equals(slab.attributName)) {
+            return eventControllerShopping;
+
+        } else if (EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST.equals(slab.attributName)) {
+            return eventControllerSurvey;
+
+        } else if (EventSurveyChoiceEntity.CST_SLABOPERATION_CHOICELIST.equals(slab.attributName)) {
+            return eventControllerSurveyChoiceList;
+
+        } else if (EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST.equals(slab.attributName)) {
+            return eventControllerSurveyAnswerList;
+
+        } else if (EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST.equals(slab.attributName)) {
+            return eventControllerGroupChat;
+
+        } else if (EventChatEntity.CST_SLABOPERATION_CHAT.equals(slab.attributName)) {
+            return eventControllerChat;
+        }
+        return null;
+    }
+    
+    /**
+     * Localise the BaseEntity according the localisation. Localisation is a string like "/tasklist/1"
+     * 
+     * @param baseEntity
+     * @param localisation
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected BaseEntity localise(BaseEntity baseEntity, String localisation) {
+
+        // source is <name>/id/ <<something else 
+        if (localisation.isEmpty())
+            return baseEntity;
+        StringTokenizer stLocalisation = new StringTokenizer(localisation, "/");
+        BaseEntity indexEntity = baseEntity;
+        try {
+            while (stLocalisation.hasMoreTokens()) {
+                String nameEntity = stLocalisation.nextToken();
+
+                Method method = JpaTool.searchMethodByName(indexEntity, nameEntity);
+                if (method == null)
+                    return null;
+
+                // get the object
+                Object getObject = method.invoke(indexEntity);
+                if (getObject instanceof List) {
+                    // then the idEntity take the sens
+                    String idEntity = stLocalisation.hasMoreTokens() ? stLocalisation.nextToken() : null;
+                    Long idEntityLong = Long.valueOf(idEntity);
+                    List<BaseEntity> listChildrenEntity = (List<BaseEntity>) getObject;
+                    BaseEntity childEntityById = null;
+                    for (BaseEntity child : listChildrenEntity) {
+                        if (child.getId().equals(idEntityLong)) {
+                            childEntityById = child;
+                            break;
+                        }
+                    }
+                    if (childEntityById == null)
+                        return null;
+                    indexEntity = childEntityById;
+                } else if (getObject instanceof BaseEntity)
+                    indexEntity = (BaseEntity) getObject;
+                else if (getObject == null) {
+                    // time to add this object
+
+                    indexEntity = getEventService().add(nameEntity, (EventBaseEntity) indexEntity);
+                    if (indexEntity == null)
+                        return null;
+                }
+
+            }
+        } catch (Exception e) {
+            logger.severe(LOG_HEADER + "Can't localise item [" + localisation + "] currentIndexItem[" + indexEntity.getClass().getName() + "]");
+            return null;
+        }
+        return indexEntity;
+    }
 }

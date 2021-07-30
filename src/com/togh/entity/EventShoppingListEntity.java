@@ -41,6 +41,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventShoppingListEntity extends EventBaseEntity {
 
+    public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
+
     public enum ShoppingStatusEnum {
         TODO, DONE, CANCEL
     }

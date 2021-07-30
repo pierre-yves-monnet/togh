@@ -35,6 +35,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventSurveyChoiceEntity extends UserEntity {
 
+    public static final String CST_SLABOPERATION_CHOICELIST = "choicelist";
+
     @Column(name = "code", nullable=false)
     private Integer code;
 

@@ -42,6 +42,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public @Data class EventTaskEntity extends UserEntity {
 
+    public static final String CST_SLABOPERATION_TASKLIST = "tasklist";
+
     public enum TaskStatusEnum {
         PLANNED, ACTIVE, DONE, CANCEL
     }

@@ -216,30 +216,30 @@ Frais 				: a revoir
 references			: todo / Engrenages
 budget				: todo / sac ou tirelire
 Default Boy			: ok (togh)
-Default girl		: Ok (Crispy)
+Default girl		: Ok (cypris)
 
 
 
 
 Starter 		: todo
 Ender 			: todo
-Point d'interet
-Visite
+Point d'interet	: todo
+Visite			: todo
 Achat 			: sac de courses
-Divertissement
-Aeroport
-Stations de bus
-gare
-port
-restaurant
-nuit (hotel)
+Divertissement	: todo
+Aeroport		: todo
+Stations de bus	: todo
+gare			: todo
+port			: todo
+restaurant		: todo
+nuit (hotel)	: todo
 
 
 
 const ITINERARYITEM_POI 		= "POI";
 const ITINERARYITEM_BEGIN		= "BEGIN";
-const ITINERARYITEM_END			= "END";
-const ITINERARYITEM_SHOPPING	= "SHOPPING";
+const ITINERARYITEM_END			= "END";  
+const ITINERARYITEM_SHOPPING	= "SHOPPING";  ok
 const ITINERARYITEM_AIRPORT		= "AIRPORT";
 const ITINERARYITEM_BUS			= "BUS";
 const ITINERARYITEM_TRAIN		= "TRAIN";
@@ -247,7 +247,7 @@ const ITINERARYITEM_BOAT		= "BOAT";
 const ITINERARYITEM_NIGHT		= "NIGHT";
 const ITINERARYITEM_VISITE		= "VISITE";
 const ITINERARYITEM_RESTAURANT	= "RESTAURANT";
-const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT"
+const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT" 
 
 
 
@@ -569,9 +569,8 @@ Simon ?	Date Carbon: le format de date ne respecte pas la langue
 CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
 	
 Py	
-9.	Close event automatically
-10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 
+10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 11. Revoir la deconnection, le feedback user quand on fait un save
 
 
@@ -614,13 +613,12 @@ V2
 ## bugs
 	
 
-Plus possible de choisir une date    
-Eventlist : afficher la date et les participants
 Deconnection : ca ne renvoi plus sur la page de login      
           
 
 EventEntity.getMap : normaliser les constante ici avec les SLAB_OPERATION (une seule constante)
-EventSurvey : todo avec SlabRecord          
+EventSurvey : ca ne marche pas dajouter un nouveau choix de survey
+  Et arriver par defaut sur les reponses, pas sur la definition
           
 
       

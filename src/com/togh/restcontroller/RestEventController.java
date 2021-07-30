@@ -29,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
+import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.EventEntity.AdditionnalInformationEvent;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
@@ -43,6 +44,7 @@ import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.FactoryService;
 import com.togh.service.event.EventController;
+import com.togh.service.event.EventUpdate.Slab;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -134,7 +136,7 @@ public class RestEventController {
 
         if (eventName ==null || eventName.trim().length()==0)
             eventName="New event";
-        EventOperationResult eventOperationResult = factoryService.getEventService().createEvent(toghUser, eventName );
+        EventOperationResult eventOperationResult = eventService.createEvent(toghUser, eventName );
         if (Boolean.TRUE.equals(getList)) {            
             completePayloadListEvents(payload, toghUser, filterEvents, new AdditionnalInformationEvent(), timezoneOffset);
         }
@@ -198,7 +200,6 @@ public class RestEventController {
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Event not found");
 
         // get service        
-        EventService eventService = factoryService.getEventService();
         EventEntity event = eventService.getAllowedEventById(toghUser, eventId);
         if (event==null) {
             // same error as not found: we don't want to give the information that the event exist
@@ -233,7 +234,7 @@ public class RestEventController {
         @SuppressWarnings("unchecked")
         List<Map<String,Object>> slabEventList = RestTool.getList(updateMap, "listslab", new ArrayList<>() );
 
-        EventEntity event = factoryService.getEventService().getEventById( eventId);
+        EventEntity event = eventService.getEventById( eventId);
         if (event==null) {
             // same error as not found: we don't want to give the information that the event exist
             throw new ResponseStatusException( HttpStatus.NOT_FOUND,  RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
@@ -244,13 +245,13 @@ public class RestEventController {
         updateContext.timezoneOffset = timezoneOffset;
         updateContext.factoryService = factoryService;
         
-        EventOperationResult eventOperationResult = factoryService.getEventService().updateEvent( event, slabEventList, updateContext);
+        EventOperationResult eventOperationResult = eventService.updateEvent( event, getListSlab(slabEventList), updateContext);
         
         Map<String, Object> payload = new HashMap<>();
         payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId());
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
         
-        ContextAccess contextAccess = EventController.getInstance(  event, factoryService).getTypeAccess(toghUser);
+        ContextAccess contextAccess = eventService.getContextAccess(event, toghUser);
         List<Map<String,Object>> listEntity = new ArrayList<>();
         for(BaseEntity entity : eventOperationResult.listChildEntity) {
             listEntity.add( entity.getMap(contextAccess, timezoneOffset));
@@ -258,7 +259,7 @@ public class RestEventController {
         payload.put( RestJsonConstants.CST_CHILDENTITY, listEntity);
 
         // send back all the Chat group at each update - too important to miss one.
-        payload.put( EventEntity.CST_JSONOUT_GROUPCHATLIST, event.getGroupChatList(contextAccess, timezoneOffset));
+        payload.put( EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, event.getGroupChatList(contextAccess, timezoneOffset));
         payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
 
         payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
@@ -268,7 +269,18 @@ public class RestEventController {
         return payload;
     }
     
-   
+    /**
+     * Create a list of Slab from a Map
+     * @param listSlabMap
+     * @return
+     */
+   private List<Slab> getListSlab(List<Map<String, Object>> listSlabMap){
+       List<Slab> listSlab = new ArrayList<>();
+       for (Map<String, Object> recordSlab : listSlabMap) {
+           listSlab.add(new Slab(recordSlab));
+       }
+       return listSlab;
+   }
     /**
      * Get the list of events and populate the payload with it
      * @param payload
@@ -280,13 +292,12 @@ public class RestEventController {
             AdditionnalInformationEvent additionnalInformationEvent,
             Long timezoneOffset) { 
         List<Map<String,Object>> listEventsMap= new ArrayList<>();
-        EventResult eventResult = factoryService.getEventService().getEvents(toghUser, filterEvents);
+        EventResult eventResult = eventService.getEvents(toghUser, filterEvents);
     if (LogEventFactory.isError( eventResult.listLogEvent)) {
         payload.put( RestJsonConstants.CST_LISTLOGEVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
     } else {
         for (EventEntity event : eventResult.listEvents) {
-            EventController eventController = new EventController( event, factoryService);
-            listEventsMap.add( event.getHeaderMap( eventController.getTypeAccess(toghUser), additionnalInformationEvent, timezoneOffset));
+            listEventsMap.add( event.getHeaderMap( eventService.getContextAccess(event, toghUser), additionnalInformationEvent, timezoneOffset));
         }
         payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);
     }

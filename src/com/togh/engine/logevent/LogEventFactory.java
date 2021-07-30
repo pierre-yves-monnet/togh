@@ -4,24 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  LogEventFactory                                                                 */
+/* LogEventFactory */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
 public class LogEventFactory {
 
-    
-    /** Only static method
-    private LogEventFactory() {        
-    }
     /**
+     * Only static method
+     * private LogEventFactory() {
+     * }
+     * /**
      * is this list contains one error ? If yes, then we return true
      */
     public static boolean isError(final List<LogEvent> listEvents) {
+        
         for (final LogEvent event : listEvents) {
             if (event.isError()) {
                 return true;
@@ -37,9 +43,14 @@ public class LogEventFactory {
     public static String getHtml(final List<LogEvent> listEvents) {
         StringBuilder tableHtml = new StringBuilder();
         tableHtml.append("<table>");
-        for (final LogEvent event : listEvents) {
-            tableHtml.append("<tr><td>" + event.getHtml() + "</td></tr>");
-        }
+        
+        tableHtml.append( listEvents.stream()
+                .map(event -> {return "<tr><td>" + event.getHtml() +  "</td>" + "</tr>";})
+                .collect(Collectors.joining("") ));
+//        
+//        for (final LogEvent event : listEvents) {
+//            tableHtml.append("<tr><td>" + event.getHtml() + "</td></tr>");
+//        }
         tableHtml.append("</table>");
         return tableHtml.toString();
     }
@@ -56,12 +67,20 @@ public class LogEventFactory {
         tableHtml.append("<table style=\"border:1px solid black;border-spacing: 10px 0px;border-collapse: separate;\">");
         tableHtml.append("<tr><td>Title</td><td>Level</td><td>Parameters</td></tr>");
 
-        for (final LogEvent event : listEvents) {
-            tableHtml.append("<tr><td>" + event.getHtmlTitle() + "</td>"
-                    + "<td>" + event.getLevel().toString() + "</td>"
-                    + "<td>" + event.getParameters() + event.getExceptionDetails() + "</td>"
-                    + "</tr>");
-        }
+        tableHtml.append( listEvents.stream()
+                .map(event -> {return "<tr><td>" + event.getHtmlTitle() + "</td>"
+                        + "<td>" + event.getLevel().toString() + "</td>"
+                        + "<td>" + event.getParameters() + event.getExceptionDetails() + "</td>"
+                        + "</tr>";})
+                .collect(Collectors.joining("") ));
+
+        
+//        for (final LogEvent event : listEvents) {
+//            tableHtml.append("<tr><td>" + event.getHtmlTitle() + "</td>"
+//                    + "<td>" + event.getLevel().toString() + "</td>"
+//                    + "<td>" + event.getParameters() + event.getExceptionDetails() + "</td>"
+//                    + "</tr>");
+//        }
         tableHtml.append("</table>");
         return tableHtml.toString();
     }
@@ -73,13 +92,17 @@ public class LogEventFactory {
      * @return
      */
     public static String getSyntheticLog(final List<LogEvent> listEvents) {
-        StringBuilder tableLog = new StringBuilder();
+        return listEvents.stream()
+                .map(LogEvent::toString)
+                .collect(Collectors.joining(" <~> ") );
 
-        for (final LogEvent event : listEvents) {
-            tableLog.append(event.toString() + " <~> ");
-        }
-
-        return tableLog.toString();
+//        StringBuilder tableLog = new StringBuilder();
+//
+//        for (final LogEvent event : listEvents) {
+//            tableLog.append(event.toString() + " <~> ");
+//        }
+//
+//        return tableLog.toString();
     }
 
     /**
@@ -89,22 +112,33 @@ public class LogEventFactory {
      * @return
      */
     public static String getSyntheticErrorLog(final List<LogEvent> listEvents) {
-        StringBuilder tableLog = new StringBuilder();
-
-        for (final LogEvent event : listEvents) {
-            if (event.isError())
-                tableLog.append(event.toString() + " <~> ");
-        }
-        return tableLog.toString();
+        
+        return listEvents.stream()
+                .filter(LogEvent::isError)
+                .map(LogEvent::toString)
+                .collect(Collectors.joining(" <~> ") );
+//        
+//        StringBuilder tableLog = new StringBuilder();
+//
+//        for (final LogEvent event : listEvents) {
+//            if (event.isError())
+//                tableLog.append(event.toString() + " <~> ");
+//        }
+//        return tableLog.toString();
     }
 
     /**
      * Json to listEvent
      */
     public static List<LogEvent> getListEventsFromJson(List<Map<String, Serializable>> listEventsJson) {
-        List<LogEvent> listEvents = new ArrayList<>();
-        for (Map<String, Serializable> eventJson : listEventsJson)
-            listEvents.add(LogEvent.getInstanceFormJson(eventJson));
+                
+        List<LogEvent> listEvents = listEventsJson.stream()
+                .map(eventJson -> { return LogEvent.getInstanceFormJson(eventJson);})
+                .collect(Collectors.toList());
+ 
+//        List<LogEvent> listEvents = new ArrayList<>();
+//        for (Map<String, Serializable> eventJson : listEventsJson)
+//            listEvents.add(LogEvent.getInstanceFormJson(eventJson));
         return listEvents;
     }
 
@@ -115,9 +149,13 @@ public class LogEventFactory {
      * @return
      */
     public static List<Map<String, Serializable>> getJson(List<LogEvent> listEvents) {
-        List<Map<String, Serializable>> listEventsJson = new ArrayList<>();
-        for (LogEvent event : listEvents)
-            listEventsJson.add(event.getJson(false));
+
+        List<Map<String, Serializable>> listEventsJson = listEvents.stream()
+                .map(event -> event.getJson(false))
+                .collect(Collectors.toList());
+        //         List<Map<String, Serializable>> listEventsJson = new ArrayList<>();
+        //        for (LogEvent event : listEvents)
+        //            listEventsJson.add(event.getJson(false));
         return listEventsJson;
     }
 
@@ -132,12 +170,18 @@ public class LogEventFactory {
         if (listEvents == null) {
             return;
         }
-
-        for (int i = 0; i < listEvents.size(); i++) {
-            if (listEvents.get(i).isIdentical(eventToAdd)) {
-                return;
-            }
-        }
+        String idToCheck =eventToAdd.getSignature(false);
+        boolean idExists = listEvents.stream()
+                .map(LogEvent::getSignatureParameter)
+                .anyMatch(idToCheck::equals);
+        if (idExists)
+            return;
+        
+//        for (int i = 0; i < listEvents.size(); i++) {
+//            if (listEvents.get(i).isIdentical(eventToAdd)) {
+//                return;
+//            }
+//        }
         listEvents.add(eventToAdd);
     }
 
@@ -163,21 +207,34 @@ public class LogEventFactory {
      * @return
      */
     public static List<LogEvent> filterUnique(final List<LogEvent> listEvents) {
-        final List<LogEvent> listUnique = new ArrayList<LogEvent>();
 
-        for (final LogEvent event : listEvents) {
-            boolean alreadyExist = false;
-            for (final LogEvent existingEvent : listUnique) {
-                if (event.isIdentical(existingEvent)) {
-                    alreadyExist = true;
-                    break;
-                }
-            }
-            if (!alreadyExist) {
-                listUnique.add(event);
-            }
-        }
+        List<LogEvent> listUnique = listEvents.stream()
+                .filter(distinctByKey(event -> {
+                    return event.getSignature(true);
+                }))
+                .collect(Collectors.toList());
         return listUnique;
+        //        
+        //        final List<LogEvent> listUnique = new ArrayList<LogEvent>();
+        //
+        //        for (final LogEvent event : listEvents) {
+        //            boolean alreadyExist = false;
+        //            for (final LogEvent existingEvent : listUnique) {
+        //                if (event.isIdentical(existingEvent)) {
+        //                    alreadyExist = true;
+        //                    break;
+        //                }
+        //            }
+        //            if (!alreadyExist) {
+        //                listUnique.add(event);
+        //            }
+        //        }
+        //        return listUnique;
     }
 
+    //Utility function
+    private static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
 }

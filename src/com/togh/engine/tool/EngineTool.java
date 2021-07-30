@@ -74,7 +74,7 @@ public class EngineTool {
         LocalDateTime localDateTime = time.atStartOfDay( ZoneId.of(ZoneOffset.UTC.getId())).toLocalDateTime();
         localDateTime= localDateTime.minusMinutes( - timezoneOffset);
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        return time.format(sdt);
+        return localDateTime.format(sdt);
     }
 
     public static LocalDateTime stringToDateTime(String dateInString) {
