@@ -71,6 +71,8 @@ public class RestLoginController {
   
     /**
      * Login from the portal via a email / password
+     * Nota: the Administrator is created at the startup. There is here nothing special to connect him
+     * See ToghUserService.TOGHADMIN_USERNAME
      * @param userData
      * @param response
      * @return

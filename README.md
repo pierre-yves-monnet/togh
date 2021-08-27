@@ -456,7 +456,6 @@ https://console.cloud.google.com/apis
 https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
 
 https://cloud.google.com/translate/docs/quickstarts
-API KEY Google Translate : AIzaSyAqzQn9yET9inp9RmDm7to4unFO3df82Fg
  	
 stocker les photo de l'API Key pour Flick
 
@@ -470,18 +469,24 @@ stocker les photo de l'API Key pour Flick
 /*                                                                                  */
 /* ******************************************************************************** */
 
-user togh: pass4togh
 
-
-## Creation d'une image a partir de tomcat
-pull tomcat ou qq chose comme ca
+# docker image tomcat:
+docker pull tomcat
+docker pull ubuntu
+docker run --name togh -h localhost -v d:/tmp/docker:/opt/togh -d -p 8080:8080 tomcat
 
 ## Creation du container togh
-docker run --name togh -h localhost -v /tmp/docker:/opt/togh -d -p 8080:8080 togh
 
+docker run --name togh -h localhost -v d:/tmp/docker:/opt/togh -d -p 8080:8080 togh
+
+
+
+-------------------------------------- container vide
 Ajout des composants vi & postgres
 apt-get update
 apt-get install vi
+
+
 apt-get install postgresql postgresql-contrib
  
  su - postgres
