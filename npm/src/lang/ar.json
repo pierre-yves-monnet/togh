@@ -122,6 +122,9 @@
   "__AdminUsers.ShowDetails" : "Details",
   "AdminUsers.ShowDetails" : "تفاصيل",
 
+  "__AdminUsers.Source" : "Source",
+  "AdminUsers.Source" : "مصدر",
+
   "__AdminUsers.Status" : "Status",
   "AdminUsers.Status" : "حالة",
 
@@ -170,6 +173,27 @@
   "__AdminUsers.subscriptionPremium" : "Premium subscription",
   "AdminUsers.subscriptionPremium" : "اشتراك بريميوم",
 
+  "__AskPassword.DifferentPassword" : "Password are different",
+  "AskPassword.DifferentPassword" : "كلمة المرور مختلفة",
+
+  "__AskPassword.NewPassword" : "New password",
+  "AskPassword.NewPassword" : "كلمة مرور جديدة",
+
+  "__AskPassword.RetypePassword" : "Retype password to verify it",
+  "AskPassword.RetypePassword" : "أعد كتابة كلمة المرور للتحقق منها",
+
+  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword" : "أدخل 3 أحرف على الأقل لكلمة المرور",
+
+  "__BodyTogh.ResetYourPassword" : "Reset your password",
+  "BodyTogh.ResetYourPassword" : "اعد ضبط كلمه السر",
+
+  "__BodyTogh.ThankYou" : "Thank you!",
+  "BodyTogh.ThankYou" : "شكرا لك!",
+
+  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited" : "أنت مدعو إلى حدث! قم بالتسجيل أو الاتصال للوصول إليه",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "مرحبا بكم في طوق د",
 
@@ -199,6 +223,9 @@
 
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "كنت أرغب في تعلم React ، Spring. بالإضافة إلى ذلك ، أردت أن أضع يدي في نشر السحابة. فلماذا لا نبني تطبيقًا باستخدام كل هذه التقنيات ، ونرى ما الذي يحدث؟",
+
+  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "BodyTogh.whyToghThankYou" : "إلى Simon ، لموهبته كمستكشف تقني. لونس ، لتصاميمه الرائعة. كريستيل ، على دعمها. وجميع الآخرين الذين ساعدوني في وقت ما.",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "ميزانية",
@@ -329,7 +356,7 @@
   "__EventChat.The" : "The",
   "EventChat.The" : "ال",
 
-  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "__EventChat.WhatYouWantToSay" : "What do you want to say?",
   "EventChat.WhatYouWantToSay" : "ماذا تريد ان تقول؟",
 
   "__EventExpense.AddExpense" : "Add a expense",
@@ -821,11 +848,35 @@
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "تم حذف الخطوة",
 
+  "__EventsList.AllEvents" : "All events",
+  "EventsList.AllEvents" : "كل الأحداث",
+
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "لا يمكن الوصول إلى قائمة العناصر &quot;",
 
+  "__EventsList.CreateAnEvent" : "Create an Event",
+  "EventsList.CreateAnEvent" : "أنشئ حدثًا",
+
+  "__EventsList.Date" : "Date",
+  "EventsList.Date" : "تاريخ",
+
+  "__EventsList.DateFromTo" : "to",
+  "EventsList.DateFromTo" : "إلى",
+
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "تصل إلى الحد الأقصى من الأحداث المسموح بها في الفترة الماضية. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+
+  "__EventsList.MyEvents" : "My events",
+  "EventsList.MyEvents" : "أحداثي",
+
+  "__EventsList.Name" : "Name",
+  "EventsList.Name" : "اسم",
+
+  "__EventsList.Participants" : "Participants",
+  "EventsList.Participants" : "مشاركون",
+
+  "__EventsList.Refresh" : "Refresh",
+  "EventsList.Refresh" : "ينعش",
 
   "__EventsList.ServerConnectionError" : "Server connection error",
   "EventsList.ServerConnectionError" : "خطأ في الاتصال بالخادم",
@@ -893,8 +944,35 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "لا يمكن الاتصال بالخادم",
 
+  "__Login.EmailIncorrect" : "Email address is incorrect",
+  "Login.EmailIncorrect" : "عنوان البريد الإلكتروني غير صحيح",
+
+  "__Login.EmailSent" : "An email is sent, check your mailbox",
+  "Login.EmailSent" : "تم إرسال بريد إلكتروني ، تحقق من صندوق البريد الخاص بك",
+
+  "__Login.LostMyPassword" : "I lost My password",
+  "Login.LostMyPassword" : "لقد فقدت كلمة المرور الخاصة بي",
+
+  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation" : "لديك حساب ولكن لا يمكنك الاتصال؟ انقر فوق الزر &quot;أدرج كلمة المرور الخاصة بي&quot; للحصول على كلمة مرور مؤقتة",
+
+  "__Login.LostMyPasswordLabel" : "Reset my password",
+  "Login.LostMyPasswordLabel" : "إعادة تعيين كلمة المرور الخاصة بي",
+
+  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation" : "سيتم إرسال رابط لتغيير كلمة المرور إلى بريدك الإلكتروني",
+
   "__Login.RememberMe" : "Remember Me",
   "Login.RememberMe" : "تذكرنى",
+
+  "__Login.SendEmail" : "Send the email",
+  "Login.SendEmail" : "أرسل البريد الإلكتروني",
+
+  "__Login.ServerConnectionError" : "Server connection error",
+  "Login.ServerConnectionError" : "خطأ في الاتصال بالخادم",
+
+  "__Login.ServerIssue" : "An error arrived on the server, please try later",
+  "Login.ServerIssue" : "حدث خطأ في الخادم ، يرجى المحاولة لاحقًا",
 
   "__Login.connection" : "Connection",
   "Login.connection" : "اتصال",
@@ -952,6 +1030,9 @@
 
   "__MyProfile.ChangeEmail" : "Change Email",
   "MyProfile.ChangeEmail" : "تغيير البريد الالكتروني",
+
+  "__MyProfile.ChangeMyPassword" : "Change my password",
+  "MyProfile.ChangeMyPassword" : "تغيير كلمة المرور الخاصة بي",
 
   "__MyProfile.Cypris" : "Cypris",
   "MyProfile.Cypris" : "سيبريس",
@@ -1025,11 +1106,17 @@
   "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
   "MyProfile.SearchableExplanation" : "يمكن أن يكون المستخدم الخاص بك مرئيًا في وظيفة البحث. إذا لم يكن الأمر كذلك ، فإن الطريقة الوحيدة لدعوتك هي إرسال بريدك الإلكتروني بشكل صريح.",
 
+  "__MyProfile.SetANewPassword" : "Set a new password",
+  "MyProfile.SetANewPassword" : "قم بتعيين كلمة مرور جديدة",
+
   "__MyProfile.Togh" : "Togh",
   "MyProfile.Togh" : "توغ",
 
   "__MyProfile.URL" : "Url",
   "MyProfile.URL" : "عنوان Url",
+
+  "__MyProfile.UpdateMyPassword" : "Update my password",
+  "MyProfile.UpdateMyPassword" : "تحديث كلمة المرور الخاصة بي",
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "اسم المستخدم",
@@ -1042,6 +1129,15 @@
 
   "__MyProfile.lastName" : "LastName",
   "MyProfile.lastName" : "الكنية",
+
+  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "MyProfile.passwordChangeFailed" : "فشل التغيير",
+
+  "__MyProfile.passwordChangeInProgress" : "In progress",
+  "MyProfile.passwordChangeInProgress" : "في تقدم",
+
+  "__MyProfile.passwordChangedOk" : "Password changed",
+  "MyProfile.passwordChangedOk" : "تم تغيير كلمة السر",
 
   "__MyProfile.searchable" : "Searchable",
   "MyProfile.searchable" : "قابل للبحث",
@@ -1085,6 +1181,21 @@
   "__RegisterNewUser.FirstName" : "First name",
   "RegisterNewUser.FirstName" : "الاسم الأول",
 
+  "__RegisterNewUser.InformationLogin" : "Login",
+  "RegisterNewUser.InformationLogin" : "تسجيل الدخول",
+
+  "__RegisterNewUser.InformationVisibility" : "Access information",
+  "RegisterNewUser.InformationVisibility" : "معلومات الدخول",
+
+  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1" : "قم بتسجيل مستخدم في Togh للوصول إلى الأحداث وإنشاؤها ، وتلقي الإخطارات. الوصول إلى ملف التعريف الخاص بك لتغيير أي إعدادات.",
+
+  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2" : "تسجيل الدخول الخاص بك هو البريد الإلكتروني الخاص بك. سوف ترسل لك Togh رسالة تأكيد بالبريد الإلكتروني للتحقق من صحة حسابك. يتم استخدام هذا البريد الإلكتروني عندما فقدت كلمة المرور الخاصة بك.",
+
+  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3" : "في الملف الشخصي ، يمكنك تغيير الإعداد بحيث لا يكون مرئيًا من قبل مستخدم توغ آخر. بشكل افتراضي ، تكون مرئيًا في البحث عبر الاسم والبريد الإلكتروني. صديقك بحاجة لرؤيتك! ولكن يمكنك أن تقرر عدم الظهور في البحث العام. بعد ذلك ، يجب أن يعرف صديقك بريدك الإلكتروني لإضافتك كمشارك.",
+
   "__RegisterNewUser.LastName" : "Last name",
   "RegisterNewUser.LastName" : "الكنية",
 
@@ -1096,6 +1207,30 @@
 
   "__RegisterNewUser.RetypePassword" : "Retype password",
   "RegisterNewUser.RetypePassword" : "أعد إدخال كلمة السر",
+
+  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
+  "RegisterUser.EmailIsMandatory" : "البريد الإلكتروني إلزامي",
+
+  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory" : "الاسم الأول إلزامي",
+
+  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory" : "كلمة المرور إلزامية",
+
+  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory" : "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل",
+
+  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDiffrent" : "كلمات المرور مختلفة",
+
+  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure" : "يمكنك الآن تغيير كلمة المرور الخاصة بك. سيتم تغييره وسيتم توصيلك على الفور",
+
+  "__ResetPassword.passwordchanged" : "Password changed",
+  "ResetPassword.passwordchanged" : "تم تغيير كلمة السر",
+
+  "__ResetPassword.passwordchangefailed" : "Change failed",
+  "ResetPassword.passwordchangefailed" : "فشل التغيير",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "فشلت العملية",
