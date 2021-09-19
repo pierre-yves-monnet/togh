@@ -122,6 +122,9 @@
   "__AdminUsers.ShowDetails" : "Details",
   "AdminUsers.ShowDetails" : "Λεπτομέριες",
 
+  "__AdminUsers.Source" : "Source",
+  "AdminUsers.Source" : "Πηγή",
+
   "__AdminUsers.Status" : "Status",
   "AdminUsers.Status" : "Κατάσταση",
 
@@ -170,6 +173,27 @@
   "__AdminUsers.subscriptionPremium" : "Premium subscription",
   "AdminUsers.subscriptionPremium" : "Premium συνδρομή",
 
+  "__AskPassword.DifferentPassword" : "Password are different",
+  "AskPassword.DifferentPassword" : "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
+
+  "__AskPassword.NewPassword" : "New password",
+  "AskPassword.NewPassword" : "Νέος Κωδικός",
+
+  "__AskPassword.RetypePassword" : "Retype password to verify it",
+  "AskPassword.RetypePassword" : "Πληκτρολογήστε ξανά τον κωδικό πρόσβασης για επαλήθευση",
+
+  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword" : "Δώστε τουλάχιστον 3 χαρακτήρες για τον κωδικό πρόσβασης",
+
+  "__BodyTogh.ResetYourPassword" : "Reset your password",
+  "BodyTogh.ResetYourPassword" : "Επαναφορά του κωδικού πρόσβασής σας",
+
+  "__BodyTogh.ThankYou" : "Thank you!",
+  "BodyTogh.ThankYou" : "Σας ευχαριστώ!",
+
+  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited" : "Είστε καλεσμένοι σε μια εκδήλωση! Εγγραφείτε ή συνδεθείτε για πρόσβαση σε αυτό",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Καλώς ήλθατε στο Togh D",
 
@@ -199,6 +223,9 @@
 
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "Ήθελα να μάθω React, Άνοιξη. Επιπλέον, ήθελα να βάλω το χέρι μου στην ανάπτυξη του Cloud. Λοιπόν, γιατί να μην δημιουργήσετε μια εφαρμογή χρησιμοποιώντας όλες αυτές τις τεχνολογίες και να δείτε τι συμβαίνει;",
+
+  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "BodyTogh.whyToghThankYou" : "Στον Σάιμον, για το ταλέντο του ως τεχνικός εξερευνητής. Lounes, για τα υπέροχα σχέδιά του. Christelle, για την υποστήριξή της. Και όλους τους άλλους που με έχουν βοηθήσει κάποια στιγμή.",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "Προϋπολογισμός",
@@ -329,7 +356,7 @@
   "__EventChat.The" : "The",
   "EventChat.The" : "ο",
 
-  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "__EventChat.WhatYouWantToSay" : "What do you want to say?",
   "EventChat.WhatYouWantToSay" : "Τι θες να πεις?",
 
   "__EventExpense.AddExpense" : "Add a expense",
@@ -821,11 +848,35 @@
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "Το βήμα αφαιρείται",
 
+  "__EventsList.AllEvents" : "All events",
+  "EventsList.AllEvents" : "Όλα τα γεγονότα",
+
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Δεν είναι δυνατή η πρόσβαση στη λίστα του αντικειμένου '",
 
+  "__EventsList.CreateAnEvent" : "Create an Event",
+  "EventsList.CreateAnEvent" : "Δημιουργήστε ένα συμβάν",
+
+  "__EventsList.Date" : "Date",
+  "EventsList.Date" : "Ημερομηνία",
+
+  "__EventsList.DateFromTo" : "to",
+  "EventsList.DateFromTo" : "προς το",
+
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "Φτάνετε στο όριο των επιτρεπόμενων συμβάντων την τελευταία περίοδο Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+
+  "__EventsList.MyEvents" : "My events",
+  "EventsList.MyEvents" : "Οι εκδηλώσεις μου",
+
+  "__EventsList.Name" : "Name",
+  "EventsList.Name" : "Ονομα",
+
+  "__EventsList.Participants" : "Participants",
+  "EventsList.Participants" : "Συμμετέχοντες",
+
+  "__EventsList.Refresh" : "Refresh",
+  "EventsList.Refresh" : "Φρεσκάρω",
 
   "__EventsList.ServerConnectionError" : "Server connection error",
   "EventsList.ServerConnectionError" : "Σφάλμα σύνδεσης διακομιστή",
@@ -893,8 +944,35 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Δεν είναι δυνατή η σύνδεση στον διακομιστή",
 
+  "__Login.EmailIncorrect" : "Email address is incorrect",
+  "Login.EmailIncorrect" : "Η διεύθυνση email δεν είναι σωστή",
+
+  "__Login.EmailSent" : "An email is sent, check your mailbox",
+  "Login.EmailSent" : "Αποστέλλεται ένα email, ελέγξτε το γραμματοκιβώτιό σας",
+
+  "__Login.LostMyPassword" : "I lost My password",
+  "Login.LostMyPassword" : "Έχασα τον κωδικό μου",
+
+  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation" : "Έχετε λογαριασμό, αλλά δεν μπορείτε να συνδεθείτε; Κάντε κλικ στο κουμπί &quot;Παραθέτω τον κωδικό πρόσβασής μου&quot; για να λάβετε έναν προσωρινό",
+
+  "__Login.LostMyPasswordLabel" : "Reset my password",
+  "Login.LostMyPasswordLabel" : "Επαναφορά του κωδικού πρόσβασής μου",
+
+  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation" : "Ένας σύνδεσμος για την αλλαγή του κωδικού πρόσβασής σας θα σταλεί στο email σας",
+
   "__Login.RememberMe" : "Remember Me",
   "Login.RememberMe" : "Θυμήσου με",
+
+  "__Login.SendEmail" : "Send the email",
+  "Login.SendEmail" : "Στείλτε το email",
+
+  "__Login.ServerConnectionError" : "Server connection error",
+  "Login.ServerConnectionError" : "Σφάλμα σύνδεσης διακομιστή",
+
+  "__Login.ServerIssue" : "An error arrived on the server, please try later",
+  "Login.ServerIssue" : "Ένα σφάλμα έφτασε στον διακομιστή. Δοκιμάστε αργότερα",
 
   "__Login.connection" : "Connection",
   "Login.connection" : "Σύνδεση",
@@ -952,6 +1030,9 @@
 
   "__MyProfile.ChangeEmail" : "Change Email",
   "MyProfile.ChangeEmail" : "Αλλαγή email",
+
+  "__MyProfile.ChangeMyPassword" : "Change my password",
+  "MyProfile.ChangeMyPassword" : "Αλλάξτε τον κωδικό πρόσβασής μου",
 
   "__MyProfile.Cypris" : "Cypris",
   "MyProfile.Cypris" : "Κύπριοι",
@@ -1025,11 +1106,17 @@
   "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
   "MyProfile.SearchableExplanation" : "Ο χρήστης σας μπορεί να είναι ορατός στη λειτουργία αναζήτησης. Εάν όχι, ο μόνος τρόπος να σας προσκαλέσουμε είναι να δώσετε ρητά το email σας",
 
+  "__MyProfile.SetANewPassword" : "Set a new password",
+  "MyProfile.SetANewPassword" : "Ορίστε νέο κωδικό πρόσβασης",
+
   "__MyProfile.Togh" : "Togh",
   "MyProfile.Togh" : "Τοχ",
 
   "__MyProfile.URL" : "Url",
   "MyProfile.URL" : "Url",
+
+  "__MyProfile.UpdateMyPassword" : "Update my password",
+  "MyProfile.UpdateMyPassword" : "Ενημέρωση κωδικού πρόσβασης",
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "Ονομα χρήστη",
@@ -1042,6 +1129,15 @@
 
   "__MyProfile.lastName" : "LastName",
   "MyProfile.lastName" : "Επίθετο",
+
+  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "MyProfile.passwordChangeFailed" : "Η αλλαγή απέτυχε",
+
+  "__MyProfile.passwordChangeInProgress" : "In progress",
+  "MyProfile.passwordChangeInProgress" : "Σε εξέλιξη",
+
+  "__MyProfile.passwordChangedOk" : "Password changed",
+  "MyProfile.passwordChangedOk" : "Ο κωδικός άλλαξε",
 
   "__MyProfile.searchable" : "Searchable",
   "MyProfile.searchable" : "Ερευνήσιμος",
@@ -1085,6 +1181,21 @@
   "__RegisterNewUser.FirstName" : "First name",
   "RegisterNewUser.FirstName" : "Ονομα",
 
+  "__RegisterNewUser.InformationLogin" : "Login",
+  "RegisterNewUser.InformationLogin" : "Σύνδεση",
+
+  "__RegisterNewUser.InformationVisibility" : "Access information",
+  "RegisterNewUser.InformationVisibility" : "Πρόσβαση σε πληροφορίες",
+
+  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1" : "Εγγραφείτε ένας χρήστης στο Togh για πρόσβαση και δημιουργία εκδηλώσεων, λήψη ειδοποιήσεων. Αποκτήστε πρόσβαση στο προφίλ σας για να αλλάξετε τυχόν ρυθμίσεις.",
+
+  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2" : "Η σύνδεσή σας είναι το email σας. Ο Togh θα σας στείλει ένα email επιβεβαίωσης για την επικύρωση του λογαριασμού σας. Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου χρησιμοποιείται όταν χάσετε τον κωδικό πρόσβασής σας.",
+
+  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3" : "Στο προφίλ, μπορείτε να αλλάξετε τη ρύθμιση ώστε να μην είναι ορατή από άλλο χρήστη Togh. Από προεπιλογή, είστε ορατοί στην αναζήτηση μέσω ονόματος και email. Ο φίλος σας πρέπει να σας δει! Μπορείτε όμως να αποφασίσετε να μην είστε ορατοί σε μια γενική αναζήτηση. Στη συνέχεια, ο φίλος σας πρέπει να γνωρίζει το email σας για να σας προσθέσει ως συμμετέχοντα.",
+
   "__RegisterNewUser.LastName" : "Last name",
   "RegisterNewUser.LastName" : "Επίθετο",
 
@@ -1096,6 +1207,30 @@
 
   "__RegisterNewUser.RetypePassword" : "Retype password",
   "RegisterNewUser.RetypePassword" : "Πληκτρολογήστε ξανά τον κωδικό πρόσβασης",
+
+  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
+  "RegisterUser.EmailIsMandatory" : "Το email είναι υποχρεωτικό",
+
+  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory" : "Το Όνομα είναι υποχρεωτικό",
+
+  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory" : "Ο κωδικός πρόσβασης είναι υποχρεωτικός",
+
+  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory" : "Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες",
+
+  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDiffrent" : "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
+
+  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure" : "Τώρα μπορείτε να αλλάξετε τον κωδικό πρόσβασής σας. Θα αλλάξει και θα συνδεθείτε αμέσως",
+
+  "__ResetPassword.passwordchanged" : "Password changed",
+  "ResetPassword.passwordchanged" : "Ο κωδικός άλλαξε",
+
+  "__ResetPassword.passwordchangefailed" : "Change failed",
+  "ResetPassword.passwordchangefailed" : "Η αλλαγή απέτυχε",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "Η λειτουργία απέτυχε",

@@ -124,6 +124,9 @@
   "__AdminUsers.ShowDetails" : "Details",
   "AdminUsers.ShowDetails" : "Detalhes",
 
+  "__AdminUsers.Source" : "Source",
+  "AdminUsers.Source" : "Fonte",
+
   "__AdminUsers.Status" : "Status",
   "AdminUsers.Status" : "Status",
 
@@ -172,6 +175,27 @@
   "__AdminUsers.subscriptionPremium" : "Premium subscription",
   "AdminUsers.subscriptionPremium" : "Assinatura premium",
 
+  "__AskPassword.DifferentPassword" : "Password are different",
+  "AskPassword.DifferentPassword" : "As senhas são diferentes",
+
+  "__AskPassword.NewPassword" : "New password",
+  "AskPassword.NewPassword" : "Nova Senha",
+
+  "__AskPassword.RetypePassword" : "Retype password to verify it",
+  "AskPassword.RetypePassword" : "Digite a senha novamente para verificá-la",
+
+  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword" : "Dê no mínimo 3 caracteres para a senha",
+
+  "__BodyTogh.ResetYourPassword" : "Reset your password",
+  "BodyTogh.ResetYourPassword" : "Redefina sua senha",
+
+  "__BodyTogh.ThankYou" : "Thank you!",
+  "BodyTogh.ThankYou" : "Obrigado!",
+
+  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited" : "Você está convidado para um evento! Registre-se ou conecte-se para acessá-lo",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Bem-vindo a Togh",
 
@@ -201,6 +225,9 @@
 
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "Eu queria aprender React, Spring. Além disso, eu queria colocar minha mão na implantação da nuvem. Então, por que não construir um aplicativo usando todas essas tecnologias e ver o que está acontecendo?",
+
+  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "BodyTogh.whyToghThankYou" : "A Simon, por seu talento como explorador técnico. Lounes, por seus designs fabulosos. Christelle, por seu apoio. E todos os outros que me ajudaram em algum momento.",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "Orçamento",
@@ -333,7 +360,7 @@
   "__EventChat.The" : "The",
   "EventChat.The" : "O",
 
-  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "__EventChat.WhatYouWantToSay" : "What do you want to say?",
   "EventChat.WhatYouWantToSay" : "O que você quer dizer?",
 
   "__EventExpense.AddExpense" : "Add a expense",
@@ -860,11 +887,35 @@
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "A etapa foi removida",
 
+  "__EventsList.AllEvents" : "All events",
+  "EventsList.AllEvents" : "Todos os eventos",
+
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Não é possível acessar a lista de itens '",
 
+  "__EventsList.CreateAnEvent" : "Create an Event",
+  "EventsList.CreateAnEvent" : "Crie um Evento",
+
+  "__EventsList.Date" : "Date",
+  "EventsList.Date" : "Encontro",
+
+  "__EventsList.DateFromTo" : "to",
+  "EventsList.DateFromTo" : "para",
+
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "Você atingiu o limite de eventos permitidos no último período. Vá para o seu perfil para ver a sua assinatura",
+
+  "__EventsList.MyEvents" : "My events",
+  "EventsList.MyEvents" : "Meus eventos",
+
+  "__EventsList.Name" : "Name",
+  "EventsList.Name" : "Nome",
+
+  "__EventsList.Participants" : "Participants",
+  "EventsList.Participants" : "Participantes",
+
+  "__EventsList.Refresh" : "Refresh",
+  "EventsList.Refresh" : "Atualizar",
 
   "__EventsList.ServerConnectionError" : "Server connection error",
   "EventsList.ServerConnectionError" : "Erro de conexão do servidor",
@@ -940,8 +991,35 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "Não consigo conectar ao servidor",
 
+  "__Login.EmailIncorrect" : "Email address is incorrect",
+  "Login.EmailIncorrect" : "Endereço de email está incorreto",
+
+  "__Login.EmailSent" : "An email is sent, check your mailbox",
+  "Login.EmailSent" : "Um e-mail é enviado, verifique sua caixa de correio",
+
+  "__Login.LostMyPassword" : "I lost My password",
+  "Login.LostMyPassword" : "Eu perdi minha senha",
+
+  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation" : "Você tem uma conta, mas não consegue se conectar? Clique no botão 'Eu listo minha senha' para obter uma senha temporária",
+
+  "__Login.LostMyPasswordLabel" : "Reset my password",
+  "Login.LostMyPasswordLabel" : "Resetar minha senha",
+
+  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation" : "Um link para alterar sua senha será enviado para seu e-mail",
+
   "__Login.RememberMe" : "Remember Me",
   "Login.RememberMe" : "Lembre de mim",
+
+  "__Login.SendEmail" : "Send the email",
+  "Login.SendEmail" : "Manda o email",
+
+  "__Login.ServerConnectionError" : "Server connection error",
+  "Login.ServerConnectionError" : "Erro de conexão do servidor",
+
+  "__Login.ServerIssue" : "An error arrived on the server, please try later",
+  "Login.ServerIssue" : "Um erro chegou ao servidor, por favor tente mais tarde",
 
   "Login.badConnection" : "Conex�o ruim - Verifique suas credenciais",
 
@@ -1005,6 +1083,9 @@
 
   "__MyProfile.ChangeEmail" : "Change Email",
   "MyProfile.ChangeEmail" : "Mude o e-mail",
+
+  "__MyProfile.ChangeMyPassword" : "Change my password",
+  "MyProfile.ChangeMyPassword" : "Mudar minha senha",
 
   "__MyProfile.Cypris" : "Cypris",
   "MyProfile.Cypris" : "Cypris",
@@ -1078,11 +1159,17 @@
   "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
   "MyProfile.SearchableExplanation" : "Seu usuário pode estar visível na função de pesquisa. Caso contrário, a única maneira de convidá-lo é dando seu e-mail explicitamente.",
 
+  "__MyProfile.SetANewPassword" : "Set a new password",
+  "MyProfile.SetANewPassword" : "Defina uma nova senha",
+
   "__MyProfile.Togh" : "Togh",
   "MyProfile.Togh" : "Togh",
 
   "__MyProfile.URL" : "Url",
   "MyProfile.URL" : "Url",
+
+  "__MyProfile.UpdateMyPassword" : "Update my password",
+  "MyProfile.UpdateMyPassword" : "Atualize minha senha",
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "Nome do usuário",
@@ -1095,6 +1182,15 @@
 
   "__MyProfile.lastName" : "LastName",
   "MyProfile.lastName" : "Sobrenome",
+
+  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "MyProfile.passwordChangeFailed" : "Mudança falhou",
+
+  "__MyProfile.passwordChangeInProgress" : "In progress",
+  "MyProfile.passwordChangeInProgress" : "Em progresso",
+
+  "__MyProfile.passwordChangedOk" : "Password changed",
+  "MyProfile.passwordChangedOk" : "Senha alterada",
 
   "__MyProfile.searchable" : "Searchable",
   "MyProfile.searchable" : "Pesquisável",
@@ -1138,6 +1234,21 @@
   "__RegisterNewUser.FirstName" : "First name",
   "RegisterNewUser.FirstName" : "Primeiro nome",
 
+  "__RegisterNewUser.InformationLogin" : "Login",
+  "RegisterNewUser.InformationLogin" : "Conecte-se",
+
+  "__RegisterNewUser.InformationVisibility" : "Access information",
+  "RegisterNewUser.InformationVisibility" : "Informações de acesso",
+
+  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1" : "Cadastre um usuário no Togh para acessar e criar eventos, receber notificações. Acesse seu perfil para alterar quaisquer configurações.",
+
+  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2" : "Seu login é seu e-mail. Togh enviará a você um e-mail de confirmação para validar sua conta. Este e-mail é usado quando você perdeu sua senha.",
+
+  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3" : "No perfil, você pode alterar a configuração para não ser visível por outro usuário Togh. Por padrão, você está visível na pesquisa por nome e e-mail. Seu amigo precisa ver você! Mas você pode decidir não ficar visível em uma pesquisa geral. Então, seu amigo deve saber seu e-mail para adicioná-lo como participante.",
+
   "__RegisterNewUser.LastName" : "Last name",
   "RegisterNewUser.LastName" : "Sobrenome",
 
@@ -1149,6 +1260,30 @@
 
   "__RegisterNewUser.RetypePassword" : "Retype password",
   "RegisterNewUser.RetypePassword" : "Digite novamente a senha",
+
+  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
+  "RegisterUser.EmailIsMandatory" : "Email é obrigatório",
+
+  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory" : "Nome é obrigatório",
+
+  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory" : "Senha é obrigatória",
+
+  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory" : "A senha deve ter no mínimo 4 caracteres",
+
+  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDiffrent" : "As senhas são diferentes",
+
+  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure" : "Agora você pode alterar sua senha. Ele será alterado e você será conectado imediatamente",
+
+  "__ResetPassword.passwordchanged" : "Password changed",
+  "ResetPassword.passwordchanged" : "Senha alterada",
+
+  "__ResetPassword.passwordchangefailed" : "Change failed",
+  "ResetPassword.passwordchangefailed" : "Mudança falhou",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "Operação falhou",

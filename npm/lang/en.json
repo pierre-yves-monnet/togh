@@ -122,6 +122,9 @@
   "AdminUsers.ShowDetails": {
     "defaultMessage": "Details"
   },
+  "AdminUsers.Source": {
+    "defaultMessage": "Source"
+  },
   "AdminUsers.Status": {
     "defaultMessage": "Status"
   },
@@ -170,6 +173,27 @@
   "AdminUsers.subscriptionPremium": {
     "defaultMessage": "Premium subscription"
   },
+  "AskPassword.DifferentPassword": {
+    "defaultMessage": "Password are different"
+  },
+  "AskPassword.NewPassword": {
+    "defaultMessage": "New password"
+  },
+  "AskPassword.RetypePassword": {
+    "defaultMessage": "Retype password to verify it"
+  },
+  "AskPassword.ToSmalPassword": {
+    "defaultMessage": "Give minimum 3 characters for the password"
+  },
+  "BodyTogh.ResetYourPassword": {
+    "defaultMessage": "Reset your password"
+  },
+  "BodyTogh.ThankYou": {
+    "defaultMessage": "Thank you!"
+  },
+  "BodyTogh.YouAreInvited": {
+    "defaultMessage": "You are invited to an event! Register or Connect to access it"
+  },
   "BodyTogh.welcome": {
     "defaultMessage": "Welcome to Togh"
   },
@@ -199,6 +223,9 @@
   },
   "BodyTogh.whyToghMotivation": {
     "defaultMessage": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"
+  },
+  "BodyTogh.whyToghThankYou": {
+    "defaultMessage": "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point."
   },
   "Event.Budget": {
     "defaultMessage": "Budget"
@@ -330,7 +357,7 @@
     "defaultMessage": "The"
   },
   "EventChat.WhatYouWantToSay": {
-    "defaultMessage": "What you want to say?"
+    "defaultMessage": "What do you want to say?"
   },
   "EventExpense.AddExpense": {
     "defaultMessage": "Add a expense"
@@ -451,27 +478,6 @@
   },
   "EventItineray.WebSite": {
     "defaultMessage": "WebSite"
-  },
-  "EventList.AllEvents": {
-    "defaultMessage": "All events"
-  },
-  "EventList.CreateAnEvent": {
-    "defaultMessage": "Create an Event"
-  },
-  "EventList.Dae": {
-    "defaultMessage": "Date"
-  },
-  "EventList.MyEvents": {
-    "defaultMessage": "My events"
-  },
-  "EventList.Name": {
-    "defaultMessage": "Name"
-  },
-  "EventList.Participants": {
-    "defaultMessage": "Participants"
-  },
-  "EventList.Refresh": {
-    "defaultMessage": "Refresh"
   },
   "EventParticipant.Actif": {
     "defaultMessage": "Actif"
@@ -803,11 +809,35 @@
   "Eventitinerary.StepRemoved": {
     "defaultMessage": "The step is removed"
   },
+  "EventsList.AllEvents": {
+    "defaultMessage": "All events"
+  },
   "EventsList.CantGetListItem": {
     "defaultMessage": "Can't access the list of item'"
   },
+  "EventsList.CreateAnEvent": {
+    "defaultMessage": "Create an Event"
+  },
+  "EventsList.Date": {
+    "defaultMessage": "Date"
+  },
+  "EventsList.DateFromTo": {
+    "defaultMessage": "to"
+  },
   "EventsList.LimitSubscription": {
     "defaultMessage": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription"
+  },
+  "EventsList.MyEvents": {
+    "defaultMessage": "My events"
+  },
+  "EventsList.Name": {
+    "defaultMessage": "Name"
+  },
+  "EventsList.Participants": {
+    "defaultMessage": "Participants"
+  },
+  "EventsList.Refresh": {
+    "defaultMessage": "Refresh"
   },
   "EventsList.ServerConnectionError": {
     "defaultMessage": "Server connection error"
@@ -872,8 +902,35 @@
   "Login.CantConnectToTheServer": {
     "defaultMessage": "Can't Connect To The Server"
   },
+  "Login.EmailIncorrect": {
+    "defaultMessage": "Email address is incorrect"
+  },
+  "Login.EmailSent": {
+    "defaultMessage": "An email is sent, check your mailbox"
+  },
+  "Login.LostMyPassword": {
+    "defaultMessage": "I lost My password"
+  },
+  "Login.LostMyPasswordExplanation": {
+    "defaultMessage": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one"
+  },
+  "Login.LostMyPasswordLabel": {
+    "defaultMessage": "Reset my password"
+  },
+  "Login.LostPasswordExplanation": {
+    "defaultMessage": "A link to change your password will be send to your email"
+  },
   "Login.RememberMe": {
     "defaultMessage": "Remember Me"
+  },
+  "Login.SendEmail": {
+    "defaultMessage": "Send the email"
+  },
+  "Login.ServerConnectionError": {
+    "defaultMessage": "Server connection error"
+  },
+  "Login.ServerIssue": {
+    "defaultMessage": "An error arrived on the server, please try later"
   },
   "Login.connection": {
     "defaultMessage": "Connection"
@@ -931,6 +988,9 @@
   },
   "MyProfile.ChangeEmail": {
     "defaultMessage": "Change Email"
+  },
+  "MyProfile.ChangeMyPassword": {
+    "defaultMessage": "Change my password"
   },
   "MyProfile.Cypris": {
     "defaultMessage": "Cypris"
@@ -1004,11 +1064,17 @@
   "MyProfile.SearchableExplanation": {
     "defaultMessage": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly."
   },
+  "MyProfile.SetANewPassword": {
+    "defaultMessage": "Set a new password"
+  },
   "MyProfile.Togh": {
     "defaultMessage": "Togh"
   },
   "MyProfile.URL": {
     "defaultMessage": "Url"
+  },
+  "MyProfile.UpdateMyPassword": {
+    "defaultMessage": "Update my password"
   },
   "MyProfile.UserName": {
     "defaultMessage": "User name"
@@ -1021,6 +1087,15 @@
   },
   "MyProfile.lastName": {
     "defaultMessage": "LastName"
+  },
+  "MyProfile.passwordChangeFailed": {
+    "defaultMessage": "Change failed"
+  },
+  "MyProfile.passwordChangeInProgress": {
+    "defaultMessage": "In progress"
+  },
+  "MyProfile.passwordChangedOk": {
+    "defaultMessage": "Password changed"
   },
   "MyProfile.searchable": {
     "defaultMessage": "Searchable"
@@ -1064,6 +1139,21 @@
   "RegisterNewUser.FirstName": {
     "defaultMessage": "First name"
   },
+  "RegisterNewUser.InformationLogin": {
+    "defaultMessage": "Login"
+  },
+  "RegisterNewUser.InformationVisibility": {
+    "defaultMessage": "Access information"
+  },
+  "RegisterNewUser.Information_1": {
+    "defaultMessage": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings."
+  },
+  "RegisterNewUser.Information_2": {
+    "defaultMessage": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password."
+  },
+  "RegisterNewUser.Information_3": {
+    "defaultMessage": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant."
+  },
   "RegisterNewUser.LastName": {
     "defaultMessage": "Last name"
   },
@@ -1075,6 +1165,30 @@
   },
   "RegisterNewUser.RetypePassword": {
     "defaultMessage": "Retype password"
+  },
+  "RegisterUser.EmailIsMandatory": {
+    "defaultMessage": "Email is mandatory"
+  },
+  "RegisterUser.FirstNameIsMandatory": {
+    "defaultMessage": "First Name is mandatory"
+  },
+  "RegisterUser.PasswordIsMandatory": {
+    "defaultMessage": "Password is mandatory"
+  },
+  "RegisterUser.PasswordSizeMandatory": {
+    "defaultMessage": "Password must have minimum 4 characters"
+  },
+  "RegisterUser.PasswordsAreDiffrent": {
+    "defaultMessage": "Passwords are different"
+  },
+  "ResetPassword.ResetPasswordProcedure": {
+    "defaultMessage": "You can now change your password. It will be changed, and you will be connected immediately"
+  },
+  "ResetPassword.passwordchanged": {
+    "defaultMessage": "Password changed"
+  },
+  "ResetPassword.passwordchangefailed": {
+    "defaultMessage": "Change failed"
   },
   "UserFeedback.OperationFailed": {
     "defaultMessage": "Operation Failed"

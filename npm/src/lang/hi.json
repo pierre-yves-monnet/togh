@@ -124,6 +124,9 @@
   "__AdminUsers.ShowDetails" : "Details",
   "AdminUsers.ShowDetails" : "विवरण",
 
+  "__AdminUsers.Source" : "Source",
+  "AdminUsers.Source" : "स्रोत",
+
   "__AdminUsers.Status" : "Status",
   "AdminUsers.Status" : "स्थिति",
 
@@ -172,6 +175,27 @@
   "__AdminUsers.subscriptionPremium" : "Premium subscription",
   "AdminUsers.subscriptionPremium" : "प्रीमियम सदस्यता",
 
+  "__AskPassword.DifferentPassword" : "Password are different",
+  "AskPassword.DifferentPassword" : "पासवर्ड अलग हैं",
+
+  "__AskPassword.NewPassword" : "New password",
+  "AskPassword.NewPassword" : "नया पासवर्ड",
+
+  "__AskPassword.RetypePassword" : "Retype password to verify it",
+  "AskPassword.RetypePassword" : "इसे सत्यापित करने के लिए पासवर्ड फिर से टाइप करें",
+
+  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword" : "पासवर्ड के लिए कम से कम 3 अक्षर दें",
+
+  "__BodyTogh.ResetYourPassword" : "Reset your password",
+  "BodyTogh.ResetYourPassword" : "अपना पासवर्ड रीसेट करें",
+
+  "__BodyTogh.ThankYou" : "Thank you!",
+  "BodyTogh.ThankYou" : "शुक्रिया!",
+
+  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited" : "आपको एक कार्यक्रम में आमंत्रित किया गया है! इसे एक्सेस करने के लिए रजिस्टर या कनेक्ट करें",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "तोगड़ में आपका स्वागत है",
 
@@ -201,6 +225,9 @@
 
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "मैं रिएक्ट, स्प्रिंग सीखना चाहता था। इसके अलावा, मैं अपना हाथ क्लाउड की तैनाती में लगाना चाहता था। तो, इन सभी तकनीकों का उपयोग करते हुए एक एप्लिकेशन क्यों न बनाएं, और देखें कि क्या चल रहा है?",
+
+  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "BodyTogh.whyToghThankYou" : "साइमन के लिए, एक तकनीकी खोजकर्ता के रूप में उनकी प्रतिभा के लिए। Lounes, उनके शानदार डिजाइनों के लिए। क्रिस्टेल, उसके समर्थन के लिए। और अन्य सभी जिन्होंने किसी समय मेरी मदद की है।",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "बजट",
@@ -333,7 +360,7 @@
   "__EventChat.The" : "The",
   "EventChat.The" : "",
 
-  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "__EventChat.WhatYouWantToSay" : "What do you want to say?",
   "EventChat.WhatYouWantToSay" : "तुम क्या कहना चाहते हो?",
 
   "__EventExpense.AddExpense" : "Add a expense",
@@ -860,11 +887,35 @@
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "कदम हटा दिया है",
 
+  "__EventsList.AllEvents" : "All events",
+  "EventsList.AllEvents" : "सभी कार्यक्रम",
+
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "आइटम की सूची तक नहीं पहुंच सकते '",
 
+  "__EventsList.CreateAnEvent" : "Create an Event",
+  "EventsList.CreateAnEvent" : "एक घटना बनाएँ",
+
+  "__EventsList.Date" : "Date",
+  "EventsList.Date" : "दिनांक",
+
+  "__EventsList.DateFromTo" : "to",
+  "EventsList.DateFromTo" : "प्रति",
+
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "आप अंतिम अवधि में अनुमत घटनाओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+
+  "__EventsList.MyEvents" : "My events",
+  "EventsList.MyEvents" : "मेरे कार्यक्रम",
+
+  "__EventsList.Name" : "Name",
+  "EventsList.Name" : "नाम",
+
+  "__EventsList.Participants" : "Participants",
+  "EventsList.Participants" : "प्रतिभागियों",
+
+  "__EventsList.Refresh" : "Refresh",
+  "EventsList.Refresh" : "ताज़ा करना",
 
   "__EventsList.ServerConnectionError" : "Server connection error",
   "EventsList.ServerConnectionError" : "सर्वर कनेक्शन त्रुटि",
@@ -940,8 +991,35 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "सर्वर से कनेक्ट नहीं किया जा सकता",
 
+  "__Login.EmailIncorrect" : "Email address is incorrect",
+  "Login.EmailIncorrect" : "ईमेल पता गलत है",
+
+  "__Login.EmailSent" : "An email is sent, check your mailbox",
+  "Login.EmailSent" : "एक ईमेल भेजा गया है, अपना मेलबॉक्स जांचें",
+
+  "__Login.LostMyPassword" : "I lost My password",
+  "Login.LostMyPassword" : "मैंने अपना पासवर्ड खो दिया",
+
+  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation" : "आपके पास एक खाता है, लेकिन आप कनेक्ट नहीं कर सकते? अस्थायी पासवर्ड प्राप्त करने के लिए 'मैं अपना पासवर्ड सूचीबद्ध करता हूं' बटन पर क्लिक करें",
+
+  "__Login.LostMyPasswordLabel" : "Reset my password",
+  "Login.LostMyPasswordLabel" : "अपना पासवर्ड रीसेट करें",
+
+  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation" : "आपका पासवर्ड बदलने के लिए एक लिंक आपके ईमेल पर भेजा जाएगा",
+
   "__Login.RememberMe" : "Remember Me",
   "Login.RememberMe" : "मुझे याद रखें",
+
+  "__Login.SendEmail" : "Send the email",
+  "Login.SendEmail" : "ईमेल भेजें",
+
+  "__Login.ServerConnectionError" : "Server connection error",
+  "Login.ServerConnectionError" : "सर्वर कनेक्शन त्रुटि",
+
+  "__Login.ServerIssue" : "An error arrived on the server, please try later",
+  "Login.ServerIssue" : "सर्वर पर एक त्रुटि आई, कृपया बाद में प्रयास करें",
 
   "Login.badConnection" : "खराब कनेक्शन - अपनी साख जांचें",
 
@@ -1005,6 +1083,9 @@
 
   "__MyProfile.ChangeEmail" : "Change Email",
   "MyProfile.ChangeEmail" : "बदले ई - मेल",
+
+  "__MyProfile.ChangeMyPassword" : "Change my password",
+  "MyProfile.ChangeMyPassword" : "मेरा पासवर्ड बदलो",
 
   "__MyProfile.Cypris" : "Cypris",
   "MyProfile.Cypris" : "साइप्रिस",
@@ -1078,11 +1159,17 @@
   "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
   "MyProfile.SearchableExplanation" : "आपका उपयोगकर्ता खोज फ़ंक्शन में दिखाई दे सकता है। यदि नहीं, तो आपको आमंत्रित करने का एकमात्र तरीका स्पष्ट रूप से अपना ईमेल देना है।",
 
+  "__MyProfile.SetANewPassword" : "Set a new password",
+  "MyProfile.SetANewPassword" : "नया पासवर्ड सेट करें",
+
   "__MyProfile.Togh" : "Togh",
   "MyProfile.Togh" : "तोग",
 
   "__MyProfile.URL" : "Url",
   "MyProfile.URL" : "यूआरएल",
+
+  "__MyProfile.UpdateMyPassword" : "Update my password",
+  "MyProfile.UpdateMyPassword" : "मेरा पासवर्ड अपडेट करें",
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "उपयोगकर्ता नाम",
@@ -1095,6 +1182,15 @@
 
   "__MyProfile.lastName" : "LastName",
   "MyProfile.lastName" : "अंतिम नाम",
+
+  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "MyProfile.passwordChangeFailed" : "परिवर्तन विफल",
+
+  "__MyProfile.passwordChangeInProgress" : "In progress",
+  "MyProfile.passwordChangeInProgress" : "चालू",
+
+  "__MyProfile.passwordChangedOk" : "Password changed",
+  "MyProfile.passwordChangedOk" : "पासवर्ड बदला गया",
 
   "__MyProfile.searchable" : "Searchable",
   "MyProfile.searchable" : "खोज सकने",
@@ -1138,6 +1234,21 @@
   "__RegisterNewUser.FirstName" : "First name",
   "RegisterNewUser.FirstName" : "पहला नाम",
 
+  "__RegisterNewUser.InformationLogin" : "Login",
+  "RegisterNewUser.InformationLogin" : "लॉग इन करें",
+
+  "__RegisterNewUser.InformationVisibility" : "Access information",
+  "RegisterNewUser.InformationVisibility" : "उपयोग की जानकारी",
+
+  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1" : "घटनाओं तक पहुँचने और बनाने के लिए Togh में एक उपयोगकर्ता को पंजीकृत करें, सूचनाएं प्राप्त करें। किसी भी सेटिंग को बदलने के लिए अपनी प्रोफ़ाइल तक पहुंचें।",
+
+  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2" : "आपका लॉगिन आपका ईमेल है। Togh आपके खाते को सत्यापित करने के लिए आपको एक पुष्टिकरण ईमेल भेजेगा। इस ईमेल का उपयोग तब किया जाता है जब आप अपना पासवर्ड खो देते हैं।",
+
+  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3" : "प्रोफ़ाइल में, आप सेटिंग को किसी अन्य Togh उपयोगकर्ता द्वारा दिखाई नहीं देने के लिए बदल सकते हैं। डिफ़ॉल्ट रूप से, आप नाम और ईमेल के माध्यम से खोज में दिखाई देते हैं। आपके दोस्त को आपको देखने की जरूरत है! लेकिन आप सामान्य खोज में दिखाई न देने का निर्णय ले सकते हैं। फिर, एक भागीदार के रूप में आपको जोड़ने के लिए आपके मित्र को आपका ईमेल पता होना चाहिए।",
+
   "__RegisterNewUser.LastName" : "Last name",
   "RegisterNewUser.LastName" : "अंतिम नाम",
 
@@ -1149,6 +1260,30 @@
 
   "__RegisterNewUser.RetypePassword" : "Retype password",
   "RegisterNewUser.RetypePassword" : "पासवर्ड फिर से लिखें",
+
+  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
+  "RegisterUser.EmailIsMandatory" : "ईमेल अनिवार्य है",
+
+  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory" : "प्रथम नाम अनिवार्य है",
+
+  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory" : "पासवर्ड अनिवार्य है",
+
+  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory" : "पासवर्ड में कम से कम 4 अक्षर होने चाहिए",
+
+  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDiffrent" : "पासवर्ड अलग हैं",
+
+  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure" : "अब आप अपना पासवर्ड बदल सकते हैं। इसे बदल दिया जाएगा, और आप तुरंत कनेक्ट हो जाएंगे",
+
+  "__ResetPassword.passwordchanged" : "Password changed",
+  "ResetPassword.passwordchanged" : "पासवर्ड बदला गया",
+
+  "__ResetPassword.passwordchangefailed" : "Change failed",
+  "ResetPassword.passwordchangefailed" : "परिवर्तन विफल",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "प्रचालन विफल रहा",

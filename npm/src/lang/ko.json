@@ -124,6 +124,9 @@
   "__AdminUsers.ShowDetails" : "Details",
   "AdminUsers.ShowDetails" : "세부",
 
+  "__AdminUsers.Source" : "Source",
+  "AdminUsers.Source" : "원천",
+
   "__AdminUsers.Status" : "Status",
   "AdminUsers.Status" : "상태",
 
@@ -172,6 +175,27 @@
   "__AdminUsers.subscriptionPremium" : "Premium subscription",
   "AdminUsers.subscriptionPremium" : "프리미엄 구독",
 
+  "__AskPassword.DifferentPassword" : "Password are different",
+  "AskPassword.DifferentPassword" : "비밀번호가 다릅니다",
+
+  "__AskPassword.NewPassword" : "New password",
+  "AskPassword.NewPassword" : "새 비밀번호",
+
+  "__AskPassword.RetypePassword" : "Retype password to verify it",
+  "AskPassword.RetypePassword" : "암호를 다시 입력하여 확인",
+
+  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword" : "비밀번호는 최소 3자 이상 입력하세요.",
+
+  "__BodyTogh.ResetYourPassword" : "Reset your password",
+  "BodyTogh.ResetYourPassword" : "비밀번호를 재설정",
+
+  "__BodyTogh.ThankYou" : "Thank you!",
+  "BodyTogh.ThankYou" : "감사합니다!",
+
+  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited" : "이벤트에 초대합니다! 등록하거나 연결하여 액세스",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Togh에 오신 것을 환영합니다",
 
@@ -201,6 +225,9 @@
 
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "React, Spring을 배우고 싶었습니다. 또한 클라우드 배포에 손을 뻗고 싶었습니다. 그렇다면 이러한 모든 기술을 사용하여 응용 프로그램을 구축하고 무슨 일이 일어나고 있는지 확인하십시오.",
+
+  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "BodyTogh.whyToghThankYou" : "기술 탐험가로서의 재능에 대해 Simon에게. 그의 멋진 디자인에 대한 Lounes. 그녀의 지원을 위해 크리스텔. 그리고 어느 시점에서 나를 도왔던 다른 모든 사람들.",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "예산",
@@ -333,7 +360,7 @@
   "__EventChat.The" : "The",
   "EventChat.The" : "그만큼",
 
-  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "__EventChat.WhatYouWantToSay" : "What do you want to say?",
   "EventChat.WhatYouWantToSay" : "무슨 말을 하시겠습니까?",
 
   "__EventExpense.AddExpense" : "Add a expense",
@@ -860,11 +887,35 @@
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "단계가 제거되었습니다.",
 
+  "__EventsList.AllEvents" : "All events",
+  "EventsList.AllEvents" : "모든 이벤트",
+
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "항목 목록에 액세스 할 수 없습니다. '",
 
+  "__EventsList.CreateAnEvent" : "Create an Event",
+  "EventsList.CreateAnEvent" : "이벤트 만들기",
+
+  "__EventsList.Date" : "Date",
+  "EventsList.Date" : "날짜",
+
+  "__EventsList.DateFromTo" : "to",
+  "EventsList.DateFromTo" : "에게",
+
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "마지막 기간에 허용 된 이벤트 한도에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
+
+  "__EventsList.MyEvents" : "My events",
+  "EventsList.MyEvents" : "내 이벤트",
+
+  "__EventsList.Name" : "Name",
+  "EventsList.Name" : "이름",
+
+  "__EventsList.Participants" : "Participants",
+  "EventsList.Participants" : "참가자들",
+
+  "__EventsList.Refresh" : "Refresh",
+  "EventsList.Refresh" : "새로 고치다",
 
   "__EventsList.ServerConnectionError" : "Server connection error",
   "EventsList.ServerConnectionError" : "서버 연결 오류",
@@ -940,8 +991,35 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "서버에 연결할 수 없습니다",
 
+  "__Login.EmailIncorrect" : "Email address is incorrect",
+  "Login.EmailIncorrect" : "이메일 주소가 잘못되었습니다.",
+
+  "__Login.EmailSent" : "An email is sent, check your mailbox",
+  "Login.EmailSent" : "이메일이 전송되었습니다. 메일함을 확인하세요.",
+
+  "__Login.LostMyPassword" : "I lost My password",
+  "Login.LostMyPassword" : "비밀번호를 분실했습니다.",
+
+  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation" : "계정이 있지만 연결할 수 없습니까? 임시 비밀번호를 얻으려면 '비밀번호 나열' 버튼을 클릭하세요.",
+
+  "__Login.LostMyPasswordLabel" : "Reset my password",
+  "Login.LostMyPasswordLabel" : "내 비밀번호 재설정",
+
+  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation" : "비밀번호 변경 링크가 이메일로 전송됩니다.",
+
   "__Login.RememberMe" : "Remember Me",
   "Login.RememberMe" : "날 기억해",
+
+  "__Login.SendEmail" : "Send the email",
+  "Login.SendEmail" : "이메일 보내기",
+
+  "__Login.ServerConnectionError" : "Server connection error",
+  "Login.ServerConnectionError" : "서버 연결 오류",
+
+  "__Login.ServerIssue" : "An error arrived on the server, please try later",
+  "Login.ServerIssue" : "서버에 오류가 발생했습니다. 나중에 시도하십시오.",
 
   "Login.badConnection" : "잘못된 연결-자격 증명 확인",
 
@@ -1005,6 +1083,9 @@
 
   "__MyProfile.ChangeEmail" : "Change Email",
   "MyProfile.ChangeEmail" : "이메일을 바꾸다",
+
+  "__MyProfile.ChangeMyPassword" : "Change my password",
+  "MyProfile.ChangeMyPassword" : "내 비밀번호 변경",
 
   "__MyProfile.Cypris" : "Cypris",
   "MyProfile.Cypris" : "Cypris",
@@ -1078,11 +1159,17 @@
   "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
   "MyProfile.SearchableExplanation" : "사용자는 검색 기능에서 볼 수 있습니다. 그렇지 않은 경우 초대하는 유일한 방법은 이메일을 명시 적으로 제공하는 것입니다.",
 
+  "__MyProfile.SetANewPassword" : "Set a new password",
+  "MyProfile.SetANewPassword" : "새 비밀번호 설정",
+
   "__MyProfile.Togh" : "Togh",
   "MyProfile.Togh" : "Togh",
 
   "__MyProfile.URL" : "Url",
   "MyProfile.URL" : "URL",
+
+  "__MyProfile.UpdateMyPassword" : "Update my password",
+  "MyProfile.UpdateMyPassword" : "내 비밀번호 업데이트",
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "사용자 이름",
@@ -1095,6 +1182,15 @@
 
   "__MyProfile.lastName" : "LastName",
   "MyProfile.lastName" : "성",
+
+  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "MyProfile.passwordChangeFailed" : "변경 실패",
+
+  "__MyProfile.passwordChangeInProgress" : "In progress",
+  "MyProfile.passwordChangeInProgress" : "진행 중",
+
+  "__MyProfile.passwordChangedOk" : "Password changed",
+  "MyProfile.passwordChangedOk" : "비밀번호 변경됨",
 
   "__MyProfile.searchable" : "Searchable",
   "MyProfile.searchable" : "검색 가능",
@@ -1138,6 +1234,21 @@
   "__RegisterNewUser.FirstName" : "First name",
   "RegisterNewUser.FirstName" : "이름",
 
+  "__RegisterNewUser.InformationLogin" : "Login",
+  "RegisterNewUser.InformationLogin" : "로그인",
+
+  "__RegisterNewUser.InformationVisibility" : "Access information",
+  "RegisterNewUser.InformationVisibility" : "액세스 정보",
+
+  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1" : "Togh에 사용자를 등록하여 이벤트에 액세스하고 이벤트를 생성하고 알림을 받습니다. 설정을 변경하려면 프로필에 액세스하세요.",
+
+  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2" : "귀하의 로그인은 귀하의 이메일입니다. Togh는 귀하의 계정을 확인하기 위해 확인 이메일을 보낼 것입니다. 이 이메일은 비밀번호를 분실했을 때 사용됩니다.",
+
+  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3" : "프로필에서 다른 Togh 사용자가 볼 수 없도록 설정을 변경할 수 있습니다. 기본적으로 이름과 이메일을 통해 검색에 표시됩니다. 친구가 당신을 만나야 합니다! 그러나 일반 검색에서 보이지 않도록 결정할 수 있습니다. 그런 다음 친구가 귀하를 참가자로 추가하려면 귀하의 이메일을 알아야 합니다.",
+
   "__RegisterNewUser.LastName" : "Last name",
   "RegisterNewUser.LastName" : "성",
 
@@ -1149,6 +1260,30 @@
 
   "__RegisterNewUser.RetypePassword" : "Retype password",
   "RegisterNewUser.RetypePassword" : "비밀번호 재 입력",
+
+  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
+  "RegisterUser.EmailIsMandatory" : "이메일은 필수입니다",
+
+  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory" : "이름은 필수입니다.",
+
+  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory" : "비밀번호는 필수입니다",
+
+  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory" : "비밀번호는 최소 4자 이상이어야 합니다.",
+
+  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDiffrent" : "비밀번호가 다릅니다",
+
+  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure" : "이제 비밀번호를 변경할 수 있습니다. 변경되며 즉시 연결됩니다.",
+
+  "__ResetPassword.passwordchanged" : "Password changed",
+  "ResetPassword.passwordchanged" : "비밀번호 변경됨",
+
+  "__ResetPassword.passwordchangefailed" : "Change failed",
+  "ResetPassword.passwordchangefailed" : "변경 실패",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "작업 실패",

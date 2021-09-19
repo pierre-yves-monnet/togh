@@ -124,6 +124,9 @@
   "__AdminUsers.ShowDetails" : "Details",
   "AdminUsers.ShowDetails" : "詳細",
 
+  "__AdminUsers.Source" : "Source",
+  "AdminUsers.Source" : "ソース",
+
   "__AdminUsers.Status" : "Status",
   "AdminUsers.Status" : "状態",
 
@@ -172,6 +175,27 @@
   "__AdminUsers.subscriptionPremium" : "Premium subscription",
   "AdminUsers.subscriptionPremium" : "プレミアムサブスクリプション",
 
+  "__AskPassword.DifferentPassword" : "Password are different",
+  "AskPassword.DifferentPassword" : "パスワードが違います",
+
+  "__AskPassword.NewPassword" : "New password",
+  "AskPassword.NewPassword" : "新しいパスワード",
+
+  "__AskPassword.RetypePassword" : "Retype password to verify it",
+  "AskPassword.RetypePassword" : "パスワードを再入力して確認します",
+
+  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword" : "パスワードには最低3文字を入力してください",
+
+  "__BodyTogh.ResetYourPassword" : "Reset your password",
+  "BodyTogh.ResetYourPassword" : "あなたのパスワードをリセット",
+
+  "__BodyTogh.ThankYou" : "Thank you!",
+  "BodyTogh.ThankYou" : "ありがとうございました！",
+
+  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited" : "あなたはイベントに招待されています！登録または接続してアクセスします",
+
   "__BodyTogh.welcome" : "Welcome to Togh",
   "BodyTogh.welcome" : "Welcome to Togh",
 
@@ -201,6 +225,9 @@
 
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "React、Springを学びたかった。さらに、私はクラウド展開に手を入れたかったのです。では、これらすべてのテクノロジーを使用してアプリケーションを構築し、何が起こっているのかを見てみませんか？",
+
+  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "BodyTogh.whyToghThankYou" : "技術探検家としての彼の才能のために、サイモンに。ルーンズ、彼の素晴らしいデザイン。クリステル、彼女のサポートに。そして、ある時点で私を助けてくれた他のすべての人たち。",
 
   "__Event.Budget" : "Budget",
   "Event.Budget" : "予算",
@@ -333,7 +360,7 @@
   "__EventChat.The" : "The",
   "EventChat.The" : "ザ・",
 
-  "__EventChat.WhatYouWantToSay" : "What you want to say?",
+  "__EventChat.WhatYouWantToSay" : "What do you want to say?",
   "EventChat.WhatYouWantToSay" : "あなたは何を言いたいですか？",
 
   "__EventExpense.AddExpense" : "Add a expense",
@@ -860,11 +887,35 @@
   "__Eventitinerary.StepRemoved" : "The step is removed",
   "Eventitinerary.StepRemoved" : "ステップが削除されます",
 
+  "__EventsList.AllEvents" : "All events",
+  "EventsList.AllEvents" : "すべてのイベント",
+
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "アイテムのリストにアクセスできません」",
 
+  "__EventsList.CreateAnEvent" : "Create an Event",
+  "EventsList.CreateAnEvent" : "イベントを作成する",
+
+  "__EventsList.Date" : "Date",
+  "EventsList.Date" : "日にち",
+
+  "__EventsList.DateFromTo" : "to",
+  "EventsList.DateFromTo" : "に",
+
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "最後の期間に許可されたイベントの制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
+
+  "__EventsList.MyEvents" : "My events",
+  "EventsList.MyEvents" : "私のイベント",
+
+  "__EventsList.Name" : "Name",
+  "EventsList.Name" : "名前",
+
+  "__EventsList.Participants" : "Participants",
+  "EventsList.Participants" : "参加者",
+
+  "__EventsList.Refresh" : "Refresh",
+  "EventsList.Refresh" : "更新",
 
   "__EventsList.ServerConnectionError" : "Server connection error",
   "EventsList.ServerConnectionError" : "サーバー接続エラー",
@@ -940,8 +991,35 @@
   "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
   "Login.CantConnectToTheServer" : "サーバーに接続できません",
 
+  "__Login.EmailIncorrect" : "Email address is incorrect",
+  "Login.EmailIncorrect" : "E-mailアドレスが正しくありません",
+
+  "__Login.EmailSent" : "An email is sent, check your mailbox",
+  "Login.EmailSent" : "メールが送信されました。メールボックスを確認してください",
+
+  "__Login.LostMyPassword" : "I lost My password",
+  "Login.LostMyPassword" : "パスワードを紛失しました",
+
+  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation" : "アカウントを持っていますが、接続できませんか？ [パスワードを一覧表示します]ボタンをクリックして、一時的なパスワードを取得します",
+
+  "__Login.LostMyPasswordLabel" : "Reset my password",
+  "Login.LostMyPasswordLabel" : "私のパスワードをリセットする",
+
+  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation" : "パスワードを変更するためのリンクがメールに送信されます",
+
   "__Login.RememberMe" : "Remember Me",
   "Login.RememberMe" : "私を覚えてますか",
+
+  "__Login.SendEmail" : "Send the email",
+  "Login.SendEmail" : "メールを送信する",
+
+  "__Login.ServerConnectionError" : "Server connection error",
+  "Login.ServerConnectionError" : "サーバー接続エラー",
+
+  "__Login.ServerIssue" : "An error arrived on the server, please try later",
+  "Login.ServerIssue" : "サーバーにエラーが到着しました。しばらくしてからお試しください",
 
   "Login.badConnection" : "接続不良-資格情報を確認してください",
 
@@ -1005,6 +1083,9 @@
 
   "__MyProfile.ChangeEmail" : "Change Email",
   "MyProfile.ChangeEmail" : "メールアドレスを変更",
+
+  "__MyProfile.ChangeMyPassword" : "Change my password",
+  "MyProfile.ChangeMyPassword" : "パスワードを変更する",
 
   "__MyProfile.Cypris" : "Cypris",
   "MyProfile.Cypris" : "キプリス",
@@ -1078,11 +1159,17 @@
   "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
   "MyProfile.SearchableExplanation" : "ユーザーは検索機能で表示できます。そうでない場合、あなたを招待する唯一の方法はあなたの電子メールを明示的に与えることです。",
 
+  "__MyProfile.SetANewPassword" : "Set a new password",
+  "MyProfile.SetANewPassword" : "新しいパスワードを設定する",
+
   "__MyProfile.Togh" : "Togh",
   "MyProfile.Togh" : "トグ",
 
   "__MyProfile.URL" : "Url",
   "MyProfile.URL" : "URL",
+
+  "__MyProfile.UpdateMyPassword" : "Update my password",
+  "MyProfile.UpdateMyPassword" : "パスワードを更新する",
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "ユーザー名",
@@ -1095,6 +1182,15 @@
 
   "__MyProfile.lastName" : "LastName",
   "MyProfile.lastName" : "苗字",
+
+  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "MyProfile.passwordChangeFailed" : "変更に失敗しました",
+
+  "__MyProfile.passwordChangeInProgress" : "In progress",
+  "MyProfile.passwordChangeInProgress" : "進行中",
+
+  "__MyProfile.passwordChangedOk" : "Password changed",
+  "MyProfile.passwordChangedOk" : "パスワード変更済み",
 
   "__MyProfile.searchable" : "Searchable",
   "MyProfile.searchable" : "検索可能",
@@ -1138,6 +1234,21 @@
   "__RegisterNewUser.FirstName" : "First name",
   "RegisterNewUser.FirstName" : "ファーストネーム",
 
+  "__RegisterNewUser.InformationLogin" : "Login",
+  "RegisterNewUser.InformationLogin" : "ログイン",
+
+  "__RegisterNewUser.InformationVisibility" : "Access information",
+  "RegisterNewUser.InformationVisibility" : "アクセス情報",
+
+  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1" : "Toghにユーザーを登録して、イベントにアクセスして作成し、通知を受け取ります。プロファイルにアクセスして、設定を変更します。",
+
+  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2" : "あなたのログインはあなたの電子メールです。 Toghから、アカウントを検証するための確認メールが送信されます。このメールは、パスワードを紛失した場合に使用されます。",
+
+  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3" : "プロファイルで、他のToghユーザーに表示されないように設定を変更できます。デフォルトでは、名前と電子メールを介して検索に表示されます。あなたの友人はあなたに会う必要があります！ただし、一般的な検索では表示されないように決定できます。次に、あなたを参加者として追加するには、友達があなたのメールアドレスを知っている必要があります。",
+
   "__RegisterNewUser.LastName" : "Last name",
   "RegisterNewUser.LastName" : "苗字",
 
@@ -1149,6 +1260,30 @@
 
   "__RegisterNewUser.RetypePassword" : "Retype password",
   "RegisterNewUser.RetypePassword" : "パスワードを再入力してください",
+
+  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
+  "RegisterUser.EmailIsMandatory" : "メールは必須です",
+
+  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory" : "名は必須です",
+
+  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory" : "パスワードは必須です",
+
+  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory" : "パスワードは4文字以上である必要があります",
+
+  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDiffrent" : "パスワードが異なります",
+
+  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure" : "これで、パスワードを変更できます。変更され、すぐに接続されます",
+
+  "__ResetPassword.passwordchanged" : "Password changed",
+  "ResetPassword.passwordchanged" : "パスワード変更済み",
+
+  "__ResetPassword.passwordchangefailed" : "Change failed",
+  "ResetPassword.passwordchangefailed" : "変更に失敗しました",
 
   "__UserFeedback.OperationFailed" : "Operation Failed",
   "UserFeedback.OperationFailed" : "操作に失敗しました",
