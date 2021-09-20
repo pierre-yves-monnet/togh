@@ -14,3 +14,9 @@ src/main/resources/secret.properties
 npm/public/img/toghV1.jpg
 npm/src/lang/*.bak
 /Safe.txt
+/GoogleCloud/intricate-gamma-325323-0c23d50f1d04.json
+/GoogleCloud/intricate-gamma-325323-ContainerRegistry.json
+dockerimage.tar
+db-data/
+.idea
+jpa-buddy.xml
