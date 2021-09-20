@@ -169,9 +169,9 @@ public class RestEventController {
      *      "userid" : <userId>,
      *      "role" : "ORGANIZER|PARTICIPANT|OBSERVER"
      *   }
-     * @param eventId
-     * @param connectionStamp
-     * @return
+     * @param inviteData Data for invitation
+     * @param connectionStamp information on connection
+     * @return list of invitation
      */
     
     @CrossOrigin

@@ -78,7 +78,7 @@ public class RestLoginController {
      * @return
      */
     @CrossOrigin
-    @PostMapping(value = "/api/login",produces = "application/json")
+    @PostMapping(value = "togh/api/login",produces = "application/json")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginResult loginStatus = loginService.connectWithEmail(userData.get("email"), userData.get("password"));
