@@ -72,7 +72,7 @@ public class LoginService {
 
     @Autowired
     private MonitorService monitorService;
-    
+
     @Autowired
     StatsService statsService;
 
@@ -87,8 +87,10 @@ public class LoginService {
 
     private int delayMinutesDisconnectInactiveUser = 30;
 
-    public enum LoginStatus { OK, BADEMAIL, SERVERISSUE, UNKNOWUSER, ALREADYEXISTUSER, NOTREGISTERED, BLOCKED };
-    
+    public enum LoginStatus {OK, BADEMAIL, SERVERISSUE, UNKNOWUSER, ALREADYEXISTUSER, NOTREGISTERED, BLOCKED}
+
+    ;
+
     public static class LoginResult {
 
         public boolean isConnected = false;
@@ -97,8 +99,10 @@ public class LoginService {
         public String connectionToken = null;
 
         public List<LogEvent> listEvents = new ArrayList<>();
+
         /**
          * listEvents are not sent back, it's a server information
+         *
          * @return
          */
         public Map<String, Object> getMap() {
@@ -112,9 +116,9 @@ public class LoginService {
     }
 
     /**
-     * @param email
-     * @param password
-     * @return
+     * @param emailOrName email or the name to connect
+     * @param password    password
+     * @return a LoginResult status
      */
     public LoginResult connectWithEmail(String emailOrName, String password) {
         LoginResult loginStatus = new LoginResult();
@@ -129,13 +133,13 @@ public class LoginService {
         }
         // Special case: a invited user with a password.... this is not normal. When the user register, it set a password and
         // it must move to Portal. Let's catch that
-        if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource()) 
-                && toghUserEntity.getPassword() !=null
-                && toghUserEntity.getPassword().length()>0) {
-            toghUserEntity.setSource( SourceUserEnum.PORTAL);
+        if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource())
+                && toghUserEntity.getPassword() != null
+                && toghUserEntity.getPassword().length() > 0) {
+            toghUserEntity.setSource(SourceUserEnum.PORTAL);
             toghUserService.saveUser(toghUserEntity);
         }
-        
+
         // this user must be registered on the portal
         if (!(SourceUserEnum.PORTAL.equals(toghUserEntity.getSource())
                 || SourceUserEnum.SYSTEM.equals(toghUserEntity.getSource()))) {
@@ -214,12 +218,12 @@ public class LoginService {
 
     // create a new user
     public LoginResult registerNewUser(String email,
-            String firstName,
-            String lastName,
-            String password,
-            SourceUserEnum sourceUser,
-            TypePictureEnum typePicture,
-            String picture) {
+                                       String firstName,
+                                       String lastName,
+                                       String password,
+                                       SourceUserEnum sourceUser,
+                                       TypePictureEnum typePicture,
+                                       String picture) {
         LoginResult loginStatus = new LoginResult();
         ToghUserEntity toghUserEntity = toghUserService.getUserFromEmail(email);
         if (toghUserEntity != null) {
@@ -241,18 +245,17 @@ public class LoginService {
                 // Hum, someone try to access an existing user via the registration ? Well try...
                 // Or maybe this is just a duplicate coincidence
                 loginStatus.status = LoginStatus.ALREADYEXISTUSER;
-                toghUserEntity=null;
+                toghUserEntity = null;
             }
             return loginStatus;
-        }
-        else {
+        } else {
             // encrypt the password now
             String passwordEncrypted = ToghUserService.encryptPassword(password);
             toghUserEntity = ToghUserEntity.createNewUser(firstName, lastName, email, passwordEncrypted, sourceUser);
             toghUserEntity.setTypePicture(typePicture);
-            toghUserEntity.setPicture(picture);            
+            toghUserEntity.setPicture(picture);
         }
-        
+
         // save modifications now
         if (toghUserEntity != null) {
             try {
@@ -261,7 +264,7 @@ public class LoginService {
             } catch (Exception e) {
                 logger.severe(logHeader + "Can't create new user: " + e.toString());
                 loginStatus.status = LoginStatus.SERVERISSUE;
-    
+
             }
         }
         return loginStatus;
@@ -308,7 +311,7 @@ public class LoginService {
 
     /**
      * User is updated (picture change, name change...) : just refresh this information
-     * 
+     *
      * @param toghUserEntity
      */
     public void userIsUpdated(ToghUserEntity toghUserEntity) {
@@ -360,8 +363,8 @@ public class LoginService {
 
     /**
      * Is this user an admin ?
-     * 
-     * @param userId
+     *
+     * @param toghUser togh user
      * @return
      */
     public boolean isAdministrator(ToghUserEntity toghUser) {
@@ -372,11 +375,10 @@ public class LoginService {
 
     /**
      * check that the user can access this RestAdminTranslator
-     * 
+     *
      * @param connectionStamp
      * @return
-     * @throws ResponseStatusException
-     *         bob
+     * @throws ResponseStatusException bob
      */
     public ToghUserEntity isAdministratorConnected(String connectionStamp) throws ResponseStatusException {
         ToghUserEntity toghUser = isConnected(connectionStamp);
@@ -393,7 +395,7 @@ public class LoginService {
 
     /**
      * Disconnect
-     * 
+     *
      * @param connectionStamp
      */
     public void disconnectUser(String connectionStamp) {
@@ -433,10 +435,7 @@ public class LoginService {
     }
 
     /**
-     * Disconnect explicitaly a user
-     * 
-     * @param userId
-     * @return
+     * class of status
      */
     public class OperationLoginUser {
 
@@ -466,15 +465,16 @@ public class LoginService {
     // LostMyPassword
     // 
     // --------------------------------------------------------------
+
     /**
      * Sent the email. The message to user is add, because it is translated by the interface (which contains the dictionnary)
+     *
      * @param email
-     * @param messageToUser
-     * @return
+     * @return the login status
      */
-    public LoginResult lostMyPassword( String email ) {
+    public LoginResult lostMyPassword(String email) {
         LoginResult loginStatus = new LoginResult();
-        
+
         // find the user from the email
         ToghUserEntity toghUserEntity = toghUserService.getUserFromEmail(email);
         if (toghUserEntity == null) {
@@ -483,54 +483,55 @@ public class LoginService {
         // Generate a UUID
         UUID uuid = UUID.randomUUID();
         ToghUserLostPasswordEntity lostPasswordEntity = new ToghUserLostPasswordEntity();
-        lostPasswordEntity.setUuid( uuid.toString());
-        lostPasswordEntity.setUser( toghUserEntity);
+        lostPasswordEntity.setUuid(uuid.toString());
+        lostPasswordEntity.setUser(toghUserEntity);
         LocalDateTime localDateTime = LocalDateTime.now(ZoneOffset.UTC);
-        localDateTime= localDateTime.minusHours( - 2);
+        localDateTime = localDateTime.minusHours(-2);
         lostPasswordEntity.setDateValidity(localDateTime);
-        lostPasswordEntity.setStatusProcess( StatusProcessEnum.PREPARATION);            
+        lostPasswordEntity.setStatusProcess(StatusProcessEnum.PREPARATION);
 
         try {
-            toghUserLostPasswordRepository.save( lostPasswordEntity );
+            toghUserLostPasswordRepository.save(lostPasswordEntity);
         } catch (Exception ex) {
             loginStatus.status = LoginStatus.SERVERISSUE;
-            loginStatus.listEvents.add( new LogEvent(eventCantSaveLostPassword, ex, "User["+toghUserEntity.getLabel()+"]"));
+            loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.getLabel() + "]"));
             monitorService.registerErrorEvents(loginStatus.listEvents);
             return loginStatus;
         }
-        
-        
+
+
         // send the email now
-        NotificationStatus notificationStatus = notifyService.sendLostPasswordEmail( toghUserEntity,uuid.toString() );
-        
+        NotificationStatus notificationStatus = notifyService.sendLostPasswordEmail(toghUserEntity, uuid.toString());
+
         if (notificationStatus.isCorrect()) {
-            lostPasswordEntity.setStatusProcess( StatusProcessEnum.EMAILSENT);            
+            lostPasswordEntity.setStatusProcess(StatusProcessEnum.EMAILSENT);
         } else if (notificationStatus.serverIssue) {
-            lostPasswordEntity.setStatusProcess( StatusProcessEnum.SERVERISSUE);
-            loginStatus.status =  LoginStatus.SERVERISSUE;
-            loginStatus.listEvents.add( new LogEvent(eventEmailResetPasswordFailed, "User["+toghUserEntity.getLabel()+"]"));
+            lostPasswordEntity.setStatusProcess(StatusProcessEnum.SERVERISSUE);
+            loginStatus.status = LoginStatus.SERVERISSUE;
+            loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.getLabel() + "]"));
         } else {
-            lostPasswordEntity.setStatusProcess( StatusProcessEnum.EMAILINERROR);
-            loginStatus.status =  LoginStatus.BADEMAIL;
-            loginStatus.listEvents.add( new LogEvent(eventEmailResetPasswordFailed, "User["+toghUserEntity.getLabel()+"]"));
-            
+            lostPasswordEntity.setStatusProcess(StatusProcessEnum.EMAILINERROR);
+            loginStatus.status = LoginStatus.BADEMAIL;
+            loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.getLabel() + "]"));
+
         }
-        
+
         try {
-            toghUserLostPasswordRepository.save( lostPasswordEntity );
+            toghUserLostPasswordRepository.save(lostPasswordEntity);
         } catch (Exception ex) {
             loginStatus.status = LoginStatus.SERVERISSUE;
-            loginStatus.listEvents.add( new LogEvent(eventCantSaveLostPassword, ex, "User["+toghUserEntity.getLabel()+"]"));
+            loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.getLabel() + "]"));
             monitorService.registerErrorEvents(loginStatus.listEvents);
             return loginStatus;
         }
-        
+
         monitorService.registerErrorEvents(loginStatus.listEvents);
         return loginStatus;
     }
-    
+
     /**
      * When the password is lost, a UUID is generated. Then, the page "change my password" is acceded. Form the UUID, information are send back
+     *
      * @param uuid
      * @return
      */
@@ -539,7 +540,7 @@ public class LoginService {
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("retrieveFromUUID");
 
-        List<ToghUserLostPasswordEntity> listUUID = toghUserLostPasswordRepository.findByUUID( uuid );
+        List<ToghUserLostPasswordEntity> listUUID = toghUserLostPasswordRepository.findByUUID(uuid);
         if (listUUID.isEmpty()) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
             return loginStatus;
@@ -552,17 +553,18 @@ public class LoginService {
 
         return loginStatus;
     }
+
     public LoginResult changePasswordAndConnect(String uuid, String password) {
         LoginResult loginStatus = new LoginResult();
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("retrieveFromUUID");
 
-        List<ToghUserLostPasswordEntity> listUUID = toghUserLostPasswordRepository.findByUUID( uuid );
+        List<ToghUserLostPasswordEntity> listUUID = toghUserLostPasswordRepository.findByUUID(uuid);
         if (listUUID.isEmpty()) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
             return loginStatus;
         }
-        ToghUserEntity  toghUserEntity = listUUID.get(0).getUser();
+        ToghUserEntity toghUserEntity = listUUID.get(0).getUser();
         // password inactif or block: remove it
         if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
@@ -574,21 +576,22 @@ public class LoginService {
         // change the password now
         toghUserService.setPassword(toghUserEntity, password);
         toghUserService.saveUser(toghUserEntity);
-        
+
         // now connect 
         loginStatus.userConnected = toghUserEntity;
         loginStatus.connectionToken = connectUser(toghUserEntity);
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
         return loginStatus;
-        
+
     }
-    public LoginResult changePassword(ToghUserEntity toghUserEntity, 
-            String password) {
+
+    public LoginResult changePassword(ToghUserEntity toghUserEntity,
+                                      String password) {
         LoginResult loginStatus = new LoginResult();
         MonitorService monitorService = factoryService.getMonitorService();
         Chrono chronoConnection = monitorService.startOperation("changePassword");
-        
+
 
         // password inactif or block: remove it
         if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
@@ -601,11 +604,11 @@ public class LoginService {
         // change the password now
         toghUserService.setPassword(toghUserEntity, password);
         toghUserService.saveUser(toghUserEntity);
-        
+
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
         return loginStatus;
-        
+
     }
 
 }
