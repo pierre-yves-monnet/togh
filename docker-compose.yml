@@ -1,0 +1,36 @@
+version: "3"
+services:
+  db:
+    image: "postgres"
+    container_name: "postgres"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+  backendtoghservice:
+    image: "pierreyvesmonnet/togh:1.0.0"
+    container_name: "togh"
+    ports:
+      - "7080:7080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5433/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+# frontendtoghservice:
+#    image: "pierreyvesmonnet/frontendtogh:1.0.0"
+#    container_name: "frontendtogh"
+#    ports:
+#      - "3000:3000"
+#    depends_on:
+#      - backendtoghservice
+#    logging:
+#       driver: gcplogs
