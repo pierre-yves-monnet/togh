@@ -1273,8 +1273,8 @@
   "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
   "RegisterUser.PasswordSizeMandatory" : "पासवर्ड में कम से कम 4 अक्षर होने चाहिए",
 
-  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDiffrent" : "पासवर्ड अलग हैं",
+  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent" : "पासवर्ड अलग हैं",
 
   "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure" : "अब आप अपना पासवर्ड बदल सकते हैं। इसे बदल दिया जाएगा, और आप तुरंत कनेक्ट हो जाएंगे",

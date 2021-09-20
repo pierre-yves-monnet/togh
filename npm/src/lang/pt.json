@@ -1273,8 +1273,8 @@
   "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
   "RegisterUser.PasswordSizeMandatory" : "A senha deve ter no mínimo 4 caracteres",
 
-  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDiffrent" : "As senhas são diferentes",
+  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent" : "As senhas são diferentes",
 
   "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure" : "Agora você pode alterar sua senha. Ele será alterado e você será conectado imediatamente",

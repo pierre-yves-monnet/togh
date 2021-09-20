@@ -1273,8 +1273,8 @@
   "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
   "RegisterUser.PasswordSizeMandatory" : "パスワードは4文字以上である必要があります",
 
-  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDiffrent" : "パスワードが異なります",
+  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent" : "パスワードが異なります",
 
   "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure" : "これで、パスワードを変更できます。変更され、すぐに接続されます",

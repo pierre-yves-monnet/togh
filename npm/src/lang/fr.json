@@ -224,7 +224,7 @@
   "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
   "BodyTogh.whyToghMotivation" : "Je voulais apprendre React, Spring. De plus, je voulais mettre la main sur le déploiement Cloud. Alors, pourquoi ne pas créer une application utilisant toutes ces technologies et voir ce qui se passe?",
 
-  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
+  "__BodyTogh.whyToghThankYou" : "To n, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
   "BodyTogh.whyToghThankYou" : "A Simon, pour son talent d'explorateur technique. Lounes, pour ses fabuleuses créations. Christelle, pour son soutien. Et tous les autres qui m'ont aidé à un moment donné.",
 
   "__Event.Budget" : "Budget",
@@ -1220,8 +1220,8 @@
   "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
   "RegisterUser.PasswordSizeMandatory" : "Le mot de passe doit avoir au moins 4 caractères",
 
-  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDiffrent" : "Les mots de passe sont différents",
+  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent" : "Les mots de passe sont différents",
 
   "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure" : "Vous pouvez maintenant changer votre mot de passe. Il sera modifié et vous serez connecté immédiatement",

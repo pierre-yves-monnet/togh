@@ -1220,8 +1220,8 @@
   "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
   "RegisterUser.PasswordSizeMandatory" : "Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες",
 
-  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDiffrent" : "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
+  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent" : "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
 
   "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure" : "Τώρα μπορείτε να αλλάξετε τον κωδικό πρόσβασής σας. Θα αλλάξει και θα συνδεθείτε αμέσως",

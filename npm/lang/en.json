@@ -1178,7 +1178,7 @@
   "RegisterUser.PasswordSizeMandatory": {
     "defaultMessage": "Password must have minimum 4 characters"
   },
-  "RegisterUser.PasswordsAreDiffrent": {
+  "RegisterUser.PasswordsAreDifferent": {
     "defaultMessage": "Passwords are different"
   },
   "ResetPassword.ResetPasswordProcedure": {

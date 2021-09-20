@@ -1220,8 +1220,8 @@
   "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
   "RegisterUser.PasswordSizeMandatory" : "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل",
 
-  "__RegisterUser.PasswordsAreDiffrent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDiffrent" : "كلمات المرور مختلفة",
+  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent" : "كلمات المرور مختلفة",
 
   "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure" : "يمكنك الآن تغيير كلمة المرور الخاصة بك. سيتم تغييره وسيتم توصيلك على الفور",
