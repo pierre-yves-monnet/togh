@@ -1,300 +1,356 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.togh</groupId>
-	<artifactId>togh</artifactId>
-	<version>1.0.0</version>
-	<packaging>war</packaging> <!--  war? -->
-	<properties>
-		<start-class>com.togh.ServletInitializer</start-class>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<npm.output.directory>build</npm.output.directory>
-	  	
-	</properties>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.google.cloud</groupId>
-				<artifactId>libraries-bom</artifactId>
-				<version>16.4.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<dependencies>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.togh</groupId>
+    <artifactId>togh</artifactId>
+    <version>1.0.0</version>
+    <!--<packaging>jar</packaging>  jar, war? -->
+    <properties>
+        <start-class>com.togh.ServletInitializer</start-class>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <npm.output.directory>build</npm.output.directory>
 
-		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>16.4.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.3</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-jpa</artifactId> <version>2.4.2</version> 
-			</dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-		<!-- PostgreSQL -->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- <dependency> <groupId>com.googlecode.json-simple</groupId> <artifactId>json-simple</artifactId> <version>1.1</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.json/json -->
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20201115</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.16</version>
-			<scope>provided</scope>
-		</dependency>
-
-
-
-		<!-- translation -->
-		<!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate -->
-
-		<!-- explicite authentication -->
-		<!-- https://cloud.google.com/docs/authentication/production?hl=fr -->
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-storage</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.auth</groupId>
-			<artifactId>google-auth-library-appengine</artifactId>
-			<version>0.24.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.8.0</version>
-		</dependency>
-
-		<!-- translation -->
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-translate</artifactId>
-			<!-- <version>1.95.7</version> -->
-		</dependency>
-		<dependency>
-			<groupId>com.google.api-client</groupId>
-			<artifactId>google-api-client-gson</artifactId>
-			<version>1.21.0</version>
-		</dependency>
-
-		<!-- <dependency> <groupId>com.google.apis</groupId> <artifactId>google-api-services-plus</artifactId> <version>v1-rev137-1.19.0</version> </dependency> -->
-
-		<!-- Example <dependency> <groupId>com.google.cloud</groupId> <artifactId>google-cloud-translate</artifactId> <version>LATEST</version> </dependency> <dependency> <groupId>com.google.http-client</groupId> 
-			<artifactId>google-http-client-gson</artifactId> <version>LATEST</version> </dependency> -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.5.0-b01</version>
-		</dependency>
-
-	</dependencies>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<finalName>${artifactId}</finalName>
-
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.2.3</version>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.3.2</version>
-				<executions>
-
-					<execution>
-						<id>npm run build (compile)</id>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<phase>compile</phase>
-						<configuration>
-							<executable>npm</executable>
-							<workingDirectory>npm</workingDirectory>
-							<arguments>
-								<argument>run</argument>
-								<argument>build</argument>
-							</arguments>
-						</configuration>
-					</execution>
-
-				</executions>
-
-				<configuration>
-					<environmentVariables>
-						<CI>false</CI>
-						<NPM_CONFIG_PREFIX>${basedir}/npm</NPM_CONFIG_PREFIX>
-						<NPM_CONFIG_CACHE>${NPM_CONFIG_PREFIX}/cache</NPM_CONFIG_CACHE>
-						<NPM_CONFIG_TMP>${project.build.directory}/npmtmp</NPM_CONFIG_TMP>
-					</environmentVariables>
-				</configuration>
-			</plugin>
-			
-		<!-- Maven JAR plugin for Docker -->
-		<plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-jar-plugin</artifactId>
-		    <executions>
-		        <execution>
-		            <id>jar-services-provided</id>
-		            <phase>compile</phase>
-		            <goals>
-		                <goal>jar</goal>
-		            </goals>
-		        </execution>
-		    </executions>
-		</plugin>	
-		<!--  build the Docker image -->
-		 <plugin>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-                <image>
-                    <name>docker-hub-username/togh:1.0</name>
-                </image>
-            </configuration>
-            <executions>
-                <execution>
-                    <phase>install</phase>
-                    <goals>
-                        <goal>build-image</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        
-        <!--  push the Docker image to dockerhub (https://hub.docker.com/)-->        
-        <plugin>
-		  <groupId>com.spotify</groupId>
-		  <artifactId>dockerfile-maven-plugin</artifactId>
-		  <version>1.4.7</version>
-		  <executions>
-		    <execution>
-		      <id>default</id>
-		      <phase>install</phase>		      
-		      <goals>
-		        <goal>build</goal>
-		        <goal>push</goal>
-		      </goals>
-		    </execution>
-		  </executions>
-		  <configuration>
-		    <repository>pierreyvesmonnet/togh</repository>
-		    <tag>${project.version}</tag>
-		    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>		    
-		    <buildArgs>
-		      <JAR_FILE>${project.build.finalName}-${project.version}.jar</JAR_FILE>
-		    </buildArgs>
-		  </configuration>
-		</plugin>
-        
-		</plugins>
-	</build>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-	<profiles>
-		<profile>
-			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
 
-						<configuration>
-							<environmentVariables>
-								<PUBLIC_URL>http://localhost:7080/togh</PUBLIC_URL>
-								<REACT_APP_ROUTER_BASE>/togh</REACT_APP_ROUTER_BASE>
-							</environmentVariables>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-jpa</artifactId> <version>2.4.2</version>
+            </dependency> -->
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <!-- PostgreSQL -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
 
-		<profile>
-			<id>prod</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
+        </dependency>
 
-						<configuration>
-							<environmentVariables>
-								<PUBLIC_URL>http://togh.com/togh</PUBLIC_URL>
-								<REACT_APP_ROUTER_BASE>/togh</REACT_APP_ROUTER_BASE>
-							</environmentVariables>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- <dependency> <groupId>com.googlecode.json-simple</groupId> <artifactId>json-simple</artifactId> <version>1.1</version> </dependency> -->
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20201115</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.16</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- translation -->
+        <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate -->
+
+        <!-- explicite authentication -->
+        <!-- https://cloud.google.com/docs/authentication/production?hl=fr -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.auth</groupId>
+            <artifactId>google-auth-library-appengine</artifactId>
+            <version>0.24.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <!-- translation -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-translate</artifactId>
+            <!-- <version>1.95.7</version> -->
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client-gson</artifactId>
+            <version>1.21.0</version>
+        </dependency>
+
+        <!-- <dependency> <groupId>com.google.apis</groupId> <artifactId>google-api-services-plus</artifactId> <version>v1-rev137-1.19.0</version> </dependency> -->
+
+        <!-- Example <dependency> <groupId>com.google.cloud</groupId> <artifactId>google-cloud-translate</artifactId> <version>LATEST</version> </dependency> <dependency> <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-gson</artifactId> <version>LATEST</version> </dependency> -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.5.0-b01</version>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                </configuration>
+            </plugin>
+
+            <!-- build the Frontend Docker image -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <executions>
+
+                    <execution>
+                        <id>FrontEnd npm run build</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <workingDirectory>npm</workingDirectory>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>FrontEnd docker build</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>npm</workingDirectory>
+                            <executable>docker</executable>
+                            <arguments>
+                                <argument>build</argument>
+                                <argument>-t</argument>
+                                <argument>pierreyvesmonnet/frontendtogh:${project.version}</argument>
+                                <argument>.</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>docker frontend push</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>npm</workingDirectory>
+                            <executable>docker</executable>
+                            <arguments>
+                                <argument>push</argument>
+                                <argument>pierreyvesmonnet/frontendtogh:${project.version}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <environmentVariables>
+                        <CI>false</CI>
+                        <NPM_CONFIG_PREFIX>${basedir}/npm</NPM_CONFIG_PREFIX>
+                        <NPM_CONFIG_CACHE>${basedir}/npm/cache</NPM_CONFIG_CACHE>
+                        <NPM_CONFIG_TMP>${project.build.directory}/npmtmp</NPM_CONFIG_TMP>
+                    </environmentVariables>
+                </configuration>
+            </plugin>
+
+            <!-- Maven JAR plugin for Docker
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jar-services-provided</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+
+            <!-- build the Application Docker image -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>pierreyvesmonnet/togh:${project.version}</name>
+                    </image>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build-image</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Push the Application Docker image -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <executions>
+                    <execution>
+                        <id>docker application push</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>npm</workingDirectory>
+                            <executable>docker</executable>
+                            <arguments>
+                                <argument>push</argument>
+                                <argument>pierreyvesmonnet/togh:${project.version}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- push the Docker image to dockerhub (https://hub.docker.com/) -->
+            <!--
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.7</version>
+                <executions>
+                    <execution>
+                        <id>PushApplicationDockerImage</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>pierreyvesmonnet/togh</repository>
+                    <tag>${project.version}</tag>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}-${project.version}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            -->
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+
+                        <configuration>
+                            <environmentVariables>
+                                <PUBLIC_URL>http://localhost:7080/togh</PUBLIC_URL>
+                                <REACT_APP_ROUTER_BASE>/togh</REACT_APP_ROUTER_BASE>
+                            </environmentVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+
+                        <configuration>
+                            <environmentVariables>
+                                <PUBLIC_URL>http://localhost:7080/togh</PUBLIC_URL>
+                                <REACT_APP_ROUTER_BASE>/togh</REACT_APP_ROUTER_BASE>
+                            </environmentVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

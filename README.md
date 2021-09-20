@@ -7,8 +7,7 @@
 /*                                                                                  */
 /* ******************************************************************************** */
 
-Tomcat server : D:\bonita\tomcat\Tomcat-9.0.41, port 7080
-http://localhost:7080/Together
+
 
 npm install
 npm install -S carbon-components carbon-components-react carbon-icons
@@ -18,7 +17,7 @@ copier configuration/paths.js dans node_modules/react-scripts/config/path
 mvn clean install
 
 
-## base de donnée
+## Database
 
 Une base de donnée Postgres est crée. Le fichier applications.ressources défini cela:
 
@@ -40,6 +39,9 @@ Puis faire sur le projet un "Debug in server"
 Note: 
 le projet doit etre not� "Dynamic web application" sinon Spring ne veut pas d�marr� ( ? )
 Click droit => Properties => Project Facet => Dynamic Web Application
+
+# Intellij
+Launch the class com.togh.ServerInitializer.
 
 ## Lombok 
 The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
@@ -158,10 +160,6 @@ https://www.npmjs.com/package/carbon-components
 npm install -S carbon-components carbon-components-react carbon-icons
 
 
-Install react in tomcat
-https://frugalisminds.com/deploy-react-js-in-tomcat/
-npm install
-mvn clean install
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 
 
@@ -460,44 +458,39 @@ https://cloud.google.com/translate/docs/quickstarts
 stocker les photo de l'API Key pour Flick
 
 
-# Cloud & docker
+# Cloud & Docker
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  Cloud									                                        */
+/*  Cloud & Docker									                                        */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
+## Create Togh Docker image
+```
+> mvn install
+
+> docker push pierreyvesmonnet/togh:1.0.0
+
+```
+
+## Create frontendtogh image
+```
+> cd npm
+> docker build -t pierreyvesmonnet/frontendtogh:1.0.0 .
+> docker push pierreyvesmonnet/frontendtogh:1.0.0
+```
+## execute docker image
+```
+> docker run --name togh -h localhost -e "SPRING_PROFILES_ACTIVE=production" -d -p 7080:7080 -p 5432:5432 pierreyvesmonnet/togh:1.0.0
+> docker run --name frontendtogh -h localhost -d -p 3000:3000 -p 80:80 pierreyvesmonnet/frontendtogh:1.0.0
+```
+not needed: -v d:/tmp/docker:/opt/togh
+
+## ---- compose
+docker-compose up
 
 
-# docker image tomcat:
-docker pull tomcat
-docker pull ubuntu
-docker run --name togh -h localhost -v d:/tmp/docker:/opt/togh -d -p 8080:8080 tomcat
-
-## Creation du container togh
-
-docker run --name togh -h localhost -v d:/tmp/docker:/opt/togh -d -p 8080:8080 togh
-
-
-
--------------------------------------- container vide
-Ajout des composants vi & postgres
-apt-get update
-apt-get install vi
-
-
-apt-get install postgresql postgresql-contrib
- 
- su - postgres
- pg_ctlcluster 11 main start
- 
- creation de la la base de donnée
- \conninfo
- psql
- CREATE DATABASE together;
- 
- Ajout de npm 
  
 ## cloud
 
@@ -507,6 +500,160 @@ https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 Deployer Postgres
 https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
  
+# google cloud
+https://cloud.google.com/community/tutorials/kotlin-springboot-compute-engine
+
+cd d:\atelier\cloud
+cloud_env.bat
+
+## Allow Docker to publish to gcr.io:
+As a Windows administrateur
+```
+> net localgroup docker-users rhaegal\pymonnet /add
+> gcloud auth activate-service-account --key-file=D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-0c23d50f1d04.json
+> gcloud auth configure-docker
+```
+
+## Push image to gcr.io
+gcloud auth login
+```
+> docker tag pierreyvesmonnet/togh:1.0.0 gcr.io/intricate-gamma-325323/togh:1.0.0
+> docker push gcr.io/intricate-gamma-325323/togh:1.0.0
+
+> docker tag pierreyvesmonnet/frontendtogh:1.0.0 gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+> docker push gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+> 
+```
+http://gcr.io/intricate-gamma-325323
+
+# Create Google instance
+> https://cloud.google.com/community/tutorials/cloud-run-local-dev-docker-compose
+1. Create an Compute Engine instance, named toghinstance
+
+
+2. Create a Service Account with the role "ContainerRegistry". Generate the KEY, get the JSON file and copy the file to the host
+3. 
+
+upload file from D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-ContainerRegistry
+
+docker login -u _json_key --password-stdin https://gcr.io  <intricate-gamma-325323-ContainerRegistry.json
+
+export GCP_KEY_PATH=~/intricate-gamma-325323-ContainerRegistry.json
+
+docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
+docker run gcr.io/intricate-gamma-325323/togh:1.0.0
+docker pull gcr.io/intricate-gamma-325323/toghfront:1.0.0
+            gcr.io/intricate-gamma-325323/toghfront
+
+
+4.1 run docker compose
+export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json
+docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
+
+docker run --rm \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v "$PWD:$PWD" \
+     -p 5432:5432  \
+     -w="$PWD" \
+     -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/keyfile.json \
+     -v /home/toghnow/intricate-gamma-325323-ContainerRegistry.json:/tmp/keys/keyfile.json:ro \
+     docker/compose:1.24.0 up &
+
+     -p 5432:5432  \
+    -p 7080:7080 \
+    -p 3000:3000 \
+
+
+
+4.2 run docker container
+A lancer sur le computen engine
+
+```
+$ docker run --name toghpostgres -e POSTGRES_USER=toghp -e POSTGRES_PASSWORD=ThisIsThog4Postgres -e POSTGRES_DB=togh -p 5432:5432 -d postgres
+$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres -p 7080:7080 --network="host" -d gcr.io/intricate-gamma-325323/togh:1.0.0
+$ docker run --name frontendtogh  -p 3000:3000 --network="host" -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+$ curl http://34.125.204.84:7080/api/ping
+```
+
+
+Create a firewall rule to allow my PC to access Postgres: 5432
+
+docker run -it --rm --network="host" postgres psql -h 34.94.244.105 -U toghp
+
+docker run -it --rm postgres psql -h toghpostgres -U toghpostgres
+
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+$ docker run -it --rm --network some-network postgres psql -h some-postgres -U postgres
+
+
+- SPRING_DATASOURCE_PASSWORD=root
+
+
+gcloud config set project <<YOUR_PROJECT_NAME>>
+gcloud config set compute/zone <<YOUR_SELECT_ZONE>>
+docker logs <containerid>
+sudo netstat -tulpn | grep LISTEN
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Docker									                                        */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+# Docker Other commands
+### docker image tomcat:
+docker pull tomcat
+docker pull ubuntu
+docker run --name togh -h localhost -v d:/tmp/docker:/opt/togh -d -p 8080:8080 pierreyvesmonnet/togh:1.0.0
+
+
+
+### main command
+> image
+docker image ls
+docker image rm
+
+> docker en execution
+docker ps -a
+docker stop <container id>
+docker rm <container id>
+
+Access the content of a container
+docker container ls -a
+>>> without -a, there is nothing if the container does not run
+
+
+docker export <containerId> > docimage.tar
+
+docker logs 221
+
+
+
+
+
+test backend:
+http://localhost:7080/ping
+test front end
+http://localhost:3000
+
+
+-------------------------------------- container vide
+Ajout des composants vi & postgres
+apt-get update
+apt-get install vi
+
+
+apt-get install postgresql postgresql-contrib
+
+su - postgres
+pg_ctlcluster 11 main start
+
+creation de la la base de donnée
+\conninfo
+psql
+CREATE DATABASE together;
+
+
 ## Sauvegarder le container
  
 ## importer le container
@@ -533,7 +680,7 @@ https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-
+## Default admin 
   private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com";
     private static final String TOGHADMIN_USERNAME = "toghadmin";
     private static final String TOGHADMIN_PASSWORD = "togh";
@@ -579,9 +726,10 @@ Py
 11. Revoir la deconnection, le feedback user quand on fait un save
 
 
-
-12. Verifier : admintogh creation et login (admintogh d'un coté, et toghadmin@togh.com de l'autre et j'arrive plus a me connecter
-13. Verifier : quand un user se connecte, on recupere bien dans toghentity ses propres tips preference?
+Forgot my password: email incorrect
+envoi d'email
+registration
+invitation
 
 	
 		
