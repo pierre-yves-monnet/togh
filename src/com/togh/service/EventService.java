@@ -8,18 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
@@ -31,19 +19,27 @@ import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.ToghUserEntity;
+import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
 import com.togh.repository.EventExpenseRepository;
-import com.togh.repository.EventGroupChatRepository;
-import com.togh.repository.EventItineraryStepRepository;
 import com.togh.repository.EventRepository;
-import com.togh.repository.EventShoppingListRepository;
-import com.togh.repository.EventSurveyRepository;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventController;
 import com.togh.service.event.EventUpdate.Slab;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -137,8 +133,9 @@ public class EventService {
     }
 
     /**
-     * @param user
-     * @return
+     * @param toghUserEntity the user
+     * @param  eventName
+     * @return the EventOperationResult
      */
     public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
 
@@ -282,9 +279,9 @@ public class EventService {
     }
 
     /**
-     * @param userId
-     * @param eventId
-     * @return
+     * @param toghUserEntity userEntity
+     * @param eventId eventId
+     * @return the eventEntity
      */
     public EventEntity getAllowedEventById(ToghUserEntity toghUserEntity, long eventId) {
         EventEntity eventEntity = getEventById(eventId);
@@ -320,9 +317,41 @@ public class EventService {
         public InvitationStatus status;
         public List<ToghUserEntity> listThogUserInvited = new ArrayList<>();
         public List<ParticipantEntity> newParticipants = new ArrayList<>();
-        public StringBuilder errorMessage = new StringBuilder();
-        public StringBuilder okMessage = new StringBuilder();
+        private List<ToghUserEntity> errorMessage = new ArrayList();
+        private List<ToghUserEntity> errorSendEmail = new ArrayList<>();
+        private List<ToghUserEntity> okMessage = new ArrayList();
+
         public List<LogEvent> listLogEvents = new ArrayList<>();
+
+        public void addErrorMessage( ToghUserEntity toghUserEntity) {
+            errorMessage.add( toghUserEntity);
+        }
+
+        public String getErrorMessage() {
+            return errorMessage.stream()
+                    .map(ToghUserEntity::getLabel)
+                    .collect( Collectors.joining( "," ) );
+        }
+
+        public void addErrorSendEmail( ToghUserEntity toghUserEntity) {
+            errorSendEmail.add( toghUserEntity);
+        }
+
+        public String getErrorSendEmail() {
+            return errorSendEmail.stream()
+                    .map(ToghUserEntity::getLabel)
+                    .collect( Collectors.joining( "," ) );
+        }
+
+        public void addOkMessage( ToghUserEntity toghUserEntity) {
+            okMessage.add( toghUserEntity);
+        }
+
+        public String getOkMessage() {
+            return okMessage.stream()
+                    .map(ToghUserEntity::getLabel)
+                    .collect( Collectors.joining( "," ) );
+        }
     }
 
     public InvitationResult invite(EventEntity eventEntity, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {

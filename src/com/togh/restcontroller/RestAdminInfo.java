@@ -14,10 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.togh.service.LoginService;
 
@@ -28,11 +25,17 @@ import com.togh.service.LoginService;
 /* -------------------------------------------------------------------- */
 
 @RestController
+@RequestMapping("togh")
 public class RestAdminInfo {
 
     @Autowired
     private LoginService loginService;
-    
+
+    /**
+     *
+     * @param connectionStamp    Information on the connected user
+     * @return
+     */
     @CrossOrigin
     @GetMapping(value = "/api/admin/info", produces = "application/json")
     public List<Map<String,Object>> getApiKeys(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {

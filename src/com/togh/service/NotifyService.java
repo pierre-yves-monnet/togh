@@ -68,7 +68,7 @@ public class NotifyService {
 
     public class NotificationStatus {
 
-        List<LogEvent> listEvents = new ArrayList<>();
+        public List<LogEvent> listEvents = new ArrayList<>();
 
         public boolean isCorrect() {
             return !LogEventFactory.isError(listEvents);
@@ -162,8 +162,7 @@ public class NotifyService {
      * Anevent is purged
      * Some person may want to be notify?
      * @param eventEntity
-     * @param oldStatus status before the change
-     * 
+     *
      */
     public NotificationStatus notifyEventPurge(@Nonnull EventEntity eventEntity) {
         return new NotificationStatus();
@@ -222,17 +221,19 @@ public class NotifyService {
     // --------------------------------------------------------------
 
     /**
-     * @param emailTo
-     * @param mailSubject
-     * @param mailContent
-     * @return
+     * Send Email
+     *
+     * @param emailTo Email to this mail
+     * @param mailSubject Subject of mail
+     * @param mailContent Content of email
+     * @return the notification status
      */
     private NotificationStatus sendEmail(String emailTo, String mailSubject, String mailContent) {
         NotificationStatus notificationStatus = new NotificationStatus();
 
         SendEmail sendEmail = new SendEmail(factoryService);
         notificationStatus.listEvents.addAll(sendEmail.sendOneEmail(emailTo, mailSubject, mailContent));
-        if (notificationStatus.listEvents.size() > 0 &&
+        if (! notificationStatus.listEvents.isEmpty() &&
                 notificationStatus.listEvents.get(0).isSameEvent(SendEmail.eventNoEmailServerConfigured))
             notificationStatus.serverIssue = true;
         return notificationStatus;

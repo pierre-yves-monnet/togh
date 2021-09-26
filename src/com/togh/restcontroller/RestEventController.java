@@ -17,14 +17,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.togh.engine.logevent.LogEventFactory;
@@ -43,23 +36,31 @@ import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.FactoryService;
-import com.togh.service.event.EventController;
 import com.togh.service.event.EventUpdate.Slab;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
-/* RestEventControler */
+/* RestEventController */
 /*                                                                      */
 /* -------------------------------------------------------------------- */
 
 @RestController
+@RequestMapping("togh")
 public class RestEventController {
 
     @Autowired
     private FactoryService factoryService;
 
     @Autowired EventService eventService;
-    
+
+    /**
+     *
+     * @param filterEvents
+     * @param timezoneOffset
+     * @param withParticipants
+     * @param connectionStamp    Information on the connected user
+     * @return
+     */
     @CrossOrigin
     @GetMapping("/api/event/list")
       public Map<String, Object> events(@RequestParam( RestJsonConstants.CST_PARAM_FILTER_EVENTS ) String filterEvents,
@@ -85,7 +86,7 @@ public class RestEventController {
      * Get an event to display it
      * @param eventId
      * @param timezoneOffset
-     * @param connectionStamp
+     * @param connectionStamp    Information on the connected user
      * @return
      */
     @CrossOrigin
@@ -114,8 +115,8 @@ public class RestEventController {
 
     /**
      * Create a new event
-     * 
-     * @param connectionStamp
+     *
+     * @param connectionStamp    Information on the connected user
      * @return
      */
     @CrossOrigin
@@ -141,8 +142,8 @@ public class RestEventController {
             completePayloadListEvents(payload, toghUser, filterEvents, new AdditionnalInformationEvent(), timezoneOffset);
         }
         payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
-        payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId() );
-        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
+        payload.put( RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId() );
+        payload.put( RestJsonConstants.CST_LIST_LOG_EVENTS, eventOperationResult.getEventsJson());
         payload.put( RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
 
         return payload;
@@ -170,10 +171,9 @@ public class RestEventController {
      *      "role" : "ORGANIZER|PARTICIPANT|OBSERVER"
      *   }
      * @param inviteData Data for invitation
-     * @param connectionStamp information on connection
+     * @param connectionStamp    Information on the connected user
      * @return list of invitation
      */
-    
     @CrossOrigin
     @PostMapping("/api/event/invitation")
     public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
@@ -215,13 +215,20 @@ public class RestEventController {
         for (ParticipantEntity participant : invitationResult.newParticipants)
             listParticipants.add( participant.getMap( ContextAccess.PUBLICACCESS, timezoneOffset ));
         payload.put( RestJsonConstants.CST_STATUS, invitationResult.status.toString());
-        payload.put( RestJsonConstants.CST_OKMESSAGE, invitationResult.okMessage.toString());
-        payload.put( RestJsonConstants.CST_ERRORMESSAGE, invitationResult.errorMessage.toString());
+        payload.put( RestJsonConstants.CST_MESSAGE_OK, invitationResult.getOkMessage());
+        payload.put( RestJsonConstants.CST_MESSAGE_ERROR, invitationResult.getErrorMessage());
+        payload.put( RestJsonConstants.CST_MESSAGE_ERROR_SEND_EMAIL, invitationResult.getErrorSendEmail());
 
         payload.put( RestJsonConstants.CST_ISINVITATIONSENT, invitationResult.status == InvitationStatus.INVITATIONSENT);
         return payload;
     }
-    
+
+    /**
+     *
+     * @param updateMap
+     * @param connectionStamp    Information on the connected user
+     * @return
+     */
     @CrossOrigin
     @PostMapping("/api/event/update")
     public Map<String, Object> update(@RequestBody Map<String, Object> updateMap, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
@@ -248,8 +255,8 @@ public class RestEventController {
         EventOperationResult eventOperationResult = eventService.updateEvent( event, getListSlab(slabEventList), updateContext);
         
         Map<String, Object> payload = new HashMap<>();
-        payload.put( RestJsonConstants.CST_EVENTID, eventOperationResult.getEventId());
-        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, eventOperationResult.getEventsJson());
+        payload.put( RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId());
+        payload.put( RestJsonConstants.CST_LIST_LOG_EVENTS, eventOperationResult.getEventsJson());
         
         ContextAccess contextAccess = eventService.getContextAccess(event, toghUser);
         List<Map<String,Object>> listEntity = new ArrayList<>();
@@ -294,12 +301,12 @@ public class RestEventController {
         List<Map<String,Object>> listEventsMap= new ArrayList<>();
         EventResult eventResult = eventService.getEvents(toghUser, filterEvents);
     if (LogEventFactory.isError( eventResult.listLogEvent)) {
-        payload.put( RestJsonConstants.CST_LISTLOGEVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
+        payload.put( RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
     } else {
         for (EventEntity event : eventResult.listEvents) {
             listEventsMap.add( event.getHeaderMap( eventService.getContextAccess(event, toghUser), additionnalInformationEvent, timezoneOffset));
         }
-        payload.put( RestJsonConstants.CST_LISTEVENTS, listEventsMap);
+        payload.put( RestJsonConstants.CST_LIST_EVENTS, listEventsMap);
     }
     }
 }

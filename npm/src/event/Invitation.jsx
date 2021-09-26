@@ -141,14 +141,31 @@ class Invitation extends React.Component {
 					<div style={{display: "inline-block", float: "right"}}>	
 						<button class="btn btn-info btn-lg" 
 							onClick={this.sendInvitation}
-							disabled={! this.enableInvite() }>
+							disabled={! this.enableInvite() }
+							style="padding-bottom:10px;">
 							<div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
 							{this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
 						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.SendInvitation" defaultMessage="Send Invitation"/></div>)}
 						</button>
 						<br />
-						{ this.state.statusErrorInvitation && (<div class="alert alert-warning">{this.state.statusErrorInvitation}</div>)}
-						{ this.state.statusOkInvitation && (<div class="alert alert-success">{this.state.statusOkInvitation}</div>)}
+						{ this.state.statusErrorInvitation && (
+						    <div class="alert alert-warning">
+						        {<FormattedMessage id="Invitation.UsersAlreadyRegistered" defaultMessage="These participants are already registered"/>}
+						        :
+						        {this.state.statusErrorInvitation}
+						    </div>)}
+						{ this.state.statusOkInvitation && (
+						    <div class="alert alert-success">
+						        {<FormattedMessage id="Invitation.UsersInvited" defaultMessage="Users are invited with success"/>}
+						        :
+						        {this.state.statusOkInvitation}
+						    </div>)}
+						{ this.state.statusErrorSendEmail && (
+						    <div class="alert alert-warning">
+						        {<FormattedMessage id="Invitation.NoEmails" defaultMessage="Attention, email can't be sent to these users"/>}
+						        :
+						        {this.state.statusErrorSendEmail}
+						    </div>)}
 					</div>
 
 
@@ -273,7 +290,8 @@ class Invitation extends React.Component {
 			listUsersSelected: {}, 
 			messageServerSearch:'', 
 			statusErrorInvitation: '', 
-			statusOkInvitation:'' });
+			statusOkInvitation:'',
+			 statusErrorSendEmail:''});
 			
 		this.setState( {inprogresssearch: true });
 
@@ -319,7 +337,7 @@ class Invitation extends React.Component {
 		console.log("Invitation.sendInvitation: http[event/create?] param="+JSON.stringify(param));
 		
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		this.setState( {inprogressinvitation: true, statusErrorInvitation: '', statusOkInvitation:'' });
+		this.setState( {inprogressinvitation: true, statusErrorInvitation: '', statusOkInvitation:'', statusErrorSendEmail:'' });
 		restCallService.postJson('/api/event/invitation', this, param, this.sendInvitationCallback );
 	}
 
@@ -330,11 +348,12 @@ class Invitation extends React.Component {
 			this.setState({ "statusErrorInvitation": "An error arrived " });
 		}
 		else if (httpPayload.getData().status === 'INVITATIONSENT') {
-			this.setState({ "statusOkInvitation": "Invitation sent with success to "+httpPayload.getData().okMessage });
+			this.setState({ "statusOkInvitation":httpPayload.getData().okMessage });
+			this.setState({ "statusErrorSendEmail" : httpPayload.getData().errorSendEmail});
 			console.log("Invitation.callback : register this new participant =" + JSON.stringify(httpPayload.getData()));
 			this.props.participantInvited(httpPayload.getData().participants);
 		} else if (httpPayload.getData().status === 'ALREADYAPARTICIPANT') {
-			this.setState({ "statusErrorInvitation": "This participant is already registered: "+httpPayload.getData().errorMessage  });
+			this.setState({ "statusErrorInvitation": httpPayload.getData().errorMessage  });
 			this.props.participantInvited(httpPayload.getData().participants);
 		} else {
 			this.setState({ "statusErrorInvitation": "An error arrived "+ httpPayload.getData().status });

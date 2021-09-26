@@ -20,10 +20,10 @@ public class RestJsonConstants {
 
     public static final String CST_PARAM_FILTER_EVENTS = "filterEvents";
     public static final String CST_PARAM_NAME = "name";
-    public static final String CST_LISTLOGEVENTS = "listLogEvents";
-    public static final String CST_EVENTID = "eventId";
+    public static final String CST_LIST_LOG_EVENTS = "listLogEvents";
+    public static final String CST_EVENT_ID = "eventId";
     public static final String CST_EVENT = "event";
-    public static final String CST_LISTEVENTS = "events";
+    public static final String CST_LIST_EVENTS = "events";
     public static final String CST_CHILDENTITY = "childEntity";
     public static final String CST_CHILDENTITYID = "childEntityId";
     public static final String CST_LIMITSUBSCRIPTION = "limitsubscription";
@@ -33,12 +33,14 @@ public class RestJsonConstants {
     public static final String CST_STATUS = "status";
     public static final String CST_STATUS_V_OK = "OK";
     public static final String CST_STATUS_V_ERROR = "ERROR";
-    public static final String CST_OKMESSAGE = "okMessage";
-    public static final String CST_ERRORMESSAGE = "errorMessage";
+    public static final String CST_MESSAGE_OK = "okMessage";
+    public static final String CST_MESSAGE_ERROR = "errorMessage";
+    public static final String CST_MESSAGE_ERROR_SEND_EMAIL="errorSendEmail";
+
     public static final String CST_ISINVITATIONSENT = "isInvitationSent";
     static final String CST_PARAM_AUTHORIZATION = "Authorization";
     static final String CST_INJSON_EVENTID = "eventid";
-    static final String CST_NUMBERPERPAGE = "numberperpage";
+    static final String CST_NUMBER_PER_PAGE = "numberperpage";
     static final String CST_PAGE = "page";
     static final String CST_COUNTUSERS = "countusers";
     static final String CST_LISTUSERS = "users";

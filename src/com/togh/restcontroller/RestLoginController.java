@@ -25,14 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -50,6 +43,7 @@ import com.togh.service.LoginService.LoginResult;
 import com.togh.service.LoginService.LoginStatus;
 
 @RestController
+@RequestMapping("togh")
 public class RestLoginController {
    
     private Logger logger = Logger.getLogger(RestLoginController.class.getName());
@@ -78,7 +72,7 @@ public class RestLoginController {
      * @return
      */
     @CrossOrigin
-    @PostMapping(value = "togh/api/login",produces = "application/json")
+    @PostMapping(value = "api/login",produces = "application/json")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginResult loginStatus = loginService.connectWithEmail(userData.get("email"), userData.get("password"));
@@ -92,7 +86,7 @@ public class RestLoginController {
     
     /**
      * Logout
-     * @param connectionStamp
+     * @param connectionStamp    Information on the connected user
      * @return
      */
     @CrossOrigin
@@ -234,8 +228,13 @@ public class RestLoginController {
         finalStatus.putAll( loginStatus.getMap());
         return finalStatus;
     }
-    
-    
+
+    /**
+     *
+     * @param userData
+     * @param connectionStamp    Information on the connected user
+     * @return
+     */
     @CrossOrigin
     @PostMapping(value = "/api/login/changePassword",produces = "application/json")
     @ResponseBody

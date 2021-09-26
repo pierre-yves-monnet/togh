@@ -8,10 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
@@ -26,6 +22,10 @@ import com.togh.service.NotifyService;
 import com.togh.service.ToghUserService;
 import com.togh.service.ToghUserService.CreationResult;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -38,7 +38,7 @@ import com.togh.service.ToghUserService.CreationResult;
 
 public class EventInvitation {
 
-    private FactoryService factoryService;
+    private final FactoryService factoryService;
 
     // private EventRepository eventRepository;
 
@@ -71,7 +71,7 @@ public class EventInvitation {
                 CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, event);
                 if (creationStatus.toghUser == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
-                    // This is an internal message here , cant sent back to the user error information 
+                    // This is an internal message here , can't send back to the user error information
                     return invitationResult;
                 }
                 setUserJustInvited.add( creationStatus.toghUser );
@@ -86,16 +86,16 @@ public class EventInvitation {
 
         if (listUsersId != null && !listUsersId.isEmpty()) {
             for (Long userId : listUsersId) {
-                // Javascript will pass a Integer or a String (JS doesn not manage correctly large Long number as Integer)
+                // Javascript will pass an Integer or a String (JS does not manage correctly large number)
                 ToghUserEntity toghUser = null;
                 if (userId != null)
                     toghUser = userService.getUserFromId( userId );
                 if (toghUser == null) {
 
-                    // caller has supposed to give a valid userId. Stop immediatelly
+                    // caller has supposed to give a valid userId. Stop immediately
 
                     invitationResult.status = InvitationStatus.INVALIDUSERID;
-                    // This is an internal message here , cant sent back to the user error information 
+                    // This is an internal message here , can't send back to the user error information
                     monitorService.endOperation(chronoInvitation);
                     return invitationResult;
                 }
@@ -104,22 +104,24 @@ public class EventInvitation {
             }
         }
 
-        // check if one users was already a participant ?
+        // check if one user was already a participant ?
         boolean doubleInvitation = false;
         for (ToghUserEntity toghUser : invitationResult.listThogUserInvited) {
             ParticipantEntity participant = this.eventController.getParticipant(toghUser);
             if (participant != null) {
                 doubleInvitation = true;
-                invitationResult.errorMessage.append(toghUser.getFirstName() + " " + toghUser.getLastName() + ", ");
+                invitationResult.addErrorMessage(toghUser);
             } else {
                 // send the invitation and register the guy
-                // attention, if the user is just invited to join TOGH, we don't want to sent a new email.
+                // attention, if the user is just invited to join TOGH, we don't want to send a new email.
                 // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
                 if (! setUserJustInvited.contains(toghUser)) {
-                    notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, event);
+                    NotifyService.NotificationStatus notificationStatus=notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, event);
+                    if (! notificationStatus.isCorrect())
+                        invitationResult.addErrorSendEmail(toghUser);
                 }
                 invitationResult.newParticipants.add(event.addPartipant(toghUser, role, StatusEnum.INVITED));
-                invitationResult.okMessage.append(toghUser.getLabel() + ", ");
+                invitationResult.addOkMessage(toghUser);
             }
         }
         
