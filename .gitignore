@@ -18,5 +18,5 @@ npm/src/lang/*.bak
 /GoogleCloud/intricate-gamma-325323-ContainerRegistry.json
 dockerimage.tar
 db-data/
-.idea
-jpa-buddy.xml
+.idea/
+.idea/jpa-buddy.xml
