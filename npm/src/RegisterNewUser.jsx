@@ -95,7 +95,7 @@ class RegisterNewUser extends React.Component {
 						<div style={{color:"red"}}>{messageBadPassword}</div>
 					</div>
 					<button class="btn btn-info" onClick={this.registerUser} 
-							disabled={ ! this.checkPassword() || this.validateForm() != ''}>
+							disabled={ ! this.checkPassword() || this.validateForm() !== ''}>
 						{this.state.loading && <span class="loading">.</span>} <FormattedMessage id="RegisterNewUser.Registration" defaultMessage="Registration"/></button><p />
 					<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
 					

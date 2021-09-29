@@ -72,7 +72,7 @@ class Menu extends React.Component {
 					<FormattedMessage id="Menu.MyProfileExplanation" defaultMessage="Manage your preferences, set up an avatar." />
 				</div>
 				
-				{ user.privilegeUser =="ADMIN" &&
+				{ user.privilegeUser === "ADMIN" &&
 					<div> 
 						<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghmenu">
 							<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />

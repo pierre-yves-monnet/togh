@@ -113,7 +113,7 @@ class Login extends React.Component {
 					
 				<table >
 				<tr>
-				<td style={{"paddingLeft" : "150px"}}>
+				<td style={{paddingLeft: "150px"}}>
 					
 					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
 					
@@ -145,7 +145,7 @@ class Login extends React.Component {
 				<tr>
 				<td colspan="2" style={{paddingRight : "40px", paddingLeft : "150px"}}>
 					
-					<div style={{marginTop: "80px", marginBottom:"10px"}}>
+					<div style={{marginTop: "80px", marginBottom: "10px"}}>
 						<FormattedMessage id="Login.LostMyPasswordExplanation" defaultMessage="You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one"/>
 					</div>
 					<ModalWrapper
