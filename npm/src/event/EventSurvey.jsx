@@ -43,7 +43,7 @@ class EventSurvey extends React.Component {
 				typeDisplay: DISPLAY_SURVEY,
 			},
 			operation: {
-				inprogress: false,
+				inProgress: false,
 				label:"",
 				status:"",
 				result:"",
@@ -167,7 +167,7 @@ class EventSurvey extends React.Component {
 					<div class="row">
 						<div class="col-12">
 
-							<UserFeedback inprogress= {this.state.operation.inprogress}
+							<UserFeedback inProgress= {this.state.operation.inProgress}
 									label= {this.state.operation.label}
 									status= {this.state.operation.status}
 									result= {this.state.operation.result}
@@ -265,7 +265,7 @@ class EventSurvey extends React.Component {
 			
 			// Checkbox can't be center		
 			for (let i in survey[ surveyConstant.CHILD_ANSWER ]) {
-				let answerParticipant = survey[ surveyConstant.CHILD_ANSWER ] [i];
+				let answerParticipant = survey[ surveyConstant.CHILD_ANSWER ][i];
 				
 				participantList.push(<tr>
 					<td> {this.eventCtrl.getParticipantName( answerParticipant.whoid) }</td>
@@ -303,7 +303,7 @@ class EventSurvey extends React.Component {
 			<div>
 				<div class="row">
 					<div class="col-12">
-						<UserFeedback inprogress= {this.state.operation.inprogress}
+						<UserFeedback inprogress= {this.state.operation.inProgress}
 									label= {this.state.operation.label}
 									status= {this.state.operation.status}
 									result= {this.state.operation.result}
@@ -424,7 +424,7 @@ class EventSurvey extends React.Component {
 		var choice = { code:uniqCode, proptext:''};
 		
 		this.setState({operation:{
-					inprogress:true,
+					inProgress:true,
 					label: intl.formatMessage({id: "EventSurvey.AddingChoice",defaultMessage: "Adding a choice"}), 
 					listlogevents: [] }});
 	
@@ -441,7 +441,7 @@ class EventSurvey extends React.Component {
 		const intl = this.props.intl;
 
 		let currentOperation = this.state.operation;
-		currentOperation.inprogress = false;
+		currentOperation.inProgress = false;
 		if (httpPayload.isError()) {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required
@@ -484,7 +484,7 @@ class EventSurvey extends React.Component {
 		console.log("EventSurvey.removeItem: event=" + JSON.stringify(this.state.event));
 
 		this.setState({operation:{
-					inprogress:true,
+					inProgress:true,
 					label: intl.formatMessage({id: "EventSurvey.RemovingChoice",defaultMessage: "Removing a choice"}), 
 					listlogevents: [] }});
 	
@@ -499,7 +499,7 @@ class EventSurvey extends React.Component {
 	removeChoiceCallback( httpPayload) {
 		const intl = this.props.intl;
 		let currentOperation = this.state.operation;
-		currentOperation.inprogress = false;
+		currentOperation.inProgress = false;
 		
 		// find the task item to delete
 		if (httpPayload.isError()) {
@@ -566,7 +566,7 @@ class EventSurvey extends React.Component {
 		}
 		// so, add me
 		this.setState({operation:{
-					inprogress:true,
+					inProgress:true,
 					label: intl.formatMessage({id: "EventSurvey.AddAnswer",defaultMessage: "Adding your answer"}), 
 					listlogevents: [] }});
 
@@ -580,7 +580,7 @@ class EventSurvey extends React.Component {
 		const intl = this.props.intl;
 
 		let currentOperation = this.state.operation;
-		currentOperation.inprogress = false;
+		currentOperation.inProgress = false;
 		if (httpPayload.isError()) {
 			currentOperation.status= userFeedbackConstant.ERRORHTTP;
 			// feedback to user is required

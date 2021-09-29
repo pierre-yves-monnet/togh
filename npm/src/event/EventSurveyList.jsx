@@ -214,8 +214,8 @@ class EventSurveyList extends React.Component {
 
 		item[name] = value;
 
-		var completeLocalisation = "/surveylist/"+survey.id+"/"+localisation;
 		var survey = this.state.event.surveylist[ this.state.currentSurveyId ];
+		var completeLocalisation = "/surveylist/"+survey.id+"/"+localisation;
 
 		// currentEvent.shoppinglist[0].[name] = value;
 

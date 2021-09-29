@@ -133,16 +133,13 @@ class Invitation extends React.Component {
 	  						<label class="btn btn-outline-primary btn-sm" for="btnradio2">{<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} </label>
 	
 						</div>
-					
-					
-	
 					</div>
 					
 					<div style={{display: "inline-block", float: "right"}}>	
 						<button class="btn btn-info btn-lg" 
 							onClick={this.sendInvitation}
 							disabled={! this.enableInvite() }
-							style="padding-bottom:10px;">
+							style={{paddingBottom: "10px"}}>
 							<div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
 							{this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
 						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.SendInvitation" defaultMessage="Send Invitation"/></div>)}
@@ -171,25 +168,47 @@ class Invitation extends React.Component {
 
       				<br/>
       				{this.state.panelVisible === 'INVITATION' && (<div>
-							<TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>} value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
+							<TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>} value={this.state.email}
+							onChange={(event) => this.setState({ email: event.target.value })}
+							id="Invitation.email"></TextInput><br />
 						</div>)
 					}		
 					{this.state.panelVisible === 'SEARCH' && (<div>
 							<table>
 							<tr>
-								<td style={{"paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.FirstName" defaultMessage="First name"/>} value={this.state.searchFirstName} onChange={(event) => this.setState( { searchFirstName: event.target.value })} ></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.LastName" defaultMessage="Last name"/>} value={this.state.searchLastName} onChange={(event) => this.setState( { searchLastName: event.target.value })}></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.PhoneNumber" defaultMessage="Phone number"/>} value={this.state.searchPhoneNumber} onChange={(event) => this.setState( { searchPhoneNumber: event.target.value })} ></TextInput>
-								</td><td style={{ "paddingRight": "10px"}}><TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>} value={this.state.searchEmail} onChange={(event) => this.setState( {searchEmail: event.target.value })} ></TextInput>
-							</td></tr>
-							<tr><td style={{ "paddingRight": "10px"}} colspan="4">
-								<Checkbox labelText={<FormattedMessage id="Invitation.OnlyUserNotAlreadyAParticipant" defaultMessage="Only users not already a participant"/>} 
-									 
-									onChange={(value,event ) => {
-									console.log("Invitation.OnlyNonInvitedUser type="+JSON.stringify(event));
-									this.setState( {onlyNonInvitedUser: value})
-									}
-								}/></td></tr> 
+								<td style={{"paddingRight": "10px"}}>
+								    <TextInput labelText={<FormattedMessage id="Invitation.FirstName" defaultMessage="First name" />}
+								        value={this.state.searchFirstName}
+								        onChange={(event) => this.setState( { searchFirstName: event.target.value })}
+								        id="Invitation.searchFirstName"/>
+								</td><td style={{ "paddingRight": "10px"}}>
+								    <TextInput labelText={<FormattedMessage id="Invitation.LastName" defaultMessage="Last name"/>}
+								        value={this.state.searchLastName}
+								        onChange={(event) => this.setState( { searchLastName: event.target.value })}
+								        id="Invitation.searchLastName"/>
+								</td><td style={{ "paddingRight": "10px"}}>
+								    <TextInput labelText={<FormattedMessage id="Invitation.PhoneNumber" defaultMessage="Phone number"/>}
+								        value={this.state.searchPhoneNumber}
+								        onChange={(event) => this.setState( { searchPhoneNumber: event.target.value })}
+								        id="Invitation.searchPhoneNumber"/>
+								</td><td style={{ "paddingRight": "10px"}}>
+								    <TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>}
+								        value={this.state.searchEmail}
+								        onChange={(event) => this.setState( {searchEmail: event.target.value })}
+								        id="Invitation.searchEmail"/>
+							    </td>
+							</tr>
+							<tr>
+							    <td style={{ "paddingRight": "10px"}} colspan="4">
+                                    <Checkbox labelText={<FormattedMessage id="Invitation.OnlyUserNotAlreadyAParticipant" defaultMessage="Only users not already a participant"/>}
+                                        onChange={(value,event ) => {
+                                            console.log("Invitation.OnlyNonInvitedUser type="+JSON.stringify(event));
+                                            this.setState( {onlyNonInvitedUser: value})
+                                            }
+                                        }
+                                        id="Invitation.onlyUserNotAlreadyAParticipant"/>
+								</td>
+							</tr>
 							</table>
 							<br/>
 							<button class="btn btn-info btn-lg" onClick={this.searchToghUser} disabled={this.state.inprogresssearch}>	

@@ -10,12 +10,10 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { TextInput, Select } from 'carbon-components-react';
 
 import FactoryService from 'service/FactoryService';
 import EventSectionHeader from 'component/EventSectionHeader';
 
-import SlabRecord from 'service/SlabRecord';
 
 // -----------------------------------------------------------
 //
@@ -123,20 +121,20 @@ class EventExpense extends React.Component {
 	// --------------------------------------------------------------
 
 	setChildAttribut(name, value, isChild, item) {
-		console.log("EventShoppinglist.setChildAttribut: set attribut:" + name + " <= " + value);
+		console.log("EventExpense.setChildAttribut: set attribut:" + name + " <= " + value);
 		const currentEvent = this.state.event;
-		var SlabRecord;
+		let slabRecord;
 
 		if (isChild) {
 			item[name] = value;
-			SlabRecord = SlabRecord.getUpdate(this.state.event, name, value, "/expense/" + item.id);
+			slabRecord = slabRecord.getUpdate(this.state.event, name, value, "/expense/" + item.id);
 		} else {
 			currentEvent[name] = value
-			var SlabRecord = SlabRecord.getUpdate(this.state.event, name, value, "");
+			slabRecord = slabRecord.getUpdate(this.state.event, name, value, "");
 		}
 
 		this.setState({ "event": currentEvent });
-		this.props.updateEvent(SlabRecord);
+		this.props.updateEvent(slabRecord);
 
 	}
 
@@ -146,64 +144,6 @@ class EventExpense extends React.Component {
 	// Component controls
 	// 
 	// --------------------------------------------------------------
-	test () {
-		
-		const solution = (tree) => {
-			
-			
-	    	// Type your solution here
-			if (tree.length==0)
-				return 0; 
-	    	var i =1;
-			var root = {};
-			var queue=[];
-			queue.push(root);
-			
-	    	var i =1;
-	    	while (i <tree.length) {
-		        var node = queue[ 0 ];
-			
-				queue.shift();
-				var left=tree[ i ];
-				var right=tree[ i + 1 ];
-				console.log("node="+node.value+" left="+left+" right="+right);
-				if (left!=-1) {
-					var nodechild = { value : left };
-					node.left = nodechild;	
-					queue.push( nodechild);
-				}
-				if (right!=-1) {
-					var nodechild = { value : right };
-					node.right = nodechild;	
-					queue.push( nodechild);
-				}
-				i = i+2;
-			}
-			
-			
-			// second step, calculate the depth of the tree
-			function rundepth( node ) {
-				var depth= 1
-				if (node.left) {
-					depth = rundepth( node.left)+1;
-				}
-				if (node.right) {
-					var depri = rundepth( node.right)+1;
-					if (depri > depth)
-						depth = depri;
-				}
-				return depth;
-			}
-			 var calcul = rundepth( root );
-			return calcul;
-			}
-	
-
-
-		// console.log(solution( [1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1])); 
-
-		console.log(solution( [1, 2, -1, 3, -1, -1, -1, 4, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1])); 
-	}
 
 	
 
