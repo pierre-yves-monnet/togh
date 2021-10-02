@@ -82,8 +82,8 @@ public class RestAdminEmail {
         final Map<String, Object> mapKeys=new HashMap<>();
 
         LocalSmtpService(List<Map<String, Object>> listKeys) {
-            for (Map<String, Object> record : listKeys) {
-                this.mapKeys.put((String) record.get("name"), record.get("keyApi"));
+            for (Map<String, Object> recordKey : listKeys) {
+                this.mapKeys.put((String) recordKey.get("name"), recordKey.get("keyApi"));
         }
         }
 
@@ -100,7 +100,6 @@ public class RestAdminEmail {
         @Override
         public String getSmtpUserName() {
             return ToolCast.getString(mapKeys, ApiKey.SMTP_USER_NAME.getName(), "");
-
         }
 
         @Override
@@ -134,8 +133,7 @@ public class RestAdminEmail {
         String emailTo = (String) updateMap.get("sendEmailTo");
         // send an email
         SendEmail sendEmail = new SendEmail();
-
-        LocalSmtpService localSmtpService = new LocalSmtpService((List<Map<String,Object>> )updateMap.get("listKeys"));
+        LocalSmtpService localSmtpService = new LocalSmtpService(listApiKey);
         List<LogEvent> listLogEvent = sendEmail.sendOneEmail(emailTo,
                 "Test from Togh",
                 "This is a test from Togh",
