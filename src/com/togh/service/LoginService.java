@@ -8,29 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-
-/* -------------------------------------------------------------------- */
-/*                                                                      */
-/* Login service */
-/*                                                                      */
-/* -------------------------------------------------------------------- */
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
-import java.util.logging.Logger;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.entity.ToghUserEntity;
@@ -45,6 +22,16 @@ import com.togh.restcontroller.RestHttpConstant;
 import com.togh.service.MonitorService.Chrono;
 import com.togh.service.NotifyService.NotificationStatus;
 import com.togh.service.ToghUserService.SearchUsersResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
+import java.util.logging.Logger;
 
 /* ******************************************************************************** */
 /*                                                                                  */

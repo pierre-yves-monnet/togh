@@ -9,34 +9,30 @@
 package com.togh.restcontroller;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
-import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.EventEntity.AdditionnalInformationEvent;
+import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.BaseEntity;
 import com.togh.service.EventService;
-import com.togh.service.EventService.EventOperationResult;
-import com.togh.service.EventService.EventResult;
-import com.togh.service.EventService.InvitationResult;
-import com.togh.service.EventService.InvitationStatus;
-import com.togh.service.EventService.UpdateContext;
+import com.togh.service.EventService.*;
 import com.togh.service.FactoryService;
 import com.togh.service.event.EventUpdate.Slab;
+import com.togh.tool.ToolCast;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -133,7 +129,7 @@ public class RestEventController {
         if (toghUser == null) {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long timezoneOffset             = RestTool.getLong(postData, "timezoneoffset", 0L);
+        Long timezoneOffset             = ToolCast.getLong(postData, "timezoneoffset", 0L);
 
         if (eventName ==null || eventName.trim().length()==0)
             eventName="New event";
@@ -181,12 +177,12 @@ public class RestEventController {
         if (toghUser == null) {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long eventId = RestTool.getLong(inviteData, "eventid", null);
-        List<Long> listUsersId= RestTool.getListLong(inviteData, "listUsersid", null);
-        String userInvitedEmail = RestTool.getString(inviteData, "email", null);
-        String message = RestTool.getString(inviteData, "message", null);
-        String role = RestTool.getString(inviteData, "role", null);
-        Long timezoneOffset             = RestTool.getLong(inviteData, "timezoneoffset", 0L);
+        Long eventId = ToolCast.getLong(inviteData, "eventid", null);
+        List<Long> listUsersId= ToolCast.getListLong(inviteData, "listUsersid", null);
+        String userInvitedEmail = ToolCast.getString(inviteData, "email", null);
+        String message = ToolCast.getString(inviteData, "message", null);
+        String role = ToolCast.getString(inviteData, "role", null);
+        Long timezoneOffset             = ToolCast.getLong(inviteData, "timezoneoffset", 0L);
 
         ParticipantRoleEnum roleEnum;
         try {
@@ -236,10 +232,10 @@ public class RestEventController {
         if (toghUser == null) {
             throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long eventId                            = RestTool.getLong(updateMap, "eventid", null);
-        Long timezoneOffset                     = RestTool.getLong(updateMap, "timezoneoffset", 0L);
+        Long eventId                            = ToolCast.getLong(updateMap, "eventid", null);
+        Long timezoneOffset                     = ToolCast.getLong(updateMap, "timezoneoffset", 0L);
         @SuppressWarnings("unchecked")
-        List<Map<String,Object>> slabEventList = RestTool.getList(updateMap, "listslab", new ArrayList<>() );
+        List<Map<String,Object>> slabEventList = ToolCast.getList(updateMap, "listslab", new ArrayList<>() );
 
         EventEntity event = eventService.getEventById( eventId);
         if (event==null) {

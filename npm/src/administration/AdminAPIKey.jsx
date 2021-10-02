@@ -44,7 +44,6 @@ class AdminAPIKey extends React.Component {
 		this.setState({inprogress: true });
 		
 		var restCallService = FactoryService.getInstance().getRestcallService();
-
 		restCallService.getJson('/api/admin/apikey/get?', this, this.getApiKeyCallback);
 	}
 

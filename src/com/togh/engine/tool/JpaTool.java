@@ -8,6 +8,13 @@
 /* ******************************************************************************** */
 package com.togh.engine.tool;
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
+import com.togh.entity.base.BaseEntity;
+import com.togh.service.EventService.LoadEntityResult;
+import com.togh.service.EventService.UpdateContext;
+import org.apache.commons.beanutils.PropertyUtils;
+
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -17,14 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
-
-import org.apache.commons.beanutils.PropertyUtils;
-
-import com.togh.engine.logevent.LogEvent;
-import com.togh.engine.logevent.LogEvent.Level;
-import com.togh.entity.base.BaseEntity;
-import com.togh.service.EventService.LoadEntityResult;
-import com.togh.service.EventService.UpdateContext;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -37,31 +36,33 @@ import com.togh.service.EventService.UpdateContext;
 
 public class JpaTool {
 
-    private static Logger logger = Logger.getLogger(JpaTool.class.getName());
+    private static final Logger logger = Logger.getLogger(JpaTool.class.getName());
     private static final String LOG_HEADER = JpaTool.class.getSimpleName() + ": ";
 
-  
+
     private static final LogEvent eventInvalidUpdateOperation = new LogEvent(JpaTool.class.getName(), 1, Level.APPLICATIONERROR, "Invalid operation", "This operation failed", "Operation can't be done", "Check error");
 
     /**
      * update an entity
-     * 
-     * @param event
-     * @param slab
+     *
+     * @param baseEntity    Base entity to update
+     * @param attributName  attribut to update
+     * @param attributValue value to apply
+     * @param updateContext context for this update
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static List<LogEvent> updateEntityOperation(BaseEntity baseEntity, 
-                String attributName, 
-                Object attributValue, 
-                UpdateContext updateContext) {
-        List<LogEvent> listEvents= new ArrayList<>();
+    public static List<LogEvent> updateEntityOperation(BaseEntity baseEntity,
+                                                       String attributName,
+                                                       Object attributValue,
+                                                       UpdateContext updateContext) {
+        List<LogEvent> listEvents = new ArrayList<>();
         Object value = null;
         Method methodAttribut = searchMethodByName(baseEntity, attributName);
         if (methodAttribut == null) {
             listEvents.add(new LogEvent(eventInvalidUpdateOperation, attributName + " <="
                     + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
-            logger.severe(LOG_HEADER+" Invalid operation ["+attributName+"] on entity["+baseEntity.getClass().getName()+"]");
+            logger.severe(LOG_HEADER + " Invalid operation [" + attributName + "] on entity[" + baseEntity.getClass().getName() + "]");
             return listEvents;
         }
         String jpaAttributName = methodAttribut.getName().substring(3);
@@ -85,15 +86,15 @@ public class JpaTool {
 
                 } else if (returnType.equals(LocalDateTime.class)) {
                     value = EngineTool.stringToDateTime(attributValue.toString());
-                    
+
                 } else if (returnType.equals(LocalDate.class)) {
                     if (attributValue instanceof LocalDate) {
-                        value=(LocalDate) attributValue;
+                        value = (LocalDate) attributValue;
                     } else {
                         long timezoneOffset = updateContext.timezoneOffset;
                         if (baseEntity.isAbsoluteLocalDate(attributName))
                             timezoneOffset = 0;
-                        value = EngineTool.stringToDate(attributValue.toString(), timezoneOffset); 
+                        value = EngineTool.stringToDate(attributValue.toString(), timezoneOffset);
                     }
 
                 } else if (returnType.equals(String.class)) {
@@ -103,7 +104,7 @@ public class JpaTool {
                     value = Enum.valueOf(returnType, attributValue.toString());
 
                 } else if (isClassBaseEntity(returnType)) {
-                    if (updateContext.factoryService.getEventService()!=null) {
+                    if (updateContext.factoryService.getEventService() != null) {
                         LoadEntityResult loadResult = updateContext.factoryService.getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
                         value = loadResult.entity;
                         listEvents.addAll(loadResult.listLogEvents);
@@ -125,8 +126,8 @@ public class JpaTool {
         }
         return listEvents;
     }
-    
-    
+
+
     /**
      * IsClassEntity
      */
@@ -141,6 +142,7 @@ public class JpaTool {
 
     /**
      * return a boolean value from a string
+     *
      * @param valueSt
      * @return
      * @throws Exception
@@ -150,12 +152,12 @@ public class JpaTool {
             return Boolean.TRUE;
         return Boolean.FALSE;
     }
-        
-    
-    
+
+
     /**
      * value may be a currency, like $33.344. So, remove all non numric expression.
-     * french is 2 334,44 ===> One comma only  
+     * french is 2 334,44 ===> One comma only
+     *
      * @param valueSt
      * @return
      * @throws Exception
@@ -189,8 +191,8 @@ public class JpaTool {
 
         return new BigDecimal(numberFormat.parse(valueExpurged.toString()).toString());
     }
-    
-    
+
+
     public static Method searchMethodByName(BaseEntity baseEntity, String attributName) {
         String methodName = "get" + attributName;
 

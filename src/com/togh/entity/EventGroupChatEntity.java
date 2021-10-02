@@ -8,27 +8,17 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-
+import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.entity.base.UserEntity;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.entity.base.UserEntity;
-
-import lombok.EqualsAndHashCode;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -66,7 +56,7 @@ public class EventGroupChatEntity  extends UserEntity {
     @BatchSize(size=100)
     @JoinColumn(name = "groupchatid")
     @OrderBy("id")
-    private List<EventChatEntity> listChat = new ArrayList<>();
+    private final List<EventChatEntity> listChat = new ArrayList<>();
 
     
     public List<EventChatEntity> getListChat() {
@@ -78,28 +68,27 @@ public class EventGroupChatEntity  extends UserEntity {
     /**
      * Add a chat. 
      * @param chatEntity
-     * @param maxChatEntity
      */
     public void addChat( EventChatEntity chatEntity) {
         listChat.add( chatEntity);
     }
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
+     * @param contextAccess the Context Access
+     * @param timeZoneOffset the time zone offset of the browser
      * @return
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
+    public Map<String,Object> getMap( ContextAccess contextAccess, Long timeZoneOffset) {
+        Map<String,Object> resultMap = super.getMap( contextAccess, timeZoneOffset );
         
 
         resultMap.put("description", description);
 
         List<Map<String, Object>> listChatMap = new ArrayList<>();
-        if (listChat!=null)
-            for (EventChatEntity chat : listChat) {
-                listChatMap.add(chat.getMap(contextAccess, timezoneOffset));
-            }
+        for (EventChatEntity chat : listChat) {
+            listChatMap.add(chat.getMap(contextAccess, timeZoneOffset));
+        }
         resultMap.put( "chatlist", listChatMap);
         
         return resultMap;

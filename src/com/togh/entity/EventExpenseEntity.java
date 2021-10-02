@@ -8,18 +8,16 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.math.BigDecimal;
-import java.util.Map;
+import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.entity.base.UserEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.entity.base.UserEntity;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.math.BigDecimal;
+import java.util.Map;
 /* ******************************************************************************** */
 /*                                                                                  */
 /*  EventExpenseEntity,                                                             */

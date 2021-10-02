@@ -14,6 +14,7 @@ import { FormattedMessage } from "react-intl";
 
 import AdminUsers 				from 'administration/AdminUsers';
 import AdminTranslator 			from 'administration/AdminTranslator';
+import AdminEmail               from 'administration/AdminEmail';
 import AdminGoogle 				from 'administration/AdminGoogle';
 import AdminAPIKey 				from 'administration/AdminAPIKey';
 import AdminInfo 				from 'administration/AdminInfo';
@@ -65,6 +66,7 @@ class AdminHome extends React.Component {
 				<div class="row">
 					<div class="col-6"> 
 						<AdminTranslator/>
+						<AdminEmail/>
 					</div>
 					<div class="col-6"> 
 						<AdminGoogle/><br/>

@@ -19,10 +19,10 @@ import java.util.logging.Logger;
 
 public class ChronoSet {
     
-    private Logger logger = Logger.getLogger(ChronoSet.class.getName());
-    private final static String logHeader = "com.togh.engine.chrono.ChronoSet: ";
+    private final Logger logger = Logger.getLogger(ChronoSet.class.getName());
+    private static final String LOG_HEADER = "com.togh.engine.chrono.ChronoSet: ";
 
-    public Map<String, Chronometer> mapChrono = new HashMap<>();
+    public final Map<String, Chronometer> mapChrono = new HashMap<>();
     public ChronoSet() {
         // nothing to do
     }
@@ -40,7 +40,7 @@ public class ChronoSet {
         for (Chronometer chrono : mapChrono.values()) {
             logChrono.append( chrono.getName()+": "+chrono.getTimeInMs()+" ms ("+chrono.getNbExecution()+"),");
         }
-        logger.info(logHeader+logChrono.toString());
+        logger.info(LOG_HEADER +logChrono.toString());
     }
     /**
      * 

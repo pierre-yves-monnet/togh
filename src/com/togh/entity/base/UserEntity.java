@@ -8,17 +8,11 @@
 /* ******************************************************************************** */
 package com.togh.entity.base;
 
-import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
+
+import javax.persistence.*;
+import java.util.Map;
 
 
 

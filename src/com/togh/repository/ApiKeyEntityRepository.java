@@ -8,9 +8,8 @@
 /* ******************************************************************************** */
 package com.togh.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.togh.entity.APIKeyEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ApiKeyEntityRepository extends JpaRepository<APIKeyEntity, Long> {
 

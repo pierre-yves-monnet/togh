@@ -8,14 +8,13 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
+import com.togh.engine.logevent.LogEvent;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.logging.Logger;
-
-import org.springframework.stereotype.Service;
-
-import com.togh.engine.logevent.LogEvent;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */

@@ -8,29 +8,12 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
-import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.tool.JpaTool;
-import com.togh.entity.EventChatEntity;
-import com.togh.entity.EventEntity;
+import com.togh.entity.*;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
-import com.togh.entity.EventGroupChatEntity;
-import com.togh.entity.EventItineraryStepEntity;
-import com.togh.entity.EventShoppingListEntity;
-import com.togh.entity.EventSurveyAnswerEntity;
-import com.togh.entity.EventSurveyChoiceEntity;
-import com.togh.entity.EventSurveyEntity;
-import com.togh.entity.EventTaskEntity;
-import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
@@ -41,6 +24,12 @@ import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.FactoryService;
 import com.togh.service.event.EventUpdate.Slab;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -56,31 +45,33 @@ import com.togh.service.event.EventUpdate.Slab;
 /* ******************************************************************************** */
 public class EventController {
 
-    private static Logger logger = Logger.getLogger(EventController.class.getName());
+    private static final Logger logger = Logger.getLogger(EventController.class.getName());
     private static final String LOG_HEADER = EventController.class.getSimpleName() + ": ";
 
-    private FactoryService factoryService;
-    private EventFactoryRepository factoryRepository;
+    private final FactoryService factoryService;
+    private final EventFactoryRepository factoryRepository;
 
-    private EventEntity eventEntity;
+    private final EventEntity eventEntity;
 
     /**
      * Declare all friend controller
      */
-    EventControllerTask eventControllerTask;
-    EventControllerItinerary eventControllerItinerary;
-    EventControllerShopping eventControllerShopping;
-    EventControllerSurvey eventControllerSurvey;
-    eventControllerSurveyChoiceList eventControllerSurveyChoiceList;
-    EventControllerSurveyAnswerList eventControllerSurveyAnswerList;
-    EventControllerGroupChat eventControllerGroupChat;
-    EventControllerChat eventControllerChat;
-    
+    private final EventControllerTask eventControllerTask;
+    private final EventControllerItinerary eventControllerItinerary;
+    private final EventControllerShopping eventControllerShopping;
+    private final EventControllerSurvey eventControllerSurvey;
+    private final eventControllerSurveyChoiceList eventControllerSurveyChoiceList;
+    private final EventControllerSurveyAnswerList eventControllerSurveyAnswerList;
+    private final EventControllerGroupChat eventControllerGroupChat;
+    private final EventControllerChat eventControllerChat;
+
     /**
-     * Keep all Reposito
+     * Keep all Repository
      * Default Constructor.
-     * @param eventEntity
-     * @param factoryService
+     *
+     * @param eventEntity       the eventEntity attached to the controller
+     * @param factoryService    the factory service
+     * @param factoryRepository the factory repository
      */
 
     public EventController(EventEntity eventEntity, FactoryService factoryService, EventFactoryRepository factoryRepository) {
@@ -90,13 +81,13 @@ public class EventController {
         eventControllerTask = new EventControllerTask(this, eventEntity);
         eventControllerItinerary = new EventControllerItinerary(this, eventEntity);
         eventControllerShopping = new EventControllerShopping(this, eventEntity);
-        
+
         eventControllerSurvey = new EventControllerSurvey(this, eventEntity);
-        eventControllerSurveyChoiceList = new eventControllerSurveyChoiceList(this, eventControllerSurvey,eventEntity);
-        eventControllerSurveyAnswerList = new EventControllerSurveyAnswerList(this, eventControllerSurvey,eventEntity);
+        eventControllerSurveyChoiceList = new eventControllerSurveyChoiceList(this, eventControllerSurvey, eventEntity);
+        eventControllerSurveyAnswerList = new EventControllerSurveyAnswerList(this, eventControllerSurvey, eventEntity);
 
         eventControllerGroupChat = new EventControllerGroupChat(this, eventEntity);
-        eventControllerChat = new EventControllerChat(this,eventControllerGroupChat, eventEntity);
+        eventControllerChat = new EventControllerChat(this, eventControllerGroupChat, eventEntity);
     }
 
     public static EventController getInstance(EventEntity event, FactoryService factoryService, EventFactoryRepository factoryRepository) {
@@ -106,6 +97,7 @@ public class EventController {
     public EventEntity getEvent() {
         return eventEntity;
     }
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* operations on event */
@@ -138,8 +130,8 @@ public class EventController {
             eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
 
         // itinerary: must be in the date
-        listSlab.addAll( eventControllerItinerary.checkItinerary());
-        
+        listSlab.addAll(eventControllerItinerary.checkItinerary());
+
         return listSlab;
     }
 
@@ -160,21 +152,20 @@ public class EventController {
 
     /**
      * isRegisteredParticipant. if this user is part of this event?
-     * 
-     * @param userId
-     * @return
+     *
+     * @param toghUser user
+     * @return true if the user can access this event
      */
-    public boolean isAccess(ToghUserEntity toghUser) {
+    public boolean hasAccess(ToghUserEntity toghUser) {
         if (eventEntity.getTypeEvent() == TypeEventEnum.OPEN)
             return true;
         return getParticipant(toghUser) != null;
     }
 
     /**
-     * User must be the author, or a partipant, or should be invited
-     * 
-     * @param userId
-     * @param eventEntity
+     * User must be the author, or a participant, or should be invited
+     *
+     * @param toghUser the togh user
      * @return
      */
     public boolean isActiveParticipant(ToghUserEntity toghUser) {
@@ -191,9 +182,9 @@ public class EventController {
 
     /**
      * is this user an organizer? Some operation, like invitation, is allowed only for organizer
-     * 
-     * @param userId
-     * @return
+     *
+     * @param toghUser the toghUser
+     * @return true is this user is an organizer of the event
      */
     public boolean isOrganizer(ToghUserEntity toghUser) {
         ParticipantEntity participant = getParticipant(toghUser);
@@ -204,8 +195,8 @@ public class EventController {
 
     /**
      * Return the owner of the event
-     * 
-     * @return
+     *
+     * @return the owner of the event
      */
     public ToghUserEntity getOwner() {
         for (ParticipantEntity participant : eventEntity.getParticipantList()) {
@@ -217,8 +208,8 @@ public class EventController {
 
     /**
      * get the role of this userId in the event. Return null if the user does not have any participation
-     * 
-     * @param userId
+     *
+     * @param toghUser the toghUser
      * @return
      */
     public ParticipantRoleEnum getRoleEnum(ToghUserEntity toghUser) {
@@ -227,7 +218,7 @@ public class EventController {
     }
 
     /**
-     * @param userId
+     * @param toghUser the toghUser
      * @return
      */
     public ParticipantEntity getParticipant(ToghUserEntity toghUser) {
@@ -239,9 +230,9 @@ public class EventController {
     }
 
     /**
-     * According the user, and the type of event, the ContextAccess is calculated
-     * 
-     * @param eventEntity
+     * According to the user, and the type of event, the ContextAccess is calculated
+     *
+     * @param toghUser the toghUser
      * @return
      */
     public ContextAccess getTypeAccess(ToghUserEntity toghUser) {
@@ -280,9 +271,26 @@ public class EventController {
     /* Invitation */
     /*                                                                                  */
     /* ******************************************************************************** */
-    public InvitationResult invite(EventEntity event, ToghUserEntity invitedByToghUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
+
+    /**
+     * send an invitation
+     *
+     * @param eventEntity       the eventEntity
+     * @param invitedByToghUser the togfhUser who sent the invitation
+     * @param listUsersId       list of ToghUserId to invites
+     * @param userInvitedEmail  list of email : there are not yet toghUser
+     * @param role              role in this event
+     * @param message           Message to come with the invitation
+     * @return
+     */
+    public InvitationResult invite(EventEntity eventEntity,
+                                   ToghUserEntity invitedByToghUser,
+                                   List<Long> listUsersId,
+                                   String userInvitedEmail,
+                                   ParticipantRoleEnum role,
+                                   String message) {
         EventInvitation eventInvitation = new EventInvitation(this, factoryService);
-        return eventInvitation.invite(event, invitedByToghUser, listUsersId, userInvitedEmail, role, message);
+        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, message);
     }
 
     /* ******************************************************************************** */
@@ -290,11 +298,12 @@ public class EventController {
     /* Operations */
     /*                                                                                  */
     /* ******************************************************************************** */
+
     /**
      * A user access to the event.
      * We can deal with operation. For example, if the user is INVITED, then we moved to ACTIF
-     * 
-     * @param toghUser
+     *
+     * @param toghUserEntity toghUserEntity
      * @return true if the event were modified, and need to be saved
      */
     public boolean accessByUser(ToghUserEntity toghUserEntity) {
@@ -316,8 +325,8 @@ public class EventController {
 
     /**
      * Update the event. All update are done via the Slab objects
-     * 
-     * @param listSlabMap
+     *
+     * @param listSlab
      * @param updateContext
      * @return
      */
@@ -334,47 +343,11 @@ public class EventController {
         return factoryService.getEventService();
     }
 
-    /**
-     * operation on tasks.
-     * Task is then saved, and can be modified (persistenceid is created)
-     */
-//    public void addTask(EventTaskEntity task, EventOperationResult eventOperationResult) {
-//        eventControllerTask.addEntity(task, slab, eventOperationResult);
-//    }
-//
-//    public void removeTask(EventTaskEntity task, EventOperationResult eventOperationResult) {
-//        eventControllerTask.removeEntity(task, eventOperationResult);
-//    }
-//  
-//    public EventTaskEntity getTask( long taskId) {
-//        return (EventTaskEntity) eventControllerTask.getEntity(taskId);
-//    }
-//    
-    
-//    
-//    public EventSurveyChoiceEntity addSurveyChoice(EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {
-//        return eventControllerSurvey.addSurveyChoice(surveyEntity, surveyChoice);
-//    }
-//    
-//    public EventSurveyAnswerEntity addSurveyAnswser(EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {
-//        return eventControllerSurvey.addSurveyAnswser(surveyEntity, surveyAnswerEntity);
-//    }
-//    
-//    public List<LogEvent> removeSurveyChoice( EventSurveyEntity surveyEntity, Long choiceId) {
-//        return eventControllerSurvey.removeSurveyChoice(surveyEntity, choiceId);
-//    }
-//    
-//    
-//    
-//    
-//    public EventChatEntity addChatInGroup( EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity) {
-//        return eventControllerGroupChat.addChatInGroup(groupChatEntity, chatEntity);
-//    }
-   
+
     protected EventFactoryRepository getFactoryRepository() {
         return factoryRepository;
     }
-  
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Factory of controller */
@@ -383,14 +356,14 @@ public class EventController {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    
+
     /**
-     * Factory of EventController. According the SlabOperation, created the correct event Controller/
-     * 
-     * @param slabOperation
-     * @return
+     * Factory of EventController. According to the SlabOperation, created the correct event Controller/
+     *
+     * @param slab the operation to realize
+     * @return the status
      */
-    protected EventControllerAbsChild getEventControllerFromSlabOperation( Slab slab) {
+    protected EventControllerAbsChild getEventControllerFromSlabOperation(Slab slab) {
         if (EventTaskEntity.CST_SLABOPERATION_TASKLIST.equals(slab.attributName)) {
             return eventControllerTask;
 
@@ -417,10 +390,10 @@ public class EventController {
         }
         return null;
     }
-    
+
     /**
      * Localise the BaseEntity according the localisation. Localisation is a string like "/tasklist/1"
-     * 
+     *
      * @param baseEntity
      * @param localisation
      * @return

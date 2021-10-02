@@ -8,15 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
-import javax.annotation.Nonnull;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
@@ -27,6 +18,13 @@ import com.togh.service.TranslatorService.Sentence;
 import com.togh.service.event.EventController;
 import com.togh.service.event.EventPresentationAttribut;
 import com.togh.tool.email.SendEmail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -44,11 +42,11 @@ public class NotifyService {
 
     private static final String HTTP_DEFAULT_HOST_TOGH = "http://localhost:3000";
     private Logger logger = Logger.getLogger(NotifyService.class.getName());
-    private final static String logHeader = "com.togh.NotifyService";
+    private final static String LOG_HEADER = "com.togh.NotifyService";
 
     @Autowired
     private FactoryService factoryService;
-    
+
     @Autowired
     private EventFactoryRepository factoryRepository;
 
@@ -58,11 +56,11 @@ public class NotifyService {
     @Autowired
     private ApiKeyService apiKeyService;
 
-    private final static String mailHost = "localhost";
-    private final static int mailPort = 2525;
-    private final static boolean mailTLS = false;
-    private final static String mailUserName = "";
-    private final static String mailUserPassword = "";
+    private final static String MAIL_HOST = "localhost";
+    private final static int MAIL_PORT = 2525;
+    private final static boolean MAIL_TLS = false;
+    private final static String MAIL_USER_NAME = "";
+    private final static String MAIL_USER_PASSWORD = "";
 
     private final static LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
 
@@ -84,9 +82,8 @@ public class NotifyService {
     // --------------------------------------------------------------
 
     /**
-     * 
      * @param toghUserEntity
-     * @param newUser user is new, so an action "invitedNewUser" is sent, else we send an invitatin "invitedUser"
+     * @param newUser        user is new, so an action "invitedNewUser" is sent, else we send an invitatin "invitedUser"
      * @param invitedBy
      * @param event
      * @return
@@ -99,11 +96,11 @@ public class NotifyService {
 
         StringBuilder cartouchText = new StringBuilder();
         cartouchText.append(translatorService.getDictionarySentence(Sentence.DEAR, lang));
-            if (toghUserEntity.getFirstName() != null)
-                cartouchText.append(NBSP + toghUserEntity.getFirstName());
-            if (toghUserEntity.getLastName() != null)
-                cartouchText.append(NBSP + toghUserEntity.getLastName());
-        
+        if (toghUserEntity.getFirstName() != null)
+            cartouchText.append(NBSP + toghUserEntity.getFirstName());
+        if (toghUserEntity.getLastName() != null)
+            cartouchText.append(NBSP + toghUserEntity.getLastName());
+
         cartouchText.append("," + BR);
         cartouchText.append(translatorService.getDictionarySentence(Sentence.YOU_ARE_INVITED_BY, lang));
         cartouchText.append(NBSP);
@@ -119,15 +116,15 @@ public class NotifyService {
 
         st.append(translatorService.getDictionarySentence(Sentence.TOGH_EVENT_EXPLANATION, lang));
         st.append(BR);
-        
-        st.append(String.format( translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang), invitedBy.getLabel()));
 
-        EventController eventController = EventController.getInstance(event, factoryService,factoryRepository);
+        st.append(String.format(translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang), invitedBy.getLabel()));
+
+        EventController eventController = EventController.getInstance(event, factoryService, factoryRepository);
         EventPresentationAttribut eventPresentationAttribut = new EventPresentationAttribut();
         eventPresentationAttribut.bannerAction = "<a href=\"" + getHttpLink(HTTP_DEFAULT_HOST_TOGH)
-            + "?action=" + (newUser? "invitedNewUser":"invitedUser")
-            + "&eventid=" + event.getId()
-            + "&email="+toghUserEntity.getEmail()+"\""
+                + "?action=" + (newUser ? "invitedNewUser" : "invitedUser")
+                + "&eventid=" + event.getId()
+                + "&email=" + toghUserEntity.getEmail() + "\""
                 + " style=\"text-decoration: none;color: white;\">"
                 + translatorService.getDictionarySentence(Sentence.REGISTER_AND_JOIN_THIS_EVENT, lang) + "</a>";
 
@@ -144,54 +141,52 @@ public class NotifyService {
         return sendEmail(toghUserEntity.getEmail(), subject, st.toString());
     }
 
-    
+
     /**
-     * 
      * A status of an event change
      * Some person may want to be notify?
+     *
      * @param eventEntity
-     * @param oldStatus status before the change
-     * 
+     * @param oldStatus   status before the change
      */
     public NotificationStatus notifyEventChangeStatus(@Nonnull EventEntity eventEntity, StatusEventEnum oldStatus) {
         return new NotificationStatus();
     }
-        
+
     /**
-     * 
      * Anevent is purged
      * Some person may want to be notify?
-     * @param eventEntity
      *
+     * @param eventEntity
      */
     public NotificationStatus notifyEventPurge(@Nonnull EventEntity eventEntity) {
         return new NotificationStatus();
     }
-        
-    
+
+
     private String getHttpLink(String defaultHttp) {
         return apiKeyService.getHttpToghServer(defaultHttp); // "http://localhost:7080/togh";
     }
 
     /**
      * Send the Lost Password email
-     * 
+     *
      * @param toghUserEntity
      * @param uuid
      * @return
      */
     public NotificationStatus sendLostPasswordEmail(ToghUserEntity toghUserEntity, String uuid) {
 
-        String textInCartouche = translatorService.getDictionarySentence(Sentence.YOU_LOST_YOUR_PASSWORD,  toghUserEntity.getLanguage())+BR;
-        textInCartouche+=translatorService.getDictionarySentence(Sentence.CLICK_TO_RESET_PASSWORD,  toghUserEntity.getLanguage());
-        
+        String textInCartouche = translatorService.getDictionarySentence(Sentence.YOU_LOST_YOUR_PASSWORD, toghUserEntity.getLanguage()) + BR;
+        textInCartouche += translatorService.getDictionarySentence(Sentence.CLICK_TO_RESET_PASSWORD, toghUserEntity.getLanguage());
+
         StringBuilder st = new StringBuilder();
         st.append(getEmailHeader(textInCartouche, toghUserEntity.getLanguage()));
-        
+
         String url = getHttpLink(HTTP_DEFAULT_HOST_TOGH) + "?action=resetpassword&uuid=" + uuid;
 
-        st.append("<a href='" + url + "'>" + translatorService.getDictionarySentence( Sentence.RESET_MY_PASSWORD, toghUserEntity.getLanguage()) + "</a>");
-        return sendEmail(toghUserEntity.getEmail(), translatorService.getDictionarySentence( Sentence.TOGH_RESET_PASSWORD, toghUserEntity.getLanguage()), st.toString());
+        st.append("<a href='" + url + "'>" + translatorService.getDictionarySentence(Sentence.RESET_MY_PASSWORD, toghUserEntity.getLanguage()) + "</a>");
+        return sendEmail(toghUserEntity.getEmail(), translatorService.getDictionarySentence(Sentence.TOGH_RESET_PASSWORD, toghUserEntity.getLanguage()), st.toString());
     }
 
     // --------------------------------------------------------------
@@ -223,7 +218,7 @@ public class NotifyService {
     /**
      * Send Email
      *
-     * @param emailTo Email to this mail
+     * @param emailTo     Email to this mail
      * @param mailSubject Subject of mail
      * @param mailContent Content of email
      * @return the notification status
@@ -231,9 +226,9 @@ public class NotifyService {
     private NotificationStatus sendEmail(String emailTo, String mailSubject, String mailContent) {
         NotificationStatus notificationStatus = new NotificationStatus();
 
-        SendEmail sendEmail = new SendEmail(factoryService);
+        SendEmail sendEmail = new SendEmail();
         notificationStatus.listEvents.addAll(sendEmail.sendOneEmail(emailTo, mailSubject, mailContent));
-        if (! notificationStatus.listEvents.isEmpty() &&
+        if (!notificationStatus.listEvents.isEmpty() &&
                 notificationStatus.listEvents.get(0).isSameEvent(SendEmail.eventNoEmailServerConfigured))
             notificationStatus.serverIssue = true;
         return notificationStatus;

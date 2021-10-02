@@ -8,12 +8,11 @@
 /* ******************************************************************************** */
 package com.togh.repository;
 
+import com.togh.entity.AdminStatsUsageEntity;
+import com.togh.entity.AdminStatsUsageEntity.TypeStatsEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import com.togh.entity.AdminStatsUsageEntity;
-import com.togh.entity.AdminStatsUsageEntity.TypeStatsEnum;
 
 public interface AdminStatsUsageRepository extends JpaRepository<AdminStatsUsageEntity, Long> {
 

@@ -8,14 +8,13 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
 import com.togh.entity.base.BaseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /* ******************************************************************************** */
 /*                                                                                  */

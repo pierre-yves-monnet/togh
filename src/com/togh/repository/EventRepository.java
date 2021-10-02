@@ -1,16 +1,15 @@
 package com.togh.repository;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+import com.togh.entity.EventEntity;
+import com.togh.entity.EventEntity.StatusEventEnum;
+import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.togh.entity.EventEntity;
-import com.togh.entity.EventEntity.StatusEventEnum;
-import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /*
  * This is the EventRepository, Spring implementation.

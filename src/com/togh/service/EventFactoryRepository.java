@@ -8,16 +8,9 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
+import com.togh.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import com.togh.repository.EventChatRepository;
-import com.togh.repository.EventGroupChatRepository;
-import com.togh.repository.EventItineraryStepRepository;
-import com.togh.repository.EventRepository;
-import com.togh.repository.EventShoppingListRepository;
-import com.togh.repository.EventTaskRepository;
 
 /* ******************************************************************************** */
 /*                                                                                  */

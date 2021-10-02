@@ -19,7 +19,7 @@ class RestcallService {
 		this.factoryService = factoryService;
 	}
 
-	// init - separe of constructor because service use themself
+	// init - separed of constructor because service use themself
 	init() {
 		console.log( "RestcallService.init");
 		this.authService= this.factoryService.getAuthService();		
@@ -28,7 +28,7 @@ class RestcallService {
 	// From the URL, complete to have a complete URL
 	getUrl( uri ) {
 		// console.log("RestCall.geturl : "+window.location.href);
-		var i = window.location.href.indexOf(":",7); // skyp http: or https:
+		var i = window.location.href.indexOf(":",7); // skype http: or https:
 		var headerUrl = window.location.href.substring(0,i)+":7080/togh";
 		// search something like http://localhost:3000/#
 		return headerUrl+uri; 
@@ -48,14 +48,15 @@ class RestcallService {
 	        headers: headers
 	    };
 		uri = uri+"&timezoneoffset="+(new Date()).getTimezoneOffset();
-		console.log("RestCallService.getJson: uri="+uri);		
+		console.log("RestCallService.getJson: uri="+uri);
     	axios.get( this.getUrl( uri ), requestOptions)
         	.then( axiosPayload => { 
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));
 				let httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
 				})
-			.catch(error => {				
+			.catch(error => {
+			    console.log("RestcallService.getJson() error "+error);
 				if (error.response && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");
@@ -86,7 +87,7 @@ class RestcallService {
 				fctToCallback.call(objToCall, httpResponse); 
 				})
 			.catch(error => {
-				console.error("RestCallService.getJson: Uri["+selfUri+"] catch error:"+error);	
+				console.error("RestCallService.getJson: Uri["+selfUri+"] catch error:"+error);
 				if (error.response && error.response.status && error.response.status === 401) {
 					let homeTogh=window.location.href;
 					console.log("Redirect : to["+homeTogh+"]");

@@ -16,7 +16,7 @@ public class Chronometer {
 
     private long beginTime;
     private long endTime;
-    private String name;
+    private final String name;
     private long cumulateTime = 0;
     private long nbExecutions;
 

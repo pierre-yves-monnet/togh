@@ -8,17 +8,18 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.logging.Logger;
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
+import com.togh.engine.tool.JpaTool;
+import com.togh.entity.EventEntity;
+import com.togh.entity.ToghUserEntity;
+import com.togh.entity.ToghUserEntity.*;
+import com.togh.repository.ToghUserRepository;
+import com.togh.service.EventService.UpdateContext;
+import com.togh.service.NotifyService.NotificationStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.crypto.SecretKeyFactory;
@@ -26,24 +27,11 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
-import com.togh.engine.logevent.LogEvent;
-import com.togh.engine.logevent.LogEvent.Level;
-import com.togh.engine.tool.JpaTool;
-import com.togh.entity.EventEntity;
-import com.togh.entity.ToghUserEntity;
-import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
-import com.togh.entity.ToghUserEntity.SourceUserEnum;
-import com.togh.entity.ToghUserEntity.StatusUserEnum;
-import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
-import com.togh.entity.ToghUserEntity.TypePictureEnum;
-import com.togh.repository.ToghUserRepository;
-import com.togh.service.EventService.UpdateContext;
-import com.togh.service.NotifyService.NotificationStatus;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.logging.Logger;
 
 @Service
 public class ToghUserService {

@@ -8,21 +8,12 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.togh.entity.base.BaseEntity;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /* ******************************************************************************** */
 /*                                                                                  */

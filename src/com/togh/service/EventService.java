@@ -62,7 +62,7 @@ public class EventService {
     private static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventService.class.getName(), 7, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
 
     private Logger logger = Logger.getLogger(EventService.class.getName());
-    private final static String logHeader = EventService.class.getSimpleName() + ": ";
+    private final static String LOG_HEADER = EventService.class.getSimpleName() + ": ";
 
     @Autowired
     FactoryService factoryService;
@@ -200,7 +200,7 @@ public class EventService {
      */
     public EventOperationResult updateEvent(EventEntity eventEntity, List<Slab> listSlab, UpdateContext updateContext) {
         EventController eventController = getEventController(eventEntity);
-        if (!eventController.isAccess(updateContext.toghUser)) {
+        if (!eventController.hasAccess(updateContext.toghUser)) {
             EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
             eventOperationResult.addLogEvent(eventAccessError);
             return eventOperationResult;
@@ -258,7 +258,7 @@ public class EventService {
                 eventResult.listEvents = eventRepository.findEventsUser(toghUserEntity.getId());
         } catch (Exception e) {
             // something bad arrived
-            logger.severe(logHeader + " Error during finEventsUser toghUser[" + toghUserEntity.getId() + "] :" + e.toString());
+            logger.severe(LOG_HEADER + " Error during finEventsUser toghUser[" + toghUserEntity.getId() + "] :" + e.toString());
             eventResult.listLogEvent.add(new LogEvent(eventFindEventError, e, "User [" + toghUserEntity.getId()));
         }
         return eventResult;
@@ -288,7 +288,7 @@ public class EventService {
         if (eventEntity == null)
             return null;
         EventController eventController = getEventController(eventEntity);
-        if (!eventController.isAccess(toghUserEntity))
+        if (!eventController.hasAccess(toghUserEntity))
             return null;
         return eventEntity;
 
@@ -315,13 +315,13 @@ public class EventService {
     public static class InvitationResult {
 
         public InvitationStatus status;
-        public List<ToghUserEntity> listThogUserInvited = new ArrayList<>();
-        public List<ParticipantEntity> newParticipants = new ArrayList<>();
-        private List<ToghUserEntity> errorMessage = new ArrayList();
-        private List<ToghUserEntity> errorSendEmail = new ArrayList<>();
-        private List<ToghUserEntity> okMessage = new ArrayList();
+        public final List<ToghUserEntity> listThogUserInvited = new ArrayList<>();
+        public final List<ParticipantEntity> newParticipants = new ArrayList<>();
+        private final List<ToghUserEntity> errorMessage = new ArrayList();
+        private final List<ToghUserEntity> errorSendEmail = new ArrayList<>();
+        private final List<ToghUserEntity> okMessage = new ArrayList();
 
-        public List<LogEvent> listLogEvents = new ArrayList<>();
+        public final List<LogEvent> listLogEvents = new ArrayList<>();
 
         public void addErrorMessage( ToghUserEntity toghUserEntity) {
             errorMessage.add( toghUserEntity);
@@ -458,7 +458,7 @@ public class EventService {
     /**
      * Add a task in the event
      * task is saved, then it got an id. Event is not saved.
-     * 
+     *
      * @param eventEntity
      * @return
      */
@@ -470,7 +470,7 @@ public class EventService {
 
     /**
      * RemoveTask
-     * 
+     *
      * @param eventEntity
      * @param taskId
      * @return

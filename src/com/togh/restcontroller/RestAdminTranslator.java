@@ -8,12 +8,11 @@
 /* ******************************************************************************** */
 package com.togh.restcontroller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.togh.admin.translate.TranslateDictionary;
 import com.togh.admin.translate.TranslateDictionary.TranslateResult;
 import com.togh.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */

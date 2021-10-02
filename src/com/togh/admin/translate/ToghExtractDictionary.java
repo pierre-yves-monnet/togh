@@ -8,6 +8,11 @@ package com.togh.admin.translate;
 /*                                                                                  */
 /* ******************************************************************************** */
 
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -16,12 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import com.togh.engine.logevent.LogEvent;
-import com.togh.engine.logevent.LogEvent.Level;
 
 public class ToghExtractDictionary extends ToghDictionary {
     

@@ -9,22 +9,13 @@
 package com.togh.entity;
 
 
-import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.EventBaseEntity;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
+import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */

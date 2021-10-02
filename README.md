@@ -469,9 +469,9 @@ stocker les photo de l'API Key pour Flick
 ## Create Togh Docker image
 ```
 > mvn install
+> docker build -t pierreyvesmonnet/togh:1.0.0
 
 > docker push pierreyvesmonnet/togh:1.0.0
-
 ```
 
 ## Create frontendtogh image
@@ -483,6 +483,8 @@ stocker les photo de l'API Key pour Flick
 ## execute docker image
 ```
 > docker run --name togh -h localhost -e "SPRING_PROFILES_ACTIVE=production" -d -p 7080:7080 -p 5432:5432 pierreyvesmonnet/togh:1.0.0
+docker run --name togh -h localhost -e SPRING_DATASOURCE_URL=jdbc:postgresql://34.125.204.84:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" pierreyvesmonnet/togh:1.0.0 
+
 > docker run --name frontendtogh -h localhost -d -p 3000:3000 -p 80:80 pierreyvesmonnet/frontendtogh:1.0.0
 ```
 not needed: -v d:/tmp/docker:/opt/togh
@@ -528,23 +530,21 @@ http://gcr.io/intricate-gamma-325323
 
 # Create Google instance
 > https://cloud.google.com/community/tutorials/cloud-run-local-dev-docker-compose
-1. Create an Compute Engine instance, named toghinstance
-
+1. Create a Compute Engine instance, named toghinstance
 
 2. Create a Service Account with the role "ContainerRegistry". Generate the KEY, get the JSON file and copy the file to the host
-3. 
 
-upload file from D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-ContainerRegistry
+3. upload file from D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-ContainerRegistry
 
 docker login -u _json_key --password-stdin https://gcr.io  <intricate-gamma-325323-ContainerRegistry.json
 
 export GCP_KEY_PATH=~/intricate-gamma-325323-ContainerRegistry.json
 
-docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
-docker run gcr.io/intricate-gamma-325323/togh:1.0.0
-docker pull gcr.io/intricate-gamma-325323/toghfront:1.0.0
-            gcr.io/intricate-gamma-325323/toghfront
+```
+> docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
 
+> docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+```
 
 4.1 run docker compose
 export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json
@@ -565,14 +565,16 @@ docker run --rm \
 
 
 
-4.2 run docker container
-A lancer sur le computen engine
+4.2 run docker conteneur
+A lancer sur le compute engine
 
 ```
 $ docker run --name toghpostgres -e POSTGRES_USER=toghp -e POSTGRES_PASSWORD=ThisIsThog4Postgres -e POSTGRES_DB=togh -p 5432:5432 -d postgres
-$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres -p 7080:7080 --network="host" -d gcr.io/intricate-gamma-325323/togh:1.0.0
+$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" -d gcr.io/intricate-gamma-325323/togh:1.0.0 &
 $ docker run --name frontendtogh  -p 3000:3000 --network="host" -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+
 $ curl http://34.125.204.84:7080/api/ping
+$ curl http://34.125.204.84:3000
 ```
 
 
@@ -765,7 +767,9 @@ V2
 
 ## bugs
 	
-
+Click sur mon event => Part en live
+ 
+ 
 Deconnection : ca ne renvoi plus sur la page de login      
           
 

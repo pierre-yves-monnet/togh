@@ -8,21 +8,15 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
+import com.togh.engine.tool.EngineTool;
+import com.togh.entity.base.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
-
-import com.togh.engine.tool.EngineTool;
-import com.togh.entity.base.BaseEntity;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -242,12 +236,13 @@ public @Data class ToghUserEntity extends BaseEntity {
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
      * 
-     * @param levelInformation
+     * @param contextAccess Context of the access
+     * @param timeZoneOffset time Zone offset of the browser
      * @return
      */
     @Override
-    public Map<String, Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
+    public Map<String, Object> getMap(ContextAccess contextAccess, Long timeZoneOffset) {
+        Map<String, Object> resultMap = super.getMap(contextAccess, timeZoneOffset);
 
         StringBuilder label = new StringBuilder();
         StringBuilder longlabel = new StringBuilder();
@@ -304,12 +299,12 @@ public @Data class ToghUserEntity extends BaseEntity {
             resultMap.put("privilegeuser", privilegeUser.toString());
             resultMap.put("connectiontime", EngineTool.dateToString(connectionTime));
             if (connectionTime!=null) {
-                LocalDateTime connectionTimeLocal = connectionTime.minusMinutes(timezoneOffset);
+                LocalDateTime connectionTimeLocal = connectionTime.minusMinutes(timeZoneOffset);
                 resultMap.put("connectiontimest", EngineTool.dateToHumanString(connectionTimeLocal));
             }
             resultMap.put("connectionlastactivity", EngineTool.dateToString(connectionLastActivity));
             if (connectionLastActivity!=null) {
-                LocalDateTime connectionLastActivityLocal = connectionLastActivity.minusMinutes(timezoneOffset);
+                LocalDateTime connectionLastActivityLocal = connectionLastActivity.minusMinutes(timeZoneOffset);
                 resultMap.put("connectionlastactivityst", EngineTool.dateToHumanString(connectionLastActivityLocal));
             }
             resultMap.put("connected", connectionStamp == null ? "OFFLINE" : "ONLINE");

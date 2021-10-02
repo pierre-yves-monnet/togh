@@ -8,27 +8,16 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.Table;
-
+import com.togh.entity.ToghUserEntity.ContextAccess;
+import com.togh.entity.base.UserEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
-import com.togh.entity.base.UserEntity;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */

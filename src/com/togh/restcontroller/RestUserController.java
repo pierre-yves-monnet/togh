@@ -1,16 +1,6 @@
 package com.togh.restcontroller;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.service.FactoryService;
@@ -20,6 +10,16 @@ import com.togh.service.ToghUserService;
 import com.togh.service.ToghUserService.CriteriaSearchUser;
 import com.togh.service.ToghUserService.OperationUser;
 import com.togh.service.ToghUserService.SearchUsersResult;
+import com.togh.tool.ToolCast;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -166,9 +166,9 @@ public class RestUserController {
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
-        Long timezoneOffset = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
 
-        String attribut = RestTool.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
+        String attribut = ToolCast.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
         Object value = updateMap.get(RestJsonConstants.CST_PARAM_VALUE);
 
         Map<String, Object> payload = new HashMap<>();
@@ -196,10 +196,10 @@ public class RestUserController {
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
-        Long timezoneOffset = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
 
-        Long userId = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
-        String attribut = RestTool.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
+        Long userId = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
+        String attribut = ToolCast.getString(updateMap, RestJsonConstants.CST_PARAM_ATTRIBUT, "");
         Object value = updateMap.get(RestJsonConstants.CST_PARAM_VALUE);
 
         Map<String, Object> payload = new HashMap<>();
@@ -227,9 +227,9 @@ public class RestUserController {
         if (toghUser == null)
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
-        Long timezoneOffset = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
         // Long timezoneOffset             = RestTool.getLong(updateMap, "timezoneoffset", 0L);
-        Long userId = RestTool.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
+        Long userId = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
         Map<String, Object> payload = new HashMap<>();
         OperationLoginUser operationUser = loginService.disconnectUser(userId);
 

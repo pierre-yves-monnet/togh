@@ -8,8 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
-import org.springframework.stereotype.Component;
-
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventTaskEntity;
 import com.togh.entity.base.BaseEntity;

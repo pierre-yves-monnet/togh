@@ -8,30 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.admin.translate;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
-/* ******************************************************************************** */
-/*                                                                                  */
-/* TranslateDictionnary, */
-/*                                                                                  */
-/* Pilote the translation of all directory */
-/*                                                                                  */
-/*                                                                                  */
-/* ******************************************************************************** */
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-
 import com.togh.admin.translate.ToghDictionary.SentenceItem;
 import com.togh.admin.translate.TranslatorGoogle.TranslateSentenceResult;
 import com.togh.engine.chrono.ChronoSet;
@@ -39,6 +15,15 @@ import com.togh.engine.chrono.Chronometer;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * https://code.google.com/archive/p/java-google-translate-text-to-speech/

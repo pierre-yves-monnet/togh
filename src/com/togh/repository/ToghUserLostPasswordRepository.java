@@ -8,13 +8,12 @@
 /* ******************************************************************************** */
 package com.togh.repository;
 
-import java.util.List;
-
+import com.togh.entity.ToghUserLostPasswordEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.togh.entity.ToghUserLostPasswordEntity;
+import java.util.List;
 
 public interface ToghUserLostPasswordRepository extends JpaRepository<ToghUserLostPasswordEntity, Long> {
 

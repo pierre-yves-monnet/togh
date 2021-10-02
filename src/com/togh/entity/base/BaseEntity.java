@@ -1,25 +1,16 @@
 package com.togh.entity.base;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.MappedSuperclass;
-
+import com.togh.entity.ToghUserEntity.ContextAccess;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
-
-import lombok.Data;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.Map;
 
 @MappedSuperclass
 @Inheritance

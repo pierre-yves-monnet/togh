@@ -1,37 +1,14 @@
 package com.togh.admin.translate;
 
-import java.io.BufferedWriter;
-
-/* ******************************************************************************** */
-/*                                                                                  */
-/* ToghDictionary, */
-/*                                                                                  */
-/* Read/Write one dictionary */
-/*                                                                                  */
-/*                                                                                  */
-/* ******************************************************************************** */
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import com.togh.engine.logevent.LogEvent;
+import com.togh.engine.logevent.LogEvent.Level;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.togh.engine.logevent.LogEvent;
-import com.togh.engine.logevent.LogEvent.Level;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class ToghDictionary {
 
