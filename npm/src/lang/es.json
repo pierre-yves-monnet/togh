@@ -1,45 +1,40 @@
 {
-  "__AdminAPIKey.Title" : "API Keys",
-  "AdminAPIKey.Title" : "Claves API",
-
-  "__AdminAPIKey.updateKey" : "Update key",
-  "AdminAPIKey.updateKey" : "Actualizar clave",
-
-  "__AdminGoogle.Billing" : "Billing",
-  "AdminGoogle.Billing" : "Facturación",
-
-  "__AdminGoogle.Dahsboard" : "Dashboard",
-  "AdminGoogle.Dahsboard" : "Tablero",
-
-  "__AdminGoogle.Google" : "Google",
-  "AdminGoogle.Google" : "Google",
-
-  "__AdminInfo.Information" : "Information",
-  "AdminInfo.Information" : "Información",
-
-  "__AdminTransaltor.Title" : "Translation",
-  "AdminTransaltor.Title" : "Administración",
-
-  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
-  "AdminTranslator.AverageTranslation" : "Promedio (en milisegundos)",
-
-  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
-  "AdminTranslator.CheckDictionary" : "Consultar diccionario",
-
-  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-  "AdminTranslator.CompleteDictionary" : "Diccionario completo",
-
-  "__AdminTranslator.MissingSentences" : "Missing sentences",
-  "AdminTranslator.MissingSentences" : "Faltan oraciones",
-
-  "__AdminTranslator.Name" : "Name",
-  "AdminTranslator.Name" : "Nombre",
-
-  "__AdminTranslator.TimeTranslation" : "Time of translation",
-  "AdminTranslator.TimeTranslation" : "Hora de la traducción",
-
-  "__AdminTranslator.Title" : "Translation",
-  "AdminTranslator.Title" : "Traducción",
+  "__AdminAPIKey.Title": "API Keys",
+  "AdminAPIKey.Title": "Claves API",
+  "__AdminAPIKey.updateKey": "Update key",
+  "AdminAPIKey.updateKey": "Actualizar clave",
+  "__AdminEmail.SendEmailTo": "Send Email test to",
+  "AdminEmail.SendEmailTo": "Enviar prueba de correo electrónico a",
+  "__AdminEmail.Title": "Email parameters",
+  "AdminEmail.Title": "Parámetros de correo electrónico",
+  "__AdminEmail.testEmail": "Test Email",
+  "AdminEmail.testEmail": "Email de prueba",
+  "__AdminEmail.updateKey": "Update key",
+  "AdminEmail.updateKey": "Actualizar clave",
+  "__AdminGoogle.Billing": "Billing",
+  "AdminGoogle.Billing": "Facturación",
+  "__AdminGoogle.Dahsboard": "Dashboard",
+  "AdminGoogle.Dahsboard": "Tablero",
+  "__AdminGoogle.Google": "Google",
+  "AdminGoogle.Google": "Google",
+  "__AdminInfo.Information": "Information",
+  "AdminInfo.Information": "Información",
+  "__AdminTransaltor.Title": "Translation",
+  "AdminTransaltor.Title": "Administración",
+  "__AdminTranslator.AverageTranslation": "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation": "Promedio (en milisegundos)",
+  "__AdminTranslator.CheckDictionary": "Check Dictionary",
+  "AdminTranslator.CheckDictionary": "Consultar diccionario",
+  "__AdminTranslator.CompleteDictionary": "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary": "Diccionario completo",
+  "__AdminTranslator.MissingSentences": "Missing sentences",
+  "AdminTranslator.MissingSentences": "Faltan oraciones",
+  "__AdminTranslator.Name": "Name",
+  "AdminTranslator.Name": "Nombre",
+  "__AdminTranslator.TimeTranslation": "Time of translation",
+  "AdminTranslator.TimeTranslation": "Hora de la traducción",
+  "__AdminTranslator.Title": "Translation",
+  "AdminTranslator.Title": "Traducción",
 
   "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
   "AdminTranslator.TooMuchSentences" : "Oración de desbordamiento",
@@ -864,112 +859,85 @@
   "EventsList.DateFromTo" : "para",
 
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
-  "EventsList.LimitSubscription" : "Alcanza el límite de eventos permitidos en el último período. Vaya a su perfil para ver su suscripción",
-
-  "__EventsList.MyEvents" : "My events",
-  "EventsList.MyEvents" : "Mis eventos",
-
-  "__EventsList.Name" : "Name",
-  "EventsList.Name" : "Nombre",
-
-  "__EventsList.Participants" : "Participants",
-  "EventsList.Participants" : "Participantes",
-
-  "__EventsList.Refresh" : "Refresh",
-  "EventsList.Refresh" : "Actualizar",
-
-  "__EventsList.ServerConnectionError" : "Server connection error",
-  "EventsList.ServerConnectionError" : "Error de conexión al servidor",
-
-  "__Expense.Budget" : "Budget",
-  "Expense.Budget" : "Presupuesto",
-
-  "__Expense.Cost" : "Cost",
-  "Expense.Cost" : "Costo",
-
-  "__Invitation.ByEmail" : "Send an Email",
-  "Invitation.ByEmail" : "Enviar un correo electrónico",
-
-  "__Invitation.Close" : "Close",
-  "Invitation.Close" : "Cerrar",
-
-  "__Invitation.Email" : "Email",
-  "Invitation.Email" : "Correo electrónico",
-
-  "__Invitation.FirstName" : "First name",
-  "Invitation.FirstName" : "Nombre de pila",
-
-  "__Invitation.Invitation" : "Invitation",
-  "Invitation.Invitation" : "Invitación",
-
-  "__Invitation.LastName" : "Last name",
-  "Invitation.LastName" : "Apellido",
-
-  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
-  "Invitation.OnlyUserNotAlreadyAParticipant" : "Solo los usuarios que aún no son participantes",
-
-  "__Invitation.PhoneNumber" : "Phone number",
-  "Invitation.PhoneNumber" : "Número de teléfono",
-
-  "__Invitation.Search" : "Search",
-  "Invitation.Search" : "Buscar",
-
-  "__Invitation.SearchAUser" : "Search a user",
-  "Invitation.SearchAUser" : "Buscar un usuario",
-
-  "__Invitation.Searching" : "Searching",
-  "Invitation.Searching" : "buscando",
-
-  "__Invitation.SendInvitation" : "Send Invitation",
-  "Invitation.SendInvitation" : "Enviar invitacion",
-
-  "__Invitation.UserEmail" : "Email",
-  "Invitation.UserEmail" : "Correo electrónico",
-
-  "__Invitation.UserFound" : "UsersFound",
-  "Invitation.UserFound" : "Usuarios Encontrados",
-
-  "__Invitation.UserName" : "Name",
-  "Invitation.UserName" : "Nombre",
-
-  "__Invitation.UserPhoneNumber" : "Phone number",
-  "Invitation.UserPhoneNumber" : "Número de teléfono",
-
-  "__LogEvent.Action" : "Action",
-  "LogEvent.Action" : "Acción",
-
-  "__LogEvent.Consequence" : "Consequence",
-  "LogEvent.Consequence" : "Consecuencia",
-
-  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
-  "Login.CantConnectToTheServer" : "No puedo conectarme al servidor",
-
-  "__Login.EmailIncorrect" : "Email address is incorrect",
-  "Login.EmailIncorrect" : "Correo electronico incorrecto",
-
-  "__Login.EmailSent" : "An email is sent, check your mailbox",
-  "Login.EmailSent" : "Se envía un correo electrónico, revise su buzón",
-
-  "__Login.LostMyPassword" : "I lost My password",
-  "Login.LostMyPassword" : "Perdí mi contraseña",
-
-  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
-  "Login.LostMyPasswordExplanation" : "¿Tienes una cuenta, pero no puedes conectarte? Haga clic en el botón 'Incluyo mi contraseña' para obtener una temporal",
-
-  "__Login.LostMyPasswordLabel" : "Reset my password",
-  "Login.LostMyPasswordLabel" : "Restablecer mi contraseña",
-
-  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
-  "Login.LostPasswordExplanation" : "Se enviará un enlace para cambiar su contraseña a su correo electrónico",
-
-  "__Login.RememberMe" : "Remember Me",
-  "Login.RememberMe" : "Recuérdame",
-
-  "__Login.SendEmail" : "Send the email",
-  "Login.SendEmail" : "Envíe el correo electrónico",
-
-  "__Login.ServerConnectionError" : "Server connection error",
-  "Login.ServerConnectionError" : "Error de conexión al servidor",
+  "EventsList.LimitSubscription": "Alcanza el límite de eventos permitidos en el último período. Vaya a su perfil para ver su suscripción",
+  "__EventsList.MyEvents": "My events",
+  "EventsList.MyEvents": "Mis eventos",
+  "__EventsList.Name": "Name",
+  "EventsList.Name": "Nombre",
+  "__EventsList.Participants": "Participants",
+  "EventsList.Participants": "Participantes",
+  "__EventsList.Refresh": "Refresh",
+  "EventsList.Refresh": "Actualizar",
+  "__EventsList.ServerConnectionError": "Server connection error",
+  "EventsList.ServerConnectionError": "Error de conexión al servidor",
+  "__Expense.Budget": "Budget",
+  "Expense.Budget": "Presupuesto",
+  "__Expense.Cost": "Cost",
+  "Expense.Cost": "Costo",
+  "__Invitation.ByEmail": "Send an Email",
+  "Invitation.ByEmail": "Enviar un correo electrónico",
+  "__Invitation.Close": "Close",
+  "Invitation.Close": "Cerrar",
+  "__Invitation.Email": "Email",
+  "Invitation.Email": "Correo electrónico",
+  "__Invitation.FirstName": "First name",
+  "Invitation.FirstName": "Nombre de pila",
+  "__Invitation.Invitation": "Invitation",
+  "Invitation.Invitation": "Invitación",
+  "__Invitation.LastName": "Last name",
+  "Invitation.LastName": "Apellido",
+  "__Invitation.NoEmails": "Attention, email can't be sent to these users",
+  "Invitation.NoEmails": "Atención, no se puede enviar correo electrónico a estos usuarios",
+  "__Invitation.OnlyUserNotAlreadyAParticipant": "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant": "Solo los usuarios que aún no son participantes",
+  "__Invitation.PhoneNumber": "Phone number",
+  "Invitation.PhoneNumber": "Número de teléfono",
+  "__Invitation.Search": "Search",
+  "Invitation.Search": "Buscar",
+  "__Invitation.SearchAUser": "Search a user",
+  "Invitation.SearchAUser": "Buscar un usuario",
+  "__Invitation.Searching": "Searching",
+  "Invitation.Searching": "buscando",
+  "__Invitation.SendInvitation": "Send Invitation",
+  "Invitation.SendInvitation": "Enviar invitacion",
+  "__Invitation.UseMyEmailAsFrom": "Use my email in the From message",
+  "Invitation.UseMyEmailAsFrom": "Usar mi correo electrónico en el mensaje De",
+  "__Invitation.UserEmail": "Email",
+  "Invitation.UserEmail": "Correo electrónico",
+  "__Invitation.UserFound": "UsersFound",
+  "Invitation.UserFound": "Usuarios Encontrados",
+  "__Invitation.UserName": "Name",
+  "Invitation.UserName": "Nombre",
+  "__Invitation.UserPhoneNumber": "Phone number",
+  "Invitation.UserPhoneNumber": "Número de teléfono",
+  "__Invitation.UsersAlreadyRegistered": "These participants are already registered",
+  "Invitation.UsersAlreadyRegistered": "Estos participantes ya están registrados",
+  "__Invitation.UsersInvited": "Users are invited with success",
+  "Invitation.UsersInvited": "Los usuarios están invitados con éxito",
+  "__LogEvent.Action": "Action",
+  "LogEvent.Action": "Acción",
+  "__LogEvent.Consequence": "Consequence",
+  "LogEvent.Consequence": "Consecuencia",
+  "__Login.CantConnectToTheServer": "Can't Connect To The Server",
+  "Login.CantConnectToTheServer": "No puedo conectarme al servidor",
+  "__Login.EmailIncorrect": "Email address is incorrect",
+  "Login.EmailIncorrect": "Correo electronico incorrecto",
+  "__Login.EmailSent": "An email is sent, check your mailbox",
+  "Login.EmailSent": "Se envía un correo electrónico, revise su buzón",
+  "__Login.LostMyPassword": "I lost My password",
+  "Login.LostMyPassword": "Perdí mi contraseña",
+  "__Login.LostMyPasswordExplanation": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation": "¿Tienes una cuenta, pero no puedes conectarte? Haga clic en el botón 'Incluyo mi contraseña' para obtener una temporal",
+  "__Login.LostMyPasswordLabel": "Reset my password",
+  "Login.LostMyPasswordLabel": "Restablecer mi contraseña",
+  "__Login.LostPasswordExplanation": "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation": "Se enviará un enlace para cambiar su contraseña a su correo electrónico",
+  "__Login.RememberMe": "Remember Me",
+  "Login.RememberMe": "Recuérdame",
+  "__Login.SendEmail": "Send the email",
+  "Login.SendEmail": "Envíe el correo electrónico",
+  "__Login.ServerConnectionError": "Server connection error",
+  "Login.ServerConnectionError": "Error de conexión al servidor",
 
   "__Login.ServerIssue" : "An error arrived on the server, please try later",
   "Login.ServerIssue" : "Llegó un error en el servidor, inténtelo más tarde",
@@ -1131,118 +1099,87 @@
   "MyProfile.lastName" : "Apellido",
 
   "__MyProfile.passwordChangeFailed" : "Change failed",
-  "MyProfile.passwordChangeFailed" : "Cambio fallido",
-
-  "__MyProfile.passwordChangeInProgress" : "In progress",
-  "MyProfile.passwordChangeInProgress" : "En curso",
-
-  "__MyProfile.passwordChangedOk" : "Password changed",
-  "MyProfile.passwordChangedOk" : "contraseña cambiada",
-
-  "__MyProfile.searchable" : "Searchable",
-  "MyProfile.searchable" : "Buscable",
-
-  "__MyProfile.searchableFalse" : "Never in the search result",
-  "MyProfile.searchableFalse" : "Nunca en el resultado de la búsqueda",
-
-  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
-  "MyProfile.searchableTrue" : "Sí, apareceré en la búsqueda.",
-
-  "__MyProfile.showTipsUser" : "Show tips",
-  "MyProfile.showTipsUser" : "Mostrar recomendaciones",
-
-  "__MyProfile.showtipuser" : "ShowTipUsers",
-  "MyProfile.showtipuser" : "ShowTipUsers",
-
-  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
-  "MyProfile.subscriptionExcellentExplanation" : "¡La suscripción Excellence llega al cielo! Grandes eventos, sin límite real. Y ayudas a mantener la aplicación.",
-
-  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
-  "MyProfile.subscriptionFreeExplanation" : "La suscripción gratuita contiene todo lo que necesita para organizar sus eventos. Solo se limita a evitar el costo. Está limitado en la cantidad de eventos que puede crear por mes, la cantidad de participantes por evento.",
-
-  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
-  "MyProfile.subscriptionPremiumExplanation" : "La suscripción Premium supera el límite. Puede organizar múltiples eventos, administrar el presupuesto. ¡Perfecto para profesionales que desean tener un gran sistema para rastrear y organizar todo, o para usuarios que organizan muchos eventos!",
-
-  "__MyProfile.subscriptionUser" : "Subscription",
-  "MyProfile.subscriptionUser" : "Suscripción",
-
-  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
-  "MyProfile.subscriptionUserExplanation" : "Existe un nivel de suscripción diferente.",
-
-  "__MyProfile.typeProfile" : "Picture",
-  "MyProfile.typeProfile" : "Imagen",
-
-  "__RegisterNewUser.CloseRegistration" : "Close registration",
-  "RegisterNewUser.CloseRegistration" : "Cerrar registro",
-
-  "__RegisterNewUser.Email" : "Email",
-  "RegisterNewUser.Email" : "Correo electrónico",
-
-  "__RegisterNewUser.FirstName" : "First name",
-  "RegisterNewUser.FirstName" : "Nombre propio",
-
-  "__RegisterNewUser.InformationLogin" : "Login",
-  "RegisterNewUser.InformationLogin" : "Acceso",
-
-  "__RegisterNewUser.InformationVisibility" : "Access information",
-  "RegisterNewUser.InformationVisibility" : "Informacion de acceso",
-
-  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
-  "RegisterNewUser.Information_1" : "Registre un usuario en Togh para acceder y crear eventos, recibir notificaciones. Acceda a su perfil para cambiar cualquier configuración.",
-
-  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
-  "RegisterNewUser.Information_2" : "Su nombre de usuario es su correo electrónico. Togh le enviará un correo electrónico de confirmación para validar su cuenta. Este correo electrónico se utiliza cuando perdió su contraseña.",
-
-  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
-  "RegisterNewUser.Information_3" : "En el perfil, puede cambiar la configuración para que no sea visible para otro usuario de Togh. De forma predeterminada, se le puede ver en la búsqueda mediante su nombre y correo electrónico. ¡Tu amigo necesita verte! Pero puede decidir no ser visible en una búsqueda general. Entonces, su amigo debe conocer su correo electrónico para agregarlo como participante.",
-
-  "__RegisterNewUser.LastName" : "Last name",
-  "RegisterNewUser.LastName" : "Apellido",
-
-  "__RegisterNewUser.Password" : "Password",
-  "RegisterNewUser.Password" : "Contraseña",
-
-  "__RegisterNewUser.Registration" : "Registration",
-  "RegisterNewUser.Registration" : "Registro",
-
-  "__RegisterNewUser.RetypePassword" : "Retype password",
-  "RegisterNewUser.RetypePassword" : "Vuelva a escribir la contraseña",
-
-  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
-  "RegisterUser.EmailIsMandatory" : "El correo electrónico es obligatorio",
-
-  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
-  "RegisterUser.FirstNameIsMandatory" : "El nombre es obligatorio",
-
-  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
-  "RegisterUser.PasswordIsMandatory" : "La contraseña es obligatoria",
-
-  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
-  "RegisterUser.PasswordSizeMandatory" : "La contraseña debe tener un mínimo de 4 caracteres",
-
-  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDifferent" : "Las contraseñas son diferentes",
-
-  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
-  "ResetPassword.ResetPasswordProcedure" : "Ahora puede cambiar su contraseña. Se cambiará y se le conectará de inmediato.",
-
-  "__ResetPassword.passwordchanged" : "Password changed",
-  "ResetPassword.passwordchanged" : "contraseña cambiada",
-
-  "__ResetPassword.passwordchangefailed" : "Change failed",
-  "ResetPassword.passwordchangefailed" : "Cambio fallido",
-
-  "__UserFeedback.OperationFailed" : "Operation Failed",
-  "UserFeedback.OperationFailed" : "Operación fallida",
-
-  "__UserFeedback.OperationHttpError" : "Connection to the server lost",
-  "UserFeedback.OperationHttpError" : "Se perdió la conexión al servidor",
-
-  "__UserFeedback.OperationSuccess" : "Operation successful",
-  "UserFeedback.OperationSuccess" : "Operación exitosa",
-
-  "__UserFeedback.OperationSuccessfull" : "Success",
-  "UserFeedback.OperationSuccessfull" : "Éxito",
+  "MyProfile.passwordChangeFailed": "Cambio fallido",
+  "__MyProfile.passwordChangeInProgress": "In progress",
+  "MyProfile.passwordChangeInProgress": "En curso",
+  "__MyProfile.passwordChangedOk": "Password changed",
+  "MyProfile.passwordChangedOk": "contraseña cambiada",
+  "__MyProfile.searchable": "Searchable",
+  "MyProfile.searchable": "Buscable",
+  "__MyProfile.searchableFalse": "Never in the search result",
+  "MyProfile.searchableFalse": "Nunca en el resultado de la búsqueda",
+  "__MyProfile.searchableTrue": "Yes, I will appears on search",
+  "MyProfile.searchableTrue": "Sí, apareceré en la búsqueda.",
+  "__MyProfile.showTipsUser": "Show tips",
+  "MyProfile.showTipsUser": "Mostrar recomendaciones",
+  "__MyProfile.showtipuser": "ShowTipUsers",
+  "MyProfile.showtipuser": "ShowTipUsers",
+  "__MyProfile.subscriptionExcellentExplanation": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation": "¡La suscripción Excellence llega al cielo! Grandes eventos, sin límite real. Y ayudas a mantener la aplicación.",
+  "__MyProfile.subscriptionFreeExplanation": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation": "La suscripción gratuita contiene todo lo que necesita para organizar sus eventos. Solo se limita a evitar el costo. Está limitado en la cantidad de eventos que puede crear por mes, la cantidad de participantes por evento.",
+  "__MyProfile.subscriptionPremiumExplanation": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation": "La suscripción Premium supera el límite. Puede organizar múltiples eventos, administrar el presupuesto. ¡Perfecto para profesionales que desean tener un gran sistema para rastrear y organizar todo, o para usuarios que organizan muchos eventos!",
+  "__MyProfile.subscriptionUser": "Subscription",
+  "MyProfile.subscriptionUser": "Suscripción",
+  "__MyProfile.subscriptionUserExplanation": "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation": "Existe un nivel de suscripción diferente.",
+  "__MyProfile.typeProfile": "Picture",
+  "MyProfile.typeProfile": "Imagen",
+  "__RegisterNewUser.Account Create": "Account Created",
+  "RegisterNewUser.Account Create": "Cuenta creada",
+  "__RegisterNewUser.AccountAlreadyExist": "Account already exist",
+  "RegisterNewUser.AccountAlreadyExist": "La cuenta ya existe",
+  "__RegisterNewUser.CloseRegistration": "Close registration",
+  "RegisterNewUser.CloseRegistration": "Cerrar registro",
+  "__RegisterNewUser.Email": "Email",
+  "RegisterNewUser.Email": "Correo electrónico",
+  "__RegisterNewUser.FirstName": "First name",
+  "RegisterNewUser.FirstName": "Nombre propio",
+  "__RegisterNewUser.InformationLogin": "Login",
+  "RegisterNewUser.InformationLogin": "Acceso",
+  "__RegisterNewUser.InformationVisibility": "Access information",
+  "RegisterNewUser.InformationVisibility": "Informacion de acceso",
+  "__RegisterNewUser.Information_1": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1": "Registre un usuario en Togh para acceder y crear eventos, recibir notificaciones. Acceda a su perfil para cambiar cualquier configuración.",
+  "__RegisterNewUser.Information_2": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2": "Su nombre de usuario es su correo electrónico. Togh le enviará un correo electrónico de confirmación para validar su cuenta. Este correo electrónico se utiliza cuando perdió su contraseña.",
+  "__RegisterNewUser.Information_3": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3": "En el perfil, puede cambiar la configuración para que no sea visible para otro usuario de Togh. De forma predeterminada, se le puede ver en la búsqueda mediante su nombre y correo electrónico. ¡Tu amigo necesita verte! Pero puede decidir no ser visible en una búsqueda general. Entonces, su amigo debe conocer su correo electrónico para agregarlo como participante.",
+  "__RegisterNewUser.LastName": "Last name",
+  "RegisterNewUser.LastName": "Apellido",
+  "__RegisterNewUser.Password": "Password",
+  "RegisterNewUser.Password": "Contraseña",
+  "__RegisterNewUser.Registration": "Registration",
+  "RegisterNewUser.Registration": "Registro",
+  "__RegisterNewUser.RetypePassword": "Retype password",
+  "RegisterNewUser.RetypePassword": "Vuelva a escribir la contraseña",
+  "__RegisterNewUser.ServerError": "Server error",
+  "RegisterNewUser.ServerError": "Error del Servidor",
+  "__RegisterUser.EmailIsMandatory": "Email is mandatory",
+  "RegisterUser.EmailIsMandatory": "El correo electrónico es obligatorio",
+  "__RegisterUser.FirstNameIsMandatory": "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory": "El nombre es obligatorio",
+  "__RegisterUser.PasswordIsMandatory": "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory": "La contraseña es obligatoria",
+  "__RegisterUser.PasswordSizeMandatory": "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory": "La contraseña debe tener un mínimo de 4 caracteres",
+  "__RegisterUser.PasswordsAreDifferent": "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent": "Las contraseñas son diferentes",
+  "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure": "Ahora puede cambiar su contraseña. Se cambiará y se le conectará de inmediato.",
+  "__ResetPassword.passwordchanged": "Password changed",
+  "ResetPassword.passwordchanged": "contraseña cambiada",
+  "__ResetPassword.passwordchangefailed": "Change failed",
+  "ResetPassword.passwordchangefailed": "Cambio fallido",
+  "__UserFeedback.OperationFailed": "Operation Failed",
+  "UserFeedback.OperationFailed": "Operación fallida",
+  "__UserFeedback.OperationHttpError": "Connection to the server lost",
+  "UserFeedback.OperationHttpError": "Se perdió la conexión al servidor",
+  "__UserFeedback.OperationSuccess": "Operation successful",
+  "UserFeedback.OperationSuccess": "Operación exitosa",
+  "__UserFeedback.OperationSuccessfull": "Success",
+  "UserFeedback.OperationSuccessfull": "Éxito",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
   "UserTips.DeactivateTipInPreference" : "Las propinas se pueden desactivar según sus preferencias"}

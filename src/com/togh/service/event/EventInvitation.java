@@ -40,20 +40,31 @@ public class EventInvitation {
 
     private final FactoryService factoryService;
 
-    // private EventRepository eventRepository;
-
     EventController eventController;
 
-    protected EventInvitation(EventController eventController,FactoryService factoryService) {
+    protected EventInvitation(EventController eventController, FactoryService factoryService) {
         this.eventController = eventController;
         this.factoryService = factoryService;
     }
 
+    /**
+     * Do the invitation
+     *
+     * @param invitedByToghUser the togfUser who sent the invitation
+     * @param listUsersId       list of ToghUserId to invites
+     * @param userInvitedEmail  list of email : there are not yet toghUser
+     * @param role              role in this event
+     * @param useMyEmailAsFrom  if true, the From used in the message is the InvitedByToghUser email
+     * @param message           Message to come with the invitation
+     * @return the InvitationResult
+     */
     public InvitationResult invite(EventEntity event,
-            ToghUserEntity invitedByToghUser,
-            List<Long> listUsersId,
-            String userInvitedEmail,
-            ParticipantRoleEnum role, String message) {
+                                   ToghUserEntity invitedByToghUser,
+                                   List<Long> listUsersId,
+                                   String userInvitedEmail,
+                                   ParticipantRoleEnum role,
+                                   boolean useMyEmailAsFrom,
+                                   String message) {
         InvitationResult invitationResult = new InvitationResult();
 
         MonitorService monitorService = factoryService.getMonitorService();
@@ -68,28 +79,27 @@ public class EventInvitation {
             ToghUserEntity toghUser = userService.getUserFromEmail(userInvitedEmail);
             if (toghUser == null) {
                 // this is a real new user, register and invite it to join Togh
-                CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, event);
+                CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, useMyEmailAsFrom, event);
                 if (creationStatus.toghUser == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
                     // This is an internal message here , can't send back to the user error information
                     return invitationResult;
                 }
-                setUserJustInvited.add( creationStatus.toghUser );
-                
-                invitationResult.listThogUserInvited.add( creationStatus.toghUser);
+                setUserJustInvited.add(creationStatus.toghUser);
+
+                invitationResult.listThogUserInvited.add(creationStatus.toghUser);
             } else {
                 invitationResult.listThogUserInvited.add(toghUser);
             }
         }
 
         // ---- from the list of ToghUserId
-
         if (listUsersId != null && !listUsersId.isEmpty()) {
             for (Long userId : listUsersId) {
                 // Javascript will pass an Integer or a String (JS does not manage correctly large number)
                 ToghUserEntity toghUser = null;
                 if (userId != null)
-                    toghUser = userService.getUserFromId( userId );
+                    toghUser = userService.getUserFromId(userId);
                 if (toghUser == null) {
 
                     // caller has supposed to give a valid userId. Stop immediately
@@ -115,18 +125,18 @@ public class EventInvitation {
                 // send the invitation and register the guy
                 // attention, if the user is just invited to join TOGH, we don't want to send a new email.
                 // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
-                if (! setUserJustInvited.contains(toghUser)) {
-                    NotifyService.NotificationStatus notificationStatus=notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, event);
-                    if (! notificationStatus.isCorrect())
+                if (!setUserJustInvited.contains(toghUser)) {
+                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, useMyEmailAsFrom, event);
+                    if (!notificationStatus.isCorrect())
                         invitationResult.addErrorSendEmail(toghUser);
                 }
                 invitationResult.newParticipants.add(event.addPartipant(toghUser, role, StatusEnum.INVITED));
                 invitationResult.addOkMessage(toghUser);
             }
         }
-        
+
         // save of the event has to be done by the caller
-        
+
         // status now
         if (invitationResult.listThogUserInvited.isEmpty())
             invitationResult.status = InvitationStatus.NOUSERSGIVEN;

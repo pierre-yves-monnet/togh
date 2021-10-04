@@ -1,45 +1,40 @@
 {
-  "__AdminAPIKey.Title" : "API Keys",
-  "AdminAPIKey.Title" : "Κλειδιά API",
-
-  "__AdminAPIKey.updateKey" : "Update key",
-  "AdminAPIKey.updateKey" : "Ενημέρωση κλειδιού",
-
-  "__AdminGoogle.Billing" : "Billing",
-  "AdminGoogle.Billing" : "Χρέωση",
-
-  "__AdminGoogle.Dahsboard" : "Dashboard",
-  "AdminGoogle.Dahsboard" : "Ταμπλό",
-
-  "__AdminGoogle.Google" : "Google",
-  "AdminGoogle.Google" : "Google",
-
-  "__AdminInfo.Information" : "Information",
-  "AdminInfo.Information" : "Πληροφορίες",
-
-  "__AdminTransaltor.Title" : "Translation",
-  "AdminTransaltor.Title" : "Διαχείριση",
-
-  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
-  "AdminTranslator.AverageTranslation" : "Μέσος όρος (σε χιλιοστά του δευτερολέπτου)",
-
-  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
-  "AdminTranslator.CheckDictionary" : "Ελέγξτε το λεξικό",
-
-  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-  "AdminTranslator.CompleteDictionary" : "Πλήρες λεξικό",
-
-  "__AdminTranslator.MissingSentences" : "Missing sentences",
-  "AdminTranslator.MissingSentences" : "Λείπουν προτάσεις",
-
-  "__AdminTranslator.Name" : "Name",
-  "AdminTranslator.Name" : "Ονομα",
-
-  "__AdminTranslator.TimeTranslation" : "Time of translation",
-  "AdminTranslator.TimeTranslation" : "Ώρα μετάφρασης",
-
-  "__AdminTranslator.Title" : "Translation",
-  "AdminTranslator.Title" : "Μετάφραση",
+  "__AdminAPIKey.Title": "API Keys",
+  "AdminAPIKey.Title": "Κλειδιά API",
+  "__AdminAPIKey.updateKey": "Update key",
+  "AdminAPIKey.updateKey": "Ενημέρωση κλειδιού",
+  "__AdminEmail.SendEmailTo": "Send Email test to",
+  "AdminEmail.SendEmailTo": "Αποστολή δοκιμής ηλεκτρονικού ταχυδρομείου σε",
+  "__AdminEmail.Title": "Email parameters",
+  "AdminEmail.Title": "Παράμετροι ηλεκτρονικού ταχυδρομείου",
+  "__AdminEmail.testEmail": "Test Email",
+  "AdminEmail.testEmail": "Δοκιμαστικό email",
+  "__AdminEmail.updateKey": "Update key",
+  "AdminEmail.updateKey": "Κλειδί ενημέρωσης",
+  "__AdminGoogle.Billing": "Billing",
+  "AdminGoogle.Billing": "Χρέωση",
+  "__AdminGoogle.Dahsboard": "Dashboard",
+  "AdminGoogle.Dahsboard": "Ταμπλό",
+  "__AdminGoogle.Google": "Google",
+  "AdminGoogle.Google": "Google",
+  "__AdminInfo.Information": "Information",
+  "AdminInfo.Information": "Πληροφορίες",
+  "__AdminTransaltor.Title": "Translation",
+  "AdminTransaltor.Title": "Διαχείριση",
+  "__AdminTranslator.AverageTranslation": "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation": "Μέσος όρος (σε χιλιοστά του δευτερολέπτου)",
+  "__AdminTranslator.CheckDictionary": "Check Dictionary",
+  "AdminTranslator.CheckDictionary": "Ελέγξτε το λεξικό",
+  "__AdminTranslator.CompleteDictionary": "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary": "Πλήρες λεξικό",
+  "__AdminTranslator.MissingSentences": "Missing sentences",
+  "AdminTranslator.MissingSentences": "Λείπουν προτάσεις",
+  "__AdminTranslator.Name": "Name",
+  "AdminTranslator.Name": "Ονομα",
+  "__AdminTranslator.TimeTranslation": "Time of translation",
+  "AdminTranslator.TimeTranslation": "Ώρα μετάφρασης",
+  "__AdminTranslator.Title": "Translation",
+  "AdminTranslator.Title": "Μετάφραση",
 
   "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
   "AdminTranslator.TooMuchSentences" : "Καταδίκη υπερχείλισης",
@@ -864,112 +859,85 @@
   "EventsList.DateFromTo" : "προς το",
 
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
-  "EventsList.LimitSubscription" : "Φτάνετε στο όριο των επιτρεπόμενων συμβάντων την τελευταία περίοδο Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
-
-  "__EventsList.MyEvents" : "My events",
-  "EventsList.MyEvents" : "Οι εκδηλώσεις μου",
-
-  "__EventsList.Name" : "Name",
-  "EventsList.Name" : "Ονομα",
-
-  "__EventsList.Participants" : "Participants",
-  "EventsList.Participants" : "Συμμετέχοντες",
-
-  "__EventsList.Refresh" : "Refresh",
-  "EventsList.Refresh" : "Φρεσκάρω",
-
-  "__EventsList.ServerConnectionError" : "Server connection error",
-  "EventsList.ServerConnectionError" : "Σφάλμα σύνδεσης διακομιστή",
-
-  "__Expense.Budget" : "Budget",
-  "Expense.Budget" : "Προϋπολογισμός",
-
-  "__Expense.Cost" : "Cost",
-  "Expense.Cost" : "Κόστος",
-
-  "__Invitation.ByEmail" : "Send an Email",
-  "Invitation.ByEmail" : "Στείλτε ένα email",
-
-  "__Invitation.Close" : "Close",
-  "Invitation.Close" : "Κλείσε",
-
-  "__Invitation.Email" : "Email",
-  "Invitation.Email" : "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
-
-  "__Invitation.FirstName" : "First name",
-  "Invitation.FirstName" : "Ονομα",
-
-  "__Invitation.Invitation" : "Invitation",
-  "Invitation.Invitation" : "Πρόσκληση",
-
-  "__Invitation.LastName" : "Last name",
-  "Invitation.LastName" : "Επίθετο",
-
-  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
-  "Invitation.OnlyUserNotAlreadyAParticipant" : "Μόνο χρήστες που δεν είναι ήδη συμμετέχοντες",
-
-  "__Invitation.PhoneNumber" : "Phone number",
-  "Invitation.PhoneNumber" : "Τηλεφωνικό νούμερο",
-
-  "__Invitation.Search" : "Search",
-  "Invitation.Search" : "Αναζήτηση",
-
-  "__Invitation.SearchAUser" : "Search a user",
-  "Invitation.SearchAUser" : "Αναζήτηση χρήστη",
-
-  "__Invitation.Searching" : "Searching",
-  "Invitation.Searching" : "Ερευνητικός",
-
-  "__Invitation.SendInvitation" : "Send Invitation",
-  "Invitation.SendInvitation" : "Στελνω ΠΡΟΣΚΛΗΣΗ",
-
-  "__Invitation.UserEmail" : "Email",
-  "Invitation.UserEmail" : "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
-
-  "__Invitation.UserFound" : "UsersFound",
-  "Invitation.UserFound" : "Χρήστες",
-
-  "__Invitation.UserName" : "Name",
-  "Invitation.UserName" : "Ονομα",
-
-  "__Invitation.UserPhoneNumber" : "Phone number",
-  "Invitation.UserPhoneNumber" : "Τηλεφωνικό νούμερο",
-
-  "__LogEvent.Action" : "Action",
-  "LogEvent.Action" : "Δράση",
-
-  "__LogEvent.Consequence" : "Consequence",
-  "LogEvent.Consequence" : "Συνέπεια",
-
-  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
-  "Login.CantConnectToTheServer" : "Δεν είναι δυνατή η σύνδεση στον διακομιστή",
-
-  "__Login.EmailIncorrect" : "Email address is incorrect",
-  "Login.EmailIncorrect" : "Η διεύθυνση email δεν είναι σωστή",
-
-  "__Login.EmailSent" : "An email is sent, check your mailbox",
-  "Login.EmailSent" : "Αποστέλλεται ένα email, ελέγξτε το γραμματοκιβώτιό σας",
-
-  "__Login.LostMyPassword" : "I lost My password",
-  "Login.LostMyPassword" : "Έχασα τον κωδικό μου",
-
-  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
-  "Login.LostMyPasswordExplanation" : "Έχετε λογαριασμό, αλλά δεν μπορείτε να συνδεθείτε; Κάντε κλικ στο κουμπί &quot;Παραθέτω τον κωδικό πρόσβασής μου&quot; για να λάβετε έναν προσωρινό",
-
-  "__Login.LostMyPasswordLabel" : "Reset my password",
-  "Login.LostMyPasswordLabel" : "Επαναφορά του κωδικού πρόσβασής μου",
-
-  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
-  "Login.LostPasswordExplanation" : "Ένας σύνδεσμος για την αλλαγή του κωδικού πρόσβασής σας θα σταλεί στο email σας",
-
-  "__Login.RememberMe" : "Remember Me",
-  "Login.RememberMe" : "Θυμήσου με",
-
-  "__Login.SendEmail" : "Send the email",
-  "Login.SendEmail" : "Στείλτε το email",
-
-  "__Login.ServerConnectionError" : "Server connection error",
-  "Login.ServerConnectionError" : "Σφάλμα σύνδεσης διακομιστή",
+  "EventsList.LimitSubscription": "Φτάνετε στο όριο των επιτρεπόμενων συμβάντων την τελευταία περίοδο Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
+  "__EventsList.MyEvents": "My events",
+  "EventsList.MyEvents": "Οι εκδηλώσεις μου",
+  "__EventsList.Name": "Name",
+  "EventsList.Name": "Ονομα",
+  "__EventsList.Participants": "Participants",
+  "EventsList.Participants": "Συμμετέχοντες",
+  "__EventsList.Refresh": "Refresh",
+  "EventsList.Refresh": "Φρεσκάρω",
+  "__EventsList.ServerConnectionError": "Server connection error",
+  "EventsList.ServerConnectionError": "Σφάλμα σύνδεσης διακομιστή",
+  "__Expense.Budget": "Budget",
+  "Expense.Budget": "Προϋπολογισμός",
+  "__Expense.Cost": "Cost",
+  "Expense.Cost": "Κόστος",
+  "__Invitation.ByEmail": "Send an Email",
+  "Invitation.ByEmail": "Στείλτε ένα email",
+  "__Invitation.Close": "Close",
+  "Invitation.Close": "Κλείσε",
+  "__Invitation.Email": "Email",
+  "Invitation.Email": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+  "__Invitation.FirstName": "First name",
+  "Invitation.FirstName": "Ονομα",
+  "__Invitation.Invitation": "Invitation",
+  "Invitation.Invitation": "Πρόσκληση",
+  "__Invitation.LastName": "Last name",
+  "Invitation.LastName": "Επίθετο",
+  "__Invitation.NoEmails": "Attention, email can't be sent to these users",
+  "Invitation.NoEmails": "Προσοχή, δεν είναι δυνατή η αποστολή email σε αυτούς τους χρήστες",
+  "__Invitation.OnlyUserNotAlreadyAParticipant": "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant": "Μόνο χρήστες που δεν είναι ήδη συμμετέχοντες",
+  "__Invitation.PhoneNumber": "Phone number",
+  "Invitation.PhoneNumber": "Τηλεφωνικό νούμερο",
+  "__Invitation.Search": "Search",
+  "Invitation.Search": "Αναζήτηση",
+  "__Invitation.SearchAUser": "Search a user",
+  "Invitation.SearchAUser": "Αναζήτηση χρήστη",
+  "__Invitation.Searching": "Searching",
+  "Invitation.Searching": "Ερευνητικός",
+  "__Invitation.SendInvitation": "Send Invitation",
+  "Invitation.SendInvitation": "Στελνω ΠΡΟΣΚΛΗΣΗ",
+  "__Invitation.UseMyEmailAsFrom": "Use my email in the From message",
+  "Invitation.UseMyEmailAsFrom": "Χρησιμοποιήστε το email μου στο μήνυμα Από",
+  "__Invitation.UserEmail": "Email",
+  "Invitation.UserEmail": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+  "__Invitation.UserFound": "UsersFound",
+  "Invitation.UserFound": "Χρήστες",
+  "__Invitation.UserName": "Name",
+  "Invitation.UserName": "Ονομα",
+  "__Invitation.UserPhoneNumber": "Phone number",
+  "Invitation.UserPhoneNumber": "Τηλεφωνικό νούμερο",
+  "__Invitation.UsersAlreadyRegistered": "These participants are already registered",
+  "Invitation.UsersAlreadyRegistered": "Αυτοί οι συμμετέχοντες είναι ήδη εγγεγραμμένοι",
+  "__Invitation.UsersInvited": "Users are invited with success",
+  "Invitation.UsersInvited": "Οι χρήστες καλούνται με επιτυχία",
+  "__LogEvent.Action": "Action",
+  "LogEvent.Action": "Δράση",
+  "__LogEvent.Consequence": "Consequence",
+  "LogEvent.Consequence": "Συνέπεια",
+  "__Login.CantConnectToTheServer": "Can't Connect To The Server",
+  "Login.CantConnectToTheServer": "Δεν είναι δυνατή η σύνδεση στον διακομιστή",
+  "__Login.EmailIncorrect": "Email address is incorrect",
+  "Login.EmailIncorrect": "Η διεύθυνση email δεν είναι σωστή",
+  "__Login.EmailSent": "An email is sent, check your mailbox",
+  "Login.EmailSent": "Αποστέλλεται ένα email, ελέγξτε το γραμματοκιβώτιό σας",
+  "__Login.LostMyPassword": "I lost My password",
+  "Login.LostMyPassword": "Έχασα τον κωδικό μου",
+  "__Login.LostMyPasswordExplanation": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation": "Έχετε λογαριασμό, αλλά δεν μπορείτε να συνδεθείτε; Κάντε κλικ στο κουμπί &quot;Παραθέτω τον κωδικό πρόσβασής μου&quot; για να λάβετε έναν προσωρινό",
+  "__Login.LostMyPasswordLabel": "Reset my password",
+  "Login.LostMyPasswordLabel": "Επαναφορά του κωδικού πρόσβασής μου",
+  "__Login.LostPasswordExplanation": "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation": "Ένας σύνδεσμος για την αλλαγή του κωδικού πρόσβασής σας θα σταλεί στο email σας",
+  "__Login.RememberMe": "Remember Me",
+  "Login.RememberMe": "Θυμήσου με",
+  "__Login.SendEmail": "Send the email",
+  "Login.SendEmail": "Στείλτε το email",
+  "__Login.ServerConnectionError": "Server connection error",
+  "Login.ServerConnectionError": "Σφάλμα σύνδεσης διακομιστή",
 
   "__Login.ServerIssue" : "An error arrived on the server, please try later",
   "Login.ServerIssue" : "Ένα σφάλμα έφτασε στον διακομιστή. Δοκιμάστε αργότερα",
@@ -1131,118 +1099,87 @@
   "MyProfile.lastName" : "Επίθετο",
 
   "__MyProfile.passwordChangeFailed" : "Change failed",
-  "MyProfile.passwordChangeFailed" : "Η αλλαγή απέτυχε",
-
-  "__MyProfile.passwordChangeInProgress" : "In progress",
-  "MyProfile.passwordChangeInProgress" : "Σε εξέλιξη",
-
-  "__MyProfile.passwordChangedOk" : "Password changed",
-  "MyProfile.passwordChangedOk" : "Ο κωδικός άλλαξε",
-
-  "__MyProfile.searchable" : "Searchable",
-  "MyProfile.searchable" : "Ερευνήσιμος",
-
-  "__MyProfile.searchableFalse" : "Never in the search result",
-  "MyProfile.searchableFalse" : "Ποτέ στο αποτέλεσμα αναζήτησης",
-
-  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
-  "MyProfile.searchableTrue" : "Ναι, θα εμφανιστεί στην αναζήτηση",
-
-  "__MyProfile.showTipsUser" : "Show tips",
-  "MyProfile.showTipsUser" : "Εμφάνιση συμβουλών",
-
-  "__MyProfile.showtipuser" : "ShowTipUsers",
-  "MyProfile.showtipuser" : "ShowTipUsers",
-
-  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
-  "MyProfile.subscriptionExcellentExplanation" : "Η συνδρομή Excellence φτάνει στον ουρανό! Μεγάλα γεγονότα, χωρίς πραγματικό όριο. Και βοηθάτε στη διατήρηση της εφαρμογής.",
-
-  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
-  "MyProfile.subscriptionFreeExplanation" : "Η δωρεάν συνδρομή περιέχει όλα όσα χρειάζεστε για να οργανώσετε τις εκδηλώσεις σας. Απλώς περιορίζεται για να αποφευχθεί το κόστος. Είστε περιορισμένοι στον αριθμό των εκδηλώσεων που μπορείτε να δημιουργήσετε ανά μήνα, τον αριθμό των συμμετεχόντων ανά εκδήλωση.",
-
-  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
-  "MyProfile.subscriptionPremiumExplanation" : "Η συνδρομή Premium αυξάνει το όριο. Μπορείτε να οργανώσετε πολλές εκδηλώσεις, να διαχειριστείτε τον προϋπολογισμό. Ιδανικό για επαγγελματίες που θέλουν να έχουν ένα υπέροχο σύστημα παρακολούθησης και οργάνωσης όλων, ή για χρήστες που οργανώνουν πολλές εκδηλώσεις!",
-
-  "__MyProfile.subscriptionUser" : "Subscription",
-  "MyProfile.subscriptionUser" : "Συνδρομή",
-
-  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
-  "MyProfile.subscriptionUserExplanation" : "Υπάρχει διαφορετικό επίπεδο συνδρομής.",
-
-  "__MyProfile.typeProfile" : "Picture",
-  "MyProfile.typeProfile" : "Εικόνα",
-
-  "__RegisterNewUser.CloseRegistration" : "Close registration",
-  "RegisterNewUser.CloseRegistration" : "Κλείσιμο εγγραφής",
-
-  "__RegisterNewUser.Email" : "Email",
-  "RegisterNewUser.Email" : "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
-
-  "__RegisterNewUser.FirstName" : "First name",
-  "RegisterNewUser.FirstName" : "Ονομα",
-
-  "__RegisterNewUser.InformationLogin" : "Login",
-  "RegisterNewUser.InformationLogin" : "Σύνδεση",
-
-  "__RegisterNewUser.InformationVisibility" : "Access information",
-  "RegisterNewUser.InformationVisibility" : "Πρόσβαση σε πληροφορίες",
-
-  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
-  "RegisterNewUser.Information_1" : "Εγγραφείτε ένας χρήστης στο Togh για πρόσβαση και δημιουργία εκδηλώσεων, λήψη ειδοποιήσεων. Αποκτήστε πρόσβαση στο προφίλ σας για να αλλάξετε τυχόν ρυθμίσεις.",
-
-  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
-  "RegisterNewUser.Information_2" : "Η σύνδεσή σας είναι το email σας. Ο Togh θα σας στείλει ένα email επιβεβαίωσης για την επικύρωση του λογαριασμού σας. Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου χρησιμοποιείται όταν χάσετε τον κωδικό πρόσβασής σας.",
-
-  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
-  "RegisterNewUser.Information_3" : "Στο προφίλ, μπορείτε να αλλάξετε τη ρύθμιση ώστε να μην είναι ορατή από άλλο χρήστη Togh. Από προεπιλογή, είστε ορατοί στην αναζήτηση μέσω ονόματος και email. Ο φίλος σας πρέπει να σας δει! Μπορείτε όμως να αποφασίσετε να μην είστε ορατοί σε μια γενική αναζήτηση. Στη συνέχεια, ο φίλος σας πρέπει να γνωρίζει το email σας για να σας προσθέσει ως συμμετέχοντα.",
-
-  "__RegisterNewUser.LastName" : "Last name",
-  "RegisterNewUser.LastName" : "Επίθετο",
-
-  "__RegisterNewUser.Password" : "Password",
-  "RegisterNewUser.Password" : "Κωδικός πρόσβασης",
-
-  "__RegisterNewUser.Registration" : "Registration",
-  "RegisterNewUser.Registration" : "Εγγραφή",
-
-  "__RegisterNewUser.RetypePassword" : "Retype password",
-  "RegisterNewUser.RetypePassword" : "Πληκτρολογήστε ξανά τον κωδικό πρόσβασης",
-
-  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
-  "RegisterUser.EmailIsMandatory" : "Το email είναι υποχρεωτικό",
-
-  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
-  "RegisterUser.FirstNameIsMandatory" : "Το Όνομα είναι υποχρεωτικό",
-
-  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
-  "RegisterUser.PasswordIsMandatory" : "Ο κωδικός πρόσβασης είναι υποχρεωτικός",
-
-  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
-  "RegisterUser.PasswordSizeMandatory" : "Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες",
-
-  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDifferent" : "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
-
-  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
-  "ResetPassword.ResetPasswordProcedure" : "Τώρα μπορείτε να αλλάξετε τον κωδικό πρόσβασής σας. Θα αλλάξει και θα συνδεθείτε αμέσως",
-
-  "__ResetPassword.passwordchanged" : "Password changed",
-  "ResetPassword.passwordchanged" : "Ο κωδικός άλλαξε",
-
-  "__ResetPassword.passwordchangefailed" : "Change failed",
-  "ResetPassword.passwordchangefailed" : "Η αλλαγή απέτυχε",
-
-  "__UserFeedback.OperationFailed" : "Operation Failed",
-  "UserFeedback.OperationFailed" : "Η λειτουργία απέτυχε",
-
-  "__UserFeedback.OperationHttpError" : "Connection to the server lost",
-  "UserFeedback.OperationHttpError" : "Η σύνδεση με τον διακομιστή χάθηκε",
-
-  "__UserFeedback.OperationSuccess" : "Operation successful",
-  "UserFeedback.OperationSuccess" : "Η λειτουργία ήταν επιτυχής",
-
-  "__UserFeedback.OperationSuccessfull" : "Success",
-  "UserFeedback.OperationSuccessfull" : "Επιτυχία",
+  "MyProfile.passwordChangeFailed": "Η αλλαγή απέτυχε",
+  "__MyProfile.passwordChangeInProgress": "In progress",
+  "MyProfile.passwordChangeInProgress": "Σε εξέλιξη",
+  "__MyProfile.passwordChangedOk": "Password changed",
+  "MyProfile.passwordChangedOk": "Ο κωδικός άλλαξε",
+  "__MyProfile.searchable": "Searchable",
+  "MyProfile.searchable": "Ερευνήσιμος",
+  "__MyProfile.searchableFalse": "Never in the search result",
+  "MyProfile.searchableFalse": "Ποτέ στο αποτέλεσμα αναζήτησης",
+  "__MyProfile.searchableTrue": "Yes, I will appears on search",
+  "MyProfile.searchableTrue": "Ναι, θα εμφανιστεί στην αναζήτηση",
+  "__MyProfile.showTipsUser": "Show tips",
+  "MyProfile.showTipsUser": "Εμφάνιση συμβουλών",
+  "__MyProfile.showtipuser": "ShowTipUsers",
+  "MyProfile.showtipuser": "ShowTipUsers",
+  "__MyProfile.subscriptionExcellentExplanation": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation": "Η συνδρομή Excellence φτάνει στον ουρανό! Μεγάλα γεγονότα, χωρίς πραγματικό όριο. Και βοηθάτε στη διατήρηση της εφαρμογής.",
+  "__MyProfile.subscriptionFreeExplanation": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation": "Η δωρεάν συνδρομή περιέχει όλα όσα χρειάζεστε για να οργανώσετε τις εκδηλώσεις σας. Απλώς περιορίζεται για να αποφευχθεί το κόστος. Είστε περιορισμένοι στον αριθμό των εκδηλώσεων που μπορείτε να δημιουργήσετε ανά μήνα, τον αριθμό των συμμετεχόντων ανά εκδήλωση.",
+  "__MyProfile.subscriptionPremiumExplanation": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation": "Η συνδρομή Premium αυξάνει το όριο. Μπορείτε να οργανώσετε πολλές εκδηλώσεις, να διαχειριστείτε τον προϋπολογισμό. Ιδανικό για επαγγελματίες που θέλουν να έχουν ένα υπέροχο σύστημα παρακολούθησης και οργάνωσης όλων, ή για χρήστες που οργανώνουν πολλές εκδηλώσεις!",
+  "__MyProfile.subscriptionUser": "Subscription",
+  "MyProfile.subscriptionUser": "Συνδρομή",
+  "__MyProfile.subscriptionUserExplanation": "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation": "Υπάρχει διαφορετικό επίπεδο συνδρομής.",
+  "__MyProfile.typeProfile": "Picture",
+  "MyProfile.typeProfile": "Εικόνα",
+  "__RegisterNewUser.Account Create": "Account Created",
+  "RegisterNewUser.Account Create": "Ο λογαριασμός δημιουργήθηκε",
+  "__RegisterNewUser.AccountAlreadyExist": "Account already exist",
+  "RegisterNewUser.AccountAlreadyExist": "Ο λογαριασμός υπάρχει ήδη",
+  "__RegisterNewUser.CloseRegistration": "Close registration",
+  "RegisterNewUser.CloseRegistration": "Κλείσιμο εγγραφής",
+  "__RegisterNewUser.Email": "Email",
+  "RegisterNewUser.Email": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+  "__RegisterNewUser.FirstName": "First name",
+  "RegisterNewUser.FirstName": "Ονομα",
+  "__RegisterNewUser.InformationLogin": "Login",
+  "RegisterNewUser.InformationLogin": "Σύνδεση",
+  "__RegisterNewUser.InformationVisibility": "Access information",
+  "RegisterNewUser.InformationVisibility": "Πρόσβαση σε πληροφορίες",
+  "__RegisterNewUser.Information_1": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1": "Εγγραφείτε ένας χρήστης στο Togh για πρόσβαση και δημιουργία εκδηλώσεων, λήψη ειδοποιήσεων. Αποκτήστε πρόσβαση στο προφίλ σας για να αλλάξετε τυχόν ρυθμίσεις.",
+  "__RegisterNewUser.Information_2": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2": "Η σύνδεσή σας είναι το email σας. Ο Togh θα σας στείλει ένα email επιβεβαίωσης για την επικύρωση του λογαριασμού σας. Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου χρησιμοποιείται όταν χάσετε τον κωδικό πρόσβασής σας.",
+  "__RegisterNewUser.Information_3": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3": "Στο προφίλ, μπορείτε να αλλάξετε τη ρύθμιση ώστε να μην είναι ορατή από άλλο χρήστη Togh. Από προεπιλογή, είστε ορατοί στην αναζήτηση μέσω ονόματος και email. Ο φίλος σας πρέπει να σας δει! Μπορείτε όμως να αποφασίσετε να μην είστε ορατοί σε μια γενική αναζήτηση. Στη συνέχεια, ο φίλος σας πρέπει να γνωρίζει το email σας για να σας προσθέσει ως συμμετέχοντα.",
+  "__RegisterNewUser.LastName": "Last name",
+  "RegisterNewUser.LastName": "Επίθετο",
+  "__RegisterNewUser.Password": "Password",
+  "RegisterNewUser.Password": "Κωδικός πρόσβασης",
+  "__RegisterNewUser.Registration": "Registration",
+  "RegisterNewUser.Registration": "Εγγραφή",
+  "__RegisterNewUser.RetypePassword": "Retype password",
+  "RegisterNewUser.RetypePassword": "Πληκτρολογήστε ξανά τον κωδικό πρόσβασης",
+  "__RegisterNewUser.ServerError": "Server error",
+  "RegisterNewUser.ServerError": "Σφάλμα Διακομιστή",
+  "__RegisterUser.EmailIsMandatory": "Email is mandatory",
+  "RegisterUser.EmailIsMandatory": "Το email είναι υποχρεωτικό",
+  "__RegisterUser.FirstNameIsMandatory": "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory": "Το Όνομα είναι υποχρεωτικό",
+  "__RegisterUser.PasswordIsMandatory": "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory": "Ο κωδικός πρόσβασης είναι υποχρεωτικός",
+  "__RegisterUser.PasswordSizeMandatory": "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory": "Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες",
+  "__RegisterUser.PasswordsAreDifferent": "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent": "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
+  "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure": "Τώρα μπορείτε να αλλάξετε τον κωδικό πρόσβασής σας. Θα αλλάξει και θα συνδεθείτε αμέσως",
+  "__ResetPassword.passwordchanged": "Password changed",
+  "ResetPassword.passwordchanged": "Ο κωδικός άλλαξε",
+  "__ResetPassword.passwordchangefailed": "Change failed",
+  "ResetPassword.passwordchangefailed": "Η αλλαγή απέτυχε",
+  "__UserFeedback.OperationFailed": "Operation Failed",
+  "UserFeedback.OperationFailed": "Η λειτουργία απέτυχε",
+  "__UserFeedback.OperationHttpError": "Connection to the server lost",
+  "UserFeedback.OperationHttpError": "Η σύνδεση με τον διακομιστή χάθηκε",
+  "__UserFeedback.OperationSuccess": "Operation successful",
+  "UserFeedback.OperationSuccess": "Η λειτουργία ήταν επιτυχής",
+  "__UserFeedback.OperationSuccessfull": "Success",
+  "UserFeedback.OperationSuccessfull": "Επιτυχία",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
   "UserTips.DeactivateTipInPreference" : "Οι συμβουλές μπορούν να απενεργοποιηθούν σύμφωνα με τις προτιμήσεις σας"}

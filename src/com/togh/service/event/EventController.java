@@ -110,7 +110,6 @@ public class EventController {
      */
     public List<Slab> completeConsistant() {
         List<Slab> listSlab = new ArrayList<>();
-        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
 
         // the author is a Organizer participant
         boolean authorIsReferenced = false;
@@ -276,10 +275,11 @@ public class EventController {
      * send an invitation
      *
      * @param eventEntity       the eventEntity
-     * @param invitedByToghUser the togfhUser who sent the invitation
+     * @param invitedByToghUser the togfUser who sent the invitation
      * @param listUsersId       list of ToghUserId to invites
      * @param userInvitedEmail  list of email : there are not yet toghUser
      * @param role              role in this event
+     * @param useMyEmailAsFrom  if true, the From used in the message is the InvitedByToghUser email
      * @param message           Message to come with the invitation
      * @return
      */
@@ -288,9 +288,10 @@ public class EventController {
                                    List<Long> listUsersId,
                                    String userInvitedEmail,
                                    ParticipantRoleEnum role,
+                                   boolean useMyEmailAsFrom,
                                    String message) {
         EventInvitation eventInvitation = new EventInvitation(this, factoryService);
-        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, message);
+        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, message);
     }
 
     /* ******************************************************************************** */

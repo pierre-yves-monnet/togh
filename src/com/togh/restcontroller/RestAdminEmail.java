@@ -129,14 +129,16 @@ public class RestAdminEmail {
         loginService.isAdministratorConnected(connectionStamp);
 
         @SuppressWarnings("unchecked")
-        List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listkeys", new ArrayList<>());
+        List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listKeys", new ArrayList<>());
         String emailTo = (String) updateMap.get("sendEmailTo");
         // send an email
         SendEmail sendEmail = new SendEmail();
         LocalSmtpService localSmtpService = new LocalSmtpService(listApiKey);
         List<LogEvent> listLogEvent = sendEmail.sendOneEmail(emailTo,
+                null,
                 "Test from Togh",
                 "This is a test from Togh",
+
                 localSmtpService);
 
         payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));

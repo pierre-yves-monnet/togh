@@ -25,6 +25,7 @@ class Invitation extends React.Component {
 		// console.log("RegisterNewUser.constructor");
 		this.state = { 'event' : props.event,
 						'email' : '',
+						'useMyEmailAsFrom' : '',
 						'searchFirstName'  : '',
 						'searchLastName' : '',
 						'searchPhoneNumber': '',		
@@ -171,6 +172,17 @@ class Invitation extends React.Component {
 							<TextInput labelText={<FormattedMessage id="Invitation.Email" defaultMessage="Email"/>} value={this.state.email}
 							onChange={(event) => this.setState({ email: event.target.value })}
 							id="Invitation.email"></TextInput><br />
+
+							<input type="checkbox"
+                                    onChange={(event) => {
+                                            let rememberBool = event.target.value==='on';
+                                            this.setState( {useMyEmailAsFrom: rememberBool});
+                                            }
+                                    }
+                                    defaultChecked={this.state.useMyEmailAsFrom ? 'checked': ''} />
+                                &nbsp;
+                            <FormattedMessage id="Invitation.UseMyEmailAsFrom" defaultMessage="Use my email in the From message" />
+
 						</div>)
 					}		
 					{this.state.panelVisible === 'SEARCH' && (<div>
@@ -341,6 +353,7 @@ class Invitation extends React.Component {
 		var param = {
 			eventid : this.state.event.id,
 			email : this.state.email,
+			useMyEmailAsFrom: this.state.useMyEmailAsFrom,
 			listUsersid: [],
 			message : this.state.message,
 			role: this.state.role,

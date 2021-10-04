@@ -7,18 +7,18 @@ import com.togh.service.FactoryService;
 import com.togh.service.SmtpKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 @Component
-
 public class SendEmail {
 
     @Autowired
@@ -33,19 +33,17 @@ public class SendEmail {
     public static final LogEvent eventNoEmailServerConfigured = new LogEvent(SendEmail.class.getName(), 3, Level.APPLICATIONERROR, "No Email server configured", "The SMTP server is not configured. No email can be send", "Email can't be send", "Setup the SMTP server configuration");
     private static Logger logger = Logger.getLogger(SendEmail.class.getName());
 
-    public SendEmail() {
-    }
-
     /**
      * @param emailTo     email address
+     * @param emailFrom   Email From. If null, the Togh Email is used
      * @param mailSubject subject of the email
      * @param mailContent content of the email
      * @return
      */
-    public List<LogEvent> sendOneEmail(String emailTo, String mailSubject, String mailContent) {
+    public List<LogEvent> sendOneEmail(String emailTo, String emailFrom, String mailSubject, String mailContent) {
 
         ApiKeyService keyService = factoryService.getApiKeyService();
-        return sendOneEmail(emailTo, mailSubject, mailContent, keyService);
+        return sendOneEmail(emailTo, emailFrom, mailSubject, mailContent, keyService);
     }
 
     /**
@@ -60,6 +58,7 @@ public class SendEmail {
      * @return
      */
     public List<LogEvent> sendOneEmail(String emailTo,
+                                       String emailFrom,
                                        String mailSubject,
                                        String mailContent,
                                        SmtpKeyService emailService) {
@@ -93,14 +92,16 @@ public class SendEmail {
 
         try {
 
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(emailService.getSmtpFrom());
-            message.setTo(emailTo);
-            message.setSubject(mailSubject);
-            message.setText(mailContent);
-            mailSender.send( message );
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
-            listEvents.add(new LogEvent(eventEmailSent, "Sent to ["+emailTo+"]"));
+            helper.setFrom(emailFrom != null ? emailFrom : emailService.getSmtpFrom());
+            helper.setTo(emailTo);
+            helper.setSubject(mailSubject);
+            helper.setText(mailContent, true);
+            mailSender.send(mimeMessage);
+
+            listEvents.add(new LogEvent(eventEmailSent, "Sent to [" + emailTo + "]"));
 
         } catch (MailException smtpEx) {
             logger.severe("SendMessage  connection " + logConnection + " Exception " + smtpEx.getMessage());

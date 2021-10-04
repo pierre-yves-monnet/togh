@@ -175,25 +175,25 @@ public class RestEventController {
     public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
-            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         Long eventId = ToolCast.getLong(inviteData, "eventid", null);
-        List<Long> listUsersId= ToolCast.getListLong(inviteData, "listUsersid", null);
+        List<Long> listUsersId = ToolCast.getListLong(inviteData, "listUsersid", null);
         String userInvitedEmail = ToolCast.getString(inviteData, "email", null);
         String message = ToolCast.getString(inviteData, "message", null);
         String role = ToolCast.getString(inviteData, "role", null);
-        Long timezoneOffset             = ToolCast.getLong(inviteData, "timezoneoffset", 0L);
+        boolean useMyEmailAsFrom = ToolCast.getBoolean(inviteData, "useMyEmailAsFrom", false);
+        Long timezoneOffset = ToolCast.getLong(inviteData, "timezoneoffset", 0L);
 
         ParticipantRoleEnum roleEnum;
         try {
             roleEnum = ParticipantRoleEnum.valueOf(role);
-        }
-        catch(Exception e) {
-            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "Incorrect role["+role+"]");
-           
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect role[" + role + "]");
+
         }
         if (eventId == null)
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Event not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
 
         // get service        
         EventEntity event = eventService.getAllowedEventById(toghUser, eventId);
@@ -203,7 +203,7 @@ public class RestEventController {
         }
                 
         // we send the list of UserId, then the eventService will control each userId given, and will update the answer invitation per invitation
-        InvitationResult invitationResult = eventService.invite( event, toghUser, listUsersId, userInvitedEmail, roleEnum, message );
+        InvitationResult invitationResult = eventService.invite(event, toghUser, listUsersId, userInvitedEmail, roleEnum, useMyEmailAsFrom, message);
         
         Map<String, Object> payload = new HashMap<>();
         List<Map<String,Object>> listParticipants = new ArrayList<>();

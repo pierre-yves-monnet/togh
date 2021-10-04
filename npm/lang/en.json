@@ -5,6 +5,18 @@
   "AdminAPIKey.updateKey": {
     "defaultMessage": "Update key"
   },
+  "AdminEmail.SendEmailTo": {
+    "defaultMessage": "Send Email test to"
+  },
+  "AdminEmail.Title": {
+    "defaultMessage": "Email parameters"
+  },
+  "AdminEmail.testEmail": {
+    "defaultMessage": "Test Email"
+  },
+  "AdminEmail.updateKey": {
+    "defaultMessage": "Update key"
+  },
   "AdminGoogle.Billing": {
     "defaultMessage": "Billing"
   },
@@ -188,9 +200,6 @@
   "BodyTogh.ResetYourPassword": {
     "defaultMessage": "Reset your password"
   },
-  "BodyTogh.ThankYou": {
-    "defaultMessage": "Thank you!"
-  },
   "BodyTogh.YouAreInvited": {
     "defaultMessage": "You are invited to an event! Register or Connect to access it"
   },
@@ -223,9 +232,6 @@
   },
   "BodyTogh.whyToghMotivation": {
     "defaultMessage": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"
-  },
-  "BodyTogh.whyToghThankYou": {
-    "defaultMessage": "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point."
   },
   "Event.Budget": {
     "defaultMessage": "Budget"
@@ -863,6 +869,9 @@
   "Invitation.LastName": {
     "defaultMessage": "Last name"
   },
+  "Invitation.NoEmails": {
+    "defaultMessage": "Attention, email can't be sent to these users"
+  },
   "Invitation.OnlyUserNotAlreadyAParticipant": {
     "defaultMessage": "Only users not already a participant"
   },
@@ -881,6 +890,9 @@
   "Invitation.SendInvitation": {
     "defaultMessage": "Send Invitation"
   },
+  "Invitation.UseMyEmailAsFrom": {
+    "defaultMessage": "Use my email in the From message"
+  },
   "Invitation.UserEmail": {
     "defaultMessage": "Email"
   },
@@ -892,6 +904,12 @@
   },
   "Invitation.UserPhoneNumber": {
     "defaultMessage": "Phone number"
+  },
+  "Invitation.UsersAlreadyRegistered": {
+    "defaultMessage": "These participants are already registered"
+  },
+  "Invitation.UsersInvited": {
+    "defaultMessage": "Users are invited with success"
   },
   "LogEvent.Action": {
     "defaultMessage": "Action"
@@ -961,24 +979,6 @@
   },
   "Menu.EventsExplanation": {
     "defaultMessage": "Access all events you can access"
-  },
-  "Menu.InvitationExplanation": {
-    "defaultMessage": "Check your invitations, accept them."
-  },
-  "Menu.Join": {
-    "defaultMessage": "Join an event"
-  },
-  "Menu.JoinExplanation": {
-    "defaultMessage": "Search and join events"
-  },
-  "Menu.MyFriendExplanation": {
-    "defaultMessage": "See all your friends, invite new, send messages."
-  },
-  "Menu.MyFriends": {
-    "defaultMessage": "My Friends"
-  },
-  "Menu.MyInvitations": {
-    "defaultMessage": "My Invitations"
   },
   "Menu.MyProfile": {
     "defaultMessage": "My Profile"
@@ -1130,6 +1130,12 @@
   "MyProfile.typeProfile": {
     "defaultMessage": "Picture"
   },
+  "RegisterNewUser.Account Create": {
+    "defaultMessage": "Account Created"
+  },
+  "RegisterNewUser.AccountAlreadyExist": {
+    "defaultMessage": "Account already exist"
+  },
   "RegisterNewUser.CloseRegistration": {
     "defaultMessage": "Close registration"
   },
@@ -1165,6 +1171,9 @@
   },
   "RegisterNewUser.RetypePassword": {
     "defaultMessage": "Retype password"
+  },
+  "RegisterNewUser.ServerError": {
+    "defaultMessage": "Server error"
   },
   "RegisterUser.EmailIsMandatory": {
     "defaultMessage": "Email is mandatory"

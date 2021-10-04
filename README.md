@@ -323,9 +323,10 @@ export default injectIntl(EventShoppingList);
 
 Extraction : follow
 https://formatjs.io/docs/getting-started/message-extraction/
+```
 > npm i -D @formatjs/cli
 > npm run extract
-
+```
 
 
 # Open question
@@ -436,85 +437,70 @@ React:
 
 
 # API
+
 /* ******************************************************************************** */
-/*                                                                                  */
-/*  API										                                        */
+/*                                                                                  */ /*  Google
+API                                                                                */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-## google  
-API Key AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es
+## google
 
+Aller dans API & Service / Credential Creer API pour ToghClient(googleAPIKey)
+ToghServer(TranslateKeyAPI)
 
+Enable API:
+
+* Maps JavaScript API
+* directions API/Distance Matrix API/Geocoding API/Maos javascript API / Maps static API
+* Cloud Translation API
 
 https://console.cloud.google.com/apis
 
 https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
 
 https://cloud.google.com/translate/docs/quickstarts
- 	
+
 stocker les photo de l'API Key pour Flick
 
-
 # Cloud & Docker
+
 /* ******************************************************************************** */
-/*                                                                                  */
-/*  Cloud & Docker									                                        */
+/*                                                                                  */ /*  Cloud &
+Docker                                                                            */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-## Create Togh Docker image
+
+## Create Back End Togh Docker image
+
 ```
 > mvn install
-> docker build -t pierreyvesmonnet/togh:1.0.0
+> docker build -t pierreyvesmonnet/togh:1.0.0 .
 
 > docker push pierreyvesmonnet/togh:1.0.0
 ```
 
-## Create frontendtogh image
+## Create Front End Togh Docker image
+
 ```
 > cd npm
 > docker build -t pierreyvesmonnet/frontendtogh:1.0.0 .
 > docker push pierreyvesmonnet/frontendtogh:1.0.0
 ```
-## execute docker image
+
+## execute Locally Docker image
+
 ```
-> docker run --name togh -h localhost -e "SPRING_PROFILES_ACTIVE=production" -d -p 7080:7080 -p 5432:5432 pierreyvesmonnet/togh:1.0.0
-docker run --name togh -h localhost -e SPRING_DATASOURCE_URL=jdbc:postgresql://34.125.204.84:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" pierreyvesmonnet/togh:1.0.0 
+> docker run --name togh -h localhost -e SPRING_DATASOURCE_URL=jdbc:postgresql://34.125.204.84:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" pierreyvesmonnet/togh:1.0.0 
 
 > docker run --name frontendtogh -h localhost -d -p 3000:3000 -p 80:80 pierreyvesmonnet/frontendtogh:1.0.0
 ```
-not needed: -v d:/tmp/docker:/opt/togh
 
-## ---- compose
 docker-compose up
-
-
- 
-## cloud
-
-Deployer une image docker: 	
-https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
- 
-Deployer Postgres
-https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
- 
-# google cloud
-https://cloud.google.com/community/tutorials/kotlin-springboot-compute-engine
-
-cd d:\atelier\cloud
-cloud_env.bat
-
-## Allow Docker to publish to gcr.io:
-As a Windows administrateur
-```
-> net localgroup docker-users rhaegal\pymonnet /add
-> gcloud auth activate-service-account --key-file=D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-0c23d50f1d04.json
-> gcloud auth configure-docker
-```
 
 ## Push image to gcr.io
 gcloud auth login
@@ -526,27 +512,15 @@ gcloud auth login
 > docker push gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 > 
 ```
-http://gcr.io/intricate-gamma-325323
 
-# Create Google instance
-> https://cloud.google.com/community/tutorials/cloud-run-local-dev-docker-compose
-1. Create a Compute Engine instance, named toghinstance
-
-2. Create a Service Account with the role "ContainerRegistry". Generate the KEY, get the JSON file and copy the file to the host
-
-3. upload file from D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-ContainerRegistry
-
-docker login -u _json_key --password-stdin https://gcr.io  <intricate-gamma-325323-ContainerRegistry.json
-
-export GCP_KEY_PATH=~/intricate-gamma-325323-ContainerRegistry.json
-
+## Google Cloud
 ```
 > docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
 
 > docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 ```
 
-4.1 run docker compose
+### run docker compose
 export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json
 docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
 
@@ -563,20 +537,61 @@ docker run --rm \
     -p 7080:7080 \
     -p 3000:3000 \
 
-
-
-4.2 run docker conteneur
+### run docker conteneur
 A lancer sur le compute engine
 
 ```
-$ docker run --name toghpostgres -e POSTGRES_USER=toghp -e POSTGRES_PASSWORD=ThisIsThog4Postgres -e POSTGRES_DB=togh -p 5432:5432 -d postgres
-$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" -d gcr.io/intricate-gamma-325323/togh:1.0.0 &
-$ docker run --name frontendtogh  -p 3000:3000 --network="host" -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 
-$ curl http://34.125.204.84:7080/api/ping
+$ docker run --name toghpostgres -e POSTGRES_USER=toghp -e POSTGRES_PASSWORD=ThisIsThog4Postgres -e POSTGRES_DB=togh -p 5432:5432 -d postgres
+
+
+$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" -d gcr.io/intricate-gamma-325323/togh:1.0.0 
+$ docker run --name frontendtogh  --network="host" -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+
+$ curl http://34.125.204.84:7080/togh/api/ping
 $ curl http://34.125.204.84:3000
 ```
 
+# Documentation
+
+## cloud
+
+Deployer une image docker: 	
+https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
+
+Deployer Postgres
+https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
+
+# google cloud
+
+https://cloud.google.com/community/tutorials/kotlin-springboot-compute-engine
+
+cd d:\atelier\cloud cloud_env.bat
+
+# Create Google instance
+
+> https://cloud.google.com/community/tutorials/cloud-run-local-dev-docker-compose
+
+1. Create a Compute Engine instance, named toghinstance
+
+2. Create a Service Account with the role "ContainerRegistry". Generate the KEY, get the JSON file and copy the file to
+   the host
+
+3. upload file from D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-ContainerRegistry
+
+docker login -u _json_key --password-stdin https://gcr.io  <intricate-gamma-325323-ContainerRegistry.json
+
+export GCP_KEY_PATH=~/intricate-gamma-325323-ContainerRegistry.json
+
+## Allow Docker to publish to gcr.io:
+
+As a Windows administrateur
+
+```
+> net localgroup docker-users rhaegal\pymonnet /add
+> gcloud auth activate-service-account --key-file=D:\dev\git\togh\GoogleCloud\intricate-gamma-325323-0c23d50f1d04.json
+> gcloud auth configure-docker
+```
 
 Create a firewall rule to allow my PC to access Postgres: 5432
 
@@ -584,9 +599,8 @@ docker run -it --rm --network="host" postgres psql -h 34.94.244.105 -U toghp
 
 docker run -it --rm postgres psql -h toghpostgres -U toghpostgres
 
-$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
-$ docker run -it --rm --network some-network postgres psql -h some-postgres -U postgres
-
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres $ docker run -it --rm --network
+some-network postgres psql -h some-postgres -U postgres
 
 - SPRING_DATASOURCE_PASSWORD=root
 
@@ -701,43 +715,41 @@ insert into evtparticipant (id,accessdata, role, status, user_id, eventid) value
 # Tasks
 
 /* ******************************************************************************** */
-/*                                                                                  */
-/*  Tasks									                                        */
+/*                                                                                  */ /*
+Tasks                                                                            */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-	 
-	
-	
+Simon Anchor Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie
+existe google-maps-react)
 
-Simon 	Anchor
-Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie existe google-maps-react)
+Simon ? Date Carbon: le format de date ne respecte pas la langue
 
-Simon ?	Date Carbon: le format de date ne respecte pas la langue
-	
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas
-		
-CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
-	
-Py	
 
-10.	Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
+CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
+
+Py
+
+10. Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 11. Revoir la deconnection, le feedback user quand on fait un save
 
+Forgot my password: email incorrect registration invitation
 
-Forgot my password: email incorrect
-envoi d'email
-registration
-invitation
-
-	
-		
 V2		
-	Possibilite de supprimer une invitation dans un event (et dans ce cas, l'user peut etre supprimer s'il n'était invoqué que dans un event)
-	
+Possibilite de supprimer une invitation dans un event (et dans ce cas, l'user peut etre supprimer s'il n'était invoqué
+que dans un event)
+En tant que Owner, je devrais pouvor bannir une invitation
+
+Je revois une invitation par email: Togh devrait me dirriger vers le login OU vers la registration car il peut savoir si
+j'existe ou pas
+
+Invitation: copuer le contenu de l'emauil dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
+veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de modification"
+
 	Event/Participant: mettre l'icone + un component qui donne toutes les coordonnées
  	
 	MonitorService.registerErrorEvents() ==> Implementer
@@ -766,16 +778,14 @@ V2
 		- inactif depuis trop longtemps : 
 
 ## bugs
-	
-Click sur mon event => Part en live
- 
- 
-Deconnection : ca ne renvoi plus sur la page de login      
-          
+
+Survey : marche pas, impossible d'ajouter un survey Chat : l'ajout d'un commentaire ne fonctionne pas
+
+Deconnection : ca ne renvoi plus sur la page de login
 
 EventEntity.getMap : normaliser les constante ici avec les SLAB_OPERATION (une seule constante)
-EventSurvey : ca ne marche pas dajouter un nouveau choix de survey
-  Et arriver par defaut sur les reponses, pas sur la definition
+EventSurvey : ca ne marche pas dajouter un nouveau choix de survey Et arriver par defaut sur les reponses, pas sur la
+definition
           
 
       

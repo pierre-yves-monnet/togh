@@ -33,8 +33,8 @@ const DISPLAY_NOACCESS = "NOACCESS";
 
 
 class EventSurvey extends React.Component {
-	// this.props.updateEvent()
-	// this.props.getSurveyfct()
+
+
 	constructor(props) {
 		super();
 		this.state = {
@@ -265,7 +265,7 @@ class EventSurvey extends React.Component {
 			
 			// Checkbox can't be center		
 			for (let i in survey[ surveyConstant.CHILD_ANSWER ]) {
-				let answerParticipant = survey[ surveyConstant.CHILD_ANSWER ][i];
+				let answerParticipant = survey[surveyConstant.CHILD_ANSWER][i];
 				
 				participantList.push(<tr>
 					<td> {this.eventCtrl.getParticipantName( answerParticipant.whoid) }</td>
@@ -558,8 +558,8 @@ class EventSurvey extends React.Component {
 		if (! currentUser) 
 			return;
 		// Ok, I must be part on this survey, ins't ?
-		for (let i in survey[ surveyConstant.CHILD_ANSWER ]) {
-			if (survey[ surveyConstant.CHILD_ANSWER ] [i].whoid === currentUser.id) {
+		for (let i in survey[surveyConstant.CHILD_ANSWER]) {
+			if (survey[surveyConstant.CHILD_ANSWER] [i].whoid === currentUser.id) {
 				// I'm in !
 				return;
 			}

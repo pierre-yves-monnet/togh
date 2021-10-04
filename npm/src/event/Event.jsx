@@ -302,7 +302,8 @@ class Event extends React.Component {
 						&nbsp;
 
 						<button onClick={() => this.accessTab( TAB_CHAT) } 
-							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />} 
+							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />}
+							disabled={true}
 							class="btn"	style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }} >
 							<img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Chat" defaultMessage="Chat" />
@@ -326,7 +327,8 @@ class Event extends React.Component {
 						&nbsp;
 
 						<button onClick={() => this.accessTab( TAB_SURVEY )} 
-							title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />}  
+							title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />}
+							disabled={true}
 							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Survey" defaultMessage="Survey" />
@@ -351,7 +353,8 @@ class Event extends React.Component {
 						&nbsp;
 
 						<button onClick={() => this.accessTab( TAB_EXPENSE )} 
-							title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />} 
+							title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />}
+							disabled={true}
 							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img src="img/btnExpense.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
@@ -359,7 +362,8 @@ class Event extends React.Component {
 						&nbsp;
 						
 						<button onClick={() => this.accessTab( TAB_BUDGET )} 
-							title={<FormattedMessage id="Event.TitleBudget" defaultMessage="Budget" />} 
+							title={<FormattedMessage id="Event.TitleBudget" defaultMessage="Budget" />}
+							disabled={true}
 							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Budget" defaultMessage="Budget" />

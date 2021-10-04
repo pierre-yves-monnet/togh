@@ -59,10 +59,9 @@ public class EventService {
     private static final LogEvent eventEntityNotFound = new LogEvent(EventService.class.getName(), 4, Level.APPLICATIONERROR, "Entity not found", "The entity requested can't be found, it may be deleted by an another user in the mean time", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventNoId = new LogEvent(EventService.class.getName(), 5, Level.ERROR, "No ID", "To load an entity, an ID must be give", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventBadEntity = new LogEvent(EventService.class.getName(), 6, Level.ERROR, "Bad Entity", "This Entity can't be load", "Entity is not found, can't be linked in this object", "Check the Entity");
-    private static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventService.class.getName(), 7, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
 
-    private Logger logger = Logger.getLogger(EventService.class.getName());
-    private final static String LOG_HEADER = EventService.class.getSimpleName() + ": ";
+    private static final String LOG_HEADER = EventService.class.getSimpleName() + ": ";
+    private final Logger logger = Logger.getLogger(EventService.class.getName());
 
     @Autowired
     FactoryService factoryService;
@@ -177,9 +176,7 @@ public class EventService {
         eventController.completeConsistant();
         eventRepository.save(eventEntity);
 
-        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-
-        return eventOperationResult;
+        return new EventOperationResult(eventEntity);
 
     }
 
@@ -312,14 +309,51 @@ public class EventService {
         DONE, NOUSERSGIVEN, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
     }
 
+    /**
+     * Send invitations to a list of Togh User, or to a new email
+     *
+     * @param eventEntity      event to invit
+     * @param invitedByUser    The ToghUser who invite
+     * @param listUsersId      List user Id to invite. May be empty
+     * @param userInvitedEmail the email user to invite. May be empty
+     * @param role             Role proposed in the event
+     * @param useMyEmailAsFrom if true, the From message is the invitedByUser email
+     * @param message          additional message
+     * @return the invitation result
+     */
+    public InvitationResult invite(EventEntity eventEntity,
+                                   ToghUserEntity invitedByToghUser,
+                                   List<Long> listUsersId,
+                                   String userInvitedEmail,
+                                   ParticipantRoleEnum role,
+                                   boolean useMyEmailAsFrom,
+                                   String message) {
+
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isOrganizer(invitedByToghUser)) {
+            InvitationResult invitationResult = new InvitationResult();
+            invitationResult.status = InvitationStatus.NOTAUTHORIZED;
+            return invitationResult;
+        }
+
+        // this operation is delegated to the evenController
+        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, message);
+        try {
+            eventRepository.save(eventEntity);
+        } catch (Exception e) {
+            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+        }
+        return invitationResult;
+    }
+
     public static class InvitationResult {
 
         public InvitationStatus status;
         public final List<ToghUserEntity> listThogUserInvited = new ArrayList<>();
         public final List<ParticipantEntity> newParticipants = new ArrayList<>();
-        private final List<ToghUserEntity> errorMessage = new ArrayList();
+        private final List<ToghUserEntity> errorMessage = new ArrayList<>();
         private final List<ToghUserEntity> errorSendEmail = new ArrayList<>();
-        private final List<ToghUserEntity> okMessage = new ArrayList();
+        private final List<ToghUserEntity> okMessage = new ArrayList<>();
 
         public final List<LogEvent> listLogEvents = new ArrayList<>();
 
@@ -344,33 +378,14 @@ public class EventService {
         }
 
         public void addOkMessage( ToghUserEntity toghUserEntity) {
-            okMessage.add( toghUserEntity);
+            okMessage.add(toghUserEntity);
         }
 
         public String getOkMessage() {
             return okMessage.stream()
                     .map(ToghUserEntity::getLabel)
-                    .collect( Collectors.joining( "," ) );
+                    .collect(Collectors.joining(","));
         }
-    }
-
-    public InvitationResult invite(EventEntity eventEntity, ToghUserEntity invitedByUser, List<Long> listUsersId, String userInvitedEmail, ParticipantRoleEnum role, String message) {
-
-        EventController eventController = getEventController(eventEntity);
-        if (!eventController.isOrganizer(invitedByUser)) {
-            InvitationResult invitationResult = new InvitationResult();
-            invitationResult.status = InvitationStatus.NOTAUTHORIZED;
-            return invitationResult;
-        }
-
-        // this operation is delegated to the evenController
-        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByUser, listUsersId, userInvitedEmail, role, message);
-        try {
-            eventRepository.save(eventEntity);
-        } catch (Exception e) {
-            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
-        }
-        return invitationResult;
     }
 
     /* ******************************************************************************** */

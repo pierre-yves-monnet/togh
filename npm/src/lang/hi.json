@@ -1,47 +1,41 @@
 {
-  "__AdminAPIKey.Title" : "API Keys",
-  "AdminAPIKey.Title" : "एपीआई कुंजी",
-
-  "__AdminAPIKey.updateKey" : "Update key",
-  "AdminAPIKey.updateKey" : "अद्यतन कुंजी",
-
-  "__AdminGoogle.Billing" : "Billing",
-  "AdminGoogle.Billing" : "बिलिंग",
-
-  "__AdminGoogle.Dahsboard" : "Dashboard",
-  "AdminGoogle.Dahsboard" : "डैशबोर्ड",
-
-  "__AdminGoogle.Google" : "Google",
-  "AdminGoogle.Google" : "गूगल",
-
-  "AdminHome.Title" : "शासन प्रबंध",
-
-  "__AdminInfo.Information" : "Information",
-  "AdminInfo.Information" : "जानकारी",
-
-  "__AdminTransaltor.Title" : "Translation",
-  "AdminTransaltor.Title" : "शासन प्रबंध",
-
-  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
-  "AdminTranslator.AverageTranslation" : "औसत (मिलीसेकंड में)",
-
-  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
-  "AdminTranslator.CheckDictionary" : "शब्दकोश की जाँच करें",
-
-  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-  "AdminTranslator.CompleteDictionary" : "पूरा शब्दकोश",
-
-  "__AdminTranslator.MissingSentences" : "Missing sentences",
-  "AdminTranslator.MissingSentences" : "लापता वाक्य",
-
-  "__AdminTranslator.Name" : "Name",
-  "AdminTranslator.Name" : "नाम",
-
-  "__AdminTranslator.TimeTranslation" : "Time of translation",
-  "AdminTranslator.TimeTranslation" : "अनुवाद का समय",
-
-  "__AdminTranslator.Title" : "Translation",
-  "AdminTranslator.Title" : "अनुवाद",
+  "__AdminAPIKey.Title": "API Keys",
+  "AdminAPIKey.Title": "एपीआई कुंजी",
+  "__AdminAPIKey.updateKey": "Update key",
+  "AdminAPIKey.updateKey": "अद्यतन कुंजी",
+  "__AdminEmail.SendEmailTo": "Send Email test to",
+  "AdminEmail.SendEmailTo": "ईमेल परीक्षण भेजें",
+  "__AdminEmail.Title": "Email parameters",
+  "AdminEmail.Title": "ईमेल पैरामीटर",
+  "__AdminEmail.testEmail": "Test Email",
+  "AdminEmail.testEmail": "ईमेल का परीक्षण करें",
+  "__AdminEmail.updateKey": "Update key",
+  "AdminEmail.updateKey": "अद्यतन कुंजी",
+  "__AdminGoogle.Billing": "Billing",
+  "AdminGoogle.Billing": "बिलिंग",
+  "__AdminGoogle.Dahsboard": "Dashboard",
+  "AdminGoogle.Dahsboard": "डैशबोर्ड",
+  "__AdminGoogle.Google": "Google",
+  "AdminGoogle.Google": "गूगल",
+  "AdminHome.Title": "शासन प्रबंध",
+  "__AdminInfo.Information": "Information",
+  "AdminInfo.Information": "जानकारी",
+  "__AdminTransaltor.Title": "Translation",
+  "AdminTransaltor.Title": "शासन प्रबंध",
+  "__AdminTranslator.AverageTranslation": "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation": "औसत (मिलीसेकंड में)",
+  "__AdminTranslator.CheckDictionary": "Check Dictionary",
+  "AdminTranslator.CheckDictionary": "शब्दकोश की जाँच करें",
+  "__AdminTranslator.CompleteDictionary": "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary": "पूरा शब्दकोश",
+  "__AdminTranslator.MissingSentences": "Missing sentences",
+  "AdminTranslator.MissingSentences": "लापता वाक्य",
+  "__AdminTranslator.Name": "Name",
+  "AdminTranslator.Name": "नाम",
+  "__AdminTranslator.TimeTranslation": "Time of translation",
+  "AdminTranslator.TimeTranslation": "अनुवाद का समय",
+  "__AdminTranslator.Title": "Translation",
+  "AdminTranslator.Title": "अनुवाद",
 
   "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
   "AdminTranslator.TooMuchSentences" : "अतिप्रवाह वाक्य",
@@ -904,119 +898,88 @@
 
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "आप अंतिम अवधि में अनुमत घटनाओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
-
-  "__EventsList.MyEvents" : "My events",
-  "EventsList.MyEvents" : "मेरे कार्यक्रम",
-
-  "__EventsList.Name" : "Name",
-  "EventsList.Name" : "नाम",
-
-  "__EventsList.Participants" : "Participants",
-  "EventsList.Participants" : "प्रतिभागियों",
-
-  "__EventsList.Refresh" : "Refresh",
-  "EventsList.Refresh" : "ताज़ा करना",
-
-  "__EventsList.ServerConnectionError" : "Server connection error",
-  "EventsList.ServerConnectionError" : "सर्वर कनेक्शन त्रुटि",
-
-  "__Expense.Budget" : "Budget",
-  "Expense.Budget" : "बजट",
-
-  "__Expense.Cost" : "Cost",
-  "Expense.Cost" : "लागत",
-
-  "Expense.Price" : "कीमत",
-
-  "__Invitation.ByEmail" : "Send an Email",
-  "Invitation.ByEmail" : "एक ईमेल भेजो",
-
-  "__Invitation.Close" : "Close",
-  "Invitation.Close" : "बंद करे",
-
-  "__Invitation.Email" : "Email",
-  "Invitation.Email" : "ईमेल",
-
-  "__Invitation.FirstName" : "First name",
-  "Invitation.FirstName" : "संतोष",
-
-  "__Invitation.Invitation" : "Invitation",
-  "Invitation.Invitation" : "निमंत्रण",
-
-  "__Invitation.LastName" : "Last name",
-  "Invitation.LastName" : "उपनाम",
-
-  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
-  "Invitation.OnlyUserNotAlreadyAParticipant" : "केवल उपयोगकर्ता पहले से ही प्रतिभागी नहीं हैं",
-
-  "__Invitation.PhoneNumber" : "Phone number",
-  "Invitation.PhoneNumber" : "फ़ोन नंबर",
-
-  "Invitation.RoleObserver" : "देखने वाला",
-
-  "Invitation.RoleOrganizer" : "व्यवस्था करनेवाला",
-
-  "Invitation.RoleParticipant" : "प्रतिभागी",
-
-  "__Invitation.Search" : "Search",
-  "Invitation.Search" : "खोज",
-
-  "__Invitation.SearchAUser" : "Search a user",
-  "Invitation.SearchAUser" : "एक उपयोगकर्ता खोजें",
-
-  "__Invitation.Searching" : "Searching",
-  "Invitation.Searching" : "खोज कर",
-
-  "__Invitation.SendInvitation" : "Send Invitation",
-  "Invitation.SendInvitation" : "निमंत्रण भेजो",
-
-  "__Invitation.UserEmail" : "Email",
-  "Invitation.UserEmail" : "ईमेल",
-
-  "__Invitation.UserFound" : "UsersFound",
-  "Invitation.UserFound" : "UsersFound",
-
-  "__Invitation.UserName" : "Name",
-  "Invitation.UserName" : "नाम",
-
-  "__Invitation.UserPhoneNumber" : "Phone number",
-  "Invitation.UserPhoneNumber" : "फ़ोन नंबर",
-
-  "__LogEvent.Action" : "Action",
-  "LogEvent.Action" : "कार्य",
-
-  "__LogEvent.Consequence" : "Consequence",
-  "LogEvent.Consequence" : "परिणाम",
-
-  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
-  "Login.CantConnectToTheServer" : "सर्वर से कनेक्ट नहीं किया जा सकता",
-
-  "__Login.EmailIncorrect" : "Email address is incorrect",
-  "Login.EmailIncorrect" : "ईमेल पता गलत है",
-
-  "__Login.EmailSent" : "An email is sent, check your mailbox",
-  "Login.EmailSent" : "एक ईमेल भेजा गया है, अपना मेलबॉक्स जांचें",
-
-  "__Login.LostMyPassword" : "I lost My password",
-  "Login.LostMyPassword" : "मैंने अपना पासवर्ड खो दिया",
-
-  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
-  "Login.LostMyPasswordExplanation" : "आपके पास एक खाता है, लेकिन आप कनेक्ट नहीं कर सकते? अस्थायी पासवर्ड प्राप्त करने के लिए 'मैं अपना पासवर्ड सूचीबद्ध करता हूं' बटन पर क्लिक करें",
-
-  "__Login.LostMyPasswordLabel" : "Reset my password",
-  "Login.LostMyPasswordLabel" : "अपना पासवर्ड रीसेट करें",
-
-  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
-  "Login.LostPasswordExplanation" : "आपका पासवर्ड बदलने के लिए एक लिंक आपके ईमेल पर भेजा जाएगा",
-
-  "__Login.RememberMe" : "Remember Me",
-  "Login.RememberMe" : "मुझे याद रखें",
-
-  "__Login.SendEmail" : "Send the email",
-  "Login.SendEmail" : "ईमेल भेजें",
-
-  "__Login.ServerConnectionError" : "Server connection error",
-  "Login.ServerConnectionError" : "सर्वर कनेक्शन त्रुटि",
+  "__EventsList.MyEvents": "My events",
+  "EventsList.MyEvents": "मेरे कार्यक्रम",
+  "__EventsList.Name": "Name",
+  "EventsList.Name": "नाम",
+  "__EventsList.Participants": "Participants",
+  "EventsList.Participants": "प्रतिभागियों",
+  "__EventsList.Refresh": "Refresh",
+  "EventsList.Refresh": "ताज़ा करना",
+  "__EventsList.ServerConnectionError": "Server connection error",
+  "EventsList.ServerConnectionError": "सर्वर कनेक्शन त्रुटि",
+  "__Expense.Budget": "Budget",
+  "Expense.Budget": "बजट",
+  "__Expense.Cost": "Cost",
+  "Expense.Cost": "लागत",
+  "Expense.Price": "कीमत",
+  "__Invitation.ByEmail": "Send an Email",
+  "Invitation.ByEmail": "एक ईमेल भेजो",
+  "__Invitation.Close": "Close",
+  "Invitation.Close": "बंद करे",
+  "__Invitation.Email": "Email",
+  "Invitation.Email": "ईमेल",
+  "__Invitation.FirstName": "First name",
+  "Invitation.FirstName": "संतोष",
+  "__Invitation.Invitation": "Invitation",
+  "Invitation.Invitation": "निमंत्रण",
+  "__Invitation.LastName": "Last name",
+  "Invitation.LastName": "उपनाम",
+  "__Invitation.NoEmails": "Attention, email can't be sent to these users",
+  "Invitation.NoEmails": "ध्यान दें, इन उपयोगकर्ताओं को ईमेल नहीं भेजा जा सकता",
+  "__Invitation.OnlyUserNotAlreadyAParticipant": "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant": "केवल उपयोगकर्ता पहले से ही प्रतिभागी नहीं हैं",
+  "__Invitation.PhoneNumber": "Phone number",
+  "Invitation.PhoneNumber": "फ़ोन नंबर",
+  "Invitation.RoleObserver": "देखने वाला",
+  "Invitation.RoleOrganizer": "व्यवस्था करनेवाला",
+  "Invitation.RoleParticipant": "प्रतिभागी",
+  "__Invitation.Search": "Search",
+  "Invitation.Search": "खोज",
+  "__Invitation.SearchAUser": "Search a user",
+  "Invitation.SearchAUser": "एक उपयोगकर्ता खोजें",
+  "__Invitation.Searching": "Searching",
+  "Invitation.Searching": "खोज कर",
+  "__Invitation.SendInvitation": "Send Invitation",
+  "Invitation.SendInvitation": "निमंत्रण भेजो",
+  "__Invitation.UseMyEmailAsFrom": "Use my email in the From message",
+  "Invitation.UseMyEmailAsFrom": "प्रेषक संदेश में मेरे ईमेल का उपयोग करें",
+  "__Invitation.UserEmail": "Email",
+  "Invitation.UserEmail": "ईमेल",
+  "__Invitation.UserFound": "UsersFound",
+  "Invitation.UserFound": "UsersFound",
+  "__Invitation.UserName": "Name",
+  "Invitation.UserName": "नाम",
+  "__Invitation.UserPhoneNumber": "Phone number",
+  "Invitation.UserPhoneNumber": "फ़ोन नंबर",
+  "__Invitation.UsersAlreadyRegistered": "These participants are already registered",
+  "Invitation.UsersAlreadyRegistered": "ये प्रतिभागी पहले से पंजीकृत हैं",
+  "__Invitation.UsersInvited": "Users are invited with success",
+  "Invitation.UsersInvited": "उपयोगकर्ता सफलतापूर्वक आमंत्रित हैं",
+  "__LogEvent.Action": "Action",
+  "LogEvent.Action": "कार्य",
+  "__LogEvent.Consequence": "Consequence",
+  "LogEvent.Consequence": "परिणाम",
+  "__Login.CantConnectToTheServer": "Can't Connect To The Server",
+  "Login.CantConnectToTheServer": "सर्वर से कनेक्ट नहीं किया जा सकता",
+  "__Login.EmailIncorrect": "Email address is incorrect",
+  "Login.EmailIncorrect": "ईमेल पता गलत है",
+  "__Login.EmailSent": "An email is sent, check your mailbox",
+  "Login.EmailSent": "एक ईमेल भेजा गया है, अपना मेलबॉक्स जांचें",
+  "__Login.LostMyPassword": "I lost My password",
+  "Login.LostMyPassword": "मैंने अपना पासवर्ड खो दिया",
+  "__Login.LostMyPasswordExplanation": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation": "आपके पास एक खाता है, लेकिन आप कनेक्ट नहीं कर सकते? अस्थायी पासवर्ड प्राप्त करने के लिए 'मैं अपना पासवर्ड सूचीबद्ध करता हूं' बटन पर क्लिक करें",
+  "__Login.LostMyPasswordLabel": "Reset my password",
+  "Login.LostMyPasswordLabel": "अपना पासवर्ड रीसेट करें",
+  "__Login.LostPasswordExplanation": "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation": "आपका पासवर्ड बदलने के लिए एक लिंक आपके ईमेल पर भेजा जाएगा",
+  "__Login.RememberMe": "Remember Me",
+  "Login.RememberMe": "मुझे याद रखें",
+  "__Login.SendEmail": "Send the email",
+  "Login.SendEmail": "ईमेल भेजें",
+  "__Login.ServerConnectionError": "Server connection error",
+  "Login.ServerConnectionError": "सर्वर कनेक्शन त्रुटि",
 
   "__Login.ServerIssue" : "An error arrived on the server, please try later",
   "Login.ServerIssue" : "सर्वर पर एक त्रुटि आई, कृपया बाद में प्रयास करें",
@@ -1184,118 +1147,87 @@
   "MyProfile.lastName" : "अंतिम नाम",
 
   "__MyProfile.passwordChangeFailed" : "Change failed",
-  "MyProfile.passwordChangeFailed" : "परिवर्तन विफल",
-
-  "__MyProfile.passwordChangeInProgress" : "In progress",
-  "MyProfile.passwordChangeInProgress" : "चालू",
-
-  "__MyProfile.passwordChangedOk" : "Password changed",
-  "MyProfile.passwordChangedOk" : "पासवर्ड बदला गया",
-
-  "__MyProfile.searchable" : "Searchable",
-  "MyProfile.searchable" : "खोज सकने",
-
-  "__MyProfile.searchableFalse" : "Never in the search result",
-  "MyProfile.searchableFalse" : "खोज परिणाम में कभी नहीं",
-
-  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
-  "MyProfile.searchableTrue" : "हाँ, मैं खोज पर प्रकट होऊँगा",
-
-  "__MyProfile.showTipsUser" : "Show tips",
-  "MyProfile.showTipsUser" : "सुझाव दिखाएं",
-
-  "__MyProfile.showtipuser" : "ShowTipUsers",
-  "MyProfile.showtipuser" : "शो टिप उपयोगकर्ताUser",
-
-  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
-  "MyProfile.subscriptionExcellentExplanation" : "उत्कृष्टता सदस्यता आसमान तक पहुँचती है! बड़ी घटनाएं, कोई वास्तविक सीमा नहीं। और आप एप्लिकेशन को बनाए रखने में मदद करते हैं।",
-
-  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
-  "MyProfile.subscriptionFreeExplanation" : "नि:शुल्क सदस्यता में वह सब शामिल है जो आपको अपने कार्यक्रम आयोजित करने के लिए चाहिए। यह लागत से बचने के लिए ही सीमित है। आप प्रति माह बनाए जा सकने वाले ईवेंट की संख्या, प्रति ईवेंट प्रतिभागियों की संख्या में सीमित हैं।",
-
-  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
-  "MyProfile.subscriptionPremiumExplanation" : "प्रीमियम सदस्यता सीमा को धक्का देती है। आप कई कार्यक्रम आयोजित कर सकते हैं, बजट का प्रबंधन कर सकते हैं। पेशेवर के लिए बिल्कुल सही जो सब कुछ ट्रैक और व्यवस्थित करने के लिए एक महान प्रणाली चाहते हैं, या उन उपयोगकर्ताओं के लिए जो बहुत सारे कार्यक्रम आयोजित करते हैं!",
-
-  "__MyProfile.subscriptionUser" : "Subscription",
-  "MyProfile.subscriptionUser" : "अंशदान",
-
-  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
-  "MyProfile.subscriptionUserExplanation" : "सदस्यता के विभिन्न स्तर मौजूद हैं।",
-
-  "__MyProfile.typeProfile" : "Picture",
-  "MyProfile.typeProfile" : "चित्र",
-
-  "__RegisterNewUser.CloseRegistration" : "Close registration",
-  "RegisterNewUser.CloseRegistration" : "पंजीकरण बंद करें",
-
-  "__RegisterNewUser.Email" : "Email",
-  "RegisterNewUser.Email" : "ईमेल",
-
-  "__RegisterNewUser.FirstName" : "First name",
-  "RegisterNewUser.FirstName" : "पहला नाम",
-
-  "__RegisterNewUser.InformationLogin" : "Login",
-  "RegisterNewUser.InformationLogin" : "लॉग इन करें",
-
-  "__RegisterNewUser.InformationVisibility" : "Access information",
-  "RegisterNewUser.InformationVisibility" : "उपयोग की जानकारी",
-
-  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
-  "RegisterNewUser.Information_1" : "घटनाओं तक पहुँचने और बनाने के लिए Togh में एक उपयोगकर्ता को पंजीकृत करें, सूचनाएं प्राप्त करें। किसी भी सेटिंग को बदलने के लिए अपनी प्रोफ़ाइल तक पहुंचें।",
-
-  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
-  "RegisterNewUser.Information_2" : "आपका लॉगिन आपका ईमेल है। Togh आपके खाते को सत्यापित करने के लिए आपको एक पुष्टिकरण ईमेल भेजेगा। इस ईमेल का उपयोग तब किया जाता है जब आप अपना पासवर्ड खो देते हैं।",
-
-  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
-  "RegisterNewUser.Information_3" : "प्रोफ़ाइल में, आप सेटिंग को किसी अन्य Togh उपयोगकर्ता द्वारा दिखाई नहीं देने के लिए बदल सकते हैं। डिफ़ॉल्ट रूप से, आप नाम और ईमेल के माध्यम से खोज में दिखाई देते हैं। आपके दोस्त को आपको देखने की जरूरत है! लेकिन आप सामान्य खोज में दिखाई न देने का निर्णय ले सकते हैं। फिर, एक भागीदार के रूप में आपको जोड़ने के लिए आपके मित्र को आपका ईमेल पता होना चाहिए।",
-
-  "__RegisterNewUser.LastName" : "Last name",
-  "RegisterNewUser.LastName" : "अंतिम नाम",
-
-  "__RegisterNewUser.Password" : "Password",
-  "RegisterNewUser.Password" : "कुंजिका",
-
-  "__RegisterNewUser.Registration" : "Registration",
-  "RegisterNewUser.Registration" : "पंजीकरण",
-
-  "__RegisterNewUser.RetypePassword" : "Retype password",
-  "RegisterNewUser.RetypePassword" : "पासवर्ड फिर से लिखें",
-
-  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
-  "RegisterUser.EmailIsMandatory" : "ईमेल अनिवार्य है",
-
-  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
-  "RegisterUser.FirstNameIsMandatory" : "प्रथम नाम अनिवार्य है",
-
-  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
-  "RegisterUser.PasswordIsMandatory" : "पासवर्ड अनिवार्य है",
-
-  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
-  "RegisterUser.PasswordSizeMandatory" : "पासवर्ड में कम से कम 4 अक्षर होने चाहिए",
-
-  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDifferent" : "पासवर्ड अलग हैं",
-
-  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
-  "ResetPassword.ResetPasswordProcedure" : "अब आप अपना पासवर्ड बदल सकते हैं। इसे बदल दिया जाएगा, और आप तुरंत कनेक्ट हो जाएंगे",
-
-  "__ResetPassword.passwordchanged" : "Password changed",
-  "ResetPassword.passwordchanged" : "पासवर्ड बदला गया",
-
-  "__ResetPassword.passwordchangefailed" : "Change failed",
-  "ResetPassword.passwordchangefailed" : "परिवर्तन विफल",
-
-  "__UserFeedback.OperationFailed" : "Operation Failed",
-  "UserFeedback.OperationFailed" : "प्रचालन विफल रहा",
-
-  "__UserFeedback.OperationHttpError" : "Connection to the server lost",
-  "UserFeedback.OperationHttpError" : "सर्वर से कनेक्शन खो गया",
-
-  "__UserFeedback.OperationSuccess" : "Operation successful",
-  "UserFeedback.OperationSuccess" : "ऑपरेशन सफल रहा",
-
-  "__UserFeedback.OperationSuccessfull" : "Success",
-  "UserFeedback.OperationSuccessfull" : "सफलता",
+  "MyProfile.passwordChangeFailed": "परिवर्तन विफल",
+  "__MyProfile.passwordChangeInProgress": "In progress",
+  "MyProfile.passwordChangeInProgress": "चालू",
+  "__MyProfile.passwordChangedOk": "Password changed",
+  "MyProfile.passwordChangedOk": "पासवर्ड बदला गया",
+  "__MyProfile.searchable": "Searchable",
+  "MyProfile.searchable": "खोज सकने",
+  "__MyProfile.searchableFalse": "Never in the search result",
+  "MyProfile.searchableFalse": "खोज परिणाम में कभी नहीं",
+  "__MyProfile.searchableTrue": "Yes, I will appears on search",
+  "MyProfile.searchableTrue": "हाँ, मैं खोज पर प्रकट होऊँगा",
+  "__MyProfile.showTipsUser": "Show tips",
+  "MyProfile.showTipsUser": "सुझाव दिखाएं",
+  "__MyProfile.showtipuser": "ShowTipUsers",
+  "MyProfile.showtipuser": "शो टिप उपयोगकर्ताUser",
+  "__MyProfile.subscriptionExcellentExplanation": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation": "उत्कृष्टता सदस्यता आसमान तक पहुँचती है! बड़ी घटनाएं, कोई वास्तविक सीमा नहीं। और आप एप्लिकेशन को बनाए रखने में मदद करते हैं।",
+  "__MyProfile.subscriptionFreeExplanation": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation": "नि:शुल्क सदस्यता में वह सब शामिल है जो आपको अपने कार्यक्रम आयोजित करने के लिए चाहिए। यह लागत से बचने के लिए ही सीमित है। आप प्रति माह बनाए जा सकने वाले ईवेंट की संख्या, प्रति ईवेंट प्रतिभागियों की संख्या में सीमित हैं।",
+  "__MyProfile.subscriptionPremiumExplanation": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation": "प्रीमियम सदस्यता सीमा को धक्का देती है। आप कई कार्यक्रम आयोजित कर सकते हैं, बजट का प्रबंधन कर सकते हैं। पेशेवर के लिए बिल्कुल सही जो सब कुछ ट्रैक और व्यवस्थित करने के लिए एक महान प्रणाली चाहते हैं, या उन उपयोगकर्ताओं के लिए जो बहुत सारे कार्यक्रम आयोजित करते हैं!",
+  "__MyProfile.subscriptionUser": "Subscription",
+  "MyProfile.subscriptionUser": "अंशदान",
+  "__MyProfile.subscriptionUserExplanation": "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation": "सदस्यता के विभिन्न स्तर मौजूद हैं।",
+  "__MyProfile.typeProfile": "Picture",
+  "MyProfile.typeProfile": "चित्र",
+  "__RegisterNewUser.Account Create": "Account Created",
+  "RegisterNewUser.Account Create": "खाता बन गया",
+  "__RegisterNewUser.AccountAlreadyExist": "Account already exist",
+  "RegisterNewUser.AccountAlreadyExist": "खाता पहले से ही मौजूद है",
+  "__RegisterNewUser.CloseRegistration": "Close registration",
+  "RegisterNewUser.CloseRegistration": "पंजीकरण बंद करें",
+  "__RegisterNewUser.Email": "Email",
+  "RegisterNewUser.Email": "ईमेल",
+  "__RegisterNewUser.FirstName": "First name",
+  "RegisterNewUser.FirstName": "पहला नाम",
+  "__RegisterNewUser.InformationLogin": "Login",
+  "RegisterNewUser.InformationLogin": "लॉग इन करें",
+  "__RegisterNewUser.InformationVisibility": "Access information",
+  "RegisterNewUser.InformationVisibility": "उपयोग की जानकारी",
+  "__RegisterNewUser.Information_1": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1": "घटनाओं तक पहुँचने और बनाने के लिए Togh में एक उपयोगकर्ता को पंजीकृत करें, सूचनाएं प्राप्त करें। किसी भी सेटिंग को बदलने के लिए अपनी प्रोफ़ाइल तक पहुंचें।",
+  "__RegisterNewUser.Information_2": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2": "आपका लॉगिन आपका ईमेल है। Togh आपके खाते को सत्यापित करने के लिए आपको एक पुष्टिकरण ईमेल भेजेगा। इस ईमेल का उपयोग तब किया जाता है जब आप अपना पासवर्ड खो देते हैं।",
+  "__RegisterNewUser.Information_3": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3": "प्रोफ़ाइल में, आप सेटिंग को किसी अन्य Togh उपयोगकर्ता द्वारा दिखाई नहीं देने के लिए बदल सकते हैं। डिफ़ॉल्ट रूप से, आप नाम और ईमेल के माध्यम से खोज में दिखाई देते हैं। आपके दोस्त को आपको देखने की जरूरत है! लेकिन आप सामान्य खोज में दिखाई न देने का निर्णय ले सकते हैं। फिर, एक भागीदार के रूप में आपको जोड़ने के लिए आपके मित्र को आपका ईमेल पता होना चाहिए।",
+  "__RegisterNewUser.LastName": "Last name",
+  "RegisterNewUser.LastName": "अंतिम नाम",
+  "__RegisterNewUser.Password": "Password",
+  "RegisterNewUser.Password": "कुंजिका",
+  "__RegisterNewUser.Registration": "Registration",
+  "RegisterNewUser.Registration": "पंजीकरण",
+  "__RegisterNewUser.RetypePassword": "Retype password",
+  "RegisterNewUser.RetypePassword": "पासवर्ड फिर से लिखें",
+  "__RegisterNewUser.ServerError": "Server error",
+  "RegisterNewUser.ServerError": "सर्वर त्रुटि",
+  "__RegisterUser.EmailIsMandatory": "Email is mandatory",
+  "RegisterUser.EmailIsMandatory": "ईमेल अनिवार्य है",
+  "__RegisterUser.FirstNameIsMandatory": "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory": "प्रथम नाम अनिवार्य है",
+  "__RegisterUser.PasswordIsMandatory": "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory": "पासवर्ड अनिवार्य है",
+  "__RegisterUser.PasswordSizeMandatory": "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory": "पासवर्ड में कम से कम 4 अक्षर होने चाहिए",
+  "__RegisterUser.PasswordsAreDifferent": "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent": "पासवर्ड अलग हैं",
+  "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure": "अब आप अपना पासवर्ड बदल सकते हैं। इसे बदल दिया जाएगा, और आप तुरंत कनेक्ट हो जाएंगे",
+  "__ResetPassword.passwordchanged": "Password changed",
+  "ResetPassword.passwordchanged": "पासवर्ड बदला गया",
+  "__ResetPassword.passwordchangefailed": "Change failed",
+  "ResetPassword.passwordchangefailed": "परिवर्तन विफल",
+  "__UserFeedback.OperationFailed": "Operation Failed",
+  "UserFeedback.OperationFailed": "प्रचालन विफल रहा",
+  "__UserFeedback.OperationHttpError": "Connection to the server lost",
+  "UserFeedback.OperationHttpError": "सर्वर से कनेक्शन खो गया",
+  "__UserFeedback.OperationSuccess": "Operation successful",
+  "UserFeedback.OperationSuccess": "ऑपरेशन सफल रहा",
+  "__UserFeedback.OperationSuccessfull": "Success",
+  "UserFeedback.OperationSuccessfull": "सफलता",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
   "UserTips.DeactivateTipInPreference" : "आपकी प्राथमिकता में युक्तियों को निष्क्रिय किया जा सकता है"}

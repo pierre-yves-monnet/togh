@@ -1,47 +1,41 @@
 {
-  "__AdminAPIKey.Title" : "API Keys",
-  "AdminAPIKey.Title" : "API 키",
-
-  "__AdminAPIKey.updateKey" : "Update key",
-  "AdminAPIKey.updateKey" : "키 업데이트",
-
-  "__AdminGoogle.Billing" : "Billing",
-  "AdminGoogle.Billing" : "청구",
-
-  "__AdminGoogle.Dahsboard" : "Dashboard",
-  "AdminGoogle.Dahsboard" : "계기반",
-
-  "__AdminGoogle.Google" : "Google",
-  "AdminGoogle.Google" : "구글",
-
-  "AdminHome.Title" : "관리",
-
-  "__AdminInfo.Information" : "Information",
-  "AdminInfo.Information" : "정보",
-
-  "__AdminTransaltor.Title" : "Translation",
-  "AdminTransaltor.Title" : "관리",
-
-  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
-  "AdminTranslator.AverageTranslation" : "평균 (밀리 초)",
-
-  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
-  "AdminTranslator.CheckDictionary" : "사전 확인",
-
-  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-  "AdminTranslator.CompleteDictionary" : "완전한 사전",
-
-  "__AdminTranslator.MissingSentences" : "Missing sentences",
-  "AdminTranslator.MissingSentences" : "누락 된 문장",
-
-  "__AdminTranslator.Name" : "Name",
-  "AdminTranslator.Name" : "이름",
-
-  "__AdminTranslator.TimeTranslation" : "Time of translation",
-  "AdminTranslator.TimeTranslation" : "번역 시간",
-
-  "__AdminTranslator.Title" : "Translation",
-  "AdminTranslator.Title" : "번역",
+  "__AdminAPIKey.Title": "API Keys",
+  "AdminAPIKey.Title": "API 키",
+  "__AdminAPIKey.updateKey": "Update key",
+  "AdminAPIKey.updateKey": "키 업데이트",
+  "__AdminEmail.SendEmailTo": "Send Email test to",
+  "AdminEmail.SendEmailTo": "이메일 테스트 보내기",
+  "__AdminEmail.Title": "Email parameters",
+  "AdminEmail.Title": "이메일 매개변수",
+  "__AdminEmail.testEmail": "Test Email",
+  "AdminEmail.testEmail": "테스트 이메일",
+  "__AdminEmail.updateKey": "Update key",
+  "AdminEmail.updateKey": "키 업데이트",
+  "__AdminGoogle.Billing": "Billing",
+  "AdminGoogle.Billing": "청구",
+  "__AdminGoogle.Dahsboard": "Dashboard",
+  "AdminGoogle.Dahsboard": "계기반",
+  "__AdminGoogle.Google": "Google",
+  "AdminGoogle.Google": "구글",
+  "AdminHome.Title": "관리",
+  "__AdminInfo.Information": "Information",
+  "AdminInfo.Information": "정보",
+  "__AdminTransaltor.Title": "Translation",
+  "AdminTransaltor.Title": "관리",
+  "__AdminTranslator.AverageTranslation": "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation": "평균 (밀리 초)",
+  "__AdminTranslator.CheckDictionary": "Check Dictionary",
+  "AdminTranslator.CheckDictionary": "사전 확인",
+  "__AdminTranslator.CompleteDictionary": "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary": "완전한 사전",
+  "__AdminTranslator.MissingSentences": "Missing sentences",
+  "AdminTranslator.MissingSentences": "누락 된 문장",
+  "__AdminTranslator.Name": "Name",
+  "AdminTranslator.Name": "이름",
+  "__AdminTranslator.TimeTranslation": "Time of translation",
+  "AdminTranslator.TimeTranslation": "번역 시간",
+  "__AdminTranslator.Title": "Translation",
+  "AdminTranslator.Title": "번역",
 
   "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
   "AdminTranslator.TooMuchSentences" : "오버플로 문장",
@@ -904,119 +898,88 @@
 
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription" : "마지막 기간에 허용 된 이벤트 한도에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
-
-  "__EventsList.MyEvents" : "My events",
-  "EventsList.MyEvents" : "내 이벤트",
-
-  "__EventsList.Name" : "Name",
-  "EventsList.Name" : "이름",
-
-  "__EventsList.Participants" : "Participants",
-  "EventsList.Participants" : "참가자들",
-
-  "__EventsList.Refresh" : "Refresh",
-  "EventsList.Refresh" : "새로 고치다",
-
-  "__EventsList.ServerConnectionError" : "Server connection error",
-  "EventsList.ServerConnectionError" : "서버 연결 오류",
-
-  "__Expense.Budget" : "Budget",
-  "Expense.Budget" : "예산",
-
-  "__Expense.Cost" : "Cost",
-  "Expense.Cost" : "비용",
-
-  "Expense.Price" : "가격",
-
-  "__Invitation.ByEmail" : "Send an Email",
-  "Invitation.ByEmail" : "이메일을 보내다",
-
-  "__Invitation.Close" : "Close",
-  "Invitation.Close" : "닫기",
-
-  "__Invitation.Email" : "Email",
-  "Invitation.Email" : "이메일",
-
-  "__Invitation.FirstName" : "First name",
-  "Invitation.FirstName" : "이름",
-
-  "__Invitation.Invitation" : "Invitation",
-  "Invitation.Invitation" : "초대",
-
-  "__Invitation.LastName" : "Last name",
-  "Invitation.LastName" : "성",
-
-  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
-  "Invitation.OnlyUserNotAlreadyAParticipant" : "아직 참가자가 아닌 사용자 만",
-
-  "__Invitation.PhoneNumber" : "Phone number",
-  "Invitation.PhoneNumber" : "전화 번호",
-
-  "Invitation.RoleObserver" : "관찰자",
-
-  "Invitation.RoleOrganizer" : "조직자",
-
-  "Invitation.RoleParticipant" : "참가자",
-
-  "__Invitation.Search" : "Search",
-  "Invitation.Search" : "검색",
-
-  "__Invitation.SearchAUser" : "Search a user",
-  "Invitation.SearchAUser" : "사용자 검색",
-
-  "__Invitation.Searching" : "Searching",
-  "Invitation.Searching" : "수색",
-
-  "__Invitation.SendInvitation" : "Send Invitation",
-  "Invitation.SendInvitation" : "초대장을 보내다",
-
-  "__Invitation.UserEmail" : "Email",
-  "Invitation.UserEmail" : "이메일",
-
-  "__Invitation.UserFound" : "UsersFound",
-  "Invitation.UserFound" : "UsersFound",
-
-  "__Invitation.UserName" : "Name",
-  "Invitation.UserName" : "이름",
-
-  "__Invitation.UserPhoneNumber" : "Phone number",
-  "Invitation.UserPhoneNumber" : "전화 번호",
-
-  "__LogEvent.Action" : "Action",
-  "LogEvent.Action" : "동작",
-
-  "__LogEvent.Consequence" : "Consequence",
-  "LogEvent.Consequence" : "결과",
-
-  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
-  "Login.CantConnectToTheServer" : "서버에 연결할 수 없습니다",
-
-  "__Login.EmailIncorrect" : "Email address is incorrect",
-  "Login.EmailIncorrect" : "이메일 주소가 잘못되었습니다.",
-
-  "__Login.EmailSent" : "An email is sent, check your mailbox",
-  "Login.EmailSent" : "이메일이 전송되었습니다. 메일함을 확인하세요.",
-
-  "__Login.LostMyPassword" : "I lost My password",
-  "Login.LostMyPassword" : "비밀번호를 분실했습니다.",
-
-  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
-  "Login.LostMyPasswordExplanation" : "계정이 있지만 연결할 수 없습니까? 임시 비밀번호를 얻으려면 '비밀번호 나열' 버튼을 클릭하세요.",
-
-  "__Login.LostMyPasswordLabel" : "Reset my password",
-  "Login.LostMyPasswordLabel" : "내 비밀번호 재설정",
-
-  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
-  "Login.LostPasswordExplanation" : "비밀번호 변경 링크가 이메일로 전송됩니다.",
-
-  "__Login.RememberMe" : "Remember Me",
-  "Login.RememberMe" : "날 기억해",
-
-  "__Login.SendEmail" : "Send the email",
-  "Login.SendEmail" : "이메일 보내기",
-
-  "__Login.ServerConnectionError" : "Server connection error",
-  "Login.ServerConnectionError" : "서버 연결 오류",
+  "__EventsList.MyEvents": "My events",
+  "EventsList.MyEvents": "내 이벤트",
+  "__EventsList.Name": "Name",
+  "EventsList.Name": "이름",
+  "__EventsList.Participants": "Participants",
+  "EventsList.Participants": "참가자들",
+  "__EventsList.Refresh": "Refresh",
+  "EventsList.Refresh": "새로 고치다",
+  "__EventsList.ServerConnectionError": "Server connection error",
+  "EventsList.ServerConnectionError": "서버 연결 오류",
+  "__Expense.Budget": "Budget",
+  "Expense.Budget": "예산",
+  "__Expense.Cost": "Cost",
+  "Expense.Cost": "비용",
+  "Expense.Price": "가격",
+  "__Invitation.ByEmail": "Send an Email",
+  "Invitation.ByEmail": "이메일을 보내다",
+  "__Invitation.Close": "Close",
+  "Invitation.Close": "닫기",
+  "__Invitation.Email": "Email",
+  "Invitation.Email": "이메일",
+  "__Invitation.FirstName": "First name",
+  "Invitation.FirstName": "이름",
+  "__Invitation.Invitation": "Invitation",
+  "Invitation.Invitation": "초대",
+  "__Invitation.LastName": "Last name",
+  "Invitation.LastName": "성",
+  "__Invitation.NoEmails": "Attention, email can't be sent to these users",
+  "Invitation.NoEmails": "주의, 이 사용자에게는 이메일을 보낼 수 없습니다.",
+  "__Invitation.OnlyUserNotAlreadyAParticipant": "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant": "아직 참가자가 아닌 사용자 만",
+  "__Invitation.PhoneNumber": "Phone number",
+  "Invitation.PhoneNumber": "전화 번호",
+  "Invitation.RoleObserver": "관찰자",
+  "Invitation.RoleOrganizer": "조직자",
+  "Invitation.RoleParticipant": "참가자",
+  "__Invitation.Search": "Search",
+  "Invitation.Search": "검색",
+  "__Invitation.SearchAUser": "Search a user",
+  "Invitation.SearchAUser": "사용자 검색",
+  "__Invitation.Searching": "Searching",
+  "Invitation.Searching": "수색",
+  "__Invitation.SendInvitation": "Send Invitation",
+  "Invitation.SendInvitation": "초대장을 보내다",
+  "__Invitation.UseMyEmailAsFrom": "Use my email in the From message",
+  "Invitation.UseMyEmailAsFrom": "보낸 사람 메시지에서 내 이메일 사용",
+  "__Invitation.UserEmail": "Email",
+  "Invitation.UserEmail": "이메일",
+  "__Invitation.UserFound": "UsersFound",
+  "Invitation.UserFound": "UsersFound",
+  "__Invitation.UserName": "Name",
+  "Invitation.UserName": "이름",
+  "__Invitation.UserPhoneNumber": "Phone number",
+  "Invitation.UserPhoneNumber": "전화 번호",
+  "__Invitation.UsersAlreadyRegistered": "These participants are already registered",
+  "Invitation.UsersAlreadyRegistered": "이미 등록된 참가자입니다.",
+  "__Invitation.UsersInvited": "Users are invited with success",
+  "Invitation.UsersInvited": "사용자는 성공으로 초대됩니다",
+  "__LogEvent.Action": "Action",
+  "LogEvent.Action": "동작",
+  "__LogEvent.Consequence": "Consequence",
+  "LogEvent.Consequence": "결과",
+  "__Login.CantConnectToTheServer": "Can't Connect To The Server",
+  "Login.CantConnectToTheServer": "서버에 연결할 수 없습니다",
+  "__Login.EmailIncorrect": "Email address is incorrect",
+  "Login.EmailIncorrect": "이메일 주소가 잘못되었습니다.",
+  "__Login.EmailSent": "An email is sent, check your mailbox",
+  "Login.EmailSent": "이메일이 전송되었습니다. 메일함을 확인하세요.",
+  "__Login.LostMyPassword": "I lost My password",
+  "Login.LostMyPassword": "비밀번호를 분실했습니다.",
+  "__Login.LostMyPasswordExplanation": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation": "계정이 있지만 연결할 수 없습니까? 임시 비밀번호를 얻으려면 '비밀번호 나열' 버튼을 클릭하세요.",
+  "__Login.LostMyPasswordLabel": "Reset my password",
+  "Login.LostMyPasswordLabel": "내 비밀번호 재설정",
+  "__Login.LostPasswordExplanation": "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation": "비밀번호 변경 링크가 이메일로 전송됩니다.",
+  "__Login.RememberMe": "Remember Me",
+  "Login.RememberMe": "날 기억해",
+  "__Login.SendEmail": "Send the email",
+  "Login.SendEmail": "이메일 보내기",
+  "__Login.ServerConnectionError": "Server connection error",
+  "Login.ServerConnectionError": "서버 연결 오류",
 
   "__Login.ServerIssue" : "An error arrived on the server, please try later",
   "Login.ServerIssue" : "서버에 오류가 발생했습니다. 나중에 시도하십시오.",
@@ -1184,118 +1147,87 @@
   "MyProfile.lastName" : "성",
 
   "__MyProfile.passwordChangeFailed" : "Change failed",
-  "MyProfile.passwordChangeFailed" : "변경 실패",
-
-  "__MyProfile.passwordChangeInProgress" : "In progress",
-  "MyProfile.passwordChangeInProgress" : "진행 중",
-
-  "__MyProfile.passwordChangedOk" : "Password changed",
-  "MyProfile.passwordChangedOk" : "비밀번호 변경됨",
-
-  "__MyProfile.searchable" : "Searchable",
-  "MyProfile.searchable" : "검색 가능",
-
-  "__MyProfile.searchableFalse" : "Never in the search result",
-  "MyProfile.searchableFalse" : "검색 결과에 없음",
-
-  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
-  "MyProfile.searchableTrue" : "예, 검색에 표시됩니다",
-
-  "__MyProfile.showTipsUser" : "Show tips",
-  "MyProfile.showTipsUser" : "팁보기",
-
-  "__MyProfile.showtipuser" : "ShowTipUsers",
-  "MyProfile.showtipuser" : "ShowTipUsers",
-
-  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
-  "MyProfile.subscriptionExcellentExplanation" : "Excellence 구독이 하늘에 도달했습니다! 대규모 이벤트, 실제 제한 없음. 그리고 응용 프로그램을 유지하는 데 도움이됩니다.",
-
-  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
-  "MyProfile.subscriptionFreeExplanation" : "무료 구독에는 이벤트를 구성하는 데 필요한 모든 것이 포함되어 있습니다. 비용을 피하기 위해 제한됩니다. 한 달에 만들 수있는 이벤트 수, 이벤트 당 참가자 수에 제한이 있습니다.",
-
-  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
-  "MyProfile.subscriptionPremiumExplanation" : "프리미엄 구독은 한계를 뛰어 넘습니다. 여러 이벤트를 구성하고 예산을 관리 할 수 있습니다. 모든 것을 추적하고 구성 할 수있는 훌륭한 시스템을 원하는 전문가 또는 많은 이벤트를 구성하는 사용자에게 적합합니다!",
-
-  "__MyProfile.subscriptionUser" : "Subscription",
-  "MyProfile.subscriptionUser" : "신청",
-
-  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
-  "MyProfile.subscriptionUserExplanation" : "다른 수준의 구독이 있습니다.",
-
-  "__MyProfile.typeProfile" : "Picture",
-  "MyProfile.typeProfile" : "그림",
-
-  "__RegisterNewUser.CloseRegistration" : "Close registration",
-  "RegisterNewUser.CloseRegistration" : "등록 닫기",
-
-  "__RegisterNewUser.Email" : "Email",
-  "RegisterNewUser.Email" : "이메일",
-
-  "__RegisterNewUser.FirstName" : "First name",
-  "RegisterNewUser.FirstName" : "이름",
-
-  "__RegisterNewUser.InformationLogin" : "Login",
-  "RegisterNewUser.InformationLogin" : "로그인",
-
-  "__RegisterNewUser.InformationVisibility" : "Access information",
-  "RegisterNewUser.InformationVisibility" : "액세스 정보",
-
-  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
-  "RegisterNewUser.Information_1" : "Togh에 사용자를 등록하여 이벤트에 액세스하고 이벤트를 생성하고 알림을 받습니다. 설정을 변경하려면 프로필에 액세스하세요.",
-
-  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
-  "RegisterNewUser.Information_2" : "귀하의 로그인은 귀하의 이메일입니다. Togh는 귀하의 계정을 확인하기 위해 확인 이메일을 보낼 것입니다. 이 이메일은 비밀번호를 분실했을 때 사용됩니다.",
-
-  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
-  "RegisterNewUser.Information_3" : "프로필에서 다른 Togh 사용자가 볼 수 없도록 설정을 변경할 수 있습니다. 기본적으로 이름과 이메일을 통해 검색에 표시됩니다. 친구가 당신을 만나야 합니다! 그러나 일반 검색에서 보이지 않도록 결정할 수 있습니다. 그런 다음 친구가 귀하를 참가자로 추가하려면 귀하의 이메일을 알아야 합니다.",
-
-  "__RegisterNewUser.LastName" : "Last name",
-  "RegisterNewUser.LastName" : "성",
-
-  "__RegisterNewUser.Password" : "Password",
-  "RegisterNewUser.Password" : "암호",
-
-  "__RegisterNewUser.Registration" : "Registration",
-  "RegisterNewUser.Registration" : "기재",
-
-  "__RegisterNewUser.RetypePassword" : "Retype password",
-  "RegisterNewUser.RetypePassword" : "비밀번호 재 입력",
-
-  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
-  "RegisterUser.EmailIsMandatory" : "이메일은 필수입니다",
-
-  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
-  "RegisterUser.FirstNameIsMandatory" : "이름은 필수입니다.",
-
-  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
-  "RegisterUser.PasswordIsMandatory" : "비밀번호는 필수입니다",
-
-  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
-  "RegisterUser.PasswordSizeMandatory" : "비밀번호는 최소 4자 이상이어야 합니다.",
-
-  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDifferent" : "비밀번호가 다릅니다",
-
-  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
-  "ResetPassword.ResetPasswordProcedure" : "이제 비밀번호를 변경할 수 있습니다. 변경되며 즉시 연결됩니다.",
-
-  "__ResetPassword.passwordchanged" : "Password changed",
-  "ResetPassword.passwordchanged" : "비밀번호 변경됨",
-
-  "__ResetPassword.passwordchangefailed" : "Change failed",
-  "ResetPassword.passwordchangefailed" : "변경 실패",
-
-  "__UserFeedback.OperationFailed" : "Operation Failed",
-  "UserFeedback.OperationFailed" : "작업 실패",
-
-  "__UserFeedback.OperationHttpError" : "Connection to the server lost",
-  "UserFeedback.OperationHttpError" : "서버 연결이 끊어졌습니다.",
-
-  "__UserFeedback.OperationSuccess" : "Operation successful",
-  "UserFeedback.OperationSuccess" : "작업 성공",
-
-  "__UserFeedback.OperationSuccessfull" : "Success",
-  "UserFeedback.OperationSuccessfull" : "성공",
+  "MyProfile.passwordChangeFailed": "변경 실패",
+  "__MyProfile.passwordChangeInProgress": "In progress",
+  "MyProfile.passwordChangeInProgress": "진행 중",
+  "__MyProfile.passwordChangedOk": "Password changed",
+  "MyProfile.passwordChangedOk": "비밀번호 변경됨",
+  "__MyProfile.searchable": "Searchable",
+  "MyProfile.searchable": "검색 가능",
+  "__MyProfile.searchableFalse": "Never in the search result",
+  "MyProfile.searchableFalse": "검색 결과에 없음",
+  "__MyProfile.searchableTrue": "Yes, I will appears on search",
+  "MyProfile.searchableTrue": "예, 검색에 표시됩니다",
+  "__MyProfile.showTipsUser": "Show tips",
+  "MyProfile.showTipsUser": "팁보기",
+  "__MyProfile.showtipuser": "ShowTipUsers",
+  "MyProfile.showtipuser": "ShowTipUsers",
+  "__MyProfile.subscriptionExcellentExplanation": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation": "Excellence 구독이 하늘에 도달했습니다! 대규모 이벤트, 실제 제한 없음. 그리고 응용 프로그램을 유지하는 데 도움이됩니다.",
+  "__MyProfile.subscriptionFreeExplanation": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation": "무료 구독에는 이벤트를 구성하는 데 필요한 모든 것이 포함되어 있습니다. 비용을 피하기 위해 제한됩니다. 한 달에 만들 수있는 이벤트 수, 이벤트 당 참가자 수에 제한이 있습니다.",
+  "__MyProfile.subscriptionPremiumExplanation": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation": "프리미엄 구독은 한계를 뛰어 넘습니다. 여러 이벤트를 구성하고 예산을 관리 할 수 있습니다. 모든 것을 추적하고 구성 할 수있는 훌륭한 시스템을 원하는 전문가 또는 많은 이벤트를 구성하는 사용자에게 적합합니다!",
+  "__MyProfile.subscriptionUser": "Subscription",
+  "MyProfile.subscriptionUser": "신청",
+  "__MyProfile.subscriptionUserExplanation": "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation": "다른 수준의 구독이 있습니다.",
+  "__MyProfile.typeProfile": "Picture",
+  "MyProfile.typeProfile": "그림",
+  "__RegisterNewUser.Account Create": "Account Created",
+  "RegisterNewUser.Account Create": "계정 생성됨",
+  "__RegisterNewUser.AccountAlreadyExist": "Account already exist",
+  "RegisterNewUser.AccountAlreadyExist": "계정이 이미 존재합니다.",
+  "__RegisterNewUser.CloseRegistration": "Close registration",
+  "RegisterNewUser.CloseRegistration": "등록 닫기",
+  "__RegisterNewUser.Email": "Email",
+  "RegisterNewUser.Email": "이메일",
+  "__RegisterNewUser.FirstName": "First name",
+  "RegisterNewUser.FirstName": "이름",
+  "__RegisterNewUser.InformationLogin": "Login",
+  "RegisterNewUser.InformationLogin": "로그인",
+  "__RegisterNewUser.InformationVisibility": "Access information",
+  "RegisterNewUser.InformationVisibility": "액세스 정보",
+  "__RegisterNewUser.Information_1": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1": "Togh에 사용자를 등록하여 이벤트에 액세스하고 이벤트를 생성하고 알림을 받습니다. 설정을 변경하려면 프로필에 액세스하세요.",
+  "__RegisterNewUser.Information_2": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2": "귀하의 로그인은 귀하의 이메일입니다. Togh는 귀하의 계정을 확인하기 위해 확인 이메일을 보낼 것입니다. 이 이메일은 비밀번호를 분실했을 때 사용됩니다.",
+  "__RegisterNewUser.Information_3": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3": "프로필에서 다른 Togh 사용자가 볼 수 없도록 설정을 변경할 수 있습니다. 기본적으로 이름과 이메일을 통해 검색에 표시됩니다. 친구가 당신을 만나야 합니다! 그러나 일반 검색에서 보이지 않도록 결정할 수 있습니다. 그런 다음 친구가 귀하를 참가자로 추가하려면 귀하의 이메일을 알아야 합니다.",
+  "__RegisterNewUser.LastName": "Last name",
+  "RegisterNewUser.LastName": "성",
+  "__RegisterNewUser.Password": "Password",
+  "RegisterNewUser.Password": "암호",
+  "__RegisterNewUser.Registration": "Registration",
+  "RegisterNewUser.Registration": "기재",
+  "__RegisterNewUser.RetypePassword": "Retype password",
+  "RegisterNewUser.RetypePassword": "비밀번호 재 입력",
+  "__RegisterNewUser.ServerError": "Server error",
+  "RegisterNewUser.ServerError": "서버 오류",
+  "__RegisterUser.EmailIsMandatory": "Email is mandatory",
+  "RegisterUser.EmailIsMandatory": "이메일은 필수입니다",
+  "__RegisterUser.FirstNameIsMandatory": "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory": "이름은 필수입니다.",
+  "__RegisterUser.PasswordIsMandatory": "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory": "비밀번호는 필수입니다",
+  "__RegisterUser.PasswordSizeMandatory": "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory": "비밀번호는 최소 4자 이상이어야 합니다.",
+  "__RegisterUser.PasswordsAreDifferent": "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent": "비밀번호가 다릅니다",
+  "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure": "이제 비밀번호를 변경할 수 있습니다. 변경되며 즉시 연결됩니다.",
+  "__ResetPassword.passwordchanged": "Password changed",
+  "ResetPassword.passwordchanged": "비밀번호 변경됨",
+  "__ResetPassword.passwordchangefailed": "Change failed",
+  "ResetPassword.passwordchangefailed": "변경 실패",
+  "__UserFeedback.OperationFailed": "Operation Failed",
+  "UserFeedback.OperationFailed": "작업 실패",
+  "__UserFeedback.OperationHttpError": "Connection to the server lost",
+  "UserFeedback.OperationHttpError": "서버 연결이 끊어졌습니다.",
+  "__UserFeedback.OperationSuccess": "Operation successful",
+  "UserFeedback.OperationSuccess": "작업 성공",
+  "__UserFeedback.OperationSuccessfull": "Success",
+  "UserFeedback.OperationSuccessfull": "성공",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
   "UserTips.DeactivateTipInPreference" : "원하는대로 팁을 비활성화 할 수 있습니다."}

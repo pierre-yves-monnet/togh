@@ -114,7 +114,7 @@
   "devDependencies": {
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
-    "@formatjs/cli": "^3.1.2",
+    "@formatjs/cli": "^3.2.0",
     "@iconify/icons-mdi": "^1.1.9",
     "babel-plugin-react-intl": "^8.2.25"
   },

@@ -40,8 +40,6 @@ public class EventUpdate {
 
     private static final LogEvent eventInvalidUpdateOperation = new LogEvent(EventUpdate.class.getName(), 1, Level.APPLICATIONERROR, "Invalid operation", "This operation failed", "Operation can't be done", "Check error");
     private static final LogEvent eventCantLocalise = new LogEvent(EventUpdate.class.getName(), 2, Level.ERROR, "Can't localise", "A localisation can't be found, maybe the item is deleted by an another user?", "Operation can't be done", "Refresh your event");
-    private static final LogEvent eventBadLocalisationEntity = new LogEvent(EventUpdate.class.getName(), 3, Level.ERROR, "Entity found is not the one expected", "An entity with a special type is search, and an another one if found.", "Operation can't be executed", "Check the localisation and the entity found");
-    private static final LogEvent eventAlreadyDeleted = new LogEvent(EventUpdate.class.getName(), 4, Level.INFO, "Entity already deleted", "The entity is already deleted");
 
     EventController eventController;
 
@@ -49,43 +47,12 @@ public class EventUpdate {
         UPDATE, ADD, REMOVE
     }
 
-    public static class Slab {
-
-        public SlabOperation operation;
-        public String attributName;
-        public Object attributValue;
-        public String localisation;
-        public BaseEntity baseEntity = null;
-
-        public Slab(Map<String, Object> record) {
-            operation = SlabOperation.valueOf((String) record.get("operation"));
-            attributName = (String) record.get("name");
-            attributValue = record.get("value");
-            localisation = (String) record.get("localisation");
-        }
-
-        public Slab(SlabOperation operation, String attributName, Object attributValue, BaseEntity baseEntity) {
-            this.operation = operation;
-            this.attributName = attributName;
-            this.attributValue = attributValue;
-            this.baseEntity = baseEntity;
-        }
-
-        public Long getAttributValueLong() {
-            try {
-                return Long.parseLong(attributValue.toString());
-            } catch (Exception e) {
-                return null;
-            }
-        }
-    }
-
     protected EventUpdate(EventController eventController) {
         this.eventController = eventController;
     }
 
     public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
-        logger.info(LOG_HEADER, "Start update from listSlab size["+listSlab.size()+"]");
+        logger.info(LOG_HEADER + "Start update from listSlab size[" + listSlab.size() + "]");
         EventEntity eventEntity = this.eventController.getEvent();
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
         listSlab.stream().forEach((slab) -> {
@@ -93,9 +60,9 @@ public class EventUpdate {
                 if (SlabOperation.UPDATE.equals(slab.operation)) {
                     updateOperation(eventEntity, slab, updateContext, eventOperationResult);
                 } else if (SlabOperation.ADD.equals(slab.operation)) {
-                    addOperation(eventEntity, slab, updateContext, eventOperationResult);
+                    addOperation(slab, updateContext, eventOperationResult);
                 } else if (SlabOperation.REMOVE.equals(slab.operation)) {
-                    removeOperation(eventEntity, slab, eventOperationResult);
+                    removeOperation(slab, eventOperationResult);
                 }
             } catch (Exception e) {
                 eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, e, slab.operation + ":" + slab.attributName));
@@ -108,7 +75,7 @@ public class EventUpdate {
         return eventOperationResult;
     }
 
-    private void addOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
+    private void addOperation(Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
 
         EventControllerAbsChild eventChildController = eventController.getEventControllerFromSlabOperation(slab);
         if (eventController == null)
@@ -154,12 +121,11 @@ public class EventUpdate {
 
     /**
      * Remove operation
-     * 
-     * @param event
+     *
      * @param slab
      * @param eventOperationResult
      */
-    private void removeOperation(EventEntity event, Slab slab, EventOperationResult eventOperationResult) {
+    private void removeOperation(Slab slab, EventOperationResult eventOperationResult) {
         EventControllerAbsChild eventChildController = eventController.getEventControllerFromSlabOperation(slab);
         if (eventController == null)
             return;
@@ -175,7 +141,7 @@ public class EventUpdate {
 
     /**
      * Update the event Eventity with the slab
-     * 
+     *
      * @param event
      * @param slab
      * @return
@@ -193,6 +159,37 @@ public class EventUpdate {
 
         }
         event.touch();
+    }
+
+    public static class Slab {
+
+        public SlabOperation operation;
+        public String attributName;
+        public Object attributValue;
+        public String localisation;
+        public BaseEntity baseEntity = null;
+
+        public Slab(Map<String, Object> recordSlab) {
+            operation = SlabOperation.valueOf((String) recordSlab.get("operation"));
+            attributName = (String) recordSlab.get("name");
+            attributValue = recordSlab.get("value");
+            localisation = (String) recordSlab.get("localisation");
+        }
+
+        public Slab(SlabOperation operation, String attributName, Object attributValue, BaseEntity baseEntity) {
+            this.operation = operation;
+            this.attributName = attributName;
+            this.attributValue = attributValue;
+            this.baseEntity = baseEntity;
+        }
+
+        public Long getAttributValueLong() {
+            try {
+                return Long.parseLong(attributValue.toString());
+            } catch (Exception e) {
+                return null;
+            }
+        }
     }
 
 }

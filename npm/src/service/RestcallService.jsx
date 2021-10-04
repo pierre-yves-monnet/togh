@@ -59,7 +59,8 @@ class RestcallService {
 			    console.log("RestcallService.getJson() error "+error);
 				if (error.response && error.response.status === 401) {
 					let homeTogh=window.location.href;
-					console.log("Redirect : to["+homeTogh+"]");
+					console.log("Redirect: to["+homeTogh+"] force reload");
+					window.location.reload();
 					window.location = homeTogh;
 					return;
 				}

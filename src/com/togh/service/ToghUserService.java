@@ -50,27 +50,8 @@ public class ToghUserService {
     @Autowired
     private ToghUserRepository endUserRepository;
 
-    /**
-     * Check if the user toghadmin exist. If not, create it
-     */
-    @PostConstruct
-    public void init() {
-        ToghUserEntity adminUser = endUserRepository.findByName(TOGHADMIN_USERNAME);
-        if (adminUser == null) {
-            adminUser = new ToghUserEntity();
-            adminUser.setName( TOGHADMIN_USERNAME );
-            setPassword( adminUser, TOGHADMIN_PASSWORD);
-            adminUser.setEmail( TOGHADMIN_EMAIL );
-            adminUser.setPrivilegeUser( PrivilegeUserEnum.ADMIN );
-            adminUser.setStatusUser( StatusUserEnum.ACTIF );
-            adminUser.setSource( SourceUserEnum.SYSTEM );
-            adminUser.setSubscriptionUser(SubscriptionUserEnum.EXCELLENCE);
-            adminUser.setTypePicture(TypePictureEnum.TOGH);
-            
-            endUserRepository.save(adminUser);
-        }
-
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public ToghUserEntity getUserFromId(long userId) {
         Optional<ToghUserEntity> toghUserEntity = endUserRepository.findById(userId);
@@ -92,15 +73,9 @@ public class ToghUserService {
     }
 
     public void saveUser(ToghUserEntity user) {
-        // transactionTemplate = new TransactionTemplate(transactionManager);
-        // DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
-        // TransactionStatus status = transactionManager.getTransaction(definition);
-
         try {
             endUserRepository.save(user);
-            // transactionManager.commit(status);
         } catch (Exception ex) {
-            // transactionManager.rollback(status);
             logger.severe(LOG_HEADER + "Can't save user: " + ex.toString());
             throw ex;
         }
@@ -122,19 +97,28 @@ public class ToghUserService {
     }
 
     /**
-     * Invite a new user: we register it with the status Invited, then we sent an email
-     * 
-     * @param email
-     * @return
+     * Check if the user toghadmin exist. If not, create it
      */
-    public class CreationResult {
+    @PostConstruct
+    public void init() {
+        ToghUserEntity adminUser = endUserRepository.findByName(TOGHADMIN_USERNAME);
+        if (adminUser == null) {
+            adminUser = new ToghUserEntity();
+            adminUser.setName(TOGHADMIN_USERNAME);
+            setPassword(adminUser, TOGHADMIN_PASSWORD);
+            adminUser.setEmail(TOGHADMIN_EMAIL);
+            adminUser.setPrivilegeUser(PrivilegeUserEnum.ADMIN);
+            adminUser.setStatusUser(StatusUserEnum.ACTIF);
+            adminUser.setSource(SourceUserEnum.SYSTEM);
+            adminUser.setSubscriptionUser(SubscriptionUserEnum.EXCELLENCE);
+            adminUser.setTypePicture(TypePictureEnum.TOGH);
 
-        public ToghUserEntity toghUser;
-        public boolean isEmailIsCorrect = false;
-        public boolean isEmailSent = false;
+            endUserRepository.save(adminUser);
+        }
+
     }
 
-    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, EventEntity event) {
+    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, boolean useMyEmailAsFrom, EventEntity event) {
         CreationResult invitationStatus = new CreationResult();
         try {
             // Check the email now: we don't want to create a bad user
@@ -148,10 +132,14 @@ public class ToghUserService {
             // send the email now
             invitationStatus.isEmailSent = true;
             NotifyService notifyService = factoryService.getNotifyService();
-            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser, true, invitedByUser, event);
-            
+            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser,
+                    true,
+                    invitedByUser,
+                    useMyEmailAsFrom,
+                    event);
+
             invitationStatus.isEmailSent = notificationStatus.isCorrect();
-            
+
             return invitationStatus;
         } catch (Exception e) {
             logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
@@ -161,23 +149,12 @@ public class ToghUserService {
     }
 
     /**
-     * Search users
-     */
-    public class SearchUsersResult {
-
-        public List<ToghUserEntity> listUsers;
-        public int page = 0;
-        public int numberPerPage = 1;
-        public Long countUsers;
-    }
-
-    /**
      * @param firstName
      * @param lastName
      * @param phoneNumber
      * @param email
-     * @param page page number, start at 0
-     * @param pageCount number of item per page. If this number is 0, then move to 1
+     * @param page        page number, start at 0
+     * @param pageCount   number of item per page. If this number is 0, then move to 1
      * @return
      */
     public SearchUsersResult searchUsers(String firstName, String lastName, String phoneNumber, String email, int page, int numberPerPage) {
@@ -186,6 +163,23 @@ public class ToghUserService {
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
         searchResult.listUsers = endUserRepository.findPublicUsers(firstName, lastName, phoneNumber, email, PageRequest.of(searchResult.page, searchResult.numberPerPage));
         searchResult.countUsers = endUserRepository.countPublicUsers(firstName, lastName, phoneNumber, email);
+        return searchResult;
+    }
+
+    /**
+     * Search users connected, but with no activity after the limeSearch time
+     *
+     * @param limitSearch
+     * @param page
+     * @param numberPerPage
+     * @return
+     */
+    public SearchUsersResult searchConnectedUsersNoActivity(LocalDateTime limitSearch, int page, int numberPerPage) {
+        SearchUsersResult searchResult = new SearchUsersResult();
+        searchResult.page = page;
+        searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
+        searchResult.listUsers = endUserRepository.findConnectedUsersNoActivity(limitSearch, PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = endUserRepository.countConnectedUsersNoActivity(limitSearch);
         return searchResult;
     }
 
@@ -207,78 +201,41 @@ public class ToghUserService {
         return searchResult;
     }
 
-    
-    /**
-     * Search users connected, but with no activity after the limeSearch time
-     * @param limitSearch
-     * @param page
-     * @param numberPerPage
-     * @return
-     */
-    public SearchUsersResult searchConnectedUsersNoActivity( LocalDateTime limitSearch,int page, int numberPerPage) {
-        SearchUsersResult searchResult = new SearchUsersResult();
-        searchResult.page = page;
-        searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
-        searchResult.listUsers = endUserRepository.findConnectedUsersNoActivity(limitSearch,PageRequest.of(searchResult.page, searchResult.numberPerPage));
-        searchResult.countUsers = endUserRepository.countConnectedUsersNoActivity(limitSearch);
-        return searchResult;
-    }
-    
-    
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    /**
-     * This is a restriction filter. So, if all is null/false, there is no restriction
-     * 
-     * @author Firstname Lastname
-     */
-    public static class CriteriaSearchUser {
-
-        public String searchSentence = null;
-        public boolean connected = false;
-        public boolean block = false;
-        public boolean administrator = false;
-        public boolean premium = false;
-        public boolean excellence = false;
-
-    }
-
     public SearchUsersResult findUserByCriterias(CriteriaSearchUser criteriaSearch, int page, int numberPerPage) {
-        
+
         StringBuilder sqlRequest = new StringBuilder();
-                sqlRequest.append( "select toghuser from ToghUserEntity toghuser where 1=1 " );
+        sqlRequest.append("select toghuser from ToghUserEntity toghuser where 1=1 ");
         /**
          * Search Sentence
          */
-                List<Object> listParameters = new ArrayList<>();
+        List<Object> listParameters = new ArrayList<>();
         if (criteriaSearch.searchSentence != null && criteriaSearch.searchSentence.trim().length() > 0) {
-            sqlRequest.append( " and ( upper(toghuser.firstName) like concat('%', upper( "+registerParameter( listParameters,  criteriaSearch.searchSentence)+" ), '%') "
-                    + " or  upper(toghuser.lastName) like concat('%', upper( "+registerParameter( listParameters,  criteriaSearch.searchSentence)+" ), '%') "
-                    + " or  upper(toghuser.phoneNumber) like concat('%', upper( "+registerParameter( listParameters,  criteriaSearch.searchSentence)+" ), '%')"
-                    + " or  upper(toghuser.email) like concat('%', upper( "+registerParameter( listParameters,  criteriaSearch.searchSentence)+" ), '%') )");
+            sqlRequest.append(" and ( upper(toghuser.firstName) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') "
+                    + " or  upper(toghuser.lastName) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') "
+                    + " or  upper(toghuser.phoneNumber) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%')"
+                    + " or  upper(toghuser.email) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') )");
         }
         if (criteriaSearch.connected)
             sqlRequest.append(" and toghuser.connectionStamp is not null ");
         if (criteriaSearch.block) {
-            sqlRequest.append(" and toghuser.statusUser = "+registerParameter( listParameters, StatusUserEnum.BLOCKED));
+            sqlRequest.append(" and toghuser.statusUser = " + registerParameter(listParameters, StatusUserEnum.BLOCKED));
         }
         if (criteriaSearch.administrator) {
-            sqlRequest.append(" and toghuser.privilegeUser = "+registerParameter( listParameters, PrivilegeUserEnum.ADMIN));
+            sqlRequest.append(" and toghuser.privilegeUser = " + registerParameter(listParameters, PrivilegeUserEnum.ADMIN));
         }
         if (criteriaSearch.premium) {
-            sqlRequest.append(" and toghuser.subscriptionUser = "+registerParameter( listParameters, SubscriptionUserEnum.PREMIUM));
+            sqlRequest.append(" and toghuser.subscriptionUser = " + registerParameter(listParameters, SubscriptionUserEnum.PREMIUM));
         }
         if (criteriaSearch.excellence) {
-            sqlRequest.append(" and toghuser.subscriptionUser = "+registerParameter( listParameters, SubscriptionUserEnum.EXCELLENCE));
+            sqlRequest.append(" and toghuser.subscriptionUser = " + registerParameter(listParameters, SubscriptionUserEnum.EXCELLENCE));
         }
         sqlRequest.append(" order by toghuser.firstName asc");
         TypedQuery<ToghUserEntity> query = entityManager.createQuery(sqlRequest.toString(), ToghUserEntity.class);
-        for (int i=0;i<listParameters.size();i++)
-            query.setParameter(i+1, listParameters.get( i ));
+        for (int i = 0; i < listParameters.size(); i++)
+            query.setParameter(i + 1, listParameters.get(i));
 
-        query.setFirstResult( page * numberPerPage);
-        query.setMaxResults( numberPerPage);
+        query.setFirstResult(page * numberPerPage);
+        query.setMaxResults(numberPerPage);
         // return em.createQuery( “SELECT c FROM Customer c WHERE c.name LIKE ?1”) .setParameter(1, name) .getResultList();
         SearchUsersResult searchResult = new SearchUsersResult();
 
@@ -291,22 +248,19 @@ public class ToghUserService {
 
     /**
      * JPA Impose to give an numberId to each "?" : like "?1". So, this method add the object in the list and return "?<list.size>"
+     *
      * @param listParameters
      * @param parameter
      * @return
      */
-    private String registerParameter( List<Object> listParameters, Object parameter) {
-        listParameters.add( parameter);
-        return "?"+listParameters.size();
+    private String registerParameter(List<Object> listParameters, Object parameter) {
+        listParameters.add(parameter);
+        return "?" + listParameters.size();
     }
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Privilege */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
+
     /**
      * How many item an user can creates in an event ?
-     * 
+     *
      * @param userEntity
      * @return
      */
@@ -323,7 +277,7 @@ public class ToghUserService {
 
     /**
      * Return the map of privilege for this user. Then, the interface can work with these privilege
-     * 
+     *
      * @param toghUserEntity
      * @return
      */
@@ -332,24 +286,6 @@ public class ToghUserService {
         result.put("NBITEMS", getPrivilegesNumberOfItems(toghUser));
         result.put("PRIVILEGEUSER", toghUser.getPrivilegeUser().toString());
         return result;
-    }
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Update user */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
-
-    /**
-     * Update an user
-     * 
-     * @param userId
-     * @param attribut
-     * @param value
-     * @return
-     */
-    public class OperationUser{
-        public List<LogEvent> listLogEvents = new ArrayList<>();
-        public ToghUserEntity toghUserEntity= null;
     }
 
     public OperationUser updateUser(Long userId, String attributName, Object attributValue) {
@@ -366,37 +302,102 @@ public class ToghUserService {
         updateContext.timezoneOffset = 0;
         updateContext.factoryService = null;
 
-        operationUser.listLogEvents.addAll( JpaTool.updateEntityOperation(toghUser.get(),
+        operationUser.listLogEvents.addAll(JpaTool.updateEntityOperation(toghUser.get(),
                 attributName,
                 attributValue,
                 updateContext));
 
-        factoryService.getToghUserService().saveUser( operationUser.toghUserEntity );
+        factoryService.getToghUserService().saveUser(operationUser.toghUserEntity);
 
-        
+
         // we have to propagate this change to any another service
-        factoryService.getLoginService().userIsUpdated(operationUser.toghUserEntity );
-        
+        factoryService.getLoginService().userIsUpdated(operationUser.toghUserEntity);
+
         return operationUser;
     }
-    
-    
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Privilege */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+
+    /**
+     * Set the password in the user. The password will be encrypted at this moment.
+     * Object toghUser is not saved
+     *
+     * @param toghUser
+     * @param password
+     * @param saveImmediately
+     */
+    public void setPassword(ToghUserEntity toghUser, String password) {
+        toghUser.setPassword(encryptPassword(password));
+    }
+
+    /**
+     * This is a restriction filter. So, if all is null/false, there is no restriction
+     *
+     * @author Firstname Lastname
+     */
+    public static class CriteriaSearchUser {
+
+        public String searchSentence = null;
+        public boolean connected = false;
+        public boolean block = false;
+        public boolean administrator = false;
+        public boolean premium = false;
+        public boolean excellence = false;
+
+    }
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Update user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+
+    /**
+     * Search users
+     */
+    public class SearchUsersResult {
+
+        public List<ToghUserEntity> listUsers;
+        public int page = 0;
+        public int numberPerPage = 1;
+        public Long countUsers;
+    }
+
+    /**
+     * Invite a new user: we register it with the status Invited, then we sent an email
+     *
+     * @param email
+     * @return
+     */
+    public class CreationResult {
+
+        public ToghUserEntity toghUser;
+        public boolean isEmailIsCorrect = false;
+        public boolean isEmailSent = false;
+    }
+
+
     // --------------------------------------------------------------
     // 
     // Encrypt password
     // 
     // --------------------------------------------------------------
+
     /**
-     * Set the password in the user. The password will be encrypted at this moment. 
-     * Object toghUser is not saved
-     * @param toghUser
-     * @param password
-     * @param saveImmediately
+     * Update an user
+     *
+     * @param userId
+     * @param attribut
+     * @param value
+     * @return
      */
-    public void setPassword( ToghUserEntity toghUser, String password) {
-        toghUser.setPassword( encryptPassword( password ) );
+    public class OperationUser {
+        public List<LogEvent> listLogEvents = new ArrayList<>();
+        public ToghUserEntity toghUserEntity = null;
     }
-    
+
     private static String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
@@ -417,5 +418,5 @@ public class ToghUserService {
             spec.clearPassword();
         }
     }
-   
+
 }

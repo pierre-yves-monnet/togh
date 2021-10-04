@@ -1,45 +1,40 @@
 {
-  "__AdminAPIKey.Title" : "API Keys",
-  "AdminAPIKey.Title" : "مفاتيح API",
-
-  "__AdminAPIKey.updateKey" : "Update key",
-  "AdminAPIKey.updateKey" : "مفتاح التحديث",
-
-  "__AdminGoogle.Billing" : "Billing",
-  "AdminGoogle.Billing" : "الفواتير",
-
-  "__AdminGoogle.Dahsboard" : "Dashboard",
-  "AdminGoogle.Dahsboard" : "لوحة القيادة",
-
-  "__AdminGoogle.Google" : "Google",
-  "AdminGoogle.Google" : "غوغل",
-
-  "__AdminInfo.Information" : "Information",
-  "AdminInfo.Information" : "معلومة",
-
-  "__AdminTransaltor.Title" : "Translation",
-  "AdminTransaltor.Title" : "إدارة",
-
-  "__AdminTranslator.AverageTranslation" : "Average (in Milliseconds)",
-  "AdminTranslator.AverageTranslation" : "المتوسط (بالمللي ثانية)",
-
-  "__AdminTranslator.CheckDictionary" : "Check Dictionary",
-  "AdminTranslator.CheckDictionary" : "تحقق من القاموس",
-
-  "__AdminTranslator.CompleteDictionary" : "Complete Dictionary",
-  "AdminTranslator.CompleteDictionary" : "القاموس الكامل",
-
-  "__AdminTranslator.MissingSentences" : "Missing sentences",
-  "AdminTranslator.MissingSentences" : "الجمل المفقودة",
-
-  "__AdminTranslator.Name" : "Name",
-  "AdminTranslator.Name" : "اسم",
-
-  "__AdminTranslator.TimeTranslation" : "Time of translation",
-  "AdminTranslator.TimeTranslation" : "وقت الترجمة",
-
-  "__AdminTranslator.Title" : "Translation",
-  "AdminTranslator.Title" : "ترجمة",
+  "__AdminAPIKey.Title": "API Keys",
+  "AdminAPIKey.Title": "مفاتيح API",
+  "__AdminAPIKey.updateKey": "Update key",
+  "AdminAPIKey.updateKey": "مفتاح التحديث",
+  "__AdminEmail.SendEmailTo": "Send Email test to",
+  "AdminEmail.SendEmailTo": "إرسال اختبار البريد الإلكتروني إلى",
+  "__AdminEmail.Title": "Email parameters",
+  "AdminEmail.Title": "معلمات البريد الإلكتروني",
+  "__AdminEmail.testEmail": "Test Email",
+  "AdminEmail.testEmail": "البريد الإلكتروني اختبار",
+  "__AdminEmail.updateKey": "Update key",
+  "AdminEmail.updateKey": "مفتاح التحديث",
+  "__AdminGoogle.Billing": "Billing",
+  "AdminGoogle.Billing": "الفواتير",
+  "__AdminGoogle.Dahsboard": "Dashboard",
+  "AdminGoogle.Dahsboard": "لوحة القيادة",
+  "__AdminGoogle.Google": "Google",
+  "AdminGoogle.Google": "غوغل",
+  "__AdminInfo.Information": "Information",
+  "AdminInfo.Information": "معلومة",
+  "__AdminTransaltor.Title": "Translation",
+  "AdminTransaltor.Title": "إدارة",
+  "__AdminTranslator.AverageTranslation": "Average (in Milliseconds)",
+  "AdminTranslator.AverageTranslation": "المتوسط (بالمللي ثانية)",
+  "__AdminTranslator.CheckDictionary": "Check Dictionary",
+  "AdminTranslator.CheckDictionary": "تحقق من القاموس",
+  "__AdminTranslator.CompleteDictionary": "Complete Dictionary",
+  "AdminTranslator.CompleteDictionary": "القاموس الكامل",
+  "__AdminTranslator.MissingSentences": "Missing sentences",
+  "AdminTranslator.MissingSentences": "الجمل المفقودة",
+  "__AdminTranslator.Name": "Name",
+  "AdminTranslator.Name": "اسم",
+  "__AdminTranslator.TimeTranslation": "Time of translation",
+  "AdminTranslator.TimeTranslation": "وقت الترجمة",
+  "__AdminTranslator.Title": "Translation",
+  "AdminTranslator.Title": "ترجمة",
 
   "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
   "AdminTranslator.TooMuchSentences" : "جملة تجاوز السعة",
@@ -864,112 +859,85 @@
   "EventsList.DateFromTo" : "إلى",
 
   "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
-  "EventsList.LimitSubscription" : "تصل إلى الحد الأقصى من الأحداث المسموح بها في الفترة الماضية. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
-
-  "__EventsList.MyEvents" : "My events",
-  "EventsList.MyEvents" : "أحداثي",
-
-  "__EventsList.Name" : "Name",
-  "EventsList.Name" : "اسم",
-
-  "__EventsList.Participants" : "Participants",
-  "EventsList.Participants" : "مشاركون",
-
-  "__EventsList.Refresh" : "Refresh",
-  "EventsList.Refresh" : "ينعش",
-
-  "__EventsList.ServerConnectionError" : "Server connection error",
-  "EventsList.ServerConnectionError" : "خطأ في الاتصال بالخادم",
-
-  "__Expense.Budget" : "Budget",
-  "Expense.Budget" : "ميزانية",
-
-  "__Expense.Cost" : "Cost",
-  "Expense.Cost" : "كلفة",
-
-  "__Invitation.ByEmail" : "Send an Email",
-  "Invitation.ByEmail" : "أرسل بريدا إلكترونيا",
-
-  "__Invitation.Close" : "Close",
-  "Invitation.Close" : "قريب",
-
-  "__Invitation.Email" : "Email",
-  "Invitation.Email" : "بريد الالكتروني",
-
-  "__Invitation.FirstName" : "First name",
-  "Invitation.FirstName" : "الاسم الاول",
-
-  "__Invitation.Invitation" : "Invitation",
-  "Invitation.Invitation" : "رسالة دعوة",
-
-  "__Invitation.LastName" : "Last name",
-  "Invitation.LastName" : "الكنية",
-
-  "__Invitation.OnlyUserNotAlreadyAParticipant" : "Only users not already a participant",
-  "Invitation.OnlyUserNotAlreadyAParticipant" : "فقط المستخدمين ليسوا مشاركين بالفعل",
-
-  "__Invitation.PhoneNumber" : "Phone number",
-  "Invitation.PhoneNumber" : "رقم التليفون",
-
-  "__Invitation.Search" : "Search",
-  "Invitation.Search" : "بحث",
-
-  "__Invitation.SearchAUser" : "Search a user",
-  "Invitation.SearchAUser" : "ابحث عن مستخدم",
-
-  "__Invitation.Searching" : "Searching",
-  "Invitation.Searching" : "يبحث",
-
-  "__Invitation.SendInvitation" : "Send Invitation",
-  "Invitation.SendInvitation" : "إرسال دعوة",
-
-  "__Invitation.UserEmail" : "Email",
-  "Invitation.UserEmail" : "بريد الالكتروني",
-
-  "__Invitation.UserFound" : "UsersFound",
-  "Invitation.UserFound" : "المستخدمون تم العثور عليها",
-
-  "__Invitation.UserName" : "Name",
-  "Invitation.UserName" : "اسم",
-
-  "__Invitation.UserPhoneNumber" : "Phone number",
-  "Invitation.UserPhoneNumber" : "رقم التليفون",
-
-  "__LogEvent.Action" : "Action",
-  "LogEvent.Action" : "عمل",
-
-  "__LogEvent.Consequence" : "Consequence",
-  "LogEvent.Consequence" : "عاقبة",
-
-  "__Login.CantConnectToTheServer" : "Can't Connect To The Server",
-  "Login.CantConnectToTheServer" : "لا يمكن الاتصال بالخادم",
-
-  "__Login.EmailIncorrect" : "Email address is incorrect",
-  "Login.EmailIncorrect" : "عنوان البريد الإلكتروني غير صحيح",
-
-  "__Login.EmailSent" : "An email is sent, check your mailbox",
-  "Login.EmailSent" : "تم إرسال بريد إلكتروني ، تحقق من صندوق البريد الخاص بك",
-
-  "__Login.LostMyPassword" : "I lost My password",
-  "Login.LostMyPassword" : "لقد فقدت كلمة المرور الخاصة بي",
-
-  "__Login.LostMyPasswordExplanation" : "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
-  "Login.LostMyPasswordExplanation" : "لديك حساب ولكن لا يمكنك الاتصال؟ انقر فوق الزر &quot;أدرج كلمة المرور الخاصة بي&quot; للحصول على كلمة مرور مؤقتة",
-
-  "__Login.LostMyPasswordLabel" : "Reset my password",
-  "Login.LostMyPasswordLabel" : "إعادة تعيين كلمة المرور الخاصة بي",
-
-  "__Login.LostPasswordExplanation" : "A link to change your password will be send to your email",
-  "Login.LostPasswordExplanation" : "سيتم إرسال رابط لتغيير كلمة المرور إلى بريدك الإلكتروني",
-
-  "__Login.RememberMe" : "Remember Me",
-  "Login.RememberMe" : "تذكرنى",
-
-  "__Login.SendEmail" : "Send the email",
-  "Login.SendEmail" : "أرسل البريد الإلكتروني",
-
-  "__Login.ServerConnectionError" : "Server connection error",
-  "Login.ServerConnectionError" : "خطأ في الاتصال بالخادم",
+  "EventsList.LimitSubscription": "تصل إلى الحد الأقصى من الأحداث المسموح بها في الفترة الماضية. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+  "__EventsList.MyEvents": "My events",
+  "EventsList.MyEvents": "أحداثي",
+  "__EventsList.Name": "Name",
+  "EventsList.Name": "اسم",
+  "__EventsList.Participants": "Participants",
+  "EventsList.Participants": "مشاركون",
+  "__EventsList.Refresh": "Refresh",
+  "EventsList.Refresh": "ينعش",
+  "__EventsList.ServerConnectionError": "Server connection error",
+  "EventsList.ServerConnectionError": "خطأ في الاتصال بالخادم",
+  "__Expense.Budget": "Budget",
+  "Expense.Budget": "ميزانية",
+  "__Expense.Cost": "Cost",
+  "Expense.Cost": "كلفة",
+  "__Invitation.ByEmail": "Send an Email",
+  "Invitation.ByEmail": "أرسل بريدا إلكترونيا",
+  "__Invitation.Close": "Close",
+  "Invitation.Close": "قريب",
+  "__Invitation.Email": "Email",
+  "Invitation.Email": "بريد الالكتروني",
+  "__Invitation.FirstName": "First name",
+  "Invitation.FirstName": "الاسم الاول",
+  "__Invitation.Invitation": "Invitation",
+  "Invitation.Invitation": "رسالة دعوة",
+  "__Invitation.LastName": "Last name",
+  "Invitation.LastName": "الكنية",
+  "__Invitation.NoEmails": "Attention, email can't be sent to these users",
+  "Invitation.NoEmails": "تنبيه ، لا يمكن إرسال البريد الإلكتروني إلى هؤلاء المستخدمين",
+  "__Invitation.OnlyUserNotAlreadyAParticipant": "Only users not already a participant",
+  "Invitation.OnlyUserNotAlreadyAParticipant": "فقط المستخدمين ليسوا مشاركين بالفعل",
+  "__Invitation.PhoneNumber": "Phone number",
+  "Invitation.PhoneNumber": "رقم التليفون",
+  "__Invitation.Search": "Search",
+  "Invitation.Search": "بحث",
+  "__Invitation.SearchAUser": "Search a user",
+  "Invitation.SearchAUser": "ابحث عن مستخدم",
+  "__Invitation.Searching": "Searching",
+  "Invitation.Searching": "يبحث",
+  "__Invitation.SendInvitation": "Send Invitation",
+  "Invitation.SendInvitation": "إرسال دعوة",
+  "__Invitation.UseMyEmailAsFrom": "Use my email in the From message",
+  "Invitation.UseMyEmailAsFrom": "استخدم بريدي الإلكتروني في الرسالة من",
+  "__Invitation.UserEmail": "Email",
+  "Invitation.UserEmail": "بريد الالكتروني",
+  "__Invitation.UserFound": "UsersFound",
+  "Invitation.UserFound": "المستخدمون تم العثور عليها",
+  "__Invitation.UserName": "Name",
+  "Invitation.UserName": "اسم",
+  "__Invitation.UserPhoneNumber": "Phone number",
+  "Invitation.UserPhoneNumber": "رقم التليفون",
+  "__Invitation.UsersAlreadyRegistered": "These participants are already registered",
+  "Invitation.UsersAlreadyRegistered": "تم تسجيل هؤلاء المشاركين بالفعل",
+  "__Invitation.UsersInvited": "Users are invited with success",
+  "Invitation.UsersInvited": "تمت دعوة المستخدمين بنجاح",
+  "__LogEvent.Action": "Action",
+  "LogEvent.Action": "عمل",
+  "__LogEvent.Consequence": "Consequence",
+  "LogEvent.Consequence": "عاقبة",
+  "__Login.CantConnectToTheServer": "Can't Connect To The Server",
+  "Login.CantConnectToTheServer": "لا يمكن الاتصال بالخادم",
+  "__Login.EmailIncorrect": "Email address is incorrect",
+  "Login.EmailIncorrect": "عنوان البريد الإلكتروني غير صحيح",
+  "__Login.EmailSent": "An email is sent, check your mailbox",
+  "Login.EmailSent": "تم إرسال بريد إلكتروني ، تحقق من صندوق البريد الخاص بك",
+  "__Login.LostMyPassword": "I lost My password",
+  "Login.LostMyPassword": "لقد فقدت كلمة المرور الخاصة بي",
+  "__Login.LostMyPasswordExplanation": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one",
+  "Login.LostMyPasswordExplanation": "لديك حساب ولكن لا يمكنك الاتصال؟ انقر فوق الزر &quot;أدرج كلمة المرور الخاصة بي&quot; للحصول على كلمة مرور مؤقتة",
+  "__Login.LostMyPasswordLabel": "Reset my password",
+  "Login.LostMyPasswordLabel": "إعادة تعيين كلمة المرور الخاصة بي",
+  "__Login.LostPasswordExplanation": "A link to change your password will be send to your email",
+  "Login.LostPasswordExplanation": "سيتم إرسال رابط لتغيير كلمة المرور إلى بريدك الإلكتروني",
+  "__Login.RememberMe": "Remember Me",
+  "Login.RememberMe": "تذكرنى",
+  "__Login.SendEmail": "Send the email",
+  "Login.SendEmail": "أرسل البريد الإلكتروني",
+  "__Login.ServerConnectionError": "Server connection error",
+  "Login.ServerConnectionError": "خطأ في الاتصال بالخادم",
 
   "__Login.ServerIssue" : "An error arrived on the server, please try later",
   "Login.ServerIssue" : "حدث خطأ في الخادم ، يرجى المحاولة لاحقًا",
@@ -1131,118 +1099,87 @@
   "MyProfile.lastName" : "الكنية",
 
   "__MyProfile.passwordChangeFailed" : "Change failed",
-  "MyProfile.passwordChangeFailed" : "فشل التغيير",
-
-  "__MyProfile.passwordChangeInProgress" : "In progress",
-  "MyProfile.passwordChangeInProgress" : "في تقدم",
-
-  "__MyProfile.passwordChangedOk" : "Password changed",
-  "MyProfile.passwordChangedOk" : "تم تغيير كلمة السر",
-
-  "__MyProfile.searchable" : "Searchable",
-  "MyProfile.searchable" : "قابل للبحث",
-
-  "__MyProfile.searchableFalse" : "Never in the search result",
-  "MyProfile.searchableFalse" : "أبدا في نتيجة البحث",
-
-  "__MyProfile.searchableTrue" : "Yes, I will appears on search",
-  "MyProfile.searchableTrue" : "نعم ، سأظهر في البحث",
-
-  "__MyProfile.showTipsUser" : "Show tips",
-  "MyProfile.showTipsUser" : "عرض نصائح",
-
-  "__MyProfile.showtipuser" : "ShowTipUsers",
-  "MyProfile.showtipuser" : "ShowTipUsers",
-
-  "__MyProfile.subscriptionExcellentExplanation" : "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
-  "MyProfile.subscriptionExcellentExplanation" : "اشتراك التميز يصل إلى السماء! أحداث كبيرة ، لا يوجد حد حقيقي. وتساعد في الحفاظ على التطبيق.",
-
-  "__MyProfile.subscriptionFreeExplanation" : "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
-  "MyProfile.subscriptionFreeExplanation" : "يحتوي الاشتراك المجاني على كل ما تحتاجه لتنظيم الأحداث الخاصة بك. يقتصر الأمر على تجنب التكلفة. أنت مقيد في عدد الأحداث التي يمكنك إنشاؤها شهريًا ، وعدد المشاركين في كل حدث.",
-
-  "__MyProfile.subscriptionPremiumExplanation" : "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
-  "MyProfile.subscriptionPremiumExplanation" : "يدفع الاشتراك المميز الحد الأقصى. يمكنك تنظيم أحداث متعددة وإدارة الميزانية. مثالي للمحترفين الذين يرغبون في امتلاك نظام رائع لتتبع وتنظيم كل شيء ، أو للمستخدمين الذين ينظمون الكثير من الأحداث!",
-
-  "__MyProfile.subscriptionUser" : "Subscription",
-  "MyProfile.subscriptionUser" : "الاشتراك",
-
-  "__MyProfile.subscriptionUserExplanation" : "Different level of subscription exists.",
-  "MyProfile.subscriptionUserExplanation" : "يوجد مستوى اشتراك مختلف.",
-
-  "__MyProfile.typeProfile" : "Picture",
-  "MyProfile.typeProfile" : "صورة",
-
-  "__RegisterNewUser.CloseRegistration" : "Close registration",
-  "RegisterNewUser.CloseRegistration" : "إغلاق التسجيل",
-
-  "__RegisterNewUser.Email" : "Email",
-  "RegisterNewUser.Email" : "بريد إلكتروني",
-
-  "__RegisterNewUser.FirstName" : "First name",
-  "RegisterNewUser.FirstName" : "الاسم الأول",
-
-  "__RegisterNewUser.InformationLogin" : "Login",
-  "RegisterNewUser.InformationLogin" : "تسجيل الدخول",
-
-  "__RegisterNewUser.InformationVisibility" : "Access information",
-  "RegisterNewUser.InformationVisibility" : "معلومات الدخول",
-
-  "__RegisterNewUser.Information_1" : "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
-  "RegisterNewUser.Information_1" : "قم بتسجيل مستخدم في Togh للوصول إلى الأحداث وإنشاؤها ، وتلقي الإخطارات. الوصول إلى ملف التعريف الخاص بك لتغيير أي إعدادات.",
-
-  "__RegisterNewUser.Information_2" : "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
-  "RegisterNewUser.Information_2" : "تسجيل الدخول الخاص بك هو البريد الإلكتروني الخاص بك. سوف ترسل لك Togh رسالة تأكيد بالبريد الإلكتروني للتحقق من صحة حسابك. يتم استخدام هذا البريد الإلكتروني عندما فقدت كلمة المرور الخاصة بك.",
-
-  "__RegisterNewUser.Information_3" : "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
-  "RegisterNewUser.Information_3" : "في الملف الشخصي ، يمكنك تغيير الإعداد بحيث لا يكون مرئيًا من قبل مستخدم توغ آخر. بشكل افتراضي ، تكون مرئيًا في البحث عبر الاسم والبريد الإلكتروني. صديقك بحاجة لرؤيتك! ولكن يمكنك أن تقرر عدم الظهور في البحث العام. بعد ذلك ، يجب أن يعرف صديقك بريدك الإلكتروني لإضافتك كمشارك.",
-
-  "__RegisterNewUser.LastName" : "Last name",
-  "RegisterNewUser.LastName" : "الكنية",
-
-  "__RegisterNewUser.Password" : "Password",
-  "RegisterNewUser.Password" : "كلمه السر",
-
-  "__RegisterNewUser.Registration" : "Registration",
-  "RegisterNewUser.Registration" : "تسجيل",
-
-  "__RegisterNewUser.RetypePassword" : "Retype password",
-  "RegisterNewUser.RetypePassword" : "أعد إدخال كلمة السر",
-
-  "__RegisterUser.EmailIsMandatory" : "Email is mandatory",
-  "RegisterUser.EmailIsMandatory" : "البريد الإلكتروني إلزامي",
-
-  "__RegisterUser.FirstNameIsMandatory" : "First Name is mandatory",
-  "RegisterUser.FirstNameIsMandatory" : "الاسم الأول إلزامي",
-
-  "__RegisterUser.PasswordIsMandatory" : "Password is mandatory",
-  "RegisterUser.PasswordIsMandatory" : "كلمة المرور إلزامية",
-
-  "__RegisterUser.PasswordSizeMandatory" : "Password must have minimum 4 characters",
-  "RegisterUser.PasswordSizeMandatory" : "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل",
-
-  "__RegisterUser.PasswordsAreDifferent" : "Passwords are different",
-  "RegisterUser.PasswordsAreDifferent" : "كلمات المرور مختلفة",
-
-  "__ResetPassword.ResetPasswordProcedure" : "You can now change your password. It will be changed, and you will be connected immediately",
-  "ResetPassword.ResetPasswordProcedure" : "يمكنك الآن تغيير كلمة المرور الخاصة بك. سيتم تغييره وسيتم توصيلك على الفور",
-
-  "__ResetPassword.passwordchanged" : "Password changed",
-  "ResetPassword.passwordchanged" : "تم تغيير كلمة السر",
-
-  "__ResetPassword.passwordchangefailed" : "Change failed",
-  "ResetPassword.passwordchangefailed" : "فشل التغيير",
-
-  "__UserFeedback.OperationFailed" : "Operation Failed",
-  "UserFeedback.OperationFailed" : "فشلت العملية",
-
-  "__UserFeedback.OperationHttpError" : "Connection to the server lost",
-  "UserFeedback.OperationHttpError" : "انقطع الاتصال بالخادم",
-
-  "__UserFeedback.OperationSuccess" : "Operation successful",
-  "UserFeedback.OperationSuccess" : "تمت العملية بنجاح",
-
-  "__UserFeedback.OperationSuccessfull" : "Success",
-  "UserFeedback.OperationSuccessfull" : "نجاح",
+  "MyProfile.passwordChangeFailed": "فشل التغيير",
+  "__MyProfile.passwordChangeInProgress": "In progress",
+  "MyProfile.passwordChangeInProgress": "في تقدم",
+  "__MyProfile.passwordChangedOk": "Password changed",
+  "MyProfile.passwordChangedOk": "تم تغيير كلمة السر",
+  "__MyProfile.searchable": "Searchable",
+  "MyProfile.searchable": "قابل للبحث",
+  "__MyProfile.searchableFalse": "Never in the search result",
+  "MyProfile.searchableFalse": "أبدا في نتيجة البحث",
+  "__MyProfile.searchableTrue": "Yes, I will appears on search",
+  "MyProfile.searchableTrue": "نعم ، سأظهر في البحث",
+  "__MyProfile.showTipsUser": "Show tips",
+  "MyProfile.showTipsUser": "عرض نصائح",
+  "__MyProfile.showtipuser": "ShowTipUsers",
+  "MyProfile.showtipuser": "ShowTipUsers",
+  "__MyProfile.subscriptionExcellentExplanation": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application.",
+  "MyProfile.subscriptionExcellentExplanation": "اشتراك التميز يصل إلى السماء! أحداث كبيرة ، لا يوجد حد حقيقي. وتساعد في الحفاظ على التطبيق.",
+  "__MyProfile.subscriptionFreeExplanation": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event.",
+  "MyProfile.subscriptionFreeExplanation": "يحتوي الاشتراك المجاني على كل ما تحتاجه لتنظيم الأحداث الخاصة بك. يقتصر الأمر على تجنب التكلفة. أنت مقيد في عدد الأحداث التي يمكنك إنشاؤها شهريًا ، وعدد المشاركين في كل حدث.",
+  "__MyProfile.subscriptionPremiumExplanation": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!",
+  "MyProfile.subscriptionPremiumExplanation": "يدفع الاشتراك المميز الحد الأقصى. يمكنك تنظيم أحداث متعددة وإدارة الميزانية. مثالي للمحترفين الذين يرغبون في امتلاك نظام رائع لتتبع وتنظيم كل شيء ، أو للمستخدمين الذين ينظمون الكثير من الأحداث!",
+  "__MyProfile.subscriptionUser": "Subscription",
+  "MyProfile.subscriptionUser": "الاشتراك",
+  "__MyProfile.subscriptionUserExplanation": "Different level of subscription exists.",
+  "MyProfile.subscriptionUserExplanation": "يوجد مستوى اشتراك مختلف.",
+  "__MyProfile.typeProfile": "Picture",
+  "MyProfile.typeProfile": "صورة",
+  "__RegisterNewUser.Account Create": "Account Created",
+  "RegisterNewUser.Account Create": "تم إنشاء الحساب",
+  "__RegisterNewUser.AccountAlreadyExist": "Account already exist",
+  "RegisterNewUser.AccountAlreadyExist": "الحساب موجود مسبقا",
+  "__RegisterNewUser.CloseRegistration": "Close registration",
+  "RegisterNewUser.CloseRegistration": "إغلاق التسجيل",
+  "__RegisterNewUser.Email": "Email",
+  "RegisterNewUser.Email": "بريد إلكتروني",
+  "__RegisterNewUser.FirstName": "First name",
+  "RegisterNewUser.FirstName": "الاسم الأول",
+  "__RegisterNewUser.InformationLogin": "Login",
+  "RegisterNewUser.InformationLogin": "تسجيل الدخول",
+  "__RegisterNewUser.InformationVisibility": "Access information",
+  "RegisterNewUser.InformationVisibility": "معلومات الدخول",
+  "__RegisterNewUser.Information_1": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings.",
+  "RegisterNewUser.Information_1": "قم بتسجيل مستخدم في Togh للوصول إلى الأحداث وإنشاؤها ، وتلقي الإخطارات. الوصول إلى ملف التعريف الخاص بك لتغيير أي إعدادات.",
+  "__RegisterNewUser.Information_2": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password.",
+  "RegisterNewUser.Information_2": "تسجيل الدخول الخاص بك هو البريد الإلكتروني الخاص بك. سوف ترسل لك Togh رسالة تأكيد بالبريد الإلكتروني للتحقق من صحة حسابك. يتم استخدام هذا البريد الإلكتروني عندما فقدت كلمة المرور الخاصة بك.",
+  "__RegisterNewUser.Information_3": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant.",
+  "RegisterNewUser.Information_3": "في الملف الشخصي ، يمكنك تغيير الإعداد بحيث لا يكون مرئيًا من قبل مستخدم توغ آخر. بشكل افتراضي ، تكون مرئيًا في البحث عبر الاسم والبريد الإلكتروني. صديقك بحاجة لرؤيتك! ولكن يمكنك أن تقرر عدم الظهور في البحث العام. بعد ذلك ، يجب أن يعرف صديقك بريدك الإلكتروني لإضافتك كمشارك.",
+  "__RegisterNewUser.LastName": "Last name",
+  "RegisterNewUser.LastName": "الكنية",
+  "__RegisterNewUser.Password": "Password",
+  "RegisterNewUser.Password": "كلمه السر",
+  "__RegisterNewUser.Registration": "Registration",
+  "RegisterNewUser.Registration": "تسجيل",
+  "__RegisterNewUser.RetypePassword": "Retype password",
+  "RegisterNewUser.RetypePassword": "أعد إدخال كلمة السر",
+  "__RegisterNewUser.ServerError": "Server error",
+  "RegisterNewUser.ServerError": "خطأ في الخادم",
+  "__RegisterUser.EmailIsMandatory": "Email is mandatory",
+  "RegisterUser.EmailIsMandatory": "البريد الإلكتروني إلزامي",
+  "__RegisterUser.FirstNameIsMandatory": "First Name is mandatory",
+  "RegisterUser.FirstNameIsMandatory": "الاسم الأول إلزامي",
+  "__RegisterUser.PasswordIsMandatory": "Password is mandatory",
+  "RegisterUser.PasswordIsMandatory": "كلمة المرور إلزامية",
+  "__RegisterUser.PasswordSizeMandatory": "Password must have minimum 4 characters",
+  "RegisterUser.PasswordSizeMandatory": "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل",
+  "__RegisterUser.PasswordsAreDifferent": "Passwords are different",
+  "RegisterUser.PasswordsAreDifferent": "كلمات المرور مختلفة",
+  "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
+  "ResetPassword.ResetPasswordProcedure": "يمكنك الآن تغيير كلمة المرور الخاصة بك. سيتم تغييره وسيتم توصيلك على الفور",
+  "__ResetPassword.passwordchanged": "Password changed",
+  "ResetPassword.passwordchanged": "تم تغيير كلمة السر",
+  "__ResetPassword.passwordchangefailed": "Change failed",
+  "ResetPassword.passwordchangefailed": "فشل التغيير",
+  "__UserFeedback.OperationFailed": "Operation Failed",
+  "UserFeedback.OperationFailed": "فشلت العملية",
+  "__UserFeedback.OperationHttpError": "Connection to the server lost",
+  "UserFeedback.OperationHttpError": "انقطع الاتصال بالخادم",
+  "__UserFeedback.OperationSuccess": "Operation successful",
+  "UserFeedback.OperationSuccess": "تمت العملية بنجاح",
+  "__UserFeedback.OperationSuccessfull": "Success",
+  "UserFeedback.OperationSuccessfull": "نجاح",
 
   "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
   "UserTips.DeactivateTipInPreference" : "يمكن إلغاء تنشيط النصائح في تفضيلاتك"}

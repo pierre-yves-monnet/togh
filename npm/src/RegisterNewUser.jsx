@@ -31,7 +31,8 @@ class RegisterNewUser extends React.Component {
 			confirmPassword:'',
 			email: props.defaultLoginEmail, 
 			showRegistration: props.showRegisterUserForm,
-			badRegistration: false, 
+			badRegistration: false,
+			errorNetwork: false,
 			registrationOk:false,
 			isLog: false,
 			loading : false }
@@ -45,21 +46,8 @@ class RegisterNewUser extends React.Component {
 
 
 	render() {
-		let messageRegistration='';
-		if (this.state.badRegistration) {
-			messageRegistration = messageRegistration.concat("<div style='color:red'>Account already exist</div>");
-		}
-		if (this.state.registrationOk) {
-			messageRegistration = messageRegistration.concat("<div style='color:green'>Account created</div>");
-		}
-		// console.log("ResigerNewUser.render: badRegistration=" + this.state.badRegistration+" / message=["+messageRegistration+"]");
-		const intl = this.props.intl;
 
-		let messageBadPassword='';
-		if (! this.checkPassword()) {
-			messageBadPassword= intl.formatMessage({id: "RegisterUser.PasswordsAreDiffrent", defaultMessage: "Passwords are different"});
-		}
-		let	messageBadForm = this.validateForm();
+
 		if (this.state.showRegistration) {
 			return (
 			<div className="App" class="toghBlock" style={{padding:"10px 10px 20px 10px"}}>
@@ -91,14 +79,34 @@ class RegisterNewUser extends React.Component {
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.RetypePassword" defaultMessage="Retype password"/>} 
 						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} maxlength="30" required></TextInput><br />
 					<div style={{padding:"10px 10px 10px 10px"}}>
-						<div style={{color:"red"}}>{messageBadForm}</div>
-						<div style={{color:"red"}}>{messageBadPassword}</div>
+						<div style={{color:"red"}}>{ this.validateForm() }</div>
+						<div style={{color:"red"}}>
+						    {!this.checkPassword() && <FormattedMessage id="RegisterUser.PasswordsAreDifferent" defaultMessage="Passwords are different"/>}
+						 </div>
 					</div>
 					<button class="btn btn-info" onClick={this.registerUser} 
-							disabled={ ! this.checkPassword() || this.validateForm() !== ''}>
-						{this.state.loading && <span class="loading">.</span>} <FormattedMessage id="RegisterNewUser.Registration" defaultMessage="Registration"/></button><p />
-					<div dangerouslySetInnerHTML={{ __html: messageRegistration}}></div>
-					
+							disabled={ ! this.checkPassword() || this.validateForm().length >0}>
+						{this.state.loading && <span class="loading">.</span>}
+						<FormattedMessage id="RegisterNewUser.Registration" defaultMessage="Registration"/>
+					</button><p />
+
+					{this.state.badRegistration &&
+					    <div class="alert alert-danger" style={{marginTop: "10px"}}>
+					        <FormattedMessage id="RegisterNewUser.AccountAlreadyExist" defaultMessage="Account already exist"/>
+					    </div>
+					}
+                    {this.state.errorNetwork &&
+                        <div class="alert alert-danger" style={{marginTop: "10px"}}>
+                            <FormattedMessage id="RegisterNewUser.ServerError" defaultMessage="Server error"/>
+                        </div>
+                    }
+                    {this.state.registrationOk &&
+                    	<div class="alert alert-success" style={{marginTop: "10px"}}>
+                    	    <FormattedMessage id="RegisterNewUser.Account Create" defaultMessage="Account Created"/>
+                    	</div>
+                    }
+
+
 					<div class="toghTips">
 						<div class="row">
 							<div class="col-1">
@@ -148,7 +156,7 @@ class RegisterNewUser extends React.Component {
 	}
 
 	checkPassword() {
-		if (this.state.password !== this.state.confirmPassword) 
+		if (this.state.password !== this.state.confirmPassword)
 			return false;
 		return true;
 	}
@@ -179,7 +187,7 @@ class RegisterNewUser extends React.Component {
 	
 	// -------- Rest Call
 	registerUser() {
-		this.setState( {badRegistration: false, loading:true});
+		this.setState( {badRegistration: false, errorNetwork:false, registrationOk:false, loading:true});
 		
 		var param= { email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName };
 		console.log("RegisterUser.registerUser: ClickRegistration, param" + JSON.stringify(param));
@@ -190,13 +198,16 @@ class RegisterNewUser extends React.Component {
 	
 	registerUserCallback( httpPayload ) {
 		console.log("RegisterNew.registerStatus: registerStatus = "+JSON.stringify(httpPayload));
- 		if (httpPayload.getData().isConnected) {
+        if (httpPayload.isError()) {
+        	this.setState( { errorNetwork:true, loading:false});
+        }
+ 		else if (httpPayload.getData().isConnected) {
 			console.log("RegisterNew.connectStatus : redirect then");
-			this.setState( {badRegistration: false, registrationOk:true,  loading:true});
+			this.setState( { registrationOk:true,  loading:true});
 			this.props.authCallback( true );
 		}
 		else {
-			this.setState( {badRegistration: true,  registrationOk:false,  loading:false});
+			this.setState( {badRegistration: true, loading:false});
 		}
 	} // end connectStatus
 }
