@@ -492,7 +492,7 @@ public class LoginService {
 
         if (notificationStatus.isCorrect()) {
             lostPasswordEntity.setStatusProcess(StatusProcessEnum.EMAILSENT);
-        } else if (notificationStatus.serverIssue) {
+        } else if (notificationStatus.hasServerIssue()) {
             lostPasswordEntity.setStatusProcess(StatusProcessEnum.SERVERISSUE);
             loginStatus.status = LoginStatus.SERVERISSUE;
             loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.getLabel() + "]"));
