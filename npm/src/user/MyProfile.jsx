@@ -46,7 +46,8 @@ class MyProfile extends React.Component {
 		
 		
 											
-		// -----------------	 
+		// -----------------
+		// <button onClick={this.changeEmail} class="btn btn-primary"><FormattedMessage id="MyProfile.ChangeEmail" defaultMessage="Change Email"/></button>
 		return ( 
 			<div>
 				{ this.state.inprogress && <Loading
@@ -132,7 +133,7 @@ class MyProfile extends React.Component {
 						</div>
 					</div>
 					<div class="col-sm-4">
-						<button onClick={this.changeEmail} class="btn btn-primary"><FormattedMessage id="MyProfile.ChangeEmail" defaultMessage="Change Email"/></button>
+
 						<br/>
 					</div>
 				</div>	
