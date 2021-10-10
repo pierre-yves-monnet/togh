@@ -25,7 +25,7 @@ import com.togh.service.event.EventUpdate.Slab;
 /* ******************************************************************************** */
 public class EventControllerShopping extends EventControllerAbsChild {
 
-  
+
     protected EventControllerShopping(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
 
@@ -37,20 +37,22 @@ public class EventControllerShopping extends EventControllerAbsChild {
     }
 
     @Override
-    public BaseEntity createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
-        return new EventShoppingListEntity();
+    public boolean isAtLimit(UpdateContext updateContext) {
+        return getEventEntity().getShoppingList().size() >= getMaxEntity();
     }
 
     @Override
-    public BaseEntity getEntity( long entityId ) {
-        return getFactoryRepository().eventShoppingListRepository.findById( entityId );
+    public EventEntityPlan createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
+        return new EventEntityPlan(new EventShoppingListEntity());
     }
-    
+
+    @Override
+    public BaseEntity getEntity(long entityId) {
+        return getFactoryRepository().eventShoppingListRepository.findById(entityId);
+    }
+
     @Override
     public BaseEntity updateEntity(BaseEntity shoppingEntity, Slab slabOperation, EventOperationResult eventOperationResult) {
-        eventOperationResult.reachTheLimit = getEventEntity().getShoppingList().size() >= getMaxEntity();
-        if (eventOperationResult.reachTheLimit)
-            return null;
         getFactoryRepository().eventShoppingListRepository.save((EventShoppingListEntity) shoppingEntity);
         return shoppingEntity;
     }

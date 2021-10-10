@@ -19,10 +19,12 @@ import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -52,20 +54,25 @@ public class EventUpdate {
     }
 
     public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
-        logger.info(LOG_HEADER + "Start update from listSlab size[" + listSlab.size() + "]");
         EventEntity eventEntity = this.eventController.getEvent();
+        logger.info(LOG_HEADER + "EventId[" + eventEntity.getId() + "] Start update from listSlab " + getSummary(listSlab));
+
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
         listSlab.stream().forEach((slab) -> {
             try {
-                if (SlabOperation.UPDATE.equals(slab.operation)) {
-                    updateOperation(eventEntity, slab, updateContext, eventOperationResult);
-                } else if (SlabOperation.ADD.equals(slab.operation)) {
-                    addOperation(slab, updateContext, eventOperationResult);
-                } else if (SlabOperation.REMOVE.equals(slab.operation)) {
-                    removeOperation(slab, eventOperationResult);
+                switch (slab.operation) {
+                    case UPDATE:
+                        updateOperation(eventEntity, slab, updateContext, eventOperationResult);
+                        break;
+                    case ADD:
+                        addOperation(slab, updateContext, eventOperationResult);
+                        break;
+                    case REMOVE:
+                        removeOperation(slab, eventOperationResult);
+                        break;
                 }
             } catch (Exception e) {
-                eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, e, slab.operation + ":" + slab.attributName));
+                eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, e, "EventId[" + eventEntity.getId() + " " + getSummary(Arrays.asList(slab))));
             }
         });
 
@@ -78,44 +85,55 @@ public class EventUpdate {
     private void addOperation(Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
 
         EventControllerAbsChild eventChildController = eventController.getEventControllerFromSlabOperation(slab);
-        if (eventController == null)
+        if (eventChildController == null)
             return;
 
-        BaseEntity child = eventChildController.createEntity(updateContext, slab, eventOperationResult);
-        if (child == null)
-            return;
 
         LimitReach limitReach = eventChildController.getLimitReach();
 
 
         // Check if the subscription allow to add this entity
-        int maxEntity = updateContext.factoryService.getSubscriptionService().getMaximumEntityPerEvent(this.eventController.getEvent().getSubscriptionEvent(), child);
+        int maxEntity = updateContext.getFactoryService()
+                .getSubscriptionService()
+                .getMaximumEntityPerEvent(this.eventController.getEvent().getSubscriptionEvent(),
+                        eventChildController.getClass());
+
         eventChildController.setMaxEntity(maxEntity);
+        eventOperationResult.reachTheLimit = eventChildController.isAtLimit(updateContext);
+
+        if (eventOperationResult.reachTheLimit) {
+            // We reach the limit per the subscription
+            eventOperationResult.limitSubscription = true;
+            // get the owner user
+            ToghUserEntity ownerUser = this.eventController.getOwner();
+            if (limitReach != null)
+                updateContext.getFactoryService().getSubscriptionService().registerTouchLimitSubscription(ownerUser, limitReach);
+            return;
+        }
+
+
+        EventEntityPlan entityPlan = eventChildController.createEntity(updateContext, slab, eventOperationResult);
+        if (entityPlan.isEmpty())
+            return;
 
         @SuppressWarnings("unchecked")
         Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
         for (Entry<String, Object> entrySlab : valueDefault.entrySet()) {
-            eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(child, entrySlab.getKey(), entrySlab.getValue(), updateContext));
+            // apply the default value only on the LAST entry
+            eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(entityPlan.child, entrySlab.getKey(), entrySlab.getValue(), updateContext));
         }
         // an error? Stop now.
         if (LogEventFactory.isError(eventOperationResult.listLogEvents))
             return;
 
-        // save it now
-        eventChildController.addEntity(child, slab, eventOperationResult);
 
-        if (eventOperationResult.reachTheLimit) {
-            // We reach the limit per the subscription
-            eventOperationResult.limitSubscription = true;
-            // get the ownser user
-            ToghUserEntity ownerUser = this.eventController.getOwner();
-            if (limitReach != null)
-                updateContext.factoryService.getSubscriptionService().registerTouchLimitSubscription(ownerUser, limitReach);
-            child = null;
+        // save it now. The eventOperationResult can return a ReachTheLimit
+        for (BaseEntity child : entityPlan.additionalEntity) {
+            eventChildController.addEntity(child, slab, eventOperationResult);
         }
+        eventChildController.addEntity(entityPlan.child, slab, eventOperationResult);
 
-        if (child != null)
-            eventOperationResult.listChildEntity.add(child);
+        eventOperationResult.listChildEntity.add(entityPlan.getEntityToAttach());
 
     }
 
@@ -148,7 +166,7 @@ public class EventUpdate {
      */
     private void updateOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         if (slab.localisation == null || slab.localisation.isEmpty())
-            eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(slab.baseEntity==null ? event : slab.baseEntity, slab.attributName, slab.attributValue, updateContext));
+            eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(slab.baseEntity == null ? event : slab.baseEntity, slab.attributName, slab.attributValue, updateContext));
         else {
             BaseEntity baseEntity = eventController.localise(event, slab.localisation);
             if (baseEntity != null) {
@@ -192,4 +210,27 @@ public class EventUpdate {
         }
     }
 
+    /**
+     * Do a Summary on Slab to update
+     *
+     * @param listSlab list Of Slab to get the summary
+     * @return the summary
+     */
+    private String getSummary(List<Slab> listSlab) {
+        return "Size:" + listSlab.size()
+                + " - ["
+                + listSlab.stream()
+                .map(t -> {
+                    return
+                            t.operation
+                                    + " "
+                                    + t.localisation + "." + t.attributName + ": ["
+                                    + (t.attributValue == null ? null :
+                                    t.attributValue.toString().length() > 20 ? t.attributValue.toString().substring(0, 20) + "..."
+                                            : t.attributValue.toString()
+                                            + "]");
+                })
+                .collect(Collectors.joining(", "))
+                + "]";
+    }
 }

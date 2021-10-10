@@ -269,8 +269,7 @@ class EventCtrl {
 	getMyself() {
 		var authService = FactoryService.getInstance().getAuthService();
 		// console.log("Event.getUserPartipant.start");
-		var user = authService.getUser();
-		return user;
+		return authService.getUser();
 	}
 
 	getUserParticipant() {
@@ -340,13 +339,13 @@ class EventCtrl {
 
 
 	getCurrentSurveyCtrl() {
-		console.log("EventCtrl.getCurrentSurveyCtrl." + this.ctrlId + ": ");
+		// console.log("EventCtrl.getCurrentSurveyCtrl." + this.ctrlId + ": ");
 		return this.currentSurveyCtrl;
 	}
 
 
 	addSurveyInEvent(surveyToAdd) {
-		console.log("EventCtrl.addSurveyInEvent." + this.ctrlId + ":" + JSON.stringify(surveyToAdd));
+		// console.log("EventCtrl.addSurveyInEvent." + this.ctrlId + ":" + JSON.stringify(surveyToAdd));
 
 		this.event.surveylist = this.event.surveylist.concat(surveyToAdd);
 		this.currentSurveyId = surveyToAdd.id;

@@ -14,7 +14,7 @@ import Login 			from 'Login';
 import Banner 			from 'Banner';
 import Footer 			from 'Footer';
 import Menu 			from 'Menu';
-import{ MENU_NAME} 		from 'Menu';
+import{MENU_NAME} 		from 'Menu';
 import RegisterNewUser 	from 'RegisterNewUser';
 import ResetPassword 	from 'ResetPassword';
 import EventsList 		from 'EventsList';
@@ -261,10 +261,10 @@ class BodyTogh extends React.Component {
 	clickMenu( menuName ) {
 		console.log("BodyTogh.clickMenu: menuAction="+menuName);
 		if (menuName === MENU_NAME.ADMINISTRATION) {
-				this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
+		    this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
 		}
 		else if (menuName === MENU_NAME.MYPROFILE) {
-				this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.MYPROFILE });
+			this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.MYPROFILE });
 		}
 		else {
 			this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.LISTEVENTS });
@@ -281,13 +281,8 @@ class BodyTogh extends React.Component {
 		console.log("BodyTogh.changeLanguage "+newlanguage);
 		this.setState( {'language' : newlanguage } );
 	}
-	
-	
-	
-	
 
-	
-};
+}
 
 export default BodyTogh;
 	

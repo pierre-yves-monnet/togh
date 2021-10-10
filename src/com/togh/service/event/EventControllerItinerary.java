@@ -29,8 +29,13 @@ public class EventControllerItinerary extends EventControllerAbsChild {
     }
 
     @Override
-    public BaseEntity createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
-        return new EventItineraryStepEntity();
+    public boolean isAtLimit(UpdateContext updateContext) {
+        return getEventEntity().getItineraryStepList().size() >= getMaxEntity();
+    }
+
+    @Override
+    public EventEntityPlan createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
+        return new EventEntityPlan(new EventItineraryStepEntity());
     }
 
     @Override
@@ -40,16 +45,12 @@ public class EventControllerItinerary extends EventControllerAbsChild {
 
     @Override
     public BaseEntity updateEntity(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult) {
-
         getFactoryRepository().eventItineraryStepRepository.save((EventItineraryStepEntity) childEntity);
         return childEntity;
     }
 
     @Override
     public BaseEntity addEntity(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult) {
-        eventOperationResult.reachTheLimit = getEventEntity().getItineraryStepList().size() >= getMaxEntity();
-        if (eventOperationResult.reachTheLimit)
-            return null;
         getFactoryRepository().eventItineraryStepRepository.save((EventItineraryStepEntity) childEntity);
         getEventEntity().addItineraryStep((EventItineraryStepEntity) childEntity);
         getFactoryRepository().eventRepository.save(getEventEntity());
@@ -85,8 +86,8 @@ public class EventControllerItinerary extends EventControllerAbsChild {
             } else {
                 if (dateBegin != null && itineraryStep.getDateStep().compareTo(dateBegin.toLocalDate()) < 0)
                     listSlab.add(new Slab(SlabOperation.UPDATE, "dateStep", dateBegin.toLocalDate(), itineraryStep));
-                if (dateEnd != null && itineraryStep.getDateStep().compareTo(dateBegin.toLocalDate()) > 0)
-                    listSlab.add(new Slab(SlabOperation.UPDATE, "dateStep", dateBegin.toLocalDate(), itineraryStep));
+                if (dateEnd != null && itineraryStep.getDateStep().compareTo(dateEnd.toLocalDate()) > 0)
+                    listSlab.add(new Slab(SlabOperation.UPDATE, "dateStep", dateEnd.toLocalDate(), itineraryStep));
             }
         }
         return listSlab;

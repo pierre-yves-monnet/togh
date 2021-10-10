@@ -60,7 +60,7 @@ public class EventController {
     private final EventControllerItinerary eventControllerItinerary;
     private final EventControllerShopping eventControllerShopping;
     private final EventControllerSurvey eventControllerSurvey;
-    private final eventControllerSurveyChoiceList eventControllerSurveyChoiceList;
+    private final EventControllerSurveyChoiceList eventControllerSurveyChoiceList;
     private final EventControllerSurveyAnswerList eventControllerSurveyAnswerList;
     private final EventControllerGroupChat eventControllerGroupChat;
     private final EventControllerChat eventControllerChat;
@@ -83,7 +83,7 @@ public class EventController {
         eventControllerShopping = new EventControllerShopping(this, eventEntity);
 
         eventControllerSurvey = new EventControllerSurvey(this, eventEntity);
-        eventControllerSurveyChoiceList = new eventControllerSurveyChoiceList(this, eventControllerSurvey, eventEntity);
+        eventControllerSurveyChoiceList = new EventControllerSurveyChoiceList(this, eventControllerSurvey, eventEntity);
         eventControllerSurveyAnswerList = new EventControllerSurveyAnswerList(this, eventControllerSurvey, eventEntity);
 
         eventControllerGroupChat = new EventControllerGroupChat(this, eventEntity);

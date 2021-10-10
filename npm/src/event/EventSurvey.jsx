@@ -73,10 +73,32 @@ class EventSurvey extends React.Component {
 		this.addAnswerCallback 		= this.addAnswerCallback.bind( this );
 		
 	}
+	componentDidMount() {
+	    let bestDisplay= this.calculateBestDisplay();
+	    this.setState( { show: { typeDisplay: bestDisplay}});
+   		this.addAnswerWithMe();
+	}
 	// Calculate the state to display
-	componentDidMount () {
-		console.log("EventSurvey.componentDidMount");
-		// survey May be completed, set it again	
+	componentDidUpdate(prevProps) {
+        //let valueProps=JSON.stringify(this.props);
+        let prevPropsTypeDisplay='';
+        if (prevProps && prevProps.show )
+            prevPropsTypeDisplay=prevProps.show.typeDisplay;
+	    let bestDisplay= this.calculateBestDisplay();
+		console.log("EventSurvey.componentDidUpdate prevProps=("+prevPropsTypeDisplay+") typeDisplay=("+this.state.show.typeDisplay+") bestDisplay=("+bestDisplay+")");
+
+        debugger;
+        //if (typeof(prevProps) === "undefined" ) {
+            // this.setState( { show: { typeDisplay: bestDisplay}});
+        //} else if (typeof(prevProps.show) === "undefined") {
+            // this.setState( { show: { typeDisplay: bestDisplay}});
+        if (this.state.show.typeDisplay !== bestDisplay) {
+            this.setState( { show: { typeDisplay: bestDisplay}});
+        }
+	}
+
+	calculateBestDisplay() {
+		// survey May be completed, set it again
 		// this.setState( {survey: this.surveyEmbeded.getValue()});
 		this.currentSurveyCtrl =  this.eventCtrl.getCurrentSurveyCtrl();
 
@@ -84,14 +106,11 @@ class EventSurvey extends React.Component {
 		if ( this.currentSurveyCtrl.getStatus() === surveyConstant.STATUS_INPREPAR) {
 			// so move to the ADMIN or the NOACCESS, depending of the user permission
 			if (this.userParticipant.isParticipant()) 
-				this.setState( { show: { typeDisplay: DISPLAY_ADMIN}});
+				return DISPLAY_ADMIN;
 			else
-				this.setState( { show: { typeDisplay: DISPLAY_NOACCESS}});
+				return DISPLAY_NOACCESS;
 		}
-		else
-			this.setState( { show: { typeDisplay: DISPLAY_SURVEY}});
-			
-		this.addAnswerWithMe();
+    	return DISPLAY_SURVEY;
 	}
 	
 	
@@ -104,9 +123,9 @@ class EventSurvey extends React.Component {
 			return (<div/>)
 		}
 	
-		// refresh the current survey embeded
-		// this.surveyEmbeded = new Survey( this.state.event, currentSurvey, this.userParticipant, this.updateEventfct);
-
+		// refresh the current survey embedded
+		// this.surveyEmbedded = new Survey( this.state.event, currentSurvey, this.userParticipant, this.updateEventfct);
+		console.log("EventSurvey: typeDisplay=["+this.state.show.typeDisplay+"]");
 		if (this.state.show.typeDisplay === DISPLAY_NOACCESS) {
 			return (
 				<div>
@@ -135,14 +154,13 @@ class EventSurvey extends React.Component {
 		var survey = this.surveyCtrl.getValue();
 		
 		var listChoiceHtml = [];
-		
-		
+
 		listChoiceHtml = survey.choicelist.map((item, index) =>
 			<tr key={item.code}>
 				<td> 
-					<TextInput value={item.proptext} 
+					<TextInput value={item.proptext}
+					    id="proptext"
 						onChange={(event) => {
-							
 							this.surveyCtrl.setChoiceValue("proptext", event.target.value, item);
 							this.setState( {survey: this.surveyCtrl.getValue()});
 					}}
@@ -180,7 +198,8 @@ class EventSurvey extends React.Component {
 							{this.getTagState( survey )}
 						</div>
 						<div class="col-8">
-							<TextInput value={survey.name} 
+							<TextInput value={survey.name}
+							    id="name"
 								onChange={(event) => {
 									this.setAttribut("name", event.target.value,survey);			
 									// console.log("EventSurvey:forceUpdate my parent");
@@ -240,14 +259,13 @@ class EventSurvey extends React.Component {
 	}
 	
 	/** ------------------------------------------------------------------------------
-	 * RenderSurvey
+	 * RenderSurvey : Vote!
 	 */
 	renderSurvey () {
 				
 		var userParticipant = this.eventCtrl.getUserParticipant();
 
 		var survey = this.surveyCtrl.getValue();
-		
 		var headerList = [];
 		headerList.push(<th class="toghSectionHeader"></th>);
 		for (let i in survey.choicelist) {
@@ -258,8 +276,7 @@ class EventSurvey extends React.Component {
 		}
 		
 		var participantList=[];
-		
-		if (survey.state === surveyConstant.STATUS_INPREPAR) {
+		if (survey.status === surveyConstant.STATUS_INPREPAR) {
 			participantList.push(<tr><td><FormattedMessage id="EventSurvey.SurveyInPreparationNoParticipantsVisible" defaultMessage="This survey is in preparation. Participants are not visible" /></td></tr>)
 		} else {
 			
@@ -297,8 +314,7 @@ class EventSurvey extends React.Component {
 			}		
 		}
 			
-		
-		
+
 		return (
 			<div>
 				<div class="row">
@@ -312,18 +328,18 @@ class EventSurvey extends React.Component {
 				</div>			
 
 				<div class="row ">
-					<div class="col-10">{survey.title}</div>
+					<div class="col-10">{survey.name}</div>
 					{ userParticipant.isParticipant() && 
 					 	<div class="col-2" style={{ float: "right" }}>
 							<button  class="btn btn-primary btn-xs" 
 								onClick={(event) => {
 									console.log("EventItinerary.ClickOnButtonModify : ");
-									this.setState( { show: { typeDisplay: DISPLAY_ADMIN}});
+									this.setState( {show: {typeDisplay: DISPLAY_ADMIN}});
 								}}>
 							<Pencil   
 								onClick={(event) => {
 									console.log("EventSurvey : ClickOnPencilModify");
-									this.setState( { show: { typeDisplay: DISPLAY_ADMIN}});
+									this.setState( {show: {typeDisplay: DISPLAY_ADMIN}});
 								}
 								}/>
 							</button>
@@ -381,7 +397,7 @@ class EventSurvey extends React.Component {
 	 * 
 	 */
 	getTagState( survey ) {
-		// console.log("EventSurvey.getTagState item.status="+survey.status);
+		console.log("EventSurvey.getTagState item.status="+survey.status);
 		const intl = this.props.intl;
 		
 		const listOptions = [
@@ -554,7 +570,7 @@ class EventSurvey extends React.Component {
 		}
 		
 		let currentUser = this.userParticipant.getUser();
-		// we don't have a current user ? Weirf, we don't want to add anything. Should be an internal view
+		// We don't have a current user ? Strange, we don't want to add anything. Should be an internal view
 		if (! currentUser) 
 			return;
 		// Ok, I must be part on this survey, ins't ?

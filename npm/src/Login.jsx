@@ -135,7 +135,7 @@ class Login extends React.Component {
 				</td>
 				<td style={{paddingRight : "40px"}} >
 					<GoogleLogin
-					    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
+					    clientId="81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com"
 					    buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
 					    onSuccess={this.loginGoogle}				    
 					    cookiePolicy={'single_host_origin'}

@@ -54,8 +54,10 @@ public @Data class EventSurveyAnswerEntity extends UserEntity {
     
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
-     * @return
+     *
+     * @param contextAccess  context to know which information has to be returned
+     * @param timezoneOffset timezone of the browser
+     * @return the map to send back
      */
     @Override
     public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {

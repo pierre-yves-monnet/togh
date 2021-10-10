@@ -258,7 +258,7 @@ class EventSurveyList extends React.Component {
 		console.log("EventSurvey.addItem: addItem item=" + JSON.stringify(this.state.event));
 		this.setState({operation:{
 					inprogress:true,
-					label: intl.formatMessage({id: "EventSurvey.AddingTask",defaultMessage: "Adding a task"}), 
+					label: intl.formatMessage({id: "EventSurvey.AddingSurvey",defaultMessage: "Adding a survey"}),
 					listlogevents: [] }});
 		// call the server to get an ID on this taskList		
 		var surveyToAdd = SurveyCtrl.getDefaultSurvey();

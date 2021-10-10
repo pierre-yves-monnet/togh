@@ -23,9 +23,12 @@ import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventSurveyEntity,                                                                      */
+/*  EventSurveyEntity,                                                              */
 /*                                                                                  */
-/*  Manage Survey in a event                                                          */
+/*  Manage Survey in an event. A survey has different children                      */
+/*    - EventSurveyChoiceEntity : the list of choices                               */
+/*    - EventSurveyAnswerEntity : each participant has a AnswerEntity.              */
+/*              This class has a Map<String,boolean> decision to store the vote     */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -33,50 +36,28 @@ import java.util.Map;
 @Entity
 
 @Table(name = "EVTSURVEY")
-@EqualsAndHashCode(callSuper=true)
-public @Data class EventSurveyEntity extends UserEntity {
+@EqualsAndHashCode(callSuper = true)
+public @Data
+class EventSurveyEntity extends UserEntity {
 
     public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
 
 
-    public enum SurveyStatusEnum {
-        INPREPAR, OPEN,CLOSE
-    }
-    @Column(name = "status", length=10, nullable= false)
-    @Enumerated(EnumType.STRING)    
+    @Column(name = "status", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
     private SurveyStatusEnum status;
 
-    // name is part of the baseEntity
-    @Column( name="description", length=400)
-    private String description;
-  
-    // choice : list of "code/ proposition"
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size=100)
-    @JoinColumn(name = "surveyid")
-    @OrderBy("id")
-    private List<EventSurveyChoiceEntity> choicelist = new ArrayList<>();
-
-    
-  
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @Column(name = "answer", length=100)
-    @JoinColumn(name = "surveyid")
-    @OrderBy("id")
-    private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
- 
-    
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
+     *
+     * @param contextAccess  context
+     * @param timezoneOffset timeZone of the browser
      * @return
      */
     @Override
     public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
         Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
-        
+
 
         resultMap.put("status",status==null ? null : status.toString());
         resultMap.put("description", description);
@@ -87,16 +68,41 @@ public @Data class EventSurveyEntity extends UserEntity {
                 listChoiceMap.add(choice.getMap(contextAccess, timezoneOffset));
             }
         resultMap.put(EventSurveyChoiceEntity.CST_SLABOPERATION_CHOICELIST, listChoiceMap);
-        
+
         List<Map<String, Object>> listAnswerMap = new ArrayList<>();
-        if (answerlist!=null)
+        if (answerlist != null)
             for (EventSurveyAnswerEntity answer : answerlist) {
                 listAnswerMap.add(answer.getMap(contextAccess, timezoneOffset));
             }
-        resultMap.put( EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
+        resultMap.put(EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
 
-      
+
         return resultMap;
+    }
+
+    // name is part of the baseEntity
+    @Column(name = "description", length = 400)
+    private String description;
+
+    // choice : list of "code/ proposition"
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "surveyid")
+    @OrderBy("id")
+    private List<EventSurveyChoiceEntity> choicelist = new ArrayList<>();
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @Column(name = "answer", length = 100)
+    @JoinColumn(name = "surveyid")
+    @OrderBy("id")
+    private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
+
+
+    public enum SurveyStatusEnum {
+        INPREPAR, OPEN, CLOSE
     }
 
 }

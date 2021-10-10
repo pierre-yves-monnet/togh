@@ -44,7 +44,9 @@ public @Data class EventChatEntity extends UserEntity {
 
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
+     *
+     * @param contextAccess  Information on the context
+     * @param timezoneOffset browser time zone
      * @return
      */
     @Override

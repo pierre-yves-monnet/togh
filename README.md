@@ -201,55 +201,22 @@ Marron : 210/165/108	#d2a66c
 		
 Lounes : $5 / icons
 
-Chat 				: OK
-Task 				: OK
-Shopping List 		: OK
-Cypris				: OK
-Participant 		: OK          
-Itinerary 			: Ok
-Survey 				: Revoir un peu la ligne pour ne pas faire 3 zones identiques 
-Geolocalisation 	: a revoir
-Photo 				: a revoir
-Frais 				: a revoir
-references			: todo / Engrenages
-budget				: todo / sac ou tirelire
-Default Boy			: ok (togh)
-Default girl		: Ok (cypris)
+Chat                : OK/Paid Task                : OK/Paid Shopping List        : OK/Paid Participant        :
+OK/Paid     
+Itinerary            : Ok/Paid Survey                : OK /Paid Geolocalisation    : OK/Paid Photo                :
+OK/Paid Frais                : OK/Paid references            : todo / Engrenages budget                : OK/Paid / sac
+ou tirelire/Paid Default Boy            : ok/Paid (togh)
+Default girl        : Ok/Paid (cypris)
 
+Starter        : OK/Paid Ender            : OK/Paid Point d'interet    : todo Visite            : todo
+Achat            : sac de courses Divertissement    : todo Aeroport        : todo Stations de bus    : todo
+gare            : todo port            : todo restaurant        : todo nuit (hotel)    : todo
 
-
-
-Starter 		: todo
-Ender 			: todo
-Point d'interet	: todo
-Visite			: todo
-Achat 			: sac de courses
-Divertissement	: todo
-Aeroport		: todo
-Stations de bus	: todo
-gare			: todo
-port			: todo
-restaurant		: todo
-nuit (hotel)	: todo
-
-
-
-const ITINERARYITEM_POI 		= "POI";
-const ITINERARYITEM_BEGIN		= "BEGIN";
-const ITINERARYITEM_END			= "END";  
-const ITINERARYITEM_SHOPPING	= "SHOPPING";  ok
-const ITINERARYITEM_AIRPORT		= "AIRPORT";
-const ITINERARYITEM_BUS			= "BUS";
-const ITINERARYITEM_TRAIN		= "TRAIN";
-const ITINERARYITEM_BOAT		= "BOAT";
-const ITINERARYITEM_NIGHT		= "NIGHT";
-const ITINERARYITEM_VISITE		= "VISITE";
-const ITINERARYITEM_RESTAURANT	= "RESTAURANT";
-const ITINERARYITEM_ENTERTAINMENT = "ENTERTAINMENT" 
-
-
-
-
+const ITINERARYITEM_POI = "POI"; const ITINERARYITEM_BEGIN = "BEGIN"; const ITINERARYITEM_END = "END";  
+const ITINERARYITEM_SHOPPING = "SHOPPING"; ok const ITINERARYITEM_AIRPORT = "AIRPORT"; const ITINERARYITEM_BUS = "BUS";
+const ITINERARYITEM_TRAIN = "TRAIN"; const ITINERARYITEM_BOAT = "BOAT"; const ITINERARYITEM_NIGHT = "NIGHT"; const
+ITINERARYITEM_VISITE = "VISITE"; const ITINERARYITEM_RESTAURANT = "RESTAURANT"; const ITINERARYITEM_ENTERTAINMENT = "
+ENTERTAINMENT"
 
 ##Structure
 componentDidUpdate(prevProps) {
@@ -324,6 +291,7 @@ export default injectIntl(EventShoppingList);
 Extraction : follow
 https://formatjs.io/docs/getting-started/message-extraction/
 ```
+> cd npm
 > npm i -D @formatjs/cli
 > npm run extract
 ```
@@ -446,7 +414,7 @@ API                                                                             
 /*                                                                                  */
 /* ******************************************************************************** */
 
-## google
+# google
 
 Aller dans API & Service / Credential Creer API pour ToghClient(googleAPIKey)
 ToghServer(TranslateKeyAPI)
@@ -464,6 +432,18 @@ https://code.google.com/archive/p/google-translate-api-v2-java/ ==> 2011
 https://cloud.google.com/translate/docs/quickstarts
 
 stocker les photo de l'API Key pour Flick
+
+## Google SSO
+
+https://blog.prototypr.io/how-to-build-google-login-into-a-react-app-and-node-express-api-821d049ee670
+Aller dans Credential, Creeate OAuthClient Id / Name "Single Sign On with Google"
+
+GoogleClientId:
+81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com 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
+
+we’ll add our own Google account as a test user.
+
+Create "External" OAuth
 
 # Cloud & Docker
 
@@ -739,10 +719,34 @@ Py
 
 Forgot my password: email incorrect registration invitation
 
-V2		
+# RoadMap
+
+## Event
+
 Possibilite de supprimer une invitation dans un event (et dans ce cas, l'user peut etre supprimer s'il n'était invoqué
 que dans un event)
 En tant que Owner, je devrais pouvor bannir une invitation
+
+Log sur un event: quand il a changé de status, envoi d'inviation...
+
+Notification ; je veux pouvoir dire "prevuens moi si qq chose change
+
+Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer Expense
+Preference affichage Budget Administration Statistics usage
+
+## integration
+
+Integration what's app & Instagram Wheather
+
+Integrate in Google Calendar Integrate in Google Drive Coder whatismyip dans l'administration
+
+## Mes amis
+
+Avoir une liste de mes amis que je ^peux importer depuis Google. Pouvoir inviter mes amis
+
+## Contact & support
+
+## invitation
 
 Je revois une invitation par email: Togh devrait me dirriger vers le login OU vers la registration car il peut savoir si
 j'existe ou pas
@@ -750,15 +754,15 @@ j'existe ou pas
 Invitation: copuer le contenu de l'emauil dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
 veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de modification"
 
+Jpoin Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
+
+## Administration
+
+Supprimer un user invalide Graph des events / mois
+
 	Event/Participant: mettre l'icone + un component qui donne toutes les coordonnées
  	
 	MonitorService.registerErrorEvents() ==> Implementer
-	
-	Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer
-	Expense
-	Preference affichage
-	Budget
-	Administration Statistics usage
 	
 	Integrer weather  : https://openweathermap.org/api
 	
@@ -766,11 +770,7 @@ veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de mod
 	Permettre a un utilisateur de changer son username
 	
 	My Friend = recuperer les users de google
-	Integrate in Google Calendar
-	Integrate in Google Drive
-	Coder whatismyip dans l'administration
 		
-    Survey : first, present the VIEW display if there is an survey      
 
 	Admin gestion user
 		- invited + password : c'est un probleme, l'utilisateur ne peut plus se connecter

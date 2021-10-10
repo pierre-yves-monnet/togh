@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/* Accces all repository, */
+/* Acccess all repository, */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -30,8 +30,8 @@ public class EventFactoryRepository {
     
     @Autowired
     public EventTaskRepository eventTaskRepository;
-    
- 
+
+
     @Autowired
     public EventChatRepository eventChatRepository;
 
@@ -41,6 +41,14 @@ public class EventFactoryRepository {
     @Autowired
     public EventShoppingListRepository eventShoppingListRepository;
 
+    @Autowired
+    public EventSurveyRepository eventSurveyRepository;
+
+    @Autowired
+    public EventSurveyAnswerRepository surveyAnswerRepository;
+
+    @Autowired
+    public EventSurveyChoiceRepository surveyChoiceRepository;
 
 
 }

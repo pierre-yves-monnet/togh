@@ -8,11 +8,10 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
-import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
-import com.togh.entity.base.BaseEntity;
+import com.togh.service.event.EventControllerChat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +48,11 @@ public class SubscriptionService {
         }
     }
 
-    public int getMaximumEntityPerEvent(SubscriptionEventEnum subscription, BaseEntity baseEntity) {
+    public int getMaximumEntityPerEvent(SubscriptionEventEnum subscription, Class eventController) {
         // the for the tchat, we add 50 lines
         int baseValue = 0;
-        if (baseEntity instanceof EventChatEntity)
-            baseValue=100;
+        if (eventController == EventControllerChat.class)
+            baseValue = 100;
         switch (subscription) {
             case FREE:
                 return 1 * baseValue + 20;

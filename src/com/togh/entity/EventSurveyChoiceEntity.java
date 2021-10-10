@@ -20,9 +20,9 @@ import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventSurveyEntity,                                                                      */
+/*  EventSurveyChoiceEntity                                                         */
 /*                                                                                  */
-/*  Manage Survey in a event                                                          */
+/*  In a survey, the choice (in survey Restaurant?, choice is Mexican, French)      */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */

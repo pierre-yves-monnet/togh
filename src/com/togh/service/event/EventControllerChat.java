@@ -21,20 +21,30 @@ public class EventControllerChat extends EventControllerAbsChild {
     @Override
     public LimitReach getLimitReach() {
         return LimitReach.SURVEYCHOICE;
-
     }
 
     @Override
-    public BaseEntity createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
-        EventChatEntity eventChatEntity= new EventChatEntity();
-        eventChatEntity.setWhoId( updateContext.toghUser);
-        return eventChatEntity;
-
+    public boolean isAtLimit(UpdateContext updateContext) {
+        return false;
     }
 
-    public  BaseEntity getEntity( long entityId ) 
-    {
-       return null; // not implemented 
+
+    @Override
+    public EventEntityPlan createEntity(UpdateContext updateContext,
+                                        Slab slabOperation, EventOperationResult eventOperationResult) {
+        EventChatEntity eventChatEntity = new EventChatEntity();
+        eventChatEntity.setWhoId(updateContext.getToghUser());
+        // chat is attached to a GroupChat
+        EventGroupChatEntity groupChatEntity = eventControllerGroupChat.getGroupChat(slabOperation);
+        eventControllerGroupChat.addChatInGroup(groupChatEntity, eventChatEntity);
+
+        EventEntityPlan eventEntityPlan = new EventEntityPlan(eventChatEntity);
+        eventEntityPlan.additionalEntity.add(groupChatEntity);
+        return eventEntityPlan;
+    }
+
+    public BaseEntity getEntity(long entityId) {
+        return null; // not implemented
     }
 
     /**
@@ -43,9 +53,9 @@ public class EventControllerChat extends EventControllerAbsChild {
      */
     @Override
     public BaseEntity updateEntity(BaseEntity childEntity, Slab slab, EventOperationResult eventOperationResult) {
-        EventGroupChatEntity groupChatEntity = eventControllerGroupChat.getGroupChat( slab);
-       return eventControllerGroupChat.addChatInGroup( groupChatEntity, (EventChatEntity) childEntity);
-    
+        EventGroupChatEntity groupChatEntity = eventControllerGroupChat.getGroupChat(slab);
+        return eventControllerGroupChat.addChatInGroup(groupChatEntity, (EventChatEntity) childEntity);
+
     }
 
 

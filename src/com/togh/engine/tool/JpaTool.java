@@ -91,7 +91,7 @@ public class JpaTool {
                     if (attributValue instanceof LocalDate) {
                         value = (LocalDate) attributValue;
                     } else {
-                        long timezoneOffset = updateContext.timezoneOffset;
+                        long timezoneOffset = updateContext.getTimezoneOffset();
                         if (baseEntity.isAbsoluteLocalDate(attributName))
                             timezoneOffset = 0;
                         value = EngineTool.stringToDate(attributValue.toString(), timezoneOffset);
@@ -104,8 +104,8 @@ public class JpaTool {
                     value = Enum.valueOf(returnType, attributValue.toString());
 
                 } else if (isClassBaseEntity(returnType)) {
-                    if (updateContext.factoryService.getEventService() != null) {
-                        LoadEntityResult loadResult = updateContext.factoryService.getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
+                    if (updateContext.getFactoryService().getEventService() != null) {
+                        LoadEntityResult loadResult = updateContext.getFactoryService().getEventService().loadEntity(returnType, Long.valueOf(attributValue.toString()));
                         value = loadResult.entity;
                         listEvents.addAll(loadResult.listLogEvents);
                     }
@@ -119,10 +119,15 @@ public class JpaTool {
             baseEntity.touch();
 
         } catch (Exception e) {
-            listEvents.add(new LogEvent(eventInvalidUpdateOperation, e, attributName
-                    + " (JPA=" + jpaAttributName + ")"
-                    + " <="
-                    + (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue)));
+            String errorMessage = String.format(LOG_HEADER + "Can't update [%s] Id[%d] Attribut[%s] Value[%s] : %s",
+                    baseEntity.getName(),
+                    baseEntity.getId(),
+                    jpaAttributName,
+                    (attributValue == null ? "null" : "(" + attributValue.getClass().getName() + ") " + attributValue),
+                    e.getMessage());
+            logger.severe(errorMessage);
+
+            listEvents.add(new LogEvent(eventInvalidUpdateOperation, e, errorMessage));
         }
         return listEvents;
     }

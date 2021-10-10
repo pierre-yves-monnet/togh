@@ -13,11 +13,8 @@ import { FormattedMessage } from "react-intl";
 // import { Button } from 'carbon-components-react';
 import { DatePicker, DatePickerInput, TimePicker, RadioButtonGroup, RadioButton, TextArea, TextInput, Select } from 'carbon-components-react';
 
-import * as participantConstant from 'event/EventParticipants';
-
 import FactoryService from 'service/FactoryService';
 
-import BasketSlabRecord from 'service/BasketSlabRecord';
 import UserParticipantCtrl from 'controller/UserParticipantCtrl';
 
 import EventParticipants from 'event/EventParticipants';
@@ -303,8 +300,8 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_CHAT) } 
 							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />}
-							disabled={true}
-							class="btn"	style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }} >
+							class="btn"
+							style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }} >
 							<img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 45 }} /><br />
 							<FormattedMessage id="Event.Chat" defaultMessage="Chat" />
 						</button>
@@ -328,7 +325,6 @@ class Event extends React.Component {
 
 						<button onClick={() => this.accessTab( TAB_SURVEY )} 
 							title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />}
-							disabled={true}
 							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
 							<img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 45 }} /><br />							
 							<FormattedMessage id="Event.Survey" defaultMessage="Survey" />
@@ -470,16 +466,10 @@ class Event extends React.Component {
 		restCallService.getJson('/api/event?id=' + this.state.eventid, this, httpPayload => {
 			httpPayload.trace("Event.getPayload");
 
-			if (httpPayload.isError()) {
-				
-			}
-			else {
-
-				
+			if (! httpPayload.isError()) {
 				// not in the state: we don't want a render when something is added
 				// so, this is the moment to create the Basket
-				// this.currentBasketSlabRecord= new BasketSlabRecord( this.state.event );
-	
+
 				// console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
 				this.eventCtrl = new EventCtrl( this, httpPayload.getData().event );
 				// console.log("Event.loadEvent: before complementeion event=" + JSON.stringify(this.eventCtrl.getEvent()));

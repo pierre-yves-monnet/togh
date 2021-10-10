@@ -39,8 +39,13 @@ public class EventControllerTask extends EventControllerAbsChild {
     }
 
     @Override
-    public BaseEntity createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
-        return new EventTaskEntity();
+    public boolean isAtLimit(UpdateContext updateContext) {
+        return getEventEntity().getTaskList().size() >= getMaxEntity();
+    }
+
+    @Override
+    public EventEntityPlan createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
+        return new EventEntityPlan(new EventTaskEntity());
 
     }
 
@@ -64,7 +69,6 @@ public class EventControllerTask extends EventControllerAbsChild {
         getFactoryRepository().eventRepository.save(getEventEntity());
 
     }
-
   
     @Override
     public BaseEntity getEntity( long entityId ) {

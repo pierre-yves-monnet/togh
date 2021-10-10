@@ -9,12 +9,11 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
-import { PlusCircle, ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
+import { PlusCircle, ArrowUp, ArrowDown, DashCircle } from 'react-bootstrap-icons';
 
-import { TextInput,  TimePicker, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle } from 'carbon-components-react';
+import { TextInput,  TimePicker, TextArea, Toggle } from 'carbon-components-react';
 
 import FactoryService 				from 'service/FactoryService';
-import SlabRecord 					from 'service/SlabRecord';
 
 import Expense 						from 'component/Expense';
 import TagDropdown 					from 'component/TagDropdown';
@@ -92,9 +91,9 @@ class EventItinerary extends React.Component {
 	render() {
 		console.log("EventItinerary.render:  itineraryList="+JSON.stringify(this.state.event.itinerarysteplist));
 
-		var toolService = FactoryService.getInstance().getToolService();
+		let toolService = FactoryService.getInstance().getToolService();
 
-		var resultHtml= [];
+		let resultHtml= [];
 		resultHtml.push(
 			<EventSectionHeader id="itinerary" 
 				image="img/btnItinerary.png" 
@@ -113,8 +112,8 @@ class EventItinerary extends React.Component {
 
 				
 		// let's create a list of days.
-		var dateStart = null;
-		var dateEnd = null;
+		let dateStart = null;
+		let dateEnd = null;
 		if (this.state.event.datePolicy === 'ONEDATE') {
 			console.log("EventItinerary : policy="+this.state.event.datePolicy+" dateEvent="+JSON.stringify(this.state.event.dateEvent));
 			dateStart = toolService.getDateFromString( this.state.event.dateEvent);
@@ -136,7 +135,7 @@ class EventItinerary extends React.Component {
 			}
 		}
 		if ( dateStart > dateEnd ) {
-			var dateSav = dateStart;
+			let dateSav = dateStart;
 			dateStart=dateEnd;
 			dateEnd=dateSav;
 		}
@@ -180,7 +179,7 @@ class EventItinerary extends React.Component {
 			</div> )
 		);
 		
-		var nbDays = toolService.getNumberOfDaysInPeriod( dateStart, dateEnd);
+		let nbDays = toolService.getNumberOfDaysInPeriod( dateStart, dateEnd);
 		if (nbDays <= 31 )
 			resultHtml.push( this.renderCalendar( dateStart, dateEnd ) );
 		else
@@ -194,12 +193,12 @@ class EventItinerary extends React.Component {
  	*/
 	renderCalendar(dateStart, dateEnd ) {
 		// console.log("EventItinerary.renderCalendar ");
-		var toolService = FactoryService.getInstance().getToolService();
+		let toolService = FactoryService.getInstance().getToolService();
 
-		var listItineraryListHtml = [];
-		var dateIndex = new Date( dateStart.getTime() ); // clone it 
-		var index=-10;
-		var count=0;
+		let listItineraryListHtml = [];
+		let dateIndex = new Date( dateStart.getTime() ); // clone it
+		let index=-10;
+		let count=0;
 		while (dateIndex.getTime() <= dateEnd.getTime()) {
 			count++;
 			// protection
@@ -207,9 +206,9 @@ class EventItinerary extends React.Component {
 				break;			
 			index = index - 10;
 			// console.log("EventItinerary.renderCalendar: index="+index+", calculate date "+JSON.stringify(dateIndex));
-			var dateIndexPublish = new Date( dateIndex);
+			let dateIndexPublish = new Date( dateIndex);
 			
-			var line = (
+			let line = (
 				<div style={{marginBottom: "10px"}} key={index}>
 					<div class="row toghSectionHeader">
 						<div class="col-10" style={{verticalAlign: "middle",paddingLeft: "20px"}}>
@@ -241,17 +240,17 @@ class EventItinerary extends React.Component {
 			
 			
 			// now attach all events on this day - ok, we parse again the list, but reminber this is a 31 lines * 200 lines each so total is 6000 iteration - moden browser can hander that isn't it?
-			var listMarkers = [];
-			var countStepsInTheDay=0;
-			for (var j in this.state.event.itinerarysteplist) {
-				var stepinlist = this.state.event.itinerarysteplist[ j ];
+			let listMarkers = [];
+			let countStepsInTheDay=0;
+			for (let j in this.state.event.itinerarysteplist) {
+				let stepinlist = this.state.event.itinerarysteplist[ j ];
 				if (toolService.getDayOfDate(stepinlist.dateStep) === toolService.getDayOfDate(dateIndex)) {
 					// console.log("EventItinerary.renderCalendar: Found line in this date "+stepinlist.rownumber);
-					var line = (<div class="toghBlock" style={{backgroundColor: "#fed9a691"}}>
+					line = (<div class="toghBlock" style={{backgroundColor: "#fed9a691"}}>
 										<div class="container">
 											{this.renderOneStep( stepinlist,false, j )}
 										</div>
-									</div> );
+							</div> );
 					countStepsInTheDay++;
 					if (stepinlist.geolat)
 						listMarkers.push({ lat: stepinlist.geolat, lng: stepinlist.geolng, text:stepinlist.name, category:stepinlist.category });
@@ -263,7 +262,7 @@ class EventItinerary extends React.Component {
 			if ( this.state.event.itineraryshowmap && countStepsInTheDay>0) {
 				// console.log("EventItinerary.renderCalendar: Draw map of the day "+JSON.stringify(listMarkers));
 
-				if (listMarkers.length ==0) 
+				if (listMarkers.length === 0)
 					listItineraryListHtml.push(<FormattedMessage id="EventItinerary.NoAddressProvided" defaultMessage="No address are provided for this day."/>);	
 				else 
 					listItineraryListHtml.push(<div><center> <GoogleMapDisplay  positions={listMarkers} /></center></div>	);
@@ -282,10 +281,10 @@ class EventItinerary extends React.Component {
 	 * Period is too large : then give a list of value
 	 */
 	renderList() {
-		var listItineraryListHtml = [];
+		let listItineraryListHtml = [];
 		
-		for (var j in this.state.event.itinerarysteplist) {
-			var stepinlist = this.state.event.itinerarysteplist[ j ];
+		for (let j in this.state.event.itinerarysteplist) {
+			let stepinlist = this.state.event.itinerarysteplist[ j ];
 			listItineraryListHtml.push( 
 				<div class="toghBlock" style={{backgrounColor: "#fed9a691"}}>
 					<div class="container"> 
@@ -304,7 +303,7 @@ class EventItinerary extends React.Component {
 	 */
 	renderOneStep( item, showDate, index ) {
 		
-		var listLines = [];
+		let listLines = [];
 
 		const intl = this.props.intl;		
 		const listOptions = [
@@ -533,12 +532,12 @@ class EventItinerary extends React.Component {
 	/**
 	 */
 	moveStepOneDirection( item, direction) {
-		var toolService = FactoryService.getInstance().getToolService();
+		let toolService = FactoryService.getInstance().getToolService();
 
-		var	dateStartEvent = toolService.getDateFromString( this.state.event.dateStartEvent );
-		var dateEndEvent   = toolService.getDateFromString( this.state.event.dateEndEvent );
+		let	dateStartEvent = toolService.getDateFromString( this.state.event.dateStartEvent );
+		let dateEndEvent   = toolService.getDateFromString( this.state.event.dateEndEvent );
 
-		var indexInList = this.getIndexInList ( item );
+		let indexInList = this.getIndexInList ( item );
 		if (indexInList === null) {
 			return; // not normal
 		}
@@ -546,7 +545,7 @@ class EventItinerary extends React.Component {
 		// Move top but first in the list
 		if (direction === -1 && indexInList === 0 ) {
 			// first in the list, maybe back for one day ?
-			var newDate = new Date( this.getDateItem(item).getTime() - 86400000 );			
+			let newDate = new Date( this.getDateItem(item).getTime() - 86400000 );
 			// something is wrong here if we are before the startDate!
 			if (newDate.getTime() >= dateStartEvent.getTime() ) {
 				item.dateStep = newDate;
@@ -556,7 +555,7 @@ class EventItinerary extends React.Component {
 		// index start at 0
 		} else if (direction === 1 && indexInList === this.state.event.itinerarysteplist.length-1 ) {
 			// Last in the list, maybe advance for one day ?
-			var newDate = new Date( this.getDateItem( item ).getTime() + 86400000 );			
+			newDate = new Date( this.getDateItem( item ).getTime() + 86400000 );
 			// something is wrong here if we are before the startDate!
 			if (newDate.getTime() <= dateEndEvent.getTime() ) {
 				item.dateStep = newDate;
@@ -565,7 +564,7 @@ class EventItinerary extends React.Component {
 			
 		} else {
 			// we have a guy before (or after). If the guy before is the same day? THen go before it
-			var stepGuy = this.state.event.itinerarysteplist[ indexInList + direction ];
+			let stepGuy = this.state.event.itinerarysteplist[ indexInList + direction ];
 			if (stepGuy==null) {
 				// not normal : we are not the last in the list ??
 				return;
@@ -584,7 +583,7 @@ class EventItinerary extends React.Component {
 				this.setChildAttribut( "dateStep",item.dateStep ,item );
 			}
 		}	
-		var currentEvent = this.eventCtrl.getEvent();
+		let currentEvent = this.eventCtrl.getEvent();
 		currentEvent.itinerarysteplist = this.reorderList( currentEvent.itinerarysteplist );
 		this.setState({ "event": currentEvent });
 		
@@ -592,7 +591,7 @@ class EventItinerary extends React.Component {
 	}
 
 	getIndexInList( item ) {
-		for (var i in this.state.event.itinerarysteplist) {
+		for (let i in this.state.event.itinerarysteplist) {
 			if (item === this.state.event.itinerarysteplist[ i ]) {
 				console.log("EventItinerary.getIndexInList found i="+i);
 				return parseInt(i);
@@ -609,10 +608,10 @@ class EventItinerary extends React.Component {
 			console.log("Eventitinerary.addItem: date is NULL !");
 			return;
 		}
-		var toolService = FactoryService.getInstance().getToolService();
+		let toolService = FactoryService.getInstance().getToolService();
 
-		var datestep = new Date( datestepSt);
-		var currentEvent = this.state.event;
+		let datestep = new Date( datestepSt);
+		let currentEvent = this.state.event;
 		
 		console.log("Eventitinerary.addItem: addItem datestep=" + JSON.stringify(datestep)+" rownumber="+rownumber +" in list "+JSON.stringify(currentEvent.itinerarysteplist));
 
@@ -620,7 +619,7 @@ class EventItinerary extends React.Component {
 		if (! rownumber) {
 			// then find it
 			rownumber=0;
-			for (var i in currentEvent.itinerarysteplist) {
+			for (let i in currentEvent.itinerarysteplist) {
 				// qame date : continue to advance, idea is to be at the end of this step
 				let dateStepIndex = toolService.getDateFromString( currentEvent.itinerarysteplist[ i ].dateStep);
 				
@@ -667,10 +666,10 @@ class EventItinerary extends React.Component {
 			currentOperation.result=intl.formatMessage({id: "EventItinerary.StepAdded",defaultMessage: "A step is added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
-			var stepToAdd = httpPayload.getData().childEntity[0];
+			let stepToAdd = httpPayload.getData().childEntity[0];
 			stepToAdd.expense={};
-			var event = this.eventCtrl.getEvent();
-			var newList= event.itinerarysteplist.concat( stepToAdd );
+			let event = this.eventCtrl.getEvent();
+			let newList= event.itinerarysteplist.concat( stepToAdd );
 			event.itinerarysteplist = this.reorderList( newList );
 			this.setState( { event: event});
 		}
@@ -693,9 +692,9 @@ class EventItinerary extends React.Component {
 					label: intl.formatMessage({id: "Eventitinerary.RemovingStep",defaultMessage: "Removing a step"}), 
 					listlogevents: [] }});
 	
-		var currentEvent = this.eventCtrl.getEvent();
-		var listSteps = currentEvent.itinerarysteplist;
-		var index = listSteps.indexOf(item);
+		let currentEvent = this.eventCtrl.getEvent();
+		let listSteps = currentEvent.itinerarysteplist;
+		let index = listSteps.indexOf(item);
 		if (index > -1) {
 			this.eventCtrl.removeEventChild("itinerarysteplist", listSteps[ index ].id, "", this.removeItemCallback);
 			// listSteps.splice(index, 1);
@@ -726,9 +725,9 @@ class EventItinerary extends React.Component {
 			currentOperation.result=intl.formatMessage({id: "Eventitinerary.StepRemoved",defaultMessage: "The step is removed"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
-			var currentEvent = this.state.event;
+			let currentEvent = this.state.event;
 			let childId = httpPayload.getData().childEntityId[ 0 ];
-			for( var i in currentEvent.itinerarysteplist) {
+			for( let i in currentEvent.itinerarysteplist) {
 				if ( currentEvent.itinerarysteplist[ i ].id === childId) {
 					currentEvent.itinerarysteplist.splice( currentEvent.itinerarysteplist[ i ], 1);
 					break;
@@ -754,8 +753,8 @@ class EventItinerary extends React.Component {
 		//     60 D 
 		// it will be renamed 35. Then, reorder and recalcute by 30 A, 40 C, 50 B, 60 D
 		listSteps = listSteps.sort((a, b) => a.rownumber > b.rownumber ? 1 : -1);
-		var rownumber=10;
-		for (var i in listSteps) {
+		let rownumber=10;
+		for (let i in listSteps) {
 			if (listSteps[ i ].rownumber !== rownumber) {
 				this.setChildAttribut("rownumber", rownumber, listSteps[ i ]);
 			}
@@ -771,7 +770,7 @@ class EventItinerary extends React.Component {
 	getDateItem( item ) {
 		if ( item.dateStep instanceof Date)
 			return item.dateStep;
-		var dateInTimeZone= new Date( item.dateStep);
+		let dateInTimeZone= new Date( item.dateStep);
 		// the dateStap is something like this : "2021-08-02", meaning 08-02 IN MY TIMEZONE.
 		// Buit JS think this is a UTC time, so now we need to move to the UTC date 
 		let timezoneoffset = new Date().getTimezoneOffset();

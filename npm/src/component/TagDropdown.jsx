@@ -26,18 +26,32 @@ class TagDropDown extends React.Component {
 	// - changeState() method 
 	constructor( props ) {
 		super();
-		
+		console.log("TagDropDown.constructor value="+props.value);
+
 		this.state = { listOptions : props.listOptions,
 					value : props.value,
 					readWrite: props.readWrite}
 	}
 
-	
+
+	componentDidUpdate(prevProps) {
+        // let value=JSON.stringify(this.props);
+        // console.log("TagDropDown.componentDidUpdate props=("+value+")");
+   		if (prevProps.listOptions !== this.props.listOptions) {
+            this.setState( {listOptions : this.props.listOptions });
+        }
+        if (prevProps.value !== this.props.value) {
+            this.setState( {value : this.props.value });
+        }
+        if (prevProps.readWrite !== this.props.readWrite) {
+            this.setState( {readWrite: this.props.readWrite});
+        }
+	}
 	//----------------------------------- Render
 	render() {
 		// console.log("TagDropDown.render value="+this.state.value);
-		var tagHtml = null;
-		var dropDownChangeHtml = (<div/>);
+		let tagHtml = null;
+		let dropDownChangeHtml = (<div/>);
 		if (this.state.readWrite) {
 			dropDownChangeHtml = (
 				<OverflowMenu selectorPrimaryFocus={'.'+ this.state.value} >
@@ -57,13 +71,17 @@ class TagDropDown extends React.Component {
 				
 		}
 		// default value if the current option is not found: display the menu then
-		var tagHtml= (<div>{dropDownChangeHtml}</div>);		
+		tagHtml= (<div>{dropDownChangeHtml}</div>);
 		
-		for (var i in this.state.listOptions) {
-			var option=this.state.listOptions[ i ];
+		for (let i in this.state.listOptions) {
+			let option=this.state.listOptions[ i ];
 			if (option.value === this.state.value) {				
 				tagHtml = (<Tag  type={option.type} title={option.title}>
-							{option.icon && <img src={option.icon} style={{width:30}} title={option.imgtitle}/>}
+							{option.icon &&
+							    <img src={option.icon}
+							        style={{width:30}}
+							        title={option.imgtitle}
+							        alt={option.imgtitle}/>}
 							{option.label && <div>{option.label}</div>}
 							{dropDownChangeHtml}
 						</Tag>)			

@@ -128,7 +128,9 @@ class RegisterNewUser extends React.Component {
 		else {
 			return 	(
 				<div>
-				<button  class="btn btn-primary" onClick={this.showRegistration} >Register New User</button>
+				<button  class="btn btn-primary" onClick={this.showRegistration}>
+				    <FormattedMessage id="RegisterNewUser.RegisterButton" defaultMessage="Register New User"/>
+				</button>
 				
 				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whatisToghTitle" defaultMessage="What is Togh?" /></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExplanation" defaultMessage="Togh is an application to manage your event."/></div> 

@@ -11,7 +11,6 @@ import com.togh.service.event.EventUpdate.Slab;
 
 public class EventControllerGroupChat extends EventControllerAbsChild {
 
-  
     
     private final static String GENERAL_CHAT ="GENERAL";
     
@@ -26,16 +25,21 @@ public class EventControllerGroupChat extends EventControllerAbsChild {
     }
 
     @Override
-    public BaseEntity createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
-        return new EventGroupChatEntity();
+    public boolean isAtLimit(UpdateContext updateContext) {
+        return false;
+    }
+
+    @Override
+    public EventEntityPlan createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
+        return new EventEntityPlan(new EventGroupChatEntity());
 
     }
 
     @Override
-    public BaseEntity getEntity( long entityId ) {
-        return getFactoryRepository().eventGroupChatRepository.findById( entityId );
+    public BaseEntity getEntity(long entityId) {
+        return getFactoryRepository().eventGroupChatRepository.findById(entityId);
     }
-    
+
 
     /**
      * Save the entity
@@ -73,8 +77,8 @@ public class EventControllerGroupChat extends EventControllerAbsChild {
 
     public EventGroupChatEntity getGroupChat(Slab slab) {
         // there is only one
-    
-        if (getEventEntity().getGroupChatList().size() == 0) {
+
+        if (getEventEntity().getGroupChatList().isEmpty()) {
             EventGroupChatEntity generalChat = new EventGroupChatEntity();
             generalChat.setName(GENERAL_CHAT);
             getFactoryRepository().eventGroupChatRepository.save(generalChat);
@@ -83,7 +87,7 @@ public class EventControllerGroupChat extends EventControllerAbsChild {
             return generalChat;
         }
         return getEventEntity().getGroupChatList().get(0);
-        
+
     }
 
     public EventChatEntity addChatInGroup(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity) {

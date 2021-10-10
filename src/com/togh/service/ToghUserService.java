@@ -297,10 +297,7 @@ public class ToghUserService {
             return operationUser;
         }
         operationUser.toghUserEntity = toghUser.get();
-        UpdateContext updateContext = new UpdateContext();
-        updateContext.toghUser = null;
-        updateContext.timezoneOffset = 0;
-        updateContext.factoryService = null;
+        UpdateContext updateContext = new UpdateContext(toghUser.get(), 0, null, null);
 
         operationUser.listLogEvents.addAll(JpaTool.updateEntityOperation(toghUser.get(),
                 attributName,

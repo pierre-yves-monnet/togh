@@ -20,7 +20,7 @@ import LogEvents 			from 'component/LogEvents';
 
 class AdminTranslator extends React.Component {
 
-	// this.props.updateEvent()
+
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
@@ -55,17 +55,6 @@ class AdminTranslator extends React.Component {
 			inprogresshtml=(<Loading
       						description="Active loading indicator" withOverlay={true}
     						/>);
-		
-		var listDictionaryHtml = (<div></div>);
-		if (this.state.translate && this.state.translate.listLanguages ) 
-			listDictionaryHtml = this.state.translate.listLanguages.map((language,index) =>
-				<tr key={index}>
-					<td><img src={this.getIcon( language ) }  style={{width: "30px"}}/></td>
-					<td>{language.name}</td>
-					<td>{language.nbMissingSentences}</td>
-        			<td>{language.nbTranslatedSentences}</td>
-        			<td>{language.nbTooMuchSentences}</td>
-				</tr>);
 		
 		return (
 			<div class="card" style={{marginTop: "10px"}}>
@@ -156,7 +145,7 @@ class AdminTranslator extends React.Component {
 	checkDictionary() {
 		console.log("AdminTranslator.checkDictionary:");
 		this.setState({inprogress: true });
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.getJson('/api/admin/translator/status?', this, httpPayload =>{
 			httpPayload.trace("AdminTranslator.checkDictionary");
 			this.setState({inprogress: false });
@@ -176,7 +165,7 @@ class AdminTranslator extends React.Component {
 		console.log("AdminTranslator.completeDictionary:");
 		this.setState({inprogress: true });
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestcallService();
 		restCallService.postJson('/api/admin/translator/complete', this, {}, httpPayload =>{
 			httpPayload.trace("AdminTranslator.completeDictionary");
 			this.setState({inprogress: false });

@@ -33,81 +33,96 @@ import com.togh.service.event.EventUpdate.Slab;
 public abstract class EventControllerAbsChild {
 
     private final EventController eventController;
-    
+
     private EventEntity eventEntity;
-    
-    private int maxEntity=100;
- 
-    
+
+    private int maxEntity = 100;
+
+
     protected static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventControllerAbsChild.class.getName(), 1, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
 
-    
-    protected EventControllerAbsChild( EventController eventController, EventEntity eventEntity) {
+
+    protected EventControllerAbsChild(EventController eventController, EventEntity eventEntity) {
         this.eventController = eventController;
         this.eventEntity = eventEntity;
     }
 
     /**
-     * Create a new ChildEntity. Object is created, not saved in the database.
-     * @param updateContext TODO
-     * @param slabOperation TODO
-     * @param eventOperationResult
-     * @param event
-     * @return entity created
+     * Is this part of the event is at the limit, according the subscription?
+     *
+     * @return true is the controller is as the limit
      */
-    public abstract BaseEntity createEntity( UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult);
-   
+    public abstract boolean isAtLimit(UpdateContext updateContext);
+
+    /**
+     * Create a new ChildEntity. Object is created, not saved in the database.
+     *
+     * @param updateContext        Information on update
+     * @param slabOperation        SlabOperation to perform
+     * @param eventOperationResult operationResult updated
+     * @return List of entity to create
+     */
+    public abstract EventEntityPlan createEntity(UpdateContext updateContext,
+                                                 Slab slabOperation,
+                                                 EventOperationResult eventOperationResult);
+
+
     /**
      * add the entity in the database
-     * @param childEntity Entity to save
-     * @param slabOperation TODO
-     * @param eventOperationResult. LogEvent may be updated in case of error
-     * @return the baseEntiy, which may be has modified (persistenceid is updated)
+     *
+     * @param childEntity          Entity to save
+     * @param slabOperation        SlabOperation to perform
+     * @param eventOperationResult operationResult updated
+     * @return the baseEntity added, which may be modified (persistenceid is updated)
      */
-    public abstract BaseEntity addEntity( BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult);
-    
+    public abstract BaseEntity addEntity(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult);
+
     /**
-     * Get the entity by it's id 
-     * @param entityId
-     * @return
+     * Get the entity by it id
+     *
+     * @param entityId the entityId
+     * @return the BaseEntity
      */
-    public abstract BaseEntity getEntity( long entityId );
-    
+    public abstract BaseEntity getEntity(long entityId);
+
     /**
      * Save the entity transported by the controller
-     * @param slabOperation TODO
-     * @param eventOperationResult. LogEvent may be updated in case of error
+     *
+     * @param slabOperation        SlabOperation to perform
+     * @param eventOperationResult LogEvent may be updated in case of error
      * @return the baseEntiy, which may be has modified (persistenceid is updated)
      */
-    public abstract BaseEntity updateEntity( BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult);
+    public abstract BaseEntity updateEntity(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult);
 
     /**
      * Remove the given entity
-     * @param entity
+     *
+     * @param childEntity          to remove
+     * @param eventOperationResult LogEvent may be updated in case of error
      * @return
      */
-    public abstract void removeEntity( BaseEntity childEntity, EventOperationResult eventOperationResult );
-    
+    public abstract void removeEntity(BaseEntity childEntity, EventOperationResult eventOperationResult);
+
     /**
      * The controller return the type limit acceptable.
      * By default, the maxEntity is not knoz, and had to be calculated outside.
      * So, before any save call, the setLimitNumber has to be called
-     * 
+     *
      * @return
      */
     public abstract LimitReach getLimitReach();
 
-    
-    
+
     public void setMaxEntity(int maxEntity) {
         this.maxEntity = maxEntity;
     }
+
     public int getMaxEntity() {
-        return maxEntity;        
+        return maxEntity;
     }
-    
- 
-    
+
+
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* getter */
@@ -119,22 +134,18 @@ public abstract class EventControllerAbsChild {
     public EventEntity getEventEntity() {
         return eventEntity;
     }
-    
-    
-    
+
     public EventController getEventController() {
         return eventController;
     }
-    
+
     public EventService getEventService() {
         return eventController.getEventService();
     }
-    
+
     public EventFactoryRepository getFactoryRepository() {
         return eventController.getFactoryRepository();
     }
 
-
-    
 
 }

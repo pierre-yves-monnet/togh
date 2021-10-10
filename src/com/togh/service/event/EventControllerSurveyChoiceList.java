@@ -10,12 +10,12 @@ import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventUpdate.Slab;
 
-public class eventControllerSurveyChoiceList extends EventControllerAbsChild {
+public class EventControllerSurveyChoiceList extends EventControllerAbsChild {
 
-  
+
     EventControllerSurvey eventControllerSurvey;
 
-    protected eventControllerSurveyChoiceList(EventController eventController, EventControllerSurvey eventControllerSurvey, EventEntity eventEntity) {
+    protected EventControllerSurveyChoiceList(EventController eventController, EventControllerSurvey eventControllerSurvey, EventEntity eventEntity) {
         super(eventController, eventEntity);
         this.eventControllerSurvey = eventControllerSurvey;
     }
@@ -23,26 +23,30 @@ public class eventControllerSurveyChoiceList extends EventControllerAbsChild {
     @Override
     public LimitReach getLimitReach() {
         return LimitReach.CHATGROUP;
+    }
+
+    @Override
+    public boolean isAtLimit(UpdateContext updateContext) {
+        return false;
+    }
+
+    @Override
+    public EventEntityPlan createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
+        return new EventEntityPlan(new EventSurveyChoiceEntity());
 
     }
 
     @Override
-    public BaseEntity createEntity(UpdateContext updateContext, Slab slabOperation, EventOperationResult eventOperationResult) {
-        return new EventSurveyChoiceEntity();
-
-    }
-
-    @Override
-    public BaseEntity getEntity( long entityId ) {
+    public BaseEntity getEntity(long entityId) {
         return null;
     }
+
     /**
      * Save the entity
      * Entity is then saved, and can be modified (persistenceid is created)
      */
     @Override
     public BaseEntity updateEntity(BaseEntity childEntity, Slab slab, EventOperationResult eventOperationResult) {
-
         BaseEntity surveyEntity = getEventController().localise(getEventEntity(), slab.localisation);
         if (!(surveyEntity instanceof EventSurveyEntity)) {
             return null;
@@ -65,7 +69,13 @@ public class eventControllerSurveyChoiceList extends EventControllerAbsChild {
      * Entity is then saved, and can be modified (persistenceid is created)
      */
     @Override
-    public BaseEntity addEntity(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult) {
-        return null; // only by the
+    public BaseEntity addEntity(BaseEntity childEntity, Slab slab, EventOperationResult eventOperationResult) {
+        getFactoryRepository().surveyChoiceRepository.save((EventSurveyChoiceEntity) childEntity);
+        BaseEntity surveyEntity = getEventController().localise(getEventEntity(), slab.localisation);
+        if (!(surveyEntity instanceof EventSurveyEntity))
+            return null;
+
+        childEntity = eventControllerSurvey.addSurveyChoice((EventSurveyEntity) surveyEntity, (EventSurveyChoiceEntity) childEntity);
+        return childEntity;
     }
 }

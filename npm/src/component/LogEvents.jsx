@@ -14,10 +14,6 @@ import { FormattedMessage } from "react-intl";
 
 import { Tooltip } from 'carbon-components-react';
 
-import {  PatchQuestion  } from 'react-bootstrap-icons';
-
-import UserTips 			from 'component/UserTips';
-
 
 // -----------------------------------------------------------
 //

@@ -58,7 +58,7 @@ public class EventService {
 
     private static final LogEvent eventEntityNotFound = new LogEvent(EventService.class.getName(), 4, Level.APPLICATIONERROR, "Entity not found", "The entity requested can't be found, it may be deleted by an another user in the mean time", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventNoId = new LogEvent(EventService.class.getName(), 5, Level.ERROR, "No ID", "To load an entity, an ID must be give", "Entity is not found, can't be linked in this object", "Check the ID");
-    private static final LogEvent eventBadEntity = new LogEvent(EventService.class.getName(), 6, Level.ERROR, "Bad Entity", "This Entity can't be load", "Entity is not found, can't be linked in this object", "Check the Entity");
+    private static final LogEvent eventBadEntity = new LogEvent(EventService.class.getName(), 6, Level.ERROR, "Bad Entity", "This Entity can't be load", "Entity is not the correct one", "Check the Entity");
 
     private static final String LOG_HEADER = EventService.class.getSimpleName() + ": ";
     private final Logger logger = Logger.getLogger(EventService.class.getName());
@@ -75,11 +75,10 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-   
+
     @Autowired
     private EventExpenseRepository eventExpenseRepository;
 
- 
 
     @Autowired
     private ToghUserService toghUserService;
@@ -87,48 +86,32 @@ public class EventService {
     @Autowired
     private NotifyService notifyService;
 
-    public static class EventOperationResult {
-
-        public EventEntity eventEntity;
-        public boolean limitSubscription = false;
-        public List<LogEvent> listLogEvents = new ArrayList<>();
-        public List<BaseEntity> listChildEntity = new ArrayList<>();
-
-        public boolean reachTheLimit=false;
-        
-        
-        // in case of Remove, entity are deleted but then we send back the entityId
-        public List<Long> listChildEntityId = new ArrayList<>();
-
-        public EventOperationResult(EventEntity eventEntity) {
-            this.eventEntity = eventEntity;
+    /**
+     * Update event: update attribut, create new item, delete item. All operations on event are done via the Slab Mechanism, which is a Updater design
+     *
+     * @param eventEntity   the event to update
+     * @param listSlab      the list of Slab, list of operations to apply
+     * @param updateContext the update context
+     * @return the result of the update
+     */
+    public EventOperationResult updateEvent(EventEntity eventEntity, List<Slab> listSlab, UpdateContext updateContext) {
+        EventController eventController = getEventController(eventEntity);
+        updateContext.eventController = eventController;
+        if (!eventController.hasAccess(updateContext.toghUser)) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventAccessError);
+            return eventOperationResult;
         }
 
-        public Long getEventId() {
-            return eventEntity != null ? eventEntity.getId() : null;
-        }
+        EventOperationResult eventOperationResult = eventController.update(listSlab, updateContext);
 
-        public List<Map<String, Serializable>> getEventsJson() {
-            return LogEventFactory.getJson(listLogEvents);
+        try {
+            eventRepository.save(eventEntity);
+        } catch (Exception e) {
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
         }
-
-        public void add(EventOperationResult complement) {
-            this.listLogEvents.addAll(complement.listLogEvents);
-            this.listChildEntity.addAll(complement.listChildEntity);
-            this.listChildEntityId.addAll(complement.listChildEntityId);
-        }
-
-        public void addLogEvent(LogEvent event) {
-            listLogEvents.add(event);
-        }
-
-        public void addLogEvents(List<LogEvent> listEvents) {
-            listLogEvents.addAll(listEvents);
-        }
-
-        public boolean isError() {
-            return LogEventFactory.isError(listLogEvents);
-        }
+        eventOperationResult.eventEntity = eventEntity;
+        return eventOperationResult;
     }
 
     /**
@@ -180,42 +163,46 @@ public class EventService {
 
     }
 
-    public static class UpdateContext {
-
-        public ToghUserEntity toghUser;
-        public long timezoneOffset;
-        public FactoryService factoryService;
-    }
-
-    
     /**
-     * Update event: update attribut, create new item, delete item. All operations on event are done via the Slab Mechanism, which is a Updater design
-     * @param eventEntity
-     * @param listSlab
-     * @param updateContext
-     * @return
+     * Send invitations to a list of Togh User, or to a new email
+     *
+     * @param eventEntity       event from the user is invited
+     * @param invitedByToghUser The ToghUser who invite
+     * @param listUsersId       List userId to invite. May be empty
+     * @param userInvitedEmail  the email user to invite. May be empty
+     * @param role              Role proposed in the event
+     * @param useMyEmailAsFrom  if true, the expeditor of the message is the invitedByUser email
+     * @param message           additional message
+     * @return the invitation result
      */
-    public EventOperationResult updateEvent(EventEntity eventEntity, List<Slab> listSlab, UpdateContext updateContext) {
+    public InvitationResult invite(EventEntity eventEntity,
+                                   ToghUserEntity invitedByToghUser,
+                                   List<Long> listUsersId,
+                                   String userInvitedEmail,
+                                   ParticipantRoleEnum role,
+                                   boolean useMyEmailAsFrom,
+                                   String message) {
+
         EventController eventController = getEventController(eventEntity);
-        if (!eventController.hasAccess(updateContext.toghUser)) {
-            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-            eventOperationResult.addLogEvent(eventAccessError);
-            return eventOperationResult;
+        if (!eventController.isOrganizer(invitedByToghUser)) {
+            InvitationResult invitationResult = new InvitationResult();
+            invitationResult.status = InvitationStatus.NOTAUTHORIZED;
+            return invitationResult;
         }
 
-        EventOperationResult eventOperationResult = eventController.update(listSlab, updateContext);
-
+        // this operation is delegated to the evenController
+        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, message);
         try {
             eventRepository.save(eventEntity);
         } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
         }
-        eventOperationResult.eventEntity = eventEntity;
-        return eventOperationResult;
+        return invitationResult;
     }
+
     /**
      * a User access an event: do all need information (notification, etc...)
-     * 
+     *
      * @param toghUserEntity
      */
     public EventOperationResult accessByUser(EventEntity eventEntity, ToghUserEntity toghUserEntity) {
@@ -231,6 +218,26 @@ public class EventService {
             }
         }
         return eventOperationResult;
+    }
+
+    /**
+     * Entity is given by its name. Then, it is added to the parent, and saved.
+     *
+     * @param nameEntity   the name of the entity to add
+     * @param parentEntity the parentEntity of the entity to add
+     * @return the BaseEntity added
+     */
+
+    public BaseEntity add(String nameEntity, EventBaseEntity parentEntity) {
+        if (EventExpenseEntity.CST_ENTITY_NAME.equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
+            EventExpenseEntity expense = new EventExpenseEntity();
+            eventExpenseRepository.save(expense);
+            parentEntity.setExpense(expense);
+
+            return expense;
+
+        }
+        return null;
     }
 
     public class EventResult {
@@ -310,40 +317,13 @@ public class EventService {
     }
 
     /**
-     * Send invitations to a list of Togh User, or to a new email
+     * return a eventController
      *
-     * @param eventEntity      event to invit
-     * @param invitedByUser    The ToghUser who invite
-     * @param listUsersId      List user Id to invite. May be empty
-     * @param userInvitedEmail the email user to invite. May be empty
-     * @param role             Role proposed in the event
-     * @param useMyEmailAsFrom if true, the From message is the invitedByUser email
-     * @param message          additional message
-     * @return the invitation result
+     * @param eventEntity the EventEntity we search the controller
+     * @return the EventController attached to the entity
      */
-    public InvitationResult invite(EventEntity eventEntity,
-                                   ToghUserEntity invitedByToghUser,
-                                   List<Long> listUsersId,
-                                   String userInvitedEmail,
-                                   ParticipantRoleEnum role,
-                                   boolean useMyEmailAsFrom,
-                                   String message) {
-
-        EventController eventController = getEventController(eventEntity);
-        if (!eventController.isOrganizer(invitedByToghUser)) {
-            InvitationResult invitationResult = new InvitationResult();
-            invitationResult.status = InvitationStatus.NOTAUTHORIZED;
-            return invitationResult;
-        }
-
-        // this operation is delegated to the evenController
-        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, message);
-        try {
-            eventRepository.save(eventEntity);
-        } catch (Exception e) {
-            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
-        }
-        return invitationResult;
+    private EventController getEventController(EventEntity eventEntity) {
+        return new EventController(eventEntity, factoryService, factoryRepository);
     }
 
     public static class InvitationResult {
@@ -616,23 +596,50 @@ public class EventService {
     /* ******************************************************************************** */
 
     /**
-     * Entity is given by its name. Then, it is added to the parent, and saved.
-     * 
-     * @param nameEntity
-     * @param parentEntity
-     * @return
+     * Status of operation
      */
+    public static class EventOperationResult {
+        private static final String LOG_HEADER = EventOperationResult.class.getSimpleName() + ": ";
+        public final List<LogEvent> listLogEvents = new ArrayList<>();
+        public final List<BaseEntity> listChildEntity = new ArrayList<>();
+        // in case of Remove, entity are deleted but then we send back the entityId
+        public final List<Long> listChildEntityId = new ArrayList<>();
+        private final Logger logger = Logger.getLogger(EventOperationResult.class.getName());
+        public EventEntity eventEntity;
+        public boolean limitSubscription = false;
+        public boolean reachTheLimit = false;
 
-    public BaseEntity add(String nameEntity, EventBaseEntity parentEntity) {
-        if (EventExpenseEntity.CST_ENTITY_NAME.equalsIgnoreCase(nameEntity) && (parentEntity.acceptExpense())) {
-            EventExpenseEntity expense = new EventExpenseEntity();
-            eventExpenseRepository.save(expense);
-            parentEntity.setExpense(expense);
-
-            return expense;
-
+        public EventOperationResult(EventEntity eventEntity) {
+            this.eventEntity = eventEntity;
         }
-        return null;
+
+        public Long getEventId() {
+            return eventEntity != null ? eventEntity.getId() : null;
+        }
+
+        public List<Map<String, Serializable>> getEventsJson() {
+            return LogEventFactory.getJson(listLogEvents);
+        }
+
+        public void add(EventOperationResult complement) {
+            this.listLogEvents.addAll(complement.listLogEvents);
+            this.listChildEntity.addAll(complement.listChildEntity);
+            this.listChildEntityId.addAll(complement.listChildEntityId);
+        }
+
+        public void addLogEvent(LogEvent event) {
+            if (event.isError())
+                logger.severe(LOG_HEADER + event);
+            listLogEvents.add(event);
+        }
+
+        public void addLogEvents(List<LogEvent> listEvents) {
+            listLogEvents.addAll(listEvents);
+        }
+
+        public boolean isError() {
+            return LogEventFactory.isError(listLogEvents);
+        }
     }
 
     /**
@@ -712,13 +719,51 @@ public class EventService {
     }
 
     /**
-     * return a eventController
-     * 
-     * @param eventEntity
-     * @return
+     * UpdateContext class, to pass context to the different operations
      */
-    private EventController getEventController(EventEntity eventEntity) {
-        return new EventController(eventEntity, factoryService,factoryRepository);
+    public static class UpdateContext {
+
+        private final ToghUserEntity toghUser;
+        private final long timezoneOffset;
+        private final FactoryService factoryService;
+        private final EventEntity eventEntity;
+
+        public EventController eventController = null;
+
+        public UpdateContext(ToghUserEntity toghUser,
+                             long timezoneOffset,
+                             FactoryService factoryService,
+                             EventEntity eventEntity) {
+            this.toghUser = toghUser;
+            this.timezoneOffset = timezoneOffset;
+            this.factoryService = factoryService;
+            this.eventEntity = eventEntity;
+        }
+
+        public ToghUserEntity getToghUser() {
+            return toghUser;
+        }
+
+        public long getTimezoneOffset() {
+            return timezoneOffset;
+        }
+
+        public FactoryService getFactoryService() {
+            return factoryService;
+        }
+
+        public EventEntity getEventEntity() {
+            return eventEntity;
+        }
+
+        public EventController getEventController() {
+            return eventController;
+        }
+
+        public void setEventController(EventController eventController) {
+            this.eventController = eventController;
+        }
+
     }
 
 }

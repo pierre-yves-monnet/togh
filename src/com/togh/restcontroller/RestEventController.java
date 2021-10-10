@@ -230,43 +230,40 @@ public class RestEventController {
     public Map<String, Object> update(@RequestBody Map<String, Object> updateMap, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
-            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long eventId                            = ToolCast.getLong(updateMap, "eventid", null);
-        Long timezoneOffset                     = ToolCast.getLong(updateMap, "timezoneoffset", 0L);
+        Long eventId = ToolCast.getLong(updateMap, "eventid", null);
+        Long timezoneOffset = ToolCast.getLong(updateMap, "timezoneoffset", 0L);
         @SuppressWarnings("unchecked")
-        List<Map<String,Object>> slabEventList = ToolCast.getList(updateMap, "listslab", new ArrayList<>() );
+        List<Map<String, Object>> slabEventList = ToolCast.getList(updateMap, "listslab", new ArrayList<>());
 
-        EventEntity event = eventService.getEventById( eventId);
-        if (event==null) {
+        EventEntity event = eventService.getEventById(eventId);
+        if (event == null) {
             // same error as not found: we don't want to give the information that the event exist
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND,  RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
         }
 
-        UpdateContext updateContext  = new UpdateContext();
-        updateContext.toghUser = toghUser;
-        updateContext.timezoneOffset = timezoneOffset;
-        updateContext.factoryService = factoryService;
-        
-        EventOperationResult eventOperationResult = eventService.updateEvent( event, getListSlab(slabEventList), updateContext);
-        
+        UpdateContext updateContext = new UpdateContext(toghUser, timezoneOffset, factoryService, event);
+
+        EventOperationResult eventOperationResult = eventService.updateEvent(event, getListSlab(slabEventList), updateContext);
+
         Map<String, Object> payload = new HashMap<>();
-        payload.put( RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId());
-        payload.put( RestJsonConstants.CST_LIST_LOG_EVENTS, eventOperationResult.getEventsJson());
-        
+        payload.put(RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId());
+        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, eventOperationResult.getEventsJson());
+
         ContextAccess contextAccess = eventService.getContextAccess(event, toghUser);
-        List<Map<String,Object>> listEntity = new ArrayList<>();
-        for(BaseEntity entity : eventOperationResult.listChildEntity) {
-            listEntity.add( entity.getMap(contextAccess, timezoneOffset));
+        List<Map<String, Object>> listEntity = new ArrayList<>();
+        for (BaseEntity entity : eventOperationResult.listChildEntity) {
+            listEntity.add(entity.getMap(contextAccess, timezoneOffset));
         }
-        payload.put( RestJsonConstants.CST_CHILDENTITY, listEntity);
+        payload.put(RestJsonConstants.CST_CHILDENTITY, listEntity);
 
         // send back all the Chat group at each update - too important to miss one.
-        payload.put( EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, event.getGroupChatList(contextAccess, timezoneOffset));
-        payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
+        payload.put(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, event.getGroupChatList(contextAccess, timezoneOffset));
+        payload.put(RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
 
-        payload.put( RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
-        payload.put( RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity ==null? null : eventOperationResult.eventEntity.getMap(contextAccess, timezoneOffset) );
+        payload.put(RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
+        payload.put(RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity == null ? null : eventOperationResult.eventEntity.getMap(contextAccess, timezoneOffset));
         payload.put( RestJsonConstants.CST_STATUS, eventOperationResult.isError() ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
 
         return payload;
