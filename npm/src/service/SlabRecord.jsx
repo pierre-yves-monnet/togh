@@ -36,7 +36,7 @@ class SlabRecord {
 	*  UPDATE "what" "this is where we go" "/shoppinglist/43"
 	*  UPDATE "name" "My birthday" "/"
 	 */
-	static getUpdate (event, name, value, localisation) {
+	static getUpdate(event, name, value, localisation) {
 		return new SlabRecord(event, "UPDATE", name, value, localisation);
  	}
 	

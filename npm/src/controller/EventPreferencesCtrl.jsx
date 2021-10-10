@@ -33,7 +33,7 @@ class EventPreferenceCtrl {
 	constructor(eventCtrl, updateEventfct ) {
 		this.eventCtrl = eventCtrl;
 		this.updateEventfct = updateEventfct;
-		var event = eventCtrl.getEvent();
+		let event = eventCtrl.getEvent();
 		if (event && event.preferences)
 			this.currencyCode = event.preferences[ CURRENCY_ATTRIBUT_NAME ];
 			
@@ -51,13 +51,12 @@ class EventPreferenceCtrl {
 	setCurrency(currencyCode) {
 		this.currencyCode = currencyCode;
 
-		var SlabRecord = SlabRecord.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
-		this.eventCtrl.updateEventfct( SlabRecord );
-
+		let slab = SlabRecord.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
+		this.eventCtrl.updateEventfct( slab );
 	}
 	
 	getCurrency(){
-		var currencyService = FactoryService.getInstance().getCurrencyService();
+		let currencyService = FactoryService.getInstance().getCurrencyService();
 		return currencyService.getCurrencyInfoByCode(this.currencyCode);
 	}
 	
@@ -67,7 +66,7 @@ class EventPreferenceCtrl {
 	
 	getCurrencySymbolPrefix(){
 		// console.log("EventPreferenceCtrl.getCurrencySymbolPrefix");
-		var currency = this.getCurrency();
+		let currency = this.getCurrency();
 		if (currency)
 			return currency.prefix;
 		else
@@ -77,7 +76,7 @@ class EventPreferenceCtrl {
 	
 	getCurrencySymbolSuffix(){
 		// console.log("EventPreferenceCtrl.getCurrencySymbolSuffix");
-		var currency = this.getCurrency();
+		let currency = this.getCurrency();
 		if (currency)
 			return currency.suffix;
 		else

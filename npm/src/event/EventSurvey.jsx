@@ -575,7 +575,7 @@ class EventSurvey extends React.Component {
 			return;
 		// Ok, I must be part on this survey, ins't ?
 		for (let i in survey[surveyConstant.CHILD_ANSWER]) {
-			if (survey[surveyConstant.CHILD_ANSWER] [i].whoid === currentUser.id) {
+			if (survey[surveyConstant.CHILD_ANSWER][i].whoid === currentUser.id) {
 				// I'm in !
 				return;
 			}
@@ -650,7 +650,7 @@ class EventSurvey extends React.Component {
 			
 		let total=0;
 		for (let i in survey[ surveyConstant.CHILD_ANSWER]) {
-			let answerParticipant = survey[ surveyConstant.CHILD_ANSWER] [i];
+			let answerParticipant = survey[ surveyConstant.CHILD_ANSWER][i];
 			if (answerParticipant.decision[ surveyCode ])
 				total++;				
 		}

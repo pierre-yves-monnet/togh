@@ -9,18 +9,14 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { TextInput, Toggle, TextArea } from 'carbon-components-react';
+import { Toggle, TextArea } from 'carbon-components-react';
 
 
-import { GeoAltFill } from 'react-bootstrap-icons';
-import GoogleMapReact from 'google-map-react';
+// import { GeoAltFill } from 'react-bootstrap-icons';
+// import GoogleMapReact from 'google-map-react';
 
-import { Icon } from '@iconify/react'
-import locationIcon from '@iconify/icons-mdi/map-marker'
+// import locationIcon from '@iconify/icons-mdi/map-marker'
 
-
-import FactoryService 			from 'service/FactoryService';
-import GoogleMapService 		from 'service/GoogleMapService';
 
 import EventSectionHeader 		from 'component/EventSectionHeader';
 import GoogleAddressGeocode 	from 'component/GoogleAddressGeocode';

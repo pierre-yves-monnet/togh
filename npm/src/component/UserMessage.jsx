@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 
 import React from 'react';
-import { FormattedMessage } from "react-intl";
+
 
 import { Check, ShieldFillX } from 'react-bootstrap-icons';
 

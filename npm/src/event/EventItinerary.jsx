@@ -483,11 +483,13 @@ class EventItinerary extends React.Component {
  	*/
 	setAttributCheckbox(name, value) {		
 		console.log("EventItinerary.setAttributCheckbox set " + name + "<=" + value.target.checked);
+		let eventValue=this.state.event;
 		if (value.target.checked)
-			this.state.event[name] = true;
+			eventValue[name] = true;
 		else
-			this.state.event[name] = false;
-		this.eventCtrl.setAttribut(name, this.state.event[name], this.state.event, "" );
+			eventValue[name] = false;
+
+		this.eventCtrl.setAttribut(name, eventValue[name], this.state.event, "" );
 		this.setState({ event: this.state.event });
 	}
 	
@@ -555,7 +557,7 @@ class EventItinerary extends React.Component {
 		// index start at 0
 		} else if (direction === 1 && indexInList === this.state.event.itinerarysteplist.length-1 ) {
 			// Last in the list, maybe advance for one day ?
-			newDate = new Date( this.getDateItem( item ).getTime() + 86400000 );
+			let newDate = new Date( this.getDateItem( item ).getTime() + 86400000 );
 			// something is wrong here if we are before the startDate!
 			if (newDate.getTime() <= dateEndEvent.getTime() ) {
 				item.dateStep = newDate;

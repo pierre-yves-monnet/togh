@@ -11,8 +11,9 @@ import React from 'react';
 import { FormattedMessage } from "react-intl";
 
 
-import FactoryService from 'service/FactoryService';
-import EventSectionHeader from 'component/EventSectionHeader';
+import FactoryService               from 'service/FactoryService';
+import EventSectionHeader           from 'component/EventSectionHeader';
+import SlabRecord 					from 'service/SlabRecord';
 
 
 // -----------------------------------------------------------
@@ -127,10 +128,10 @@ class EventExpense extends React.Component {
 
 		if (isChild) {
 			item[name] = value;
-			slabRecord = slabRecord.getUpdate(this.state.event, name, value, "/expense/" + item.id);
+			slabRecord = SlabRecord.getUpdate(this.state.event, name, value, "/expense/" + item.id);
 		} else {
 			currentEvent[name] = value
-			slabRecord = slabRecord.getUpdate(this.state.event, name, value, "");
+			slabRecord = SlabRecord.getUpdate(this.state.event, name, value, "");
 		}
 
 		this.setState({ "event": currentEvent });

@@ -9,8 +9,6 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
-
 import { Select, Tag } from 'carbon-components-react';
 
 import Invitation from 'event/Invitation';

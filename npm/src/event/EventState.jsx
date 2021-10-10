@@ -8,14 +8,7 @@
 
 import React from 'react';
 
-import { injectIntl, FormattedMessage } from "react-intl";
-
-
-// import { Button } from 'carbon-components-react';
-import { Tag } from 'carbon-components-react';
-import { OverflowMenu } from 'carbon-components-react';
-import { OverflowMenuItem } from 'carbon-components-react';
-
+import { injectIntl } from "react-intl";
 import TagDropdown from 'component/TagDropdown';
 
 

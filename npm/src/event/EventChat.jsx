@@ -10,21 +10,21 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage, FormattedDate} from "react-intl";
 
-import { TextInput, TextArea, OverflowMenu, OverflowMenuItem, Tag, Toggle } from 'carbon-components-react';
+import { TextArea } from 'carbon-components-react';
 
 import { SkipBackwardCircle } from 'react-bootstrap-icons';
 
-import ChooseParticipant 		from 'component/ChooseParticipant';
-import Expense 					from 'component/Expense';
+
+
 import EventSectionHeader 		from 'component/EventSectionHeader';
-import TagDropdown 				from 'component/TagDropdown';
-
-import SlabRecord 				from 'service/SlabRecord';
 
 
-const STATUS_TODO = "TODO";
-const STATUS_DONE = "DONE";
-const STATUS_CANCEL = "CANCEL";
+
+
+
+// const STATUS_TODO = "TODO";
+// const STATUS_DONE = "DONE";
+// const STATUS_CANCEL = "CANCEL";
 
 
 // -----------------------------------------------------------
@@ -68,7 +68,7 @@ class EventChat extends React.Component {
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		const intl = this.props.intl;
+
 		console.log("EventShoppinglist.render: visible=" + this.state.show);
 
 		var headerSection = (
