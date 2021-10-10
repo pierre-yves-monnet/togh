@@ -69,12 +69,16 @@ class AdminInfo extends React.Component {
     							/>}
 					{this.state.message}<br/> 
 
-				<table class="table table-condensed">
+				<table class="table table-striped toghtable">
 					{this.state.listinfos && this.state.listinfos.map((info,index) =>
 						<tr key={index}>
 							<td>{info.name}</td>
 							<td>{info.value}</td>
 						</tr>)}
+						<tr>
+						    <td>Version</td>
+						    <td>Version Oct 10, 2021</td>
+						</tr>
 				</table>
 				</div>	 
 			</div>
