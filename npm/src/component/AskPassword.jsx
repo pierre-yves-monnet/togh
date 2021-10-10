@@ -55,8 +55,10 @@ class AskPaswword extends React.Component {
 		let check = this.checkPassword(password, confirmPassword);
 		this.props.changePasswordCallback( check === 0, password);
 	}
+
+
 	checkPassword(password, confirmPassword) {
-		console.log("AskPassword, compare["+password+"] <> ["+confirmPassword+"]");
+		// console.log("AskPassword, compare["+password+"] <> ["+confirmPassword+"]");
 		if (password !== confirmPassword)
 			return 1;
 		if (password.length < 3)

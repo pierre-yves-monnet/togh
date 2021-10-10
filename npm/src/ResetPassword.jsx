@@ -28,7 +28,7 @@ class ResetPassword extends React.Component {
 			inprogress: false,
 			user: null,
 			password: '',
-			confirmPassword: '',
+			passwordIsCorrect: false,
 			message:''
 		}
 
@@ -36,6 +36,7 @@ class ResetPassword extends React.Component {
 		this.getInfoCallback 			= this.getInfoCallback.bind( this );
 		this.changePasswordCallback 	= this.changePasswordCallback.bind( this );
 		this.changePasswordRestCallback	= this.changePasswordRestCallback.bind( this );
+		this.changePassword             = this.changePassword.bind(this);
 	}
 	/**
 	* We arrive in the window : get the information behind the uuid
@@ -77,21 +78,34 @@ class ResetPassword extends React.Component {
 				<FormattedMessage id="ResetPassword.ResetPasswordProcedure" defaultMessage="You can now change your password. It will be changed, and you will be connected immediately" />
 				</div>
 				<AskPassword changePasswordCallback={this.changePasswordCallback} />
-				
+                <button class="btn btn-info"
+                    onClick={ this.changePassword}
+                    disabled={this.state.passwordIsCorrect===false}
+                    style={{paddingTop: "10px"}}>
+						<FormattedMessage id="ResetPassword.UpdateMyPassword" defaultMessage="Update my password"/>
+				</button>
 			</div>
 			);	
 	}
 
 
 	
-	// -------- Rest Call
-	changePasswordCallback() {
+	// -------- Callback from AskPassword
+	changePasswordCallback(checkOk, password) {
+	    debugger;
+	    this.setState({password: password, passwordIsCorrect: checkOk});
+
+	}
+
+
+	changePassword() {
+
+	    debugger;
 		this.setState( {badRegistration: false, loading:true});
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		
 		var param= {  password: this.state.password, uuid: this.state.uuid };
 		console.log("ResetPassword.changePassword: param" + JSON.stringify(param));
-
 
 		restCallService.postJson('/api/login/resetPassword?', this, param, this.changePasswordRestCallback);
 
