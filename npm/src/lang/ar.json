@@ -35,15 +35,12 @@
   "AdminTranslator.TimeTranslation": "وقت الترجمة",
   "__AdminTranslator.Title": "Translation",
   "AdminTranslator.Title": "ترجمة",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-  "AdminTranslator.TooMuchSentences" : "جملة تجاوز السعة",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-  "AdminTranslator.TranslateSentences" : "الجمل المترجمة",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-  "AdminTranslator.nbTransations" : "عدد الترجمة",
+  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences": "جملة تجاوز السعة",
+  "__AdminTranslator.TranslateSentences": "Translated sentences",
+  "AdminTranslator.TranslateSentences": "الجمل المترجمة",
+  "__AdminTranslator.nbTransations": "Number of translation",
+  "AdminTranslator.nbTransations": "عدد الترجمة",
 
   "__AdminUsers.Administrator" : "Administrator",
   "AdminUsers.Administrator" : "مدير",
@@ -647,24 +644,20 @@
 
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "قيد التحضير",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
-  "EventSurvey.AddAnswer" : "مضيفا إجابتك",
-
-  "__EventSurvey.AddOption" : "Option",
-  "EventSurvey.AddOption" : "خيار",
-
-  "__EventSurvey.AddingChoice" : "Adding a choice",
-  "EventSurvey.AddingChoice" : "مضيفا اختيار",
-
-  "__EventSurvey.AddingTask" : "Adding a task",
-  "EventSurvey.AddingTask" : "مضيفا مهمة",
-
-  "__EventSurvey.AnswerAdded" : "answer added",
-  "EventSurvey.AnswerAdded" : "تمت إضافة الإجابة",
-
-  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
-  "EventSurvey.CantaddAnswer" : "لا يمكن إضافة الإجابة",
+  "__EventSurvey.AddAnswer": "Adding your answer",
+  "EventSurvey.AddAnswer": "مضيفا إجابتك",
+  "__EventSurvey.AddOption": "Option",
+  "EventSurvey.AddOption": "خيار",
+  "__EventSurvey.AddingChoice": "Adding a choice",
+  "EventSurvey.AddingChoice": "مضيفا اختيار",
+  "__EventSurvey.AddingSurvey": "Adding a survey",
+  "EventSurvey.AddingSurvey": "إضافة استطلاع",
+  "__EventSurvey.AddingTask": "Adding a task",
+  "EventSurvey.AddingTask": "مضيفا مهمة",
+  "__EventSurvey.AnswerAdded": "answer added",
+  "EventSurvey.AnswerAdded": "تمت إضافة الإجابة",
+  "__EventSurvey.CantaddAnswer": "Can't add the answer",
+  "EventSurvey.CantaddAnswer": "لا يمكن إضافة الإجابة",
 
   "__EventSurvey.CantaddItem" : "A task can't be added",
   "EventSurvey.CantaddItem" : "لا يمكن إضافة مهمة",
@@ -848,17 +841,13 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "لا يمكن الوصول إلى قائمة العناصر &quot;",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
-  "EventsList.CreateAnEvent" : "أنشئ حدثًا",
-
-  "__EventsList.Date" : "Date",
-  "EventsList.Date" : "تاريخ",
-
-  "__EventsList.DateFromTo" : "to",
-  "EventsList.DateFromTo" : "إلى",
-
-  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "__EventsList.CreateAnEvent": "Create an Event",
+  "EventsList.CreateAnEvent": "أنشئ حدثًا",
+  "__EventsList.Date": "Date",
+  "EventsList.Date": "تاريخ",
+  "__EventsList.DateFromTo": "to",
+  "EventsList.DateFromTo": "إلى",
+  "__EventsList.LimitSubscription": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription": "تصل إلى الحد الأقصى من الأحداث المسموح بها في الفترة الماضية. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
   "__EventsList.MyEvents": "My events",
   "EventsList.MyEvents": "أحداثي",
@@ -938,15 +927,12 @@
   "Login.SendEmail": "أرسل البريد الإلكتروني",
   "__Login.ServerConnectionError": "Server connection error",
   "Login.ServerConnectionError": "خطأ في الاتصال بالخادم",
-
-  "__Login.ServerIssue" : "An error arrived on the server, please try later",
-  "Login.ServerIssue" : "حدث خطأ في الخادم ، يرجى المحاولة لاحقًا",
-
-  "__Login.connection" : "Connection",
-  "Login.connection" : "اتصال",
-
-  "__Login.email" : "Email",
-  "Login.email" : "بريد الالكتروني",
+  "__Login.ServerIssue": "An error arrived on the server, please try later",
+  "Login.ServerIssue": "حدث خطأ في الخادم ، يرجى المحاولة لاحقًا",
+  "__Login.connection": "Connection",
+  "Login.connection": "اتصال",
+  "__Login.email": "Email",
+  "Login.email": "بريد الالكتروني",
 
   "__Login.googlelogin" : "Login",
   "Login.googlelogin" : "تسجيل الدخول",
@@ -1088,17 +1074,13 @@
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "اسم المستخدم",
-
-  "__MyProfile.firstname" : "FirstName",
-  "MyProfile.firstname" : "الاسم الأول",
-
-  "__MyProfile.hideTipsUser" : "Hide tips",
-  "MyProfile.hideTipsUser" : "إخفاء النصائح",
-
-  "__MyProfile.lastName" : "LastName",
-  "MyProfile.lastName" : "الكنية",
-
-  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "__MyProfile.firstname": "FirstName",
+  "MyProfile.firstname": "الاسم الأول",
+  "__MyProfile.hideTipsUser": "Hide tips",
+  "MyProfile.hideTipsUser": "إخفاء النصائح",
+  "__MyProfile.lastName": "LastName",
+  "MyProfile.lastName": "الكنية",
+  "__MyProfile.passwordChangeFailed": "Change failed",
   "MyProfile.passwordChangeFailed": "فشل التغيير",
   "__MyProfile.passwordChangeInProgress": "In progress",
   "MyProfile.passwordChangeInProgress": "في تقدم",
@@ -1150,6 +1132,8 @@
   "RegisterNewUser.LastName": "الكنية",
   "__RegisterNewUser.Password": "Password",
   "RegisterNewUser.Password": "كلمه السر",
+  "__RegisterNewUser.RegisterButton": "Register New User",
+  "RegisterNewUser.RegisterButton": "تسجيل مستخدم جديد",
   "__RegisterNewUser.Registration": "Registration",
   "RegisterNewUser.Registration": "تسجيل",
   "__RegisterNewUser.RetypePassword": "Retype password",
@@ -1180,6 +1164,6 @@
   "UserFeedback.OperationSuccess": "تمت العملية بنجاح",
   "__UserFeedback.OperationSuccessfull": "Success",
   "UserFeedback.OperationSuccessfull": "نجاح",
-
-  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "يمكن إلغاء تنشيط النصائح في تفضيلاتك"}
+  "__UserTips.DeactivateTipInPreference": "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference": "يمكن إلغاء تنشيط النصائح في تفضيلاتك"
+}

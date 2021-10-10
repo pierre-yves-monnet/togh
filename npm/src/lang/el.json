@@ -35,15 +35,12 @@
   "AdminTranslator.TimeTranslation": "Ώρα μετάφρασης",
   "__AdminTranslator.Title": "Translation",
   "AdminTranslator.Title": "Μετάφραση",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-  "AdminTranslator.TooMuchSentences" : "Καταδίκη υπερχείλισης",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-  "AdminTranslator.TranslateSentences" : "Μεταφρασμένες προτάσεις",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-  "AdminTranslator.nbTransations" : "Αριθμός μετάφρασης",
+  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences": "Καταδίκη υπερχείλισης",
+  "__AdminTranslator.TranslateSentences": "Translated sentences",
+  "AdminTranslator.TranslateSentences": "Μεταφρασμένες προτάσεις",
+  "__AdminTranslator.nbTransations": "Number of translation",
+  "AdminTranslator.nbTransations": "Αριθμός μετάφρασης",
 
   "__AdminUsers.Administrator" : "Administrator",
   "AdminUsers.Administrator" : "Διαχειριστής",
@@ -647,24 +644,20 @@
 
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "Σε προετοιμασία",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
-  "EventSurvey.AddAnswer" : "Προσθέτοντας την απάντησή σας",
-
-  "__EventSurvey.AddOption" : "Option",
-  "EventSurvey.AddOption" : "Επιλογή",
-
-  "__EventSurvey.AddingChoice" : "Adding a choice",
-  "EventSurvey.AddingChoice" : "Προσθήκη επιλογής",
-
-  "__EventSurvey.AddingTask" : "Adding a task",
-  "EventSurvey.AddingTask" : "Προσθήκη εργασίας",
-
-  "__EventSurvey.AnswerAdded" : "answer added",
-  "EventSurvey.AnswerAdded" : "προστέθηκε απάντηση",
-
-  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
-  "EventSurvey.CantaddAnswer" : "Δεν είναι δυνατή η προσθήκη της απάντησης",
+  "__EventSurvey.AddAnswer": "Adding your answer",
+  "EventSurvey.AddAnswer": "Προσθέτοντας την απάντησή σας",
+  "__EventSurvey.AddOption": "Option",
+  "EventSurvey.AddOption": "Επιλογή",
+  "__EventSurvey.AddingChoice": "Adding a choice",
+  "EventSurvey.AddingChoice": "Προσθήκη επιλογής",
+  "__EventSurvey.AddingSurvey": "Adding a survey",
+  "EventSurvey.AddingSurvey": "Προσθήκη έρευνας",
+  "__EventSurvey.AddingTask": "Adding a task",
+  "EventSurvey.AddingTask": "Προσθήκη εργασίας",
+  "__EventSurvey.AnswerAdded": "answer added",
+  "EventSurvey.AnswerAdded": "προστέθηκε απάντηση",
+  "__EventSurvey.CantaddAnswer": "Can't add the answer",
+  "EventSurvey.CantaddAnswer": "Δεν είναι δυνατή η προσθήκη της απάντησης",
 
   "__EventSurvey.CantaddItem" : "A task can't be added",
   "EventSurvey.CantaddItem" : "Δεν είναι δυνατή η προσθήκη μιας εργασίας",
@@ -848,17 +841,13 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Δεν είναι δυνατή η πρόσβαση στη λίστα του αντικειμένου '",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
-  "EventsList.CreateAnEvent" : "Δημιουργήστε ένα συμβάν",
-
-  "__EventsList.Date" : "Date",
-  "EventsList.Date" : "Ημερομηνία",
-
-  "__EventsList.DateFromTo" : "to",
-  "EventsList.DateFromTo" : "προς το",
-
-  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "__EventsList.CreateAnEvent": "Create an Event",
+  "EventsList.CreateAnEvent": "Δημιουργήστε ένα συμβάν",
+  "__EventsList.Date": "Date",
+  "EventsList.Date": "Ημερομηνία",
+  "__EventsList.DateFromTo": "to",
+  "EventsList.DateFromTo": "προς το",
+  "__EventsList.LimitSubscription": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription": "Φτάνετε στο όριο των επιτρεπόμενων συμβάντων την τελευταία περίοδο Μεταβείτε στο προφίλ σας για να δείτε τη συνδρομή σας",
   "__EventsList.MyEvents": "My events",
   "EventsList.MyEvents": "Οι εκδηλώσεις μου",
@@ -938,15 +927,12 @@
   "Login.SendEmail": "Στείλτε το email",
   "__Login.ServerConnectionError": "Server connection error",
   "Login.ServerConnectionError": "Σφάλμα σύνδεσης διακομιστή",
-
-  "__Login.ServerIssue" : "An error arrived on the server, please try later",
-  "Login.ServerIssue" : "Ένα σφάλμα έφτασε στον διακομιστή. Δοκιμάστε αργότερα",
-
-  "__Login.connection" : "Connection",
-  "Login.connection" : "Σύνδεση",
-
-  "__Login.email" : "Email",
-  "Login.email" : "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+  "__Login.ServerIssue": "An error arrived on the server, please try later",
+  "Login.ServerIssue": "Ένα σφάλμα έφτασε στον διακομιστή. Δοκιμάστε αργότερα",
+  "__Login.connection": "Connection",
+  "Login.connection": "Σύνδεση",
+  "__Login.email": "Email",
+  "Login.email": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
 
   "__Login.googlelogin" : "Login",
   "Login.googlelogin" : "Σύνδεση",
@@ -1088,17 +1074,13 @@
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "Ονομα χρήστη",
-
-  "__MyProfile.firstname" : "FirstName",
-  "MyProfile.firstname" : "Ονομα",
-
-  "__MyProfile.hideTipsUser" : "Hide tips",
-  "MyProfile.hideTipsUser" : "Απόκρυψη συμβουλών",
-
-  "__MyProfile.lastName" : "LastName",
-  "MyProfile.lastName" : "Επίθετο",
-
-  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "__MyProfile.firstname": "FirstName",
+  "MyProfile.firstname": "Ονομα",
+  "__MyProfile.hideTipsUser": "Hide tips",
+  "MyProfile.hideTipsUser": "Απόκρυψη συμβουλών",
+  "__MyProfile.lastName": "LastName",
+  "MyProfile.lastName": "Επίθετο",
+  "__MyProfile.passwordChangeFailed": "Change failed",
   "MyProfile.passwordChangeFailed": "Η αλλαγή απέτυχε",
   "__MyProfile.passwordChangeInProgress": "In progress",
   "MyProfile.passwordChangeInProgress": "Σε εξέλιξη",
@@ -1150,6 +1132,8 @@
   "RegisterNewUser.LastName": "Επίθετο",
   "__RegisterNewUser.Password": "Password",
   "RegisterNewUser.Password": "Κωδικός πρόσβασης",
+  "__RegisterNewUser.RegisterButton": "Register New User",
+  "RegisterNewUser.RegisterButton": "Εγγραφή νέου χρήστη",
   "__RegisterNewUser.Registration": "Registration",
   "RegisterNewUser.Registration": "Εγγραφή",
   "__RegisterNewUser.RetypePassword": "Retype password",
@@ -1180,6 +1164,6 @@
   "UserFeedback.OperationSuccess": "Η λειτουργία ήταν επιτυχής",
   "__UserFeedback.OperationSuccessfull": "Success",
   "UserFeedback.OperationSuccessfull": "Επιτυχία",
-
-  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "Οι συμβουλές μπορούν να απενεργοποιηθούν σύμφωνα με τις προτιμήσεις σας"}
+  "__UserTips.DeactivateTipInPreference": "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference": "Οι συμβουλές μπορούν να απενεργοποιηθούν σύμφωνα με τις προτιμήσεις σας"
+}

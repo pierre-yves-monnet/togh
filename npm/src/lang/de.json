@@ -35,15 +35,12 @@
   "AdminTranslator.TimeTranslation": "Zeitpunkt der Übersetzung",
   "__AdminTranslator.Title": "Translation",
   "AdminTranslator.Title": "Übersetzung",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-  "AdminTranslator.TooMuchSentences" : "Überlaufsatz",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-  "AdminTranslator.TranslateSentences" : "Übersetzte Sätze",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-  "AdminTranslator.nbTransations" : "Anzahl der Übersetzungen",
+  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences": "Überlaufsatz",
+  "__AdminTranslator.TranslateSentences": "Translated sentences",
+  "AdminTranslator.TranslateSentences": "Übersetzte Sätze",
+  "__AdminTranslator.nbTransations": "Number of translation",
+  "AdminTranslator.nbTransations": "Anzahl der Übersetzungen",
 
   "__AdminUsers.Administrator" : "Administrator",
   "AdminUsers.Administrator" : "Administrator",
@@ -65,17 +62,13 @@
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "Benutzer verbunden",
-
-  "__AdminUsers.Disconnect" : "Disconnect",
-  "AdminUsers.Disconnect" : "Trennen",
-
-  "__AdminUsers.Email" : "Email",
-  "AdminUsers.Email" : "Email",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "Exzellenz",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
+  "__AdminUsers.Disconnect": "Disconnect",
+  "AdminUsers.Disconnect": "Trennen",
+  "__AdminUsers.Email": "Email",
+  "AdminUsers.Email": "Email",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "Exzellenz",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
   "AdminUsers.LastActivityTime": "Letzte Aktivität",
   "__AdminUsers.LastConnectionTime": "Last Connection",
   "AdminUsers.LastConnectionTime": "Letzte Verbindung",
@@ -173,15 +166,12 @@
   "Event.Budget": "Budget",
   "__Event.Chat": "Chat",
   "Event.Chat": "Plaudern",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "Datum Ereignis",
-
-  "__Event.DatePolicy" : "Date policy",
-  "Event.DatePolicy" : "Datumsrichtlinie",
-
-  "__Event.Description" : "Description",
-  "Event.Description" : "Beschreibung",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "Datum Ereignis",
+  "__Event.DatePolicy": "Date policy",
+  "Event.DatePolicy": "Datumsrichtlinie",
+  "__Event.Description": "Description",
+  "Event.Description": "Beschreibung",
 
   "__Event.DurationEvent" : "Duration",
   "Event.DurationEvent" : "Dauer",
@@ -245,17 +235,13 @@
 
   "__Event.Survey" : "Survey",
   "Event.Survey" : "Umfrage",
-
-  "__Event.Tasks" : "Tasks",
-  "Event.Tasks" : "Aufgaben",
-
-  "__Event.TimeEvent" : "Time",
-  "Event.TimeEvent" : "Zeit",
-
-  "__Event.TitleBudget" : "Budget",
-  "Event.TitleBudget" : "Budget",
-
-  "__Event.TitleChat" : "Chat",
+  "__Event.Tasks": "Tasks",
+  "Event.Tasks": "Aufgaben",
+  "__Event.TimeEvent": "Time",
+  "Event.TimeEvent": "Zeit",
+  "__Event.TitleBudget": "Budget",
+  "Event.TitleBudget": "Budget",
+  "__Event.TitleChat": "Chat",
   "Event.TitleChat": "Plaudern",
   "__Event.TitleExpense": "Manage and share expenses",
   "Event.TitleExpense": "Ausgaben verwalten und teilen",
@@ -309,15 +295,12 @@
   "EventItinerary.CantaddItem": "Ein Schritt kann nicht hinzugefügt werden",
   "__EventItinerary.ItineraryTip": "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary",
   "EventItinerary.ItineraryTip": "Listen Sie alle Orte auf, die Sie während dieser Veranstaltung besuchen möchten. Wenn die Veranstaltung an mehreren Tagen stattfindet, können Sie Tag für Tag Ihre Reiseroute festlegen",
-
-  "__EventItinerary.LimitSubsscription" : "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
-  "EventItinerary.LimitSubsscription" : "Sie erreichen die im Ereignis zulässige Anzahl von Schritten. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
-
-  "__EventItinerary.MainTitleItinerary" : "Itinerary",
-  "EventItinerary.MainTitleItinerary" : "Route",
-
-  "__EventItinerary.NoAddressProvided" : "No address are provided for this day.",
-  "EventItinerary.NoAddressProvided" : "Für diesen Tag wird keine Adresse angegeben.",
+  "__EventItinerary.LimitSubsscription": "You reach the limit of steps allowed in the event. Go to your profile to see your subscription",
+  "EventItinerary.LimitSubsscription": "Sie erreichen die im Ereignis zulässige Anzahl von Schritten. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
+  "__EventItinerary.MainTitleItinerary": "Itinerary",
+  "EventItinerary.MainTitleItinerary": "Route",
+  "__EventItinerary.NoAddressProvided": "No address are provided for this day.",
+  "EventItinerary.NoAddressProvided": "Für diesen Tag wird keine Adresse angegeben.",
 
   "__EventItinerary.ProvideDateInEvent" : "Select a date for this event",
   "EventItinerary.ProvideDateInEvent" : "Wählen Sie ein Datum für dieses Ereignis",
@@ -567,24 +550,20 @@
 
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "In Vorbereitung",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
-  "EventSurvey.AddAnswer" : "Hinzufügen Ihrer Antwort",
-
-  "__EventSurvey.AddOption" : "Option",
-  "EventSurvey.AddOption" : "Möglichkeit",
-
-  "__EventSurvey.AddingChoice" : "Adding a choice",
-  "EventSurvey.AddingChoice" : "Auswahl hinzufügen",
-
-  "__EventSurvey.AddingTask" : "Adding a task",
-  "EventSurvey.AddingTask" : "Hinzufügen einer Aufgabe",
-
-  "__EventSurvey.AnswerAdded" : "answer added",
-  "EventSurvey.AnswerAdded" : "Antwort hinzugefügt",
-
-  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
-  "EventSurvey.CantaddAnswer" : "Die Antwort kann nicht hinzugefügt werden",
+  "__EventSurvey.AddAnswer": "Adding your answer",
+  "EventSurvey.AddAnswer": "Hinzufügen Ihrer Antwort",
+  "__EventSurvey.AddOption": "Option",
+  "EventSurvey.AddOption": "Möglichkeit",
+  "__EventSurvey.AddingChoice": "Adding a choice",
+  "EventSurvey.AddingChoice": "Auswahl hinzufügen",
+  "__EventSurvey.AddingSurvey": "Adding a survey",
+  "EventSurvey.AddingSurvey": "Hinzufügen einer Umfrage",
+  "__EventSurvey.AddingTask": "Adding a task",
+  "EventSurvey.AddingTask": "Hinzufügen einer Aufgabe",
+  "__EventSurvey.AnswerAdded": "answer added",
+  "EventSurvey.AnswerAdded": "Antwort hinzugefügt",
+  "__EventSurvey.CantaddAnswer": "Can't add the answer",
+  "EventSurvey.CantaddAnswer": "Die Antwort kann nicht hinzugefügt werden",
 
   "__EventSurvey.CantaddItem" : "A task can't be added",
   "EventSurvey.CantaddItem" : "Eine Aufgabe kann nicht hinzugefügt werden",
@@ -711,17 +690,13 @@
 
   "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
   "EventTaskList.LimitSubsscription" : "Sie erreichen die Grenze der im Ereignis zulässigen Aufgaben. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
-
-  "__EventTaskList.MainTitleTaskList" : "Tasks List",
-  "EventTaskList.MainTitleTaskList" : "Aufgabenliste",
-
-  "__EventTaskList.NoItem" : "You don't have any task in the list.",
-  "EventTaskList.NoItem" : "Sie haben keine Aufgabe in der Liste.",
-
-  "__EventTaskList.RemoveThisTask" : "Remove this task",
-  "EventTaskList.RemoveThisTask" : "Entfernen Sie diese Aufgabe",
-
-  "__EventTaskList.RemovingTask" : "Removing a task",
+  "__EventTaskList.MainTitleTaskList": "Tasks List",
+  "EventTaskList.MainTitleTaskList": "Aufgabenliste",
+  "__EventTaskList.NoItem": "You don't have any task in the list.",
+  "EventTaskList.NoItem": "Sie haben keine Aufgabe in der Liste.",
+  "__EventTaskList.RemoveThisTask": "Remove this task",
+  "EventTaskList.RemoveThisTask": "Entfernen Sie diese Aufgabe",
+  "__EventTaskList.RemovingTask": "Removing a task",
   "EventTaskList.RemovingTask": "Eine Aufgabe entfernen",
   "__EventTaskList.ShowDate": "Show dates",
   "EventTaskList.ShowDate": "Daten anzeigen",
@@ -997,6 +972,8 @@
   "RegisterNewUser.LastName": "Nachname",
   "__RegisterNewUser.Password": "Password",
   "RegisterNewUser.Password": "Passwort",
+  "__RegisterNewUser.RegisterButton": "Register New User",
+  "RegisterNewUser.RegisterButton": "Neuen Benutzer registrieren",
   "__RegisterNewUser.Registration": "Registration",
   "RegisterNewUser.Registration": "Anmeldung",
   "__RegisterNewUser.RetypePassword": "Retype password",

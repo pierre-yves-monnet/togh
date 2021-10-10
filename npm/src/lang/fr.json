@@ -35,15 +35,12 @@
   "AdminTranslator.TimeTranslation": "Heure de la traduction",
   "__AdminTranslator.Title": "Translation",
   "AdminTranslator.Title": "Traduction",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-  "AdminTranslator.TooMuchSentences" : "Phrases superflues",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-  "AdminTranslator.TranslateSentences" : "Phrases traduites",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-  "AdminTranslator.nbTransations" : "Nombre de traductions",
+  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences": "Phrases superflues",
+  "__AdminTranslator.TranslateSentences": "Translated sentences",
+  "AdminTranslator.TranslateSentences": "Phrases traduites",
+  "__AdminTranslator.nbTransations": "Number of translation",
+  "AdminTranslator.nbTransations": "Nombre de traductions",
 
   "__AdminUsers.Administrator" : "Administrator",
   "AdminUsers.Administrator" : "Administrateur",
@@ -647,24 +644,20 @@
 
   "__EventState.InPreparation" : "In Preparation",
   "EventState.InPreparation" : "En préparation",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
-  "EventSurvey.AddAnswer" : "Ajout de votre réponse",
-
-  "__EventSurvey.AddOption" : "Option",
-  "EventSurvey.AddOption" : "Option",
-
-  "__EventSurvey.AddingChoice" : "Adding a choice",
-  "EventSurvey.AddingChoice" : "Ajouter un choix",
-
-  "__EventSurvey.AddingTask" : "Adding a task",
-  "EventSurvey.AddingTask" : "Ajouter une tâche",
-
-  "__EventSurvey.AnswerAdded" : "answer added",
-  "EventSurvey.AnswerAdded" : "réponse ajoutée",
-
-  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
-  "EventSurvey.CantaddAnswer" : "Je ne peux pas ajouter la réponse",
+  "__EventSurvey.AddAnswer": "Adding your answer",
+  "EventSurvey.AddAnswer": "Ajout de votre réponse",
+  "__EventSurvey.AddOption": "Option",
+  "EventSurvey.AddOption": "Option",
+  "__EventSurvey.AddingChoice": "Adding a choice",
+  "EventSurvey.AddingChoice": "Ajouter un choix",
+  "__EventSurvey.AddingSurvey": "Adding a survey",
+  "EventSurvey.AddingSurvey": "Ajouter une enquête",
+  "__EventSurvey.AddingTask": "Adding a task",
+  "EventSurvey.AddingTask": "Ajouter une tâche",
+  "__EventSurvey.AnswerAdded": "answer added",
+  "EventSurvey.AnswerAdded": "réponse ajoutée",
+  "__EventSurvey.CantaddAnswer": "Can't add the answer",
+  "EventSurvey.CantaddAnswer": "Je ne peux pas ajouter la réponse",
 
   "__EventSurvey.CantaddItem" : "A task can't be added",
   "EventSurvey.CantaddItem" : "Une tâche ne peut pas être ajoutée",
@@ -848,17 +841,13 @@
 
   "__EventsList.CantGetListItem" : "Can't access the list of item'",
   "EventsList.CantGetListItem" : "Impossible d'accéder à la liste des éléments &quot;",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
-  "EventsList.CreateAnEvent" : "Créer un événement",
-
-  "__EventsList.Date" : "Date",
-  "EventsList.Date" : "Date",
-
-  "__EventsList.DateFromTo" : "to",
-  "EventsList.DateFromTo" : "à",
-
-  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "__EventsList.CreateAnEvent": "Create an Event",
+  "EventsList.CreateAnEvent": "Créer un événement",
+  "__EventsList.Date": "Date",
+  "EventsList.Date": "Date",
+  "__EventsList.DateFromTo": "to",
+  "EventsList.DateFromTo": "à",
+  "__EventsList.LimitSubscription": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
   "EventsList.LimitSubscription": "Vous atteignez la limite des événements autorisés dans la dernière période. Accédez à votre profil pour voir votre abonnement",
   "__EventsList.MyEvents": "My events",
   "EventsList.MyEvents": "Mes événements",
@@ -938,15 +927,12 @@
   "Login.SendEmail": "Envoyer l'e-mail",
   "__Login.ServerConnectionError": "Server connection error",
   "Login.ServerConnectionError": "Erreur de connexion au serveur",
-
-  "__Login.ServerIssue" : "An error arrived on the server, please try later",
-  "Login.ServerIssue" : "Une erreur est arrivée sur le serveur, veuillez réessayer plus tard",
-
-  "__Login.connection" : "Connection",
-  "Login.connection" : "Connexion",
-
-  "__Login.email" : "Email",
-  "Login.email" : "E-mail",
+  "__Login.ServerIssue": "An error arrived on the server, please try later",
+  "Login.ServerIssue": "Une erreur est arrivée sur le serveur, veuillez réessayer plus tard",
+  "__Login.connection": "Connection",
+  "Login.connection": "Connexion",
+  "__Login.email": "Email",
+  "Login.email": "E-mail",
 
   "__Login.googlelogin" : "Login",
   "Login.googlelogin" : "Connexion",
@@ -1088,17 +1074,13 @@
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "Nom d'utilisateur",
-
-  "__MyProfile.firstname" : "FirstName",
-  "MyProfile.firstname" : "Prénom",
-
-  "__MyProfile.hideTipsUser" : "Hide tips",
-  "MyProfile.hideTipsUser" : "Masquer les astuces",
-
-  "__MyProfile.lastName" : "LastName",
-  "MyProfile.lastName" : "Nom de famille",
-
-  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "__MyProfile.firstname": "FirstName",
+  "MyProfile.firstname": "Prénom",
+  "__MyProfile.hideTipsUser": "Hide tips",
+  "MyProfile.hideTipsUser": "Masquer les astuces",
+  "__MyProfile.lastName": "LastName",
+  "MyProfile.lastName": "Nom de famille",
+  "__MyProfile.passwordChangeFailed": "Change failed",
   "MyProfile.passwordChangeFailed": "Échec de la modification",
   "__MyProfile.passwordChangeInProgress": "In progress",
   "MyProfile.passwordChangeInProgress": "En cours",
@@ -1150,6 +1132,8 @@
   "RegisterNewUser.LastName": "Nom de famille",
   "__RegisterNewUser.Password": "Password",
   "RegisterNewUser.Password": "Mot de passe",
+  "__RegisterNewUser.RegisterButton": "Register New User",
+  "RegisterNewUser.RegisterButton": "Enregistrer un nouvel utilisateur",
   "__RegisterNewUser.Registration": "Registration",
   "RegisterNewUser.Registration": "Inscription",
   "__RegisterNewUser.RetypePassword": "Retype password",
@@ -1180,6 +1164,6 @@
   "UserFeedback.OperationSuccess": "Opération réussie",
   "__UserFeedback.OperationSuccessfull": "Success",
   "UserFeedback.OperationSuccessfull": "Succès",
-
-  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "Les astuces peuvent être désactivées dans votre profile"}
+  "__UserTips.DeactivateTipInPreference": "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference": "Les astuces peuvent être désactivées dans votre profile"
+}

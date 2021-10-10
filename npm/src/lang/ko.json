@@ -36,15 +36,12 @@
   "AdminTranslator.TimeTranslation": "번역 시간",
   "__AdminTranslator.Title": "Translation",
   "AdminTranslator.Title": "번역",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-  "AdminTranslator.TooMuchSentences" : "오버플로 문장",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-  "AdminTranslator.TranslateSentences" : "번역 된 문장",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-  "AdminTranslator.nbTransations" : "번역 수",
+  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences": "오버플로 문장",
+  "__AdminTranslator.TranslateSentences": "Translated sentences",
+  "AdminTranslator.TranslateSentences": "번역 된 문장",
+  "__AdminTranslator.nbTransations": "Number of translation",
+  "AdminTranslator.nbTransations": "번역 수",
 
   "__AdminUsers.Administrator" : "Administrator",
   "AdminUsers.Administrator" : "관리자",
@@ -669,24 +666,20 @@
   "EventState.InPreparation" : "준비 중",
 
   "__EventSurvey.AddAnswer" : "Adding your answer",
-  "EventSurvey.AddAnswer" : "답변 추가",
-
-  "EventSurvey.AddOne" : "하나 추가!",
-
-  "__EventSurvey.AddOption" : "Option",
-  "EventSurvey.AddOption" : "선택권",
-
-  "__EventSurvey.AddingChoice" : "Adding a choice",
-  "EventSurvey.AddingChoice" : "선택 추가",
-
-  "__EventSurvey.AddingTask" : "Adding a task",
-  "EventSurvey.AddingTask" : "작업 추가",
-
-  "__EventSurvey.AnswerAdded" : "answer added",
-  "EventSurvey.AnswerAdded" : "답변 추가",
-
-  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
-  "EventSurvey.CantaddAnswer" : "답변을 추가 할 수 없습니다.",
+  "EventSurvey.AddAnswer": "답변 추가",
+  "EventSurvey.AddOne": "하나 추가!",
+  "__EventSurvey.AddOption": "Option",
+  "EventSurvey.AddOption": "선택권",
+  "__EventSurvey.AddingChoice": "Adding a choice",
+  "EventSurvey.AddingChoice": "선택 추가",
+  "__EventSurvey.AddingSurvey": "Adding a survey",
+  "EventSurvey.AddingSurvey": "설문 추가",
+  "__EventSurvey.AddingTask": "Adding a task",
+  "EventSurvey.AddingTask": "작업 추가",
+  "__EventSurvey.AnswerAdded": "answer added",
+  "EventSurvey.AnswerAdded": "답변 추가",
+  "__EventSurvey.CantaddAnswer": "Can't add the answer",
+  "EventSurvey.CantaddAnswer": "답변을 추가 할 수 없습니다.",
 
   "__EventSurvey.CantaddItem" : "A task can't be added",
   "EventSurvey.CantaddItem" : "작업을 추가 할 수 없습니다.",
@@ -888,16 +881,13 @@
   "EventsList.CantGetListItem" : "항목 목록에 액세스 할 수 없습니다. '",
 
   "__EventsList.CreateAnEvent" : "Create an Event",
-  "EventsList.CreateAnEvent" : "이벤트 만들기",
-
-  "__EventsList.Date" : "Date",
-  "EventsList.Date" : "날짜",
-
-  "__EventsList.DateFromTo" : "to",
-  "EventsList.DateFromTo" : "에게",
-
-  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
-  "EventsList.LimitSubscription" : "마지막 기간에 허용 된 이벤트 한도에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
+  "EventsList.CreateAnEvent": "이벤트 만들기",
+  "__EventsList.Date": "Date",
+  "EventsList.Date": "날짜",
+  "__EventsList.DateFromTo": "to",
+  "EventsList.DateFromTo": "에게",
+  "__EventsList.LimitSubscription": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription": "마지막 기간에 허용 된 이벤트 한도에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
   "__EventsList.MyEvents": "My events",
   "EventsList.MyEvents": "내 이벤트",
   "__EventsList.Name": "Name",
@@ -980,16 +970,12 @@
   "Login.SendEmail": "이메일 보내기",
   "__Login.ServerConnectionError": "Server connection error",
   "Login.ServerConnectionError": "서버 연결 오류",
-
-  "__Login.ServerIssue" : "An error arrived on the server, please try later",
-  "Login.ServerIssue" : "서버에 오류가 발생했습니다. 나중에 시도하십시오.",
-
-  "Login.badConnection" : "잘못된 연결-자격 증명 확인",
-
-  "__Login.connection" : "Connection",
-  "Login.connection" : "연결",
-
-  "__Login.email" : "Email",
+  "__Login.ServerIssue": "An error arrived on the server, please try later",
+  "Login.ServerIssue": "서버에 오류가 발생했습니다. 나중에 시도하십시오.",
+  "Login.badConnection": "잘못된 연결-자격 증명 확인",
+  "__Login.connection": "Connection",
+  "Login.connection": "연결",
+  "__Login.email": "Email",
   "Login.email" : "이메일",
 
   "Login.googleLogin" : "로그인",
@@ -1136,17 +1122,13 @@
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "사용자 이름",
-
-  "__MyProfile.firstname" : "FirstName",
-  "MyProfile.firstname" : "이름",
-
-  "__MyProfile.hideTipsUser" : "Hide tips",
-  "MyProfile.hideTipsUser" : "팁 숨기기",
-
-  "__MyProfile.lastName" : "LastName",
-  "MyProfile.lastName" : "성",
-
-  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "__MyProfile.firstname": "FirstName",
+  "MyProfile.firstname": "이름",
+  "__MyProfile.hideTipsUser": "Hide tips",
+  "MyProfile.hideTipsUser": "팁 숨기기",
+  "__MyProfile.lastName": "LastName",
+  "MyProfile.lastName": "성",
+  "__MyProfile.passwordChangeFailed": "Change failed",
   "MyProfile.passwordChangeFailed": "변경 실패",
   "__MyProfile.passwordChangeInProgress": "In progress",
   "MyProfile.passwordChangeInProgress": "진행 중",
@@ -1198,6 +1180,8 @@
   "RegisterNewUser.LastName": "성",
   "__RegisterNewUser.Password": "Password",
   "RegisterNewUser.Password": "암호",
+  "__RegisterNewUser.RegisterButton": "Register New User",
+  "RegisterNewUser.RegisterButton": "새 사용자 등록",
   "__RegisterNewUser.Registration": "Registration",
   "RegisterNewUser.Registration": "기재",
   "__RegisterNewUser.RetypePassword": "Retype password",
@@ -1228,6 +1212,6 @@
   "UserFeedback.OperationSuccess": "작업 성공",
   "__UserFeedback.OperationSuccessfull": "Success",
   "UserFeedback.OperationSuccessfull": "성공",
-
-  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "원하는대로 팁을 비활성화 할 수 있습니다."}
+  "__UserTips.DeactivateTipInPreference": "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference": "원하는대로 팁을 비활성화 할 수 있습니다."
+}

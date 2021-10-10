@@ -638,8 +638,8 @@
   "EventSurvey.AddingChoice": {
     "defaultMessage": "Adding a choice"
   },
-  "EventSurvey.AddingTask": {
-    "defaultMessage": "Adding a task"
+  "EventSurvey.AddingSurvey": {
+    "defaultMessage": "Adding a survey"
   },
   "EventSurvey.AnswerAdded": {
     "defaultMessage": "answer added"
@@ -1165,6 +1165,9 @@
   },
   "RegisterNewUser.Password": {
     "defaultMessage": "Password"
+  },
+  "RegisterNewUser.RegisterButton": {
+    "defaultMessage": "Register New User"
   },
   "RegisterNewUser.Registration": {
     "defaultMessage": "Registration"

@@ -36,15 +36,12 @@
   "AdminTranslator.TimeTranslation": "अनुवाद का समय",
   "__AdminTranslator.Title": "Translation",
   "AdminTranslator.Title": "अनुवाद",
-
-  "__AdminTranslator.TooMuchSentences" : "Overflow Sentence",
-  "AdminTranslator.TooMuchSentences" : "अतिप्रवाह वाक्य",
-
-  "__AdminTranslator.TranslateSentences" : "Translated sentences",
-  "AdminTranslator.TranslateSentences" : "अनूदित वाक्य",
-
-  "__AdminTranslator.nbTransations" : "Number of translation",
-  "AdminTranslator.nbTransations" : "अनुवाद की संख्या",
+  "__AdminTranslator.TooMuchSentences": "Overflow Sentence",
+  "AdminTranslator.TooMuchSentences": "अतिप्रवाह वाक्य",
+  "__AdminTranslator.TranslateSentences": "Translated sentences",
+  "AdminTranslator.TranslateSentences": "अनूदित वाक्य",
+  "__AdminTranslator.nbTransations": "Number of translation",
+  "AdminTranslator.nbTransations": "अनुवाद की संख्या",
 
   "__AdminUsers.Administrator" : "Administrator",
   "AdminUsers.Administrator" : "प्रशासक",
@@ -669,24 +666,20 @@
   "EventState.InPreparation" : "तैयारी में",
 
   "__EventSurvey.AddAnswer" : "Adding your answer",
-  "EventSurvey.AddAnswer" : "अपना उत्तर जोड़ना",
-
-  "EventSurvey.AddOne" : "एक जोड़ें !",
-
-  "__EventSurvey.AddOption" : "Option",
-  "EventSurvey.AddOption" : "विकल्प",
-
-  "__EventSurvey.AddingChoice" : "Adding a choice",
-  "EventSurvey.AddingChoice" : "एक विकल्प जोड़ना",
-
-  "__EventSurvey.AddingTask" : "Adding a task",
-  "EventSurvey.AddingTask" : "किसी कार्य को जोड़ना",
-
-  "__EventSurvey.AnswerAdded" : "answer added",
-  "EventSurvey.AnswerAdded" : "उत्तर जोड़ा गया",
-
-  "__EventSurvey.CantaddAnswer" : "Can't add the answer",
-  "EventSurvey.CantaddAnswer" : "उत्तर नहीं जोड़ सकते",
+  "EventSurvey.AddAnswer": "अपना उत्तर जोड़ना",
+  "EventSurvey.AddOne": "एक जोड़ें !",
+  "__EventSurvey.AddOption": "Option",
+  "EventSurvey.AddOption": "विकल्प",
+  "__EventSurvey.AddingChoice": "Adding a choice",
+  "EventSurvey.AddingChoice": "एक विकल्प जोड़ना",
+  "__EventSurvey.AddingSurvey": "Adding a survey",
+  "EventSurvey.AddingSurvey": "एक सर्वेक्षण जोड़ना",
+  "__EventSurvey.AddingTask": "Adding a task",
+  "EventSurvey.AddingTask": "किसी कार्य को जोड़ना",
+  "__EventSurvey.AnswerAdded": "answer added",
+  "EventSurvey.AnswerAdded": "उत्तर जोड़ा गया",
+  "__EventSurvey.CantaddAnswer": "Can't add the answer",
+  "EventSurvey.CantaddAnswer": "उत्तर नहीं जोड़ सकते",
 
   "__EventSurvey.CantaddItem" : "A task can't be added",
   "EventSurvey.CantaddItem" : "कोई कार्य जोड़ा नहीं जा सकता",
@@ -888,16 +881,13 @@
   "EventsList.CantGetListItem" : "आइटम की सूची तक नहीं पहुंच सकते '",
 
   "__EventsList.CreateAnEvent" : "Create an Event",
-  "EventsList.CreateAnEvent" : "एक घटना बनाएँ",
-
-  "__EventsList.Date" : "Date",
-  "EventsList.Date" : "दिनांक",
-
-  "__EventsList.DateFromTo" : "to",
-  "EventsList.DateFromTo" : "प्रति",
-
-  "__EventsList.LimitSubscription" : "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
-  "EventsList.LimitSubscription" : "आप अंतिम अवधि में अनुमत घटनाओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+  "EventsList.CreateAnEvent": "एक घटना बनाएँ",
+  "__EventsList.Date": "Date",
+  "EventsList.Date": "दिनांक",
+  "__EventsList.DateFromTo": "to",
+  "EventsList.DateFromTo": "प्रति",
+  "__EventsList.LimitSubscription": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription",
+  "EventsList.LimitSubscription": "आप अंतिम अवधि में अनुमत घटनाओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
   "__EventsList.MyEvents": "My events",
   "EventsList.MyEvents": "मेरे कार्यक्रम",
   "__EventsList.Name": "Name",
@@ -980,16 +970,12 @@
   "Login.SendEmail": "ईमेल भेजें",
   "__Login.ServerConnectionError": "Server connection error",
   "Login.ServerConnectionError": "सर्वर कनेक्शन त्रुटि",
-
-  "__Login.ServerIssue" : "An error arrived on the server, please try later",
-  "Login.ServerIssue" : "सर्वर पर एक त्रुटि आई, कृपया बाद में प्रयास करें",
-
-  "Login.badConnection" : "खराब कनेक्शन - अपनी साख जांचें",
-
-  "__Login.connection" : "Connection",
-  "Login.connection" : "कनेक्शन",
-
-  "__Login.email" : "Email",
+  "__Login.ServerIssue": "An error arrived on the server, please try later",
+  "Login.ServerIssue": "सर्वर पर एक त्रुटि आई, कृपया बाद में प्रयास करें",
+  "Login.badConnection": "खराब कनेक्शन - अपनी साख जांचें",
+  "__Login.connection": "Connection",
+  "Login.connection": "कनेक्शन",
+  "__Login.email": "Email",
   "Login.email" : "ईमेल",
 
   "Login.googleLogin" : "लॉगिन",
@@ -1136,17 +1122,13 @@
 
   "__MyProfile.UserName" : "User name",
   "MyProfile.UserName" : "उपयोगकर्ता नाम",
-
-  "__MyProfile.firstname" : "FirstName",
-  "MyProfile.firstname" : "नाम",
-
-  "__MyProfile.hideTipsUser" : "Hide tips",
-  "MyProfile.hideTipsUser" : "युक्तियाँ छुपाएं",
-
-  "__MyProfile.lastName" : "LastName",
-  "MyProfile.lastName" : "अंतिम नाम",
-
-  "__MyProfile.passwordChangeFailed" : "Change failed",
+  "__MyProfile.firstname": "FirstName",
+  "MyProfile.firstname": "नाम",
+  "__MyProfile.hideTipsUser": "Hide tips",
+  "MyProfile.hideTipsUser": "युक्तियाँ छुपाएं",
+  "__MyProfile.lastName": "LastName",
+  "MyProfile.lastName": "अंतिम नाम",
+  "__MyProfile.passwordChangeFailed": "Change failed",
   "MyProfile.passwordChangeFailed": "परिवर्तन विफल",
   "__MyProfile.passwordChangeInProgress": "In progress",
   "MyProfile.passwordChangeInProgress": "चालू",
@@ -1198,6 +1180,8 @@
   "RegisterNewUser.LastName": "अंतिम नाम",
   "__RegisterNewUser.Password": "Password",
   "RegisterNewUser.Password": "कुंजिका",
+  "__RegisterNewUser.RegisterButton": "Register New User",
+  "RegisterNewUser.RegisterButton": "नया उपयोगकर्ता पंजीकृत करें",
   "__RegisterNewUser.Registration": "Registration",
   "RegisterNewUser.Registration": "पंजीकरण",
   "__RegisterNewUser.RetypePassword": "Retype password",
@@ -1228,6 +1212,6 @@
   "UserFeedback.OperationSuccess": "ऑपरेशन सफल रहा",
   "__UserFeedback.OperationSuccessfull": "Success",
   "UserFeedback.OperationSuccessfull": "सफलता",
-
-  "__UserTips.DeactivateTipInPreference" : "Tips can be deactived in your preference",
-  "UserTips.DeactivateTipInPreference" : "आपकी प्राथमिकता में युक्तियों को निष्क्रिय किया जा सकता है"}
+  "__UserTips.DeactivateTipInPreference": "Tips can be deactived in your preference",
+  "UserTips.DeactivateTipInPreference": "आपकी प्राथमिकता में युक्तियों को निष्क्रिय किया जा सकता है"
+}
