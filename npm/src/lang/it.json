@@ -42,15 +42,12 @@
   "AdminTranslator.TranslateSentences": "Frasi tradotte",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "Numero di traduzioni",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "Amministratore",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "Tutti gli utenti",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "Bloccato",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "Amministratore",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "Tutti gli utenti",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "Bloccato",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "Nome completo",
@@ -655,17 +652,13 @@
 
   "__EventState.Actif" : "Actif",
   "EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "Annullato",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "Fatto",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "In preparazione",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "Annullato",
+  "__EventState.Done": "Done",
+  "EventState.Done": "Fatto",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "In preparazione",
+  "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "Aggiungendo la tua risposta",
   "EventSurvey.AddOne": "Aggiungi uno !",
   "__EventSurvey.AddOption": "Option",
@@ -680,15 +673,12 @@
   "EventSurvey.AnswerAdded": "risposta aggiunta",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "Non posso aggiungere la risposta",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "Impossibile aggiungere un'attività",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "Chiuso",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "Descrizione",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "Impossibile aggiungere un'attività",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "Chiuso",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "Descrizione",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "In preparazione",
@@ -870,17 +860,13 @@
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "Rimozione di un gradino",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "Il passaggio viene rimosso",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "Tutti gli eventi",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "Non riesco ad accedere all'elenco di elementi &quot;",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "Il passaggio viene rimosso",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "Tutti gli eventi",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "Non riesco ad accedere all'elenco di elementi &quot;",
+  "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "Crea un evento",
   "__EventsList.Date": "Date",
   "EventsList.Date": "Data",
@@ -898,6 +884,10 @@
   "EventsList.Refresh": "ricaricare",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "Errore di connessione al server",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "Eventi",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "I miei inviti",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "Budget",
   "__Expense.Cost": "Cost",
@@ -976,16 +966,12 @@
   "__Login.connection": "Connection",
   "Login.connection": "Connection",
   "__Login.email": "Email",
-  "Login.email" : "Email",
-
-  "Login.googleLogin" : "Login",
-
-  "Login.googleLogout" : "Logout",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "Login",
-
-  "__Login.googlelogout" : "Login",
+  "Login.email": "Email",
+  "Login.googleLogin": "Login",
+  "Login.googleLogout": "Logout",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "Login",
+  "__Login.googlelogout": "Login",
   "Login.googlelogout" : "Login",
 
   "__Login.logout" : "Logout",
@@ -1112,16 +1098,13 @@
   "MyProfile.SetANewPassword" : "Imposta una nuova password",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "Togh",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "Url",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "Aggiorna la mia password",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "Nome utente",
+  "MyProfile.Togh": "Togh",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "Url",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "Aggiorna la mia password",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "Nome utente",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "Nome di battesimo",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1200,6 +1183,8 @@
   "RegisterUser.PasswordsAreDifferent": "Le password sono diverse",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "Ora puoi cambiare la tua password. Verrà modificato e verrai connesso immediatamente",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "Aggiorna la mia password",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "Password cambiata",
   "__ResetPassword.passwordchangefailed": "Change failed",

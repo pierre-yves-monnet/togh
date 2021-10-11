@@ -848,6 +848,12 @@
   "EventsList.ServerConnectionError": {
     "defaultMessage": "Server connection error"
   },
+  "EventsList.TitleEvents": {
+    "defaultMessage": "Events"
+  },
+  "EventsList.TitleMyInvitations": {
+    "defaultMessage": "My Invitations"
+  },
   "Expense.Budget": {
     "defaultMessage": "Budget"
   },
@@ -980,14 +986,17 @@
   "Menu.EventsExplanation": {
     "defaultMessage": "Access all events you can access"
   },
+  "Menu.InvitationExplanation": {
+    "defaultMessage": "Check your invitations, accept them."
+  },
+  "Menu.MyInvitations": {
+    "defaultMessage": "My Invitations"
+  },
   "Menu.MyProfile": {
     "defaultMessage": "My Profile"
   },
   "Menu.MyProfileExplanation": {
     "defaultMessage": "Manage your preferences, set up an avatar."
-  },
-  "MyProfile.ChangeEmail": {
-    "defaultMessage": "Change Email"
   },
   "MyProfile.ChangeMyPassword": {
     "defaultMessage": "Change my password"
@@ -1195,6 +1204,9 @@
   },
   "ResetPassword.ResetPasswordProcedure": {
     "defaultMessage": "You can now change your password. It will be changed, and you will be connected immediately"
+  },
+  "ResetPassword.UpdateMyPassword": {
+    "defaultMessage": "Update my password"
   },
   "ResetPassword.passwordchanged": {
     "defaultMessage": "Password changed"

@@ -41,15 +41,12 @@
   "AdminTranslator.TranslateSentences": "الجمل المترجمة",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "عدد الترجمة",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "مدير",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "جميع المستخدمين",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "ممنوع",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "مدير",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "جميع المستخدمين",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "ممنوع",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "اكمل الاسم",
@@ -634,16 +631,13 @@
   "EventShoppingList.removeItem" : "أزل هذا البند",
 
   "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "أكتيف",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "ألغيت",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "منتهي",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "قيد التحضير",
+  "EventState.Actif": "أكتيف",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "ألغيت",
+  "__EventState.Done": "Done",
+  "EventState.Done": "منتهي",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "قيد التحضير",
   "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "مضيفا إجابتك",
   "__EventSurvey.AddOption": "Option",
@@ -658,15 +652,12 @@
   "EventSurvey.AnswerAdded": "تمت إضافة الإجابة",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "لا يمكن إضافة الإجابة",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "لا يمكن إضافة مهمة",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "مغلق",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "وصف",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "لا يمكن إضافة مهمة",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "مغلق",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "وصف",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "قيد التحضير",
@@ -831,16 +822,13 @@
   "Eventitinerary.CantremoveItem" : "لا يمكن إزالة الخطوة",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "إزالة خطوة",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "تم حذف الخطوة",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "كل الأحداث",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "لا يمكن الوصول إلى قائمة العناصر &quot;",
+  "Eventitinerary.RemovingStep": "إزالة خطوة",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "تم حذف الخطوة",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "كل الأحداث",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "لا يمكن الوصول إلى قائمة العناصر &quot;",
   "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "أنشئ حدثًا",
   "__EventsList.Date": "Date",
@@ -859,6 +847,10 @@
   "EventsList.Refresh": "ينعش",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "خطأ في الاتصال بالخادم",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "الأحداث",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "دعواتي",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "ميزانية",
   "__Expense.Cost": "Cost",
@@ -933,15 +925,12 @@
   "Login.connection": "اتصال",
   "__Login.email": "Email",
   "Login.email": "بريد الالكتروني",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "تسجيل الدخول",
-
-  "__Login.googlelogout" : "Login",
-  "Login.googlelogout" : "تسجيل الدخول",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "تسجيل خروج",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "تسجيل الدخول",
+  "__Login.googlelogout": "Login",
+  "Login.googlelogout": "تسجيل الدخول",
+  "__Login.logout": "Logout",
+  "Login.logout": "تسجيل خروج",
 
   "__Login.password" : "Password",
   "Login.password" : "كلمة المرور",
@@ -1064,16 +1053,13 @@
   "MyProfile.SetANewPassword" : "قم بتعيين كلمة مرور جديدة",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "توغ",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "عنوان Url",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "تحديث كلمة المرور الخاصة بي",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "اسم المستخدم",
+  "MyProfile.Togh": "توغ",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "عنوان Url",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "تحديث كلمة المرور الخاصة بي",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "اسم المستخدم",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "الاسم الأول",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1152,6 +1138,8 @@
   "RegisterUser.PasswordsAreDifferent": "كلمات المرور مختلفة",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "يمكنك الآن تغيير كلمة المرور الخاصة بك. سيتم تغييره وسيتم توصيلك على الفور",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "تحديث كلمة المرور الخاصة بي",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "تم تغيير كلمة السر",
   "__ResetPassword.passwordchangefailed": "Change failed",

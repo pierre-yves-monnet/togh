@@ -41,15 +41,12 @@
   "AdminTranslator.TranslateSentences": "Translated sentences",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "Number of translation",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "Administrator",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "All Users",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "Blocked",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "Administrator",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "All Users",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "Blocked",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "Complete Name",
@@ -634,16 +631,13 @@
   "EventShoppingList.removeItem" : "Remove this item",
 
   "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "Cancelled",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "Done",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "In Preparation",
+  "EventState.Actif": "Actif",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "Cancelled",
+  "__EventState.Done": "Done",
+  "EventState.Done": "Done",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "In Preparation",
   "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "Adding your answer",
   "__EventSurvey.AddOption": "Option",
@@ -658,15 +652,12 @@
   "EventSurvey.AnswerAdded": "answer added",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "Can't add the answer",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "A task can't be added",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "closed",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "Description",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "A task can't be added",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "closed",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "Description",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "In preparation",
@@ -831,16 +822,13 @@
   "Eventitinerary.CantremoveItem" : "The step can't be removed",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "Removing a step",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "The step is removed",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "All events",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "Can't access the list of item'",
+  "Eventitinerary.RemovingStep": "Removing a step",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "The step is removed",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "All events",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "Can't access the list of item'",
   "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "Create an Event",
   "__EventsList.Date": "Date",
@@ -859,6 +847,10 @@
   "EventsList.Refresh": "Refresh",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "Server connection error",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "Events",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "My Invitations",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "Budget",
   "__Expense.Cost": "Cost",
@@ -933,15 +925,12 @@
   "Login.connection": "Connection",
   "__Login.email": "Email",
   "Login.email": "Email",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "Login",
-
-  "__Login.googlelogout" : "Login",
-  "Login.googlelogout" : "Login",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "Logout",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "Login",
+  "__Login.googlelogout": "Login",
+  "Login.googlelogout": "Login",
+  "__Login.logout": "Logout",
+  "Login.logout": "Logout",
 
   "__Login.password" : "Password",
   "Login.password" : "Password",
@@ -1064,16 +1053,13 @@
   "MyProfile.SetANewPassword" : "Set a new password",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "Togh",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "Url",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "Update my password",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "User name",
+  "MyProfile.Togh": "Togh",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "Url",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "Update my password",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "User name",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "FirstName",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1152,6 +1138,8 @@
   "RegisterUser.PasswordsAreDifferent": "Passwords are different",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "Update my password",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "Password changed",
   "__ResetPassword.passwordchangefailed": "Change failed",

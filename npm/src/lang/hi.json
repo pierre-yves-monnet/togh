@@ -42,15 +42,12 @@
   "AdminTranslator.TranslateSentences": "अनूदित वाक्य",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "अनुवाद की संख्या",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "प्रशासक",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "सभी उपयोगकर्ता",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "अवरोधित",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "प्रशासक",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "सभी उपयोगकर्ता",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "अवरोधित",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "पूरा नाम",
@@ -655,17 +652,13 @@
 
   "__EventState.Actif" : "Actif",
   "EventState.Actif" : "एक्टिफ",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "रद्द",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "किया हुआ",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "तैयारी में",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "रद्द",
+  "__EventState.Done": "Done",
+  "EventState.Done": "किया हुआ",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "तैयारी में",
+  "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "अपना उत्तर जोड़ना",
   "EventSurvey.AddOne": "एक जोड़ें !",
   "__EventSurvey.AddOption": "Option",
@@ -680,15 +673,12 @@
   "EventSurvey.AnswerAdded": "उत्तर जोड़ा गया",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "उत्तर नहीं जोड़ सकते",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "कोई कार्य जोड़ा नहीं जा सकता",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "बंद किया हुआ",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "विवरण",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "कोई कार्य जोड़ा नहीं जा सकता",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "बंद किया हुआ",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "विवरण",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "तैयारी में",
@@ -870,17 +860,13 @@
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "एक कदम हटाना",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "कदम हटा दिया है",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "सभी कार्यक्रम",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "आइटम की सूची तक नहीं पहुंच सकते '",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "कदम हटा दिया है",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "सभी कार्यक्रम",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "आइटम की सूची तक नहीं पहुंच सकते '",
+  "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "एक घटना बनाएँ",
   "__EventsList.Date": "Date",
   "EventsList.Date": "दिनांक",
@@ -898,6 +884,10 @@
   "EventsList.Refresh": "ताज़ा करना",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "सर्वर कनेक्शन त्रुटि",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "आयोजन",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "मेरे निमंत्रण",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "बजट",
   "__Expense.Cost": "Cost",
@@ -976,16 +966,12 @@
   "__Login.connection": "Connection",
   "Login.connection": "कनेक्शन",
   "__Login.email": "Email",
-  "Login.email" : "ईमेल",
-
-  "Login.googleLogin" : "लॉगिन",
-
-  "Login.googleLogout" : "लॉगआउट",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "लॉग इन करें",
-
-  "__Login.googlelogout" : "Login",
+  "Login.email": "ईमेल",
+  "Login.googleLogin": "लॉगिन",
+  "Login.googleLogout": "लॉगआउट",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "लॉग इन करें",
+  "__Login.googlelogout": "Login",
   "Login.googlelogout" : "लॉग इन करें",
 
   "__Login.logout" : "Logout",
@@ -1112,16 +1098,13 @@
   "MyProfile.SetANewPassword" : "नया पासवर्ड सेट करें",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "तोग",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "यूआरएल",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "मेरा पासवर्ड अपडेट करें",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "उपयोगकर्ता नाम",
+  "MyProfile.Togh": "तोग",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "यूआरएल",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "मेरा पासवर्ड अपडेट करें",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "उपयोगकर्ता नाम",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "नाम",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1200,6 +1183,8 @@
   "RegisterUser.PasswordsAreDifferent": "पासवर्ड अलग हैं",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "अब आप अपना पासवर्ड बदल सकते हैं। इसे बदल दिया जाएगा, और आप तुरंत कनेक्ट हो जाएंगे",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "मेरा पासवर्ड अपडेट करें",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "पासवर्ड बदला गया",
   "__ResetPassword.passwordchangefailed": "Change failed",

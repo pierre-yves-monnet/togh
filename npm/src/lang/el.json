@@ -41,15 +41,12 @@
   "AdminTranslator.TranslateSentences": "Μεταφρασμένες προτάσεις",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "Αριθμός μετάφρασης",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "Διαχειριστής",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "Ολοι οι χρήστες",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "Αποκλείστηκε",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "Διαχειριστής",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "Ολοι οι χρήστες",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "Αποκλείστηκε",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "Πλήρες όνομα",
@@ -634,16 +631,13 @@
   "EventShoppingList.removeItem" : "Αφαιρέστε αυτό το αντικείμενο",
 
   "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "Ακυρώθηκε",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "Εγινε",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "Σε προετοιμασία",
+  "EventState.Actif": "Actif",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "Ακυρώθηκε",
+  "__EventState.Done": "Done",
+  "EventState.Done": "Εγινε",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "Σε προετοιμασία",
   "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "Προσθέτοντας την απάντησή σας",
   "__EventSurvey.AddOption": "Option",
@@ -658,15 +652,12 @@
   "EventSurvey.AnswerAdded": "προστέθηκε απάντηση",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "Δεν είναι δυνατή η προσθήκη της απάντησης",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "Δεν είναι δυνατή η προσθήκη μιας εργασίας",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "κλειστό",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "Περιγραφή",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "Δεν είναι δυνατή η προσθήκη μιας εργασίας",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "κλειστό",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "Περιγραφή",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "Σε προετοιμασία",
@@ -831,16 +822,13 @@
   "Eventitinerary.CantremoveItem" : "Δεν είναι δυνατή η κατάργηση του βήματος",
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "Κατάργηση ενός βήματος",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "Το βήμα αφαιρείται",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "Όλα τα γεγονότα",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "Δεν είναι δυνατή η πρόσβαση στη λίστα του αντικειμένου '",
+  "Eventitinerary.RemovingStep": "Κατάργηση ενός βήματος",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "Το βήμα αφαιρείται",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "Όλα τα γεγονότα",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "Δεν είναι δυνατή η πρόσβαση στη λίστα του αντικειμένου '",
   "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "Δημιουργήστε ένα συμβάν",
   "__EventsList.Date": "Date",
@@ -859,6 +847,10 @@
   "EventsList.Refresh": "Φρεσκάρω",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "Σφάλμα σύνδεσης διακομιστή",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "Εκδηλώσεις",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "Οι προσκλήσεις μου",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "Προϋπολογισμός",
   "__Expense.Cost": "Cost",
@@ -933,15 +925,12 @@
   "Login.connection": "Σύνδεση",
   "__Login.email": "Email",
   "Login.email": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "Σύνδεση",
-
-  "__Login.googlelogout" : "Login",
-  "Login.googlelogout" : "Σύνδεση",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "Αποσύνδεση",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "Σύνδεση",
+  "__Login.googlelogout": "Login",
+  "Login.googlelogout": "Σύνδεση",
+  "__Login.logout": "Logout",
+  "Login.logout": "Αποσύνδεση",
 
   "__Login.password" : "Password",
   "Login.password" : "Κωδικός πρόσβασης",
@@ -1064,16 +1053,13 @@
   "MyProfile.SetANewPassword" : "Ορίστε νέο κωδικό πρόσβασης",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "Τοχ",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "Url",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "Ενημέρωση κωδικού πρόσβασης",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "Ονομα χρήστη",
+  "MyProfile.Togh": "Τοχ",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "Url",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "Ενημέρωση κωδικού πρόσβασης",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "Ονομα χρήστη",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "Ονομα",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1152,6 +1138,8 @@
   "RegisterUser.PasswordsAreDifferent": "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "Τώρα μπορείτε να αλλάξετε τον κωδικό πρόσβασής σας. Θα αλλάξει και θα συνδεθείτε αμέσως",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "Ενημέρωση κωδικού πρόσβασης",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "Ο κωδικός άλλαξε",
   "__ResetPassword.passwordchangefailed": "Change failed",

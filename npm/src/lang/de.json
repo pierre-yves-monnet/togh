@@ -41,27 +41,21 @@
   "AdminTranslator.TranslateSentences": "Übersetzte Sätze",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "Anzahl der Übersetzungen",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "Administrator",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "Alle Nutzer",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "verstopft",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "Administrator",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "Alle Nutzer",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "verstopft",
 
   "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "Vollständiger Name",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "In Verbindung gebracht",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "Benutzer offline",
-
-  "__AdminUsers.ConnectedOnLine" : "User connected",
-  "AdminUsers.ConnectedOnLine" : "Benutzer verbunden",
+  "AdminUsers.CompleteName": "Vollständiger Name",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "In Verbindung gebracht",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "Benutzer offline",
+  "__AdminUsers.ConnectedOnLine": "User connected",
+  "AdminUsers.ConnectedOnLine": "Benutzer verbunden",
   "__AdminUsers.Disconnect": "Disconnect",
   "AdminUsers.Disconnect": "Trennen",
   "__AdminUsers.Email": "Email",
@@ -172,15 +166,12 @@
   "Event.DatePolicy": "Datumsrichtlinie",
   "__Event.Description": "Description",
   "Event.Description": "Beschreibung",
-
-  "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "Dauer",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "Endtermin",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "Datum",
+  "__Event.DurationEvent": "Duration",
+  "Event.DurationEvent": "Dauer",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "Endtermin",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "Datum",
 
   "__Event.Expense" : "Expense",
   "Event.Expense" : "Kosten",
@@ -225,16 +216,13 @@
   "Event.ScopeSecret" : "Geheimnis",
 
   "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "Einkaufsliste",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "Anfangsdatum",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "Status",
-
-  "__Event.Survey" : "Survey",
-  "Event.Survey" : "Umfrage",
+  "Event.ShoppingList": "Einkaufsliste",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "Anfangsdatum",
+  "__Event.Status": "Status",
+  "Event.Status": "Status",
+  "__Event.Survey": "Survey",
+  "Event.Survey": "Umfrage",
   "__Event.Tasks": "Tasks",
   "Event.Tasks": "Aufgaben",
   "__Event.TimeEvent": "Time",
@@ -301,15 +289,12 @@
   "EventItinerary.MainTitleItinerary": "Route",
   "__EventItinerary.NoAddressProvided": "No address are provided for this day.",
   "EventItinerary.NoAddressProvided": "Für diesen Tag wird keine Adresse angegeben.",
-
-  "__EventItinerary.ProvideDateInEvent" : "Select a date for this event",
-  "EventItinerary.ProvideDateInEvent" : "Wählen Sie ein Datum für dieses Ereignis",
-
-  "__EventItinerary.ProvidePeriodDateInEvent" : "Select a start and a end date for this event",
-  "EventItinerary.ProvidePeriodDateInEvent" : "Wählen Sie ein Start- und ein Enddatum für dieses Ereignis",
-
-  "__EventItinerary.ShowDetail" : "Show Detail",
-  "EventItinerary.ShowDetail" : "Detail anzeigen",
+  "__EventItinerary.ProvideDateInEvent": "Select a date for this event",
+  "EventItinerary.ProvideDateInEvent": "Wählen Sie ein Datum für dieses Ereignis",
+  "__EventItinerary.ProvidePeriodDateInEvent": "Select a start and a end date for this event",
+  "EventItinerary.ProvidePeriodDateInEvent": "Wählen Sie ein Start- und ein Enddatum für dieses Ereignis",
+  "__EventItinerary.ShowDetail": "Show Detail",
+  "EventItinerary.ShowDetail": "Detail anzeigen",
 
   "__EventItinerary.ShowExpense" : "Show Expense",
   "EventItinerary.ShowExpense" : "Kosten anzeigen",
@@ -540,16 +525,13 @@
   "EventShoppingList.removeItem" : "entferne diesen Gegenstand",
 
   "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "Abgebrochen",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "Getan",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "In Vorbereitung",
+  "EventState.Actif": "Actif",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "Abgebrochen",
+  "__EventState.Done": "Done",
+  "EventState.Done": "Getan",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "In Vorbereitung",
   "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "Hinzufügen Ihrer Antwort",
   "__EventSurvey.AddOption": "Option",
@@ -564,15 +546,12 @@
   "EventSurvey.AnswerAdded": "Antwort hinzugefügt",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "Die Antwort kann nicht hinzugefügt werden",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "Eine Aufgabe kann nicht hinzugefügt werden",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "geschlossen",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "Beschreibung",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "Eine Aufgabe kann nicht hinzugefügt werden",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "geschlossen",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "Beschreibung",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "In Vorbereitung",
@@ -680,16 +659,13 @@
   "EventTaskList.FilterMyTasks" : "Meine Aufgaben",
 
   "__EventTaskList.FilterPlanned" : "Planned",
-  "EventTaskList.FilterPlanned" : "Geplant",
-
-  "__EventTaskList.FilterUnaffected" : "Unaffected",
-  "EventTaskList.FilterUnaffected" : "Unberührt",
-
-  "__EventTaskList.InProgress" : "In progress",
-  "EventTaskList.InProgress" : "In Bearbeitung",
-
-  "__EventTaskList.LimitSubsscription" : "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
-  "EventTaskList.LimitSubsscription" : "Sie erreichen die Grenze der im Ereignis zulässigen Aufgaben. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
+  "EventTaskList.FilterPlanned": "Geplant",
+  "__EventTaskList.FilterUnaffected": "Unaffected",
+  "EventTaskList.FilterUnaffected": "Unberührt",
+  "__EventTaskList.InProgress": "In progress",
+  "EventTaskList.InProgress": "In Bearbeitung",
+  "__EventTaskList.LimitSubsscription": "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription",
+  "EventTaskList.LimitSubsscription": "Sie erreichen die Grenze der im Ereignis zulässigen Aufgaben. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
   "__EventTaskList.MainTitleTaskList": "Tasks List",
   "EventTaskList.MainTitleTaskList": "Aufgabenliste",
   "__EventTaskList.NoItem": "You don't have any task in the list.",
@@ -746,6 +722,10 @@
   "EventsList.Refresh": "Aktualisierung",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "Serververbindungsfehler",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "Veranstaltungen",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "Meine Einladungen",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "Budget",
   "__Expense.Cost": "Cost",
@@ -992,6 +972,8 @@
   "RegisterUser.PasswordsAreDifferent": "Passwörter sind anders",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "Sie können jetzt Ihr Passwort ändern. Es wird geändert und Sie werden sofort verbunden",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "Aktualisiere mein Passwort",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "Passwort geändert",
   "__ResetPassword.passwordchangefailed": "Change failed",

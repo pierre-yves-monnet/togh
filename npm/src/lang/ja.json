@@ -42,15 +42,12 @@
   "AdminTranslator.TranslateSentences": "翻訳された文章",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "翻訳数",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "管理者",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "全てのユーザー",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "ブロックされた",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "管理者",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "全てのユーザー",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "ブロックされた",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "完全な名前",
@@ -655,17 +652,13 @@
 
   "__EventState.Actif" : "Actif",
   "EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "キャンセル",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "完了",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "準備中",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "キャンセル",
+  "__EventState.Done": "Done",
+  "EventState.Done": "完了",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "準備中",
+  "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "あなたの答えを追加する",
   "EventSurvey.AddOne": "1つ追加してください！",
   "__EventSurvey.AddOption": "Option",
@@ -680,15 +673,12 @@
   "EventSurvey.AnswerAdded": "回答を追加",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "答えを追加できません",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "タスクを追加できません",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "閉まっている",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "説明",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "タスクを追加できません",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "閉まっている",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "説明",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "準備中",
@@ -870,17 +860,13 @@
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "ステップの削除",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "ステップが削除されます",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "すべてのイベント",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "アイテムのリストにアクセスできません」",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "ステップが削除されます",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "すべてのイベント",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "アイテムのリストにアクセスできません」",
+  "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "イベントを作成する",
   "__EventsList.Date": "Date",
   "EventsList.Date": "日にち",
@@ -898,6 +884,10 @@
   "EventsList.Refresh": "更新",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "サーバー接続エラー",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "イベント",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "私の招待状",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "予算",
   "__Expense.Cost": "Cost",
@@ -976,16 +966,12 @@
   "__Login.connection": "Connection",
   "Login.connection": "接続",
   "__Login.email": "Email",
-  "Login.email" : "Email",
-
-  "Login.googleLogin" : "ログイン",
-
-  "Login.googleLogout" : "ログアウト",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "ログイン",
-
-  "__Login.googlelogout" : "Login",
+  "Login.email": "Email",
+  "Login.googleLogin": "ログイン",
+  "Login.googleLogout": "ログアウト",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "ログイン",
+  "__Login.googlelogout": "Login",
   "Login.googlelogout" : "ログイン",
 
   "__Login.logout" : "Logout",
@@ -1112,16 +1098,13 @@
   "MyProfile.SetANewPassword" : "新しいパスワードを設定する",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "トグ",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "URL",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "パスワードを更新する",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "ユーザー名",
+  "MyProfile.Togh": "トグ",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "URL",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "パスワードを更新する",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "ユーザー名",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "ファーストネーム",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1200,6 +1183,8 @@
   "RegisterUser.PasswordsAreDifferent": "パスワードが異なります",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "これで、パスワードを変更できます。変更され、すぐに接続されます",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "パスワードを更新する",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "パスワード変更済み",
   "__ResetPassword.passwordchangefailed": "Change failed",

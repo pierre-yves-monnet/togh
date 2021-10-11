@@ -42,15 +42,12 @@
   "AdminTranslator.TranslateSentences": "번역 된 문장",
   "__AdminTranslator.nbTransations": "Number of translation",
   "AdminTranslator.nbTransations": "번역 수",
-
-  "__AdminUsers.Administrator" : "Administrator",
-  "AdminUsers.Administrator" : "관리자",
-
-  "__AdminUsers.AllUsers" : "All Users",
-  "AdminUsers.AllUsers" : "모든 사용자들",
-
-  "__AdminUsers.Blocked" : "Blocked",
-  "AdminUsers.Blocked" : "막힌",
+  "__AdminUsers.Administrator": "Administrator",
+  "AdminUsers.Administrator": "관리자",
+  "__AdminUsers.AllUsers": "All Users",
+  "AdminUsers.AllUsers": "모든 사용자들",
+  "__AdminUsers.Blocked": "Blocked",
+  "AdminUsers.Blocked": "막힌",
 
   "__AdminUsers.CompleteName" : "Complete Name",
   "AdminUsers.CompleteName" : "완전한 이름",
@@ -655,17 +652,13 @@
 
   "__EventState.Actif" : "Actif",
   "EventState.Actif" : "Actif",
-
-  "__EventState.Cancelled" : "Cancelled",
-  "EventState.Cancelled" : "취소 된",
-
-  "__EventState.Done" : "Done",
-  "EventState.Done" : "끝난",
-
-  "__EventState.InPreparation" : "In Preparation",
-  "EventState.InPreparation" : "준비 중",
-
-  "__EventSurvey.AddAnswer" : "Adding your answer",
+  "__EventState.Cancelled": "Cancelled",
+  "EventState.Cancelled": "취소 된",
+  "__EventState.Done": "Done",
+  "EventState.Done": "끝난",
+  "__EventState.InPreparation": "In Preparation",
+  "EventState.InPreparation": "준비 중",
+  "__EventSurvey.AddAnswer": "Adding your answer",
   "EventSurvey.AddAnswer": "답변 추가",
   "EventSurvey.AddOne": "하나 추가!",
   "__EventSurvey.AddOption": "Option",
@@ -680,15 +673,12 @@
   "EventSurvey.AnswerAdded": "답변 추가",
   "__EventSurvey.CantaddAnswer": "Can't add the answer",
   "EventSurvey.CantaddAnswer": "답변을 추가 할 수 없습니다.",
-
-  "__EventSurvey.CantaddItem" : "A task can't be added",
-  "EventSurvey.CantaddItem" : "작업을 추가 할 수 없습니다.",
-
-  "__EventSurvey.Closed" : "closed",
-  "EventSurvey.Closed" : "닫은",
-
-  "__EventSurvey.Description" : "Description",
-  "EventSurvey.Description" : "기술",
+  "__EventSurvey.CantaddItem": "A task can't be added",
+  "EventSurvey.CantaddItem": "작업을 추가 할 수 없습니다.",
+  "__EventSurvey.Closed": "closed",
+  "EventSurvey.Closed": "닫은",
+  "__EventSurvey.Description": "Description",
+  "EventSurvey.Description": "기술",
 
   "__EventSurvey.InPreparation" : "In preparation",
   "EventSurvey.InPreparation" : "준비 중",
@@ -870,17 +860,13 @@
 
   "__Eventitinerary.RemovingStep" : "Removing a step",
   "Eventitinerary.RemovingStep" : "단계 제거",
-
-  "__Eventitinerary.StepRemoved" : "The step is removed",
-  "Eventitinerary.StepRemoved" : "단계가 제거되었습니다.",
-
-  "__EventsList.AllEvents" : "All events",
-  "EventsList.AllEvents" : "모든 이벤트",
-
-  "__EventsList.CantGetListItem" : "Can't access the list of item'",
-  "EventsList.CantGetListItem" : "항목 목록에 액세스 할 수 없습니다. '",
-
-  "__EventsList.CreateAnEvent" : "Create an Event",
+  "__Eventitinerary.StepRemoved": "The step is removed",
+  "Eventitinerary.StepRemoved": "단계가 제거되었습니다.",
+  "__EventsList.AllEvents": "All events",
+  "EventsList.AllEvents": "모든 이벤트",
+  "__EventsList.CantGetListItem": "Can't access the list of item'",
+  "EventsList.CantGetListItem": "항목 목록에 액세스 할 수 없습니다. '",
+  "__EventsList.CreateAnEvent": "Create an Event",
   "EventsList.CreateAnEvent": "이벤트 만들기",
   "__EventsList.Date": "Date",
   "EventsList.Date": "날짜",
@@ -898,6 +884,10 @@
   "EventsList.Refresh": "새로 고치다",
   "__EventsList.ServerConnectionError": "Server connection error",
   "EventsList.ServerConnectionError": "서버 연결 오류",
+  "__EventsList.TitleEvents": "Events",
+  "EventsList.TitleEvents": "이벤트",
+  "__EventsList.TitleMyInvitations": "My Invitations",
+  "EventsList.TitleMyInvitations": "내 초대장",
   "__Expense.Budget": "Budget",
   "Expense.Budget": "예산",
   "__Expense.Cost": "Cost",
@@ -976,16 +966,12 @@
   "__Login.connection": "Connection",
   "Login.connection": "연결",
   "__Login.email": "Email",
-  "Login.email" : "이메일",
-
-  "Login.googleLogin" : "로그인",
-
-  "Login.googleLogout" : "로그 아웃",
-
-  "__Login.googlelogin" : "Login",
-  "Login.googlelogin" : "로그인",
-
-  "__Login.googlelogout" : "Login",
+  "Login.email": "이메일",
+  "Login.googleLogin": "로그인",
+  "Login.googleLogout": "로그 아웃",
+  "__Login.googlelogin": "Login",
+  "Login.googlelogin": "로그인",
+  "__Login.googlelogout": "Login",
   "Login.googlelogout" : "로그인",
 
   "__Login.logout" : "Logout",
@@ -1112,16 +1098,13 @@
   "MyProfile.SetANewPassword" : "새 비밀번호 설정",
 
   "__MyProfile.Togh" : "Togh",
-  "MyProfile.Togh" : "Togh",
-
-  "__MyProfile.URL" : "Url",
-  "MyProfile.URL" : "URL",
-
-  "__MyProfile.UpdateMyPassword" : "Update my password",
-  "MyProfile.UpdateMyPassword" : "내 비밀번호 업데이트",
-
-  "__MyProfile.UserName" : "User name",
-  "MyProfile.UserName" : "사용자 이름",
+  "MyProfile.Togh": "Togh",
+  "__MyProfile.URL": "Url",
+  "MyProfile.URL": "URL",
+  "__MyProfile.UpdateMyPassword": "Update my password",
+  "MyProfile.UpdateMyPassword": "내 비밀번호 업데이트",
+  "__MyProfile.UserName": "User name",
+  "MyProfile.UserName": "사용자 이름",
   "__MyProfile.firstname": "FirstName",
   "MyProfile.firstname": "이름",
   "__MyProfile.hideTipsUser": "Hide tips",
@@ -1200,6 +1183,8 @@
   "RegisterUser.PasswordsAreDifferent": "비밀번호가 다릅니다",
   "__ResetPassword.ResetPasswordProcedure": "You can now change your password. It will be changed, and you will be connected immediately",
   "ResetPassword.ResetPasswordProcedure": "이제 비밀번호를 변경할 수 있습니다. 변경되며 즉시 연결됩니다.",
+  "__ResetPassword.UpdateMyPassword": "Update my password",
+  "ResetPassword.UpdateMyPassword": "내 비밀번호 업데이트",
   "__ResetPassword.passwordchanged": "Password changed",
   "ResetPassword.passwordchanged": "비밀번호 변경됨",
   "__ResetPassword.passwordchangefailed": "Change failed",
