@@ -32,7 +32,7 @@ class LogEvent extends React.Component {
 			listEvents: props.listEvents
 		};
 				
-		console.log("LogEvent: constructor "+JSON.stringify(this.state.listEvents));
+		// console.log("LogEvent: constructor "+JSON.stringify(this.state.listEvents));
 
 	}
 	componentDidUpdate(prevProps) {
@@ -46,9 +46,7 @@ class LogEvent extends React.Component {
 
   
 	render() {
-	    console.log("LogEvent: render "+JSON.stringify(this.state.listEvents));
-		
-
+	    // console.log("LogEvent: render "+JSON.stringify(this.state.listEvents));
 
 		if (! this.state.listEvents || this.state.listEvents.length===0) {
 			return (<div/>);

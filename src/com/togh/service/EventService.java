@@ -248,24 +248,35 @@ public class EventService {
 
     /**
      * Get Events
-     * 
+     *
      * @param toghUserEntity
      * @param filterEvents
      * @return
      */
-    public EventResult getEvents(ToghUserEntity toghUserEntity, String filterEvents) {
+    public EventResult getEvents(ToghUserEntity toghUserEntity, FilterEvents filterEvents) {
         EventResult eventResult = new EventResult();
         try {
-            if (filterEvents.equals("myevents"))
-                eventResult.listEvents = eventRepository.findMyEventsUser(toghUserEntity.getId());
-            else
-                eventResult.listEvents = eventRepository.findEventsUser(toghUserEntity.getId());
+            switch (filterEvents) {
+                case MYEVENTS:
+                    eventResult.listEvents = eventRepository.findMyEventsUser(toghUserEntity.getId());
+                    break;
+                case ALLEVENTS:
+                    eventResult.listEvents = eventRepository.findEventsUser(toghUserEntity.getId());
+                    break;
+                case MYINVITATIONS:
+                    eventResult.listEvents = eventRepository.findEventsUserByStatusParticipant(toghUserEntity.getId(), ParticipantEntity.StatusEnum.INVITED);
+                    break;
+            }
         } catch (Exception e) {
             // something bad arrived
             logger.severe(LOG_HEADER + " Error during finEventsUser toghUser[" + toghUserEntity.getId() + "] :" + e.toString());
             eventResult.listLogEvent.add(new LogEvent(eventFindEventError, e, "User [" + toghUserEntity.getId()));
         }
         return eventResult;
+    }
+
+    public enum FilterEvents {
+        MYEVENTS, ALLEVENTS, MYINVITATIONS
     }
 
     public EventEntity getEventById(Long eventId) {

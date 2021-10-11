@@ -18,7 +18,15 @@ package com.togh.restcontroller;
 /* ******************************************************************************** */
 public class RestJsonConstants {
 
+    /**
+     * filter
+     */
     public static final String CST_PARAM_FILTER_EVENTS = "filterEvents";
+    public static final String CST_PARAM_FILTER_EVENTS_V_MYEVENTS = "MyEvents";
+    public static final String CST_PARAM_FILTER_EVENTS_V_ALLEVENTS = "AllEvents";
+    public static final String CST_PARAM_FILTER_EVENTS_V_MYINVITATIONS = "MyInvitations";
+
+    public static final String CST_PARAM_TYPE_EVENTS = "TypeEvents";
     public static final String CST_PARAM_NAME = "name";
     public static final String CST_LIST_LOG_EVENTS = "listLogEvents";
     public static final String CST_EVENT_ID = "eventId";
@@ -35,7 +43,7 @@ public class RestJsonConstants {
     public static final String CST_STATUS_V_ERROR = "ERROR";
     public static final String CST_MESSAGE_OK = "okMessage";
     public static final String CST_MESSAGE_ERROR = "errorMessage";
-    public static final String CST_MESSAGE_ERROR_SEND_EMAIL="errorSendEmail";
+    public static final String CST_MESSAGE_ERROR_SEND_EMAIL = "errorSendEmail";
 
     public static final String CST_ISINVITATIONSENT = "isInvitationSent";
     static final String CST_PARAM_AUTHORIZATION = "Authorization";
@@ -59,10 +67,18 @@ public class RestJsonConstants {
     static final String CST_PARAM_SEARCHUSER_PREMIUM = "premium";
     static final String CST_PARAM_SEARCHUSER_EXCELLENCE = "excellence";
     static final String CST_PARAM_SEARCHUSER_TIMEZONEOFFSET = "timezoneoffset";
-    
-    
+
+
     static final String CST_PARAM_USERID = "userid";
     static final String CST_PARAM_ATTRIBUT = "attribut";
     static final String CST_PARAM_VALUE = "value";
 
+
+    /**
+     * List of constants
+     */
+    private RestJsonConstants() {
+    }
+
+    ;
 }

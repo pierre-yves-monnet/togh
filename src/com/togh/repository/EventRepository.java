@@ -2,6 +2,7 @@ package com.togh.repository;
 
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.StatusEventEnum;
+import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,6 +30,10 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
     @Query("SELECT e FROM EventEntity e,  ToghUserEntity t join e.participantList p where p.user = t and t.id = :userid order by e.dateCreation")
     List<EventEntity> findEventsUser(@Param("userid") Long userId);
 
+
+    @Query("SELECT e FROM EventEntity e,  ToghUserEntity t join e.participantList p where p.user = t and p.status= :statusparticipant and t.id = :userid order by e.dateCreation")
+    List<EventEntity> findEventsUserByStatusParticipant(@Param("userid") Long userId, @Param("statusparticipant") ParticipantEntity.StatusEnum statusParticipant);
+
     @Query("SELECT count(e) FROM EventEntity e, ToghUserEntity t "
             + "JOIN e.participantList p "
             + "WHERE p.user = t and t.id = :userid and p.role = :role and e.dateCreation > :datecreationevent")
@@ -36,8 +41,9 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     /**
      * Search all past event OR, if the event is just modified in the last X time, then it survived
-     * @param connectionLastActivity
-     * @param connectionLastActivity
+     *
+     * @param timeLimit
+     * @param timeGrace
      * @return
      */
     @Query("SELECT e FROM EventEntity e "

@@ -47,22 +47,22 @@ public class RestEventController {
     @Autowired
     private FactoryService factoryService;
 
-    @Autowired EventService eventService;
+    @Autowired
+    EventService eventService;
 
     /**
-     *
-     * @param filterEvents
+     * @param filterEvents     filterEvents
      * @param timezoneOffset
      * @param withParticipants
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp  Information on the connected user
      * @return
      */
     @CrossOrigin
     @GetMapping("/api/event/list")
-      public Map<String, Object> events(@RequestParam( RestJsonConstants.CST_PARAM_FILTER_EVENTS ) String filterEvents,
-              @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
-              @RequestParam( name="withParticipants", required = false) Boolean withParticipants,
-              @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public Map<String, Object> events(@RequestParam(RestJsonConstants.CST_PARAM_FILTER_EVENTS) String filterEvents,
+                                      @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                      @RequestParam(name = "withParticipants", required = false) Boolean withParticipants,
+                                      @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
 
         if (toghUser == null) {
@@ -70,40 +70,42 @@ public class RestEventController {
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         AdditionnalInformationEvent additionnalInformation = new AdditionnalInformationEvent();
-        additionnalInformation.withParticipantsAsString=withParticipants;
-        
+        additionnalInformation.withParticipantsAsString = withParticipants;
+
         Map<String, Object> payload = new HashMap<>();
-       completePayloadListEvents(payload, toghUser, filterEvents, additionnalInformation, timezoneOffset);       
+        completePayloadListEvents(payload, toghUser, filterEvents, additionnalInformation, timezoneOffset);
 
         return payload;
 
     }
+
     /**
      * Get an event to display it
+     *
      * @param eventId
      * @param timezoneOffset
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp Information on the connected user
      * @return
      */
     @CrossOrigin
     @GetMapping("/api/event")
     public Map<String, Object> event(@RequestParam("id") Long eventId,
-            @RequestParam( name=RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
-            @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
-        ToghUserEntity toghUserEntity  = factoryService.getLoginService().isConnected(connectionStamp);
+                                     @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                     @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUserEntity == null)
-            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         EventEntity eventEntity = eventService.getAllowedEventById(toghUserEntity, eventId);
         if (eventEntity == null)
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
-        
-        eventService.accessByUser( eventEntity, toghUserEntity);
-        
-       
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
+
+        eventService.accessByUser(eventEntity, toghUserEntity);
+
+
         Map<String, Object> payload = new HashMap<>();
-        
-        payload.put( RestJsonConstants.CST_EVENT, eventService.getMap( eventEntity, toghUserEntity, timezoneOffset));
+
+        payload.put(RestJsonConstants.CST_EVENT, eventService.getMap(eventEntity, toghUserEntity, timezoneOffset));
 
         return payload;
 
@@ -112,35 +114,39 @@ public class RestEventController {
     /**
      * Create a new event
      *
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp Information on the connected user
      * @return
      */
     @CrossOrigin
     @PostMapping(value = "/api/event/create", produces = "application/json")
     @ResponseBody
     public Map<String, Object> createEvent(
-            @Param( RestJsonConstants.CST_PARAM_NAME ) String eventName,
+            @Param(RestJsonConstants.CST_PARAM_NAME) String eventName,
             @Param("getlist") Boolean getList,
-            @Param( RestJsonConstants.CST_PARAM_FILTER_EVENTS ) String filterEvents,
+            @Param(RestJsonConstants.CST_PARAM_FILTER_EVENTS) String filterEvents,
             @RequestBody Map<String, Object> postData,
             @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         Map<String, Object> payload = new HashMap<>();
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
-            throw new ResponseStatusException( HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long timezoneOffset             = ToolCast.getLong(postData, "timezoneoffset", 0L);
+        Long timezoneOffset = ToolCast.getLong(postData, "timezoneoffset", 0L);
 
-        if (eventName ==null || eventName.trim().length()==0)
-            eventName="New event";
-        EventOperationResult eventOperationResult = eventService.createEvent(toghUser, eventName );
-        if (Boolean.TRUE.equals(getList)) {            
-            completePayloadListEvents(payload, toghUser, filterEvents, new AdditionnalInformationEvent(), timezoneOffset);
+        if (eventName == null || eventName.trim().length() == 0)
+            eventName = "New event";
+        EventOperationResult eventOperationResult = eventService.createEvent(toghUser, eventName);
+        if (Boolean.TRUE.equals(getList)) {
+            completePayloadListEvents(payload,
+                    toghUser,
+                    RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_ALLEVENTS,
+                    new AdditionnalInformationEvent(),
+                    timezoneOffset);
         }
-        payload.put( RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
-        payload.put( RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId() );
-        payload.put( RestJsonConstants.CST_LIST_LOG_EVENTS, eventOperationResult.getEventsJson());
-        payload.put( RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
+        payload.put(RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
+        payload.put(RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId());
+        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, eventOperationResult.getEventsJson());
+        payload.put(RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
 
         return payload;
 
@@ -148,26 +154,27 @@ public class RestEventController {
 
 
     /**
-     * Invite 
-     *   /invite?
-     *   /invitation?
-     *   {
-     *      var param = {
-            eventid : <eventid>,
-            email : '',
-            userid: <thoguserId>,
-            message : '',
-            role: <ORGANIZER|PARTICIPANT|OBSERVER>
-        }
-     *   payload
-     *   {
-     *      "eventid" :<eventId>,
-     *      "useremail" :"email",
-     *      "userid" : <userId>,
-     *      "role" : "ORGANIZER|PARTICIPANT|OBSERVER"
-     *   }
-     * @param inviteData Data for invitation
-     * @param connectionStamp    Information on the connected user
+     * Invite
+     * /invite?
+     * /invitation?
+     * {
+     * var param = {
+     * eventid : <eventid>,
+     * email : '',
+     * userid: <thoguserId>,
+     * message : '',
+     * role: <ORGANIZER|PARTICIPANT|OBSERVER>
+     * }
+     * payload
+     * {
+     * "eventid" :<eventId>,
+     * "useremail" :"email",
+     * "userid" : <userId>,
+     * "role" : "ORGANIZER|PARTICIPANT|OBSERVER"
+     * }
+     *
+     * @param inviteData      Data for invitation
+     * @param connectionStamp Information on the connected user
      * @return list of invitation
      */
     @CrossOrigin
@@ -197,32 +204,31 @@ public class RestEventController {
 
         // get service        
         EventEntity event = eventService.getAllowedEventById(toghUser, eventId);
-        if (event==null) {
+        if (event == null) {
             // same error as not found: we don't want to give the information that the event exist
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Event not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
-                
+
         // we send the list of UserId, then the eventService will control each userId given, and will update the answer invitation per invitation
         InvitationResult invitationResult = eventService.invite(event, toghUser, listUsersId, userInvitedEmail, roleEnum, useMyEmailAsFrom, message);
-        
+
         Map<String, Object> payload = new HashMap<>();
-        List<Map<String,Object>> listParticipants = new ArrayList<>();
+        List<Map<String, Object>> listParticipants = new ArrayList<>();
         payload.put("participants", listParticipants);
         for (ParticipantEntity participant : invitationResult.newParticipants)
-            listParticipants.add( participant.getMap( ContextAccess.PUBLICACCESS, timezoneOffset ));
-        payload.put( RestJsonConstants.CST_STATUS, invitationResult.status.toString());
-        payload.put( RestJsonConstants.CST_MESSAGE_OK, invitationResult.getOkMessage());
-        payload.put( RestJsonConstants.CST_MESSAGE_ERROR, invitationResult.getErrorMessage());
-        payload.put( RestJsonConstants.CST_MESSAGE_ERROR_SEND_EMAIL, invitationResult.getErrorSendEmail());
+            listParticipants.add(participant.getMap(ContextAccess.PUBLICACCESS, timezoneOffset));
+        payload.put(RestJsonConstants.CST_STATUS, invitationResult.status.toString());
+        payload.put(RestJsonConstants.CST_MESSAGE_OK, invitationResult.getOkMessage());
+        payload.put(RestJsonConstants.CST_MESSAGE_ERROR, invitationResult.getErrorMessage());
+        payload.put(RestJsonConstants.CST_MESSAGE_ERROR_SEND_EMAIL, invitationResult.getErrorSendEmail());
 
-        payload.put( RestJsonConstants.CST_ISINVITATIONSENT, invitationResult.status == InvitationStatus.INVITATIONSENT);
+        payload.put(RestJsonConstants.CST_ISINVITATIONSENT, invitationResult.status == InvitationStatus.INVITATIONSENT);
         return payload;
     }
 
     /**
-     *
      * @param updateMap
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp Information on the connected user
      * @return
      */
     @CrossOrigin
@@ -264,42 +270,57 @@ public class RestEventController {
 
         payload.put(RestJsonConstants.CST_CHILDENTITYID, eventOperationResult.listChildEntityId);
         payload.put(RestJsonConstants.CST_EVENT, eventOperationResult.eventEntity == null ? null : eventOperationResult.eventEntity.getMap(contextAccess, timezoneOffset));
-        payload.put( RestJsonConstants.CST_STATUS, eventOperationResult.isError() ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
+        payload.put(RestJsonConstants.CST_STATUS, eventOperationResult.isError() ? RestJsonConstants.CST_STATUS_V_ERROR : RestJsonConstants.CST_STATUS_V_OK);
 
         return payload;
     }
-    
+
     /**
      * Create a list of Slab from a Map
+     *
      * @param listSlabMap
      * @return
      */
-   private List<Slab> getListSlab(List<Map<String, Object>> listSlabMap){
-       List<Slab> listSlab = new ArrayList<>();
-       for (Map<String, Object> recordSlab : listSlabMap) {
-           listSlab.add(new Slab(recordSlab));
-       }
-       return listSlab;
-   }
+    private List<Slab> getListSlab(List<Map<String, Object>> listSlabMap) {
+        List<Slab> listSlab = new ArrayList<>();
+        for (Map<String, Object> recordSlab : listSlabMap) {
+            listSlab.add(new Slab(recordSlab));
+        }
+        return listSlab;
+    }
+
     /**
      * Get the list of events and populate the payload with it
-     * @param payload
-     * @param toghUser
-     * @param filterEvents
+     *
+     * @param payload                    Rest payload
+     * @param toghUser                   user who execute the request
+     * @param filterEventsSt             should be RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_...
+     * @param additionalInformationEvent additional events
+     * @param timezoneOffset             time zone of the browser
      */
-    private void completePayloadListEvents(Map<String,Object> payload, ToghUserEntity toghUser, 
-            String filterEvents,
-            AdditionnalInformationEvent additionnalInformationEvent,
-            Long timezoneOffset) { 
-        List<Map<String,Object>> listEventsMap= new ArrayList<>();
-        EventResult eventResult = eventService.getEvents(toghUser, filterEvents);
-    if (LogEventFactory.isError( eventResult.listLogEvent)) {
-        payload.put( RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
-    } else {
-        for (EventEntity event : eventResult.listEvents) {
-            listEventsMap.add( event.getHeaderMap( eventService.getContextAccess(event, toghUser), additionnalInformationEvent, timezoneOffset));
+    private void completePayloadListEvents(Map<String, Object> payload,
+                                           ToghUserEntity toghUser,
+                                           String filterEventsSt,
+                                           AdditionnalInformationEvent additionalInformationEvent,
+                                           Long timezoneOffset) {
+        List<Map<String, Object>> listEventsMap = new ArrayList<>();
+        FilterEvents filterEvent = FilterEvents.ALLEVENTS;
+        if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_ALLEVENTS.equals(filterEventsSt))
+            filterEvent = FilterEvents.ALLEVENTS;
+        else if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_MYEVENTS.equals(filterEventsSt))
+            filterEvent = FilterEvents.MYEVENTS;
+        else if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_MYINVITATIONS.equals(filterEventsSt))
+            filterEvent = FilterEvents.MYINVITATIONS;
+
+        EventResult eventResult = eventService.getEvents(toghUser, filterEvent);
+
+        if (LogEventFactory.isError(eventResult.listLogEvent)) {
+            payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(eventResult.listLogEvent));
+        } else {
+            for (EventEntity event : eventResult.listEvents) {
+                listEventsMap.add(event.getHeaderMap(eventService.getContextAccess(event, toghUser), additionalInformationEvent, timezoneOffset));
+            }
+            payload.put(RestJsonConstants.CST_LIST_EVENTS, listEventsMap);
         }
-        payload.put( RestJsonConstants.CST_LIST_EVENTS, listEventsMap);
-    }
     }
 }

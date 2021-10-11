@@ -19,28 +19,39 @@ import EventState from 'event/EventState';
 import * as userFeedbackConstant from 'component/UserFeedback';
 import UserFeedback  from 'component/UserFeedback';
 
+
+
+export const FILTER_EVENT = {
+		MYEVENTS: "MyEvents",
+		ALLEVENTS : "AllEvents",
+		MYINVITATIONS: "MyInvitations"
+	}
+
 class EventsList extends React.Component {
 
 	// in props, a function must be give to the call back. When we click on a line, we call
 	// this.props.homeSelectEvent( event.id)
 	constructor(props) {
 		super();
-		this.state = {}
+
 		console.log("EventsList.constructor");
-		this.state = { filterEvents: "", "message": "", 
+		this.state = { filterEvents: props.filterEvents,
+		            titleFrame : props.titleFrame,
+		            message: "",
 					events: [],
 					operation: {
 						inprogress: false,
 						label:"",
 						status:"",
 						result:"",
-						listlogevents: [] 
+						listlogevents: []
 					} };
 		// this is mandatory to have access to the variable in the method... thank you React!   
 
 		this.createEvent = this.createEvent.bind(this);
 		this.refreshListEvents = this.refreshListEvents.bind(this);
-
+        this.refreshAllEvents = this.refreshAllEvents.bind(this);
+        this.refreshMyEvents = this.refreshMyEvents.bind(this);
 
 		console.log("EventsList.constructor: END");
 	}
@@ -49,7 +60,18 @@ class EventsList extends React.Component {
 		this.refreshListEvents(); 	
 		console.log("EventsList.componentWillMount: END");
 	}
-	
+	componentDidUpdate (prevProps) {
+		console.log("EventsList.componentDidUpdate titleFrame=("+this.props.titleFrame+") prevProps=("+prevProps.titleFrame+")");
+		debugger;
+		if (prevProps.filterEvents !== this.props.filterEvents) {
+		    console.log("EventsList.componentDidUpdate: Change filterEvents=("+this.props.filterEvents+")");
+		    this.refreshListEvents( this.props.filterEvents );
+		}
+		if (prevProps.titleFrame !== this.props.titleFrame) {
+		    console.log("EventsList.componentDidUpdate: Change titleFrame=("+this.props.titleFrame+")");
+		    this.setState({titleFrame: this.props.titleFrame} );
+		}
+    }
 	
 	// --------------------------------------------------------------
 	// 
@@ -59,7 +81,7 @@ class EventsList extends React.Component {
 
 	// -------------------------------------------- render
 	render() {
-		console.log("EventList.render listEvents=" + JSON.stringify(this.state.events));
+		console.log("EventList.render titleFrame=("+this.state.titleFrame+") listEvents=" + JSON.stringify(this.state.events));
 		const intl = this.props.intl;
 
 		// no map read, return
@@ -100,7 +122,13 @@ class EventsList extends React.Component {
 		return (
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col"><h1>Events</h1></div>
+					<div class="col">
+					    <h1>
+					        {this.state.titleFrame === 'EVENTS' &&
+					            <FormattedMessage id="EventsList.TitleEvents" defaultMessage="Events" />}
+                            {this.state.titleFrame === 'MYINVITATIONS' &&
+					            <FormattedMessage id="EventsList.TitleMyInvitations" defaultMessage="My Invitations" />}
+					        </h1></div>
 					<div class="col"><div style={{ float: "right" }}>
 						<button class="btn btn-info btn-lg" onClick={this.createEvent}>
 							<PlusCircle/> &nbsp;<FormattedMessage id="EventsList.CreateAnEvent" defaultMessage="Create an Event"/></button>
@@ -112,9 +140,22 @@ class EventsList extends React.Component {
 				<div class="row">
 					<div class="col-sm">
 						<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }} onClick={this.refreshListEvents}><ArrowRepeat/><FormattedMessage id="EventsList.Refresh" defaultMessage="Refresh"/></button>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><ClipboardData/> <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/></button>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}><PersonCircle/> <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/></button>
+							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
+							    onClick={() => this.refreshListEvents(this.state.filterEvents)}>
+							    <ArrowRepeat/><FormattedMessage id="EventsList.Refresh" defaultMessage="Refresh"/>
+							</button>
+							{this.state.titleFrame === 'EVENTS' &&
+							    <div>
+							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
+							            onClick={() => this.refreshAllEvents() }>
+							            <ClipboardData/> <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/>
+							        </button>
+							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
+							            onClick={() => this.refreshMyEvents}>
+							            <PersonCircle/> <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/>
+							        </button>
+							    </div>
+							}
 						</div>
 					</div>
 				</div>
@@ -182,14 +223,20 @@ class EventsList extends React.Component {
 		});
 	}
 
-	
+	refreshAllEvents() {
+	    this.refreshListEvents(FILTER_EVENT.ALLEVENTS);
+	}
+
+	refreshMyEvents() {
+	    this.refreshListEvents(FILTER_EVENT.MYEVENTS);
+	}
 
 	// ----------- refresh list event
-	refreshListEvents() {
-		console.log("EventsList.refreshListEvents http[event/list?filterEvents=" + this.state.filterEvents + "]");
-		this.setState({ events: [] });
+	refreshListEvents( filterEventsValue ) {
+		console.log("EventsList.refreshListEvents http[event/list?filterEvents=" + filterEventsValue + "]");
+		this.setState({ events: [], filterEvents: filterEventsValue });
 		var restCallService = FactoryService.getInstance().getRestcallService();
-		restCallService.getJson('/api/event/list?withParticipants=true&filterEvents=' + this.state.filterEvents, this, this.refreshListEventsCallback );
+		restCallService.getJson('/api/event/list?withParticipants=true&filterEvents=' + filterEventsValue, this, this.refreshListEventsCallback );
 	}
 	
 	refreshListEventsCallback( httpPayload) {

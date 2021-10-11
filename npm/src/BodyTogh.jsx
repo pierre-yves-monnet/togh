@@ -10,11 +10,13 @@ import React from 'react';
 
 import { IntlProvider, FormattedMessage } from "react-intl";
 
+
 import Login 			from 'Login';
 import Banner 			from 'Banner';
 import Footer 			from 'Footer';
 import Menu 			from 'Menu';
-import{MENU_NAME} 		from 'Menu';
+import {MENU_NAME} 		from 'Menu';
+import {FILTER_EVENT}	from 'EventsList';
 import RegisterNewUser 	from 'RegisterNewUser';
 import ResetPassword 	from 'ResetPassword';
 import EventsList 		from 'EventsList';
@@ -166,7 +168,7 @@ class BodyTogh extends React.Component {
 						<div class="container">
 	  						{this.state.currentEventId && <div class="row" >
 									<div class="col-sm-12" >
-									 	<div style={{border:"1px solid", borderColor:"#1f78b4",
+									 	<div style={{border:"1px solid",
 													margin: "5px 5px 5px 5px", 
 													padding: "10px 10px 10px 10px", 
 													backgroundColor: "#337ab7", 
@@ -230,7 +232,10 @@ class BodyTogh extends React.Component {
 										<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
 									</td>
 									<td style={{padding: "10px", "verticalAlign": "top"}} >
-										{ this.state.frameContent === FRAME_NAME.LISTEVENTS && <EventsList homeSelectEvent={this.homeSelectEvent} />}
+										{ this.state.frameContent === FRAME_NAME.LISTEVENTS &&
+										    <EventsList homeSelectEvent={this.homeSelectEvent}
+										        filterEvents={this.state.filterEvents}
+										        titleFrame={this.state.titleFrame}/>}
 										{ this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currentEventId} />}
 										{ this.state.frameContent === FRAME_NAME.MYPROFILE && <MyProfile  />}
 										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
@@ -258,17 +263,29 @@ class BodyTogh extends React.Component {
 		this.setState( {'currentEventId' : eventId, 'frameContent': FRAME_NAME.EVENT });
 	}
 
+    /**
+    *
+    */
 	clickMenu( menuName ) {
 		console.log("BodyTogh.clickMenu: menuAction="+menuName);
-		if (menuName === MENU_NAME.ADMINISTRATION) {
-		    this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
-		}
-		else if (menuName === MENU_NAME.MYPROFILE) {
+      	if (menuName === MENU_NAME.EVENTSLIST) {
+		    this.setState( {currentEventId : null,
+		            frameContent: FRAME_NAME.LISTEVENTS,
+		            filterEvents: FILTER_EVENT.MYEVENTS,
+		            titleFrame: 'EVENTS'
+		         });
+        } else if (menuName === MENU_NAME.MYINVITATIONS) {
+		    this.setState( {currentEventId : null,
+		        frameContent: FRAME_NAME.LISTEVENTS,
+		        filterEvents: FILTER_EVENT.MYINVITATIONS,
+		        titleFrame: 'MYINVITATIONS'
+		        });
+		} else if (menuName === MENU_NAME.MYPROFILE) {
 			this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.MYPROFILE });
-		}
-		else {
-			this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.LISTEVENTS });
-		}
+        } else if (menuName === MENU_NAME.ADMINISTRATION) {
+            this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
+        }
+
 	}
 	
 	
@@ -285,5 +302,3 @@ class BodyTogh extends React.Component {
 }
 
 export default BodyTogh;
-	
-  

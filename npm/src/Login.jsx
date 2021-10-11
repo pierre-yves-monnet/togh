@@ -165,7 +165,7 @@ class Login extends React.Component {
 											}
 										}
 										} />
-							<button class="btn btn-info"  onClick={ this.sendEmailPassword}>
+							<button class="btn btn-info"  onClick={this.sendEmailPassword}>
 								<Envelope/>			
 								&nbsp;					
 								<FormattedMessage id="Login.SendEmail" defaultMessage="Send the email"/>
