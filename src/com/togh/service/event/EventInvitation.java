@@ -24,6 +24,7 @@ import com.togh.service.ToghUserService.CreationResult;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -76,8 +77,8 @@ public class EventInvitation {
         Set<ToghUserEntity> setUserJustInvited = new HashSet<>();
         // invitation by the email? 
         if (userInvitedEmail != null && !userInvitedEmail.trim().isEmpty()) {
-            ToghUserEntity toghUser = userService.getUserFromEmail(userInvitedEmail);
-            if (toghUser == null) {
+            Optional<ToghUserEntity> toghUserEntity = userService.getUserFromEmail(userInvitedEmail);
+            if (toghUserEntity.isEmpty()) {
                 // this is a real new user, register and invite it to join Togh
                 CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, useMyEmailAsFrom, event);
                 if (creationStatus.toghUser == null) {
@@ -89,7 +90,7 @@ public class EventInvitation {
 
                 invitationResult.listThogUserInvited.add(creationStatus.toghUser);
             } else {
-                invitationResult.listThogUserInvited.add(toghUser);
+                invitationResult.listThogUserInvited.add(toghUserEntity.get());
             }
         }
 

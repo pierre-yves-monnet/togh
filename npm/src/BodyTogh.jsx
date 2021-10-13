@@ -75,10 +75,11 @@ class BodyTogh extends React.Component {
 
 		this.homeSelectEvent = this.homeSelectEvent.bind(this)
 		
-		this.clickMenu = this.clickMenu.bind( this )
-		this.showMenu = this.showMenu.bind( this );
-		this.changeLanguage = this.changeLanguage.bind( this );
-		
+		this.clickMenu                  = this.clickMenu.bind( this )
+		this.showMenu                   = this.showMenu.bind( this );
+		this.changeLanguage             = this.changeLanguage.bind( this );
+		this.getInfoOnNewUser           = this.getInfoOnNewUser.bind( this );
+
 		// this is mandatory to have access to the variable in the method... thank you React!   
 		// this.connect = this.connect.bind(this);
 		// currentEventId : we keep the ID here, but we don't load it. Component Event will be call, and it will be in charge to load it.
@@ -88,9 +89,11 @@ class BodyTogh extends React.Component {
 						showLoginPanel : true,
 						showRegisterUserPanel:true,
 						showRegisterUserForm:false,
+						readOnlyRegisterEmail:false,
 						currentEventId : null,
 						language: props.language,
-						ignoreAction:false};
+						ignoreAction:false,
+						titleFrame: 'EVENTS'};
 		// action: when a URL with an action arrive (like "resetpassword"), we manage it.
 		// But after this management, we stay in the same object, and we do not want to manage this action anymore
 		// so, the toggle "ignoreAction" is set to true
@@ -102,12 +105,16 @@ class BodyTogh extends React.Component {
 		if (action && action === 'invitedNewUser') {
 			// switch to the register user page
 			console.log("NewUser: redirect him directly to the register page!")
-			this.state.showLoginPanel		= true;
+			this.state.showLoginPanel		= false;
 			this.state.showRegisterUserForm	= true;
 			this.state.defaultLoginEmail	= email;
 			this.state.currentEventId		= eventId;
 			if (eventId)
 				this.state.frameContent		= FRAME_NAME.EVENT;
+            let invitationStamp 		    = params.get('invitationStamp');
+
+		    // maybe the user is registered now?
+			this.getInfoOnNewUser( email, invitationStamp );
 			
 		}
 		if (action && action === 'invitedUser') {
@@ -122,7 +129,7 @@ class BodyTogh extends React.Component {
 		}
 	}
 
-	
+
 // { this.state.frameContent == 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
 	// 			{ this.state.frameContent == 'event' &&	<Event eventid={this.state.currentEventId} /> }
 	render() {
@@ -158,9 +165,12 @@ class BodyTogh extends React.Component {
 						</div>
 					</IntlProvider>);
 		}
-			
+
+
+		// ------------------------------------------- Not connected, connection or register user
 		else if (authService.isConnected() === false) {
 			// Explanation are in the registerNewUser
+			console.log("BodyTog.render: NonConnected - LoginPanel:"+this.state.showLoginPanel+" showRegisterUserPanel:"+this.state.showRegisterUserPanel);
 			return (	
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
 					<div>
@@ -200,6 +210,7 @@ class BodyTogh extends React.Component {
 										<RegisterNewUser authCallback={this.authCallback} 
 											showRegisterUserForm={this.state.showRegisterUserForm}
 											defaultLoginEmail={this.state.defaultLoginEmail}
+											readOnlyRegisterEmail={this.state.readOnlyRegisterEmail}
 										/>}
 									
 								</div>
@@ -298,6 +309,25 @@ class BodyTogh extends React.Component {
 		console.log("BodyTogh.changeLanguage "+newlanguage);
 		this.setState( {'language' : newlanguage } );
 	}
+
+	getInfoOnNewUser( email, invitationStamp ) {
+        console.log("BodyTogh.getInfoOnNewUser");
+        var restCallService = FactoryService.getInstance().getRestcallService();
+
+   		restCallService.postJson('/api/userinfo', this, {email: email, invitationStamp:invitationStamp}, httpPayload => {
+            httpPayload.trace("BodyTogh.getInfoOnNewUserCallback");
+            if (httpPayload.isError()) {
+                console.log("BodyTogh.getInfoOnNewUserCallback: ERROR ");
+            } else if (httpPayload.getData().isUser) {
+                let isInvited = httpPayload.getData().isInvited;
+                console.log("BodyTogh.getInfoOnNewUserCallback: isUser- "+httpPayload.getData().isUser+" isInvited:"+isInvited);
+                this.setState( {showLoginPanel: !isInvited,
+                                showRegisterUserPanel: isInvited,
+                                showRegisterUserForm: isInvited,
+                                readOnlyRegisterEmail:isInvited});
+            }
+        });
+    }
 
 }
 

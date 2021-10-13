@@ -85,13 +85,8 @@ class EventSurvey extends React.Component {
         if (prevProps && prevProps.show )
             prevPropsTypeDisplay=prevProps.show.typeDisplay;
 	    let bestDisplay= this.calculateBestDisplay();
-		console.log("EventSurvey.componentDidUpdate prevProps=("+prevPropsTypeDisplay+") typeDisplay=("+this.state.show.typeDisplay+") bestDisplay=("+bestDisplay+")");
+		// console.log("EventSurvey.componentDidUpdate prevProps=("+prevPropsTypeDisplay+") typeDisplay=("+this.state.show.typeDisplay+") bestDisplay=("+bestDisplay+")");
 
-        debugger;
-        //if (typeof(prevProps) === "undefined" ) {
-            // this.setState( { show: { typeDisplay: bestDisplay}});
-        //} else if (typeof(prevProps.show) === "undefined") {
-            // this.setState( { show: { typeDisplay: bestDisplay}});
         if (this.state.show.typeDisplay !== bestDisplay) {
             this.setState( { show: { typeDisplay: bestDisplay}});
         }

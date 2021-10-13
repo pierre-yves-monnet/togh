@@ -83,25 +83,25 @@ public class NotifyService {
         String lang = toghUserEntity.getLanguage() == null ? invitedByToghUser.getLanguage() : toghUserEntity.getLanguage();
         String subject = translatorService.getDictionarySentence(Sentence.INVITED_TOGH_EVENT, lang);
 
-        StringBuilder cartouchText = new StringBuilder();
-        cartouchText.append(translatorService.getDictionarySentence(Sentence.DEAR, lang));
+        StringBuilder cartridgeText = new StringBuilder();
+        cartridgeText.append(translatorService.getDictionarySentence(Sentence.DEAR, lang));
         if (toghUserEntity.getFirstName() != null)
-            cartouchText.append(NBSP + toghUserEntity.getFirstName());
+            cartridgeText.append(NBSP + toghUserEntity.getFirstName());
         if (toghUserEntity.getLastName() != null)
-            cartouchText.append(NBSP + toghUserEntity.getLastName());
+            cartridgeText.append(NBSP + toghUserEntity.getLastName());
 
-        cartouchText.append("," + BR);
-        cartouchText.append(translatorService.getDictionarySentence(Sentence.YOU_ARE_INVITED_BY, lang));
-        cartouchText.append(NBSP);
-        cartouchText.append("<span style=\"color: #1f78b4;font-weight: bold;\">" + invitedByToghUser.getLabel() + "</span>");
-        cartouchText.append(NBSP);
-        cartouchText.append(translatorService.getDictionarySentence(Sentence.TO_JOIN_A, lang));
-        cartouchText.append(NBSP);
-        cartouchText.append("<span style=\"color: #1f78b4;font-weight: bold;\">" + translatorService.getDictionarySentence(Sentence.TOGH_EVENT, lang) + "</span>");
+        cartridgeText.append("," + BR);
+        cartridgeText.append(translatorService.getDictionarySentence(Sentence.YOU_ARE_INVITED_BY, lang));
+        cartridgeText.append(NBSP);
+        cartridgeText.append("<span style=\"color: #1f78b4;font-weight: bold;\">" + invitedByToghUser.getLabel() + "</span>");
+        cartridgeText.append(NBSP);
+        cartridgeText.append(translatorService.getDictionarySentence(Sentence.TO_JOIN_A, lang));
+        cartridgeText.append(NBSP);
+        cartridgeText.append("<span style=\"color: #1f78b4;font-weight: bold;\">" + translatorService.getDictionarySentence(Sentence.TOGH_EVENT, lang) + "</span>");
 
         StringBuilder st = new StringBuilder();
 
-        st.append(getEmailHeader(cartouchText.toString(), lang));
+        st.append(getEmailHeader(cartridgeText.toString(), lang));
 
         st.append(translatorService.getDictionarySentence(Sentence.TOGH_EVENT_EXPLANATION, lang));
         st.append(BR);
@@ -112,6 +112,7 @@ public class NotifyService {
         EventPresentationAttribut eventPresentationAttribut = new EventPresentationAttribut();
         eventPresentationAttribut.bannerAction = "<a href=\"" + getHttpLink(HTTP_DEFAULT_HOST_TOGH)
                 + "?action=" + (newUser ? "invitedNewUser" : "invitedUser")
+                + "&invitationStamp=" + toghUserEntity.getInvitationStamp()
                 + "&eventid=" + event.getId()
                 + "&email=" + toghUserEntity.getEmail() + "\""
                 + " style=\"text-decoration: none;color: white;\">"

@@ -11,7 +11,7 @@ package com.togh.restcontroller;
 
 import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
-import com.togh.entity.EventEntity.AdditionnalInformationEvent;
+import com.togh.entity.EventEntity.AdditionalInformationEvent;
 import com.togh.entity.EventGroupChatEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
@@ -69,11 +69,11 @@ public class RestEventController {
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        AdditionnalInformationEvent additionnalInformation = new AdditionnalInformationEvent();
-        additionnalInformation.withParticipantsAsString = withParticipants;
+        AdditionalInformationEvent additionalInformation = new AdditionalInformationEvent();
+        additionalInformation.withParticipantsAsString = withParticipants;
 
         Map<String, Object> payload = new HashMap<>();
-        completePayloadListEvents(payload, toghUser, filterEvents, additionnalInformation, timezoneOffset);
+        completePayloadListEvents(payload, toghUser, filterEvents, additionalInformation, timezoneOffset);
 
         return payload;
 
@@ -140,7 +140,7 @@ public class RestEventController {
             completePayloadListEvents(payload,
                     toghUser,
                     RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_ALLEVENTS,
-                    new AdditionnalInformationEvent(),
+                    new AdditionalInformationEvent(),
                     timezoneOffset);
         }
         payload.put(RestJsonConstants.CST_LIMITSUBSCRIPTION, eventOperationResult.limitSubscription);
@@ -301,7 +301,7 @@ public class RestEventController {
     private void completePayloadListEvents(Map<String, Object> payload,
                                            ToghUserEntity toghUser,
                                            String filterEventsSt,
-                                           AdditionnalInformationEvent additionalInformationEvent,
+                                           AdditionalInformationEvent additionalInformationEvent,
                                            Long timezoneOffset) {
         List<Map<String, Object>> listEventsMap = new ArrayList<>();
         FilterEvents filterEvent = FilterEvents.ALLEVENTS;

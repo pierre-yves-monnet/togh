@@ -60,8 +60,8 @@ public class ToghUserService {
         return null;
     }
 
-    public ToghUserEntity getUserFromEmail(String email) {
-        return endUserRepository.findByEmail(email);
+    public Optional<ToghUserEntity> getUserFromEmail(String email) {
+        return Optional.ofNullable(endUserRepository.findByEmail(email));
     }
 
     public ToghUserEntity findToConnect(String emailOrName) {
@@ -149,12 +149,14 @@ public class ToghUserService {
     }
 
     /**
-     * @param firstName
-     * @param lastName
-     * @param phoneNumber
-     * @param email
-     * @param page        page number, start at 0
-     * @param pageCount   number of item per page. If this number is 0, then move to 1
+     * Search users from criteria
+     *
+     * @param firstName     first name criteria
+     * @param lastName      last name criteria
+     * @param phoneNumber   phone number criteria
+     * @param email         email criteria
+     * @param page          page number, start at 0
+     * @param numberPerPage number of item per page. If this number is 0, then move to 1
      * @return
      */
     public SearchUsersResult searchUsers(String firstName, String lastName, String phoneNumber, String email, int page, int numberPerPage) {
@@ -259,17 +261,17 @@ public class ToghUserService {
     }
 
     /**
-     * How many item an user can creates in an event ?
+     * How many item a user can create in an event ?
      *
-     * @param userEntity
-     * @return
+     * @param toghUserEntity the user
+     * @return the default number of items
      */
-    public int getPrivilegesNumberOfItems(ToghUserEntity toghUser) {
-        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.FREE)
+    public int getPrivilegesNumberOfItems(ToghUserEntity toghUserEntity) {
+        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.FREE)
             return 15;
-        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
+        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
             return 100;
-        if (toghUser.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE)
+        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE)
             return 1000;
         // not a FREE user, so this is a very limited one
         return 2;
@@ -279,12 +281,12 @@ public class ToghUserService {
      * Return the map of privilege for this user. Then, the interface can work with these privilege
      *
      * @param toghUserEntity
-     * @return
+     * @return map of privileges
      */
-    public Map<String, Object> getPrivileges(ToghUserEntity toghUser) {
+    public Map<String, Object> getPrivileges(ToghUserEntity toghUserEntity) {
         Map<String, Object> result = new HashMap<>();
-        result.put("NBITEMS", getPrivilegesNumberOfItems(toghUser));
-        result.put("PRIVILEGEUSER", toghUser.getPrivilegeUser().toString());
+        result.put("NBITEMS", getPrivilegesNumberOfItems(toghUserEntity));
+        result.put("PRIVILEGEUSER", toghUserEntity.getPrivilegeUser().toString());
         return result;
     }
 
@@ -322,12 +324,11 @@ public class ToghUserService {
      * Set the password in the user. The password will be encrypted at this moment.
      * Object toghUser is not saved
      *
-     * @param toghUser
-     * @param password
-     * @param saveImmediately
+     * @param toghUserEntity the toghUser
+     * @param password       the password
      */
-    public void setPassword(ToghUserEntity toghUser, String password) {
-        toghUser.setPassword(encryptPassword(password));
+    public void setPassword(ToghUserEntity toghUserEntity, String password) {
+        toghUserEntity.setPassword(encryptPassword(password));
     }
 
     /**
@@ -365,8 +366,6 @@ public class ToghUserService {
     /**
      * Invite a new user: we register it with the status Invited, then we sent an email
      *
-     * @param email
-     * @return
      */
     public class CreationResult {
 
@@ -383,12 +382,7 @@ public class ToghUserService {
     // --------------------------------------------------------------
 
     /**
-     * Update an user
-     *
-     * @param userId
-     * @param attribut
-     * @param value
-     * @return
+     * Update a user
      */
     public class OperationUser {
         public List<LogEvent> listLogEvents = new ArrayList<>();

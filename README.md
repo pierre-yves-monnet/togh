@@ -501,32 +501,33 @@ gcloud auth login
 ```
 
 ### run docker compose
-export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json
-docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
+export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json docker pull
+gcr.io/intricate-gamma-325323/togh:1.0.0
 
 docker run --rm \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     -v "$PWD:$PWD" \
-     -p 5432:5432  \
-     -w="$PWD" \
-     -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/keyfile.json \
-     -v /home/toghnow/intricate-gamma-325323-ContainerRegistry.json:/tmp/keys/keyfile.json:ro \
-     docker/compose:1.24.0 up &
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v "$PWD:$PWD" \
+-p 5432:5432  \
+-w="$PWD" \
+-e GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/keyfile.json \
+-v /home/toghnow/intricate-gamma-325323-ContainerRegistry.json:/tmp/keys/keyfile.json:ro \
+docker/compose:1.24.0 up &
 
      -p 5432:5432  \
     -p 7080:7080 \
     -p 3000:3000 \
 
 ### run docker conteneur
-A lancer sur le compute engine
+
+To execute on Computer instance
 
 ```
 
 $ docker run --name toghpostgres -e POSTGRES_USER=toghp -e POSTGRES_PASSWORD=ThisIsThog4Postgres -e POSTGRES_DB=togh -p 5432:5432 -d postgres
 
 
-$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" -d gcr.io/intricate-gamma-325323/togh:1.0.0 
-$ docker run --name frontendtogh  --network="host" -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/togh:1.0.0 
+$ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 
 $ curl http://34.125.204.84:7080/togh/api/ping
 $ curl http://34.125.204.84:3000
@@ -748,6 +749,10 @@ Avoir une liste de mes amis que je ^peux importer depuis Google. Pouvoir inviter
 
 ## invitation
 
+Pouvoir mettre une photo dans l'invitation pour le House Warming
+
+Pouvoir dire "non je ne vais pas venir dans cette event"
+
 Je revois une invitation par email: Togh devrait me dirriger vers le login OU vers la registration car il peut savoir si
 j'existe ou pas
 
@@ -786,6 +791,10 @@ Deconnection : ca ne renvoi plus sur la page de login
 EventEntity.getMap : normaliser les constante ici avec les SLAB_OPERATION (une seule constante)
 EventSurvey : ca ne marche pas dajouter un nouveau choix de survey Et arriver par defaut sur les reponses, pas sur la
 definition
-          
 
-      
+* Je suis 2 fois : email en Majuscule et en Minuscule. Faire un test ignore case
+* changement de password: il attends pas de taper les 2 passwords
+* remettre "mes invitations" sinon on ne les voit plus
+* admin: faire une purge d'user et un log de mauvaise connection
+* task et budget pas visible
+* changeemail

@@ -34,6 +34,7 @@ class RegisterNewUser extends React.Component {
 			badRegistration: false,
 			errorNetwork: false,
 			registrationOk:false,
+			readOnlyRegisterEmail: props.readOnlyRegisterEmail,
 			isLog: false,
 			loading : false }
 
@@ -44,11 +45,18 @@ class RegisterNewUser extends React.Component {
 
 	}
 
+    componentDidUpdate(prevProps) {
+		console.log("RegisterNewUser.componentDidUpdate ");
+		if (prevProps.showRegistration !== this.props.showRegistration) {
+			this.setState({ showRegistration: this.props.showRegistration });
+		}
+		if (prevProps.readOnlyRegisterEmail !== this.props.readOnlyRegisterEmail) {
+			this.setState({ readOnlyRegisterEmail: this.props.readOnlyRegisterEmail });
+		}
+	}
 
 	render() {
-
-
-		if (this.state.showRegistration) {
+	    if (this.state.showRegistration) {
 			return (
 			<div className="App" class="toghBlock" style={{padding:"10px 10px 20px 10px"}}>
 				<div class="panel-heading">
@@ -64,8 +72,12 @@ class RegisterNewUser extends React.Component {
 						<br/>
 						<br />
 					</div>
-					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Email" defaultMessage="Email"/>} 
-						type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
+					ReadOnly={this.state.readOnlyRegisterEmail}
+					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Email" defaultMessage="Email"/>}
+					    disabled={this.state.readOnlyRegisterEmail}
+						type="email"
+						value={this.state.email}
+						onChange={(event) => this.setState({ email: event.target.value })} ></TextInput><br />
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.FirstName" defaultMessage="First name"/>} 
 						type="string" value={this.state.firstName} onChange={(event) => this.setState({ firstName: event.target.value })}  required></TextInput><br />
@@ -74,10 +86,10 @@ class RegisterNewUser extends React.Component {
 						 type="string" value={this.state.lastName} onChange={(event) => this.setState({ lastName: event.target.value })}  ></TextInput><br />
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Password" defaultMessage="Password"/>} 
-						type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  maxlength="30" required></TextInput><br />
+						type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })}  maxLength="30" required></TextInput><br />
 
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.RetypePassword" defaultMessage="Retype password"/>} 
-						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} maxlength="30" required></TextInput><br />
+						type="password" value={this.state.confirmPassword} onChange={(event) => this.setState({ confirmPassword: event.target.value })} maxLength="30" required></TextInput><br />
 					<div style={{padding:"10px 10px 10px 10px"}}>
 						<div style={{color:"red"}}>{ this.validateForm() }</div>
 						<div style={{color:"red"}}>
@@ -143,7 +155,17 @@ class RegisterNewUser extends React.Component {
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghBorn" defaultMessage="Here Togh was born. I was thinking of this application for five years now."/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghHistory" defaultMessage="Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea."/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghConclusion" defaultMessage="So this application was really needed at this moment."/></div>
-				</div>				
+
+
+				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.thankYou" defaultMessage="Thank you" /></div>
+
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIntroduction" defaultMessage="Big thank you to everybody who helps me on the road. "/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSimon" defaultMessage="Simon, to be an extraordinary exploratory and figure out a lot of clues."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouLounes" defaultMessage="Lounes to design these awesome graphics and icons."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIsmail" defaultMessage="Ismail for sharing ideas."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristel" defaultMessage="Christel to support and encourage me."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristelBand" defaultMessage="Christel's band to use the application and for their lovely feedback."/></div>
+				</div>
 				)
 		}
 	}

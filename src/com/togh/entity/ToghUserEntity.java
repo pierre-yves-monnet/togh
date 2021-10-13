@@ -17,6 +17,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
+import java.util.Random;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -88,10 +89,13 @@ public @Data class ToghUserEntity extends BaseEntity {
         ACTIF, DISABLED, BLOCKED, INVITED
     }
 
+    private static Random random = new Random();
     @Column(name = "statususer", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'ACTIF'")
-    StatusUserEnum statusUser;
+    private StatusUserEnum statusUser;
+    @Column(name = "invitationStamp", length = 100)
+    private String invitationStamp;
 
     /**
      * The user accept to be part of a search result, to be invited directly in an event
@@ -117,16 +121,17 @@ public @Data class ToghUserEntity extends BaseEntity {
 
         return endUser;
     }
-    
-    public static ToghUserEntity createInvitedUser(String email) 
-    {
+
+    public static ToghUserEntity createInvitedUser(String email) {
+        String randomStamp = String.valueOf(System.currentTimeMillis()) + String.valueOf(random.nextInt(100000));
+
         ToghUserEntity toghUserEntity = createNewUser(null, null, email, null, SourceUserEnum.INVITED);
-        toghUserEntity.setStatusUser( StatusUserEnum.INVITED );
-        toghUserEntity.setStatusUser( StatusUserEnum.ACTIF );
+        toghUserEntity.setStatusUser(StatusUserEnum.INVITED);
+        toghUserEntity.setInvitationStamp(randomStamp);
 
         return toghUserEntity;
     }
-    
+
     /**
      * Calculate the name according the first and last name
      */
@@ -198,6 +203,7 @@ public @Data class ToghUserEntity extends BaseEntity {
     @org.hibernate.annotations.ColumnDefault("'1'")
     Boolean showTipsUser;
 
+    @Override
     public String toString() {
         return getId() + ":" + getName()
                 + (getGoogleId() != null ? " Gid@" + getGoogleId() : "")
@@ -208,8 +214,8 @@ public @Data class ToghUserEntity extends BaseEntity {
 
     /**
      * Get the user Label, to add in an email, or explanation
-     * 
-     * @return
+     *
+     * @return user label
      */
     public String getLabel() {
         if ( isExist(firstName) && isExist(lastName))
@@ -218,9 +224,7 @@ public @Data class ToghUserEntity extends BaseEntity {
     }
 
     private boolean isExist(String value) {
-        if (value!=null && value.trim().length()>0)
-            return true;
-        return false;
+        return (value != null && value.trim().length() > 0);
     }
     // define the user access :
     // SEARCH : the user show up in a public search
@@ -235,10 +239,10 @@ public @Data class ToghUserEntity extends BaseEntity {
 
     /**
      * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * 
+     *
      * @param contextAccess Context of the access
      * @param timeZoneOffset time Zone offset of the browser
-     * @return
+     * @return Map to describe the user
      */
     @Override
     public Map<String, Object> getMap(ContextAccess contextAccess, Long timeZoneOffset) {
@@ -319,13 +323,12 @@ public @Data class ToghUserEntity extends BaseEntity {
         // second rule : secret : never.
         if (userAccess == ContextAccess.SECRETACCESS)
             return false;
-        // then depends of the visibily and the policy
+        // then depends on the visibility and the policy
         if (emailVisibility == VisibilityEnum.ALWAYS)
             return true;
         // it's visible only for accepted user in the event
-        if (userAccess == ContextAccess.FRIENDACCESS && (visibility == VisibilityEnum.LIMITEDEVENT || visibility == VisibilityEnum.ALWAYBUTSEARCH))
-            return true;
+        return (userAccess == ContextAccess.FRIENDACCESS && (visibility == VisibilityEnum.LIMITEDEVENT || visibility == VisibilityEnum.ALWAYBUTSEARCH));
         // in all other case, refuse
-        return false;
     }
+
 }

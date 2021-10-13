@@ -62,7 +62,6 @@ class EventsList extends React.Component {
 	}
 	componentDidUpdate (prevProps) {
 		console.log("EventsList.componentDidUpdate titleFrame=("+this.props.titleFrame+") prevProps=("+prevProps.titleFrame+")");
-		debugger;
 		if (prevProps.filterEvents !== this.props.filterEvents) {
 		    console.log("EventsList.componentDidUpdate: Change filterEvents=("+this.props.filterEvents+")");
 		    this.refreshListEvents( this.props.filterEvents );
@@ -239,7 +238,7 @@ class EventsList extends React.Component {
 		restCallService.getJson('/api/event/list?withParticipants=true&filterEvents=' + filterEventsValue, this, this.refreshListEventsCallback );
 	}
 	
-	refreshListEventsCallback( httpPayload) {
+	refreshListEventsCallback(httpPayload) {
 		httpPayload.trace("EventsList.refreshListEventsCallback");
 		let currentOperation = this.state.operation;
 		currentOperation.inprogress = false;

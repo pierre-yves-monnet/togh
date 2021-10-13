@@ -16,22 +16,25 @@ import org.springframework.stereotype.Service;
 @Service
 @EnableScheduling
 public class SchedulerService {
-    
-    @Autowired
-    LoginService loginService;
-    @Scheduled(fixedDelay = 60000)
-    public void scheduleDisconnectUser() {
-      loginService.disconnectInactiveUsers();
-    }
 
     @Autowired
-    EventService eventService; 
+    LoginService loginService;
+
+    @Autowired
+    EventService eventService;
+
+    @Scheduled(fixedDelay = 60000)
+    public void scheduleDisconnectUser() {
+        loginService.disconnectInactiveUsers();
+    }
+
+    // 18000000 : 6 H
     // 3600000 : 1 H
     // 60000 : 1 mn
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 18000000)
     public void scheduleCloseEvents() {
-      eventService.closeOldEvents( true );
-      eventService.purgeOldEvents( true );
+        eventService.closeOldEvents(true);
+        eventService.purgeOldEvents(true);
     }
 
 }

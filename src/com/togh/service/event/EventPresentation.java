@@ -53,7 +53,7 @@ public class EventPresentation {
      */
     public String getHtmlPresentation(EventPresentationAttribut eventPresentationAttribut, ToghUserEntity toghUserEntity) {
         EventEntity event = eventController.getEvent();
-        StringBuffer result  = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         
         
         result.append("<center>");
@@ -85,7 +85,7 @@ public class EventPresentation {
             for (ParticipantEntity participant : event.getParticipantList()) {
                 ToghUserEntity userParticipant = participant.getUser();
                 if (userParticipant!=null)
-                    result.append( NBSP +NBSP + userParticipant.getFirstName()+ NBSP +userParticipant.getLastName()+"<br>");    
+                    result.append(NBSP + NBSP + userParticipant.getLabel() + "<br>");
             }
             result.append("  </td>");
             result.append("</tr>");
@@ -132,8 +132,6 @@ public class EventPresentation {
             return "";
         ZonedDateTime dateUtc = date.atZone(ZoneId.of("UTC"));
         // translate to the time user
-        //  ZonedDateTime dateLocal = dateUtc.atZone(ZoneId.of("Asia/Tokyo"));
-
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm:ss");
         return format.format( dateUtc );
         

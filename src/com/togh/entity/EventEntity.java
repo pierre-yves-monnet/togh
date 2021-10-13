@@ -322,10 +322,6 @@ public @Data class EventEntity extends UserEntity {
     /* Survey */
     /*                                                                                  */
     /* ******************************************************************************** */
-
-    // @Column(name = "tasklistshowdates")
-    //     private Boolean surveyListShowDates;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 100)
@@ -475,14 +471,7 @@ public @Data class EventEntity extends UserEntity {
         
     }
 
-    public static class AdditionnalInformationEvent {
-        /**
-         * Participants will be added with a String
-         */
-        public boolean withParticipantsAsString=false;        
-    }
-    
-    public Map<String, Object> getHeaderMap(ContextAccess contextAccess, AdditionnalInformationEvent additionnalInformationEvent, Long timezoneOffset) {
+    public Map<String, Object> getHeaderMap(ContextAccess contextAccess, AdditionalInformationEvent additionnalInformationEvent, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
         resultMap.put(CST_JSONOUT_NAME, getName());
         resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
@@ -497,20 +486,28 @@ public @Data class EventEntity extends UserEntity {
             boolean firstPartipant=true;
             StringBuilder sb = new StringBuilder();
             for( ParticipantEntity participant : participantList) {
-                if (participant.getUser()==null)
+                if (participant.getUser() == null)
                     continue;
-                if (! firstPartipant)
+                if (!firstPartipant)
                     sb.append(", ");
-                firstPartipant=false;
+                firstPartipant = false;
                 sb.append(participant.getUser().getLabel());
             }
-            resultMap.put(CST_JSONOUT_LISTSYNTHETICPARTICIPANTS, sb.toString());     
+            resultMap.put(CST_JSONOUT_LISTSYNTHETICPARTICIPANTS, sb.toString());
         }
         return resultMap;
     }
 
+    @Override
     public String toString() {
         return "Event{" + super.toString() + "}";
+    }
+
+    public static class AdditionalInformationEvent {
+        /**
+         * Participants will be added with a String
+         */
+        public boolean withParticipantsAsString = false;
     }
 
 }

@@ -27,6 +27,7 @@ import com.togh.service.FactoryService;
 import com.togh.service.LoginService;
 import com.togh.service.LoginService.LoginResult;
 import com.togh.service.LoginService.LoginStatus;
+import com.togh.service.ToghUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -52,6 +54,9 @@ public class RestLoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private ToghUserService toghUserService;
 
     @Autowired
     private ApiKeyService apiKeyService;
@@ -80,6 +85,25 @@ public class RestLoginController {
         if (loginStatus.isConnected) {
             finalStatus.put("apikeys", apiKeyService.getApiKeyForUser(loginStatus.userConnected));
         }
+        return finalStatus;
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "api/userinfo", produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> userInfo(@RequestBody Map<String, String> userData, HttpServletResponse response) {
+        String email = userData.get("email");
+        String invitationStamp = userData.get("invitationStamp");
+        // We get an answer only if the email + invitationId match, to avoid bad guy who scan emails.
+
+        Optional<ToghUserEntity> toghUserEntity = toghUserService.getUserFromEmail(email);
+
+
+        boolean exist = toghUserEntity.isPresent()
+                && invitationStamp != null && invitationStamp.equals(toghUserEntity.get().getInvitationStamp());
+        boolean isInvited = exist && toghUserEntity.get().getStatusUser() == ToghUserEntity.StatusUserEnum.INVITED;
+
+        Map<String, Object> finalStatus = Map.of("isUser", exist, "isInvited", isInvited);
         return finalStatus;
     }
 
