@@ -52,12 +52,19 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
             + "   or (e.dateEndEvent is null and e.dateEvent is null)) "
             + " and e.dateModification < :timeGrace "
             + " and e.statusEvent != :status")
-    List<EventEntity> findOldEvents(@Param("timeLimit") LocalDateTime timeLimit, @Param("timeGrace") LocalDateTime timeGrace, @Param("status") StatusEventEnum status,  Pageable pageable);
+    List<EventEntity> findOldEvents(@Param("timeLimit") LocalDateTime timeLimit, @Param("timeGrace") LocalDateTime timeGrace, @Param("status") StatusEventEnum status, Pageable pageable);
+
+
+    @Query("SELECT e FROM EventEntity e join e.participantList p "
+            + "WHERE p.id = :participantId")
+    EventEntity findByParticipant(@Param("participantId") Long participantId);
 
     /**
      * Search all past event OR, if the event is just modified in the last X time, then it survived
-     * @param connectionLastActivity
-     * @param connectionLastActivity
+     *
+     * @param timeGrace limit time under when
+     * @param status
+     * @param pageable
      * @return
      */
     @Query("SELECT e FROM EventEntity e "

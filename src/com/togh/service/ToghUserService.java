@@ -133,7 +133,6 @@ public class ToghUserService {
             invitationStatus.isEmailSent = true;
             NotifyService notifyService = factoryService.getNotifyService();
             NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser,
-                    true,
                     invitedByUser,
                     useMyEmailAsFrom,
                     event);
@@ -238,7 +237,6 @@ public class ToghUserService {
 
         query.setFirstResult(page * numberPerPage);
         query.setMaxResults(numberPerPage);
-        // return em.createQuery( “SELECT c FROM Customer c WHERE c.name LIKE ?1”) .setParameter(1, name) .getResultList();
         SearchUsersResult searchResult = new SearchUsersResult();
 
         searchResult.listUsers = query.getResultList();

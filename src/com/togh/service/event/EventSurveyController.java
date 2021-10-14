@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EventControllerSurvey extends EventControllerAbsChild {
+public class EventSurveyController extends EventAbsChildController {
 
 
-    protected EventControllerSurvey(EventController eventController, EventEntity eventEntity) {
+    protected EventSurveyController(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
     }
 
@@ -95,4 +95,6 @@ public class EventControllerSurvey extends EventControllerAbsChild {
 
         return listLogEvent;
     }
+
+
 }

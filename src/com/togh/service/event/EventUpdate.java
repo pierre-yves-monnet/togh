@@ -84,7 +84,7 @@ public class EventUpdate {
 
     private void addOperation(Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
 
-        EventControllerAbsChild eventChildController = eventController.getEventControllerFromSlabOperation(slab);
+        EventAbsChildController eventChildController = eventController.getEventControllerFromSlabOperation(slab);
         if (eventChildController == null)
             return;
 
@@ -144,14 +144,14 @@ public class EventUpdate {
      * @param eventOperationResult
      */
     private void removeOperation(Slab slab, EventOperationResult eventOperationResult) {
-        EventControllerAbsChild eventChildController = eventController.getEventControllerFromSlabOperation(slab);
+        EventAbsChildController eventChildController = eventController.getEventControllerFromSlabOperation(slab);
         if (eventController == null)
             return;
 
         eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
         BaseEntity baseEntity = eventChildController.getEntity(slab.getAttributValueLong());
         if (baseEntity == null) {
-            eventOperationResult.listLogEvents.add(new LogEvent(EventControllerAbsChild.eventEntityNotFoundToRemove, "Can't find taskId " + slab.getAttributValueLong()));
+            eventOperationResult.listLogEvents.add(new LogEvent(EventAbsChildController.eventEntityNotFoundToRemove, "Can't find taskId " + slab.getAttributValueLong()));
         } else {
             eventChildController.removeEntity(baseEntity, eventOperationResult);
         }

@@ -127,11 +127,11 @@ public class EventInvitation {
                 // attention, if the user is just invited to join TOGH, we don't want to send a new email.
                 // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
                 if (!setUserJustInvited.contains(toghUser)) {
-                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, false, invitedByToghUser, useMyEmailAsFrom, event);
+                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, useMyEmailAsFrom, event);
                     if (!notificationStatus.isCorrect())
                         invitationResult.addErrorSendEmail(toghUser);
                 }
-                invitationResult.newParticipants.add(event.addPartipant(toghUser, role, StatusEnum.INVITED));
+                invitationResult.newParticipants.add(event.addParticipant(toghUser, role, StatusEnum.INVITED));
                 invitationResult.addOkMessage(toghUser);
             }
         }

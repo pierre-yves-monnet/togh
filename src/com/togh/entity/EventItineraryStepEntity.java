@@ -8,15 +8,12 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.engine.tool.EngineTool;
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.EventBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -89,40 +86,12 @@ public @Data class EventItineraryStepEntity extends EventBaseEntity {
    
     
     /**
-     * The dateStep is manipulate by the interface, not by the user.
-     */
-    public boolean isAbsoluteLocalDate(String attributName ) {
-        if ("dateStep".equalsIgnoreCase(attributName))
-            return true;
-        return false;
-    }
-
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
-     * @return
+     * The dateStep is manipulates by the interface, not by the user.
      */
     @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
-        
-        resultMap.put("dateStep", EngineTool.dateToString( dateStep));
-        resultMap.put("rownumber", rownumber);
-
-        resultMap.put("category",category==null ? null : category.toString());
-        resultMap.put("visitTime", visitTime);
-        resultMap.put("durationTime", durationTime);
-        resultMap.put("description", description);
-        resultMap.put("geoaddress", geoaddress);
-        resultMap.put("geolat", geolat);
-        resultMap.put("geolng", geolng);
-        resultMap.put("website", website);
-        
-        
-        // Here we attached directly the expense information
-        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess, timezoneOffset));
-        
-
-        return resultMap;
+    public boolean isAbsoluteLocalDate(String attributName ) {
+        return ("dateStep".equalsIgnoreCase(attributName));
     }
+
+
 }

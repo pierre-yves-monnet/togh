@@ -8,7 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.engine.tool.EngineTool;
 import com.togh.entity.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +15,6 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Map;
 import java.util.Random;
 
 /* ******************************************************************************** */
@@ -237,98 +235,7 @@ public @Data class ToghUserEntity extends BaseEntity {
         SEARCH, PUBLICACCESS, FRIENDACCESS, SECRETACCESS, ADMIN, MYPROFILE
     }
 
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     *
-     * @param contextAccess Context of the access
-     * @param timeZoneOffset time Zone offset of the browser
-     * @return Map to describe the user
-     */
-    @Override
-    public Map<String, Object> getMap(ContextAccess contextAccess, Long timeZoneOffset) {
-        Map<String, Object> resultMap = super.getMap(contextAccess, timeZoneOffset);
 
-        StringBuilder label = new StringBuilder();
-        StringBuilder longlabel = new StringBuilder();
 
-        if (getName() != null) {
-            label.append(getName());
-            longlabel.append(getName());
-        }
-
-        resultMap.put("tagid",System.currentTimeMillis() % 10000);
-        resultMap.put("name", getName());
-        resultMap.put("firstName", firstName);
-        resultMap.put("typePicture", typePicture);
-        resultMap.put("picture", picture);
-        resultMap.put("source", getSource().toString().toLowerCase());
-
-        
-        resultMap.put("statusUser", statusUser==null ? "" : statusUser.toString());
-
-        // if the context is SECRET, the last name is not visible
-        if (contextAccess != ContextAccess.SECRETACCESS)
-            resultMap.put("lastName", lastName);
-
-        if (isVisible(emailVisibility, contextAccess)) {
-            resultMap.put("email", email);
-            if (email != null && email.trim().length() > 0) {
-                // the label is the email only if there is no label at this moment
-                if (label.toString().trim().length() == 0)
-                    label.append(" (" + email + ")");
-                longlabel.append(" (" + email + ")");
-            }
-        } else
-            resultMap.put("email", "*********");
-
-        if (isVisible(phoneNumberVisibility, contextAccess)) {
-            resultMap.put("phoneNumber", phoneNumber);
-            if (phoneNumber != null) {
-                if (label.length() == 0)
-                    label.append(" " + phoneNumber);
-                longlabel.append(" " + phoneNumber);
-            }
-        } else
-            resultMap.put("phoneNumber", "*********");
-
-        resultMap.put("label", label.toString());
-        resultMap.put("longlabel", longlabel.toString());
-
-        if (contextAccess == ContextAccess.MYPROFILE || contextAccess == ContextAccess.ADMIN) {
-            resultMap.put("subscriptionuser", subscriptionUser.toString());
-            resultMap.put("showTipsUser", showTipsUser);
-
-        }
-        if (contextAccess == ContextAccess.ADMIN) {
-            resultMap.put("privilegeuser", privilegeUser.toString());
-            resultMap.put("connectiontime", EngineTool.dateToString(connectionTime));
-            if (connectionTime!=null) {
-                LocalDateTime connectionTimeLocal = connectionTime.minusMinutes(timeZoneOffset);
-                resultMap.put("connectiontimest", EngineTool.dateToHumanString(connectionTimeLocal));
-            }
-            resultMap.put("connectionlastactivity", EngineTool.dateToString(connectionLastActivity));
-            if (connectionLastActivity!=null) {
-                LocalDateTime connectionLastActivityLocal = connectionLastActivity.minusMinutes(timeZoneOffset);
-                resultMap.put("connectionlastactivityst", EngineTool.dateToHumanString(connectionLastActivityLocal));
-            }
-            resultMap.put("connected", connectionStamp == null ? "OFFLINE" : "ONLINE");
-        }
-        return resultMap;
-    }
-
-    private boolean isVisible(VisibilityEnum visibility, ContextAccess userAccess) {
-        // first rule : admin, return true
-        if (userAccess == ContextAccess.ADMIN)
-            return true;
-        // second rule : secret : never.
-        if (userAccess == ContextAccess.SECRETACCESS)
-            return false;
-        // then depends on the visibility and the policy
-        if (emailVisibility == VisibilityEnum.ALWAYS)
-            return true;
-        // it's visible only for accepted user in the event
-        return (userAccess == ContextAccess.FRIENDACCESS && (visibility == VisibilityEnum.LIMITEDEVENT || visibility == VisibilityEnum.ALWAYBUTSEARCH));
-        // in all other case, refuse
-    }
 
 }

@@ -23,6 +23,7 @@ import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.FactoryService;
+import com.togh.service.NotifyService;
 import com.togh.service.event.EventUpdate.Slab;
 
 import java.lang.reflect.Method;
@@ -56,14 +57,15 @@ public class EventController {
     /**
      * Declare all friend controller
      */
-    private final EventControllerTask eventControllerTask;
-    private final EventControllerItinerary eventControllerItinerary;
-    private final EventControllerShopping eventControllerShopping;
-    private final EventControllerSurvey eventControllerSurvey;
-    private final EventControllerSurveyChoiceList eventControllerSurveyChoiceList;
-    private final EventControllerSurveyAnswerList eventControllerSurveyAnswerList;
-    private final EventControllerGroupChat eventControllerGroupChat;
-    private final EventControllerChat eventControllerChat;
+    private final EventTaskController eventControllerTask;
+    private final EventItineraryController eventControllerItinerary;
+    private final EventShoppingController eventControllerShopping;
+    private final EventSurveyController eventSurveyController;
+    private final EventSurveyChoiceController eventSurveyChoiceControllerList;
+    private final EventSurveyAnswerController eventSurveyAnswerController;
+    private final EventGroupChatController eventControllerGroupChat;
+    private final EventChatController eventControllerChat;
+    private final EventExpenseController eventControllerExpense;
 
     /**
      * Keep all Repository
@@ -78,16 +80,17 @@ public class EventController {
         this.eventEntity = eventEntity;
         this.factoryService = factoryService;
         this.factoryRepository = factoryRepository;
-        eventControllerTask = new EventControllerTask(this, eventEntity);
-        eventControllerItinerary = new EventControllerItinerary(this, eventEntity);
-        eventControllerShopping = new EventControllerShopping(this, eventEntity);
+        eventControllerTask = new EventTaskController(this, eventEntity);
+        eventControllerItinerary = new EventItineraryController(this, eventEntity);
+        eventControllerShopping = new EventShoppingController(this, eventEntity);
 
-        eventControllerSurvey = new EventControllerSurvey(this, eventEntity);
-        eventControllerSurveyChoiceList = new EventControllerSurveyChoiceList(this, eventControllerSurvey, eventEntity);
-        eventControllerSurveyAnswerList = new EventControllerSurveyAnswerList(this, eventControllerSurvey, eventEntity);
+        eventSurveyController = new EventSurveyController(this, eventEntity);
+        eventSurveyChoiceControllerList = new EventSurveyChoiceController(this, eventSurveyController, eventEntity);
+        eventSurveyAnswerController = new EventSurveyAnswerController(this, eventSurveyController, eventEntity);
 
-        eventControllerGroupChat = new EventControllerGroupChat(this, eventEntity);
-        eventControllerChat = new EventControllerChat(this, eventControllerGroupChat, eventEntity);
+        eventControllerGroupChat = new EventGroupChatController(this, eventEntity);
+        eventControllerChat = new EventChatController(this, eventControllerGroupChat, eventEntity);
+        eventControllerExpense = new EventExpenseController(this, eventEntity);
     }
 
     public static EventController getInstance(EventEntity event, FactoryService factoryService, EventFactoryRepository factoryRepository) {
@@ -121,7 +124,7 @@ public class EventController {
         }
         if (!authorIsReferenced) {
             // if the user does not exist, this is an issue.... ==> ToghEvent
-            eventEntity.addPartipant(eventEntity.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
+            eventEntity.addParticipant(eventEntity.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
         }
 
         // a date policy must be set
@@ -141,6 +144,26 @@ public class EventController {
     /* ******************************************************************************** */
     public EventPresentation getEventPresentation() {
         return new EventPresentation(this, factoryService);
+    }
+
+    public EventExpenseController getEventControllerExpense() {
+        return eventControllerExpense;
+    }
+
+    public EventSurveyChoiceController getEventControllerSurveyChoiceList() {
+        return eventSurveyChoiceControllerList;
+    }
+
+    public EventSurveyAnswerController getEventControllerSurveyAnswerList() {
+        return eventSurveyAnswerController;
+    }
+
+    public EventGroupChatController getEventControllerGroupChat() {
+        return eventControllerGroupChat;
+    }
+
+    public EventChatController getEventControllerChat() {
+        return eventControllerChat;
     }
 
     /* ******************************************************************************** */
@@ -234,8 +257,8 @@ public class EventController {
      * @param toghUser the toghUser
      * @return
      */
-    public ContextAccess getTypeAccess(ToghUserEntity toghUser) {
-        // event is public : so show onkly what you want to show to public
+    public ContextAccess getContextAccess(ToghUserEntity toghUser) {
+        // event is public : so show only what you want to show to public
         if (eventEntity.getTypeEvent() == TypeEventEnum.OPEN)
             return ContextAccess.PUBLICACCESS;
         // event is secret : hide all at maximum
@@ -344,6 +367,10 @@ public class EventController {
         return factoryService.getEventService();
     }
 
+    protected NotifyService getNotifyService() {
+        return factoryService.getNotifyService();
+    }
+
 
     protected EventFactoryRepository getFactoryRepository() {
         return factoryRepository;
@@ -364,7 +391,7 @@ public class EventController {
      * @param slab the operation to realize
      * @return the status
      */
-    protected EventControllerAbsChild getEventControllerFromSlabOperation(Slab slab) {
+    protected EventAbsChildController getEventControllerFromSlabOperation(Slab slab) {
         if (EventTaskEntity.CST_SLABOPERATION_TASKLIST.equals(slab.attributName)) {
             return eventControllerTask;
 
@@ -375,13 +402,13 @@ public class EventController {
             return eventControllerShopping;
 
         } else if (EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST.equals(slab.attributName)) {
-            return eventControllerSurvey;
+            return eventSurveyController;
 
         } else if (EventSurveyChoiceEntity.CST_SLABOPERATION_CHOICELIST.equals(slab.attributName)) {
-            return eventControllerSurveyChoiceList;
+            return eventSurveyChoiceControllerList;
 
         } else if (EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST.equals(slab.attributName)) {
-            return eventControllerSurveyAnswerList;
+            return eventSurveyAnswerController;
 
         } else if (EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST.equals(slab.attributName)) {
             return eventControllerGroupChat;
@@ -449,4 +476,6 @@ public class EventController {
         }
         return indexEntity;
     }
+
+
 }

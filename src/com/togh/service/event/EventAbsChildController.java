@@ -30,7 +30,7 @@ import com.togh.service.event.EventUpdate.Slab;
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public abstract class EventControllerAbsChild {
+public abstract class EventAbsChildController {
 
     private final EventController eventController;
 
@@ -39,10 +39,10 @@ public abstract class EventControllerAbsChild {
     private int maxEntity = 100;
 
 
-    protected static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventControllerAbsChild.class.getName(), 1, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
+    protected static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventAbsChildController.class.getName(), 1, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
 
 
-    protected EventControllerAbsChild(EventController eventController, EventEntity eventEntity) {
+    protected EventAbsChildController(EventController eventController, EventEntity eventEntity) {
         this.eventController = eventController;
         this.eventEntity = eventEntity;
     }

@@ -747,14 +747,28 @@ Avoir une liste de mes amis que je ^peux importer depuis Google. Pouvoir inviter
 
 ## Contact & support
 
+## Participants
+
+Ajouter le nombre de personne, pouvoir dire "je ne viens pas"
+
+Ajouter la date de dernier acces du participant dans l'évent: ainsi on peut calculater le "what's news" et mettre des
+badges
+
+## notification / event & General
+
+Ajouter une notification dans l'évent qui apparait en gros "He, remplissez ce sondage"
+
+Notification generale dans toutes les langues
+
+## look and feel
+
+==> Boutons => tab dans les onglets
+
 ## invitation
 
 Pouvoir mettre une photo dans l'invitation pour le House Warming
 
 Pouvoir dire "non je ne vais pas venir dans cette event"
-
-Je revois une invitation par email: Togh devrait me dirriger vers le login OU vers la registration car il peut savoir si
-j'existe ou pas
 
 Invitation: copuer le contenu de l'emauil dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
 veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de modification"

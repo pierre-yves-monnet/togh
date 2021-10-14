@@ -8,7 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +15,6 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -40,13 +38,6 @@ public @Data class EventSurveyChoiceEntity extends UserEntity {
 
     @Column(name = "proptext", length=50)
     private String proptext;
-    
-    @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
-        resultMap.put("code", code);
-        resultMap.put("proptext", proptext);
-        return resultMap;
-    }
+
 
 }

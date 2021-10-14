@@ -8,10 +8,8 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.engine.tool.EngineTool;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,7 +21,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -40,28 +37,6 @@ import java.util.Map;
 public @Data class EventEntity extends UserEntity {
 
 
-    private static final String CST_JSONOUT_PARTICIPANTS = "participants";
-
-    private static final String CST_JSONOUT_STATUS_EVENT = "statusEvent";
-
-    private static final String CST_JSONOUT_TYPE_EVENT = "typeEvent";
-
-    private static final String CST_JSONOUT_DATE_POLICY = "datePolicy";
-
-    private static final String CST_JSONOUT_DATE_END_EVENT = "dateEndEvent";
-
-    private static final String CST_JSONOUT_DATE_START_EVENT = "dateStartEvent";
-
-    private static final String CST_JSONOUT_NAME = "name";
-
-    private static final String CST_JSONOUT_SUBSCRIPTION_EVENT = "subscriptionEvent";
-    private static final String CST_JSONOUT_LISTSYNTHETICPARTICIPANTS ="listParticipants";
-    
-
-    /**
-     * All verbe used to produce the JSON Output information
-     */
-    private static final String CST_JSONOUT_DATE_EVENT = "dateEvent";
 
 
     @Column(name = "dateevent")
@@ -181,11 +156,13 @@ public @Data class EventEntity extends UserEntity {
     private List<ParticipantEntity> participantList = new ArrayList<>();
 
     /**
-     * do not add a participant, which is a private information. So, don't take the risk to add accidentaly a participant from an another event
-     * 
-     * @param participant
+     * Add a participant
+     *
+     * @param userParticipant Add this user as a participant
+     * @param role            Role of the participant
+     * @param status          status
      */
-    public ParticipantEntity addPartipant(ToghUserEntity userParticipant, ParticipantRoleEnum role, StatusEnum status) {
+    public ParticipantEntity addParticipant(ToghUserEntity userParticipant, ParticipantRoleEnum role, StatusEnum status) {
         ParticipantEntity participant = new ParticipantEntity();
         participant.setUser(userParticipant);
         participant.setRole(role);
@@ -224,9 +201,9 @@ public @Data class EventEntity extends UserEntity {
     }
 
     /**
-     * Remove a task.
-     * 
-     * @param task
+     * Remove an itinerary step.
+     *
+     * @param oneStep step to remove
      * @return true if the task exist and is removed, false else
      */
     public boolean removeItineraryStep(EventItineraryStepEntity oneStep) {
@@ -388,115 +365,6 @@ public @Data class EventEntity extends UserEntity {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    @Override
-    public Map<String, Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
-
-        resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
-        resultMap.put(CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
-        resultMap.put(CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
-        resultMap.put(CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
-        resultMap.put(CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
-        resultMap.put("description", description);
-        resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
-
-        resultMap.put("tasklistshowdates", taskListShowDates);
-
-        resultMap.put("itineraryshowmap", itineraryShowMap);
-        resultMap.put("itineraryshowdetails", itineraryShowDetails);
-        resultMap.put("itineraryshowexpenses", itineraryShowExpenses);
-
-        resultMap.put("shoppinglistshowdetails", shoppingListShowDetails);
-        resultMap.put("shoppinglistshowexpenses", shoppinglistShowExpenses);
-
-        if (contextAccess != ContextAccess.PUBLICACCESS) {
-            resultMap.put(CST_JSONOUT_DATE_POLICY, datePolicy == null ? null : datePolicy.toString());
-        }
-        if (typeEvent == TypeEventEnum.OPEN || contextAccess != ContextAccess.PUBLICACCESS) {
-            List<Map<String, Object>> listParticipantsMap = new ArrayList<>();
-            for (ParticipantEntity participant : participantList) {
-                listParticipantsMap.add(participant.getMap(contextAccess, timezoneOffset));
-            }
-            resultMap.put(CST_JSONOUT_PARTICIPANTS, listParticipantsMap);
-
-            // get task
-            List<Map<String, Object>> listTasksMap = new ArrayList<>();
-            for (EventTaskEntity tasks : taskList) {
-                listTasksMap.add(tasks.getMap(contextAccess, timezoneOffset));
-            }
-            resultMap.put(EventTaskEntity.CST_SLABOPERATION_TASKLIST, listTasksMap);
-
-            // get task
-            List<Map<String, Object>> listItineraryStepMap = new ArrayList<>();
-            for (EventItineraryStepEntity itineraryStep : itineraryStepList) {
-                listItineraryStepMap.add(itineraryStep.getMap(contextAccess, timezoneOffset));
-            }
-            resultMap.put(EventItineraryStepEntity.CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
-
-            // get Shoppinglist
-            List<Map<String, Object>> listShoppinglistMap = new ArrayList<>();
-            for (EventShoppingListEntity shoppingListStep : shoppingList) {
-                listShoppinglistMap.add(shoppingListStep.getMap(contextAccess, timezoneOffset));
-            }
-            resultMap.put(EventShoppingListEntity.CST_SLABOPERATION_SHOPPINGLIST, listShoppinglistMap);
-
-            // get Surveylist
-            List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
-            for (EventSurveyEntity surveyStep : surveyList) {
-                listSurveylistMap.add(surveyStep.getMap(contextAccess, timezoneOffset));
-            }
-            resultMap.put(EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
-
-            // get GroupChatList
-           
-            resultMap.put(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, getGroupChatList(contextAccess, timezoneOffset));
-
-        }
-
-        return resultMap;
-    }
-    
-    /**
-     * Return the groupChatList. This information is important, order is important, so it is updated differently
-     * @param contextAccess
-     * @param timezoneOffset
-     * @return
-     */
-    public List<Map<String, Object>> getGroupChatList(ContextAccess contextAccess, Long timezoneOffset) {
-        List<Map<String, Object>> listGroupChatListMap = new ArrayList<>();
-        for (EventGroupChatEntity groupChat : groupChatList) {
-            listGroupChatListMap.add(groupChat.getMap(contextAccess, timezoneOffset));
-        }
-        return listGroupChatListMap;
-        
-    }
-
-    public Map<String, Object> getHeaderMap(ContextAccess contextAccess, AdditionalInformationEvent additionnalInformationEvent, Long timezoneOffset) {
-        Map<String, Object> resultMap = super.getMap(contextAccess, timezoneOffset);
-        resultMap.put(CST_JSONOUT_NAME, getName());
-        resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(dateEvent));
-        resultMap.put(CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(dateStartEvent));
-        resultMap.put(CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(dateEndEvent));
-        resultMap.put(CST_JSONOUT_DATE_POLICY, datePolicy.toString());
-        resultMap.put(CST_JSONOUT_TYPE_EVENT, typeEvent == null ? null : typeEvent.toString());
-        resultMap.put(CST_JSONOUT_STATUS_EVENT, statusEvent == null ? null : statusEvent.toString());
-        resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, subscriptionEvent.toString());
-        if (additionnalInformationEvent.withParticipantsAsString) {
-            // create the list of partipants
-            boolean firstPartipant=true;
-            StringBuilder sb = new StringBuilder();
-            for( ParticipantEntity participant : participantList) {
-                if (participant.getUser() == null)
-                    continue;
-                if (!firstPartipant)
-                    sb.append(", ");
-                firstPartipant = false;
-                sb.append(participant.getUser().getLabel());
-            }
-            resultMap.put(CST_JSONOUT_LISTSYNTHETICPARTICIPANTS, sb.toString());
-        }
-        return resultMap;
-    }
 
     @Override
     public String toString() {

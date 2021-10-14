@@ -1,3 +1,11 @@
+/* ******************************************************************************** */
+/*                                                                                  */
+/*  Togh Project                                                                    */
+/*                                                                                  */
+/*  This component is part of the Togh Project, developed by Pierre-Yves Monnet     */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 package com.togh.service.event;
 
 import com.togh.entity.EventEntity;
@@ -22,9 +30,11 @@ import java.util.List;
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public class EventControllerItinerary extends EventControllerAbsChild {
+public class EventItineraryController extends EventAbsChildController {
 
-    protected EventControllerItinerary(EventController eventController, EventEntity eventEntity) {
+    public static final String CST_JSON_DATE_STEP = "dateStep";
+
+    protected EventItineraryController(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
     }
 
@@ -70,7 +80,6 @@ public class EventControllerItinerary extends EventControllerAbsChild {
     }
 
     /**
-     * 
      * @return
      */
     public List<Slab> checkItinerary() {
@@ -81,13 +90,13 @@ public class EventControllerItinerary extends EventControllerAbsChild {
         for (EventItineraryStepEntity itineraryStep : getEventEntity().getItineraryStepList()) {
             if (itineraryStep.getDateStep() == null) {
                 if (dateBegin != null) {
-                    listSlab.add(new Slab(SlabOperation.UPDATE, "dateStep", dateBegin.toLocalDate(), itineraryStep));
+                    listSlab.add(new Slab(SlabOperation.UPDATE, CST_JSON_DATE_STEP, dateBegin.toLocalDate(), itineraryStep));
                 }
             } else {
                 if (dateBegin != null && itineraryStep.getDateStep().compareTo(dateBegin.toLocalDate()) < 0)
-                    listSlab.add(new Slab(SlabOperation.UPDATE, "dateStep", dateBegin.toLocalDate(), itineraryStep));
+                    listSlab.add(new Slab(SlabOperation.UPDATE, CST_JSON_DATE_STEP, dateBegin.toLocalDate(), itineraryStep));
                 if (dateEnd != null && itineraryStep.getDateStep().compareTo(dateEnd.toLocalDate()) > 0)
-                    listSlab.add(new Slab(SlabOperation.UPDATE, "dateStep", dateEnd.toLocalDate(), itineraryStep));
+                    listSlab.add(new Slab(SlabOperation.UPDATE, CST_JSON_DATE_STEP, dateEnd.toLocalDate(), itineraryStep));
             }
         }
         return listSlab;

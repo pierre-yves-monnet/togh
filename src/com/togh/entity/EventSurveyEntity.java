@@ -8,7 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +18,6 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -47,38 +45,7 @@ class EventSurveyEntity extends UserEntity {
     @Enumerated(EnumType.STRING)
     private SurveyStatusEnum status;
 
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     *
-     * @param contextAccess  context
-     * @param timezoneOffset timeZone of the browser
-     * @return
-     */
-    @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
 
-
-        resultMap.put("status",status==null ? null : status.toString());
-        resultMap.put("description", description);
-
-        List<Map<String, Object>> listChoiceMap = new ArrayList<>();
-        if (choicelist!=null)
-            for (EventSurveyChoiceEntity choice : choicelist) {
-                listChoiceMap.add(choice.getMap(contextAccess, timezoneOffset));
-            }
-        resultMap.put(EventSurveyChoiceEntity.CST_SLABOPERATION_CHOICELIST, listChoiceMap);
-
-        List<Map<String, Object>> listAnswerMap = new ArrayList<>();
-        if (answerlist != null)
-            for (EventSurveyAnswerEntity answer : answerlist) {
-                listAnswerMap.add(answer.getMap(contextAccess, timezoneOffset));
-            }
-        resultMap.put(EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST, listAnswerMap);
-
-
-        return resultMap;
-    }
 
     // name is part of the baseEntity
     @Column(name = "description", length = 400)

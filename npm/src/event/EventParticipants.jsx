@@ -52,69 +52,82 @@ class EventParticipants extends React.Component {
 
 		console.log("EventParticipant.render:  Participants:"+JSON.stringify(this.state.event.participants) );
 		// show the list
-		return ( <div>
-					<div class="eventsection"> 
-						<FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
-						<div style={{float: "right"}}>							
-							<Invitation event={this.state.event} participantInvited={this.participantInvited}/>
-						</div>
-					</div> 
+		return (
+		    <div>
+                <div class="eventsection">
+                    <FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
+                    <div style={{float: "right"}}>
+                        <Invitation event={this.state.event} participantInvited={this.participantInvited}/>
+                    </div>
+                </div>
 
-					<table class="table table-striped toghtable">
-						<thead>
-							<tr >
-								<th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
-								<th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
-								<th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
-							</tr>
-						</thead>
-						{this.state.event.participants && this.state.event.participants.map( (item, index) => {
-							return (<tr key={index}>
-								<td>
-									{item.user !== '' && ( <span>{item.user.label} </span>)}					
-									
-									{item.status === 'INVITED' && (<span>
-										<Tag type="teal">
-										<FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
-										</Tag></span>)}
-								</td>
-								<td>
-								{item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
-								{item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
-								
-								{ (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
-									<Select labelText=""
-									    disabled={item.status===STATUS_LEFT} value={item.role}
-									        onChange={(event) => this.setAttribute( "role", event.target.value )}
-									        id="EventParticipants.role">
-									 	<FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
-			                          		{(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
-			                    		</FormattedMessage>
-										<FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
-			                          		{(message) => <option value="PARTICIPANT">{message}</option>}
-			                    		</FormattedMessage>
-										<FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
-											{(message) => <option value="OBSERVER">{message}</option>}
-			                    		</FormattedMessage>
-										
-									</Select>
-										)}
-							</td>
-					<td>
-						{item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}			
-						{item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}			
-						{item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}			
-					</td>
-							</tr>
-							)
-					        } ) 
-						}
-				
-								
-					</table>
-					
-				</div>
-				);
+                <table class="table table-striped toghtable">
+                    <thead>
+                        <tr >
+                            <th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
+                            <th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
+                            <th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
+                        </tr>
+                    </thead>
+                    {this.state.event.participants && this.state.event.participants.map( (item, index) => {
+                        return (<tr key={index}>
+                            <td>
+                                {item.user !== '' && ( <span>{item.user.label} </span>)}
+
+                                {item.status === 'INVITED' && (
+                                    <span>
+                                        <Tag type="teal">
+                                        <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
+                                        </Tag>
+                                        <button class="btn btn-info btn-xs "
+                                            onClick={this.sendAgainInvitation}>
+                                            <FormattedMessage id="EventParticipant.SendAgainInvitation" defaultMessage="Send again"/>
+                                        </button>
+                                        <span
+                                            style={{fontSize: "small", fontStyle:"italic", marginLeft:"5px"}}
+                                            title={intl.formatMessage({id: "EventParticipant.TitleUrlInvitation", defaultMessage: "Use this URL in a direct email"})}>
+                                            <FormattedMessage id="EventParticipant.UrlInvitation" defaultMessage="Url"/>
+                                            {item.urlInvitation}
+                                        </span>
+                                    </span>)}
+                            </td>
+                            <td>
+                            {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
+                            {item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
+
+                            { (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
+                                <Select labelText=""
+                                    disabled={item.status===STATUS_LEFT} value={item.role}
+                                        onChange={(event) => this.setAttribute( "role", event.target.value )}
+                                        id="EventParticipants.role">
+                                    <FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
+                                        {(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
+                                    </FormattedMessage>
+                                    <FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
+                                        {(message) => <option value="PARTICIPANT">{message}</option>}
+                                    </FormattedMessage>
+                                    <FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
+                                        {(message) => <option value="OBSERVER">{message}</option>}
+                                    </FormattedMessage>
+
+                                </Select>
+                                    )}
+                        </td>
+                <td>
+                    {item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}
+                    {item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}
+                    {item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}
+                </td>
+                        </tr>
+                        )
+                        } )
+                    }
+
+
+                </table>
+
+            </div>
+            );
 		}
 		
 	

@@ -8,7 +8,6 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +16,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.Map;
 /* ******************************************************************************** */
 /*                                                                                  */
 /*  EventExpenseEntity,                                                             */
@@ -42,17 +40,5 @@ public @Data class EventExpenseEntity  extends UserEntity {
     
     @Column(name = "cost")
     private BigDecimal  cost;
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
-     * @return
-     */
-    @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
-        
-        resultMap.put("budget",budget);
-        resultMap.put("cost", cost);
-        return resultMap;
-    }
+
 }

@@ -11,7 +11,7 @@ package com.togh.service;
 import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.SubscriptionUserEnum;
-import com.togh.service.event.EventControllerChat;
+import com.togh.service.event.EventChatController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +51,7 @@ public class SubscriptionService {
     public int getMaximumEntityPerEvent(SubscriptionEventEnum subscription, Class eventController) {
         // the for the tchat, we add 50 lines
         int baseValue = 0;
-        if (eventController == EventControllerChat.class)
+        if (eventController == EventChatController.class)
             baseValue = 100;
         switch (subscription) {
             case FREE:
@@ -70,8 +70,8 @@ public class SubscriptionService {
      */
 
     public enum LimitReach {
-        CREATIONEVENT, TASKLIST, ITINERARY, SHOPPING, SURVEY, SURVEYCHOICE, CHATGROUP, CHAT
-    };
+        CREATIONEVENT, TASKLIST, ITINERARY, SHOPPING, SURVEY, SURVEYCHOICE, CHATGROUP, CHAT, PARTICIPANT
+    }
 
     /**
      * A new time, a user reach the limit. Register it.

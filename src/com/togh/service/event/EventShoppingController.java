@@ -23,10 +23,10 @@ import com.togh.service.event.EventUpdate.Slab;
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-public class EventControllerShopping extends EventControllerAbsChild {
+public class EventShoppingController extends EventAbsChildController {
 
 
-    protected EventControllerShopping(EventController eventController, EventEntity eventEntity) {
+    protected EventShoppingController(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
 
     }
@@ -71,5 +71,6 @@ public class EventControllerShopping extends EventControllerAbsChild {
         return shoppingEntity;
 
     }
+
 
 }

@@ -9,13 +9,11 @@
 package com.togh.entity;
 
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.EventBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -61,26 +59,6 @@ public @Data class EventShoppingListEntity extends EventBaseEntity {
     @Override
     public boolean acceptExpense() {
         return true;
-    }
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
-     * @return
-     */
-    @Override
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
-        
-
-        resultMap.put("status",status==null ? null : status.toString());
-        resultMap.put("description", description);
-
-        // we just return the ID here
-        resultMap.put("whoid",whoId==null ? null :  whoId.getId());
-        // Here we attached directly the expense information
-        resultMap.put("expense", expense==null ? null : expense.getMap(contextAccess, timezoneOffset));
- 
-        return resultMap;
     }
 
 }

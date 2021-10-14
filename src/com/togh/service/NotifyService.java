@@ -66,18 +66,16 @@ public class NotifyService {
     private final static LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
 
     /**
-     * @param toghUserEntity
-     * @param newUser           user is new, so an action "invitedNewUser" is sent, else we send an invitatin "invitedUser"
-     * @param invitedByToghUser
+     * @param toghUserEntity    The user to invite
+     * @param invitedByToghUser Tog user who send the invitation
      * @param useMyEmailAsFrom  if true, the From email is the invityByToghUser email
-     * @param event
-     * @return
+     * @param eventEntity       the event Entity
+     * @return a notification status. Email is sent
      */
     public NotificationStatus notifyNewUserInEvent(@Nonnull ToghUserEntity toghUserEntity,
-                                                   boolean newUser,
                                                    ToghUserEntity invitedByToghUser,
                                                    boolean useMyEmailAsFrom,
-                                                   @Nonnull EventEntity event) {
+                                                   @Nonnull EventEntity eventEntity) {
 
         // the userEntity will contains the language
         String lang = toghUserEntity.getLanguage() == null ? invitedByToghUser.getLanguage() : toghUserEntity.getLanguage();
@@ -108,13 +106,9 @@ public class NotifyService {
 
         st.append(String.format(translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang), invitedByToghUser.getLabel()));
 
-        EventController eventController = EventController.getInstance(event, factoryService, factoryRepository);
+        EventController eventController = EventController.getInstance(eventEntity, factoryService, factoryRepository);
         EventPresentationAttribut eventPresentationAttribut = new EventPresentationAttribut();
-        eventPresentationAttribut.bannerAction = "<a href=\"" + getHttpLink(HTTP_DEFAULT_HOST_TOGH)
-                + "?action=" + (newUser ? "invitedNewUser" : "invitedUser")
-                + "&invitationStamp=" + toghUserEntity.getInvitationStamp()
-                + "&eventid=" + event.getId()
-                + "&email=" + toghUserEntity.getEmail() + "\""
+        eventPresentationAttribut.bannerAction = "<a href=\"" + getUrlInvitation(toghUserEntity, eventEntity) + "\""
                 + " style=\"text-decoration: none;color: white;\">"
                 + translatorService.getDictionarySentence(Sentence.REGISTER_AND_JOIN_THIS_EVENT, lang) + "</a>";
 
@@ -131,6 +125,22 @@ public class NotifyService {
         return sendEmail(toghUserEntity.getEmail(),
                 (useMyEmailAsFrom ? invitedByToghUser.getEmail() : null),
                 subject, st.toString());
+    }
+
+    /**
+     * Get the URL to use to arrive to the Togh event invitation
+     *
+     * @param toghUserEntity togh User
+     * @param eventEntity    event
+     * @return a complete URL
+     */
+    public String getUrlInvitation(ToghUserEntity toghUserEntity, EventEntity eventEntity) {
+        boolean newUser = toghUserEntity.getStatusUser().equals(ToghUserEntity.StatusUserEnum.INVITED);
+        return getHttpLink(HTTP_DEFAULT_HOST_TOGH)
+                + "?action=" + (newUser ? "invitedNewUser" : "invitedUser")
+                + "&invitationStamp=" + toghUserEntity.getInvitationStamp()
+                + "&eventid=" + eventEntity.getId()
+                + "&email=" + toghUserEntity.getEmail();
     }
 
     // --------------------------------------------------------------

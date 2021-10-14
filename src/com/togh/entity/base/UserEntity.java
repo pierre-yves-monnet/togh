@@ -9,10 +9,8 @@
 package com.togh.entity.base;
 
 import com.togh.entity.ToghUserEntity;
-import com.togh.entity.ToghUserEntity.ContextAccess;
 
 import javax.persistence.*;
-import java.util.Map;
 
 
 
@@ -29,28 +27,28 @@ import java.util.Map;
 @Inheritance
 public abstract class UserEntity extends BaseEntity {
 
-    
-    
     @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "authorid")
     private ToghUserEntity author;
-    
-    @Column(name="accessdata", length=20)
+
+    @Column(name = "accessdata", length = 20)
     private String accessdata = "local";
 
-    public UserEntity(ToghUserEntity author, String name) {
+    protected UserEntity(ToghUserEntity author, String name) {
         super(name);
         this.author = author;
     }
-    public UserEntity() {
+
+    protected UserEntity() {
         super();
     }
-    
-	public Long getAuthorId() {
-	    
-		return (this.author !=null ? this.author.getId() : null);
-	}
-	public ToghUserEntity getAuthor() {
+
+    public Long getAuthorId() {
+
+        return (this.author != null ? this.author.getId() : null);
+    }
+
+    public ToghUserEntity getAuthor() {
         return this.author;
     }
 
@@ -65,19 +63,6 @@ public abstract class UserEntity extends BaseEntity {
 	public void setAccessdata(String accessdata) {
 		this.accessdata = accessdata;
 	}
-	
-	
-	/**
-	 * 
-	 * @param levelInformation
-	 * @return
-	 */
-    @Override
-    public Map<String,Object> getMap(ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = super.getMap( contextAccess, timezoneOffset );
-        if (contextAccess== ContextAccess.ADMIN)
-            resultMap.put("authorid", this.getAuthorId());
-        return resultMap;
-    }
+
 
 }

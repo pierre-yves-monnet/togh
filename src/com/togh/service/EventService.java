@@ -25,6 +25,8 @@ import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
 import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventRepository;
+import com.togh.serialization.BaseSerializer;
+import com.togh.serialization.FactorySerializer;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventController;
 import com.togh.service.event.EventUpdate.Slab;
@@ -85,6 +87,9 @@ public class EventService {
 
     @Autowired
     private NotifyService notifyService;
+
+    @Autowired
+    private FactorySerializer factorySerializer;
 
     /**
      * Update event: update attribut, create new item, delete item. All operations on event are done via the Slab Mechanism, which is a Updater design
@@ -311,13 +316,14 @@ public class EventService {
 
     
     public ContextAccess getContextAccess(EventEntity eventEntity, ToghUserEntity toghUser ) {
-        return EventController.getInstance( eventEntity, factoryService, factoryRepository).getTypeAccess(toghUser);
+        return EventController.getInstance(eventEntity, factoryService, factoryRepository).getContextAccess(toghUser);
     }
 
     
     public Map<String, Object> getMap( EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset) {
         EventController eventController = getEventController(eventEntity);
-        return eventEntity.getMap(eventController.getTypeAccess(toghUserEntity), timezoneOffset);
+        BaseSerializer serializer = factorySerializer.getFromEntity(eventEntity);
+        return serializer.getMap(eventEntity, eventController.getContextAccess(toghUserEntity), timezoneOffset, factorySerializer);
     }
 
     /**

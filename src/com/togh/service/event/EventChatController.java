@@ -9,11 +9,11 @@ import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventUpdate.Slab;
 
-public class EventControllerChat extends EventControllerAbsChild {
+public class EventChatController extends EventAbsChildController {
 
-    EventControllerGroupChat eventControllerGroupChat;
+    EventGroupChatController eventControllerGroupChat;
 
-    protected EventControllerChat(EventController eventController, EventControllerGroupChat eventControllerGroupChat, EventEntity eventEntity) {
+    protected EventChatController(EventController eventController, EventGroupChatController eventControllerGroupChat, EventEntity eventEntity) {
         super(eventController, eventEntity);
         this.eventControllerGroupChat = eventControllerGroupChat;
     }
@@ -58,7 +58,6 @@ public class EventControllerChat extends EventControllerAbsChild {
 
     }
 
-
     @Override
     public void removeEntity(BaseEntity childEntity, EventOperationResult eventOperationResult) {
         // not supported at this moment
@@ -66,10 +65,12 @@ public class EventControllerChat extends EventControllerAbsChild {
 
     /*
      * Add a entity in the event Entity
-     * Entity is then saved, and can be modified (persistenceid is created)
+     * childEntity is then saved, and can be modified (persistenceid is created)
      */
     @Override
     public BaseEntity addEntity(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult) {
         return null; // only by the
     }
+
+
 }

@@ -8,12 +8,9 @@
 /* ******************************************************************************** */
 package com.togh.entity;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.UserEntity;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -72,18 +69,5 @@ public class ParticipantEntity extends UserEntity {
     }
 
    
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     * @param levelInformation
-     * @return
-     */
-    public Map<String,Object> getMap( ContextAccess contextAccess, Long timezoneOffset) {
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("role", role==null ? null : role.toString());
-        resultMap.put("user", user.getMap(contextAccess, timezoneOffset ));
-        resultMap.put("id", getId());
-        resultMap.put("status", status==null ? null : status.toString());
 
-        return resultMap;
-    }
 }

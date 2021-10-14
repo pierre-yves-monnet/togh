@@ -6,39 +6,38 @@
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-package com.togh.entity;
+package com.togh.serialization;
 
+import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.UserEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import java.util.Map;
+
+
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/*  EventChat,                                                                      */
+/*  EntitySerialization                                                                     */
 /*                                                                                  */
-/*  Save a discussion                                                               */
+/*  To serialize an Entity, the controller must implement this interface             */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-@Entity
-
-@Table(name = "EVTCHAT")
-@EqualsAndHashCode(callSuper=true)
-
-public @Data class EventChatEntity extends UserEntity {
-   
-    public static final String CST_SLABOPERATION_CHAT = "chat";
-
-    // User attached to this task (maybe an external user, why not ?
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "whoid")
-    private ToghUserEntity whoId;
-
-    @Column( name="message", length=400)
-    private String message;
-
+public abstract class UserSerializer extends BaseSerializer {
+    /**
+     * getBaseMap. Each entity depend of UserEntity. So, this is the basic map
+     *
+     * @param userEntity
+     * @param contextAccess
+     * @param timezoneOffset
+     * @return
+     */
+    protected Map<String, Object> getBasicMap(UserEntity userEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset) {
+        Map<String, Object> resultMap = super.getBasicMap(userEntity, contextAccess, timezoneOffset);
+        if (contextAccess == ToghUserEntity.ContextAccess.ADMIN)
+            resultMap.put(CST_JSONOUT_AUTHORID, userEntity.getAuthorId());
+        return resultMap;
+    }
 
 }

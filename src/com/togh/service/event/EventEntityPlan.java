@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A crateEntity may result to create multiple Entity
+ * A createEntity may result to create multiple Entity
  * Example with the Chat, a GroupChat must be created, and the Chat it attached not to the parent, but to the GroupChat
  */
 public class EventEntityPlan {

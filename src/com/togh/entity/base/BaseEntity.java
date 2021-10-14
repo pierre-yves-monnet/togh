@@ -1,6 +1,5 @@
 package com.togh.entity.base;
 
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,8 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.HashMap;
-import java.util.Map;
 
 @MappedSuperclass
 @Inheritance
@@ -58,17 +55,5 @@ public abstract @Data class BaseEntity {
         this.dateModification = LocalDateTime.now(ZoneOffset.UTC);
     }
 
-    /**
-     * Get the information as the levelInformation in the event. A OWNER see more than a OBSERVER for example
-     *
-     * @param contextAccess  context of the access
-     * @param timeZoneOffset timeZone offset
-     * @return
-     */
-    public Map<String, Object> getMap(ContextAccess contextAccess, Long timeZoneOffset) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("id", id);
-        resultMap.put("name", name);
-        return resultMap;
-    }
+
 }

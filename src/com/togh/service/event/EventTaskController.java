@@ -25,10 +25,10 @@ import com.togh.service.event.EventUpdate.Slab;
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public class EventControllerTask extends EventControllerAbsChild {
+public class EventTaskController extends EventAbsChildController {
 
 
-    protected EventControllerTask(EventController eventController, EventEntity eventEntity) {
+    protected EventTaskController(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
     }
 
@@ -86,4 +86,6 @@ public class EventControllerTask extends EventControllerAbsChild {
         getFactoryRepository().eventRepository.save(getEventEntity());
         return childEntity;
     }
+
+
 }

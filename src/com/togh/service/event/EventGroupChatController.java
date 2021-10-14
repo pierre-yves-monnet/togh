@@ -9,12 +9,11 @@ import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventUpdate.Slab;
 
-public class EventControllerGroupChat extends EventControllerAbsChild {
+public class EventGroupChatController extends EventAbsChildController {
 
-    
-    private final static String GENERAL_CHAT ="GENERAL";
-    
-    protected EventControllerGroupChat(EventController eventController, EventEntity eventEntity) {
+    private final static String GENERAL_CHAT = "GENERAL";
+
+    protected EventGroupChatController(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
     }
 
@@ -100,4 +99,5 @@ public class EventControllerGroupChat extends EventControllerAbsChild {
         
         return chatEntity;
     }
+
 }
