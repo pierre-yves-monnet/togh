@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 /*                                                                                  */
 /*  EventExpenseEntity,                                                             */
 /*                                                                                  */
-/*  Manage an expense. An expense can be attached in different position :           */ 
+/*  Manage an expense. An expense can be attached in different position :           */
 /*   ItineraryStep, ShoppingList, in direct                                         */
 /*                                                                                  */
 /*                                                                                  */
@@ -29,16 +29,17 @@ import java.math.BigDecimal;
 @Entity
 
 @Table(name = "EVTEXPENSE")
-@EqualsAndHashCode(callSuper=false)
-public @Data class EventExpenseEntity  extends UserEntity {
+@EqualsAndHashCode(callSuper = false)
+public @Data
+class EventExpenseEntity extends UserEntity {
 
-    public static final String CST_ENTITY_NAME="expense";
-    
+    public static final String CST_ENTITY_NAME = "expense";
+
     @Column(name = "budget")
-    private BigDecimal  budget;
-    
-    
+    private BigDecimal budget;
+
+
     @Column(name = "cost")
-    private BigDecimal  cost;
+    private BigDecimal cost;
 
 }

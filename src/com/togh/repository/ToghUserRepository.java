@@ -87,7 +87,7 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
      * where e not in (select epar from Employee epar, CertificateOrder c join c.participants p
      * where c.persistenceId = :certificateid
      * and p.employee = epar)
-     * 
+     *
      * @param firstName
      * @param lastName
      * @param phoneNumber
@@ -97,7 +97,6 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
      * @return
      */
     // + " and user not in (select pauser from EventEntity e, ParticipantEntity pa, ToghUserEntity pauser where e.id = :eventId and e.participants pa and pa.user_id = pauser) "
-
     @Query(value = "select toghuser from ToghUserEntity toghuser "
             + "where "
             + "( :firstName = '' or upper(toghuser.firstName) like concat('%', upper( :firstName ), '%')) "
@@ -119,9 +118,9 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
                     + " and (toghuser.id > :eventId or toghuser.id <= :eventId)"
                     + " and (toghuser.source != 'INVITED' )")
     List<ToghUserEntity> findPublicUsersOutEvent(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("phoneNumber") String phoneNumber,
-            @Param("email") String email,
-            @Param("eventId") Long eventId,
-            Pageable pageable);
+                                                 @Param("email") String email,
+                                                 @Param("eventId") Long eventId,
+                                                 Pageable pageable);
 
     @Query(value = "select count( toghuser ) from ToghUserEntity toghuser "
             + "where "
@@ -133,9 +132,9 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
             + " and (toghuser.source != 'INVITED' )"
             + " and (toghuser.id > :eventId or toghuser.id <=:eventId)")
     Long countPublicUsersOutEvent(@Param("firstName") String firstName, @Param("lastName") String lastName,
-            @Param("phoneNumber") String phoneNumber,
-            @Param("email") String email,
-            @Param("eventId") Long eventId);
+                                  @Param("phoneNumber") String phoneNumber,
+                                  @Param("email") String email,
+                                  @Param("eventId") Long eventId);
 
     @Query(value = "select toghuser from ToghUserEntity toghuser "
             + "where "
@@ -165,9 +164,8 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
             + "where "
             + " toghuser.connectionStamp is not null"
             + " and toghuser.connectionLastActivity < :connectionLastActivity")
-
     List<ToghUserEntity> findConnectedUsersNoActivity(@Param("connectionLastActivity") LocalDateTime connectionLastActivity,
-            Pageable pageable);
+                                                      Pageable pageable);
 
     @Query(value = "select count( toghuser ) from ToghUserEntity toghuser "
             + "where "

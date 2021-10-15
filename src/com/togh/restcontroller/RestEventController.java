@@ -50,14 +50,11 @@ import java.util.stream.Collectors;
 public class RestEventController {
 
     @Autowired
-    private FactoryService factoryService;
-
-    @Autowired
     EventFactoryRepository factoryRepository;
-
     @Autowired
     EventService eventService;
-
+    @Autowired
+    private FactoryService factoryService;
     @Autowired
     private FactorySerializer factorySerializer;
 

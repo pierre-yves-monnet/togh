@@ -69,12 +69,12 @@ public class EventTaskController extends EventAbsChildController {
         getFactoryRepository().eventRepository.save(getEventEntity());
 
     }
-  
+
     @Override
-    public BaseEntity getEntity( long entityId ) {
-        return getFactoryRepository().eventTaskRepository.findById( entityId );
+    public BaseEntity getEntity(long entityId) {
+        return getFactoryRepository().eventTaskRepository.findById(entityId);
     }
-  
+
     /*
      * Add a entity in the event Entity
      * Entity is then saved, and can be modified (persistenceid is created)

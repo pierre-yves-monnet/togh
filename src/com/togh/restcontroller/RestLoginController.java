@@ -46,25 +46,19 @@ import java.util.logging.Logger;
 @RequestMapping("togh")
 public class RestLoginController {
 
-    private Logger logger = Logger.getLogger(RestLoginController.class.getName());
     private final static String logHeader = RestLoginController.class.getSimpleName() + ": ";
-
+    private final static String googleClientId = "81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com";
+    private Logger logger = Logger.getLogger(RestLoginController.class.getName());
     @Autowired
     private FactoryService factoryService;
-
     @Autowired
     private LoginService loginService;
-
     @Autowired
     private ToghUserService toghUserService;
-
     @Autowired
     private ApiKeyService apiKeyService;
-
     @Value("${dictionary.lang-path}")
     private String propertyDictionaryPath;
-
-    private final static String googleClientId = "81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com";
 
     /**
      * Login from the portal via a email / password

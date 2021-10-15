@@ -18,38 +18,38 @@ import java.util.logging.Logger;
 
 
 public class ChronoSet {
-    
-    private final Logger logger = Logger.getLogger(ChronoSet.class.getName());
-    private static final String LOG_HEADER = "com.togh.engine.chrono.ChronoSet: ";
 
+    private static final String LOG_HEADER = "com.togh.engine.chrono.ChronoSet: ";
     public final Map<String, Chronometer> mapChrono = new HashMap<>();
+    private final Logger logger = Logger.getLogger(ChronoSet.class.getName());
+
     public ChronoSet() {
         // nothing to do
     }
 
-    
-    public Chronometer getChronometer( String operationName ) {
-        Chronometer chrono = mapChrono.computeIfAbsent(operationName, k -> new Chronometer( operationName));
+
+    public Chronometer getChronometer(String operationName) {
+        Chronometer chrono = mapChrono.computeIfAbsent(operationName, k -> new Chronometer(operationName));
         // do systematicaly a start
         chrono.start();
         return chrono;
     }
-    
+
     public void logChronometer() {
         StringBuilder logChrono = new StringBuilder();
         for (Chronometer chrono : mapChrono.values()) {
-            logChrono.append( chrono.getName()+": "+chrono.getTimeInMs()+" ms ("+chrono.getNbExecution()+"),");
+            logChrono.append(chrono.getName() + ": " + chrono.getTimeInMs() + " ms (" + chrono.getNbExecution() + "),");
         }
-        logger.info(LOG_HEADER +logChrono.toString());
+        logger.info(LOG_HEADER + logChrono.toString());
     }
+
     /**
-     * 
      * @return
      */
-    public Map<String,Object> getMap() {
-        Map<String,Object> result = new HashMap<>();
+    public Map<String, Object> getMap() {
+        Map<String, Object> result = new HashMap<>();
         for (Chronometer chrono : mapChrono.values()) {
-            result.put( chrono.getName(), chrono.getMap());
+            result.put(chrono.getName(), chrono.getMap());
         }
         return result;
     }

@@ -28,15 +28,16 @@ import javax.persistence.Table;
 @Entity
 
 @Table(name = "EVTSURVEYCHOICE")
-@EqualsAndHashCode(callSuper=true)
-public @Data class EventSurveyChoiceEntity extends UserEntity {
+@EqualsAndHashCode(callSuper = true)
+public @Data
+class EventSurveyChoiceEntity extends UserEntity {
 
     public static final String CST_SLABOPERATION_CHOICELIST = "choicelist";
 
-    @Column(name = "code", nullable=false)
+    @Column(name = "code", nullable = false)
     private Integer code;
 
-    @Column(name = "proptext", length=50)
+    @Column(name = "proptext", length = 50)
     private String proptext;
 
 

@@ -39,19 +39,35 @@ public class ToghUserService {
     private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com";
     private static final String TOGHADMIN_USERNAME = "toghadmin";
     private static final String TOGHADMIN_PASSWORD = "togh";
-    private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     private static final String LOG_HEADER = ToghUserService.class.getName() + ":";
-
     private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
-
+    private static final int ITERATIONS = 10000;
+    private static final int KEY_LENGTH = 256;
+    private static String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
     @Autowired
     FactoryService factoryService;
-
+    private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     @Autowired
     private ToghUserRepository endUserRepository;
-
     @PersistenceContext
     private EntityManager entityManager;
+
+    public static String encryptPassword(String password) {
+        char[] passwordChar = password.toCharArray();
+        byte[] saltChar = salt.getBytes();
+        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
+        Arrays.fill(passwordChar, Character.MIN_VALUE);
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] securePassword = skf.generateSecret(spec).getEncoded();
+            return Base64.getEncoder().encodeToString(securePassword);
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+        } finally {
+            spec.clearPassword();
+        }
+    }
 
     public ToghUserEntity getUserFromId(long userId) {
         Optional<ToghUserEntity> toghUserEntity = endUserRepository.findById(userId);
@@ -245,6 +261,11 @@ public class ToghUserService {
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
         return searchResult;
     }
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Privilege */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
 
     /**
      * JPA Impose to give an numberId to each "?" : like "?1". So, this method add the object in the list and return "?<list.size>"
@@ -274,6 +295,11 @@ public class ToghUserService {
         // not a FREE user, so this is a very limited one
         return 2;
     }
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Update user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
 
     /**
      * Return the map of privilege for this user. Then, the interface can work with these privilege
@@ -312,11 +338,13 @@ public class ToghUserService {
 
         return operationUser;
     }
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Privilege */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
+
+
+    // --------------------------------------------------------------
+    // 
+    // Encrypt password
+    // 
+    // --------------------------------------------------------------
 
     /**
      * Set the password in the user. The password will be encrypted at this moment.
@@ -344,11 +372,6 @@ public class ToghUserService {
         public boolean excellence = false;
 
     }
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Update user */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
 
     /**
      * Search users
@@ -363,7 +386,6 @@ public class ToghUserService {
 
     /**
      * Invite a new user: we register it with the status Invited, then we sent an email
-     *
      */
     public class CreationResult {
 
@@ -372,40 +394,12 @@ public class ToghUserService {
         public boolean isEmailSent = false;
     }
 
-
-    // --------------------------------------------------------------
-    // 
-    // Encrypt password
-    // 
-    // --------------------------------------------------------------
-
     /**
      * Update a user
      */
     public class OperationUser {
         public List<LogEvent> listLogEvents = new ArrayList<>();
         public ToghUserEntity toghUserEntity = null;
-    }
-
-    private static String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
-    private static final int ITERATIONS = 10000;
-    private static final int KEY_LENGTH = 256;
-
-    public static String encryptPassword(String password) {
-        char[] passwordChar = password.toCharArray();
-        byte[] saltChar = salt.getBytes();
-        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
-        Arrays.fill(passwordChar, Character.MIN_VALUE);
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] securePassword = skf.generateSecret(spec).getEncoded();
-            return Base64.getEncoder().encodeToString(securePassword);
-
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
-        } finally {
-            spec.clearPassword();
-        }
     }
 
 }

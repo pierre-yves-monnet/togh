@@ -69,7 +69,7 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
      */
     @Query("SELECT e FROM EventEntity e "
             + "WHERE e.dateModification < :timeGrace "
-            + " and e.statusEvent = :status ") 
+            + " and e.statusEvent = :status ")
     List<EventEntity> findEventsToPurge(@Param("timeGrace") LocalDateTime timeGrace, @Param("status") StatusEventEnum status, Pageable pageable);
 
 }

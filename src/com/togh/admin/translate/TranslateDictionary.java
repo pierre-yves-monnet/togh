@@ -41,38 +41,16 @@ import java.util.logging.Logger;
 // @ P ropertySource("classpath:application.properties")
 public class TranslateDictionary {
 
-    @Autowired
-    private TranslatorGoogle translatorGoogle;
-
     private static final LogEvent eventDictionaryOperationError = new LogEvent(TranslateDictionary.class.getName(), 1, Level.ERROR, "During Dictionary operation", "Operation on dictionnary will failed", "Dictionary is empty", "Check Exception");
     private static final LogEvent eventDictionaryPathNotDefined = new LogEvent(TranslateDictionary.class.getName(), 2, Level.ERROR, "Path to access dictionnary is not setted in the configuration file", "Operation on dictionnaries are not possible", "Dictionaries will not change", "Check configuration file");
     private static final LogEvent eventDictionaryTranslationSuccess = new LogEvent(TranslateDictionary.class.getName(), 3, Level.SUCCESS, "Translation success", "Translation done with success");
-
+    private static final String logHeader = TranslateDictionary.class.getName() + ":";
+    @Autowired
+    private TranslatorGoogle translatorGoogle;
     private Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
-    private static final String logHeader = TranslateDictionary.class.getName()+":";
-
-    public class LanguageResult {
-
-        public String name;
-        public int nbMissingSentences = 0;
-        public int nbTranslatedSentences = 0;
-        public int nbTooMuchSentences = 0;
-    }
-
-    public class TranslateResult {
-
-        public int nbLanguages = 0;
-        public int nbSentences = 0;
-        public int nbTranslationPerformed = 0;
-        public List<LanguageResult> listLanguages = new ArrayList<>();
-        public List<LogEvent> listEvents = new ArrayList<>();
-        public Map<String, Object> chronometers;
-    }
-
     // dictionary.LangPath=D:\dev\git\togh\npm\src\lang
     @Value("${dictionary.lang-path}")
     private String propertyDictionaryPath;
-
     // dictionary.ExtractPath=D:\dev\git\togh\npm\lang
     @Value("${dictionary.extract-path}")
     private String propertyExtractPath;
@@ -127,7 +105,7 @@ public class TranslateDictionary {
                 languageResult.name = language;
                 translateResult.listLanguages.add(languageResult);
 
-                // first, check all missing sentences            
+                // first, check all missing sentences
                 if (toghReference.getDictionary() != null)
                     for (SentenceItem sentenceEntry : toghReference.getDictionary()) {
                         if (toghLanguage.exist(sentenceEntry.key)) {
@@ -189,17 +167,17 @@ public class TranslateDictionary {
             logger.severe(logHeader + "During operationDictionary " + e + " at " + exceptionDetails);
             translateResult.listEvents.add(new LogEvent(eventDictionaryOperationError, e, e.getMessage()));
         }
-        
-        if (translate && ! LogEventFactory.isError(translateResult.listEvents))
+
+        if (translate && !LogEventFactory.isError(translateResult.listEvents))
             translateResult.listEvents.add(eventDictionaryTranslationSuccess);
-        
-        
+
+
         return translateResult;
     }
 
     /**
      * Detect all languages
-     * 
+     *
      * @param directoryLanguage
      * @return
      */
@@ -211,5 +189,23 @@ public class TranslateDictionary {
             }
         }
         return listLanguages;
+    }
+
+    public class LanguageResult {
+
+        public String name;
+        public int nbMissingSentences = 0;
+        public int nbTranslatedSentences = 0;
+        public int nbTooMuchSentences = 0;
+    }
+
+    public class TranslateResult {
+
+        public int nbLanguages = 0;
+        public int nbSentences = 0;
+        public int nbTranslationPerformed = 0;
+        public List<LanguageResult> listLanguages = new ArrayList<>();
+        public List<LogEvent> listEvents = new ArrayList<>();
+        public Map<String, Object> chronometers;
     }
 }

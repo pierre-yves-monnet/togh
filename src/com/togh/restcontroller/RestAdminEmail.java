@@ -78,41 +78,6 @@ public class RestAdminEmail {
         return payload;
     }
 
-    private static class LocalSmtpService implements SmtpKeyService {
-        final Map<String, Object> mapKeys=new HashMap<>();
-
-        LocalSmtpService(List<Map<String, Object>> listKeys) {
-            for (Map<String, Object> recordKey : listKeys) {
-                this.mapKeys.put((String) recordKey.get("name"), recordKey.get("keyApi"));
-        }
-        }
-
-        @Override
-        public String getSmtpHost() {
-            return ToolCast.getString(mapKeys, ApiKey.SMTP_HOST.getName(), "");
-        }
-
-        @Override
-        public int getSmtpPort() {
-            return ToolCast.getLong(mapKeys, ApiKey.SMTP_PORT.getName(),0L).intValue();
-        }
-
-        @Override
-        public String getSmtpUserName() {
-            return ToolCast.getString(mapKeys, ApiKey.SMTP_USER_NAME.getName(), "");
-        }
-
-        @Override
-        public String getSmtpUserPassword() {
-            return ToolCast.getString( mapKeys, ApiKey.SMTP_USER_PASSWORD.getName(), "");
-        }
-
-        @Override
-        public String getSmtpFrom() {
-            return ToolCast.getString( mapKeys, ApiKey.SMTP_FROM.getName(), "");
-        }
-    }
-
     /**
      * @param updateMap
      * @param connectionStamp Information on the connected user
@@ -144,5 +109,40 @@ public class RestAdminEmail {
         payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
+    }
+
+    private static class LocalSmtpService implements SmtpKeyService {
+        final Map<String, Object> mapKeys = new HashMap<>();
+
+        LocalSmtpService(List<Map<String, Object>> listKeys) {
+            for (Map<String, Object> recordKey : listKeys) {
+                this.mapKeys.put((String) recordKey.get("name"), recordKey.get("keyApi"));
+            }
+        }
+
+        @Override
+        public String getSmtpHost() {
+            return ToolCast.getString(mapKeys, ApiKey.SMTP_HOST.getName(), "");
+        }
+
+        @Override
+        public int getSmtpPort() {
+            return ToolCast.getLong(mapKeys, ApiKey.SMTP_PORT.getName(), 0L).intValue();
+        }
+
+        @Override
+        public String getSmtpUserName() {
+            return ToolCast.getString(mapKeys, ApiKey.SMTP_USER_NAME.getName(), "");
+        }
+
+        @Override
+        public String getSmtpUserPassword() {
+            return ToolCast.getString(mapKeys, ApiKey.SMTP_USER_PASSWORD.getName(), "");
+        }
+
+        @Override
+        public String getSmtpFrom() {
+            return ToolCast.getString(mapKeys, ApiKey.SMTP_FROM.getName(), "");
+        }
     }
 }

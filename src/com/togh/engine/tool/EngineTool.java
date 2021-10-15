@@ -29,8 +29,10 @@ public class EngineTool {
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         return time.format(sdt);
     }
+
     /**
-     * Transform the date for Human 
+     * Transform the date for Human
+     *
      * @param time
      * @return
      */
@@ -41,8 +43,10 @@ public class EngineTool {
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm:ss");
         return time.format(sdt);
     }
+
     /**
-     * The local date is saved as absolute. But to send it back to the browser (which are in a time zone), a translation is mandatory 
+     * The local date is saved as absolute. But to send it back to the browser (which are in a time zone), a translation is mandatory
+     *
      * @param time
      * @return
      */
@@ -54,21 +58,22 @@ public class EngineTool {
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return time.format(sdt);
     }
-    
+
     /**
-     * Transform the date to a complete string using the TimeZone. Browser received form example "2021-04-12T08:00:00Z" in it is in the Pacific time zone (and for him, it's 2021-04-12'). 
-     * If it received 2021-04-12T00:00:00Z, it will display March 11, because Midnigh UTC = day before in California 
+     * Transform the date to a complete string using the TimeZone. Browser received form example "2021-04-12T08:00:00Z" in it is in the Pacific time zone (and for him, it's 2021-04-12').
+     * If it received 2021-04-12T00:00:00Z, it will display March 11, because Midnigh UTC = day before in California
+     *
      * @param time
      * @param timezoneOffset
      * @return
      */
-    public static String dateToTimeString(LocalDate time,long timezoneOffset) {
+    public static String dateToTimeString(LocalDate time, long timezoneOffset) {
         if (time == null)
             return null;
         // Attention, we have to get the time in UTC first
         //  datecreation: "2021-01-30T18:52:10.973"
-        LocalDateTime localDateTime = time.atStartOfDay( ZoneId.of(ZoneOffset.UTC.getId())).toLocalDateTime();
-        localDateTime= localDateTime.minusMinutes( - timezoneOffset);
+        LocalDateTime localDateTime = time.atStartOfDay(ZoneId.of(ZoneOffset.UTC.getId())).toLocalDateTime();
+        localDateTime = localDateTime.minusMinutes(-timezoneOffset);
         DateTimeFormatter sdt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         return localDateTime.format(sdt);
     }
@@ -78,19 +83,19 @@ public class EngineTool {
             return null;
         // format is yyyy-MM-ddTHH:mm:ss.sssZ" ==> UTC date
         Instant instant = Instant.parse(dateInString);
-        return LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));       
+        return LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
     }
 
     public static LocalDate stringToDate(String dateInString, long timezoneOffset) {
         if (dateInString == null)
             return null;
-        if (dateInString.length()==10) {
+        if (dateInString.length() == 10) {
             // this is only the format yyyy-MM-dd
             return LocalDate.parse(dateInString);
         }
         Instant instant = Instant.parse(dateInString);
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
-        localDateTime = localDateTime.minusMinutes( timezoneOffset);
-        return localDateTime.toLocalDate();        
+        localDateTime = localDateTime.minusMinutes(timezoneOffset);
+        return localDateTime.toLocalDate();
     }
 }

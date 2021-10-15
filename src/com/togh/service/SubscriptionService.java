@@ -31,7 +31,7 @@ public class SubscriptionService {
 
     /**
      * How many event a user can create in the month?
-     * 
+     *
      * @param subscription
      * @return
      */
@@ -66,21 +66,21 @@ public class SubscriptionService {
     }
 
     /**
-     * Attention, this entity may be large, pay attention to the size
-     */
-
-    public enum LimitReach {
-        CREATIONEVENT, TASKLIST, ITINERARY, SHOPPING, SURVEY, SURVEYCHOICE, CHATGROUP, CHAT, PARTICIPANT
-    }
-
-    /**
      * A new time, a user reach the limit. Register it.
-     * 
+     *
      * @param toghUserEntity
      * @param limit
      */
     public void registerTouchLimitSubscription(ToghUserEntity toghUserEntity, LimitReach limit) {
         statsService.registerLimitSubcription(toghUserEntity.getSubscriptionUser(), limit);
+    }
+
+    /**
+     * Attention, this entity may be large, pay attention to the size
+     */
+
+    public enum LimitReach {
+        CREATIONEVENT, TASKLIST, ITINERARY, SHOPPING, SURVEY, SURVEYCHOICE, CHATGROUP, CHAT, PARTICIPANT
     }
 
 }

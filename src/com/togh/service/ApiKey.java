@@ -49,6 +49,10 @@ public enum ApiKey {
         this.name = name;
     }
 
+    public static List<ApiKey> getAlls() {
+        return Stream.of(ApiKey.values()).collect(Collectors.toList());
+    }
+
     public String getName() {
         return name;
     }
@@ -65,9 +69,5 @@ public enum ApiKey {
      */
     public boolean isPrivilegeKey() {
         return (listKeysBrowser.contains(this));
-    }
-
-    public static List<ApiKey> getAlls() {
-        return Stream.of(ApiKey.values()).collect(Collectors.toList());
     }
 }

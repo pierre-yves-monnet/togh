@@ -35,18 +35,15 @@ import java.util.*;
 public class ApiKeyService implements SmtpKeyService {
 
 
-    @Autowired
-    ApiKeyEntityRepository apiKeyRepository;
-
-
+    private static final LogEvent eventUnknownCode = new LogEvent(ApiKeyService.class.getName(), 1, Level.ERROR, "Unknown code", "This APIKey is unknow",
+            "A code is unknown, and can't be updated in the database", "Verify the code");
+    private static final LogEvent eventKeysUpdated = new LogEvent(ApiKeyService.class.getName(), 2, Level.SUCCESS, "Keys updated", "API Key are updated with success");
     /**
      * A premium API Key is not limited as the FREE key are.
      */
     public final List<PrivilegeKeyEnum> listSuffixPrivilege = Arrays.asList(PrivilegeKeyEnum.PREMIUM, PrivilegeKeyEnum.FREE);
-
-    private static final LogEvent eventUnknownCode = new LogEvent(ApiKeyService.class.getName(), 1, Level.ERROR, "Unknown code", "This APIKey is unknow",
-            "A code is unknown, and can't be updated in the database", "Verify the code");
-    private static final LogEvent eventKeysUpdated = new LogEvent(ApiKeyService.class.getName(), 2, Level.SUCCESS, "Keys updated", "API Key are updated with success");
+    @Autowired
+    ApiKeyEntityRepository apiKeyRepository;
 
     @PostConstruct
     public void init() {

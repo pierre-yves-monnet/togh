@@ -14,16 +14,16 @@ import java.util.Map;
 
 public class Chronometer {
 
+    private final String name;
     private long beginTime;
     private long endTime;
-    private final String name;
     private long cumulateTime = 0;
     private long nbExecutions;
 
     /**
      * Get the chronometer implied it is started
      * Default Constructor.
-     * 
+     *
      * @param operationName
      */
     protected Chronometer(String operationName) {
@@ -38,7 +38,7 @@ public class Chronometer {
     }
 
     /**
-     * 
+     *
      */
     public void stop() {
         endTime = System.currentTimeMillis();
@@ -57,18 +57,18 @@ public class Chronometer {
     public long getNbExecution() {
         return nbExecutions;
     }
-    
+
     public long getAverageInMs() {
-        return (getNbExecution() > 0 ? (int) (getTimeInMs()/ getNbExecution()): 0);
+        return (getNbExecution() > 0 ? (int) (getTimeInMs() / getNbExecution()) : 0);
     }
-    
-    public Map<String,Object> getMap() {
-        Map<String,Object> resultChrono = new HashMap<>();
-        resultChrono.put("name", getName());            
-        resultChrono.put("timeinms", getTimeInMs() );
+
+    public Map<String, Object> getMap() {
+        Map<String, Object> resultChrono = new HashMap<>();
+        resultChrono.put("name", getName());
+        resultChrono.put("timeinms", getTimeInMs());
         resultChrono.put("nbexecutions", getNbExecution());
         resultChrono.put("average", getAverageInMs());
         return resultChrono;
-   
+
     }
 }

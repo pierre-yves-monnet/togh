@@ -49,6 +49,10 @@ import java.util.logging.Logger;
 public class LoginService {
 
     private final static String LOG_HEADER = "LoginService:";
+    private static final LogEvent eventUnknowId = new LogEvent(LoginService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
+    private static final LogEvent eventUserDisconnected = new LogEvent(LoginService.class.getName(), 2, Level.SUCCESS, "User disconnected", "User disconnected with success");
+    private static final LogEvent eventCantSaveLostPassword = new LogEvent(LoginService.class.getName(), 3, Level.ERROR, "Can't save lost password", "The data 'lostPassword' can't be save in the database", "Procedure to reset the password failed", "check Exception ");
+    private static final LogEvent eventEmailResetPasswordFailed = new LogEvent(LoginService.class.getName(), 4, Level.ERROR, "Impossible to send the reset password email", "The email can't be send", "Procedure to reset the password failed", "check Exception ");
     /* -------------------------------------------------------------------- */
     /*                                                                      */
     /* Connect / disconnect / IsConnected */
@@ -59,21 +63,12 @@ public class LoginService {
     private FactoryService factoryService;
     @Autowired
     private ToghUserLostPasswordRepository toghUserLostPasswordRepository;
-
     @Autowired
     private NotifyService notifyService;
-
     @Autowired
     private MonitorService monitorService;
     @Autowired
     private ToghUserService toghUserService;
-
-    private static final LogEvent eventUnknowId = new LogEvent(LoginService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
-    private static final LogEvent eventUserDisconnected = new LogEvent(LoginService.class.getName(), 2, Level.SUCCESS, "User disconnected", "User disconnected with success");
-
-    private static final LogEvent eventCantSaveLostPassword = new LogEvent(LoginService.class.getName(), 3, Level.ERROR, "Can't save lost password", "The data 'lostPassword' can't be save in the database", "Procedure to reset the password failed", "check Exception ");
-    private static final LogEvent eventEmailResetPasswordFailed = new LogEvent(LoginService.class.getName(), 4, Level.ERROR, "Impossible to send the reset password email", "The email can't be send", "Procedure to reset the password failed", "check Exception ");
-
     private Logger logger = Logger.getLogger(LoginService.class.getName());
     @Autowired
     private LoginLogRepository loginLogRepository;
@@ -527,15 +522,6 @@ public class LoginService {
         }
     }
 
-    /**
-     * class of status
-     */
-    public class OperationLoginUser {
-
-        public List<LogEvent> listLogEvents = new ArrayList<>();
-        public ToghUserEntity toghUserEntity = null;
-    }
-
     public OperationLoginUser disconnectUser(long userId) {
         OperationLoginUser operationUser = new OperationLoginUser();
 
@@ -552,12 +538,6 @@ public class LoginService {
         return operationUser;
 
     }
-
-    // --------------------------------------------------------------
-    // 
-    // LostMyPassword
-    // 
-    // --------------------------------------------------------------
 
     /**
      * When the password is lost, a UUID is generated. Then, the page "change my password" is acceded. Form the UUID, information are send back
@@ -582,6 +562,12 @@ public class LoginService {
 
         return loginStatus;
     }
+
+    // --------------------------------------------------------------
+    // 
+    // LostMyPassword
+    // 
+    // --------------------------------------------------------------
 
     private void report(LoginResult loginStatus) {
         // first, calculate the timeSlot
@@ -647,6 +633,15 @@ public class LoginService {
                 map.put("user", userConnected);
             return map;
         }
+    }
+
+    /**
+     * class of status
+     */
+    public class OperationLoginUser {
+
+        public List<LogEvent> listLogEvents = new ArrayList<>();
+        public ToghUserEntity toghUserEntity = null;
     }
 
     private class UserConnected {

@@ -32,14 +32,10 @@ import com.togh.service.event.EventUpdate.Slab;
 
 public abstract class EventAbsChildController {
 
-    private final EventController eventController;
-
-    private EventEntity eventEntity;
-
-    private int maxEntity = 100;
-
-
     protected static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventAbsChildController.class.getName(), 1, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
+    private final EventController eventController;
+    private EventEntity eventEntity;
+    private int maxEntity = 100;
 
 
     protected EventAbsChildController(EventController eventController, EventEntity eventEntity) {
@@ -112,13 +108,12 @@ public abstract class EventAbsChildController {
      */
     public abstract LimitReach getLimitReach();
 
+    public int getMaxEntity() {
+        return maxEntity;
+    }
 
     public void setMaxEntity(int maxEntity) {
         this.maxEntity = maxEntity;
-    }
-
-    public int getMaxEntity() {
-        return maxEntity;
     }
 
 

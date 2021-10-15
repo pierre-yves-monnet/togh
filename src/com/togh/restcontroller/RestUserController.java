@@ -156,8 +156,8 @@ public class RestUserController {
     /**
      * Update yourself
      *
-     * @param updateMap Information to update user
-     * @param connectionStamp    Information on the connected user
+     * @param updateMap       Information to update user
+     * @param connectionStamp Information on the connected user
      * @return result of update
      */
     @CrossOrigin
@@ -186,9 +186,8 @@ public class RestUserController {
     }
 
     /**
-     *
-     * @param updateMap Information to update
-     * @param connectionStamp    Information on the connected user
+     * @param updateMap       Information to update
+     * @param connectionStamp Information on the connected user
      * @return result of update
      */
     @CrossOrigin
@@ -220,9 +219,8 @@ public class RestUserController {
     }
 
     /**
-     *
-     * @param updateMap update information
-     * @param connectionStamp    Information on the connected user
+     * @param updateMap       update information
+     * @param connectionStamp Information on the connected user
      * @return result of update
      */
     @CrossOrigin

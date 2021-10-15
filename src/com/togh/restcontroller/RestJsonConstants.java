@@ -46,6 +46,9 @@ public class RestJsonConstants {
     public static final String CST_MESSAGE_ERROR_SEND_EMAIL = "errorSendEmail";
 
     public static final String CST_ISINVITATIONSENT = "isInvitationSent";
+    protected static final String CST_PARAM_PHONE_NUMBER = "phoneNumber";
+    protected static final String CST_PARAM_FIRST_NAME = "firstName";
+    protected static final String CST_PARAM_LAST_NAME = "lastName";
     static final String CST_PARAM_AUTHORIZATION = "Authorization";
     static final String CST_INJSON_EVENTID = "eventid";
     static final String CST_NUMBER_PER_PAGE = "numberperpage";
@@ -55,10 +58,6 @@ public class RestJsonConstants {
     static final String CST_USER = "user";
     static final String CST_PARAM_ONLY_NON_INVITED_USER = "onlyNonInvitedUser";
     static final String CST_PARAM_EMAIL = "email";
-    protected static final String CST_PARAM_PHONE_NUMBER = "phoneNumber";
-    protected static final String CST_PARAM_FIRST_NAME = "firstName";
-    protected static final String CST_PARAM_LAST_NAME = "lastName";
-
     static final String CST_PARAM_SEARCHUSER_SENTENCE = "searchusersentence";
     static final String CST_PARAM_SEARCHUSER_ALL = "all";
     static final String CST_PARAM_SEARCHUSER_CONNECTED = "connected";

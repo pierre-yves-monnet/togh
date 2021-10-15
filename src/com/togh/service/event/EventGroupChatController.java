@@ -90,13 +90,13 @@ public class EventGroupChatController extends EventAbsChildController {
     }
 
     public EventChatEntity addChatInGroup(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity) {
-        getFactoryRepository().eventChatRepository.save( chatEntity );
-       
+        getFactoryRepository().eventChatRepository.save(chatEntity);
+
         groupChatEntity.addChat(chatEntity);
         if (groupChatEntity.getListChat().size() > getMaxEntity())
             groupChatEntity.getListChat().remove(0);
-        getFactoryRepository().eventGroupChatRepository.save( groupChatEntity );
-        
+        getFactoryRepository().eventGroupChatRepository.save(groupChatEntity);
+
         return chatEntity;
     }
 

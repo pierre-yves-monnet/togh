@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("togh")
 public class RestAdminTranslator {
-    
+
     @Autowired
     private LoginService loginService;
 
@@ -31,34 +31,32 @@ public class RestAdminTranslator {
     private TranslateDictionary translateDictionnary;
 
     /**
-     *
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp Information on the connected user
      * @return
      */
     @CrossOrigin
-    @GetMapping(value ="/api/admin/translator/status",  produces = "application/json")
-      public TranslateResult translatorStatus( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
-        
+    @GetMapping(value = "/api/admin/translator/status", produces = "application/json")
+    public TranslateResult translatorStatus(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+
         loginService.isAdministratorConnected(connectionStamp);
-   
-        return translateDictionnary.check(); 
-        
+
+        return translateDictionnary.check();
+
     }
 
     /**
-     *
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp Information on the connected user
      * @return
      */
     @CrossOrigin
-    @PostMapping(value ="/api/admin/translator/complete",  produces = "application/json")
-      public TranslateResult translator( @RequestHeader( RestJsonConstants.CST_PARAM_AUTHORIZATION ) String connectionStamp) {
-        
+    @PostMapping(value = "/api/admin/translator/complete", produces = "application/json")
+    public TranslateResult translator(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+
         loginService.isAdministratorConnected(connectionStamp);
 
-        return translateDictionnary.complete(); 
-        
+        return translateDictionnary.complete();
+
     }
-    
-    
+
+
 }

@@ -25,7 +25,7 @@ public class LogEventFactory {
      * is this list contains one error ? If yes, then we return true
      */
     public static boolean isError(final List<LogEvent> listEvents) {
-        
+
         for (final LogEvent event : listEvents) {
             if (event.isError()) {
                 return true;
@@ -41,10 +41,12 @@ public class LogEventFactory {
     public static String getHtml(final List<LogEvent> listEvents) {
         StringBuilder tableHtml = new StringBuilder();
         tableHtml.append("<table>");
-        
-        tableHtml.append( listEvents.stream()
-                .map(event -> {return "<tr><td>" + event.getHtml() +  "</td>" + "</tr>";})
-                .collect(Collectors.joining("") ));
+
+        tableHtml.append(listEvents.stream()
+                .map(event -> {
+                    return "<tr><td>" + event.getHtml() + "</td>" + "</tr>";
+                })
+                .collect(Collectors.joining("")));
 //        
 //        for (final LogEvent event : listEvents) {
 //            tableHtml.append("<tr><td>" + event.getHtml() + "</td></tr>");
@@ -55,7 +57,7 @@ public class LogEventFactory {
 
     /**
      * create the list in a synthetic way, as a list of events
-     * 
+     *
      * @param listEvents
      * @return
      */
@@ -65,14 +67,16 @@ public class LogEventFactory {
         tableHtml.append("<table style=\"border:1px solid black;border-spacing: 10px 0px;border-collapse: separate;\">");
         tableHtml.append("<tr><td>Title</td><td>Level</td><td>Parameters</td></tr>");
 
-        tableHtml.append( listEvents.stream()
-                .map(event -> {return "<tr><td>" + event.getHtmlTitle() + "</td>"
-                        + "<td>" + event.getLevel().toString() + "</td>"
-                        + "<td>" + event.getParameters() + event.getExceptionDetails() + "</td>"
-                        + "</tr>";})
-                .collect(Collectors.joining("") ));
+        tableHtml.append(listEvents.stream()
+                .map(event -> {
+                    return "<tr><td>" + event.getHtmlTitle() + "</td>"
+                            + "<td>" + event.getLevel().toString() + "</td>"
+                            + "<td>" + event.getParameters() + event.getExceptionDetails() + "</td>"
+                            + "</tr>";
+                })
+                .collect(Collectors.joining("")));
 
-        
+
 //        for (final LogEvent event : listEvents) {
 //            tableHtml.append("<tr><td>" + event.getHtmlTitle() + "</td>"
 //                    + "<td>" + event.getLevel().toString() + "</td>"
@@ -85,14 +89,14 @@ public class LogEventFactory {
 
     /**
      * return a list of event for a log
-     * 
+     *
      * @param listEvents
      * @return
      */
     public static String getSyntheticLog(final List<LogEvent> listEvents) {
         return listEvents.stream()
                 .map(LogEvent::toString)
-                .collect(Collectors.joining(" <~> ") );
+                .collect(Collectors.joining(" <~> "));
 
 //        StringBuilder tableLog = new StringBuilder();
 //
@@ -105,16 +109,16 @@ public class LogEventFactory {
 
     /**
      * return a synthetic log only for errors
-     * 
+     *
      * @param listEvents
      * @return
      */
     public static String getSyntheticErrorLog(final List<LogEvent> listEvents) {
-        
+
         return listEvents.stream()
                 .filter(LogEvent::isError)
                 .map(LogEvent::toString)
-                .collect(Collectors.joining(" <~> ") );
+                .collect(Collectors.joining(" <~> "));
 //        
 //        StringBuilder tableLog = new StringBuilder();
 //
@@ -129,11 +133,13 @@ public class LogEventFactory {
      * Json to listEvent
      */
     public static List<LogEvent> getListEventsFromJson(List<Map<String, Serializable>> listEventsJson) {
-                
+
         List<LogEvent> listEvents = listEventsJson.stream()
-                .map(eventJson -> { return LogEvent.getInstanceFormJson(eventJson);})
+                .map(eventJson -> {
+                    return LogEvent.getInstanceFormJson(eventJson);
+                })
                 .collect(Collectors.toList());
- 
+
 //        List<LogEvent> listEvents = new ArrayList<>();
 //        for (Map<String, Serializable> eventJson : listEventsJson)
 //            listEvents.add(LogEvent.getInstanceFormJson(eventJson));
@@ -142,7 +148,7 @@ public class LogEventFactory {
 
     /**
      * Event to Json
-     * 
+     *
      * @param listEvents
      * @return
      */
@@ -162,19 +168,19 @@ public class LogEventFactory {
      * An event already exist if this is the same package/number/parameters (see BEvent.same() ).
      *
      * @param listEvents the list modified if needed
-     * @param event the new event to add
+     * @param event      the new event to add
      */
     public static void addEventUniqueInList(final List<LogEvent> listEvents, final LogEvent eventToAdd) {
         if (listEvents == null) {
             return;
         }
-        String idToCheck =eventToAdd.getSignature(false);
+        String idToCheck = eventToAdd.getSignature(false);
         boolean idExists = listEvents.stream()
                 .map(LogEvent::getSignatureParameter)
                 .anyMatch(idToCheck::equals);
         if (idExists)
             return;
-        
+
 //        for (int i = 0; i < listEvents.size(); i++) {
 //            if (listEvents.get(i).isIdentical(eventToAdd)) {
 //                return;

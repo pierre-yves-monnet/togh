@@ -45,10 +45,6 @@ public class EventUpdate {
 
     EventController eventController;
 
-    public enum SlabOperation {
-        UPDATE, ADD, REMOVE
-    }
-
     protected EventUpdate(EventController eventController) {
         this.eventController = eventController;
     }
@@ -179,6 +175,34 @@ public class EventUpdate {
         event.touch();
     }
 
+    /**
+     * Do a Summary on Slab to update
+     *
+     * @param listSlab list Of Slab to get the summary
+     * @return the summary
+     */
+    private String getSummary(List<Slab> listSlab) {
+        return "Size:" + listSlab.size()
+                + " - ["
+                + listSlab.stream()
+                .map(t -> {
+                    return
+                            t.operation
+                                    + " "
+                                    + t.localisation + "." + t.attributName + ": ["
+                                    + (t.attributValue == null ? null :
+                                    t.attributValue.toString().length() > 20 ? t.attributValue.toString().substring(0, 20) + "..."
+                                            : t.attributValue.toString()
+                                            + "]");
+                })
+                .collect(Collectors.joining(", "))
+                + "]";
+    }
+
+    public enum SlabOperation {
+        UPDATE, ADD, REMOVE
+    }
+
     public static class Slab {
 
         public SlabOperation operation;
@@ -208,29 +232,5 @@ public class EventUpdate {
                 return null;
             }
         }
-    }
-
-    /**
-     * Do a Summary on Slab to update
-     *
-     * @param listSlab list Of Slab to get the summary
-     * @return the summary
-     */
-    private String getSummary(List<Slab> listSlab) {
-        return "Size:" + listSlab.size()
-                + " - ["
-                + listSlab.stream()
-                .map(t -> {
-                    return
-                            t.operation
-                                    + " "
-                                    + t.localisation + "." + t.attributName + ": ["
-                                    + (t.attributValue == null ? null :
-                                    t.attributValue.toString().length() > 20 ? t.attributValue.toString().substring(0, 20) + "..."
-                                            : t.attributValue.toString()
-                                            + "]");
-                })
-                .collect(Collectors.joining(", "))
-                + "]";
     }
 }

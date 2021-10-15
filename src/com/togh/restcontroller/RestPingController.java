@@ -28,9 +28,8 @@ import java.util.logging.Logger;
 @RequestMapping("togh")
 public class RestPingController {
 
-    private final Logger logger = Logger.getLogger(RestPingController.class.getName());
     private final static String logHeader = RestLoginController.class.getSimpleName() + ": ";
-
+    private final Logger logger = Logger.getLogger(RestPingController.class.getName());
     @Autowired
     DataSource dataSource;
 

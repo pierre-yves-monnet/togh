@@ -23,11 +23,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FactoryService {
-    
-    
+
+
     @Autowired
     private LoginService loginService;
-    
+
     @Autowired
     private ToghUserService userService;
 
@@ -42,13 +42,13 @@ public class FactoryService {
 
     @Autowired
     private ApiKeyService apiKeyService;
- 
+
     @Autowired
     private StatsService statsService;
-    
+
     @Autowired
     private SubscriptionService subscriptionService;
- 
+
     @Autowired
     private TranslatorService translatorService;
 
@@ -57,20 +57,20 @@ public class FactoryService {
         return factoryService;
     }
     */
-    
-   
+
+
     public LoginService getLoginService() {
         return loginService;
     }
-    
+
     public ToghUserService getToghUserService() {
         return userService;
     }
-    
+
     public EventService getEventService() {
         return eventService;
     }
-    
+
     public MonitorService getMonitorService() {
         return monitorService;
     }
@@ -78,19 +78,19 @@ public class FactoryService {
     public NotifyService getNotifyService() {
         return notifyService;
     }
-        
+
     public ApiKeyService getApiKeyService() {
         return apiKeyService;
     }
- 
+
     public StatsService getStatsService() {
         return statsService;
     }
-    
+
     public SubscriptionService getSubscriptionService() {
         return subscriptionService;
     }
-    
+
     public TranslatorService getTranslatorService() {
         return translatorService;
     }

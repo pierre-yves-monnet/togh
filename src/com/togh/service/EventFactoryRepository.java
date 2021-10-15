@@ -21,13 +21,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EventFactoryRepository {
-    
+
     @Autowired
     public EventRepository eventRepository;
 
     @Autowired
-    public EventItineraryStepRepository eventItineraryStepRepository; 
-    
+    public EventItineraryStepRepository eventItineraryStepRepository;
+
     @Autowired
     public EventTaskRepository eventTaskRepository;
 

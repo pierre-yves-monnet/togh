@@ -33,94 +33,90 @@ import java.time.format.DateTimeFormatter;
 
 public class EventPresentation {
 
-    private FactoryService factoryService;
-
-    // private EventRepository eventRepository;
-
-    EventController eventController;
-
-   
     private static final String NBSP = "&nbsp;";
 
-    protected EventPresentation(EventController eventController,FactoryService factoryService) {
+    // private EventRepository eventRepository;
+    EventController eventController;
+    private FactoryService factoryService;
+
+    protected EventPresentation(EventController eventController, FactoryService factoryService) {
         this.eventController = eventController;
         this.factoryService = factoryService;
     }
-    
+
     /**
      * Return a nice HTML presentation
+     *
      * @return
      */
     public String getHtmlPresentation(EventPresentationAttribut eventPresentationAttribut, ToghUserEntity toghUserEntity) {
         EventEntity event = eventController.getEvent();
         StringBuilder result = new StringBuilder();
-        
-        
+
+
         result.append("<center>");
         result.append("<table style=\"border:3px solid;border-color:#1f78b4;border-collapse: collapse;margin: 20px 5px 20px 5px;\" >");
         result.append("  <tr style=\"border:1px solid;border-color:#1f78b4;\">");
-        result.append("    <td style=\"padding: 10px 10px 10px 10px;font-weight: bold;font-size: 20px;\">"+event.getName()+"</td>");
+        result.append("    <td style=\"padding: 10px 10px 10px 10px;font-weight: bold;font-size: 20px;\">" + event.getName() + "</td>");
         result.append("    <td style=\"border:1px solid;border-color:#1f78b4;padding: 10px 10px 10px 10px;font-style: italic;font-size: 12px;\">");
-            if (event.getDatePolicy() == DatePolicyEnum.ONEDATE) {
-                result.append( getHumanDate(event.getDateEvent(), event, toghUserEntity, true));                
-            }
-                else {
-                    result.append( factoryService.getTranslatorService().getDictionarySentence(Sentence.FROM, toghUserEntity.getLanguage()));
-                    result.append( NBSP );
-                    result.append( getHumanDate(event.getDateStartEvent(), event, toghUserEntity, false));
-                    result.append( NBSP );
-                    result.append( factoryService.getTranslatorService().getDictionarySentence(Sentence.TO, toghUserEntity.getLanguage()));
-                    result.append( NBSP );
-                    result.append( getHumanDate(event.getDateEndEvent(), event, toghUserEntity, true));
-                    result.append( NBSP );
-                }
-                    
+        if (event.getDatePolicy() == DatePolicyEnum.ONEDATE) {
+            result.append(getHumanDate(event.getDateEvent(), event, toghUserEntity, true));
+        } else {
+            result.append(factoryService.getTranslatorService().getDictionarySentence(Sentence.FROM, toghUserEntity.getLanguage()));
+            result.append(NBSP);
+            result.append(getHumanDate(event.getDateStartEvent(), event, toghUserEntity, false));
+            result.append(NBSP);
+            result.append(factoryService.getTranslatorService().getDictionarySentence(Sentence.TO, toghUserEntity.getLanguage()));
+            result.append(NBSP);
+            result.append(getHumanDate(event.getDateEndEvent(), event, toghUserEntity, true));
+            result.append(NBSP);
+        }
+
+        result.append("</td></tr>");
+        result.append("<tr style=\"border:1px solid;border-color:#1f78b4\">");
+        result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\">" + event.getDescription() + "</td>");
+        result.append("</tr><tr style=\"border:1px solid;border-color:#1f78b4;\">");
+        result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\"><i>");
+        result.append(factoryService.getTranslatorService().getDictionarySentence(Sentence.PARTICIPANTS, toghUserEntity.getLanguage()));
+        result.append(":</i><br>");
+        for (ParticipantEntity participant : event.getParticipantList()) {
+            ToghUserEntity userParticipant = participant.getUser();
+            if (userParticipant != null)
+                result.append(NBSP + NBSP + userParticipant.getLabel() + "<br>");
+        }
+        result.append("  </td>");
+        result.append("</tr>");
+
+        if (eventPresentationAttribut.bannerMessage != null) {
+            result.append("<tr style=\"border:1px solid;border-color:#1f78b4;\">");
+            result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\">");
+            result.append("     <center>");
+            result.append(eventPresentationAttribut.bannerMessage);
+            // <a href="http://localhost:3000/togh/registerUser"
+            //     style="text-decoration: none;color: white;">Register and join this event</a>
+            result.append("      </center>");
             result.append("</td></tr>");
-            result.append("<tr style=\"border:1px solid;border-color:#1f78b4\">");
-            result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\">"+event.getDescription()+"</td>");
-            result.append("</tr><tr style=\"border:1px solid;border-color:#1f78b4;\">");
-            result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\"><i>");
-            result.append( factoryService.getTranslatorService().getDictionarySentence(Sentence.PARTICIPANTS, toghUserEntity.getLanguage()));
-            result.append(":</i><br>");
-            for (ParticipantEntity participant : event.getParticipantList()) {
-                ToghUserEntity userParticipant = participant.getUser();
-                if (userParticipant!=null)
-                    result.append(NBSP + NBSP + userParticipant.getLabel() + "<br>");
-            }
-            result.append("  </td>");
-            result.append("</tr>");
-            
-            if (eventPresentationAttribut.bannerMessage !=null) {
-                result.append("<tr style=\"border:1px solid;border-color:#1f78b4;\">");
-                result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\">");
-                result.append("     <center>");
-                result.append( eventPresentationAttribut.bannerMessage);
-                // <a href="http://localhost:3000/togh/registerUser" 
-                //     style="text-decoration: none;color: white;">Register and join this event</a>
-                result.append("      </center>");
-                result.append("</td></tr>");
-            }
-            
-            if (eventPresentationAttribut.bannerAction !=null) {
-                result.append("<tr style=\"border:1px solid;border-color:#1f78b4;\">");
-                result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;background-color: #337ab7;border-color: #2e6da4;color: #ffffff;\">");
-                result.append("     <center>");
-                result.append( eventPresentationAttribut.bannerAction);
-                // <a href="http://localhost:3000/togh/registerUser" 
-                //     style="text-decoration: none;color: white;">Register and join this event</a>
-                result.append("      </center>");
-                result.append("</td></tr>");
-            }
-            result.append("</table>");
-            result.append("</center>");
-        
-        
+        }
+
+        if (eventPresentationAttribut.bannerAction != null) {
+            result.append("<tr style=\"border:1px solid;border-color:#1f78b4;\">");
+            result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;background-color: #337ab7;border-color: #2e6da4;color: #ffffff;\">");
+            result.append("     <center>");
+            result.append(eventPresentationAttribut.bannerAction);
+            // <a href="http://localhost:3000/togh/registerUser"
+            //     style="text-decoration: none;color: white;">Register and join this event</a>
+            result.append("      </center>");
+            result.append("</td></tr>");
+        }
+        result.append("</table>");
+        result.append("</center>");
+
+
         return result.toString();
     }
-    
-    
+
+
     /**
-     * 
      * @param date
      * @param event
      * @param toghUserEntity
@@ -128,12 +124,12 @@ public class EventPresentation {
      * @return
      */
     public String getHumanDate(LocalDateTime date, EventEntity event, ToghUserEntity toghUserEntity, boolean displayTimeZone) {
-        if (date==null)
+        if (date == null)
             return "";
         ZonedDateTime dateUtc = date.atZone(ZoneId.of("UTC"));
         // translate to the time user
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm:ss");
-        return format.format( dateUtc );
-        
+        return format.format(dateUtc);
+
     }
 }

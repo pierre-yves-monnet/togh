@@ -13,9 +13,10 @@ import java.time.ZoneOffset;
 @Inheritance
 // use for CreatedDate and LatModifiedDate
 @EntityListeners(AuditingEntityListener.class)
-public abstract @Data class BaseEntity {
-	
-	@Id
+public abstract @Data
+class BaseEntity {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

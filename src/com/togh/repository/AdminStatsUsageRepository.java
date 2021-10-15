@@ -20,7 +20,7 @@ public interface AdminStatsUsageRepository extends JpaRepository<AdminStatsUsage
             + " where adminstats.yearMonthDay = :dateToSearch "
             + " and typeStatistique = :typeStats")
     public AdminStatsUsageEntity findByDate(@Param("dateToSearch") String dateToSearch,
-            @Param("typeStats") TypeStatsEnum typeStats);
+                                            @Param("typeStats") TypeStatsEnum typeStats);
 
     @Query("select adminstats from AdminStatsUsageEntity adminstats "
             + " where adminstats.yearMonthDay = :dateToSearch "
@@ -31,9 +31,9 @@ public interface AdminStatsUsageRepository extends JpaRepository<AdminStatsUsage
      * Using the enumerate for subscriptionUser and limitReach provoque an error ( ! )
      */
     public AdminStatsUsageEntity findByDateLimit(@Param("dateToSearch") String dateToSearch,
-            @Param("typeStats") TypeStatsEnum typeStats,
-            @Param("subscriptionUser") String subscriptionUser,
-            @Param("limitReach") String limitReach);
+                                                 @Param("typeStats") TypeStatsEnum typeStats,
+                                                 @Param("subscriptionUser") String subscriptionUser,
+                                                 @Param("limitReach") String limitReach);
 
     @Query(value = "select adminstats from AdminStatsUsageEntity adminstats order by adminstats.yearMonthDay asc")
     public AdminStatsUsageEntity getAllDates();

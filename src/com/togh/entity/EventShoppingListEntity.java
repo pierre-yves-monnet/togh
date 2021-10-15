@@ -27,31 +27,23 @@ import javax.persistence.*;
 @Entity
 
 @Table(name = "EVTSHOPPINGLIST")
-@EqualsAndHashCode(callSuper=true)
-public @Data class EventShoppingListEntity extends EventBaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public @Data
+class EventShoppingListEntity extends EventBaseEntity {
 
     public static final String CST_SLABOPERATION_SHOPPINGLIST = "shoppinglist";
-
-    public enum ShoppingStatusEnum {
-        TODO, DONE, CANCEL
-    }
-    @Column(name = "status", length=10, nullable=false)
+    @Column(name = "status", length = 10, nullable = false)
     @org.hibernate.annotations.ColumnDefault("'TODO'")
-    @Enumerated(EnumType.STRING)    
+    @Enumerated(EnumType.STRING)
     private ShoppingStatusEnum status;
-
-    
-    
     // name is part of the baseEntity
-    @Column( name="description", length=400)
+    @Column(name = "description", length = 400)
     private String description;
-   
     // User attached to this task (maybe an external user, why not ?
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "whoid")
     private ToghUserEntity whoId;
-
-    // Expense attached to this task 
+    // Expense attached to this task
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "expenseid")
     private EventExpenseEntity expense;
@@ -59,6 +51,10 @@ public @Data class EventShoppingListEntity extends EventBaseEntity {
     @Override
     public boolean acceptExpense() {
         return true;
+    }
+
+    public enum ShoppingStatusEnum {
+        TODO, DONE, CANCEL
     }
 
 }

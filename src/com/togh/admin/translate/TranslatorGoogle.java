@@ -29,23 +29,19 @@ import java.util.logging.Logger;
 @PropertySource("classpath:secret.properties")
 public class TranslatorGoogle {
 
-    private Logger logger = Logger.getLogger(TranslatorGoogle.class.getName());
     private final static String logHeader = "com.togh.EventService";
-
     private final static LogEvent eventGoogleFileDoesNotExist = new LogEvent(TranslatorGoogle.class.getName(), 1, Level.ERROR, "Google File does not exist", "To connect to Google Service, an authentication file is necessary. This file can't be found", "No google service are available", "Check source of the file");
     private final static LogEvent eventGoogleInvalidKey = new LogEvent(TranslatorGoogle.class.getName(), 1, Level.ERROR, "Google InvalidKey", "To connect to Google Service, an authentication key is necessary. This key is incorrect", "No google service are available", "Check source of the file");
+    private static Translate translate;
     // final String KEY = "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es";
-
+    private Logger logger = Logger.getLogger(TranslatorGoogle.class.getName());
     @Autowired
     private ApiKeyService apiKeyService;
-    
-    private static Translate translate;
 
-    
+
     // @Value( "${google.TranslateKeyAPI}" )
     // private String googleApiKey;
-    
-    
+
     @SuppressWarnings("deprecation")
     public List<LogEvent> initialisation() {
         List<LogEvent> listEvents = new ArrayList<>();
@@ -53,12 +49,12 @@ public class TranslatorGoogle {
         // String googleFileName = "D:/dev/git/togh/configuration/client_secret.json";
 
         try {
-            String googleApikey = apiKeyService.getApiKeyGoogleTranslate(); 
+            String googleApikey = apiKeyService.getApiKeyGoogleTranslate();
             // authExplicit(googleFileName);
-            translate = TranslateOptions.newBuilder().setApiKey( googleApikey ).build().getService();
+            translate = TranslateOptions.newBuilder().setApiKey(googleApikey).build().getService();
 
-            
-             /* } catch (IOException e) {
+
+            /* } catch (IOException e) {
              * listEvents.add( new LogEvent(eventGoogleFileDoesNotExist, "File ["+googleFileName+"]"));
              * logger.severe(logHeader+" Initialisation translator "+e.getMessage());
              */
@@ -69,22 +65,9 @@ public class TranslatorGoogle {
         return listEvents;
     }
 
-    public class TranslateSentenceResult {
-
-        List<LogEvent> listEvents = new ArrayList<>();
-        List<String> listTranslations = new ArrayList<>();
-        /**
-         * In case only one sentence is asked, here the result is saved
-         */
-        public String getTranslation() {
-            if (! listTranslations.isEmpty())
-                return listTranslations.get(0);
-            return null;
-        }
-    }
-
     /**
-     * Translate a unique sentence from the Source language to the target langage 
+     * Translate a unique sentence from the Source language to the target langage
+     *
      * @param sentence
      * @param language &#39;
      * @return
@@ -94,10 +77,11 @@ public class TranslatorGoogle {
         sentences.add(sentence);
         return translateSentences(sentences, sourceLanguage, targetLanguage);
     }
-    
+
     /**
      * Translate a list of sentence from the source language to the target langage
-     * Replace the sequence &#39; by ' : google encode this character, and React does not need that 
+     * Replace the sequence &#39; by ' : google encode this character, and React does not need that
+     *
      * @param sentences
      * @param sourceLanguage
      * @param targetLanguage
@@ -120,7 +104,7 @@ public class TranslatorGoogle {
                 // Use "base" for standard edition, "nmt" for the premium model.
                 // Translate.TranslateOption.model("base"));
                 String decodeSentence = translation.getTranslatedText().replace("&#39;", "'");
-                translateResult.listTranslations.add( decodeSentence );
+                translateResult.listTranslations.add(decodeSentence);
             }
 
         } catch (Exception e) {
@@ -152,6 +136,21 @@ public class TranslatorGoogle {
             System.out.println(bucket.toString());
         }
 
+    }
+
+    public class TranslateSentenceResult {
+
+        List<LogEvent> listEvents = new ArrayList<>();
+        List<String> listTranslations = new ArrayList<>();
+
+        /**
+         * In case only one sentence is asked, here the result is saved
+         */
+        public String getTranslation() {
+            if (!listTranslations.isEmpty())
+                return listTranslations.get(0);
+            return null;
+        }
     }
 
 }

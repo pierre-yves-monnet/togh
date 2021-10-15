@@ -25,7 +25,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TOGHUSERLOSTPWD")
 @EqualsAndHashCode(callSuper = false)
-public @Data class ToghUserLostPasswordEntity extends BaseEntity {
+public @Data
+class ToghUserLostPasswordEntity extends BaseEntity {
 
     // User attached to this participant
     @ManyToOne(fetch = FetchType.EAGER)
@@ -35,18 +36,17 @@ public @Data class ToghUserLostPasswordEntity extends BaseEntity {
     /**
      * A UUID is given in the email, to be able to be sure the correct user respond
      */
-    @Column(name = "uuid", length = 300, nullable=false)
+    @Column(name = "uuid", length = 300, nullable = false)
     private String uuid;
-    
-    @Column(name = "datevalidity",  nullable=false)
-    private LocalDateTime dateValidity;
-    
-    public enum StatusProcessEnum {
-        PREPARATION, EMAILINERROR, SERVERISSUE, EMAILSENT, PAGEACCESS, RESETOK
-    }
 
+    @Column(name = "datevalidity", nullable = false)
+    private LocalDateTime dateValidity;
     @Column(name = "statusprocess", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusProcessEnum StatusProcess = StatusProcessEnum.PREPARATION;
+
+    public enum StatusProcessEnum {
+        PREPARATION, EMAILINERROR, SERVERISSUE, EMAILSENT, PAGEACCESS, RESETOK
+    }
 
 }

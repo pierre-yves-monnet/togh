@@ -21,17 +21,14 @@ import java.util.logging.Logger;
 @Component
 public class SendEmail {
 
-    @Autowired
-    private JavaMailSender emailSender;
-
-    @Autowired
-    private FactoryService factoryService;
-
     public static final LogEvent eventEmailSent = new LogEvent(SendEmail.class.getName(), 1, Level.SUCCESS, "Mail sent with success", "The email is sent with success");
-
     public static final LogEvent eventSendEmail = new LogEvent(SendEmail.class.getName(), 2, Level.APPLICATIONERROR, "Error Email", "Error sending email", "Email can't be send", "Check the exception");
     public static final LogEvent eventNoEmailServerConfigured = new LogEvent(SendEmail.class.getName(), 3, Level.APPLICATIONERROR, "No Email server configured", "The SMTP server is not configured. No email can be send", "Email can't be send", "Setup the SMTP server configuration");
     private static Logger logger = Logger.getLogger(SendEmail.class.getName());
+    @Autowired
+    private JavaMailSender emailSender;
+    @Autowired
+    private FactoryService factoryService;
 
     /**
      * @param emailTo     email address
@@ -105,7 +102,7 @@ public class SendEmail {
 
         } catch (MailException smtpEx) {
             logger.severe("SendMessage  connection " + logConnection + " Exception " + smtpEx.getMessage());
-            listEvents.add(new LogEvent(eventNoEmailServerConfigured, smtpEx, "Sender "+smtpEx.getMessage()));
+            listEvents.add(new LogEvent(eventNoEmailServerConfigured, smtpEx, "Sender " + smtpEx.getMessage()));
 
         } catch (Exception e) {
             logger.severe("SendMessage  connection " + logConnection + " Exception " + e.getMessage());

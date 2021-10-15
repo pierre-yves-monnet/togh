@@ -27,79 +27,75 @@ import java.util.Random;
 @Entity
 @Table(name = "TOGHUSER")
 @EqualsAndHashCode(callSuper = false)
-public @Data class ToghUserEntity extends BaseEntity {
+public @Data
+class ToghUserEntity extends BaseEntity {
 
+    private static Random random = new Random();
+    @Column(name = "connectionlastactivity")
+    public LocalDateTime connectionLastActivity;
+    /**
+     * The user accept to be part of a search result, to be invited directly in an event
+     */
+    @Column(name = "searchable")
+    Boolean searchable = true;
+    @Column(name = "source", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+
+    SourceUserEnum source;
+    @Column(name = "typepicture", length = 10, nullable = false)
+    @org.hibernate.annotations.ColumnDefault("'TOGH'")
+    @Enumerated(EnumType.STRING)
+
+    TypePictureEnum typePicture;
+    @Column(name = "picture", length = 300)
+    String picture;
+    @Column(name = "privilegeuser", length = 10)
+    @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.ColumnDefault("'USER'")
+    PrivilegeUserEnum privilegeUser;
+    @Column(name = "subscriptionuser", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.ColumnDefault("'FREE'")
+    SubscriptionUserEnum subscriptionUser;
+    @Column(name = "showtipsuser")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    Boolean showTipsUser;
     @Column(name = "googleid", length = 100)
     private String googleId;
-
     @Column(name = "firstname", length = 100)
     private String firstName;
-
     @Column(name = "lastname", length = 100)
     private String lastName;
-
     @Column(name = "password", length = 100)
     private String password;
-
     @Column(name = "email", length = 100)
     private String email;
-
-    @Column(name = "language", length = 5 )
+    @Column(name = "language", length = 5)
     @org.hibernate.annotations.ColumnDefault("'en'")
     private String language;
-
     /**
-     * Save the user time zone. Then, each communication (email...) will be translated to this time zone 
+     * Save the user time zone. Then, each communication (email...) will be translated to this time zone
      */
-    @Column(name = "usertimezone", length=10)
+    @Column(name = "usertimezone", length = 10)
     private String userTimeZone;
-    
-    public enum VisibilityEnum {
-        ALWAYS, ALWAYBUTSEARCH, LIMITEDEVENT, NEVER
-    }
-
     @Column(name = "emailvisibility", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private VisibilityEnum emailVisibility = VisibilityEnum.ALWAYS;
-
     @Column(name = "phonenumber", length = 100)
     private String phoneNumber;
-
     @Column(name = "phonevisibility", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private VisibilityEnum phoneNumberVisibility = VisibilityEnum.ALWAYS;
-
     @Column(name = "connectstamp", length = 100)
     private String connectionStamp;
-
     @Column(name = "connectiontime")
     private LocalDateTime connectionTime;
-
-    @Column(name = "connectionlastactivity")
-    public LocalDateTime connectionLastActivity;
-
-    /**
-     * Invited: email was sent, waiting to be confirmed
-     * @author Firstname Lastname
-     *
-     */
-    public enum StatusUserEnum {
-        ACTIF, DISABLED, BLOCKED, INVITED
-    }
-
-    private static Random random = new Random();
     @Column(name = "statususer", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'ACTIF'")
     private StatusUserEnum statusUser;
     @Column(name = "invitationStamp", length = 100)
     private String invitationStamp;
-
-    /**
-     * The user accept to be part of a search result, to be invited directly in an event
-     */
-    @Column(name = "searchable")
-    Boolean searchable = true;
 
     public static ToghUserEntity createNewUser(String firstName, String lastName, String email, String password, SourceUserEnum sourceUser) {
         ToghUserEntity endUser = new ToghUserEntity();
@@ -134,72 +130,14 @@ public @Data class ToghUserEntity extends BaseEntity {
      * Calculate the name according the first and last name
      */
     public void calculateName() {
-        setName( (firstName==null? "": firstName+" ") + (lastName==null? "": lastName));
+        setName((firstName == null ? "" : firstName + " ") + (lastName == null ? "" : lastName));
     }
-    
+
     public boolean checkPassword(String passwordToCompare) {
         if (passwordToCompare == null)
             return false;
         return passwordToCompare.equals(password);
     }
-
-    /**
-     * INVITED : an invitation is sent, the user did not confirm yet
-     */
-
-    public enum SourceUserEnum {
-        PORTAL, GOOGLE, INVITED, SYSTEM
-    }
-
-   
-
-    @Column(name = "source", length = 10, nullable = false)
-    @Enumerated(EnumType.STRING)
-
-    SourceUserEnum source;
-    
-    public enum TypePictureEnum {
-        TOGH, CYPRIS, URL, IMAGE
-    }
-    @Column(name = "typepicture", length = 10, nullable = false)
-    @org.hibernate.annotations.ColumnDefault("'TOGH'")
-    @Enumerated(EnumType.STRING)
-
-    TypePictureEnum typePicture;
-
-    @Column(name = "picture", length = 300)
-    String picture;
-
-    /**
-     * Level of privilege
-     * an ADMIN can administrate the complete application
-     * a TRANSlator access all translation function
-     * a USER use the application
-     */
-    public enum PrivilegeUserEnum {
-        ADMIN, TRANS, USER
-    }
-
-    @Column(name = "privilegeuser", length = 10)
-    @Enumerated(EnumType.STRING)
-    @org.hibernate.annotations.ColumnDefault("'USER'")
-    PrivilegeUserEnum privilegeUser;
-
-    /**
-     * attention, this value is used in different entity
-     */
-    public enum SubscriptionUserEnum {
-        FREE, PREMIUM, EXCELLENCE
-    }
-
-    @Column(name = "subscriptionuser", length = 10, nullable = false)
-    @Enumerated(EnumType.STRING)
-    @org.hibernate.annotations.ColumnDefault("'FREE'")
-    SubscriptionUserEnum subscriptionUser;
-
-    @Column(name = "showtipsuser")
-    @org.hibernate.annotations.ColumnDefault("'1'")
-    Boolean showTipsUser;
 
     @Override
     public String toString() {
@@ -216,7 +154,7 @@ public @Data class ToghUserEntity extends BaseEntity {
      * @return user label
      */
     public String getLabel() {
-        if ( isExist(firstName) && isExist(lastName))
+        if (isExist(firstName) && isExist(lastName))
             return (firstName != null ? firstName + " " : "") + (lastName != null ? lastName : "");
         return email;
     }
@@ -224,6 +162,49 @@ public @Data class ToghUserEntity extends BaseEntity {
     private boolean isExist(String value) {
         return (value != null && value.trim().length() > 0);
     }
+
+    public enum VisibilityEnum {
+        ALWAYS, ALWAYBUTSEARCH, LIMITEDEVENT, NEVER
+    }
+
+    /**
+     * Invited: email was sent, waiting to be confirmed
+     *
+     * @author Firstname Lastname
+     */
+    public enum StatusUserEnum {
+        ACTIF, DISABLED, BLOCKED, INVITED
+    }
+
+    /**
+     * INVITED : an invitation is sent, the user did not confirm yet
+     */
+
+    public enum SourceUserEnum {
+        PORTAL, GOOGLE, INVITED, SYSTEM
+    }
+
+    public enum TypePictureEnum {
+        TOGH, CYPRIS, URL, IMAGE
+    }
+
+    /**
+     * Level of privilege
+     * an ADMIN can administrate the complete application
+     * a TRANSlator access all translation function
+     * a USER use the application
+     */
+    public enum PrivilegeUserEnum {
+        ADMIN, TRANS, USER
+    }
+
+    /**
+     * attention, this value is used in different entity
+     */
+    public enum SubscriptionUserEnum {
+        FREE, PREMIUM, EXCELLENCE
+    }
+
     // define the user access :
     // SEARCH : the user show up in a public search
     // PUBLICACCESS : access is from a public event : event is public or limited, but the user who want to access is only an observer, or not yet confirmed. So, show only what user want to show to the public
@@ -234,8 +215,6 @@ public @Data class ToghUserEntity extends BaseEntity {
     public enum ContextAccess {
         SEARCH, PUBLICACCESS, FRIENDACCESS, SECRETACCESS, ADMIN, MYPROFILE
     }
-
-
 
 
 }

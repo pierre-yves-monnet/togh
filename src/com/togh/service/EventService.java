@@ -123,7 +123,7 @@ public class EventService {
 
     /**
      * @param toghUserEntity the user
-     * @param  eventName
+     * @param eventName
      * @return the EventOperationResult
      */
     public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
@@ -276,12 +276,6 @@ public class EventService {
         return null;
     }
 
-    public class EventResult {
-
-        public List<EventEntity> listEvents;
-        public List<LogEvent> listLogEvent = new ArrayList<>();
-    }
-
     /**
      * Get Events
      *
@@ -311,10 +305,6 @@ public class EventService {
         return eventResult;
     }
 
-    public enum FilterEvents {
-        MYEVENTS, ALLEVENTS, MYINVITATIONS
-    }
-
     public EventEntity getEventById(Long eventId) {
         if (eventId == null)
             return null;
@@ -331,7 +321,7 @@ public class EventService {
 
     /**
      * @param toghUserEntity userEntity
-     * @param eventId eventId
+     * @param eventId        eventId
      * @return the eventEntity
      */
     public EventEntity getAllowedEventById(ToghUserEntity toghUserEntity, long eventId) {
@@ -345,23 +335,14 @@ public class EventService {
 
     }
 
-    
-    public ContextAccess getContextAccess(EventEntity eventEntity, ToghUserEntity toghUser ) {
+    public ContextAccess getContextAccess(EventEntity eventEntity, ToghUserEntity toghUser) {
         return EventController.getInstance(eventEntity, factoryService, factoryRepository).getContextAccess(toghUser);
     }
 
-    
-    public Map<String, Object> getMap( EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset) {
+    public Map<String, Object> getMap(EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset) {
         EventController eventController = getEventController(eventEntity);
         BaseSerializer serializer = factorySerializer.getFromEntity(eventEntity);
         return serializer.getMap(eventEntity, eventController.getContextAccess(toghUserEntity), timezoneOffset, factorySerializer);
-    }
-
-    /**
-     * invitation
-     */
-    public enum InvitationStatus {
-        DONE, NOUSERSGIVEN, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
     }
 
     /**
@@ -374,46 +355,67 @@ public class EventService {
         return new EventController(eventEntity, factoryService, factoryRepository);
     }
 
-    public static class InvitationResult {
-
-        public InvitationStatus status;
-        public final List<ToghUserEntity> listToghUserInvited = new ArrayList<>();
-        public final List<ParticipantEntity> newParticipants = new ArrayList<>();
-        private final List<ToghUserEntity> errorMessage = new ArrayList<>();
-        private final List<ToghUserEntity> errorSendEmail = new ArrayList<>();
-        private final List<ToghUserEntity> okMessage = new ArrayList<>();
-
-        public final List<LogEvent> listLogEvents = new ArrayList<>();
-
-        public void addErrorMessage( ToghUserEntity toghUserEntity) {
-            errorMessage.add( toghUserEntity);
+    public LoadEntityResult loadEntity(Class<?> classEntity, Long id) {
+        LoadEntityResult loadEntityResult = new LoadEntityResult();
+        if (id == null) {
+            loadEntityResult.listLogEvents.add(new LogEvent(eventNoId, "Entity[" + classEntity.getName() + "]"));
+            return loadEntityResult;
+        }
+        if (ToghUserEntity.class.equals(classEntity)) {
+            loadEntityResult.entity = toghUserService.getUserFromId(id);
+        } else {
+            loadEntityResult.listLogEvents.add(new LogEvent(eventBadEntity, "Entity[" + classEntity.getName() + "] ,Id=[" + id + "]"));
         }
 
-        public String getErrorMessage() {
-            return errorMessage.stream()
-                    .map(ToghUserEntity::getLabel)
-                    .collect( Collectors.joining( "," ) );
+        if (loadEntityResult.entity == null) {
+            loadEntityResult.listLogEvents.add(new LogEvent(eventEntityNotFound, "Entity[" + classEntity.getName() + "] ,Id=[" + id + "]"));
         }
+        return loadEntityResult;
+    }
 
-        public void addErrorSendEmail( ToghUserEntity toghUserEntity) {
-            errorSendEmail.add( toghUserEntity);
-        }
+    /**
+     * Close old events
+     */
+    public List<EventEntity> closeOldEvents(boolean doTheOperation) {
+        LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
 
-        public String getErrorSendEmail() {
-            return errorSendEmail.stream()
-                    .map(ToghUserEntity::getLabel)
-                    .collect( Collectors.joining( "," ) );
-        }
+        // modified last than 2 H? Keep it open.
+        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
+        timeGrace = timeGrace.minusMinutes(120);
 
-        public void addOkMessage( ToghUserEntity toghUserEntity) {
-            okMessage.add(toghUserEntity);
+        List<EventEntity> listEventsToClose = eventRepository.findOldEvents(timeCheck, timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
+        if (doTheOperation) {
+            for (EventEntity eventEntity : listEventsToClose) {
+                StatusEventEnum oldStatus = eventEntity.getStatusEvent();
+                eventEntity.setStatusEvent(StatusEventEnum.CLOSED);
+                eventRepository.save(eventEntity);
+                notifyService.notifyEventChangeStatus(eventEntity, oldStatus);
+            }
         }
+        return listEventsToClose;
+    }
 
-        public String getOkMessage() {
-            return okMessage.stream()
-                    .map(ToghUserEntity::getLabel)
-                    .collect(Collectors.joining(","));
+    /**
+     * Close old events
+     */
+    public List<EventEntity> purgeOldEvents(boolean doTheOperation) {
+
+        // modified last than 2 H? Keep it open.
+        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
+        timeGrace = timeGrace.minusDays(30);
+
+        List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge(timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
+        if (doTheOperation) {
+            for (EventEntity eventEntity : listEventsToClose) {
+                eventRepository.delete(eventEntity);
+                notifyService.notifyEventPurge(eventEntity);
+            }
         }
+        return listEventsToClose;
+    }
+
+    public enum FilterEvents {
+        MYEVENTS, ALLEVENTS, MYINVITATIONS
     }
 
     /* ******************************************************************************** */
@@ -427,10 +429,10 @@ public class EventService {
     /**
      * Add a task in the event
      * task is saved, then it got an id. Event is not saved.
-     * 
+     *
      * @param eventEntity
      * @return
-//     */
+    //     */
 //    public EventItineraryStepEntity addItineraryStep(EventEntity eventEntity, EventItineraryStepEntity itineraryStep) {
 //        eventItineraryStepRepository.save(itineraryStep);
 //        eventEntity.addItineraryStep(itineraryStep);
@@ -440,7 +442,7 @@ public class EventService {
 
     /**
      * removeItineraryStep
-     * 
+     *
      * @param eventEntity
      * @param taskId
      * @return
@@ -473,7 +475,7 @@ public class EventService {
 
     /**
      * RemoveShoppingList
-     * 
+     *
      * @param eventEntity
      * @param shoppingListId
      * @return
@@ -644,6 +646,54 @@ public class EventService {
     /* ******************************************************************************** */
 
     /**
+     * invitation
+     */
+    public enum InvitationStatus {
+        DONE, NOUSERSGIVEN, ALREADYAPARTICIPANT, NOTAUTHORIZED, ERRORDURINGCREATIONUSER, ERRORDURINVITATION, INVITATIONSENT, INVALIDUSERID
+    }
+
+    public static class InvitationResult {
+
+        public final List<ToghUserEntity> listToghUserInvited = new ArrayList<>();
+        public final List<ParticipantEntity> newParticipants = new ArrayList<>();
+        public final List<LogEvent> listLogEvents = new ArrayList<>();
+        private final List<ToghUserEntity> errorMessage = new ArrayList<>();
+        private final List<ToghUserEntity> errorSendEmail = new ArrayList<>();
+        private final List<ToghUserEntity> okMessage = new ArrayList<>();
+        public InvitationStatus status;
+
+        public void addErrorMessage(ToghUserEntity toghUserEntity) {
+            errorMessage.add(toghUserEntity);
+        }
+
+        public String getErrorMessage() {
+            return errorMessage.stream()
+                    .map(ToghUserEntity::getLabel)
+                    .collect(Collectors.joining(","));
+        }
+
+        public void addErrorSendEmail(ToghUserEntity toghUserEntity) {
+            errorSendEmail.add(toghUserEntity);
+        }
+
+        public String getErrorSendEmail() {
+            return errorSendEmail.stream()
+                    .map(ToghUserEntity::getLabel)
+                    .collect(Collectors.joining(","));
+        }
+
+        public void addOkMessage(ToghUserEntity toghUserEntity) {
+            okMessage.add(toghUserEntity);
+        }
+
+        public String getOkMessage() {
+            return okMessage.stream()
+                    .map(ToghUserEntity::getLabel)
+                    .collect(Collectors.joining(","));
+        }
+    }
+
+    /**
      * Status of operation
      */
     public static class EventOperationResult {
@@ -690,33 +740,6 @@ public class EventService {
         }
     }
 
-    /**
-     * Load an entity by its class and an ID
-     */
-    public class LoadEntityResult {
-
-        public BaseEntity entity;
-        public List<LogEvent> listLogEvents = new ArrayList<>();
-    }
-
-    public LoadEntityResult loadEntity(Class<?> classEntity, Long id) {
-        LoadEntityResult loadEntityResult = new LoadEntityResult();
-        if (id == null) {
-            loadEntityResult.listLogEvents.add(new LogEvent(eventNoId, "Entity[" + classEntity.getName() + "]"));
-            return loadEntityResult;
-        }
-        if (ToghUserEntity.class.equals(classEntity)) {
-            loadEntityResult.entity = toghUserService.getUserFromId(id);
-        } else {
-            loadEntityResult.listLogEvents.add(new LogEvent(eventBadEntity, "Entity[" + classEntity.getName() + "] ,Id=[" + id + "]"));
-        }
-
-        if (loadEntityResult.entity == null) {
-            loadEntityResult.listLogEvents.add(new LogEvent(eventEntityNotFound, "Entity[" + classEntity.getName() + "] ,Id=[" + id + "]"));
-        }
-        return loadEntityResult;
-    }
-
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Close old events */
@@ -724,47 +747,6 @@ public class EventService {
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-
-    /**
-     * Close old events
-     */
-    public List<EventEntity> closeOldEvents(boolean doTheOperation) {
-        LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
-
-        // modified last than 2 H? Keep it open.
-        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
-        timeGrace = timeGrace.minusMinutes(120);
-
-        List<EventEntity> listEventsToClose = eventRepository.findOldEvents(timeCheck, timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
-        if (doTheOperation) {
-            for (EventEntity eventEntity : listEventsToClose) {
-                StatusEventEnum oldStatus = eventEntity.getStatusEvent();
-                eventEntity.setStatusEvent(StatusEventEnum.CLOSED);
-                eventRepository.save(eventEntity);
-                notifyService.notifyEventChangeStatus(eventEntity, oldStatus);
-            }
-        }
-        return listEventsToClose;
-    }
-
-    /**
-     * Close old events
-     */
-    public List<EventEntity> purgeOldEvents(boolean doTheOperation) {
-
-        // modified last than 2 H? Keep it open.
-        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
-        timeGrace = timeGrace.minusDays(30);
-
-        List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge(timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
-        if (doTheOperation) {
-            for (EventEntity eventEntity : listEventsToClose) {
-                eventRepository.delete(eventEntity);
-                notifyService.notifyEventPurge(eventEntity);
-            }
-        }
-        return listEventsToClose;
-    }
 
     /**
      * UpdateContext class, to pass context to the different operations
@@ -812,6 +794,21 @@ public class EventService {
             this.eventController = eventController;
         }
 
+    }
+
+    public class EventResult {
+
+        public List<EventEntity> listEvents;
+        public List<LogEvent> listLogEvent = new ArrayList<>();
+    }
+
+    /**
+     * Load an entity by its class and an ID
+     */
+    public class LoadEntityResult {
+
+        public BaseEntity entity;
+        public List<LogEvent> listLogEvents = new ArrayList<>();
     }
 
 }

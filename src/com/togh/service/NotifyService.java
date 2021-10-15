@@ -43,27 +43,22 @@ public class NotifyService {
     private static final String HTTP_DEFAULT_HOST_TOGH = "http://localhost:3000";
     private static final String LOG_HEADER = "com.togh.NotifyService";
     private static final String MAIL_HOST = "localhost";
-
-    @Autowired
-    private FactoryService factoryService;
-
-    @Autowired
-    private EventFactoryRepository factoryRepository;
-
-    @Autowired
-    private TranslatorService translatorService;
-
-    @Autowired
-    private ApiKeyService apiKeyService;
     private static final int MAIL_PORT = 2525;
     private static final boolean MAIL_TLS = false;
     private static final String MAIL_USER_NAME = "";
     private static final String MAIL_USER_PASSWORD = "";
+    private final static LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
     private final Logger logger = Logger.getLogger(NotifyService.class.getName());
     @Autowired
+    private FactoryService factoryService;
+    @Autowired
+    private EventFactoryRepository factoryRepository;
+    @Autowired
+    private TranslatorService translatorService;
+    @Autowired
+    private ApiKeyService apiKeyService;
+    @Autowired
     private SendEmail sendEmail;
-
-    private final static LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
 
     /**
      * @param toghUserEntity    The user to invite

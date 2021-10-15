@@ -24,23 +24,15 @@ import javax.persistence.*;
 @Table(name = "EVTPARTICIPANT")
 public class ParticipantEntity extends UserEntity {
 
-    public enum ParticipantRoleEnum {
-        OWNER, ORGANIZER, PARTICIPANT, OBSERVER, WAITCONFIR, EXTERNAL
-    }
-
-    @Column(name = "role", length=15, nullable = false)
-    @Enumerated(EnumType.STRING)    
+    @Column(name = "role", length = 15, nullable = false)
+    @Enumerated(EnumType.STRING)
     private ParticipantRoleEnum role;
-
     // User attached to this participant
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userid")
     private ToghUserEntity user;
-
-    public enum StatusEnum {  INVITED, ACTIF, LEFT }
-
-    @Column(name = "status", length=10, nullable = false)
-    @Enumerated(EnumType.STRING)    
+    @Column(name = "status", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
     public ParticipantRoleEnum getRole() {
@@ -59,7 +51,6 @@ public class ParticipantEntity extends UserEntity {
         this.user = endUser;
     }
 
-   
     public StatusEnum getStatus() {
         return status;
     }
@@ -68,6 +59,12 @@ public class ParticipantEntity extends UserEntity {
         this.status = status;
     }
 
-   
+
+    public enum ParticipantRoleEnum {
+        OWNER, ORGANIZER, PARTICIPANT, OBSERVER, WAITCONFIR, EXTERNAL
+    }
+
+    public enum StatusEnum {INVITED, ACTIF, LEFT}
+
 
 }

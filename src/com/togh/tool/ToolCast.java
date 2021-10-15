@@ -44,7 +44,7 @@ public class ToolCast {
     }
 
     @SuppressWarnings("rawtypes")
-    public static List getList(Map<String,Object> content, String key, List defaultValue) {
+    public static List getList(Map<String, Object> content, String key, List defaultValue) {
         try {
             if (content.get(key) instanceof List)
                 return (List) content.get(key);
@@ -54,8 +54,8 @@ public class ToolCast {
         }
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public static List<Long> getListLong(Map<String,Object> content, String key, List<Long> defaultValue) {
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public static List<Long> getListLong(Map<String, Object> content, String key, List<Long> defaultValue) {
         try {
             if (content.get(key) instanceof List) {
                 // if the ID is very large, the object may be send as a STRING. So, this is the moment to translate it

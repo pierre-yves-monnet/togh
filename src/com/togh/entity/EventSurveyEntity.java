@@ -46,7 +46,6 @@ class EventSurveyEntity extends UserEntity {
     private SurveyStatusEnum status;
 
 
-
     // name is part of the baseEntity
     @Column(name = "description", length = 400)
     private String description;

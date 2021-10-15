@@ -18,9 +18,9 @@ import javax.persistence.*;
 
 /* ******************************************************************************** */
 /*                                                                                  */
-/* AdminStatsConnection, Keep connection day per day of the connection              */  
+/* AdminStatsConnection, Keep connection day per day of the connection              */
 /*                                                                                  */
-/*   yearMonthDay is yyyy-mm-dd                                                       */ 
+/*   yearMonthDay is yyyy-mm-dd                                                       */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -28,27 +28,27 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ADMSTATSUSAGE")
-@EqualsAndHashCode(callSuper=true)
-public @Data class AdminStatsUsageEntity extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public @Data
+class AdminStatsUsageEntity extends BaseEntity {
 
     @Column(name = "yearmonthday", length = 10)
     public String yearMonthDay;
-
-    public enum TypeStatsEnum { CONNECTION, ACCESS, LIMITSUBSCRIPT};
     @Column(name = "typestats", length = 15)
     @Enumerated(EnumType.STRING)
     public TypeStatsEnum typeStatistique;
 
+    ;
     @Column(name = "subscriptionuser", length = 10)
     @Enumerated(EnumType.STRING)
-    public SubscriptionUserEnum subscriptionUser; 
-
+    public SubscriptionUserEnum subscriptionUser;
     @Column(name = "limitreach", length = 15)
     @Enumerated(EnumType.STRING)
     public LimitReach limitReach;
-    
-    
     @Column(name = "value")
     public Long value;
+
+
+    public enum TypeStatsEnum {CONNECTION, ACCESS, LIMITSUBSCRIPT}
 
 }

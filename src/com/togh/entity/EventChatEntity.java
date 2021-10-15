@@ -26,10 +26,11 @@ import javax.persistence.*;
 @Entity
 
 @Table(name = "EVTCHAT")
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 
-public @Data class EventChatEntity extends UserEntity {
-   
+public @Data
+class EventChatEntity extends UserEntity {
+
     public static final String CST_SLABOPERATION_CHAT = "chat";
 
     // User attached to this task (maybe an external user, why not ?
@@ -37,7 +38,7 @@ public @Data class EventChatEntity extends UserEntity {
     @JoinColumn(name = "whoid")
     private ToghUserEntity whoId;
 
-    @Column( name="message", length=400)
+    @Column(name = "message", length = 400)
     private String message;
 
 

@@ -12,12 +12,12 @@ import org.springframework.context.annotation.ComponentScan;
 
 public class ServletInitializer extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(ServletInitializer.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ServletInitializer.class);
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(ServletInitializer.class, args);
     }
 }

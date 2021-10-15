@@ -17,37 +17,16 @@ public class ToghDictionary {
 
     File path;
     String language;
-
-    public class SentenceItem {
-
-        String key;
-        String translation;
-        String originalSentence;
-
-        public SentenceItem(String key, String translation, String originalSentence) {
-            this.key = key;
-            this.translation = translation;
-            this.originalSentence = originalSentence;
-        }
-    }
-
     Map<String, SentenceItem> dictionary = new HashMap<String, SentenceItem>();
     /**
      * marker to know if the dictionnary is modified or not
      */
     private boolean dictionaryIsModified = false;
-
     public ToghDictionary(File path, String language) {
         this.path = path;
         this.language = language;
 
     }
-
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Read/Write */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
 
     /**
      * @return
@@ -59,7 +38,7 @@ public class ToghDictionary {
         dictionary = new HashMap<>();
         File file = getFile();
         try (FileInputStream fis = new FileInputStream(file);
-                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8)) {
+             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8)) {
 
             JSONTokener tokener = new JSONTokener(isr);
             JSONObject object = new JSONObject(tokener);
@@ -79,9 +58,15 @@ public class ToghDictionary {
         return listEvents;
     }
 
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Read/Write */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+
     /**
      * Write the dictionnary
-     * 
+     *
      * @return
      */
     public List<LogEvent> write() {
@@ -94,12 +79,12 @@ public class ToghDictionary {
             // file exist before ? Rename it to .bak
             File file = getFile();
             if (file.exists()) {
-                File backupDirectory = new File( file.getParentFile().getAbsolutePath()+"/backup");
+                File backupDirectory = new File(file.getParentFile().getAbsolutePath() + "/backup");
                 backupDirectory.mkdirs();
                 String fileName = file.getName();
                 fileName = fileName.replace(".json", ".bak");
-                File destFile = new File(backupDirectory.getAbsolutePath()+"/"+fileName);
-                
+                File destFile = new File(backupDirectory.getAbsolutePath() + "/" + fileName);
+
                 file.renameTo(destFile);
             }
             fos = new FileOutputStream(file);
@@ -115,25 +100,25 @@ public class ToghDictionary {
             Collections.sort(listSentences, new Comparator<SentenceItem>() {
 
                 public int compare(SentenceItem s1,
-                        SentenceItem s2) {
+                                   SentenceItem s2) {
                     return s1.key.compareTo(s2.key);
                 }
             });
 
-            
+
             // we want to keep the order, so write the ASCII file directly
             writer.write("{\n");
-            for (int i=0;i<listSentences.size();i++) {
-                SentenceItem sentence =listSentences.get( i ); 
-                if (i>0)
-                    writer.write(",\n\n"); 
-                if (sentence.originalSentence!=null)
-                    writer.write("  \"__" + sentence.key+"\" : \"" +sentence.originalSentence+"\",\n");
-                writer.write("  \"" + sentence.key+"\" : \"" +sentence.translation+"\"");
+            for (int i = 0; i < listSentences.size(); i++) {
+                SentenceItem sentence = listSentences.get(i);
+                if (i > 0)
+                    writer.write(",\n\n");
+                if (sentence.originalSentence != null)
+                    writer.write("  \"__" + sentence.key + "\" : \"" + sentence.originalSentence + "\",\n");
+                writer.write("  \"" + sentence.key + "\" : \"" + sentence.translation + "\"");
             }
             writer.write("}\n");
-            
-            
+
+
             writer.flush();
 
         } catch (Exception e) {
@@ -192,18 +177,31 @@ public class ToghDictionary {
         return dictionary.values();
     }
 
+    /**
+     * Return the file
+     *
+     * @return
+     */
+    protected File getFile() {
+        return new File(path + "/" + language + ".json");
+    }
+
     /* -------------------------------------------------------------------- */
     /*                                                                      */
     /* Get the file used for the dictionary */
     /*                                                                      */
     /* -------------------------------------------------------------------- */
 
-    /**
-     * Return the file
-     * 
-     * @return
-     */
-    protected File getFile() {
-        return new File(path + "/" + language + ".json");
+    public class SentenceItem {
+
+        String key;
+        String translation;
+        String originalSentence;
+
+        public SentenceItem(String key, String translation, String originalSentence) {
+            this.key = key;
+            this.translation = translation;
+            this.originalSentence = originalSentence;
+        }
     }
 }

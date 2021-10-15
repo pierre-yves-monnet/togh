@@ -27,7 +27,7 @@ import javax.persistence.*;
 @Inheritance
 public abstract class UserEntity extends BaseEntity {
 
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authorid")
     private ToghUserEntity author;
 
@@ -52,17 +52,17 @@ public abstract class UserEntity extends BaseEntity {
         return this.author;
     }
 
-	public void setAuthor(ToghUserEntity author) {
-		this.author = author;
-	}
+    public void setAuthor(ToghUserEntity author) {
+        this.author = author;
+    }
 
-	public String getAccessdata() {
-		return accessdata;
-	}
+    public String getAccessdata() {
+        return accessdata;
+    }
 
-	public void setAccessdata(String accessdata) {
-		this.accessdata = accessdata;
-	}
+    public void setAccessdata(String accessdata) {
+        this.accessdata = accessdata;
+    }
 
 
 }

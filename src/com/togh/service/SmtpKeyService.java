@@ -27,4 +27,4 @@ public interface SmtpKeyService {
     String getSmtpUserPassword();
 
     String getSmtpFrom();
-    }
+}

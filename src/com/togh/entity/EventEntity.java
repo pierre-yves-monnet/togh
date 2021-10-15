@@ -34,24 +34,24 @@ import java.util.List;
 @Entity
 @Table(name = "EVT")
 @EqualsAndHashCode(callSuper = true)
-public @Data class EventEntity extends UserEntity {
+public @Data
+class EventEntity extends UserEntity {
 
 
-
-
+    @Column(name = "subscriptionevent", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.ColumnDefault("'FREE'")
+    SubscriptionEventEnum subscriptionEvent;
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
-
     /**
      * In case of a policy Period, a Start and End event are provide.
      * Nota: LocalDateTime in UTC timezone
      */
     @Column(name = "datestartevent")
     private LocalDateTime dateStartEvent;
-
     @Column(name = "dateendevent")
     private LocalDateTime dateEndEvent;
-
     /**
      * Date are store in UTC, and can be translated in any brower timezone.
      * But when we publish the event (by Email), we have to translate the time in a time zone:
@@ -60,80 +60,33 @@ public @Data class EventEntity extends UserEntity {
      */
     @Column(name = "eventtimezone", length = 10)
     private String eventTimeZone;
-
-    public enum TypeEventEnum {
-        OPEN, OPENCONF, LIMITED, SECRET
-    }
-
     @Column(name = "typeevent", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private TypeEventEnum typeEvent;
-
-    public enum StatusEventEnum {
-        INPREPAR, INPROG, CLOSED, CANCELLED
-    }
-
     @Column(name = "status", length = 10)
     @Enumerated(EnumType.STRING)
     private StatusEventEnum statusEvent;
-
     @Column(name = "description", length = 400)
     private String description;
-
-    public enum DatePolicyEnum {
-        ONEDATE, PERIOD
-    }
-
     @Column(name = "datepolicy", length = 10, nullable = false)
     @org.hibernate.annotations.ColumnDefault("'ONEDATE'")
     @Enumerated(EnumType.STRING)
     private DatePolicyEnum datePolicy;
-
     @Column(name = "timeevent", length = 5)
     private String timeevent;
-
     @Column(name = "durationevent", length = 5)
     private String duration;
-
-    public enum ScopeEnum {
-        OPEN, OPENCONF, LIMITED, SECRET
-    }
-
     @Column(name = "scope", length = 10)
     @Enumerated(EnumType.STRING)
     private ScopeEnum scope;
-
     @Column(name = "geoaddress", length = 300)
     private String geoaddress;
-
     @Column(name = "geolat")
     private Double geolat;
-
     @Column(name = "geolng")
     private Double geolng;
-
     @Column(name = "geoinstructions", length = 400)
     private String geoinstructions;
-
-    public enum SubscriptionEventEnum {
-        FREE, PREMIUM, EXCELLENCE
-    }
-
-    @Column(name = "subscriptionevent", length = 10, nullable = false)
-    @Enumerated(EnumType.STRING)
-    @org.hibernate.annotations.ColumnDefault("'FREE'")
-    SubscriptionEventEnum subscriptionEvent;
-
-    public EventEntity(ToghUserEntity author, String name) {
-        super(author, name);
-        setTypeEvent(TypeEventEnum.LIMITED);
-        setStatusEvent(StatusEventEnum.INPREPAR);
-
-    }
-
-    public EventEntity() {
-    }
-
     /**
      * getRealTimeUtc
      * Real time is the dateEvent (which contains the time zone) + the time (which contains a jour/mn in the day)
@@ -154,6 +107,78 @@ public @Data class EventEntity extends UserEntity {
     @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     private List<ParticipantEntity> participantList = new ArrayList<>();
+    @Column(name = "itineraryshowmap")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean itineraryShowMap;
+    @Column(name = "itineraryshowdetails")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean itineraryShowDetails;
+    @Column(name = "itineraryshowexpenses")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean itineraryShowExpenses;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("rownumber")
+    private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
+    @Column(name = "tasklistshowdates")
+    private Boolean taskListShowDates;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventTaskEntity> taskList = new ArrayList<>();
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* ShoppingList */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    @Column(name = "shoppinglistshowdetails")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean shoppingListShowDetails;
+    @Column(name = "shoppinglistshowexpenses")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    private Boolean shoppinglistShowExpenses;
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Itinerary */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventShoppingListEntity> shoppingList = new ArrayList<>();
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Survey */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventSurveyEntity> surveyList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventGroupChatEntity> groupChatList = new ArrayList<>();
+
+    public EventEntity(ToghUserEntity author, String name) {
+        super(author, name);
+        setTypeEvent(TypeEventEnum.LIMITED);
+        setStatusEvent(StatusEventEnum.INPREPAR);
+
+    }
+
+    public EventEntity() {
+    }
 
     /**
      * Add a participant
@@ -170,30 +195,12 @@ public @Data class EventEntity extends UserEntity {
         participantList.add(participant);
         return participant;
     }
+
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Itinerary */
+    /* Tasklist */
     /*                                                                                  */
     /* ******************************************************************************** */
-
-    @Column(name = "itineraryshowmap")
-    @org.hibernate.annotations.ColumnDefault("'1'")
-    private Boolean itineraryShowMap;
-
-    @Column(name = "itineraryshowdetails")
-    @org.hibernate.annotations.ColumnDefault("'1'")
-    private Boolean itineraryShowDetails;
-
-    @Column(name = "itineraryshowexpenses")
-    @org.hibernate.annotations.ColumnDefault("'1'")
-    private Boolean itineraryShowExpenses;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "eventid")
-    @OrderBy("rownumber")
-    private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
 
     public EventItineraryStepEntity addItineraryStep(EventItineraryStepEntity oneStep) {
         itineraryStepList.add(oneStep);
@@ -216,22 +223,6 @@ public @Data class EventEntity extends UserEntity {
         return false;
     }
 
-    /* ******************************************************************************** */
-    /*                                                                                  */
-    /* Tasklist */
-    /*                                                                                  */
-    /* ******************************************************************************** */
-
-    @Column(name = "tasklistshowdates")
-    private Boolean taskListShowDates;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "eventid")
-    @OrderBy("id")
-    private List<EventTaskEntity> taskList = new ArrayList<>();
-
     public EventTaskEntity addTask(EventTaskEntity onetask) {
         taskList.add(onetask);
         return onetask;
@@ -239,7 +230,7 @@ public @Data class EventEntity extends UserEntity {
 
     /**
      * Remove a task.
-     * 
+     *
      * @param task
      * @return true if the task exist and is removed, false else
      */
@@ -253,26 +244,6 @@ public @Data class EventEntity extends UserEntity {
         return false;
     }
 
-    /* ******************************************************************************** */
-    /*                                                                                  */
-    /* ShoppingList */
-    /*                                                                                  */
-    /* ******************************************************************************** */
-    @Column(name = "shoppinglistshowdetails")
-    @org.hibernate.annotations.ColumnDefault("'1'")
-    private Boolean shoppingListShowDetails;
-
-    @Column(name = "shoppinglistshowexpenses")
-    @org.hibernate.annotations.ColumnDefault("'1'")
-    private Boolean shoppinglistShowExpenses;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "eventid")
-    @OrderBy("id")
-    private List<EventShoppingListEntity> shoppingList = new ArrayList<>();
-
     public EventShoppingListEntity addShoppingList(EventShoppingListEntity onetask) {
         shoppingList.add(onetask);
         return onetask;
@@ -280,7 +251,7 @@ public @Data class EventEntity extends UserEntity {
 
     /**
      * Remove a task.
-     * 
+     *
      * @param task
      * @return true if the task exist and is removed, false else
      */
@@ -294,18 +265,6 @@ public @Data class EventEntity extends UserEntity {
         return false;
     }
 
-    /* ******************************************************************************** */
-    /*                                                                                  */
-    /* Survey */
-    /*                                                                                  */
-    /* ******************************************************************************** */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "eventid")
-    @OrderBy("id")
-    private List<EventSurveyEntity> surveyList = new ArrayList<>();
-
     public EventSurveyEntity addSurvey(EventSurveyEntity onesurvey) {
         surveyList.add(onesurvey);
         return onesurvey;
@@ -313,7 +272,7 @@ public @Data class EventEntity extends UserEntity {
 
     /**
      * Remove a task.
-     * 
+     *
      * @param task
      * @return true if the task exist and is removed, false else
      */
@@ -327,23 +286,11 @@ public @Data class EventEntity extends UserEntity {
         return false;
     }
 
-    /* ******************************************************************************** */
-    /*                                                                                  */
-    /* Chat */
-    /*                                                                                  */
-    /* ******************************************************************************** */
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "eventid")
-    @OrderBy("id")
-    private List<EventGroupChatEntity> groupChatList = new ArrayList<>();
-
     public EventGroupChatEntity addGroupChat(EventGroupChatEntity groupChatEntity) {
         groupChatList.add(groupChatEntity);
         return groupChatEntity;
     }
+
     public boolean removeGroupChat(EventGroupChatEntity groupChatEntity) {
         for (EventGroupChatEntity groupChatIterator : groupChatList) {
             if (groupChatIterator.getId().equals(groupChatEntity.getId())) {
@@ -353,10 +300,37 @@ public @Data class EventEntity extends UserEntity {
         }
         return false;
     }
-    
+
     public EventChatEntity addChat(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity, int maxChatEntity) {
         groupChatEntity.addChat(chatEntity);
         return chatEntity;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" + super.toString() + "}";
+    }
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Chat */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    public enum TypeEventEnum {
+        OPEN, OPENCONF, LIMITED, SECRET
+    }
+
+    public enum StatusEventEnum {
+        INPREPAR, INPROG, CLOSED, CANCELLED
+    }
+
+    public enum DatePolicyEnum {
+        ONEDATE, PERIOD
+    }
+
+    public enum ScopeEnum {
+        OPEN, OPENCONF, LIMITED, SECRET
     }
 
     /* ******************************************************************************** */
@@ -366,9 +340,8 @@ public @Data class EventEntity extends UserEntity {
     /* ******************************************************************************** */
 
 
-    @Override
-    public String toString() {
-        return "Event{" + super.toString() + "}";
+    public enum SubscriptionEventEnum {
+        FREE, PREMIUM, EXCELLENCE
     }
 
     public static class AdditionalInformationEvent {

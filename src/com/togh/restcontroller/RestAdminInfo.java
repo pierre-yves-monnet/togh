@@ -31,24 +31,23 @@ public class RestAdminInfo {
     private LoginService loginService;
 
     /**
-     *
-     * @param connectionStamp    Information on the connected user
+     * @param connectionStamp Information on the connected user
      * @return
      */
     @CrossOrigin
     @GetMapping(value = "/api/admin/info", produces = "application/json")
-    public List<Map<String,Object>> getApiKeys(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public List<Map<String, Object>> getApiKeys(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
 
         loginService.isAdministratorConnected(connectionStamp);
-        List<Map<String,Object>> listInformations = new ArrayList<>();
+        List<Map<String, Object>> listInformations = new ArrayList<>();
 
-        listInformations.add( addInformation("java version", System.getProperty("java.version")));
-        
+        listInformations.add(addInformation("java version", System.getProperty("java.version")));
+
         return listInformations;
     }
-    
-    public Map<String,Object> addInformation( String name, Object value) {
-        Map<String,Object> info = new HashMap<>();
+
+    public Map<String, Object> addInformation(String name, Object value) {
+        Map<String, Object> info = new HashMap<>();
         info.put("name", name);
         info.put("value", value);
         return info;
