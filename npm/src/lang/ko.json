@@ -48,15 +48,12 @@
   "AdminUsers.AllUsers": "모든 사용자들",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "막힌",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "완전한 이름",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "연결됨",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "사용자 오프라인",
+  "__AdminUsers.CompleteName": "Complete Name",
+  "AdminUsers.CompleteName": "완전한 이름",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "연결됨",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "사용자 오프라인",
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "사용자 연결",
@@ -174,24 +171,32 @@
 
   "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
   "AskPassword.ToSmalPassword" : "비밀번호는 최소 3자 이상 입력하세요.",
-
-  "__BodyTogh.ResetYourPassword" : "Reset your password",
-  "BodyTogh.ResetYourPassword" : "비밀번호를 재설정",
-
-  "__BodyTogh.ThankYou" : "Thank you!",
-  "BodyTogh.ThankYou" : "감사합니다!",
-
-  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-  "BodyTogh.YouAreInvited" : "이벤트에 초대합니다! 등록하거나 연결하여 액세스",
-
-  "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "Togh에 오신 것을 환영합니다",
-
-  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-  "BodyTogh.whatisToghExample" : "학교에서 팟럭? 친구들과 바베큐? m에서 가족과 함께 여행? 며칠? 이것은 이벤트입니다.",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
-  "BodyTogh.whatisToghExplanation" : "Togh는 이벤트를 관리하는 응용 프로그램입니다. 학교에서 팟럭? 친구들과 바베큐? m에서 가족과 함께 여행? 며칠? 이것은 이벤트입니다. 하나의 이벤트에서 참가자를 구성하고, 작업 및 쇼핑 목록을 등록하고, 주소를 제공하고, 도로 여행 단계를 지정합니다. 참가자에게 설문 조사를 요청할 수 있습니다. 할리우드 빌딩을 방문하는 것을 선호합니까, 아니면 그리피스 천문대를 방문하는 것을 선호합니까 (폴은 둘 다 방문하고 싶어합니까!)지도에 여정을 시각화하십시오. 비용을 계산하십시오. Togh는 누가 누가 소유하는지 말할 것입니다.",
+  "__BodyTogh.ResetYourPassword": "Reset your password",
+  "BodyTogh.ResetYourPassword": "비밀번호를 재설정",
+  "__BodyTogh.ThankYou": "Thank you!",
+  "BodyTogh.ThankYou": "감사합니다!",
+  "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited": "이벤트에 초대합니다! 등록하거나 연결하여 액세스",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "감사합니다",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "나를 지지하고 격려하는 크리스텔.",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "응용 프로그램과 그들의 사랑스러운 피드백을 사용하는 Christel의 밴드.",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "길에서 저를 도와주신 모든 분들께 진심으로 감사드립니다.",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "아이디어 공유를 위한 Ismail.",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "이 멋진 그래픽과 아이콘을 디자인하는 Lounes.",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "사이먼은 비범한 탐험가가 되어 많은 단서를 찾아냅니다.",
+  "__BodyTogh.welcome": "Welcome to Togh",
+  "BodyTogh.welcome": "Togh에 오신 것을 환영합니다",
+  "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample": "학교에서 팟럭? 친구들과 바베큐? m에서 가족과 함께 여행? 며칠? 이것은 이벤트입니다.",
+  "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation": "Togh는 이벤트를 관리하는 응용 프로그램입니다. 학교에서 팟럭? 친구들과 바베큐? m에서 가족과 함께 여행? 며칠? 이것은 이벤트입니다. 하나의 이벤트에서 참가자를 구성하고, 작업 및 쇼핑 목록을 등록하고, 주소를 제공하고, 도로 여행 단계를 지정합니다. 참가자에게 설문 조사를 요청할 수 있습니다. 할리우드 빌딩을 방문하는 것을 선호합니까, 아니면 그리피스 천문대를 방문하는 것을 선호합니까 (폴은 둘 다 방문하고 싶어합니까!)지도에 여정을 시각화하십시오. 비용을 계산하십시오. Togh는 누가 누가 소유하는지 말할 것입니다.",
 
   "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
   "BodyTogh.whatisToghPossibility" : "하나의 이벤트에서 참가자를 구성하고, 작업 및 쇼핑 목록을 등록하고, 주소를 제공하고, 도로 여행 단계를 지정합니다. 참가자에게 설문 조사를 요청할 수 있습니다. 할리우드 빌딩을 방문하는 것을 선호합니까, 아니면 그리피스 천문대를 방문하는 것을 선호합니까 (폴은 둘 다 방문하고 싶어합니까!)지도에 여정을 시각화하십시오. 비용을 계산하십시오. Togh는 누가 누가 소유하는지 말할 것입니다.",
@@ -532,36 +537,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "역할",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "관찰자",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "조직자",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "참가자",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "상태",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "적극적인 참가자",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "참가자가 이벤트를 떠났습니다.",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "초대 된 참가자 : 지금은 확인이 수신되지 않습니다. ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "이 이벤트에 사용 된 통화",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "신청",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "이벤트에 대한 모든 환경 설정 지정",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "관찰자",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "조직자",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "참가자",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "다시 보내기",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "상태",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "적극적인 참가자",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "참가자가 이벤트를 떠났습니다.",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "클립보드의 URL을 복사합니다. 붙여넣고 다이렉트 이메일에 사용",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "초대 된 참가자 : 지금은 확인이 수신되지 않습니다. ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇ",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "URL",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "보낸 사람 메시지에서 내 이메일 사용",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "이메일 오류",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "이메일이 전송됨",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "이 이벤트에 사용 된 통화",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "신청",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "이벤트에 대한 모든 환경 설정 지정",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "우선권",
@@ -642,16 +649,13 @@
   "EventShoppingList.What" : "뭐",
 
   "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "WHO",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "목록에 새 항목 추가",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "이 항목 제거",
-
-  "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "Actif",
+  "EventShoppingList.Who": "WHO",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "목록에 새 항목 추가",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "이 항목 제거",
+  "__EventState.Actif": "Actif",
+  "EventState.Actif": "Actif",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "취소 된",
   "__EventState.Done": "Done",
@@ -679,15 +683,12 @@
   "EventSurvey.Closed": "닫은",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "기술",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "준비 중",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "진행 중",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "이벤트에서 허용되는 선택의 한계에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "준비 중",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "진행 중",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "이벤트에서 허용되는 선택의 한계에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
 
   "EventSurvey.MainTitleSurveyList" : "서베이",
 
@@ -850,16 +851,13 @@
   "EventTaskList.Who" : "WHO",
 
   "__EventTaskList.addItem" : "Add a task in the list",
-  "EventTaskList.addItem" : "목록에 새 항목 추가",
-
-  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
-  "Eventitinerary.CantRemoveStep" : "단계를 제거 할 수 없습니다.",
-
-  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
-  "Eventitinerary.CantremoveItem" : "단계를 제거 할 수 없습니다.",
-
-  "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "단계 제거",
+  "EventTaskList.addItem": "목록에 새 항목 추가",
+  "__Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "Eventitinerary.CantRemoveStep": "단계를 제거 할 수 없습니다.",
+  "__Eventitinerary.CantremoveItem": "The step can't be removed",
+  "Eventitinerary.CantremoveItem": "단계를 제거 할 수 없습니다.",
+  "__Eventitinerary.RemovingStep": "Removing a step",
+  "Eventitinerary.RemovingStep": "단계 제거",
   "__Eventitinerary.StepRemoved": "The step is removed",
   "Eventitinerary.StepRemoved": "단계가 제거되었습니다.",
   "__EventsList.AllEvents": "All events",
@@ -972,16 +970,13 @@
   "__Login.googlelogin": "Login",
   "Login.googlelogin": "로그인",
   "__Login.googlelogout": "Login",
-  "Login.googlelogout" : "로그인",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "로그 아웃",
-
-  "__Login.password" : "Password",
-  "Login.password" : "비밀번호",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-  "Menu.AdmininstratorExplanation" : "관리자 기능.",
+  "Login.googlelogout": "로그인",
+  "__Login.logout": "Logout",
+  "Login.logout": "로그 아웃",
+  "__Login.password": "Password",
+  "Login.password": "비밀번호",
+  "__Menu.AdmininstratorExplanation": "Administrator function.",
+  "Menu.AdmininstratorExplanation": "관리자 기능.",
 
   "__Menu.Administration" : "Administration",
   "Menu.Administration" : "관리",
@@ -1087,17 +1082,13 @@
 
   "__MyProfile.PhoneNumberVisibilityNever" : "Never",
   "MyProfile.PhoneNumberVisibilityNever" : "못",
-
-  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "전화 번호가 전혀 보이지 않습니다.",
-
-  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-  "MyProfile.SearchableExplanation" : "사용자는 검색 기능에서 볼 수 있습니다. 그렇지 않은 경우 초대하는 유일한 방법은 이메일을 명시 적으로 제공하는 것입니다.",
-
-  "__MyProfile.SetANewPassword" : "Set a new password",
-  "MyProfile.SetANewPassword" : "새 비밀번호 설정",
-
-  "__MyProfile.Togh" : "Togh",
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": "전화 번호가 전혀 보이지 않습니다.",
+  "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation": "사용자는 검색 기능에서 볼 수 있습니다. 그렇지 않은 경우 초대하는 유일한 방법은 이메일을 명시 적으로 제공하는 것입니다.",
+  "__MyProfile.SetANewPassword": "Set a new password",
+  "MyProfile.SetANewPassword": "새 비밀번호 설정",
+  "__MyProfile.Togh": "Togh",
   "MyProfile.Togh": "Togh",
   "__MyProfile.URL": "Url",
   "MyProfile.URL": "URL",

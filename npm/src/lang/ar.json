@@ -47,15 +47,12 @@
   "AdminUsers.AllUsers": "جميع المستخدمين",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "ممنوع",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "اكمل الاسم",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "متصل",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "المستخدم حاليا",
+  "__AdminUsers.CompleteName": "Complete Name",
+  "AdminUsers.CompleteName": "اكمل الاسم",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "متصل",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "المستخدم حاليا",
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "المستخدم متصل",
@@ -173,24 +170,32 @@
 
   "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
   "AskPassword.ToSmalPassword" : "أدخل 3 أحرف على الأقل لكلمة المرور",
-
-  "__BodyTogh.ResetYourPassword" : "Reset your password",
-  "BodyTogh.ResetYourPassword" : "اعد ضبط كلمه السر",
-
-  "__BodyTogh.ThankYou" : "Thank you!",
-  "BodyTogh.ThankYou" : "شكرا لك!",
-
-  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-  "BodyTogh.YouAreInvited" : "أنت مدعو إلى حدث! قم بالتسجيل أو الاتصال للوصول إليه",
-
-  "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "مرحبا بكم في طوق د",
-
-  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-  "BodyTogh.whatisToghExample" : "الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث.",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
-  "BodyTogh.whatisToghExplanation" : "توغ هو تطبيق لإدارة الحدث الخاص بك. الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث. في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
+  "__BodyTogh.ResetYourPassword": "Reset your password",
+  "BodyTogh.ResetYourPassword": "اعد ضبط كلمه السر",
+  "__BodyTogh.ThankYou": "Thank you!",
+  "BodyTogh.ThankYou": "شكرا لك!",
+  "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited": "أنت مدعو إلى حدث! قم بالتسجيل أو الاتصال للوصول إليه",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "شكرا لك",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "كريستل لدعمني وتشجيعي.",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "فرقة كريستل لاستخدام التطبيق وعلى ملاحظاتهم الجميلة.",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "شكراً جزيلاً لكل من ساعدني على الطريق.",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "اسماعيل لتبادل الافكار.",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "Lounes لتصميم هذه الرسومات والأيقونات الرائعة.",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "سيمون ، ليكون استكشافيًا استثنائيًا ويكتشف الكثير من القرائن.",
+  "__BodyTogh.welcome": "Welcome to Togh",
+  "BodyTogh.welcome": "مرحبا بكم في طوق د",
+  "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample": "الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث.",
+  "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation": "توغ هو تطبيق لإدارة الحدث الخاص بك. الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث. في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
 
   "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
   "BodyTogh.whatisToghPossibility" : "في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
@@ -518,36 +523,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "دور",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "مراقب",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "منظم",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "مشارك",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "حالة",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "مشارك نشط",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "غادر المشارك الحدث",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "المشارك المدعو: لم يتم استلام أي تأكيد في هذه اللحظة",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "العملة المستخدمة في هذا الحدث",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "الاشتراك",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "قم بإعداد كل التفضيلات لهذا الحدث",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "مراقب",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "منظم",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "مشارك",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "أعد الإرسال",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "حالة",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "مشارك نشط",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "غادر المشارك الحدث",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "انسخ عنوان URL في الحافظة الخاصة بك. لصقه واستخدمه في بريد إلكتروني مباشر",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "المشارك المدعو: لم يتم استلام أي تأكيد في هذه اللحظة",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "عنوان Url",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "استخدم بريدي الإلكتروني في الرسالة من",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "خطأ في البريد الإلكتروني",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "أرسل البريد الإلكتروني",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "العملة المستخدمة في هذا الحدث",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "الاشتراك",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "قم بإعداد كل التفضيلات لهذا الحدث",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "الأفضلية",
@@ -620,17 +627,13 @@
 
   "__EventShoppingList.What" : "What",
   "EventShoppingList.What" : "ماذا او ما",
-
-  "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "متى",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "إضافة عنصر جديد في القائمة",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "أزل هذا البند",
-
-  "__EventState.Actif" : "Actif",
+  "__EventShoppingList.Who": "Who",
+  "EventShoppingList.Who": "متى",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "إضافة عنصر جديد في القائمة",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "أزل هذا البند",
+  "__EventState.Actif": "Actif",
   "EventState.Actif": "أكتيف",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "ألغيت",
@@ -658,15 +661,12 @@
   "EventSurvey.Closed": "مغلق",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "وصف",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "قيد التحضير",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "في تقدم",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "تصل إلى حد الاختيار المسموح به في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "قيد التحضير",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "في تقدم",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "تصل إلى حد الاختيار المسموح به في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
 
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "هذا المسح قيد الإعداد. لا يمكنك الوصول إليه في الوقت الحالي.",
@@ -811,17 +811,13 @@
 
   "__EventTaskList.Who" : "Who",
   "EventTaskList.Who" : "متى",
-
-  "__EventTaskList.addItem" : "Add a task in the list",
-  "EventTaskList.addItem" : "إضافة عنصر جديد في القائمة",
-
-  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
-  "Eventitinerary.CantRemoveStep" : "لا يمكن إزالة الخطوة",
-
-  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
-  "Eventitinerary.CantremoveItem" : "لا يمكن إزالة الخطوة",
-
-  "__Eventitinerary.RemovingStep" : "Removing a step",
+  "__EventTaskList.addItem": "Add a task in the list",
+  "EventTaskList.addItem": "إضافة عنصر جديد في القائمة",
+  "__Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "Eventitinerary.CantRemoveStep": "لا يمكن إزالة الخطوة",
+  "__Eventitinerary.CantremoveItem": "The step can't be removed",
+  "Eventitinerary.CantremoveItem": "لا يمكن إزالة الخطوة",
+  "__Eventitinerary.RemovingStep": "Removing a step",
   "Eventitinerary.RemovingStep": "إزالة خطوة",
   "__Eventitinerary.StepRemoved": "The step is removed",
   "Eventitinerary.StepRemoved": "تم حذف الخطوة",
@@ -931,15 +927,12 @@
   "Login.googlelogout": "تسجيل الدخول",
   "__Login.logout": "Logout",
   "Login.logout": "تسجيل خروج",
-
-  "__Login.password" : "Password",
-  "Login.password" : "كلمة المرور",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-  "Menu.AdmininstratorExplanation" : "وظيفة المسؤول.",
-
-  "__Menu.Administration" : "Administration",
-  "Menu.Administration" : "إدارة",
+  "__Login.password": "Password",
+  "Login.password": "كلمة المرور",
+  "__Menu.AdmininstratorExplanation": "Administrator function.",
+  "Menu.AdmininstratorExplanation": "وظيفة المسؤول.",
+  "__Menu.Administration": "Administration",
+  "Menu.Administration": "إدارة",
 
   "__Menu.Events" : "Events",
   "Menu.Events" : "الأحداث",
@@ -1042,17 +1035,13 @@
 
   "__MyProfile.PhoneNumberVisibilityNever" : "Never",
   "MyProfile.PhoneNumberVisibilityNever" : "مطلقا",
-
-  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "رقم هاتفك غير مرئي على الإطلاق.",
-
-  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-  "MyProfile.SearchableExplanation" : "يمكن أن يكون المستخدم الخاص بك مرئيًا في وظيفة البحث. إذا لم يكن الأمر كذلك ، فإن الطريقة الوحيدة لدعوتك هي إرسال بريدك الإلكتروني بشكل صريح.",
-
-  "__MyProfile.SetANewPassword" : "Set a new password",
-  "MyProfile.SetANewPassword" : "قم بتعيين كلمة مرور جديدة",
-
-  "__MyProfile.Togh" : "Togh",
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": "رقم هاتفك غير مرئي على الإطلاق.",
+  "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation": "يمكن أن يكون المستخدم الخاص بك مرئيًا في وظيفة البحث. إذا لم يكن الأمر كذلك ، فإن الطريقة الوحيدة لدعوتك هي إرسال بريدك الإلكتروني بشكل صريح.",
+  "__MyProfile.SetANewPassword": "Set a new password",
+  "MyProfile.SetANewPassword": "قم بتعيين كلمة مرور جديدة",
+  "__MyProfile.Togh": "Togh",
   "MyProfile.Togh": "توغ",
   "__MyProfile.URL": "Url",
   "MyProfile.URL": "عنوان Url",

@@ -203,6 +203,27 @@
   "BodyTogh.YouAreInvited": {
     "defaultMessage": "You are invited to an event! Register or Connect to access it"
   },
+  "BodyTogh.thankYou": {
+    "defaultMessage": "Thank you"
+  },
+  "BodyTogh.thankYouChristel": {
+    "defaultMessage": "Christel to support and encourage me."
+  },
+  "BodyTogh.thankYouChristelBand": {
+    "defaultMessage": "Christel's band to use the application and for their lovely feedback."
+  },
+  "BodyTogh.thankYouIntroduction": {
+    "defaultMessage": "Big thank you to everybody who helps me on the road."
+  },
+  "BodyTogh.thankYouIsmail": {
+    "defaultMessage": "Ismail for sharing ideas."
+  },
+  "BodyTogh.thankYouLounes": {
+    "defaultMessage": "Lounes to design these awesome graphics and icons."
+  },
+  "BodyTogh.thankYouSimon": {
+    "defaultMessage": "Simon, to be an extraordinary exploratory and figure out a lot of clues."
+  },
   "BodyTogh.welcome": {
     "defaultMessage": "Welcome to Togh"
   },
@@ -518,6 +539,9 @@
   "EventParticipant.RoleParticipant": {
     "defaultMessage": "Participant"
   },
+  "EventParticipant.SendAgainInvitation": {
+    "defaultMessage": "Send again"
+  },
   "EventParticipant.Status": {
     "defaultMessage": "Status"
   },
@@ -527,8 +551,23 @@
   "EventParticipant.TitleLeft": {
     "defaultMessage": "The participant left the event"
   },
+  "EventParticipant.TitleUrlInvitation": {
+    "defaultMessage": "Copy the URL in your clipboard. Paste it and Use it in a direct email"
+  },
   "EventParticipant.Titleinvited": {
     "defaultMessage": "Invited participant: no confirmation is received at this moment"
+  },
+  "EventParticipant.UrlInvitation": {
+    "defaultMessage": "Url"
+  },
+  "EventParticipant.UseMyEmailAsFrom": {
+    "defaultMessage": "Use my email in the From message"
+  },
+  "EventParticipants.EmailSentError": {
+    "defaultMessage": "Email error"
+  },
+  "EventParticipants.EmailSentOk": {
+    "defaultMessage": "Email sent"
   },
   "EventPreferences.CurrencyOnEvent": {
     "defaultMessage": "Currency used in this event"

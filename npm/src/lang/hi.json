@@ -48,15 +48,12 @@
   "AdminUsers.AllUsers": "सभी उपयोगकर्ता",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "अवरोधित",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "पूरा नाम",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "जुड़े हुए",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "उपयोगकर्ता ऑफ़लाइन",
+  "__AdminUsers.CompleteName": "Complete Name",
+  "AdminUsers.CompleteName": "पूरा नाम",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "जुड़े हुए",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "उपयोगकर्ता ऑफ़लाइन",
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "उपयोगकर्ता जुड़ा हुआ है",
@@ -174,24 +171,32 @@
 
   "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
   "AskPassword.ToSmalPassword" : "पासवर्ड के लिए कम से कम 3 अक्षर दें",
-
-  "__BodyTogh.ResetYourPassword" : "Reset your password",
-  "BodyTogh.ResetYourPassword" : "अपना पासवर्ड रीसेट करें",
-
-  "__BodyTogh.ThankYou" : "Thank you!",
-  "BodyTogh.ThankYou" : "शुक्रिया!",
-
-  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-  "BodyTogh.YouAreInvited" : "आपको एक कार्यक्रम में आमंत्रित किया गया है! इसे एक्सेस करने के लिए रजिस्टर या कनेक्ट करें",
-
-  "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "तोगड़ में आपका स्वागत है",
-
-  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-  "BodyTogh.whatisToghExample" : "स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है।",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
-  "BodyTogh.whatisToghExplanation" : "Togh अपने कार्यक्रम का प्रबंधन करने के लिए एक आवेदन पत्र है। स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है। एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
+  "__BodyTogh.ResetYourPassword": "Reset your password",
+  "BodyTogh.ResetYourPassword": "अपना पासवर्ड रीसेट करें",
+  "__BodyTogh.ThankYou": "Thank you!",
+  "BodyTogh.ThankYou": "शुक्रिया!",
+  "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited": "आपको एक कार्यक्रम में आमंत्रित किया गया है! इसे एक्सेस करने के लिए रजिस्टर या कनेक्ट करें",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "शुक्रिया",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "मुझे समर्थन और प्रोत्साहित करने के लिए क्रिस्टेल।",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "एप्लिकेशन का उपयोग करने और उनकी प्यारी प्रतिक्रिया के लिए क्रिस्टेल के बैंड।",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "सड़क पर मेरी मदद करने वाले सभी लोगों को बहुत-बहुत धन्यवाद।",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "विचारों को साझा करने के लिए इस्माइल।",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "इन भयानक ग्राफिक्स और आइकनों को डिजाइन करने के लिए लाउंज।",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "साइमन, एक असाधारण खोजकर्ता होने के लिए और बहुत सारे सुरागों का पता लगाने के लिए।",
+  "__BodyTogh.welcome": "Welcome to Togh",
+  "BodyTogh.welcome": "तोगड़ में आपका स्वागत है",
+  "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample": "स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है।",
+  "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation": "Togh अपने कार्यक्रम का प्रबंधन करने के लिए एक आवेदन पत्र है। स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है। एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
 
   "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
   "BodyTogh.whatisToghPossibility" : "एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
@@ -532,36 +537,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "भूमिका",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "देखने वाला",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "व्यवस्था करनेवाला",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "प्रतिभागी",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "स्थिति",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "सक्रिय प्रतिभागी",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "सुभागी ने घटना छोड़ दी",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "आमंत्रित प्रतिभागी: इस समय कोई पुष्टि प्राप्त नहीं हुई है",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "इस घटना में इस्तेमाल की गई मुद्रा",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "अंशदान",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "घटना के लिए सभी वरीयताओं को सेट करें",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "देखने वाला",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "व्यवस्था करनेवाला",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "प्रतिभागी",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "पुनः भेजें",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "स्थिति",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "सक्रिय प्रतिभागी",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "सुभागी ने घटना छोड़ दी",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "अपने क्लिपबोर्ड में URL को कॉपी करें। इसे पेस्ट करें और इसे सीधे ईमेल में इस्तेमाल करें",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "आमंत्रित प्रतिभागी: इस समय कोई पुष्टि प्राप्त नहीं हुई है",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "यूआरएल",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "प्रेषक संदेश में मेरे ईमेल का उपयोग करें",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "ईमेल त्रुटि",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "ईमेल भेजा",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "इस घटना में इस्तेमाल की गई मुद्रा",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "अंशदान",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "घटना के लिए सभी वरीयताओं को सेट करें",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "पसंद",
@@ -642,16 +649,13 @@
   "EventShoppingList.What" : "क्या",
 
   "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "Who",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "सूची में एक नया आइटम जोड़ें",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "इस सामान को हटाओ",
-
-  "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "एक्टिफ",
+  "EventShoppingList.Who": "Who",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "सूची में एक नया आइटम जोड़ें",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "इस सामान को हटाओ",
+  "__EventState.Actif": "Actif",
+  "EventState.Actif": "एक्टिफ",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "रद्द",
   "__EventState.Done": "Done",
@@ -679,15 +683,12 @@
   "EventSurvey.Closed": "बंद किया हुआ",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "विवरण",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "तैयारी में",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "चालू",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "आप घटना में अनुमति दी गई पसंद की सीमा तक पहुंच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "तैयारी में",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "चालू",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "आप घटना में अनुमति दी गई पसंद की सीमा तक पहुंच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
 
   "EventSurvey.MainTitleSurveyList" : "सर्वेक्षण",
 
@@ -850,16 +851,13 @@
   "EventTaskList.Who" : "Who",
 
   "__EventTaskList.addItem" : "Add a task in the list",
-  "EventTaskList.addItem" : "सूची में एक नया आइटम जोड़ें",
-
-  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
-  "Eventitinerary.CantRemoveStep" : "कदम हटाया नहीं जा सकता",
-
-  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
-  "Eventitinerary.CantremoveItem" : "कदम हटाया नहीं जा सकता",
-
-  "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "एक कदम हटाना",
+  "EventTaskList.addItem": "सूची में एक नया आइटम जोड़ें",
+  "__Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "Eventitinerary.CantRemoveStep": "कदम हटाया नहीं जा सकता",
+  "__Eventitinerary.CantremoveItem": "The step can't be removed",
+  "Eventitinerary.CantremoveItem": "कदम हटाया नहीं जा सकता",
+  "__Eventitinerary.RemovingStep": "Removing a step",
+  "Eventitinerary.RemovingStep": "एक कदम हटाना",
   "__Eventitinerary.StepRemoved": "The step is removed",
   "Eventitinerary.StepRemoved": "कदम हटा दिया है",
   "__EventsList.AllEvents": "All events",
@@ -972,16 +970,13 @@
   "__Login.googlelogin": "Login",
   "Login.googlelogin": "लॉग इन करें",
   "__Login.googlelogout": "Login",
-  "Login.googlelogout" : "लॉग इन करें",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "लॉगआउट",
-
-  "__Login.password" : "Password",
-  "Login.password" : "पासवर्ड",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-  "Menu.AdmininstratorExplanation" : "प्रशासक समारोह।",
+  "Login.googlelogout": "लॉग इन करें",
+  "__Login.logout": "Logout",
+  "Login.logout": "लॉगआउट",
+  "__Login.password": "Password",
+  "Login.password": "पासवर्ड",
+  "__Menu.AdmininstratorExplanation": "Administrator function.",
+  "Menu.AdmininstratorExplanation": "प्रशासक समारोह।",
 
   "__Menu.Administration" : "Administration",
   "Menu.Administration" : "शासन प्रबंध",
@@ -1087,17 +1082,13 @@
 
   "__MyProfile.PhoneNumberVisibilityNever" : "Never",
   "MyProfile.PhoneNumberVisibilityNever" : "कभी नहीँ",
-
-  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "आपका फ़ोन नंबर बिल्कुल भी दिखाई नहीं दे रहा है।",
-
-  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-  "MyProfile.SearchableExplanation" : "आपका उपयोगकर्ता खोज फ़ंक्शन में दिखाई दे सकता है। यदि नहीं, तो आपको आमंत्रित करने का एकमात्र तरीका स्पष्ट रूप से अपना ईमेल देना है।",
-
-  "__MyProfile.SetANewPassword" : "Set a new password",
-  "MyProfile.SetANewPassword" : "नया पासवर्ड सेट करें",
-
-  "__MyProfile.Togh" : "Togh",
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": "आपका फ़ोन नंबर बिल्कुल भी दिखाई नहीं दे रहा है।",
+  "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation": "आपका उपयोगकर्ता खोज फ़ंक्शन में दिखाई दे सकता है। यदि नहीं, तो आपको आमंत्रित करने का एकमात्र तरीका स्पष्ट रूप से अपना ईमेल देना है।",
+  "__MyProfile.SetANewPassword": "Set a new password",
+  "MyProfile.SetANewPassword": "नया पासवर्ड सेट करें",
+  "__MyProfile.Togh": "Togh",
   "MyProfile.Togh": "तोग",
   "__MyProfile.URL": "Url",
   "MyProfile.URL": "यूआरएल",

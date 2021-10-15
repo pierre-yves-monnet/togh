@@ -47,8 +47,7 @@
   "AdminUsers.AllUsers": "Alle Nutzer",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "verstopft",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
+  "__AdminUsers.CompleteName": "Complete Name",
   "AdminUsers.CompleteName": "Vollständiger Name",
   "__AdminUsers.Connected": "Connected",
   "AdminUsers.Connected": "In Verbindung gebracht",
@@ -136,6 +135,20 @@
   "BodyTogh.ResetYourPassword": "Setze dein Passwort zurück",
   "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
   "BodyTogh.YouAreInvited": "Sie sind zu einer Veranstaltung eingeladen! Registrieren oder verbinden, um darauf zuzugreifen",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "Dankeschön",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "Christel, mich zu unterstützen und zu ermutigen.",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "Christels Band für die Nutzung der Anwendung und für ihr liebevolles Feedback.",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "Ein großes Dankeschön an alle, die mir auf dem Weg helfen.",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "Ismail für den Austausch von Ideen.",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "Lounes, um diese fantastischen Grafiken und Symbole zu entwerfen.",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "Simon, um ein außergewöhnlicher Entdecker zu sein und viele Hinweise zu finden.",
   "__BodyTogh.welcome": "Welcome to Togh",
   "BodyTogh.welcome": "Willkommen bei Togh D.",
   "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
@@ -172,15 +185,12 @@
   "Event.EndDate": "Endtermin",
   "__Event.EventDate": "Date",
   "Event.EventDate": "Datum",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "Kosten",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "Dieses Datum wird in Ihrer Zeitzone berechnet",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "Geolokalisierung",
+  "__Event.Expense": "Expense",
+  "Event.Expense": "Kosten",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "Dieses Datum wird in Ihrer Zeitzone berechnet",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "Geolokalisierung",
 
   "__Event.Itinerary" : "itinerary",
   "Event.Itinerary" : "Route",
@@ -205,17 +215,13 @@
 
   "__Event.ScopeLimited" : "Limited",
   "Event.ScopeLimited" : "Begrenzt",
-
-  "__Event.ScopeOpen" : "Open",
-  "Event.ScopeOpen" : "Öffnen",
-
-  "__Event.ScopeOpenConfirmation" : "Open on confirmation",
-  "Event.ScopeOpenConfirmation" : "Bei Bestätigung öffnen",
-
-  "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "Geheimnis",
-
-  "__Event.ShoppingList" : "Shopping List",
+  "__Event.ScopeOpen": "Open",
+  "Event.ScopeOpen": "Öffnen",
+  "__Event.ScopeOpenConfirmation": "Open on confirmation",
+  "Event.ScopeOpenConfirmation": "Bei Bestätigung öffnen",
+  "__Event.ScopeSecret": "Secret",
+  "Event.ScopeSecret": "Geheimnis",
+  "__Event.ShoppingList": "Shopping List",
   "Event.ShoppingList": "Einkaufsliste",
   "__Event.StartDate": "Start Date",
   "Event.StartDate": "Anfangsdatum",
@@ -295,15 +301,12 @@
   "EventItinerary.ProvidePeriodDateInEvent": "Wählen Sie ein Start- und ein Enddatum für dieses Ereignis",
   "__EventItinerary.ShowDetail": "Show Detail",
   "EventItinerary.ShowDetail": "Detail anzeigen",
-
-  "__EventItinerary.ShowExpense" : "Show Expense",
-  "EventItinerary.ShowExpense" : "Kosten anzeigen",
-
-  "__EventItinerary.ShowItineraryMap" : "Show itinerary map",
-  "EventItinerary.ShowItineraryMap" : "Reiseroutenkarte anzeigen",
-
-  "__EventItinerary.StepAdded" : "A step is added",
-  "EventItinerary.StepAdded" : "Ein Schritt wird hinzugefügt",
+  "__EventItinerary.ShowExpense": "Show Expense",
+  "EventItinerary.ShowExpense": "Kosten anzeigen",
+  "__EventItinerary.ShowItineraryMap": "Show itinerary map",
+  "EventItinerary.ShowItineraryMap": "Reiseroutenkarte anzeigen",
+  "__EventItinerary.StepAdded": "A step is added",
+  "EventItinerary.StepAdded": "Ein Schritt wird hinzugefügt",
 
   "__EventItineray.Address" : "Address",
   "EventItineray.Address" : "Adresse",
@@ -412,36 +415,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "Rolle",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "Beobachter",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "Veranstalter",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "Teilnehmer",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "Status",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "Aktiver Teilnehmer",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "Der Teilnehmer hat die Veranstaltung verlassen",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "Eingeladener Teilnehmer: Derzeit ist keine Bestätigung eingegangen",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "In diesem Fall verwendete Währung",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "Abonnement",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "Richten Sie alle Einstellungen für das Ereignis ein",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "Beobachter",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "Veranstalter",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "Teilnehmer",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "Erneut senden",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "Status",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "Aktiver Teilnehmer",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "Der Teilnehmer hat die Veranstaltung verlassen",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "Kopieren Sie die URL in Ihre Zwischenablage. Fügen Sie es ein und verwenden Sie es in einer direkten E-Mail",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "Eingeladener Teilnehmer: Derzeit ist keine Bestätigung eingegangen",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "URL",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "Verwenden Sie meine E-Mail in der Von-Nachricht",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "E-Mail-Fehler",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "E-Mail gesendet",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "In diesem Fall verwendete Währung",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "Abonnement",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "Richten Sie alle Einstellungen für das Ereignis ein",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "Präferenz",
@@ -514,17 +519,13 @@
 
   "__EventShoppingList.What" : "What",
   "EventShoppingList.What" : "Was",
-
-  "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "WHO",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "Fügen Sie der Liste ein neues Element hinzu",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "entferne diesen Gegenstand",
-
-  "__EventState.Actif" : "Actif",
+  "__EventShoppingList.Who": "Who",
+  "EventShoppingList.Who": "WHO",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "Fügen Sie der Liste ein neues Element hinzu",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "entferne diesen Gegenstand",
+  "__EventState.Actif": "Actif",
   "EventState.Actif": "Actif",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "Abgebrochen",
@@ -552,15 +553,12 @@
   "EventSurvey.Closed": "geschlossen",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "Beschreibung",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "In Vorbereitung",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "In Bearbeitung",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "Sie erreichen die im Event zulässige Auswahlgrenze. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "In Vorbereitung",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "In Bearbeitung",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "Sie erreichen die im Event zulässige Auswahlgrenze. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
 
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "Diese Umfrage ist in Vorbereitung. Sie können momentan nicht darauf zugreifen.",
@@ -648,17 +646,13 @@
 
   "__EventTaskList.FilterAllStates" : "All states",
   "EventTaskList.FilterAllStates" : "Alle Staaten",
-
-  "__EventTaskList.FilterDone" : "Done",
-  "EventTaskList.FilterDone" : "Getan",
-
-  "__EventTaskList.FilterInProgress" : "In progress",
-  "EventTaskList.FilterInProgress" : "In Bearbeitung",
-
-  "__EventTaskList.FilterMyTasks" : "My tasks",
-  "EventTaskList.FilterMyTasks" : "Meine Aufgaben",
-
-  "__EventTaskList.FilterPlanned" : "Planned",
+  "__EventTaskList.FilterDone": "Done",
+  "EventTaskList.FilterDone": "Getan",
+  "__EventTaskList.FilterInProgress": "In progress",
+  "EventTaskList.FilterInProgress": "In Bearbeitung",
+  "__EventTaskList.FilterMyTasks": "My tasks",
+  "EventTaskList.FilterMyTasks": "Meine Aufgaben",
+  "__EventTaskList.FilterPlanned": "Planned",
   "EventTaskList.FilterPlanned": "Geplant",
   "__EventTaskList.FilterUnaffected": "Unaffected",
   "EventTaskList.FilterUnaffected": "Unberührt",

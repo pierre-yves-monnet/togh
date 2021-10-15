@@ -48,15 +48,12 @@
   "AdminUsers.AllUsers": "Todos os usuários",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "Bloqueado",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "Nome completo",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "Conectado",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "Usuário offline",
+  "__AdminUsers.CompleteName": "Complete Name",
+  "AdminUsers.CompleteName": "Nome completo",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "Conectado",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "Usuário offline",
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "Usuário conectado",
@@ -174,24 +171,32 @@
 
   "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
   "AskPassword.ToSmalPassword" : "Dê no mínimo 3 caracteres para a senha",
-
-  "__BodyTogh.ResetYourPassword" : "Reset your password",
-  "BodyTogh.ResetYourPassword" : "Redefina sua senha",
-
-  "__BodyTogh.ThankYou" : "Thank you!",
-  "BodyTogh.ThankYou" : "Obrigado!",
-
-  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-  "BodyTogh.YouAreInvited" : "Você está convidado para um evento! Registre-se ou conecte-se para acessá-lo",
-
-  "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "Bem-vindo a Togh",
-
-  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-  "BodyTogh.whatisToghExample" : "Potluck com a escola? Churrasco com amigos? Viagem com a família em m? vários dias? Este é um evento.",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
-  "BodyTogh.whatisToghExplanation" : "Togh é um aplicativo para gerenciar seu evento. Potluck com a escola? Churrasco com amigos? Viagem com a família em m? vários dias? Este é um evento. Em um evento, organize os participantes, registre tarefas e lista de compras, dê o endereço, especifique os passos de sua viagem. Você pode perguntar ao participante qualquer pesquisa: eles preferem visitar Hollywood Bld, ou o Observatório Griffith (Paul quer visitar os dois!) Visualize o roteiro no mapa. Calcule despesas. Togh dirá quem é o dono de quem.",
+  "__BodyTogh.ResetYourPassword": "Reset your password",
+  "BodyTogh.ResetYourPassword": "Redefina sua senha",
+  "__BodyTogh.ThankYou": "Thank you!",
+  "BodyTogh.ThankYou": "Obrigado!",
+  "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited": "Você está convidado para um evento! Registre-se ou conecte-se para acessá-lo",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "Obrigado",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "Christel para me apoiar e encorajar.",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "Banda de Christel por usar o aplicativo e por seus comentários adoráveis.",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "Muito obrigado a todos que me ajudam na estrada.",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "Ismail para compartilhar ideias.",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "Lounes para projetar esses gráficos e ícones incríveis.",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "Simon, para ser um explorador extraordinário e descobrir muitas pistas.",
+  "__BodyTogh.welcome": "Welcome to Togh",
+  "BodyTogh.welcome": "Bem-vindo a Togh",
+  "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample": "Potluck com a escola? Churrasco com amigos? Viagem com a família em m? vários dias? Este é um evento.",
+  "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation": "Togh é um aplicativo para gerenciar seu evento. Potluck com a escola? Churrasco com amigos? Viagem com a família em m? vários dias? Este é um evento. Em um evento, organize os participantes, registre tarefas e lista de compras, dê o endereço, especifique os passos de sua viagem. Você pode perguntar ao participante qualquer pesquisa: eles preferem visitar Hollywood Bld, ou o Observatório Griffith (Paul quer visitar os dois!) Visualize o roteiro no mapa. Calcule despesas. Togh dirá quem é o dono de quem.",
 
   "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
   "BodyTogh.whatisToghPossibility" : "Em um evento, organize os participantes, registre tarefas e lista de compras, dê o endereço, especifique os passos de sua viagem. Você pode perguntar ao participante qualquer pesquisa: eles preferem visitar Hollywood Bld, ou o Observatório Griffith (Paul quer visitar os dois!) Visualize o roteiro no mapa. Calcule despesas. Togh dirá quem é o dono de quem.",
@@ -532,36 +537,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "Função",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "Observador",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "Organizador",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "Participante",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "Status",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "Participante ativo",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "O participante saiu do evento",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "Participante convidado: nenhuma confirmação foi recebida no momento",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "Moeda usada neste evento",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "Inscrição",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "Configure todas as preferências para o evento",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "Observador",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "Organizador",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "Participante",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "Envie novamente",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "Status",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "Participante ativo",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "O participante saiu do evento",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "Copie o URL em sua área de transferência. Cole-o e use-o em um e-mail direto",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "Participante convidado: nenhuma confirmação foi recebida no momento",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "Url",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "Use meu e-mail na mensagem De",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "Erro de email",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "Email enviado",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "Moeda usada neste evento",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "Inscrição",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "Configure todas as preferências para o evento",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "Preferência",
@@ -642,16 +649,13 @@
   "EventShoppingList.What" : "O que",
 
   "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "Quem",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "Adicione um novo item na lista",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "Remova este item",
-
-  "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "Actif",
+  "EventShoppingList.Who": "Quem",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "Adicione um novo item na lista",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "Remova este item",
+  "__EventState.Actif": "Actif",
+  "EventState.Actif": "Actif",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "Cancelado",
   "__EventState.Done": "Done",
@@ -679,15 +683,12 @@
   "EventSurvey.Closed": "fechado",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "Descrição",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "Em preparação",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "Em andamento",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "Você atinge o limite de escolha permitido no evento. Vá para o seu perfil para ver a sua assinatura",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "Em preparação",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "Em andamento",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "Você atinge o limite de escolha permitido no evento. Vá para o seu perfil para ver a sua assinatura",
 
   "EventSurvey.MainTitleSurveyList" : "Enquete",
 
@@ -850,16 +851,13 @@
   "EventTaskList.Who" : "Quem",
 
   "__EventTaskList.addItem" : "Add a task in the list",
-  "EventTaskList.addItem" : "Adicione um novo item na lista",
-
-  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
-  "Eventitinerary.CantRemoveStep" : "A etapa não pode ser removida",
-
-  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
-  "Eventitinerary.CantremoveItem" : "A etapa não pode ser removida",
-
-  "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "Removendo uma etapa",
+  "EventTaskList.addItem": "Adicione um novo item na lista",
+  "__Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "Eventitinerary.CantRemoveStep": "A etapa não pode ser removida",
+  "__Eventitinerary.CantremoveItem": "The step can't be removed",
+  "Eventitinerary.CantremoveItem": "A etapa não pode ser removida",
+  "__Eventitinerary.RemovingStep": "Removing a step",
+  "Eventitinerary.RemovingStep": "Removendo uma etapa",
   "__Eventitinerary.StepRemoved": "The step is removed",
   "Eventitinerary.StepRemoved": "A etapa foi removida",
   "__EventsList.AllEvents": "All events",
@@ -972,16 +970,13 @@
   "__Login.googlelogin": "Login",
   "Login.googlelogin": "Conecte-se",
   "__Login.googlelogout": "Login",
-  "Login.googlelogout" : "Conecte-se",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "Logout",
-
-  "__Login.password" : "Password",
-  "Login.password" : "Senha",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-  "Menu.AdmininstratorExplanation" : "Função de administrador.",
+  "Login.googlelogout": "Conecte-se",
+  "__Login.logout": "Logout",
+  "Login.logout": "Logout",
+  "__Login.password": "Password",
+  "Login.password": "Senha",
+  "__Menu.AdmininstratorExplanation": "Administrator function.",
+  "Menu.AdmininstratorExplanation": "Função de administrador.",
 
   "__Menu.Administration" : "Administration",
   "Menu.Administration" : "Administração",
@@ -1087,17 +1082,13 @@
 
   "__MyProfile.PhoneNumberVisibilityNever" : "Never",
   "MyProfile.PhoneNumberVisibilityNever" : "Nunca",
-
-  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "Seu número de telefone não está visível.",
-
-  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-  "MyProfile.SearchableExplanation" : "Seu usuário pode estar visível na função de pesquisa. Caso contrário, a única maneira de convidá-lo é dando seu e-mail explicitamente.",
-
-  "__MyProfile.SetANewPassword" : "Set a new password",
-  "MyProfile.SetANewPassword" : "Defina uma nova senha",
-
-  "__MyProfile.Togh" : "Togh",
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": "Seu número de telefone não está visível.",
+  "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation": "Seu usuário pode estar visível na função de pesquisa. Caso contrário, a única maneira de convidá-lo é dando seu e-mail explicitamente.",
+  "__MyProfile.SetANewPassword": "Set a new password",
+  "MyProfile.SetANewPassword": "Defina uma nova senha",
+  "__MyProfile.Togh": "Togh",
   "MyProfile.Togh": "Togh",
   "__MyProfile.URL": "Url",
   "MyProfile.URL": "Url",

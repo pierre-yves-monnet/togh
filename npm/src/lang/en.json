@@ -47,15 +47,12 @@
   "AdminUsers.AllUsers": "All Users",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "Blocked",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "Complete Name",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "Connected",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "User offline",
+  "__AdminUsers.CompleteName": "Complete Name",
+  "AdminUsers.CompleteName": "Complete Name",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "Connected",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "User offline",
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "User connected",
@@ -173,24 +170,32 @@
 
   "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
   "AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
-
-  "__BodyTogh.ResetYourPassword" : "Reset your password",
-  "BodyTogh.ResetYourPassword" : "Reset your password",
-
-  "__BodyTogh.ThankYou" : "Thank you!",
-  "BodyTogh.ThankYou" : "Thank you!",
-
-  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-  "BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-
-  "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "Welcome to Togh",
-
-  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-  "BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
-  "BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
+  "__BodyTogh.ResetYourPassword": "Reset your password",
+  "BodyTogh.ResetYourPassword": "Reset your password",
+  "__BodyTogh.ThankYou": "Thank you!",
+  "BodyTogh.ThankYou": "Thank you!",
+  "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "Thank you",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "__BodyTogh.welcome": "Welcome to Togh",
+  "BodyTogh.welcome": "Welcome to Togh",
+  "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
 
   "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
   "BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
@@ -518,36 +523,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "Role",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "Observer",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "Organizer",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "Participant",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "Status",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "Active participant",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "The participant left the event",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "Subscription",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "Set up all preferences for the event",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "Observer",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "Organizer",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "Participant",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "Send again",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "Status",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "Active participant",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "The participant left the event",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "Url",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "Email error",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "Email sent",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "Subscription",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "Set up all preferences for the event",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "Preference",
@@ -620,17 +627,13 @@
 
   "__EventShoppingList.What" : "What",
   "EventShoppingList.What" : "What",
-
-  "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "Who",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "Add a new item in the list",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "Remove this item",
-
-  "__EventState.Actif" : "Actif",
+  "__EventShoppingList.Who": "Who",
+  "EventShoppingList.Who": "Who",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "Add a new item in the list",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "Remove this item",
+  "__EventState.Actif": "Actif",
   "EventState.Actif": "Actif",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "Cancelled",
@@ -658,15 +661,12 @@
   "EventSurvey.Closed": "closed",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "Description",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "In preparation",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "In progress",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "In preparation",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "In progress",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
 
   "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
   "EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
@@ -811,17 +811,13 @@
 
   "__EventTaskList.Who" : "Who",
   "EventTaskList.Who" : "Who",
-
-  "__EventTaskList.addItem" : "Add a task in the list",
-  "EventTaskList.addItem" : "Add a new item in the list",
-
-  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
-  "Eventitinerary.CantRemoveStep" : "The step can't be removed",
-
-  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
-  "Eventitinerary.CantremoveItem" : "The step can't be removed",
-
-  "__Eventitinerary.RemovingStep" : "Removing a step",
+  "__EventTaskList.addItem": "Add a task in the list",
+  "EventTaskList.addItem": "Add a new item in the list",
+  "__Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "__Eventitinerary.CantremoveItem": "The step can't be removed",
+  "Eventitinerary.CantremoveItem": "The step can't be removed",
+  "__Eventitinerary.RemovingStep": "Removing a step",
   "Eventitinerary.RemovingStep": "Removing a step",
   "__Eventitinerary.StepRemoved": "The step is removed",
   "Eventitinerary.StepRemoved": "The step is removed",
@@ -931,15 +927,12 @@
   "Login.googlelogout": "Login",
   "__Login.logout": "Logout",
   "Login.logout": "Logout",
-
-  "__Login.password" : "Password",
-  "Login.password" : "Password",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-  "Menu.AdmininstratorExplanation" : "Administrator function.",
-
-  "__Menu.Administration" : "Administration",
-  "Menu.Administration" : "Administration",
+  "__Login.password": "Password",
+  "Login.password": "Password",
+  "__Menu.AdmininstratorExplanation": "Administrator function.",
+  "Menu.AdmininstratorExplanation": "Administrator function.",
+  "__Menu.Administration": "Administration",
+  "Menu.Administration": "Administration",
 
   "__Menu.Events" : "Events",
   "Menu.Events" : "Events",
@@ -1042,17 +1035,13 @@
 
   "__MyProfile.PhoneNumberVisibilityNever" : "Never",
   "MyProfile.PhoneNumberVisibilityNever" : "Never",
-
-  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-
-  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-  "MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-
-  "__MyProfile.SetANewPassword" : "Set a new password",
-  "MyProfile.SetANewPassword" : "Set a new password",
-
-  "__MyProfile.Togh" : "Togh",
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "__MyProfile.SetANewPassword": "Set a new password",
+  "MyProfile.SetANewPassword": "Set a new password",
+  "__MyProfile.Togh": "Togh",
   "MyProfile.Togh": "Togh",
   "__MyProfile.URL": "Url",
   "MyProfile.URL": "Url",

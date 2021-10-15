@@ -48,15 +48,12 @@
   "AdminUsers.AllUsers": "全てのユーザー",
   "__AdminUsers.Blocked": "Blocked",
   "AdminUsers.Blocked": "ブロックされた",
-
-  "__AdminUsers.CompleteName" : "Complete Name",
-  "AdminUsers.CompleteName" : "完全な名前",
-
-  "__AdminUsers.Connected" : "Connected",
-  "AdminUsers.Connected" : "接続済み",
-
-  "__AdminUsers.ConnectedOffline" : "User offline",
-  "AdminUsers.ConnectedOffline" : "オフラインのユーザー",
+  "__AdminUsers.CompleteName": "Complete Name",
+  "AdminUsers.CompleteName": "完全な名前",
+  "__AdminUsers.Connected": "Connected",
+  "AdminUsers.Connected": "接続済み",
+  "__AdminUsers.ConnectedOffline": "User offline",
+  "AdminUsers.ConnectedOffline": "オフラインのユーザー",
 
   "__AdminUsers.ConnectedOnLine" : "User connected",
   "AdminUsers.ConnectedOnLine" : "ユーザー接続",
@@ -174,24 +171,32 @@
 
   "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
   "AskPassword.ToSmalPassword" : "パスワードには最低3文字を入力してください",
-
-  "__BodyTogh.ResetYourPassword" : "Reset your password",
-  "BodyTogh.ResetYourPassword" : "あなたのパスワードをリセット",
-
-  "__BodyTogh.ThankYou" : "Thank you!",
-  "BodyTogh.ThankYou" : "ありがとうございました！",
-
-  "__BodyTogh.YouAreInvited" : "You are invited to an event! Register or Connect to access it",
-  "BodyTogh.YouAreInvited" : "あなたはイベントに招待されています！登録または接続してアクセスします",
-
-  "__BodyTogh.welcome" : "Welcome to Togh",
-  "BodyTogh.welcome" : "Welcome to Togh",
-
-  "__BodyTogh.whatisToghExample" : "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
-  "BodyTogh.whatisToghExample" : "学校で持ち寄り？友達とバーベキュー？ mで家族とのロードトリップ？複数日？これはイベントです。",
-
-  "__BodyTogh.whatisToghExplanation" : "Togh is an application to manage your event.",
-  "BodyTogh.whatisToghExplanation" : "Toghは、イベントを管理するためのアプリケーションです。学校で持ち寄り？友達とバーベキュー？ mで家族とのロードトリップ？複数日？これはイベントです。 1つのイベントでは、参加者を整理し、タスクとショッピングリストを登録し、住所を指定し、ロードトリップの手順を指定します。参加者に調査を依頼することができます。彼らはハリウッド大通りを訪問することを好むのか、それともグリフィス天文台を訪問することを好むのか（ポールは両方を訪問したいのです！）地図上で旅程を視覚化します。費用を計算します。 Toghは、誰が誰を所有しているかを教えてくれます。",
+  "__BodyTogh.ResetYourPassword": "Reset your password",
+  "BodyTogh.ResetYourPassword": "あなたのパスワードをリセット",
+  "__BodyTogh.ThankYou": "Thank you!",
+  "BodyTogh.ThankYou": "ありがとうございました！",
+  "__BodyTogh.YouAreInvited": "You are invited to an event! Register or Connect to access it",
+  "BodyTogh.YouAreInvited": "あなたはイベントに招待されています！登録または接続してアクセスします",
+  "__BodyTogh.thankYou": "Thank you",
+  "BodyTogh.thankYou": "ありがとうございました",
+  "__BodyTogh.thankYouChristel": "Christel to support and encourage me.",
+  "BodyTogh.thankYouChristel": "クリステルは私をサポートし、励ましてくれます。",
+  "__BodyTogh.thankYouChristelBand": "Christel's band to use the application and for their lovely feedback.",
+  "BodyTogh.thankYouChristelBand": "Christelのバンドは、アプリケーションを使用し、彼らの素敵なフィードバックを求めています。",
+  "__BodyTogh.thankYouIntroduction": "Big thank you to everybody who helps me on the road.",
+  "BodyTogh.thankYouIntroduction": "旅先で私を助けてくれた皆さん、本当にありがとうございました。",
+  "__BodyTogh.thankYouIsmail": "Ismail for sharing ideas.",
+  "BodyTogh.thankYouIsmail": "アイデアを共有するためのIsmail。",
+  "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
+  "BodyTogh.thankYouLounes": "これらの素晴らしいグラフィックとアイコンをデザインするためのLounes。",
+  "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
+  "BodyTogh.thankYouSimon": "サイモン、並外れた探索的であり、多くの手がかりを理解すること。",
+  "__BodyTogh.welcome": "Welcome to Togh",
+  "BodyTogh.welcome": "Welcome to Togh",
+  "__BodyTogh.whatisToghExample": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event.",
+  "BodyTogh.whatisToghExample": "学校で持ち寄り？友達とバーベキュー？ mで家族とのロードトリップ？複数日？これはイベントです。",
+  "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
+  "BodyTogh.whatisToghExplanation": "Toghは、イベントを管理するためのアプリケーションです。学校で持ち寄り？友達とバーベキュー？ mで家族とのロードトリップ？複数日？これはイベントです。 1つのイベントでは、参加者を整理し、タスクとショッピングリストを登録し、住所を指定し、ロードトリップの手順を指定します。参加者に調査を依頼することができます。彼らはハリウッド大通りを訪問することを好むのか、それともグリフィス天文台を訪問することを好むのか（ポールは両方を訪問したいのです！）地図上で旅程を視覚化します。費用を計算します。 Toghは、誰が誰を所有しているかを教えてくれます。",
 
   "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
   "BodyTogh.whatisToghPossibility" : "1つのイベントでは、参加者を整理し、タスクとショッピングリストを登録し、住所を指定し、ロードトリップの手順を指定します。参加者に調査を依頼することができます。彼らはハリウッド大通りを訪れることを好むのか、それともグリフィス天文台を訪れることを好むのか（ポールは両方を訪れたいのです！）地図上で旅程を視覚化します。費用を計算します。 Toghは、誰が誰を所有しているかを教えてくれます。",
@@ -532,36 +537,38 @@
 
   "__EventParticipant.Role" : "Role",
   "EventParticipant.Role" : "役割",
-
-  "__EventParticipant.RoleObserver" : "Observer",
-  "EventParticipant.RoleObserver" : "観察者",
-
-  "__EventParticipant.RoleOrganizer" : "Organizer",
-  "EventParticipant.RoleOrganizer" : "主催者",
-
-  "__EventParticipant.RoleParticipant" : "Participant",
-  "EventParticipant.RoleParticipant" : "参加者",
-
-  "__EventParticipant.Status" : "Status",
-  "EventParticipant.Status" : "状態",
-
-  "__EventParticipant.TitleActiveParticipant" : "Active participant",
-  "EventParticipant.TitleActiveParticipant" : "アクティブな参加者",
-
-  "__EventParticipant.TitleLeft" : "The participant left the event",
-  "EventParticipant.TitleLeft" : "参加者はイベントを去りました",
-
-  "__EventParticipant.Titleinvited" : "Invited participant: no confirmation is received at this moment",
-  "EventParticipant.Titleinvited" : "招待された参加者：現時点では確認は受信されていません",
-
-  "__EventPreferences.CurrencyOnEvent" : "Currency used in this event",
-  "EventPreferences.CurrencyOnEvent" : "このイベントで使用される通貨",
-
-  "__EventPreferences.EventSubscription" : "Subscription",
-  "EventPreferences.EventSubscription" : "サブスクリプション",
-
-  "__EventPreferences.ExpenseTip" : "Set up all preferences for the event",
-  "EventPreferences.ExpenseTip" : "イベントのすべての設定を設定します",
+  "__EventParticipant.RoleObserver": "Observer",
+  "EventParticipant.RoleObserver": "観察者",
+  "__EventParticipant.RoleOrganizer": "Organizer",
+  "EventParticipant.RoleOrganizer": "主催者",
+  "__EventParticipant.RoleParticipant": "Participant",
+  "EventParticipant.RoleParticipant": "参加者",
+  "__EventParticipant.SendAgainInvitation": "Send again",
+  "EventParticipant.SendAgainInvitation": "もう一度送信",
+  "__EventParticipant.Status": "Status",
+  "EventParticipant.Status": "状態",
+  "__EventParticipant.TitleActiveParticipant": "Active participant",
+  "EventParticipant.TitleActiveParticipant": "アクティブな参加者",
+  "__EventParticipant.TitleLeft": "The participant left the event",
+  "EventParticipant.TitleLeft": "参加者はイベントを去りました",
+  "__EventParticipant.TitleUrlInvitation": "Copy the URL in your clipboard. Paste it and Use it in a direct email",
+  "EventParticipant.TitleUrlInvitation": "クリップボードにURLをコピーします。貼り付けて直接メールで使用する",
+  "__EventParticipant.Titleinvited": "Invited participant: no confirmation is received at this moment",
+  "EventParticipant.Titleinvited": "招待された参加者：現時点では確認は受信されていません",
+  "__EventParticipant.UrlInvitation": "Url",
+  "EventParticipant.UrlInvitation": "URL",
+  "__EventParticipant.UseMyEmailAsFrom": "Use my email in the From message",
+  "EventParticipant.UseMyEmailAsFrom": "Fromメッセージで私のメールアドレスを使用してください",
+  "__EventParticipants.EmailSentError": "Email error",
+  "EventParticipants.EmailSentError": "メールエラー",
+  "__EventParticipants.EmailSentOk": "Email sent",
+  "EventParticipants.EmailSentOk": "送信された電子メール",
+  "__EventPreferences.CurrencyOnEvent": "Currency used in this event",
+  "EventPreferences.CurrencyOnEvent": "このイベントで使用される通貨",
+  "__EventPreferences.EventSubscription": "Subscription",
+  "EventPreferences.EventSubscription": "サブスクリプション",
+  "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
+  "EventPreferences.ExpenseTip": "イベントのすべての設定を設定します",
 
   "__EventPreferences.MainTitlePreferences" : "Preferences",
   "EventPreferences.MainTitlePreferences" : "好み",
@@ -642,16 +649,13 @@
   "EventShoppingList.What" : "何",
 
   "__EventShoppingList.Who" : "Who",
-  "EventShoppingList.Who" : "WHO",
-
-  "__EventShoppingList.addItem" : "Add a new item in the list",
-  "EventShoppingList.addItem" : "リストに新しいアイテムを追加します",
-
-  "__EventShoppingList.removeItem" : "Remove this item",
-  "EventShoppingList.removeItem" : "このアイテムを削除します",
-
-  "__EventState.Actif" : "Actif",
-  "EventState.Actif" : "Actif",
+  "EventShoppingList.Who": "WHO",
+  "__EventShoppingList.addItem": "Add a new item in the list",
+  "EventShoppingList.addItem": "リストに新しいアイテムを追加します",
+  "__EventShoppingList.removeItem": "Remove this item",
+  "EventShoppingList.removeItem": "このアイテムを削除します",
+  "__EventState.Actif": "Actif",
+  "EventState.Actif": "Actif",
   "__EventState.Cancelled": "Cancelled",
   "EventState.Cancelled": "キャンセル",
   "__EventState.Done": "Done",
@@ -679,15 +683,12 @@
   "EventSurvey.Closed": "閉まっている",
   "__EventSurvey.Description": "Description",
   "EventSurvey.Description": "説明",
-
-  "__EventSurvey.InPreparation" : "In preparation",
-  "EventSurvey.InPreparation" : "準備中",
-
-  "__EventSurvey.InProgress" : "In progress",
-  "EventSurvey.InProgress" : "進行中",
-
-  "__EventSurvey.LimitSubsscription" : "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
-  "EventSurvey.LimitSubsscription" : "イベントで許可されている選択の制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
+  "__EventSurvey.InPreparation": "In preparation",
+  "EventSurvey.InPreparation": "準備中",
+  "__EventSurvey.InProgress": "In progress",
+  "EventSurvey.InProgress": "進行中",
+  "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
+  "EventSurvey.LimitSubsscription": "イベントで許可されている選択の制限に達しました。プロフィールに移動して、サブスクリプションを確認してください",
 
   "EventSurvey.MainTitleSurveyList" : "調査",
 
@@ -850,16 +851,13 @@
   "EventTaskList.Who" : "WHO",
 
   "__EventTaskList.addItem" : "Add a task in the list",
-  "EventTaskList.addItem" : "リストに新しいアイテムを追加します",
-
-  "__Eventitinerary.CantRemoveStep" : "The step can't be removed",
-  "Eventitinerary.CantRemoveStep" : "ステップを削除できません",
-
-  "__Eventitinerary.CantremoveItem" : "The step can't be removed",
-  "Eventitinerary.CantremoveItem" : "ステップを削除できません",
-
-  "__Eventitinerary.RemovingStep" : "Removing a step",
-  "Eventitinerary.RemovingStep" : "ステップの削除",
+  "EventTaskList.addItem": "リストに新しいアイテムを追加します",
+  "__Eventitinerary.CantRemoveStep": "The step can't be removed",
+  "Eventitinerary.CantRemoveStep": "ステップを削除できません",
+  "__Eventitinerary.CantremoveItem": "The step can't be removed",
+  "Eventitinerary.CantremoveItem": "ステップを削除できません",
+  "__Eventitinerary.RemovingStep": "Removing a step",
+  "Eventitinerary.RemovingStep": "ステップの削除",
   "__Eventitinerary.StepRemoved": "The step is removed",
   "Eventitinerary.StepRemoved": "ステップが削除されます",
   "__EventsList.AllEvents": "All events",
@@ -972,16 +970,13 @@
   "__Login.googlelogin": "Login",
   "Login.googlelogin": "ログイン",
   "__Login.googlelogout": "Login",
-  "Login.googlelogout" : "ログイン",
-
-  "__Login.logout" : "Logout",
-  "Login.logout" : "Logout",
-
-  "__Login.password" : "Password",
-  "Login.password" : "パスワード",
-
-  "__Menu.AdmininstratorExplanation" : "Administrator function.",
-  "Menu.AdmininstratorExplanation" : "管理者機能。",
+  "Login.googlelogout": "ログイン",
+  "__Login.logout": "Logout",
+  "Login.logout": "Logout",
+  "__Login.password": "Password",
+  "Login.password": "パスワード",
+  "__Menu.AdmininstratorExplanation": "Administrator function.",
+  "Menu.AdmininstratorExplanation": "管理者機能。",
 
   "__Menu.Administration" : "Administration",
   "Menu.Administration" : "管理",
@@ -1087,17 +1082,13 @@
 
   "__MyProfile.PhoneNumberVisibilityNever" : "Never",
   "MyProfile.PhoneNumberVisibilityNever" : "決して",
-
-  "__MyProfile.PhoneNumberVisibilityNeverExplanation" : "Your phone number is not visible at all.",
-  "MyProfile.PhoneNumberVisibilityNeverExplanation" : "あなたの電話番号はまったく見えません。",
-
-  "__MyProfile.SearchableExplanation" : "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
-  "MyProfile.SearchableExplanation" : "ユーザーは検索機能で表示できます。そうでない場合、あなたを招待する唯一の方法はあなたの電子メールを明示的に与えることです。",
-
-  "__MyProfile.SetANewPassword" : "Set a new password",
-  "MyProfile.SetANewPassword" : "新しいパスワードを設定する",
-
-  "__MyProfile.Togh" : "Togh",
+  "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": "あなたの電話番号はまったく見えません。",
+  "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
+  "MyProfile.SearchableExplanation": "ユーザーは検索機能で表示できます。そうでない場合、あなたを招待する唯一の方法はあなたの電子メールを明示的に与えることです。",
+  "__MyProfile.SetANewPassword": "Set a new password",
+  "MyProfile.SetANewPassword": "新しいパスワードを設定する",
+  "__MyProfile.Togh": "Togh",
   "MyProfile.Togh": "トグ",
   "__MyProfile.URL": "Url",
   "MyProfile.URL": "URL",
