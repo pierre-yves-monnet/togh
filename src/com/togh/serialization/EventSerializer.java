@@ -79,6 +79,11 @@ public class EventSerializer extends BaseSerializer {
         resultMap.put("shoppinglistshowdetails", eventEntity.getShoppingListShowDetails());
         resultMap.put("shoppinglistshowexpenses", eventEntity.getShoppinglistShowExpenses());
 
+        resultMap.put("geoaddress", eventEntity.getGeoaddress());
+        resultMap.put("geolng", eventEntity.getGeolng());
+        resultMap.put("geolat", eventEntity.getGeolat());
+        resultMap.put("geoinstructions", eventEntity.getGeoinstructions());
+
         if (contextAccess != ToghUserEntity.ContextAccess.PUBLICACCESS) {
             resultMap.put(CST_JSONOUT_DATE_POLICY, eventEntity.getDatePolicy() == null ? null : eventEntity.getDatePolicy().toString());
         }

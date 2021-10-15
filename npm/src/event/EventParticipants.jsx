@@ -9,9 +9,10 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { Select, Tag } from 'carbon-components-react';
-
-import Invitation from 'event/Invitation';
+import { Select, Tag }      from 'carbon-components-react';
+import { Files }            from 'react-bootstrap-icons';
+import Invitation           from 'event/Invitation';
+import FactoryService 		from 'service/FactoryService';
 
 
 export const ROLE_OWNER = 'OWNER';
@@ -72,24 +73,41 @@ class EventParticipants extends React.Component {
                     {this.state.event.participants && this.state.event.participants.map( (item, index) => {
                         return (<tr key={index}>
                             <td>
-                                {item.user !== '' && ( <span>{item.user.label} </span>)}
+                                {item.user !== '' && ( <span>{item.user.label}</span>)}
 
                                 {item.status === 'INVITED' && (
+
                                     <span>
                                         <Tag type="teal">
-                                        <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
+                                                <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
                                         </Tag>
-                                        <button class="btn btn-info btn-xs "
-                                            onClick={this.sendAgainInvitation}>
-                                            <FormattedMessage id="EventParticipant.SendAgainInvitation" defaultMessage="Send again"/>
-                                        </button>
-                                        <span
-                                            style={{fontSize: "small", fontStyle:"italic", marginLeft:"5px"}}
-                                            title={intl.formatMessage({id: "EventParticipant.TitleUrlInvitation", defaultMessage: "Use this URL in a direct email"})}>
-                                            <FormattedMessage id="EventParticipant.UrlInvitation" defaultMessage="Url"/>
-                                            {item.urlInvitation}
+
+                                        <span>
+                                            <input type="checkbox"
+                                                style={{marginLeft: "15px", marginRight:"5px"}}
+                                               onChange={(event) => {
+                                                       let rememberBool = event.target.value==='on';
+                                                       item.useMyEmailAsFrom = rememberBool}}
+                                               title={intl.formatMessage({id:"EventParticipant.UseMyEmailAsFrom", defaultMessage:"Use my email in the From message"})}
+                                              />
+
+
+                                            <button class="btn btn-info btn-xs "
+                                                onClick={() => {this.inviteResend(item)}}>
+                                                <FormattedMessage id="EventParticipant.SendAgainInvitation" defaultMessage="Send again"/>
+                                            </button>
+                                            <span style={{fontStyle: "italic"}}>
+                                                {item.messageResend}
+                                            </span>
                                         </span>
-                                    </span>)}
+                                        <span
+                                            style={{fontSize: "small", fontStyle:"italic", marginLeft:"10px"}}
+                                            title={intl.formatMessage({id: "EventParticipant.TitleUrlInvitation", defaultMessage: "Copy the URL in your clipboard. Paste it and Use it in a direct email"})}>
+                                            <FormattedMessage id="EventParticipant.UrlInvitation" defaultMessage="Url"/>
+                                            <Files onClick={() => {navigator.clipboard.writeText(item.urlInvitation)}} />
+                                        </span>
+                                    </span>
+                                   )}
                             </td>
                             <td>
                             {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
@@ -113,11 +131,11 @@ class EventParticipants extends React.Component {
                                 </Select>
                                     )}
                         </td>
-                <td>
-                    {item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}
-                    {item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}
-                    {item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}
-                </td>
+                        <td>
+                            {item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}
+                            {item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}
+                            {item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}
+                        </td>
                         </tr>
                         )
                         } )
@@ -144,8 +162,6 @@ class EventParticipants extends React.Component {
 
   		item[ name ] = value;
 
-		// currentEvent.shoppinglist[0].[name] = value;
-		
 		this.setState( { "event" : currentEvent});
 		this.props.updateEvent();
 	}
@@ -170,7 +186,41 @@ class EventParticipants extends React.Component {
 		this.setState( { "event" : currentEvent});
 		this.props.updateEvent();
 	}
-	
+
+	inviteResend(participant) {
+	    console.log("AdminTranslator.completeDictionary:");
+        this.setState({inprogress: true });
+        participant.messageResend="";
+        let param={
+            eventId: this.state.event.id,
+            participantId: participant.id,
+            useMyEmailAsFrom: participant.useMyEmailAsFrom
+        };
+        let restCallService = FactoryService.getInstance().getRestcallService();
+        restCallService.postJson('/api/event/invite/resend', this, param, httpPayload =>{
+            httpPayload.trace("AdminTranslator.completeDictionary");
+            this.setState({inprogress: false });
+            // retrieve the participant
+            let event = this.state.event;
+            let participantEvent;
+            for (let i in event.participants) {
+                let participantIndex = event.participants[i];
+                if (participantIndex.id === participant.id) {
+                    participantEvent=participantIndex;
+                }
+            }
+            const intl = this.props.intl;
+            if (httpPayload.isError()) {
+                participantEvent.messageResend="Server connection error";
+                this.setState({ message: "Server connection error"});
+            } else if (httpPayload.getData().status === "INVITATIONSENT"){
+                participantEvent.messageResend= intl.formatMessage({id: "EventParticipants.EmailSentOk",defaultMessage: "Email sent"});
+            } else {
+                 participantEvent.messageResend= intl.formatMessage({id: "EventParticipants.EmailSentError",defaultMessage: "Email error"});
+            }
+            this.setState({event: event});
+        });
+	}
 	
 
 }		

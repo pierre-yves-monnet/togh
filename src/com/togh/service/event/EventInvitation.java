@@ -88,9 +88,9 @@ public class EventInvitation {
                 }
                 setUserJustInvited.add(creationStatus.toghUser);
 
-                invitationResult.listThogUserInvited.add(creationStatus.toghUser);
+                invitationResult.listToghUserInvited.add(creationStatus.toghUser);
             } else {
-                invitationResult.listThogUserInvited.add(toghUserEntity.get());
+                invitationResult.listToghUserInvited.add(toghUserEntity.get());
             }
         }
 
@@ -110,14 +110,14 @@ public class EventInvitation {
                     monitorService.endOperation(chronoInvitation);
                     return invitationResult;
                 }
-                invitationResult.listThogUserInvited.add(toghUser);
+                invitationResult.listToghUserInvited.add(toghUser);
 
             }
         }
 
         // check if one user was already a participant ?
         boolean doubleInvitation = false;
-        for (ToghUserEntity toghUser : invitationResult.listThogUserInvited) {
+        for (ToghUserEntity toghUser : invitationResult.listToghUserInvited) {
             ParticipantEntity participant = this.eventController.getParticipant(toghUser);
             if (participant != null) {
                 doubleInvitation = true;
@@ -139,7 +139,7 @@ public class EventInvitation {
         // save of the event has to be done by the caller
 
         // status now
-        if (invitationResult.listThogUserInvited.isEmpty())
+        if (invitationResult.listToghUserInvited.isEmpty())
             invitationResult.status = InvitationStatus.NOUSERSGIVEN;
         else if (doubleInvitation)
             invitationResult.status = InvitationStatus.ALREADYAPARTICIPANT;

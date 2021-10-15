@@ -61,6 +61,8 @@ public class EventService {
     private static final LogEvent eventEntityNotFound = new LogEvent(EventService.class.getName(), 4, Level.APPLICATIONERROR, "Entity not found", "The entity requested can't be found, it may be deleted by an another user in the mean time", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventNoId = new LogEvent(EventService.class.getName(), 5, Level.ERROR, "No ID", "To load an entity, an ID must be give", "Entity is not found, can't be linked in this object", "Check the ID");
     private static final LogEvent eventBadEntity = new LogEvent(EventService.class.getName(), 6, Level.ERROR, "Bad Entity", "This Entity can't be load", "Entity is not the correct one", "Check the Entity");
+    private static final LogEvent eventParticipantNotFound = new LogEvent(EventService.class.getName(), 7, Level.ERROR, "Participant Not Found", "The participant can't be found", "Operation on the participant can't be executed", "Check the Event and the participant ID");
+
 
     private static final String LOG_HEADER = EventService.class.getSimpleName() + ": ";
     private final Logger logger = Logger.getLogger(EventService.class.getName());
@@ -206,6 +208,35 @@ public class EventService {
     }
 
     /**
+     * Resend the notification invitation
+     *
+     * @param eventEntity       the event entity
+     * @param invitedByToghUser the toghuser who resend the invitation
+     * @param participantId     the participantId to re-invite
+     * @param useMyEmailAsFrom  if true, the person who invite is the from email
+     * @return
+     */
+    public InvitationResult resendInvitation(EventEntity eventEntity, ToghUserEntity invitedByToghUser, Long participantId, boolean useMyEmailAsFrom) {
+        EventController eventController = getEventController(eventEntity);
+        // anybody can resend the invitation
+        List<ParticipantEntity> searchParticipant = eventEntity.getParticipantList()
+                .stream()
+                .filter(t -> t.getId().equals(participantId))
+                .collect(Collectors.toList());
+        InvitationResult invitationResult = new InvitationResult();
+        if (searchParticipant.size() != 1) {
+            // we should find only 1
+            invitationResult.listLogEvents.add(new LogEvent(eventParticipantNotFound, "Save event"));
+        } else {
+            ToghUserEntity invited = searchParticipant.get(0).getUser();
+            NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invited, invitedByToghUser, useMyEmailAsFrom, eventEntity);
+            invitationResult.listLogEvents.addAll(notificationStatus.listEvents);
+            invitationResult.status = notificationStatus.isCorrect() ? InvitationStatus.INVITATIONSENT : InvitationStatus.ERRORDURINVITATION;
+        }
+        return invitationResult;
+    }
+
+    /**
      * a User access an event: do all need information (notification, etc...)
      *
      * @param toghUserEntity
@@ -346,7 +377,7 @@ public class EventService {
     public static class InvitationResult {
 
         public InvitationStatus status;
-        public final List<ToghUserEntity> listThogUserInvited = new ArrayList<>();
+        public final List<ToghUserEntity> listToghUserInvited = new ArrayList<>();
         public final List<ParticipantEntity> newParticipants = new ArrayList<>();
         private final List<ToghUserEntity> errorMessage = new ArrayList<>();
         private final List<ToghUserEntity> errorSendEmail = new ArrayList<>();

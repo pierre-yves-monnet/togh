@@ -190,7 +190,8 @@ public class RestEventController {
      */
     @CrossOrigin
     @PostMapping("/api/event/invitation")
-    public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData,
+                                      @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
@@ -237,6 +238,40 @@ public class RestEventController {
 
         payload.put(RestJsonConstants.CST_ISINVITATIONSENT, invitationResult.status == InvitationStatus.INVITATIONSENT);
         return payload;
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/event/invite/resend")
+    public Map<String, Object> resendInvitation(@RequestBody Map<String, Object> inviteData, @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+        }
+        Long eventId = ToolCast.getLong(inviteData, "eventId", null);
+        Long participantId = ToolCast.getLong(inviteData, "participantId", null);
+        boolean useMyEmailAsFrom = ToolCast.getBoolean(inviteData, "useMyEmailAsFrom", false);
+
+        if (eventId == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        if (participantId == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ParticipantId not found");
+
+        // get service
+        EventEntity event = eventService.getAllowedEventById(toghUser, eventId);
+        if (event == null) {
+            // same error as not found: we don't want to give the information that the event exist
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        }
+        InvitationResult invitationResult = eventService.resendInvitation(event, toghUser, participantId, useMyEmailAsFrom);
+        Map<String, Object> payload = new HashMap<>();
+        payload.put(RestJsonConstants.CST_STATUS, invitationResult.status.toString());
+        payload.put(RestJsonConstants.CST_MESSAGE_OK, invitationResult.getOkMessage());
+        payload.put(RestJsonConstants.CST_MESSAGE_ERROR, invitationResult.getErrorMessage());
+        payload.put(RestJsonConstants.CST_MESSAGE_ERROR_SEND_EMAIL, invitationResult.getErrorSendEmail());
+
+        payload.put(RestJsonConstants.CST_ISINVITATIONSENT, invitationResult.status == InvitationStatus.INVITATIONSENT);
+        return payload;
+
     }
 
     /**
