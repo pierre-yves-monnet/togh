@@ -304,9 +304,9 @@ public class RestEventController {
 
         ContextAccess contextAccess = eventService.getContextAccess(event, toghUser);
         List<Map<String, Object>> listEntity = new ArrayList<>();
-        for (BaseEntity eventEntity : eventOperationResult.listChildEntity) {
-            BaseSerializer serializer = factorySerializer.getFromEntity(event);
-            listEntity.add(serializer.getMap(eventEntity, contextAccess, timezoneOffset, factorySerializer));
+        for (BaseEntity baseEntity : eventOperationResult.listChildEntity) {
+            BaseSerializer serializer = factorySerializer.getFromEntity(baseEntity);
+            listEntity.add(serializer.getMap(baseEntity, contextAccess, timezoneOffset, factorySerializer));
         }
         payload.put(RestJsonConstants.CST_CHILDENTITY, listEntity);
 

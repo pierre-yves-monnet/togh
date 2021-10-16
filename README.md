@@ -500,23 +500,6 @@ gcloud auth login
 > docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 ```
 
-### run docker compose
-export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json docker pull
-gcr.io/intricate-gamma-325323/togh:1.0.0
-
-docker run --rm \
--v /var/run/docker.sock:/var/run/docker.sock \
--v "$PWD:$PWD" \
--p 5432:5432  \
--w="$PWD" \
--e GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/keyfile.json \
--v /home/toghnow/intricate-gamma-325323-ContainerRegistry.json:/tmp/keys/keyfile.json:ro \
-docker/compose:1.24.0 up &
-
-     -p 5432:5432  \
-    -p 7080:7080 \
-    -p 3000:3000 \
-
 ### run docker conteneur
 
 To execute on Computer instance
@@ -532,6 +515,24 @@ $ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs -d gcr.
 $ curl http://34.125.204.84:7080/togh/api/ping
 $ curl http://34.125.204.84:3000
 ```
+
+### run docker compose
+
+export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json docker pull
+gcr.io/intricate-gamma-325323/togh:1.0.0
+
+docker run --rm \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v "$PWD:$PWD" \
+-p 5432:5432  \
+-w="$PWD" \
+-e GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/keyfile.json \
+-v /home/toghnow/intricate-gamma-325323-ContainerRegistry.json:/tmp/keys/keyfile.json:ro \
+docker/compose:1.24.0 up &
+
+     -p 5432:5432  \
+    -p 7080:7080 \
+    -p 3000:3000 \
 
 # Documentation
 
@@ -722,6 +723,10 @@ Forgot my password: email incorrect registration invitation
 
 # RoadMap
 
+## interne
+
+Test unitaire sur le SLAB
+
 ## Event
 
 Possibilite de supprimer une invitation dans un event (et dans ce cas, l'user peut etre supprimer s'il n'était invoqué
@@ -777,7 +782,8 @@ Jpoin Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
 
 ## Administration
 
-Supprimer un user invalide Graph des events / mois
+Supprimer un user invalide Graph des events / mois Purger les users invite, jamais venus purger plus rapidement encore
+les users invite mais plus retirer des events ou dans des events clotures
 
 	Event/Participant: mettre l'icone + un component qui donne toutes les coordonnées
  	

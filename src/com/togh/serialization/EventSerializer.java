@@ -68,7 +68,7 @@ public class EventSerializer extends BaseSerializer {
         resultMap.put(CST_JSONOUT_TYPE_EVENT, eventEntity.getTypeEvent() == null ? null : eventEntity.getTypeEvent().toString());
         resultMap.put(CST_JSONOUT_STATUS_EVENT, eventEntity.getStatusEvent() == null ? null : eventEntity.getStatusEvent().toString());
         resultMap.put("description", eventEntity.getDescription());
-        resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, eventEntity.getSubscriptionEvent().toString());
+        resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, eventEntity.getSubscriptionEvent() == null ? EventEntity.SubscriptionEventEnum.FREE.toString() : eventEntity.getSubscriptionEvent().toString());
 
         resultMap.put("tasklistshowdates", eventEntity.getTaskListShowDates());
 

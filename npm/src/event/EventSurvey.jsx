@@ -75,9 +75,14 @@ class EventSurvey extends React.Component {
 	}
 	componentDidMount() {
 	    let bestDisplay= this.calculateBestDisplay();
-	    this.setState( { show: { typeDisplay: bestDisplay}});
+	    debugger;
+  		var survey = this.surveyCtrl.getValue();
+	    console.log("EventSurvey.componentDidMount: typeDisplay=("+bestDisplay+") surveyId=("+survey.id+")");
+
+	    this.setState( { show: { typeDisplay: bestDisplay, currentSurveyId: survey.id }});
    		this.addAnswerWithMe();
 	}
+
 	// Calculate the state to display
 	componentDidUpdate(prevProps) {
         //let valueProps=JSON.stringify(this.props);
@@ -85,10 +90,22 @@ class EventSurvey extends React.Component {
         if (prevProps && prevProps.show )
             prevPropsTypeDisplay=prevProps.show.typeDisplay;
 	    let bestDisplay= this.calculateBestDisplay();
-		// console.log("EventSurvey.componentDidUpdate prevProps=("+prevPropsTypeDisplay+") typeDisplay=("+this.state.show.typeDisplay+") bestDisplay=("+bestDisplay+")");
 
-        if (this.state.show.typeDisplay !== bestDisplay) {
-            this.setState( { show: { typeDisplay: bestDisplay}});
+	    debugger;
+	    // we propose the bestDisplay only if the survey change
+   		let survey = this.surveyCtrl.getValue();
+
+		console.log("EventSurvey.componentDidUpdate prevProps=("+prevPropsTypeDisplay+") typeDisplay=("+this.state.show.typeDisplay+") bestDisplay=("+bestDisplay+")");
+
+	    if (this.state.show.currentSurveyId !== survey.id)
+	    {
+    	    let currentShow = this.state.show;
+	        if (this.state.show.typeDisplay !== bestDisplay) {
+                console.log("EventSurvey.componentDidUpdate: setStateBestDisplay=("+bestDisplay+")");
+                currentShow.typeDisplay= bestDisplay;
+            }
+            currentShow.currentSurveyId=survey.id;
+            this.setState( {show : currentShow});
         }
 	}
 
@@ -111,16 +128,17 @@ class EventSurvey extends React.Component {
 	
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("EventSurvey: render survey");
 		this.surveyCtrl = this.eventCtrl.getCurrentSurveyCtrl();
 
 		if (! this.surveyCtrl ) {
+			console.log("EventSurvey: render survey: No Survey");
+
 			return (<div/>)
 		}
 	
 		// refresh the current survey embedded
 		// this.surveyEmbedded = new Survey( this.state.event, currentSurvey, this.userParticipant, this.updateEventfct);
-		console.log("EventSurvey: typeDisplay=["+this.state.show.typeDisplay+"]");
+		console.log("EventSurvey.render: typeDisplay=["+this.state.show.typeDisplay+"]");
 		if (this.state.show.typeDisplay === DISPLAY_NOACCESS) {
 			return (
 				<div>
@@ -207,14 +225,18 @@ class EventSurvey extends React.Component {
 							<button  class="btn btn-primary btn-xs" 
 								onClick={(event) => {
 									console.log("EventItinerary.ClickOnButtonView : ");
-									this.addAnswerWithMe();									
-									this.setState( { show: { typeDisplay: DISPLAY_SURVEY}});
+									this.addAnswerWithMe();
+									let currentShow = this.state.show;
+									currentShow.typeDisplay=DISPLAY_SURVEY;
+									this.setState( { show: currentShow});
 								}}>
 							<Eye   
 								onClick={(event) => {
 									console.log("EventSurvey : ClickOnEyeView");
 									this.addAnswerWithMe();
-									this.setState( { show: { typeDisplay: DISPLAY_SURVEY}});
+									let currentShow = this.state.show;
+									currentShow.typeDisplay=DISPLAY_SURVEY;
+									this.setState( { show: currentShow});
 								}
 								}/>
 							</button>
@@ -329,12 +351,16 @@ class EventSurvey extends React.Component {
 							<button  class="btn btn-primary btn-xs" 
 								onClick={(event) => {
 									console.log("EventItinerary.ClickOnButtonModify : ");
-									this.setState( {show: {typeDisplay: DISPLAY_ADMIN}});
+                                    let currentShow = this.state.show;
+                                    currentShow.typeDisplay=DISPLAY_ADMIN;
+                                    this.setState( { show: currentShow});
 								}}>
 							<Pencil   
 								onClick={(event) => {
 									console.log("EventSurvey : ClickOnPencilModify");
-									this.setState( {show: {typeDisplay: DISPLAY_ADMIN}});
+                                    let currentShow = this.state.show;
+                                    currentShow.typeDisplay=DISPLAY_ADMIN;
+                                    this.setState( { show: currentShow});
 								}
 								}/>
 							</button>
