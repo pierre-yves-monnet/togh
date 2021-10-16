@@ -191,30 +191,24 @@
   "Event.ExplanationYourTimeZone": "Dieses Datum wird in Ihrer Zeitzone berechnet",
   "__Event.Geolocalisation": "Geolocalisation",
   "Event.Geolocalisation": "Geolokalisierung",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "Route",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "Ein Datum",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "Teilnehmer",
+  "__Event.Itinerary": "itinerary",
+  "Event.Itinerary": "Route",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "Ein Datum",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "Teilnehmer",
 
   "__Event.Period" : "Period",
   "Event.Period" : "Zeitraum",
 
   "__Event.Photos" : "Photos",
-  "Event.Photos" : "Fotos",
-
-  "__Event.Preferences" : "Preferences",
-  "Event.Preferences" : "Einstellungen",
-
-  "__Event.Scope" : "Scope",
-  "Event.Scope" : "Umfang",
-
-  "__Event.ScopeLimited" : "Limited",
-  "Event.ScopeLimited" : "Begrenzt",
+  "Event.Photos": "Fotos",
+  "__Event.Preferences": "Preferences",
+  "Event.Preferences": "Einstellungen",
+  "__Event.Scope": "Scope",
+  "Event.Scope": "Umfang",
+  "__Event.ScopeLimited": "Limited",
+  "Event.ScopeLimited": "Begrenzt",
   "__Event.ScopeOpen": "Open",
   "Event.ScopeOpen": "Öffnen",
   "__Event.ScopeOpenConfirmation": "Open on confirmation",
@@ -233,9 +227,11 @@
   "Event.Tasks": "Aufgaben",
   "__Event.TimeEvent": "Time",
   "Event.TimeEvent": "Zeit",
+  "__Event.TitleBringList": "What to brings?",
+  "Event.TitleBringList": "Was bringt?",
   "__Event.TitleBudget": "Budget",
   "Event.TitleBudget": "Budget",
-  "__Event.TitleChat": "Chat",
+  "__Event.TitleChat": "Chat with all participants",
   "Event.TitleChat": "Plaudern",
   "__Event.TitleExpense": "Manage and share expenses",
   "Event.TitleExpense": "Ausgaben verwalten und teilen",
@@ -307,15 +303,12 @@
   "EventItinerary.ShowItineraryMap": "Reiseroutenkarte anzeigen",
   "__EventItinerary.StepAdded": "A step is added",
   "EventItinerary.StepAdded": "Ein Schritt wird hinzugefügt",
-
-  "__EventItineray.Address" : "Address",
-  "EventItineray.Address" : "Adresse",
-
-  "__EventItineray.Airport" : "Airport",
-  "EventItineray.Airport" : "Flughafen",
-
-  "__EventItineray.Begin" : "Begin",
-  "EventItineray.Begin" : "Start",
+  "__EventItineray.Address": "Address",
+  "EventItineray.Address": "Adresse",
+  "__EventItineray.Airport": "Airport",
+  "EventItineray.Airport": "Flughafen",
+  "__EventItineray.Begin": "Begin",
+  "EventItineray.Begin": "Start",
 
   "__EventItineray.BusStation" : "Bus Station",
   "EventItineray.BusStation" : "Bushaltestelle",
@@ -400,21 +393,18 @@
 
   "__EventParticipant.Invited" : "Invited",
   "EventParticipant.Invited" : "Eingeladen",
-
-  "__EventParticipant.Left" : "Left",
-  "EventParticipant.Left" : "Links",
-
-  "__EventParticipant.MainTitleParticipant" : "Participants",
-  "EventParticipant.MainTitleParticipant" : "Teilnehmer",
-
-  "__EventParticipant.Owner" : "Owner",
-  "EventParticipant.Owner" : "Inhaber",
-
-  "__EventParticipant.Person" : "Person",
-  "EventParticipant.Person" : "Person",
-
-  "__EventParticipant.Role" : "Role",
-  "EventParticipant.Role" : "Rolle",
+  "__EventParticipant.Left": "Left",
+  "EventParticipant.Left": "Links",
+  "__EventParticipant.MainTitleParticipant": "Participants",
+  "EventParticipant.MainTitleParticipant": "Teilnehmer",
+  "__EventParticipant.Owner": "Owner",
+  "EventParticipant.Owner": "Inhaber",
+  "__EventParticipant.ParticipantTip": "Invite participant to the event",
+  "EventParticipant.ParticipantTip": "Teilnehmer zur Veranstaltung einladen",
+  "__EventParticipant.Person": "Person",
+  "EventParticipant.Person": "Person",
+  "__EventParticipant.Role": "Role",
+  "EventParticipant.Role": "Rolle",
   "__EventParticipant.RoleObserver": "Observer",
   "EventParticipant.RoleObserver": "Beobachter",
   "__EventParticipant.RoleOrganizer": "Organizer",
@@ -447,15 +437,12 @@
   "EventPreferences.EventSubscription": "Abonnement",
   "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
   "EventPreferences.ExpenseTip": "Richten Sie alle Einstellungen für das Ereignis ein",
-
-  "__EventPreferences.MainTitlePreferences" : "Preferences",
-  "EventPreferences.MainTitlePreferences" : "Präferenz",
-
-  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
-  "EventPreferences.PreferencesTip" : "Richten Sie alle Einstellungen für das Ereignis ein",
-
-  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
-  "EventPreferences.SubscriptionExcellenceExplanation" : "Ein Excellence-Event enthält alle Funktionen und ein Limit von 1000 pro Artikel",
+  "__EventPreferences.MainTitlePreferences": "Preferences",
+  "EventPreferences.MainTitlePreferences": "Präferenz",
+  "__EventPreferences.PreferencesTip": "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip": "Richten Sie alle Einstellungen für das Ereignis ein",
+  "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation": "Ein Excellence-Event enthält alle Funktionen und ein Limit von 1000 pro Artikel",
 
   "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
   "EventPreferences.SubscriptionFreeExplanation" : "Eine kostenlose Veranstaltung enthält alle Funktionen außer dem Budget und ist in der Anzahl der Teilnehmer (20) und Artikel (50) begrenzt.",
@@ -483,42 +470,33 @@
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "Beschreibung",
-
-  "__EventShoppingList.Done" : "Done",
-  "EventShoppingList.Done" : "Getan",
-
-  "__EventShoppingList.ItemRemoved" : "The item is removed",
-  "EventShoppingList.ItemRemoved" : "Der Artikel wird entfernt",
-
-  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
-  "EventShoppingList.LimitSubsscription" : "Sie erreichen das Limit der im Ereignis zulässigen Elemente. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
-
-  "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
-  "EventShoppingList.MainTitleShoppingList" : "Einkaufsliste",
-
-  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
-  "EventShoppingList.NoItem" : "Sie haben keine Aufgabe in der Liste.",
-
-  "__EventShoppingList.RemovingItem" : "Removing an item",
-  "EventShoppingList.RemovingItem" : "Einen Gegenstand entfernen",
-
-  "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
-  "EventShoppingList.ShoppingListTip" : "Sie haben eine Liste mit Elementen, die Sie an das Ereignis anschließen möchten. Listen Sie sie auf, entscheiden Sie, wer sie kaufen muss",
-
-  "__EventShoppingList.ShowDetails" : "Detail",
-  "EventShoppingList.ShowDetails" : "Detail",
+  "__EventShoppingList.Done": "Done",
+  "EventShoppingList.Done": "Getan",
+  "__EventShoppingList.ItemRemoved": "The item is removed",
+  "EventShoppingList.ItemRemoved": "Der Artikel wird entfernt",
+  "__EventShoppingList.LimitSubsscription": "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription": "Sie erreichen das Limit der im Ereignis zulässigen Elemente. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
+  "__EventShoppingList.MainTitleBringList": "Bring List",
+  "EventShoppingList.MainTitleBringList": "Liste mitbringen",
+  "__EventShoppingList.MainTitleShoppingList": "Shopping List",
+  "EventShoppingList.MainTitleShoppingList": "Einkaufsliste",
+  "__EventShoppingList.NoItem": "You don't have any item to bring in the list.",
+  "EventShoppingList.NoItem": "Sie haben keine Aufgabe in der Liste.",
+  "__EventShoppingList.RemovingItem": "Removing an item",
+  "EventShoppingList.RemovingItem": "Einen Gegenstand entfernen",
+  "__EventShoppingList.ShoppingListTip": "You have a list of item to bing to the event. List them, decide who have to bought them",
+  "EventShoppingList.ShoppingListTip": "Sie haben eine Liste mit Elementen, die Sie an das Ereignis anschließen möchten. Listen Sie sie auf, entscheiden Sie, wer sie kaufen muss",
+  "__EventShoppingList.ShowDetails": "Detail",
+  "EventShoppingList.ShowDetails": "Detail",
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
-  "EventShoppingList.ShowExpense" : "Kosten anzeigen",
-
-  "__EventShoppingList.TaskAdded" : "The item is added",
-  "EventShoppingList.TaskAdded" : "Der Artikel wird hinzugefügt",
-
-  "__EventShoppingList.ToBring" : "To bring",
-  "EventShoppingList.ToBring" : "Bringen",
-
-  "__EventShoppingList.What" : "What",
-  "EventShoppingList.What" : "Was",
+  "EventShoppingList.ShowExpense": "Kosten anzeigen",
+  "__EventShoppingList.TaskAdded": "The item is added",
+  "EventShoppingList.TaskAdded": "Der Artikel wird hinzugefügt",
+  "__EventShoppingList.ToBring": "To bring",
+  "EventShoppingList.ToBring": "Bringen",
+  "__EventShoppingList.What": "What",
+  "EventShoppingList.What": "Was",
   "__EventShoppingList.Who": "Who",
   "EventShoppingList.Who": "WHO",
   "__EventShoppingList.addItem": "Add a new item in the list",
@@ -559,15 +537,12 @@
   "EventSurvey.InProgress": "In Bearbeitung",
   "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
   "EventSurvey.LimitSubsscription": "Sie erreichen die im Event zulässige Auswahlgrenze. Gehen Sie zu Ihrem Profil, um Ihr Abonnement anzuzeigen",
-
-  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
-  "EventSurvey.NoAccessForSurveyInPreparation" : "Diese Umfrage ist in Vorbereitung. Sie können momentan nicht darauf zugreifen.",
-
-  "__EventSurvey.Option" : "Option",
-  "EventSurvey.Option" : "Möglichkeit",
-
-  "__EventSurvey.RemovingChoice" : "Removing a choice",
-  "EventSurvey.RemovingChoice" : "Auswahl entfernen",
+  "__EventSurvey.NoAccessForSurveyInPreparation": "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation": "Diese Umfrage ist in Vorbereitung. Sie können momentan nicht darauf zugreifen.",
+  "__EventSurvey.Option": "Option",
+  "EventSurvey.Option": "Möglichkeit",
+  "__EventSurvey.RemovingChoice": "Removing a choice",
+  "EventSurvey.RemovingChoice": "Auswahl entfernen",
 
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "Diese Umfrage ist in Vorbereitung. Teilnehmer sind nicht sichtbar",
@@ -636,16 +611,13 @@
   "EventTaskList.Description" : "Beschreibung",
 
   "__EventTaskList.Done" : "Done",
-  "EventTaskList.Done" : "Getan",
-
-  "__EventTaskList.End" : "End",
-  "EventTaskList.End" : "Ende",
-
-  "__EventTaskList.FilterAllParticipants" : "All participants",
-  "EventTaskList.FilterAllParticipants" : "Alle Teilnehmer",
-
-  "__EventTaskList.FilterAllStates" : "All states",
-  "EventTaskList.FilterAllStates" : "Alle Staaten",
+  "EventTaskList.Done": "Getan",
+  "__EventTaskList.End": "End",
+  "EventTaskList.End": "Ende",
+  "__EventTaskList.FilterAllParticipants": "All participants",
+  "EventTaskList.FilterAllParticipants": "Alle Teilnehmer",
+  "__EventTaskList.FilterAllStates": "All states",
+  "EventTaskList.FilterAllStates": "Alle Staaten",
   "__EventTaskList.FilterDone": "Done",
   "EventTaskList.FilterDone": "Getan",
   "__EventTaskList.FilterInProgress": "In progress",

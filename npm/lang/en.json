@@ -254,12 +254,6 @@
   "BodyTogh.whyToghMotivation": {
     "defaultMessage": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"
   },
-  "Event.Budget": {
-    "defaultMessage": "Budget"
-  },
-  "Event.Chat": {
-    "defaultMessage": "Chat"
-  },
   "Event.DateEvent": {
     "defaultMessage": "Date Event"
   },
@@ -278,32 +272,14 @@
   "Event.EventDate": {
     "defaultMessage": "Date"
   },
-  "Event.Expense": {
-    "defaultMessage": "Expense"
-  },
   "Event.ExplanationYourTimeZone": {
     "defaultMessage": "This date is calculated in your time zone"
-  },
-  "Event.Geolocalisation": {
-    "defaultMessage": "Geolocalisation"
-  },
-  "Event.Itinerary": {
-    "defaultMessage": "itinerary"
   },
   "Event.OneDate": {
     "defaultMessage": "One date"
   },
-  "Event.Participants": {
-    "defaultMessage": "Participants"
-  },
   "Event.Period": {
     "defaultMessage": "Period"
-  },
-  "Event.Photos": {
-    "defaultMessage": "Photos"
-  },
-  "Event.Preferences": {
-    "defaultMessage": "Preferences"
   },
   "Event.Scope": {
     "defaultMessage": "Scope"
@@ -320,29 +296,23 @@
   "Event.ScopeSecret": {
     "defaultMessage": "Secret"
   },
-  "Event.ShoppingList": {
-    "defaultMessage": "Shopping List"
-  },
   "Event.StartDate": {
     "defaultMessage": "Start Date"
   },
   "Event.Status": {
     "defaultMessage": "Status"
   },
-  "Event.Survey": {
-    "defaultMessage": "Survey"
-  },
-  "Event.Tasks": {
-    "defaultMessage": "Tasks"
-  },
   "Event.TimeEvent": {
     "defaultMessage": "Time"
+  },
+  "Event.TitleBringList": {
+    "defaultMessage": "What to brings?"
   },
   "Event.TitleBudget": {
     "defaultMessage": "Budget"
   },
   "Event.TitleChat": {
-    "defaultMessage": "Chat"
+    "defaultMessage": "Chat with all participants"
   },
   "Event.TitleExpense": {
     "defaultMessage": "Manage and share expenses"
@@ -361,9 +331,6 @@
   },
   "Event.TitlePreferences": {
     "defaultMessage": "Preferences"
-  },
-  "Event.TitleShoppingList": {
-    "defaultMessage": "Shopping list : what to brings?"
   },
   "Event.TitleSurvey": {
     "defaultMessage": "Survey"
@@ -524,6 +491,9 @@
   "EventParticipant.Owner": {
     "defaultMessage": "Owner"
   },
+  "EventParticipant.ParticipantTip": {
+    "defaultMessage": "Invite participant to the event"
+  },
   "EventParticipant.Person": {
     "defaultMessage": "Person"
   },
@@ -620,11 +590,11 @@
   "EventShoppingList.LimitSubsscription": {
     "defaultMessage": "You reach the limit of items allowed in the event. Go to your profile to see your subscription"
   },
-  "EventShoppingList.MainTitleShoppingList": {
-    "defaultMessage": "Shopping List"
+  "EventShoppingList.MainTitleBringList": {
+    "defaultMessage": "Bring List"
   },
   "EventShoppingList.NoItem": {
-    "defaultMessage": "You don't have any task in the list."
+    "defaultMessage": "You don't have any item to bring in the list."
   },
   "EventShoppingList.RemovingItem": {
     "defaultMessage": "Removing an item"

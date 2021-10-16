@@ -54,15 +54,12 @@
   "AdminUsers.Connected": "जुड़े हुए",
   "__AdminUsers.ConnectedOffline": "User offline",
   "AdminUsers.ConnectedOffline": "उपयोगकर्ता ऑफ़लाइन",
-
-  "__AdminUsers.ConnectedOnLine" : "User connected",
-  "AdminUsers.ConnectedOnLine" : "उपयोगकर्ता जुड़ा हुआ है",
-
-  "__AdminUsers.Disconnect" : "Disconnect",
-  "AdminUsers.Disconnect" : "डिस्कनेक्ट",
-
-  "__AdminUsers.Email" : "Email",
-  "AdminUsers.Email" : "ईमेल",
+  "__AdminUsers.ConnectedOnLine": "User connected",
+  "AdminUsers.ConnectedOnLine": "उपयोगकर्ता जुड़ा हुआ है",
+  "__AdminUsers.Disconnect": "Disconnect",
+  "AdminUsers.Disconnect": "डिस्कनेक्ट",
+  "__AdminUsers.Email": "Email",
+  "AdminUsers.Email": "ईमेल",
 
   "__AdminUsers.Excellence" : "Excellence",
   "AdminUsers.Excellence" : "उत्कृष्टता",
@@ -161,16 +158,13 @@
   "AdminUsers.subscriptionPremium" : "प्रीमियम सदस्यता",
 
   "__AskPassword.DifferentPassword" : "Password are different",
-  "AskPassword.DifferentPassword" : "पासवर्ड अलग हैं",
-
-  "__AskPassword.NewPassword" : "New password",
-  "AskPassword.NewPassword" : "नया पासवर्ड",
-
-  "__AskPassword.RetypePassword" : "Retype password to verify it",
-  "AskPassword.RetypePassword" : "इसे सत्यापित करने के लिए पासवर्ड फिर से टाइप करें",
-
-  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
-  "AskPassword.ToSmalPassword" : "पासवर्ड के लिए कम से कम 3 अक्षर दें",
+  "AskPassword.DifferentPassword": "पासवर्ड अलग हैं",
+  "__AskPassword.NewPassword": "New password",
+  "AskPassword.NewPassword": "नया पासवर्ड",
+  "__AskPassword.RetypePassword": "Retype password to verify it",
+  "AskPassword.RetypePassword": "इसे सत्यापित करने के लिए पासवर्ड फिर से टाइप करें",
+  "__AskPassword.ToSmalPassword": "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword": "पासवर्ड के लिए कम से कम 3 अक्षर दें",
   "__BodyTogh.ResetYourPassword": "Reset your password",
   "BodyTogh.ResetYourPassword": "अपना पासवर्ड रीसेट करें",
   "__BodyTogh.ThankYou": "Thank you!",
@@ -197,15 +191,12 @@
   "BodyTogh.whatisToghExample": "स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है।",
   "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation": "Togh अपने कार्यक्रम का प्रबंधन करने के लिए एक आवेदन पत्र है। स्कूल के साथ पॉटलुक? दोस्तों के साथ बारबेक्यू? मी पर परिवार के साथ सड़क यात्रा? कई दिन? यह एक घटना है। एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
-
-  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
-  "BodyTogh.whatisToghPossibility" : "एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
-
-  "__BodyTogh.whatisToghTitle" : "What is Togh?",
-  "BodyTogh.whatisToghTitle" : "तोग क्या है?",
-
-  "__BodyTogh.whyTogh" : "Why Togh?",
-  "BodyTogh.whyTogh" : "क्यों तोग?",
+  "__BodyTogh.whatisToghPossibility": "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility": "एक घटना में, प्रतिभागियों को व्यवस्थित करें, कार्यों को पंजीकृत करें और खरीदारी की सूची दें, पता दें, अपनी सड़क यात्रा के चरणों को निर्दिष्ट करें। आप प्रतिभागी से किसी भी सर्वेक्षण के लिए पूछ सकते हैं: क्या वे हॉलीवुड बल्ड, या ग्रिफ़िथ वेधशाला (पॉल दोनों का दौरा करने के लिए जाना पसंद करते हैं!) मानचित्र पर यात्रा कार्यक्रम की कल्पना करें। खर्च की गणना करें। तोगड़ बताएंगे कि कौन किसका मालिक है।",
+  "__BodyTogh.whatisToghTitle": "What is Togh?",
+  "BodyTogh.whatisToghTitle": "तोग क्या है?",
+  "__BodyTogh.whyTogh": "Why Togh?",
+  "BodyTogh.whyTogh": "क्यों तोग?",
 
   "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
   "BodyTogh.whyToghBorn" : "यहाँ तोग का जन्म हुआ था। मैं अब पांच साल के लिए इस आवेदन के बारे में सोच रहा था।",
@@ -298,30 +289,24 @@
 
   "__Event.Status" : "Status",
   "Event.Status" : "स्थिति",
-
-  "__Event.Survey" : "Survey",
-  "Event.Survey" : "सर्वेक्षण",
-
-  "__Event.Tasks" : "Tasks",
-  "Event.Tasks" : "कार्य",
-
-  "__Event.TimeEvent" : "Time",
-  "Event.TimeEvent" : "समय",
-
-  "__Event.TitleBudget" : "Budget",
-  "Event.TitleBudget" : "बजट",
-
-  "__Event.TitleChat" : "Chat",
-  "Event.TitleChat" : "चैट",
-
-  "__Event.TitleExpense" : "Manage and share expenses",
-  "Event.TitleExpense" : "खर्चों को प्रबंधित और साझा करें",
-
-  "__Event.TitleGeolocalisation" : "Where is the event?",
-  "Event.TitleGeolocalisation" : "कहां है घटना?",
-
-  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
-  "Event.TitleItinerary" : "अपनी यात्रा कार्यक्रम, और रुचि के बिंदु को परिभाषित करें",
+  "__Event.Survey": "Survey",
+  "Event.Survey": "सर्वेक्षण",
+  "__Event.Tasks": "Tasks",
+  "Event.Tasks": "कार्य",
+  "__Event.TimeEvent": "Time",
+  "Event.TimeEvent": "समय",
+  "__Event.TitleBringList": "What to brings?",
+  "Event.TitleBringList": "क्या लाना है?",
+  "__Event.TitleBudget": "Budget",
+  "Event.TitleBudget": "बजट",
+  "__Event.TitleChat": "Chat with all participants",
+  "Event.TitleChat": "चैट",
+  "__Event.TitleExpense": "Manage and share expenses",
+  "Event.TitleExpense": "खर्चों को प्रबंधित और साझा करें",
+  "__Event.TitleGeolocalisation": "Where is the event?",
+  "Event.TitleGeolocalisation": "कहां है घटना?",
+  "__Event.TitleItinerary": "Define your itinerary, and point of interest",
+  "Event.TitleItinerary": "अपनी यात्रा कार्यक्रम, और रुचि के बिंदु को परिभाषित करें",
 
   "__Event.TitleParticipant" : "Invite participant to your event",
   "Event.TitleParticipant" : "अपने इवेंट में प्रतिभागी को आमंत्रित करें",
@@ -522,21 +507,18 @@
 
   "__EventParticipant.Invited" : "Invited",
   "EventParticipant.Invited" : "आमंत्रित",
-
-  "__EventParticipant.Left" : "Left",
-  "EventParticipant.Left" : "बाएं",
-
-  "__EventParticipant.MainTitleParticipant" : "Participants",
-  "EventParticipant.MainTitleParticipant" : "प्रतिभागियों",
-
-  "__EventParticipant.Owner" : "Owner",
-  "EventParticipant.Owner" : "मालिक",
-
-  "__EventParticipant.Person" : "Person",
-  "EventParticipant.Person" : "व्यक्ति",
-
-  "__EventParticipant.Role" : "Role",
-  "EventParticipant.Role" : "भूमिका",
+  "__EventParticipant.Left": "Left",
+  "EventParticipant.Left": "बाएं",
+  "__EventParticipant.MainTitleParticipant": "Participants",
+  "EventParticipant.MainTitleParticipant": "प्रतिभागियों",
+  "__EventParticipant.Owner": "Owner",
+  "EventParticipant.Owner": "मालिक",
+  "__EventParticipant.ParticipantTip": "Invite participant to the event",
+  "EventParticipant.ParticipantTip": "कार्यक्रम में प्रतिभागी को आमंत्रित करें",
+  "__EventParticipant.Person": "Person",
+  "EventParticipant.Person": "व्यक्ति",
+  "__EventParticipant.Role": "Role",
+  "EventParticipant.Role": "भूमिका",
   "__EventParticipant.RoleObserver": "Observer",
   "EventParticipant.RoleObserver": "देखने वाला",
   "__EventParticipant.RoleOrganizer": "Organizer",
@@ -569,15 +551,12 @@
   "EventPreferences.EventSubscription": "अंशदान",
   "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
   "EventPreferences.ExpenseTip": "घटना के लिए सभी वरीयताओं को सेट करें",
-
-  "__EventPreferences.MainTitlePreferences" : "Preferences",
-  "EventPreferences.MainTitlePreferences" : "पसंद",
-
-  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
-  "EventPreferences.PreferencesTip" : "घटना के लिए सभी वरीयताओं को सेट करें",
-
-  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
-  "EventPreferences.SubscriptionExcellenceExplanation" : "एक्सीलेंस इवेंट में सभी कार्य होते हैं, और प्रति आइटम 1000 की सीमा होती है",
+  "__EventPreferences.MainTitlePreferences": "Preferences",
+  "EventPreferences.MainTitlePreferences": "पसंद",
+  "__EventPreferences.PreferencesTip": "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip": "घटना के लिए सभी वरीयताओं को सेट करें",
+  "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation": "एक्सीलेंस इवेंट में सभी कार्य होते हैं, और प्रति आइटम 1000 की सीमा होती है",
 
   "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
   "EventPreferences.SubscriptionFreeExplanation" : "एक निशुल्क घटना में बजट को छोड़कर सभी कार्य शामिल होते हैं और प्रतिभागियों की संख्या (20) और आइटम (50) तक सीमित होते हैं",
@@ -608,47 +587,37 @@
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "विवरण",
-
-  "__EventShoppingList.Done" : "Done",
-  "EventShoppingList.Done" : "किया हुआ",
-
-  "__EventShoppingList.ItemRemoved" : "The item is removed",
-  "EventShoppingList.ItemRemoved" : "आइटम हटा दिया गया है",
-
-  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
-  "EventShoppingList.LimitSubsscription" : "आप घटना में अनुमत वस्तुओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
-
-  "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
-  "EventShoppingList.MainTitleShoppingList" : "खरीदारी की सूची",
-
-  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
-  "EventShoppingList.NoItem" : "आपके पास सूची में कोई आइटम नहीं है।",
-
-  "__EventShoppingList.RemovingItem" : "Removing an item",
-  "EventShoppingList.RemovingItem" : "किसी वस्तु को निकालना",
-
-  "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
-  "EventShoppingList.ShoppingListTip" : "ईवेंट के लिए आपके पास आइटम की एक सूची है। उन्हें सूचीबद्ध करें, तय करें कि उन्हें किसे खरीदना है",
-
-  "__EventShoppingList.ShowDetails" : "Detail",
-  "EventShoppingList.ShowDetails" : "विस्तार",
+  "__EventShoppingList.Done": "Done",
+  "EventShoppingList.Done": "किया हुआ",
+  "__EventShoppingList.ItemRemoved": "The item is removed",
+  "EventShoppingList.ItemRemoved": "आइटम हटा दिया गया है",
+  "__EventShoppingList.LimitSubsscription": "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription": "आप घटना में अनुमत वस्तुओं की सीमा तक पहुँच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
+  "__EventShoppingList.MainTitleBringList": "Bring List",
+  "EventShoppingList.MainTitleBringList": "सूची लाओ",
+  "__EventShoppingList.MainTitleShoppingList": "Shopping List",
+  "EventShoppingList.MainTitleShoppingList": "खरीदारी की सूची",
+  "__EventShoppingList.NoItem": "You don't have any item to bring in the list.",
+  "EventShoppingList.NoItem": "आपके पास सूची में कोई आइटम नहीं है।",
+  "__EventShoppingList.RemovingItem": "Removing an item",
+  "EventShoppingList.RemovingItem": "किसी वस्तु को निकालना",
+  "__EventShoppingList.ShoppingListTip": "You have a list of item to bing to the event. List them, decide who have to bought them",
+  "EventShoppingList.ShoppingListTip": "ईवेंट के लिए आपके पास आइटम की एक सूची है। उन्हें सूचीबद्ध करें, तय करें कि उन्हें किसे खरीदना है",
+  "__EventShoppingList.ShowDetails": "Detail",
+  "EventShoppingList.ShowDetails": "विस्तार",
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "व्यय दिखाओ",
 
   "__EventShoppingList.TaskAdded" : "The item is added",
   "EventShoppingList.TaskAdded" : "आइटम जोड़ा जाता है",
-
-  "__EventShoppingList.Title" : "Shopping List",
-  "EventShoppingList.Title" : "खरीदारी की सूची",
-
-  "__EventShoppingList.ToBring" : "To bring",
-  "EventShoppingList.ToBring" : "लाने के लिए",
-
-  "__EventShoppingList.What" : "What",
-  "EventShoppingList.What" : "क्या",
-
-  "__EventShoppingList.Who" : "Who",
+  "__EventShoppingList.Title": "Shopping List",
+  "EventShoppingList.Title": "खरीदारी की सूची",
+  "__EventShoppingList.ToBring": "To bring",
+  "EventShoppingList.ToBring": "लाने के लिए",
+  "__EventShoppingList.What": "What",
+  "EventShoppingList.What": "क्या",
+  "__EventShoppingList.Who": "Who",
   "EventShoppingList.Who": "Who",
   "__EventShoppingList.addItem": "Add a new item in the list",
   "EventShoppingList.addItem": "सूची में एक नया आइटम जोड़ें",
@@ -689,16 +658,12 @@
   "EventSurvey.InProgress": "चालू",
   "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
   "EventSurvey.LimitSubsscription": "आप घटना में अनुमति दी गई पसंद की सीमा तक पहुंच जाते हैं। अपनी सदस्यता देखने के लिए अपनी प्रोफ़ाइल पर जाएं",
-
-  "EventSurvey.MainTitleSurveyList" : "सर्वेक्षण",
-
-  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
-  "EventSurvey.NoAccessForSurveyInPreparation" : "यह सर्वेक्षण तैयारी में है। आप इसे इस समय के लिए एक्सेस नहीं कर सकते।",
-
-  "EventSurvey.NoItem" : "आपके पास सूची में कोई भी सर्वेक्षण तैयार नहीं है।",
-
-  "__EventSurvey.Option" : "Option",
-  "EventSurvey.Option" : "विकल्प",
+  "EventSurvey.MainTitleSurveyList": "सर्वेक्षण",
+  "__EventSurvey.NoAccessForSurveyInPreparation": "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation": "यह सर्वेक्षण तैयारी में है। आप इसे इस समय के लिए एक्सेस नहीं कर सकते।",
+  "EventSurvey.NoItem": "आपके पास सूची में कोई भी सर्वेक्षण तैयार नहीं है।",
+  "__EventSurvey.Option": "Option",
+  "EventSurvey.Option": "विकल्प",
 
   "__EventSurvey.RemovingChoice" : "Removing a choice",
   "EventSurvey.RemovingChoice" : "एक विकल्प निकालना",
@@ -840,17 +805,13 @@
 
   "__EventTaskList.TaskAdded" : "A task is added",
   "EventTaskList.TaskAdded" : "एक कार्य जोड़ा गया है",
-
-  "__EventTaskList.TaskRemoved" : "The task is removed",
-  "EventTaskList.TaskRemoved" : "टास्क को हटा दिया जाता है",
-
-  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
-  "EventTaskList.TaskTip" : "अपने ईवेंट के लिए आपको क्या करना है, यह बताने के लिए कार्यों का उपयोग करें। आप प्रतिभागी को असाइन कर सकते हैं, और कार्य की स्थिति को चिह्नित कर सकते हैं: नियोजित, किया गया .... आपकी पसंद के अनुसार, जब आपको एहसास करने के लिए कोई कार्य हो तो आपको एक सूचना मिल सकती है",
-
-  "__EventTaskList.Who" : "Who",
-  "EventTaskList.Who" : "Who",
-
-  "__EventTaskList.addItem" : "Add a task in the list",
+  "__EventTaskList.TaskRemoved": "The task is removed",
+  "EventTaskList.TaskRemoved": "टास्क को हटा दिया जाता है",
+  "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+  "EventTaskList.TaskTip": "अपने ईवेंट के लिए आपको क्या करना है, यह बताने के लिए कार्यों का उपयोग करें। आप प्रतिभागी को असाइन कर सकते हैं, और कार्य की स्थिति को चिह्नित कर सकते हैं: नियोजित, किया गया .... आपकी पसंद के अनुसार, जब आपको एहसास करने के लिए कोई कार्य हो तो आपको एक सूचना मिल सकती है",
+  "__EventTaskList.Who": "Who",
+  "EventTaskList.Who": "Who",
+  "__EventTaskList.addItem": "Add a task in the list",
   "EventTaskList.addItem": "सूची में एक नया आइटम जोड़ें",
   "__Eventitinerary.CantRemoveStep": "The step can't be removed",
   "Eventitinerary.CantRemoveStep": "कदम हटाया नहीं जा सकता",
@@ -977,15 +938,12 @@
   "Login.password": "पासवर्ड",
   "__Menu.AdmininstratorExplanation": "Administrator function.",
   "Menu.AdmininstratorExplanation": "प्रशासक समारोह।",
-
-  "__Menu.Administration" : "Administration",
-  "Menu.Administration" : "शासन प्रबंध",
-
-  "__Menu.Events" : "Events",
-  "Menu.Events" : "आयोजन",
-
-  "__Menu.EventsExplanation" : "Access all events you can access",
-  "Menu.EventsExplanation" : "उन सभी घटनाओं तक पहुँचें जिन्हें आप एक्सेस कर सकते हैं",
+  "__Menu.Administration": "Administration",
+  "Menu.Administration": "शासन प्रबंध",
+  "__Menu.Events": "Events",
+  "Menu.Events": "आयोजन",
+  "__Menu.EventsExplanation": "Access all events you can access",
+  "Menu.EventsExplanation": "उन सभी घटनाओं तक पहुँचें जिन्हें आप एक्सेस कर सकते हैं",
 
   "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
   "Menu.InvitationExplanation" : "अपने निमंत्रण जांचें, उन्हें स्वीकार करें।",
@@ -1072,16 +1030,13 @@
   "MyProfile.PhoneNumberVisibilityAlways" : "हमेशा",
 
   "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
-  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "आपका फ़ोन नंबर Togh . से जुड़े किसी भी उपयोगकर्ता के लिए दृश्यमान है",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
-  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "सीमित घटना",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
-  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "आपका फ़ोन नंबर केवल ईवेंट पर ही दिखाई देता है, ईवेंट में पंजीकृत सभी उपयोगकर्ताओं के लिए",
-
-  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
-  "MyProfile.PhoneNumberVisibilityNever" : "कभी नहीँ",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "आपका फ़ोन नंबर Togh . से जुड़े किसी भी उपयोगकर्ता के लिए दृश्यमान है",
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent": "सीमित घटना",
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "आपका फ़ोन नंबर केवल ईवेंट पर ही दिखाई देता है, ईवेंट में पंजीकृत सभी उपयोगकर्ताओं के लिए",
+  "__MyProfile.PhoneNumberVisibilityNever": "Never",
+  "MyProfile.PhoneNumberVisibilityNever": "कभी नहीँ",
   "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
   "MyProfile.PhoneNumberVisibilityNeverExplanation": "आपका फ़ोन नंबर बिल्कुल भी दिखाई नहीं दे रहा है।",
   "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",

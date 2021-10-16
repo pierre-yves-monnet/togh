@@ -54,15 +54,12 @@
   "AdminUsers.Connected": "연결됨",
   "__AdminUsers.ConnectedOffline": "User offline",
   "AdminUsers.ConnectedOffline": "사용자 오프라인",
-
-  "__AdminUsers.ConnectedOnLine" : "User connected",
-  "AdminUsers.ConnectedOnLine" : "사용자 연결",
-
-  "__AdminUsers.Disconnect" : "Disconnect",
-  "AdminUsers.Disconnect" : "연결 해제",
-
-  "__AdminUsers.Email" : "Email",
-  "AdminUsers.Email" : "이메일",
+  "__AdminUsers.ConnectedOnLine": "User connected",
+  "AdminUsers.ConnectedOnLine": "사용자 연결",
+  "__AdminUsers.Disconnect": "Disconnect",
+  "AdminUsers.Disconnect": "연결 해제",
+  "__AdminUsers.Email": "Email",
+  "AdminUsers.Email": "이메일",
 
   "__AdminUsers.Excellence" : "Excellence",
   "AdminUsers.Excellence" : "우수",
@@ -161,16 +158,13 @@
   "AdminUsers.subscriptionPremium" : "프리미엄 구독",
 
   "__AskPassword.DifferentPassword" : "Password are different",
-  "AskPassword.DifferentPassword" : "비밀번호가 다릅니다",
-
-  "__AskPassword.NewPassword" : "New password",
-  "AskPassword.NewPassword" : "새 비밀번호",
-
-  "__AskPassword.RetypePassword" : "Retype password to verify it",
-  "AskPassword.RetypePassword" : "암호를 다시 입력하여 확인",
-
-  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
-  "AskPassword.ToSmalPassword" : "비밀번호는 최소 3자 이상 입력하세요.",
+  "AskPassword.DifferentPassword": "비밀번호가 다릅니다",
+  "__AskPassword.NewPassword": "New password",
+  "AskPassword.NewPassword": "새 비밀번호",
+  "__AskPassword.RetypePassword": "Retype password to verify it",
+  "AskPassword.RetypePassword": "암호를 다시 입력하여 확인",
+  "__AskPassword.ToSmalPassword": "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword": "비밀번호는 최소 3자 이상 입력하세요.",
   "__BodyTogh.ResetYourPassword": "Reset your password",
   "BodyTogh.ResetYourPassword": "비밀번호를 재설정",
   "__BodyTogh.ThankYou": "Thank you!",
@@ -197,15 +191,12 @@
   "BodyTogh.whatisToghExample": "학교에서 팟럭? 친구들과 바베큐? m에서 가족과 함께 여행? 며칠? 이것은 이벤트입니다.",
   "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation": "Togh는 이벤트를 관리하는 응용 프로그램입니다. 학교에서 팟럭? 친구들과 바베큐? m에서 가족과 함께 여행? 며칠? 이것은 이벤트입니다. 하나의 이벤트에서 참가자를 구성하고, 작업 및 쇼핑 목록을 등록하고, 주소를 제공하고, 도로 여행 단계를 지정합니다. 참가자에게 설문 조사를 요청할 수 있습니다. 할리우드 빌딩을 방문하는 것을 선호합니까, 아니면 그리피스 천문대를 방문하는 것을 선호합니까 (폴은 둘 다 방문하고 싶어합니까!)지도에 여정을 시각화하십시오. 비용을 계산하십시오. Togh는 누가 누가 소유하는지 말할 것입니다.",
-
-  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
-  "BodyTogh.whatisToghPossibility" : "하나의 이벤트에서 참가자를 구성하고, 작업 및 쇼핑 목록을 등록하고, 주소를 제공하고, 도로 여행 단계를 지정합니다. 참가자에게 설문 조사를 요청할 수 있습니다. 할리우드 빌딩을 방문하는 것을 선호합니까, 아니면 그리피스 천문대를 방문하는 것을 선호합니까 (폴은 둘 다 방문하고 싶어합니까!)지도에 여정을 시각화하십시오. 비용을 계산하십시오. Togh는 누가 누가 소유하는지 말할 것입니다.",
-
-  "__BodyTogh.whatisToghTitle" : "What is Togh?",
-  "BodyTogh.whatisToghTitle" : "Togh는 무엇입니까?",
-
-  "__BodyTogh.whyTogh" : "Why Togh?",
-  "BodyTogh.whyTogh" : "왜 Togh?",
+  "__BodyTogh.whatisToghPossibility": "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility": "하나의 이벤트에서 참가자를 구성하고, 작업 및 쇼핑 목록을 등록하고, 주소를 제공하고, 도로 여행 단계를 지정합니다. 참가자에게 설문 조사를 요청할 수 있습니다. 할리우드 빌딩을 방문하는 것을 선호합니까, 아니면 그리피스 천문대를 방문하는 것을 선호합니까 (폴은 둘 다 방문하고 싶어합니까!)지도에 여정을 시각화하십시오. 비용을 계산하십시오. Togh는 누가 누가 소유하는지 말할 것입니다.",
+  "__BodyTogh.whatisToghTitle": "What is Togh?",
+  "BodyTogh.whatisToghTitle": "Togh는 무엇입니까?",
+  "__BodyTogh.whyTogh": "Why Togh?",
+  "BodyTogh.whyTogh": "왜 Togh?",
 
   "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
   "BodyTogh.whyToghBorn" : "여기에서 Togh가 태어났습니다. 저는이 응용 프로그램을 5 년 동안 생각하고있었습니다.",
@@ -298,30 +289,24 @@
 
   "__Event.Status" : "Status",
   "Event.Status" : "상태",
-
-  "__Event.Survey" : "Survey",
-  "Event.Survey" : "서베이",
-
-  "__Event.Tasks" : "Tasks",
-  "Event.Tasks" : "과제",
-
-  "__Event.TimeEvent" : "Time",
-  "Event.TimeEvent" : "시각",
-
-  "__Event.TitleBudget" : "Budget",
-  "Event.TitleBudget" : "예산",
-
-  "__Event.TitleChat" : "Chat",
-  "Event.TitleChat" : "잡담",
-
-  "__Event.TitleExpense" : "Manage and share expenses",
-  "Event.TitleExpense" : "비용 관리 및 공유",
-
-  "__Event.TitleGeolocalisation" : "Where is the event?",
-  "Event.TitleGeolocalisation" : "이벤트는 어디입니까?",
-
-  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
-  "Event.TitleItinerary" : "여정과 관심 지점 정의",
+  "__Event.Survey": "Survey",
+  "Event.Survey": "서베이",
+  "__Event.Tasks": "Tasks",
+  "Event.Tasks": "과제",
+  "__Event.TimeEvent": "Time",
+  "Event.TimeEvent": "시각",
+  "__Event.TitleBringList": "What to brings?",
+  "Event.TitleBringList": "무엇을 가져올까요?",
+  "__Event.TitleBudget": "Budget",
+  "Event.TitleBudget": "예산",
+  "__Event.TitleChat": "Chat with all participants",
+  "Event.TitleChat": "잡담",
+  "__Event.TitleExpense": "Manage and share expenses",
+  "Event.TitleExpense": "비용 관리 및 공유",
+  "__Event.TitleGeolocalisation": "Where is the event?",
+  "Event.TitleGeolocalisation": "이벤트는 어디입니까?",
+  "__Event.TitleItinerary": "Define your itinerary, and point of interest",
+  "Event.TitleItinerary": "여정과 관심 지점 정의",
 
   "__Event.TitleParticipant" : "Invite participant to your event",
   "Event.TitleParticipant" : "이벤트에 참가자 초대",
@@ -522,21 +507,18 @@
 
   "__EventParticipant.Invited" : "Invited",
   "EventParticipant.Invited" : "초대 됨",
-
-  "__EventParticipant.Left" : "Left",
-  "EventParticipant.Left" : "왼쪽",
-
-  "__EventParticipant.MainTitleParticipant" : "Participants",
-  "EventParticipant.MainTitleParticipant" : "참가자",
-
-  "__EventParticipant.Owner" : "Owner",
-  "EventParticipant.Owner" : "소유자",
-
-  "__EventParticipant.Person" : "Person",
-  "EventParticipant.Person" : "사람",
-
-  "__EventParticipant.Role" : "Role",
-  "EventParticipant.Role" : "역할",
+  "__EventParticipant.Left": "Left",
+  "EventParticipant.Left": "왼쪽",
+  "__EventParticipant.MainTitleParticipant": "Participants",
+  "EventParticipant.MainTitleParticipant": "참가자",
+  "__EventParticipant.Owner": "Owner",
+  "EventParticipant.Owner": "소유자",
+  "__EventParticipant.ParticipantTip": "Invite participant to the event",
+  "EventParticipant.ParticipantTip": "이벤트에 참가자 초대",
+  "__EventParticipant.Person": "Person",
+  "EventParticipant.Person": "사람",
+  "__EventParticipant.Role": "Role",
+  "EventParticipant.Role": "역할",
   "__EventParticipant.RoleObserver": "Observer",
   "EventParticipant.RoleObserver": "관찰자",
   "__EventParticipant.RoleOrganizer": "Organizer",
@@ -569,15 +551,12 @@
   "EventPreferences.EventSubscription": "신청",
   "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
   "EventPreferences.ExpenseTip": "이벤트에 대한 모든 환경 설정 지정",
-
-  "__EventPreferences.MainTitlePreferences" : "Preferences",
-  "EventPreferences.MainTitlePreferences" : "우선권",
-
-  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
-  "EventPreferences.PreferencesTip" : "이벤트에 대한 모든 환경 설정 지정",
-
-  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
-  "EventPreferences.SubscriptionExcellenceExplanation" : "Excellence 이벤트에는 모든 기능이 포함되며 항목 당 1000 개로 제한됩니다.",
+  "__EventPreferences.MainTitlePreferences": "Preferences",
+  "EventPreferences.MainTitlePreferences": "우선권",
+  "__EventPreferences.PreferencesTip": "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip": "이벤트에 대한 모든 환경 설정 지정",
+  "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation": "Excellence 이벤트에는 모든 기능이 포함되며 항목 당 1000 개로 제한됩니다.",
 
   "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
   "EventPreferences.SubscriptionFreeExplanation" : "무료 이벤트는 예산을 제외한 모든 기능을 포함하며 참가자 수 (20) 및 항목 (50)에 제한이 있습니다.",
@@ -608,47 +587,37 @@
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "기술",
-
-  "__EventShoppingList.Done" : "Done",
-  "EventShoppingList.Done" : "끝난",
-
-  "__EventShoppingList.ItemRemoved" : "The item is removed",
-  "EventShoppingList.ItemRemoved" : "항목이 제거되었습니다.",
-
-  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
-  "EventShoppingList.LimitSubsscription" : "이벤트에서 허용되는 항목의 한도에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
-
-  "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
-  "EventShoppingList.MainTitleShoppingList" : "쇼핑리스트",
-
-  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
-  "EventShoppingList.NoItem" : "목록에 항목이 없습니다.",
-
-  "__EventShoppingList.RemovingItem" : "Removing an item",
-  "EventShoppingList.RemovingItem" : "항목 제거",
-
-  "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
-  "EventShoppingList.ShoppingListTip" : "이벤트에 참여할 항목 목록이 있습니다. 목록을 작성하고 누가 구입해야하는지 결정하십시오.",
-
-  "__EventShoppingList.ShowDetails" : "Detail",
-  "EventShoppingList.ShowDetails" : "세부 묘사",
+  "__EventShoppingList.Done": "Done",
+  "EventShoppingList.Done": "끝난",
+  "__EventShoppingList.ItemRemoved": "The item is removed",
+  "EventShoppingList.ItemRemoved": "항목이 제거되었습니다.",
+  "__EventShoppingList.LimitSubsscription": "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription": "이벤트에서 허용되는 항목의 한도에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
+  "__EventShoppingList.MainTitleBringList": "Bring List",
+  "EventShoppingList.MainTitleBringList": "목록 가져오기",
+  "__EventShoppingList.MainTitleShoppingList": "Shopping List",
+  "EventShoppingList.MainTitleShoppingList": "쇼핑리스트",
+  "__EventShoppingList.NoItem": "You don't have any item to bring in the list.",
+  "EventShoppingList.NoItem": "목록에 항목이 없습니다.",
+  "__EventShoppingList.RemovingItem": "Removing an item",
+  "EventShoppingList.RemovingItem": "항목 제거",
+  "__EventShoppingList.ShoppingListTip": "You have a list of item to bing to the event. List them, decide who have to bought them",
+  "EventShoppingList.ShoppingListTip": "이벤트에 참여할 항목 목록이 있습니다. 목록을 작성하고 누가 구입해야하는지 결정하십시오.",
+  "__EventShoppingList.ShowDetails": "Detail",
+  "EventShoppingList.ShowDetails": "세부 묘사",
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "비용 표시",
 
   "__EventShoppingList.TaskAdded" : "The item is added",
   "EventShoppingList.TaskAdded" : "항목이 추가됩니다",
-
-  "__EventShoppingList.Title" : "Shopping List",
-  "EventShoppingList.Title" : "쇼핑리스트",
-
-  "__EventShoppingList.ToBring" : "To bring",
-  "EventShoppingList.ToBring" : "가져오다",
-
-  "__EventShoppingList.What" : "What",
-  "EventShoppingList.What" : "뭐",
-
-  "__EventShoppingList.Who" : "Who",
+  "__EventShoppingList.Title": "Shopping List",
+  "EventShoppingList.Title": "쇼핑리스트",
+  "__EventShoppingList.ToBring": "To bring",
+  "EventShoppingList.ToBring": "가져오다",
+  "__EventShoppingList.What": "What",
+  "EventShoppingList.What": "뭐",
+  "__EventShoppingList.Who": "Who",
   "EventShoppingList.Who": "WHO",
   "__EventShoppingList.addItem": "Add a new item in the list",
   "EventShoppingList.addItem": "목록에 새 항목 추가",
@@ -689,16 +658,12 @@
   "EventSurvey.InProgress": "진행 중",
   "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
   "EventSurvey.LimitSubsscription": "이벤트에서 허용되는 선택의 한계에 도달했습니다. 구독을 보려면 프로필로 이동하세요.",
-
-  "EventSurvey.MainTitleSurveyList" : "서베이",
-
-  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
-  "EventSurvey.NoAccessForSurveyInPreparation" : "이 설문 조사는 준비 중입니다. 지금은 액세스 할 수 없습니다.",
-
-  "EventSurvey.NoItem" : "목록에 준비된 설문 조사가 없습니다.",
-
-  "__EventSurvey.Option" : "Option",
-  "EventSurvey.Option" : "선택권",
+  "EventSurvey.MainTitleSurveyList": "서베이",
+  "__EventSurvey.NoAccessForSurveyInPreparation": "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation": "이 설문 조사는 준비 중입니다. 지금은 액세스 할 수 없습니다.",
+  "EventSurvey.NoItem": "목록에 준비된 설문 조사가 없습니다.",
+  "__EventSurvey.Option": "Option",
+  "EventSurvey.Option": "선택권",
 
   "__EventSurvey.RemovingChoice" : "Removing a choice",
   "EventSurvey.RemovingChoice" : "선택 제거",
@@ -840,17 +805,13 @@
 
   "__EventTaskList.TaskAdded" : "A task is added",
   "EventTaskList.TaskAdded" : "작업이 추가되었습니다.",
-
-  "__EventTaskList.TaskRemoved" : "The task is removed",
-  "EventTaskList.TaskRemoved" : "작업이 제거되었습니다.",
-
-  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
-  "EventTaskList.TaskTip" : "작업을 사용하여 이벤트를 위해해야 할 일을 참조하십시오. 참가자를 지정하고 작업 상태를 표시 할 수 있습니다. 계획 됨, 완료 됨 .... 선호에 따라 실현할 작업이있을 때 표기법을받을 수 있습니다.",
-
-  "__EventTaskList.Who" : "Who",
-  "EventTaskList.Who" : "WHO",
-
-  "__EventTaskList.addItem" : "Add a task in the list",
+  "__EventTaskList.TaskRemoved": "The task is removed",
+  "EventTaskList.TaskRemoved": "작업이 제거되었습니다.",
+  "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+  "EventTaskList.TaskTip": "작업을 사용하여 이벤트를 위해해야 할 일을 참조하십시오. 참가자를 지정하고 작업 상태를 표시 할 수 있습니다. 계획 됨, 완료 됨 .... 선호에 따라 실현할 작업이있을 때 표기법을받을 수 있습니다.",
+  "__EventTaskList.Who": "Who",
+  "EventTaskList.Who": "WHO",
+  "__EventTaskList.addItem": "Add a task in the list",
   "EventTaskList.addItem": "목록에 새 항목 추가",
   "__Eventitinerary.CantRemoveStep": "The step can't be removed",
   "Eventitinerary.CantRemoveStep": "단계를 제거 할 수 없습니다.",
@@ -977,15 +938,12 @@
   "Login.password": "비밀번호",
   "__Menu.AdmininstratorExplanation": "Administrator function.",
   "Menu.AdmininstratorExplanation": "관리자 기능.",
-
-  "__Menu.Administration" : "Administration",
-  "Menu.Administration" : "관리",
-
-  "__Menu.Events" : "Events",
-  "Menu.Events" : "이벤트",
-
-  "__Menu.EventsExplanation" : "Access all events you can access",
-  "Menu.EventsExplanation" : "액세스 할 수있는 모든 이벤트에 액세스",
+  "__Menu.Administration": "Administration",
+  "Menu.Administration": "관리",
+  "__Menu.Events": "Events",
+  "Menu.Events": "이벤트",
+  "__Menu.EventsExplanation": "Access all events you can access",
+  "Menu.EventsExplanation": "액세스 할 수있는 모든 이벤트에 액세스",
 
   "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
   "Menu.InvitationExplanation" : "초대를 확인하고 수락하십시오.",
@@ -1072,16 +1030,13 @@
   "MyProfile.PhoneNumberVisibilityAlways" : "항상",
 
   "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
-  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Togh에 연결된 모든 사용자에게 전화 번호가 표시됩니다.",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
-  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "한정 이벤트",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
-  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "귀하의 전화 번호는 이벤트에 등록 된 모든 사용자의 이벤트에서만 볼 수 있습니다.",
-
-  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
-  "MyProfile.PhoneNumberVisibilityNever" : "못",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Togh에 연결된 모든 사용자에게 전화 번호가 표시됩니다.",
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent": "한정 이벤트",
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "귀하의 전화 번호는 이벤트에 등록 된 모든 사용자의 이벤트에서만 볼 수 있습니다.",
+  "__MyProfile.PhoneNumberVisibilityNever": "Never",
+  "MyProfile.PhoneNumberVisibilityNever": "못",
   "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
   "MyProfile.PhoneNumberVisibilityNeverExplanation": "전화 번호가 전혀 보이지 않습니다.",
   "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",

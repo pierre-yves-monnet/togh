@@ -53,15 +53,12 @@
   "AdminUsers.Connected": "متصل",
   "__AdminUsers.ConnectedOffline": "User offline",
   "AdminUsers.ConnectedOffline": "المستخدم حاليا",
-
-  "__AdminUsers.ConnectedOnLine" : "User connected",
-  "AdminUsers.ConnectedOnLine" : "المستخدم متصل",
-
-  "__AdminUsers.Disconnect" : "Disconnect",
-  "AdminUsers.Disconnect" : "قطع الاتصال",
-
-  "__AdminUsers.Email" : "Email",
-  "AdminUsers.Email" : "بريد إلكتروني",
+  "__AdminUsers.ConnectedOnLine": "User connected",
+  "AdminUsers.ConnectedOnLine": "المستخدم متصل",
+  "__AdminUsers.Disconnect": "Disconnect",
+  "AdminUsers.Disconnect": "قطع الاتصال",
+  "__AdminUsers.Email": "Email",
+  "AdminUsers.Email": "بريد إلكتروني",
 
   "__AdminUsers.Excellence" : "Excellence",
   "AdminUsers.Excellence" : "تفوق",
@@ -160,16 +157,13 @@
   "AdminUsers.subscriptionPremium" : "اشتراك بريميوم",
 
   "__AskPassword.DifferentPassword" : "Password are different",
-  "AskPassword.DifferentPassword" : "كلمة المرور مختلفة",
-
-  "__AskPassword.NewPassword" : "New password",
-  "AskPassword.NewPassword" : "كلمة مرور جديدة",
-
-  "__AskPassword.RetypePassword" : "Retype password to verify it",
-  "AskPassword.RetypePassword" : "أعد كتابة كلمة المرور للتحقق منها",
-
-  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
-  "AskPassword.ToSmalPassword" : "أدخل 3 أحرف على الأقل لكلمة المرور",
+  "AskPassword.DifferentPassword": "كلمة المرور مختلفة",
+  "__AskPassword.NewPassword": "New password",
+  "AskPassword.NewPassword": "كلمة مرور جديدة",
+  "__AskPassword.RetypePassword": "Retype password to verify it",
+  "AskPassword.RetypePassword": "أعد كتابة كلمة المرور للتحقق منها",
+  "__AskPassword.ToSmalPassword": "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword": "أدخل 3 أحرف على الأقل لكلمة المرور",
   "__BodyTogh.ResetYourPassword": "Reset your password",
   "BodyTogh.ResetYourPassword": "اعد ضبط كلمه السر",
   "__BodyTogh.ThankYou": "Thank you!",
@@ -196,15 +190,12 @@
   "BodyTogh.whatisToghExample": "الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث.",
   "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation": "توغ هو تطبيق لإدارة الحدث الخاص بك. الطعام مع المدرسة؟ الشواء مع الأصدقاء؟ رحلة على الطريق مع العائلة على م؟ عدة أيام؟ هذا حدث. في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
-
-  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
-  "BodyTogh.whatisToghPossibility" : "في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
-
-  "__BodyTogh.whatisToghTitle" : "What is Togh?",
-  "BodyTogh.whatisToghTitle" : "ما هو طوغ؟",
-
-  "__BodyTogh.whyTogh" : "Why Togh?",
-  "BodyTogh.whyTogh" : "لماذا توج؟",
+  "__BodyTogh.whatisToghPossibility": "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility": "في حدث واحد ، قم بتنظيم المشاركين ، وسجل المهام وقائمة التسوق ، وحدد العنوان ، وحدد خطوات رحلتك على الطريق. يمكنك أن تطلب من المشارك أي استطلاع: هل يفضل زيارة مبنى هوليوود أم مرصد جريفيث (يريد بول زيارة كليهما!) تصور مسار الرحلة على الخريطة. حساب المصاريف. توغ سيخبر من يملك من.",
+  "__BodyTogh.whatisToghTitle": "What is Togh?",
+  "BodyTogh.whatisToghTitle": "ما هو طوغ؟",
+  "__BodyTogh.whyTogh": "Why Togh?",
+  "BodyTogh.whyTogh": "لماذا توج؟",
 
   "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
   "BodyTogh.whyToghBorn" : "هنا ولد طوغ. كنت أفكر في هذا التطبيق لمدة خمس سنوات حتى الآن.",
@@ -295,30 +286,24 @@
 
   "__Event.Status" : "Status",
   "Event.Status" : "حالة",
-
-  "__Event.Survey" : "Survey",
-  "Event.Survey" : "استبيان",
-
-  "__Event.Tasks" : "Tasks",
-  "Event.Tasks" : "مهام",
-
-  "__Event.TimeEvent" : "Time",
-  "Event.TimeEvent" : "وقت",
-
-  "__Event.TitleBudget" : "Budget",
-  "Event.TitleBudget" : "ميزانية",
-
-  "__Event.TitleChat" : "Chat",
-  "Event.TitleChat" : "محادثة",
-
-  "__Event.TitleExpense" : "Manage and share expenses",
-  "Event.TitleExpense" : "إدارة النفقات وتقاسمها",
-
-  "__Event.TitleGeolocalisation" : "Where is the event?",
-  "Event.TitleGeolocalisation" : "اين الحدث؟",
-
-  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
-  "Event.TitleItinerary" : "حدد خط سير الرحلة ونقطة الاهتمام",
+  "__Event.Survey": "Survey",
+  "Event.Survey": "استبيان",
+  "__Event.Tasks": "Tasks",
+  "Event.Tasks": "مهام",
+  "__Event.TimeEvent": "Time",
+  "Event.TimeEvent": "وقت",
+  "__Event.TitleBringList": "What to brings?",
+  "Event.TitleBringList": "ماذا تجلب؟",
+  "__Event.TitleBudget": "Budget",
+  "Event.TitleBudget": "ميزانية",
+  "__Event.TitleChat": "Chat with all participants",
+  "Event.TitleChat": "محادثة",
+  "__Event.TitleExpense": "Manage and share expenses",
+  "Event.TitleExpense": "إدارة النفقات وتقاسمها",
+  "__Event.TitleGeolocalisation": "Where is the event?",
+  "Event.TitleGeolocalisation": "اين الحدث؟",
+  "__Event.TitleItinerary": "Define your itinerary, and point of interest",
+  "Event.TitleItinerary": "حدد خط سير الرحلة ونقطة الاهتمام",
 
   "__Event.TitleParticipant" : "Invite participant to your event",
   "Event.TitleParticipant" : "ادعُ مشاركًا إلى هذا الحدث الخاص بك",
@@ -508,21 +493,18 @@
 
   "__EventParticipant.Invited" : "Invited",
   "EventParticipant.Invited" : "مدعو",
-
-  "__EventParticipant.Left" : "Left",
-  "EventParticipant.Left" : "اليسار",
-
-  "__EventParticipant.MainTitleParticipant" : "Participants",
-  "EventParticipant.MainTitleParticipant" : "مشاركون",
-
-  "__EventParticipant.Owner" : "Owner",
-  "EventParticipant.Owner" : "مالك",
-
-  "__EventParticipant.Person" : "Person",
-  "EventParticipant.Person" : "شخص",
-
-  "__EventParticipant.Role" : "Role",
-  "EventParticipant.Role" : "دور",
+  "__EventParticipant.Left": "Left",
+  "EventParticipant.Left": "اليسار",
+  "__EventParticipant.MainTitleParticipant": "Participants",
+  "EventParticipant.MainTitleParticipant": "مشاركون",
+  "__EventParticipant.Owner": "Owner",
+  "EventParticipant.Owner": "مالك",
+  "__EventParticipant.ParticipantTip": "Invite participant to the event",
+  "EventParticipant.ParticipantTip": "ادعُ مشاركًا إلى الحدث",
+  "__EventParticipant.Person": "Person",
+  "EventParticipant.Person": "شخص",
+  "__EventParticipant.Role": "Role",
+  "EventParticipant.Role": "دور",
   "__EventParticipant.RoleObserver": "Observer",
   "EventParticipant.RoleObserver": "مراقب",
   "__EventParticipant.RoleOrganizer": "Organizer",
@@ -555,15 +537,12 @@
   "EventPreferences.EventSubscription": "الاشتراك",
   "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
   "EventPreferences.ExpenseTip": "قم بإعداد كل التفضيلات لهذا الحدث",
-
-  "__EventPreferences.MainTitlePreferences" : "Preferences",
-  "EventPreferences.MainTitlePreferences" : "الأفضلية",
-
-  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
-  "EventPreferences.PreferencesTip" : "قم بإعداد كل التفضيلات لهذا الحدث",
-
-  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
-  "EventPreferences.SubscriptionExcellenceExplanation" : "يحتوي حدث التميز على جميع الوظائف ، وبحد 1000 لكل عنصر",
+  "__EventPreferences.MainTitlePreferences": "Preferences",
+  "EventPreferences.MainTitlePreferences": "الأفضلية",
+  "__EventPreferences.PreferencesTip": "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip": "قم بإعداد كل التفضيلات لهذا الحدث",
+  "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation": "يحتوي حدث التميز على جميع الوظائف ، وبحد 1000 لكل عنصر",
 
   "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
   "EventPreferences.SubscriptionFreeExplanation" : "حدث مجاني يحتوي على جميع الوظائف باستثناء الميزانية ويقتصر على عدد المشاركين (20) والبنود (50)",
@@ -591,42 +570,33 @@
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "وصف",
-
-  "__EventShoppingList.Done" : "Done",
-  "EventShoppingList.Done" : "منتهي",
-
-  "__EventShoppingList.ItemRemoved" : "The item is removed",
-  "EventShoppingList.ItemRemoved" : "تمت إزالة العنصر",
-
-  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
-  "EventShoppingList.LimitSubsscription" : "تصل إلى الحد الأقصى من العناصر المسموح بها في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
-
-  "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
-  "EventShoppingList.MainTitleShoppingList" : "قائمة التسوق",
-
-  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
-  "EventShoppingList.NoItem" : "ليس لديك أي مهمة في القائمة.",
-
-  "__EventShoppingList.RemovingItem" : "Removing an item",
-  "EventShoppingList.RemovingItem" : "إزالة عنصر",
-
-  "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
-  "EventShoppingList.ShoppingListTip" : "لديك قائمة من العناصر التي تريدها إلى الحدث. قم بإدراجها ، وقرر من يجب أن يشتريها",
-
-  "__EventShoppingList.ShowDetails" : "Detail",
-  "EventShoppingList.ShowDetails" : "التفاصيل",
+  "__EventShoppingList.Done": "Done",
+  "EventShoppingList.Done": "منتهي",
+  "__EventShoppingList.ItemRemoved": "The item is removed",
+  "EventShoppingList.ItemRemoved": "تمت إزالة العنصر",
+  "__EventShoppingList.LimitSubsscription": "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription": "تصل إلى الحد الأقصى من العناصر المسموح بها في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
+  "__EventShoppingList.MainTitleBringList": "Bring List",
+  "EventShoppingList.MainTitleBringList": "إحضار قائمة",
+  "__EventShoppingList.MainTitleShoppingList": "Shopping List",
+  "EventShoppingList.MainTitleShoppingList": "قائمة التسوق",
+  "__EventShoppingList.NoItem": "You don't have any item to bring in the list.",
+  "EventShoppingList.NoItem": "ليس لديك أي مهمة في القائمة.",
+  "__EventShoppingList.RemovingItem": "Removing an item",
+  "EventShoppingList.RemovingItem": "إزالة عنصر",
+  "__EventShoppingList.ShoppingListTip": "You have a list of item to bing to the event. List them, decide who have to bought them",
+  "EventShoppingList.ShoppingListTip": "لديك قائمة من العناصر التي تريدها إلى الحدث. قم بإدراجها ، وقرر من يجب أن يشتريها",
+  "__EventShoppingList.ShowDetails": "Detail",
+  "EventShoppingList.ShowDetails": "التفاصيل",
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
-  "EventShoppingList.ShowExpense" : "إظهار المصاريف",
-
-  "__EventShoppingList.TaskAdded" : "The item is added",
-  "EventShoppingList.TaskAdded" : "تمت إضافة العنصر",
-
-  "__EventShoppingList.ToBring" : "To bring",
-  "EventShoppingList.ToBring" : "لجلب",
-
-  "__EventShoppingList.What" : "What",
-  "EventShoppingList.What" : "ماذا او ما",
+  "EventShoppingList.ShowExpense": "إظهار المصاريف",
+  "__EventShoppingList.TaskAdded": "The item is added",
+  "EventShoppingList.TaskAdded": "تمت إضافة العنصر",
+  "__EventShoppingList.ToBring": "To bring",
+  "EventShoppingList.ToBring": "لجلب",
+  "__EventShoppingList.What": "What",
+  "EventShoppingList.What": "ماذا او ما",
   "__EventShoppingList.Who": "Who",
   "EventShoppingList.Who": "متى",
   "__EventShoppingList.addItem": "Add a new item in the list",
@@ -667,15 +637,12 @@
   "EventSurvey.InProgress": "في تقدم",
   "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
   "EventSurvey.LimitSubsscription": "تصل إلى حد الاختيار المسموح به في الحدث. انتقل إلى ملف التعريف الخاص بك لمعرفة اشتراكك",
-
-  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
-  "EventSurvey.NoAccessForSurveyInPreparation" : "هذا المسح قيد الإعداد. لا يمكنك الوصول إليه في الوقت الحالي.",
-
-  "__EventSurvey.Option" : "Option",
-  "EventSurvey.Option" : "خيار",
-
-  "__EventSurvey.RemovingChoice" : "Removing a choice",
-  "EventSurvey.RemovingChoice" : "إزالة الاختيار",
+  "__EventSurvey.NoAccessForSurveyInPreparation": "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation": "هذا المسح قيد الإعداد. لا يمكنك الوصول إليه في الوقت الحالي.",
+  "__EventSurvey.Option": "Option",
+  "EventSurvey.Option": "خيار",
+  "__EventSurvey.RemovingChoice": "Removing a choice",
+  "EventSurvey.RemovingChoice": "إزالة الاختيار",
 
   "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
   "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "هذا المسح قيد الإعداد. المشاركون غير مرئيين",
@@ -801,16 +768,13 @@
   "EventTaskList.Subject" : "موضوعات",
 
   "__EventTaskList.TaskAdded" : "A task is added",
-  "EventTaskList.TaskAdded" : "تمت إضافة مهمة",
-
-  "__EventTaskList.TaskRemoved" : "The task is removed",
-  "EventTaskList.TaskRemoved" : "تتم إزالة المهمة",
-
-  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
-  "EventTaskList.TaskTip" : "استخدم المهام للإشارة إلى ما عليك القيام به لحدثك. يمكنك تعيين مشارك ، وتمييز حالة المهمة: مخطط لها ، تم إنجازه .... وفقًا لتفضيلاتك ، قد تتلقى ملاحظة عندما يكون لديك مهمة يجب إدراكها",
-
-  "__EventTaskList.Who" : "Who",
-  "EventTaskList.Who" : "متى",
+  "EventTaskList.TaskAdded": "تمت إضافة مهمة",
+  "__EventTaskList.TaskRemoved": "The task is removed",
+  "EventTaskList.TaskRemoved": "تتم إزالة المهمة",
+  "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+  "EventTaskList.TaskTip": "استخدم المهام للإشارة إلى ما عليك القيام به لحدثك. يمكنك تعيين مشارك ، وتمييز حالة المهمة: مخطط لها ، تم إنجازه .... وفقًا لتفضيلاتك ، قد تتلقى ملاحظة عندما يكون لديك مهمة يجب إدراكها",
+  "__EventTaskList.Who": "Who",
+  "EventTaskList.Who": "متى",
   "__EventTaskList.addItem": "Add a task in the list",
   "EventTaskList.addItem": "إضافة عنصر جديد في القائمة",
   "__Eventitinerary.CantRemoveStep": "The step can't be removed",
@@ -933,15 +897,12 @@
   "Menu.AdmininstratorExplanation": "وظيفة المسؤول.",
   "__Menu.Administration": "Administration",
   "Menu.Administration": "إدارة",
-
-  "__Menu.Events" : "Events",
-  "Menu.Events" : "الأحداث",
-
-  "__Menu.EventsExplanation" : "Access all events you can access",
-  "Menu.EventsExplanation" : "الوصول إلى جميع الأحداث التي يمكنك الوصول إليها",
-
-  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
-  "Menu.InvitationExplanation" : "تحقق من دعواتك ، اقبلها.",
+  "__Menu.Events": "Events",
+  "Menu.Events": "الأحداث",
+  "__Menu.EventsExplanation": "Access all events you can access",
+  "Menu.EventsExplanation": "الوصول إلى جميع الأحداث التي يمكنك الوصول إليها",
+  "__Menu.InvitationExplanation": "Check your invitations, accept them.",
+  "Menu.InvitationExplanation": "تحقق من دعواتك ، اقبلها.",
 
   "__Menu.Join" : "Join an event",
   "Menu.Join" : "انضم إلى حدث",
@@ -1025,16 +986,13 @@
   "MyProfile.PhoneNumberVisibilityAlways" : "دائما",
 
   "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
-  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "رقم هاتفك مرئي لأي مستخدم متصل بـ Togh",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
-  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "حدث محدود",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
-  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "رقم هاتفك مرئي فقط في الحدث ، لجميع المستخدمين المسجلين في الحدث",
-
-  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
-  "MyProfile.PhoneNumberVisibilityNever" : "مطلقا",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "رقم هاتفك مرئي لأي مستخدم متصل بـ Togh",
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent": "حدث محدود",
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "رقم هاتفك مرئي فقط في الحدث ، لجميع المستخدمين المسجلين في الحدث",
+  "__MyProfile.PhoneNumberVisibilityNever": "Never",
+  "MyProfile.PhoneNumberVisibilityNever": "مطلقا",
   "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
   "MyProfile.PhoneNumberVisibilityNeverExplanation": "رقم هاتفك غير مرئي على الإطلاق.",
   "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",

@@ -54,15 +54,12 @@
   "AdminUsers.Connected": "Collegato",
   "__AdminUsers.ConnectedOffline": "User offline",
   "AdminUsers.ConnectedOffline": "Utente offline",
-
-  "__AdminUsers.ConnectedOnLine" : "User connected",
-  "AdminUsers.ConnectedOnLine" : "Utente connesso",
-
-  "__AdminUsers.Disconnect" : "Disconnect",
-  "AdminUsers.Disconnect" : "Disconnetti",
-
-  "__AdminUsers.Email" : "Email",
-  "AdminUsers.Email" : "E-mail",
+  "__AdminUsers.ConnectedOnLine": "User connected",
+  "AdminUsers.ConnectedOnLine": "Utente connesso",
+  "__AdminUsers.Disconnect": "Disconnect",
+  "AdminUsers.Disconnect": "Disconnetti",
+  "__AdminUsers.Email": "Email",
+  "AdminUsers.Email": "E-mail",
 
   "__AdminUsers.Excellence" : "Excellence",
   "AdminUsers.Excellence" : "Eccellenza",
@@ -161,16 +158,13 @@
   "AdminUsers.subscriptionPremium" : "Abbonamento Premium",
 
   "__AskPassword.DifferentPassword" : "Password are different",
-  "AskPassword.DifferentPassword" : "Le password sono diverse",
-
-  "__AskPassword.NewPassword" : "New password",
-  "AskPassword.NewPassword" : "Nuova password",
-
-  "__AskPassword.RetypePassword" : "Retype password to verify it",
-  "AskPassword.RetypePassword" : "Ridigita la password per verificarla",
-
-  "__AskPassword.ToSmalPassword" : "Give minimum 3 characters for the password",
-  "AskPassword.ToSmalPassword" : "Fornisci almeno 3 caratteri per la password",
+  "AskPassword.DifferentPassword": "Le password sono diverse",
+  "__AskPassword.NewPassword": "New password",
+  "AskPassword.NewPassword": "Nuova password",
+  "__AskPassword.RetypePassword": "Retype password to verify it",
+  "AskPassword.RetypePassword": "Ridigita la password per verificarla",
+  "__AskPassword.ToSmalPassword": "Give minimum 3 characters for the password",
+  "AskPassword.ToSmalPassword": "Fornisci almeno 3 caratteri per la password",
   "__BodyTogh.ResetYourPassword": "Reset your password",
   "BodyTogh.ResetYourPassword": "reimposta la tua password",
   "__BodyTogh.ThankYou": "Thank you!",
@@ -197,15 +191,12 @@
   "BodyTogh.whatisToghExample": "Potluck con la scuola? Barbecue con gli amici? Viaggio su strada con la famiglia su m? più giorni? Questo è un evento.",
   "__BodyTogh.whatisToghExplanation": "Togh is an application to manage your event.",
   "BodyTogh.whatisToghExplanation": "Togh è un'applicazione per gestire il tuo evento. Potluck con la scuola? Barbecue con gli amici? Viaggio su strada con la famiglia su m? più giorni? Questo è un evento. In un evento, organizza i partecipanti, registra le attività e la lista della spesa, dai l'indirizzo, specifica i passaggi del tuo viaggio. Puoi chiedere al partecipante qualsiasi sondaggio: preferisce visitare Hollywood Bld, o il Griffith Observatory (Paul vuole visitare entrambi!) Visualizza l'itinerario sulla mappa. Calcola la spesa. Togh dirà chi possiede chi.",
-
-  "__BodyTogh.whatisToghPossibility" : "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
-  "BodyTogh.whatisToghPossibility" : "In un evento, organizza i partecipanti, registra le attività e la lista della spesa, dai l'indirizzo, specifica i passaggi del tuo viaggio. Puoi chiedere al partecipante qualsiasi sondaggio: preferisce visitare Hollywood Bld, o il Griffith Observatory (Paul vuole visitare entrambi!) Visualizza l'itinerario sulla mappa. Calcola la spesa. Togh dirà chi possiede chi.",
-
-  "__BodyTogh.whatisToghTitle" : "What is Togh?",
-  "BodyTogh.whatisToghTitle" : "Cos'è Togh?",
-
-  "__BodyTogh.whyTogh" : "Why Togh?",
-  "BodyTogh.whyTogh" : "Perché Togh?",
+  "__BodyTogh.whatisToghPossibility": "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who.",
+  "BodyTogh.whatisToghPossibility": "In un evento, organizza i partecipanti, registra le attività e la lista della spesa, dai l'indirizzo, specifica i passaggi del tuo viaggio. Puoi chiedere al partecipante qualsiasi sondaggio: preferisce visitare Hollywood Bld, o il Griffith Observatory (Paul vuole visitare entrambi!) Visualizza l'itinerario sulla mappa. Calcola la spesa. Togh dirà chi possiede chi.",
+  "__BodyTogh.whatisToghTitle": "What is Togh?",
+  "BodyTogh.whatisToghTitle": "Cos'è Togh?",
+  "__BodyTogh.whyTogh": "Why Togh?",
+  "BodyTogh.whyTogh": "Perché Togh?",
 
   "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
   "BodyTogh.whyToghBorn" : "Qui è nato Togh. Stavo pensando a questa applicazione da cinque anni ormai.",
@@ -298,30 +289,24 @@
 
   "__Event.Status" : "Status",
   "Event.Status" : "Stato",
-
-  "__Event.Survey" : "Survey",
-  "Event.Survey" : "Sondaggio",
-
-  "__Event.Tasks" : "Tasks",
-  "Event.Tasks" : "Compiti",
-
-  "__Event.TimeEvent" : "Time",
-  "Event.TimeEvent" : "Tempo",
-
-  "__Event.TitleBudget" : "Budget",
-  "Event.TitleBudget" : "Budget",
-
-  "__Event.TitleChat" : "Chat",
-  "Event.TitleChat" : "Chiacchierare",
-
-  "__Event.TitleExpense" : "Manage and share expenses",
-  "Event.TitleExpense" : "Gestisci e condividi le spese",
-
-  "__Event.TitleGeolocalisation" : "Where is the event?",
-  "Event.TitleGeolocalisation" : "Dov&#39;è l&#39;evento?",
-
-  "__Event.TitleItinerary" : "Define your itinerary, and point of interest",
-  "Event.TitleItinerary" : "Definisci il tuo itinerario e il punto di interesse",
+  "__Event.Survey": "Survey",
+  "Event.Survey": "Sondaggio",
+  "__Event.Tasks": "Tasks",
+  "Event.Tasks": "Compiti",
+  "__Event.TimeEvent": "Time",
+  "Event.TimeEvent": "Tempo",
+  "__Event.TitleBringList": "What to brings?",
+  "Event.TitleBringList": "Cosa portare?",
+  "__Event.TitleBudget": "Budget",
+  "Event.TitleBudget": "Budget",
+  "__Event.TitleChat": "Chat with all participants",
+  "Event.TitleChat": "Chiacchierare",
+  "__Event.TitleExpense": "Manage and share expenses",
+  "Event.TitleExpense": "Gestisci e condividi le spese",
+  "__Event.TitleGeolocalisation": "Where is the event?",
+  "Event.TitleGeolocalisation": "Dov&#39;è l&#39;evento?",
+  "__Event.TitleItinerary": "Define your itinerary, and point of interest",
+  "Event.TitleItinerary": "Definisci il tuo itinerario e il punto di interesse",
 
   "__Event.TitleParticipant" : "Invite participant to your event",
   "Event.TitleParticipant" : "Invita un partecipante al tuo evento",
@@ -522,21 +507,18 @@
 
   "__EventParticipant.Invited" : "Invited",
   "EventParticipant.Invited" : "Invitato",
-
-  "__EventParticipant.Left" : "Left",
-  "EventParticipant.Left" : "Sinistra",
-
-  "__EventParticipant.MainTitleParticipant" : "Participants",
-  "EventParticipant.MainTitleParticipant" : "Partecipanti",
-
-  "__EventParticipant.Owner" : "Owner",
-  "EventParticipant.Owner" : "Proprietario",
-
-  "__EventParticipant.Person" : "Person",
-  "EventParticipant.Person" : "Persona",
-
-  "__EventParticipant.Role" : "Role",
-  "EventParticipant.Role" : "Ruolo",
+  "__EventParticipant.Left": "Left",
+  "EventParticipant.Left": "Sinistra",
+  "__EventParticipant.MainTitleParticipant": "Participants",
+  "EventParticipant.MainTitleParticipant": "Partecipanti",
+  "__EventParticipant.Owner": "Owner",
+  "EventParticipant.Owner": "Proprietario",
+  "__EventParticipant.ParticipantTip": "Invite participant to the event",
+  "EventParticipant.ParticipantTip": "Invita un partecipante all'evento",
+  "__EventParticipant.Person": "Person",
+  "EventParticipant.Person": "Persona",
+  "__EventParticipant.Role": "Role",
+  "EventParticipant.Role": "Ruolo",
   "__EventParticipant.RoleObserver": "Observer",
   "EventParticipant.RoleObserver": "Osservatore",
   "__EventParticipant.RoleOrganizer": "Organizer",
@@ -569,15 +551,12 @@
   "EventPreferences.EventSubscription": "Sottoscrizione",
   "__EventPreferences.ExpenseTip": "Set up all preferences for the event",
   "EventPreferences.ExpenseTip": "Imposta tutte le preferenze per l'evento",
-
-  "__EventPreferences.MainTitlePreferences" : "Preferences",
-  "EventPreferences.MainTitlePreferences" : "Preferenza",
-
-  "__EventPreferences.PreferencesTip" : "Set up all preferences for the event",
-  "EventPreferences.PreferencesTip" : "Imposta tutte le preferenze per l'evento",
-
-  "__EventPreferences.SubscriptionExcellenceExplanation" : "A Excellence event contains all functions, and a limit of 1000 per items",
-  "EventPreferences.SubscriptionExcellenceExplanation" : "Un evento Excellence contiene tutte le funzioni e un limite di 1000 per articolo",
+  "__EventPreferences.MainTitlePreferences": "Preferences",
+  "EventPreferences.MainTitlePreferences": "Preferenza",
+  "__EventPreferences.PreferencesTip": "Set up all preferences for the event",
+  "EventPreferences.PreferencesTip": "Imposta tutte le preferenze per l'evento",
+  "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
+  "EventPreferences.SubscriptionExcellenceExplanation": "Un evento Excellence contiene tutte le funzioni e un limite di 1000 per articolo",
 
   "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
   "EventPreferences.SubscriptionFreeExplanation" : "Un evento gratuito contiene tutte le funzioni tranne il budget ed è limitato nel numero di partecipanti (20) e articoli (50)",
@@ -608,47 +587,37 @@
 
   "__EventShoppingList.Description" : "Description",
   "EventShoppingList.Description" : "Descrizione",
-
-  "__EventShoppingList.Done" : "Done",
-  "EventShoppingList.Done" : "Fatto",
-
-  "__EventShoppingList.ItemRemoved" : "The item is removed",
-  "EventShoppingList.ItemRemoved" : "L'articolo viene rimosso",
-
-  "__EventShoppingList.LimitSubsscription" : "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
-  "EventShoppingList.LimitSubsscription" : "Hai raggiunto il limite di elementi consentiti nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
-
-  "__EventShoppingList.MainTitleShoppingList" : "Shopping List",
-  "EventShoppingList.MainTitleShoppingList" : "Lista della spesa",
-
-  "__EventShoppingList.NoItem" : "You don't have any task in the list.",
-  "EventShoppingList.NoItem" : "Non hai alcun elemento nell&#39;elenco.",
-
-  "__EventShoppingList.RemovingItem" : "Removing an item",
-  "EventShoppingList.RemovingItem" : "Rimozione di un elemento",
-
-  "__EventShoppingList.ShoppingListTip" : "You have a list of item to bing to the event. List them, decide who have to bought them",
-  "EventShoppingList.ShoppingListTip" : "Hai un elenco di elementi da aggiungere all'evento. Elencali, decidi chi deve comprarli",
-
-  "__EventShoppingList.ShowDetails" : "Detail",
-  "EventShoppingList.ShowDetails" : "Dettaglio",
+  "__EventShoppingList.Done": "Done",
+  "EventShoppingList.Done": "Fatto",
+  "__EventShoppingList.ItemRemoved": "The item is removed",
+  "EventShoppingList.ItemRemoved": "L'articolo viene rimosso",
+  "__EventShoppingList.LimitSubsscription": "You reach the limit of items allowed in the event. Go to your profile to see your subscription",
+  "EventShoppingList.LimitSubsscription": "Hai raggiunto il limite di elementi consentiti nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
+  "__EventShoppingList.MainTitleBringList": "Bring List",
+  "EventShoppingList.MainTitleBringList": "Porta la lista",
+  "__EventShoppingList.MainTitleShoppingList": "Shopping List",
+  "EventShoppingList.MainTitleShoppingList": "Lista della spesa",
+  "__EventShoppingList.NoItem": "You don't have any item to bring in the list.",
+  "EventShoppingList.NoItem": "Non hai alcun elemento nell&#39;elenco.",
+  "__EventShoppingList.RemovingItem": "Removing an item",
+  "EventShoppingList.RemovingItem": "Rimozione di un elemento",
+  "__EventShoppingList.ShoppingListTip": "You have a list of item to bing to the event. List them, decide who have to bought them",
+  "EventShoppingList.ShoppingListTip": "Hai un elenco di elementi da aggiungere all'evento. Elencali, decidi chi deve comprarli",
+  "__EventShoppingList.ShowDetails": "Detail",
+  "EventShoppingList.ShowDetails": "Dettaglio",
 
   "__EventShoppingList.ShowExpense" : "Show Expense",
   "EventShoppingList.ShowExpense" : "Mostra spesa",
 
   "__EventShoppingList.TaskAdded" : "The item is added",
   "EventShoppingList.TaskAdded" : "L'articolo viene aggiunto",
-
-  "__EventShoppingList.Title" : "Shopping List",
-  "EventShoppingList.Title" : "Lista della spesa",
-
-  "__EventShoppingList.ToBring" : "To bring",
-  "EventShoppingList.ToBring" : "Portare",
-
-  "__EventShoppingList.What" : "What",
-  "EventShoppingList.What" : "Che cosa",
-
-  "__EventShoppingList.Who" : "Who",
+  "__EventShoppingList.Title": "Shopping List",
+  "EventShoppingList.Title": "Lista della spesa",
+  "__EventShoppingList.ToBring": "To bring",
+  "EventShoppingList.ToBring": "Portare",
+  "__EventShoppingList.What": "What",
+  "EventShoppingList.What": "Che cosa",
+  "__EventShoppingList.Who": "Who",
   "EventShoppingList.Who": "Oms",
   "__EventShoppingList.addItem": "Add a new item in the list",
   "EventShoppingList.addItem": "Aggiungi un nuovo elemento all&#39;elenco",
@@ -689,16 +658,12 @@
   "EventSurvey.InProgress": "In corso",
   "__EventSurvey.LimitSubsscription": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription",
   "EventSurvey.LimitSubsscription": "Hai raggiunto il limite di scelta consentito nell'evento. Vai al tuo profilo per vedere il tuo abbonamento",
-
-  "EventSurvey.MainTitleSurveyList" : "Sondaggio",
-
-  "__EventSurvey.NoAccessForSurveyInPreparation" : "This survey is in preparation. You can't access it for the moment.",
-  "EventSurvey.NoAccessForSurveyInPreparation" : "Questo sondaggio è in preparazione. Non puoi accedervi per il momento.",
-
-  "EventSurvey.NoItem" : "Non hai nessun sondaggio pronto nell&#39;elenco.",
-
-  "__EventSurvey.Option" : "Option",
-  "EventSurvey.Option" : "Opzione",
+  "EventSurvey.MainTitleSurveyList": "Sondaggio",
+  "__EventSurvey.NoAccessForSurveyInPreparation": "This survey is in preparation. You can't access it for the moment.",
+  "EventSurvey.NoAccessForSurveyInPreparation": "Questo sondaggio è in preparazione. Non puoi accedervi per il momento.",
+  "EventSurvey.NoItem": "Non hai nessun sondaggio pronto nell&#39;elenco.",
+  "__EventSurvey.Option": "Option",
+  "EventSurvey.Option": "Opzione",
 
   "__EventSurvey.RemovingChoice" : "Removing a choice",
   "EventSurvey.RemovingChoice" : "Rimozione di una scelta",
@@ -840,17 +805,13 @@
 
   "__EventTaskList.TaskAdded" : "A task is added",
   "EventTaskList.TaskAdded" : "Viene aggiunta un'attività",
-
-  "__EventTaskList.TaskRemoved" : "The task is removed",
-  "EventTaskList.TaskRemoved" : "L'attività viene rimossa",
-
-  "__EventTaskList.TaskTip" : "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
-  "EventTaskList.TaskTip" : "Usa le attività per fare riferimento a ciò che devi fare per il tuo evento. È possibile assegnare un partecipante e contrassegnare lo stato dell&#39;attività: pianificata, completata .... In base alle proprie preferenze, è possibile che venga visualizzato un avviso quando si ha un&#39;attività da realizzare",
-
-  "__EventTaskList.Who" : "Who",
-  "EventTaskList.Who" : "Oms",
-
-  "__EventTaskList.addItem" : "Add a task in the list",
+  "__EventTaskList.TaskRemoved": "The task is removed",
+  "EventTaskList.TaskRemoved": "L'attività viene rimossa",
+  "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
+  "EventTaskList.TaskTip": "Usa le attività per fare riferimento a ciò che devi fare per il tuo evento. È possibile assegnare un partecipante e contrassegnare lo stato dell&#39;attività: pianificata, completata .... In base alle proprie preferenze, è possibile che venga visualizzato un avviso quando si ha un&#39;attività da realizzare",
+  "__EventTaskList.Who": "Who",
+  "EventTaskList.Who": "Oms",
+  "__EventTaskList.addItem": "Add a task in the list",
   "EventTaskList.addItem": "Aggiungi un nuovo elemento all&#39;elenco",
   "__Eventitinerary.CantRemoveStep": "The step can't be removed",
   "Eventitinerary.CantRemoveStep": "Il passaggio non può essere rimosso",
@@ -977,15 +938,12 @@
   "Login.password": "Password",
   "__Menu.AdmininstratorExplanation": "Administrator function.",
   "Menu.AdmininstratorExplanation": "Funzione amministratore.",
-
-  "__Menu.Administration" : "Administration",
-  "Menu.Administration" : "Amministrazione",
-
-  "__Menu.Events" : "Events",
-  "Menu.Events" : "Eventi",
-
-  "__Menu.EventsExplanation" : "Access all events you can access",
-  "Menu.EventsExplanation" : "Accedi a tutti gli eventi a cui puoi accedere",
+  "__Menu.Administration": "Administration",
+  "Menu.Administration": "Amministrazione",
+  "__Menu.Events": "Events",
+  "Menu.Events": "Eventi",
+  "__Menu.EventsExplanation": "Access all events you can access",
+  "Menu.EventsExplanation": "Accedi a tutti gli eventi a cui puoi accedere",
 
   "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
   "Menu.InvitationExplanation" : "Controlla i tuoi inviti, accettali.",
@@ -1072,16 +1030,13 @@
   "MyProfile.PhoneNumberVisibilityAlways" : "Sempre",
 
   "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
-  "MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Il tuo numero di telefono è visibile a qualsiasi utente connesso a Togh",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEvent" : "Limited Event",
-  "MyProfile.PhoneNumberVisibilityLimitedEvent" : "Evento limitato",
-
-  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Your Phone number is visible only on event, for all users registered in the event",
-  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation" : "Il tuo numero di telefono è visibile solo su evento, per tutti gli utenti registrati all'evento",
-
-  "__MyProfile.PhoneNumberVisibilityNever" : "Never",
-  "MyProfile.PhoneNumberVisibilityNever" : "Mai",
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Il tuo numero di telefono è visibile a qualsiasi utente connesso a Togh",
+  "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
+  "MyProfile.PhoneNumberVisibilityLimitedEvent": "Evento limitato",
+  "__MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "Your Phone number is visible only on event, for all users registered in the event",
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation": "Il tuo numero di telefono è visibile solo su evento, per tutti gli utenti registrati all'evento",
+  "__MyProfile.PhoneNumberVisibilityNever": "Never",
+  "MyProfile.PhoneNumberVisibilityNever": "Mai",
   "__MyProfile.PhoneNumberVisibilityNeverExplanation": "Your phone number is not visible at all.",
   "MyProfile.PhoneNumberVisibilityNeverExplanation": "Il tuo numero di telefono non è affatto visibile.",
   "__MyProfile.SearchableExplanation": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly.",
