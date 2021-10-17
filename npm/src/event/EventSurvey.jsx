@@ -75,7 +75,6 @@ class EventSurvey extends React.Component {
 	}
 	componentDidMount() {
 	    let bestDisplay= this.calculateBestDisplay();
-	    debugger;
   		var survey = this.surveyCtrl.getValue();
 	    console.log("EventSurvey.componentDidMount: typeDisplay=("+bestDisplay+") surveyId=("+survey.id+")");
 
@@ -91,7 +90,6 @@ class EventSurvey extends React.Component {
             prevPropsTypeDisplay=prevProps.show.typeDisplay;
 	    let bestDisplay= this.calculateBestDisplay();
 
-	    debugger;
 	    // we propose the bestDisplay only if the survey change
    		let survey = this.surveyCtrl.getValue();
 

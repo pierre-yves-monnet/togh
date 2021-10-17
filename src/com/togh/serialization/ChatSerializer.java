@@ -20,6 +20,8 @@ import java.util.Map;
 public class ChatSerializer extends BaseSerializer {
 
 
+    public static final String JSON_OUT_MESSAGE = "message";
+
     /**
      * The serializer serialize an Entity Class. Return the entity
      *
@@ -44,7 +46,7 @@ public class ChatSerializer extends BaseSerializer {
         EventChatEntity chatEntity = (EventChatEntity) baseEntity;
         Map<String, Object> resultMap = getBasicMap(chatEntity, contextAccess, timezoneOffset);
 
-        resultMap.put("message", chatEntity.getMessage());
+        resultMap.put(JSON_OUT_MESSAGE, chatEntity.getMessage());
 
         // we just return the ID here
         resultMap.put("whoid", chatEntity.getWhoId() == null ? null : chatEntity.getWhoId().getId());

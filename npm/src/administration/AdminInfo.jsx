@@ -77,7 +77,7 @@ class AdminInfo extends React.Component {
 						</tr>)}
 						<tr>
 						    <td>Version</td>
-						    <td>Version Oct 14, 2021</td>
+						    <td>Version Oct 15, 2021</td>
 						</tr>
 				</table>
 				</div>	 

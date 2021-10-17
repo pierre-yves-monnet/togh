@@ -23,6 +23,8 @@ import java.util.Map;
 public class GroupChatSerializer extends BaseSerializer {
 
 
+    public static final String JSON_CHATLIST = "chatlist";
+
     @Override
     public Class getEntityClass() {
         return EventGroupChatEntity.class;
@@ -48,7 +50,7 @@ public class GroupChatSerializer extends BaseSerializer {
             BaseSerializer serializer = factorySerializer.getFromEntity(chatEntity);
             listChatMap.add(serializer.getMap(chatEntity, contextAccess, timezoneOffset, factorySerializer));
         }
-        resultMap.put("chatlist", listChatMap);
+        resultMap.put(JSON_CHATLIST, listChatMap);
 
         return resultMap;
     }

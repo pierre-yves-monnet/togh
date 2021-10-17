@@ -40,11 +40,12 @@ class EventChat extends React.Component {
 	// props.eventPreferences is provide (or should be at least, I think, I don't know)
 	constructor(props) {
 		super();
+		debugger;
 		// console.log("RegisterNewUser.constructor");
 		this.eventCtrl = props.eventCtrl;
 
 		this.state = {
-			event: this.eventCtrl.getEvent(),
+		    event: this.eventCtrl.getEvent(),
 			chat: "",
 			showProperties: {
 				showDetail: true,
@@ -55,9 +56,11 @@ class EventChat extends React.Component {
 		console.log("EventChat.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.addMessage 		= this.addMessage.bind(this);
 		this.addMessageCallback	= this.addMessageCallback.bind( this );
-		
 	}
 
+	componentDidMount() {
+		// Ok, now we do the load
+    }
 
 
 	// --------------------------------------------------------------
@@ -69,9 +72,9 @@ class EventChat extends React.Component {
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 
-		console.log("EventShoppinglist.render: visible=" + this.state.show);
+		console.log("EventChat.render: visible=" + this.state.show);
 
-		var headerSection = (
+		let headerSection = (
 			<EventSectionHeader id="chat"
 				image="img/btnChat.png"
 				title={<FormattedMessage id="EventChat.MainTitleChat" defaultMessage="Chat" />}
@@ -81,6 +84,10 @@ class EventChat extends React.Component {
 		);
 
 		//------------------------------ show the list
+		if (! this.state.event || ! this.state.event.chatlist) {
+		    return "<div/>";
+		}
+
 		console.log("EventChat.render: list calculated from " + JSON.stringify(this.state.event.chatlist));
 
 		// class="table table-striped toghtable"

@@ -13,6 +13,7 @@ import { Select, Tag }      from 'carbon-components-react';
 import { Files }            from 'react-bootstrap-icons';
 import Invitation           from 'event/Invitation';
 import FactoryService 		from 'service/FactoryService';
+import EventSectionHeader 		from 'component/EventSectionHeader';
 
 
 export const ROLE_OWNER = 'OWNER';
@@ -52,11 +53,19 @@ class EventParticipants extends React.Component {
 		const intl = this.props.intl;
 
 		console.log("EventParticipant.render:  Participants:"+JSON.stringify(this.state.event.participants) );
+		let headerSection = (
+        			<EventSectionHeader id="participant"
+        				image="img/btnParticipants.png"
+        				title={<FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants" />}
+        				showPlusButton={false}
+        				userTipsText={<FormattedMessage id="EventParticipant.ParticipantTip" defaultMessage="Invite participant to the event" />}
+        			/>
+        		);
 		// show the list
 		return (
 		    <div>
-                <div class="eventsection">
-                    <FormattedMessage id="EventParticipant.MainTitleParticipant" defaultMessage="Participants"/>
+                <div>
+        			{headerSection}
                     <div style={{float: "right"}}>
                         <Invitation event={this.state.event} participantInvited={this.participantInvited}/>
                     </div>

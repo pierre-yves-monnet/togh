@@ -26,9 +26,9 @@ import java.util.Map;
 /* ******************************************************************************** */
 
 public abstract class BaseSerializer {
-    static final String CST_JSONOUT_NAME = "name";
-    static final String CST_JSONOUT_ID = "id";
-    static final String CST_JSONOUT_AUTHORID = "authorid";
+    static final String JSON_OUT_NAME = "name";
+    static final String JSON_OUT_ID = "id";
+    static final String JSON_OUT_AUTHORID = "authorid";
 
 
     /**
@@ -60,8 +60,8 @@ public abstract class BaseSerializer {
      */
     protected Map<String, Object> getBasicMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timeZoneOffset) {
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put(CST_JSONOUT_ID, baseEntity.getId());
-        resultMap.put(CST_JSONOUT_NAME, baseEntity.getName());
+        resultMap.put(JSON_OUT_ID, baseEntity.getId());
+        resultMap.put(JSON_OUT_NAME, baseEntity.getName());
         return resultMap;
     }
 

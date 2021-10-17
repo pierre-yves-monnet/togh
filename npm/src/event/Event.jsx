@@ -8,7 +8,7 @@
 /* ******************************************************************************** */
 import React from 'react';
 
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage } from "react-intl";
 
 // import { Button } from 'carbon-components-react';
 import { DatePicker, DatePickerInput, TimePicker, RadioButtonGroup, RadioButton, TextArea, TextInput, Select } from 'carbon-components-react';
@@ -63,17 +63,17 @@ class Event extends React.Component {
 			}
 		};
 
-		
-		
+
+
 		// TextArea must not be null
 		if (!this.state.event.description)
 			this.state.event.description = '';
 
-		// this is mandatory to have access to the variable in the method... thank you React!   
+		// this is mandatory to have access to the variable in the method... thank you React!
 
 		this.accessTab			 		= this.accessTab.bind(this);
 
-		// this is mandatory to have access to the variable in the method... thank you React!   
+		// this is mandatory to have access to the variable in the method... thank you React!
 		this.loadEvent 					= this.loadEvent.bind(this);
 		this.changeStateCallback 		= this.changeStateCallback.bind(this);
 		this.setAttribut 				= this.setAttribut.bind(this);
@@ -82,19 +82,18 @@ class Event extends React.Component {
 
 
 	}
+
 	componentDidMount() {
 		// Ok, now we do the load
 		this.loadEvent();
-		
-		
 	}
-	
 
 	//
 
 	//----------------------------------- Render
 	render() {
 		console.log("Event.render eventId=" + this.state.eventid + " event=" + JSON.stringify(this.state.event) + " show:" + JSON.stringify(this.state.show));
+        const intl = this.props.intl;
 
 
 		// no map read, return
@@ -103,7 +102,7 @@ class Event extends React.Component {
 			return (<div />);
 		}
 
-		
+
 		var toolService = FactoryService.getInstance().getToolService();
 
 
@@ -126,7 +125,7 @@ class Event extends React.Component {
 					<div>
 						<table><tr>
 							<td colspan="2">
-								
+
 								<DatePicker datePickerType="single"
 									onChange={(dates) => {
 										console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
@@ -135,7 +134,7 @@ class Event extends React.Component {
 												// else we face a "Non React Object" during the setEvent()
 												// and whatever is the value() method
 												let dateSingleSt = dates[0].toISOString();
-												this.setAttribut("dateEvent", dateSingleSt);												
+												this.setAttribut("dateEvent", dateSingleSt);
 											}
 										}
 									}
@@ -147,7 +146,7 @@ class Event extends React.Component {
 										placeholder="mm/dd/yyyy"
 										labelText={<FormattedMessage id="Event.DateEvent" defaultMessage="Date Event" />}
 										id="date-picker-simple"
-										
+
 									/>
 								</DatePicker>
 							</td></tr>
@@ -207,8 +206,8 @@ class Event extends React.Component {
 		//						</button>
 		//					</div>
 
-		// -----------------	
-		// console.log("Event.render : statusEvent="+JSON.stringify(this.state.event.statusEvent)+" Participants="+JSON.stringify(this.state.event.participants)); 
+		// -----------------
+		// console.log("Event.render : statusEvent="+JSON.stringify(this.state.event.statusEvent)+" Participants="+JSON.stringify(this.state.event.participants));
 		return (
 			<div>
 				{ this.state.event.systemerror && <div class="alert alert-danger">{this.state.event.systemerror}</div>}
@@ -216,12 +215,12 @@ class Event extends React.Component {
 					<div class="col-sm-1">
 						<img src="img/toghEvent.jpg" style={{ width: 90 }}     />
 					</div>
-						
+
 					<div class="col-sm-4">
-						<TextInput labelText="" 
+						<TextInput labelText=""
 							id="name"
 							value={this.state.event.name}
-							style={{fontSize: "24px", height: "50px", color: "#ac1e4a", maxWidth: "315px"}} 
+							style={{fontSize: "24px", height: "50px", color: "#ac1e4a", maxWidth: "315px"}}
 							onChange={(event) => this.setAttribut("name", event.target.value)} /><br />
 					</div>
 					<div class="col-sm-5">
@@ -278,117 +277,106 @@ class Event extends React.Component {
 					</div>
 				</div>
 
+
 				<div class="row" style={{ padding: "10px 30px 10px" }}>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class={this.getTabCssClass( TAB_CHAT )} aria-current="page" onClick={() => this.accessTab( TAB_CHAT ) }
+                            title={intl.formatMessage({id:"Event.TitleChat", defaultMessage:"Chat with all participants"})}>
+                                <img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 50 }}/>
+                            </a>
+                        </li>
 
-					<div class="col-lg">
+                        <li class="nav-item">
+                            <a class={this.getTabCssClass( TAB_PARTICIPANT )} aria-current="page" onClick={() => this.accessTab( TAB_PARTICIPANT )}
+                             title={intl.formatMessage({id:"Event.TitleParticipant", defaultMessage:"Invite participant to your event"})}>
+                                <img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 50 }}/>
+                      	    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_PARTICIPANT )}
-								title={<FormattedMessage id="Event.TitleParticipant" defaultMessage="Invite participant to your event" />}
-								 class="btn" style={{marginBottom:"10px", backgroundColor:"#bd7d49"}}>
-							<img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 45 }} /><br />
-							<FormattedMessage id="Event.Participants" defaultMessage="Participants" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+                             <a class={this.getTabCssClass( TAB_ITINERARY )} aria-current="page" onClick={() => this.accessTab( TAB_ITINERARY )}
+								title={intl.formatMessage({id:"Event.TitleItinerary", defaultMessage:"Define your itinerary, and point of interest"})}>
+							    <img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_ITINERARY )}
-								title={<FormattedMessage id="Event.TitleItinerary" defaultMessage="Define your itinerary, and point of interest" />} 
-								class="btn" style={{ marginLeft: "10px", marginBottom:"10px", backgroundColor:"#bd7d49"}}>
-							<img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 45 }} /><br />
-							<FormattedMessage id="Event.Itinerary" defaultMessage="itinerary" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+						    <a class={this.getTabCssClass( TAB_TASKLIST )} aria-current="page" onClick={() => this.accessTab( TAB_TASKLIST )}
+							    title={intl.formatMessage({id:"Event.TitleTasks", defaultMessage:"Tasks" })}>
+							    <img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_CHAT) } 
-							title={<FormattedMessage id="Event.TitleChat" defaultMessage="Chat" />}
-							class="btn"
-							style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }} >
-							<img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 45 }} /><br />
-							<FormattedMessage id="Event.Chat" defaultMessage="Chat" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+					        <a class={this.getTabCssClass( TAB_SHOPPINGLIST )} aria-current="page" onClick={() => this.accessTab( TAB_SHOPPINGLIST )}
+							    title={intl.formatMessage({id:"Event.TitleBringList", defaultMessage:"What to brings?" })}>
+							    <img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button  onClick={() => this.accessTab( TAB_TASKLIST )} 
-							title={<FormattedMessage id="Event.TitleTasks" defaultMessage="Tasks" />} 
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 45 }} /><br />
-							<FormattedMessage id="Event.Tasks" defaultMessage="Tasks" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+						    <a class={this.getTabCssClass( TAB_SURVEY )} aria-current="page" onClick={() => this.accessTab( TAB_SURVEY )}
+							    title={intl.formatMessage({id:"Event.TitleSurvey", defaultMessage:"Survey"})}>
+							    <img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_SHOPPINGLIST)} 
-							title={<FormattedMessage id="Event.TitleShoppingList" defaultMessage="Shopping list : what to brings?" />} 
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.ShoppingList" defaultMessage="Shopping List" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+						    <a class={this.getTabCssClass( TAB_GEOLOCALISATION )} aria-current="page" onClick={() => this.accessTab( TAB_GEOLOCALISATION )}
+							    title={intl.formatMessage({id:"Event.TitleGeolocalisation",defaultMessage:"Where is the event?"})}>
+							    <img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_SURVEY )} 
-							title={<FormattedMessage id="Event.TitleSurvey" defaultMessage="Survey" />}
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.Survey" defaultMessage="Survey" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+						    <a class={this.getTabCssClass( TAB_PHOTO )} aria-current="page"
+							    title={intl.formatMessage({id:"Event.TitlePhotos", defaultMessage:"Photos" })}>
+							    <img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 50 }} /><br />
+                            </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_GEOLOCALISATION )} 
-							title={<FormattedMessage id="Event.TitleGeolocalisation" defaultMessage="Where is the event?" />} 
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.Geolocalisation" defaultMessage="Geolocalisation" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+						    <a class={this.getTabCssClass( TAB_EXPENSE )} aria-current="page"
+							    title={intl.formatMessage({id:"Event.TitleExpense",  defaultMessage:"Manage and share expenses" })}>
+							    <img src="img/btnExpense.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_PHOTO )} 
-							title={<FormattedMessage id="Event.TitlePhotos" defaultMessage="Photos" />} 
-							disabled={true} 
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.Photos" defaultMessage="Photos" />
-						</button>
-						&nbsp;
+                        <li class="nav-item">
+						    <a class={this.getTabCssClass( TAB_BUDGET )} aria-current="page"
+							    title={intl.formatMessage({id:"Event.TitleBudget", defaultMessage:"Budget" })}>
+							    <img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
 
-						<button onClick={() => this.accessTab( TAB_EXPENSE )} 
-							title={<FormattedMessage id="Event.TitleExpense" defaultMessage="Manage and share expenses" />}
-							disabled={true}
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img src="img/btnExpense.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.Expense" defaultMessage="Expense" />
-						</button>
-						&nbsp;
-						
-						<button onClick={() => this.accessTab( TAB_BUDGET )} 
-							title={<FormattedMessage id="Event.TitleBudget" defaultMessage="Budget" />}
-							disabled={true}
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.Budget" defaultMessage="Budget" />
-						</button>
-						&nbsp;
-						
-						<button onClick={() => this.accessTab( TAB_PREFERENCES )} 
-							title={<FormattedMessage id="Event.TitlePreferences" defaultMessage="Preferences" />} 
-							class="btn" style={{ marginLeft: "10px", marginBottom:"10px",backgroundColor: "#bd7d49" }}>
-							<img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 45 }} /><br />							
-							<FormattedMessage id="Event.Preferences" defaultMessage="Preferences" />
-						</button>
-
-					</div>
+                        <li class="nav-item">
+                            <a class={this.getTabCssClass( TAB_PREFERENCES )} aria-current="page" onClick={() => this.accessTab( TAB_PREFERENCES )}
+							    title={intl.formatMessage({id:"Event.TitlePreferences", defaultMessage:"Preferences" })}>
+							    <img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 50 }} />
+						    </a>
+                        </li>
+                    </ul>
 
 				</div>
-				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event} 
+
+
+
+
+
+				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event}
 																			updateEvent={this.updateEventfct}
 																			getUserParticipant={this.getUserParticipant}/>}
 				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary eventCtrl={this.eventCtrl} />}
-				
+
 				{this.state.show.currentSection === TAB_CHAT && <EventChat eventCtrl={this.eventCtrl} />}
-				
+
 				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList  eventCtrl={this.eventCtrl} />}
-				
+
 				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList eventCtrl={this.eventCtrl} />}
-				
+
 				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation eventCtrl={this.eventCtrl} />}
-				
+
 				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
 																			updateEvent={this.updateEventfct}
@@ -404,7 +392,7 @@ class Event extends React.Component {
 		this.setAttribut("statusEvent", event);
 	}
 
-	
+
 
 	// provide automatic save
 	setAttribut(name, value) {
@@ -419,18 +407,18 @@ class Event extends React.Component {
 
 		this.setState( { event: this.eventCtrl.getEvent()} );
 	}
-	
+
 	/**
 	Something change in the event, all subcomponent refer it with a Slab, which is the information which change */
 	updateEventfct( slab ) {
 			console.log("Event.updateEventfct : DEPRECATED METHOD !!");
 	}
-	
-		
+
+
 	// --------------------------------------------------------------
-	// 
+	//
 	// Component controls
-	// 
+	//
 	// --------------------------------------------------------------
 
 
@@ -438,8 +426,14 @@ class Event extends React.Component {
 	accessTab( accessTab ) {
 		console.log("Event.accessTab tab=" + JSON.stringify(accessTab));
 		this.setState( { show: { currentSection: accessTab} });
-
 	}
+
+    getTabCssClass( tab ) {
+        if (this.state.show.currentSection === tab ) {
+            return "nav-link active"
+        }
+        return "nav-link";
+    }
 
 	// -------------------------------------------- Tool Service
 	getUserParticipant() {
@@ -454,7 +448,7 @@ class Event extends React.Component {
 		}
 		return new UserParticipantCtrl(this.state.event,null );
 	}
-	
+
 
 
 	// -------------------------------------------- Call REST
@@ -488,4 +482,4 @@ class Event extends React.Component {
 	// -------- Rest Call
 
 }
-export default Event;
+export default injectIntl(Event);

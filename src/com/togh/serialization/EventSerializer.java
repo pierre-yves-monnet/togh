@@ -132,7 +132,7 @@ public class EventSerializer extends BaseSerializer {
             for (EventGroupChatEntity groupChatEntity : eventEntity.getGroupChatList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(groupChatEntity);
 
-                listShoppingListMap.add(serializer.getMap(groupChatEntity, contextAccess, timezoneOffset, factorySerializer));
+                listGroupChat.add(serializer.getMap(groupChatEntity, contextAccess, timezoneOffset, factorySerializer));
             }
             resultMap.put(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, listGroupChat);
         }

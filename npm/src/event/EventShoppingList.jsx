@@ -85,7 +85,7 @@ class EventShoppingList extends React.Component {
 		var headerSection = (
 			<EventSectionHeader id="task"
 				image="img/btnShoppingList.png"
-				title={<FormattedMessage id="EventShoppingList.MainTitleShoppingList" defaultMessage="Shopping List" />}
+				title={<FormattedMessage id="EventShoppingList.MainTitleBringList" defaultMessage="Bring List" />}
 				showPlusButton={true}
 				showPlusButtonTitle={<FormattedMessage id="EventShoppingList.AddItem" defaultMessage="Add a item in the list" />}
 				userTipsText={<FormattedMessage id="EventShoppingList.ShoppingListTip" defaultMessage="You have a list of item to bing to the event. List them, decide who have to bought them" />}
@@ -99,7 +99,7 @@ class EventShoppingList extends React.Component {
 			return (
 				<div>
 					{headerSection}
-					<FormattedMessage id="EventShoppingList.NoItem" defaultMessage="You don't have any task in the list." />
+					<FormattedMessage id="EventShoppingList.NoItem" defaultMessage="You don't have any item to bring in the list." />
 					&nbsp;
 					<button class="btn btn-success btn-xs"
 						onClick={() => this.addItem()}

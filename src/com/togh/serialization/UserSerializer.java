@@ -36,7 +36,7 @@ public abstract class UserSerializer extends BaseSerializer {
     protected Map<String, Object> getBasicMap(UserEntity userEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset) {
         Map<String, Object> resultMap = super.getBasicMap(userEntity, contextAccess, timezoneOffset);
         if (contextAccess == ToghUserEntity.ContextAccess.ADMIN)
-            resultMap.put(CST_JSONOUT_AUTHORID, userEntity.getAuthorId());
+            resultMap.put(JSON_OUT_AUTHORID, userEntity.getAuthorId());
         return resultMap;
     }
 

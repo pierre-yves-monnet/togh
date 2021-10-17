@@ -445,7 +445,7 @@ we’ll add our own Google account as a test user.
 
 Create "External" OAuth
 
-# Cloud & Docker
+# Cloud Google & Docker
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*  Cloud &
@@ -483,7 +483,16 @@ Docker                                                                          
 docker-compose up
 
 ## Push image to gcr.io
+
 gcloud auth login
+
+```
+> cd cloud
+> pushImagesGoogle.bat
+```
+
+or
+
 ```
 > docker tag pierreyvesmonnet/togh:1.0.0 gcr.io/intricate-gamma-325323/togh:1.0.0
 > docker push gcr.io/intricate-gamma-325323/togh:1.0.0
@@ -494,6 +503,7 @@ gcloud auth login
 ```
 
 ## Google Cloud
+
 ```
 > docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
 
@@ -784,6 +794,8 @@ Jpoin Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
 
 Supprimer un user invalide Graph des events / mois Purger les users invite, jamais venus purger plus rapidement encore
 les users invite mais plus retirer des events ou dans des events clotures
+
+Admini: avoir un "automatique refresh check box" : penible de clicker "connected" et de faire search
 
 	Event/Participant: mettre l'icone + un component qui donne toutes les coordonnées
  	
