@@ -279,79 +279,97 @@ class Event extends React.Component {
 
 
 				<div class="row" style={{ padding: "10px 30px 10px" }}>
-                    <ul class="nav nav-pills">
+                    <ul class="nav nav-tabs" style={{borderBottom: "7px solid #e9ecef"}}>
                         <li class="nav-item">
-                            <a class={this.getTabCssClass( TAB_CHAT )} aria-current="page" onClick={() => this.accessTab( TAB_CHAT ) }
+                            <a class={this.getTabCssClass( TAB_CHAT )}
+								style={this.getTabCssStyle( TAB_CHAT )} aria-current="page"
+								onClick={() => this.accessTab( TAB_CHAT ) }
                             title={intl.formatMessage({id:"Event.TitleChat", defaultMessage:"Chat with all participants"})}>
-                                <img style={{ "float": "right" }} src="img/btnChat.png" style={{ width: 50 }}/>
+                                <img style={{ float: "right" }} src="img/btnChat.png" style={{ width: 50 }}/>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class={this.getTabCssClass( TAB_PARTICIPANT )} aria-current="page" onClick={() => this.accessTab( TAB_PARTICIPANT )}
+                            <a class={this.getTabCssClass( TAB_PARTICIPANT )}
+								style={this.getTabCssStyle( TAB_PARTICIPANT )} aria-current="page"
+								onClick={() => this.accessTab( TAB_PARTICIPANT )}
                              title={intl.formatMessage({id:"Event.TitleParticipant", defaultMessage:"Invite participant to your event"})}>
                                 <img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 50 }}/>
                       	    </a>
                         </li>
 
                         <li class="nav-item">
-                             <a class={this.getTabCssClass( TAB_ITINERARY )} aria-current="page" onClick={() => this.accessTab( TAB_ITINERARY )}
+                             <a class={this.getTabCssClass( TAB_ITINERARY )}
+								style={this.getTabCssStyle( TAB_ITINERARY )} aria-current="page"
+								onClick={() => this.accessTab( TAB_ITINERARY )}
 								title={intl.formatMessage({id:"Event.TitleItinerary", defaultMessage:"Define your itinerary, and point of interest"})}>
 							    <img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_TASKLIST )} aria-current="page" onClick={() => this.accessTab( TAB_TASKLIST )}
+						    <a class={this.getTabCssClass( TAB_TASKLIST )}
+								style={this.getTabCssStyle( TAB_TASKLIST )} aria-current="page"
+								onClick={() => this.accessTab( TAB_TASKLIST )}
 							    title={intl.formatMessage({id:"Event.TitleTasks", defaultMessage:"Tasks" })}>
 							    <img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-					        <a class={this.getTabCssClass( TAB_SHOPPINGLIST )} aria-current="page" onClick={() => this.accessTab( TAB_SHOPPINGLIST )}
+					        <a class={this.getTabCssClass( TAB_SHOPPINGLIST )}
+								style={this.getTabCssStyle( TAB_SHOPPINGLIST )} aria-current="page"
+								onClick={() => this.accessTab( TAB_SHOPPINGLIST )}
 							    title={intl.formatMessage({id:"Event.TitleBringList", defaultMessage:"What to brings?" })}>
 							    <img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_SURVEY )} aria-current="page" onClick={() => this.accessTab( TAB_SURVEY )}
+						    <a class={this.getTabCssClass( TAB_SURVEY )}
+								style={this.getTabCssStyle( TAB_SURVEY )} aria-current="page"
+								onClick={() => this.accessTab( TAB_SURVEY )}
 							    title={intl.formatMessage({id:"Event.TitleSurvey", defaultMessage:"Survey"})}>
 							    <img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_GEOLOCALISATION )} aria-current="page" onClick={() => this.accessTab( TAB_GEOLOCALISATION )}
+						    <a class={this.getTabCssClass( TAB_GEOLOCALISATION )} 
+								style={this.getTabCssStyle( TAB_GEOLOCALISATION )} aria-current="page"
+								onClick={() => this.accessTab( TAB_GEOLOCALISATION )}
 							    title={intl.formatMessage({id:"Event.TitleGeolocalisation",defaultMessage:"Where is the event?"})}>
 							    <img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_PHOTO )} aria-current="page"
+						    <a class={this.getTabCssClass( TAB_PHOTO )}
+								style={this.getTabCssStyle( TAB_PHOTO )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitlePhotos", defaultMessage:"Photos" })}>
 							    <img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 50 }} /><br />
                             </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_EXPENSE )} aria-current="page"
+						    <a class={this.getTabCssClass( TAB_EXPENSE )}
+								style={this.getTabCssStyle( TAB_EXPENSE )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleExpense",  defaultMessage:"Manage and share expenses" })}>
 							    <img src="img/btnExpense.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_BUDGET )} aria-current="page"
+						    <a class={this.getTabCssClass( TAB_BUDGET )}
+								style={this.getTabCssStyle( TAB_BUDGET )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleBudget", defaultMessage:"Budget" })}>
 							    <img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 50 }} />
 						    </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class={this.getTabCssClass( TAB_PREFERENCES )} aria-current="page" onClick={() => this.accessTab( TAB_PREFERENCES )}
+                            <a class={this.getTabCssClass( TAB_PREFERENCES )}
+								style={this.getTabCssStyle( TAB_PREFERENCES )} aria-current="page" onClick={() => this.accessTab( TAB_PREFERENCES )}
 							    title={intl.formatMessage({id:"Event.TitlePreferences", defaultMessage:"Preferences" })}>
 							    <img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 50 }} />
 						    </a>
@@ -433,6 +451,30 @@ class Event extends React.Component {
             return "nav-link active"
         }
         return "nav-link";
+    }
+
+    getTabCssStyle( tab ) {
+		const style = {
+	      active : {
+	        borderWidth: '8px',
+			borderColor: "#e9ecef #e9ecef white #e9ecef",
+			margin: '-7px',
+	        transition: 'all 0.2s ease-in-out',
+	        // width: '100px',
+	        // textAlign: 'center',
+	      }, 
+	      inactive : { //this will only be applied when state is Circle
+			borderWidth: '2px',
+			opacity: '0.5',
+			// backgroundColor: 'grey',
+	        // borderRadius: '50%',
+	        // height: '100px',
+	      }
+	    }
+        if (this.state.show.currentSection === tab ) {
+            return style.active
+        }
+        return style.inactive;
     }
 
 	// -------------------------------------------- Tool Service
