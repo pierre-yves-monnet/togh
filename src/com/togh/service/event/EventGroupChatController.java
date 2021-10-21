@@ -11,7 +11,7 @@ import com.togh.service.event.EventUpdate.Slab;
 
 public class EventGroupChatController extends EventAbsChildController {
 
-    private final static String GENERAL_CHAT = "GENERAL";
+    private static final String GENERAL_CHAT = "GENERAL";
 
     protected EventGroupChatController(EventController eventController, EventEntity eventEntity) {
         super(eventController, eventEntity);
@@ -74,8 +74,22 @@ public class EventGroupChatController extends EventAbsChildController {
         return childEntity;
     }
 
+    /**
+     * Database may return a constraint error, because 2 threads try to do the same operation at the same time.
+     * So, the server has to deal with that. One solution is to retrieve the current record saved in the database, and return it
+     *
+     * @param childEntity          child Entity to insert
+     * @param slabOperation        slab operation in progress
+     * @param eventOperationResult eventOperationResult
+     * @return the correct entity, which may be the existing entity in the database
+     */
+    @Override
+    public BaseEntity manageConstraint(BaseEntity childEntity, Slab slabOperation, EventOperationResult eventOperationResult) {
+        return null;
+    }
+
     public EventGroupChatEntity getGroupChat(Slab slab) {
-        // there is only one
+        // there is only one group at this moment, hardcoded
 
         if (getEventEntity().getGroupChatList().isEmpty()) {
             EventGroupChatEntity generalChat = new EventGroupChatEntity();

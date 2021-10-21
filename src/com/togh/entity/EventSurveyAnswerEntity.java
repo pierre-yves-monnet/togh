@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Entity
 
-@Table(name = "EVTSURVEYANSWER")
+@Table(name = "EVTSURVEYANSWER", uniqueConstraints = {@UniqueConstraint(name = "UniqueAnswer", columnNames = {"whoid", "surveyid"})})
 @EqualsAndHashCode(callSuper = true)
 public @Data
 class EventSurveyAnswerEntity extends UserEntity {
@@ -41,13 +41,15 @@ class EventSurveyAnswerEntity extends UserEntity {
     @JoinColumn(name = "whoid")
     private ToghUserEntity whoId;
 
+    /**
+     * Map to save the vote. This will create a sub-table to save this map
+     */
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "EVTSURVEYANSWERCHOICE",
-            joinColumns = {@JoinColumn(name = "surveyid", referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "surveyanswerid", referencedColumnName = "id", nullable = false)})
     @Fetch(value = FetchMode.SELECT)
     @MapKeyColumn(name = "choice")
     @Column(name = "decision")
-
     private Map<String, Boolean> decision;
 
 

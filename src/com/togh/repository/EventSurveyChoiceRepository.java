@@ -24,4 +24,5 @@ public interface EventSurveyChoiceRepository extends JpaRepository<EventSurveyCh
 
     public EventSurveyChoiceEntity findById(long id);
 
+
 }

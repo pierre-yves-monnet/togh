@@ -62,7 +62,6 @@ class EventSurveyList extends React.Component {
 			}
 		};
 		// show : OFF, ON, COLLAPSE
-		// console.log("EventSurveyList.constructor show=" + +this.state.show + " event=" + JSON.stringify(this.state.event));
 		this.setAttributeCheckbox		= this.setAttributeCheckbox.bind( this );
 		this.addItem 					= this.addItem.bind(this);
 		this.addItemCallback			= this.addItemCallback.bind( this );		
@@ -104,7 +103,7 @@ class EventSurveyList extends React.Component {
 				/>
 				);
 
-		var contentPage = (<div/>);
+		let contentPage = (<div/>);
 							
 		if (this.state.event.surveylist.length === 0) {
 			contentPage= (
@@ -137,7 +136,6 @@ class EventSurveyList extends React.Component {
 				
 				// Tab
 				if (item.id.toString() === this.eventCtrl.getCurrentSurveyId().toString()) {					
-					// classSurvey = classSurvey.concat(" active");
 					styleSurvey = { borderTop: "2px solid black", borderLeft: "2px solid black", borderBottom: "2px solid black"};
 				}
 				else {
@@ -217,7 +215,6 @@ class EventSurveyList extends React.Component {
 		var survey = this.state.event.surveylist[ this.state.currentSurveyId ];
 		var completeLocalisation = "/surveylist/"+survey.id+"/"+localisation;
 
-		// currentEvent.shoppinglist[0].[name] = value;
 
 		this.setState({ event: currentEvent });
 		

@@ -54,7 +54,7 @@ class EventSurveyEntity extends UserEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 100)
-    @JoinColumn(name = "surveyid")
+    @JoinColumn(name = "surveyid", nullable = false)
     @OrderBy("id")
     private List<EventSurveyChoiceEntity> choicelist = new ArrayList<>();
 
@@ -62,7 +62,7 @@ class EventSurveyEntity extends UserEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @Column(name = "answer", length = 100)
-    @JoinColumn(name = "surveyid")
+    @JoinColumn(name = "surveyid", nullable = false)
     @OrderBy("id")
     private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
 

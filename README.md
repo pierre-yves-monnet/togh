@@ -47,32 +47,34 @@ Launch the class com.togh.ServerInitializer.
 The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
 
 ## mobile
+
 https://flutter.dev/
 
-
-
 ## install npm
+
 npx create-react-app togh
 
-### Install carbon
+## Install carbon
+
 https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e
 
-npm add carbon-components carbon-components-react carbon-icons
-npm add node-sass@4.14.1
+npm add carbon-components carbon-components-react carbon-icons npm add node-sass@4.14.1
 
 npm start
 
+## using h2
 
+Using h2 database instead of postgres -Dspring.profiles.active=dev
 
 # Architecture
-/* ******************************************************************************** */
-/*                                                                                  */
-/*  Architecture							                                        */
-/*                                                                                  */
-/*                                                                                  */
-/*                                                                                  */
-/* ******************************************************************************** */
 
+/* ******************************************************************************** */
+/*                                                                                  */ /*
+Architecture                                                                    */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
 
 com.together.spring.ServletInitializer : this is the REST call
 
@@ -814,19 +816,24 @@ Admini: avoir un "automatique refresh check box" : penible de clicker "connected
 		- invited depuis trop longtemps : a purger
 		- inactif depuis trop longtemps : 
 
+## update prochaine livraison
+
+--delete from evtsurveyanswer where id in (
+-- select b.id from evtsurveyanswer a, evtsurveyanswer b -- where a.whoid=b.whoid and a.surveyid = b.surveyid and a.id <
+b.id); -- alter table evtsurveyanswerchoice drop column surveyid;
+
 ## bugs
 
-Survey : marche pas, impossible d'ajouter un survey Chat : l'ajout d'un commentaire ne fonctionne pas
-
-Deconnection : ca ne renvoi plus sur la page de login
-
 EventEntity.getMap : normaliser les constante ici avec les SLAB_OPERATION (une seule constante)
-EventSurvey : ca ne marche pas dajouter un nouveau choix de survey Et arriver par defaut sur les reponses, pas sur la
-definition
 
 * Je suis 2 fois : email en Majuscule et en Minuscule. Faire un test ignore case
-* changement de password: il attends pas de taper les 2 passwords
-* remettre "mes invitations" sinon on ne les voit plus
 * admin: faire une purge d'user et un log de mauvaise connection
-* task et budget pas visible
 * changeemail
+
+* Date des messages dans le chat qui est la date du jour
+* en tant que participant, pouvoir changer le status des gens et la date de l'invitation, ni le scope ni le status
+*
+* inviration de nouvelles personnes: ouvert que aux Onwer + Organizateur
+* Geolocalisation : titre dupliquée
+* my profile => My invitation: on affiche la liste complete
+* My invitation => evnts : on n'a que "my events" et pas tout

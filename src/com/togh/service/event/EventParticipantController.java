@@ -45,6 +45,20 @@ public class EventParticipantController extends EventAbsChildController {
         return null;
     }
 
+    /**
+     * Database may return a constraint error, because 2 threads try to do the same operation at the same time.
+     * So, the server has to deal with that. One solution is to retrieve the current record saved in the database, and return it
+     *
+     * @param childEntity          child Entity to insert
+     * @param slabOperation        slab operation in progress
+     * @param eventOperationResult eventOperationResult
+     * @return the correct entity, which may be the existing entity in the database
+     */
+    @Override
+    public BaseEntity manageConstraint(BaseEntity childEntity, EventUpdate.Slab slabOperation, EventService.EventOperationResult eventOperationResult) {
+        return null;
+    }
+
     @Override
     public BaseEntity getEntity(long entityId) {
         return null; // not yet necessary
@@ -57,6 +71,7 @@ public class EventParticipantController extends EventAbsChildController {
 
     @Override
     public void removeEntity(BaseEntity childEntity, EventService.EventOperationResult eventOperationResult) {
+        // not managed at this moment, not possible to remove a participant
     }
 
     @Override

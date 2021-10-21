@@ -84,12 +84,12 @@ class EventSurvey extends React.Component {
 
 	// Calculate the state to display
 	componentDidUpdate(prevProps) {
-        //let valueProps=JSON.stringify(this.props);
+
         let prevPropsTypeDisplay='';
         if (prevProps && prevProps.show )
             prevPropsTypeDisplay=prevProps.show.typeDisplay;
 	    let bestDisplay= this.calculateBestDisplay();
-
+        debugger;
 	    // we propose the bestDisplay only if the survey change
    		let survey = this.surveyCtrl.getValue();
 
@@ -104,6 +104,7 @@ class EventSurvey extends React.Component {
             }
             currentShow.currentSurveyId=survey.id;
             this.setState( {show : currentShow});
+            this.addAnswerWithMe();
         }
 	}
 
@@ -303,7 +304,7 @@ class EventSurvey extends React.Component {
 					<td> {this.eventCtrl.getParticipantName( answerParticipant.whoid) }</td>
 					{ survey.choicelist.map( surveyChoice => 
 						{ 
-							let itemSquare=(<div/>);
+							let itemSquare;
 							if (survey.status === surveyConstant.STATUS_CLOSE || answerParticipant.whoid !== userParticipant.getUser().id) {
 								if (answerParticipant.decision[ surveyChoice.code ])
 									itemSquare= (<Check2Square/>);
@@ -557,14 +558,7 @@ class EventSurvey extends React.Component {
 			let childId = httpPayload.getData().childEntityId[ 0 ];
 			const newChoices = survey[ surveyConstant.CHILD_CHOICE ].filter((index) => index.id !== childId);
 			survey[ surveyConstant.CHILD_CHOICE ] = newChoices;
-			/*
-			for( var i in survey[ surveyConstant.CHILD_CHOICE ]) {
-				if ( survey[ surveyConstant.CHILD_CHOICE ] [ i ].id === childId) {
-					survey[ surveyConstant.CHILD_CHOICE ].splice( survey[ surveyConstant.CHILD_CHOICE ] [ i ], 1);
-					break;
-				}
-			}
-			*/
+
 			this.setState({ event: currentEvent });
 		}
 		
@@ -579,6 +573,9 @@ class EventSurvey extends React.Component {
 	// 
 	// --------------------------------------------------------------
 
+    /**
+     * This request may be send multiple time. No worry, the server handle it
+     */
 	addAnswerWithMe() {
 		const intl = this.props.intl;
 
@@ -587,12 +584,11 @@ class EventSurvey extends React.Component {
 		if (survey[ surveyConstant.CHILD_ANSWER ] === null) {
 			survey[ surveyConstant.CHILD_ANSWER ] = [];
 		}
-		
 		let currentUser = this.userParticipant.getUser();
 		// We don't have a current user ? Strange, we don't want to add anything. Should be an internal view
 		if (! currentUser) 
 			return;
-		// Ok, I must be part on this survey, ins't ?
+		// Ok, I must be part on this survey, isn't it ?
 		for (let i in survey[surveyConstant.CHILD_ANSWER]) {
 			if (survey[surveyConstant.CHILD_ANSWER][i].whoid === currentUser.id) {
 				// I'm in !
@@ -610,8 +606,9 @@ class EventSurvey extends React.Component {
 		this.eventCtrl.addEventChildFct(surveyConstant.CHILD_ANSWER, addSurveyParticipant, "/surveylist/"+survey.id, this.addAnswerCallback);
 	}
 
+
+
 	addAnswerCallback(httpPayload) {
-		
 		const intl = this.props.intl;
 
 		let currentOperation = this.state.operation;
@@ -645,10 +642,6 @@ class EventSurvey extends React.Component {
 			console.log("EventSurvey.addAnswerCallback ");
 		}
 		this.setState({operation: currentOperation});
-	
-	
-	
-		// nothing to do here for the moment
 	}
 	
 	

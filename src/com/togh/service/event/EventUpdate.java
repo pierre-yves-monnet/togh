@@ -78,15 +78,21 @@ public class EventUpdate {
         return eventOperationResult;
     }
 
+    /**
+     * addOperation
+     *
+     * @param slab                 slab operation to add
+     * @param updateContext        update context
+     * @param eventOperationResult operation
+     */
+
     private void addOperation(Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
 
         EventAbsChildController eventChildController = eventController.getEventControllerFromSlabOperation(slab);
         if (eventChildController == null)
             return;
 
-
         LimitReach limitReach = eventChildController.getLimitReach();
-
 
         // Check if the subscription allow to add this entity
         int maxEntity = updateContext.getFactoryService()
@@ -124,10 +130,23 @@ public class EventUpdate {
 
 
         // save it now. The eventOperationResult can return a ReachTheLimit
-        for (BaseEntity child : entityPlan.additionalEntity) {
-            eventChildController.addEntity(child, slab, eventOperationResult);
+
+        for (int i = 0; i < entityPlan.additionalEntity.size(); i++) {
+            BaseEntity child = entityPlan.additionalEntity.get(i);
+            try {
+                eventChildController.addEntity(child, slab, eventOperationResult);
+            } catch (Exception e) {
+                entityPlan.additionalEntity.set(i, eventChildController.manageConstraint(child, slab, eventOperationResult));
+            }
+
         }
-        eventChildController.addEntity(entityPlan.child, slab, eventOperationResult);
+        try {
+            eventChildController.addEntity(entityPlan.child, slab, eventOperationResult);
+        } catch (Exception e) {
+            // assuming the controller update the event
+            entityPlan.child = eventChildController.manageConstraint(entityPlan.child, slab, eventOperationResult);
+        }
+
 
         eventOperationResult.listChildEntity.add(entityPlan.getEntityToAttach());
 
