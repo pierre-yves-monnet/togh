@@ -51,7 +51,6 @@ class GoogleAddressGeocode extends React.Component {
 		// recalculate the new lat/long
 		  if (this.timeout) 
 			clearTimeout(this.timeout);
-        debugger;
 		this.changeCallbackfct( CHANGE_ADDRESS, currentItem );
 					
     	this.timeout = setTimeout(() => {
@@ -64,7 +63,6 @@ class GoogleAddressGeocode extends React.Component {
 	
 	changeAddressGoogleCallback( status, lat, lng) {
 		console.log("AddressGeocode; changeAddressCallback location=("+lat+","+lng+")");
-debugger;
 		var currentItem = this.state.item;
 		currentItem.geostatus = status;
 		if (status !== "ERROR") {
