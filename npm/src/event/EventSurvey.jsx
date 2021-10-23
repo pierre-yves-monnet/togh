@@ -89,7 +89,6 @@ class EventSurvey extends React.Component {
         if (prevProps && prevProps.show )
             prevPropsTypeDisplay=prevProps.show.typeDisplay;
 	    let bestDisplay= this.calculateBestDisplay();
-        debugger;
 	    // we propose the bestDisplay only if the survey change
    		let survey = this.surveyCtrl.getValue();
 
@@ -602,7 +601,6 @@ class EventSurvey extends React.Component {
 					listlogevents: [] }});
 
 		var addSurveyParticipant = { whoid : this.userParticipant.getUser().id};
-												
 		this.eventCtrl.addEventChildFct(surveyConstant.CHILD_ANSWER, addSurveyParticipant, "/surveylist/"+survey.id, this.addAnswerCallback);
 	}
 

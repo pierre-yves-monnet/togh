@@ -71,7 +71,6 @@ class SurveyCtrl {
 		// answerParticipant && surveyChoice are correctly pointed to the value expected
 
 		let surveyAnswer=null;
-		debugger;
 		// avoid the JSON Circular
 		for (var i in this.survey[ CHILD_ANSWER ]) {
 			if (this.survey[ CHILD_ANSWER ] [ i ].whoid === answerParticipant.whoid ) {

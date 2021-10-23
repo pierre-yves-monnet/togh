@@ -92,7 +92,6 @@ class ResetPassword extends React.Component {
 	
 	// -------- Callback from AskPassword
 	changePasswordCallback(checkOk, password) {
-	    debugger;
 	    this.setState({password: password, passwordIsCorrect: checkOk});
 
 	}
@@ -100,7 +99,6 @@ class ResetPassword extends React.Component {
 
 	changePassword() {
 
-	    debugger;
 		this.setState( {badRegistration: false, loading:true});
 		var restCallService = FactoryService.getInstance().getRestcallService();
 		

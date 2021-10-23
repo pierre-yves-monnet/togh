@@ -40,7 +40,6 @@ class EventChat extends React.Component {
 	// props.eventPreferences is provide (or should be at least, I think, I don't know)
 	constructor(props) {
 		super();
-		debugger;
 		// console.log("RegisterNewUser.constructor");
 		this.eventCtrl = props.eventCtrl;
 
