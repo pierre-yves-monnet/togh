@@ -46,7 +46,7 @@ class EventSurveyAnswerEntity extends UserEntity {
      */
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "EVTSURVEYANSWERCHOICE",
-            joinColumns = {@JoinColumn(name = "surveyanswerid", referencedColumnName = "id", nullable = false)})
+            joinColumns = {@JoinColumn(name = "surveyanswerid", referencedColumnName = "id")})
     @Fetch(value = FetchMode.SELECT)
     @MapKeyColumn(name = "choice")
     @Column(name = "decision")

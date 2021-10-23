@@ -54,7 +54,7 @@ public class EventUpdate {
         logger.info(LOG_HEADER + "EventId[" + eventEntity.getId() + "] Start update from listSlab " + getSummary(listSlab));
 
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-        listSlab.stream().forEach((slab) -> {
+        listSlab.stream().forEach(slab -> {
             try {
                 switch (slab.operation) {
                     case UPDATE:
@@ -144,9 +144,9 @@ public class EventUpdate {
             eventChildController.addEntity(entityPlan.child, slab, eventOperationResult);
         } catch (Exception e) {
             // assuming the controller update the event
+            logger.severe(LOG_HEADER + "Can't insert " + entityPlan.child.toString() + " : " + e.toString());
             entityPlan.child = eventChildController.manageConstraint(entityPlan.child, slab, eventOperationResult);
         }
-
 
         eventOperationResult.listChildEntity.add(entityPlan.getEntityToAttach());
 
@@ -204,16 +204,15 @@ public class EventUpdate {
         return "Size:" + listSlab.size()
                 + " - ["
                 + listSlab.stream()
-                .map(t -> {
-                    return
-                            t.operation
-                                    + " "
-                                    + t.localisation + "." + t.attributName + ": ["
-                                    + (t.attributValue == null ? null :
-                                    t.attributValue.toString().length() > 20 ? t.attributValue.toString().substring(0, 20) + "..."
-                                            : t.attributValue.toString()
-                                            + "]");
-                })
+                .map(t ->
+                        t.operation
+                                + " "
+                                + t.localisation + "." + t.attributName + ": ["
+                                + (t.attributValue == null ? null :
+                                t.attributValue.toString().length() > 20 ? t.attributValue.toString().substring(0, 20) + "..."
+                                        : t.attributValue.toString()
+                                        + "]")
+                )
                 .collect(Collectors.joining(", "))
                 + "]";
     }

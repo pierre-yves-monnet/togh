@@ -62,7 +62,7 @@ class EventSurveyEntity extends UserEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @Column(name = "answer", length = 100)
-    @JoinColumn(name = "surveyid", nullable = false)
+    @JoinColumn(name = "surveyid")
     @OrderBy("id")
     private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
 

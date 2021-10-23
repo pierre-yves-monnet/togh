@@ -73,12 +73,11 @@ public class EventSurveyAnswerController extends EventAbsChildController {
     @Override
     public BaseEntity addEntity(BaseEntity childEntity, Slab slab, EventOperationResult eventOperationResult) {
 
-
-        getFactoryRepository().surveyAnswerRepository.save((EventSurveyAnswerEntity) childEntity);
         BaseEntity surveyEntity = getEventController().localise(getEventEntity(), slab.localisation);
         if (!(surveyEntity instanceof EventSurveyEntity))
             return null;
 
+        getFactoryRepository().surveyAnswerRepository.save((EventSurveyAnswerEntity) childEntity);
         childEntity = eventSurveyController.addSurveyAnswser((EventSurveyEntity) surveyEntity, (EventSurveyAnswerEntity) childEntity);
         return childEntity;
     }
@@ -110,7 +109,7 @@ public class EventSurveyAnswerController extends EventAbsChildController {
 
 
         BaseEntity databaseEntity = reloadSourceFromDatabase(parentEntity, violationChild);
-
+        // the databaseEntity may be null: It's just added in the same transaction then!
         List<? extends BaseEntity> listChildren = null;
         if (violationChild instanceof EventSurveyAnswerEntity) {
             listChildren = surveyEntity.getAnswerlist();

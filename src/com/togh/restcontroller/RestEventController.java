@@ -139,7 +139,7 @@ public class RestEventController {
         if (toghUser == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
-        Long timezoneOffset = ToolCast.getLong(postData, "timezoneoffset", 0L);
+        Long timezoneOffset = ToolCast.getLong(postData, RestJsonConstants.CST_PARAM_TIMEZONEOFFSET, 0L);
 
         if (eventName == null || eventName.trim().length() == 0)
             eventName = "New event";
@@ -199,7 +199,7 @@ public class RestEventController {
         String message = ToolCast.getString(inviteData, "message", null);
         String role = ToolCast.getString(inviteData, "role", null);
         boolean useMyEmailAsFrom = ToolCast.getBoolean(inviteData, "useMyEmailAsFrom", false);
-        Long timezoneOffset = ToolCast.getLong(inviteData, "timezoneoffset", 0L);
+        Long timezoneOffset = ToolCast.getLong(inviteData, RestJsonConstants.CST_PARAM_TIMEZONEOFFSET, 0L);
 
         ParticipantRoleEnum roleEnum;
         try {
@@ -284,7 +284,7 @@ public class RestEventController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         Long eventId = ToolCast.getLong(updateMap, "eventid", null);
-        Long timezoneOffset = ToolCast.getLong(updateMap, "timezoneoffset", 0L);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_TIMEZONEOFFSET, 0L);
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> slabEventList = ToolCast.getList(updateMap, "listslab", new ArrayList<>());
 
@@ -305,6 +305,8 @@ public class RestEventController {
         ContextAccess contextAccess = eventService.getContextAccess(event, toghUser);
         List<Map<String, Object>> listEntity = new ArrayList<>();
         for (BaseEntity baseEntity : eventOperationResult.listChildEntity) {
+            if (baseEntity == null)
+                continue;
             BaseSerializer serializer = factorySerializer.getFromEntity(baseEntity);
             listEntity.add(serializer.getMap(baseEntity, contextAccess, timezoneOffset, factorySerializer));
         }
