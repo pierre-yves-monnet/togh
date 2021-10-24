@@ -38,7 +38,7 @@ class AdminInfo extends React.Component {
 	componentDidMount() {
 		console.log("AdminInfo.getInfo:");
 		this.setState({inprogress: true });
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/admin/info?', this, httpPayload =>{
 			httpPayload.trace("AdminInfo.callback");
 			this.setState({inprogress: false });

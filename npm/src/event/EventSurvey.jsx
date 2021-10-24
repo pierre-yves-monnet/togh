@@ -135,7 +135,7 @@ class EventSurvey extends React.Component {
 		}
 	
 		// refresh the current survey embedded
-		// this.surveyEmbedded = new Survey( this.state.event, currentSurvey, this.userParticipant, this.updateEventfct);
+		// this.surveyEmbedded = new Survey( this.state.event, currentSurvey, this.userParticipant, this.updateEventFct);
 		console.log("EventSurvey.render: typeDisplay=["+this.state.show.typeDisplay+"]");
 		if (this.state.show.typeDisplay === DISPLAY_NOACCESS) {
 			return (

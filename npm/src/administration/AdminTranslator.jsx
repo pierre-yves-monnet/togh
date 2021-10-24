@@ -145,7 +145,7 @@ class AdminTranslator extends React.Component {
 	checkDictionary() {
 		console.log("AdminTranslator.checkDictionary:");
 		this.setState({inprogress: true });
-		let restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/admin/translator/status?', this, httpPayload =>{
 			httpPayload.trace("AdminTranslator.checkDictionary");
 			this.setState({inprogress: false });
@@ -165,7 +165,7 @@ class AdminTranslator extends React.Component {
 		console.log("AdminTranslator.completeDictionary:");
 		this.setState({inprogress: true });
 		
-		let restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/admin/translator/complete', this, {}, httpPayload =>{
 			httpPayload.trace("AdminTranslator.completeDictionary");
 			this.setState({inprogress: false });

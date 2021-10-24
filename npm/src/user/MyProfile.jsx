@@ -304,7 +304,7 @@ class MyProfile extends React.Component {
 	// provide automatic save
 	setAttribut(name, value) {
 		this.setState( {inprogress: true, message:''});
-		let restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestCallService();
 		let param ={ attribut: name, value: value};
 		
 		
@@ -333,7 +333,7 @@ class MyProfile extends React.Component {
 	actionChangePassword() {
 
 		const intl = this.props.intl;
-		let restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestCallService();
 		
 		this.setState( {actionPasswordMessage: intl.formatMessage({id: "MyProfile.passwordChangeInProgress",defaultMessage: "In progress"}),
 					actionPasswordStatus:"",

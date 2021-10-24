@@ -45,7 +45,7 @@ class ResetPassword extends React.Component {
 		// call the server to get the value
 		this.setState({ inprogress: true });
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		let param = { uuid: this.state.uuid};
 		
 		restCallService.postJson('/api/login/resetPasswordInfo?', this, param, this.getInfoCallback);
@@ -100,7 +100,7 @@ class ResetPassword extends React.Component {
 	changePassword() {
 
 		this.setState( {badRegistration: false, loading:true});
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		
 		var param= {  password: this.state.password, uuid: this.state.uuid };
 		console.log("ResetPassword.changePassword: param" + JSON.stringify(param));

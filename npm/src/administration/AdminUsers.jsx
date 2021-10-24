@@ -370,7 +370,7 @@ class AdminUsers extends React.Component {
 	
 	searchUsers () {	
 		this.setState({ message:"", inprogress:true});
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		var filterUrl="";
 		for (var index in this.state.filterusers)
 			filterUrl += "&"+index+"="+this.state.filterusers[ index ];
@@ -401,7 +401,7 @@ class AdminUsers extends React.Component {
 		console.log("AdminUsers.setAttributUser:");
 		this.setState({inprogress: true });
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={userid: user.id,
 					attribut: attribut,
 					value: value};
@@ -442,7 +442,7 @@ class AdminUsers extends React.Component {
 	disconnectUser( user ) {
 		this.setState({inprogress: true });
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={userid: user.id};
 		restCallService.postJson('/api/user/admin/disconnect', this, param, httpPayload =>{
 			httpPayload.trace("AdminUsers.disconnectUser");

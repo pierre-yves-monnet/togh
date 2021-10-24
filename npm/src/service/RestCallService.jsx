@@ -4,7 +4,7 @@
 //
 // RestcallService
 //
-//  var restCallService = FactoryService.getInstance().getRestcallService();
+//  var restCallService = FactoryService.getInstance().getRestCallService();
 
 // -----------------------------------------------------------
 

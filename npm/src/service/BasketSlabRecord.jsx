@@ -46,7 +46,7 @@ class BasketSlabRecord {
 		
 		var param = {eventid:this.eventCtrl.event.id, listslab: listParamSlab};
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/event/update', this, param, httpPayload => {
 			// console.log("BasketSlabRecord.Callback ! ");
 			httpPayload.trace("BasketSlabRecord.callback");

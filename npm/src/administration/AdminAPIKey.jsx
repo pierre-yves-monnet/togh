@@ -43,7 +43,7 @@ class AdminAPIKey extends React.Component {
 		// call the server to get the value
 		this.setState({inprogress: true });
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/admin/apikey/get?', this, this.getApiKeyCallback);
 	}
 
@@ -109,7 +109,7 @@ class AdminAPIKey extends React.Component {
 		console.log("AdminAPIKey.updateKey:");
 		this.setState({inprogress: true });
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={listkeys: this.state.listkeys};
 		restCallService.postJson('/api/admin/apikey/update', this, param, httpPayload =>{
 			httpPayload.trace("AdminAPIKey.updateKey");

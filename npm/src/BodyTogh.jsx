@@ -312,7 +312,7 @@ class BodyTogh extends React.Component {
 
 	getInfoOnNewUser( email, invitationStamp ) {
         console.log("BodyTogh.getInfoOnNewUser");
-        var restCallService = FactoryService.getInstance().getRestcallService();
+        var restCallService = FactoryService.getInstance().getRestCallService();
 
    		restCallService.postJson('/api/userinfo', this, {email: email, invitationStamp:invitationStamp}, httpPayload => {
             httpPayload.trace("BodyTogh.getInfoOnNewUserCallback");

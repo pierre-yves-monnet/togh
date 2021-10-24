@@ -30,9 +30,9 @@ class EventPreferenceCtrl {
 	// props.updateEvent must be defined
 	// props.eventPreferences
 	// props.text is the text to display, translated
-	constructor(eventCtrl, updateEventfct ) {
+	constructor(eventCtrl, updateEventFct ) {
 		this.eventCtrl = eventCtrl;
-		this.updateEventfct = updateEventfct;
+		this.updateEventFct = updateEventFct;
 		let event = eventCtrl.getEvent();
 		if (event && event.preferences)
 			this.currencyCode = event.preferences[ CURRENCY_ATTRIBUT_NAME ];
@@ -52,7 +52,7 @@ class EventPreferenceCtrl {
 		this.currencyCode = currencyCode;
 
 		let slab = SlabRecord.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
-		this.eventCtrl.updateEventfct( slab );
+		this.eventCtrl.updateEventFct( slab );
 	}
 	
 	getCurrency(){

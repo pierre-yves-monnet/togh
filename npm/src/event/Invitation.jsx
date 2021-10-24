@@ -59,7 +59,7 @@ class Invitation extends React.Component {
 	// --------------------------------------------------------------
 
 	render() {
-		console.log("Invitation.render ");
+		// console.log("Invitation.render ");
 		// console.log("Invitation.listSearch="+ JSON.stringify( this.state.listSearchUsers ));
 		const intl = this.props.intl;
 
@@ -326,7 +326,7 @@ class Invitation extends React.Component {
 			
 		this.setState( {inprogresssearch: true });
 
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/user/search?firstName='+this.state.searchFirstName
 			+'&lastName='+this.state.searchLastName
 			+'&email='+this.state.searchEmail
@@ -368,7 +368,7 @@ class Invitation extends React.Component {
 		}
 		console.log("Invitation.sendInvitation: http[event/create?] param="+JSON.stringify(param));
 		
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		this.setState( {inprogressinvitation: true, statusErrorInvitation: '', statusOkInvitation:'', statusErrorSendEmail:'' });
 		restCallService.postJson('/api/event/invitation', this, param, this.sendInvitationCallback );
 	}

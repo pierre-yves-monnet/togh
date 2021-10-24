@@ -54,7 +54,7 @@ class EventCtrl {
 		this.eventReact = eventReact;
 		this.event = event;
 		this.ctrlId = new Date().getTime();
-		this.eventPreferences = new EventPreferencesCtrl(this, this.updateEventfct);
+		this.eventPreferences = new EventPreferencesCtrl(this, this.updateEventFct);
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
 	}
 
@@ -170,16 +170,16 @@ class EventCtrl {
 
 		item[name] = value;
 		// we send a setState to refresh the value
-		this.eventReact.refreshEventfct();
+		this.eventReact.refreshEventFct();
 
 		let slabRecord;
 		slabRecord = SlabRecord.getUpdate(this.event, name, value, localisation);
-		this.updateEventfct(slabRecord);
+		this.updateEventFct(slabRecord);
 
 	}
 
 
-	updateEventfct(slabRecord) {
+	updateEventFct(slabRecord) {
 		this.currentBasketSlabRecord.addSlabRecord(slabRecord);
 		if (this.timer)
 			clearTimeout(this.timer);
@@ -259,8 +259,8 @@ class EventCtrl {
 		return this.event.surveylist;
 	}
 
-	getUpdateEventfct() {
-		return this.updateEventfct;
+	getUpdateEventFct() {
+		return this.updateEventFct;
 	}
 
 	getEventPreferences() {

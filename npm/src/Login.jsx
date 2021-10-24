@@ -289,7 +289,7 @@ class Login extends React.Component {
 		const intl = this.props.intl;
 
 		this.setState({ messageLostPassword :  ""});
-		let restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/login/lostmypassword', this, {email: this.state.email}, httpPayload => {
 				httpPayload.trace("Login.lostmypassword");
 	

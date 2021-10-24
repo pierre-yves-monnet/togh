@@ -26,7 +26,7 @@ class AuthService {
 	}
 
 	init() {
-		this.restcallService = this.factoryService.getRestcallService();
+		this.restcallService = this.factoryService.getRestCallService();
 	}
 	
 	isConnected() {

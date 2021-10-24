@@ -205,7 +205,7 @@ class EventsList extends React.Component {
 		const intl = this.props.intl;
 
 		this.setState({ message :  ""});
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/event/create', this, {name:"new event"}, httpPayload => {
 			httpPayload.trace("EventList.createEventCallback");
 
@@ -234,7 +234,7 @@ class EventsList extends React.Component {
 	refreshListEvents( filterEventsValue ) {
 		console.log("EventsList.refreshListEvents http[event/list?filterEvents=" + filterEventsValue + "]");
 		this.setState({ events: [], filterEvents: filterEventsValue });
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/event/list?withParticipants=true&filterEvents=' + filterEventsValue, this, this.refreshListEventsCallback );
 	}
 	

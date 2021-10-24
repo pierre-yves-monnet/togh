@@ -32,7 +32,7 @@ class SurveyCtrl {
 		this.event = eventCtrl.getEvent();
 		this.survey = survey;
 		this.userParticipant = eventCtrl.getUserParticipant();
-		this.updateEventfct = eventCtrl.getUpdateEventfct();
+		this.updateEventFct = eventCtrl.getUpdateEventFct();
 
 		if (! this.survey) {
 			console.log("SurveyEntity.constructor : survey does not exist, this is not expected")

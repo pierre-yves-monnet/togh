@@ -17,18 +17,19 @@ import FactoryService from 'service/FactoryService';
 
 import UserParticipantCtrl from 'controller/UserParticipantCtrl';
 
-import EventParticipants from 'event/EventParticipants';
-import EventItinerary from 'event/EventItinerary';
-import EventShoppingList from 'event/EventShoppingList';
-import EventGeolocalisation from 'event/EventGeolocalisation';
-import EventTaskList from 'event/EventTaskList';
-import EventState from 'event/EventState';
-import EventExpense from 'event/EventExpense';
-import EventSurveyList from 'event/EventSurveyList';
-import EventChat from 'event/EventChat';
-import EventPreferences from 'event/EventPreferences';
+import EventSectionHeader 			from 'component/EventSectionHeader';
+import EventParticipants            from 'event/EventParticipants';
+import EventItinerary               from 'event/EventItinerary';
+import EventShoppingList            from 'event/EventShoppingList';
+import EventGeolocalisation         from 'event/EventGeolocalisation';
+import EventTaskList                from 'event/EventTaskList';
+import EventState                   from 'event/EventState';
+import EventExpense                 from 'event/EventExpense';
+import EventSurveyList              from 'event/EventSurveyList';
+import EventChat                    from 'event/EventChat';
+import EventPreferences             from 'event/EventPreferences';
 
-import EventCtrl from 'controller/EventCtrl';
+import EventCtrl                    from 'controller/EventCtrl';
 
 // -----------------------------------------------------------
 //
@@ -44,7 +45,7 @@ const TAB_SHOPPINGLIST = 'ShoppingList';
 const TAB_GEOLOCALISATION='Geolocalisation';
 const TAB_EXPENSE = 'Expense';
 const TAB_CHAT = 'Chat';
-const TAB_TASKLIST = 'TaskList';
+const TAB_TASKS = 'TaskList';
 const TAB_SURVEY = 'Survey';
 const TAB_PHOTO = 'Photo';
 const TAB_BUDGET = 'Budget';
@@ -77,7 +78,7 @@ class Event extends React.Component {
 		this.loadEvent 					= this.loadEvent.bind(this);
 		this.changeStateCallback 		= this.changeStateCallback.bind(this);
 		this.setAttribut 				= this.setAttribut.bind(this);
-		this.updateEventfct 			= this.updateEventfct.bind(this);
+		this.updateEventFct 			= this.updateEventFct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
 
 
@@ -94,6 +95,8 @@ class Event extends React.Component {
 	render() {
 		console.log("Event.render eventId=" + this.state.eventid + " event=" + JSON.stringify(this.state.event) + " show:" + JSON.stringify(this.state.show));
         const intl = this.props.intl;
+
+	    var userService = FactoryService.getInstance().getUserService();
 
 
 		// no map read, return
@@ -277,15 +280,24 @@ class Event extends React.Component {
 					</div>
 				</div>
 
-
+                <EventSectionHeader id="helptabs"
+                    showPlusButton  = {false}
+                    userTipsText={<FormattedMessage id="Event.HelpTabs" defaultMessage="You have access to different tools in the event. Explore them" />}
+				    />
 				<div class="row" style={{ padding: "10px 30px 10px" }}>
-                    <ul class="nav nav-tabs" style={{borderBottom: "7px solid #e9ecef"}}>
+                    <ul class="nav nav-tabs" style={{borderBottom: "6px solid #e9ecef"}}>
                         <li class="nav-item">
                             <a class={this.getTabCssClass( TAB_CHAT )}
 								style={this.getTabCssStyle( TAB_CHAT )} aria-current="page"
 								onClick={() => this.accessTab( TAB_CHAT ) }
                             title={intl.formatMessage({id:"Event.TitleChat", defaultMessage:"Chat with all participants"})}>
-                                <img style={{ float: "right" }} src="img/btnChat.png" style={{ width: 50 }}/>
+                                <div style={{textAlign: "center"}}>
+                                    <img style={{ float: "right" }} src="img/btnChat.png" style={{ width: 50 }}/>
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Chat" defaultMessage="Chat"/>
+                                        </div>}
+                                </div>
                             </a>
                         </li>
 
@@ -294,7 +306,14 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_PARTICIPANT )} aria-current="page"
 								onClick={() => this.accessTab( TAB_PARTICIPANT )}
                              title={intl.formatMessage({id:"Event.TitleParticipant", defaultMessage:"Invite participant to your event"})}>
-                                <img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 50 }}/>
+                                <div style={{textAlign: "center"}}>
+                                    <img style={{ "float": "right" }} src="img/btnParticipants.png" style={{ width: 50 }}/>
+                                    { userService.prefsDisplayTips() &&
+                                        <div>
+                                            <FormattedMessage id="Event.Participant" defaultMessage="Participants"/>
+                                        </div>
+                                    }
+                                </div>
                       	    </a>
                         </li>
 
@@ -303,16 +322,28 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_ITINERARY )} aria-current="page"
 								onClick={() => this.accessTab( TAB_ITINERARY )}
 								title={intl.formatMessage({id:"Event.TitleItinerary", defaultMessage:"Define your itinerary, and point of interest"})}>
-							    <img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 50 }} />
+								<div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnItinerary.png" style={{ width: 50 }} />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Itinerary" defaultMessage="Itinerary"/>
+                                        </div>}
+                                </div>
 						    </a>
                         </li>
 
                         <li class="nav-item">
-						    <a class={this.getTabCssClass( TAB_TASKLIST )}
-								style={this.getTabCssStyle( TAB_TASKLIST )} aria-current="page"
-								onClick={() => this.accessTab( TAB_TASKLIST )}
+						    <a class={this.getTabCssClass( TAB_TASKS )}
+								style={this.getTabCssStyle( TAB_TASKS )} aria-current="page"
+								onClick={() => this.accessTab( TAB_TASKS )}
 							    title={intl.formatMessage({id:"Event.TitleTasks", defaultMessage:"Tasks" })}>
-							    <img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnTask.png" style={{ width: 50 }} />
+							        { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Tasks" defaultMessage="Tasks"/>
+                                        </div>}
+							    </div>
 						    </a>
                         </li>
 
@@ -321,7 +352,13 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_SHOPPINGLIST )} aria-current="page"
 								onClick={() => this.accessTab( TAB_SHOPPINGLIST )}
 							    title={intl.formatMessage({id:"Event.TitleBringList", defaultMessage:"What to brings?" })}>
-							    <img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnShoppingList.png" style={{ width: 50 }} />
+							        { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.BringList" defaultMessage="Bring List"/>
+                                        </div>}
+							    </div>
 						    </a>
                         </li>
 
@@ -330,7 +367,13 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_SURVEY )} aria-current="page"
 								onClick={() => this.accessTab( TAB_SURVEY )}
 							    title={intl.formatMessage({id:"Event.TitleSurvey", defaultMessage:"Survey"})}>
-							    <img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnSurvey.png" style={{ width: 50 }} />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Survey" defaultMessage="Survey"/>
+                                        </div>}
+                                </div>
 						    </a>
                         </li>
 
@@ -339,7 +382,13 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_GEOLOCALISATION )} aria-current="page"
 								onClick={() => this.accessTab( TAB_GEOLOCALISATION )}
 							    title={intl.formatMessage({id:"Event.TitleGeolocalisation",defaultMessage:"Where is the event?"})}>
-							    <img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnGeolocalisation.png" style={{ width: 50 }} />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Geolocalisation" defaultMessage="Geolocalisation"/>
+                                        </div>}
+							    </div>
 						    </a>
                         </li>
 
@@ -347,7 +396,13 @@ class Event extends React.Component {
 						    <a class={this.getTabCssClass( TAB_PHOTO )}
 								style={this.getTabCssStyle( TAB_PHOTO )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitlePhotos", defaultMessage:"Photos" })}>
-							    <img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 50 }} /><br />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnPhoto.png" style={{ width: 50 }} /><br />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Photos" defaultMessage="Photos"/>
+                                        </div>}
+							    </div>
                             </a>
                         </li>
 
@@ -355,7 +410,13 @@ class Event extends React.Component {
 						    <a class={this.getTabCssClass( TAB_EXPENSE )}
 								style={this.getTabCssStyle( TAB_EXPENSE )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleExpense",  defaultMessage:"Manage and share expenses" })}>
-							    <img src="img/btnExpense.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img src="img/btnExpense.png" style={{ width: 50 }} />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Expense" defaultMessage="Expenses"/>
+                                        </div>}
+							    </div>
 						    </a>
                         </li>
 
@@ -363,7 +424,13 @@ class Event extends React.Component {
 						    <a class={this.getTabCssClass( TAB_BUDGET )}
 								style={this.getTabCssStyle( TAB_BUDGET )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleBudget", defaultMessage:"Budget" })}>
-							    <img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnBudget.png" style={{ width: 50 }} />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Budget" defaultMessage="Budget"/>
+                                        </div>}
+							    </div>
 						    </a>
                         </li>
 
@@ -371,7 +438,13 @@ class Event extends React.Component {
                             <a class={this.getTabCssClass( TAB_PREFERENCES )}
 								style={this.getTabCssStyle( TAB_PREFERENCES )} aria-current="page" onClick={() => this.accessTab( TAB_PREFERENCES )}
 							    title={intl.formatMessage({id:"Event.TitlePreferences", defaultMessage:"Preferences" })}>
-							    <img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 50 }} />
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right" }} src="img/btnPreferences.png" style={{ width: 50 }} />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Preferences" defaultMessage="Preferences"/>
+                                        </div>}
+							    </div>
 						    </a>
                         </li>
                     </ul>
@@ -383,13 +456,14 @@ class Event extends React.Component {
 
 
 				{this.state.show.currentSection === TAB_PARTICIPANT && <EventParticipants event={this.state.event}
-																			updateEvent={this.updateEventfct}
+																			updateEvent={this.updateEventFct}
+																			eventCtrl={this.eventCtrl}
 																			getUserParticipant={this.getUserParticipant}/>}
 				{this.state.show.currentSection === TAB_ITINERARY && <EventItinerary eventCtrl={this.eventCtrl} />}
 
 				{this.state.show.currentSection === TAB_CHAT && <EventChat eventCtrl={this.eventCtrl} />}
 
-				{this.state.show.currentSection === TAB_TASKLIST && <EventTaskList  eventCtrl={this.eventCtrl} />}
+				{this.state.show.currentSection === TAB_TASKS && <EventTaskList eventCtrl={this.eventCtrl} />}
 
 				{this.state.show.currentSection === TAB_SHOPPINGLIST && <EventShoppingList eventCtrl={this.eventCtrl} />}
 
@@ -397,7 +471,7 @@ class Event extends React.Component {
 
 				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
-																			updateEvent={this.updateEventfct}
+																			updateEvent={this.updateEventFct}
 																			getUserParticipant={this.getUserParticipant}/>}
 				{this.state.show.currentSection === TAB_PREFERENCES  && <EventPreferences eventCtrl={this.eventCtrl} />}
 		</div>)
@@ -420,16 +494,16 @@ class Event extends React.Component {
 
 
 	/** */
-	refreshEventfct(  ) {
-		console.log("Event.refreshEventfct Start!! event="+JSON.stringify(this.eventCtrl.getEvent()));
+	refreshEventFct(  ) {
+		console.log("Event.refreshEventFct Start!! event="+JSON.stringify(this.eventCtrl.getEvent()));
 
 		this.setState( { event: this.eventCtrl.getEvent()} );
 	}
 
 	/**
 	Something change in the event, all subcomponent refer it with a Slab, which is the information which change */
-	updateEventfct( slab ) {
-			console.log("Event.updateEventfct : DEPRECATED METHOD !!");
+	updateEventFct( slab ) {
+			console.log("Event.updateEventFct : DEPRECATED METHOD !!");
 	}
 
 
@@ -456,7 +530,7 @@ class Event extends React.Component {
     getTabCssStyle( tab ) {
 		const style = {
 	      active : {
-	        borderWidth: '8px',
+	        borderWidth: '9px',
 			borderColor: "#e9ecef #e9ecef white #e9ecef",
 			margin: '-7px',
 	        transition: 'all 0.2s ease-in-out',
@@ -480,7 +554,7 @@ class Event extends React.Component {
 	// -------------------------------------------- Tool Service
 	getUserParticipant() {
 		var authService = FactoryService.getInstance().getAuthService();
-		// console.log("Event.getUserPartipant.start");
+		// console.log("Event.getUserParticipant.start");
 		var user= authService.getUser();
 		// search the access right for this user
 		for (var i in this.state.event.participants) {
@@ -498,7 +572,7 @@ class Event extends React.Component {
 		console.log("Event.loadEvent: event?id=" + this.state.eventid + "]");
 		this.setState({ event: {} });
 
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/event?id=' + this.state.eventid, this, httpPayload => {
 			httpPayload.trace("Event.getPayload");
 
@@ -508,7 +582,7 @@ class Event extends React.Component {
 
 				// console.log("Event.loadEvent: eventLoaded=" + JSON.stringify(httpPayload.getData().event) + "]");
 				this.eventCtrl = new EventCtrl( this, httpPayload.getData().event );
-				// console.log("Event.loadEvent: before complementeion event=" + JSON.stringify(this.eventCtrl.getEvent()));
+				// console.log("Event.loadEvent: before completion event=" + JSON.stringify(this.eventCtrl.getEvent()));
 				this.eventCtrl.completeEvent();
 				// console.log("Event.loadEvent: end of complete, event=" + JSON.stringify(this.eventCtrl.getEvent()));
 				this.setState({ event: this.eventCtrl.getEvent(), show: { currentSection : TAB_PARTICIPANT } });

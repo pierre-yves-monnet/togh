@@ -49,7 +49,7 @@ class AdminEmail extends React.Component {
 		// call the server to get the value
 		this.setState({inProgress: true });
 
-		let restCallService = FactoryService.getInstance().getRestcallService();
+		let restCallService = FactoryService.getInstance().getRestCallService();
 
 		restCallService.getJson('/api/admin/email/get?', this, this.getApiKeyCallback);
 
@@ -152,7 +152,7 @@ class AdminEmail extends React.Component {
              listTestEvents:[],
              listEvents:[]});
 
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={listKeys: this.state.listKeys};
 		restCallService.postJson('/api/admin/email/update', this, param, httpPayload =>{
 			httpPayload.trace("AdminEmail.updateKey");
@@ -173,7 +173,7 @@ class AdminEmail extends React.Component {
              listTestEvents:[],
              listEvents:[]});
 
-		var restCallService = FactoryService.getInstance().getRestcallService();
+		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={listKeys: this.state.listKeys, 'sendEmailTo': this.state.sendEmailTo};
 		restCallService.postJson('/api/admin/email/test', this, param, httpPayload =>{
 			httpPayload.trace("AdminEmail.test isError:"+httpPayload.isError());
