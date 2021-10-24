@@ -25,6 +25,7 @@ public class RestJsonConstants {
     public static final String CST_PARAM_FILTER_EVENTS_V_MYEVENTS = "MyEvents";
     public static final String CST_PARAM_FILTER_EVENTS_V_ALLEVENTS = "AllEvents";
     public static final String CST_PARAM_FILTER_EVENTS_V_MYINVITATIONS = "MyInvitations";
+    public static final String CST_PARAM_TIMEZONEOFFSET = "timezoneoffset";
 
     public static final String CST_PARAM_TYPE_EVENTS = "TypeEvents";
     public static final String CST_PARAM_NAME = "name";

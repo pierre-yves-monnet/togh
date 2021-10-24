@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 
 import AuthService 					from 'service/AuthService';
-import RestcallService 				from 'service/RestcallService';
+import RestCallService 				from 'service/RestCallService';
 import ToolService 					from 'service/ToolService';
 import UserService 					from 'service/UserService';
 import CurrencyService 				from 'service/CurrencyService';
@@ -23,7 +23,7 @@ class FactoryService  {
 		this.uniqId = new Date().getTime();
 		console.log("FactoryService.constructor id="+this.uniqId);
 		this.authService = new AuthService( this );
-		this.restcallService = new RestcallService( this );
+		this.restCallService = new RestCallService( this );
 		this.toolService = new ToolService( this );
 		this.currencyService = new CurrencyService( this );
 		this.userService = new UserService( this );
@@ -31,7 +31,7 @@ class FactoryService  {
 		this.googleMapService =  new GoogleMapService( this );
 		
 		this.authService.init();
-		this.restcallService.init();
+		this.restCallService.init();
 		this.apiKeyService.init();
 	}
 
@@ -44,9 +44,9 @@ class FactoryService  {
 		// console.log("FactoryService.getUserService");
 		return this.userService;
 	}
-	getRestcallService() {
-		// console.log("FactoryService.getRestcallService");
-		return this.restcallService;
+	getRestCallService() {
+		// console.log("FactoryService.getRestCallService");
+		return this.restCallService;
 	}
 	
 	getToolService() {
