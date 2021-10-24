@@ -9,6 +9,7 @@
 package com.togh.entity;
 
 import com.togh.entity.base.UserEntity;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -22,7 +23,8 @@ import javax.persistence.*;
 @Entity
 
 @Table(name = "EVTPARTICIPANT")
-public class ParticipantEntity extends UserEntity {
+public @Data
+class ParticipantEntity extends UserEntity {
 
     @Column(name = "role", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -34,6 +36,12 @@ public class ParticipantEntity extends UserEntity {
     @Column(name = "status", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
+
+    @Column(name = "ispartof")
+    private Boolean isPartOf;
+
+    @Column(name = "numberOfParticipants")
+    private Integer numberOfParticipants;
 
     public ParticipantRoleEnum getRole() {
         return role;

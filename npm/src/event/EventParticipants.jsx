@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { Select, Tag }      from 'carbon-components-react';
+import { Select, Tag, TextInput, Toggle}      from 'carbon-components-react';
 import { Files }            from 'react-bootstrap-icons';
 import Invitation           from 'event/Invitation';
 import FactoryService 		from 'service/FactoryService';
@@ -25,6 +25,7 @@ export const ROLE_OUTSIDE = 'OUTSIDE';
 export const STATUS_LEFT = 'LEFT';
 export const STATUS_ACTIF = 'ACTIF';
 
+const NAME_ENTITY = "participantlist";
 
 
 class EventParticipants extends React.Component {
@@ -33,6 +34,7 @@ class EventParticipants extends React.Component {
 	constructor( props ) {
 		super();
 		// console.log("EventParticipants.constructor");
+		this.eventCtrl = props.eventCtrl;
 
 		this.state = { 'event' : props.event 
 						};
@@ -51,7 +53,23 @@ class EventParticipants extends React.Component {
 
 	render() {
 		const intl = this.props.intl;
+		var authService = FactoryService.getInstance().getAuthService();
+		let mySelfUser= authService.getUser();
 
+		// search my role in this event
+		let totalParticipants=0;
+		let myRoleInTheEvent='';
+		for (let i in this.state.event.participants) {
+		    let participant = this.state.event.participants[ i ];
+		    if (participant.user.id == mySelfUser.id) {
+		        myRoleInTheEvent=participant.role;
+		    }
+		    if (participant.status !== 'INVITED' && participant.status !== 'STATUS_LEFT' && participant.isPartOf) {
+		        if (participant.numberOfParticipants>0)
+		            totalParticipants += parseInt(participant.numberOfParticipants);
+		    }
+		}
+		let administratorEvent=myRoleInTheEvent === ROLE_OWNER || myRoleInTheEvent === ROLE_ORGANIZER;
 		console.log("EventParticipant.render:  Participants:"+JSON.stringify(this.state.event.participants) );
 		let headerSection = (
         			<EventSectionHeader id="participant"
@@ -75,6 +93,7 @@ class EventParticipants extends React.Component {
                     <thead>
                         <tr >
                             <th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
+                            <th colspan="2"><FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )</th>
                             <th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
                             <th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
                         </tr>
@@ -85,10 +104,9 @@ class EventParticipants extends React.Component {
                                 {item.user !== '' && ( <span>{item.user.label}</span>)}
 
                                 {item.status === 'INVITED' && (
-
                                     <span>
                                         <Tag type="teal">
-                                                <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
+                                            <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
                                         </Tag>
 
                                         <span>
@@ -118,14 +136,39 @@ class EventParticipants extends React.Component {
                                     </span>
                                    )}
                             </td>
+                            <td style={{minWidth:"120px"}}>
+                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                                    <Toggle labelText="" aria-label=""
+                                            toggled={item.isPartOf}
+                                            selectorPrimaryFocus={item.isPartOf}
+                                            labelA={<FormattedMessage id="EventParticipant.NotPartOf" defaultMessage="Not part of"/>}
+                                            labelB={<FormattedMessage id="EventParticipant.PartOf" defaultMessage="Part Of"/>}
+                                            onChange={(event) => this.setAttributCheckbox( "isPartOf", event, item )}
+                                            disabled={(! (administratorEvent || item.user.id === mySelfUser.id))}
+                                            id={ 'partof'+index} />
+                                  )}
+                             </td><td>
+                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                                     <TextInput
+                                            onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
+                                            keyboardType='numeric'
+                                            value={item.numberOfParticipants}
+                                            disabled={(! (item.isPartOf === true && (administratorEvent || item.user.id === mySelfUser.id)))}
+                                            placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
+                                            style={{width: "100px"}}
+                                          />
+                                      )}
+                            </td>
                             <td>
                             {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
                             {item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
 
                             { (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
                                 <Select labelText=""
-                                    disabled={item.status===STATUS_LEFT} value={item.role}
-                                        onChange={(event) => this.setAttribute( "role", event.target.value )}
+                                    inline={true}
+                                    disabled={ ( ! administratorEvent) }
+                                    value={item.role}
+                                    onChange={(event) => this.setChildAttribut( "role", event.target.value,item )}
                                         id="EventParticipants.role">
                                     <FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
                                         {(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
@@ -164,17 +207,18 @@ class EventParticipants extends React.Component {
 	// 
 	// --------------------------------------------------------------
 
-	setChildAttribut( name, value, item ) {
-		console.log("EventParticipant.setChildAttribut: set attribut:"+name+" <= "+value+" item="+JSON.stringify(item));
-		const { event } = { ...this.state };
-  		const currentEvent = event;
+	setChildAttribut(name, value, item) {
+        console.log("EventParticipant.setAttribut: set attribut:" + name + " <= " + value + " item=" + JSON.stringify(item));
+    	this.eventCtrl.setAttribut(name, value, item, NAME_ENTITY+"/"+item.id);
+    }
 
-  		item[ name ] = value;
-
-		this.setState( { "event" : currentEvent});
-		this.props.updateEvent();
-	}
-	
+    setAttributCheckbox(name, event, item) {
+        console.log("EventParticipant.setAttributCheckbox set " + name + "<=" + event.target.checked);
+        if (event.target.checked)
+            this.setChildAttribut(name, true, item)
+        else
+            this.setChildAttribut(name, false, item)
+    }
 		
 	// --------------------------------------------------------------
 	// 
@@ -182,8 +226,6 @@ class EventParticipants extends React.Component {
 	// 
 	// --------------------------------------------------------------
 
-
-	
 	participantInvited( participants ) {
 		console.log("EventParticipant.participantinvited event="+JSON.stringify( this.state.event));
 		var currentEvent = this.state.event;
@@ -205,7 +247,7 @@ class EventParticipants extends React.Component {
             participantId: participant.id,
             useMyEmailAsFrom: participant.useMyEmailAsFrom
         };
-        let restCallService = FactoryService.getInstance().getRestcallService();
+        let restCallService = FactoryService.getInstance().getRestCallService();
         restCallService.postJson('/api/event/invite/resend', this, param, httpPayload =>{
             httpPayload.trace("AdminTranslator.completeDictionary");
             this.setState({inprogress: false });

@@ -309,7 +309,7 @@ class EventItinerary extends React.Component {
 		const listOptions = [
 			{ 	label: intl.formatMessage({id: "EventItineray.Begin",defaultMessage: "Begin"}),
 			 	value: ITINERARYITEM_BEGIN,
-				icon: null,
+				icon: "img/itineraryBegin.svg",
 			 	type: "Blue" },
 			{ 	label: intl.formatMessage({id: "EventItineray.PointOfInterest",defaultMessage: "Point Of Interest"}),				
 			 	value: ITINERARYITEM_POI,
@@ -481,10 +481,10 @@ class EventItinerary extends React.Component {
 
 	/** --------------------
  	*/
-	setAttributCheckbox(name, value) {		
-		console.log("EventItinerary.setAttributCheckbox set " + name + "<=" + value.target.checked);
+	setAttributCheckbox(name, event) {
+		console.log("EventItinerary.setAttributCheckbox set " + name + "<=" + event.target.checked);
 		let eventValue=this.state.event;
-		if (value.target.checked)
+		if (event.target.checked)
 			eventValue[name] = true;
 		else
 			eventValue[name] = false;

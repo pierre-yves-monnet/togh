@@ -192,6 +192,8 @@ class EventEntity extends UserEntity {
         participant.setUser(userParticipant);
         participant.setRole(role);
         participant.setStatus(status);
+        participant.setIsPartOf(false);
+        participant.setNumberOfParticipants(0);
         participantList.add(participant);
         return participant;
     }

@@ -84,6 +84,9 @@ public class JpaTool {
                 } else if (returnType.equals(Long.class)) {
                     value = Long.valueOf(attributValue.toString());
 
+                } else if (returnType.equals(Integer.class)) {
+                    value = Integer.valueOf(attributValue.toString());
+
                 } else if (returnType.equals(LocalDateTime.class)) {
                     value = EngineTool.stringToDateTime(attributValue.toString());
 

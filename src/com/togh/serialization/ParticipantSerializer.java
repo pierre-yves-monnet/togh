@@ -55,6 +55,8 @@ public class ParticipantSerializer extends BaseSerializer {
         resultMap.put("role", participantEntity.getRole() == null ? null : participantEntity.getRole().toString());
         BaseSerializer userSerialize = factorySerializer.getFromEntity(participantEntity.getUser());
         resultMap.put("user", userSerialize.getMap(participantEntity.getUser(), contextAccess, timezoneOffset, factorySerializer));
+        resultMap.put("isPartOf", participantEntity.getIsPartOf());
+        resultMap.put("numberOfParticipants", participantEntity.getNumberOfParticipants());
         resultMap.put("id", participantEntity.getId());
         resultMap.put("status", participantEntity.getStatus() == null ? null : participantEntity.getStatus().toString());
         EventEntity eventEntity = eventRepository.findByParticipant(participantEntity.getId());

@@ -439,8 +439,11 @@ public class EventController {
                 String nameEntity = stLocalisation.nextToken();
 
                 Method method = JpaTool.searchMethodByName(indexEntity, nameEntity);
-                if (method == null)
+                if (method == null) {
+                    logger.severe(LOG_HEADER + "Can't localise [" + nameEntity + "] in [" + indexEntity.toString() + "]");
                     return null;
+                }
+
 
                 // get the object
                 Object getObject = method.invoke(indexEntity);
