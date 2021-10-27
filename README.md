@@ -451,11 +451,15 @@ Create "External" OAuth
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*  Cloud &
-Docker                                                                            */
+Docker                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
+
+## Tag the release
+
+AdminInfo.jsx RestPingController.java
 
 ## Create Back End Togh Docker image
 
@@ -637,50 +641,35 @@ docker export <containerId> > docimage.tar
 
 docker logs 221
 
-
-
-
-
 test backend:
 http://localhost:7080/ping
 test front end
 http://localhost:3000
 
-
--------------------------------------- container vide
-Ajout des composants vi & postgres
-apt-get update
-apt-get install vi
-
+-------------------------------------- container vide Ajout des composants vi & postgres apt-get update apt-get install
+vi
 
 apt-get install postgresql postgresql-contrib
 
-su - postgres
-pg_ctlcluster 11 main start
+su - postgres pg_ctlcluster 11 main start
 
-creation de la la base de donnée
-\conninfo
-psql
-CREATE DATABASE together;
+creation de la la base de donnée \conninfo psql CREATE DATABASE together;
 
+## Save the container
 
-## Sauvegarder le container
- 
 ## importer le container
-  
- 
+
 ## Arret de docker
-  wsl --shutdown
-  
-  
+
+wsl --shutdown
+
 ## domain:
 
 www.1and1.com
 
-  
 ## CI
-https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
 
+https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
 
 # Administration
 /* ******************************************************************************** */
@@ -818,13 +807,9 @@ Admini: avoir un "automatique refresh check box" : penible de clicker "connected
 
 ## update prochaine livraison
 
---delete from evtsurveyanswer where id in (
--- select b.id from evtsurveyanswer a, evtsurveyanswer b -- where a.whoid=b.whoid and a.surveyid = b.surveyid and a.id <
-b.id); -- alter table evtsurveyanswerchoice drop column surveyid;
-
 ## bugs
 
-EventEntity.getMap : normaliser les constante ici avec les SLAB_OPERATION (une seule constante)
+EventEntity.getMap : normaliser les constantes ici avec les SLAB_OPERATION (une seule constante)
 
 * Je suis 2 fois : email en Majuscule et en Minuscule. Faire un test ignore case
 * admin: faire une purge d'user et un log de mauvaise connection

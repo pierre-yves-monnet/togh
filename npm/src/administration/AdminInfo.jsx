@@ -11,8 +11,7 @@ import { FormattedMessage } from "react-intl";
 
 import { Loading } from 'carbon-components-react';
 
-
-
+import ToghVersion from 'component/ToghVersion';
 import FactoryService 		from 'service/FactoryService';
 
 
@@ -73,11 +72,13 @@ class AdminInfo extends React.Component {
 					{this.state.listinfos && this.state.listinfos.map((info,index) =>
 						<tr key={index}>
 							<td>{info.name}</td>
-							<td>{info.value}</td>
+							<td style={{fontWeigh: "bold", fontSize:"smaller"}}>{info.value}</td>
 						</tr>)}
-						<tr>
-						    <td>Version</td>
-						    <td>Version Oct 15, 2021</td>
+                        <tr>
+						    <td >Portal version</td>
+						    <td style={{fontWeigh: "bold", fontSize:"smaller"}}>
+						            <ToghVersion/>
+						    </td>
 						</tr>
 				</table>
 				</div>	 

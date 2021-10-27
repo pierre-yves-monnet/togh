@@ -28,8 +28,9 @@ import java.util.logging.Logger;
 @RequestMapping("togh")
 public class RestPingController {
 
-    private final static String logHeader = RestLoginController.class.getSimpleName() + ": ";
     private final Logger logger = Logger.getLogger(RestPingController.class.getName());
+    private final static String LOG_HEADER = RestLoginController.class.getSimpleName() + ": ";
+
     @Autowired
     DataSource dataSource;
 
@@ -42,14 +43,14 @@ public class RestPingController {
     @CrossOrigin
     @GetMapping(value = "togh/api/ping", produces = "application/json")
     public Map<String, Object> ping(@RequestParam(required = false) String message) {
-        logger.info(logHeader + "Ping!");
+        logger.info(LOG_HEADER + "Ping!");
         Map<String, Object> result = new HashMap<>();
         result.put("now", LocalDateTime.now());
+        result.put("version", "Oct 25,2021");
         if (message != null)
             result.put("message", message);
         // information on the datasource: are we connected?
-        try {
-            Connection con = dataSource.getConnection();
+        try (Connection con = dataSource.getConnection()) {
             con.getMetaData().getDatabaseProductName();
             result.put("database", "Database is up and running");
         } catch (Exception e) {
