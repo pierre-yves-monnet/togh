@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon, Tag,ToggleSmall } from 'carbon-components-react';
+import { TextInput,Select, TooltipIcon, Tag, Toggle, ToggleSmall } from 'carbon-components-react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import { Loading } from 'carbon-components-react';
@@ -84,6 +84,7 @@ class AdminUsers extends React.Component {
 					<div class="row">
 						<div class="col-6"> 
 							<TextInput
+							    id="search"
 								labelText={<FormattedMessage id="AdminUsers.searchSentence" defaultMessage="Search"/>} 
 								value={this.state.searchUserSentence} onChange={ (event) => this.setState({searchUserSentence: event.target.value})}/>
 						</div>
@@ -92,7 +93,7 @@ class AdminUsers extends React.Component {
 							<div class="btn-group btn-group-sm"  
 								aria-label="Basic radio toggle button group" 
 								style={{ padding: "10px 10px 10px 10px" }}>
-								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterALL" autocomplete="off" 
+								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterALL" autoComplete="off"
 									checked={this.state.filterusers.all}
 									onChange={() => this.managerfilter('all')}/>
 							  	<label class="btn btn-outline-primary" for="filterALL">
@@ -149,15 +150,15 @@ class AdminUsers extends React.Component {
 					</div>
 					<div class="row">
 						<div class="col-4">
-							<ToggleSmall class="sm" labelText="" aria-label="" 
-							toggled={this.state.show.details}
-							selectorPrimaryFocus={this.state.show.details}
-							labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
-							labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
-							onChange={(event) => {
-								this.setState( { show: { details : event.target.checked}} );
-								}}
-							id="showDetails" />
+						    <Toggle size="sm" class="sm" labelText="" aria-label=""
+                                toggled={this.state.show.details}
+                                selectorPrimaryFocus={this.state.show.details}
+                                labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+                                labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+                                onChange={(event) => {
+                                    this.setState( { show: { details : event.target.checked}} );
+                                    }}
+                                id="showDetails" />
 						</div> 
 					</div>
 					

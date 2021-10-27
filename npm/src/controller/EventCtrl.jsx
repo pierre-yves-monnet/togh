@@ -92,6 +92,7 @@ class EventCtrl {
 			this.event.itinerarysteplist.map((item) => {
 				if (!item.expense)
 					item.expense = {};
+				return item;
 			});
 	
 			if (!this.event.chatlist) {
@@ -115,6 +116,7 @@ class EventCtrl {
 			this.event.shoppinglist.map( (item) => {
 				if (! item.expense)
 					item.expense = {};
+				return item;
 				} );
 	
 			if (!this.event.tasklist) {
@@ -127,13 +129,14 @@ class EventCtrl {
 			}
 			
 			this.event.surveylist.map( (survey) => {
-				if (! survey[ surveyConstant.CHILD_ANSWER ])
-					survey[ surveyConstant.CHILD_ANSWER ] = {};
+				    if (! survey[ surveyConstant.CHILD_ANSWER ])
+					    survey[ surveyConstant.CHILD_ANSWER ] = {};
 				
-				survey[ surveyConstant.CHILD_ANSWER ].map( (surveyAnswer) => {
+				    survey[ surveyConstant.CHILD_ANSWER ].map( (surveyAnswer) => {
 				
 					if (! surveyAnswer.decision)
 						surveyAnswer.decision = {};
+				    return survey;
 				} );
 			});		
 			

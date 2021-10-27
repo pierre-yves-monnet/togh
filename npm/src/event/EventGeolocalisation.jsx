@@ -11,13 +11,6 @@ import { FormattedMessage } from "react-intl";
 
 import { Toggle, TextArea } from 'carbon-components-react';
 
-
-// import { GeoAltFill } from 'react-bootstrap-icons';
-// import GoogleMapReact from 'google-map-react';
-
-// import locationIcon from '@iconify/icons-mdi/map-marker'
-
-
 import EventSectionHeader 		from 'component/EventSectionHeader';
 import GoogleAddressGeocode 	from 'component/GoogleAddressGeocode';
 import * as GeocodeConstant 	from 'component/GoogleAddressGeocode';

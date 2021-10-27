@@ -124,8 +124,8 @@ class EventSurveyList extends React.Component {
 			var listSurveyHtml = [];
 			
 			listSurveyHtml.push( this.state.event.surveylist.map( (item, index) => {
-				var classSurvey = "";
-				var styleSurvey="";
+				let classSurvey = "";
+				let styleSurvey="";
 				// color
 				if (item.status === surveyConstant.STATUS_INPREPAR)
 					classSurvey= "list-group-item list-group-item-dark"
@@ -142,7 +142,8 @@ class EventSurveyList extends React.Component {
 					styleSurvey = {borderRight:"2px solid black"};
 				}
 				return(
-					<li class={classSurvey} style={styleSurvey}
+					<li class={classSurvey}
+					    style={styleSurvey}
 						key={index}
 						id={item.id}
 						onClick={ (event) =>{

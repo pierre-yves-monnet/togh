@@ -61,7 +61,7 @@ class EventParticipants extends React.Component {
 		let myRoleInTheEvent='';
 		for (let i in this.state.event.participants) {
 		    let participant = this.state.event.participants[ i ];
-		    if (participant.user.id == mySelfUser.id) {
+		    if (participant.user.id === mySelfUser.id) {
 		        myRoleInTheEvent=participant.role;
 		    }
 		    if (participant.status !== 'INVITED' && participant.status !== 'STATUS_LEFT' && participant.isPartOf) {

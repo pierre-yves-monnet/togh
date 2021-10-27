@@ -9,13 +9,8 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
-
-import { TextInput, Select } from 'carbon-components-react';
-
+import { Select } from 'carbon-components-react';
 import FactoryService 		from 'service/FactoryService';
-
-import SlabRecord 			from 'service/SlabRecord';
-
 import EventSectionHeader 	from 'component/EventSectionHeader';
 
 // -----------------------------------------------------------

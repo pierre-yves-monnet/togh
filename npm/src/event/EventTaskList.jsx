@@ -243,7 +243,7 @@ class EventTaskList extends React.Component {
 				<table width="100%"><tr>
 					<td style={{ paddingRight: "60px" }}>
 
-						<Toggle labelText="" aria-label="" 
+						<Toggle labelText=""
 							toggled={this.state.event.tasklistshowdates}
 							selectorPrimaryFocus={this.state.event.tasklistshowdates}
 							labelA={<FormattedMessage id="EventTaskList.ShowDate" defaultMessage="Show dates" />}
@@ -255,7 +255,7 @@ class EventTaskList extends React.Component {
 							
 					</td><td style={{ paddingLeft: "50px", paddingRight: "50px" }}>
 						<div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate" >
-							<input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autocomplete="off" 
+							<input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autoComplete="off"
 								checked={this.state.showProperties.filterState === "ALL"}
 								onChange={() => this.setSwitcherValue("filterState", "ALL")}/>
 						  	<label class="btn btn-outline-primary" for="filterState1">
