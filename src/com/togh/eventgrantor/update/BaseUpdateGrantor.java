@@ -6,13 +6,7 @@
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
-package com.togh.serialization;
-
-import com.togh.entity.base.BaseEntity;
-import com.togh.entity.base.UserEntity;
-
-import java.util.Map;
-
+package com.togh.eventgrantor.update;
 
 
 /* ******************************************************************************** */
@@ -24,20 +18,35 @@ import java.util.Map;
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public abstract class UserSerializer extends BaseSerializer {
+import com.togh.entity.ToghUserEntity;
+import com.togh.entity.base.BaseEntity;
+import com.togh.service.EventService;
+import com.togh.service.event.EventController;
+import com.togh.service.event.EventUpdate;
+
+import java.util.List;
+
+public interface BaseUpdateGrantor {
+
     /**
-     * getBaseMap. Each entity depend on UserEntity. So, this is the basic map
+     * Give the Entity on which the grantor works
      *
-     * @param baseEntity        Base entity to serialize
-     * @param serializerOptions Serialize options
      * @return
      */
-    @Override
-    protected Map<String, Object> getBasicMap(BaseEntity baseEntity, SerializerOptions serializerOptions) {
-        Map<String, Object> resultMap = super.getBasicMap(baseEntity, serializerOptions);
-        if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.ADMIN))
-            resultMap.put(JSON_AUTHORID, ((UserEntity) baseEntity).getAuthorId());
-        return resultMap;
-    }
+    Class getEntityClass();
+
+    /**
+     * Return true if this operation is allowed on this Slab for the user in the context
+     */
+    boolean isOperationAllowed(BaseEntity baseEntity, EventUpdate.Slab slab, EventService.UpdateContext updateContext);
+
+    /**
+     * Return, for the user, the list of Readonly field, to send to the interface
+     *
+     * @param toghUser        user to check
+     * @param eventController event controller
+     * @return list of string to move to ReadOnly
+     */
+    public List<String> getFieldsReadOnly(ToghUserEntity toghUser, EventController eventController);
 
 }

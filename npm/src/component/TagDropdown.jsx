@@ -22,7 +22,7 @@ class TagDropDown extends React.Component {
 	// type is a TagHtml type: "teal", "green", "red"...
 	//  see https://www.carbondesignsystem.com/components/tag/usage
 	// - value : the current value
-	// - readWrite[boolean]: a read/write
+	// - disabled[boolean]: a disabled
 	// - changeState() method 
 	constructor( props ) {
 		super();
@@ -30,7 +30,7 @@ class TagDropDown extends React.Component {
 
 		this.state = { listOptions : props.listOptions,
 					value : props.value,
-					readWrite: props.readWrite}
+					disabled: props.disabled}
 	}
 
 
@@ -43,8 +43,8 @@ class TagDropDown extends React.Component {
         if (prevProps.value !== this.props.value) {
             this.setState( {value : this.props.value });
         }
-        if (prevProps.readWrite !== this.props.readWrite) {
-            this.setState( {readWrite: this.props.readWrite});
+        if (prevProps.disabled !== this.props.disabled) {
+            this.setState( {disabled: this.props.disabled});
         }
 	}
 	//----------------------------------- Render
@@ -52,7 +52,7 @@ class TagDropDown extends React.Component {
 		// console.log("TagDropDown.render value="+this.state.value);
 		let tagHtml = null;
 		let dropDownChangeHtml = (<div/>);
-		if (this.state.readWrite) {
+		if (! this.state.disabled) {
 			dropDownChangeHtml = (
 				<OverflowMenu selectorPrimaryFocus={'.'+ this.state.value} >
 					{this.state.listOptions.map( (item, index) =>

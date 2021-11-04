@@ -10,8 +10,8 @@ package com.togh.serialization;
 
 import com.togh.entity.EventEntity;
 import com.togh.entity.ParticipantEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import com.togh.repository.EventRepository;
 import com.togh.service.NotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,19 +42,20 @@ public class ParticipantSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param userEntity        userEntity
-     * @param contextAccess     contextAccess to know what information has to be produce
-     * @param timezoneOffset    timeoffset of the browser
-     * @param factorySerializer
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
-    public Map<String, Object> getMap(BaseEntity userEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
-        ParticipantEntity participantEntity = (ParticipantEntity) userEntity;
-        Map<String, Object> resultMap = getBasicMap(participantEntity, contextAccess, timezoneOffset);
+    @Override
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
+        ParticipantEntity participantEntity = (ParticipantEntity) baseEntity;
+        Map<String, Object> resultMap = getBasicMap(participantEntity, serializerOptions);
 
         resultMap.put("role", participantEntity.getRole() == null ? null : participantEntity.getRole().toString());
         BaseSerializer userSerialize = factorySerializer.getFromEntity(participantEntity.getUser());
-        resultMap.put("user", userSerialize.getMap(participantEntity.getUser(), contextAccess, timezoneOffset, factorySerializer));
+        resultMap.put("user", userSerialize.getMap(participantEntity.getUser(), serializerOptions, factorySerializer, factoryUpdateGrantor));
         resultMap.put("isPartOf", participantEntity.getIsPartOf());
         resultMap.put("numberOfParticipants", participantEntity.getNumberOfParticipants());
         resultMap.put("id", participantEntity.getId());

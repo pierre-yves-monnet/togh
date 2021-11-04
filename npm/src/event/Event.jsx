@@ -80,7 +80,7 @@ class Event extends React.Component {
 		this.setAttribut 				= this.setAttribut.bind(this);
 		this.updateEventFct 			= this.updateEventFct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
-
+        this.getDisabledState           = this.getDisabledState.bind(this);
 
 	}
 
@@ -112,6 +112,7 @@ class Event extends React.Component {
 		var datePanelHtml = (
 			<div>
 				<RadioButtonGroup
+				    disabled={this.getDisabledState("datePolicy")}
 					name="datepolicy"
 					valueSelected={this.state.event.datePolicy}
 					legend={<FormattedMessage id="Event.DatePolicy" defaultMessage="Date policy" />}
@@ -121,8 +122,12 @@ class Event extends React.Component {
 					}
 					}
 				>
-					<RadioButton value="ONEDATE" id="r1" labelText={<FormattedMessage id="Event.OneDate" defaultMessage="One date" />} labelPosition="right" />
-					<RadioButton value="PERIOD" id="r2" labelText={<FormattedMessage id="Event.Period" defaultMessage="Period" />} labelPosition="right" />
+					<RadioButton value="ONEDATE"
+    				    disabled={this.getDisabledState("datePolicy")}
+					    id="r1" labelText={<FormattedMessage id="Event.OneDate" defaultMessage="One date" />} labelPosition="right" />
+					<RadioButton value="PERIOD"
+       				    disabled={this.getDisabledState("datePolicy")}
+                        id="r2" labelText={<FormattedMessage id="Event.Period" defaultMessage="Period" />} labelPosition="right" />
 				</RadioButtonGroup>
 				{this.state.event.datePolicy === 'ONEDATE' && (
 					<div>
@@ -130,6 +135,7 @@ class Event extends React.Component {
 							<td colspan="2">
 
 								<DatePicker datePickerType="single"
+								    disabled={this.getDisabledState("dateStartEvent")}
 									onChange={(dates) => {
 										console.log("SingleDatePicker :" + dates.length + " is an array " + Array.isArray(dates));
 											if (dates.length >= 1) {
@@ -145,6 +151,7 @@ class Event extends React.Component {
 									value={toolService.getIsoStringFromDate(this.state.event.dateEvent) }
 								>
 									<DatePickerInput
+                                        disabled={this.getDisabledState("dateStartEvent")}
 										// placeholder='mm/dd/yyyy' // To get from a service that returns the format based on the language selected
 										placeholder="mm/dd/yyyy"
 										labelText={<FormattedMessage id="Event.DateEvent" defaultMessage="Date Event" />}
@@ -155,12 +162,14 @@ class Event extends React.Component {
 							</td></tr>
 							<tr><td>
 								<TimePicker
+								    disabled={this.getDisabledState("timeEvent")}
 									id="eventTime"
 									labelText={<FormattedMessage id="Event.TimeEvent" defaultMessage="Time" />}
 									value={this.state.event.timeEvent}
 									onChange={(event) => this.setAttribut("timeEvent", event.target.value)} />
 							</td><td>
 								<TimePicker
+									    disabled={this.getDisabledState("durationEvent")}
 										id="durationTime"
 										labelText={<FormattedMessage id="Event.DurationEvent" defaultMessage="Duration" />}
 										value={this.state.event.durationEvent}
@@ -184,11 +193,13 @@ class Event extends React.Component {
 							value={toolService.getDateListFromDate(this.state.event.dateStartEvent, this.state.event.dateEndEvent)}
 						>
 							<DatePickerInput
+					            disabled={this.getDisabledState("dateStartEvent")}
 								id="date-picker-input-id-start"
 								placeholder="mm/dd/yyyy"
 								labelText={<FormattedMessage id="Event.StartDate" defaultMessage="Start Date" />}
 							/>
 							<DatePickerInput
+								disabled={this.getDisabledState("dateEndEvent")}
 								id="date-picker-input-id-finish"
 								placeholder="mm/dd/yyyy"
 								labelText={<FormattedMessage id="Event.EndDate" defaultMessage="End Date" />}
@@ -221,6 +232,7 @@ class Event extends React.Component {
 
 					<div class="col-sm-4">
 						<TextInput labelText=""
+				            disabled={this.getDisabledState("name")}
 							id="name"
 							value={this.state.event.name}
 							style={{fontSize: "24px", height: "50px", color: "#ac1e4a", maxWidth: "315px"}}
@@ -228,10 +240,13 @@ class Event extends React.Component {
 					</div>
 					<div class="col-sm-5">
 						<div class="fieldlabel">{<FormattedMessage id="Event.Status" defaultMessage="Status" />}</div>
-						<EventState statusEvent={this.state.event.statusEvent} modifyEvent={true} changeState={this.changeStateCallback} />
+						<EventState statusEvent={this.state.event.statusEvent}
+						    disabled={this.getDisabledState("statusEvent")}
+						    changeState={this.changeStateCallback} />
 					</div>
 					<div class="col-sm-2">
 						<Select labelText={<FormattedMessage id="Event.Scope" defaultMessage="Scope" />}
+				            disabled={this.getDisabledState("typeEvent")}
 							id="typeEvent"
 							value={this.state.event.typeEvent}
 							onChange={(event) => this.setAttribut("typeEvent", event.target.value)}>
@@ -262,7 +277,8 @@ class Event extends React.Component {
 				<div class="row">
 					<div class="col-sm-6">
 						<TextArea id="description"
-							labelText={<FormattedMessage id="Event.Description" defaultMessage="Description" />}
+				            disabled={this.getDisabledState("description")}
+                            labelText={<FormattedMessage id="Event.Description" defaultMessage="Description" />}
 							style={{ width: "100%", maxWidth: "100%" }}
 							rows={5}
 							value={this.state.event.description}
@@ -512,7 +528,12 @@ class Event extends React.Component {
 	// Component controls
 	//
 	// --------------------------------------------------------------
-
+    getDisabledState( fieldName) {
+        debugger;
+        if (this.state && this.state.event && this.state.event.readOnlyFields && this.state.event.readOnlyFields.includes(fieldName))
+            return true;
+        return false;
+    }
 
 	// -------------------------------------------- Access different part
 	accessTab( accessTab ) {

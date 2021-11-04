@@ -10,8 +10,8 @@ package com.togh.serialization;
 
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventTaskEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -33,16 +33,16 @@ public class TaskSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param userEntity
-     * @param contextAccess
-     * @param timezoneOffset
-     * @param factorySerializer
-     * @return
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
+     * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity userEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
-        EventTaskEntity eventTaskEntity = (EventTaskEntity) userEntity;
-        Map<String, Object> resultMap = getBasicMap(eventTaskEntity, contextAccess, timezoneOffset);
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
+        EventTaskEntity eventTaskEntity = (EventTaskEntity) baseEntity;
+        Map<String, Object> resultMap = getBasicMap(eventTaskEntity, serializerOptions);
 
 
         resultMap.put("status", eventTaskEntity.getStatus() == null ? null : eventTaskEntity.getStatus().toString());

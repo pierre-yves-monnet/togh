@@ -20,13 +20,15 @@ import com.togh.entity.EventExpenseEntity;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ToghUserEntity;
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
+import com.togh.eventgrantor.access.EventAccessGrantor;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import com.togh.repository.EventExpenseRepository;
 import com.togh.repository.EventRepository;
 import com.togh.serialization.BaseSerializer;
 import com.togh.serialization.FactorySerializer;
+import com.togh.serialization.SerializerOptions;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventController;
 import com.togh.service.event.EventUpdate.Slab;
@@ -92,6 +94,9 @@ public class EventService {
 
     @Autowired
     private FactorySerializer factorySerializer;
+
+    @Autowired
+    private FactoryUpdateGrantor factoryUpdateGrantor;
 
     /**
      * Update event: update attribut, create new item, delete item. All operations on event are done via the Slab Mechanism, which is a Updater design
@@ -335,14 +340,28 @@ public class EventService {
 
     }
 
-    public ContextAccess getContextAccess(EventEntity eventEntity, ToghUserEntity toghUser) {
-        return EventController.getInstance(eventEntity, factoryService, factoryRepository).getContextAccess(toghUser);
-    }
-
-    public Map<String, Object> getMap(EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset) {
+    /**
+     * GetMap for the event
+     *
+     * @param eventEntity    event to access
+     * @param toghUserEntity user who access the event
+     * @param timezoneOffset time Zone Offset of the browser, to display dates in the correct timezone
+     * @param isAdmin        if the user is an admin and ask to see the event as an administrator
+     * @return
+     */
+    public Map<String, Object> getMap(EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset, boolean isAdmin) {
         EventController eventController = getEventController(eventEntity);
+        SerializerOptions.ContextAccess contextAccess = isAdmin ? SerializerOptions.ContextAccess.ADMIN : SerializerOptions.ContextAccess.EVENTACCESS;
+
+        EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, toghUserEntity, contextAccess);
+        SerializerOptions serializerOptions = new SerializerOptions(toghUserEntity,
+                eventController,
+                timezoneOffset,
+                contextAccess,
+                eventAccessGrantor);
+
         BaseSerializer serializer = factorySerializer.getFromEntity(eventEntity);
-        return serializer.getMap(eventEntity, eventController.getContextAccess(toghUserEntity), timezoneOffset, factorySerializer);
+        return serializer.getMap(eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor);
     }
 
     /**
@@ -426,19 +445,6 @@ public class EventService {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    /**
-     * Add a task in the event
-     * task is saved, then it got an id. Event is not saved.
-     *
-     * @param eventEntity
-     * @return
-    //     */
-//    public EventItineraryStepEntity addItineraryStep(EventEntity eventEntity, EventItineraryStepEntity itineraryStep) {
-//        eventItineraryStepRepository.save(itineraryStep);
-//        eventEntity.addItineraryStep(itineraryStep);
-//        return itineraryStep;
-//
-//    }
 
     /**
      * removeItineraryStep

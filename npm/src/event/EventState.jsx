@@ -19,7 +19,8 @@ class EventState extends React.Component {
 		super();
 		
 		this.state = { 'statusEvent' : props.statusEvent,
-						'modifyEvent' : props.modifyEvent}
+						'disabled' : props.disabled};
+	    console.log("EventState: statusEvent["+props.statusEvent+"] disabled=["+props.disabled+"]")
 	}
 
 	
@@ -47,7 +48,7 @@ class EventState extends React.Component {
 		
 			
 		return (<TagDropdown listOptions={listOptions} value={this.state.statusEvent} 
-					readWrite={this.state.modifyEvent} 
+					disabled={this.state.disabled}
 					changeState={(value) => {
 						this.props.changeState( value );
 					}} />);

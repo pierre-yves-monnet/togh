@@ -150,15 +150,22 @@ class AdminUsers extends React.Component {
 					</div>
 					<div class="row">
 						<div class="col-4">
-						    <Toggle size="sm" class="sm" labelText="" aria-label=""
-                                toggled={this.state.show.details}
-                                selectorPrimaryFocus={this.state.show.details}
-                                labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
-                                labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
-                                onChange={(event) => {
-                                    this.setState( { show: { details : event.target.checked}} );
-                                    }}
-                                id="showDetails" />
+						    <table>
+						    <tr><td>
+						        <Toggle size="sm" class="sm" labelText="" aria-label=""
+                                    toggled={this.state.show.details}
+                                    selectorPrimaryFocus={this.state.show.details}
+                                    labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+                                    labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+                                    onChange={(event) => {
+                                        this.setState( { show: { details : event.target.checked}} );
+                                        }}
+                                    id="showDetails" />
+                            </td><td style={{padding: "10px"}}>
+
+                                <FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details"/>
+                            </td></tr>
+                            </table>
 						</div> 
 					</div>
 					
@@ -332,6 +339,10 @@ class AdminUsers extends React.Component {
 							})
 						}
 					</table>
+
+					{this.state.page} / {this.state.numberOfPages} <FormattedMessage id="AdminUsers.Pages" defaultMessage="Pages"/>
+					&nbsp;({this.state.numberOfItems}  <FormattedMessage id="AdminUsers.Users" defaultMessage="Users"/> )
+
 				</div>
 				<LogEvents listEvents={this.state.listEvents} />
 					
@@ -366,6 +377,8 @@ class AdminUsers extends React.Component {
 				filter.all=true;
 		}
 		this.setState({ filterusers: filter});
+		// ask immediately
+		this.searchUsers();
 	}
 	
 	
@@ -391,7 +404,10 @@ class AdminUsers extends React.Component {
 				this.setState({ listusers : httpPayload.getData().users,
 								countusers: httpPayload.getData().countusers,
 								page:httpPayload.getData().page,
-								numberperpage:httpPayload.getData().numberperpage
+								itemsPerPage:httpPayload.getData().itemsPerPage,
+								numberOfPages:httpPayload.getData().numberOfPages,
+								numberOfItems:httpPayload.getData().numberOfItems
+
 								});
 			}
 		

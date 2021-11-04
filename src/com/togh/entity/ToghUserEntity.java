@@ -205,16 +205,5 @@ class ToghUserEntity extends BaseEntity {
         FREE, PREMIUM, EXCELLENCE
     }
 
-    // define the user access :
-    // SEARCH : the user show up in a public search
-    // PUBLICACCESS : access is from a public event : event is public or limited, but the user who want to access is only an observer, or not yet confirmed. So, show only what user want to show to the public
-    // FRIENDACCESS : access is from an LimitedEvent. The user who want to access is registered in this LimitedEvent, so show what the user want to shopw to hist friend
-    // SECRETEVENT : access is from a SECRET event, then show only a first name, nothing else
-    // ADMIN : administrator access, give back everything
-    // MYPROFILE : I want to access my profile
-    public enum ContextAccess {
-        SEARCH, PUBLICACCESS, FRIENDACCESS, SECRETACCESS, ADMIN, MYPROFILE
-    }
-
 
 }

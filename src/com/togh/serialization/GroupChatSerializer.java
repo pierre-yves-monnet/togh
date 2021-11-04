@@ -10,8 +10,8 @@ package com.togh.serialization;
 
 import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventGroupChatEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -33,22 +33,22 @@ public class GroupChatSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param baseEntity        userEntity
-     * @param contextAccess     contextAccess to know what information has to be produce
-     * @param timezoneOffset    time offset of the browser
-     * @param factorySerializer
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventGroupChatEntity groupChatEntity = (EventGroupChatEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(groupChatEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(groupChatEntity, serializerOptions);
         resultMap.put("description", groupChatEntity.getDescription());
 
         List<Map<String, Object>> listChatMap = new ArrayList<>();
         for (EventChatEntity chatEntity : groupChatEntity.getListChat()) {
             BaseSerializer serializer = factorySerializer.getFromEntity(chatEntity);
-            listChatMap.add(serializer.getMap(chatEntity, contextAccess, timezoneOffset, factorySerializer));
+            listChatMap.add(serializer.getMap(chatEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
         resultMap.put(JSON_CHATLIST, listChatMap);
 

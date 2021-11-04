@@ -3,7 +3,9 @@ package com.togh.serialization;
 import com.togh.entity.EventChatEntity;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventGroupChatEntity;
-import com.togh.entity.ToghUserEntity;
+import com.togh.eventgrantor.access.EventAccessGrantor;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
+import com.togh.service.event.EventController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +20,26 @@ class EventSerializerTest {
     @Autowired
     FactorySerializer factorySerializer;
 
+    @Autowired
+    private FactoryUpdateGrantor factoryUpdateGrantor;
+
     @Test
     void testEventSerialiser() {
         EventEntity eventEntity = new EventEntity();
         eventEntity.setName("Hello Word");
         BaseSerializer eventSerializer = factorySerializer.getFromEntity(eventEntity);
-        ToghUserEntity.ContextAccess contextAccess = ToghUserEntity.ContextAccess.PUBLICACCESS;
-        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, contextAccess, 0L, factorySerializer);
-        Assertions.assertEquals("Hello Word", mapSerialized.get(BaseSerializer.JSON_OUT_NAME));
+
+        EventController eventController = new EventController(eventEntity, null, null);
+        EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, null, SerializerOptions.ContextAccess.EVENTACCESS);
+        SerializerOptions serializerOptions = new SerializerOptions(null,
+                eventController,
+                0L,
+                SerializerOptions.ContextAccess.EVENTACCESS,
+                eventAccessGrantor);
+
+
+        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor);
+        Assertions.assertEquals("Hello Word", mapSerialized.get(BaseSerializer.JSON_NAME));
     }
 
     @Test
@@ -61,16 +75,23 @@ class EventSerializerTest {
 
         eventEntity.setName("Hello Word");
         BaseSerializer eventSerializer = factorySerializer.getFromEntity(eventEntity);
-        ToghUserEntity.ContextAccess contextAccess = ToghUserEntity.ContextAccess.FRIENDACCESS;
 
-        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, contextAccess, 0L, factorySerializer);
+        EventController eventController = new EventController(eventEntity, null, null);
+        EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, null, SerializerOptions.ContextAccess.EVENTACCESS);
+        SerializerOptions serializerOptions = new SerializerOptions(null,
+                eventController,
+                0L,
+                SerializerOptions.ContextAccess.EVENTACCESS,
+                eventAccessGrantor);
 
-        Assertions.assertEquals("Hello Word", mapSerialized.get(BaseSerializer.JSON_OUT_NAME));
+        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor);
+
+        Assertions.assertEquals("Hello Word", mapSerialized.get(BaseSerializer.JSON_NAME));
         List<Map<String, Object>> listGroupChatSerialized = (List<Map<String, Object>>) mapSerialized.get(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST);
         Assertions.assertEquals(1, listGroupChatSerialized.size());
 
         Map<String, Object> MainGroupSerializedMap = listGroupChatSerialized.get(0);
-        Assertions.assertEquals("GENERAL", MainGroupSerializedMap.get(BaseSerializer.JSON_OUT_NAME));
+        Assertions.assertEquals("GENERAL", MainGroupSerializedMap.get(BaseSerializer.JSON_NAME));
 
         List<Map<String, Object>> ListChatSerialized = (List<Map<String, Object>>) MainGroupSerializedMap.get(GroupChatSerializer.JSON_CHATLIST);
         Assertions.assertEquals(2, ListChatSerialized.size());

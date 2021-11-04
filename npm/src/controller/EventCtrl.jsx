@@ -89,11 +89,10 @@ class EventCtrl {
 				log = log.concat("create itinerarysteplist;");
 				this.event.itinerarylist = [];
 			}
-			this.event.itinerarysteplist.map((item) => {
-				if (!item.expense)
-					item.expense = {};
-				return item;
-			});
+			for (let i in this.event.itinerarysteplist) {
+				if (!this.event.itinerarysteplist[i].expense)
+					this.event.itinerarysteplist[i].expense = {};
+		    }
 	
 			if (!this.event.chatlist) {
 				log = log.concat("create chatlist;");
@@ -148,7 +147,7 @@ class EventCtrl {
 			// console.log("EventCtrl.loadEvent: completionDone event=" + JSON.stringify(this.event) );
 		} catch( error) {
 			// not normal that...
-			this.event.systemerror="Exception during event Control :"+ error;
+			this.event.systemerror="EventCtrl.jsx: Exception during event Control :"+ error;
 			console.log("EventCtrl.completeEvent: ERROR " + error );
 		}
 		
@@ -277,7 +276,7 @@ class EventCtrl {
 
 	getUserParticipant() {
 		var authService = FactoryService.getInstance().getAuthService();
-		// console.log("Event.getUserPartipant.start");
+		// console.log("Event.getUserParticipant.start");
 		var user = authService.getUser();
 		// search the access right for this user
 		for (var i in this.event.participants) {

@@ -95,7 +95,7 @@ class EventsList extends React.Component {
 						<img src="img/toghEvent.jpg" style={{ width: 60 }}     />
 					</td>
 					<td style={{verticalAlign: "middle"}}>
-						<EventState statusEvent={event.statusEvent} modifyEvent={false} />
+						<EventState statusEvent={event.statusEvent} disabled={true} />
 					</td>
 					<td style={{verticalAlign: "middle"}}>{event.name}</td>
 					<td style={{verticalAlign: "middle"}}>

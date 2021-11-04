@@ -9,8 +9,8 @@
 package com.togh.serialization;
 
 import com.togh.entity.EventExpenseEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -31,16 +31,16 @@ public class ExpenseSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param baseEntity
-     * @param contextAccess
-     * @param timezoneOffset
-     * @param factorySerializer
-     * @return
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
+     * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventExpenseEntity expenseEntity = (EventExpenseEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(expenseEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(expenseEntity, serializerOptions);
 
         resultMap.put("budget", expenseEntity.getBudget());
         resultMap.put("cost", expenseEntity.getCost());

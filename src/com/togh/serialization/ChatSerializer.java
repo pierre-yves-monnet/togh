@@ -9,8 +9,8 @@
 package com.togh.serialization;
 
 import com.togh.entity.EventChatEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -35,16 +35,16 @@ public class ChatSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param baseEntity        userEntity
-     * @param contextAccess     contextAccess to know what information has to be produce
-     * @param timezoneOffset    time offset of the browser
-     * @param factorySerializer
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventChatEntity chatEntity = (EventChatEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(chatEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(chatEntity, serializerOptions);
 
         resultMap.put(JSON_OUT_MESSAGE, chatEntity.getMessage());
 

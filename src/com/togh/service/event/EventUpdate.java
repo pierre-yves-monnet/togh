@@ -15,6 +15,7 @@ import com.togh.engine.tool.JpaTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.BaseUpdateGrantor;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
@@ -41,7 +42,8 @@ public class EventUpdate {
     private static final String LOG_HEADER = EventUpdate.class.getSimpleName() + ": ";
 
     private static final LogEvent eventInvalidUpdateOperation = new LogEvent(EventUpdate.class.getName(), 1, Level.APPLICATIONERROR, "Invalid operation", "This operation failed", "Operation can't be done", "Check error");
-    private static final LogEvent eventCantLocalise = new LogEvent(EventUpdate.class.getName(), 2, Level.ERROR, "Can't localise", "A localisation can't be found, maybe the item is deleted by an another user?", "Operation can't be done", "Refresh your event");
+    private static final LogEvent eventCantLocalise = new LogEvent(EventUpdate.class.getName(), 2, Level.APPLICATIONERROR, "Can't localise", "A localisation can't be found, maybe the item is deleted by an another user?", "Operation can't be done", "Refresh your event");
+    private static final LogEvent eventOperationNotAllowed = new LogEvent(EventUpdate.class.getName(), 3, Level.APPLICATIONERROR, "Not allowed", "This operation, on this component, by this user, is not allowed", "Operation can't be done", "Log with a different user");
 
     EventController eventController;
 
@@ -49,6 +51,13 @@ public class EventUpdate {
         this.eventController = eventController;
     }
 
+    /**
+     * Update an event, via a list of update (slab)
+     *
+     * @param listSlab      list Slab to update
+     * @param updateContext all contains need to check / execute updates
+     * @return result of update operations
+     */
     public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
         EventEntity eventEntity = this.eventController.getEvent();
         logger.info(LOG_HEADER + "EventId[" + eventEntity.getId() + "] Start update from listSlab " + getSummary(listSlab));
@@ -56,6 +65,7 @@ public class EventUpdate {
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
         listSlab.stream().forEach(slab -> {
             try {
+
                 switch (slab.operation) {
                     case UPDATE:
                         updateOperation(eventEntity, slab, updateContext, eventOperationResult);
@@ -64,7 +74,7 @@ public class EventUpdate {
                         addOperation(slab, updateContext, eventOperationResult);
                         break;
                     case REMOVE:
-                        removeOperation(slab, eventOperationResult);
+                        removeOperation(slab, updateContext, eventOperationResult);
                         break;
                 }
             } catch (Exception e) {
@@ -85,7 +95,6 @@ public class EventUpdate {
      * @param updateContext        update context
      * @param eventOperationResult operation
      */
-
     private void addOperation(Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
 
         EventAbsChildController eventChildController = eventController.getEventControllerFromSlabOperation(slab);
@@ -117,6 +126,15 @@ public class EventUpdate {
         EventEntityPlan entityPlan = eventChildController.createEntity(updateContext, slab, eventOperationResult);
         if (entityPlan.isEmpty())
             return;
+        if (!isOperationAllowed(entityPlan.child, slab, updateContext)) {
+            eventOperationResult.addLogEvent(new LogEvent(eventOperationNotAllowed,
+                    String.format("Action[%s] Attribut[%s] entity[event] user[%d] userName[%s]",
+                            slab.operation.toString(),
+                            slab.attributName,
+                            updateContext.getToghUser().getId(),
+                            updateContext.getToghUser().getLabel())));
+            return;
+        }
 
         @SuppressWarnings("unchecked")
         Map<String, Object> valueDefault = (Map<String, Object>) slab.attributValue;
@@ -155,12 +173,12 @@ public class EventUpdate {
     /**
      * Remove operation
      *
-     * @param slab
-     * @param eventOperationResult
+     * @param slab                 operation to execute
+     * @param eventOperationResult result of the operation
      */
-    private void removeOperation(Slab slab, EventOperationResult eventOperationResult) {
+    private void removeOperation(Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
         EventAbsChildController eventChildController = eventController.getEventControllerFromSlabOperation(slab);
-        if (eventController == null)
+        if (eventChildController == null)
             return;
 
         eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
@@ -168,7 +186,16 @@ public class EventUpdate {
         if (baseEntity == null) {
             eventOperationResult.listLogEvents.add(new LogEvent(EventAbsChildController.eventEntityNotFoundToRemove, "Can't find taskId " + slab.getAttributValueLong()));
         } else {
-            eventChildController.removeEntity(baseEntity, eventOperationResult);
+            if (isOperationAllowed(baseEntity, slab, updateContext)) {
+                eventChildController.removeEntity(baseEntity, eventOperationResult);
+            } else {
+                eventOperationResult.addLogEvent(new LogEvent(eventOperationNotAllowed,
+                        String.format("Action[%s] Attribut[%s] entity[event] user[%d] userName[%s]",
+                                slab.operation.toString(),
+                                slab.attributName,
+                                updateContext.getToghUser().getId(),
+                                updateContext.getToghUser().getLabel())));
+            }
         }
     }
 
@@ -180,18 +207,47 @@ public class EventUpdate {
      * @return
      */
     private void updateOperation(EventEntity event, Slab slab, UpdateContext updateContext, EventOperationResult eventOperationResult) {
-        if (slab.localisation == null || slab.localisation.isEmpty())
-            eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(slab.baseEntity == null ? event : slab.baseEntity, slab.attributName, slab.attributValue, updateContext));
-        else {
-            BaseEntity baseEntity = eventController.localise(event, slab.localisation);
-            if (baseEntity != null) {
-                eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
-            } else {
-                eventOperationResult.addLogEvent(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
-            }
+        BaseEntity baseEntity = null;
+        if (slab.localisation == null || slab.localisation.isEmpty()) {
+            baseEntity = slab.baseEntity == null ? event : slab.baseEntity;
+        } else {
+            baseEntity = eventController.localise(event, slab.localisation);
 
         }
+
+        if (baseEntity == null) {
+            eventOperationResult.addLogEvent(new LogEvent(eventCantLocalise, "Localisation [" + slab.localisation + "] to update [" + slab.attributName + "]"));
+            return;
+        }
+
+        boolean allowed = isOperationAllowed(baseEntity, slab, updateContext);
+        if (!allowed) {
+            eventOperationResult.addLogEvent(new LogEvent(eventOperationNotAllowed,
+                    String.format("Action[%s] Attribut[%s] entity[event] user[%d] userName[%s]",
+                            slab.operation.toString(),
+                            slab.attributName,
+                            updateContext.getToghUser().getId(),
+                            updateContext.getToghUser().getLabel())));
+            return;
+        }
+        eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
+
         event.touch();
+    }
+
+    /**
+     * Check if a grantor exist. If yes, ask him what is thing about the operation
+     *
+     * @param baseEntity    Entity where the operation will be done
+     * @param slab          operation to execute (update, add, remove)
+     * @param updateContext Context
+     * @return true if the operation is allowed, false else
+     */
+    private boolean isOperationAllowed(BaseEntity baseEntity, Slab slab, UpdateContext updateContext) {
+        BaseUpdateGrantor grantor = updateContext.getFactoryService().getFactoryGrantor().getFromEntity(baseEntity);
+        if (grantor != null)
+            return grantor.isOperationAllowed(baseEntity, slab, updateContext);
+        return true;
     }
 
     /**

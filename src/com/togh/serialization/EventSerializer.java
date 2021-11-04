@@ -12,6 +12,8 @@ package com.togh.serialization;
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.*;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.BaseUpdateGrantor;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -36,16 +38,20 @@ public class EventSerializer extends BaseSerializer {
     private static final String CST_JSONOUT_TYPE_EVENT = "typeEvent";
     private static final String CST_JSONOUT_DATE_POLICY = "datePolicy";
     private static final String CST_JSONOUT_DATE_END_EVENT = "dateEndEvent";
-    private static final String CST_JSONOUT_DATE_START_EVENT = "dateStartEvent";
+    public static final String JSON_DESCRIPTION = "description";
     private static final String CST_JSONOUT_NAME = "name";
     private static final String CST_JSONOUT_SUBSCRIPTION_EVENT = "subscriptionEvent";
     private static final String CST_JSONOUT_LISTSYNTHETICPARTICIPANTS = "listParticipants";
-
-
+    public static final String JSON_TASKLISTSHOWDATES = "tasklistshowdates";
+    private static final String JSON_DATE_START_EVENT = "dateStartEvent";
     /**
-     * All verbe used to produce the JSON Output information
+     * All verbs used to produce the JSON Output information
      */
-    private static final String CST_JSONOUT_DATE_EVENT = "dateEvent";
+    private static final String JSON_DATE_EVENT = "dateEvent";
+    /**
+     * Time of the event
+     */
+    private static final String JSON_TIME_EVENT = "timeEvent";
 
     /**
      * The serializer serialize an Entity Class. Return the entity
@@ -58,19 +64,20 @@ public class EventSerializer extends BaseSerializer {
     }
 
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventEntity eventEntity = (EventEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(eventEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(eventEntity, serializerOptions);
 
-        resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(eventEntity.getDateEvent()));
-        resultMap.put(CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(eventEntity.getDateStartEvent()));
+        resultMap.put(JSON_DATE_EVENT, EngineTool.dateToString(eventEntity.getDateEvent()));
+        resultMap.put(JSON_TIME_EVENT, eventEntity.getTimeevent());
+        resultMap.put(JSON_DATE_START_EVENT, EngineTool.dateToString(eventEntity.getDateStartEvent()));
         resultMap.put(CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(eventEntity.getDateEndEvent()));
         resultMap.put(CST_JSONOUT_TYPE_EVENT, eventEntity.getTypeEvent() == null ? null : eventEntity.getTypeEvent().toString());
         resultMap.put(CST_JSONOUT_STATUS_EVENT, eventEntity.getStatusEvent() == null ? null : eventEntity.getStatusEvent().toString());
-        resultMap.put("description", eventEntity.getDescription());
+        resultMap.put(JSON_DESCRIPTION, eventEntity.getDescription());
         resultMap.put(CST_JSONOUT_SUBSCRIPTION_EVENT, eventEntity.getSubscriptionEvent() == null ? EventEntity.SubscriptionEventEnum.FREE.toString() : eventEntity.getSubscriptionEvent().toString());
 
-        resultMap.put("tasklistshowdates", eventEntity.getTaskListShowDates());
+        resultMap.put(JSON_TASKLISTSHOWDATES, eventEntity.getTaskListShowDates());
 
         resultMap.put("itineraryshowmap", eventEntity.getItineraryShowMap());
         resultMap.put("itineraryshowdetails", eventEntity.getItineraryShowDetails());
@@ -83,15 +90,13 @@ public class EventSerializer extends BaseSerializer {
         resultMap.put("geolng", eventEntity.getGeolng());
         resultMap.put("geolat", eventEntity.getGeolat());
         resultMap.put("geoinstructions", eventEntity.getGeoinstructions());
+        resultMap.put(CST_JSONOUT_DATE_POLICY, eventEntity.getDatePolicy() == null ? null : eventEntity.getDatePolicy().toString());
 
-        if (contextAccess != ToghUserEntity.ContextAccess.PUBLICACCESS) {
-            resultMap.put(CST_JSONOUT_DATE_POLICY, eventEntity.getDatePolicy() == null ? null : eventEntity.getDatePolicy().toString());
-        }
-        if (eventEntity.getTypeEvent() == EventEntity.TypeEventEnum.OPEN || contextAccess != ToghUserEntity.ContextAccess.PUBLICACCESS) {
+        if (serializerOptions.getEventAccessGrantor().isOtherParticipantsVisible()) {
             List<Map<String, Object>> listParticipantsMap = new ArrayList<>();
             for (ParticipantEntity participantEntity : eventEntity.getParticipantList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(participantEntity);
-                listParticipantsMap.add(serializer.getMap(participantEntity, contextAccess, timezoneOffset, factorySerializer));
+                listParticipantsMap.add(serializer.getMap(participantEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
             }
             resultMap.put(CST_JSONOUT_PARTICIPANTS, listParticipantsMap);
 
@@ -99,7 +104,7 @@ public class EventSerializer extends BaseSerializer {
             List<Map<String, Object>> listTasksMap = new ArrayList<>();
             for (EventTaskEntity taskEntity : eventEntity.getTaskList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(taskEntity);
-                listTasksMap.add(serializer.getMap(taskEntity, contextAccess, timezoneOffset, factorySerializer));
+                listTasksMap.add(serializer.getMap(taskEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
             }
             resultMap.put(EventTaskEntity.CST_SLABOPERATION_TASKLIST, listTasksMap);
 
@@ -107,7 +112,7 @@ public class EventSerializer extends BaseSerializer {
             List<Map<String, Object>> listItineraryStepMap = new ArrayList<>();
             for (EventItineraryStepEntity itineraryStepEntity : eventEntity.getItineraryStepList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(itineraryStepEntity);
-                listItineraryStepMap.add(serializer.getMap(itineraryStepEntity, contextAccess, timezoneOffset, factorySerializer));
+                listItineraryStepMap.add(serializer.getMap(itineraryStepEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
             }
             resultMap.put(EventItineraryStepEntity.CST_SLABOPERATION_ITINERARYSTEPLIST, listItineraryStepMap);
 
@@ -115,7 +120,7 @@ public class EventSerializer extends BaseSerializer {
             List<Map<String, Object>> listShoppingListMap = new ArrayList<>();
             for (EventShoppingListEntity shoppingListEntity : eventEntity.getShoppingList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(shoppingListEntity);
-                listShoppingListMap.add(serializer.getMap(shoppingListEntity, contextAccess, timezoneOffset, factorySerializer));
+                listShoppingListMap.add(serializer.getMap(shoppingListEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
             }
             resultMap.put(EventShoppingListEntity.CST_SLABOPERATION_SHOPPINGLIST, listShoppingListMap);
 
@@ -123,7 +128,7 @@ public class EventSerializer extends BaseSerializer {
             List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
             for (EventSurveyEntity surveyEntity : eventEntity.getSurveyList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(surveyEntity);
-                listSurveylistMap.add(serializer.getMap(surveyEntity, contextAccess, timezoneOffset, factorySerializer));
+                listSurveylistMap.add(serializer.getMap(surveyEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
             }
             resultMap.put(EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
 
@@ -132,21 +137,35 @@ public class EventSerializer extends BaseSerializer {
             for (EventGroupChatEntity groupChatEntity : eventEntity.getGroupChatList()) {
                 BaseSerializer serializer = factorySerializer.getFromEntity(groupChatEntity);
 
-                listGroupChat.add(serializer.getMap(groupChatEntity, contextAccess, timezoneOffset, factorySerializer));
+                listGroupChat.add(serializer.getMap(groupChatEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
             }
             resultMap.put(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST, listGroupChat);
         }
 
+        BaseUpdateGrantor baseUpdateGrantor = factoryUpdateGrantor.getFromEntity(eventEntity);
+        if (baseUpdateGrantor != null)
+            resultMap.put(JSON_READONLY_FIELDS, baseUpdateGrantor.getFieldsReadOnly(serializerOptions.getToghUser(), serializerOptions.getEventController()));
+
+        resultMap.put(JSON_CONTROL_INFORMATION_EVENT, serializerOptions.getEventAccessGrantor().getControlInformation());
         return resultMap;
     }
 
 
-    public Map<String, Object> getHeaderMap(EventEntity eventEntity, ToghUserEntity.ContextAccess contextAccess, EventEntity.AdditionalInformationEvent additionalInformationEvent, Long timezoneOffset) {
-        Map<String, Object> resultMap = getBasicMap(eventEntity, contextAccess, timezoneOffset);
+    /**
+     * Get only the header of event
+     *
+     * @param eventEntity                eventEntity
+     * @param serializerOptions          Serializer option
+     * @param additionalInformationEvent additional information
+     * @return the header on event
+     */
+    public Map<String, Object> getHeaderMap(EventEntity eventEntity, SerializerOptions serializerOptions,
+                                            EventEntity.AdditionalInformationEvent additionalInformationEvent) {
+        Map<String, Object> resultMap = getBasicMap(eventEntity, serializerOptions);
 
         resultMap.put(CST_JSONOUT_NAME, eventEntity.getName());
-        resultMap.put(CST_JSONOUT_DATE_EVENT, EngineTool.dateToString(eventEntity.getDateEvent()));
-        resultMap.put(CST_JSONOUT_DATE_START_EVENT, EngineTool.dateToString(eventEntity.getDateStartEvent()));
+        resultMap.put(JSON_DATE_EVENT, EngineTool.dateToString(eventEntity.getDateEvent()));
+        resultMap.put(JSON_DATE_START_EVENT, EngineTool.dateToString(eventEntity.getDateStartEvent()));
         resultMap.put(CST_JSONOUT_DATE_END_EVENT, EngineTool.dateToString(eventEntity.getDateEndEvent()));
         resultMap.put(CST_JSONOUT_DATE_POLICY, eventEntity.getDatePolicy().toString());
         resultMap.put(CST_JSONOUT_TYPE_EVENT, eventEntity.getTypeEvent() == null ? null : eventEntity.getTypeEvent().toString());

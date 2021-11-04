@@ -9,8 +9,8 @@
 package com.togh.serialization;
 
 import com.togh.entity.EventShoppingListEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -33,16 +33,16 @@ public class ShoppingListSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param baseEntity        userEntity
-     * @param contextAccess     contextAccess to know what information has to be produce
-     * @param timezoneOffset    time offset of the browser
-     * @param factorySerializer
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventShoppingListEntity shoppingListEntity = (EventShoppingListEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(shoppingListEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(shoppingListEntity, serializerOptions);
 
         resultMap.put("status", shoppingListEntity.getStatus() == null ? null : shoppingListEntity.getStatus().toString());
         resultMap.put("description", shoppingListEntity.getDescription());
@@ -53,7 +53,7 @@ public class ShoppingListSerializer extends BaseSerializer {
         // Here we attached directly the expense information
         if (shoppingListEntity.getExpense() != null) {
             BaseSerializer expenseSerializer = factorySerializer.getFromEntity(shoppingListEntity.getExpense());
-            resultMap.put("expense", expenseSerializer.getMap(shoppingListEntity.getExpense(), contextAccess, timezoneOffset, factorySerializer));
+            resultMap.put("expense", expenseSerializer.getMap(shoppingListEntity.getExpense(), serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
 
 

@@ -251,7 +251,7 @@ public class ToghUserService {
         for (int i = 0; i < listParameters.size(); i++)
             query.setParameter(i + 1, listParameters.get(i));
 
-        query.setFirstResult(page * numberPerPage);
+        query.setFirstResult((page - 1) * numberPerPage);
         query.setMaxResults(numberPerPage);
         SearchUsersResult searchResult = new SearchUsersResult();
 
@@ -379,8 +379,9 @@ public class ToghUserService {
     public class SearchUsersResult {
 
         public List<ToghUserEntity> listUsers;
-        public int page = 0;
+        public int page = 1;
         public int numberPerPage = 1;
+
         public Long countUsers;
     }
 

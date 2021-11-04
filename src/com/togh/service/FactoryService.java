@@ -8,6 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.service;
 
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +53,8 @@ public class FactoryService {
     @Autowired
     private TranslatorService translatorService;
 
-    /*private static FactoryService factoryService = new FactoryService();
-    public static FactoryService getInstance() {
-        return factoryService;
-    }
-    */
+    @Autowired
+    private FactoryUpdateGrantor factoryGrantor;
 
 
     public LoginService getLoginService() {
@@ -94,4 +92,10 @@ public class FactoryService {
     public TranslatorService getTranslatorService() {
         return translatorService;
     }
+
+    public FactoryUpdateGrantor getFactoryGrantor() {
+        return factoryGrantor;
+    }
+
+
 }

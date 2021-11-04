@@ -456,6 +456,8 @@ Docker                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
+https://container-registry.oracle.com
+docker pull container-registry.oracle.com/java/openjdk:latest
 
 ## Tag the release
 

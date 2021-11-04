@@ -10,8 +10,8 @@ package com.togh.serialization;
 
 import com.togh.engine.tool.EngineTool;
 import com.togh.entity.EventItineraryStepEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -33,16 +33,16 @@ public class ItinerarySerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param baseEntity        userEntity
-     * @param contextAccess     contextAccess to know what information has to be produce
-     * @param timezoneOffset    time offset of the browser
-     * @param factorySerializer
+     * @param baseEntity           Entity to serialize
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventItineraryStepEntity itineraryStepEntity = (EventItineraryStepEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(itineraryStepEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(itineraryStepEntity, serializerOptions);
 
         resultMap.put("dateStep", EngineTool.dateToString(itineraryStepEntity.getDateStep()));
         resultMap.put("rownumber", itineraryStepEntity.getRownumber());
@@ -59,7 +59,7 @@ public class ItinerarySerializer extends BaseSerializer {
         // Here we attached directly the expense information
         if (itineraryStepEntity.getExpense() != null) {
             BaseSerializer expenseSerializer = factorySerializer.getFromEntity(itineraryStepEntity.getExpense());
-            resultMap.put("expense", expenseSerializer.getMap(itineraryStepEntity.getExpense(), contextAccess, timezoneOffset, factorySerializer));
+            resultMap.put("expense", expenseSerializer.getMap(itineraryStepEntity.getExpense(), serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
 
 

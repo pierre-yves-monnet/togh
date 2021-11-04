@@ -52,10 +52,12 @@ public class RestJsonConstants {
     protected static final String CST_PARAM_LAST_NAME = "lastName";
     static final String CST_PARAM_AUTHORIZATION = "Authorization";
     static final String CST_INJSON_EVENTID = "eventid";
-    static final String CST_NUMBER_PER_PAGE = "numberperpage";
-    static final String CST_PAGE = "page";
+    static final String PAGE = "page";
+    static final String ITEMS_PER_PAGE = "itemsPerPage";
+    static final String NUMBER_OF_PAGES = "numberOfPages";
+    static final String NUMBER_OF_ITEMS = "numberOfItems";
     static final String CST_COUNTUSERS = "countusers";
-    static final String CST_LISTUSERS = "users";
+    static final String LISTUSERS = "users";
     static final String CST_USER = "user";
     static final String CST_PARAM_ONLY_NON_INVITED_USER = "onlyNonInvitedUser";
     static final String CST_PARAM_EMAIL = "email";
@@ -80,5 +82,5 @@ public class RestJsonConstants {
     private RestJsonConstants() {
     }
 
-    ;
+
 }

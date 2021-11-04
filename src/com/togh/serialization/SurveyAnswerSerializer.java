@@ -9,8 +9,8 @@
 package com.togh.serialization;
 
 import com.togh.entity.EventSurveyAnswerEntity;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -32,16 +32,17 @@ public class SurveyAnswerSerializer extends BaseSerializer {
     /**
      * GetMap - implement EntitySerialization
      *
-     * @param baseEntity        userEntity
-     * @param contextAccess     contextAccess to know what information has to be produce
-     * @param timezoneOffset    time offset of the browser
-     * @param factorySerializer
+     * @param baseEntity           userEntity
+     * @param baseEntity           userEntity
+     * @param serializerOptions    Serialization options
+     * @param factorySerializer    factory to access all serializer
+     * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, ToghUserEntity.ContextAccess contextAccess, Long timezoneOffset, FactorySerializer factorySerializer) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventSurveyAnswerEntity surveyAnswerEntity = (EventSurveyAnswerEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(surveyAnswerEntity, contextAccess, timezoneOffset);
+        Map<String, Object> resultMap = getBasicMap(surveyAnswerEntity, serializerOptions);
 
         resultMap.put("decision", surveyAnswerEntity.getDecision() == null ? new HashMap<>() : surveyAnswerEntity.getDecision());
 

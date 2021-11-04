@@ -14,7 +14,6 @@ import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
-import com.togh.entity.ToghUserEntity.ContextAccess;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
 import com.togh.service.EventFactoryRepository;
@@ -251,41 +250,14 @@ public class EventController {
         return null;
     }
 
+
     /**
-     * According to the user, and the type of event, the ContextAccess is calculated
+     * true if the event is a Secret Event
      *
-     * @param toghUser the toghUser
-     * @return
+     * @return true when the event is a secret event
      */
-    public ContextAccess getContextAccess(ToghUserEntity toghUser) {
-        // event is public : so show only what you want to show to public
-        if (eventEntity.getTypeEvent() == TypeEventEnum.OPEN)
-            return ContextAccess.PUBLICACCESS;
-        // event is secret : hide all at maximum
-        if (eventEntity.getTypeEvent() == TypeEventEnum.SECRET)
-            return ContextAccess.SECRETACCESS;
-
-        ParticipantEntity participant = getParticipant(toghUser);
-        if (eventEntity.getTypeEvent() == TypeEventEnum.OPENCONF) {
-            // the user is not accepted : show the minimum.
-            if (participant == null)
-                return ContextAccess.SECRETACCESS;
-            if (participant.getStatus() == StatusEnum.ACTIF)
-                return ContextAccess.PUBLICACCESS;
-            // user left, or wait for the confirmation 
-            return ContextAccess.SECRETACCESS;
-        }
-        if (eventEntity.getTypeEvent() == TypeEventEnum.LIMITED) {
-            if (participant == null)
-                return ContextAccess.SECRETACCESS;
-            if (participant.getStatus() == StatusEnum.ACTIF)
-                return ContextAccess.FRIENDACCESS;
-            // user left, or wait for the confirmation 
-            return ContextAccess.SECRETACCESS;
-        }
-        // should not be here
-        return ContextAccess.SECRETACCESS;
-
+    public boolean isSecretEvent() {
+        return false;
     }
 
     /* ******************************************************************************** */
@@ -304,7 +276,7 @@ public class EventController {
      * @param role              role in this event
      * @param useMyEmailAsFrom  if true, the From used in the message is the InvitedByToghUser email
      * @param message           Message to come with the invitation
-     * @return
+     * @return the invitation Result
      */
     public InvitationResult invite(EventEntity eventEntity,
                                    ToghUserEntity invitedByToghUser,
