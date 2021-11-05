@@ -47,7 +47,7 @@ public class RestAdminApiKey {
      */
     @CrossOrigin
     @GetMapping(value = "/api/admin/apikey/get", produces = "application/json")
-    public List<APIKeyEntity> getApiKeys(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public List<APIKeyEntity> getApiKeys(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         loginService.isAdministratorConnected(connectionStamp);
         return apiKeyService.getListApiKeys(Stream.concat(ApiKey.listKeysApi.stream(), ApiKey.listKeysBrowser.stream())
@@ -65,7 +65,7 @@ public class RestAdminApiKey {
     @ResponseBody
     public Map<String, Object> updateKey(
             @RequestBody Map<String, Object> updateMap,
-            @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+            @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         Map<String, Object> payload = new HashMap<>();
         loginService.isAdministratorConnected(connectionStamp);
@@ -74,7 +74,7 @@ public class RestAdminApiKey {
         List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listkeys", new ArrayList<>());
         List<LogEvent> listLogEvent = apiKeyService.updateKeys(listApiKey);
 
-        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+        payload.put(RestJsonConstants.LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
     }

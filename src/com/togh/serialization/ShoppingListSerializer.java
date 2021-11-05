@@ -34,13 +34,14 @@ public class ShoppingListSerializer extends BaseSerializer {
      * GetMap - implement EntitySerialization
      *
      * @param baseEntity           Entity to serialize
+     * @param parentEntity         Parent entity
      * @param serializerOptions    Serialization options
      * @param factorySerializer    factory to access all serializer
-     * @param factoryUpdateGrantor
+     * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, BaseEntity parentEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventShoppingListEntity shoppingListEntity = (EventShoppingListEntity) baseEntity;
         Map<String, Object> resultMap = getBasicMap(shoppingListEntity, serializerOptions);
 
@@ -53,7 +54,7 @@ public class ShoppingListSerializer extends BaseSerializer {
         // Here we attached directly the expense information
         if (shoppingListEntity.getExpense() != null) {
             BaseSerializer expenseSerializer = factorySerializer.getFromEntity(shoppingListEntity.getExpense());
-            resultMap.put("expense", expenseSerializer.getMap(shoppingListEntity.getExpense(), serializerOptions, factorySerializer, factoryUpdateGrantor));
+            resultMap.put("expense", expenseSerializer.getMap(shoppingListEntity.getExpense(), parentEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
 
 

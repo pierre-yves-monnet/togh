@@ -32,11 +32,11 @@ public class RestAdminTranslator {
 
     /**
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return Translation status
      */
     @CrossOrigin
     @GetMapping(value = "/api/admin/translator/status", produces = "application/json")
-    public TranslateResult translatorStatus(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public TranslateResult translatorStatus(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         loginService.isAdministratorConnected(connectionStamp);
 
@@ -46,11 +46,11 @@ public class RestAdminTranslator {
 
     /**
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return Translation result
      */
     @CrossOrigin
     @PostMapping(value = "/api/admin/translator/complete", produces = "application/json")
-    public TranslateResult translator(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public TranslateResult translator(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         loginService.isAdministratorConnected(connectionStamp);
 

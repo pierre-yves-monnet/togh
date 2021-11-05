@@ -34,13 +34,14 @@ public class SurveyAnswerSerializer extends BaseSerializer {
      *
      * @param baseEntity           userEntity
      * @param baseEntity           userEntity
+     * @param parentEntity         Parent entity
      * @param serializerOptions    Serialization options
      * @param factorySerializer    factory to access all serializer
      * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, BaseEntity parentEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         EventSurveyAnswerEntity surveyAnswerEntity = (EventSurveyAnswerEntity) baseEntity;
         Map<String, Object> resultMap = getBasicMap(surveyAnswerEntity, serializerOptions);
 

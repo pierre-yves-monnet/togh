@@ -529,7 +529,6 @@ class Event extends React.Component {
 	//
 	// --------------------------------------------------------------
     getDisabledState( fieldName) {
-        debugger;
         if (this.state && this.state.event && this.state.event.readOnlyFields && this.state.event.readOnlyFields.includes(fieldName))
             return true;
         return false;

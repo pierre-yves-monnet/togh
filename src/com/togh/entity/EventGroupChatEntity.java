@@ -41,7 +41,7 @@ import java.util.List;
 public @Data
 class EventGroupChatEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_GROUPCHATLIST = "groupchatlist";
+    public static final String SLABOPERATION_GROUPCHATLIST = "groupchatlist";
 
     public static final String CST_DEFAULT_GROUP = "general";
 
@@ -68,7 +68,7 @@ class EventGroupChatEntity extends UserEntity {
     /**
      * Add a chat.
      *
-     * @param chatEntity
+     * @param chatEntity entity to add
      */
     public void addChat(EventChatEntity chatEntity) {
         listChat.add(chatEntity);

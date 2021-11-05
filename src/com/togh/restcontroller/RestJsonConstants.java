@@ -25,32 +25,32 @@ public class RestJsonConstants {
     public static final String CST_PARAM_FILTER_EVENTS_V_MYEVENTS = "MyEvents";
     public static final String CST_PARAM_FILTER_EVENTS_V_ALLEVENTS = "AllEvents";
     public static final String CST_PARAM_FILTER_EVENTS_V_MYINVITATIONS = "MyInvitations";
-    public static final String CST_PARAM_TIMEZONEOFFSET = "timezoneoffset";
+    public static final String PARAM_TIMEZONEOFFSET = "timezoneoffset";
 
     public static final String CST_PARAM_TYPE_EVENTS = "TypeEvents";
     public static final String CST_PARAM_NAME = "name";
-    public static final String CST_LIST_LOG_EVENTS = "listLogEvents";
+    public static final String LOG_EVENTS = "listLogEvents";
     public static final String CST_EVENT_ID = "eventId";
-    public static final String CST_EVENT = "event";
+    public static final String EVENT = "event";
     public static final String CST_LIST_EVENTS = "events";
     public static final String CST_CHILDENTITY = "childEntity";
-    public static final String CST_CHILDENTITYID = "childEntityId";
-    public static final String CST_LIMITSUBSCRIPTION = "limitsubscription";
+    public static final String CHILDENTITYID = "childEntityId";
+    public static final String LIMIT_SUBSCRIPTION = "limitsubscription";
     /**
      * Status may have multiple value (in case of invitation for example), and 2 default value, OK and ERROR, are proposed
      */
-    public static final String CST_STATUS = "status";
-    public static final String CST_STATUS_V_OK = "OK";
-    public static final String CST_STATUS_V_ERROR = "ERROR";
-    public static final String CST_MESSAGE_OK = "okMessage";
-    public static final String CST_MESSAGE_ERROR = "errorMessage";
-    public static final String CST_MESSAGE_ERROR_SEND_EMAIL = "errorSendEmail";
+    public static final String STATUS = "status";
+    public static final String STATUS_V_OK = "OK";
+    public static final String STATUS_V_ERROR = "ERROR";
+    public static final String MESSAGE_OK = "okMessage";
+    public static final String MESSAGE_ERROR = "errorMessage";
+    public static final String MESSAGE_ERROR_SEND_EMAIL = "errorSendEmail";
 
-    public static final String CST_ISINVITATIONSENT = "isInvitationSent";
+    public static final String ISINVITATIONSENT = "isInvitationSent";
     protected static final String CST_PARAM_PHONE_NUMBER = "phoneNumber";
     protected static final String CST_PARAM_FIRST_NAME = "firstName";
     protected static final String CST_PARAM_LAST_NAME = "lastName";
-    static final String CST_PARAM_AUTHORIZATION = "Authorization";
+    static final String PARAM_AUTHORIZATION = "Authorization";
     static final String CST_INJSON_EVENTID = "eventid";
     static final String PAGE = "page";
     static final String ITEMS_PER_PAGE = "itemsPerPage";

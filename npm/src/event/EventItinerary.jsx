@@ -110,7 +110,6 @@ class EventItinerary extends React.Component {
 				listlogevents= {this.state.operation.listlogevents} />
 		);
 
-				
 		// let's create a list of days.
 		let dateStart = null;
 		let dateEnd = null;
@@ -199,6 +198,20 @@ class EventItinerary extends React.Component {
 		let dateIndex = new Date( dateStart.getTime() ); // clone it
 		let index=-10;
 		let count=0;
+
+		// two special situation: there is steps BEFORE the dateState, and there is steps AFTER the dateStart
+		// We move theses dates to the dateStart
+		for (let j in this.state.event.itinerarysteplist) {
+        		let stepinlist = this.state.event.itinerarysteplist[ j ];
+        		if (toolService.getDayOfDate(stepinlist.dateStep) < toolService.getDayOfDate(dateStart)) {
+        		    stepinlist.dateStep = new Date( dateStart.getTime())
+        		}
+        		if (toolService.getDayOfDate(stepinlist.dateStep) > toolService.getDayOfDate(dateEnd)) {
+        		    stepinlist.dateStep = new Date( dateEnd.getTime())
+        		}
+        }
+
+		// now we can loop on dates
 		while (dateIndex.getTime() <= dateEnd.getTime()) {
 			count++;
 			// protection
@@ -239,7 +252,7 @@ class EventItinerary extends React.Component {
 			 
 			
 			
-			// now attach all events on this day - ok, we parse again the list, but reminber this is a 31 lines * 200 lines each so total is 6000 iteration - moden browser can hander that isn't it?
+			// now attach all events on this day - ok, we parse again the list, but remember this is a 31 lines * 200 lines each so total is 6000 iteration - modern browser can handle that isn't it?
 			let listMarkers = [];
 			let countStepsInTheDay=0;
 			for (let j in this.state.event.itinerarysteplist) {

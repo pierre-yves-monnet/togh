@@ -46,8 +46,12 @@ import java.util.logging.Logger;
 @RequestMapping("togh")
 public class RestLoginController {
 
-    private final static String logHeader = RestLoginController.class.getSimpleName() + ": ";
-    private final static String googleClientId = "81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com";
+    private final static String LOG_HEADER = RestLoginController.class.getSimpleName() + ": ";
+    private final static String GOOGLE_CLIENTID = "81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com";
+    private static final String JSON_EMAIL = "email";
+    private static final String JSON_PASSWORD = "password";
+    private static final String JSON_STATUS = "status";
+
     private Logger logger = Logger.getLogger(RestLoginController.class.getName());
     @Autowired
     private FactoryService factoryService;
@@ -65,15 +69,15 @@ public class RestLoginController {
      * Nota: the Administrator is created at the startup. There is here nothing special to connect him
      * See ToghUserService.TOGHADMIN_USERNAME
      *
-     * @param userData
+     * @param userData REST API Payload
      * @param response
-     * @return
+     * @return REST API Answer
      */
     @CrossOrigin
     @PostMapping(value = "api/login", produces = "application/json")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.connectWithEmail(userData.get("email"), userData.get("password"));
+        LoginResult loginStatus = loginService.connectWithEmail(userData.get(JSON_EMAIL), userData.get(JSON_PASSWORD));
         Map<String, Object> finalStatus = new HashMap<>();
         finalStatus.putAll(loginStatus.getMap());
         if (loginStatus.isConnected) {
@@ -82,11 +86,16 @@ public class RestLoginController {
         return finalStatus;
     }
 
+    /**
+     * @param userData REST API Payload
+     * @param response
+     * @return REST API Answer
+     */
     @CrossOrigin
     @PostMapping(value = "api/userinfo", produces = "application/json")
     @ResponseBody
     public Map<String, Object> userInfo(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        String email = userData.get("email");
+        String email = userData.get(JSON_EMAIL);
         String invitationStamp = userData.get("invitationStamp");
         // We get an answer only if the email + invitationId match, to avoid bad guy who scan emails.
 
@@ -105,11 +114,11 @@ public class RestLoginController {
      * Logout
      *
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return REST API Answer
      */
     @CrossOrigin
     @PostMapping(value = "/api/logout", produces = "application/json")
-    public String logout(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public String logout(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         loginService.disconnectUser(connectionStamp);
         return "{}";
     }
@@ -120,7 +129,7 @@ public class RestLoginController {
      *
      * @param idTokenGoogle
      * @param response
-     * @return
+     * @return REST API Answer
      */
     // visit https://developers.google.com/identity/sign-in/web/backend-auth#send-the-id-token-to-your-server
     @CrossOrigin
@@ -133,7 +142,7 @@ public class RestLoginController {
             final GsonFactory jsonFactory = new GsonFactory();
 
             final GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                    .setAudience(Arrays.asList(googleClientId))
+                    .setAudience(Arrays.asList(GOOGLE_CLIENTID))
                     // To learn about getting a Server Client ID, see this link
                     // https://developers.google.com/identity/sign-in/android/start
                     // And follow step 4
@@ -146,7 +155,7 @@ public class RestLoginController {
             if (idToken != null) {
                 final Payload payload = idToken.getPayload();
                 // String userName = (String) payload.get("name");
-                String email = (String) payload.get("email");
+                String email = (String) payload.get(JSON_EMAIL);
                 String firstName = (String) payload.get("given_name");
                 String lastName = (String) payload.get("family_name");
                 String picture = (String) payload.get("picture");
@@ -163,7 +172,7 @@ public class RestLoginController {
                 return loginStatus.getMap();
             }
         } catch (Exception e) {
-            logger.info(logHeader + "Error when creating a Google user " + e.toString());
+            logger.info(LOG_HEADER + "Error when creating a Google user " + e.toString());
 
         }
         return loginStatus.getMap();
@@ -173,15 +182,15 @@ public class RestLoginController {
     /**
      * Register a new user
      *
-     * @param userData data on user
+     * @param userData REST API Payload
      * @param response the HttpServletResponse
-     * @return
+     * @return REST API Answer
      */
     @CrossOrigin
     @PostMapping(value = "/api/login/registernewuser", produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.registerNewUser(userData.get("email"),
+        LoginResult loginStatus = loginService.registerNewUser(userData.get(JSON_EMAIL),
                 userData.get("firstName"),
                 userData.get("lastName"),
                 userData.get("password"),
@@ -190,44 +199,48 @@ public class RestLoginController {
                 null
         );
         if (loginStatus.status == LoginStatus.OK)
-            loginStatus = loginService.connectNoVerification(userData.get("email"));
+            loginStatus = loginService.connectNoVerification(userData.get(JSON_EMAIL));
 
         return loginStatus.getMap();
     }
 
 
     /**
-     * Register a new user
+     * Lost my password
      *
-     * @param userData
-     * @param response
-     * @return
+     * @param userData REST API Payload
+     * @param response Response
+     * @return REST API Answer
      */
     @CrossOrigin
     @PostMapping(value = "/api/login/lostmypassword", produces = "application/json")
     @ResponseBody
     public Map<String, Object> lostMyPassword(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.lostMyPassword(userData.get("email"));
+        LoginResult loginStatus = loginService.lostMyPassword(userData.get(JSON_EMAIL));
         Map<String, Object> payLoad = new HashMap<>();
         switch (loginStatus.status) {
             case BADEMAIL:
-                payLoad.put("status", "BADEMAIL");
+                payLoad.put(JSON_STATUS, "BADEMAIL");
                 break;
             case SERVERISSUE:
-                payLoad.put("status", "SERVERISSUE");
+                payLoad.put(JSON_STATUS, "SERVERISSUE");
                 break;
             case OK:
-                payLoad.put("status", "OK");
+                payLoad.put(JSON_STATUS, "OK");
                 break;
             default:
-                payLoad.put("status", "SERVERISSUE");
+                payLoad.put(JSON_STATUS, "SERVERISSUE");
                 break;
         }
 
         return payLoad;
     }
 
-
+    /**
+     * @param userData REST API Payload
+     * @param response
+     * @return REST API Answer
+     */
     @CrossOrigin
     @PostMapping(value = "/api/login/resetPasswordInfo", produces = "application/json")
     @ResponseBody
@@ -239,6 +252,11 @@ public class RestLoginController {
     }
 
 
+    /**
+     * @param userData REST API Payload
+     * @param response
+     * @return REST API Answer
+     */
     @CrossOrigin
     @PostMapping(value = "/api/login/resetPassword", produces = "application/json")
     @ResponseBody
@@ -250,20 +268,22 @@ public class RestLoginController {
     }
 
     /**
-     * @param userData
+     * Change password
+     *
+     * @param userData        REST API Payload
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return REST API Answer
      */
     @CrossOrigin
     @PostMapping(value = "/api/login/changePassword", produces = "application/json")
     @ResponseBody
     public Map<String, Object> changePassword(@RequestBody Map<String, String> userData,
-                                              @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+                                              @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUserEntity == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
         LoginResult loginStatus = loginService.changePassword(toghUserEntity, userData.get("password"));
         Map<String, Object> finalStatus = new HashMap<>();
@@ -272,18 +292,17 @@ public class RestLoginController {
     }
 
     /**
-     * @param message
-     * @return
+     * @param message to give it back
+     * @return REST API Answer
      */
     @CrossOrigin
     @GetMapping(value = "/api/ping", produces = "application/json")
     public Map<String, Object> ping(@RequestParam(required = false) String message) {
-        logger.info(logHeader + "Ping!");
+        logger.info(LOG_HEADER + "Ping!");
         Map<String, Object> result = new HashMap<>();
         result.put("now", LocalDateTime.now());
         if (message != null)
             result.put("message", message);
-
         return result;
     }
 

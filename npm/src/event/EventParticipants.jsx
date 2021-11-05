@@ -119,7 +119,7 @@ class EventParticipants extends React.Component {
                                               />
 
 
-                                            <button class="btn btn-info btn-xs "
+                                            <button class="btn btn-info btn-sm "
                                                 onClick={() => {this.inviteResend(item)}}>
                                                 <FormattedMessage id="EventParticipant.SendAgainInvitation" defaultMessage="Send again"/>
                                             </button>

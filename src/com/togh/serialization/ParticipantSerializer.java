@@ -22,6 +22,13 @@ import java.util.Map;
 @Component
 public class ParticipantSerializer extends BaseSerializer {
 
+    public static final String JSON_ROLE = "role";
+    public static final String JSON_USER = "user";
+    public static final String JSON_IS_PART_OF = "isPartOf";
+    public static final String JSON_NUMBER_OF_PARTICIPANTS = "numberOfParticipants";
+    public static final String JSON_ID = "id";
+    public static final String JSON_STATUS = "status";
+    public static final String JSON_URL_INVITATION = "urlInvitation";
     @Autowired
     private NotifyService notifyService;
 
@@ -43,27 +50,28 @@ public class ParticipantSerializer extends BaseSerializer {
      * GetMap - implement EntitySerialization
      *
      * @param baseEntity           Entity to serialize
+     * @param parentEntity         Parent of the Participant : this is the EventEntity
      * @param serializerOptions    Serialization options
      * @param factorySerializer    factory to access all serializer
      * @param factoryUpdateGrantor factory to access Update Grantor
      * @return a serialisation map
      */
     @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
+    public Map<String, Object> getMap(BaseEntity baseEntity, BaseEntity parentEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
         ParticipantEntity participantEntity = (ParticipantEntity) baseEntity;
         Map<String, Object> resultMap = getBasicMap(participantEntity, serializerOptions);
 
-        resultMap.put("role", participantEntity.getRole() == null ? null : participantEntity.getRole().toString());
+        resultMap.put(JSON_ROLE, participantEntity.getRole() == null ? null : participantEntity.getRole().toString());
         BaseSerializer userSerialize = factorySerializer.getFromEntity(participantEntity.getUser());
-        resultMap.put("user", userSerialize.getMap(participantEntity.getUser(), serializerOptions, factorySerializer, factoryUpdateGrantor));
-        resultMap.put("isPartOf", participantEntity.getIsPartOf());
-        resultMap.put("numberOfParticipants", participantEntity.getNumberOfParticipants());
-        resultMap.put("id", participantEntity.getId());
-        resultMap.put("status", participantEntity.getStatus() == null ? null : participantEntity.getStatus().toString());
-        EventEntity eventEntity = eventRepository.findByParticipant(participantEntity.getId());
+        resultMap.put(JSON_USER, userSerialize.getMap(participantEntity.getUser(), parentEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+        resultMap.put(JSON_IS_PART_OF, participantEntity.getIsPartOf());
+        resultMap.put(JSON_NUMBER_OF_PARTICIPANTS, participantEntity.getNumberOfParticipants());
+        resultMap.put(JSON_ID, participantEntity.getId());
+        resultMap.put(JSON_STATUS, participantEntity.getStatus() == null ? null : participantEntity.getStatus().toString());
+        EventEntity eventEntity = (EventEntity) parentEntity;
         if (ParticipantEntity.StatusEnum.INVITED.equals(participantEntity.getStatus())) {
             String url = notifyService.getUrlInvitation(participantEntity.getUser(), eventEntity);
-            resultMap.put("urlInvitation", url);
+            resultMap.put(JSON_URL_INVITATION, url);
         }
         return resultMap;
     }

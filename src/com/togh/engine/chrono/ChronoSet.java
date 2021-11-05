@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 
 public class ChronoSet {
 
-    private static final String LOG_HEADER = "com.togh.engine.chrono.ChronoSet: ";
+    private final static String LOG_HEADER = ChronoSet.class.getSimpleName() + ": ";
+
     public final Map<String, Chronometer> mapChrono = new HashMap<>();
     private final Logger logger = Logger.getLogger(ChronoSet.class.getName());
 

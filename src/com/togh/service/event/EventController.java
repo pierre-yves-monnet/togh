@@ -382,7 +382,7 @@ public class EventController {
         } else if (EventSurveyAnswerEntity.CST_SLABOPERATION_ANSWERLIST.equals(slab.attributName)) {
             return eventSurveyAnswerController;
 
-        } else if (EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST.equals(slab.attributName)) {
+        } else if (EventGroupChatEntity.SLABOPERATION_GROUPCHATLIST.equals(slab.attributName)) {
             return eventControllerGroupChat;
 
         } else if (EventChatEntity.CST_SLABOPERATION_CHAT.equals(slab.attributName)) {

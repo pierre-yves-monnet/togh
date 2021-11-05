@@ -48,19 +48,25 @@ import java.util.logging.Logger;
 @Service
 public class LoginService {
 
-    private final static String LOG_HEADER = "LoginService:";
-    private static final LogEvent eventUnknowId = new LogEvent(LoginService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
+    private final static String LOG_HEADER = LoginService.class.getSimpleName() + ": ";
+
+    private static final LogEvent eventUnknownId = new LogEvent(LoginService.class.getName(), 1, Level.APPLICATIONERROR, "Unknown user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
     private static final LogEvent eventUserDisconnected = new LogEvent(LoginService.class.getName(), 2, Level.SUCCESS, "User disconnected", "User disconnected with success");
     private static final LogEvent eventCantSaveLostPassword = new LogEvent(LoginService.class.getName(), 3, Level.ERROR, "Can't save lost password", "The data 'lostPassword' can't be save in the database", "Procedure to reset the password failed", "check Exception ");
     private static final LogEvent eventEmailResetPasswordFailed = new LogEvent(LoginService.class.getName(), 4, Level.ERROR, "Impossible to send the reset password email", "The email can't be send", "Procedure to reset the password failed", "check Exception ");
+
+    private static final String OPERATION_V_NOT_EXIST = "NotExist";
+    private static final String OPERATION_V_NOT_REGISTERED_ON_PORTAL = "NotRegisteredOnPortal";
+    private static final String OPERATION_V_USER_BLOCKED_OR_DISABLED = "UserBlockedOrDisabled";
+    private static final String OPERATION_V_BAD_PASSWORD = "BadPassword";
+    private static final String OPERATION_CONNECT_USER_NO_VERIFICATION = "ConnectUserNoVerification";
     /* -------------------------------------------------------------------- */
     /*                                                                      */
     /* Connect / disconnect / IsConnected */
     /*                                                                      */
     /* -------------------------------------------------------------------- */
     Random random = new Random();
-    @Autowired
-    private FactoryService factoryService;
+
     @Autowired
     private ToghUserLostPasswordRepository toghUserLostPasswordRepository;
     @Autowired
@@ -90,13 +96,13 @@ public class LoginService {
 
         ToghUserEntity toghUserEntity = toghUserService.findToConnect(emailOrName);
         if (toghUserEntity == null) {
-            monitorService.endOperationWithStatus(chronoConnection, "NotExist");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_EXIST);
             loginStatus.status = LoginStatus.UNKNOWUSER;
             report(loginStatus);
             return loginStatus;
         }
-        // Special case: a invited user with a password.... this is not normal. When the user register, it set a password and
-        // it must move to Portal. Let's catch that
+        // Special case: an invited user with a password.... this is not normal.
+        // When the user register, it set a password, and it must move to Portal. Let's catch that
         if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource())
                 && toghUserEntity.getPassword() != null
                 && toghUserEntity.getPassword().length() > 0) {
@@ -107,14 +113,14 @@ public class LoginService {
         // this user must be registered on the portal
         if (!(SourceUserEnum.PORTAL.equals(toghUserEntity.getSource())
                 || SourceUserEnum.SYSTEM.equals(toghUserEntity.getSource()))) {
-            monitorService.endOperationWithStatus(chronoConnection, "NotRegisteredOnPortal");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_REGISTERED_ON_PORTAL);
             loginStatus.status = LoginStatus.NOTREGISTERED;
             report(loginStatus);
             return loginStatus;
         }
         // password inactif or block: remove it
         if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
-            monitorService.endOperationWithStatus(chronoConnection, "UserBlockedOrDisabled");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_USER_BLOCKED_OR_DISABLED);
             loginStatus.status = LoginStatus.BLOCKED;
             report(loginStatus);
             return loginStatus;
@@ -122,7 +128,7 @@ public class LoginService {
         // check the password
         String passwordEncrypted = ToghUserService.encryptPassword(password);
         if (!toghUserEntity.checkPassword(passwordEncrypted)) {
-            monitorService.endOperationWithStatus(chronoConnection, "BadPassword");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_BAD_PASSWORD);
             loginStatus.status = LoginStatus.BADPASSWORD; // don't say that the user exists...
             report(loginStatus);
             return loginStatus;
@@ -142,11 +148,11 @@ public class LoginService {
         LoginResult loginStatus = new LoginResult();
         loginStatus.email = email;
 
-        Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
+        Chrono chronoConnection = monitorService.startOperation(OPERATION_CONNECT_USER_NO_VERIFICATION);
 
         Optional<ToghUserEntity> endUserEntity = toghUserService.getUserFromEmail(email);
         if (endUserEntity.isEmpty()) {
-            monitorService.endOperationWithStatus(chronoConnection, "NotExist");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_EXIST);
             return loginStatus;
         }
         loginStatus.userConnected = endUserEntity.get();
@@ -160,17 +166,17 @@ public class LoginService {
     }
 
     /**
-     * SSO connection: just give a name, and should connect Internal connection: we trust who call it and then we connect the user
+     * SSO connection: just give a name, and should connect Internal connection: we trust who call it, and then we connect the user
      */
     public LoginResult connectSSO(String email, boolean isGoogle) {
         LoginResult loginStatus = new LoginResult();
         loginStatus.email = email;
 
-        Chrono chronoConnection = monitorService.startOperation("ConnectUserNoVerification");
+        Chrono chronoConnection = monitorService.startOperation(OPERATION_CONNECT_USER_NO_VERIFICATION);
 
         Optional<ToghUserEntity> toghUserEntity = toghUserService.getUserFromEmail(email);
         if (toghUserEntity.isEmpty()) {
-            monitorService.endOperationWithStatus(chronoConnection, "NotExist");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_EXIST);
             report(loginStatus);
             return loginStatus;
         }
@@ -204,7 +210,7 @@ public class LoginService {
         if (toghUserEntityOptional.isPresent()) {
             toghUserEntity = toghUserEntityOptional.get();
 
-            // user already exist: so, time to save it's password
+            // user already exist: so, time to save it password
             if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource())) {
                 // Ok, this is the first time the user join!
                 String passwordEncrypted = ToghUserService.encryptPassword(password);
@@ -239,7 +245,7 @@ public class LoginService {
             toghUserService.saveUser(toghUserEntity);
             loginStatus.status = LoginStatus.OK;
         } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
+            logger.severe(LOG_HEADER + "Can't create new user: " + e);
             loginStatus.status = LoginStatus.SERVERISSUE;
         }
         report(loginStatus);
@@ -275,7 +281,7 @@ public class LoginService {
     /**
      * check that the user can access this RestAdminTranslator
      *
-     * @param connectionStamp
+     * @param connectionStamp stamp to identify the connection
      * @return the ToghUser
      * @throws ResponseStatusException bob
      */
@@ -283,7 +289,7 @@ public class LoginService {
         ToghUserEntity toghUser = isConnected(connectionStamp);
 
         if (toghUser == null)
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
         // check if the user is an administrator
         if (!isAdministrator(toghUser)) {
@@ -293,9 +299,9 @@ public class LoginService {
     }
 
     /**
-     * Sent the email. The message to user is add, because it is translated by the interface (which contains the dictionnary)
+     * Sent the email. The message to the user is added, because it is translated by the interface (which contains the dictionary)
      *
-     * @param email
+     * @param email email to identify the user
      * @return the login status
      */
     public LoginResult lostMyPassword(String email) {
@@ -372,7 +378,7 @@ public class LoginService {
         // password inactif or block: remove it
         if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
-            monitorService.endOperationWithStatus(chronoConnection, "UserBlockedOrDisabled");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_USER_BLOCKED_OR_DISABLED);
             report(loginStatus);
             return loginStatus;
         }
@@ -395,17 +401,19 @@ public class LoginService {
     /**
      * User is updated (picture change, name change...) : just refresh this information
      *
-     * @param toghUserEntity
+     * @param toghUser togh user
      */
-    public void userIsUpdated(ToghUserEntity toghUserEntity) {
+    public void userIsUpdated(ToghUserEntity toghUser) {
         for (UserConnected userConnected : cacheUserConnected.values()) {
-            if (userConnected.toghUserEntity.getId().equals(toghUserEntity.getId()))
-                userConnected.toghUserEntity = toghUserEntity;
+            if (userConnected.toghUserEntity.getId().equals(toghUser.getId()))
+                userConnected.toghUserEntity = toghUser;
         }
     }
 
     /**
-     * @param connectionStamp
+     * Is Connected
+     *
+     * @param connectionStamp to identify the connection
      * @return a user, or null if nobody is connected
      */
     public ToghUserEntity isConnected(String connectionStamp) {
@@ -448,7 +456,7 @@ public class LoginService {
      * Is this user an admin ?
      *
      * @param toghUser togh user
-     * @return
+     * @return true if the user is an administrator
      */
     public boolean isAdministrator(ToghUserEntity toghUser) {
         if (toghUser == null)
@@ -456,24 +464,31 @@ public class LoginService {
         return PrivilegeUserEnum.ADMIN.equals(toghUser.getPrivilegeUser());
     }
 
-    public LoginResult changePassword(ToghUserEntity toghUserEntity,
+    /**
+     * Change the password
+     *
+     * @param toghUser Togh user to change the password
+     * @param password password to change
+     * @return login status
+     */
+    public LoginResult changePassword(ToghUserEntity toghUser,
                                       String password) {
         LoginResult loginStatus = new LoginResult();
         Chrono chronoConnection = monitorService.startOperation("changePassword");
 
 
         // password inactif or block: remove it
-        if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
+        if (!StatusUserEnum.ACTIF.equals(toghUser.getStatusUser())) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
-            monitorService.endOperationWithStatus(chronoConnection, "UserBlockedOrDisabled");
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_USER_BLOCKED_OR_DISABLED);
             report(loginStatus);
             return loginStatus;
         }
         // search the user now
-        loginStatus.userConnected = toghUserEntity;
+        loginStatus.userConnected = toghUser;
         // change the password now
-        toghUserService.setPassword(toghUserEntity, password);
-        toghUserService.saveUser(toghUserEntity);
+        toghUserService.setPassword(toghUser, password);
+        toghUserService.saveUser(toghUser);
 
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
@@ -482,9 +497,9 @@ public class LoginService {
     }
 
     /**
-     * Disconnect
+     * Disconnect user based on the connectionStamp
      *
-     * @param connectionStamp
+     * @param connectionStamp Connection Stamp to retrieve the connection
      */
     public void disconnectUser(String connectionStamp) {
         UserConnected userConnected = cacheUserConnected.get(connectionStamp);
@@ -514,7 +529,7 @@ public class LoginService {
         LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
         timeCheck = timeCheck.minusMinutes(delayMinutesDisconnectInactiveUser);
         SearchUsersResult searchUsersResult = toghUserService.searchConnectedUsersNoActivity(timeCheck, 0, 1000);
-        logger.info(LOG_HEADER + "disconnectInactiveUsers found " + searchUsersResult.listUsers.size());
+        logger.info(String.format("%s disconnectInactiveUsers found %d users", LOG_HEADER, searchUsersResult.listUsers.size()));
         for (ToghUserEntity toghUserEntity : searchUsersResult.listUsers) {
             logger.info(LOG_HEADER + "disconnectInactiveUsers Disconnect[" + toghUserEntity.getLabel() + "]");
             toghUserEntity.setConnectionStamp(null);
@@ -522,13 +537,19 @@ public class LoginService {
         }
     }
 
+    /**
+     * disconnect a user
+     *
+     * @param userId userId to disconnect
+     * @return Operation Status
+     */
     public OperationLoginUser disconnectUser(long userId) {
         OperationLoginUser operationUser = new OperationLoginUser();
 
         operationUser.toghUserEntity = toghUserService.getUserFromId(userId);
 
         if (operationUser.toghUserEntity == null) {
-            operationUser.listLogEvents.add(new LogEvent(eventUnknowId, "Id[" + userId + "]"));
+            operationUser.listLogEvents.add(new LogEvent(eventUnknownId, "Id[" + userId + "]"));
             return operationUser;
         }
         cacheUserConnected.remove(operationUser.toghUserEntity.getConnectionStamp());
@@ -542,8 +563,8 @@ public class LoginService {
     /**
      * When the password is lost, a UUID is generated. Then, the page "change my password" is acceded. Form the UUID, information are send back
      *
-     * @param uuid
-     * @return
+     * @param uuid Uuid to retrieve the connection
+     * @return Login status
      */
     public LoginResult getFromUUID(String uuid) {
         LoginResult loginStatus = new LoginResult();
@@ -573,11 +594,16 @@ public class LoginService {
         // first, calculate the timeSlot
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HH:");
-        String timeSlot = now.format(formatter) + (((int) (now.getMinute() / 15)) * 15);
+        String timeSlot = now.format(formatter) + ((now.getMinute() / 15) * 15);
         logger.info(LOG_HEADER + "Connection Email[" + loginStatus.email + "] googleId[" + loginStatus.googleId + "] Status[" + loginStatus.status + "] @ [" + timeSlot + "]");
 
         if (loginLogRepository.countByTimeSlot(timeSlot) > 100) {
             // we are under attack: Stop to log
+            try {
+                Thread.sleep(30000);
+            } catch (Exception e) {
+                // nothing to do here
+            }
         }
         try {
             LoginLogEntity loginLogEntity = loginLogRepository.findByTimeSlot(timeSlot,
@@ -600,12 +626,15 @@ public class LoginService {
 
             loginLogRepository.save(loginLogEntity);
         } catch (Exception e) {
-            logger.severe("Can't save loginLog " + e.toString());
+            logger.severe(LOG_HEADER + "Can't save loginLog " + e);
         }
     }
 
     public enum LoginStatus {OK, BADEMAIL, SERVERISSUE, UNKNOWUSER, BADPASSWORD, ALREADYEXISTUSER, NOTREGISTERED, BLOCKED}
 
+    /**
+     * LoginResult class
+     */
     public static class LoginResult {
 
         public boolean isConnected = false;
@@ -623,7 +652,7 @@ public class LoginService {
         /**
          * listEvents are not sent back, it's a server information
          *
-         * @return
+         * @return Map of login information
          */
         public Map<String, Object> getMap() {
             Map<String, Object> map = new HashMap<>();
@@ -638,13 +667,16 @@ public class LoginService {
     /**
      * class of status
      */
-    public class OperationLoginUser {
+    public static class OperationLoginUser {
 
         public List<LogEvent> listLogEvents = new ArrayList<>();
         public ToghUserEntity toghUserEntity = null;
     }
 
-    private class UserConnected {
+    /**
+     * User Connected information
+     */
+    private static class UserConnected {
 
         public ToghUserEntity toghUserEntity;
         public LocalDateTime lastPing = LocalDateTime.now(ZoneOffset.UTC);

@@ -37,6 +37,7 @@ public class ToghUserSerializer extends BaseSerializer {
      */
     @Override
     public Map<String, Object> getMap(BaseEntity baseEntity,
+                                      BaseEntity parentEntity,
                                       SerializerOptions serializerOptions,
                                       FactorySerializer factorySerializer,
                                       FactoryUpdateGrantor factoryUpdateGrantor) {

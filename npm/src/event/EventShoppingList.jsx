@@ -129,7 +129,7 @@ class EventShoppingList extends React.Component {
 			{this.getFilterTaskHtml()}
 
 			{this.state.event.shoppinglist.map((item, index) => { return (
-					<div class="toghBlock" style={{backgroundColor: "#fed9a691"}}>
+					<div class="toghBlock" style={{backgroundColor: "#fed9a691"}} id={{index}}>
 						<div class="container">
 							{this.getLineShopping(item, index) }
 						</div>

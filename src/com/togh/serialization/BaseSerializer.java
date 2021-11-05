@@ -33,6 +33,7 @@ public abstract class BaseSerializer {
     static final String JSON_READONLY_FIELDS = "readOnlyFields";
     static final String JSON_CONTROL_INFORMATION_EVENT = "informationEvent";
 
+
     /**
      * The serializer serialize an Entity Class. Return the entity
      *
@@ -42,13 +43,14 @@ public abstract class BaseSerializer {
 
     /**
      * @param entity               entity to serialize
-     * @param serializerOptions
+     * @param parentEntity         The parent of the entity, may be needed by the serializer. Null if the entity is the root.
+     * @param serializerOptions    Options to serialize
      * @param factorySerializer    the factory has to be pass. Not possible to aAutowired it: we have a loop dependency else
-     * @param factoryUpdateGrantor
+     * @param factoryUpdateGrantor Factory to access the grantor
      * @return the map which contains the serialized object
      */
     public abstract Map<String, Object> getMap(BaseEntity entity,
-                                               SerializerOptions serializerOptions,
+                                               BaseEntity parentEntity, SerializerOptions serializerOptions,
                                                FactorySerializer factorySerializer,
                                                FactoryUpdateGrantor factoryUpdateGrantor);
 

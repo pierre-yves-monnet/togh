@@ -75,7 +75,7 @@ class EventEntity extends UserEntity {
     @Column(name = "timeevent", length = 5)
     private String timeevent;
     @Column(name = "durationevent", length = 5)
-    private String duration;
+    private String durationEvent;
     @Column(name = "scope", length = 10)
     @Enumerated(EnumType.STRING)
     private ScopeEnum scope;
@@ -233,12 +233,12 @@ class EventEntity extends UserEntity {
     /**
      * Remove a task.
      *
-     * @param task
+     * @param taskEntity task to remove
      * @return true if the task exist and is removed, false else
      */
-    public boolean removeTask(EventTaskEntity task) {
+    public boolean removeTask(EventTaskEntity taskEntity) {
         for (EventTaskEntity taskIterator : taskList) {
-            if (taskIterator.getId().equals(task.getId())) {
+            if (taskIterator.getId().equals(taskEntity.getId())) {
                 taskList.remove(taskIterator);
                 return true;
             }
@@ -254,12 +254,12 @@ class EventEntity extends UserEntity {
     /**
      * Remove a task.
      *
-     * @param task
+     * @param shoppingListEntity shopping to remove
      * @return true if the task exist and is removed, false else
      */
-    public boolean removeShoppingList(EventShoppingListEntity task) {
+    public boolean removeShoppingList(EventShoppingListEntity shoppingListEntity) {
         for (EventShoppingListEntity shoppingListIterator : shoppingList) {
-            if (shoppingListIterator.getId().equals(task.getId())) {
+            if (shoppingListIterator.getId().equals(shoppingListEntity.getId())) {
                 shoppingList.remove(shoppingListIterator);
                 return true;
             }
@@ -275,12 +275,12 @@ class EventEntity extends UserEntity {
     /**
      * Remove a task.
      *
-     * @param task
+     * @param surveyEntity Survey Entity to remove
      * @return true if the task exist and is removed, false else
      */
-    public boolean removeSurvey(EventSurveyEntity task) {
+    public boolean removeSurvey(EventSurveyEntity surveyEntity) {
         for (EventSurveyEntity surveyIterator : surveyList) {
-            if (surveyIterator.getId().equals(task.getId())) {
+            if (surveyIterator.getId().equals(surveyEntity.getId())) {
                 surveyList.remove(surveyIterator);
                 return true;
             }
@@ -303,6 +303,14 @@ class EventEntity extends UserEntity {
         return false;
     }
 
+    /**
+     * Add a Chat in a group
+     *
+     * @param groupChatEntity group to add the chat
+     * @param chatEntity      chat to add
+     * @param maxChatEntity   maximum chat allowed
+     * @return
+     */
     public EventChatEntity addChat(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity, int maxChatEntity) {
         groupChatEntity.addChat(chatEntity);
         return chatEntity;

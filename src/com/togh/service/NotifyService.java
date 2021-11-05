@@ -37,11 +37,14 @@ import java.util.logging.Logger;
 @Service
 public class NotifyService {
 
+    private final static String LOG_HEADER = NotifyService.class.getSimpleName() + ": ";
+
     private static final String NBSP = "&nbsp;";
     private static final String BR = "<br>";
 
     private static final String HTTP_DEFAULT_HOST_TOGH = "http://localhost:3000";
-    private static final String LOG_HEADER = "com.togh.NotifyService";
+
+
     private static final String MAIL_HOST = "localhost";
     private static final int MAIL_PORT = 2525;
     private static final boolean MAIL_TLS = false;
@@ -133,7 +136,7 @@ public class NotifyService {
         boolean newUser = toghUserEntity.getStatusUser().equals(ToghUserEntity.StatusUserEnum.INVITED);
         return getHttpLink(HTTP_DEFAULT_HOST_TOGH)
                 + "?action=" + (newUser ? "invitedNewUser" : "invitedUser")
-                + "&invitationStamp=" + toghUserEntity.getInvitationStamp()
+                + (toghUserEntity.getInvitationStamp() != null ? "&invitationStamp=" + toghUserEntity.getInvitationStamp() : "")
                 + "&eventid=" + eventEntity.getId()
                 + "&email=" + toghUserEntity.getEmail();
     }

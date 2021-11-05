@@ -43,11 +43,11 @@ public class RestAdminEmail {
 
     /**
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return List of APIKeyEntity
      */
     @CrossOrigin
     @GetMapping(value = "/api/admin/email/get", produces = "application/json")
-    public List<APIKeyEntity> getApiKeys(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public List<APIKeyEntity> getApiKeys(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         loginService.isAdministratorConnected(connectionStamp);
         return apiKeyService.getListApiKeys(ApiKey.listKeysEmail);
@@ -55,40 +55,40 @@ public class RestAdminEmail {
     }
 
     /**
-     * @param updateMap
+     * @param updateMap       information to update
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return status of key updated
      */
     @CrossOrigin
     @PostMapping(value = "/api/admin/email/update", produces = "application/json")
     @ResponseBody
     public Map<String, Object> updateKey(
             @RequestBody Map<String, Object> updateMap,
-            @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+            @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
-        Map<String, Object> payload = new HashMap<>();
         loginService.isAdministratorConnected(connectionStamp);
 
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listKeys", new ArrayList<>());
         List<LogEvent> listLogEvent = apiKeyService.updateKeys(listApiKey);
 
-        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+        Map<String, Object> payload = new HashMap<>();
+        payload.put(RestJsonConstants.LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
     }
 
     /**
-     * @param updateMap
+     * @param updateMap       information to test the email
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return status of operation
      */
     @CrossOrigin
     @PostMapping(value = "/api/admin/email/test", produces = "application/json")
     @ResponseBody
     public Map<String, Object> testEmail(
             @RequestBody Map<String, Object> updateMap,
-            @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+            @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         Map<String, Object> payload = new HashMap<>();
         loginService.isAdministratorConnected(connectionStamp);
@@ -106,7 +106,7 @@ public class RestAdminEmail {
 
                 localSmtpService);
 
-        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+        payload.put(RestJsonConstants.LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
     }

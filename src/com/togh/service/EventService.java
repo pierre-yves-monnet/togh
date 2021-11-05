@@ -361,7 +361,7 @@ public class EventService {
                 eventAccessGrantor);
 
         BaseSerializer serializer = factorySerializer.getFromEntity(eventEntity);
-        return serializer.getMap(eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor);
+        return serializer.getMap(eventEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor);
     }
 
     /**

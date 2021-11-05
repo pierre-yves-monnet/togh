@@ -24,9 +24,10 @@ class EventSerializerTest {
     private FactoryUpdateGrantor factoryUpdateGrantor;
 
     @Test
-    void testEventSerialiser() {
+    void testEventSerializer() {
         EventEntity eventEntity = new EventEntity();
         eventEntity.setName("Hello Word");
+        eventEntity.setTypeEvent(EventEntity.TypeEventEnum.OPEN);
         BaseSerializer eventSerializer = factorySerializer.getFromEntity(eventEntity);
 
         EventController eventController = new EventController(eventEntity, null, null);
@@ -38,7 +39,7 @@ class EventSerializerTest {
                 eventAccessGrantor);
 
 
-        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor);
+        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor);
         Assertions.assertEquals("Hello Word", mapSerialized.get(BaseSerializer.JSON_NAME));
     }
 
@@ -60,9 +61,14 @@ class EventSerializerTest {
     @Test
     void testGroupChatSerialiser() {
         EventEntity eventEntity = new EventEntity();
+        eventEntity.setName("Hello Word");
+        eventEntity.setTypeEvent(EventEntity.TypeEventEnum.OPEN);
+
 
         EventGroupChatEntity groupChatEntity = new EventGroupChatEntity();
         groupChatEntity.setName("GENERAL");
+        eventEntity.setTypeEvent(EventEntity.TypeEventEnum.OPEN);
+
         eventEntity.addGroupChat(groupChatEntity);
 
         EventChatEntity chatEntityHello = new EventChatEntity();
@@ -73,7 +79,6 @@ class EventSerializerTest {
         chatEntityWord.setMessage("Word");
         eventEntity.addChat(groupChatEntity, chatEntityWord, 10);
 
-        eventEntity.setName("Hello Word");
         BaseSerializer eventSerializer = factorySerializer.getFromEntity(eventEntity);
 
         EventController eventController = new EventController(eventEntity, null, null);
@@ -84,10 +89,10 @@ class EventSerializerTest {
                 SerializerOptions.ContextAccess.EVENTACCESS,
                 eventAccessGrantor);
 
-        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor);
+        Map<String, Object> mapSerialized = eventSerializer.getMap(eventEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor);
 
         Assertions.assertEquals("Hello Word", mapSerialized.get(BaseSerializer.JSON_NAME));
-        List<Map<String, Object>> listGroupChatSerialized = (List<Map<String, Object>>) mapSerialized.get(EventGroupChatEntity.CST_SLABOPERATION_GROUPCHATLIST);
+        List<Map<String, Object>> listGroupChatSerialized = (List<Map<String, Object>>) mapSerialized.get(EventGroupChatEntity.SLABOPERATION_GROUPCHATLIST);
         Assertions.assertEquals(1, listGroupChatSerialized.size());
 
         Map<String, Object> MainGroupSerializedMap = listGroupChatSerialized.get(0);

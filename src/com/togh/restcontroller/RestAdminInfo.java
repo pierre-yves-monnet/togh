@@ -53,7 +53,7 @@ public class RestAdminInfo {
      */
     @CrossOrigin
     @GetMapping(value = "/api/admin/info", produces = "application/json")
-    public List<Map<String, Object>> getApiKeys(@RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+    public List<Map<String, Object>> getApiKeys(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
         loginService.isAdministratorConnected(connectionStamp);
         List<Map<String, Object>> listInformations = new ArrayList<>();

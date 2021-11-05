@@ -70,11 +70,11 @@ public class RestUserController {
                                           @RequestParam(RestJsonConstants.CST_PARAM_ONLY_NON_INVITED_USER) Boolean onlyNonInvitedUser,
                                           @RequestParam(RestJsonConstants.CST_INJSON_EVENTID) Long eventId,
                                           @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
-                                          @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+                                          @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
         Map<String, Object> payload = new HashMap<>();
         SearchUsersResult searchUsers;
@@ -88,7 +88,7 @@ public class RestUserController {
         for (ToghUserEntity toghUserEntityIterator : searchUsers.listUsers) {
             BaseSerializer serializer = factorySerializer.getFromEntity(toghUserEntityIterator);
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.SEARCH);
-            listUsersMap.add(serializer.getMap(toghUserEntityIterator, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            listUsersMap.add(serializer.getMap(toghUserEntityIterator, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
 
         payload.put(RestJsonConstants.LISTUSERS, listUsersMap);
@@ -124,11 +124,11 @@ public class RestUserController {
             @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_PREMIUM, required = false) boolean filterPremium,
             @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_EXCELLENCE, required = false) boolean filterExcellence,
             @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
-            @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+            @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
 
         CriteriaSearchUser criteriaSearch = new CriteriaSearchUser();
@@ -149,7 +149,7 @@ public class RestUserController {
         for (ToghUserEntity toghUserEntityIterator : searchUsers.listUsers) {
             BaseSerializer serializer = factorySerializer.getFromEntity(toghUserEntityIterator);
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
-            listUsersMap.add(serializer.getMap(toghUserEntityIterator, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            listUsersMap.add(serializer.getMap(toghUserEntityIterator, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
 
         payload.put(RestJsonConstants.LISTUSERS, listUsersMap);
@@ -172,11 +172,11 @@ public class RestUserController {
     @CrossOrigin
     @PostMapping(value = "/api/user/update", produces = "application/json")
     public Map<String, Object> updateUser(@RequestBody Map<String, Object> updateMap,
-                                          @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+                                          @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
         Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
 
@@ -188,9 +188,9 @@ public class RestUserController {
         if (operationUser.toghUserEntity != null) {
             BaseSerializer serializer = factorySerializer.getFromEntity(operationUser.toghUserEntity);
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
-            payload.put(RestJsonConstants.CST_USER, serializer.getMap(operationUser.toghUserEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            payload.put(RestJsonConstants.CST_USER, serializer.getMap(operationUser.toghUserEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
 
         return payload;
     }
@@ -203,11 +203,11 @@ public class RestUserController {
     @CrossOrigin
     @PostMapping(value = "/api/user/admin/update", produces = "application/json")
     public Map<String, Object> updateAdminUser(@RequestBody Map<String, Object> updateMap,
-                                               @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+                                               @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
         Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
 
@@ -220,9 +220,9 @@ public class RestUserController {
         if (operationUser.toghUserEntity != null) {
             BaseSerializer serializer = factorySerializer.getFromEntity(operationUser.toghUserEntity);
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
-            payload.put(RestJsonConstants.CST_USER, serializer.getMap(operationUser.toghUserEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            payload.put(RestJsonConstants.CST_USER, serializer.getMap(operationUser.toghUserEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
 
 
         return payload;
@@ -239,11 +239,11 @@ public class RestUserController {
     @CrossOrigin
     @PostMapping(value = "/api/user/admin/disconnect", produces = "application/json")
     public Map<String, Object> disconnectUser(@RequestBody Map<String, Object> updateMap,
-                                              @RequestHeader(RestJsonConstants.CST_PARAM_AUTHORIZATION) String connectionStamp) {
+                                              @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
         Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
         Long userId = ToolCast.getLong(updateMap, RestJsonConstants.CST_PARAM_USERID, 0L);
         Map<String, Object> payload = new HashMap<>();
@@ -252,9 +252,9 @@ public class RestUserController {
         if (operationUser.toghUserEntity != null) {
             BaseSerializer serializer = factorySerializer.getFromEntity(operationUser.toghUserEntity);
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
-            payload.put(RestJsonConstants.CST_USER, serializer.getMap(operationUser.toghUserEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            payload.put(RestJsonConstants.CST_USER, serializer.getMap(operationUser.toghUserEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.CST_LIST_LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
         return payload;
     }
 
