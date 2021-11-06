@@ -60,36 +60,29 @@
   "AdminUsers.Disconnect": "切断する",
   "__AdminUsers.Email": "Email",
   "AdminUsers.Email": "Eメール",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "優秀",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
-  "AdminUsers.LastActivityTime" : "最後の活動",
-
-  "__AdminUsers.LastConnectionTime" : "Last Connection",
-  "AdminUsers.LastConnectionTime" : "最後の接続",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "優秀",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
+  "AdminUsers.LastActivityTime": "最後の活動",
+  "__AdminUsers.LastConnectionTime": "Last Connection",
+  "AdminUsers.LastConnectionTime": "最後の接続",
 
   "__AdminUsers.LongStatusUserActif" : "User actif",
   "AdminUsers.LongStatusUserActif" : "ユーザーの行動",
-
-  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
-  "AdminUsers.LongStatusUserBlock" : "ユーザーがブロックされました",
-
-  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
-  "AdminUsers.LongStatusUserDisabled" : "ユーザーが無効",
-
-  "__AdminUsers.Myself" : "Myself",
-  "AdminUsers.Myself" : "私自身",
-
-  "__AdminUsers.PhoneNumber" : "PhoneNumber",
-  "AdminUsers.PhoneNumber" : "電話番号",
-
-  "__AdminUsers.Premium" : "Premium",
-  "AdminUsers.Premium" : "プレミアム",
-
-  "__AdminUsers.PrivilegeUser" : "Privilege",
-  "AdminUsers.PrivilegeUser" : "特権",
+  "__AdminUsers.LongStatusUserBlock": "User Blocked",
+  "AdminUsers.LongStatusUserBlock": "ユーザーがブロックされました",
+  "__AdminUsers.LongStatusUserDisabled": "User disabled",
+  "AdminUsers.LongStatusUserDisabled": "ユーザーが無効",
+  "__AdminUsers.Myself": "Myself",
+  "AdminUsers.Myself": "私自身",
+  "__AdminUsers.Pages": "Pages",
+  "AdminUsers.Pages": "ページ",
+  "__AdminUsers.PhoneNumber": "PhoneNumber",
+  "AdminUsers.PhoneNumber": "電話番号",
+  "__AdminUsers.Premium": "Premium",
+  "AdminUsers.Premium": "プレミアム",
+  "__AdminUsers.PrivilegeUser": "Privilege",
+  "AdminUsers.PrivilegeUser": "特権",
 
   "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
   "AdminUsers.PrivilegeUserAdmin" : "管理者",
@@ -129,35 +122,27 @@
 
   "__AdminUsers.SubscriptionUserFree" : "Free",
   "AdminUsers.SubscriptionUserFree" : "自由",
-
-  "__AdminUsers.SubscriptionUserPremium" : "Premium",
-  "AdminUsers.SubscriptionUserPremium" : "プレミアム",
-
-  "__AdminUsers.Title" : "Users",
-  "AdminUsers.Title" : "ユーザー",
-
-  "__AdminUsers.UserName" : "User Name",
-  "AdminUsers.UserName" : "ユーザー名",
-
-  "__AdminUsers.privilegeAdmin" : "Administrator",
-  "AdminUsers.privilegeAdmin" : "管理者",
-
-  "__AdminUsers.privilegeTrans" : "Translator",
-  "AdminUsers.privilegeTrans" : "翻訳者",
-
-  "__AdminUsers.searchSentence" : "Search",
-  "AdminUsers.searchSentence" : "探す",
-
-  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
-  "AdminUsers.subscriptionExcellence" : "エクセレンスサブスクリプション",
-
-  "__AdminUsers.subscriptionFree" : "Free subscription",
-  "AdminUsers.subscriptionFree" : "無料サブスクリプション",
-
-  "__AdminUsers.subscriptionPremium" : "Premium subscription",
-  "AdminUsers.subscriptionPremium" : "プレミアムサブスクリプション",
-
-  "__AskPassword.DifferentPassword" : "Password are different",
+  "__AdminUsers.SubscriptionUserPremium": "Premium",
+  "AdminUsers.SubscriptionUserPremium": "プレミアム",
+  "__AdminUsers.Title": "Users",
+  "AdminUsers.Title": "ユーザー",
+  "__AdminUsers.UserName": "User Name",
+  "AdminUsers.UserName": "ユーザー名",
+  "__AdminUsers.Users": "Users",
+  "AdminUsers.Users": "ユーザー",
+  "__AdminUsers.privilegeAdmin": "Administrator",
+  "AdminUsers.privilegeAdmin": "管理者",
+  "__AdminUsers.privilegeTrans": "Translator",
+  "AdminUsers.privilegeTrans": "翻訳者",
+  "__AdminUsers.searchSentence": "Search",
+  "AdminUsers.searchSentence": "探す",
+  "__AdminUsers.subscriptionExcellence": "Excellence subscription",
+  "AdminUsers.subscriptionExcellence": "エクセレンスサブスクリプション",
+  "__AdminUsers.subscriptionFree": "Free subscription",
+  "AdminUsers.subscriptionFree": "無料サブスクリプション",
+  "__AdminUsers.subscriptionPremium": "Premium subscription",
+  "AdminUsers.subscriptionPremium": "プレミアムサブスクリプション",
+  "__AskPassword.DifferentPassword": "Password are different",
   "AskPassword.DifferentPassword": "パスワードが違います",
   "__AskPassword.NewPassword": "New password",
   "AskPassword.NewPassword": "新しいパスワード",
@@ -183,6 +168,8 @@
   "BodyTogh.thankYouIsmail": "アイデアを共有するためのIsmail。",
   "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
   "BodyTogh.thankYouLounes": "これらの素晴らしいグラフィックとアイコンをデザインするためのLounes。",
+  "__BodyTogh.thankYouSalome": "Salomé for her assistance with the English grammar.",
+  "BodyTogh.thankYouSalome": "英文法を手伝ってくれたSalomé。",
   "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
   "BodyTogh.thankYouSimon": "サイモン、並外れた探索的であり、多くの手がかりを理解すること。",
   "__BodyTogh.welcome": "Welcome to Togh",
@@ -197,30 +184,22 @@
   "BodyTogh.whatisToghTitle": "トグとは何ですか？",
   "__BodyTogh.whyTogh": "Why Togh?",
   "BodyTogh.whyTogh": "なぜトグ？",
-
-  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
-  "BodyTogh.whyToghBorn" : "ここでトグが生まれました。私はこのアプリケーションを5年間考えていました。",
-
-  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
-  "BodyTogh.whyToghConclusion" : "したがって、このアプリケーションは現時点で本当に必要でした。",
-
-  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
-  "BodyTogh.whyToghHistory" : "昨年、家族のためにロードトリップを企画したとき（Covidのためにキャンセルされました）、旅程を作成するためにFurkotを使用し、調査のためにDoogleを作成し、Splitwiseを開いて費用を分担する必要がありました。アイデアを交換するための旅程、Facebookグループについて説明します。",
-
-  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
-  "BodyTogh.whyToghMotivation" : "React、Springを学びたかった。さらに、私はクラウド展開に手を入れたかったのです。では、これらすべてのテクノロジーを使用してアプリケーションを構築し、何が起こっているのかを見てみませんか？",
-
-  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
-  "BodyTogh.whyToghThankYou" : "技術探検家としての彼の才能のために、サイモンに。ルーンズ、彼の素晴らしいデザイン。クリステル、彼女のサポートに。そして、ある時点で私を助けてくれた他のすべての人たち。",
-
-  "__Event.Budget" : "Budget",
-  "Event.Budget" : "予算",
-
-  "__Event.Chat" : "Chat",
-  "Event.Chat" : "チャット",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "日付イベント",
+  "__BodyTogh.whyToghBorn": "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn": "ここでトグが生まれました。私はこのアプリケーションを5年間考えていました。",
+  "__BodyTogh.whyToghConclusion": "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion": "したがって、このアプリケーションは現時点で本当に必要でした。",
+  "__BodyTogh.whyToghHistory": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory": "昨年、家族のためにロードトリップを企画したとき（Covidのためにキャンセルされました）、旅程を作成するためにFurkotを使用し、調査のためにDoogleを作成し、Splitwiseを開いて費用を分担する必要がありました。アイデアを交換するための旅程、Facebookグループについて説明します。",
+  "__BodyTogh.whyToghMotivation": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation": "React、Springを学びたかった。さらに、私はクラウド展開に手を入れたかったのです。では、これらすべてのテクノロジーを使用してアプリケーションを構築し、何が起こっているのかを見てみませんか？",
+  "__Event.BringList": "Bring List",
+  "Event.BringList": "リストを持参",
+  "__Event.Budget": "Budget",
+  "Event.Budget": "予算",
+  "__Event.Chat": "Chat",
+  "Event.Chat": "チャット",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "日付イベント",
 
   "__Event.DatePolicy" : "Date policy",
   "Event.DatePolicy" : "日付ポリシー",
@@ -229,39 +208,32 @@
   "Event.Description" : "説明",
 
   "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "デュレーション",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "終了日",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "日付",
-
-  "Event.EventName" : "名前",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "費用",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "この日付はあなたのタイムゾーンで計算されます",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "ジオローカリゼーション",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "旅程",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "ある日",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "参加者",
-
-  "__Event.Period" : "Period",
-  "Event.Period" : "限目",
-
-  "__Event.Photos" : "Photos",
-  "Event.Photos" : "写真",
+  "Event.DurationEvent": "デュレーション",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "終了日",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "日付",
+  "Event.EventName": "名前",
+  "__Event.Expense": "Expenses",
+  "Event.Expense": "費用",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "この日付はあなたのタイムゾーンで計算されます",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "ジオローカリゼーション",
+  "__Event.HelpTabs": "You have access to different tools in the event. Explore them",
+  "Event.HelpTabs": "イベントではさまざまなツールにアクセスできます。それらを探索する",
+  "__Event.Itinerary": "Itinerary",
+  "Event.Itinerary": "旅程",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "ある日",
+  "__Event.Participant": "Participants",
+  "Event.Participant": "参加者",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "参加者",
+  "__Event.Period": "Period",
+  "Event.Period": "限目",
+  "__Event.Photos": "Photos",
+  "Event.Photos": "写真",
 
   "__Event.Preferences" : "Preferences",
   "Event.Preferences" : "環境設定",
@@ -279,16 +251,13 @@
   "Event.ScopeOpenConfirmation" : "確認時に開く",
 
   "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "秘密",
-
-  "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "買い物リスト",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "開始日",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "状態",
+  "Event.ScopeSecret": "秘密",
+  "__Event.ShoppingList": "Shopping List",
+  "Event.ShoppingList": "買い物リスト",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "開始日",
+  "__Event.Status": "Status",
+  "Event.Status": "状態",
   "__Event.Survey": "Survey",
   "Event.Survey": "調査",
   "__Event.Tasks": "Tasks",
@@ -307,15 +276,12 @@
   "Event.TitleGeolocalisation": "イベントはどこですか？",
   "__Event.TitleItinerary": "Define your itinerary, and point of interest",
   "Event.TitleItinerary": "旅程と興味のあるポイントを定義します",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-  "Event.TitleParticipant" : "イベントに参加者を招待する",
-
-  "__Event.TitlePhotos" : "Photos",
-  "Event.TitlePhotos" : "写真",
-
-  "__Event.TitlePreferences" : "Preferences",
-  "Event.TitlePreferences" : "環境設定",
+  "__Event.TitleParticipant": "Invite participant to your event",
+  "Event.TitleParticipant": "イベントに参加者を招待する",
+  "__Event.TitlePhotos": "Photos",
+  "Event.TitlePhotos": "写真",
+  "__Event.TitlePreferences": "Preferences",
+  "Event.TitlePreferences": "環境設定",
 
   "__Event.TitleShoppingList" : "Shopping list : what to brings?",
   "Event.TitleShoppingList" : "買い物リスト：何を持っていくの？",
@@ -497,24 +463,29 @@
   "EventList.Participants" : "参加者",
 
   "__EventList.Refresh" : "Refresh",
-  "EventList.Refresh" : "更新",
-
-  "__EventParticipant.Actif" : "Actif",
-  "EventParticipant.Actif" : "Actif",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-  "EventParticipant.InvitationInProgress" : "進行中の招待",
-
-  "__EventParticipant.Invited" : "Invited",
-  "EventParticipant.Invited" : "招待",
+  "EventList.Refresh": "更新",
+  "__EventParticipant.Actif": "Actif",
+  "EventParticipant.Actif": "Actif",
+  "__EventParticipant.InvitationInProgress": "Invitation in progress",
+  "EventParticipant.InvitationInProgress": "進行中の招待",
+  "__EventParticipant.Invited": "Invited",
+  "EventParticipant.Invited": "招待",
   "__EventParticipant.Left": "Left",
   "EventParticipant.Left": "左",
   "__EventParticipant.MainTitleParticipant": "Participants",
   "EventParticipant.MainTitleParticipant": "参加者",
+  "__EventParticipant.NotPartOf": "Not part of",
+  "EventParticipant.NotPartOf": "の一部ではありません",
+  "__EventParticipant.NumberOfParticipants": "Number of participants",
+  "EventParticipant.NumberOfParticipants": "参加者の数",
   "__EventParticipant.Owner": "Owner",
   "EventParticipant.Owner": "オーナー",
+  "__EventParticipant.PartOf": "Part Of",
+  "EventParticipant.PartOf": "一部の",
   "__EventParticipant.ParticipantTip": "Invite participant to the event",
   "EventParticipant.ParticipantTip": "イベントに参加者を招待する",
+  "__EventParticipant.Participation": "Participation",
+  "EventParticipant.Participation": "参加",
   "__EventParticipant.Person": "Person",
   "EventParticipant.Person": "人",
   "__EventParticipant.Role": "Role",
@@ -557,15 +528,12 @@
   "EventPreferences.PreferencesTip": "イベントのすべての設定を設定します",
   "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
   "EventPreferences.SubscriptionExcellenceExplanation": "エクセレンスイベントにはすべての機能が含まれ、アイテムごとに1000の制限があります",
-
-  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
-  "EventPreferences.SubscriptionFreeExplanation" : "無料イベントには予算以外のすべての機能が含まれ、参加者（20）とアイテム（50）の数に制限があります",
-
-  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
-  "EventPreferences.SubscriptionPremiumExplanation" : "プレミアムイベントには、すべての機能、上限参加者（100）およびアイテム（100）が含まれます",
-
-  "__EventShoppingList.AddItem" : "Add a item in the list",
-  "EventShoppingList.AddItem" : "リストにアイテムを追加します",
+  "__EventPreferences.SubscriptionFreeExplanation": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation": "無料イベントには予算以外のすべての機能が含まれ、参加者（20）とアイテム（50）の数に制限があります",
+  "__EventPreferences.SubscriptionPremiumExplanation": "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation": "プレミアムイベントには、すべての機能、上限参加者（100）およびアイテム（100）が含まれます",
+  "__EventShoppingList.AddItem": "Add a item in the list",
+  "EventShoppingList.AddItem": "リストにアイテムを追加します",
 
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "1つ追加してください！",
@@ -577,16 +545,13 @@
   "EventShoppingList.Cancel" : "キャンセル",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
-  "EventShoppingList.Cancelled" : "キャンセル",
-
-  "__EventShoppingList.CantAddTask" : "An item can't be added",
-  "EventShoppingList.CantAddTask" : "アイテムを追加できません",
-
-  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
-  "EventShoppingList.CantRemoveItem" : "アイテムを削除できません",
-
-  "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "説明",
+  "EventShoppingList.Cancelled": "キャンセル",
+  "__EventShoppingList.CantAddTask": "An item can't be added",
+  "EventShoppingList.CantAddTask": "アイテムを追加できません",
+  "__EventShoppingList.CantRemoveItem": "The item can't be removed",
+  "EventShoppingList.CantRemoveItem": "アイテムを削除できません",
+  "__EventShoppingList.Description": "Description",
+  "EventShoppingList.Description": "説明",
   "__EventShoppingList.Done": "Done",
   "EventShoppingList.Done": "完了",
   "__EventShoppingList.ItemRemoved": "The item is removed",
@@ -605,12 +570,10 @@
   "EventShoppingList.ShoppingListTip": "イベントに参加するアイテムのリストがあります。それらをリストし、誰がそれらを購入しなければならないかを決定します",
   "__EventShoppingList.ShowDetails": "Detail",
   "EventShoppingList.ShowDetails": "詳細",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
-  "EventShoppingList.ShowExpense" : "経費を表示",
-
-  "__EventShoppingList.TaskAdded" : "The item is added",
-  "EventShoppingList.TaskAdded" : "アイテムが追加されます",
+  "__EventShoppingList.ShowExpense": "Show Expense",
+  "EventShoppingList.ShowExpense": "経費を表示",
+  "__EventShoppingList.TaskAdded": "The item is added",
+  "EventShoppingList.TaskAdded": "アイテムが追加されます",
   "__EventShoppingList.Title": "Shopping List",
   "EventShoppingList.Title": "買い物リスト",
   "__EventShoppingList.ToBring": "To bring",
@@ -664,16 +627,12 @@
   "EventSurvey.NoItem": "リストに調査の準備ができていません。",
   "__EventSurvey.Option": "Option",
   "EventSurvey.Option": "オプション",
-
-  "__EventSurvey.RemovingChoice" : "Removing a choice",
-  "EventSurvey.RemovingChoice" : "選択肢を削除する",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "この調査は準備中です。参加者は表示されません",
-
-  "EventSurvey.SurveyTip" : "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
-
-  "__EventSurvey.TaskAdded" : "A task is added",
+  "__EventSurvey.RemovingChoice": "Removing a choice",
+  "EventSurvey.RemovingChoice": "選択肢を削除する",
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "この調査は準備中です。参加者は表示されません",
+  "EventSurvey.SurveyTip": "参加者は芸術や航空宇宙博物館を訪れることを好みますか？ Japanase、イタリアン、フレンチのどちらのレストランがお好みですか？調査を作成し、レビューを収集します。",
+  "__EventSurvey.TaskAdded": "A task is added",
   "EventSurvey.TaskAdded" : "タスクが追加されます",
 
   "__EventSurvey.Title" : "Title",
@@ -795,16 +754,13 @@
   "EventTaskList.ShowDate" : "日付を表示",
 
   "__EventTaskList.State" : "State",
-  "EventTaskList.State" : "状態",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-  "EventTaskList.StatePlanned" : "予定",
-
-  "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "件名",
-
-  "__EventTaskList.TaskAdded" : "A task is added",
-  "EventTaskList.TaskAdded" : "タスクが追加されます",
+  "EventTaskList.State": "状態",
+  "__EventTaskList.StatePlanned": "Planned",
+  "EventTaskList.StatePlanned": "予定",
+  "__EventTaskList.Subject": "Subject",
+  "EventTaskList.Subject": "件名",
+  "__EventTaskList.TaskAdded": "A task is added",
+  "EventTaskList.TaskAdded": "タスクが追加されます",
   "__EventTaskList.TaskRemoved": "The task is removed",
   "EventTaskList.TaskRemoved": "タスクが削除されました",
   "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
@@ -944,15 +900,12 @@
   "Menu.Events": "イベント",
   "__Menu.EventsExplanation": "Access all events you can access",
   "Menu.EventsExplanation": "アクセスできるすべてのイベントにアクセスする",
-
-  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
-  "Menu.InvitationExplanation" : "招待状を確認し、受け入れます。",
-
-  "__Menu.Join" : "Join an event",
-  "Menu.Join" : "イベントに参加する",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-  "Menu.JoinExplanation" : "イベントを検索して参加する",
+  "__Menu.InvitationExplanation": "Check your invitations, accept them.",
+  "Menu.InvitationExplanation": "招待状を確認し、受け入れます。",
+  "__Menu.Join": "Join an event",
+  "Menu.Join": "イベントに参加する",
+  "__Menu.JoinExplanation": "Search and join events",
+  "Menu.JoinExplanation": "イベントを検索して参加する",
 
   "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
   "Menu.MyFriendExplanation" : "すべての友達に会い、新しい人を招待し、メッセージを送ってください。",
@@ -1019,17 +972,13 @@
 
   "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
   "MyProfile.PhoneNumberExplanation" : "Toghは使用しませんが、同じイベントでユーザーと共有できます",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "検索を除くすべての場所",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "検索では電話番号は使用されませんが、結果には電話番号が表示されます。イベントに接続しているユーザーがあなたの電話を見る",
-
-  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
-  "MyProfile.PhoneNumberVisibilityAlways" : "常に",
-
-  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch": "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": "検索を除くすべての場所",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "検索では電話番号は使用されませんが、結果には電話番号が表示されます。イベントに接続しているユーザーがあなたの電話を見る",
+  "__MyProfile.PhoneNumberVisibilityAlways": "Always",
+  "MyProfile.PhoneNumberVisibilityAlways": "常に",
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Your phone number is visible for any user connected to Togh",
   "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Toghに接続しているすべてのユーザーにあなたの電話番号が表示されます",
   "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
   "MyProfile.PhoneNumberVisibilityLimitedEvent": "限定イベント",

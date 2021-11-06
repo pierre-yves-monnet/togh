@@ -60,36 +60,29 @@
   "AdminUsers.Disconnect": "연결 해제",
   "__AdminUsers.Email": "Email",
   "AdminUsers.Email": "이메일",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "우수",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
-  "AdminUsers.LastActivityTime" : "마지막 활동",
-
-  "__AdminUsers.LastConnectionTime" : "Last Connection",
-  "AdminUsers.LastConnectionTime" : "마지막 연결",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "우수",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
+  "AdminUsers.LastActivityTime": "마지막 활동",
+  "__AdminUsers.LastConnectionTime": "Last Connection",
+  "AdminUsers.LastConnectionTime": "마지막 연결",
 
   "__AdminUsers.LongStatusUserActif" : "User actif",
   "AdminUsers.LongStatusUserActif" : "사용자 actif",
-
-  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
-  "AdminUsers.LongStatusUserBlock" : "사용자 차단",
-
-  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
-  "AdminUsers.LongStatusUserDisabled" : "사용자 비활성화",
-
-  "__AdminUsers.Myself" : "Myself",
-  "AdminUsers.Myself" : "자기",
-
-  "__AdminUsers.PhoneNumber" : "PhoneNumber",
-  "AdminUsers.PhoneNumber" : "전화 번호",
-
-  "__AdminUsers.Premium" : "Premium",
-  "AdminUsers.Premium" : "프리미엄",
-
-  "__AdminUsers.PrivilegeUser" : "Privilege",
-  "AdminUsers.PrivilegeUser" : "특권",
+  "__AdminUsers.LongStatusUserBlock": "User Blocked",
+  "AdminUsers.LongStatusUserBlock": "사용자 차단",
+  "__AdminUsers.LongStatusUserDisabled": "User disabled",
+  "AdminUsers.LongStatusUserDisabled": "사용자 비활성화",
+  "__AdminUsers.Myself": "Myself",
+  "AdminUsers.Myself": "자기",
+  "__AdminUsers.Pages": "Pages",
+  "AdminUsers.Pages": "페이지",
+  "__AdminUsers.PhoneNumber": "PhoneNumber",
+  "AdminUsers.PhoneNumber": "전화 번호",
+  "__AdminUsers.Premium": "Premium",
+  "AdminUsers.Premium": "프리미엄",
+  "__AdminUsers.PrivilegeUser": "Privilege",
+  "AdminUsers.PrivilegeUser": "특권",
 
   "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
   "AdminUsers.PrivilegeUserAdmin" : "관리자",
@@ -129,35 +122,27 @@
 
   "__AdminUsers.SubscriptionUserFree" : "Free",
   "AdminUsers.SubscriptionUserFree" : "비어 있는",
-
-  "__AdminUsers.SubscriptionUserPremium" : "Premium",
-  "AdminUsers.SubscriptionUserPremium" : "프리미엄",
-
-  "__AdminUsers.Title" : "Users",
-  "AdminUsers.Title" : "사용자",
-
-  "__AdminUsers.UserName" : "User Name",
-  "AdminUsers.UserName" : "사용자 이름",
-
-  "__AdminUsers.privilegeAdmin" : "Administrator",
-  "AdminUsers.privilegeAdmin" : "관리자",
-
-  "__AdminUsers.privilegeTrans" : "Translator",
-  "AdminUsers.privilegeTrans" : "역자",
-
-  "__AdminUsers.searchSentence" : "Search",
-  "AdminUsers.searchSentence" : "검색",
-
-  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
-  "AdminUsers.subscriptionExcellence" : "Excellence 구독",
-
-  "__AdminUsers.subscriptionFree" : "Free subscription",
-  "AdminUsers.subscriptionFree" : "무료 구독",
-
-  "__AdminUsers.subscriptionPremium" : "Premium subscription",
-  "AdminUsers.subscriptionPremium" : "프리미엄 구독",
-
-  "__AskPassword.DifferentPassword" : "Password are different",
+  "__AdminUsers.SubscriptionUserPremium": "Premium",
+  "AdminUsers.SubscriptionUserPremium": "프리미엄",
+  "__AdminUsers.Title": "Users",
+  "AdminUsers.Title": "사용자",
+  "__AdminUsers.UserName": "User Name",
+  "AdminUsers.UserName": "사용자 이름",
+  "__AdminUsers.Users": "Users",
+  "AdminUsers.Users": "사용자",
+  "__AdminUsers.privilegeAdmin": "Administrator",
+  "AdminUsers.privilegeAdmin": "관리자",
+  "__AdminUsers.privilegeTrans": "Translator",
+  "AdminUsers.privilegeTrans": "역자",
+  "__AdminUsers.searchSentence": "Search",
+  "AdminUsers.searchSentence": "검색",
+  "__AdminUsers.subscriptionExcellence": "Excellence subscription",
+  "AdminUsers.subscriptionExcellence": "Excellence 구독",
+  "__AdminUsers.subscriptionFree": "Free subscription",
+  "AdminUsers.subscriptionFree": "무료 구독",
+  "__AdminUsers.subscriptionPremium": "Premium subscription",
+  "AdminUsers.subscriptionPremium": "프리미엄 구독",
+  "__AskPassword.DifferentPassword": "Password are different",
   "AskPassword.DifferentPassword": "비밀번호가 다릅니다",
   "__AskPassword.NewPassword": "New password",
   "AskPassword.NewPassword": "새 비밀번호",
@@ -183,6 +168,8 @@
   "BodyTogh.thankYouIsmail": "아이디어 공유를 위한 Ismail.",
   "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
   "BodyTogh.thankYouLounes": "이 멋진 그래픽과 아이콘을 디자인하는 Lounes.",
+  "__BodyTogh.thankYouSalome": "Salomé for her assistance with the English grammar.",
+  "BodyTogh.thankYouSalome": "영어 문법에 도움을 준 Salomé.",
   "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
   "BodyTogh.thankYouSimon": "사이먼은 비범한 탐험가가 되어 많은 단서를 찾아냅니다.",
   "__BodyTogh.welcome": "Welcome to Togh",
@@ -197,30 +184,22 @@
   "BodyTogh.whatisToghTitle": "Togh는 무엇입니까?",
   "__BodyTogh.whyTogh": "Why Togh?",
   "BodyTogh.whyTogh": "왜 Togh?",
-
-  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
-  "BodyTogh.whyToghBorn" : "여기에서 Togh가 태어났습니다. 저는이 응용 프로그램을 5 년 동안 생각하고있었습니다.",
-
-  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
-  "BodyTogh.whyToghConclusion" : "그래서이 애플리케이션은이 순간 정말 필요했습니다.",
-
-  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
-  "BodyTogh.whyToghHistory" : "작년에 가족을위한로드 트립 (Covid로 인해 취소됨)을 계획 할 때 Furkot을 사용하여 여정을 작성하고, 설문 조사를 위해 Doogle을 만들고, 비용을 분담하기 위해 Splitwise를 열어야했습니다. 여정을 설명하고, 아이디어를 교환 할 페이스 북 그룹.",
-
-  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
-  "BodyTogh.whyToghMotivation" : "React, Spring을 배우고 싶었습니다. 또한 클라우드 배포에 손을 뻗고 싶었습니다. 그렇다면 이러한 모든 기술을 사용하여 응용 프로그램을 구축하고 무슨 일이 일어나고 있는지 확인하십시오.",
-
-  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
-  "BodyTogh.whyToghThankYou" : "기술 탐험가로서의 재능에 대해 Simon에게. 그의 멋진 디자인에 대한 Lounes. 그녀의 지원을 위해 크리스텔. 그리고 어느 시점에서 나를 도왔던 다른 모든 사람들.",
-
-  "__Event.Budget" : "Budget",
-  "Event.Budget" : "예산",
-
-  "__Event.Chat" : "Chat",
-  "Event.Chat" : "잡담",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "날짜 이벤트",
+  "__BodyTogh.whyToghBorn": "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn": "여기에서 Togh가 태어났습니다. 저는이 응용 프로그램을 5 년 동안 생각하고있었습니다.",
+  "__BodyTogh.whyToghConclusion": "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion": "그래서이 애플리케이션은이 순간 정말 필요했습니다.",
+  "__BodyTogh.whyToghHistory": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory": "작년에 가족을위한로드 트립 (Covid로 인해 취소됨)을 계획 할 때 Furkot을 사용하여 여정을 작성하고, 설문 조사를 위해 Doogle을 만들고, 비용을 분담하기 위해 Splitwise를 열어야했습니다. 여정을 설명하고, 아이디어를 교환 할 페이스 북 그룹.",
+  "__BodyTogh.whyToghMotivation": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation": "React, Spring을 배우고 싶었습니다. 또한 클라우드 배포에 손을 뻗고 싶었습니다. 그렇다면 이러한 모든 기술을 사용하여 응용 프로그램을 구축하고 무슨 일이 일어나고 있는지 확인하십시오.",
+  "__Event.BringList": "Bring List",
+  "Event.BringList": "목록 가져오기",
+  "__Event.Budget": "Budget",
+  "Event.Budget": "예산",
+  "__Event.Chat": "Chat",
+  "Event.Chat": "잡담",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "날짜 이벤트",
 
   "__Event.DatePolicy" : "Date policy",
   "Event.DatePolicy" : "날짜 정책",
@@ -229,39 +208,32 @@
   "Event.Description" : "기술",
 
   "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "지속",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "종료일",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "데이트",
-
-  "Event.EventName" : "이름",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "비용",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "이 날짜는 귀하의 시간대로 계산됩니다.",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "지리적 위치 화",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "여정",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "하나의 날짜",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "참가자",
-
-  "__Event.Period" : "Period",
-  "Event.Period" : "기간",
-
-  "__Event.Photos" : "Photos",
-  "Event.Photos" : "사진",
+  "Event.DurationEvent": "지속",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "종료일",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "데이트",
+  "Event.EventName": "이름",
+  "__Event.Expense": "Expenses",
+  "Event.Expense": "비용",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "이 날짜는 귀하의 시간대로 계산됩니다.",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "지리적 위치 화",
+  "__Event.HelpTabs": "You have access to different tools in the event. Explore them",
+  "Event.HelpTabs": "이벤트에서 다양한 도구에 액세스할 수 있습니다. 살펴보기",
+  "__Event.Itinerary": "Itinerary",
+  "Event.Itinerary": "여정",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "하나의 날짜",
+  "__Event.Participant": "Participants",
+  "Event.Participant": "참가자들",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "참가자",
+  "__Event.Period": "Period",
+  "Event.Period": "기간",
+  "__Event.Photos": "Photos",
+  "Event.Photos": "사진",
 
   "__Event.Preferences" : "Preferences",
   "Event.Preferences" : "환경 설정",
@@ -279,16 +251,13 @@
   "Event.ScopeOpenConfirmation" : "확인시 열기",
 
   "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "비밀",
-
-  "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "쇼핑리스트",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "시작일",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "상태",
+  "Event.ScopeSecret": "비밀",
+  "__Event.ShoppingList": "Shopping List",
+  "Event.ShoppingList": "쇼핑리스트",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "시작일",
+  "__Event.Status": "Status",
+  "Event.Status": "상태",
   "__Event.Survey": "Survey",
   "Event.Survey": "서베이",
   "__Event.Tasks": "Tasks",
@@ -307,15 +276,12 @@
   "Event.TitleGeolocalisation": "이벤트는 어디입니까?",
   "__Event.TitleItinerary": "Define your itinerary, and point of interest",
   "Event.TitleItinerary": "여정과 관심 지점 정의",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-  "Event.TitleParticipant" : "이벤트에 참가자 초대",
-
-  "__Event.TitlePhotos" : "Photos",
-  "Event.TitlePhotos" : "사진",
-
-  "__Event.TitlePreferences" : "Preferences",
-  "Event.TitlePreferences" : "환경 설정",
+  "__Event.TitleParticipant": "Invite participant to your event",
+  "Event.TitleParticipant": "이벤트에 참가자 초대",
+  "__Event.TitlePhotos": "Photos",
+  "Event.TitlePhotos": "사진",
+  "__Event.TitlePreferences": "Preferences",
+  "Event.TitlePreferences": "환경 설정",
 
   "__Event.TitleShoppingList" : "Shopping list : what to brings?",
   "Event.TitleShoppingList" : "쇼핑 목록 : 무엇을 가져 오나요?",
@@ -497,24 +463,29 @@
   "EventList.Participants" : "참가자",
 
   "__EventList.Refresh" : "Refresh",
-  "EventList.Refresh" : "새롭게 하다",
-
-  "__EventParticipant.Actif" : "Actif",
-  "EventParticipant.Actif" : "Actif",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-  "EventParticipant.InvitationInProgress" : "초대 진행 중",
-
-  "__EventParticipant.Invited" : "Invited",
-  "EventParticipant.Invited" : "초대 됨",
+  "EventList.Refresh": "새롭게 하다",
+  "__EventParticipant.Actif": "Actif",
+  "EventParticipant.Actif": "Actif",
+  "__EventParticipant.InvitationInProgress": "Invitation in progress",
+  "EventParticipant.InvitationInProgress": "초대 진행 중",
+  "__EventParticipant.Invited": "Invited",
+  "EventParticipant.Invited": "초대 됨",
   "__EventParticipant.Left": "Left",
   "EventParticipant.Left": "왼쪽",
   "__EventParticipant.MainTitleParticipant": "Participants",
   "EventParticipant.MainTitleParticipant": "참가자",
+  "__EventParticipant.NotPartOf": "Not part of",
+  "EventParticipant.NotPartOf": "일부가 아님",
+  "__EventParticipant.NumberOfParticipants": "Number of participants",
+  "EventParticipant.NumberOfParticipants": "참가자 수",
   "__EventParticipant.Owner": "Owner",
   "EventParticipant.Owner": "소유자",
+  "__EventParticipant.PartOf": "Part Of",
+  "EventParticipant.PartOf": "부분의",
   "__EventParticipant.ParticipantTip": "Invite participant to the event",
   "EventParticipant.ParticipantTip": "이벤트에 참가자 초대",
+  "__EventParticipant.Participation": "Participation",
+  "EventParticipant.Participation": "참여",
   "__EventParticipant.Person": "Person",
   "EventParticipant.Person": "사람",
   "__EventParticipant.Role": "Role",
@@ -557,15 +528,12 @@
   "EventPreferences.PreferencesTip": "이벤트에 대한 모든 환경 설정 지정",
   "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
   "EventPreferences.SubscriptionExcellenceExplanation": "Excellence 이벤트에는 모든 기능이 포함되며 항목 당 1000 개로 제한됩니다.",
-
-  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
-  "EventPreferences.SubscriptionFreeExplanation" : "무료 이벤트는 예산을 제외한 모든 기능을 포함하며 참가자 수 (20) 및 항목 (50)에 제한이 있습니다.",
-
-  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
-  "EventPreferences.SubscriptionPremiumExplanation" : "프리미엄 이벤트에는 모든 기능, 참가자 상한선 (100 명) 및 아이템 (100 명)이 포함됩니다.",
-
-  "__EventShoppingList.AddItem" : "Add a item in the list",
-  "EventShoppingList.AddItem" : "목록에 항목 추가",
+  "__EventPreferences.SubscriptionFreeExplanation": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation": "무료 이벤트는 예산을 제외한 모든 기능을 포함하며 참가자 수 (20) 및 항목 (50)에 제한이 있습니다.",
+  "__EventPreferences.SubscriptionPremiumExplanation": "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation": "프리미엄 이벤트에는 모든 기능, 참가자 상한선 (100 명) 및 아이템 (100 명)이 포함됩니다.",
+  "__EventShoppingList.AddItem": "Add a item in the list",
+  "EventShoppingList.AddItem": "목록에 항목 추가",
 
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "하나 추가!",
@@ -577,16 +545,13 @@
   "EventShoppingList.Cancel" : "취소 된",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
-  "EventShoppingList.Cancelled" : "취소 된",
-
-  "__EventShoppingList.CantAddTask" : "An item can't be added",
-  "EventShoppingList.CantAddTask" : "항목을 추가 할 수 없습니다.",
-
-  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
-  "EventShoppingList.CantRemoveItem" : "항목을 제거 할 수 없습니다.",
-
-  "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "기술",
+  "EventShoppingList.Cancelled": "취소 된",
+  "__EventShoppingList.CantAddTask": "An item can't be added",
+  "EventShoppingList.CantAddTask": "항목을 추가 할 수 없습니다.",
+  "__EventShoppingList.CantRemoveItem": "The item can't be removed",
+  "EventShoppingList.CantRemoveItem": "항목을 제거 할 수 없습니다.",
+  "__EventShoppingList.Description": "Description",
+  "EventShoppingList.Description": "기술",
   "__EventShoppingList.Done": "Done",
   "EventShoppingList.Done": "끝난",
   "__EventShoppingList.ItemRemoved": "The item is removed",
@@ -605,12 +570,10 @@
   "EventShoppingList.ShoppingListTip": "이벤트에 참여할 항목 목록이 있습니다. 목록을 작성하고 누가 구입해야하는지 결정하십시오.",
   "__EventShoppingList.ShowDetails": "Detail",
   "EventShoppingList.ShowDetails": "세부 묘사",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
-  "EventShoppingList.ShowExpense" : "비용 표시",
-
-  "__EventShoppingList.TaskAdded" : "The item is added",
-  "EventShoppingList.TaskAdded" : "항목이 추가됩니다",
+  "__EventShoppingList.ShowExpense": "Show Expense",
+  "EventShoppingList.ShowExpense": "비용 표시",
+  "__EventShoppingList.TaskAdded": "The item is added",
+  "EventShoppingList.TaskAdded": "항목이 추가됩니다",
   "__EventShoppingList.Title": "Shopping List",
   "EventShoppingList.Title": "쇼핑리스트",
   "__EventShoppingList.ToBring": "To bring",
@@ -664,16 +627,12 @@
   "EventSurvey.NoItem": "목록에 준비된 설문 조사가 없습니다.",
   "__EventSurvey.Option": "Option",
   "EventSurvey.Option": "선택권",
-
-  "__EventSurvey.RemovingChoice" : "Removing a choice",
-  "EventSurvey.RemovingChoice" : "선택 제거",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "이 설문 조사는 준비 중입니다. 참가자가 보이지 않음",
-
-  "EventSurvey.SurveyTip" : "참가자들은 미술품이나 항공 우주 박물관을 선호합니까? Japanase, 이탈리아 또는 프랑스 레스토랑을 선호하십니까? 설문 조사를 만들고 리뷰를 수집합니다.",
-
-  "__EventSurvey.TaskAdded" : "A task is added",
+  "__EventSurvey.RemovingChoice": "Removing a choice",
+  "EventSurvey.RemovingChoice": "선택 제거",
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "이 설문 조사는 준비 중입니다. 참가자가 보이지 않음",
+  "EventSurvey.SurveyTip": "참가자들은 미술품이나 항공 우주 박물관을 선호합니까? Japanase, 이탈리아 또는 프랑스 레스토랑을 선호하십니까? 설문 조사를 만들고 리뷰를 수집합니다.",
+  "__EventSurvey.TaskAdded": "A task is added",
   "EventSurvey.TaskAdded" : "작업이 추가되었습니다.",
 
   "__EventSurvey.Title" : "Title",
@@ -795,16 +754,13 @@
   "EventTaskList.ShowDate" : "날짜 표시",
 
   "__EventTaskList.State" : "State",
-  "EventTaskList.State" : "상태",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-  "EventTaskList.StatePlanned" : "계획",
-
-  "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "제목",
-
-  "__EventTaskList.TaskAdded" : "A task is added",
-  "EventTaskList.TaskAdded" : "작업이 추가되었습니다.",
+  "EventTaskList.State": "상태",
+  "__EventTaskList.StatePlanned": "Planned",
+  "EventTaskList.StatePlanned": "계획",
+  "__EventTaskList.Subject": "Subject",
+  "EventTaskList.Subject": "제목",
+  "__EventTaskList.TaskAdded": "A task is added",
+  "EventTaskList.TaskAdded": "작업이 추가되었습니다.",
   "__EventTaskList.TaskRemoved": "The task is removed",
   "EventTaskList.TaskRemoved": "작업이 제거되었습니다.",
   "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
@@ -944,15 +900,12 @@
   "Menu.Events": "이벤트",
   "__Menu.EventsExplanation": "Access all events you can access",
   "Menu.EventsExplanation": "액세스 할 수있는 모든 이벤트에 액세스",
-
-  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
-  "Menu.InvitationExplanation" : "초대를 확인하고 수락하십시오.",
-
-  "__Menu.Join" : "Join an event",
-  "Menu.Join" : "이벤트 참여",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-  "Menu.JoinExplanation" : "이벤트 검색 및 참여",
+  "__Menu.InvitationExplanation": "Check your invitations, accept them.",
+  "Menu.InvitationExplanation": "초대를 확인하고 수락하십시오.",
+  "__Menu.Join": "Join an event",
+  "Menu.Join": "이벤트 참여",
+  "__Menu.JoinExplanation": "Search and join events",
+  "Menu.JoinExplanation": "이벤트 검색 및 참여",
 
   "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
   "Menu.MyFriendExplanation" : "모든 친구를보고, 새로 초대하고, 메시지를 보냅니다.",
@@ -1019,17 +972,13 @@
 
   "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
   "MyProfile.PhoneNumberExplanation" : "Togh는 사용하지 않지만 동일한 이벤트에서 사용자와 공유 할 수 있습니다.",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "검색을 제외한 모든 곳",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "검색은 전화 번호를 사용하지 않지만 결과에 표시됩니다. 이벤트에 연결된 사용자가 내 휴대 전화를 봅니다.",
-
-  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
-  "MyProfile.PhoneNumberVisibilityAlways" : "항상",
-
-  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch": "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": "검색을 제외한 모든 곳",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "검색은 전화 번호를 사용하지 않지만 결과에 표시됩니다. 이벤트에 연결된 사용자가 내 휴대 전화를 봅니다.",
+  "__MyProfile.PhoneNumberVisibilityAlways": "Always",
+  "MyProfile.PhoneNumberVisibilityAlways": "항상",
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Your phone number is visible for any user connected to Togh",
   "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Togh에 연결된 모든 사용자에게 전화 번호가 표시됩니다.",
   "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
   "MyProfile.PhoneNumberVisibilityLimitedEvent": "한정 이벤트",

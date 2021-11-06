@@ -110,6 +110,9 @@
   "AdminUsers.Myself": {
     "defaultMessage": "Myself"
   },
+  "AdminUsers.Pages": {
+    "defaultMessage": "Pages"
+  },
   "AdminUsers.PhoneNumber": {
     "defaultMessage": "PhoneNumber"
   },
@@ -167,6 +170,9 @@
   "AdminUsers.UserName": {
     "defaultMessage": "User Name"
   },
+  "AdminUsers.Users": {
+    "defaultMessage": "Users"
+  },
   "AdminUsers.privilegeAdmin": {
     "defaultMessage": "Administrator"
   },
@@ -221,6 +227,9 @@
   "BodyTogh.thankYouLounes": {
     "defaultMessage": "Lounes to design these awesome graphics and icons."
   },
+  "BodyTogh.thankYouSalome": {
+    "defaultMessage": "Salomé for her assistance with the English grammar."
+  },
   "BodyTogh.thankYouSimon": {
     "defaultMessage": "Simon, to be an extraordinary exploratory and figure out a lot of clues."
   },
@@ -254,6 +263,15 @@
   "BodyTogh.whyToghMotivation": {
     "defaultMessage": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"
   },
+  "Event.BringList": {
+    "defaultMessage": "Bring List"
+  },
+  "Event.Budget": {
+    "defaultMessage": "Budget"
+  },
+  "Event.Chat": {
+    "defaultMessage": "Chat"
+  },
   "Event.DateEvent": {
     "defaultMessage": "Date Event"
   },
@@ -272,14 +290,35 @@
   "Event.EventDate": {
     "defaultMessage": "Date"
   },
+  "Event.Expense": {
+    "defaultMessage": "Expenses"
+  },
   "Event.ExplanationYourTimeZone": {
     "defaultMessage": "This date is calculated in your time zone"
+  },
+  "Event.Geolocalisation": {
+    "defaultMessage": "Geolocalisation"
+  },
+  "Event.HelpTabs": {
+    "defaultMessage": "You have access to different tools in the event. Explore them"
+  },
+  "Event.Itinerary": {
+    "defaultMessage": "Itinerary"
   },
   "Event.OneDate": {
     "defaultMessage": "One date"
   },
+  "Event.Participant": {
+    "defaultMessage": "Participants"
+  },
   "Event.Period": {
     "defaultMessage": "Period"
+  },
+  "Event.Photos": {
+    "defaultMessage": "Photos"
+  },
+  "Event.Preferences": {
+    "defaultMessage": "Preferences"
   },
   "Event.Scope": {
     "defaultMessage": "Scope"
@@ -301,6 +340,12 @@
   },
   "Event.Status": {
     "defaultMessage": "Status"
+  },
+  "Event.Survey": {
+    "defaultMessage": "Survey"
+  },
+  "Event.Tasks": {
+    "defaultMessage": "Tasks"
   },
   "Event.TimeEvent": {
     "defaultMessage": "Time"
@@ -488,11 +533,23 @@
   "EventParticipant.MainTitleParticipant": {
     "defaultMessage": "Participants"
   },
+  "EventParticipant.NotPartOf": {
+    "defaultMessage": "Not part of"
+  },
+  "EventParticipant.NumberOfParticipants": {
+    "defaultMessage": "Number of participants"
+  },
   "EventParticipant.Owner": {
     "defaultMessage": "Owner"
   },
+  "EventParticipant.PartOf": {
+    "defaultMessage": "Part Of"
+  },
   "EventParticipant.ParticipantTip": {
     "defaultMessage": "Invite participant to the event"
+  },
+  "EventParticipant.Participation": {
+    "defaultMessage": "Participation"
   },
   "EventParticipant.Person": {
     "defaultMessage": "Person"

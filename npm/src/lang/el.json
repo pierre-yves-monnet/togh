@@ -59,36 +59,29 @@
   "AdminUsers.Disconnect": "Αποσυνδέω",
   "__AdminUsers.Email": "Email",
   "AdminUsers.Email": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "Υπεροχή",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
-  "AdminUsers.LastActivityTime" : "Τελευταία δραστηριότητα",
-
-  "__AdminUsers.LastConnectionTime" : "Last Connection",
-  "AdminUsers.LastConnectionTime" : "Τελευταία σύνδεση",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "Υπεροχή",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
+  "AdminUsers.LastActivityTime": "Τελευταία δραστηριότητα",
+  "__AdminUsers.LastConnectionTime": "Last Connection",
+  "AdminUsers.LastConnectionTime": "Τελευταία σύνδεση",
 
   "__AdminUsers.LongStatusUserActif" : "User actif",
   "AdminUsers.LongStatusUserActif" : "Χρήστης actif",
-
-  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
-  "AdminUsers.LongStatusUserBlock" : "Ο χρήστης αποκλείστηκε",
-
-  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
-  "AdminUsers.LongStatusUserDisabled" : "Ο χρήστης απενεργοποιήθηκε",
-
-  "__AdminUsers.Myself" : "Myself",
-  "AdminUsers.Myself" : "Εγώ ο ίδιος",
-
-  "__AdminUsers.PhoneNumber" : "PhoneNumber",
-  "AdminUsers.PhoneNumber" : "Τηλεφωνικό νούμερο",
-
-  "__AdminUsers.Premium" : "Premium",
-  "AdminUsers.Premium" : "Ασφάλιστρο",
-
-  "__AdminUsers.PrivilegeUser" : "Privilege",
-  "AdminUsers.PrivilegeUser" : "Προνόμιο",
+  "__AdminUsers.LongStatusUserBlock": "User Blocked",
+  "AdminUsers.LongStatusUserBlock": "Ο χρήστης αποκλείστηκε",
+  "__AdminUsers.LongStatusUserDisabled": "User disabled",
+  "AdminUsers.LongStatusUserDisabled": "Ο χρήστης απενεργοποιήθηκε",
+  "__AdminUsers.Myself": "Myself",
+  "AdminUsers.Myself": "Εγώ ο ίδιος",
+  "__AdminUsers.Pages": "Pages",
+  "AdminUsers.Pages": "Σελίδες",
+  "__AdminUsers.PhoneNumber": "PhoneNumber",
+  "AdminUsers.PhoneNumber": "Τηλεφωνικό νούμερο",
+  "__AdminUsers.Premium": "Premium",
+  "AdminUsers.Premium": "Ασφάλιστρο",
+  "__AdminUsers.PrivilegeUser": "Privilege",
+  "AdminUsers.PrivilegeUser": "Προνόμιο",
 
   "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
   "AdminUsers.PrivilegeUserAdmin" : "Διαχειριστής",
@@ -128,35 +121,27 @@
 
   "__AdminUsers.SubscriptionUserFree" : "Free",
   "AdminUsers.SubscriptionUserFree" : "Ελεύθερος",
-
-  "__AdminUsers.SubscriptionUserPremium" : "Premium",
-  "AdminUsers.SubscriptionUserPremium" : "Ασφάλιστρο",
-
-  "__AdminUsers.Title" : "Users",
-  "AdminUsers.Title" : "Χρήστες",
-
-  "__AdminUsers.UserName" : "User Name",
-  "AdminUsers.UserName" : "Ονομα χρήστη",
-
-  "__AdminUsers.privilegeAdmin" : "Administrator",
-  "AdminUsers.privilegeAdmin" : "Διαχειριστής",
-
-  "__AdminUsers.privilegeTrans" : "Translator",
-  "AdminUsers.privilegeTrans" : "Μεταφράστης",
-
-  "__AdminUsers.searchSentence" : "Search",
-  "AdminUsers.searchSentence" : "Αναζήτηση",
-
-  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
-  "AdminUsers.subscriptionExcellence" : "Συνδρομή Excellence",
-
-  "__AdminUsers.subscriptionFree" : "Free subscription",
-  "AdminUsers.subscriptionFree" : "Δωρεάν συνδρομή",
-
-  "__AdminUsers.subscriptionPremium" : "Premium subscription",
-  "AdminUsers.subscriptionPremium" : "Premium συνδρομή",
-
-  "__AskPassword.DifferentPassword" : "Password are different",
+  "__AdminUsers.SubscriptionUserPremium": "Premium",
+  "AdminUsers.SubscriptionUserPremium": "Ασφάλιστρο",
+  "__AdminUsers.Title": "Users",
+  "AdminUsers.Title": "Χρήστες",
+  "__AdminUsers.UserName": "User Name",
+  "AdminUsers.UserName": "Ονομα χρήστη",
+  "__AdminUsers.Users": "Users",
+  "AdminUsers.Users": "Χρήστες",
+  "__AdminUsers.privilegeAdmin": "Administrator",
+  "AdminUsers.privilegeAdmin": "Διαχειριστής",
+  "__AdminUsers.privilegeTrans": "Translator",
+  "AdminUsers.privilegeTrans": "Μεταφράστης",
+  "__AdminUsers.searchSentence": "Search",
+  "AdminUsers.searchSentence": "Αναζήτηση",
+  "__AdminUsers.subscriptionExcellence": "Excellence subscription",
+  "AdminUsers.subscriptionExcellence": "Συνδρομή Excellence",
+  "__AdminUsers.subscriptionFree": "Free subscription",
+  "AdminUsers.subscriptionFree": "Δωρεάν συνδρομή",
+  "__AdminUsers.subscriptionPremium": "Premium subscription",
+  "AdminUsers.subscriptionPremium": "Premium συνδρομή",
+  "__AskPassword.DifferentPassword": "Password are different",
   "AskPassword.DifferentPassword": "Οι κωδικοί πρόσβασης είναι διαφορετικοί",
   "__AskPassword.NewPassword": "New password",
   "AskPassword.NewPassword": "Νέος Κωδικός",
@@ -182,6 +167,8 @@
   "BodyTogh.thankYouIsmail": "Ismail για την ανταλλαγή ιδεών.",
   "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
   "BodyTogh.thankYouLounes": "Lounes για να σχεδιάσετε αυτά τα φοβερά γραφικά και εικονίδια.",
+  "__BodyTogh.thankYouSalome": "Salomé for her assistance with the English grammar.",
+  "BodyTogh.thankYouSalome": "Salomé για τη βοήθειά της με την αγγλική γραμματική.",
   "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
   "BodyTogh.thankYouSimon": "Simon, για να είσαι ένας εξαιρετικός εξερευνητής και να βρεις πολλές ενδείξεις.",
   "__BodyTogh.welcome": "Welcome to Togh",
@@ -196,69 +183,54 @@
   "BodyTogh.whatisToghTitle": "Τι είναι το Togh;",
   "__BodyTogh.whyTogh": "Why Togh?",
   "BodyTogh.whyTogh": "Γιατί Togh;",
-
-  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
-  "BodyTogh.whyToghBorn" : "Εδώ γεννήθηκε ο Togh. Σκεφτόμουν αυτήν την εφαρμογή εδώ και πέντε χρόνια.",
-
-  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
-  "BodyTogh.whyToghConclusion" : "Έτσι, αυτή η εφαρμογή ήταν πραγματικά απαραίτητη αυτή τη στιγμή.",
-
-  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
-  "BodyTogh.whyToghHistory" : "Πέρυσι, όταν οργάνωσα ένα οδικό ταξίδι για την οικογένειά μου (το οποίο ακυρώθηκε, λόγω του Covid), έπρεπε να χρησιμοποιήσω το Furkot για να φτιάξω το δρομολόγιο, να κάνω το Doogle για την έρευνα, ανοίγοντας ένα Splitwise για να μοιραστώ τα έξοδα, ένα Έγγραφο Google για περιγράψτε το δρομολόγιο, την ομάδα Facebook για ανταλλαγή ιδεών.",
-
-  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
-  "BodyTogh.whyToghMotivation" : "Ήθελα να μάθω React, Άνοιξη. Επιπλέον, ήθελα να βάλω το χέρι μου στην ανάπτυξη του Cloud. Λοιπόν, γιατί να μην δημιουργήσετε μια εφαρμογή χρησιμοποιώντας όλες αυτές τις τεχνολογίες και να δείτε τι συμβαίνει;",
-
-  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
-  "BodyTogh.whyToghThankYou" : "Στον Σάιμον, για το ταλέντο του ως τεχνικός εξερευνητής. Lounes, για τα υπέροχα σχέδιά του. Christelle, για την υποστήριξή της. Και όλους τους άλλους που με έχουν βοηθήσει κάποια στιγμή.",
-
-  "__Event.Budget" : "Budget",
-  "Event.Budget" : "Προϋπολογισμός",
-
-  "__Event.Chat" : "Chat",
-  "Event.Chat" : "Κουβέντα",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "Ημερομηνία εκδήλωσης",
+  "__BodyTogh.whyToghBorn": "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn": "Εδώ γεννήθηκε ο Togh. Σκεφτόμουν αυτήν την εφαρμογή εδώ και πέντε χρόνια.",
+  "__BodyTogh.whyToghConclusion": "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion": "Έτσι, αυτή η εφαρμογή ήταν πραγματικά απαραίτητη αυτή τη στιγμή.",
+  "__BodyTogh.whyToghHistory": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory": "Πέρυσι, όταν οργάνωσα ένα οδικό ταξίδι για την οικογένειά μου (το οποίο ακυρώθηκε, λόγω του Covid), έπρεπε να χρησιμοποιήσω το Furkot για να φτιάξω το δρομολόγιο, να κάνω το Doogle για την έρευνα, ανοίγοντας ένα Splitwise για να μοιραστώ τα έξοδα, ένα Έγγραφο Google για περιγράψτε το δρομολόγιο, την ομάδα Facebook για ανταλλαγή ιδεών.",
+  "__BodyTogh.whyToghMotivation": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation": "Ήθελα να μάθω React, Άνοιξη. Επιπλέον, ήθελα να βάλω το χέρι μου στην ανάπτυξη του Cloud. Λοιπόν, γιατί να μην δημιουργήσετε μια εφαρμογή χρησιμοποιώντας όλες αυτές τις τεχνολογίες και να δείτε τι συμβαίνει;",
+  "__Event.BringList": "Bring List",
+  "Event.BringList": "Φέρτε Λίστα",
+  "__Event.Budget": "Budget",
+  "Event.Budget": "Προϋπολογισμός",
+  "__Event.Chat": "Chat",
+  "Event.Chat": "Κουβέντα",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "Ημερομηνία εκδήλωσης",
 
   "__Event.DatePolicy" : "Date policy",
   "Event.DatePolicy" : "Πολιτική ημερομηνίας",
 
   "__Event.Description" : "Description",
   "Event.Description" : "Περιγραφή",
-
-  "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "Διάρκεια",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "Ημερομηνία λήξης",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "Ημερομηνία",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "Δαπάνη",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "Αυτή η ημερομηνία υπολογίζεται στη ζώνη ώρας σας",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "Γεωεγκατάσταση",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "δρομολόγιο",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "Μια ημερομηνία",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "Συμμετέχοντες",
-
-  "__Event.Period" : "Period",
-  "Event.Period" : "Περίοδος",
-
-  "__Event.Photos" : "Photos",
-  "Event.Photos" : "Φωτογραφίες",
+  "__Event.DurationEvent": "Duration",
+  "Event.DurationEvent": "Διάρκεια",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "Ημερομηνία λήξης",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "Ημερομηνία",
+  "__Event.Expense": "Expenses",
+  "Event.Expense": "Δαπάνη",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "Αυτή η ημερομηνία υπολογίζεται στη ζώνη ώρας σας",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "Γεωεγκατάσταση",
+  "__Event.HelpTabs": "You have access to different tools in the event. Explore them",
+  "Event.HelpTabs": "Έχετε πρόσβαση σε διαφορετικά εργαλεία στην εκδήλωση. Εξερευνήστε τα",
+  "__Event.Itinerary": "Itinerary",
+  "Event.Itinerary": "δρομολόγιο",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "Μια ημερομηνία",
+  "__Event.Participant": "Participants",
+  "Event.Participant": "Συμμετέχοντες",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "Συμμετέχοντες",
+  "__Event.Period": "Period",
+  "Event.Period": "Περίοδος",
+  "__Event.Photos": "Photos",
+  "Event.Photos": "Φωτογραφίες",
 
   "__Event.Preferences" : "Preferences",
   "Event.Preferences" : "Προτιμήσεις",
@@ -276,16 +248,13 @@
   "Event.ScopeOpenConfirmation" : "Ανοιχτό κατά την επιβεβαίωση",
 
   "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "Μυστικό",
-
-  "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "Λίστα με τα ψώνια",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "Ημερομηνία έναρξης",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "Κατάσταση",
+  "Event.ScopeSecret": "Μυστικό",
+  "__Event.ShoppingList": "Shopping List",
+  "Event.ShoppingList": "Λίστα με τα ψώνια",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "Ημερομηνία έναρξης",
+  "__Event.Status": "Status",
+  "Event.Status": "Κατάσταση",
   "__Event.Survey": "Survey",
   "Event.Survey": "Επισκόπηση",
   "__Event.Tasks": "Tasks",
@@ -304,15 +273,12 @@
   "Event.TitleGeolocalisation": "Πού είναι η εκδήλωση;",
   "__Event.TitleItinerary": "Define your itinerary, and point of interest",
   "Event.TitleItinerary": "Ορίστε το δρομολόγιο και το σημείο ενδιαφέροντος",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-  "Event.TitleParticipant" : "Προσκαλέστε συμμετέχοντα στην εκδήλωσή σας",
-
-  "__Event.TitlePhotos" : "Photos",
-  "Event.TitlePhotos" : "Φωτογραφίες",
-
-  "__Event.TitlePreferences" : "Preferences",
-  "Event.TitlePreferences" : "Προτιμήσεις",
+  "__Event.TitleParticipant": "Invite participant to your event",
+  "Event.TitleParticipant": "Προσκαλέστε συμμετέχοντα στην εκδήλωσή σας",
+  "__Event.TitlePhotos": "Photos",
+  "Event.TitlePhotos": "Φωτογραφίες",
+  "__Event.TitlePreferences": "Preferences",
+  "Event.TitlePreferences": "Προτιμήσεις",
 
   "__Event.TitleShoppingList" : "Shopping list : what to brings?",
   "Event.TitleShoppingList" : "Λίστα αγορών: τι να φέρετε;",
@@ -483,24 +449,29 @@
   "EventList.Participants" : "Συμμετέχοντες",
 
   "__EventList.Refresh" : "Refresh",
-  "EventList.Refresh" : "Φρεσκάρω",
-
-  "__EventParticipant.Actif" : "Actif",
-  "EventParticipant.Actif" : "Actif",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-  "EventParticipant.InvitationInProgress" : "Πρόσκληση σε εξέλιξη",
-
-  "__EventParticipant.Invited" : "Invited",
-  "EventParticipant.Invited" : "Καλεσμένος",
+  "EventList.Refresh": "Φρεσκάρω",
+  "__EventParticipant.Actif": "Actif",
+  "EventParticipant.Actif": "Actif",
+  "__EventParticipant.InvitationInProgress": "Invitation in progress",
+  "EventParticipant.InvitationInProgress": "Πρόσκληση σε εξέλιξη",
+  "__EventParticipant.Invited": "Invited",
+  "EventParticipant.Invited": "Καλεσμένος",
   "__EventParticipant.Left": "Left",
   "EventParticipant.Left": "Αριστερά",
   "__EventParticipant.MainTitleParticipant": "Participants",
   "EventParticipant.MainTitleParticipant": "Συμμετέχοντες",
+  "__EventParticipant.NotPartOf": "Not part of",
+  "EventParticipant.NotPartOf": "Όχι μέρος του",
+  "__EventParticipant.NumberOfParticipants": "Number of participants",
+  "EventParticipant.NumberOfParticipants": "Αριθμός συμμετεχόντων",
   "__EventParticipant.Owner": "Owner",
   "EventParticipant.Owner": "Ιδιοκτήτης",
+  "__EventParticipant.PartOf": "Part Of",
+  "EventParticipant.PartOf": "Μέρος του",
   "__EventParticipant.ParticipantTip": "Invite participant to the event",
   "EventParticipant.ParticipantTip": "Προσκαλέστε συμμετέχοντα στην εκδήλωση",
+  "__EventParticipant.Participation": "Participation",
+  "EventParticipant.Participation": "Συμμετοχή",
   "__EventParticipant.Person": "Person",
   "EventParticipant.Person": "Πρόσωπο",
   "__EventParticipant.Role": "Role",
@@ -543,15 +514,12 @@
   "EventPreferences.PreferencesTip": "Ρυθμίστε όλες τις προτιμήσεις για την εκδήλωση",
   "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
   "EventPreferences.SubscriptionExcellenceExplanation": "Μια εκδήλωση Excellence περιέχει όλες τις λειτουργίες και ένα όριο 1000 ανά αντικείμενα",
-
-  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
-  "EventPreferences.SubscriptionFreeExplanation" : "Μια δωρεάν εκδήλωση περιέχει όλες τις λειτουργίες εκτός από τον προϋπολογισμό και περιορίζεται στον αριθμό των συμμετεχόντων (20) και σε αντικείμενα (50)",
-
-  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
-  "EventPreferences.SubscriptionPremiumExplanation" : "Ένα συμβάν Premium περιέχει όλες τις λειτουργίες, τους συμμετέχοντες με ανώτατο όριο (100) και τα στοιχεία (100)",
-
-  "__EventShoppingList.AddItem" : "Add a item in the list",
-  "EventShoppingList.AddItem" : "Προσθέστε ένα στοιχείο στη λίστα",
+  "__EventPreferences.SubscriptionFreeExplanation": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation": "Μια δωρεάν εκδήλωση περιέχει όλες τις λειτουργίες εκτός από τον προϋπολογισμό και περιορίζεται στον αριθμό των συμμετεχόντων (20) και σε αντικείμενα (50)",
+  "__EventPreferences.SubscriptionPremiumExplanation": "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation": "Ένα συμβάν Premium περιέχει όλες τις λειτουργίες, τους συμμετέχοντες με ανώτατο όριο (100) και τα στοιχεία (100)",
+  "__EventShoppingList.AddItem": "Add a item in the list",
+  "EventShoppingList.AddItem": "Προσθέστε ένα στοιχείο στη λίστα",
 
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "Προσθέστε ένα!",
@@ -560,16 +528,13 @@
   "EventShoppingList.AddingItem" : "Προσθήκη αντικειμένου",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
-  "EventShoppingList.Cancelled" : "Ακυρώθηκε",
-
-  "__EventShoppingList.CantAddTask" : "An item can't be added",
-  "EventShoppingList.CantAddTask" : "Δεν είναι δυνατή η προσθήκη ενός αντικειμένου",
-
-  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
-  "EventShoppingList.CantRemoveItem" : "Δεν είναι δυνατή η κατάργηση του αντικειμένου",
-
-  "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "Περιγραφή",
+  "EventShoppingList.Cancelled": "Ακυρώθηκε",
+  "__EventShoppingList.CantAddTask": "An item can't be added",
+  "EventShoppingList.CantAddTask": "Δεν είναι δυνατή η προσθήκη ενός αντικειμένου",
+  "__EventShoppingList.CantRemoveItem": "The item can't be removed",
+  "EventShoppingList.CantRemoveItem": "Δεν είναι δυνατή η κατάργηση του αντικειμένου",
+  "__EventShoppingList.Description": "Description",
+  "EventShoppingList.Description": "Περιγραφή",
   "__EventShoppingList.Done": "Done",
   "EventShoppingList.Done": "Εγινε",
   "__EventShoppingList.ItemRemoved": "The item is removed",
@@ -588,8 +553,7 @@
   "EventShoppingList.ShoppingListTip": "Έχετε μια λίστα αντικειμένων για να μπείτε στο συμβάν. Λίστα τους, αποφασίστε ποιος πρέπει να τα αγοράσει",
   "__EventShoppingList.ShowDetails": "Detail",
   "EventShoppingList.ShowDetails": "Λεπτομέρεια",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
+  "__EventShoppingList.ShowExpense": "Show Expense",
   "EventShoppingList.ShowExpense": "Εμφάνιση εξόδων",
   "__EventShoppingList.TaskAdded": "The item is added",
   "EventShoppingList.TaskAdded": "Το αντικείμενο προστίθεται",
@@ -643,15 +607,12 @@
   "EventSurvey.Option": "Επιλογή",
   "__EventSurvey.RemovingChoice": "Removing a choice",
   "EventSurvey.RemovingChoice": "Κατάργηση μιας επιλογής",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "Αυτή η έρευνα βρίσκεται σε προετοιμασία. Οι συμμετέχοντες δεν είναι ορατοί",
-
-  "__EventSurvey.TaskAdded" : "A task is added",
-  "EventSurvey.TaskAdded" : "Προστίθεται μια εργασία",
-
-  "__EventSurvey.Title" : "Title",
-  "EventSurvey.Title" : "Τίτλος",
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "Αυτή η έρευνα βρίσκεται σε προετοιμασία. Οι συμμετέχοντες δεν είναι ορατοί",
+  "__EventSurvey.TaskAdded": "A task is added",
+  "EventSurvey.TaskAdded": "Προστίθεται μια εργασία",
+  "__EventSurvey.Title": "Title",
+  "EventSurvey.Title": "Τίτλος",
 
   "__EventSurvey.removeItem" : "Remove this item",
   "EventSurvey.removeItem" : "Αφαιρέστε αυτό το αντικείμενο",
@@ -757,17 +718,13 @@
 
   "__EventTaskList.ShowDate" : "Show dates",
   "EventTaskList.ShowDate" : "Εμφάνιση ημερομηνιών",
-
-  "__EventTaskList.State" : "State",
-  "EventTaskList.State" : "κατάσταση",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-  "EventTaskList.StatePlanned" : "Σχεδιασμένος",
-
-  "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "Θέμα",
-
-  "__EventTaskList.TaskAdded" : "A task is added",
+  "__EventTaskList.State": "State",
+  "EventTaskList.State": "κατάσταση",
+  "__EventTaskList.StatePlanned": "Planned",
+  "EventTaskList.StatePlanned": "Σχεδιασμένος",
+  "__EventTaskList.Subject": "Subject",
+  "EventTaskList.Subject": "Θέμα",
+  "__EventTaskList.TaskAdded": "A task is added",
   "EventTaskList.TaskAdded": "Προστίθεται μια εργασία",
   "__EventTaskList.TaskRemoved": "The task is removed",
   "EventTaskList.TaskRemoved": "Η εργασία καταργείται",
@@ -903,15 +860,12 @@
   "Menu.EventsExplanation": "Αποκτήστε πρόσβαση σε όλες τις εκδηλώσεις στις οποίες έχετε πρόσβαση",
   "__Menu.InvitationExplanation": "Check your invitations, accept them.",
   "Menu.InvitationExplanation": "Ελέγξτε τις προσκλήσεις σας, αποδεχτείτε τις.",
-
-  "__Menu.Join" : "Join an event",
-  "Menu.Join" : "Λάβετε μέρος σε μια εκδήλωση",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-  "Menu.JoinExplanation" : "Αναζήτηση και συμμετοχή σε εκδηλώσεις",
-
-  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
-  "Menu.MyFriendExplanation" : "Δείτε όλους τους φίλους σας, προσκαλέστε νέους, στείλτε μηνύματα.",
+  "__Menu.Join": "Join an event",
+  "Menu.Join": "Λάβετε μέρος σε μια εκδήλωση",
+  "__Menu.JoinExplanation": "Search and join events",
+  "Menu.JoinExplanation": "Αναζήτηση και συμμετοχή σε εκδηλώσεις",
+  "__Menu.MyFriendExplanation": "See all your friends, invite new, send messages.",
+  "Menu.MyFriendExplanation": "Δείτε όλους τους φίλους σας, προσκαλέστε νέους, στείλτε μηνύματα.",
 
   "__Menu.MyFriends" : "My Friends",
   "Menu.MyFriends" : "Οι φίλοι μου",
@@ -975,17 +929,13 @@
 
   "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
   "MyProfile.PhoneNumberExplanation" : "Το Togh δεν το χρησιμοποιεί, αλλά μπορείτε να το μοιραστείτε με χρήστες στην ίδια εκδήλωση",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Παντού εκτός από αναζήτηση",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Η αναζήτηση δεν χρησιμοποιεί τον αριθμό τηλεφώνου σας, αλλά το αποτέλεσμα το εμφανίζει. Ένας χρήστης που είναι συνδεδεμένος σε ένα συμβάν βλέπει το τηλέφωνό σας",
-
-  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
-  "MyProfile.PhoneNumberVisibilityAlways" : "Πάντα",
-
-  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch": "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": "Παντού εκτός από αναζήτηση",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Η αναζήτηση δεν χρησιμοποιεί τον αριθμό τηλεφώνου σας, αλλά το αποτέλεσμα το εμφανίζει. Ένας χρήστης που είναι συνδεδεμένος σε ένα συμβάν βλέπει το τηλέφωνό σας",
+  "__MyProfile.PhoneNumberVisibilityAlways": "Always",
+  "MyProfile.PhoneNumberVisibilityAlways": "Πάντα",
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Your phone number is visible for any user connected to Togh",
   "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Ο αριθμός τηλεφώνου σας είναι ορατός για οποιονδήποτε χρήστη είναι συνδεδεμένο στο Togh",
   "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
   "MyProfile.PhoneNumberVisibilityLimitedEvent": "Περιορισμένη εκδήλωση",

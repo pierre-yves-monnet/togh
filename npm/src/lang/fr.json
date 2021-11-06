@@ -59,36 +59,29 @@
   "AdminUsers.Disconnect": "Déconnecter",
   "__AdminUsers.Email": "Email",
   "AdminUsers.Email": "E-mail",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "Excellence",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
-  "AdminUsers.LastActivityTime" : "Dernière activité",
-
-  "__AdminUsers.LastConnectionTime" : "Last Connection",
-  "AdminUsers.LastConnectionTime" : "Dernière connexion",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "Excellence",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
+  "AdminUsers.LastActivityTime": "Dernière activité",
+  "__AdminUsers.LastConnectionTime": "Last Connection",
+  "AdminUsers.LastConnectionTime": "Dernière connexion",
 
   "__AdminUsers.LongStatusUserActif" : "User actif",
   "AdminUsers.LongStatusUserActif" : "Utilisateur actif",
-
-  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
-  "AdminUsers.LongStatusUserBlock" : "Utilisateur bloqué",
-
-  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
-  "AdminUsers.LongStatusUserDisabled" : "Utilisateur désactivé",
-
-  "__AdminUsers.Myself" : "Myself",
-  "AdminUsers.Myself" : "Moi-même",
-
-  "__AdminUsers.PhoneNumber" : "PhoneNumber",
-  "AdminUsers.PhoneNumber" : "Numéro de téléphone",
-
-  "__AdminUsers.Premium" : "Premium",
-  "AdminUsers.Premium" : "Prime",
-
-  "__AdminUsers.PrivilegeUser" : "Privilege",
-  "AdminUsers.PrivilegeUser" : "Privilège",
+  "__AdminUsers.LongStatusUserBlock": "User Blocked",
+  "AdminUsers.LongStatusUserBlock": "Utilisateur bloqué",
+  "__AdminUsers.LongStatusUserDisabled": "User disabled",
+  "AdminUsers.LongStatusUserDisabled": "Utilisateur désactivé",
+  "__AdminUsers.Myself": "Myself",
+  "AdminUsers.Myself": "Moi-même",
+  "__AdminUsers.Pages": "Pages",
+  "AdminUsers.Pages": "Pages",
+  "__AdminUsers.PhoneNumber": "PhoneNumber",
+  "AdminUsers.PhoneNumber": "Numéro de téléphone",
+  "__AdminUsers.Premium": "Premium",
+  "AdminUsers.Premium": "Prime",
+  "__AdminUsers.PrivilegeUser": "Privilege",
+  "AdminUsers.PrivilegeUser": "Privilège",
 
   "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
   "AdminUsers.PrivilegeUserAdmin" : "Administrateur",
@@ -128,35 +121,27 @@
 
   "__AdminUsers.SubscriptionUserFree" : "Free",
   "AdminUsers.SubscriptionUserFree" : "Libérer",
-
-  "__AdminUsers.SubscriptionUserPremium" : "Premium",
-  "AdminUsers.SubscriptionUserPremium" : "Prime",
-
-  "__AdminUsers.Title" : "Users",
-  "AdminUsers.Title" : "Utilisateurs",
-
-  "__AdminUsers.UserName" : "User Name",
-  "AdminUsers.UserName" : "Nom d'utilisateur",
-
-  "__AdminUsers.privilegeAdmin" : "Administrator",
-  "AdminUsers.privilegeAdmin" : "Administrateur",
-
-  "__AdminUsers.privilegeTrans" : "Translator",
-  "AdminUsers.privilegeTrans" : "Traducteur",
-
-  "__AdminUsers.searchSentence" : "Search",
-  "AdminUsers.searchSentence" : "Rechercher",
-
-  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
-  "AdminUsers.subscriptionExcellence" : "Abonnement Excellence",
-
-  "__AdminUsers.subscriptionFree" : "Free subscription",
-  "AdminUsers.subscriptionFree" : "Abonnement gratuit",
-
-  "__AdminUsers.subscriptionPremium" : "Premium subscription",
-  "AdminUsers.subscriptionPremium" : "Abonnement Premium",
-
-  "__AskPassword.DifferentPassword" : "Password are different",
+  "__AdminUsers.SubscriptionUserPremium": "Premium",
+  "AdminUsers.SubscriptionUserPremium": "Prime",
+  "__AdminUsers.Title": "Users",
+  "AdminUsers.Title": "Utilisateurs",
+  "__AdminUsers.UserName": "User Name",
+  "AdminUsers.UserName": "Nom d'utilisateur",
+  "__AdminUsers.Users": "Users",
+  "AdminUsers.Users": "Utilisateurs",
+  "__AdminUsers.privilegeAdmin": "Administrator",
+  "AdminUsers.privilegeAdmin": "Administrateur",
+  "__AdminUsers.privilegeTrans": "Translator",
+  "AdminUsers.privilegeTrans": "Traducteur",
+  "__AdminUsers.searchSentence": "Search",
+  "AdminUsers.searchSentence": "Rechercher",
+  "__AdminUsers.subscriptionExcellence": "Excellence subscription",
+  "AdminUsers.subscriptionExcellence": "Abonnement Excellence",
+  "__AdminUsers.subscriptionFree": "Free subscription",
+  "AdminUsers.subscriptionFree": "Abonnement gratuit",
+  "__AdminUsers.subscriptionPremium": "Premium subscription",
+  "AdminUsers.subscriptionPremium": "Abonnement Premium",
+  "__AskPassword.DifferentPassword": "Password are different",
   "AskPassword.DifferentPassword": "Le mot de passe est différent",
   "__AskPassword.NewPassword": "New password",
   "AskPassword.NewPassword": "Nouveau mot de passe",
@@ -182,6 +167,8 @@
   "BodyTogh.thankYouIsmail": "Ismail pour partager des idées.",
   "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
   "BodyTogh.thankYouLounes": "Lounes pour concevoir ces graphismes et icônes impressionnants.",
+  "__BodyTogh.thankYouSalome": "Salomé for her assistance with the English grammar.",
+  "BodyTogh.thankYouSalome": "Salomé pour son aide avec la grammaire anglaise.",
   "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
   "BodyTogh.thankYouSimon": "Simon, pour être un explorateur extraordinaire et découvrir beaucoup d'indices.",
   "__BodyTogh.welcome": "Welcome to Togh",
@@ -196,69 +183,54 @@
   "BodyTogh.whatisToghTitle": "Qu'est-ce que Togh?",
   "__BodyTogh.whyTogh": "Why Togh?",
   "BodyTogh.whyTogh": "Pourquoi Togh?",
-
-  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
-  "BodyTogh.whyToghBorn" : "Ici, Togh est né. Je pensais à cette application depuis maintenant cinq ans.",
-
-  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
-  "BodyTogh.whyToghConclusion" : "Cette application était donc vraiment nécessaire en ce moment.",
-
-  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
-  "BodyTogh.whyToghHistory" : "L'année dernière, lorsque j'ai organisé un road trip pour ma famille (qui a été annulé, à cause du Covid), j'ai dû utiliser Furkot pour construire l'itinéraire, faire Doogle pour l'enquête, ouvrir un Splitwise pour partager les dépenses, un Google Doc à décrire l'itinéraire, groupe Facebook pour échanger des idées.",
-
-  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
-  "BodyTogh.whyToghMotivation" : "Je voulais apprendre React, Spring. De plus, je voulais mettre la main sur le déploiement Cloud. Alors, pourquoi ne pas créer une application utilisant toutes ces technologies et voir ce qui se passe?",
-
-  "__BodyTogh.whyToghThankYou" : "To n, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
-  "BodyTogh.whyToghThankYou" : "A Simon, pour son talent d'explorateur technique. Lounes, pour ses fabuleuses créations. Christelle, pour son soutien. Et tous les autres qui m'ont aidé à un moment donné.",
-
-  "__Event.Budget" : "Budget",
-  "Event.Budget" : "Budget",
-
-  "__Event.Chat" : "Chat",
-  "Event.Chat" : "Discuter",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "Date événement",
+  "__BodyTogh.whyToghBorn": "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn": "Ici, Togh est né. Je pensais à cette application depuis maintenant cinq ans.",
+  "__BodyTogh.whyToghConclusion": "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion": "Cette application était donc vraiment nécessaire en ce moment.",
+  "__BodyTogh.whyToghHistory": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory": "L'année dernière, lorsque j'ai organisé un road trip pour ma famille (qui a été annulé, à cause du Covid), j'ai dû utiliser Furkot pour construire l'itinéraire, faire Doogle pour l'enquête, ouvrir un Splitwise pour partager les dépenses, un Google Doc à décrire l'itinéraire, groupe Facebook pour échanger des idées.",
+  "__BodyTogh.whyToghMotivation": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation": "Je voulais apprendre React, Spring. De plus, je voulais mettre la main sur le déploiement Cloud. Alors, pourquoi ne pas créer une application utilisant toutes ces technologies et voir ce qui se passe?",
+  "__Event.BringList": "Bring List",
+  "Event.BringList": "Apporter la liste",
+  "__Event.Budget": "Budget",
+  "Event.Budget": "Budget",
+  "__Event.Chat": "Chat",
+  "Event.Chat": "Discuter",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "Date événement",
 
   "__Event.DatePolicy" : "Date policy",
   "Event.DatePolicy" : "Politique de date",
 
   "__Event.Description" : "Description",
   "Event.Description" : "Description",
-
-  "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "Durée",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "Date de fin",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "Date",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "Frais",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "Cette date est calculée dans votre fuseau horaire",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "Géolocalisation",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "itinéraire",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "Rendez-vous",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "Participants",
-
-  "__Event.Period" : "Period",
-  "Event.Period" : "Période",
-
-  "__Event.Photos" : "Photos",
-  "Event.Photos" : "Photos",
+  "__Event.DurationEvent": "Duration",
+  "Event.DurationEvent": "Durée",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "Date de fin",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "Date",
+  "__Event.Expense": "Expenses",
+  "Event.Expense": "Frais",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "Cette date est calculée dans votre fuseau horaire",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "Géolocalisation",
+  "__Event.HelpTabs": "You have access to different tools in the event. Explore them",
+  "Event.HelpTabs": "Vous avez accès à différents outils dans l'événement. Explorez-les",
+  "__Event.Itinerary": "Itinerary",
+  "Event.Itinerary": "itinéraire",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "Rendez-vous",
+  "__Event.Participant": "Participants",
+  "Event.Participant": "Participants",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "Participants",
+  "__Event.Period": "Period",
+  "Event.Period": "Période",
+  "__Event.Photos": "Photos",
+  "Event.Photos": "Photos",
 
   "__Event.Preferences" : "Preferences",
   "Event.Preferences" : "Préférences",
@@ -276,22 +248,19 @@
   "Event.ScopeOpenConfirmation" : "Ouvert sur confirmation",
 
   "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "Secret",
-
-  "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "Liste de courses",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "Date de début",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "Statut",
+  "Event.ScopeSecret": "Secret",
+  "__Event.ShoppingList": "Shopping List",
+  "Event.ShoppingList": "Liste de courses",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "Date de début",
+  "__Event.Status": "Status",
+  "Event.Status": "Statut",
   "__Event.Survey": "Survey",
   "Event.Survey": "Sondage",
   "__Event.Tasks": "Tasks",
   "Event.Tasks": "Tâches",
   "__Event.TimeEvent": "Time",
-  "Event.TimeEvent": "Temps",
+  "Event.TimeEvent": "Heure",
   "__Event.TitleBringList": "What to brings?",
   "Event.TitleBringList": "Quoi apporter?",
   "__Event.TitleBudget": "Budget",
@@ -304,15 +273,12 @@
   "Event.TitleGeolocalisation": "Où est l'événement?",
   "__Event.TitleItinerary": "Define your itinerary, and point of interest",
   "Event.TitleItinerary": "Définissez votre itinéraire et votre point d'intérêt",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-  "Event.TitleParticipant" : "Invitez un participant à votre événement",
-
-  "__Event.TitlePhotos" : "Photos",
-  "Event.TitlePhotos" : "Photos",
-
-  "__Event.TitlePreferences" : "Preferences",
-  "Event.TitlePreferences" : "Préférences",
+  "__Event.TitleParticipant": "Invite participant to your event",
+  "Event.TitleParticipant": "Invitez un participant à votre événement",
+  "__Event.TitlePhotos": "Photos",
+  "Event.TitlePhotos": "Photos",
+  "__Event.TitlePreferences": "Preferences",
+  "Event.TitlePreferences": "Préférences",
 
   "__Event.TitleShoppingList" : "Shopping list : what to brings?",
   "Event.TitleShoppingList" : "Liste de courses: que faut-il apporter?",
@@ -483,24 +449,29 @@
   "EventList.Participants" : "Participants",
 
   "__EventList.Refresh" : "Refresh",
-  "EventList.Refresh" : "Rafraîchir",
-
-  "__EventParticipant.Actif" : "Actif",
-  "EventParticipant.Actif" : "Actif",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-  "EventParticipant.InvitationInProgress" : "Invitation en cours",
-
-  "__EventParticipant.Invited" : "Invited",
-  "EventParticipant.Invited" : "Invité",
+  "EventList.Refresh": "Rafraîchir",
+  "__EventParticipant.Actif": "Actif",
+  "EventParticipant.Actif": "Actif",
+  "__EventParticipant.InvitationInProgress": "Invitation in progress",
+  "EventParticipant.InvitationInProgress": "Invitation en cours",
+  "__EventParticipant.Invited": "Invited",
+  "EventParticipant.Invited": "Invité",
   "__EventParticipant.Left": "Left",
   "EventParticipant.Left": "La gauche",
   "__EventParticipant.MainTitleParticipant": "Participants",
   "EventParticipant.MainTitleParticipant": "Participants",
+  "__EventParticipant.NotPartOf": "Not part of",
+  "EventParticipant.NotPartOf": "Ne fait pas partie de",
+  "__EventParticipant.NumberOfParticipants": "Number of participants",
+  "EventParticipant.NumberOfParticipants": "Nombre de participants",
   "__EventParticipant.Owner": "Owner",
   "EventParticipant.Owner": "Propriétaire",
+  "__EventParticipant.PartOf": "Part Of",
+  "EventParticipant.PartOf": "Partie de",
   "__EventParticipant.ParticipantTip": "Invite participant to the event",
   "EventParticipant.ParticipantTip": "Inviter un participant à l'événement",
+  "__EventParticipant.Participation": "Participation",
+  "EventParticipant.Participation": "Participation",
   "__EventParticipant.Person": "Person",
   "EventParticipant.Person": "La personne",
   "__EventParticipant.Role": "Role",
@@ -543,15 +514,12 @@
   "EventPreferences.PreferencesTip": "Configurer toutes les préférences pour l'événement",
   "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
   "EventPreferences.SubscriptionExcellenceExplanation": "Un événement Excellence contient toutes les fonctions et une limite de 1000 par élément",
-
-  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
-  "EventPreferences.SubscriptionFreeExplanation" : "Un événement gratuit contient toutes les fonctions sauf le budget et est limité en nombre de participants (20) et d'articles (50)",
-
-  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
-  "EventPreferences.SubscriptionPremiumExplanation" : "Un événement Premium contient toutes les fonctions, les participants à la limitation supérieure (100) et les éléments (100)",
-
-  "__EventShoppingList.AddItem" : "Add a item in the list",
-  "EventShoppingList.AddItem" : "Ajouter un élément dans la liste",
+  "__EventPreferences.SubscriptionFreeExplanation": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation": "Un événement gratuit contient toutes les fonctions sauf le budget et est limité en nombre de participants (20) et d'articles (50)",
+  "__EventPreferences.SubscriptionPremiumExplanation": "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation": "Un événement Premium contient toutes les fonctions, les participants à la limitation supérieure (100) et les éléments (100)",
+  "__EventShoppingList.AddItem": "Add a item in the list",
+  "EventShoppingList.AddItem": "Ajouter un élément dans la liste",
 
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "Ajoute un !",
@@ -560,16 +528,13 @@
   "EventShoppingList.AddingItem" : "Ajouter un article",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
-  "EventShoppingList.Cancelled" : "Annulé",
-
-  "__EventShoppingList.CantAddTask" : "An item can't be added",
-  "EventShoppingList.CantAddTask" : "Un élément ne peut pas être ajouté",
-
-  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
-  "EventShoppingList.CantRemoveItem" : "L'élément ne peut pas être supprimé",
-
-  "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "Description",
+  "EventShoppingList.Cancelled": "Annulé",
+  "__EventShoppingList.CantAddTask": "An item can't be added",
+  "EventShoppingList.CantAddTask": "Un élément ne peut pas être ajouté",
+  "__EventShoppingList.CantRemoveItem": "The item can't be removed",
+  "EventShoppingList.CantRemoveItem": "L'élément ne peut pas être supprimé",
+  "__EventShoppingList.Description": "Description",
+  "EventShoppingList.Description": "Description",
   "__EventShoppingList.Done": "Done",
   "EventShoppingList.Done": "Terminé",
   "__EventShoppingList.ItemRemoved": "The item is removed",
@@ -588,8 +553,7 @@
   "EventShoppingList.ShoppingListTip": "Vous avez une liste d'éléments à ajouter à l'événement. Listez-les, décidez qui doit les acheter",
   "__EventShoppingList.ShowDetails": "Detail",
   "EventShoppingList.ShowDetails": "Détail",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
+  "__EventShoppingList.ShowExpense": "Show Expense",
   "EventShoppingList.ShowExpense": "Afficher les dépenses",
   "__EventShoppingList.TaskAdded": "The item is added",
   "EventShoppingList.TaskAdded": "L'élément est ajouté",
@@ -643,15 +607,12 @@
   "EventSurvey.Option": "Option",
   "__EventSurvey.RemovingChoice": "Removing a choice",
   "EventSurvey.RemovingChoice": "Supprimer un choix",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "Cette enquête est en préparation. Les participants ne sont pas visibles",
-
-  "__EventSurvey.TaskAdded" : "A task is added",
-  "EventSurvey.TaskAdded" : "Une tâche est ajoutée",
-
-  "__EventSurvey.Title" : "Title",
-  "EventSurvey.Title" : "Titre",
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "Cette enquête est en préparation. Les participants ne sont pas visibles",
+  "__EventSurvey.TaskAdded": "A task is added",
+  "EventSurvey.TaskAdded": "Une tâche est ajoutée",
+  "__EventSurvey.Title": "Title",
+  "EventSurvey.Title": "Titre",
 
   "__EventSurvey.removeItem" : "Remove this item",
   "EventSurvey.removeItem" : "enlever cet article",
@@ -757,17 +718,13 @@
 
   "__EventTaskList.ShowDate" : "Show dates",
   "EventTaskList.ShowDate" : "Afficher les dates",
-
-  "__EventTaskList.State" : "State",
-  "EventTaskList.State" : "État",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-  "EventTaskList.StatePlanned" : "Prévu",
-
-  "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "Sujet",
-
-  "__EventTaskList.TaskAdded" : "A task is added",
+  "__EventTaskList.State": "State",
+  "EventTaskList.State": "État",
+  "__EventTaskList.StatePlanned": "Planned",
+  "EventTaskList.StatePlanned": "Prévu",
+  "__EventTaskList.Subject": "Subject",
+  "EventTaskList.Subject": "Sujet",
+  "__EventTaskList.TaskAdded": "A task is added",
   "EventTaskList.TaskAdded": "Une tâche est ajoutée",
   "__EventTaskList.TaskRemoved": "The task is removed",
   "EventTaskList.TaskRemoved": "La tâche est supprimée",
@@ -903,15 +860,12 @@
   "Menu.EventsExplanation": "Accédez à tous les événements auxquels vous pouvez accéder",
   "__Menu.InvitationExplanation": "Check your invitations, accept them.",
   "Menu.InvitationExplanation": "Vérifiez vos invitations, acceptez-les.",
-
-  "__Menu.Join" : "Join an event",
-  "Menu.Join" : "Rejoignez un événement",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-  "Menu.JoinExplanation" : "Rechercher et rejoindre des événements",
-
-  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
-  "Menu.MyFriendExplanation" : "Voir tous vos amis, inviter de nouveaux, envoyer des messages.",
+  "__Menu.Join": "Join an event",
+  "Menu.Join": "Rejoignez un événement",
+  "__Menu.JoinExplanation": "Search and join events",
+  "Menu.JoinExplanation": "Rechercher et rejoindre des événements",
+  "__Menu.MyFriendExplanation": "See all your friends, invite new, send messages.",
+  "Menu.MyFriendExplanation": "Voir tous vos amis, inviter de nouveaux, envoyer des messages.",
 
   "__Menu.MyFriends" : "My Friends",
   "Menu.MyFriends" : "Mes amis",
@@ -975,17 +929,13 @@
 
   "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
   "MyProfile.PhoneNumberExplanation" : "Togh ne l'utilise pas, mais vous pouvez le partager avec les utilisateurs dans le même événement",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Partout sauf la recherche",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "La recherche n'utilise pas votre numéro de téléphone, mais le résultat l'affiche. Un utilisateur connecté à un événement voit votre téléphone",
-
-  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
-  "MyProfile.PhoneNumberVisibilityAlways" : "Toujours",
-
-  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch": "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": "Partout sauf la recherche",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "La recherche n'utilise pas votre numéro de téléphone, mais le résultat l'affiche. Un utilisateur connecté à un événement voit votre téléphone",
+  "__MyProfile.PhoneNumberVisibilityAlways": "Always",
+  "MyProfile.PhoneNumberVisibilityAlways": "Toujours",
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Your phone number is visible for any user connected to Togh",
   "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Votre numéro de téléphone est visible pour tout utilisateur connecté à Togh",
   "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
   "MyProfile.PhoneNumberVisibilityLimitedEvent": "Événement limité",

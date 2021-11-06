@@ -60,36 +60,29 @@
   "AdminUsers.Disconnect": "डिस्कनेक्ट",
   "__AdminUsers.Email": "Email",
   "AdminUsers.Email": "ईमेल",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "उत्कृष्टता",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
-  "AdminUsers.LastActivityTime" : "अंतिम सक्रियता",
-
-  "__AdminUsers.LastConnectionTime" : "Last Connection",
-  "AdminUsers.LastConnectionTime" : "अंतिम कनेक्शन",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "उत्कृष्टता",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
+  "AdminUsers.LastActivityTime": "अंतिम सक्रियता",
+  "__AdminUsers.LastConnectionTime": "Last Connection",
+  "AdminUsers.LastConnectionTime": "अंतिम कनेक्शन",
 
   "__AdminUsers.LongStatusUserActif" : "User actif",
   "AdminUsers.LongStatusUserActif" : "उपयोगकर्ता कार्य",
-
-  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
-  "AdminUsers.LongStatusUserBlock" : "उपयोगकर्ता अवरोधित किया गया",
-
-  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
-  "AdminUsers.LongStatusUserDisabled" : "उपयोगकर्ता अक्षम किया गया",
-
-  "__AdminUsers.Myself" : "Myself",
-  "AdminUsers.Myself" : "मैं खुद",
-
-  "__AdminUsers.PhoneNumber" : "PhoneNumber",
-  "AdminUsers.PhoneNumber" : "फ़ोन नंबर",
-
-  "__AdminUsers.Premium" : "Premium",
-  "AdminUsers.Premium" : "प्रीमियम",
-
-  "__AdminUsers.PrivilegeUser" : "Privilege",
-  "AdminUsers.PrivilegeUser" : "विशेषाधिकार",
+  "__AdminUsers.LongStatusUserBlock": "User Blocked",
+  "AdminUsers.LongStatusUserBlock": "उपयोगकर्ता अवरोधित किया गया",
+  "__AdminUsers.LongStatusUserDisabled": "User disabled",
+  "AdminUsers.LongStatusUserDisabled": "उपयोगकर्ता अक्षम किया गया",
+  "__AdminUsers.Myself": "Myself",
+  "AdminUsers.Myself": "मैं खुद",
+  "__AdminUsers.Pages": "Pages",
+  "AdminUsers.Pages": "पृष्ठों",
+  "__AdminUsers.PhoneNumber": "PhoneNumber",
+  "AdminUsers.PhoneNumber": "फ़ोन नंबर",
+  "__AdminUsers.Premium": "Premium",
+  "AdminUsers.Premium": "प्रीमियम",
+  "__AdminUsers.PrivilegeUser": "Privilege",
+  "AdminUsers.PrivilegeUser": "विशेषाधिकार",
 
   "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
   "AdminUsers.PrivilegeUserAdmin" : "प्रशासक",
@@ -129,35 +122,27 @@
 
   "__AdminUsers.SubscriptionUserFree" : "Free",
   "AdminUsers.SubscriptionUserFree" : "नि: शुल्क",
-
-  "__AdminUsers.SubscriptionUserPremium" : "Premium",
-  "AdminUsers.SubscriptionUserPremium" : "प्रीमियम",
-
-  "__AdminUsers.Title" : "Users",
-  "AdminUsers.Title" : "उपयोगकर्ताओं",
-
-  "__AdminUsers.UserName" : "User Name",
-  "AdminUsers.UserName" : "उपयोगकर्ता नाम",
-
-  "__AdminUsers.privilegeAdmin" : "Administrator",
-  "AdminUsers.privilegeAdmin" : "प्रशासक",
-
-  "__AdminUsers.privilegeTrans" : "Translator",
-  "AdminUsers.privilegeTrans" : "अनुवादक",
-
-  "__AdminUsers.searchSentence" : "Search",
-  "AdminUsers.searchSentence" : "खोज",
-
-  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
-  "AdminUsers.subscriptionExcellence" : "उत्कृष्टता सदस्यता",
-
-  "__AdminUsers.subscriptionFree" : "Free subscription",
-  "AdminUsers.subscriptionFree" : "मुफ्त सदस्यता",
-
-  "__AdminUsers.subscriptionPremium" : "Premium subscription",
-  "AdminUsers.subscriptionPremium" : "प्रीमियम सदस्यता",
-
-  "__AskPassword.DifferentPassword" : "Password are different",
+  "__AdminUsers.SubscriptionUserPremium": "Premium",
+  "AdminUsers.SubscriptionUserPremium": "प्रीमियम",
+  "__AdminUsers.Title": "Users",
+  "AdminUsers.Title": "उपयोगकर्ताओं",
+  "__AdminUsers.UserName": "User Name",
+  "AdminUsers.UserName": "उपयोगकर्ता नाम",
+  "__AdminUsers.Users": "Users",
+  "AdminUsers.Users": "उपयोगकर्ताओं",
+  "__AdminUsers.privilegeAdmin": "Administrator",
+  "AdminUsers.privilegeAdmin": "प्रशासक",
+  "__AdminUsers.privilegeTrans": "Translator",
+  "AdminUsers.privilegeTrans": "अनुवादक",
+  "__AdminUsers.searchSentence": "Search",
+  "AdminUsers.searchSentence": "खोज",
+  "__AdminUsers.subscriptionExcellence": "Excellence subscription",
+  "AdminUsers.subscriptionExcellence": "उत्कृष्टता सदस्यता",
+  "__AdminUsers.subscriptionFree": "Free subscription",
+  "AdminUsers.subscriptionFree": "मुफ्त सदस्यता",
+  "__AdminUsers.subscriptionPremium": "Premium subscription",
+  "AdminUsers.subscriptionPremium": "प्रीमियम सदस्यता",
+  "__AskPassword.DifferentPassword": "Password are different",
   "AskPassword.DifferentPassword": "पासवर्ड अलग हैं",
   "__AskPassword.NewPassword": "New password",
   "AskPassword.NewPassword": "नया पासवर्ड",
@@ -183,6 +168,8 @@
   "BodyTogh.thankYouIsmail": "विचारों को साझा करने के लिए इस्माइल।",
   "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
   "BodyTogh.thankYouLounes": "इन भयानक ग्राफिक्स और आइकनों को डिजाइन करने के लिए लाउंज।",
+  "__BodyTogh.thankYouSalome": "Salomé for her assistance with the English grammar.",
+  "BodyTogh.thankYouSalome": "सलोमे को अंग्रेजी व्याकरण में उनकी सहायता के लिए धन्यवाद।",
   "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
   "BodyTogh.thankYouSimon": "साइमन, एक असाधारण खोजकर्ता होने के लिए और बहुत सारे सुरागों का पता लगाने के लिए।",
   "__BodyTogh.welcome": "Welcome to Togh",
@@ -197,30 +184,22 @@
   "BodyTogh.whatisToghTitle": "तोग क्या है?",
   "__BodyTogh.whyTogh": "Why Togh?",
   "BodyTogh.whyTogh": "क्यों तोग?",
-
-  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
-  "BodyTogh.whyToghBorn" : "यहाँ तोग का जन्म हुआ था। मैं अब पांच साल के लिए इस आवेदन के बारे में सोच रहा था।",
-
-  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
-  "BodyTogh.whyToghConclusion" : "इसलिए इस क्षण में इस एप्लिकेशन की आवश्यकता थी।",
-
-  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
-  "BodyTogh.whyToghHistory" : "पिछले साल, जब मैंने अपने परिवार के लिए एक रोड ट्रिप का आयोजन किया (जो कोविद के कारण रद्द हो गया था), मुझे यात्रा के निर्माण के लिए फुरकोट का उपयोग करना पड़ा, सर्वेक्षण के लिए Doogle बना, खर्च को साझा करने के लिए एक स्प्लिटवाइज़ खोलना, एक Google डॉक विचार विनिमय करने के लिए यात्रा कार्यक्रम, फेसबुक समूह का वर्णन करें।",
-
-  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
-  "BodyTogh.whyToghMotivation" : "मैं रिएक्ट, स्प्रिंग सीखना चाहता था। इसके अलावा, मैं अपना हाथ क्लाउड की तैनाती में लगाना चाहता था। तो, इन सभी तकनीकों का उपयोग करते हुए एक एप्लिकेशन क्यों न बनाएं, और देखें कि क्या चल रहा है?",
-
-  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
-  "BodyTogh.whyToghThankYou" : "साइमन के लिए, एक तकनीकी खोजकर्ता के रूप में उनकी प्रतिभा के लिए। Lounes, उनके शानदार डिजाइनों के लिए। क्रिस्टेल, उसके समर्थन के लिए। और अन्य सभी जिन्होंने किसी समय मेरी मदद की है।",
-
-  "__Event.Budget" : "Budget",
-  "Event.Budget" : "बजट",
-
-  "__Event.Chat" : "Chat",
-  "Event.Chat" : "चैट",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "दिनांक घटना",
+  "__BodyTogh.whyToghBorn": "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn": "यहाँ तोग का जन्म हुआ था। मैं अब पांच साल के लिए इस आवेदन के बारे में सोच रहा था।",
+  "__BodyTogh.whyToghConclusion": "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion": "इसलिए इस क्षण में इस एप्लिकेशन की आवश्यकता थी।",
+  "__BodyTogh.whyToghHistory": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory": "पिछले साल, जब मैंने अपने परिवार के लिए एक रोड ट्रिप का आयोजन किया (जो कोविद के कारण रद्द हो गया था), मुझे यात्रा के निर्माण के लिए फुरकोट का उपयोग करना पड़ा, सर्वेक्षण के लिए Doogle बना, खर्च को साझा करने के लिए एक स्प्लिटवाइज़ खोलना, एक Google डॉक विचार विनिमय करने के लिए यात्रा कार्यक्रम, फेसबुक समूह का वर्णन करें।",
+  "__BodyTogh.whyToghMotivation": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation": "मैं रिएक्ट, स्प्रिंग सीखना चाहता था। इसके अलावा, मैं अपना हाथ क्लाउड की तैनाती में लगाना चाहता था। तो, इन सभी तकनीकों का उपयोग करते हुए एक एप्लिकेशन क्यों न बनाएं, और देखें कि क्या चल रहा है?",
+  "__Event.BringList": "Bring List",
+  "Event.BringList": "सूची लाओ",
+  "__Event.Budget": "Budget",
+  "Event.Budget": "बजट",
+  "__Event.Chat": "Chat",
+  "Event.Chat": "चैट",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "दिनांक घटना",
 
   "__Event.DatePolicy" : "Date policy",
   "Event.DatePolicy" : "दिनांक नीति",
@@ -229,39 +208,32 @@
   "Event.Description" : "विवरण",
 
   "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "समयांतराल",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "अंतिम तिथि",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "तारीख",
-
-  "Event.EventName" : "नाम",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "व्यय",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "इस तिथि की गणना आपके समय क्षेत्र में की जाती है",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "जियोलोकेशन",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "यात्रा कार्यक्रम",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "एक तिथि",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "प्रतिभागियों",
-
-  "__Event.Period" : "Period",
-  "Event.Period" : "अवधि",
-
-  "__Event.Photos" : "Photos",
-  "Event.Photos" : "तस्वीरें",
+  "Event.DurationEvent": "समयांतराल",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "अंतिम तिथि",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "तारीख",
+  "Event.EventName": "नाम",
+  "__Event.Expense": "Expenses",
+  "Event.Expense": "व्यय",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "इस तिथि की गणना आपके समय क्षेत्र में की जाती है",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "जियोलोकेशन",
+  "__Event.HelpTabs": "You have access to different tools in the event. Explore them",
+  "Event.HelpTabs": "आपके पास ईवेंट में विभिन्न टूल तक पहुंच है। उन्हें एक्सप्लोर करें",
+  "__Event.Itinerary": "Itinerary",
+  "Event.Itinerary": "यात्रा कार्यक्रम",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "एक तिथि",
+  "__Event.Participant": "Participants",
+  "Event.Participant": "प्रतिभागियों",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "प्रतिभागियों",
+  "__Event.Period": "Period",
+  "Event.Period": "अवधि",
+  "__Event.Photos": "Photos",
+  "Event.Photos": "तस्वीरें",
 
   "__Event.Preferences" : "Preferences",
   "Event.Preferences" : "पसंद",
@@ -279,16 +251,13 @@
   "Event.ScopeOpenConfirmation" : "पुष्टि पर खोलें",
 
   "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "गुप्त",
-
-  "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "खरीदारी की सूची",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "आरंभ करने की तिथि",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "स्थिति",
+  "Event.ScopeSecret": "गुप्त",
+  "__Event.ShoppingList": "Shopping List",
+  "Event.ShoppingList": "खरीदारी की सूची",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "आरंभ करने की तिथि",
+  "__Event.Status": "Status",
+  "Event.Status": "स्थिति",
   "__Event.Survey": "Survey",
   "Event.Survey": "सर्वेक्षण",
   "__Event.Tasks": "Tasks",
@@ -307,15 +276,12 @@
   "Event.TitleGeolocalisation": "कहां है घटना?",
   "__Event.TitleItinerary": "Define your itinerary, and point of interest",
   "Event.TitleItinerary": "अपनी यात्रा कार्यक्रम, और रुचि के बिंदु को परिभाषित करें",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-  "Event.TitleParticipant" : "अपने इवेंट में प्रतिभागी को आमंत्रित करें",
-
-  "__Event.TitlePhotos" : "Photos",
-  "Event.TitlePhotos" : "तस्वीरें",
-
-  "__Event.TitlePreferences" : "Preferences",
-  "Event.TitlePreferences" : "पसंद",
+  "__Event.TitleParticipant": "Invite participant to your event",
+  "Event.TitleParticipant": "अपने इवेंट में प्रतिभागी को आमंत्रित करें",
+  "__Event.TitlePhotos": "Photos",
+  "Event.TitlePhotos": "तस्वीरें",
+  "__Event.TitlePreferences": "Preferences",
+  "Event.TitlePreferences": "पसंद",
 
   "__Event.TitleShoppingList" : "Shopping list : what to brings?",
   "Event.TitleShoppingList" : "खरीदारी की सूची: क्या लाना है?",
@@ -497,24 +463,29 @@
   "EventList.Participants" : "प्रतिभागियों",
 
   "__EventList.Refresh" : "Refresh",
-  "EventList.Refresh" : "ताज़ा करना",
-
-  "__EventParticipant.Actif" : "Actif",
-  "EventParticipant.Actif" : "एक्टिफ",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-  "EventParticipant.InvitationInProgress" : "निमंत्रण जारी है",
-
-  "__EventParticipant.Invited" : "Invited",
-  "EventParticipant.Invited" : "आमंत्रित",
+  "EventList.Refresh": "ताज़ा करना",
+  "__EventParticipant.Actif": "Actif",
+  "EventParticipant.Actif": "एक्टिफ",
+  "__EventParticipant.InvitationInProgress": "Invitation in progress",
+  "EventParticipant.InvitationInProgress": "निमंत्रण जारी है",
+  "__EventParticipant.Invited": "Invited",
+  "EventParticipant.Invited": "आमंत्रित",
   "__EventParticipant.Left": "Left",
   "EventParticipant.Left": "बाएं",
   "__EventParticipant.MainTitleParticipant": "Participants",
   "EventParticipant.MainTitleParticipant": "प्रतिभागियों",
+  "__EventParticipant.NotPartOf": "Not part of",
+  "EventParticipant.NotPartOf": "का हिस्सा नहीं",
+  "__EventParticipant.NumberOfParticipants": "Number of participants",
+  "EventParticipant.NumberOfParticipants": "प्रतिभागियों की संख्या",
   "__EventParticipant.Owner": "Owner",
   "EventParticipant.Owner": "मालिक",
+  "__EventParticipant.PartOf": "Part Of",
+  "EventParticipant.PartOf": "का हिस्सा",
   "__EventParticipant.ParticipantTip": "Invite participant to the event",
   "EventParticipant.ParticipantTip": "कार्यक्रम में प्रतिभागी को आमंत्रित करें",
+  "__EventParticipant.Participation": "Participation",
+  "EventParticipant.Participation": "भाग लेना",
   "__EventParticipant.Person": "Person",
   "EventParticipant.Person": "व्यक्ति",
   "__EventParticipant.Role": "Role",
@@ -557,15 +528,12 @@
   "EventPreferences.PreferencesTip": "घटना के लिए सभी वरीयताओं को सेट करें",
   "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
   "EventPreferences.SubscriptionExcellenceExplanation": "एक्सीलेंस इवेंट में सभी कार्य होते हैं, और प्रति आइटम 1000 की सीमा होती है",
-
-  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
-  "EventPreferences.SubscriptionFreeExplanation" : "एक निशुल्क घटना में बजट को छोड़कर सभी कार्य शामिल होते हैं और प्रतिभागियों की संख्या (20) और आइटम (50) तक सीमित होते हैं",
-
-  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
-  "EventPreferences.SubscriptionPremiumExplanation" : "एक प्रीमियम ईवेंट में सभी फ़ंक्शन, ऊपरी सीमा वाले प्रतिभागी (100) और आइटम (100) शामिल होते हैं",
-
-  "__EventShoppingList.AddItem" : "Add a item in the list",
-  "EventShoppingList.AddItem" : "सूची में एक आइटम जोड़ें",
+  "__EventPreferences.SubscriptionFreeExplanation": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation": "एक निशुल्क घटना में बजट को छोड़कर सभी कार्य शामिल होते हैं और प्रतिभागियों की संख्या (20) और आइटम (50) तक सीमित होते हैं",
+  "__EventPreferences.SubscriptionPremiumExplanation": "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation": "एक प्रीमियम ईवेंट में सभी फ़ंक्शन, ऊपरी सीमा वाले प्रतिभागी (100) और आइटम (100) शामिल होते हैं",
+  "__EventShoppingList.AddItem": "Add a item in the list",
+  "EventShoppingList.AddItem": "सूची में एक आइटम जोड़ें",
 
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "एक जोड़ें !",
@@ -577,16 +545,13 @@
   "EventShoppingList.Cancel" : "रद्द",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
-  "EventShoppingList.Cancelled" : "रद्द",
-
-  "__EventShoppingList.CantAddTask" : "An item can't be added",
-  "EventShoppingList.CantAddTask" : "एक आइटम नहीं जोड़ा जा सकता है",
-
-  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
-  "EventShoppingList.CantRemoveItem" : "आइटम हटाया नहीं जा सकता",
-
-  "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "विवरण",
+  "EventShoppingList.Cancelled": "रद्द",
+  "__EventShoppingList.CantAddTask": "An item can't be added",
+  "EventShoppingList.CantAddTask": "एक आइटम नहीं जोड़ा जा सकता है",
+  "__EventShoppingList.CantRemoveItem": "The item can't be removed",
+  "EventShoppingList.CantRemoveItem": "आइटम हटाया नहीं जा सकता",
+  "__EventShoppingList.Description": "Description",
+  "EventShoppingList.Description": "विवरण",
   "__EventShoppingList.Done": "Done",
   "EventShoppingList.Done": "किया हुआ",
   "__EventShoppingList.ItemRemoved": "The item is removed",
@@ -605,12 +570,10 @@
   "EventShoppingList.ShoppingListTip": "ईवेंट के लिए आपके पास आइटम की एक सूची है। उन्हें सूचीबद्ध करें, तय करें कि उन्हें किसे खरीदना है",
   "__EventShoppingList.ShowDetails": "Detail",
   "EventShoppingList.ShowDetails": "विस्तार",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
-  "EventShoppingList.ShowExpense" : "व्यय दिखाओ",
-
-  "__EventShoppingList.TaskAdded" : "The item is added",
-  "EventShoppingList.TaskAdded" : "आइटम जोड़ा जाता है",
+  "__EventShoppingList.ShowExpense": "Show Expense",
+  "EventShoppingList.ShowExpense": "व्यय दिखाओ",
+  "__EventShoppingList.TaskAdded": "The item is added",
+  "EventShoppingList.TaskAdded": "आइटम जोड़ा जाता है",
   "__EventShoppingList.Title": "Shopping List",
   "EventShoppingList.Title": "खरीदारी की सूची",
   "__EventShoppingList.ToBring": "To bring",
@@ -664,16 +627,12 @@
   "EventSurvey.NoItem": "आपके पास सूची में कोई भी सर्वेक्षण तैयार नहीं है।",
   "__EventSurvey.Option": "Option",
   "EventSurvey.Option": "विकल्प",
-
-  "__EventSurvey.RemovingChoice" : "Removing a choice",
-  "EventSurvey.RemovingChoice" : "एक विकल्प निकालना",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "यह सर्वेक्षण तैयारी में है। प्रतिभागी दिखाई नहीं दे रहे हैं",
-
-  "EventSurvey.SurveyTip" : "प्रतिभागियों को एक कला या एक एयरोस्पेस संग्रहालय का दौरा करना पसंद है? Japanase, इतालवी या फ्रेंच रेस्तरां पसंद करते हैं? एक सर्वेक्षण बनाएं और समीक्षा एकत्र करें।",
-
-  "__EventSurvey.TaskAdded" : "A task is added",
+  "__EventSurvey.RemovingChoice": "Removing a choice",
+  "EventSurvey.RemovingChoice": "एक विकल्प निकालना",
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "यह सर्वेक्षण तैयारी में है। प्रतिभागी दिखाई नहीं दे रहे हैं",
+  "EventSurvey.SurveyTip": "प्रतिभागियों को एक कला या एक एयरोस्पेस संग्रहालय का दौरा करना पसंद है? Japanase, इतालवी या फ्रेंच रेस्तरां पसंद करते हैं? एक सर्वेक्षण बनाएं और समीक्षा एकत्र करें।",
+  "__EventSurvey.TaskAdded": "A task is added",
   "EventSurvey.TaskAdded" : "एक कार्य जोड़ा गया है",
 
   "__EventSurvey.Title" : "Title",
@@ -795,16 +754,13 @@
   "EventTaskList.ShowDate" : "दिनांक दिखाएं",
 
   "__EventTaskList.State" : "State",
-  "EventTaskList.State" : "राज्य",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-  "EventTaskList.StatePlanned" : "की योजना बनाई",
-
-  "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "विषय",
-
-  "__EventTaskList.TaskAdded" : "A task is added",
-  "EventTaskList.TaskAdded" : "एक कार्य जोड़ा गया है",
+  "EventTaskList.State": "राज्य",
+  "__EventTaskList.StatePlanned": "Planned",
+  "EventTaskList.StatePlanned": "की योजना बनाई",
+  "__EventTaskList.Subject": "Subject",
+  "EventTaskList.Subject": "विषय",
+  "__EventTaskList.TaskAdded": "A task is added",
+  "EventTaskList.TaskAdded": "एक कार्य जोड़ा गया है",
   "__EventTaskList.TaskRemoved": "The task is removed",
   "EventTaskList.TaskRemoved": "टास्क को हटा दिया जाता है",
   "__EventTaskList.TaskTip": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize",
@@ -944,15 +900,12 @@
   "Menu.Events": "आयोजन",
   "__Menu.EventsExplanation": "Access all events you can access",
   "Menu.EventsExplanation": "उन सभी घटनाओं तक पहुँचें जिन्हें आप एक्सेस कर सकते हैं",
-
-  "__Menu.InvitationExplanation" : "Check your invitations, accept them.",
-  "Menu.InvitationExplanation" : "अपने निमंत्रण जांचें, उन्हें स्वीकार करें।",
-
-  "__Menu.Join" : "Join an event",
-  "Menu.Join" : "किसी इवेंट में शामिल हों",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-  "Menu.JoinExplanation" : "खोजें और घटनाओं में शामिल हों",
+  "__Menu.InvitationExplanation": "Check your invitations, accept them.",
+  "Menu.InvitationExplanation": "अपने निमंत्रण जांचें, उन्हें स्वीकार करें।",
+  "__Menu.Join": "Join an event",
+  "Menu.Join": "किसी इवेंट में शामिल हों",
+  "__Menu.JoinExplanation": "Search and join events",
+  "Menu.JoinExplanation": "खोजें और घटनाओं में शामिल हों",
 
   "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
   "Menu.MyFriendExplanation" : "अपने सभी दोस्तों को देखें, नया आमंत्रित करें, संदेश भेजें।",
@@ -1019,17 +972,13 @@
 
   "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
   "MyProfile.PhoneNumberExplanation" : "Togh इसका उपयोग नहीं करता है, लेकिन आप इसे उसी ईवेंट में उपयोगकर्ताओं के साथ साझा कर सकते हैं",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "खोज को छोड़कर हर जगह",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "खोज आपके फ़ोन नंबर का उपयोग नहीं करती है, लेकिन परिणाम इसे प्रदर्शित करता है। किसी ईवेंट से जुड़ा एक उपयोगकर्ता आपका फ़ोन देखें",
-
-  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
-  "MyProfile.PhoneNumberVisibilityAlways" : "हमेशा",
-
-  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch": "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": "खोज को छोड़कर हर जगह",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "खोज आपके फ़ोन नंबर का उपयोग नहीं करती है, लेकिन परिणाम इसे प्रदर्शित करता है। किसी ईवेंट से जुड़ा एक उपयोगकर्ता आपका फ़ोन देखें",
+  "__MyProfile.PhoneNumberVisibilityAlways": "Always",
+  "MyProfile.PhoneNumberVisibilityAlways": "हमेशा",
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Your phone number is visible for any user connected to Togh",
   "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "आपका फ़ोन नंबर Togh . से जुड़े किसी भी उपयोगकर्ता के लिए दृश्यमान है",
   "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
   "MyProfile.PhoneNumberVisibilityLimitedEvent": "सीमित घटना",

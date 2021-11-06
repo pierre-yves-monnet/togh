@@ -59,36 +59,29 @@
   "AdminUsers.Disconnect": "قطع الاتصال",
   "__AdminUsers.Email": "Email",
   "AdminUsers.Email": "بريد إلكتروني",
-
-  "__AdminUsers.Excellence" : "Excellence",
-  "AdminUsers.Excellence" : "تفوق",
-
-  "__AdminUsers.LastActivityTime" : "Last Activiy",
-  "AdminUsers.LastActivityTime" : "آخر نشاط",
-
-  "__AdminUsers.LastConnectionTime" : "Last Connection",
-  "AdminUsers.LastConnectionTime" : "آخر اتصال",
+  "__AdminUsers.Excellence": "Excellence",
+  "AdminUsers.Excellence": "تفوق",
+  "__AdminUsers.LastActivityTime": "Last Activiy",
+  "AdminUsers.LastActivityTime": "آخر نشاط",
+  "__AdminUsers.LastConnectionTime": "Last Connection",
+  "AdminUsers.LastConnectionTime": "آخر اتصال",
 
   "__AdminUsers.LongStatusUserActif" : "User actif",
   "AdminUsers.LongStatusUserActif" : "اكتيف المستخدم",
-
-  "__AdminUsers.LongStatusUserBlock" : "User Blocked",
-  "AdminUsers.LongStatusUserBlock" : "المستخدم المحظور",
-
-  "__AdminUsers.LongStatusUserDisabled" : "User disabled",
-  "AdminUsers.LongStatusUserDisabled" : "تم تعطيل المستخدم",
-
-  "__AdminUsers.Myself" : "Myself",
-  "AdminUsers.Myself" : "نفسي",
-
-  "__AdminUsers.PhoneNumber" : "PhoneNumber",
-  "AdminUsers.PhoneNumber" : "رقم الهاتف",
-
-  "__AdminUsers.Premium" : "Premium",
-  "AdminUsers.Premium" : "غالي",
-
-  "__AdminUsers.PrivilegeUser" : "Privilege",
-  "AdminUsers.PrivilegeUser" : "شرف",
+  "__AdminUsers.LongStatusUserBlock": "User Blocked",
+  "AdminUsers.LongStatusUserBlock": "المستخدم المحظور",
+  "__AdminUsers.LongStatusUserDisabled": "User disabled",
+  "AdminUsers.LongStatusUserDisabled": "تم تعطيل المستخدم",
+  "__AdminUsers.Myself": "Myself",
+  "AdminUsers.Myself": "نفسي",
+  "__AdminUsers.Pages": "Pages",
+  "AdminUsers.Pages": "الصفحات",
+  "__AdminUsers.PhoneNumber": "PhoneNumber",
+  "AdminUsers.PhoneNumber": "رقم الهاتف",
+  "__AdminUsers.Premium": "Premium",
+  "AdminUsers.Premium": "غالي",
+  "__AdminUsers.PrivilegeUser": "Privilege",
+  "AdminUsers.PrivilegeUser": "شرف",
 
   "__AdminUsers.PrivilegeUserAdmin" : "Administrator",
   "AdminUsers.PrivilegeUserAdmin" : "مدير",
@@ -128,35 +121,27 @@
 
   "__AdminUsers.SubscriptionUserFree" : "Free",
   "AdminUsers.SubscriptionUserFree" : "حر",
-
-  "__AdminUsers.SubscriptionUserPremium" : "Premium",
-  "AdminUsers.SubscriptionUserPremium" : "غالي",
-
-  "__AdminUsers.Title" : "Users",
-  "AdminUsers.Title" : "المستخدمون",
-
-  "__AdminUsers.UserName" : "User Name",
-  "AdminUsers.UserName" : "اسم االمستخدم",
-
-  "__AdminUsers.privilegeAdmin" : "Administrator",
-  "AdminUsers.privilegeAdmin" : "مدير",
-
-  "__AdminUsers.privilegeTrans" : "Translator",
-  "AdminUsers.privilegeTrans" : "مترجم",
-
-  "__AdminUsers.searchSentence" : "Search",
-  "AdminUsers.searchSentence" : "يبحث",
-
-  "__AdminUsers.subscriptionExcellence" : "Excellence subscription",
-  "AdminUsers.subscriptionExcellence" : "اشتراك التميز",
-
-  "__AdminUsers.subscriptionFree" : "Free subscription",
-  "AdminUsers.subscriptionFree" : "اشتراك مجاني",
-
-  "__AdminUsers.subscriptionPremium" : "Premium subscription",
-  "AdminUsers.subscriptionPremium" : "اشتراك بريميوم",
-
-  "__AskPassword.DifferentPassword" : "Password are different",
+  "__AdminUsers.SubscriptionUserPremium": "Premium",
+  "AdminUsers.SubscriptionUserPremium": "غالي",
+  "__AdminUsers.Title": "Users",
+  "AdminUsers.Title": "المستخدمون",
+  "__AdminUsers.UserName": "User Name",
+  "AdminUsers.UserName": "اسم االمستخدم",
+  "__AdminUsers.Users": "Users",
+  "AdminUsers.Users": "المستخدمون",
+  "__AdminUsers.privilegeAdmin": "Administrator",
+  "AdminUsers.privilegeAdmin": "مدير",
+  "__AdminUsers.privilegeTrans": "Translator",
+  "AdminUsers.privilegeTrans": "مترجم",
+  "__AdminUsers.searchSentence": "Search",
+  "AdminUsers.searchSentence": "يبحث",
+  "__AdminUsers.subscriptionExcellence": "Excellence subscription",
+  "AdminUsers.subscriptionExcellence": "اشتراك التميز",
+  "__AdminUsers.subscriptionFree": "Free subscription",
+  "AdminUsers.subscriptionFree": "اشتراك مجاني",
+  "__AdminUsers.subscriptionPremium": "Premium subscription",
+  "AdminUsers.subscriptionPremium": "اشتراك بريميوم",
+  "__AskPassword.DifferentPassword": "Password are different",
   "AskPassword.DifferentPassword": "كلمة المرور مختلفة",
   "__AskPassword.NewPassword": "New password",
   "AskPassword.NewPassword": "كلمة مرور جديدة",
@@ -182,6 +167,8 @@
   "BodyTogh.thankYouIsmail": "اسماعيل لتبادل الافكار.",
   "__BodyTogh.thankYouLounes": "Lounes to design these awesome graphics and icons.",
   "BodyTogh.thankYouLounes": "Lounes لتصميم هذه الرسومات والأيقونات الرائعة.",
+  "__BodyTogh.thankYouSalome": "Salomé for her assistance with the English grammar.",
+  "BodyTogh.thankYouSalome": "Salomé لمساعدتها في قواعد اللغة الإنجليزية.",
   "__BodyTogh.thankYouSimon": "Simon, to be an extraordinary exploratory and figure out a lot of clues.",
   "BodyTogh.thankYouSimon": "سيمون ، ليكون استكشافيًا استثنائيًا ويكتشف الكثير من القرائن.",
   "__BodyTogh.welcome": "Welcome to Togh",
@@ -196,69 +183,54 @@
   "BodyTogh.whatisToghTitle": "ما هو طوغ؟",
   "__BodyTogh.whyTogh": "Why Togh?",
   "BodyTogh.whyTogh": "لماذا توج؟",
-
-  "__BodyTogh.whyToghBorn" : "Here Togh was born. I was thinking of this application for five years now.",
-  "BodyTogh.whyToghBorn" : "هنا ولد طوغ. كنت أفكر في هذا التطبيق لمدة خمس سنوات حتى الآن.",
-
-  "__BodyTogh.whyToghConclusion" : "So this application was really needed at this moment.",
-  "BodyTogh.whyToghConclusion" : "لذلك كان هذا التطبيق مطلوبًا حقًا في هذه اللحظة.",
-
-  "__BodyTogh.whyToghHistory" : "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
-  "BodyTogh.whyToghHistory" : "في العام الماضي ، عندما نظمت رحلة برية لعائلتي (والتي تم إلغاؤها بسبب Covid) ، اضطررت إلى استخدام Furkot لبناء مسار الرحلة ، وجعل Doogle للمسح ، وفتح Splitwise لمشاركة النفقات ، مستند Google إلى وصف خط سير الرحلة ، مجموعة Facebook لتبادل الأفكار.",
-
-  "__BodyTogh.whyToghMotivation" : "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
-  "BodyTogh.whyToghMotivation" : "كنت أرغب في تعلم React ، Spring. بالإضافة إلى ذلك ، أردت أن أضع يدي في نشر السحابة. فلماذا لا نبني تطبيقًا باستخدام كل هذه التقنيات ، ونرى ما الذي يحدث؟",
-
-  "__BodyTogh.whyToghThankYou" : "To Simon, for his talent as a technical explorer. Lounes, for his fabulous designs. Christelle, for her support. And all the others who have helped me at some point.",
-  "BodyTogh.whyToghThankYou" : "إلى Simon ، لموهبته كمستكشف تقني. لونس ، لتصاميمه الرائعة. كريستيل ، على دعمها. وجميع الآخرين الذين ساعدوني في وقت ما.",
-
-  "__Event.Budget" : "Budget",
-  "Event.Budget" : "ميزانية",
-
-  "__Event.Chat" : "Chat",
-  "Event.Chat" : "محادثة",
-
-  "__Event.DateEvent" : "Date Event",
-  "Event.DateEvent" : "تاريخ الحدث",
+  "__BodyTogh.whyToghBorn": "Here Togh was born. I was thinking of this application for five years now.",
+  "BodyTogh.whyToghBorn": "هنا ولد طوغ. كنت أفكر في هذا التطبيق لمدة خمس سنوات حتى الآن.",
+  "__BodyTogh.whyToghConclusion": "So this application was really needed at this moment.",
+  "BodyTogh.whyToghConclusion": "لذلك كان هذا التطبيق مطلوبًا حقًا في هذه اللحظة.",
+  "__BodyTogh.whyToghHistory": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea.",
+  "BodyTogh.whyToghHistory": "في العام الماضي ، عندما نظمت رحلة برية لعائلتي (والتي تم إلغاؤها بسبب Covid) ، اضطررت إلى استخدام Furkot لبناء مسار الرحلة ، وجعل Doogle للمسح ، وفتح Splitwise لمشاركة النفقات ، مستند Google إلى وصف خط سير الرحلة ، مجموعة Facebook لتبادل الأفكار.",
+  "__BodyTogh.whyToghMotivation": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?",
+  "BodyTogh.whyToghMotivation": "كنت أرغب في تعلم React ، Spring. بالإضافة إلى ذلك ، أردت أن أضع يدي في نشر السحابة. فلماذا لا نبني تطبيقًا باستخدام كل هذه التقنيات ، ونرى ما الذي يحدث؟",
+  "__Event.BringList": "Bring List",
+  "Event.BringList": "إحضار قائمة",
+  "__Event.Budget": "Budget",
+  "Event.Budget": "ميزانية",
+  "__Event.Chat": "Chat",
+  "Event.Chat": "محادثة",
+  "__Event.DateEvent": "Date Event",
+  "Event.DateEvent": "تاريخ الحدث",
 
   "__Event.DatePolicy" : "Date policy",
   "Event.DatePolicy" : "سياسة التاريخ",
 
   "__Event.Description" : "Description",
   "Event.Description" : "وصف",
-
-  "__Event.DurationEvent" : "Duration",
-  "Event.DurationEvent" : "مدة",
-
-  "__Event.EndDate" : "End Date",
-  "Event.EndDate" : "تاريخ الانتهاء",
-
-  "__Event.EventDate" : "Date",
-  "Event.EventDate" : "تاريخ",
-
-  "__Event.Expense" : "Expense",
-  "Event.Expense" : "مصروف",
-
-  "__Event.ExplanationYourTimeZone" : "This date is calculated in your time zone",
-  "Event.ExplanationYourTimeZone" : "يتم حساب هذا التاريخ في منطقتك الزمنية",
-
-  "__Event.Geolocalisation" : "Geolocalisation",
-  "Event.Geolocalisation" : "تحديد الموقع الجغرافي",
-
-  "__Event.Itinerary" : "itinerary",
-  "Event.Itinerary" : "مسار الرحلة",
-
-  "__Event.OneDate" : "One date",
-  "Event.OneDate" : "موعد واحد",
-
-  "__Event.Participants" : "Participants",
-  "Event.Participants" : "مشاركون",
-
-  "__Event.Period" : "Period",
-  "Event.Period" : "فترة",
-
-  "__Event.Photos" : "Photos",
-  "Event.Photos" : "الصور",
+  "__Event.DurationEvent": "Duration",
+  "Event.DurationEvent": "مدة",
+  "__Event.EndDate": "End Date",
+  "Event.EndDate": "تاريخ الانتهاء",
+  "__Event.EventDate": "Date",
+  "Event.EventDate": "تاريخ",
+  "__Event.Expense": "Expenses",
+  "Event.Expense": "مصروف",
+  "__Event.ExplanationYourTimeZone": "This date is calculated in your time zone",
+  "Event.ExplanationYourTimeZone": "يتم حساب هذا التاريخ في منطقتك الزمنية",
+  "__Event.Geolocalisation": "Geolocalisation",
+  "Event.Geolocalisation": "تحديد الموقع الجغرافي",
+  "__Event.HelpTabs": "You have access to different tools in the event. Explore them",
+  "Event.HelpTabs": "لديك حق الوصول إلى أدوات مختلفة في هذا الحدث. استكشفهم",
+  "__Event.Itinerary": "Itinerary",
+  "Event.Itinerary": "مسار الرحلة",
+  "__Event.OneDate": "One date",
+  "Event.OneDate": "موعد واحد",
+  "__Event.Participant": "Participants",
+  "Event.Participant": "مشاركون",
+  "__Event.Participants": "Participants",
+  "Event.Participants": "مشاركون",
+  "__Event.Period": "Period",
+  "Event.Period": "فترة",
+  "__Event.Photos": "Photos",
+  "Event.Photos": "الصور",
 
   "__Event.Preferences" : "Preferences",
   "Event.Preferences" : "التفضيلات",
@@ -276,16 +248,13 @@
   "Event.ScopeOpenConfirmation" : "فتح عند التأكيد",
 
   "__Event.ScopeSecret" : "Secret",
-  "Event.ScopeSecret" : "سر",
-
-  "__Event.ShoppingList" : "Shopping List",
-  "Event.ShoppingList" : "قائمة التسوق",
-
-  "__Event.StartDate" : "Start Date",
-  "Event.StartDate" : "تاريخ البدء",
-
-  "__Event.Status" : "Status",
-  "Event.Status" : "حالة",
+  "Event.ScopeSecret": "سر",
+  "__Event.ShoppingList": "Shopping List",
+  "Event.ShoppingList": "قائمة التسوق",
+  "__Event.StartDate": "Start Date",
+  "Event.StartDate": "تاريخ البدء",
+  "__Event.Status": "Status",
+  "Event.Status": "حالة",
   "__Event.Survey": "Survey",
   "Event.Survey": "استبيان",
   "__Event.Tasks": "Tasks",
@@ -304,15 +273,12 @@
   "Event.TitleGeolocalisation": "اين الحدث؟",
   "__Event.TitleItinerary": "Define your itinerary, and point of interest",
   "Event.TitleItinerary": "حدد خط سير الرحلة ونقطة الاهتمام",
-
-  "__Event.TitleParticipant" : "Invite participant to your event",
-  "Event.TitleParticipant" : "ادعُ مشاركًا إلى هذا الحدث الخاص بك",
-
-  "__Event.TitlePhotos" : "Photos",
-  "Event.TitlePhotos" : "الصور",
-
-  "__Event.TitlePreferences" : "Preferences",
-  "Event.TitlePreferences" : "التفضيلات",
+  "__Event.TitleParticipant": "Invite participant to your event",
+  "Event.TitleParticipant": "ادعُ مشاركًا إلى هذا الحدث الخاص بك",
+  "__Event.TitlePhotos": "Photos",
+  "Event.TitlePhotos": "الصور",
+  "__Event.TitlePreferences": "Preferences",
+  "Event.TitlePreferences": "التفضيلات",
 
   "__Event.TitleShoppingList" : "Shopping list : what to brings?",
   "Event.TitleShoppingList" : "قائمة التسوق: ماذا نحضر؟",
@@ -483,24 +449,29 @@
   "EventList.Participants" : "مشاركون",
 
   "__EventList.Refresh" : "Refresh",
-  "EventList.Refresh" : "ينعش",
-
-  "__EventParticipant.Actif" : "Actif",
-  "EventParticipant.Actif" : "أكتيف",
-
-  "__EventParticipant.InvitationInProgress" : "Invitation in progress",
-  "EventParticipant.InvitationInProgress" : "الدعوة قيد التقدم",
-
-  "__EventParticipant.Invited" : "Invited",
-  "EventParticipant.Invited" : "مدعو",
+  "EventList.Refresh": "ينعش",
+  "__EventParticipant.Actif": "Actif",
+  "EventParticipant.Actif": "أكتيف",
+  "__EventParticipant.InvitationInProgress": "Invitation in progress",
+  "EventParticipant.InvitationInProgress": "الدعوة قيد التقدم",
+  "__EventParticipant.Invited": "Invited",
+  "EventParticipant.Invited": "مدعو",
   "__EventParticipant.Left": "Left",
   "EventParticipant.Left": "اليسار",
   "__EventParticipant.MainTitleParticipant": "Participants",
   "EventParticipant.MainTitleParticipant": "مشاركون",
+  "__EventParticipant.NotPartOf": "Not part of",
+  "EventParticipant.NotPartOf": "ليس جزءًا من",
+  "__EventParticipant.NumberOfParticipants": "Number of participants",
+  "EventParticipant.NumberOfParticipants": "عدد المشاركين",
   "__EventParticipant.Owner": "Owner",
   "EventParticipant.Owner": "مالك",
+  "__EventParticipant.PartOf": "Part Of",
+  "EventParticipant.PartOf": "جزء من",
   "__EventParticipant.ParticipantTip": "Invite participant to the event",
   "EventParticipant.ParticipantTip": "ادعُ مشاركًا إلى الحدث",
+  "__EventParticipant.Participation": "Participation",
+  "EventParticipant.Participation": "مشاركة",
   "__EventParticipant.Person": "Person",
   "EventParticipant.Person": "شخص",
   "__EventParticipant.Role": "Role",
@@ -543,15 +514,12 @@
   "EventPreferences.PreferencesTip": "قم بإعداد كل التفضيلات لهذا الحدث",
   "__EventPreferences.SubscriptionExcellenceExplanation": "A Excellence event contains all functions, and a limit of 1000 per items",
   "EventPreferences.SubscriptionExcellenceExplanation": "يحتوي حدث التميز على جميع الوظائف ، وبحد 1000 لكل عنصر",
-
-  "__EventPreferences.SubscriptionFreeExplanation" : "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
-  "EventPreferences.SubscriptionFreeExplanation" : "حدث مجاني يحتوي على جميع الوظائف باستثناء الميزانية ويقتصر على عدد المشاركين (20) والبنود (50)",
-
-  "__EventPreferences.SubscriptionPremiumExplanation" : "A Premium event contains all functions, upper limitation participants (100) and items (100)",
-  "EventPreferences.SubscriptionPremiumExplanation" : "يحتوي حدث Premium على جميع الوظائف والمشاركين في الحد الأعلى (100) والعناصر (100)",
-
-  "__EventShoppingList.AddItem" : "Add a item in the list",
-  "EventShoppingList.AddItem" : "إضافة عنصر في القائمة",
+  "__EventPreferences.SubscriptionFreeExplanation": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)",
+  "EventPreferences.SubscriptionFreeExplanation": "حدث مجاني يحتوي على جميع الوظائف باستثناء الميزانية ويقتصر على عدد المشاركين (20) والبنود (50)",
+  "__EventPreferences.SubscriptionPremiumExplanation": "A Premium event contains all functions, upper limitation participants (100) and items (100)",
+  "EventPreferences.SubscriptionPremiumExplanation": "يحتوي حدث Premium على جميع الوظائف والمشاركين في الحد الأعلى (100) والعناصر (100)",
+  "__EventShoppingList.AddItem": "Add a item in the list",
+  "EventShoppingList.AddItem": "إضافة عنصر في القائمة",
 
   "__EventShoppingList.AddOne" : "Add one !",
   "EventShoppingList.AddOne" : "أضف واحدا !",
@@ -560,16 +528,13 @@
   "EventShoppingList.AddingItem" : "إضافة عنصر",
 
   "__EventShoppingList.Cancelled" : "Cancelled",
-  "EventShoppingList.Cancelled" : "ألغيت",
-
-  "__EventShoppingList.CantAddTask" : "An item can't be added",
-  "EventShoppingList.CantAddTask" : "لا يمكن إضافة عنصر",
-
-  "__EventShoppingList.CantRemoveItem" : "The item can't be removed",
-  "EventShoppingList.CantRemoveItem" : "لا يمكن إزالة العنصر",
-
-  "__EventShoppingList.Description" : "Description",
-  "EventShoppingList.Description" : "وصف",
+  "EventShoppingList.Cancelled": "ألغيت",
+  "__EventShoppingList.CantAddTask": "An item can't be added",
+  "EventShoppingList.CantAddTask": "لا يمكن إضافة عنصر",
+  "__EventShoppingList.CantRemoveItem": "The item can't be removed",
+  "EventShoppingList.CantRemoveItem": "لا يمكن إزالة العنصر",
+  "__EventShoppingList.Description": "Description",
+  "EventShoppingList.Description": "وصف",
   "__EventShoppingList.Done": "Done",
   "EventShoppingList.Done": "منتهي",
   "__EventShoppingList.ItemRemoved": "The item is removed",
@@ -588,8 +553,7 @@
   "EventShoppingList.ShoppingListTip": "لديك قائمة من العناصر التي تريدها إلى الحدث. قم بإدراجها ، وقرر من يجب أن يشتريها",
   "__EventShoppingList.ShowDetails": "Detail",
   "EventShoppingList.ShowDetails": "التفاصيل",
-
-  "__EventShoppingList.ShowExpense" : "Show Expense",
+  "__EventShoppingList.ShowExpense": "Show Expense",
   "EventShoppingList.ShowExpense": "إظهار المصاريف",
   "__EventShoppingList.TaskAdded": "The item is added",
   "EventShoppingList.TaskAdded": "تمت إضافة العنصر",
@@ -643,15 +607,12 @@
   "EventSurvey.Option": "خيار",
   "__EventSurvey.RemovingChoice": "Removing a choice",
   "EventSurvey.RemovingChoice": "إزالة الاختيار",
-
-  "__EventSurvey.SurveyInPreparationNoParticipantsVisible" : "This survey is in preparation. Participants are not visible",
-  "EventSurvey.SurveyInPreparationNoParticipantsVisible" : "هذا المسح قيد الإعداد. المشاركون غير مرئيين",
-
-  "__EventSurvey.TaskAdded" : "A task is added",
-  "EventSurvey.TaskAdded" : "تمت إضافة مهمة",
-
-  "__EventSurvey.Title" : "Title",
-  "EventSurvey.Title" : "لقب",
+  "__EventSurvey.SurveyInPreparationNoParticipantsVisible": "This survey is in preparation. Participants are not visible",
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": "هذا المسح قيد الإعداد. المشاركون غير مرئيين",
+  "__EventSurvey.TaskAdded": "A task is added",
+  "EventSurvey.TaskAdded": "تمت إضافة مهمة",
+  "__EventSurvey.Title": "Title",
+  "EventSurvey.Title": "لقب",
 
   "__EventSurvey.removeItem" : "Remove this item",
   "EventSurvey.removeItem" : "أزل هذا البند",
@@ -757,17 +718,13 @@
 
   "__EventTaskList.ShowDate" : "Show dates",
   "EventTaskList.ShowDate" : "عرض التواريخ",
-
-  "__EventTaskList.State" : "State",
-  "EventTaskList.State" : "حالة",
-
-  "__EventTaskList.StatePlanned" : "Planned",
-  "EventTaskList.StatePlanned" : "مخطط",
-
-  "__EventTaskList.Subject" : "Subject",
-  "EventTaskList.Subject" : "موضوعات",
-
-  "__EventTaskList.TaskAdded" : "A task is added",
+  "__EventTaskList.State": "State",
+  "EventTaskList.State": "حالة",
+  "__EventTaskList.StatePlanned": "Planned",
+  "EventTaskList.StatePlanned": "مخطط",
+  "__EventTaskList.Subject": "Subject",
+  "EventTaskList.Subject": "موضوعات",
+  "__EventTaskList.TaskAdded": "A task is added",
   "EventTaskList.TaskAdded": "تمت إضافة مهمة",
   "__EventTaskList.TaskRemoved": "The task is removed",
   "EventTaskList.TaskRemoved": "تتم إزالة المهمة",
@@ -903,15 +860,12 @@
   "Menu.EventsExplanation": "الوصول إلى جميع الأحداث التي يمكنك الوصول إليها",
   "__Menu.InvitationExplanation": "Check your invitations, accept them.",
   "Menu.InvitationExplanation": "تحقق من دعواتك ، اقبلها.",
-
-  "__Menu.Join" : "Join an event",
-  "Menu.Join" : "انضم إلى حدث",
-
-  "__Menu.JoinExplanation" : "Search and join events",
-  "Menu.JoinExplanation" : "البحث والانضمام إلى الأحداث",
-
-  "__Menu.MyFriendExplanation" : "See all your friends, invite new, send messages.",
-  "Menu.MyFriendExplanation" : "شاهد كل أصدقائك ، ادعُ جددًا ، أرسل رسائل.",
+  "__Menu.Join": "Join an event",
+  "Menu.Join": "انضم إلى حدث",
+  "__Menu.JoinExplanation": "Search and join events",
+  "Menu.JoinExplanation": "البحث والانضمام إلى الأحداث",
+  "__Menu.MyFriendExplanation": "See all your friends, invite new, send messages.",
+  "Menu.MyFriendExplanation": "شاهد كل أصدقائك ، ادعُ جددًا ، أرسل رسائل.",
 
   "__Menu.MyFriends" : "My Friends",
   "Menu.MyFriends" : "أصدقائى",
@@ -975,17 +929,13 @@
 
   "__MyProfile.PhoneNumberExplanation" : "Togh does not use it, but you can share it with users in the same event",
   "MyProfile.PhoneNumberExplanation" : "Togh لا تستخدمه ، ولكن يمكنك مشاركته مع المستخدمين في نفس الحدث",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearch" : "Everywhere except search",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearch" : "في كل مكان ما عدا البحث",
-
-  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
-  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation" : "لا يستخدم البحث رقم هاتفك ، ولكن النتيجة تعرضه. يرى المستخدم المتصل بحدث هاتفك",
-
-  "__MyProfile.PhoneNumberVisibilityAlways" : "Always",
-  "MyProfile.PhoneNumberVisibilityAlways" : "دائما",
-
-  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation" : "Your phone number is visible for any user connected to Togh",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearch": "Everywhere except search",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": "في كل مكان ما عدا البحث",
+  "__MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "Search does not use your phone number, but the result display it. A user connected to an event see your phone",
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": "لا يستخدم البحث رقم هاتفك ، ولكن النتيجة تعرضه. يرى المستخدم المتصل بحدث هاتفك",
+  "__MyProfile.PhoneNumberVisibilityAlways": "Always",
+  "MyProfile.PhoneNumberVisibilityAlways": "دائما",
+  "__MyProfile.PhoneNumberVisibilityAlwaysExplanation": "Your phone number is visible for any user connected to Togh",
   "MyProfile.PhoneNumberVisibilityAlwaysExplanation": "رقم هاتفك مرئي لأي مستخدم متصل بـ Togh",
   "__MyProfile.PhoneNumberVisibilityLimitedEvent": "Limited Event",
   "MyProfile.PhoneNumberVisibilityLimitedEvent": "حدث محدود",
