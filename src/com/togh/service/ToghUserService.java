@@ -17,6 +17,7 @@ import com.togh.entity.ToghUserEntity.*;
 import com.togh.repository.ToghUserRepository;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.NotifyService.NotificationStatus;
+import com.togh.tool.ToolCast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,14 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class ToghUserService {
@@ -48,7 +51,7 @@ public class ToghUserService {
     FactoryService factoryService;
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
     @Autowired
-    private ToghUserRepository endUserRepository;
+    private ToghUserRepository toghUserRepository;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -69,33 +72,59 @@ public class ToghUserService {
         }
     }
 
+    private List<StatisticsSqlItem> listStatisticsSqlItem = Arrays.asList(
+            new StatisticsSqlItem("total", "count(*)"),
+            new StatisticsSqlItem("connected", "sum( case when connectionStamp is not null then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_blocked", "sum( case when statusUser= 'BLOCKED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_invited", "sum( case when statusUser= 'INVITED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_disabled", "sum( case when statusUser= 'DISABLED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_actif", "sum( case when statusUser= 'ACTIF' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_source_portal", "sum( case when source= 'PORTAL' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_source_google", "sum( case when source= 'GOOGLE' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_source_invited", "sum( case when source= 'INVITED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_source_system", "sum( case when source= 'SYSTEM' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_privilege_admin", "sum( case when privilegeUser= 'ADMIN' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_privilege_trans", "sum( case when privilegeUser= 'TRANS' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_privilege_user", "sum( case when privilegeUser= 'USER' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("show_tips", "sum( case when showTipsUser= true then 1 else 0 end)"),
+            new StatisticsSqlItem("searchable", " sum( case when searchable= true then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_emailVisibility_always", "sum( case when emailVisibility= 'ALWAYS' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_emailVisibility_noSearch", "sum( case when emailVisibility= 'ALWAYBUTSEARCH' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_emailVisibility_limitedEvent", "sum( case when emailVisibility= 'LIMITEDEVENT' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_emailVisibility_never", "sum( case when emailVisibility= 'NEVER' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_phoneVisibility_always", "sum( case when phoneNumberVisibility= 'ALWAYS' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_phoneVisibility_noSearch", "sum( case when phoneNumberVisibility= 'ALWAYBUTSEARCH' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_phoneVisibility_limitedEvent", "sum( case when phoneNumberVisibility= 'LIMITEDEVENT' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_phoneVisibility_never", "sum( case when phoneNumberVisibility= 'NEVER' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_subscription_free", "sum( case when subscriptionUser= 'FREE' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_subscription_premium", "sum( case when subscriptionUser= 'PREMIUM' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_subscription_excellence", "sum( case when subscriptionUser= 'EXCELLENCE' then 1 else 0 end)")
+
+    );
+
     public ToghUserEntity getUserFromId(long userId) {
-        Optional<ToghUserEntity> toghUserEntity = endUserRepository.findById(userId);
+        Optional<ToghUserEntity> toghUserEntity = toghUserRepository.findById(userId);
         if (toghUserEntity.isPresent())
             return toghUserEntity.get();
         return null;
     }
 
     public Optional<ToghUserEntity> getUserFromEmail(String email) {
-        return Optional.ofNullable(endUserRepository.findByEmail(email));
+        return Optional.ofNullable(toghUserRepository.findByEmail(email));
     }
 
     public ToghUserEntity findToConnect(String emailOrName) {
-        return endUserRepository.findToConnect(emailOrName);
+        return toghUserRepository.findToConnect(emailOrName);
     }
 
     public ToghUserEntity getUserFromConnectionStamp(String connectionStamp) {
-        return endUserRepository.findByConnectionStamp(connectionStamp);
-    }
-
-    public void saveUser(ToghUserEntity user) {
-        try {
-            endUserRepository.save(user);
-        } catch (Exception ex) {
-            logger.severe(LOG_HEADER + "Can't save user: " + ex.toString());
-            throw ex;
-        }
-
+        return toghUserRepository.findByConnectionStamp(connectionStamp);
     }
 
     /**
@@ -107,17 +136,27 @@ public class ToghUserService {
             factoryService.getToghUserService().saveUser(endUser);
             return endUser;
         } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
+            logger.severe(LOG_HEADER + "Can't create new user: " + e);
             return null;
         }
     }
 
+    public void saveUser(ToghUserEntity user) {
+        try {
+            toghUserRepository.save(user);
+        } catch (Exception ex) {
+            logger.severe(LOG_HEADER + "Can't save user: " + ex);
+            throw ex;
+        }
+
+    }
+
     /**
-     * Check if the user toghadmin exist. If not, create it
+     * Check if the user toghAdmin exist. If not, create it
      */
     @PostConstruct
     public void init() {
-        ToghUserEntity adminUser = endUserRepository.findByName(TOGHADMIN_USERNAME);
+        ToghUserEntity adminUser = toghUserRepository.findByName(TOGHADMIN_USERNAME);
         if (adminUser == null) {
             adminUser = new ToghUserEntity();
             adminUser.setName(TOGHADMIN_USERNAME);
@@ -129,11 +168,20 @@ public class ToghUserService {
             adminUser.setSubscriptionUser(SubscriptionUserEnum.EXCELLENCE);
             adminUser.setTypePicture(TypePictureEnum.TOGH);
 
-            endUserRepository.save(adminUser);
+            toghUserRepository.save(adminUser);
         }
 
     }
 
+    /**
+     * Invite a new user
+     *
+     * @param email            email of the user
+     * @param invitedByUser    whom invite this user
+     * @param useMyEmailAsFrom use the user who invite as the "From" in the email for more accurancy
+     * @param event            event to invite into
+     * @return creation + invitation status. User may not exist in Togh
+     */
     public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, boolean useMyEmailAsFrom, EventEntity event) {
         CreationResult invitationStatus = new CreationResult();
         try {
@@ -157,7 +205,7 @@ public class ToghUserService {
 
             return invitationStatus;
         } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't create new user: " + e.toString());
+            logger.severe(LOG_HEADER + "Can't create new user: " + e);
             invitationStatus.toghUser = null;
             return invitationStatus;
         }
@@ -172,57 +220,98 @@ public class ToghUserService {
      * @param email         email criteria
      * @param page          page number, start at 0
      * @param numberPerPage number of item per page. If this number is 0, then move to 1
-     * @return
+     * @return result of search
      */
     public SearchUsersResult searchUsers(String firstName, String lastName, String phoneNumber, String email, int page, int numberPerPage) {
         SearchUsersResult searchResult = new SearchUsersResult();
         searchResult.page = page;
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
-        searchResult.listUsers = endUserRepository.findPublicUsers(firstName, lastName, phoneNumber, email, PageRequest.of(searchResult.page, searchResult.numberPerPage));
-        searchResult.countUsers = endUserRepository.countPublicUsers(firstName, lastName, phoneNumber, email);
+        searchResult.listUsers = toghUserRepository.findPublicUsers(firstName, lastName, phoneNumber, email, PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = toghUserRepository.countPublicUsers(firstName, lastName, phoneNumber, email);
         return searchResult;
     }
 
     /**
      * Search users connected, but with no activity after the limeSearch time
      *
-     * @param limitSearch
-     * @param page
-     * @param numberPerPage
-     * @return
+     * @param limitSearch   Limit To search user connected
+     * @param page          page (start at 1)
+     * @param numberPerPage number of items per page
+     * @return the Search result
      */
     public SearchUsersResult searchConnectedUsersNoActivity(LocalDateTime limitSearch, int page, int numberPerPage) {
         SearchUsersResult searchResult = new SearchUsersResult();
         searchResult.page = page;
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
-        searchResult.listUsers = endUserRepository.findConnectedUsersNoActivity(limitSearch, PageRequest.of(searchResult.page, searchResult.numberPerPage));
-        searchResult.countUsers = endUserRepository.countConnectedUsersNoActivity(limitSearch);
+        searchResult.listUsers = toghUserRepository.findConnectedUsersNoActivity(limitSearch, PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = toghUserRepository.countConnectedUsersNoActivity(limitSearch);
         return searchResult;
     }
+
+
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Administration */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
 
     public SearchUsersResult searchUsersOutEvent(String firstName, String lastName, String phoneNumber, String email, long eventId, int page, int numberPerPage) {
         SearchUsersResult searchResult = new SearchUsersResult();
         searchResult.page = page;
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
-        searchResult.listUsers = endUserRepository.findPublicUsersOutEvent(firstName, lastName, phoneNumber, email, eventId, PageRequest.of(searchResult.page, searchResult.numberPerPage));
-        searchResult.countUsers = endUserRepository.countPublicUsersOutEvent(firstName, lastName, phoneNumber, email, eventId);
+        searchResult.listUsers = toghUserRepository.findPublicUsersOutEvent(firstName, lastName, phoneNumber, email, eventId, PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = toghUserRepository.countPublicUsersOutEvent(firstName, lastName, phoneNumber, email, eventId);
         return searchResult;
     }
 
+    /**
+     * Search user form an administrative point of view
+     *
+     * @param searchUserSentence Search user by a sentence
+     * @param page               page number (start at 1)
+     * @param numberPerPage      number of items per pages
+     * @return a Search User Result
+     */
     public SearchUsersResult searchAdminUsers(String searchUserSentence, int page, int numberPerPage) {
         SearchUsersResult searchResult = new SearchUsersResult();
         searchResult.page = page;
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
-        searchResult.listUsers = endUserRepository.findSentenceUsers(searchUserSentence, PageRequest.of(searchResult.page, searchResult.numberPerPage));
-        searchResult.countUsers = endUserRepository.countSentenceUsers(searchUserSentence);
+        searchResult.listUsers = toghUserRepository.findSentenceUsers(searchUserSentence, PageRequest.of(searchResult.page, searchResult.numberPerPage));
+        searchResult.countUsers = toghUserRepository.countSentenceUsers(searchUserSentence);
         return searchResult;
     }
 
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Privilege */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+
+    /**
+     * JPA Impose to give an numberId to each "?" : like "?1". So, this method add the object in the list and return "?<list.size>"
+     *
+     * @param listParameters list parameters
+     * @param parameter      Number
+     * @return the string plus the parameter number
+     */
+    private String registerParameter(List<Object> listParameters, Object parameter) {
+        listParameters.add(parameter);
+        return "?" + listParameters.size();
+    }
+
+    /**
+     * Find by criteria
+     *
+     * @param criteriaSearch Criteria to search users
+     * @param page           page number (starts at 1)
+     * @param numberPerPage  number of users per page
+     * @return users found
+     */
     public SearchUsersResult findUserByCriterias(CriteriaSearchUser criteriaSearch, int page, int numberPerPage) {
 
         StringBuilder sqlRequest = new StringBuilder();
         sqlRequest.append("select toghuser from ToghUserEntity toghuser where 1=1 ");
-        /**
+        /*
          * Search Sentence
          */
         List<Object> listParameters = new ArrayList<>();
@@ -261,26 +350,28 @@ public class ToghUserService {
         searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
         return searchResult;
     }
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Privilege */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
 
     /**
-     * JPA Impose to give an numberId to each "?" : like "?1". So, this method add the object in the list and return "?<list.size>"
+     * Return the map of privilege for this user. Then, the interface can work with these privilege
      *
-     * @param listParameters
-     * @param parameter
-     * @return
+     * @param toghUserEntity ToghUser to get pr
+     * @return map of privileges
      */
-    private String registerParameter(List<Object> listParameters, Object parameter) {
-        listParameters.add(parameter);
-        return "?" + listParameters.size();
+    public Map<String, Object> getPrivileges(ToghUserEntity toghUserEntity) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("NBITEMS", getPrivilegesNumberOfItems(toghUserEntity));
+        result.put("PRIVILEGEUSER", toghUserEntity.getPrivilegeUser().toString());
+        return result;
     }
 
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Update user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+
     /**
-     * How many item a user can create in an event ?
+     * How many items a user can create in an event ?
      *
      * @param toghUserEntity the user
      * @return the default number of items
@@ -295,29 +386,17 @@ public class ToghUserService {
         // not a FREE user, so this is a very limited one
         return 2;
     }
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Update user */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
 
-    /**
-     * Return the map of privilege for this user. Then, the interface can work with these privilege
-     *
-     * @param toghUserEntity
-     * @return map of privileges
-     */
-    public Map<String, Object> getPrivileges(ToghUserEntity toghUserEntity) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("NBITEMS", getPrivilegesNumberOfItems(toghUserEntity));
-        result.put("PRIVILEGEUSER", toghUserEntity.getPrivilegeUser().toString());
-        return result;
-    }
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Statistics on user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
 
     public OperationUser updateUser(Long userId, String attributName, Object attributValue) {
         OperationUser operationUser = new OperationUser();
 
-        Optional<ToghUserEntity> toghUser = endUserRepository.findById(userId);
+        Optional<ToghUserEntity> toghUser = toghUserRepository.findById(userId);
         if (!toghUser.isPresent()) {
             operationUser.listLogEvents.add(new LogEvent(eventUnknowId, "Id[" + userId + "]"));
             return operationUser;
@@ -337,6 +416,69 @@ public class ToghUserService {
         factoryService.getLoginService().userIsUpdated(operationUser.toghUserEntity);
 
         return operationUser;
+    }
+
+    /**
+     * return statistics on user
+     *
+     * @return statistics on users
+     */
+    public StatisticsUsers statisticsOnUsers() {
+        StatisticsUsers statisticsUsers = new StatisticsUsers();
+
+
+        StringBuilder sqlRequest = new StringBuilder();
+        sqlRequest.append("select ");
+        sqlRequest.append(listStatisticsSqlItem.stream()
+                .map(t -> t.sql + " as " + t.name)
+                .collect(Collectors.joining(",")));
+        sqlRequest.append(" from ToghUserEntity");
+
+        Query query = entityManager.createQuery(sqlRequest.toString());
+        Object[] resultQuery = (Object[]) query.getSingleResult();
+        for (int i = 0; i < listStatisticsSqlItem.size(); i++) {
+            long markerValue = ToolCast.getLong(resultQuery[i], 0L);
+            String markerName = listStatisticsSqlItem.get(i).name;
+            if (markerName.startsWith("map_")) {
+                StringTokenizer st = new StringTokenizer(markerName, "_");
+                st.nextToken();
+                String collectionName = st.nextToken();
+                String nameInCollection = st.nextToken();
+                Map<String, Object> collection = (Map<String, Object>) statisticsUsers.users.getOrDefault(collectionName, new HashMap<String, Object>());
+                collection.put(nameInCollection, markerValue);
+                statisticsUsers.users.put(collectionName, collection);
+            } else {
+                statisticsUsers.users.put(listStatisticsSqlItem.get(i).name, markerValue);
+            }
+        }
+        return statisticsUsers;
+    }
+
+    public static class StatisticsUsers {
+        Map<String, Object> users = new HashMap<>();
+
+        public Map<String, Object> getMap() {
+            return users;
+        }
+    }
+            /*
+
+
+
+            + " sum( case when subscriptionUser= 'FREE' then 1 else 0 end) as nbSubscriptionFree,"
+            + " sum( case when subscriptionUser= 'PREMIUM' then 1 else 0 end) as nbSubscriptionPremium,"
+            + " sum( case when subscriptionUser= 'EXCELLENCE' then 1 else 0 end) as nbSubscriptionExcellence"
+
+            */
+
+    private static class StatisticsSqlItem {
+        public String name;
+        public String sql;
+
+        StatisticsSqlItem(String name, String sql) {
+            this.name = name;
+            this.sql = sql;
+        }
     }
 
 

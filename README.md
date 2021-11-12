@@ -1,16 +1,13 @@
 # Development Installation
 /* ******************************************************************************** */
-/*                                                                                  */
-/*  Installation Developement environnment                                          */
+/*                                                                                  */ /*  Installation Development
+environnment                                          */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-
-
-npm install
-npm install -S carbon-components carbon-components-react carbon-icons
+npm install npm install -S carbon-components carbon-components-react carbon-icons
 
 copier configuration/paths.js dans node_modules/react-scripts/config/path
 
@@ -265,24 +262,27 @@ import { Tag } from 'carbon-components-react';
 						</RadioButtonGroup>     
 
 ## Translation
+
+```
+> cd npm
+> npm i -D @formatjs/cli
+> npm run extract
+```
+
 https://phrase.com/blog/posts/react-i18n-best-libraries/
 
 https://www.freecodecamp.org/news/setting-up-internationalization-in-react-from-start-to-finish-6cb94a7af725/
 
-
 https://lokalise.com/blog/react-i18n-intl/
 {
- "app.channel.plug": "Tutorial brought to you by {blogName}"
+"app.channel.plug": "Tutorial brought to you by {blogName}"
 }
 
-<FormattedMessage
- id = "app.channel.plug"
- defaultMessage="Tutorial brought to you by Lokalise"
- values = {{blogName: "Lokalise"}}
-/>
+<FormattedMessage id = "app.channel.plug"
+defaultMessage="Tutorial brought to you by Lokalise"
+values = {{blogName: "Lokalise"}} />
 
---------- from JS
-import { injectIntl, FormattedMessage } from "react-intl"; 
+--------- from JS import { injectIntl, FormattedMessage } from "react-intl";
 
 const intl = this.props.intl;
 
@@ -292,11 +292,6 @@ export default injectIntl(EventShoppingList);
 
 Extraction : follow
 https://formatjs.io/docs/getting-started/message-extraction/
-```
-> cd npm
-> npm i -D @formatjs/cli
-> npm run extract
-```
 
 
 # Open question
@@ -461,7 +456,7 @@ docker pull container-registry.oracle.com/java/openjdk:latest
 
 ## Tag the release
 
-AdminInfo.jsx RestPingController.java
+Done automaticaly
 
 ## Create Back End Togh Docker image
 
@@ -523,15 +518,28 @@ or
 To execute on Computer instance
 
 ```
+$ cat updateTogh.sh
 
-$ docker run --name toghpostgres -e POSTGRES_USER=toghp -e POSTGRES_PASSWORD=ThisIsThog4Postgres -e POSTGRES_DB=togh -p 5432:5432 -d postgres
+$ docker container stop togh frontendtogh
+$ docker container rm togh frontendtogh
+$ docker image ls -a | grep togh | awk '{ print $3 " " $1}'
+$ docker image rm XXX
 
 
-$ docker run --name togh -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/togh:1.0.0 
-$ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+$ docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
+$ docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+$ docker run --name togh \
+-e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh \
+-e SPRING_DATASOURCE_USERNAME=toghp \
+-e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres \
+--network="host" --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/togh:1.0.0
 
-$ curl http://34.125.204.84:7080/togh/api/ping
-$ curl http://34.125.204.84:3000
+$ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs \
+-d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+
+
+$ curl http://34.125.198.71:7080/togh/ping
+$ curl http://34.125.198.71:3000
 ```
 
 ### run docker compose

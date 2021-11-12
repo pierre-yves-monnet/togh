@@ -1,17 +1,16 @@
-// -----------------------------------------------------------
+// ********************************************************************************
 //
-// AdminUsers
+//  Togh Project
 //
-// Manage user
+//  This component is part of the Togh Project, developed by Pierre-Yves Monnet
 //
-// -----------------------------------------------------------
+//
+// ********************************************************************************
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon, Tag, Toggle, ToggleSmall } from 'carbon-components-react';
+import { TextInput,Select, TooltipIcon, Tag, Toggle, Loading } from 'carbon-components-react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
-
-import { Loading } from 'carbon-components-react';
 
 import FactoryService 		from 'service/FactoryService';
 
@@ -66,7 +65,7 @@ class AdminUsers extends React.Component {
 	render() {
 		const intl = this.props.intl;
 
-		console.log("AdminAPIKey.render : inprogress="+this.state.inprogress+", listkeys="+JSON.stringify(this.state.listkeys));
+		// console.log("AdminAPIKey.render : inprogress="+this.state.inprogress+", listkeys="+JSON.stringify(this.state.listkeys));
 		let inprogresshtml=(<div/>);
 		if (this.state.inprogress )
 			inprogresshtml=(<Loading
@@ -186,7 +185,7 @@ class AdminUsers extends React.Component {
 							
 						</tr>
 						{this.state.listusers && this.state.listusers.map( (item, index) => {
-							console.log("item="+JSON.stringify(item));
+							// console.log("AdminUsers:item="+JSON.stringify(item));
 							return (
 								<tbody>
 								<tr  key={index} style={{borderTop: "1px solid"}}>
@@ -389,18 +388,18 @@ class AdminUsers extends React.Component {
 		for (var index in this.state.filterusers)
 			filterUrl += "&"+index+"="+this.state.filterusers[ index ];
 		
-		restCallService.getJson('/api/user/admin/search?searchusersentence='+this.state.searchUserSentence+filterUrl, this, this.searchUsersCallback);
+		restCallService.getJson('/api/admin/users/search?searchusersentence='+this.state.searchUserSentence+filterUrl, this, this.searchUsersCallback);
 
 	}
 	
 	searchUsersCallback(httpPayload ) {
-			httpPayload.trace("AdminUsers.getSearchUserCallback");
+			// httpPayload.trace("AdminUsers.getSearchUserCallback");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});
 			}
 			else {
-				console.log("httpPayload.getData()="+JSON.stringify(httpPayload.getData()));
+				// console.log("AdminUsers: httpPayload.getData()="+JSON.stringify(httpPayload.getData()));
 				this.setState({ listusers : httpPayload.getData().users,
 								countusers: httpPayload.getData().countusers,
 								page:httpPayload.getData().page,
@@ -422,8 +421,8 @@ class AdminUsers extends React.Component {
 		var param={userid: user.id,
 					attribut: attribut,
 					value: value};
-		restCallService.postJson('/api/user/admin/update', this, param, httpPayload =>{
-			httpPayload.trace("AdminUsers.setAttributUser");
+		restCallService.postJson('/api/admin/users/update', this, param, httpPayload =>{
+			// httpPayload.trace("AdminUsers.setAttributUser");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});
@@ -461,8 +460,8 @@ class AdminUsers extends React.Component {
 		
 		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={userid: user.id};
-		restCallService.postJson('/api/user/admin/disconnect', this, param, httpPayload =>{
-			httpPayload.trace("AdminUsers.disconnectUser");
+		restCallService.postJson('/api/admin/users/disconnect', this, param, httpPayload =>{
+			// httpPayload.trace("AdminUsers.disconnectUser");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});
@@ -471,9 +470,9 @@ class AdminUsers extends React.Component {
 				// update the attribut now
 				var listusers = this.state.listusers;
 				// search the user
-				for( var user in listusers) {
-					if (listusers[ user ].id ===  httpPayload.getData().user.id)
-						listusers[ user ] = httpPayload.getData().user;
+				for( let userIterator in listusers) {
+					if (listusers[ userIterator ].id ===  httpPayload.getData().user.id)
+						listusers[ userIterator ] = httpPayload.getData().user;
 				}
 				this.setState( { listusers : listusers});			
 			}

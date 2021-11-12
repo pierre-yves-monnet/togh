@@ -17,15 +17,17 @@ import FactoryService 		from 'service/FactoryService';
 
 export const MENU_NAME = {
 		ADMINISTRATION: "Administration",
-		MYPROFILE : "MyProfile",
-		MYINVITATIONS: "MyInvitations",
-		EVENTSLIST: "eventsList"
+		ADMINISTRATION_USERS: "AdministrationUsers",
+		MY_PROFILE : "MyProfile",
+		MY_INVITATIONS: "MyInvitations",
+		EVENTS_LIST: "eventsList"
 	}
 
 class Menu extends React.Component {
 	
 
 	// in props, a function must be give to the call back. When we click on a line, we call
+	// clickMenu is in BodyTogh.jsx
 	// this.props.clickMenu( '<action>')
 	// this.props.showMenu ( isVisible )
 	// this.props.logout()
@@ -49,40 +51,47 @@ class Menu extends React.Component {
 		
 		if (this.state.showMenu) {
 			return ( <div  > 
-				
+				<div style={{display:"none"}}>Menu.jsx</div>
 				<div style={{float: "right"}}>
 					<a onClick={() =>this.setVisibleMenu(false)} href="/#">
 						<ChevronCompactLeft height="40px" width="40px"/></a>
 				 </div>
 				&nbsp;<p/>
 				
-				<a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTSLIST)} href="/#" class="toghmenu">
+				<a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTS_LIST)} href="/#" class="toghMenu">
 					<FormattedMessage id="Menu.Events" defaultMessage="Events" />
 				</a>
-				<div class="toghmenulabel">
+				<div class="toghMenuLabel">
 					<FormattedMessage id="Menu.EventsExplanation" defaultMessage="Access all events you can access" />
 				</div>
 
-                <a onClick={() =>this.props.clickMenu( MENU_NAME.MYINVITATIONS)} href="/#" class="toghmenu">
+                <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_INVITATIONS)} href="/#" class="toghMenu">
                     <FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
                 </a>
-                <div class="toghmenulabel">
+                <div class="toghMenuLabel">
                     <FormattedMessage id="Menu.InvitationExplanation" defaultMessage="Check your invitations, accept them." />
                 </div>
 
-				<a onClick={() =>this.props.clickMenu( MENU_NAME.MYPROFILE )} href="/#"  class="toghmenu">
+				<a onClick={() =>this.props.clickMenu( MENU_NAME.MY_PROFILE )} href="/#"  class="toghMenu">
 					<FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
 				</a>
-				<div class="toghmenulabel">
+				<div class="toghMenuLabel">
 					<FormattedMessage id="Menu.MyProfileExplanation" defaultMessage="Manage your preferences, set up an avatar." />
 				</div>
 				
 				{ user.privilegeUser === "ADMIN" &&
 					<div> 
-						<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghmenu">
+						<a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghMenu">
 							<FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
 						</a>
-						<div class="toghmenulabel">
+						<ul>
+						    <li>
+					            <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_USERS )} href="/#" class="toghSubMenu">
+                        		    <FormattedMessage id="Menu.AdministrationUsers" defaultMessage="Users" />
+                        		</a>
+                            </li>
+                        </ul>
+						<div class="toghMenuLabel">
 							<FormattedMessage id="Menu.AdmininstratorExplanation" defaultMessage="Administrator function." />
 						</div>
 					</div>
@@ -104,19 +113,19 @@ class Menu extends React.Component {
 		}
 	}
     /*
-     								<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#" class="toghmenu">
+     								<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#" class="toghMenu">
                     					<FormattedMessage id="Menu.Join" defaultMessage="Join an event" />
                     				</a>
-                    				<div class="toghmenulabel">
+                    				<div class="toghMenuLabel">
                     					<FormattedMessage id="Menu.JoinExplanation" defaultMessage="Search and join events" />
                     				</div>
 */
 
 /*
-     				<a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTSLIST)} href="/#"  class="toghmenu">
+     				<a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTSLIST)} href="/#"  class="toghMenu">
        					<FormattedMessage id="Menu.MyFriends" defaultMessage="My Friends" />
        				</a>
-       				<div class="toghmenulabel">
+       				<div class="toghMenuLabel">
        					<FormattedMessage id="Menu.MyFriendExplanation" defaultMessage="See all your friends, invite new, send messages." />
        				</div>
 */

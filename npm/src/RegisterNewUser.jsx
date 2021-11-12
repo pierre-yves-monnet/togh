@@ -162,6 +162,7 @@ class RegisterNewUser extends React.Component {
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIntroduction" defaultMessage="Big thank you to everybody who helps me on the road. "/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSimon" defaultMessage="Simon, to be an extraordinary exploratory and figure out a lot of clues."/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouLounes" defaultMessage="Lounes to design these awesome graphics and icons."/></div>
+				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSalome" defaultMessage="Salomé for her assistance with the English grammar."/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIsmail" defaultMessage="Ismail for sharing ideas."/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristel" defaultMessage="Christel to support and encourage me."/></div>
 				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristelBand" defaultMessage="Christel's band to use the application and for their lovely feedback."/></div>

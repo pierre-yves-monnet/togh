@@ -21,6 +21,10 @@ import java.util.Map;
 public class ToghUserSerializer extends BaseSerializer {
 
 
+    public static final String JSON_LONG_LABEL = "longLabel";
+    public static final String JSON_FIRST_NAME = "firstName";
+    public static final String JSON_STATUS_USER = "statusUser";
+
     @Override
     public Class getEntityClass() {
         return ToghUserEntity.class;
@@ -54,13 +58,13 @@ public class ToghUserSerializer extends BaseSerializer {
 
         resultMap.put("tagid", System.currentTimeMillis() % 10000);
         resultMap.put("name", toghUserEntity.getName());
-        resultMap.put("firstName", toghUserEntity.getFirstName());
+        resultMap.put(JSON_FIRST_NAME, toghUserEntity.getFirstName());
         resultMap.put("typePicture", toghUserEntity.getTypePicture());
         resultMap.put("picture", toghUserEntity.getPicture());
         resultMap.put("source", toghUserEntity.getSource().toString().toLowerCase());
 
 
-        resultMap.put("statusUser", toghUserEntity.getStatusUser() == null ? "" : toghUserEntity.getStatusUser().toString());
+        resultMap.put(JSON_STATUS_USER, toghUserEntity.getStatusUser() == null ? "" : toghUserEntity.getStatusUser().toString());
 
         // if the context is SECRET, the last name is not visible
         if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.EVENTACCESS)) {
@@ -74,8 +78,8 @@ public class ToghUserSerializer extends BaseSerializer {
             if (toghUserEntity.getEmail() != null && toghUserEntity.getEmail().trim().length() > 0) {
                 // the label is the email only if there is no label at this moment
                 if (label.toString().trim().length() == 0)
-                    label.append(" (" + toghUserEntity.getEmail() + ")");
-                longLabel.append(" (" + toghUserEntity.getEmail() + ")");
+                    label.append(encapsulate("(", toghUserEntity.getEmail(), ")"));
+                longLabel.append(encapsulate(" (", toghUserEntity.getEmail(), ")"));
             }
         } else
             resultMap.put("email", "*********");
@@ -84,14 +88,14 @@ public class ToghUserSerializer extends BaseSerializer {
             resultMap.put("phoneNumber", toghUserEntity.getPhoneNumber());
             if (toghUserEntity.getPhoneNumber() != null) {
                 if (label.length() == 0)
-                    label.append(" " + toghUserEntity.getPhoneNumber());
-                longLabel.append(" " + toghUserEntity.getPhoneNumber());
+                    label.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " )");
+                longLabel.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " ");
             }
         } else
             resultMap.put("phoneNumber", "*********");
 
         resultMap.put("label", label.toString());
-        resultMap.put("longLabel", longLabel.toString());
+        resultMap.put(JSON_LONG_LABEL, longLabel.toString());
 
         if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.MYPROFILE)
                 || serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.ADMIN)) {
@@ -135,16 +139,25 @@ public class ToghUserSerializer extends BaseSerializer {
         if (toghUser.getEmailVisibility() == ToghUserEntity.VisibilityEnum.ALWAYS)
             return true;
         // it's visible only for accepted user in the event
-        if (serializeOptions.getEventAccessGrantor() != null) {
-            if (visibility == ToghUserEntity.VisibilityEnum.LIMITEDEVENT || visibility == ToghUserEntity.VisibilityEnum.ALWAYBUTSEARCH) {
-                // User is visible? If the user is not visible, then answer is false.
-                if (serializeOptions.getEventAccessGrantor().isOtherParticipantsVisible())
-                    return true;
-                return false;
-            }
-        }
+        if ((serializeOptions.getEventAccessGrantor() != null)
+                && ((visibility == ToghUserEntity.VisibilityEnum.LIMITEDEVENT || visibility == ToghUserEntity.VisibilityEnum.ALWAYBUTSEARCH))
+                && (serializeOptions.getEventAccessGrantor().isOtherParticipantsVisible()))
+            return true;
+
         return false;
         // return (userAccess == ToghUserEntity.ContextAccess.FRIENDACCESS && (visibility == ToghUserEntity.VisibilityEnum.LIMITEDEVENT || visibility == ToghUserEntity.VisibilityEnum.ALWAYBUTSEARCH));
         // in all other case, refuse
+    }
+
+    /**
+     * Encapsulate a string with something. Example: encapsulate( "Hello", "(") return "(Hello)"
+     *
+     * @param encapsulateInfoBegin information begin
+     * @param content              information to encapsulate
+     * @param encapsulateInfoEnd   information end
+     * @return
+     */
+    private String encapsulate(String encapsulateInfoBegin, String content, String encapsulateInfoEnd) {
+        return encapsulateInfoBegin + content + encapsulateInfoEnd;
     }
 }

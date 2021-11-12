@@ -19,20 +19,16 @@ import java.util.List;
 
 public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> {
 
-    // public ToghUserEntity findById(long id);
-    // @Query("select toghuser from ToghUserEntity toghuser where toghuser.id = ?1")
-    // public ToghUserEntity findById(long id);
-
     @Query("select toghuser from ToghUserEntity toghuser where upper(toghuser.name) like upper(?1)")
-    public ToghUserEntity findByName(String name);
+    ToghUserEntity findByName(String name);
 
     @Query("select toghuser from ToghUserEntity toghuser where upper(toghuser.email) like upper(?1)")
-    public ToghUserEntity findByEmail(String email);
+    ToghUserEntity findByEmail(String email);
 
     @Query("select toghuser from ToghUserEntity toghuser where upper(toghuser.email) like upper(?1) or upper(toghuser.name) like upper(?1)")
-    public ToghUserEntity findToConnect(String emailOrName);
+    ToghUserEntity findToConnect(String emailOrName);
 
-    public ToghUserEntity findByConnectionStamp(String connectionStamp);
+    ToghUserEntity findByConnectionStamp(String connectionStamp);
 
     @Query("select toghuser from ToghUserEntity toghuser "
             + "where "
@@ -88,13 +84,13 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
      * where c.persistenceId = :certificateid
      * and p.employee = epar)
      *
-     * @param firstName
-     * @param lastName
-     * @param phoneNumber
-     * @param email
-     * @param eventId
-     * @param pageable
-     * @return
+     * @param firstName   search by the first name
+     * @param lastName    search by the last name
+     * @param phoneNumber search by the phone number
+     * @param email       search by the email
+     * @param eventId     search by the eventId
+     * @param pageable    page object
+     * @return list of users
      */
     // + " and user not in (select pauser from EventEntity e, ParticipantEntity pa, ToghUserEntity pauser where e.id = :eventId and e.participants pa and pa.user_id = pauser) "
     @Query(value = "select toghuser from ToghUserEntity toghuser "
@@ -172,5 +168,6 @@ public interface ToghUserRepository extends JpaRepository<ToghUserEntity, Long> 
             + " toghuser.connectionStamp is not null"
             + " and toghuser.connectionLastActivity < :connectionLastActivity")
     Long countConnectedUsersNoActivity(@Param("connectionLastActivity") LocalDateTime connectionLastActivity);
+
 
 }

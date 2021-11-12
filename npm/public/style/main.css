@@ -1,6 +1,6 @@
 body>div.container {margin-top:10px;}
 
-.toghmenu {
+.toghMenu {
     border-left: 6px solid #1f78b4;
     color: #1f78b4;
     font-weight: bold;
@@ -12,9 +12,16 @@ body>div.container {margin-top:10px;}
     text-overflow: ellipsis;
     padding: 3px 10px 2px 8px;
     text-decoration: none;
-
 }
-.toghmenulabel {
+.toghSubMenu {
+    padding: 3px 10px 2px 20px;
+    color: #1f78b4;
+    border-left: 6px solid #1f78b4;
+    font-weight: bold;
+    font-size: 10px;
+    text-decoration: none;
+}
+.toghMenuLabel {
     display: block;
     font-size: 10px;
     overflow: hidden;

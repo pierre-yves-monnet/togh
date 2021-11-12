@@ -38,10 +38,11 @@ class ToghUserEntity extends BaseEntity {
      */
     @Column(name = "searchable")
     Boolean searchable = true;
+
     @Column(name = "source", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
-
     SourceUserEnum source;
+
     @Column(name = "typepicture", length = 10, nullable = false)
     @org.hibernate.annotations.ColumnDefault("'TOGH'")
     @Enumerated(EnumType.STRING)
@@ -53,13 +54,16 @@ class ToghUserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'USER'")
     PrivilegeUserEnum privilegeUser;
+
     @Column(name = "subscriptionuser", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'FREE'")
     SubscriptionUserEnum subscriptionUser;
+
     @Column(name = "showtipsuser")
     @org.hibernate.annotations.ColumnDefault("'1'")
     Boolean showTipsUser;
+
     @Column(name = "googleid", length = 100)
     private String googleId;
     @Column(name = "firstname", length = 100)
@@ -70,6 +74,7 @@ class ToghUserEntity extends BaseEntity {
     private String password;
     @Column(name = "email", length = 100)
     private String email;
+
     @Column(name = "language", length = 5)
     @org.hibernate.annotations.ColumnDefault("'en'")
     private String language;
@@ -86,14 +91,18 @@ class ToghUserEntity extends BaseEntity {
     @Column(name = "phonevisibility", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private VisibilityEnum phoneNumberVisibility = VisibilityEnum.ALWAYS;
+
     @Column(name = "connectstamp", length = 100)
     private String connectionStamp;
+
     @Column(name = "connectiontime")
     private LocalDateTime connectionTime;
+
     @Column(name = "statususer", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'ACTIF'")
     private StatusUserEnum statusUser;
+
     @Column(name = "invitationStamp", length = 100)
     private String invitationStamp;
 
