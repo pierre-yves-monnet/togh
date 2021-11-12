@@ -69,7 +69,7 @@ class ChooseParticipant extends React.Component {
 					{this.state.participant.user.sourceUser === 'INVITED' && (<div class="label label-info">Invitation in progress</div>)}
 				</div>
 			);
-		};
+		}
 	
 		var value = this.state.value;
 		if (typeof this.state.participant !== 'undefined') {
@@ -119,7 +119,7 @@ class ChooseParticipant extends React.Component {
 		});
 		// search if the new value mache a participant : if this is the cass, do the callback
 		for(var i in this.state.event.participants) {
-			console.log(" Compare [" + this.state.event.participants[ i ].user.longlabel+"] <=> ["+newValue+"]");
+			console.log(" Compare [" + this.state.event.participants[ i ].user.longLabel+"] <=> ["+newValue+"]");
 			if (this.getValueFromParticipant( this.state.event.participants[ i ]) === newValue) {
 				this.onChangeParticipantfct( this.itemToCarry,  this.state.event.participants[ i ].user.id );
 			}
@@ -147,7 +147,7 @@ class ChooseParticipant extends React.Component {
 		// const regex = new RegExp('^' + escapedValue, 'i');
 		const regex = new RegExp('.*' + escapedValue + '.*', 'i');
 
-		var result= participants.filter(participant => regex.test(participant.user.longlabel));
+		var result= participants.filter(participant => regex.test(participant.user.longLabel));
 		console.log("ChooseParticipant.getSuggestions: result = "+JSON.stringify(result));
 		return result;
 	}
@@ -173,9 +173,9 @@ class ChooseParticipant extends React.Component {
 	Call by the autosuggest via getSuggestionValue(), or when the value has to be displayed
 	*/
 	getValueFromParticipant( participant ) {
-		if (participant && participant.user) {
-			console.log("ChoosePartipant.getValueFormPartipant: "+participant.user.id+" : "+participant.user.longlabel);
-			return participant.user.longlabel.toString();
+		if (participant && participant.user && participant.user.longLabel)  {
+			console.log("ChoosePartipant.getValueFormPartipant: "+participant.user.id+" : "+participant.user.longLabel);
+			return participant.user.longLabel.toString();
 		}
 		
 		console.log("ChoosePartipant.getValueFormPartipant [unknown] ?? ");

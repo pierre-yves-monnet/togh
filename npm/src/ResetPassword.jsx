@@ -7,7 +7,6 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput } from 'carbon-components-react';
 import { injectIntl,FormattedMessage } from "react-intl";
 
 import AskPassword 				from 'component/AskPassword' 
@@ -52,14 +51,14 @@ class ResetPassword extends React.Component {
 
 	}
 	getInfoCallback(httpPayload) {
-		httpPayload.trace("ResetPassword.getInfo");
+		// httpPayload.trace("ResetPassword.getInfo");
 		
 		this.setState({ inprogress: false });
 		if (httpPayload.isError()) {
 			this.setState({ message: "Server connection error" });
 		}
 		else {
-			console.log("httpPayload.getData()=" + JSON.stringify(httpPayload.getData()));
+			// console.log("ResetPassword: httpPayload.getData()=" + JSON.stringify(httpPayload.getData()));
 			this.setState({ user: httpPayload.getData().user });
 		}
 
@@ -121,8 +120,6 @@ class ResetPassword extends React.Component {
 			authService.setConnection( httpPayload.getData() );	
 
 			this.props.authCallback( true );
-
-			return;			
 		}
 		else {
 			this.setState( {message:intl.formatMessage({id: "ResetPassword.passwordchangefailed",defaultMessage: "Change failed"}), loading:false});

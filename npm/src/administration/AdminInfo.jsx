@@ -39,7 +39,7 @@ class AdminInfo extends React.Component {
 		this.setState({inprogress: true });
 		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/admin/info?', this, httpPayload =>{
-			httpPayload.trace("AdminInfo.callback");
+			// httpPayload.trace("AdminInfo.callback");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error" });

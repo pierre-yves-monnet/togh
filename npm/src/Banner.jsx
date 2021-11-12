@@ -80,7 +80,7 @@ class Banner extends React.Component {
 								
 		if (authService.isConnected()) {
 			var user = authService.getUser();
-			console.log("User Connected "+JSON.stringify(user));
+			// console.log("Banner: User Connected "+JSON.stringify(user));
 			return ( 
 				<div class="container-fluid">
 					<div class="row">

@@ -46,10 +46,11 @@ class AdminTranslator extends React.Component {
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-		console.log("AdminTranslator.render: visible=" + this.state.show+ " listevent="+this.state.translate.listEvents);
-		if (this.state.translate) {				
+		// console.log("AdminTranslator.render: visible=" + this.state.show+ " listEvents="+this.state.translate.listEvents);
+		/*if (this.state.translate) {
 			console.log("AdminTranslater.render: translate="+JSON.stringify(this.state.translate) );
 		}
+		*/
 		let inprogresshtml=(<div/>);
 		if (this.state.inprogress )
 			inprogresshtml=(<Loading
@@ -147,7 +148,7 @@ class AdminTranslator extends React.Component {
 		this.setState({inprogress: true });
 		let restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/admin/translator/status?', this, httpPayload =>{
-			httpPayload.trace("AdminTranslator.checkDictionary");
+			// httpPayload.trace("AdminTranslator.checkDictionary");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ "message": "Server connection error" });
@@ -167,7 +168,7 @@ class AdminTranslator extends React.Component {
 		
 		let restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/admin/translator/complete', this, {}, httpPayload =>{
-			httpPayload.trace("AdminTranslator.completeDictionary");
+			// httpPayload.trace("AdminTranslator.completeDictionary");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});

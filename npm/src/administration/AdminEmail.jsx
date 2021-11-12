@@ -8,9 +8,7 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
-import { TextInput } from 'carbon-components-react';
-
-import { Loading } from 'carbon-components-react';
+import { TextInput, Loading } from 'carbon-components-react';
 
 import FactoryService 	from 'service/FactoryService';
 
@@ -40,7 +38,6 @@ class AdminEmail extends React.Component {
 		};
 
 		this.updateKey 			= this.updateKey.bind( this );
-		this.getApiKeyCallback 	= this.getApiKeyCallback.bind( this );
 		this.testEmail          = this.testEmail.bind( this );
 	}
 
@@ -48,28 +45,32 @@ class AdminEmail extends React.Component {
 	componentDidMount () {
 		// call the server to get the value
 		this.setState({inProgress: true });
+        this._isMounted = true;
 
 		let restCallService = FactoryService.getInstance().getRestCallService();
 
-		restCallService.getJson('/api/admin/email/get?', this, this.getApiKeyCallback);
-
+		restCallService.getJson('/api/admin/email/get?', this, httpPayload =>{
+                // httpPayload.trace("AdminEmail.getKey");
+                if (! this._isMounted) {
+                    return;
+                }
+                this.setState({inProgress: false });
+                if (httpPayload.isError()) {
+                    this.setState({ message: "Server connection error"});
+                }
+                else {
+                    // console.log("AdminEmail: httpPayload.getData()="+JSON.stringify(httpPayload.getData()));
+                    this.setState({ listKeys : httpPayload.getData()});
+                }
+        });
 	}
 
-	getApiKeyCallback(httpPayload ) {
-        httpPayload.trace("AdminEmail.getKey");
-
-        this.setState({inProgress: false });
-        if (httpPayload.isError()) {
-            this.setState({ message: "Server connection error"});
-        }
-        else {
-            console.log("httpPayload.getData()="+JSON.stringify(httpPayload.getData()));
-            this.setState({ listKeys : httpPayload.getData()});
-        }
-	}
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
 	render() {
-		console.log("AdminEmail.render : inProgress="+this.state.inProgress+", listKeys="+JSON.stringify(this.state.listKeys));
+		// console.log("AdminEmail.render : inProgress="+this.state.inProgress+", listKeys="+JSON.stringify(this.state.listKeys));
 
 		return (
 			<div class="card" style={{marginTop: "10px"}}>
@@ -86,7 +87,7 @@ class AdminEmail extends React.Component {
                                 />
                         }
                         {this.state.listKeys.map( (item, index) => {
-                            console.log("item="+JSON.stringify(item));
+                            // console.log("AdminEmail: item="+JSON.stringify(item));
                             return (
 
                                 <div  key={index} class="row">
@@ -155,7 +156,7 @@ class AdminEmail extends React.Component {
 		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={listKeys: this.state.listKeys};
 		restCallService.postJson('/api/admin/email/update', this, param, httpPayload =>{
-			httpPayload.trace("AdminEmail.updateKey");
+			// httpPayload.trace("AdminEmail.updateKey");
 			this.setState({inProgress: false });
 			if (httpPayload.isError()) {
 				this.setState({ message: "Server connection error"});
@@ -176,7 +177,7 @@ class AdminEmail extends React.Component {
 		var restCallService = FactoryService.getInstance().getRestCallService();
 		var param={listKeys: this.state.listKeys, 'sendEmailTo': this.state.sendEmailTo};
 		restCallService.postJson('/api/admin/email/test', this, param, httpPayload =>{
-			httpPayload.trace("AdminEmail.test isError:"+httpPayload.isError());
+			// httpPayload.trace("AdminEmail.test isError:"+httpPayload.isError());
 			this.setState({inProgress: false });
 			if (httpPayload.isError()) {
 				this.setState({ testEmailMessage: "Server connection error"});

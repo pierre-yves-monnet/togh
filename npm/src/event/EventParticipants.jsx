@@ -249,7 +249,7 @@ class EventParticipants extends React.Component {
         };
         let restCallService = FactoryService.getInstance().getRestCallService();
         restCallService.postJson('/api/event/invite/resend', this, param, httpPayload =>{
-            httpPayload.trace("AdminTranslator.completeDictionary");
+            // httpPayload.trace("AdminTranslator.completeDictionary");
             this.setState({inprogress: false });
             // retrieve the participant
             let event = this.state.event;
