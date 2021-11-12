@@ -29,8 +29,7 @@ public class EventAccessGrantor {
      * External user       No access       |  No access    | No access         | ReadOnly
      * User invited        Read Only       | Read Only     | Read Only         | Read Only
      * Invitation accepted Parti. protected| All           | All               | All
-     */
-    /**
+     *
      * Is the user can access the event? Or only the header, then he asks to get an invitation?
      */
     private boolean hasAccess;
@@ -150,7 +149,7 @@ public class EventAccessGrantor {
     /**
      * return true when the user who ask the request is an active participant on the event
      *
-     * @return
+     * @return true if this user is an active participant
      */
 
     public boolean isActiveParticipant(ToghUserEntity toghUser) {
@@ -166,7 +165,8 @@ public class EventAccessGrantor {
 
     public Map<String, Object> getControlInformation() {
         return Map.of("readOnly", isReadOnly,
-                "isAbleToJoinByMyself", isAbleToJoinByMyself);
+                "isAbleToJoinByMyself", isAbleToJoinByMyself,
+                "hasAccess", hasAccess);
     }
 
 }

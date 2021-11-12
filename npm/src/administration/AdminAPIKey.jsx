@@ -8,9 +8,7 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
-import { TextInput } from 'carbon-components-react';
-
-import { Loading } from 'carbon-components-react';
+import { TextInput, Loading } from 'carbon-components-react';
 
 import FactoryService 	from 'service/FactoryService';
 
@@ -42,28 +40,33 @@ class AdminAPIKey extends React.Component {
 	componentDidMount () {
 		// call the server to get the value
 		this.setState({inprogress: true });
-		
+		this._isMounted = true;
+
 		var restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.getJson('/api/admin/apikey/get?', this, this.getApiKeyCallback);
 	}
-
 	getApiKeyCallback(httpPayload ) {
-			httpPayload.trace("AdminAPIKey.getkey");
-			
-			this.setState({inprogress: false });
-			if (httpPayload.isError()) {
-				this.setState({ message: "Server connection error"});
-			}
-			else {
-				console.log("httpPayload.getData()="+JSON.stringify(httpPayload.getData()));
-				this.setState({ listkeys : httpPayload.getData()});
-			}
-		
-		
+        // httpPayload.trace("AdminAPIKey.getkey");
+        if (! this._isMounted) {
+                    return;
+                }
+        this.setState({inprogress: false });
+        if (httpPayload.isError()) {
+            this.setState({ message: "Server connection error"});
+        }
+        else {
+            // console.log("AdminAPIKeys: httpPayload.getData()="+JSON.stringify(httpPayload.getData()));
+            this.setState({ listkeys : httpPayload.getData()});
+        }
 	}
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+
 	render() {
-		console.log("AdminAPIKey.render : inprogress="+this.state.inprogress+", listkeys="+JSON.stringify(this.state.listkeys));
+		// console.log("AdminAPIKey.render : inprogress="+this.state.inprogress+", listkeys="+JSON.stringify(this.state.listkeys));
 		let inprogresshtml=(<div/>);
 		if (this.state.inprogress )
 			inprogresshtml=(<Loading
@@ -79,7 +82,7 @@ class AdminAPIKey extends React.Component {
 				<div class="card-body">
 				 	{inprogresshtml}
 					{this.state.listkeys.map( (item, index) => {
-						console.log("item="+JSON.stringify(item));
+						// console.log("AdminAPIKey: item="+JSON.stringify(item));
 						return (
 							<div  key={index}>
 								<TextInput labelText={item.name} value={item.keyApi} 
