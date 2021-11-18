@@ -31,7 +31,9 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -46,7 +48,7 @@ public class ToghUserService {
     private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
-    private static String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
+    private static final String SALT = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
     @Autowired
     FactoryService factoryService;
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
@@ -54,66 +56,25 @@ public class ToghUserService {
     private ToghUserRepository toghUserRepository;
     @PersistenceContext
     private EntityManager entityManager;
-
-    public static String encryptPassword(String password) {
-        char[] passwordChar = password.toCharArray();
-        byte[] saltChar = salt.getBytes();
-        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
-        Arrays.fill(passwordChar, Character.MIN_VALUE);
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] securePassword = skf.generateSecret(spec).getEncoded();
-            return Base64.getEncoder().encodeToString(securePassword);
-
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
-        } finally {
-            spec.clearPassword();
-        }
-    }
-
-    private List<StatisticsSqlItem> listStatisticsSqlItem = Arrays.asList(
-            new StatisticsSqlItem("total", "count(*)"),
-            new StatisticsSqlItem("connected", "sum( case when connectionStamp is not null then 1 else 0 end)"),
-            new StatisticsSqlItem("map_status_blocked", "sum( case when statusUser= 'BLOCKED' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_status_invited", "sum( case when statusUser= 'INVITED' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_status_disabled", "sum( case when statusUser= 'DISABLED' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_status_actif", "sum( case when statusUser= 'ACTIF' then 1 else 0 end)"),
-
-            new StatisticsSqlItem("map_source_portal", "sum( case when source= 'PORTAL' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_source_google", "sum( case when source= 'GOOGLE' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_source_invited", "sum( case when source= 'INVITED' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_source_system", "sum( case when source= 'SYSTEM' then 1 else 0 end)"),
-
-            new StatisticsSqlItem("map_privilege_admin", "sum( case when privilegeUser= 'ADMIN' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_privilege_trans", "sum( case when privilegeUser= 'TRANS' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_privilege_user", "sum( case when privilegeUser= 'USER' then 1 else 0 end)"),
-
-            new StatisticsSqlItem("show_tips", "sum( case when showTipsUser= true then 1 else 0 end)"),
-            new StatisticsSqlItem("searchable", " sum( case when searchable= true then 1 else 0 end)"),
-
-            new StatisticsSqlItem("map_emailVisibility_always", "sum( case when emailVisibility= 'ALWAYS' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_emailVisibility_noSearch", "sum( case when emailVisibility= 'ALWAYBUTSEARCH' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_emailVisibility_limitedEvent", "sum( case when emailVisibility= 'LIMITEDEVENT' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_emailVisibility_never", "sum( case when emailVisibility= 'NEVER' then 1 else 0 end)"),
-
-            new StatisticsSqlItem("map_phoneVisibility_always", "sum( case when phoneNumberVisibility= 'ALWAYS' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_phoneVisibility_noSearch", "sum( case when phoneNumberVisibility= 'ALWAYBUTSEARCH' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_phoneVisibility_limitedEvent", "sum( case when phoneNumberVisibility= 'LIMITEDEVENT' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_phoneVisibility_never", "sum( case when phoneNumberVisibility= 'NEVER' then 1 else 0 end)"),
-
-            new StatisticsSqlItem("map_subscription_free", "sum( case when subscriptionUser= 'FREE' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_subscription_premium", "sum( case when subscriptionUser= 'PREMIUM' then 1 else 0 end)"),
-            new StatisticsSqlItem("map_subscription_excellence", "sum( case when subscriptionUser= 'EXCELLENCE' then 1 else 0 end)")
-
-    );
-
-    public ToghUserEntity getUserFromId(long userId) {
-        Optional<ToghUserEntity> toghUserEntity = toghUserRepository.findById(userId);
-        if (toghUserEntity.isPresent())
-            return toghUserEntity.get();
-        return null;
-    }
+    private static final String CONNECTION_LAST_MONTH = "select TO_CHAR(dateCreation, 'YYYY-MM-DD') as dateLog, count(*) as value"
+            + " from LoginLogEntity "
+            + " where statusconnection='" + LoginService.LoginStatus.OK + "' "
+            + " and dateCreation > ?1"
+            + " group by dateLog"
+            + " order by dateLog";
+    private static final String CONNECTION_FIVE_YEARS = "select TO_CHAR(dateCreation, 'YYYY-MM') as dateLog, count(*) as value"
+            + " from LoginLogEntity "
+            + " where statusConnection='" + LoginService.LoginStatus.OK + "' "
+            + " and dateCreation > ?1"
+            + " group by dateLog"
+            + " order by dateLog";
+    private static final String CONNECTION_BAD_PASSWORD = "select TO_CHAR(datecreation, 'YYYY-MM-DD') as dateLog,"
+            + " sum(numberOfTentatives) as value"
+            + " from LoginLogEntity"
+            + " where (statusConnection='" + LoginService.LoginStatus.BADPASSWORD + "' or statusConnection='" + LoginService.LoginStatus.UNKNOWUSER + "')"
+            + " and dateCreation > ?1"
+            + " group by dateLog"
+            + " order by dateLog";
 
     public Optional<ToghUserEntity> getUserFromEmail(String email) {
         return Optional.ofNullable(toghUserRepository.findByEmail(email));
@@ -299,6 +260,124 @@ public class ToghUserService {
         return "?" + listParameters.size();
     }
 
+    private static final String USER_CREATION_LAST_MONTH = "select TO_CHAR(dateCreation, 'YYYY-MM-DD') as dateLog, count(*) as value"
+            + " from ToghUserEntity "
+            + " where "
+            + " dateCreation > ?1"
+            + " group by dateLog"
+            + " order by dateLog";
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Statistics on user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+    private static final String USER_CREATION_FIVE_YEARS = "select TO_CHAR(dateCreation, 'YYYY-MM') as dateLog, count(*) as value"
+            + " from ToghUserEntity "
+            + " where "
+            + " dateCreation > ?1"
+            + " group by dateLog"
+            + " order by dateLog";
+
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Update user */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+    private static final String PARTICIPANT_CREATION_LAST_MONTH = "select TO_CHAR(dateCreation, 'YYYY-MM-DD') as dateLog, count(*) as value"
+            + " from ParticipantEntity "
+            + " where "
+            + " dateCreation > ?1"
+            + " group by dateLog"
+            + " order by dateLog";
+    private final List<StatisticsSqlItem> listStatisticsSqlItem = Arrays.asList(
+            new StatisticsSqlItem("total", "count(*)"),
+            new StatisticsSqlItem("connected", "sum( case when connectionStamp is not null then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_blocked", "sum( case when statusUser= 'BLOCKED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_invited", "sum( case when statusUser= 'INVITED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_disabled", "sum( case when statusUser= 'DISABLED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_status_actif", "sum( case when statusUser= 'ACTIF' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_source_portal", "sum( case when source= 'PORTAL' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_source_google", "sum( case when source= 'GOOGLE' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_source_invited", "sum( case when source= 'INVITED' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_source_system", "sum( case when source= 'SYSTEM' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_privilege_admin", "sum( case when privilegeUser= 'ADMIN' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_privilege_trans", "sum( case when privilegeUser= 'TRANS' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_privilege_user", "sum( case when privilegeUser= 'USER' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("show_tips", "sum( case when showTipsUser= true then 1 else 0 end)"),
+            new StatisticsSqlItem("searchable", " sum( case when searchable= true then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_emailVisibility_always", "sum( case when emailVisibility= 'ALWAYS' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_emailVisibility_noSearch", "sum( case when emailVisibility= 'ALWAYBUTSEARCH' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_emailVisibility_limitedEvent", "sum( case when emailVisibility= 'LIMITEDEVENT' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_emailVisibility_never", "sum( case when emailVisibility= 'NEVER' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_phoneVisibility_always", "sum( case when phoneNumberVisibility= 'ALWAYS' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_phoneVisibility_noSearch", "sum( case when phoneNumberVisibility= 'ALWAYBUTSEARCH' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_phoneVisibility_limitedEvent", "sum( case when phoneNumberVisibility= 'LIMITEDEVENT' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_phoneVisibility_never", "sum( case when phoneNumberVisibility= 'NEVER' then 1 else 0 end)"),
+
+            new StatisticsSqlItem("map_subscription_free", "sum( case when subscriptionUser= 'FREE' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_subscription_premium", "sum( case when subscriptionUser= 'PREMIUM' then 1 else 0 end)"),
+            new StatisticsSqlItem("map_subscription_excellence", "sum( case when subscriptionUser= 'EXCELLENCE' then 1 else 0 end)")
+
+    );
+
+    public static String encryptPassword(String password) {
+        // we don't want to use a secret random: we need to encrypt again a password to compare it
+        char[] passwordChar = password.toCharArray();
+        byte[] saltChar = SALT.getBytes();
+        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
+        Arrays.fill(passwordChar, Character.MIN_VALUE);
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] securePassword = skf.generateSecret(spec).getEncoded();
+            return Base64.getEncoder().encodeToString(securePassword);
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+        } finally {
+            spec.clearPassword();
+        }
+    }
+
+    /**
+     * Return the map of privilege for this user. Then, the interface can work with these privilege
+     *
+     * @param toghUserEntity ToghUser to get pr
+     * @return map of privileges
+     */
+    public Map<String, Object> getPrivileges(ToghUserEntity toghUserEntity) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("NBITEMS", getPrivilegesNumberOfItems(toghUserEntity));
+        result.put("PRIVILEGEUSER", toghUserEntity.getPrivilegeUser().toString());
+        return result;
+    }
+
+    /**
+     * How many items a user can create in an event ?
+     *
+     * @param toghUserEntity the user
+     * @return the default number of items
+     */
+    public int getPrivilegesNumberOfItems(ToghUserEntity toghUserEntity) {
+        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.FREE)
+            return 15;
+        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
+            return 100;
+        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE)
+            return 1000;
+        // not a FREE user, so this is a very limited one
+        return 2;
+    }
+
+    public ToghUserEntity getUserFromId(long userId) {
+        Optional<ToghUserEntity> toghUserEntity = toghUserRepository.findById(userId);
+        return toghUserEntity.orElse(null);
+    }
+
     /**
      * Find by criteria
      *
@@ -316,10 +395,10 @@ public class ToghUserService {
          */
         List<Object> listParameters = new ArrayList<>();
         if (criteriaSearch.searchSentence != null && criteriaSearch.searchSentence.trim().length() > 0) {
-            sqlRequest.append(" and ( upper(toghuser.firstName) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') "
-                    + " or  upper(toghuser.lastName) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') "
-                    + " or  upper(toghuser.phoneNumber) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%')"
-                    + " or  upper(toghuser.email) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') )");
+            sqlRequest.append(" and ( upper(toghuser.firstName) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') ");
+            sqlRequest.append("  or upper(toghuser.lastName) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') ");
+            sqlRequest.append("  or upper(toghuser.phoneNumber) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%')");
+            sqlRequest.append("  or upper(toghuser.email) like concat('%', upper( " + registerParameter(listParameters, criteriaSearch.searchSentence) + " ), '%') )");
         }
         if (criteriaSearch.connected)
             sqlRequest.append(" and toghuser.connectionStamp is not null ");
@@ -351,53 +430,11 @@ public class ToghUserService {
         return searchResult;
     }
 
-    /**
-     * Return the map of privilege for this user. Then, the interface can work with these privilege
-     *
-     * @param toghUserEntity ToghUser to get pr
-     * @return map of privileges
-     */
-    public Map<String, Object> getPrivileges(ToghUserEntity toghUserEntity) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("NBITEMS", getPrivilegesNumberOfItems(toghUserEntity));
-        result.put("PRIVILEGEUSER", toghUserEntity.getPrivilegeUser().toString());
-        return result;
-    }
-
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Update user */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
-
-    /**
-     * How many items a user can create in an event ?
-     *
-     * @param toghUserEntity the user
-     * @return the default number of items
-     */
-    public int getPrivilegesNumberOfItems(ToghUserEntity toghUserEntity) {
-        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.FREE)
-            return 15;
-        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.PREMIUM)
-            return 100;
-        if (toghUserEntity.getSubscriptionUser() == SubscriptionUserEnum.EXCELLENCE)
-            return 1000;
-        // not a FREE user, so this is a very limited one
-        return 2;
-    }
-
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Statistics on user */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
-
     public OperationUser updateUser(Long userId, String attributName, Object attributValue) {
         OperationUser operationUser = new OperationUser();
 
         Optional<ToghUserEntity> toghUser = toghUserRepository.findById(userId);
-        if (!toghUser.isPresent()) {
+        if (toghUser.isEmpty()) {
             operationUser.listLogEvents.add(new LogEvent(eventUnknowId, "Id[" + userId + "]"));
             return operationUser;
         }
@@ -427,6 +464,7 @@ public class ToghUserService {
         StatisticsUsers statisticsUsers = new StatisticsUsers();
 
 
+        // ----------------- Statistics on Users
         StringBuilder sqlRequest = new StringBuilder();
         sqlRequest.append("select ");
         sqlRequest.append(listStatisticsSqlItem.stream()
@@ -451,25 +489,78 @@ public class ToghUserService {
                 statisticsUsers.users.put(listStatisticsSqlItem.get(i).name, markerValue);
             }
         }
+
+
+        // ----------------- Statistics on Connection
+        Calendar onMonth = Calendar.getInstance();
+        onMonth.add(Calendar.MONTH, -1);
+        Calendar fiveYears = Calendar.getInstance();
+        fiveYears.add(Calendar.YEAR, -5);
+
+        executeAndComplete("connection", CONNECTION_LAST_MONTH, onMonth, Calendar.DAY_OF_YEAR, statisticsUsers);
+        executeAndComplete("connectionFiveYears", CONNECTION_FIVE_YEARS, fiveYears, Calendar.MONTH, statisticsUsers);
+        executeAndComplete("badpassword", CONNECTION_BAD_PASSWORD, onMonth, Calendar.DAY_OF_YEAR, statisticsUsers);
+
+        executeAndComplete("userCreation", USER_CREATION_LAST_MONTH, onMonth, Calendar.DAY_OF_YEAR, statisticsUsers);
+        executeAndComplete("userCreationFiveYears", USER_CREATION_FIVE_YEARS, fiveYears, Calendar.MONTH, statisticsUsers);
+
+        executeAndComplete("participantCreation", PARTICIPANT_CREATION_LAST_MONTH, onMonth, Calendar.DAY_OF_YEAR, statisticsUsers);
+
         return statisticsUsers;
+    }
+
+
+    /**
+     * Execute the request, and populate the list in statistics users
+     *
+     * @param listName        name of the list
+     * @param sqlRequest      sqlRequest to execute
+     * @param startDate       all value from this startDate to now will be populated
+     * @param stepCalendar    may be Calendar.DAY_OF_YEAR or Calendar.MONTH.
+     * @param statisticsUsers populate this object
+     */
+    private void executeAndComplete(String listName, String sqlRequest, Calendar startDate, int stepCalendar, StatisticsUsers statisticsUsers) {
+
+        Query query = entityManager.createQuery(sqlRequest);
+        query.setParameter(1, LocalDateTime.ofInstant(startDate.getTime().toInstant(), ZoneOffset.UTC));
+
+
+        List<Object[]> listResultQuery = query.getResultList();
+        Map<String, Object> resultPerDate = new HashMap<>();
+        for (Object[] recordIterator : listResultQuery) {
+            resultPerDate.put(recordIterator[0].toString(), recordIterator[1]);
+        }
+
+        // now, populate the result
+        Date dateEnd = new Date();
+        Calendar dateIterator = (Calendar) startDate.clone();
+        SimpleDateFormat sdf = new SimpleDateFormat(stepCalendar == Calendar.DAY_OF_YEAR ? "yyyy-MM-dd" : "yyyy-MM");
+        while (dateIterator.getTime().before(dateEnd)) {
+            String dateFormat = sdf.format(dateIterator.getTime());
+            Map<String, Object> recordDate = Map.of("label", dateFormat,
+                    "value", resultPerDate.getOrDefault(dateFormat, 0));
+            statisticsUsers.addInList(listName, recordDate);
+
+            dateIterator.add(stepCalendar, 1);
+        }
+
     }
 
     public static class StatisticsUsers {
         Map<String, Object> users = new HashMap<>();
 
         public Map<String, Object> getMap() {
+
             return users;
         }
+
+        public void addInList(String listName, Map<String, Object> recordToAdd) {
+            List<Map<String, Object>> list = (List<Map<String, Object>>) users.getOrDefault(listName, new ArrayList<>());
+            list.add(recordToAdd);
+            users.put(listName, list);
+        }
     }
-            /*
 
-
-
-            + " sum( case when subscriptionUser= 'FREE' then 1 else 0 end) as nbSubscriptionFree,"
-            + " sum( case when subscriptionUser= 'PREMIUM' then 1 else 0 end) as nbSubscriptionPremium,"
-            + " sum( case when subscriptionUser= 'EXCELLENCE' then 1 else 0 end) as nbSubscriptionExcellence"
-
-            */
 
     private static class StatisticsSqlItem {
         public String name;
@@ -518,7 +609,7 @@ public class ToghUserService {
     /**
      * Search users
      */
-    public class SearchUsersResult {
+    public static class SearchUsersResult {
 
         public List<ToghUserEntity> listUsers;
         public int page = 1;
@@ -530,7 +621,7 @@ public class ToghUserService {
     /**
      * Invite a new user: we register it with the status Invited, then we sent an email
      */
-    public class CreationResult {
+    public static class CreationResult {
 
         public ToghUserEntity toghUser;
         public boolean isEmailIsCorrect = false;
@@ -540,7 +631,7 @@ public class ToghUserService {
     /**
      * Update a user
      */
-    public class OperationUser {
+    public static class OperationUser {
         public List<LogEvent> listLogEvents = new ArrayList<>();
         public ToghUserEntity toghUserEntity = null;
     }

@@ -28,28 +28,31 @@ import javax.persistence.*;
 public @Data
 class LoginLogEntity extends BaseEntity {
 
-    @Column(name = "googleId", length = 100)
+    @Column(name = "googleid", length = 100)
     private String googleId;
 
     @Column(name = "email", length = 100)
     private String email;
 
-    @Column(name = "ipAddress", length = 100)
+    @Column(name = "ipaddress", length = 100)
     private String ipAddress;
 
 
-    @Column(name = "statusConnection", length = 20, nullable = false)
+    @Column(name = "statusconnection", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private LoginService.LoginStatus statusConnection;
 
-    @Column(name = "numberOfTentatives")
+    @Column(name = "numberoftentatives")
     private int numberOfTentatives;
+
+    @Column(name = "explanation", length = 200)
+    private String explanation;
 
     /**
      * Group record per timeslot of 15 mn. Information is YYYYMMDD-HH:MM where MM is 00/15/30/45
      * Example: 20211004-16:00
      */
-    @Column(name = "timeSlot", length = 14, nullable = false)
+    @Column(name = "timeslot", length = 14, nullable = false)
     private String timeSlot;
 
 }

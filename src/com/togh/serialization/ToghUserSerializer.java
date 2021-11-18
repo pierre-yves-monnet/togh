@@ -88,8 +88,8 @@ public class ToghUserSerializer extends BaseSerializer {
             resultMap.put("phoneNumber", toghUserEntity.getPhoneNumber());
             if (toghUserEntity.getPhoneNumber() != null) {
                 if (label.length() == 0)
-                    label.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " )");
-                longLabel.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " ");
+                    label.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " )"));
+                longLabel.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " "));
             }
         } else
             resultMap.put("phoneNumber", "*********");
@@ -139,14 +139,9 @@ public class ToghUserSerializer extends BaseSerializer {
         if (toghUser.getEmailVisibility() == ToghUserEntity.VisibilityEnum.ALWAYS)
             return true;
         // it's visible only for accepted user in the event
-        if ((serializeOptions.getEventAccessGrantor() != null)
-                && ((visibility == ToghUserEntity.VisibilityEnum.LIMITEDEVENT || visibility == ToghUserEntity.VisibilityEnum.ALWAYBUTSEARCH))
-                && (serializeOptions.getEventAccessGrantor().isOtherParticipantsVisible()))
-            return true;
-
-        return false;
-        // return (userAccess == ToghUserEntity.ContextAccess.FRIENDACCESS && (visibility == ToghUserEntity.VisibilityEnum.LIMITEDEVENT || visibility == ToghUserEntity.VisibilityEnum.ALWAYBUTSEARCH));
-        // in all other case, refuse
+        return ((serializeOptions.getEventAccessGrantor() != null)
+                && (visibility == ToghUserEntity.VisibilityEnum.LIMITEDEVENT || visibility == ToghUserEntity.VisibilityEnum.ALWAYBUTSEARCH)
+                && (serializeOptions.getEventAccessGrantor().isOtherParticipantsVisible()));
     }
 
     /**
@@ -155,7 +150,7 @@ public class ToghUserSerializer extends BaseSerializer {
      * @param encapsulateInfoBegin information begin
      * @param content              information to encapsulate
      * @param encapsulateInfoEnd   information end
-     * @return
+     * @return a String with the encapsulated value
      */
     private String encapsulate(String encapsulateInfoBegin, String content, String encapsulateInfoEnd) {
         return encapsulateInfoBegin + content + encapsulateInfoEnd;

@@ -72,6 +72,9 @@ class ToghUserEntity extends BaseEntity {
     private String lastName;
     @Column(name = "password", length = 100)
     private String password;
+    @Column(name = "lengthpassword")
+    private Integer lengthPassword;
+
     @Column(name = "email", length = 100)
     private String email;
 
@@ -103,7 +106,7 @@ class ToghUserEntity extends BaseEntity {
     @org.hibernate.annotations.ColumnDefault("'ACTIF'")
     private StatusUserEnum statusUser;
 
-    @Column(name = "invitationStamp", length = 100)
+    @Column(name = "invitationstamp", length = 100)
     private String invitationStamp;
 
     public static ToghUserEntity createNewUser(String firstName, String lastName, String email, String password, SourceUserEnum sourceUser) {
@@ -175,6 +178,16 @@ class ToghUserEntity extends BaseEntity {
     public enum VisibilityEnum {
         ALWAYS, ALWAYBUTSEARCH, LIMITEDEVENT, NEVER
     }
+
+    /**
+     * Set the password. Update the length as well, to help person to maybe remind it?
+     *
+     * @param password new password to saved
+     */
+    public void setPassword(String password) {
+        setLengthPassword(password == null ? 0 : password.length());
+    }
+
 
     /**
      * Invited: email was sent, waiting to be confirmed

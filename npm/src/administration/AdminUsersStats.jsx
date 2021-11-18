@@ -9,8 +9,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon, Tag, Toggle, ToggleSmall, Loading } from 'carbon-components-react';
-import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
+import { Loading } from 'carbon-components-react';
 
 
 import FactoryService 		from 'service/FactoryService';
@@ -112,7 +111,30 @@ class AdminUsersStats extends React.Component {
                             <Chart type="Doughnut" dataMap={this.state.users.subscription}
                                 title={intl.formatMessage({id: "AdmunUsersStats.Subscription",defaultMessage: "Subscription"}) } />
                         </div>
-
+                    </div>
+                    <div class="row" style={{ margin: "10px"}}>
+                        <div class="col-6">
+                            <Chart type="HorizontalBar" dataList={this.state.users.connection} oneColor={true}
+                                title={intl.formatMessage({id: "AdmunUsersStats.ConnectionWeek",defaultMessage: "Connection week"}) } />
+                        </div>
+                        <div class="col-6">
+                            <Chart type="HorizontalBar" dataList={this.state.users.connectionFiveYears} oneColor={true}
+                                title={intl.formatMessage({id: "AdmunUsersStats.ConnectionFiveYears",defaultMessage: "Connection five years"}) } />
+                        </div>
+                    </div>
+                    <div class="row" style={{ margin: "10px"}}>
+                        <div class="col-4">
+                                <Chart type="HorizontalBar" dataList={this.state.users.userCreation} oneColor={true}
+                                    title={intl.formatMessage({id: "AdmunUsersStats.UserCreation",defaultMessage: "User creation"}) } />
+                        </div>
+                        <div class="col-4">
+                               <Chart type="HorizontalBar" dataList={this.state.users.userCreationFiveYears} oneColor={true}
+                                    title={intl.formatMessage({id: "AdmunUsersStats.UserCreationFiveYears",defaultMessage: "User creation five years"}) } />
+                        </div>
+                        <div class="col-4">
+                               <Chart type="HorizontalBar" dataList={this.state.users.participantCreation} oneColor={true}
+                                    title={intl.formatMessage({id: "AdmunUsersStats.ParticipantCreation",defaultMessage: "Participants creation"}) } />
+                        </div>
                     </div>
 				</div>
 				<LogEvents listEvents={this.state.listEvents} />

@@ -832,3 +832,30 @@ EventEntity.getMap : normaliser les constantes ici avec les SLAB_OPERATION (une 
 * Geolocalisation : titre dupliquée
 * my profile => My invitation: on affiche la liste complete
 * My invitation => evnts : on n'a que "my events" et pas tout
+
+Readonly= dans la registration
+
+Boutoun invitation : mettre un + et invitation
+
+invited pierre-uves, pierre-yves monnet
+
+Je suis 2 fois dans le systeme !!
+
+Chat : "TheFriday" ==> "On Friday"
+
+------------ Revoir l'URL : faire un bouton Share
+
+Adresse 405 Bellevue Oakland n'est pas geolocalisée
+
+bouton ADD plus gros dans les tabs
+
+Email: The event Marielle Spiteri invites you to join is
+
+Togh & Cupris : faire des fond transparent
+
+Horaire de l'email : je met 12:00 et le mail envoi 8:00.L Mettre dans l'email heure + time zone
+
+ALTER TABLE toghuser RENAME COLUMN invitation_stamp TO invitationstamp; ALTER TABLE loginlog RENAME COLUMN ip_address TO
+ipaddress; ALTER TABLE loginlog RENAME COLUMN number_of_tentatives TO numberoftentatives; ALTER TABLE loginlog RENAME
+COLUMN status_connection TO statusconnection; ALTER TABLE loginlog RENAME COLUMN time_slot TO timeslot; ALTER TABLE
+loginlog RENAME COLUMN google_id TO googleid; ALTER TABLE loginlog drop COLUMN google_id;

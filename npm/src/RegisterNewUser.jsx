@@ -72,7 +72,6 @@ class RegisterNewUser extends React.Component {
 						<br/>
 						<br />
 					</div>
-					ReadOnly={this.state.readOnlyRegisterEmail}
 					<TextInput labelText={<FormattedMessage id="RegisterNewUser.Email" defaultMessage="Email"/>}
 					    disabled={this.state.readOnlyRegisterEmail}
 						type="email"

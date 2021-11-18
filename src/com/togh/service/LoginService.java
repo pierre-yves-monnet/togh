@@ -65,7 +65,7 @@ public class LoginService {
     /* Connect / disconnect / IsConnected */
     /*                                                                      */
     /* -------------------------------------------------------------------- */
-    Random random = new Random();
+    private Random random = new Random();
 
     @Autowired
     private ToghUserLostPasswordRepository toghUserLostPasswordRepository;
@@ -130,6 +130,7 @@ public class LoginService {
         if (!toghUserEntity.checkPassword(passwordEncrypted)) {
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_BAD_PASSWORD);
             loginStatus.status = LoginStatus.BADPASSWORD; // don't say that the user exists...
+            loginStatus.explanation = "Password given has (" + password.length() + ") char, original password is " + toghUserEntity.getLengthPassword();
             report(loginStatus);
             return loginStatus;
         }
@@ -261,7 +262,9 @@ public class LoginService {
      */
     private String connectUser(ToghUserEntity toghUserEntity) {
         // Generate a ConnectionStamp
-        String randomStamp = String.valueOf(System.currentTimeMillis()) + String.valueOf(random.nextInt(100000));
+        String randomStamp = new StringBuilder()
+                .append(System.currentTimeMillis())
+                .append(random.nextInt(100000)).toString();
 
         toghUserEntity.setConnectionStamp(randomStamp);
         toghUserEntity.setConnectionTime(LocalDateTime.now(ZoneOffset.UTC));
@@ -622,6 +625,7 @@ public class LoginService {
                 loginLogEntity.setTimeSlot(timeSlot);
                 loginLogEntity.setNumberOfTentatives(1);
                 loginLogEntity.setStatusConnection(loginStatus.status);
+                loginLogEntity.setExplanation(loginStatus.explanation);
             }
 
             loginLogRepository.save(loginLogEntity);
@@ -645,7 +649,7 @@ public class LoginService {
         public String email = "";
         public String googleId = "";
         public String ipAddress = "null";
-
+        public String explanation = null;
 
         public List<LogEvent> listEvents = new ArrayList<>();
 
