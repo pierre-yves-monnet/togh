@@ -10,6 +10,7 @@ package com.togh.serialization;
 
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.UserEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import java.util.Map;
 /*                                                                                  */
 /* ******************************************************************************** */
 
+@Component
 public abstract class UserSerializer extends BaseSerializer {
     /**
      * getBaseMap. Each entity depend on UserEntity. So, this is the basic map

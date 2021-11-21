@@ -34,6 +34,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -46,8 +47,8 @@ import java.util.logging.Logger;
 @RequestMapping("togh")
 public class RestLoginController {
 
-    private final static String LOG_HEADER = RestLoginController.class.getSimpleName() + ": ";
-    private final static String GOOGLE_CLIENTID = "81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com";
+    private static final String LOG_HEADER = RestLoginController.class.getSimpleName() + ": ";
+    private static final String GOOGLE_CLIENTID = "81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com";
     private static final String JSON_EMAIL = "email";
     private static final String JSON_PASSWORD = "password";
     private static final String JSON_STATUS = "status";
@@ -76,8 +77,10 @@ public class RestLoginController {
     @CrossOrigin
     @PostMapping(value = "api/login", produces = "application/json")
     @ResponseBody
-    public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.connectWithEmail(userData.get(JSON_EMAIL), userData.get(JSON_PASSWORD));
+    public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response, HttpServletRequest request) {
+        LoginResult loginStatus = loginService.connectWithEmail(userData.get(JSON_EMAIL),
+                userData.get(JSON_PASSWORD),
+                request.getRemoteAddr());
         Map<String, Object> finalStatus = new HashMap<>();
         finalStatus.putAll(loginStatus.getMap());
         if (loginStatus.isConnected) {
@@ -106,8 +109,7 @@ public class RestLoginController {
                 && invitationStamp != null && invitationStamp.equals(toghUserEntity.get().getInvitationStamp());
         boolean isInvited = exist && toghUserEntity.get().getStatusUser() == ToghUserEntity.StatusUserEnum.INVITED;
 
-        Map<String, Object> finalStatus = Map.of("isUser", exist, "isInvited", isInvited);
-        return finalStatus;
+        return Map.of("isUser", exist, "isInvited", isInvited);
     }
 
     /**
@@ -134,8 +136,11 @@ public class RestLoginController {
     // visit https://developers.google.com/identity/sign-in/web/backend-auth#send-the-id-token-to-your-server
     @CrossOrigin
     @GetMapping(value = "/api/logingoogle")
-    public Map<String, Object> loginGoogle(@RequestParam("idtokengoogle") String idTokenGoogle, HttpServletResponse response) {
+    public Map<String, Object> loginGoogle(@RequestParam("idtokengoogle") String idTokenGoogle,
+                                           HttpServletResponse response,
+                                           HttpServletRequest request) {
         LoginResult loginStatus = new LoginResult();
+
         try {
 
             final NetHttpTransport transport = new NetHttpTransport();
@@ -146,8 +151,8 @@ public class RestLoginController {
                     // To learn about getting a Server Client ID, see this link
                     // https://developers.google.com/identity/sign-in/android/start
                     // And follow step 4
-                    // .setIssuer("https://accounts.google.com").build();
-                    // .setIssuer("http://localhost:8080/")
+                    // . s e tIssuer("https://accounts.google.com").build();
+                    // .s e t Issuer("http://localhost:8080/")
                     .build();
 
 
@@ -161,7 +166,7 @@ public class RestLoginController {
                 String picture = (String) payload.get("picture");
                 // fr, en..
                 // String language= (String) payload.get("locale");
-                loginStatus = loginService.connectSSO(email, true);
+                loginStatus = loginService.connectSSO(email, true, request.getRemoteAddr());
                 if (!loginStatus.isConnected) {
                     // register it now !
                     loginStatus = loginService.registerNewUser(email, firstName, lastName, /** No password */null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
@@ -193,7 +198,7 @@ public class RestLoginController {
         LoginResult loginStatus = loginService.registerNewUser(userData.get(JSON_EMAIL),
                 userData.get("firstName"),
                 userData.get("lastName"),
-                userData.get("password"),
+                userData.get(JSON_PASSWORD),
                 SourceUserEnum.PORTAL,
                 TypePictureEnum.TOGH,
                 null

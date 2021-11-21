@@ -76,13 +76,7 @@ class EventGeolocalisation extends React.Component {
 				showPlusButton={false}
 				userTipsText={<FormattedMessage id="EventGeolocalisation.GeolocalisationTip" defaultMessage="Where is the event? Do I want to share my position ? Note: for a multi place event, use the Itinerary." />}
 			/>
-			<div class="eventsection">
-				<a href="secGeolocalisation"></a>
-				<a onClick={this.collapse} style={{ verticalAlign: "top" }}>
-					{this.state.show === 'ON' && <span class="glyphicon glyphicon-chevron-down" style={{ fontSize: "small" }}></span>}
-					{this.state.show === 'COLLAPSE' && <span class="glyphicon glyphicon-chevron-right" style={{ fontSize: "small" }}></span>}
-				</a><FormattedMessage id="EventGeolocalisation.MainTitleGeolocation" defaultMessage="Geolocalisation" />
-			</div>
+
 			<div>
 				<table >
 					<tr><td style={{ "paddingRight": "30px" }}>

@@ -39,7 +39,7 @@ const NAMEENTITY = "shoppinglist";
 
 class EventShoppingList extends React.Component {
 	// this.props.updateEvent()
-	// props.eventPreferences is provide (or should be at least, I think, I don't know)
+	// props.manageFilter is provide (or should be at least, I think, I don't know)
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");

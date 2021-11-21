@@ -394,12 +394,14 @@ React:
 	// Component controls
 	// 
 	// --------------------------------------------------------------
-	
-## tool for react : 
-  
-  vscode
-  react hooks
 
+## tool for react :
+
+vscode react hooks
+
+## tools to explore
+
+buildpack.io : create a docker container easely
 
 # API
 

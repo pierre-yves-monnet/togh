@@ -73,7 +73,7 @@ public class RestEventController {
     @CrossOrigin
     @GetMapping("/api/event/list")
     public Map<String, Object> events(@RequestParam(RestJsonConstants.CST_PARAM_FILTER_EVENTS) String filterEvents,
-                                      @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                      @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
                                       @RequestParam(name = "withParticipants", required = false) Boolean withParticipants,
                                       @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
@@ -103,7 +103,7 @@ public class RestEventController {
     @CrossOrigin
     @GetMapping("/api/event")
     public Map<String, Object> event(@RequestParam("id") Long eventId,
-                                     @RequestParam(name = RestJsonConstants.CST_PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                     @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
                                      @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUserEntity == null)

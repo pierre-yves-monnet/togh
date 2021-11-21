@@ -11,19 +11,20 @@ import React from 'react';
 import { IntlProvider, FormattedMessage } from "react-intl";
 
 
-import Login 			from 'Login';
-import Banner 			from 'Banner';
-import Footer 			from 'Footer';
-import Menu 			from 'Menu';
-import {MENU_NAME} 		from 'Menu';
-import {FILTER_EVENT}	from 'EventsList';
-import RegisterNewUser 	from 'RegisterNewUser';
-import ResetPassword 	from 'ResetPassword';
-import EventsList 		from 'EventsList';
-import Event 			from 'event/Event';
-import AdminHome 		from 'administration/AdminHome';
-import AdminUsers 		from 'administration/AdminUsers';
-import MyProfile		from 'user/MyProfile.jsx'
+import Login 			    from 'Login';
+import Banner 			    from 'Banner';
+import Footer 			    from 'Footer';
+import Menu 			    from 'Menu';
+import {MENU_NAME} 		    from 'Menu';
+import {FILTER_EVENT}	    from 'EventsList';
+import RegisterNewUser 	    from 'RegisterNewUser';
+import ResetPassword 	    from 'ResetPassword';
+import EventsList 		    from 'EventsList';
+import Event 			    from 'event/Event';
+import AdminHome 		    from 'administration/AdminHome';
+import AdminUsers 		    from 'administration/AdminUsers';
+import AdminLogConnection	from 'administration/AdminLogConnection';
+import MyProfile		    from 'user/MyProfile.jsx'
 
 
 import FactoryService from './service/FactoryService';
@@ -46,6 +47,7 @@ const FRAME_NAME = {
 		EVENT:			"frameEvent",
 		ADMINISTRATION: "frameAdministration",
 		ADMINISTRATION_USERS:"frameAdministrationUsers",
+		ADMINISTRATION_LOGCONNECTION: "frameAdministrationLogCOnnection",
 		MY_PROFILE:		"frameMyProfile"
 };
 
@@ -253,6 +255,7 @@ class BodyTogh extends React.Component {
 										{ this.state.frameContent === FRAME_NAME.MY_PROFILE && <MyProfile  />}
 										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
 										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_USERS && <AdminUsers />}
+										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_LOGCONNECTION && <AdminLogConnection />}
 
 									</td>
 								</tr>
@@ -300,6 +303,8 @@ class BodyTogh extends React.Component {
             this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION });
         } else if (menuName === MENU_NAME.ADMINISTRATION_USERS) {
             this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION_USERS });
+        } else if (menuName === MENU_NAME.ADMINISTRATION_LOGCONNECTION) {
+            this.setState( {'currentEventId' : null, 'frameContent': FRAME_NAME.ADMINISTRATION_LOGCONNECTION });
         } else {
         	console.log("BodyTogh.clickMenu: Unknow menu=["+menuName+"]");
         }

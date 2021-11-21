@@ -12,6 +12,7 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.tool.JpaTool;
 import com.togh.entity.EventEntity;
+import com.togh.entity.LoginLogEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.*;
 import com.togh.repository.ToghUserRepository;
@@ -41,9 +42,9 @@ import java.util.stream.Collectors;
 @Service
 public class ToghUserService {
 
-    private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com";
-    private static final String TOGHADMIN_USERNAME = "toghadmin";
-    private static final String TOGHADMIN_PASSWORD = "togh";
+    private static final String TOGH_ADMIN_EMAIL = "toghadmin@togh.com";
+    private static final String TOGH_ADMIN_USERNAME = "toghadmin";
+    private static final String TOGH_ADMIN_PASSWORD = "togh";
     private static final String LOG_HEADER = ToghUserService.class.getName() + ":";
     private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
     private static final int ITERATIONS = 10000;
@@ -52,10 +53,12 @@ public class ToghUserService {
     @Autowired
     FactoryService factoryService;
     private Logger logger = Logger.getLogger(ToghUserService.class.getName());
+
     @Autowired
     private ToghUserRepository toghUserRepository;
     @PersistenceContext
     private EntityManager entityManager;
+
     private static final String CONNECTION_LAST_MONTH = "select TO_CHAR(dateCreation, 'YYYY-MM-DD') as dateLog, count(*) as value"
             + " from LoginLogEntity "
             + " where statusconnection='" + LoginService.LoginStatus.OK + "' "
@@ -117,12 +120,12 @@ public class ToghUserService {
      */
     @PostConstruct
     public void init() {
-        ToghUserEntity adminUser = toghUserRepository.findByName(TOGHADMIN_USERNAME);
+        ToghUserEntity adminUser = toghUserRepository.findByName(TOGH_ADMIN_USERNAME);
         if (adminUser == null) {
             adminUser = new ToghUserEntity();
-            adminUser.setName(TOGHADMIN_USERNAME);
-            setPassword(adminUser, TOGHADMIN_PASSWORD);
-            adminUser.setEmail(TOGHADMIN_EMAIL);
+            adminUser.setName(TOGH_ADMIN_USERNAME);
+            setPassword(adminUser, TOGH_ADMIN_PASSWORD);
+            adminUser.setEmail(TOGH_ADMIN_EMAIL);
             adminUser.setPrivilegeUser(PrivilegeUserEnum.ADMIN);
             adminUser.setStatusUser(StatusUserEnum.ACTIF);
             adminUser.setSource(SourceUserEnum.SYSTEM);
@@ -387,7 +390,6 @@ public class ToghUserService {
      * @return users found
      */
     public SearchUsersResult findUserByCriterias(CriteriaSearchUser criteriaSearch, int page, int numberPerPage) {
-
         StringBuilder sqlRequest = new StringBuilder();
         sqlRequest.append("select toghuser from ToghUserEntity toghuser where 1=1 ");
         /*
@@ -430,6 +432,14 @@ public class ToghUserService {
         return searchResult;
     }
 
+    /**
+     * Update User
+     *
+     * @param userId        UserId to update
+     * @param attributName  attribut Name
+     * @param attributValue attribut value
+     * @return result of the update
+     */
     public OperationUser updateUser(Long userId, String attributName, Object attributValue) {
         OperationUser operationUser = new OperationUser();
 
@@ -507,6 +517,52 @@ public class ToghUserService {
         executeAndComplete("participantCreation", PARTICIPANT_CREATION_LAST_MONTH, onMonth, Calendar.DAY_OF_YEAR, statisticsUsers);
 
         return statisticsUsers;
+    }
+
+    public SearchLogingLogResult findLoginLogByCriteria(CriteriaSearchLogingLog criteriaLoginLog, int page, int numberPerPage) {
+        StringBuilder sqlRequest = new StringBuilder();
+        sqlRequest.append("select loginLog from LoginLogEntity loginLog where 1=1 ");
+        /*
+         * Search Sentence
+         */
+        List<Object> listParameters = new ArrayList<>();
+        if (criteriaLoginLog.searchSentence != null && criteriaLoginLog.searchSentence.trim().length() > 0) {
+            sqlRequest.append(" and ( upper(loginLog.email) like concat('%', upper( " + registerParameter(listParameters, criteriaLoginLog.searchSentence) + " ), '%') ");
+            sqlRequest.append("  or upper(loginLog.ipAddress) like concat('%', upper( " + registerParameter(listParameters, criteriaLoginLog.searchSentence) + " ), '%') ");
+            sqlRequest.append("  or upper(loginLog.googleId) like concat('%', upper( " + registerParameter(listParameters, criteriaLoginLog.searchSentence) + " ), '%') )");
+        }
+        if (criteriaLoginLog.ok) {
+            sqlRequest.append(" and loginLog.statusConnection = " + registerParameter(listParameters, LoginService.LoginStatus.OK));
+        }
+        if (criteriaLoginLog.unknownUser) {
+            sqlRequest.append(" and loginLog.statusConnection = " + registerParameter(listParameters, LoginService.LoginStatus.UNKNOWUSER));
+        }
+        if (criteriaLoginLog.badPassword) {
+            sqlRequest.append(" and loginLog.statusConnection = " + registerParameter(listParameters, LoginService.LoginStatus.BADPASSWORD));
+        }
+        if (criteriaLoginLog.underAttack) {
+            sqlRequest.append(" and loginLog.numberOfTentatives > 5 ");
+        }
+        if (criteriaLoginLog.dateTimeStart != null) {
+            sqlRequest.append(" and loginLog.dateCreation >=  " + registerParameter(listParameters, criteriaLoginLog.dateTimeStart));
+        }
+        if (criteriaLoginLog.dateTimeEnd != null) {
+            sqlRequest.append(" and loginLog.dateCreation <=  " + registerParameter(listParameters, criteriaLoginLog.dateTimeEnd));
+        }
+        sqlRequest.append(" order by loginLog.dateCreation desc");
+        TypedQuery<LoginLogEntity> query = entityManager.createQuery(sqlRequest.toString(), LoginLogEntity.class);
+        for (int i = 0; i < listParameters.size(); i++)
+            query.setParameter(i + 1, listParameters.get(i));
+
+        query.setFirstResult((page - 1) * numberPerPage);
+        query.setMaxResults(numberPerPage);
+        var searchResult = new SearchLogingLogResult();
+
+        searchResult.listLogs = query.getResultList();
+        searchResult.countLogConnection = (long) searchResult.listLogs.size();
+        searchResult.page = page;
+        searchResult.numberPerPage = numberPerPage == 0 ? 1 : numberPerPage;
+        return searchResult;
     }
 
 
@@ -593,17 +649,14 @@ public class ToghUserService {
     /**
      * This is a restriction filter. So, if all is null/false, there is no restriction
      *
-     * @author Firstname Lastname
      */
     public static class CriteriaSearchUser {
-
         public String searchSentence = null;
         public boolean connected = false;
         public boolean block = false;
         public boolean administrator = false;
         public boolean premium = false;
         public boolean excellence = false;
-
     }
 
     /**
@@ -616,6 +669,31 @@ public class ToghUserService {
         public int numberPerPage = 1;
 
         public Long countUsers;
+    }
+
+    /**
+     * This is a restriction filter. So, if all is null/false, there is no restriction
+     */
+    public static class CriteriaSearchLogingLog {
+        public String searchSentence = null;
+        public boolean ok = false;
+        public boolean unknownUser = false;
+        public boolean badPassword = false;
+        public boolean underAttack = false;
+        public LocalDateTime dateTimeStart;
+        public LocalDateTime dateTimeEnd;
+    }
+
+    /**
+     * Search users
+     */
+    public static class SearchLogingLogResult {
+
+        public List<LoginLogEntity> listLogs;
+        public int page = 1;
+        public int numberPerPage = 1;
+
+        public Long countLogConnection;
     }
 
     /**

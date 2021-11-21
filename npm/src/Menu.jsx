@@ -18,6 +18,7 @@ import FactoryService 		from 'service/FactoryService';
 export const MENU_NAME = {
 		ADMINISTRATION: "Administration",
 		ADMINISTRATION_USERS: "AdministrationUsers",
+		ADMINISTRATION_LOGCONNECTION: "AdministrationLogConnection",
 		MY_PROFILE : "MyProfile",
 		MY_INVITATIONS: "MyInvitations",
 		EVENTS_LIST: "eventsList"
@@ -89,6 +90,11 @@ class Menu extends React.Component {
 					            <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_USERS )} href="/#" class="toghSubMenu">
                         		    <FormattedMessage id="Menu.AdministrationUsers" defaultMessage="Users" />
                         		</a>
+                            </li>
+                            <li>
+                                <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_LOGCONNECTION )} href="/#" class="toghSubMenu">
+                                    <FormattedMessage id="Menu.AdministrationLogConnection" defaultMessage="Connection" />
+                                </a>
                             </li>
                         </ul>
 						<div class="toghMenuLabel">

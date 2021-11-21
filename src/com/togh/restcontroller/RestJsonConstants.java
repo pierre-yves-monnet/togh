@@ -47,34 +47,47 @@ public class RestJsonConstants {
     public static final String MESSAGE_ERROR_SEND_EMAIL = "errorSendEmail";
 
     public static final String ISINVITATIONSENT = "isInvitationSent";
-    protected static final String CST_PARAM_PHONE_NUMBER = "phoneNumber";
-    protected static final String CST_PARAM_FIRST_NAME = "firstName";
-    protected static final String CST_PARAM_LAST_NAME = "lastName";
+    protected static final String PARAM_PHONE_NUMBER = "phoneNumber";
+    protected static final String PARAM_FIRST_NAME = "firstName";
+    protected static final String PARAM_LAST_NAME = "lastName";
+
     static final String PARAM_AUTHORIZATION = "Authorization";
-    static final String CST_INJSON_EVENTID = "eventid";
+    static final String INJSON_EVENTID = "eventid";
     static final String PAGE = "page";
     static final String ITEMS_PER_PAGE = "itemsPerPage";
     static final String NUMBER_OF_PAGES = "numberOfPages";
     static final String NUMBER_OF_ITEMS = "numberOfItems";
     static final String CST_COUNTUSERS = "countusers";
     static final String LISTUSERS = "users";
-    static final String CST_USER = "user";
-    static final String CST_PARAM_ONLY_NON_INVITED_USER = "onlyNonInvitedUser";
-    static final String CST_PARAM_EMAIL = "email";
-    static final String CST_PARAM_SEARCHUSER_SENTENCE = "searchusersentence";
-    static final String CST_PARAM_SEARCHUSER_ALL = "all";
-    static final String CST_PARAM_SEARCHUSER_CONNECTED = "connected";
-    static final String CST_PARAM_SEARCHUSER_BLOCK = "block";
-    static final String CST_PARAM_SEARCHUSER_ADMINSTRATOR = "administrator";
-    static final String CST_PARAM_SEARCHUSER_PREMIUM = "premium";
-    static final String CST_PARAM_SEARCHUSER_EXCELLENCE = "excellence";
-    static final String CST_PARAM_SEARCHUSER_TIMEZONEOFFSET = "timezoneoffset";
+    static final String USER = "user";
+    static final String PARAM_ONLY_NON_INVITED_USER = "onlyNonInvitedUser";
+    static final String PARAM_EMAIL = "email";
+    static final String PARAM_SEARCHUSER_SENTENCE = "searchusersentence";
+    static final String PARAM_SEARCHUSER_ALL = "all";
+    static final String PARAM_SEARCHUSER_CONNECTED = "connected";
+    static final String PARAM_SEARCHUSER_BLOCK = "block";
+    static final String PARAM_SEARCHUSER_ADMINSTRATOR = "administrator";
+    static final String PARAM_SEARCHUSER_PREMIUM = "premium";
+    static final String PARAM_SEARCHUSER_EXCELLENCE = "excellence";
+    static final String PARAM_SEARCHUSER_TIMEZONEOFFSET = "timezoneoffset";
 
 
-    static final String CST_PARAM_USERID = "userid";
-    static final String CST_PARAM_ATTRIBUT = "attribut";
-    static final String CST_PARAM_VALUE = "value";
+    static final String PARAM_USERID = "userid";
+    static final String PARAM_ATTRIBUT = "attribut";
+    static final String PARAM_VALUE = "value";
 
+    static final String LISTLOGINLOG = "listLoginLogs";
+    static final String PARAM_SEARCHLOGINLOG_SENTENCE = "sentence";
+    static final String PARAM_SEARCHLOGINLOG_OK = "ok";
+    static final String PARAM_SEARCHLOGINLOG_UNKNOWNUSER = "unknownUser";
+    static final String PARAM_SEARCHLOGINLOG_BADPASSWORD = "badPassword";
+    static final String PARAM_SEARCHLOGINLOG_UNDERATTACK = "underAttack";
+    static final String PARAM_SEARCHLOGINLOG_TIMEZONEOFFSET = "timezoneoffset";
+
+    static final String PARAM_SEARCHLOGINLOG_DATESTART = "dateStart";
+    static final String PARAM_SEARCHLOGINLOG_DATEEND = "dateEnd";
+    static final String PARAM_SEARCHLOGINLOG_TIMESTART = "timeStart";
+    static final String PARAM_SEARCHLOGINLOG_TIMEEND = "timeEnd";
 
     /**
      * List of constants

@@ -48,7 +48,7 @@ class AdminUsers extends React.Component {
 		this.searchUsers 			= this.searchUsers.bind( this );	
 		this.searchUsersCallback	= this.searchUsersCallback.bind( this);
 		this.setAttributUser 		= this.setAttributUser.bind( this );
-		this.managerfilter			= this.managerfilter.bind( this );
+		this.manageFilter			= this.manageFilter.bind( this );
 		this.disconnectUser			= this.disconnectUser.bind( this);
 		
 	}
@@ -94,42 +94,42 @@ class AdminUsers extends React.Component {
 								style={{ padding: "10px 10px 10px 10px" }}>
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterALL" autoComplete="off"
 									checked={this.state.filterusers.all}
-									onChange={() => this.managerfilter('all')}/>
+									onChange={() => this.manageFilter('all')}/>
 							  	<label class="btn btn-outline-primary" for="filterALL">
 									<List />&nbsp;<FormattedMessage id="AdminUsers.AllUsers" defaultMessage="All Users"/>
 								</label>
 						
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterConnected" autocomplete="off" 
 									checked={this.state.filterusers.connected}
-									onChange={() => this.managerfilter('connected') }/>
+									onChange={() => this.manageFilter('connected') }/>
 							  	<label class="btn btn-outline-primary" for="filterConnected">
 									<LampFill style={{color:"green", fill:"green"}}/>&nbsp;<FormattedMessage id="AdminUsers.Connected" defaultMessage="Connected"/>
 								</label>
 							
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterBlock" autocomplete="off" 
 									checked={this.state.filterusers.block}
-									onChange={() => this.managerfilter('block') }/>
+									onChange={() => this.manageFilter('block') }/>
 							  	<label class="btn btn-outline-primary" for="filterBlock">
 									<PersonBadge style={{color:"red", fill:"red"}}/>&nbsp;<FormattedMessage id="AdminUsers.Blocked" defaultMessage="Blocked"/>
 								</label>
 								
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterAdministrator" autocomplete="off" 
 									checked={this.state.filterusers.administrator}
-									onChange={() => this.managerfilter('administrator') }/>
+									onChange={() => this.manageFilter('administrator') }/>
 							  	<label class="btn btn-outline-primary" for="filterAdministrator">
 									<AwardFill style={{color:"a17f1a"}}/>&nbsp;<FormattedMessage id="AdminUsers.Administrator" defaultMessage="Administrator"/>
 								</label>
 
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterPremium" autocomplete="off" 
 									checked={this.state.filterusers.premium}
-									onChange={() => this.managerfilter('premium') }/>
+									onChange={() => this.manageFilter('premium') }/>
 							  	<label class="btn btn-outline-primary" for="filterPremium">
 									<BookmarkStar style={{color:"#ff6666", fill:"#ff6666"}}/>&nbsp;<FormattedMessage id="AdminUsers.Premium" defaultMessage="Premium"/>
 								</label>
 								
 								<input type="checkbox" class="btn-check" name="btnradiostate" id="filterExcellence" autocomplete="off" 
 									checked={this.state.filterusers.excellence}
-									onChange={() => this.managerfilter('excellence') }/> 
+									onChange={() => this.manageFilter('excellence') }/> 
 							  	<label class="btn btn-outline-primary" for="filterExcellence">
 									<BookmarkStar style={{color:"a17f1a",  fill:"a17f1a"}}/>&nbsp;<FormattedMessage id="AdminUsers.Excellence" defaultMessage="Excellence"/>
 								</label>
@@ -357,8 +357,8 @@ class AdminUsers extends React.Component {
 	- On opposite, when a button is clicked, uncheck all
 	- Last, when all button are uncheck, click ALL
 	*/	
-	managerfilter( attribut) {
-		var filter = this.state.filterusers;
+	manageFilter( attribut) {
+		let filter = this.state.filterusers;
 		if (attribut === 'all') {
 			filter={all:true, connected:false, block:false, administrator:false,premium:false, excellence:false};
 		} else {

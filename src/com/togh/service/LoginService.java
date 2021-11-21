@@ -89,9 +89,10 @@ public class LoginService {
      * @param password    password
      * @return a LoginResult status
      */
-    public LoginResult connectWithEmail(String emailOrName, String password) {
+    public LoginResult connectWithEmail(String emailOrName, String password, String ipAddress) {
         LoginResult loginStatus = new LoginResult();
         loginStatus.email = emailOrName;
+        loginStatus.ipAddress = ipAddress;
         Chrono chronoConnection = monitorService.startOperation("ConnectUserWithEmail");
 
         ToghUserEntity toghUserEntity = toghUserService.findToConnect(emailOrName);
@@ -169,10 +170,10 @@ public class LoginService {
     /**
      * SSO connection: just give a name, and should connect Internal connection: we trust who call it, and then we connect the user
      */
-    public LoginResult connectSSO(String email, boolean isGoogle) {
+    public LoginResult connectSSO(String email, boolean isGoogle, String ipAddress) {
         LoginResult loginStatus = new LoginResult();
         loginStatus.email = email;
-
+        loginStatus.ipAddress = ipAddress;
         Chrono chronoConnection = monitorService.startOperation(OPERATION_CONNECT_USER_NO_VERIFICATION);
 
         Optional<ToghUserEntity> toghUserEntity = toghUserService.getUserFromEmail(email);
