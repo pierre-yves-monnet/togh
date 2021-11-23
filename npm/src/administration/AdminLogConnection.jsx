@@ -79,7 +79,7 @@ class AdminLogConnection extends React.Component {
 							<TextInput
 							    id="search"
 								labelText={<FormattedMessage id="AdminLogConnection.searchSentence" defaultMessage="Search"/>} 
-								value={this.state.searchLogConnectionSentence}
+								value={this.state.filterLog.sentence}
 								onChange={ (event) => this.manageFilterLogAttribut("sentence", event.target.value)}/>
 						</div>
 
