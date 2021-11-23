@@ -562,6 +562,24 @@ docker/compose:1.24.0 up &
     -p 7080:7080 \
     -p 3000:3000 \
 
+## SQL Database update
+
+update eventuser set name='birthday' where id=31;
+
+insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(40,'local', 1, 1, 30,31); insert into
+evtparticipant (id,accessdata, role, status, user_id, eventid) values(41,'local', 1, 1, 28,31); insert into
+evtparticipant (id,accessdata, role, status, user_id, eventid) values(42,'local', 1, 1, 29,31); insert into
+evtparticipant (id,accessdata, role, status, user_id, eventid) values(43,'local', 1, 1, 5,31); insert into
+evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31); insert into
+evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
+
+--- Nov 22, 2021 => OK
+
+ALTER TABLE toghuser RENAME COLUMN invitation_stamp TO invitationstamp; ALTER TABLE loginlog RENAME COLUMN ip_address TO
+ipaddress; ALTER TABLE loginlog RENAME COLUMN number_of_tentatives TO numberoftentatives; ALTER TABLE loginlog RENAME
+COLUMN status_connection TO statusconnection; ALTER TABLE loginlog RENAME COLUMN time_slot TO timeslot; ALTER TABLE
+loginlog RENAME COLUMN google_id TO googleid; ALTER TABLE loginlog drop COLUMN google_id;
+
 # Documentation
 
 ## cloud
@@ -696,17 +714,6 @@ https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
     private static final String TOGHADMIN_USERNAME = "toghadmin";
     private static final String TOGHADMIN_PASSWORD = "togh";
  
-# Database 
-update eventuser set name='birthday' where id=31;
-
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(40,'local', 1, 1, 30,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(41,'local', 1, 1, 28,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(42,'local', 1, 1, 29,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(43,'local', 1, 1, 5,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31);
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
-
-               
 # Tasks
 
 /* ******************************************************************************** */
@@ -817,7 +824,6 @@ Admini: avoir un "automatique refresh check box" : penible de clicker "connected
 		- invited depuis trop longtemps : a purger
 		- inactif depuis trop longtemps : 
 
-## update prochaine livraison
 
 ## bugs
 
@@ -857,7 +863,3 @@ Togh & Cupris : faire des fond transparent
 
 Horaire de l'email : je met 12:00 et le mail envoi 8:00.L Mettre dans l'email heure + time zone
 
-ALTER TABLE toghuser RENAME COLUMN invitation_stamp TO invitationstamp; ALTER TABLE loginlog RENAME COLUMN ip_address TO
-ipaddress; ALTER TABLE loginlog RENAME COLUMN number_of_tentatives TO numberoftentatives; ALTER TABLE loginlog RENAME
-COLUMN status_connection TO statusconnection; ALTER TABLE loginlog RENAME COLUMN time_slot TO timeslot; ALTER TABLE
-loginlog RENAME COLUMN google_id TO googleid; ALTER TABLE loginlog drop COLUMN google_id;
