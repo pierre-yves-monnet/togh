@@ -15,6 +15,7 @@ package com.togh.restcontroller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
@@ -34,6 +35,10 @@ public class RestPingController {
     @Autowired
     DataSource dataSource;
 
+
+    @Value("${togh.version}")
+    private String toghVersion;
+
     /**
      * Call the ping function
      *
@@ -46,7 +51,7 @@ public class RestPingController {
         logger.info(LOG_HEADER + "Ping!");
         Map<String, Object> result = new HashMap<>();
         result.put("now", LocalDateTime.now());
-        result.put("version", "Oct 25,2021");
+        result.put("version", toghVersion);
         if (message != null)
             result.put("message", message);
         // information on the datasource: are we connected?
