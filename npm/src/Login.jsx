@@ -17,7 +17,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 import FactoryService from 'service/FactoryService';
 
-const LOCALSTORAGE_REMEMBERME = "loginRememberMe";
+const LOCALSTORAGE_rememberMe = "loginrememberMe";
 const LOCALSTORAGE_EMAIL = "loginEmail";
 
 
@@ -30,20 +30,26 @@ class Login extends React.Component {
 		super();
 		// console.log("Login.constructor");
 
-		let rememberme=localStorage.getItem( LOCALSTORAGE_REMEMBERME );
+		let rememberMe=localStorage.getItem( LOCALSTORAGE_rememberMe );
 		let email=localStorage.getItem( LOCALSTORAGE_EMAIL );
 		if (props.defaultLoginEmail )
 			email=props.defaultLoginEmail ;
-		
-		this.state = { email: email, 
+
+        // google connection is visible only is requested
+		const url = window.location.href;
+        const googleVisible = url.indexOf('google')>0;
+
+		this.state = { email: email,
 			password: '', 
-			rememberme: rememberme,
+			rememberMe: rememberMe,
 			badConnection: false,
 			messageConnection:'',
 			inprogress: false,
 			showLostPassword:false,
 			messageLostPassword:'',
-			statusresetpassord:'' }
+			statusResetPassord:'',
+			showGoogleLogin: googleVisible
+		}
 
 		// get from the local storage ? 
 		
@@ -96,7 +102,7 @@ class Login extends React.Component {
 					value={this.state.email} 
 					onChange={(event) => 
 						{ this.setState({ email: event.target.value });
-							if (this.state.rememberme) {
+							if (this.state.rememberMe) {
 								localStorage.setItem(LOCALSTORAGE_EMAIL,  event.target.value);
 							}
 						}
@@ -120,26 +126,28 @@ class Login extends React.Component {
 					<input type="checkbox"
 						onChange={(event) => { 
 								let rememberBool = event.target.value==='on';
-								this.setState( {"rememberme":  rememberBool});
-								localStorage.setItem(LOCALSTORAGE_REMEMBERME, rememberBool);
+								this.setState( {"rememberMe":  rememberBool});
+								localStorage.setItem(LOCALSTORAGE_rememberMe, rememberBool);
 								if (! event.target.value) {
 									localStorage.setItem(LOCALSTORAGE_EMAIL, "");
 									}
 								}
 						}
-						defaultChecked={this.state.rememberme ? 'checked': ''} />
+						defaultChecked={this.state.rememberMe ? 'checked': ''} />
 					&nbsp;
-					<FormattedMessage id="Login.RememberMe" defaultMessage="Remember Me" />
+					<FormattedMessage id="Login.rememberMe" defaultMessage="Remember Me" />
 				
 					{messageConnectionHtml}
 				</td>
 				<td style={{paddingRight : "40px"}} >
+				    {this.state.showGoogleLogin &&
 					<GoogleLogin
 					    clientId="81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com"
 					    buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
 					    onSuccess={this.loginGoogle}				    
 					    cookiePolicy={'single_host_origin'}
 					  />
+					  }
 				</td>
 				</tr>
 				<tr>
@@ -160,7 +168,7 @@ class Login extends React.Component {
 									value={this.state.email} 
 									onChange={(event) => 
 										{ this.setState({ email: event.target.value });
-											if (this.state.rememberme) {
+											if (this.state.rememberMe) {
 												localStorage.setItem(LOCALSTORAGE_EMAIL,  event.target.value);
 											}
 										}
@@ -171,8 +179,8 @@ class Login extends React.Component {
 								<FormattedMessage id="Login.SendEmail" defaultMessage="Send the email"/>
 							</button>
 							<br/>
-							{ this.state.statusresetpassord === 'OK' && <div style={{color: "green"}}>{this.state.messageLostPassword}</div>}
-							{ this.state.statusresetpassord !== '' && this.state.statusresetpassord !== 'OK'  && <div style={{color: "red"}}>{this.state.messageLostPassword}</div>}
+							{ this.state.statusResetPassord === 'OK' && <div style={{color: "green"}}>{this.state.messageLostPassword}</div>}
+							{ this.state.statusResetPassord !== '' && this.state.statusResetPassord !== 'OK'  && <div style={{color: "red"}}>{this.state.messageLostPassword}</div>}
 							
 						</div>
 					</ModalWrapper>
@@ -296,7 +304,7 @@ class Login extends React.Component {
 				if (httpPayload.isError()) {
 					this.setState({ messageLostPassword: intl.formatMessage({id: "Login.ServerConnectionError",defaultMessage: "Server connection error"}) });
 				} else {
-					this.setState( { "statusresetpassord":httpPayload.getData().status});
+					this.setState( { "statusResetPassord":httpPayload.getData().status});
 					
 					if (httpPayload.getData().status === "OK"){ 
 						this.setState( { messageLostPassword: intl.formatMessage({id: "Login.EmailSent",defaultMessage: "An email is sent, check your mailbox"}) });

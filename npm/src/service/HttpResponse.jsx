@@ -38,21 +38,21 @@ class HttpResponse {
 			if (this.err.response) {
 		      		// The request was made and the server responded with a status code
 		      // that falls out of the range of 2xx
-		      console.log("HttpResponse.trace: "+label+" ERROR "+this.err.response.status+" data: "+this.err.response.data);
+		      console.log("HttpResponse.trace: ERROR RESP"+label+" ERROR "+this.err.response.status+" data: "+this.err.response.data);
 		      // console.log("HttpResponse: ERRORHEADER="+this.err.response.headers);
 		    } else if (this.err.request) {
 		      // The request was made but no response was received
 		      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
 		      // http.ClientRequest in node.js
-		      console.log("HttpResponse.trace: "+label+" ERRORREQUEST="+this.err.request);
+		      console.log("HttpResponse.trace: ERROR REQ"+label+" ERRORREQUEST="+this.err.request);
 		    } else {
 		      // Something happened in setting up the request that triggered an Error
-		      console.log("HttpResponse.trace: "+label+" ERRORMESSAGE=", this.err.message);
+		      console.log("HttpResponse.trace: ERROR ELSE "+label+" ERRORMESSAGE=", this.err.message);
 		    }
 		    // console.log(this.err.config);
 		}
 		else {
-			console.log("HttpResponse.trace: "+label+" "+ this.getStatus() +" "+JSON.stringify( this.getData()));
+			// console.log("HttpResponse.trace: OK "+label+" "+ this.getStatus() +" "+JSON.stringify( this.getData()));
 		}
 	}
 }	

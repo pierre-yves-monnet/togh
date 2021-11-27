@@ -81,7 +81,8 @@ class Event extends React.Component {
 		this.updateEventFct 			= this.updateEventFct.bind(this);
 		this.getUserParticipant			= this.getUserParticipant.bind(this);
         this.getDisabledState           = this.getDisabledState.bind(this);
-
+        this.hasAccessTab               = this.hasAccessTab.bind(this);
+        this.preferencesCallback        = this.preferencesCallback.bind(this);
 	}
 
 	componentDidMount() {
@@ -302,7 +303,7 @@ class Event extends React.Component {
 				    />
 				<div class="row" style={{ padding: "10px 30px 10px" }}>
                     <ul class="nav nav-tabs" style={{borderBottom: "6px solid #e9ecef"}}>
-                        <li class="nav-item">
+                        {this.hasAccessTab('Chat') && <li class="nav-item">
                             <button class={this.getTabCssClass( TAB_CHAT )}
 								style={this.getTabCssStyle( TAB_CHAT )} aria-current="page"
 								onClick={() => this.accessTab( TAB_CHAT ) }
@@ -315,7 +316,7 @@ class Event extends React.Component {
                                         </div>}
                                 </div>
                             </button>
-                        </li>
+                        </li> }
 
                         <li class="nav-item">
                             <button class={this.getTabCssClass( TAB_PARTICIPANT )}
@@ -334,7 +335,7 @@ class Event extends React.Component {
                         </li>
 
                         <li class="nav-item">
-                             <button class={this.getTabCssClass( TAB_ITINERARY )}
+                             {this.hasAccessTab('Itinerary') && <button class={this.getTabCssClass( TAB_ITINERARY )}
 								style={this.getTabCssStyle( TAB_ITINERARY )} aria-current="page"
 								onClick={() => this.accessTab( TAB_ITINERARY )}
 								title={intl.formatMessage({id:"Event.TitleItinerary", defaultMessage:"Define your itinerary, and point of interest"})}>
@@ -346,10 +347,11 @@ class Event extends React.Component {
                                         </div>}
                                 </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
-						    <button class={this.getTabCssClass( TAB_TASKS )}
+						    {this.hasAccessTab('Tasks') && <button class={this.getTabCssClass( TAB_TASKS )}
 								style={this.getTabCssStyle( TAB_TASKS )} aria-current="page"
 								onClick={() => this.accessTab( TAB_TASKS )}
 							    title={intl.formatMessage({id:"Event.TitleTasks", defaultMessage:"Tasks" })}>
@@ -361,10 +363,11 @@ class Event extends React.Component {
                                         </div>}
 							    </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
-					        <button class={this.getTabCssClass( TAB_SHOPPINGLIST )}
+					        {this.hasAccessTab('Bring') && <button class={this.getTabCssClass( TAB_SHOPPINGLIST )}
 								style={this.getTabCssStyle( TAB_SHOPPINGLIST )} aria-current="page"
 								onClick={() => this.accessTab( TAB_SHOPPINGLIST )}
 							    title={intl.formatMessage({id:"Event.TitleBringList", defaultMessage:"What to brings?" })}>
@@ -376,10 +379,11 @@ class Event extends React.Component {
                                         </div>}
 							    </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
-						    <button class={this.getTabCssClass( TAB_SURVEY )}
+						    {this.hasAccessTab('Surveys') && <button class={this.getTabCssClass( TAB_SURVEY )}
 								style={this.getTabCssStyle( TAB_SURVEY )} aria-current="page"
 								onClick={() => this.accessTab( TAB_SURVEY )}
 							    title={intl.formatMessage({id:"Event.TitleSurvey", defaultMessage:"Survey"})}>
@@ -391,10 +395,11 @@ class Event extends React.Component {
                                         </div>}
                                 </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
-						    <button class={this.getTabCssClass( TAB_GEOLOCALISATION )}
+						    {this.hasAccessTab('Localisation') && <button class={this.getTabCssClass( TAB_GEOLOCALISATION )}
 								style={this.getTabCssStyle( TAB_GEOLOCALISATION )}
 								 aria-current="page"
 								onClick={() => this.accessTab( TAB_GEOLOCALISATION )}
@@ -407,10 +412,11 @@ class Event extends React.Component {
                                         </div>}
 							    </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
-						    <button class={this.getTabCssClass( TAB_PHOTO )}
+						    {this.hasAccessTab('Photos') && <button class={this.getTabCssClass( TAB_PHOTO )}
 								style={this.getTabCssStyle( TAB_PHOTO )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitlePhotos", defaultMessage:"Photos" })}>
 							    <div style={{textAlign: "center"}}>
@@ -421,10 +427,11 @@ class Event extends React.Component {
                                         </div>}
 							    </div>
                             </button>
+                            }
                         </li>
 
                         <li class="nav-item">
-						    <button class={this.getTabCssClass( TAB_EXPENSE )}
+						    {this.hasAccessTab('Expenses') && <button class={this.getTabCssClass( TAB_EXPENSE )}
 								style={this.getTabCssStyle( TAB_EXPENSE )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleExpense",  defaultMessage:"Manage and share expenses" })}>
 							    <div style={{textAlign: "center"}}>
@@ -435,10 +442,11 @@ class Event extends React.Component {
                                         </div>}
 							    </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
-						    <button class={this.getTabCssClass( TAB_BUDGET )}
+						    {this.hasAccessTab('Budget') && <button class={this.getTabCssClass( TAB_BUDGET )}
 								style={this.getTabCssStyle( TAB_BUDGET )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleBudget", defaultMessage:"Budget" })}>
 							    <div style={{textAlign: "center"}}>
@@ -449,6 +457,7 @@ class Event extends React.Component {
                                         </div>}
 							    </div>
 						    </button>
+						    }
                         </li>
 
                         <li class="nav-item">
@@ -490,7 +499,7 @@ class Event extends React.Component {
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
 																			updateEvent={this.updateEventFct}
 																			getUserParticipant={this.getUserParticipant}/>}
-				{this.state.show.currentSection === TAB_PREFERENCES  && <EventPreferences eventCtrl={this.eventCtrl} />}
+				{this.state.show.currentSection === TAB_PREFERENCES  && <EventPreferences eventCtrl={this.eventCtrl} preferencesCallback={this.preferencesCallback}/>}
 		</div>)
 
 	} //---------------------------- end Render
@@ -536,10 +545,24 @@ class Event extends React.Component {
     }
 
 	// -------------------------------------------- Access different part
+	hasAccessTab( accessTab ) {
+	    console.log("Event.hasAccess["+accessTab+"]?");
+	    if (this.state && this.state.event && this.state.event && this.state.event.preferences) {
+	        let access= this.state.event.preferences[ 'access'+accessTab ];
+	        console.log("Event.hasAccess["+accessTab+"] ="+access+" pref="+JSON.stringify(this.state.event.preferences));
+	        return access;
+	    }
+	    return false;
+	}
 	accessTab( accessTab ) {
 		console.log("Event.accessTab tab=" + JSON.stringify(accessTab));
 		this.setState( { show: { currentSection: accessTab} });
 	}
+
+    preferencesCallback() {
+		console.log("Event.preferencesCallback forceUpdate");
+        this.forceUpdate();
+    }
 
     getTabCssClass( tab ) {
         if (this.state.show.currentSection === tab ) {

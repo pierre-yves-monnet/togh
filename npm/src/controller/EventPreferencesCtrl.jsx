@@ -11,7 +11,7 @@ import FactoryService 		from 'service/FactoryService';
 // CurrencyService 			from 'service/CurrencyService';
 import SlabRecord 			from 'service/SlabRecord';
 
-const CURRENCY_ATTRIBUT_NAME= "currency";
+const CURRENCY_CODE_ATTRIBUT_NAME= "currencyCode";
 
 // -----------------------------------------------------------
 //
@@ -35,7 +35,7 @@ class EventPreferenceCtrl {
 		this.updateEventFct = updateEventFct;
 		let event = eventCtrl.getEvent();
 		if (event && event.preferences)
-			this.currencyCode = event.preferences[ CURRENCY_ATTRIBUT_NAME ];
+			this.currencyCode = event.preferences[ CURRENCY_CODE_ATTRIBUT_NAME ];
 			
 		if (! this.currencyCode)
 			this.currencyCode="USD";
@@ -51,7 +51,7 @@ class EventPreferenceCtrl {
 	setCurrency(currencyCode) {
 		this.currencyCode = currencyCode;
 
-		let slab = SlabRecord.getUpdate(this.event, CURRENCY_ATTRIBUT_NAME, currencyCode, "/preferences");
+		let slab = SlabRecord.getUpdate(this.event, CURRENCY_CODE_ATTRIBUT_NAME, currencyCode, "/preferences");
 		this.eventCtrl.updateEventFct( slab );
 	}
 	
@@ -63,7 +63,23 @@ class EventPreferenceCtrl {
 	getCurrencyCode(){
 		return this.currencyCode;
 	}
-	
+
+	getAccess( functionName ){
+	    let attributName = "access"+functionName;
+	    console.log("EventPreferenceCtrl.getAccess: function="+functionName+" value="+this.eventCtrl.event.preferences[ attributName ]);
+    	return this.eventCtrl.event.preferences[ attributName ];
+    }
+
+    setAccess( functionName, value ) {
+
+   	    let attributName = "access"+functionName;
+    	this.eventCtrl.event.preferences[ attributName ] = value ;
+
+        let slab = SlabRecord.getUpdate(this.event, attributName, value, "/preferences" );
+        this.eventCtrl.updateEventFct( slab );
+    }
+
+
 	getCurrencySymbolPrefix(){
 		// console.log("EventPreferenceCtrl.getCurrencySymbolPrefix");
 		let currency = this.getCurrency();

@@ -435,14 +435,22 @@ stocker les photo de l'API Key pour Flick
 ## Google SSO
 
 https://blog.prototypr.io/how-to-build-google-login-into-a-react-app-and-node-express-api-821d049ee670
-Aller dans Credential, Creeate OAuthClient Id / Name "Single Sign On with Google"
+https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
+
+Go to your project
+
+1. Select "Credentials"
+2. Create OAuthClient Id / Name "Single Sign On with Google"
+3. Add "http://toghevent.com" in the Authorized Javascript Origins
+4. Add "http://toghevent.com" in the Authorized redirect URIs
+5. Copy the Client Id
+6.
 
 GoogleClientId:
 81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com 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
+81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com
 
 we’ll add our own Google account as a test user.
-
-Create "External" OAuth
 
 # Cloud Google & Docker
 

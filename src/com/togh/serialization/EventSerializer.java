@@ -145,6 +145,9 @@ public class EventSerializer extends BaseSerializer {
         }
         resultMap.put(EventGroupChatEntity.SLABOPERATION_GROUPCHATLIST, listGroupChat);
 
+        BaseSerializer serializerPreference = factorySerializer.getFromEntity(eventEntity.getPreferences());
+        if (serializerPreference != null)
+            resultMap.put(EventPreferencesEntity.CST_SLABOPERATION_PREFERENCES, serializerPreference.getMap(eventEntity.getPreferences(), eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
 
         BaseUpdateGrantor baseUpdateGrantor = factoryUpdateGrantor.getFromEntity(eventEntity);
         if (baseUpdateGrantor != null)

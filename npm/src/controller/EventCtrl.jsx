@@ -143,7 +143,10 @@ class EventCtrl {
 				log = log.concat("create preferences");
 				this.event.preferences = {};
 			}
-	
+
+	        if (!this.event.accessChat) {
+	            this.event.accessChat=true;
+	        }
 			// console.log("EventCtrl.loadEvent: completionDone event=" + JSON.stringify(this.event) );
 		} catch( error) {
 			// not normal that...

@@ -17,8 +17,8 @@ import javax.persistence.MappedSuperclass;
 /*                                                                                  */
 /*  EventBaseEntity,                                                                */
 /*                                                                                  */
-/*  An event constains a lot of entity: task, survey, itinerary...                  */
-/*  All theses entity must derived from this class, to implement generic method on  */
+/*  An event constain a lot of entity: task, survey, itinerary...                  */
+/*  All these entity must be derived from this class, to implement generic method on  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -36,6 +36,5 @@ public abstract class EventBaseEntity extends UserEntity {
     }
 
     public void setExpense(EventExpenseEntity expense) {
-        return;
     }
 }

@@ -25,6 +25,7 @@ import com.togh.service.FactoryService;
 import com.togh.service.NotifyService;
 import com.togh.service.event.EventUpdate.Slab;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +131,22 @@ public class EventController {
         if (eventEntity.getDatePolicy() == null)
             eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
 
+        // Preferences must be ready (old event may not have a preference entity)
+        if (eventEntity.getPreferences() == null) {
+            EventPreferencesEntity preferencesEntity = new EventPreferencesEntity();
+            preferencesEntity.setCurrencyCode("USD");
+            preferencesEntity.setAccessChat(true);
+            preferencesEntity.setAccessItinerary(false);
+            preferencesEntity.setAccessTasks(false);
+            preferencesEntity.setAccessBring(true);
+            preferencesEntity.setAccessSurveys(false);
+            preferencesEntity.setAccessLocalisation(true);
+            preferencesEntity.setAccessPhotos(false);
+            preferencesEntity.setAccessExpenses(false);
+            preferencesEntity.setAccessBudget(false);
+            eventEntity.setPreferences(preferencesEntity);
+        }
+
         // itinerary: must be in the date
         listSlab.addAll(eventControllerItinerary.checkItinerary());
 
@@ -187,7 +204,7 @@ public class EventController {
      * User must be the author, or a participant, or should be invited
      *
      * @param toghUser the togh user
-     * @return
+     * @return true if the participant is active
      */
     public boolean isActiveParticipant(ToghUserEntity toghUser) {
         ParticipantEntity participant = getParticipant(toghUser);
@@ -231,7 +248,7 @@ public class EventController {
      * get the role of this userId in the event. Return null if the user does not have any participation
      *
      * @param toghUser the toghUser
-     * @return
+     * @return a ParticipantRoleEnum status
      */
     public ParticipantRoleEnum getRoleEnum(ToghUserEntity toghUser) {
         ParticipantEntity participant = getParticipant(toghUser);
@@ -240,7 +257,7 @@ public class EventController {
 
     /**
      * @param toghUser the toghUser
-     * @return
+     * @return a Participant Entity
      */
     public ParticipantEntity getParticipant(ToghUserEntity toghUser) {
         for (ParticipantEntity participant : eventEntity.getParticipantList()) {
@@ -322,9 +339,9 @@ public class EventController {
     /**
      * Update the event. All update are done via the Slab objects
      *
-     * @param listSlab
-     * @param updateContext
-     * @return
+     * @param listSlab      List of operations (list of Slob)
+     * @param updateContext Context of update
+     * @return the result of operation
      */
     public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
         EventUpdate eventUpdate = new EventUpdate(this);
@@ -394,12 +411,12 @@ public class EventController {
     /**
      * Localise the BaseEntity according the localisation. Localisation is a string like "/tasklist/1"
      *
-     * @param baseEntity
-     * @param localisation
-     * @return
+     * @param baseEntity   Base Entity (root of the localisation
+     * @param localisation localisation, example /survey/12/subject
+     * @return the entity pointed by the research
      */
     @SuppressWarnings("unchecked")
-    protected BaseEntity localise(BaseEntity baseEntity, String localisation) {
+    protected BaseEntity localise(@Nonnull BaseEntity baseEntity, @Nonnull String localisation) {
 
         // source is <name>/id/ <<something else 
         if (localisation.isEmpty())
@@ -412,7 +429,7 @@ public class EventController {
 
                 Method method = JpaTool.searchMethodByName(indexEntity, nameEntity);
                 if (method == null) {
-                    logger.severe(LOG_HEADER + "Can't localise [" + nameEntity + "] in [" + indexEntity.toString() + "]");
+                    logger.severe(LOG_HEADER + "Can't localise [" + nameEntity + "] in [" + indexEntity + "]");
                     return null;
                 }
 

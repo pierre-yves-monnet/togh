@@ -110,26 +110,32 @@ class EventEntity extends UserEntity {
     @Column(name = "itineraryshowmap")
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean itineraryShowMap;
+
     @Column(name = "itineraryshowdetails")
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean itineraryShowDetails;
+
     @Column(name = "itineraryshowexpenses")
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean itineraryShowExpenses;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("rownumber")
     private List<EventItineraryStepEntity> itineraryStepList = new ArrayList<>();
+
     @Column(name = "tasklistshowdates")
     private Boolean taskListShowDates;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventTaskEntity> taskList = new ArrayList<>();
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* ShoppingList */
@@ -138,9 +144,11 @@ class EventEntity extends UserEntity {
     @Column(name = "shoppinglistshowdetails")
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean shoppingListShowDetails;
+
     @Column(name = "shoppinglistshowexpenses")
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean shoppinglistShowExpenses;
+
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Itinerary */
@@ -163,12 +171,19 @@ class EventEntity extends UserEntity {
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventSurveyEntity> surveyList = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
     @OrderBy("id")
     private List<EventGroupChatEntity> groupChatList = new ArrayList<>();
+
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "eventid")
+    private EventPreferencesEntity preferences = new EventPreferencesEntity();
+
 
     public EventEntity(ToghUserEntity author, String name) {
         super(author, name);
@@ -309,7 +324,7 @@ class EventEntity extends UserEntity {
      * @param groupChatEntity group to add the chat
      * @param chatEntity      chat to add
      * @param maxChatEntity   maximum chat allowed
-     * @return
+     * @return a new EventChatEntity
      */
     public EventChatEntity addChat(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity, int maxChatEntity) {
         groupChatEntity.addChat(chatEntity);
