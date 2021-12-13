@@ -24,28 +24,37 @@ class MyProfile extends React.Component {
 		// console.log("RegisterNewUser.constructor");
 		let authService = FactoryService.getInstance().getAuthService();
 		this.state = { user: authService.getUser(),
-			passwordIsCorrect: false,
+		    passwordIsCorrect: false,
 			newPassword:"",
-			actionPasswordMessage:"" };
+			actionPasswordMessage:"",
+			errorMessage:'',
+			inprogress: false};
 			
 		this.changePasswordCallback = this.changePasswordCallback.bind( this);
 		this.actionChangePassword 	= this.actionChangePassword.bind( this );
+		this.refreshUser            = this.refreshUser.bind( this );
 	}
-	/*
-	componentDidMount() {
-		let authService = FactoryService.getInstance().getAuthService();
-		console.log("MyProfile.componentDidMount user.typepicture="+authService.getUser().typePicture);
-		this.state = { user: authService.getUser() };
 
+	componentDidMount() {
+    	console.log("MyProfile.componentDidMount ");
+        this.setState({inprogress: true});
+        console.log("MyProfile.componentDidMount: ");
+        const authService = FactoryService.getInstance().getAuthService();
+        authService.refreshUser( this, this.refreshUser);
 	}
-	*/
+
+    refreshUser( user, httpResponse ) {
+        let message='';
+        if (httpResponse.isError())
+            message=<FormattedMessage id="MyProfile.errorServer" defaultMessage="Error connection" />
+    	this.setState( { user: user, inprogress:false, errorMessage:message});
+    }
+
 	//----------------------------------- Render
 	render() {
 		 
-		console.log("MyProfile.render user="+JSON.stringify(this.state.user));
-		
-		
-											
+		console.log("MyProfile.render loading: "+this.state.loading+", user="+JSON.stringify(this.state.user));
+
 		// -----------------
 		// <button onClick={this.changeEmail} class="btn btn-primary"><FormattedMessage id="MyProfile.ChangeEmail" defaultMessage="Change Email"/></button>
 		return ( 
@@ -53,6 +62,7 @@ class MyProfile extends React.Component {
 				{ this.state.inprogress && <Loading
       						description="Active loading indicator" withOverlay={true}
     						/>}
+                {this.state.errorMessage && <div style={{color: "red"}}>{this.state.errorMessage}</div>}
 
 				<div class="row">
 					<div class="col-sm-4" style={{textAlign: "center"}}>
@@ -267,10 +277,29 @@ class MyProfile extends React.Component {
 							</FormattedMessage>
 						</Select>
 						<div class="toghTips">
-							<FormattedMessage id="MyProfile.SearchableExplanation" defaultMessage="Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly."/>
+							<FormattedMessage id="MyProfile.ShowTipsExplanation" defaultMessage="Tips are visible. This help you to knows the different functions."/>
 						</div>
 					</div>
 				</div>
+				<div class="row" style={{borderTop: "1px black solid",  marginTop: "40px", paddingTop: "10px"}}>
+                    <div class="col-sm-8">
+                        <Select labelText={<FormattedMessage id="MyProfile.showTakeATour" defaultMessage="Show Take a tour" />}
+                            id="showtakeatour"
+                            value={this.state.user.showTakeATour}
+                            onChange={(event) => this.setAttribut("showTakeATour", event.target.value)}>
+
+                            <FormattedMessage id="MyProfile.showTakeATour" defaultMessage="Show take a tour">
+                                {(message) => <option value="true">{message}</option>}
+                            </FormattedMessage>
+                            <FormattedMessage id="MyProfile.hideTakeATour" defaultMessage="Hide take a tour">
+                                {(message) => <option value="false">{message}</option>}
+                            </FormattedMessage>
+                        </Select>
+                        <div class="toghTips">
+                            <FormattedMessage id="MyProfile.ShowTakeATourExplanation" defaultMessage="Where a tour is available, the icon is presented. Clicks on it to access explanations."/>
+                        </div>
+                    </div>
+                </div>
 				<div class="row" style={{borderTop: "1px black solid",  marginTop: "40px", paddingTop: "10px"}}>
 					<div class="col-sm-8">				
 					  	<TextInput labelText={<FormattedMessage id="MyProfile.subscriptionUser" defaultMessage="Subscription"/>}

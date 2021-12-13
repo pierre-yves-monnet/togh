@@ -24,6 +24,26 @@ public class ToghUserSerializer extends BaseSerializer {
     public static final String JSON_LONG_LABEL = "longLabel";
     public static final String JSON_FIRST_NAME = "firstName";
     public static final String JSON_STATUS_USER = "statusUser";
+    public static final String JSON_TAGID = "tagid";
+    public static final String JSON_NAME = "name";
+    public static final String JSON_TYPE_PICTURE = "typePicture";
+    public static final String JSON_PICTURE = "picture";
+    public static final String JSON_SOURCE = "source";
+    public static final String JSON_LAST_NAME = "lastName";
+    public static final String JSON_EMAIL = "email";
+    public static final String JSON_PHONE_NUMBER = "phoneNumber";
+    public static final String JSON_LABEL = "label";
+    public static final String JSON_SHOW_TIPS_USER = "showTipsUser";
+    public static final String JSON_SHOW_TAKE_A_TOUR = "showTakeATour";
+    public static final String JSON_PRIVILEGE_USER = "privilegeUser";
+    public static final String JSON_CONNECTION_TIME = "connectiontime";
+    public static final String JSON_CONNECTION_TIME_ST = "connectiontimest";
+    public static final String JSON_CONNECTION_LAST_ACTIVITY = "connectionlastactivity";
+    public static final String JSON_SUBSCRIPTION_USER = "subscriptionUser";
+    public static final String JSON_CONNECTION_LAST_ACTIVITY_ST = "connectionlastactivityst";
+    public static final String JSON_CONNECTED = "connected";
+    public static final String JSON_CONNECTED_OFFLINE = "OFFLINE";
+    public static final String JSON_CONNECTED_ONLINE = "ONLINE";
 
     @Override
     public Class getEntityClass() {
@@ -56,12 +76,13 @@ public class ToghUserSerializer extends BaseSerializer {
             longLabel.append(toghUserEntity.getName());
         }
 
-        resultMap.put("tagid", System.currentTimeMillis() % 10000);
-        resultMap.put("name", toghUserEntity.getName());
+        resultMap.put(JSON_TAGID, System.currentTimeMillis() % 10000);
+        resultMap.put(JSON_NAME, toghUserEntity.getName());
         resultMap.put(JSON_FIRST_NAME, toghUserEntity.getFirstName());
-        resultMap.put("typePicture", toghUserEntity.getTypePicture());
-        resultMap.put("picture", toghUserEntity.getPicture());
-        resultMap.put("source", toghUserEntity.getSource().toString().toLowerCase());
+        resultMap.put(JSON_TYPE_PICTURE, toghUserEntity.getTypePicture());
+        resultMap.put(JSON_PICTURE, toghUserEntity.getPicture());
+        resultMap.put(JSON_SOURCE, toghUserEntity.getSource().toString().toLowerCase());
+        resultMap.put(JSON_PRIVILEGE_USER, toghUserEntity.getPrivilegeUser().toString());
 
 
         resultMap.put(JSON_STATUS_USER, toghUserEntity.getStatusUser() == null ? "" : toghUserEntity.getStatusUser().toString());
@@ -70,11 +91,11 @@ public class ToghUserSerializer extends BaseSerializer {
         if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.EVENTACCESS)) {
             // this is in the case of an event. Is the event is a Secret?
             if (serializerOptions.getEventAccessGrantor().isOtherParticipantsVisible())
-                resultMap.put("lastName", toghUserEntity.getLastName());
+                resultMap.put(JSON_LAST_NAME, toghUserEntity.getLastName());
         }
 
         if (isVisible(toghUserEntity, toghUserEntity.getEmailVisibility(), serializerOptions)) {
-            resultMap.put("email", toghUserEntity.getEmail());
+            resultMap.put(JSON_EMAIL, toghUserEntity.getEmail());
             if (toghUserEntity.getEmail() != null && toghUserEntity.getEmail().trim().length() > 0) {
                 // the label is the email only if there is no label at this moment
                 if (label.toString().trim().length() == 0)
@@ -82,40 +103,40 @@ public class ToghUserSerializer extends BaseSerializer {
                 longLabel.append(encapsulate(" (", toghUserEntity.getEmail(), ")"));
             }
         } else
-            resultMap.put("email", "*********");
+            resultMap.put(JSON_EMAIL, "*********");
 
         if (isVisible(toghUserEntity, toghUserEntity.getPhoneNumberVisibility(), serializerOptions)) {
-            resultMap.put("phoneNumber", toghUserEntity.getPhoneNumber());
+            resultMap.put(JSON_PHONE_NUMBER, toghUserEntity.getPhoneNumber());
             if (toghUserEntity.getPhoneNumber() != null) {
                 if (label.length() == 0)
                     label.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " )"));
                 longLabel.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " "));
             }
         } else
-            resultMap.put("phoneNumber", "*********");
+            resultMap.put(JSON_PHONE_NUMBER, "*********");
 
-        resultMap.put("label", label.toString());
+        resultMap.put(JSON_LABEL, label.toString());
         resultMap.put(JSON_LONG_LABEL, longLabel.toString());
 
         if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.MYPROFILE)
                 || serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.ADMIN)) {
-            resultMap.put("subscriptionuser", toghUserEntity.getSubscriptionUser().toString());
-            resultMap.put("showTipsUser", toghUserEntity.getShowTipsUser());
+            resultMap.put(JSON_SUBSCRIPTION_USER, toghUserEntity.getSubscriptionUser().toString());
+            resultMap.put(JSON_SHOW_TIPS_USER, toghUserEntity.getShowTipsUser());
+            resultMap.put(JSON_SHOW_TAKE_A_TOUR, toghUserEntity.getShowTakeATour());
 
         }
         if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.ADMIN)) {
-            resultMap.put("privilegeuser", toghUserEntity.getPrivilegeUser().toString());
-            resultMap.put("connectiontime", EngineTool.dateToString(toghUserEntity.getConnectionTime()));
+            resultMap.put(JSON_CONNECTION_TIME, EngineTool.dateToString(toghUserEntity.getConnectionTime()));
             if (toghUserEntity.getConnectionTime() != null) {
                 LocalDateTime connectionTimeLocal = toghUserEntity.getConnectionTime().minusMinutes(serializerOptions.getTimezoneOffset());
-                resultMap.put("connectiontimest", EngineTool.dateToHumanString(connectionTimeLocal));
+                resultMap.put(JSON_CONNECTION_TIME_ST, EngineTool.dateToHumanString(connectionTimeLocal));
             }
-            resultMap.put("connectionlastactivity", EngineTool.dateToString(toghUserEntity.getConnectionLastActivity()));
+            resultMap.put(JSON_CONNECTION_LAST_ACTIVITY, EngineTool.dateToString(toghUserEntity.getConnectionLastActivity()));
             if (toghUserEntity.getConnectionLastActivity() != null) {
                 LocalDateTime connectionLastActivityLocal = toghUserEntity.getConnectionLastActivity().minusMinutes(serializerOptions.getTimezoneOffset());
-                resultMap.put("connectionlastactivityst", EngineTool.dateToHumanString(connectionLastActivityLocal));
+                resultMap.put(JSON_CONNECTION_LAST_ACTIVITY_ST, EngineTool.dateToHumanString(connectionLastActivityLocal));
             }
-            resultMap.put("connected", toghUserEntity.getConnectionStamp() == null ? "OFFLINE" : "ONLINE");
+            resultMap.put(JSON_CONNECTED, toghUserEntity.getConnectionStamp() == null ? JSON_CONNECTED_OFFLINE : JSON_CONNECTED_ONLINE);
         }
         return resultMap;
     }

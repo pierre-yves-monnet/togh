@@ -23,7 +23,7 @@ class UserService {
 	*/
 	
 	prefsDisplayTips() {
-		let authService = this.factoryService.getAuthService();
+		const authService = this.factoryService.getAuthService();
 		// console.log("UserService.user="+authService.getUser());
 		let user = authService.getUser();
 		if (! user)
@@ -34,6 +34,27 @@ class UserService {
 			
 		return user.showTipsUser;
 	}
+
+	prefsDisplayTakeATour() {
+		const authService = this.factoryService.getAuthService();
+		// console.log("UserService.user="+authService.getUser());
+		let user = authService.getUser();
+		if (! user)
+			return true;
+		// if null
+		if ( user.showTakeATour == null)
+			return true;
+
+		return user.showTakeATour;
+	}
+
+    setPrefsDisplayTakeATour( active ) {
+    	const authService = this.factoryService.getAuthService();
+        // console.log("UserService.user="+authService.getUser());
+        let user = authService.getUser();
+        if (user)
+            user.showTakeATour=active;
+    }
 
 }
 export default UserService;

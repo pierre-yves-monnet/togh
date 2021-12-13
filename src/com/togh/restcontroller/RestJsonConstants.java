@@ -89,6 +89,8 @@ public class RestJsonConstants {
     static final String PARAM_SEARCHLOGINLOG_TIMESTART = "timeStart";
     static final String PARAM_SEARCHLOGINLOG_TIMEEND = "timeEnd";
 
+    static final String PARAM_ACTIVE = "active";
+
     /**
      * List of constants
      */

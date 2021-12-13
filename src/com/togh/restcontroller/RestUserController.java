@@ -6,11 +6,13 @@ import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import com.togh.serialization.BaseSerializer;
 import com.togh.serialization.FactorySerializer;
 import com.togh.serialization.SerializerOptions;
+import com.togh.serialization.ToghUserSerializer;
 import com.togh.service.FactoryService;
 import com.togh.service.LoginService;
 import com.togh.service.ToghUserService;
 import com.togh.service.ToghUserService.OperationUser;
 import com.togh.service.ToghUserService.SearchUsersResult;
+import com.togh.service.UnderAttackService;
 import com.togh.tool.ToolCast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /* -------------------------------------------------------------------- */
 /*                                                                      */
@@ -46,6 +49,50 @@ public class RestUserController {
 
     @Autowired
     private FactoryUpdateGrantor factoryUpdateGrantor;
+
+    @Autowired
+    private UnderAttackService underAttackService;
+
+    private Logger logger = Logger.getLogger(RestUserController.class.getName());
+
+    /**
+     * Call for the invitation for example, to search a user according some criteria. User should accept to publish some information
+     *
+     * @param userId          User Id
+     * @param connectionStamp Information on the connected user
+     * @return all users found plus additional information
+     */
+    @CrossOrigin
+    @GetMapping("/api/user")
+    public Map<String, Object> getUser(@RequestParam("id") Long userId,
+                                       @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                       @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+        logger.fine("RestUserController:getUser id[" + userId + "]");
+        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUser == null) {
+            underAttackService.reportNotAutorizedAction(null, "/api/user", UnderAttackService.NOT_AUTHORIZED_REASON.NOT_CONNECTED);
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+        }
+        if (!(userId.equals(toghUser.getId()) || factoryService.getLoginService().isAdministrator(toghUser))) {
+            // ask myself, or an administrator, this is OK, else not
+            logger.severe("RestUserController:getUser not allowed call[" + userId + "] from toghUser[" + toghUser.getId() + "]");
+            underAttackService.reportNotAutorizedAction(toghUser, "/api/user", UnderAttackService.NOT_AUTHORIZED_REASON.CONFIDENTIAL_ACCESS);
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTANADMINISTRATOR);
+        }
+
+        ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromEntity(toghUser);
+
+        SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.MYPROFILE);
+
+        return toghUserSerializer.getMap(toghUser, null,
+                serializerOptions,
+                factorySerializer,
+                factoryUpdateGrantor);
+
+    }
+
 
     /**
      * Call for the invitation for example, to search a user according some criteria. User should accept to publish some information
@@ -133,5 +180,50 @@ public class RestUserController {
         return payload;
     }
 
+    /**
+     * Update the TakeATour option
+     *
+     * @param active          True if the take a tour policy become active
+     * @param connectionStamp Information on the connected user
+     * @return result of update
+     */
+    @CrossOrigin
+    @PostMapping(value = "/api/user/takeatour", produces = "application/json")
+    public Map<String, Object> takeATour(@RequestParam(RestJsonConstants.PARAM_ACTIVE) Boolean active,
+                                         @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+
+        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUser == null)
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+        OperationUser operationUser = toghUserService.updateUser(toghUser.getId(), "showTakeATour", active);
+        Map<String, Object> payload = new HashMap<>();
+        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+
+        return payload;
+    }
+
+    /**
+     * Update the TakeATour option
+     *
+     * @param active          True if the take a tour policy become active
+     * @param connectionStamp Information on the connected user
+     * @return result of update
+     */
+    @CrossOrigin
+    @PostMapping(value = "/api/user/tips", produces = "application/json")
+    public Map<String, Object> tips(@RequestParam(RestJsonConstants.PARAM_ACTIVE) Boolean active,
+                                    @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+
+        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUser == null)
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+        OperationUser operationUser = toghUserService.updateUser(toghUser.getId(), "showTipsUser", active);
+        Map<String, Object> payload = new HashMap<>();
+        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+
+        return payload;
+    }
 
 }

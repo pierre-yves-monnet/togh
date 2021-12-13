@@ -10,7 +10,6 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-// import { Button } from 'carbon-components-react';
 import { DatePicker, DatePickerInput, TimePicker, RadioButtonGroup, RadioButton, TextArea, TextInput, Select } from 'carbon-components-react';
 
 import FactoryService from 'service/FactoryService';
@@ -18,6 +17,7 @@ import FactoryService from 'service/FactoryService';
 import UserParticipantCtrl from 'controller/UserParticipantCtrl';
 
 import EventSectionHeader 			from 'component/EventSectionHeader';
+import TakeATour 			        from 'component/TakeATour';
 import EventParticipants            from 'event/EventParticipants';
 import EventItinerary               from 'event/EventItinerary';
 import EventShoppingList            from 'event/EventShoppingList';
@@ -83,6 +83,7 @@ class Event extends React.Component {
         this.getDisabledState           = this.getDisabledState.bind(this);
         this.hasAccessTab               = this.hasAccessTab.bind(this);
         this.preferencesCallback        = this.preferencesCallback.bind(this);
+        this.deactivateTakeATour        = this.deactivateTakeATour.bind(this);
 	}
 
 	componentDidMount() {
@@ -130,6 +131,14 @@ class Event extends React.Component {
        				    disabled={this.getDisabledState("datePolicy")}
                         id="r2" labelText={<FormattedMessage id="Event.Period" defaultMessage="Period" />} labelPosition="right" />
 				</RadioButtonGroup>
+                <TakeATour
+                    subject={intl.formatMessage({id:"Event.TourDates", defaultMessage:"Date or period"})}
+                    content={intl.formatMessage({id:"Event.TourDatesContent",
+                                                defaultMessage:"An event can be at a specific date (a party with friends) on a period (a road trip with your family)." })}
+                    notes={intl.formatMessage({id:"Event.TourDatesNote", defaultMessage:"Only an organizer can change the scope"})}
+                    fctCallBack={this.deactivateTakeATour}
+                 />
+
 				{this.state.event.datePolicy === 'ONEDATE' && (
 					<div>
 						<table><tr>
@@ -231,19 +240,43 @@ class Event extends React.Component {
 						<img src="img/toghEvent.jpg" style={{ width: 90 }}     />
 					</div>
 
-					<div class="col-sm-4">
+					<div class="col-sm-4"
+					    style={{display:"flex",
+					            alignItems: "flex-start",
+					            gap:"5px"}}>
 						<TextInput labelText=""
 				            disabled={this.getDisabledState("name")}
 							id="name"
 							value={this.state.event.name}
 							style={{fontSize: "24px", height: "50px", color: "#ac1e4a", maxWidth: "315px"}}
-							onChange={(event) => this.setAttribut("name", event.target.value)} /><br />
+							onChange={(event) => this.setAttribut("name", event.target.value)} />
+						<TakeATour
+						    subject={intl.formatMessage({id:"Event.TourName",
+						                defaultMessage:"Give a name to your event"})}
+						    content={intl.formatMessage({id:"Event.TourNameContent",
+						                defaultMessage:"This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<p>Example: 'Party at San Marbella', 'House coming'"})}
+                            fctCallBack={this.deactivateTakeATour}
+						    />
+						<br />
 					</div>
-					<div class="col-sm-5">
-						<div class="fieldlabel">{<FormattedMessage id="Event.Status" defaultMessage="Status" />}</div>
-						<EventState statusEvent={this.state.event.statusEvent}
-						    disabled={this.getDisabledState("statusEvent")}
-						    changeState={this.changeStateCallback} />
+					<div class="col-sm-5" style={{display:"flex",
+                    					            alignItems: "flex-start",
+                    					            gap:"5px"}}>
+                        <div>
+						    <div class="fieldlabel">{<FormattedMessage id="Event.Status" defaultMessage="Status" />}</div>
+                            <EventState statusEvent={this.state.event.statusEvent}
+                                disabled={this.getDisabledState("statusEvent")}
+                                changeState={this.changeStateCallback} />
+                        </div>
+						 <TakeATour
+    					    subject={intl.formatMessage({id:"Event.TourStatus",
+                         						        defaultMessage:"Select the status"})}
+    					    content={intl.formatMessage({id:"Event.TourStatusContent",
+                         						        defaultMessage:"The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><p/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event" })}
+    					    notes={intl.formatMessage({id:"Event.TourStatusNote",
+                                                        defaultMessage:"Only an organizer can change the status"})}
+                            fctCallBack={this.deactivateTakeATour}
+                         />
 					</div>
 					<div class="col-sm-2">
 						<Select labelText={<FormattedMessage id="Event.Scope" defaultMessage="Scope" />}
@@ -271,6 +304,13 @@ class Event extends React.Component {
 
 
 						</Select>
+						<TakeATour
+                            subject={intl.formatMessage({id:"Event.TourScope", defaultMessage:"Select the scope"})}
+                            content={intl.formatMessage({id:"Event.TourScopeContent",
+                                                        defaultMessage:"The scope determines who can see and search the event.<li>Open: everybody can search and join the event.</li><li>Open on confirmation: anybody can search, ask to join. Then, an organizer must validate the person.</li><li>Limited:Only invited person can access it</li><li>Secret: share a number. The only person with this number can join, and participants are hidden from each other.</li>" })}
+                            notes={intl.formatMessage({id:"Event.TourScopeNote", defaultMessage:"Only an organizer can change the scope"})}
+                            fctCallBack={this.deactivateTakeATour}
+                         />
 						<br />
 					</div>
 
@@ -299,7 +339,7 @@ class Event extends React.Component {
 
                 <EventSectionHeader id="helptabs"
                     showPlusButton  = {false}
-                    userTipsText={<FormattedMessage id="Event.HelpTabs" defaultMessage="You have access to different tools in the event. Explore them" />}
+                    userTipsText={<FormattedMessage id="Event.HelpTabsAccess" defaultMessage="You have access to different functions in the event. Open and close functions in your preference: only some function are accessible by default" />}
 				    />
 				<div class="row" style={{ padding: "10px 30px 10px" }}>
                     <ul class="nav nav-tabs" style={{borderBottom: "6px solid #e9ecef"}}>
@@ -561,6 +601,11 @@ class Event extends React.Component {
 
     preferencesCallback() {
 		console.log("Event.preferencesCallback forceUpdate");
+        this.forceUpdate();
+    }
+
+    deactivateTakeATour() {
+		console.log("Event.deactivateTakeATour forceUpdate");
         this.forceUpdate();
     }
 

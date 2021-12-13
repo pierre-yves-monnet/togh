@@ -222,7 +222,6 @@ public class EventService {
      * @return
      */
     public InvitationResult resendInvitation(EventEntity eventEntity, ToghUserEntity invitedByToghUser, Long participantId, boolean useMyEmailAsFrom) {
-        EventController eventController = getEventController(eventEntity);
         // anybody can resend the invitation
         List<ParticipantEntity> searchParticipant = eventEntity.getParticipantList()
                 .stream()
@@ -421,7 +420,7 @@ public class EventService {
 
         // modified last than 2 H? Keep it open.
         LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
-        timeGrace = timeGrace.minusDays(30);
+        timeGrace = timeGrace.minusDays(360);
 
         List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge(timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
@@ -446,25 +445,6 @@ public class EventService {
     /* ******************************************************************************** */
 
 
-    /**
-     * removeItineraryStep
-     *
-     * @param eventEntity
-     * @param taskId
-     * @return
-     */
-//    public List<LogEvent> removeItineraryStep(EventEntity eventEntity, Long taskId) {
-//        List<LogEvent> listLogEvent = new ArrayList<>();
-//        Optional<EventItineraryStepEntity> child = eventItineraryStepRepository.findById(taskId);
-//        if (child.isPresent()) {
-//            eventItineraryStepRepository.delete(child.get());
-//            eventEntity.removeItineraryStep(child.get());
-//        } else {
-//            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find itineraryStep " + taskId));
-//        }
-//
-//        return listLogEvent;
-//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -473,30 +453,7 @@ public class EventService {
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-//    public EventShoppingListEntity addShoppingList(EventEntity eventEntity, EventShoppingListEntity shoppingListEntity) {
-//        eventShoppingListRepository.save(shoppingListEntity);
-//        eventEntity.addShoppingList(shoppingListEntity);
-//        return shoppingListEntity;
-//    }
 
-    /**
-     * RemoveShoppingList
-     *
-     * @param eventEntity
-     * @param shoppingListId
-     * @return
-     */
-//    public List<LogEvent> removeShoppingList(EventEntity eventEntity, Long shoppingListId) {
-//        List<LogEvent> listLogEvent = new ArrayList<>();
-//        Optional<EventShoppingListEntity> child = eventShoppingListRepository.findById(shoppingListId);
-//        if (child.isPresent()) {
-//            eventShoppingListRepository.delete(child.get());
-//            eventEntity.removeShoppingList(child.get());
-//        } else {
-//            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find ShoppingId " + shoppingListId));
-//        }
-//        return listLogEvent;
-//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -506,42 +463,6 @@ public class EventService {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    /**
-     * Add a task in the event
-     * task is saved, then it got an id. Event is not saved.
-     *
-     * @param eventEntity
-     * @return
-     */
-//    public EventTaskEntity addTask(EventEntity eventEntity, EventTaskEntity task, EventOperationResult eventOperationResult) {
-//        EventController eventController = getEventController(eventEntity);
-//        eventController.addTask(task, eventOperationResult);
-//        return task;
-//    }
-
-    /**
-     * RemoveTask
-     *
-     * @param eventEntity
-     * @param taskId
-     * @return
-     */
-//    public void removeTask(EventEntity eventEntity, Long taskId, EventOperationResult eventOperationResult) {
-//        EventController eventController = getEventController(eventEntity);
-//        eventController.removeTaskById(taskId, eventOperationResult);
-//
-//        /*
-//         * List<LogEvent> listLogEvent = new ArrayList<>();
-//         * Optional<EventTaskEntity> task = eventTaskRepository.findById(taskId);
-//         * if (task.isPresent()) {
-//         * EventController eventController = getEventController( eventEntity );
-//         * return eventController.removeTask( eventEntity, task );
-//         * } else {
-//         * listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find taskId " + taskId));
-//         * }
-//         * return listLogEvent;
-//         */
-//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -550,76 +471,7 @@ public class EventService {
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-//    public EventSurveyEntity addSurvey(EventEntity eventEntity, EventSurveyEntity surveyEntity) {
-//        surveyRepository.save(surveyEntity);
-//        eventEntity.addSurvey(surveyEntity);
-//        return surveyEntity;
-//    }
-//
-//    public EventSurveyChoiceEntity addSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyChoiceEntity surveyChoice) {
-//        EventController eventControler = getEventController(eventEntity);
-//        return eventControler.addSurveyChoice(surveyEntity, surveyChoice);
-//        /*
-//         * Deported
-//         * surveyChoiceRepository.save(surveyChoice);
-//         * List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
-//         * choicelist.add(surveyChoice);
-//         * surveyEntity.setChoicelist(choicelist);
-//         * surveyRepository.save(surveyEntity);
-//         * return surveyChoice;
-//         */
-//    }
-//
-//    public EventSurveyAnswerEntity addSurveyAnswser(EventEntity eventEntity, EventSurveyEntity surveyEntity, EventSurveyAnswerEntity surveyAnswerEntity) {
-//        EventController eventControler = getEventController(eventEntity);
-//        return eventControler.addSurveyAnswser(surveyEntity, surveyAnswerEntity);
-//        /*
-//         * Deported
-//         * surveyAnswerRepository.save(surveyAnswerEntity);
-//         * List<EventSurveyAnswerEntity> answerlist = surveyEntity.getAnswerlist();
-//         * answerlist.add(surveyAnswerEntity);
-//         * surveyEntity.setAnswerlist(answerlist);
-//         * surveyRepository.save(surveyEntity);
-//         * return surveyAnswerEntity;
-//         */
-//    }
-//
-//    /**
-//     * RemoveSurvey
-//     * 
-//     * @param eventEntity
-//     * @param surveyId
-//     * @return
-//     */
-//    public List<LogEvent> removeSurvey(EventEntity eventEntity, Long surveyId) {
-//        List<LogEvent> listLogEvent = new ArrayList<>();
-//        Optional<EventSurveyEntity> child = surveyRepository.findById(surveyId);
-//        if (child.isPresent()) {
-//            surveyRepository.delete(child.get());
-//        } else {
-//            listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find SurveyId " + surveyId));
-//        }
-//        return listLogEvent;
-//    }
-//
-//    public List<LogEvent> removeSurveyChoice(EventEntity eventEntity, EventSurveyEntity surveyEntity, Long choiceId) {
-//        EventController eventControler = getEventController(eventEntity);
-//        return eventControler.removeSurveyChoice(surveyEntity, choiceId);
-//        /*
-//         * Deported
-//         * List<LogEvent> listLogEvent = new ArrayList<>();
-//         * Optional<EventSurveyChoiceEntity> choice = surveyChoiceRepository.findById(choiceId);
-//         * if (choice.isPresent()) {
-//         * surveyChoiceRepository.delete(choice.get());
-//         * List<EventSurveyChoiceEntity> choicelist = surveyEntity.getChoicelist();
-//         * choicelist.remove(choice.get());
-//         * surveyEntity.setChoicelist(choicelist);
-//         * } else {
-//         * listLogEvent.add(new LogEvent(eventEntityNotFoundToRemove, "Can't find choiceId[" + choiceId + "]"));
-//         * }
-//         * return listLogEvent;
-//         */
-//    }
+
 
     /* ******************************************************************************** */
     /*                                                                                  */
@@ -628,20 +480,6 @@ public class EventService {
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
-//    public EventGroupChatEntity addGroupChat(EventEntity eventEntity, EventGroupChatEntity groupChatEntity) {
-//        eventGroupChatRepository.save(groupChatEntity);
-//        eventEntity.addGroupChat(groupChatEntity);
-//        return groupChatEntity;
-//    }
-//
-//    public EventChatEntity addChatInGroup(EventEntity eventEntity, EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity) {
-//        EventController eventControler = getEventController(eventEntity);
-//        return eventControler.addChatInGroup(groupChatEntity, chatEntity);
-//        /* Deported eventChatRepository.save(chatEntity);
-//        groupChatEntity.addChat(chatEntity);
-//        return chatEntity;
-//        */
-//    }
 
     /* ******************************************************************************** */
     /*                                                                                  */

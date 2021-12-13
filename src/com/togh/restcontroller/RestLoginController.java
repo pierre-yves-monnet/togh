@@ -78,18 +78,20 @@ public class RestLoginController {
     @PostMapping(value = "api/login", produces = "application/json")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, String> userData, HttpServletResponse response, HttpServletRequest request) {
-        LoginResult loginStatus = loginService.connectWithEmail(userData.get(JSON_EMAIL),
+        LoginResult loginResult = loginService.connectWithEmail(userData.get(JSON_EMAIL),
                 userData.get(JSON_PASSWORD),
                 request.getRemoteAddr());
         Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginStatus.getMap());
-        if (loginStatus.isConnected) {
-            finalStatus.put("apikeys", apiKeyService.getApiKeyForUser(loginStatus.userConnected));
+        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
+        if (loginResult.isConnected) {
+            finalStatus.put("apikeys", apiKeyService.getApiKeyForUser(loginResult.userConnected));
         }
         return finalStatus;
     }
 
     /**
+     * Get information on a user. This information is open to all REST CALL.
+     *
      * @param userData REST API Payload
      * @param response
      * @return REST API Answer
@@ -139,7 +141,7 @@ public class RestLoginController {
     public Map<String, Object> loginGoogle(@RequestParam("idtokengoogle") String idTokenGoogle,
                                            HttpServletResponse response,
                                            HttpServletRequest request) {
-        LoginResult loginStatus = new LoginResult();
+        LoginResult loginResult = new LoginResult();
 
         try {
 
@@ -166,21 +168,21 @@ public class RestLoginController {
                 String picture = (String) payload.get("picture");
                 // fr, en..
                 // String language= (String) payload.get("locale");
-                loginStatus = loginService.connectSSO(email, true, request.getRemoteAddr());
-                if (!loginStatus.isConnected) {
+                loginResult = loginService.connectSSO(email, true, request.getRemoteAddr());
+                if (!loginResult.isConnected) {
                     // register it now !
-                    loginStatus = loginService.registerNewUser(email, firstName, lastName, /** No password */null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
-                    if (loginStatus.status == LoginStatus.OK)
-                        loginStatus = loginService.connectNoVerification(email);
+                    loginResult = loginService.registerNewUser(email, firstName, lastName, /** No password */null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
+                    if (loginResult.status == LoginStatus.OK)
+                        loginResult = loginService.connectNoVerification(email);
                 }
 
-                return loginStatus.getMap();
+                return loginService.getLoginResultMap(loginResult);
             }
         } catch (Exception e) {
             logger.info(LOG_HEADER + "Error when creating a Google user " + e.toString());
 
         }
-        return loginStatus.getMap();
+        return loginService.getLoginResultMap(loginResult);
 
     }
 
@@ -195,7 +197,7 @@ public class RestLoginController {
     @PostMapping(value = "/api/login/registernewuser", produces = "application/json")
     @ResponseBody
     public Map<String, Object> registerNewUser(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.registerNewUser(userData.get(JSON_EMAIL),
+        LoginResult loginResult = loginService.registerNewUser(userData.get(JSON_EMAIL),
                 userData.get("firstName"),
                 userData.get("lastName"),
                 userData.get(JSON_PASSWORD),
@@ -203,10 +205,10 @@ public class RestLoginController {
                 TypePictureEnum.TOGH,
                 null
         );
-        if (loginStatus.status == LoginStatus.OK)
-            loginStatus = loginService.connectNoVerification(userData.get(JSON_EMAIL));
+        if (loginResult.status == LoginStatus.OK)
+            loginResult = loginService.connectNoVerification(userData.get(JSON_EMAIL));
 
-        return loginStatus.getMap();
+        return loginService.getLoginResultMap(loginResult);
     }
 
 
@@ -250,25 +252,25 @@ public class RestLoginController {
     @PostMapping(value = "/api/login/resetPasswordInfo", produces = "application/json")
     @ResponseBody
     public Map<String, Object> resetPasswordInfo(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.getFromUUID(userData.get("uuid"));
+        LoginResult loginResult = loginService.getFromUUID(userData.get("uuid"));
         Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginStatus.getMap());
+        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
         return finalStatus;
     }
 
 
     /**
      * @param userData REST API Payload
-     * @param response
+     * @param response HttpServletResponse
      * @return REST API Answer
      */
     @CrossOrigin
     @PostMapping(value = "/api/login/resetPassword", produces = "application/json")
     @ResponseBody
     public Map<String, Object> resetPassword(@RequestBody Map<String, String> userData, HttpServletResponse response) {
-        LoginResult loginStatus = loginService.changePasswordAndConnect(userData.get("uuid"), userData.get("password"));
+        LoginResult loginResult = loginService.changePasswordAndConnect(userData.get("uuid"), userData.get(JSON_PASSWORD));
         Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginStatus.getMap());
+        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
         return finalStatus;
     }
 
@@ -290,9 +292,9 @@ public class RestLoginController {
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
-        LoginResult loginStatus = loginService.changePassword(toghUserEntity, userData.get("password"));
+        LoginResult loginResult = loginService.changePassword(toghUserEntity, userData.get("password"));
         Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginStatus.getMap());
+        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
         return finalStatus;
     }
 

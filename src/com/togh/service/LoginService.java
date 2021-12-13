@@ -10,7 +10,6 @@ package com.togh.service;
 
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
-import com.togh.entity.LoginLogEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.PrivilegeUserEnum;
 import com.togh.entity.ToghUserEntity.SourceUserEnum;
@@ -18,9 +17,12 @@ import com.togh.entity.ToghUserEntity.StatusUserEnum;
 import com.togh.entity.ToghUserEntity.TypePictureEnum;
 import com.togh.entity.ToghUserLostPasswordEntity;
 import com.togh.entity.ToghUserLostPasswordEntity.StatusProcessEnum;
-import com.togh.repository.LoginLogRepository;
+import com.togh.eventgrantor.update.FactoryUpdateGrantor;
 import com.togh.repository.ToghUserLostPasswordRepository;
 import com.togh.restcontroller.RestHttpConstant;
+import com.togh.serialization.FactorySerializer;
+import com.togh.serialization.SerializerOptions;
+import com.togh.serialization.ToghUserSerializer;
 import com.togh.service.MonitorService.Chrono;
 import com.togh.service.NotifyService.NotificationStatus;
 import com.togh.service.ToghUserService.SearchUsersResult;
@@ -32,7 +34,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -75,13 +76,22 @@ public class LoginService {
     private MonitorService monitorService;
     @Autowired
     private ToghUserService toghUserService;
-    private Logger logger = Logger.getLogger(LoginService.class.getName());
+
     @Autowired
-    private LoginLogRepository loginLogRepository;
+    private FactorySerializer factorySerializer;
+
+    @Autowired
+    private FactoryUpdateGrantor factoryUpdateGrantor;
+
+    private Logger logger = Logger.getLogger(LoginService.class.getName());
 
     private int delayMinutesDisconnectInactiveUser = 30;
     @Autowired
     private StatsService statsService;
+
+    @Autowired
+    private UnderAttackService underAttackService;
+
     private Map<String, UserConnected> cacheUserConnected = new HashMap<>();
 
     /**
@@ -99,7 +109,7 @@ public class LoginService {
         if (toghUserEntity == null) {
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_EXIST);
             loginStatus.status = LoginStatus.UNKNOWUSER;
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         // Special case: an invited user with a password.... this is not normal.
@@ -116,14 +126,14 @@ public class LoginService {
                 || SourceUserEnum.SYSTEM.equals(toghUserEntity.getSource()))) {
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_REGISTERED_ON_PORTAL);
             loginStatus.status = LoginStatus.NOTREGISTERED;
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         // password inactif or block: remove it
         if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_USER_BLOCKED_OR_DISABLED);
             loginStatus.status = LoginStatus.BLOCKED;
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         // check the password
@@ -132,14 +142,14 @@ public class LoginService {
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_BAD_PASSWORD);
             loginStatus.status = LoginStatus.BADPASSWORD; // don't say that the user exists...
             loginStatus.explanation = "Password given has (" + password.length() + ") char, original password is " + toghUserEntity.getLengthPassword();
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         loginStatus.userConnected = toghUserEntity;
         loginStatus.connectionToken = connectUser(toghUserEntity);
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
     }
 
@@ -162,7 +172,7 @@ public class LoginService {
         loginStatus.isConnected = true;
         loginStatus.status = LoginStatus.OK;
         monitorService.endOperation(chronoConnection);
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
 
     }
@@ -179,12 +189,12 @@ public class LoginService {
         Optional<ToghUserEntity> toghUserEntity = toghUserService.getUserFromEmail(email);
         if (toghUserEntity.isEmpty()) {
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_EXIST);
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         // not correct is the source is not the correct one
         if (isGoogle && (!toghUserEntity.get().getSource().equals(SourceUserEnum.GOOGLE))) {
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
 
@@ -192,7 +202,7 @@ public class LoginService {
         loginStatus.connectionToken = connectUser(toghUserEntity.get());
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
 
     }
@@ -230,10 +240,10 @@ public class LoginService {
                 // Hum, someone try to access an existing user via the registration ? Well try...
                 // Or maybe this is just a duplicate coincidence
                 loginStatus.status = LoginStatus.ALREADYEXISTUSER;
-                report(loginStatus);
+                underAttackService.reportSuspiciousLogin(loginStatus);
                 return loginStatus;
             }
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
         } else {
             // encrypt the password now
             String passwordEncrypted = ToghUserService.encryptPassword(password);
@@ -250,7 +260,7 @@ public class LoginService {
             logger.severe(LOG_HEADER + "Can't create new user: " + e);
             loginStatus.status = LoginStatus.SERVERISSUE;
         }
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
 
     }
@@ -333,7 +343,7 @@ public class LoginService {
             loginStatus.status = LoginStatus.SERVERISSUE;
             loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.get().getLabel() + "]"));
             monitorService.registerErrorEvents(loginStatus.listEvents);
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
 
@@ -360,12 +370,12 @@ public class LoginService {
             loginStatus.status = LoginStatus.SERVERISSUE;
             loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.get().getLabel() + "]"));
             monitorService.registerErrorEvents(loginStatus.listEvents);
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
 
         monitorService.registerErrorEvents(loginStatus.listEvents);
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
     }
 
@@ -383,7 +393,7 @@ public class LoginService {
         if (!StatusUserEnum.ACTIF.equals(toghUserEntity.getStatusUser())) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_USER_BLOCKED_OR_DISABLED);
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         // search the user now
@@ -397,7 +407,7 @@ public class LoginService {
         loginStatus.connectionToken = connectUser(toghUserEntity);
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
 
     }
@@ -485,7 +495,7 @@ public class LoginService {
         if (!StatusUserEnum.ACTIF.equals(toghUser.getStatusUser())) {
             loginStatus.status = LoginStatus.UNKNOWUSER;
             monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_USER_BLOCKED_OR_DISABLED);
-            report(loginStatus);
+            underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
         }
         // search the user now
@@ -496,7 +506,7 @@ public class LoginService {
 
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
-        report(loginStatus);
+        underAttackService.reportSuspiciousLogin(loginStatus);
         return loginStatus;
     }
 
@@ -594,48 +604,30 @@ public class LoginService {
     // 
     // --------------------------------------------------------------
 
-    private void report(LoginResult loginStatus) {
-        // first, calculate the timeSlot
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HH:");
-        String timeSlot = now.format(formatter) + ((now.getMinute() / 15) * 15);
-        logger.info(LOG_HEADER + "Connection Email[" + loginStatus.email + "] googleId[" + loginStatus.googleId + "] Status[" + loginStatus.status + "] @ [" + timeSlot + "]");
-
-        if (loginLogRepository.countByTimeSlot(timeSlot) > 100) {
-            // we are under attack: Stop to log
-            try {
-                Thread.sleep(30000);
-            } catch (Exception e) {
-                // nothing to do here
-            }
-        }
-        try {
-            LoginLogEntity loginLogEntity = loginLogRepository.findByTimeSlot(timeSlot,
-                    loginStatus.email,
-                    loginStatus.googleId,
-                    loginStatus.ipAddress,
-                    loginStatus.status);
-
-            if (loginLogEntity != null && loginLogEntity.getStatusConnection().equals(loginStatus.status)) {
-                loginLogEntity.setNumberOfTentatives(loginLogEntity.getNumberOfTentatives() + 1);
-            } else {
-                loginLogEntity = new LoginLogEntity();
-                loginLogEntity.setEmail(loginStatus.email);
-                loginLogEntity.setGoogleId(loginStatus.googleId);
-                loginLogEntity.setIpAddress(loginStatus.ipAddress);
-                loginLogEntity.setTimeSlot(timeSlot);
-                loginLogEntity.setNumberOfTentatives(1);
-                loginLogEntity.setStatusConnection(loginStatus.status);
-                loginLogEntity.setExplanation(loginStatus.explanation);
-            }
-
-            loginLogRepository.save(loginLogEntity);
-        } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't save loginLog " + e);
-        }
-    }
 
     public enum LoginStatus {OK, BADEMAIL, SERVERISSUE, UNKNOWUSER, BADPASSWORD, ALREADYEXISTUSER, NOTREGISTERED, BLOCKED}
+
+    /**
+     * listEvents are not sent back, it's a server information
+     *
+     * @return Map of login information
+     */
+    public Map<String, Object> getLoginResultMap(LoginResult loginResult) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("isConnected", loginResult.isConnected);
+        map.put("token", loginResult.connectionToken);
+        if (loginResult.userConnected != null) {
+            ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromEntity(loginResult.userConnected);
+            SerializerOptions serializerOptions = new SerializerOptions(loginResult.userConnected, 0L, SerializerOptions.ContextAccess.MYPROFILE);
+
+            map.put("user", toghUserSerializer.getMap(loginResult.userConnected, null,
+                    serializerOptions,
+                    factorySerializer,
+                    factoryUpdateGrantor));
+        }
+
+        return map;
+    }
 
     /**
      * LoginResult class
@@ -654,19 +646,13 @@ public class LoginService {
 
         public List<LogEvent> listEvents = new ArrayList<>();
 
-        /**
-         * listEvents are not sent back, it's a server information
-         *
-         * @return Map of login information
-         */
-        public Map<String, Object> getMap() {
-            Map<String, Object> map = new HashMap<>();
-            map.put("isConnected", isConnected);
-            map.put("token", connectionToken);
-            if (userConnected != null)
-                map.put("user", userConnected);
-            return map;
-        }
+        @Autowired
+        private FactorySerializer factorySerializer;
+
+        @Autowired
+        private FactoryUpdateGrantor factoryUpdateGrantor;
+
+
     }
 
     /**

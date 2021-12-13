@@ -13,6 +13,7 @@ import axios from 'axios';
 
 
 import HttpResponse  		from 'service/HttpResponse';
+import FactoryService 		from 'service/FactoryService';
 
 
 
@@ -124,32 +125,24 @@ class AuthService {
 			return {};
 		}
 	}
+
 	//--------------------------- RegisterUser
 	//  param= { email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName };
 	registerUser(param, objToCall, fctToCallback) {
 		console.log("AuthService.registerUser: Register param=" + JSON.stringify(param));
-		var self=this;
-		try {
-			axios.post( this.restcallService.getUrl('/api/login/registernewuser?'), param)
-				.then( axiosPayload => {
-					console.log("AuthService.registerStatus: registerStatus = "+JSON.stringify(axiosPayload.data));
-					self.token = axiosPayload.data.token;
-					self.user =  axiosPayload.data.user;
-					self.connectMethod='DIRECT';
+	    var self=this;
+	    const restCallService = FactoryService.getInstance().getRestCallService();
+        restCallService.postJson('/api/login/registernewuser?', this, param,
+            httpPayload => {
+			    console.log("AuthService.registerStatus: registerStatus = "+JSON.stringify(httpPayload.getData()));
+			    debugger;
+                self.token = httpPayload.getData().token;
+                self.user =  httpPayload.getData().user;
+                self.connectMethod='DIRECT';
 
-					var httpResponse = new HttpResponse( axiosPayload, null);
-					fctToCallback.call(objToCall, httpResponse);	
-				})
-				.catch((err) => {
-					console.error("AuthService.loginCallback: Catch error:"+err);
-					var httpResponse =  new HttpResponse( {}, err)
-					fctToCallback.call(objToCall, httpResponse);		
-				});
-		 } catch (err) {
-        	// Handle Error Here
-        	console.log("AuthService.registerUser.Error "+err);
-			return {};
-		}
+                var httpResponse = new HttpResponse( httpPayload.getData(), null);
+                fctToCallback.call(objToCall, httpPayload);
+            });
 	}
 	
 	/**
@@ -158,9 +151,27 @@ class AuthService {
 		this.token = httpPayload.token;
 		this.user =  httpPayload.user;
 		this.connectMethod='DIRECT';
-		
 	}
-	
+
+	refreshUser( objToCall, fctToCallback ) {
+	  console.log("AuthService.refreshUser: ");
+	  let restCallService = FactoryService.getInstance().getRestCallService();
+      restCallService.getJson('/api/user?id='+this.user.id, this,
+        httpPayload =>{
+            httpPayload.trace("MyProfile.getUser");
+            if (httpPayload.isError()) {
+                console.log("AuthService.error during refresh user: ");
+                fctToCallback.call( objToCall, this.user, httpPayload );
+            }
+            else {
+                this.user= httpPayload.getData();
+                fctToCallback.call( objToCall, this.user,httpPayload );
+            }
+        }
+      );
+    }
+
+
 	//--------------------------------------- Logout
 	logout( objToCall, fctToCallback) {
 		console.log("AuthService.logout: token = " +this.token);

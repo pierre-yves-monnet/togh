@@ -72,6 +72,7 @@ class EventEntity extends UserEntity {
     @org.hibernate.annotations.ColumnDefault("'ONEDATE'")
     @Enumerated(EnumType.STRING)
     private DatePolicyEnum datePolicy;
+
     @Column(name = "timeevent", length = 5)
     private String timeevent;
     @Column(name = "durationevent", length = 5)

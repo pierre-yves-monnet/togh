@@ -19,6 +19,7 @@ import EventState from 'event/EventState';
 import * as userFeedbackConstant from 'component/UserFeedback';
 import UserFeedback  from 'component/UserFeedback';
 
+import UserTips 		from 'component/UserTips';
 
 
 export const FILTER_EVENT = {
@@ -55,11 +56,13 @@ class EventsList extends React.Component {
 
 		console.log("EventsList.constructor: END");
 	}
+
 	componentDidMount () {
-		console.log("EventsList.componentWillMount: BEGIN");
+		console.log("EventsList.componentDidMount: BEGIN");
 		this.refreshListEvents(); 	
-		console.log("EventsList.componentWillMount: END");
+		console.log("EventsList.componentDidMount: END");
 	}
+
 	componentDidUpdate (prevProps) {
 		console.log("EventsList.componentDidUpdate titleFrame=("+this.props.titleFrame+") prevProps=("+prevProps.titleFrame+")");
 		if (prevProps.filterEvents !== this.props.filterEvents) {
@@ -137,6 +140,14 @@ class EventsList extends React.Component {
 					</div>
 				</div>
 				<div class="row">
+
+				<UserTips id="eventtakeatour"
+
+                        text={<FormattedMessage id="EventsList.TakeATour"
+                      defaultMessage="Explore all the functions. Click on 'Take a tour' icon to access information and help." />}
+                    />
+				</div>
+				<div class="row">
 					<div class="col-sm">
 						<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
 							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
@@ -205,7 +216,7 @@ class EventsList extends React.Component {
 		const intl = this.props.intl;
 
 		this.setState({ message :  ""});
-		var restCallService = FactoryService.getInstance().getRestCallService();
+		const restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/event/create', this, {name:"new event"}, httpPayload => {
 			httpPayload.trace("EventList.createEventCallback");
 

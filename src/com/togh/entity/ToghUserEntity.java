@@ -64,6 +64,10 @@ class ToghUserEntity extends BaseEntity {
     @org.hibernate.annotations.ColumnDefault("'1'")
     Boolean showTipsUser;
 
+    @Column(name = "showtakeatour")
+    @org.hibernate.annotations.ColumnDefault("'1'")
+    Boolean showTakeATour;
+
     @Column(name = "googleid", length = 100)
     private String googleId;
     @Column(name = "firstname", length = 100)

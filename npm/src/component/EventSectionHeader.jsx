@@ -36,7 +36,6 @@ class EventSectionHeader extends React.Component {
 			showPlusButtonTitle : props.showPlusButtonTitle,
 			userTipsText: props.userTipsText
 		};
-		
 	}
 
 

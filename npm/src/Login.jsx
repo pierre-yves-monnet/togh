@@ -121,7 +121,7 @@ class Login extends React.Component {
 				<tr>
 				<td style={{paddingLeft: "150px"}}>
 					
-					<button onClick={this.loginConnect} class="btn btn-info"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
+					<button onClick={this.loginConnect} class="btn btn-primary"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
 					
 					<input type="checkbox"
 						onChange={(event) => { 
@@ -263,7 +263,7 @@ class Login extends React.Component {
 		console.log("Login.loginGoogle googleInformation="+JSON.stringify(googleUser));
 		console.log("Login.loginGoogle this="+this+" StaticLogin="+staticLogin);
 		FactoryService.getInstance().getAuthService().loginGoogle( googleUser, staticLogin, staticLogin.loginGoogleCallBack );
-	};
+	}
 	loginGoogleCallBack( httpResponse ) {
 		httpResponse.trace("Login.loginGoogleCallBack");
 		if (httpResponse.isError()) {

@@ -751,6 +751,13 @@ Forgot my password: email incorrect registration invitation
 
 # RoadMap
 
+## Cours terme
+
+* What change on the event avec badge sur les fonctions
+* what change by email
+* revoir les invitations, pour avoir un bouton "share" quand la personne n'a pas encore repondue a l'invitation plutot
+  que pleins de boutons
+
 ## interne
 
 Test unitaire sur le SLAB
@@ -759,18 +766,18 @@ Test unitaire sur le SLAB
 
 Possibilite de supprimer une invitation dans un event (et dans ce cas, l'user peut etre supprimer s'il n'était invoqué
 que dans un event)
-En tant que Owner, je devrais pouvor bannir une invitation
+En tant que Owner, je devrais pouvoir bannir une invitation
 
-Log sur un event: quand il a changé de status, envoi d'inviation...
+Log sur un event: quand il a changé de status, envoi d'invitation...
 
-Notification ; je veux pouvoir dire "prevuens moi si qq chose change
+Notification ; je veux pouvoir dire "previens moi si qq chose change
 
 Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer Expense
 Preference affichage Budget Administration Statistics usage
 
 ## integration
 
-Integration what's app & Instagram Wheather
+Integration what's app & Instagram Weather
 
 Integrate in Google Calendar Integrate in Google Drive Coder whatismyip dans l'administration
 
@@ -781,8 +788,6 @@ Avoir une liste de mes amis que je ^peux importer depuis Google. Pouvoir inviter
 ## Contact & support
 
 ## Participants
-
-Ajouter le nombre de personne, pouvoir dire "je ne viens pas"
 
 Ajouter la date de dernier acces du participant dans l'évent: ainsi on peut calculater le "what's news" et mettre des
 badges
@@ -803,7 +808,7 @@ Pouvoir mettre une photo dans l'invitation pour le House Warming
 
 Pouvoir dire "non je ne vais pas venir dans cette event"
 
-Invitation: copuer le contenu de l'emauil dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
+Invitation: copier le contenu de l'email dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
 veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de modification"
 
 Jpoin Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
@@ -813,7 +818,7 @@ Jpoin Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
 Supprimer un user invalide Graph des events / mois Purger les users invite, jamais venus purger plus rapidement encore
 les users invite mais plus retirer des events ou dans des events clotures
 
-Admini: avoir un "automatique refresh check box" : penible de clicker "connected" et de faire search
+Admin: avoir un "automatique refresh check box" : penible de clicker "connected" et de faire search
 
 	Event/Participant: mettre l'icone + un component qui donne toutes les coordonnées
  	

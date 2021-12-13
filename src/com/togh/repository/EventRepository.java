@@ -42,17 +42,18 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
     /**
      * Search all past event OR, if the event is just modified in the last X time, then it survived
      *
-     * @param timeLimit
-     * @param timeGrace
-     * @return
+     * @param dateLimit       if the event is created before this date, it is considered as old (except for the dateGrace mechanism)
+     * @param dateGrace       if modification is AFTER this date, it is not considered as an Old event
+     * @param notEqualsStatus status must not be equals to this status
+     * @return the list of old event
      */
     @Query("SELECT e FROM EventEntity e "
-            + "WHERE ((e.dateEndEvent is not null and e.dateEndEvent < :timeLimit) "
-            + "   or (e.dateEvent is not null and e.dateEvent < :timeLimit) "
-            + "   or (e.dateEndEvent is null and e.dateEvent is null)) "
-            + " and e.dateModification < :timeGrace "
+            + "WHERE ("
+            + " (e.datePolicy = 'ONEDATE' and e.dateEvent < :dateLimit)"
+            + " or (e.datePolicy = 'PERIOD' and e.dateEndEvent < :dateLimit)"
+            + ") and e.dateModification < :dateGrace "
             + " and e.statusEvent != :status")
-    List<EventEntity> findOldEvents(@Param("timeLimit") LocalDateTime timeLimit, @Param("timeGrace") LocalDateTime timeGrace, @Param("status") StatusEventEnum status, Pageable pageable);
+    List<EventEntity> findOldEvents(@Param("dateLimit") LocalDateTime dateLimit, @Param("dateGrace") LocalDateTime dateGrace, @Param("status") StatusEventEnum notEqualsStatus, Pageable pageable);
 
 
     @Query("SELECT e FROM EventEntity e join e.participantList p "
