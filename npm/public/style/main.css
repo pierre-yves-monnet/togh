@@ -68,7 +68,13 @@ body>div.container {margin-top:10px;}
 }
 
 .fieldlabel {
-	 font-style: italic;
+	 font-size: 0.75rem;
+	 letter-spacing: 0.32px;
+     margin-bottom: 0.5rem;
+     color: #525252;
+     font-weight: 400;
+     line-height: 1rem;
+     vertical-align: baseline;
 }
 
 h1{
