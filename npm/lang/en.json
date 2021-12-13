@@ -29,6 +29,75 @@
   "AdminInfo.Information": {
     "defaultMessage": "Information"
   },
+  "AdminLogConnection.AllLogs": {
+    "defaultMessage": "All Logs"
+  },
+  "AdminLogConnection.BadPassword": {
+    "defaultMessage": "Bad Password"
+  },
+  "AdminLogConnection.ConnectionOk": {
+    "defaultMessage": "Connection correct"
+  },
+  "AdminLogConnection.DateAndTime": {
+    "defaultMessage": "Date"
+  },
+  "AdminLogConnection.Email": {
+    "defaultMessage": "Email"
+  },
+  "AdminLogConnection.EndDate": {
+    "defaultMessage": "End Date"
+  },
+  "AdminLogConnection.EndTime": {
+    "defaultMessage": "End Time"
+  },
+  "AdminLogConnection.GoogleId": {
+    "defaultMessage": "Google Id"
+  },
+  "AdminLogConnection.IpAddress": {
+    "defaultMessage": "Ip Address"
+  },
+  "AdminLogConnection.NumberOfTentatives": {
+    "defaultMessage": "Nb. Tentatives"
+  },
+  "AdminLogConnection.Ok": {
+    "defaultMessage": "Ok"
+  },
+  "AdminLogConnection.Pages": {
+    "defaultMessage": "Pages"
+  },
+  "AdminLogConnection.Search": {
+    "defaultMessage": "Search"
+  },
+  "AdminLogConnection.ShowDetails": {
+    "defaultMessage": "Details"
+  },
+  "AdminLogConnection.StartDate": {
+    "defaultMessage": "Start Date"
+  },
+  "AdminLogConnection.StartTime": {
+    "defaultMessage": "Start Time"
+  },
+  "AdminLogConnection.Status": {
+    "defaultMessage": "Status"
+  },
+  "AdminLogConnection.Title": {
+    "defaultMessage": "Connection"
+  },
+  "AdminLogConnection.UnderAttack": {
+    "defaultMessage": "Under Attack (lot of tentatives)"
+  },
+  "AdminLogConnection.UnknowUser": {
+    "defaultMessage": "User unknown"
+  },
+  "AdminLogConnection.UnknownUser": {
+    "defaultMessage": "UnknownUser"
+  },
+  "AdminLogConnection.Users": {
+    "defaultMessage": "Users"
+  },
+  "AdminLogConnection.searchSentence": {
+    "defaultMessage": "Search"
+  },
   "AdminTransaltor.Title": {
     "defaultMessage": "Translation"
   },
@@ -191,6 +260,48 @@
   "AdminUsers.subscriptionPremium": {
     "defaultMessage": "Premium subscription"
   },
+  "AdminUsersStats.Title": {
+    "defaultMessage": "Users"
+  },
+  "AdminUsersStats.nbConnected": {
+    "defaultMessage": "Users connected"
+  },
+  "AdminUsersStats.nbUsers": {
+    "defaultMessage": "Total Users"
+  },
+  "AdmunUsersStats.ConnectionFiveYears": {
+    "defaultMessage": "Connection five years"
+  },
+  "AdmunUsersStats.ConnectionWeek": {
+    "defaultMessage": "Connection week"
+  },
+  "AdmunUsersStats.EmailVisibility": {
+    "defaultMessage": "Email visi."
+  },
+  "AdmunUsersStats.ParticipantCreation": {
+    "defaultMessage": "Participants creation"
+  },
+  "AdmunUsersStats.PhoneVisibility": {
+    "defaultMessage": "Phone visi."
+  },
+  "AdmunUsersStats.Privilege": {
+    "defaultMessage": "Privilege"
+  },
+  "AdmunUsersStats.Source": {
+    "defaultMessage": "Source"
+  },
+  "AdmunUsersStats.Subscription": {
+    "defaultMessage": "Subscription"
+  },
+  "AdmunUsersStats.UserCreation": {
+    "defaultMessage": "User creation"
+  },
+  "AdmunUsersStats.UserCreationFiveYears": {
+    "defaultMessage": "User creation five years"
+  },
+  "AdmunUsersStats.Users": {
+    "defaultMessage": "Users"
+  },
   "AskPassword.DifferentPassword": {
     "defaultMessage": "Password are different"
   },
@@ -299,8 +410,8 @@
   "Event.Geolocalisation": {
     "defaultMessage": "Geolocalisation"
   },
-  "Event.HelpTabs": {
-    "defaultMessage": "You have access to different tools in the event. Explore them"
+  "Event.HelpTabsAccess": {
+    "defaultMessage": "You have access to different functions in the event. Open and close functions in your preference: only some function are accessible by default"
   },
   "Event.Itinerary": {
     "defaultMessage": "Itinerary"
@@ -382,6 +493,39 @@
   },
   "Event.TitleTasks": {
     "defaultMessage": "Tasks"
+  },
+  "Event.TourDates": {
+    "defaultMessage": "Date or period"
+  },
+  "Event.TourDatesContent": {
+    "defaultMessage": "An event can be at a specific date (a party with friends) on a period (a road trip with your family)."
+  },
+  "Event.TourDatesNote": {
+    "defaultMessage": "Only an organizer can change the scope"
+  },
+  "Event.TourName": {
+    "defaultMessage": "Give a name to your event"
+  },
+  "Event.TourNameContent": {
+    "defaultMessage": "This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<p>Example: 'Party at San Marbella', 'House coming'"
+  },
+  "Event.TourScope": {
+    "defaultMessage": "Select the scope"
+  },
+  "Event.TourScopeContent": {
+    "defaultMessage": "The scope determines who can see and search the event.<li>Open: everybody can search and join the event.</li><li>Open on confirmation: anybody can search, ask to join. Then, an organizer must validate the person.</li><li>Limited:Only invited person can access it</li><li>Secret: share a number. The only person with this number can join, and participants are hidden from each other.</li>"
+  },
+  "Event.TourScopeNote": {
+    "defaultMessage": "Only an organizer can change the scope"
+  },
+  "Event.TourStatus": {
+    "defaultMessage": "Select the status"
+  },
+  "Event.TourStatusContent": {
+    "defaultMessage": "The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><p/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event"
+  },
+  "Event.TourStatusNote": {
+    "defaultMessage": "Only an organizer can change the status"
   },
   "EventChat.ChatTip": {
     "defaultMessage": "Chat with all participants"
@@ -599,6 +743,9 @@
   "EventPreferences.CurrencyOnEvent": {
     "defaultMessage": "Currency used in this event"
   },
+  "EventPreferences.DisplayFunction": {
+    "defaultMessage": "Display Functions"
+  },
   "EventPreferences.EventSubscription": {
     "defaultMessage": "Subscription"
   },
@@ -616,6 +763,60 @@
   },
   "EventPreferences.SubscriptionPremiumExplanation": {
     "defaultMessage": "A Premium event contains all functions, upper limitation participants (100) and items (100)"
+  },
+  "EventPreferences.accessBringNo": {
+    "defaultMessage": "Bring list"
+  },
+  "EventPreferences.accessBringYes": {
+    "defaultMessage": "Bring list"
+  },
+  "EventPreferences.accessBudgetNo": {
+    "defaultMessage": "Budget"
+  },
+  "EventPreferences.accessBudgetYes": {
+    "defaultMessage": "Budget"
+  },
+  "EventPreferences.accessChatNo": {
+    "defaultMessage": "Chat"
+  },
+  "EventPreferences.accessChatYes": {
+    "defaultMessage": "Chat"
+  },
+  "EventPreferences.accessExpensesNo": {
+    "defaultMessage": "Expenses"
+  },
+  "EventPreferences.accessExpensesYes": {
+    "defaultMessage": "Expenses"
+  },
+  "EventPreferences.accessItineraryNo": {
+    "defaultMessage": "Itinerary"
+  },
+  "EventPreferences.accessItineraryYes": {
+    "defaultMessage": "Itinerary"
+  },
+  "EventPreferences.accessLocalisationNo": {
+    "defaultMessage": "Localisation"
+  },
+  "EventPreferences.accessLocalisationYes": {
+    "defaultMessage": "Localisation"
+  },
+  "EventPreferences.accessPhotosNo": {
+    "defaultMessage": "Photos"
+  },
+  "EventPreferences.accessPhotosYes": {
+    "defaultMessage": "Photos"
+  },
+  "EventPreferences.accessSurveysNo": {
+    "defaultMessage": "Surveys"
+  },
+  "EventPreferences.accessSurveysYes": {
+    "defaultMessage": "Surveys"
+  },
+  "EventPreferences.accessTasksNo": {
+    "defaultMessage": "Tasks"
+  },
+  "EventPreferences.accessTasksYes": {
+    "defaultMessage": "Tasks"
   },
   "EventShoppingList.AddItem": {
     "defaultMessage": "Add a item in the list"
@@ -914,6 +1115,9 @@
   "EventsList.ServerConnectionError": {
     "defaultMessage": "Server connection error"
   },
+  "EventsList.TakeATour": {
+    "defaultMessage": "Explore all the functions. Click on 'Take a tour' icon to access information and help."
+  },
   "EventsList.TitleEvents": {
     "defaultMessage": "Events"
   },
@@ -1010,9 +1214,6 @@
   "Login.LostPasswordExplanation": {
     "defaultMessage": "A link to change your password will be send to your email"
   },
-  "Login.RememberMe": {
-    "defaultMessage": "Remember Me"
-  },
   "Login.SendEmail": {
     "defaultMessage": "Send the email"
   },
@@ -1040,11 +1241,20 @@
   "Login.password": {
     "defaultMessage": "Password"
   },
+  "Login.rememberMe": {
+    "defaultMessage": "Remember Me"
+  },
   "Menu.AdmininstratorExplanation": {
     "defaultMessage": "Administrator function."
   },
   "Menu.Administration": {
     "defaultMessage": "Administration"
+  },
+  "Menu.AdministrationLogConnection": {
+    "defaultMessage": "Connection"
+  },
+  "Menu.AdministrationUsers": {
+    "defaultMessage": "Users"
   },
   "Menu.Events": {
     "defaultMessage": "Events"
@@ -1142,6 +1352,12 @@
   "MyProfile.SetANewPassword": {
     "defaultMessage": "Set a new password"
   },
+  "MyProfile.ShowTakeATourExplanation": {
+    "defaultMessage": "Where a tour is available, the icon is presented. Clicks on it to access explanations."
+  },
+  "MyProfile.ShowTipsExplanation": {
+    "defaultMessage": "Tips are visible. This help you to knows the different functions."
+  },
   "MyProfile.Togh": {
     "defaultMessage": "Togh"
   },
@@ -1154,8 +1370,14 @@
   "MyProfile.UserName": {
     "defaultMessage": "User name"
   },
+  "MyProfile.errorServer": {
+    "defaultMessage": "Error connection"
+  },
   "MyProfile.firstname": {
     "defaultMessage": "FirstName"
+  },
+  "MyProfile.hideTakeATour": {
+    "defaultMessage": "Hide take a tour"
   },
   "MyProfile.hideTipsUser": {
     "defaultMessage": "Hide tips"
@@ -1180,6 +1402,9 @@
   },
   "MyProfile.searchableTrue": {
     "defaultMessage": "Yes, I will appears on search"
+  },
+  "MyProfile.showTakeATour": {
+    "defaultMessage": "Show take a tour"
   },
   "MyProfile.showTipsUser": {
     "defaultMessage": "Show tips"
@@ -1291,8 +1516,5 @@
   },
   "UserFeedback.OperationSuccessfull": {
     "defaultMessage": "Success"
-  },
-  "UserTips.DeactivateTipInPreference": {
-    "defaultMessage": "Tips can be deactived in your preference"
   }
 }
