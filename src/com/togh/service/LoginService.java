@@ -49,7 +49,6 @@ import java.util.logging.Logger;
 @Service
 public class LoginService {
 
-    private final static String LOG_HEADER = LoginService.class.getSimpleName() + ": ";
 
     private static final LogEvent eventUnknownId = new LogEvent(LoginService.class.getName(), 1, Level.APPLICATIONERROR, "Unknown user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
     private static final LogEvent eventUserDisconnected = new LogEvent(LoginService.class.getName(), 2, Level.SUCCESS, "User disconnected", "User disconnected with success");
@@ -70,10 +69,13 @@ public class LoginService {
 
     @Autowired
     private ToghUserLostPasswordRepository toghUserLostPasswordRepository;
+
     @Autowired
     private NotifyService notifyService;
+
     @Autowired
     private MonitorService monitorService;
+
     @Autowired
     private ToghUserService toghUserService;
 
@@ -84,6 +86,7 @@ public class LoginService {
     private FactoryUpdateGrantor factoryUpdateGrantor;
 
     private Logger logger = Logger.getLogger(LoginService.class.getName());
+    private final static String LOG_HEADER = LoginService.class.getSimpleName() + ": ";
 
     private int delayMinutesDisconnectInactiveUser = 30;
     @Autowired
@@ -218,7 +221,7 @@ public class LoginService {
         LoginResult loginStatus = new LoginResult();
         loginStatus.email = email;
         Optional<ToghUserEntity> toghUserEntityOptional = toghUserService.getUserFromEmail(email);
-        ToghUserEntity toghUserEntity = null;
+        ToghUserEntity toghUserEntity;
         if (toghUserEntityOptional.isPresent()) {
             toghUserEntity = toghUserEntityOptional.get();
 
@@ -235,6 +238,8 @@ public class LoginService {
                 toghUserEntity.setTypePicture(typePicture);
                 toghUserEntity.setPicture(picture);
                 toghUserEntity.setStatusUser(StatusUserEnum.ACTIF);
+                toghUserEntity.setShowTipsUser(true);
+                toghUserEntity.setShowTakeATour(true);
                 loginStatus.status = LoginStatus.OK;
             } else {
                 // Hum, someone try to access an existing user via the registration ? Well try...
@@ -273,9 +278,7 @@ public class LoginService {
      */
     private String connectUser(ToghUserEntity toghUserEntity) {
         // Generate a ConnectionStamp
-        String randomStamp = new StringBuilder()
-                .append(System.currentTimeMillis())
-                .append(random.nextInt(100000)).toString();
+        String randomStamp = String.valueOf(System.currentTimeMillis()) + random.nextInt(100000);
 
         toghUserEntity.setConnectionStamp(randomStamp);
         toghUserEntity.setConnectionTime(LocalDateTime.now(ZoneOffset.UTC));
@@ -517,7 +520,7 @@ public class LoginService {
      */
     public void disconnectUser(String connectionStamp) {
         UserConnected userConnected = cacheUserConnected.get(connectionStamp);
-        ToghUserEntity toghUserEntity = null;
+        ToghUserEntity toghUserEntity;
 
         if (userConnected == null) {
             // search in the database
