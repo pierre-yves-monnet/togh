@@ -183,7 +183,7 @@ class EventEntity extends UserEntity {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "eventid")
-    private EventPreferencesEntity preferences = new EventPreferencesEntity();
+    private EventPreferencesEntity preferences = null;
 
 
     public EventEntity(ToghUserEntity author, String name) {
