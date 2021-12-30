@@ -28,6 +28,7 @@ import com.togh.service.LoginService;
 import com.togh.service.LoginService.LoginResult;
 import com.togh.service.LoginService.LoginStatus;
 import com.togh.service.ToghUserService;
+import com.togh.tool.ToolCast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -37,8 +38,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -53,7 +54,7 @@ public class RestLoginController {
     private static final String JSON_PASSWORD = "password";
     private static final String JSON_STATUS = "status";
 
-    private Logger logger = Logger.getLogger(RestLoginController.class.getName());
+    private final Logger logger = Logger.getLogger(RestLoginController.class.getName());
     @Autowired
     private FactoryService factoryService;
     @Autowired
@@ -71,7 +72,7 @@ public class RestLoginController {
      * See ToghUserService.TOGHADMIN_USERNAME
      *
      * @param userData REST API Payload
-     * @param response
+     * @param response login information
      * @return REST API Answer
      */
     @CrossOrigin
@@ -81,8 +82,7 @@ public class RestLoginController {
         LoginResult loginResult = loginService.connectWithEmail(userData.get(JSON_EMAIL),
                 userData.get(JSON_PASSWORD),
                 request.getRemoteAddr());
-        Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
+        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
         if (loginResult.isConnected) {
             finalStatus.put("apikeys", apiKeyService.getApiKeyForUser(loginResult.userConnected));
         }
@@ -93,7 +93,7 @@ public class RestLoginController {
      * Get information on a user. This information is open to all REST CALL.
      *
      * @param userData REST API Payload
-     * @param response
+     * @param response User's information
      * @return REST API Answer
      */
     @CrossOrigin
@@ -131,8 +131,8 @@ public class RestLoginController {
     /**
      * Login via Google
      *
-     * @param idTokenGoogle
-     * @param response
+     * @param idTokenGoogle Token Id from Google
+     * @param response      login information
      * @return REST API Answer
      */
     // visit https://developers.google.com/identity/sign-in/web/backend-auth#send-the-id-token-to-your-server
@@ -149,7 +149,7 @@ public class RestLoginController {
             final GsonFactory jsonFactory = new GsonFactory();
 
             final GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                    .setAudience(Arrays.asList(GOOGLE_CLIENTID))
+                    .setAudience(List.of(GOOGLE_CLIENTID))
                     // To learn about getting a Server Client ID, see this link
                     // https://developers.google.com/identity/sign-in/android/start
                     // And follow step 4
@@ -171,7 +171,7 @@ public class RestLoginController {
                 loginResult = loginService.connectSSO(email, true, request.getRemoteAddr());
                 if (!loginResult.isConnected) {
                     // register it now !
-                    loginResult = loginService.registerNewUser(email, firstName, lastName, /** No password */null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
+                    loginResult = loginService.registerNewUser(email, firstName, lastName, /* No password */null, SourceUserEnum.GOOGLE, TypePictureEnum.URL, picture);
                     if (loginResult.status == LoginStatus.OK)
                         loginResult = loginService.connectNoVerification(email);
                 }
@@ -179,7 +179,7 @@ public class RestLoginController {
                 return loginService.getLoginResultMap(loginResult);
             }
         } catch (Exception e) {
-            logger.info(LOG_HEADER + "Error when creating a Google user " + e.toString());
+            logger.info(LOG_HEADER + "Error when creating a Google user " + e);
 
         }
         return loginService.getLoginResultMap(loginResult);
@@ -245,7 +245,7 @@ public class RestLoginController {
 
     /**
      * @param userData REST API Payload
-     * @param response
+     * @param response information on the reset password
      * @return REST API Answer
      */
     @CrossOrigin
@@ -253,8 +253,7 @@ public class RestLoginController {
     @ResponseBody
     public Map<String, Object> resetPasswordInfo(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginResult loginResult = loginService.getFromUUID(userData.get("uuid"));
-        Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
+        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
         return finalStatus;
     }
 
@@ -269,8 +268,7 @@ public class RestLoginController {
     @ResponseBody
     public Map<String, Object> resetPassword(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginResult loginResult = loginService.changePasswordAndConnect(userData.get("uuid"), userData.get(JSON_PASSWORD));
-        Map<String, Object> finalStatus = new HashMap<>();
-        finalStatus.putAll(loginService.getLoginResultMap(loginResult));
+        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
         return finalStatus;
     }
 
@@ -292,9 +290,39 @@ public class RestLoginController {
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
 
-        LoginResult loginResult = loginService.changePassword(toghUserEntity, userData.get("password"));
+        LoginResult loginResult = loginService.changePassword(toghUserEntity, userData.get(JSON_PASSWORD));
+        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
+        return finalStatus;
+    }
+
+    /**
+     * Login from the portal via a email / password
+     * Nota: the Administrator is created at the startup. There is here nothing special to connect him
+     * See ToghUserService.TOGHADMIN_USERNAME
+     *
+     * @param param           REST API Payload
+     * @param connectionStamp current connection. Only administrator can execute this REST API, he must be connected
+     * @param response        response on the goshUser, to inform the connection is now replaced by this user
+     * @return REST API Answer
+     */
+    @CrossOrigin
+    @PostMapping(value = "api/login/ghostuser", produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> ghostUserLogin(@RequestBody Map<String, Object> param,
+                                              @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp,
+                                              HttpServletResponse response, HttpServletRequest request) {
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isAdministratorConnected(connectionStamp);
+        if (toghUserEntity == null)
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+
+
+        LoginResult loginResult = loginService.ghostConnect(ToolCast.getLong(param, "ghostUserId", null), request.getRemoteAddr());
         Map<String, Object> finalStatus = new HashMap<>();
         finalStatus.putAll(loginService.getLoginResultMap(loginResult));
+        if (loginResult.isConnected) {
+            finalStatus.put("apikeys", apiKeyService.getApiKeyForUser(loginResult.userConnected));
+        }
         return finalStatus;
     }
 

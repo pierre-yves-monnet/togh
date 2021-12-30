@@ -14,8 +14,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Random;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -30,7 +28,6 @@ import java.util.Random;
 public @Data
 class ToghUserEntity extends BaseEntity {
 
-    private static Random random = new Random();
     @Column(name = "connectionlastactivity")
     public LocalDateTime connectionLastActivity;
     /**
@@ -113,34 +110,9 @@ class ToghUserEntity extends BaseEntity {
     @Column(name = "invitationstamp", length = 100)
     private String invitationStamp;
 
-    public static ToghUserEntity createNewUser(String firstName, String lastName, String email, String password, SourceUserEnum sourceUser) {
-        ToghUserEntity endUser = new ToghUserEntity();
-        endUser.setEmail(email);
-        endUser.setFirstName(firstName);
-        endUser.setLastName(lastName);
-        endUser.calculateName();
-        endUser.setPassword(password);
-        endUser.setSource(sourceUser);
-        LocalDateTime dateNow = LocalDateTime.now(ZoneOffset.UTC);
-        endUser.setDateCreation(dateNow);
-        endUser.setDateModification(dateNow);
-        endUser.setPrivilegeUser(PrivilegeUserEnum.USER);
-        endUser.setStatusUser(StatusUserEnum.ACTIF);
-        endUser.setSubscriptionUser(SubscriptionUserEnum.FREE);
-        endUser.setTypePicture(TypePictureEnum.TOGH);
 
-        return endUser;
-    }
 
-    public static ToghUserEntity createInvitedUser(String email) {
-        String randomStamp = String.valueOf(System.currentTimeMillis()) + String.valueOf(random.nextInt(100000));
 
-        ToghUserEntity toghUserEntity = createNewUser(null, null, email, null, SourceUserEnum.INVITED);
-        toghUserEntity.setStatusUser(StatusUserEnum.INVITED);
-        toghUserEntity.setInvitationStamp(randomStamp);
-
-        return toghUserEntity;
-    }
 
     /**
      * Calculate the name according the first and last name
@@ -184,12 +156,12 @@ class ToghUserEntity extends BaseEntity {
     }
 
     /**
-     * Set the password. Update the length as well, to help person to maybe remind it?
+     * Set the password. The password given here should be encrypted, so there is no sense to save the length at this moment
      *
      * @param password new password to saved
      */
     public void setPassword(String password) {
-        setLengthPassword(password == null ? 0 : password.length());
+        this.password = password;
     }
 
 

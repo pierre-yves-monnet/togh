@@ -27,7 +27,7 @@ import LogEvents 			from 'component/LogEvents';
 // -----------------------------------------------------------
 class AdminUsers extends React.Component {
 
-	// this.props.updateEvent()
+	// this.props.refreshScreenCallback must be defined
 	constructor(props) {
 		super();
 		// console.log("RegisterNewUser.constructor");
@@ -50,7 +50,7 @@ class AdminUsers extends React.Component {
 		this.setAttributUser 		= this.setAttributUser.bind( this );
 		this.manageFilter			= this.manageFilter.bind( this );
 		this.disconnectUser			= this.disconnectUser.bind( this);
-		
+		this.ghostUser              = this.ghostUser.bind(this);
 	}
 	
 	// Calculate the state to display
@@ -310,11 +310,12 @@ class AdminUsers extends React.Component {
 													<FormattedMessage id="AdminUsers.SubscriptionUserExcellence" defaultMessage="Excellence">
 														{(message) => <option value="EXCELLENCE">{message}</option>}
 													</FormattedMessage>
-												</Select></td><td>
+												</Select>
+												</td><td>
 												<Select labelText={<FormattedMessage id="AdminUsers.PrivilegeUser" defaultMessage="Privilege" />}
-													id="privilegeuser"
-													value={item.privilegeuser}
-													onChange={(event) => this.setAttributUser( item, "privilegeuser", event.target.value)}>
+													id="privilegeUser"
+													value={item.privilegeUser}
+													onChange={(event) => this.setAttributUser( item, "privilegeUser", event.target.value)}>
 		
 													<FormattedMessage id="AdminUsers.PrivilegeUserAdmin" defaultMessage="Administrator">
 														{(message) => <option value="ADMIN">{message}</option>}
@@ -328,8 +329,13 @@ class AdminUsers extends React.Component {
 														{(message) => <option value="USER">{message}</option>}
 													</FormattedMessage>
 												</Select>
-											
-											</td></tr></table>
+											    </td><td>
+                                                    <button class="btn btn-info btn-sm"
+                                                     onClick={()=> this.ghostUser( item.id ) }
+                                                     style={{marginTop: "5px", width:"100px"}}>
+                                                        <FormattedMessage id="AdminUsers.GhostUser" defaultMessage="Ghost user"/>
+                                                    </button>
+                                                </td></tr></table>
 									 </td>
 								</tr> }
 								
@@ -391,7 +397,7 @@ class AdminUsers extends React.Component {
 		restCallService.getJson('/api/admin/users/search?searchusersentence='+this.state.searchUserSentence+filterUrl, this, this.searchUsersCallback);
 
 	}
-	
+
 	searchUsersCallback(httpPayload ) {
 			// httpPayload.trace("AdminUsers.getSearchUserCallback");
 			this.setState({inprogress: false });
@@ -478,6 +484,33 @@ class AdminUsers extends React.Component {
 			}
 		});
 	}
+
+	ghostUser( ghostUserId ) {
+        this.setState({ message:"", inprogress:true});
+        let param= {'ghostUserId': ghostUserId };
+        FactoryService.getInstance().getAuthService().ghostLogin( param, this, httpPayload =>
+            {
+                const intl = this.props.intl;
+                httpPayload.trace("Login.directConnectCallback");
+                if (httpPayload.isError()) {
+                    // Server is not started
+                    console.log("Login.directConnectCallback  ERROR IN HTTPCALL");
+
+                    this.setState({ message: intl.formatMessage({id: "AdminUser.CantGhost",defaultMessage: "Can't Ghost this user"}), inprogress:false});
+                }
+                else if (httpPayload.getData().isConnected) {
+                    // call the frame event to refresh all - the fact that the user is connected is saved in the authService, not here
+                    this.setState({ message: "", inprogress:false });
+
+                    this.props.refreshScreenCallback( true );
+                } else {
+                    this.setState({ message: intl.formatMessage({id: "AdminUser.CantGhost",defaultMessage: "Can't Ghost this user"}), inprogress:false});
+                }
+            } );
+
+
+
+    }
 }
 
 export default injectIntl(AdminUsers);

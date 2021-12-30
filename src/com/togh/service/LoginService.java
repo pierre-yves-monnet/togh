@@ -60,12 +60,7 @@ public class LoginService {
     private static final String OPERATION_V_USER_BLOCKED_OR_DISABLED = "UserBlockedOrDisabled";
     private static final String OPERATION_V_BAD_PASSWORD = "BadPassword";
     private static final String OPERATION_CONNECT_USER_NO_VERIFICATION = "ConnectUserNoVerification";
-    /* -------------------------------------------------------------------- */
-    /*                                                                      */
-    /* Connect / disconnect / IsConnected */
-    /*                                                                      */
-    /* -------------------------------------------------------------------- */
-    private Random random = new Random();
+    private final static int delayMinutesDisconnectInactiveUser = 30;
 
     @Autowired
     private ToghUserLostPasswordRepository toghUserLostPasswordRepository;
@@ -84,18 +79,20 @@ public class LoginService {
 
     @Autowired
     private FactoryUpdateGrantor factoryUpdateGrantor;
-
-    private Logger logger = Logger.getLogger(LoginService.class.getName());
+    /* -------------------------------------------------------------------- */
+    /*                                                                      */
+    /* Connect / disconnect / IsConnected */
+    /*                                                                      */
+    /* -------------------------------------------------------------------- */
+    private final Random random = new Random();
     private final static String LOG_HEADER = LoginService.class.getSimpleName() + ": ";
-
-    private int delayMinutesDisconnectInactiveUser = 30;
+    private final Logger logger = Logger.getLogger(LoginService.class.getName());
     @Autowired
     private StatsService statsService;
 
     @Autowired
     private UnderAttackService underAttackService;
-
-    private Map<String, UserConnected> cacheUserConnected = new HashMap<>();
+    private final Map<String, UserConnected> cacheUserConnected = new HashMap<>();
 
     /**
      * @param emailOrName email or the name to connect
@@ -149,10 +146,42 @@ public class LoginService {
             return loginStatus;
         }
         loginStatus.userConnected = toghUserEntity;
-        loginStatus.connectionToken = connectUser(toghUserEntity);
+        loginStatus.connectionToken = connectUser(toghUserEntity, false);
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
         underAttackService.reportSuspiciousLogin(loginStatus);
+        return loginStatus;
+    }
+
+
+    public LoginResult ghostConnect(Long ghostUserId, String ipAddress) {
+        LoginResult loginStatus = new LoginResult();
+        Chrono chronoConnection = monitorService.startOperation("GhostConnectUserWithEmail");
+        ToghUserEntity toghUserEntity = toghUserService.getUserFromId(ghostUserId);
+
+        if (toghUserEntity == null) {
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_EXIST);
+            loginStatus.status = LoginStatus.UNKNOWUSER;
+            underAttackService.reportSuspiciousLogin(loginStatus);
+            return loginStatus;
+        }
+
+        // this user must be registered on the portal
+        if (!(SourceUserEnum.PORTAL.equals(toghUserEntity.getSource())
+                || SourceUserEnum.SYSTEM.equals(toghUserEntity.getSource()))) {
+            monitorService.endOperationWithStatus(chronoConnection, OPERATION_V_NOT_REGISTERED_ON_PORTAL);
+            loginStatus.status = LoginStatus.NOTREGISTERED;
+            return loginStatus;
+        }
+
+        // check the password
+        loginStatus.email = toghUserEntity.getEmail();
+        loginStatus.ipAddress = ipAddress;
+
+        loginStatus.userConnected = toghUserEntity;
+        loginStatus.connectionToken = connectUser(toghUserEntity, true);
+        loginStatus.isConnected = true;
+        monitorService.endOperation(chronoConnection);
         return loginStatus;
     }
 
@@ -171,7 +200,7 @@ public class LoginService {
             return loginStatus;
         }
         loginStatus.userConnected = endUserEntity.get();
-        loginStatus.connectionToken = connectUser(endUserEntity.get());
+        loginStatus.connectionToken = connectUser(endUserEntity.get(), false);
         loginStatus.isConnected = true;
         loginStatus.status = LoginStatus.OK;
         monitorService.endOperation(chronoConnection);
@@ -202,7 +231,7 @@ public class LoginService {
         }
 
         loginStatus.userConnected = toghUserEntity.get();
-        loginStatus.connectionToken = connectUser(toghUserEntity.get());
+        loginStatus.connectionToken = connectUser(toghUserEntity.get(), false);
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
         underAttackService.reportSuspiciousLogin(loginStatus);
@@ -228,8 +257,9 @@ public class LoginService {
             // user already exist: so, time to save it password
             if (SourceUserEnum.INVITED.equals(toghUserEntity.getSource())) {
                 // Ok, this is the first time the user join!
-                String passwordEncrypted = ToghUserService.encryptPassword(password);
-                toghUserEntity.setPassword(passwordEncrypted);
+
+                toghUserService.setPassword(toghUserEntity, password);
+
                 toghUserEntity.setFirstName(firstName);
                 toghUserEntity.setLastName(lastName);
                 toghUserEntity.calculateName();
@@ -252,7 +282,8 @@ public class LoginService {
         } else {
             // encrypt the password now
             String passwordEncrypted = ToghUserService.encryptPassword(password);
-            toghUserEntity = ToghUserEntity.createNewUser(firstName, lastName, email, passwordEncrypted, sourceUser);
+            toghUserEntity = toghUserService.createNewUser(firstName, lastName, passwordEncrypted, email, sourceUser);
+
             toghUserEntity.setTypePicture(typePicture);
             toghUserEntity.setPicture(picture);
         }
@@ -273,10 +304,11 @@ public class LoginService {
     /**
      * Do the connection operation
      *
-     * @param toghUserEntity togh user to connect
+     * @param toghUserEntity  togh user to connect
+     * @param ghostConnection may be treu, then we don't want to update the statistics
      * @return a connectionStamp
      */
-    private String connectUser(ToghUserEntity toghUserEntity) {
+    private String connectUser(ToghUserEntity toghUserEntity, boolean ghostConnection) {
         // Generate a ConnectionStamp
         String randomStamp = String.valueOf(System.currentTimeMillis()) + random.nextInt(100000);
 
@@ -286,7 +318,8 @@ public class LoginService {
 
         toghUserService.saveUser(toghUserEntity);
 
-        statsService.registerLogin();
+        if (!ghostConnection)
+            statsService.registerLogin();
 
         // keep in the cache to be more efficient
         UserConnected userConnected = new UserConnected();
@@ -407,7 +440,7 @@ public class LoginService {
 
         // now connect
         loginStatus.userConnected = toghUserEntity;
-        loginStatus.connectionToken = connectUser(toghUserEntity);
+        loginStatus.connectionToken = connectUser(toghUserEntity, false);
         loginStatus.isConnected = true;
         monitorService.endOperation(chronoConnection);
         underAttackService.reportSuspiciousLogin(loginStatus);

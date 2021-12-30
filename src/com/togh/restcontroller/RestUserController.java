@@ -53,7 +53,7 @@ public class RestUserController {
     @Autowired
     private UnderAttackService underAttackService;
 
-    private Logger logger = Logger.getLogger(RestUserController.class.getName());
+    private final Logger logger = Logger.getLogger(RestUserController.class.getName());
 
     /**
      * Call for the invitation for example, to search a user according some criteria. User should accept to publish some information

@@ -31,6 +31,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -42,6 +43,8 @@ import java.util.stream.Collectors;
 @Service
 public class ToghUserService {
 
+    private static final Random random = new Random();
+
     private static final String TOGH_ADMIN_EMAIL = "toghadmin@togh.com";
     private static final String TOGH_ADMIN_USERNAME = "toghadmin";
     private static final String TOGH_ADMIN_PASSWORD = "togh";
@@ -49,10 +52,9 @@ public class ToghUserService {
     private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
-    private static final String SALT = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
+    private final Logger logger = Logger.getLogger(ToghUserService.class.getName());
     @Autowired
-    FactoryService factoryService;
-    private Logger logger = Logger.getLogger(ToghUserService.class.getName());
+    private FactoryService factoryService;
 
     @Autowired
     private ToghUserRepository toghUserRepository;
@@ -91,18 +93,71 @@ public class ToghUserService {
         return toghUserRepository.findByConnectionStamp(connectionStamp);
     }
 
-    /**
-     * Register a new user
-     */
-    public ToghUserEntity registerNewUser(String firstName, String lastName, String password, String email, SourceUserEnum sourceUser) {
-        ToghUserEntity endUser = ToghUserEntity.createNewUser(email, firstName, lastName, password, sourceUser);
+    public static String encryptPassword(String password) {
+        // we don't want to use a secret random: we need to encrypt again a password to compare it
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+
+        char[] passwordChar = password.toCharArray();
+        PBEKeySpec spec = new PBEKeySpec(passwordChar, salt, ITERATIONS, KEY_LENGTH);
+        Arrays.fill(passwordChar, Character.MIN_VALUE);
         try {
-            factoryService.getToghUserService().saveUser(endUser);
-            return endUser;
-        } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't create new user: " + e);
-            return null;
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] securePassword = skf.generateSecret(spec).getEncoded();
+            return Base64.getEncoder().encodeToString(securePassword);
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+        } finally {
+            spec.clearPassword();
         }
+    }
+
+    /**
+     * Create a new user from a list of information
+     *
+     * @param firstName  first name
+     * @param lastName   last name
+     * @param password   password
+     * @param email      email
+     * @param sourceUser source of the usr
+     * @return the toghUserEntity
+     */
+    public ToghUserEntity createNewUser(String firstName, String lastName, String password, String email, SourceUserEnum sourceUser) {
+        ToghUserEntity toghUserEntity = new ToghUserEntity();
+        toghUserEntity.setEmail(email);
+        toghUserEntity.setFirstName(firstName);
+        toghUserEntity.setLastName(lastName);
+        toghUserEntity.calculateName();
+        setPassword(toghUserEntity, password);
+
+        toghUserEntity.setSource(sourceUser);
+        LocalDateTime dateNow = LocalDateTime.now(ZoneOffset.UTC);
+        toghUserEntity.setDateCreation(dateNow);
+        toghUserEntity.setDateModification(dateNow);
+        toghUserEntity.setPrivilegeUser(PrivilegeUserEnum.USER);
+        toghUserEntity.setStatusUser(StatusUserEnum.ACTIF);
+        toghUserEntity.setSubscriptionUser(SubscriptionUserEnum.FREE);
+        toghUserEntity.setTypePicture(TypePictureEnum.TOGH);
+
+        return toghUserEntity;
+    }
+
+    /**
+     * Create invited user
+     *
+     * @param email email of the user
+     * @return a toghUserEntity
+     */
+    public ToghUserEntity createInvitedUser(String email) {
+        String randomStamp = String.valueOf(System.currentTimeMillis()) + String.valueOf(random.nextInt(100000));
+
+        ToghUserEntity toghUserEntity = createNewUser(null, null, null, email, SourceUserEnum.INVITED);
+        toghUserEntity.setStatusUser(StatusUserEnum.INVITED);
+        toghUserEntity.setInvitationStamp(randomStamp);
+
+        return toghUserEntity;
     }
 
     public void saveUser(ToghUserEntity user) {
@@ -138,40 +193,16 @@ public class ToghUserService {
     }
 
     /**
-     * Invite a new user
-     *
-     * @param email            email of the user
-     * @param invitedByUser    whom invite this user
-     * @param useMyEmailAsFrom use the user who invite as the "From" in the email for more accurancy
-     * @param event            event to invite into
-     * @return creation + invitation status. User may not exist in Togh
+     * Register a new user
      */
-    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, boolean useMyEmailAsFrom, EventEntity event) {
-        CreationResult invitationStatus = new CreationResult();
+    public ToghUserEntity registerNewUser(String firstName, String lastName, String password, String email, SourceUserEnum sourceUser) {
+        ToghUserEntity toghUserEntity = createNewUser(firstName, lastName, password, email, sourceUser);
         try {
-            // Check the email now: we don't want to create a bad user
-            invitationStatus.isEmailIsCorrect = true;
-
-            // fullfill the event
-            invitationStatus.toghUser = ToghUserEntity.createInvitedUser(email);
-
-            factoryService.getToghUserService().saveUser(invitationStatus.toghUser);
-
-            // send the email now
-            invitationStatus.isEmailSent = true;
-            NotifyService notifyService = factoryService.getNotifyService();
-            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser,
-                    invitedByUser,
-                    useMyEmailAsFrom,
-                    event);
-
-            invitationStatus.isEmailSent = notificationStatus.isCorrect();
-
-            return invitationStatus;
+            factoryService.getToghUserService().saveUser(toghUserEntity);
+            return toghUserEntity;
         } catch (Exception e) {
             logger.severe(LOG_HEADER + "Can't create new user: " + e);
-            invitationStatus.toghUser = null;
-            return invitationStatus;
+            return null;
         }
     }
 
@@ -328,21 +359,41 @@ public class ToghUserService {
 
     );
 
-    public static String encryptPassword(String password) {
-        // we don't want to use a secret random: we need to encrypt again a password to compare it
-        char[] passwordChar = password.toCharArray();
-        byte[] saltChar = SALT.getBytes();
-        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
-        Arrays.fill(passwordChar, Character.MIN_VALUE);
+    /**
+     * Invite a new user
+     *
+     * @param email            email of the user
+     * @param invitedByUser    whom invite this user
+     * @param useMyEmailAsFrom use the user who invite as the "From" in the email for more accurancy
+     * @param event            event to invite into
+     * @return creation + invitation status. User may not exist in Togh
+     */
+    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, boolean useMyEmailAsFrom, EventEntity event) {
+        CreationResult invitationStatus = new CreationResult();
         try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] securePassword = skf.generateSecret(spec).getEncoded();
-            return Base64.getEncoder().encodeToString(securePassword);
+            // Check the email now: we don't want to create a bad user
+            invitationStatus.isEmailIsCorrect = true;
 
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
-        } finally {
-            spec.clearPassword();
+            // fullfill the event
+            invitationStatus.toghUser = createInvitedUser(email);
+
+            factoryService.getToghUserService().saveUser(invitationStatus.toghUser);
+
+            // send the email now
+            invitationStatus.isEmailSent = true;
+            NotifyService notifyService = factoryService.getNotifyService();
+            NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser,
+                    invitedByUser,
+                    useMyEmailAsFrom,
+                    event);
+
+            invitationStatus.isEmailSent = notificationStatus.isCorrect();
+
+            return invitationStatus;
+        } catch (Exception e) {
+            logger.severe(LOG_HEADER + "Can't create new user: " + e);
+            invitationStatus.toghUser = null;
+            return invitationStatus;
         }
     }
 
@@ -644,6 +695,7 @@ public class ToghUserService {
      */
     public void setPassword(ToghUserEntity toghUserEntity, String password) {
         toghUserEntity.setPassword(encryptPassword(password));
+        toghUserEntity.setLengthPassword(password.length());
     }
 
     /**

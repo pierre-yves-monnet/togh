@@ -125,7 +125,43 @@ class AuthService {
 			return {};
 		}
 	}
+    //--------------------------------------- ghostLogin
+	ghostLogin( param, objToCall, fctToCallback ) {
+		console.log("AuthService.ghostLogin, param="+JSON.stringify(param));
 
+		this.connectMethod = 'DIRECT';
+		var self=this;
+		try {
+			const requestOptions = {
+	        headers: this.getHeaders({})
+	    };
+
+
+		axios.post( this.restcallService.getUrl('/api/login/ghostuser?'), param, requestOptions)
+				.then( axiosPayload => {
+					console.log("AuthService.ghostLoginCallback, httpPayload="+JSON.stringify(axiosPayload));
+					self.token = axiosPayload.data.token;
+					self.user =  axiosPayload.data.user;
+
+					console.log("AuthService.ghostLoginCallback, token="+self.token+" in this="+self);
+					var httpResponse = new HttpResponse( axiosPayload, null);
+					fctToCallback.call(objToCall, httpResponse);
+				})
+				 .catch((err) => {
+					console.error("AuthService.ghostLoginCallback: Catch error:"+err);
+					var httpResponse =  new HttpResponse( {}, err);
+					httpResponse.trace(AuthService.loginCallback);
+					fctToCallback.call(objToCall, httpResponse);
+				}
+
+
+			)
+		 } catch (err) {
+        	// Handle Error Here
+        	console.log("AuthService.ghostLoginCallback.Error "+err);
+			return {};
+		}
+    }
 	//--------------------------- RegisterUser
 	//  param= { email: this.state.email, password: this.state.password, firstName:this.state.firstName, lastName: this.state.lastName };
 	registerUser(param, objToCall, fctToCallback) {

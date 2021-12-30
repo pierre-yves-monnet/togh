@@ -75,9 +75,9 @@ class BodyTogh extends React.Component {
 		super();
 		console.log("BodyTogh.constructor");
 
-		this.authCallback = this.authCallback.bind(this);
-
-		this.homeSelectEvent = this.homeSelectEvent.bind(this)
+		this.authCallback               = this.authCallback.bind(this);
+        this.refreshScreenCallback      = this.refreshScreenCallback.bind(this);
+		this.homeSelectEvent            = this.homeSelectEvent.bind(this)
 		
 		this.clickMenu                  = this.clickMenu.bind( this )
 		this.showMenu                   = this.showMenu.bind( this );
@@ -113,8 +113,9 @@ class BodyTogh extends React.Component {
 			this.state.showRegisterUserForm	= true;
 			this.state.defaultLoginEmail	= email;
 			this.state.currentEventId		= eventId;
-			if (eventId)
+			if (eventId) {
 				this.state.frameContent		= FRAME_NAME.EVENT;
+			}
             let invitationStamp 		    = params.get('invitationStamp');
 
 		    // maybe the user is registered now?
@@ -134,8 +135,6 @@ class BodyTogh extends React.Component {
 	}
 
 
-// { this.state.frameContent == 'frameEvents' && <EventsList selectEvent={this.homeSelectEvent} />}
-	// 			{ this.state.frameContent == 'event' &&	<Event eventid={this.state.currentEventId} /> }
 	render() {
 		var factory = FactoryService.getInstance();
 		var authService = factory.getAuthService();
@@ -254,7 +253,7 @@ class BodyTogh extends React.Component {
 										{ this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currentEventId} />}
 										{ this.state.frameContent === FRAME_NAME.MY_PROFILE && <MyProfile  />}
 										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
-										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_USERS && <AdminUsers />}
+										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_USERS && <AdminUsers refreshScreenCallback={this.refreshScreenCallback}/>}
 										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_LOGCONNECTION && <AdminLogConnection />}
 
 									</td>
@@ -274,7 +273,13 @@ class BodyTogh extends React.Component {
 		// at this moment, we ignore the action on the URL
 		this.setState( { ignoreAction: true }); 
 	}
-	
+
+
+	refreshScreenCallback( login ) {
+	    // please refresh the component
+		this.setState( { ignoreAction: true, frameContent: FRAME_NAME.EVENTS_LIST});
+	}
+
 	homeSelectEvent( eventId ) {
 		console.log("BodyTogh.selectEvent: get it, an event is selected :"+eventId);
 		this.setState( {'currentEventId' : eventId, 'frameContent': FRAME_NAME.EVENT });
