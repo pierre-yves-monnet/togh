@@ -364,7 +364,7 @@
   "Event.TourScopeNote": "Solo un organizador puede cambiar el alcance",
   "__Event.TourStatus": "Select the status",
   "Event.TourStatus": "Seleccione el estado",
-  "__Event.TourStatusContent": "The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><p/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event",
+  "__Event.TourStatusContent": "The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><br/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event",
   "Event.TourStatusContent": "El evento de estado cambia: al principio, estará <i>en preparación</i> , <i>activo</i> . Después del evento, el estado está <i>terminado.</i><p/> Puede cambiar el estado manualmente, pero tenga en cuenta que Togh lo moverá automáticamente a Activo cuando comience, y lo hará después del final del evento.",
   "__Event.TourStatusNote": "Only an organizer can change the status",
   "Event.TourStatusNote": "Solo un organizador puede cambiar el estado",

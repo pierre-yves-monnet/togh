@@ -46,7 +46,7 @@ class UserTips extends React.Component {
                                 <tr><td>
                                     <div style={{marginBottom: "10px", fontSize: "12px", fontWeight: "bold", paddingLeft: "20px"}}>
                                         <FormattedMessage id="UserTips.DeactivateTip"
-                                            defaultMessage="You can deactivate tips, and enable it again in your preferences"/>}</div>
+                                            defaultMessage="You can deactivate tips, and enable it again in your preferences"/></div>
                                    </td><td>
                                     <button class="btn btn-info btx-sm" style={{fontSize: "10px", margin: "5px 0px 5px 0px", padding: "0px 5px 0px 5px"}}
                                         onClick={this.deactivateTip}>

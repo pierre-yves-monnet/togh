@@ -507,7 +507,7 @@
     "defaultMessage": "Give a name to your event"
   },
   "Event.TourNameContent": {
-    "defaultMessage": "This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<p>Example: 'Party at San Marbella', 'House coming'"
+    "defaultMessage": "This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<br>Example: 'Party at San Marbella', 'House coming'"
   },
   "Event.TourScope": {
     "defaultMessage": "Select the scope"
@@ -522,7 +522,7 @@
     "defaultMessage": "Select the status"
   },
   "Event.TourStatusContent": {
-    "defaultMessage": "The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><p/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event"
+    "defaultMessage": "The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><br/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event"
   },
   "Event.TourStatusNote": {
     "defaultMessage": "Only an organizer can change the status"
