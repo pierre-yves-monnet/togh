@@ -41,7 +41,7 @@ public class ChronoSet {
         for (Chronometer chrono : mapChrono.values()) {
             logChrono.append(chrono.getName() + ": " + chrono.getTimeInMs() + " ms (" + chrono.getNbExecution() + "),");
         }
-        logger.info(LOG_HEADER + logChrono.toString());
+        logger.info(LOG_HEADER + logChrono);
     }
 
     /**

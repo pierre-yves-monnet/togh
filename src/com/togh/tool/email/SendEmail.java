@@ -24,7 +24,7 @@ public class SendEmail {
     public static final LogEvent eventEmailSent = new LogEvent(SendEmail.class.getName(), 1, Level.SUCCESS, "Mail sent with success", "The email is sent with success");
     public static final LogEvent eventSendEmail = new LogEvent(SendEmail.class.getName(), 2, Level.APPLICATIONERROR, "Error Email", "Error sending email", "Email can't be send", "Check the exception");
     public static final LogEvent eventNoEmailServerConfigured = new LogEvent(SendEmail.class.getName(), 3, Level.APPLICATIONERROR, "No Email server configured", "The SMTP server is not configured. No email can be send", "Email can't be send", "Setup the SMTP server configuration");
-    private static Logger logger = Logger.getLogger(SendEmail.class.getName());
+    private static final Logger logger = Logger.getLogger(SendEmail.class.getName());
     @Autowired
     private JavaMailSender emailSender;
     @Autowired
@@ -35,7 +35,7 @@ public class SendEmail {
      * @param emailFrom   Email From. If null, the Togh Email is used
      * @param mailSubject subject of the email
      * @param mailContent content of the email
-     * @return
+     * @return list of events to describe the status of the operation
      */
     public List<LogEvent> sendOneEmail(String emailTo, String emailFrom, String mailSubject, String mailContent) {
 
@@ -52,7 +52,7 @@ public class SendEmail {
      * @param mailSubject  subject of the email
      * @param mailContent  content of the email
      * @param emailService to get access of all needed key
-     * @return
+     * @return list of events to describe the status of the operation
      */
     public List<LogEvent> sendOneEmail(String emailTo,
                                        String emailFrom,

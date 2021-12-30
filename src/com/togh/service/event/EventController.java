@@ -439,7 +439,7 @@ public class EventController {
                 if (getObject instanceof List) {
                     // then the idEntity take the sens
                     String idEntity = stLocalisation.hasMoreTokens() ? stLocalisation.nextToken() : null;
-                    Long idEntityLong = Long.valueOf(idEntity);
+                    Long idEntityLong = idEntity == null ? null : Long.valueOf(idEntity);
                     List<BaseEntity> listChildrenEntity = (List<BaseEntity>) getObject;
                     BaseEntity childEntityById = null;
                     for (BaseEntity child : listChildrenEntity) {

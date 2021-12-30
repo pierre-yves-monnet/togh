@@ -30,14 +30,14 @@ import java.util.logging.Logger;
 
 @Service
 public class TranslatorService {
-    private static Logger logger = Logger.getLogger(TranslatorService.class.getName());
-    private static String LOGGER_HEADER = TranslatorService.class.getName().toString() + ": ";
+    private final static Logger logger = Logger.getLogger(TranslatorService.class.getName());
+    private final static String LOGGER_HEADER = TranslatorService.class.getName() + ": ";
 
 
     /**
      * first key is the language, second the dictionary
      */
-    private static Map<String, Map<String, String>> dictionary = new HashMap<>();
+    private final static Map<String, Map<String, String>> dictionary = new HashMap<>();
 
     // --------------------------------------------------------------
     //
@@ -61,7 +61,7 @@ public class TranslatorService {
                 props.forEach((key, value) -> dicoLanguage.put((String) key, (String) value));
                 dictionary.put(dicoSt, dicoLanguage);
             } catch (IOException e) {
-                logger.severe("Can't read properties file " + e.toString());
+                logger.severe("Can't read properties file " + e);
             }
         }
     }
@@ -71,16 +71,16 @@ public class TranslatorService {
     /**
      * First implementation : read in memory
      *
-     * @param sentence
-     * @param lang
-     * @return
+     * @param sentence sentence to get
+     * @param language language to get the sentence
+     * @return the sentence in the target
      */
-    public String getDictionarySentence(Sentence sentence, String lang) {
+    public String getDictionarySentence(Sentence sentence, String language) {
         // only in English at this moment
-        if (!dictionary.containsKey(lang)) {
-            lang = "en";
+        if (!dictionary.containsKey(language)) {
+            language = "en";
         }
-        return dictionary.get(lang).getOrDefault(sentence.toString().toLowerCase(), sentence.toString());
+        return dictionary.get(language).getOrDefault(sentence.toString().toLowerCase(), sentence.toString());
     }
 
     public void populateDictionary(Map<String, Map<String, String>> dictionaryUpdate) {

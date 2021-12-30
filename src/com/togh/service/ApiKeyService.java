@@ -62,7 +62,7 @@ public class ApiKeyService implements SmtpKeyService {
                 APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi, priviledge));
                 if (codeApiEntity == null) {
                     codeApiEntity = new APIKeyEntity();
-                    codeApiEntity.setName(codeApi + "_" + priviledge.toString());
+                    codeApiEntity.setName(codeApi + "_" + priviledge);
                     codeApiEntity.setPrivilegeKey(priviledge);
                     apiKeyRepository.save(codeApiEntity);
                 }

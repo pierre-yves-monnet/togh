@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 @Service
 public class UnderAttackService {
     private final static String LOG_HEADER = UnderAttackService.class.getSimpleName() + ": ";
-    private Logger logger = Logger.getLogger(UnderAttackService.class.getName());
+    private final Logger logger = Logger.getLogger(UnderAttackService.class.getName());
     @Autowired
     private LoginLogRepository loginLogRepository;
 

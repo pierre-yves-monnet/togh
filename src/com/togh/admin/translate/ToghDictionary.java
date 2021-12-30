@@ -192,7 +192,7 @@ public class ToghDictionary {
     /*                                                                      */
     /* -------------------------------------------------------------------- */
 
-    public class SentenceItem {
+    public static class SentenceItem {
 
         String key;
         String translation;

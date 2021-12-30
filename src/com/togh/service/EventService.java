@@ -65,6 +65,7 @@ public class EventService {
     private static final LogEvent eventBadEntity = new LogEvent(EventService.class.getName(), 6, Level.ERROR, "Bad Entity", "This Entity can't be load", "Entity is not the correct one", "Check the Entity");
     private static final LogEvent eventParticipantNotFound = new LogEvent(EventService.class.getName(), 7, Level.ERROR, "Participant Not Found", "The participant can't be found", "Operation on the participant can't be executed", "Check the Event and the participant ID");
 
+    private static final LogEvent eventCreationError = new LogEvent(EventService.class.getName(), 8, Level.ERROR, "Event Creation error", "An error arrived during the event creation", "Creation can't be done", "Check the error");
 
     private static final String LOG_HEADER = EventService.class.getSimpleName() + ": ";
     private final Logger logger = Logger.getLogger(EventService.class.getName());
@@ -132,46 +133,51 @@ public class EventService {
      * @return the EventOperationResult
      */
     public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
+        try {
+            LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
+            timeCheck = timeCheck.minusDays(60);
 
-        LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
-        timeCheck = timeCheck.minusDays(60);
+            // Do we access the maximum number of event for this users?
+            Long numberOfEvents = eventRepository.countLastEventsUser(toghUserEntity.getId(), ParticipantRoleEnum.OWNER, timeCheck);
+            int maximumSubscription = subscriptionService.getMaximumEventsPerMonth(toghUserEntity.getSubscriptionUser());
+            if (numberOfEvents >= maximumSubscription) {
+                /// reject it
+                subscriptionService.registerTouchLimitSubscription(toghUserEntity, LimitReach.CREATIONEVENT);
 
-        // Do we access the maximum number of event for this users?
-        Long numberOfEvents = eventRepository.countLastEventsUser(toghUserEntity.getId(), ParticipantRoleEnum.OWNER, timeCheck);
-        int maximumSubscription = subscriptionService.getMaximumEventsPerMonth(toghUserEntity.getSubscriptionUser());
-        if (numberOfEvents >= maximumSubscription) {
-            /// reject it
-            subscriptionService.registerTouchLimitSubscription(toghUserEntity, LimitReach.CREATIONEVENT);
+                EventOperationResult eventOperationResult = new EventOperationResult(null);
+                eventOperationResult.limitSubscription = true;
+                return eventOperationResult;
+            }
 
+            EventEntity eventEntity = new EventEntity();
+            eventEntity.setAuthor(toghUserEntity);
+            eventEntity.setName(eventName);
+            eventEntity.setStatusEvent(StatusEventEnum.INPREPAR);
+            eventEntity.setTypeEvent(TypeEventEnum.LIMITED);
+            eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
+            switch (toghUserEntity.getSubscriptionUser()) {
+                case PREMIUM:
+                    eventEntity.setSubscriptionEvent(SubscriptionEventEnum.PREMIUM);
+                    break;
+                case EXCELLENCE:
+                    eventEntity.setSubscriptionEvent(SubscriptionEventEnum.EXCELLENCE);
+                    break;
+                default:
+                    eventEntity.setSubscriptionEvent(SubscriptionEventEnum.FREE);
+            }
+
+            EventController eventController = getEventController(eventEntity);
+
+            // let's the conductor create the participant and all needed information
+            eventController.completeConsistant();
+            eventRepository.save(eventEntity);
+            return new EventOperationResult(eventEntity);
+
+        } catch (Exception e) {
             EventOperationResult eventOperationResult = new EventOperationResult(null);
-            eventOperationResult.limitSubscription = true;
+            eventOperationResult.listLogEvents.add(new LogEvent(eventCreationError, e, "User: [" + toghUserEntity.getName() + "] eventName[" + eventName + "]"));
             return eventOperationResult;
         }
-
-        EventEntity eventEntity = new EventEntity();
-        eventEntity.setAuthor(toghUserEntity);
-        eventEntity.setName(eventName);
-        eventEntity.setStatusEvent(StatusEventEnum.INPREPAR);
-        eventEntity.setTypeEvent(TypeEventEnum.LIMITED);
-        eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
-        switch (toghUserEntity.getSubscriptionUser()) {
-            case PREMIUM:
-                eventEntity.setSubscriptionEvent(SubscriptionEventEnum.PREMIUM);
-                break;
-            case EXCELLENCE:
-                eventEntity.setSubscriptionEvent(SubscriptionEventEnum.EXCELLENCE);
-                break;
-            default:
-                eventEntity.setSubscriptionEvent(SubscriptionEventEnum.FREE);
-        }
-
-        EventController eventController = getEventController(eventEntity);
-
-        // let's the conductor create the participant and all needed information
-        eventController.completeConsistant();
-        eventRepository.save(eventEntity);
-
-        return new EventOperationResult(eventEntity);
 
     }
 
@@ -640,7 +646,7 @@ public class EventService {
 
     }
 
-    public class EventResult {
+    public static class EventResult {
 
         public List<EventEntity> listEvents;
         public List<LogEvent> listLogEvent = new ArrayList<>();
@@ -649,7 +655,7 @@ public class EventService {
     /**
      * Load an entity by its class and an ID
      */
-    public class LoadEntityResult {
+    public static class LoadEntityResult {
 
         public BaseEntity entity;
         public List<LogEvent> listLogEvents = new ArrayList<>();

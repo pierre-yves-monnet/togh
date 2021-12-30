@@ -34,7 +34,7 @@ public abstract class EventAbsChildController {
 
     protected static final LogEvent eventEntityNotFoundToRemove = new LogEvent(EventAbsChildController.class.getName(), 1, Level.INFO, "Entity not found to remove", "This Entity can't be found, already removed");
     private final EventController eventController;
-    private EventEntity eventEntity;
+    private final EventEntity eventEntity;
     private int maxEntity = 100;
 
 

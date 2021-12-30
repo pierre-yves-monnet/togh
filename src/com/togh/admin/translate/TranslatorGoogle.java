@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -34,7 +33,7 @@ public class TranslatorGoogle {
     private final static LogEvent eventGoogleInvalidKey = new LogEvent(TranslatorGoogle.class.getName(), 1, Level.ERROR, "Google InvalidKey", "To connect to Google Service, an authentication key is necessary. This key is incorrect", "No google service are available", "Check source of the file");
     private static Translate translate;
     // final String KEY = "AIzaSyB85BFbfSvuyEhrIpibitXldwaSm6Ip5es";
-    private Logger logger = Logger.getLogger(TranslatorGoogle.class.getName());
+    private final Logger logger = Logger.getLogger(TranslatorGoogle.class.getName());
     @Autowired
     private ApiKeyService apiKeyService;
 
@@ -45,8 +44,6 @@ public class TranslatorGoogle {
     @SuppressWarnings("deprecation")
     public List<LogEvent> initialisation() {
         List<LogEvent> listEvents = new ArrayList<>();
-        // String googleFileName = "D:/dev/git/togh/configuration/Togh-2021-a38140b44a29.json";
-        // String googleFileName = "D:/dev/git/togh/configuration/client_secret.json";
 
         try {
             String googleApikey = apiKeyService.getApiKeyGoogleTranslate();
@@ -68,9 +65,10 @@ public class TranslatorGoogle {
     /**
      * Translate a unique sentence from the Source language to the target langage
      *
-     * @param sentence
-     * @param language &#39;
-     * @return
+     * @param sentence       sentence to translate
+     * @param sourceLanguage origin language of the sentence
+     * @param targetLanguage language to translate the sentence
+     * @return a sentence in the target language
      */
     public TranslateSentenceResult translateSentence(String sentence, String sourceLanguage, String targetLanguage) {
         List<String> sentences = new ArrayList<>();
@@ -82,10 +80,10 @@ public class TranslatorGoogle {
      * Translate a list of sentence from the source language to the target langage
      * Replace the sequence &#39; by ' : google encode this character, and React does not need that
      *
-     * @param sentences
-     * @param sourceLanguage
-     * @param targetLanguage
-     * @return
+     * @param sentences sentences to translate
+     * @param sourceLanguage origin language of the sentence
+     * @param targetLanguage language to translate the sentence
+     * @return sentences in the target language
      */
     public TranslateSentenceResult translateSentences(List<String> sentences, String sourceLanguage, String targetLanguage) {
         // list languages
@@ -127,7 +125,7 @@ public class TranslatorGoogle {
         FileInputStream file = new FileInputStream(jsonPath);
 
         GoogleCredentials credentials = GoogleCredentials.fromStream(file);
-        credentials.createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
+        credentials.createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
         Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
 
         System.out.println("Buckets:");
@@ -138,7 +136,7 @@ public class TranslatorGoogle {
 
     }
 
-    public class TranslateSentenceResult {
+    public static class TranslateSentenceResult {
 
         List<LogEvent> listEvents = new ArrayList<>();
         List<String> listTranslations = new ArrayList<>();

@@ -35,9 +35,9 @@ public class EventPresentation {
 
     private static final String NBSP = "&nbsp;";
 
-    // private EventRepository eventRepository;
-    EventController eventController;
-    private FactoryService factoryService;
+
+    private final EventController eventController;
+    private final FactoryService factoryService;
 
     protected EventPresentation(EventController eventController, FactoryService factoryService) {
         this.eventController = eventController;

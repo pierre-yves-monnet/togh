@@ -110,7 +110,7 @@ public class EventSurveyAnswerController extends EventAbsChildController {
 
         BaseEntity databaseEntity = reloadSourceFromDatabase(parentEntity, violationChild);
         // the databaseEntity may be null: It's just added in the same transaction then!
-        List<? extends BaseEntity> listChildren = null;
+        List<? extends BaseEntity> listChildren;
         if (violationChild instanceof EventSurveyAnswerEntity) {
             listChildren = surveyEntity.getAnswerlist();
         } else {

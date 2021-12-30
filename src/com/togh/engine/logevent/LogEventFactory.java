@@ -47,10 +47,7 @@ public class LogEventFactory {
                     return "<tr><td>" + event.getHtml() + "</td>" + "</tr>";
                 })
                 .collect(Collectors.joining("")));
-//        
-//        for (final LogEvent event : listEvents) {
-//            tableHtml.append("<tr><td>" + event.getHtml() + "</td></tr>");
-//        }
+
         tableHtml.append("</table>");
         return tableHtml.toString();
     }
@@ -76,13 +73,6 @@ public class LogEventFactory {
                 })
                 .collect(Collectors.joining("")));
 
-
-//        for (final LogEvent event : listEvents) {
-//            tableHtml.append("<tr><td>" + event.getHtmlTitle() + "</td>"
-//                    + "<td>" + event.getLevel().toString() + "</td>"
-//                    + "<td>" + event.getParameters() + event.getExceptionDetails() + "</td>"
-//                    + "</tr>");
-//        }
         tableHtml.append("</table>");
         return tableHtml.toString();
     }
@@ -97,14 +87,6 @@ public class LogEventFactory {
         return listEvents.stream()
                 .map(LogEvent::toString)
                 .collect(Collectors.joining(" <~> "));
-
-//        StringBuilder tableLog = new StringBuilder();
-//
-//        for (final LogEvent event : listEvents) {
-//            tableLog.append(event.toString() + " <~> ");
-//        }
-//
-//        return tableLog.toString();
     }
 
     /**
@@ -119,48 +101,33 @@ public class LogEventFactory {
                 .filter(LogEvent::isError)
                 .map(LogEvent::toString)
                 .collect(Collectors.joining(" <~> "));
-//        
-//        StringBuilder tableLog = new StringBuilder();
-//
-//        for (final LogEvent event : listEvents) {
-//            if (event.isError())
-//                tableLog.append(event.toString() + " <~> ");
-//        }
-//        return tableLog.toString();
     }
 
     /**
      * Json to listEvent
+     *
+     * @param listEventsJson list event in JSON
+     * @eturn a list of LogEvent
      */
     public static List<LogEvent> getListEventsFromJson(List<Map<String, Serializable>> listEventsJson) {
 
-        List<LogEvent> listEvents = listEventsJson.stream()
+        return listEventsJson.stream()
                 .map(eventJson -> {
                     return LogEvent.getInstanceFormJson(eventJson);
                 })
                 .collect(Collectors.toList());
-
-//        List<LogEvent> listEvents = new ArrayList<>();
-//        for (Map<String, Serializable> eventJson : listEventsJson)
-//            listEvents.add(LogEvent.getInstanceFormJson(eventJson));
-        return listEvents;
     }
 
     /**
      * Event to Json
      *
-     * @param listEvents
-     * @return
+     * @param listEvents listEvents to serialize
+     * @return a list of serialized event
      */
     public static List<Map<String, Serializable>> getJson(List<LogEvent> listEvents) {
-
-        List<Map<String, Serializable>> listEventsJson = listEvents.stream()
+        return listEvents.stream()
                 .map(event -> event.getJson(false))
                 .collect(Collectors.toList());
-        //         List<Map<String, Serializable>> listEventsJson = new ArrayList<>();
-        //        for (LogEvent event : listEvents)
-        //            listEventsJson.add(event.getJson(false));
-        return listEventsJson;
     }
 
     /**
@@ -168,7 +135,7 @@ public class LogEventFactory {
      * An event already exist if this is the same package/number/parameters (see BEvent.same() ).
      *
      * @param listEvents the list modified if needed
-     * @param event      the new event to add
+     * @param eventToAdd the new event to add
      */
     public static void addEventUniqueInList(final List<LogEvent> listEvents, final LogEvent eventToAdd) {
         if (listEvents == null) {
@@ -181,11 +148,6 @@ public class LogEventFactory {
         if (idExists)
             return;
 
-//        for (int i = 0; i < listEvents.size(); i++) {
-//            if (listEvents.get(i).isIdentical(eventToAdd)) {
-//                return;
-//            }
-//        }
         listEvents.add(eventToAdd);
     }
 
@@ -193,8 +155,8 @@ public class LogEventFactory {
      * add a list of events in the list only if this event is a new one, in order to remove the duplication.
      * An event already exist if this is the same package/number/parameters (see BEvent.same() ).
      *
-     * @param listEvents
-     * @param eventsToAdd
+     * @param listEvents list events
+     * @param eventsToAdd the event to add
      */
     public static void addListEventsUniqueInList(final List<LogEvent> listEvents, final List<LogEvent> eventsToAdd) {
         for (final LogEvent event : eventsToAdd) {
@@ -207,33 +169,16 @@ public class LogEventFactory {
      * calculate from a list of event a UNIQUE list of event, keeping the same order.
      * An event already exist if this is the same package/number/parameters (see BEvent.same() ).
      *
-     * @param listEvents
-     * @return
+     * @param listEvents list events
+     * @return a list, where all events are unique
      */
     public static List<LogEvent> filterUnique(final List<LogEvent> listEvents) {
 
-        List<LogEvent> listUnique = listEvents.stream()
+        return listEvents.stream()
                 .filter(distinctByKey(event -> {
                     return event.getSignature(true);
                 }))
                 .collect(Collectors.toList());
-        return listUnique;
-        //        
-        //        final List<LogEvent> listUnique = new ArrayList<LogEvent>();
-        //
-        //        for (final LogEvent event : listEvents) {
-        //            boolean alreadyExist = false;
-        //            for (final LogEvent existingEvent : listUnique) {
-        //                if (event.isIdentical(existingEvent)) {
-        //                    alreadyExist = true;
-        //                    break;
-        //                }
-        //            }
-        //            if (!alreadyExist) {
-        //                listUnique.add(event);
-        //            }
-        //        }
-        //        return listUnique;
     }
 
     //Utility function

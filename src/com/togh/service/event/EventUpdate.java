@@ -20,7 +20,6 @@ import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -78,7 +77,9 @@ public class EventUpdate {
                         break;
                 }
             } catch (Exception e) {
-                eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation, e, "EventId[" + eventEntity.getId() + " " + getSummary(Arrays.asList(slab))));
+                eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation,
+                        e,
+                        "EventId[" + eventEntity.getId() + " " + getSummary(List.of(slab))));
             }
         });
 

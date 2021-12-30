@@ -17,11 +17,8 @@ import java.util.List;
 
 public interface ToghUserLostPasswordRepository extends JpaRepository<ToghUserLostPasswordEntity, Long> {
 
-    // public ToghUserEntity findById(long id);
-    // @Query("select toghuser from ToghUserEntity toghuser where toghuser.id = ?1")
-    // public ToghUserEntity findById(long id);
 
     @Query("select toghLost from ToghUserLostPasswordEntity toghLost where toghLost.uuid = :uuid")
-    public List<ToghUserLostPasswordEntity> findByUUID(@Param("uuid") String uuid);
+    List<ToghUserLostPasswordEntity> findByUUID(@Param("uuid") String uuid);
 
 }

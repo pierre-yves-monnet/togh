@@ -11,10 +11,10 @@ package com.togh.repository;
 import com.togh.service.LoginService;
 
 public class LoginLogStats {
-    private String timeSlot;
-    private LoginService.LoginStatus statusConnection;
-    private long numberOfEvents;
-    private long numberOfTentatives;
+    private final String timeSlot;
+    private final LoginService.LoginStatus statusConnection;
+    private final long numberOfEvents;
+    private final long numberOfTentatives;
 
     public LoginLogStats(String timeSlot, LoginService.LoginStatus statusConnection, long numberOfEvents, long numberOfTentatives) {
         this.timeSlot = timeSlot;

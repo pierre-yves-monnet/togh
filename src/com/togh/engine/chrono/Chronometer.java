@@ -16,7 +16,6 @@ public class Chronometer {
 
     private final String name;
     private long beginTime;
-    private long endTime;
     private long cumulateTime = 0;
     private long nbExecutions;
 
@@ -41,8 +40,7 @@ public class Chronometer {
      *
      */
     public void stop() {
-        endTime = System.currentTimeMillis();
-        cumulateTime += endTime - beginTime;
+        cumulateTime += System.currentTimeMillis() - beginTime;
         nbExecutions++;
     }
 

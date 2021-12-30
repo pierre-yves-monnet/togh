@@ -11,7 +11,7 @@ import com.togh.service.event.EventUpdate.Slab;
 
 public class EventChatController extends EventAbsChildController {
 
-    EventGroupChatController eventControllerGroupChat;
+    private final EventGroupChatController eventControllerGroupChat;
 
     protected EventChatController(EventController eventController, EventGroupChatController eventControllerGroupChat, EventEntity eventEntity) {
         super(eventController, eventEntity);

@@ -47,7 +47,7 @@ public class TranslateDictionary {
     private static final String logHeader = TranslateDictionary.class.getName() + ":";
     @Autowired
     private TranslatorGoogle translatorGoogle;
-    private Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
+    private final Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
     // dictionary.LangPath=D:\dev\git\togh\npm\src\lang
     @Value("${dictionary.lang-path}")
     private String propertyDictionaryPath;
@@ -191,7 +191,7 @@ public class TranslateDictionary {
         return listLanguages;
     }
 
-    public class LanguageResult {
+    public static class LanguageResult {
 
         public String name;
         public int nbMissingSentences = 0;

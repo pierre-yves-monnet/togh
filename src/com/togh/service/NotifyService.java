@@ -150,9 +150,9 @@ public class NotifyService {
     /**
      * Send the Lost Password email
      *
-     * @param toghUserEntity
-     * @param uuid
-     * @return
+     * @param toghUserEntity togh user
+     * @param uuid           UUID to verify the lost password
+     * @return the status of the notification
      */
     public NotificationStatus sendLostPasswordEmail(ToghUserEntity toghUserEntity, String uuid) {
 
@@ -160,11 +160,13 @@ public class NotifyService {
         textInCartouche += translatorService.getDictionarySentence(Sentence.CLICK_TO_RESET_PASSWORD, toghUserEntity.getLanguage());
 
         StringBuilder st = new StringBuilder();
-        st.append(getEmailHeader(textInCartouche, toghUserEntity.getLanguage()));
 
         String url = getHttpLink(HTTP_DEFAULT_HOST_TOGH) + "?action=resetpassword&uuid=" + uuid;
 
         st.append("<a href='" + url + "'>" + translatorService.getDictionarySentence(Sentence.RESET_MY_PASSWORD, toghUserEntity.getLanguage()) + "</a>");
+        st.append(getEmailHeader(textInCartouche, toghUserEntity.getLanguage()));
+        st.append("<a href='" + url + "'>" + translatorService.getDictionarySentence(Sentence.RESET_MY_PASSWORD, toghUserEntity.getLanguage()) + "</a>");
+
         return sendEmail(toghUserEntity.getEmail(),
                 null,
                 translatorService.getDictionarySentence(Sentence.TOGH_RESET_PASSWORD, toghUserEntity.getLanguage()),
@@ -176,7 +178,8 @@ public class NotifyService {
      * A status of an event change
      * Some person may want to be notify?
      *
-     * @param eventEntity
+     * @param eventEntity event entity
+     * @param oldStatus previous status
      * @param oldStatus   status before the change
      */
     public NotificationStatus notifyEventChangeStatus(@Nonnull EventEntity eventEntity, StatusEventEnum oldStatus) {
@@ -184,10 +187,11 @@ public class NotifyService {
     }
 
     /**
-     * Anevent is purged
+     * An event is purged
      * Some person may want to be notify?
      *
-     * @param eventEntity
+     * @param eventEntity the event entity
+     * @return the notification status
      */
     public NotificationStatus notifyEventPurge(@Nonnull EventEntity eventEntity) {
         return new NotificationStatus();
@@ -226,7 +230,7 @@ public class NotifyService {
     /**
      * @return
      */
-    private String getEmailHeader(String textInCartouch, String lang) {
+    private String getEmailHeader(String textInCartouch, String language) {
         StringBuilder st = new StringBuilder();
 
         st.append("<table with=\100%\"><tr>");
@@ -243,7 +247,7 @@ public class NotifyService {
     // 
     // --------------------------------------------------------------
 
-    public class NotificationStatus {
+    public static class NotificationStatus {
 
         public final List<LogEvent> listEvents = new ArrayList<>();
         private boolean serverIssue;
