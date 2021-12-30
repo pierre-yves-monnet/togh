@@ -209,9 +209,6 @@ public class LogEvent {
      */
     public boolean isIdentical(final LogEvent compareEvent) {
         return compareEvent.getSignatureParameter().equals(getSignatureParameter());
-//        return (compareEvent.getNumber() == getNumber()
-//                && compareEvent.getPackageName().equals(getPackageName())
-//                && compareEvent.getParameters().equals(getParameters()));
     }
 
     /**
