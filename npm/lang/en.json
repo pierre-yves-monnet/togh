@@ -84,6 +84,9 @@
     "defaultMessage": "Connection"
   },
   "AdminLogConnection.UnderAttack": {
+    "defaultMessage": "Under Attack"
+  },
+  "AdminLogConnection.UnderAttackTentatives": {
     "defaultMessage": "Under Attack (lot of tentatives)"
   },
   "AdminLogConnection.UnknowUser": {
@@ -131,6 +134,9 @@
   "AdminTranslator.nbTransations": {
     "defaultMessage": "Number of translation"
   },
+  "AdminUser.CantGhost": {
+    "defaultMessage": "Can't Ghost this user"
+  },
   "AdminUsers.Administrator": {
     "defaultMessage": "Administrator"
   },
@@ -160,6 +166,9 @@
   },
   "AdminUsers.Excellence": {
     "defaultMessage": "Excellence"
+  },
+  "AdminUsers.GhostUser": {
+    "defaultMessage": "Ghost user"
   },
   "AdminUsers.LastActivityTime": {
     "defaultMessage": "Last Activiy"
@@ -407,6 +416,9 @@
   "Event.ExplanationYourTimeZone": {
     "defaultMessage": "This date is calculated in your time zone"
   },
+  "Event.Games": {
+    "defaultMessage": "Games"
+  },
   "Event.Geolocalisation": {
     "defaultMessage": "Geolocalisation"
   },
@@ -472,6 +484,9 @@
   },
   "Event.TitleExpense": {
     "defaultMessage": "Manage and share expenses"
+  },
+  "Event.TitleGames": {
+    "defaultMessage": "Games"
   },
   "Event.TitleGeolocalisation": {
     "defaultMessage": "Where is the event?"
@@ -550,6 +565,123 @@
   },
   "EventExpense.MainTitleExpense": {
     "defaultMessage": "Expense"
+  },
+  "EventGame.Closed": {
+    "defaultMessage": "closed"
+  },
+  "EventGame.GameRemoved": {
+    "defaultMessage": "The game is removed"
+  },
+  "EventGame.InPreparation": {
+    "defaultMessage": "In preparation"
+  },
+  "EventGame.InProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventGame.NoAccessForGameInPreparation": {
+    "defaultMessage": "This Game is in preparation. You can't access it for the moment."
+  },
+  "EventGame.RemoveThisGame": {
+    "defaultMessage": "Remove this game"
+  },
+  "EventGame.SecretSantas": {
+    "defaultMessage": "Secret Santas"
+  },
+  "EventGame.Title": {
+    "defaultMessage": "Title"
+  },
+  "EventGameList.AddGame": {
+    "defaultMessage": "Add a Game in the list"
+  },
+  "EventGameList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventGameList.AddingGame": {
+    "defaultMessage": "Adding a game"
+  },
+  "EventGameList.CantaddItem": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventGameList.GameAdded": {
+    "defaultMessage": "A Game is added"
+  },
+  "EventGameList.GameTip": {
+    "defaultMessage": "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a Game and collect review."
+  },
+  "EventGameList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of Game allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventGameList.MainTitleGameList": {
+    "defaultMessage": "Games"
+  },
+  "EventGameList.NoItem": {
+    "defaultMessage": "You don't have any game ready in the list."
+  },
+  "EventGameList.addItem": {
+    "defaultMessage": "Create a new game in the list"
+  },
+  "EventGameSecretSantas.Administration": {
+    "defaultMessage": "Manage the Secret Santas"
+  },
+  "EventGameSecretSantas.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventGameSecretSantas.IncludeNewPerson": {
+    "defaultMessage": "Adjust players to participants"
+  },
+  "EventGameSecretSantas.NewDraw": {
+    "defaultMessage": "New Random Draw"
+  },
+  "EventGameSecretSantas.NumberOfPlayerInScope": {
+    "defaultMessage": "Potential players"
+  },
+  "EventGameSecretSantas.NumberOfPlayers": {
+    "defaultMessage": "Number of players"
+  },
+  "EventGameSecretSantas.Player": {
+    "defaultMessage": "Player"
+  },
+  "EventGameSecretSantas.PlayerTo": {
+    "defaultMessage": "To Player"
+  },
+  "EventGameSecretSantas.PrepareAGiftTo": {
+    "defaultMessage": "Prepare a gift to"
+  },
+  "EventGameSecretSantas.Scope": {
+    "defaultMessage": "Players of the Secret Santas"
+  },
+  "EventGameSecretSantas.ScopeActive": {
+    "defaultMessage": "Active participants only"
+  },
+  "EventGameSecretSantas.ScopeAll": {
+    "defaultMessage": "All participants"
+  },
+  "EventGameSecretSantas.ShowPlayers": {
+    "defaultMessage": "List of players"
+  },
+  "EventGameSecretSantas.SynchronizePlayers": {
+    "defaultMessage": "Synchronize players"
+  },
+  "EventGameSecretSantas.YouDontWantToSeeTheList": {
+    "defaultMessage": "You don't want to see the list..."
+  },
+  "EventGameSecretSantas.YourSecretSantas": {
+    "defaultMessage": "Your Secret Santas"
+  },
+  "EventGameSecretSantas.explanation": {
+    "defaultMessage": "Each player gets a participant name. Offer him/her/in a gift. And keep in mind you are on the list of someone."
+  },
+  "EventGameSecretSantas.giftedForYou": {
+    "defaultMessage": "You have to do a secret gift to"
+  },
+  "EventGameSecretSantas.listVisibleToggleOff": {
+    "defaultMessage": "Hide the list"
+  },
+  "EventGameSecretSantas.listVisibleToggleOn": {
+    "defaultMessage": "Show the list"
+  },
+  "EventGameSecretSantas.noAffectation": {
+    "defaultMessage": "No one has been assigned to you yet."
   },
   "EventGeolocalisation.Address": {
     "defaultMessage": "Address"
@@ -653,6 +785,9 @@
   "EventItineray.TrainStation": {
     "defaultMessage": "Train Station"
   },
+  "EventItineray.UpThisLine": {
+    "defaultMessage": "Up this line"
+  },
   "EventItineray.VisitTime": {
     "defaultMessage": "Visit time"
   },
@@ -661,6 +796,9 @@
   },
   "EventItineray.WebSite": {
     "defaultMessage": "WebSite"
+  },
+  "EventItineray.downThisLine": {
+    "defaultMessage": "Down this line"
   },
   "EventParticipant.Actif": {
     "defaultMessage": "Actif"
@@ -787,6 +925,12 @@
   },
   "EventPreferences.accessExpensesYes": {
     "defaultMessage": "Expenses"
+  },
+  "EventPreferences.accessGamesNo": {
+    "defaultMessage": "Games"
+  },
+  "EventPreferences.accessGamesYes": {
+    "defaultMessage": "Games"
   },
   "EventPreferences.accessItineraryNo": {
     "defaultMessage": "Itinerary"
@@ -1406,6 +1550,9 @@
   "MyProfile.showTakeATour": {
     "defaultMessage": "Show take a tour"
   },
+  "MyProfile.showTakeATourLabel": {
+    "defaultMessage": "Select if you want to see the 'Take a tour' help"
+  },
   "MyProfile.showTipsUser": {
     "defaultMessage": "Show tips"
   },
@@ -1505,6 +1652,18 @@
   "ResetPassword.passwordchangefailed": {
     "defaultMessage": "Change failed"
   },
+  "TakeATour.Deactivate": {
+    "defaultMessage": "Deactivate"
+  },
+  "TakeATour.DeactivateTips": {
+    "defaultMessage": "You can deactivate Take a tour. Enable it again in your preferences"
+  },
+  "TakeATour.TakeATour": {
+    "defaultMessage": "Take A Tour"
+  },
+  "TakeATour.TakeATourLabel": {
+    "defaultMessage": "Take A Tour"
+  },
   "UserFeedback.OperationFailed": {
     "defaultMessage": "Operation Failed"
   },
@@ -1516,5 +1675,11 @@
   },
   "UserFeedback.OperationSuccessfull": {
     "defaultMessage": "Success"
+  },
+  "UserTips.Deactivate": {
+    "defaultMessage": "Deactivate"
+  },
+  "UserTips.DeactivateTip": {
+    "defaultMessage": "You can deactivate tips, and enable it again in your preferences"
   }
 }
