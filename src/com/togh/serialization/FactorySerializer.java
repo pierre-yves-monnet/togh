@@ -23,6 +23,11 @@ public class FactorySerializer {
 
     Map<Class, BaseSerializer> relations = new HashMap<>();
 
+    /**
+     * Thanks to Spring, the list of Serializer is calculated dynamically. Each serializer need to implement the interface and to be a Component
+     *
+     * @param serializers list of serializer detected.
+     */
     FactorySerializer(List<BaseSerializer> serializers) {
         serializers.forEach(t -> relations.put(t.getEntityClass(), t));
     }
