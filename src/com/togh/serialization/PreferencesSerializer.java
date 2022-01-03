@@ -36,6 +36,15 @@ public class PreferencesSerializer extends BaseSerializer {
 
         resultMap.put("currencyCode", preferencesEntity.getCurrencyCode());
         resultMap.put("accessChat", preferencesEntity.getAccessChat());
+        resultMap.put("accessItinerary", preferencesEntity.getAccessItinerary());
+        resultMap.put("accessTasks", preferencesEntity.getAccessTasks());
+        resultMap.put("accessBring", preferencesEntity.getAccessBring());
+        resultMap.put("accessSurveys", preferencesEntity.getAccessSurveys());
+        resultMap.put("accessGames", preferencesEntity.getAccessGames());
+        resultMap.put("accessLocalisation", preferencesEntity.getAccessLocalisation());
+        resultMap.put("accessPhotos", preferencesEntity.getAccessPhotos());
+        resultMap.put("accessExpenses", preferencesEntity.getAccessExpenses());
+        resultMap.put("accessBudget", preferencesEntity.getAccessBudget());
         return resultMap;
     }
 }
