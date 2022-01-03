@@ -285,12 +285,12 @@ class EventSurveyList extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERROR;
 			currentOperation.result=intl.formatMessage({id: "EventSurveyList.CantaddItem",defaultMessage: "A task can't be added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
-		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+		} else if ( ! (httpPayload.getData().childEntities && httpPayload.getData().childEntities.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
 			console.log("EventSurvey.addItemCallback:  BAD RECEPTION");
 
 		} else {
-			var surveyToAdd = httpPayload.getData().childEntity[ 0 ];
+			var surveyToAdd = httpPayload.getData().childEntities[ 0 ];
 			var event = this.eventCtrl.getEvent();
 			currentOperation.status= UserFeedback.OK;
 			currentOperation.result=intl.formatMessage({id: "EventSurveyList.SurveyAdded",defaultMessage: "A survey is added"});

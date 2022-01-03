@@ -11,15 +11,12 @@ package com.togh.service;
 import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.logevent.LogEvent.Level;
 import com.togh.engine.logevent.LogEventFactory;
-import com.togh.entity.EventEntity;
+import com.togh.entity.*;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.EventEntity.SubscriptionEventEnum;
 import com.togh.entity.EventEntity.TypeEventEnum;
-import com.togh.entity.EventExpenseEntity;
-import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
-import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
 import com.togh.eventgrantor.access.EventAccessGrantor;
@@ -31,6 +28,7 @@ import com.togh.serialization.FactorySerializer;
 import com.togh.serialization.SerializerOptions;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventController;
+import com.togh.service.event.EventGameParticipantController;
 import com.togh.service.event.EventUpdate.Slab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -489,11 +487,50 @@ public class EventService {
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Add child */
+    /* Game */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */
     /* ******************************************************************************** */
+
+    /**
+     * Synchronize the players with all participants for a game.
+     *
+     * @param eventEntity    event entity of the game
+     * @param gameId         game id
+     * @param reset          do a complete reset of the game
+     * @param toghUserEntity toghuser who perform the operation
+     * @return the event operation result
+     */
+    public EventOperationResult gameSynchronizePlayer(EventEntity eventEntity, Long gameId, boolean reset, ToghUserEntity toghUserEntity) {
+
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isOrganizer(toghUserEntity)) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventAccessError);
+            return eventOperationResult;
+        }
+        List<EventGameEntity> listGames = eventEntity.getGameList().stream().filter(game -> game.getId().equals(gameId)).collect(Collectors.toList());
+        if (listGames.isEmpty()) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventEntityNotFound);
+            return eventOperationResult;
+        }
+
+
+        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventPartipantController(listGames.get(0));
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+
+        eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizePlayersWithParticipant(reset));
+        eventOperationResult.listChildEntities.add(listGames.get(0));
+        try {
+            eventRepository.save(eventEntity);
+        } catch (Exception e) {
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+        }
+        return eventOperationResult;
+
+    }
 
     /**
      * invitation
@@ -549,9 +586,9 @@ public class EventService {
     public static class EventOperationResult {
         private static final String LOG_HEADER = EventOperationResult.class.getSimpleName() + ": ";
         public final List<LogEvent> listLogEvents = new ArrayList<>();
-        public final List<BaseEntity> listChildEntity = new ArrayList<>();
+        public final List<BaseEntity> listChildEntities = new ArrayList<>();
         // in case of Remove, entity are deleted but then we send back the entityId
-        public final List<Long> listChildEntityId = new ArrayList<>();
+        public final List<Long> listChildEntitiesId = new ArrayList<>();
         private final Logger logger = Logger.getLogger(EventOperationResult.class.getName());
         public EventEntity eventEntity;
         public boolean limitSubscription = false;
@@ -571,8 +608,8 @@ public class EventService {
 
         public void add(EventOperationResult complement) {
             this.listLogEvents.addAll(complement.listLogEvents);
-            this.listChildEntity.addAll(complement.listChildEntity);
-            this.listChildEntityId.addAll(complement.listChildEntityId);
+            this.listChildEntities.addAll(complement.listChildEntities);
+            this.listChildEntitiesId.addAll(complement.listChildEntitiesId);
         }
 
         public void addLogEvent(LogEvent event) {
@@ -592,7 +629,7 @@ public class EventService {
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Close old events */
+    /* Attached class */
     /*                                                                                  */
     /*                                                                                  */
     /*                                                                                  */

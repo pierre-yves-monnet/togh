@@ -240,7 +240,7 @@ class AdminLogConnection extends React.Component {
 											</TooltipIcon>}
 										{item.numberOfTentatives > 5 && item.statusConnection !== 'OK' &&
                                             <TooltipIcon
-                                                tooltipText={intl.formatMessage({id: "AdminLogConnection.UnderAttack", defaultMessage: "Under Attack (lot of tentatives)"})}
+                                                tooltipText={intl.formatMessage({id: "AdminLogConnection.UnderAttackTentatives", defaultMessage: "Under Attack (lot of tentatives)"})}
                                                 style={{paddingLeft:"10px"}}>
                                                 <Alarm style={{color:"red", fill:"red"}} />
                                             </TooltipIcon>}

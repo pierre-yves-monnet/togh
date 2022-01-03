@@ -57,15 +57,16 @@ public class EventController {
     /**
      * Declare all friend controller
      */
-    private final EventTaskController eventControllerTask;
-    private final EventItineraryController eventControllerItinerary;
-    private final EventShoppingController eventControllerShopping;
+    private final EventTaskController eventTaskController;
+    private final EventItineraryController eventItineraryController;
+    private final EventShoppingController eventShoppingController;
     private final EventSurveyController eventSurveyController;
     private final EventSurveyChoiceController eventSurveyChoiceControllerList;
     private final EventSurveyAnswerController eventSurveyAnswerController;
-    private final EventGroupChatController eventControllerGroupChat;
-    private final EventChatController eventControllerChat;
-    private final EventExpenseController eventControllerExpense;
+    private final EventGroupChatController eventGroupChatController;
+    private final EventChatController eventChatController;
+    private final EventExpenseController eventExpenseController;
+    private final EventGameController eventGameController;
 
     /**
      * Keep all Repository
@@ -80,17 +81,18 @@ public class EventController {
         this.eventEntity = eventEntity;
         this.factoryService = factoryService;
         this.factoryRepository = factoryRepository;
-        eventControllerTask = new EventTaskController(this, eventEntity);
-        eventControllerItinerary = new EventItineraryController(this, eventEntity);
-        eventControllerShopping = new EventShoppingController(this, eventEntity);
+        eventTaskController = new EventTaskController(this, eventEntity);
+        eventItineraryController = new EventItineraryController(this, eventEntity);
+        eventShoppingController = new EventShoppingController(this, eventEntity);
 
         eventSurveyController = new EventSurveyController(this, eventEntity);
         eventSurveyChoiceControllerList = new EventSurveyChoiceController(this, eventSurveyController, eventEntity);
         eventSurveyAnswerController = new EventSurveyAnswerController(this, eventSurveyController, eventEntity);
 
-        eventControllerGroupChat = new EventGroupChatController(this, eventEntity);
-        eventControllerChat = new EventChatController(this, eventControllerGroupChat, eventEntity);
-        eventControllerExpense = new EventExpenseController(this, eventEntity);
+        eventGroupChatController = new EventGroupChatController(this, eventEntity);
+        eventChatController = new EventChatController(this, eventGroupChatController, eventEntity);
+        eventExpenseController = new EventExpenseController(this, eventEntity);
+        eventGameController = new EventGameController(this, eventEntity);
     }
 
     public static EventController getInstance(EventEntity event, FactoryService factoryService, EventFactoryRepository factoryRepository) {
@@ -141,6 +143,7 @@ public class EventController {
             preferencesEntity.setAccessBring(true);
             preferencesEntity.setAccessSurveys(false);
             preferencesEntity.setAccessLocalisation(true);
+            preferencesEntity.setAccessGames(false);
             preferencesEntity.setAccessPhotos(false);
             preferencesEntity.setAccessExpenses(false);
             preferencesEntity.setAccessBudget(false);
@@ -148,7 +151,7 @@ public class EventController {
         }
 
         // itinerary: must be in the date
-        listSlab.addAll(eventControllerItinerary.checkItinerary());
+        listSlab.addAll(eventItineraryController.checkItinerary());
 
         return listSlab;
     }
@@ -162,8 +165,8 @@ public class EventController {
         return new EventPresentation(this, factoryService);
     }
 
-    public EventExpenseController getEventControllerExpense() {
-        return eventControllerExpense;
+    public EventExpenseController getEventExpenseController() {
+        return eventExpenseController;
     }
 
     public EventSurveyChoiceController getEventControllerSurveyChoiceList() {
@@ -174,14 +177,17 @@ public class EventController {
         return eventSurveyAnswerController;
     }
 
-    public EventGroupChatController getEventControllerGroupChat() {
-        return eventControllerGroupChat;
+    public EventGroupChatController getEventGroupChatController() {
+        return eventGroupChatController;
     }
 
-    public EventChatController getEventControllerChat() {
-        return eventControllerChat;
+    public EventChatController getEventChatController() {
+        return eventChatController;
     }
 
+    public EventGameController getEventGameController() {
+        return eventGameController;
+    }
     /* ******************************************************************************** */
     /*                                                                                  */
     /* Authorisation */
@@ -267,6 +273,20 @@ public class EventController {
         return null;
     }
 
+    /**
+     * Return the participant from it's ID
+     *
+     * @param participantId the participant ID
+     * @return the participant Entity. null if no participant is found with this ID
+     */
+    public ParticipantEntity getParticipantById(long participantId) {
+        for (ParticipantEntity participant : eventEntity.getParticipantList()) {
+            if (participant.getId().equals(participantId))
+                return participant;
+        }
+        return null;
+    }
+
 
     /**
      * true if the event is a Secret Event
@@ -287,11 +307,11 @@ public class EventController {
      * send an invitation
      *
      * @param eventEntity       the eventEntity
-     * @param invitedByToghUser the togfUser who sent the invitation
+     * @param invitedByToghUser the toghUser who sent the invitation
      * @param listUsersId       list of ToghUserId to invites
      * @param userInvitedEmail  list of email : there are not yet toghUser
      * @param role              role in this event
-     * @param useMyEmailAsFrom  if true, the From used in the message is the InvitedByToghUser email
+     * @param useMyEmailAsFrom  if true, the Email "From" used in the message is the InvitedByToghUser email
      * @param message           Message to come with the invitation
      * @return the invitation Result
      */
@@ -382,13 +402,13 @@ public class EventController {
      */
     protected EventAbsChildController getEventControllerFromSlabOperation(Slab slab) {
         if (EventTaskEntity.CST_SLABOPERATION_TASKLIST.equals(slab.attributName)) {
-            return eventControllerTask;
+            return eventTaskController;
 
         } else if (EventItineraryStepEntity.CST_SLABOPERATION_ITINERARYSTEPLIST.equals(slab.attributName)) {
-            return eventControllerItinerary;
+            return eventItineraryController;
 
         } else if (EventShoppingListEntity.CST_SLABOPERATION_SHOPPINGLIST.equals(slab.attributName)) {
-            return eventControllerShopping;
+            return eventShoppingController;
 
         } else if (EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST.equals(slab.attributName)) {
             return eventSurveyController;
@@ -400,10 +420,12 @@ public class EventController {
             return eventSurveyAnswerController;
 
         } else if (EventGroupChatEntity.SLABOPERATION_GROUPCHATLIST.equals(slab.attributName)) {
-            return eventControllerGroupChat;
+            return eventGroupChatController;
 
         } else if (EventChatEntity.CST_SLABOPERATION_CHAT.equals(slab.attributName)) {
-            return eventControllerChat;
+            return eventChatController;
+        } else if (EventGameEntity.CST_SLABOPERATION_GAMELIST.equals(slab.attributName)) {
+            return eventGameController;
         }
         return null;
     }

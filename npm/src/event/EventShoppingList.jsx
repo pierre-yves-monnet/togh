@@ -293,7 +293,7 @@ class EventShoppingList extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERROR;
 			currentOperation.result=intl.formatMessage({id: "EventShoppingList.CantAddTask",defaultMessage: "An item can't be added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
-		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+		} else if ( ! (httpPayload.getData().childEntities && httpPayload.getData().childEntities.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
 			console.log("EventShoppingList.addTaskCallback:  BAD RECEPTION");
 
@@ -302,7 +302,7 @@ class EventShoppingList extends React.Component {
 			currentOperation.result=intl.formatMessage({id: "EventShoppingList.TaskAdded",defaultMessage: "The item is added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
-			var itemToAdd = httpPayload.getData().childEntity[ 0 ];
+			var itemToAdd = httpPayload.getData().childEntities[ 0 ];
 			itemToAdd.expense={};
 			var event = this.eventCtrl.getEvent();
 			console.log("EventShoppingList.addItemCallback ");
@@ -356,7 +356,7 @@ class EventShoppingList extends React.Component {
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
 			var currentEvent = this.state.event;
-			let childId = httpPayload.getData().childEntityId[ 0 ];
+			let childId = httpPayload.getData().childEntitiesId[ 0 ];
 			for( var i in currentEvent.shoppinglist) {
 				if ( currentEvent.shoppinglist[ i ].id === childId) {
 					currentEvent.shoppinglist.splice( currentEvent.shoppinglist[ i ], 1);

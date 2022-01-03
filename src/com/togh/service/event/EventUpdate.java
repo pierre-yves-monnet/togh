@@ -165,9 +165,12 @@ public class EventUpdate {
             // assuming the controller update the event
             logger.severe(LOG_HEADER + "Can't insert " + entityPlan.child.toString() + " : " + e.toString());
             entityPlan.child = eventChildController.manageConstraint(entityPlan.child, slab, eventOperationResult);
+            eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation,
+                    e,
+                    "EventId[" + eventChildController.getEventEntity().getId() + " " + getSummary(List.of(slab))));
         }
 
-        eventOperationResult.listChildEntity.add(entityPlan.getEntityToAttach());
+        eventOperationResult.listChildEntities.add(entityPlan.getEntityToAttach());
 
     }
 
@@ -182,7 +185,7 @@ public class EventUpdate {
         if (eventChildController == null)
             return;
 
-        eventOperationResult.listChildEntityId.add(slab.getAttributValueLong());
+        eventOperationResult.listChildEntitiesId.add(slab.getAttributValueLong());
         BaseEntity baseEntity = eventChildController.getEntity(slab.getAttributValueLong());
         if (baseEntity == null) {
             eventOperationResult.listLogEvents.add(new LogEvent(EventAbsChildController.eventEntityNotFoundToRemove, "Can't find taskId " + slab.getAttributValueLong()));
@@ -231,6 +234,8 @@ public class EventUpdate {
                             updateContext.getToghUser().getLabel())));
             return;
         }
+        eventOperationResult.listChildEntities.add(baseEntity);
+        eventOperationResult.listChildEntitiesId.add(baseEntity.getId());
         eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
 
         event.touch();

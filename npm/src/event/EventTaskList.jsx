@@ -433,12 +433,12 @@ class EventTaskList extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERROR;
 			currentOperation.result=intl.formatMessage({id: "EventTaskList.CantaddItem",defaultMessage: "A task can't be added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
-		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+		} else if ( ! (httpPayload.getData().childEntities && httpPayload.getData().childEntities.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
 			console.log("EventTasklist.addItemCallback:  BAD RECEPTION");
 
 		} else {
-			var taskToAdd = httpPayload.getData().childEntity[ 0 ];
+			var taskToAdd = httpPayload.getData().childEntities[ 0 ];
 			var event = this.eventCtrl.getEvent();
 			currentOperation.status= UserFeedback.OK;
 			currentOperation.result=intl.formatMessage({id: "EventTaskList.TaskAdded",defaultMessage: "A task is added"});
@@ -499,10 +499,10 @@ class EventTaskList extends React.Component {
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
 			var currentEvent = this.state.event;
-			let childId = httpPayload.getData().childEntityId[ 0 ];
+			let childId = httpPayload.getData().childEntitiesId[ 0 ];
 			for( var i in currentEvent.tasklist) {
 				if ( currentEvent.tasklist[ i ].id === childId) {
-					currentEvent.tasklist.splice( currentEvent.tasklist[ i ], 1);
+					currentEvent.tasklist.splice( i, 1);
 					break;
 				}
 			}

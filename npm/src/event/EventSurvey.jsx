@@ -491,12 +491,12 @@ class EventSurvey extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERROR;
 			currentOperation.result=intl.formatMessage({id: "EventSurvey.CantaddItem",defaultMessage: "A task can't be added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
-		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+		} else if ( ! (httpPayload.getData().childEntities && httpPayload.getData().childEntities.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
 			console.log("EventSurvey.addItemCallback:  BAD RECEPTION");
 
 		} else {
-			var choice = httpPayload.getData().childEntity[ 0 ];
+			var choice = httpPayload.getData().childEntities[ 0 ];
 			currentOperation.status= UserFeedback.OK;
 			currentOperation.result=intl.formatMessage({id: "EventSurvey.TaskAdded",defaultMessage: "A task is added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
@@ -554,7 +554,7 @@ class EventSurvey extends React.Component {
 			var currentEvent = this.state.event;
 			let survey = this.surveyCtrl.getValue();
 	
-			let childId = httpPayload.getData().childEntityId[ 0 ];
+			let childId = httpPayload.getData().childEntitiesId[ 0 ];
 			const newChoices = survey[ surveyConstant.CHILD_CHOICE ].filter((index) => index.id !== childId);
 			survey[ surveyConstant.CHILD_CHOICE ] = newChoices;
 
@@ -620,12 +620,12 @@ class EventSurvey extends React.Component {
 			currentOperation.status= userFeedbackConstant.ERROR;
 			currentOperation.result=intl.formatMessage({id: "EventSurvey.CantaddAnswer",defaultMessage: "Can't add the answer"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
-		} else if ( ! (httpPayload.getData().childEntity && httpPayload.getData().childEntity.length>0) ) {
+		} else if ( ! (httpPayload.getData().childEntities && httpPayload.getData().childEntities.length>0) ) {
 			currentOperation.status= userFeedbackConstant.ERRORCONTRACT;
 			console.log("EventSurvey.addItemCallback:  BAD RECEPTION");
 
 		} else {
-			var answerParticipant = httpPayload.getData().childEntity[ 0 ];
+			var answerParticipant = httpPayload.getData().childEntities[ 0 ];
 			currentOperation.status= UserFeedback.OK;
 			currentOperation.result=intl.formatMessage({id: "EventSurvey.AnswerAdded",defaultMessage: "answer added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
