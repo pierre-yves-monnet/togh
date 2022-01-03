@@ -180,7 +180,23 @@ class EventEntity extends UserEntity {
     @OrderBy("id")
     private List<EventGroupChatEntity> groupChatList = new ArrayList<>();
 
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Game */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "eventid")
+    @OrderBy("id")
+    private List<EventGameEntity> gameList = new ArrayList<>();
 
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Preferences */
+    /*                                                                                  */
+    /* ******************************************************************************** */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "eventid")
     private EventPreferencesEntity preferences = null;
@@ -216,10 +232,9 @@ class EventEntity extends UserEntity {
 
     /* ******************************************************************************** */
     /*                                                                                  */
-    /* Tasklist */
+    /* Itinerary */
     /*                                                                                  */
     /* ******************************************************************************** */
-
     public EventItineraryStepEntity addItineraryStep(EventItineraryStepEntity oneStep) {
         itineraryStepList.add(oneStep);
         return oneStep;
@@ -241,6 +256,11 @@ class EventEntity extends UserEntity {
         return false;
     }
 
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Tasks */
+    /*                                                                                  */
+    /* ******************************************************************************** */
     public EventTaskEntity addTask(EventTaskEntity onetask) {
         taskList.add(onetask);
         return onetask;
@@ -261,6 +281,11 @@ class EventEntity extends UserEntity {
         }
         return false;
     }
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* ShoppingList */
+    /*                                                                                  */
+    /* ******************************************************************************** */
 
     public EventShoppingListEntity addShoppingList(EventShoppingListEntity onetask) {
         shoppingList.add(onetask);
@@ -283,6 +308,11 @@ class EventEntity extends UserEntity {
         return false;
     }
 
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Survey */
+    /*                                                                                  */
+    /* ******************************************************************************** */
     public EventSurveyEntity addSurvey(EventSurveyEntity onesurvey) {
         surveyList.add(onesurvey);
         return onesurvey;
@@ -303,6 +333,12 @@ class EventEntity extends UserEntity {
         }
         return false;
     }
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* GroupChat and Chat */
+    /*                                                                                  */
+    /* ******************************************************************************** */
 
     public EventGroupChatEntity addGroupChat(EventGroupChatEntity groupChatEntity) {
         groupChatList.add(groupChatEntity);
@@ -330,6 +366,39 @@ class EventEntity extends UserEntity {
     public EventChatEntity addChat(EventGroupChatEntity groupChatEntity, EventChatEntity chatEntity, int maxChatEntity) {
         groupChatEntity.addChat(chatEntity);
         return chatEntity;
+    }
+
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Game */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+
+    /**
+     * Add a game
+     *
+     * @param oneGame game to add
+     * @return the game added
+     */
+    public EventGameEntity addGame(EventGameEntity oneGame) {
+        gameList.add(oneGame);
+        return oneGame;
+    }
+
+    /**
+     * Remove a game
+     *
+     * @param oneGame game to remove
+     * @return true if the game exist and is removed, false else
+     */
+    public boolean removeGame(EventGameEntity oneGame) {
+        for (EventGameEntity stepIterator : gameList) {
+            if (stepIterator.getId().equals(oneGame.getId())) {
+                gameList.remove(stepIterator);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

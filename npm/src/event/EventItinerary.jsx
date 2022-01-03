@@ -377,9 +377,12 @@ class EventItinerary extends React.Component {
 		listLines.push(<div class="row">
 				<div class="col-1">
 					<div style={{paddingBottom: "10px"}}>
-						<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )} title="Up this line"><ArrowUp width="20px"/></button><br/>
+						<button class="btn btn-primary btn-xs" onClick={() => this.upItem( showDate, item )}
+						        title={<FormattedMessage id="EventItineray.UpThisLine" defaultMessage="Up this line" />}
+						        ><ArrowUp width="20px"/></button><br/>
 					</div>
-					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )} title="Down this line"><ArrowDown width="20px"/></button>
+					<button class="btn btn-primary btn-xs" onClick={() => this.downItem( showDate, item )}
+					        title={<FormattedMessage id="EventItineray.downThisLine" defaultMessage="Down this line" />}><ArrowDown width="20px"/></button>
 					{this.rownumber}
 				</div>	
 				
@@ -681,7 +684,7 @@ class EventItinerary extends React.Component {
 			currentOperation.result=intl.formatMessage({id: "EventItinerary.StepAdded",defaultMessage: "A step is added"});
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
-			let stepToAdd = httpPayload.getData().childEntity[0];
+			let stepToAdd = httpPayload.getData().childEntities[0];
 			stepToAdd.expense={};
 			let event = this.eventCtrl.getEvent();
 			let newList= event.itinerarysteplist.concat( stepToAdd );
@@ -741,7 +744,7 @@ class EventItinerary extends React.Component {
 			currentOperation.listlogevent = httpPayload.getData().listLogEvents;
 
 			let currentEvent = this.state.event;
-			let childId = httpPayload.getData().childEntityId[ 0 ];
+			let childId = httpPayload.getData().childEntitiesId[ 0 ];
 			for( let i in currentEvent.itinerarysteplist) {
 				if ( currentEvent.itinerarysteplist[ i ].id === childId) {
 					currentEvent.itinerarysteplist.splice( currentEvent.itinerarysteplist[ i ], 1);

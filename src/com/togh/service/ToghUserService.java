@@ -31,7 +31,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -52,6 +51,7 @@ public class ToghUserService {
     private static final LogEvent eventUnknowId = new LogEvent(ToghUserService.class.getName(), 1, Level.APPLICATIONERROR, "Unknow user", "There is no user behind this ID", "Operation can't be done", "Check the ID");
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
+    private static final String SALT = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
     private final Logger logger = Logger.getLogger(ToghUserService.class.getName());
     @Autowired
     private FactoryService factoryService;
@@ -92,15 +92,13 @@ public class ToghUserService {
     public ToghUserEntity getUserFromConnectionStamp(String connectionStamp) {
         return toghUserRepository.findByConnectionStamp(connectionStamp);
     }
-
     public static String encryptPassword(String password) {
-        // we don't want to use a secret random: we need to encrypt again a password to compare it
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
+        // ATTENTION!
+        // We don't want to use a secret random: we need to encrypt again a password to compare it
 
         char[] passwordChar = password.toCharArray();
-        PBEKeySpec spec = new PBEKeySpec(passwordChar, salt, ITERATIONS, KEY_LENGTH);
+        byte[] saltChar = SALT.getBytes();
+        PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
         Arrays.fill(passwordChar, Character.MIN_VALUE);
         try {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");

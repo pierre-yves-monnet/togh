@@ -129,12 +129,12 @@ public class EventSerializer extends BaseSerializer {
         resultMap.put(EventShoppingListEntity.CST_SLABOPERATION_SHOPPINGLIST, listShoppingListMap);
 
         // get SurveyList
-        List<Map<String, Object>> listSurveylistMap = new ArrayList<>();
+        List<Map<String, Object>> listSurveyListMap = new ArrayList<>();
         for (EventSurveyEntity surveyEntity : eventEntity.getSurveyList()) {
             BaseSerializer serializer = factorySerializer.getFromEntity(surveyEntity);
-            listSurveylistMap.add(serializer.getMap(surveyEntity, eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            listSurveyListMap.add(serializer.getMap(surveyEntity, eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        resultMap.put(EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST, listSurveylistMap);
+        resultMap.put(EventSurveyEntity.CST_SLABOPERATION_SURVEYLIST, listSurveyListMap);
 
         // get GroupChatList
         List<Map<String, Object>> listGroupChat = new ArrayList<>();
@@ -145,10 +145,22 @@ public class EventSerializer extends BaseSerializer {
         }
         resultMap.put(EventGroupChatEntity.SLABOPERATION_GROUPCHATLIST, listGroupChat);
 
-        BaseSerializer serializerPreference = factorySerializer.getFromEntity(eventEntity.getPreferences());
-        if (serializerPreference != null)
-            resultMap.put(EventPreferencesEntity.CST_SLABOPERATION_PREFERENCES, serializerPreference.getMap(eventEntity.getPreferences(), eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+        // get games
+        List<Map<String, Object>> listGames = new ArrayList<>();
+        for (EventGameEntity gameEntity : eventEntity.getGameList()) {
+            BaseSerializer serializer = factorySerializer.getFromEntity(gameEntity);
 
+            listGames.add(serializer.getMap(gameEntity, eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+        }
+        resultMap.put(EventGameEntity.CST_SLABOPERATION_GAMELIST, listGames);
+
+
+        //event Preference may be null, it is fulfilled  by the consistent
+        if (eventEntity.getPreferences() != null) {
+            BaseSerializer serializerPreference = factorySerializer.getFromEntity(eventEntity.getPreferences());
+            if (serializerPreference != null)
+                resultMap.put(EventPreferencesEntity.CST_SLABOPERATION_PREFERENCES, serializerPreference.getMap(eventEntity.getPreferences(), eventEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
+        }
         BaseUpdateGrantor baseUpdateGrantor = factoryUpdateGrantor.getFromEntity(eventEntity);
         if (baseUpdateGrantor != null)
             resultMap.put(JSON_READONLY_FIELDS, baseUpdateGrantor.getFieldsReadOnly(serializerOptions.getToghUser(), serializerOptions.getEventController()));

@@ -124,6 +124,13 @@ class EventPreferences extends React.Component {
                                     onChange={(event) => {this.setAccessAttribut("Localisation", event);}}/>
 
                             <Toggle labelText=""
+                                    toggled={this.eventCtrl.getEventPreferences().getAccess("Games")}
+                                    selectorPrimaryFocus={this.eventCtrl.accessGames}
+                                    labelA={<FormattedMessage id="EventPreferences.accessGamesNo" defaultMessage="Games" />}
+                                    labelB={<FormattedMessage id="EventPreferences.accessGamesYes" defaultMessage="Games" />}
+                                    onChange={(event) => {this.setAccessAttribut("Games", event);}}/>
+
+                            <Toggle labelText=""
                                     toggled={this.eventCtrl.getEventPreferences().getAccess("Photos")}
                                     disabled={true}
                                     selectorPrimaryFocus={this.eventCtrl.accessPhotos}

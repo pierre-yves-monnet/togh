@@ -65,10 +65,10 @@ public class RestEventController {
 
     /**
      * @param filterEvents     filterEvents
-     * @param timezoneOffset
-     * @param withParticipants
+     * @param timezoneOffset   timezoneOffset of the browser
+     * @param withParticipants with the participants of the event
      * @param connectionStamp  Information on the connected user
-     * @return
+     * @return a Map of Events
      */
     @CrossOrigin
     @GetMapping("/api/event/list")
@@ -95,10 +95,10 @@ public class RestEventController {
     /**
      * Get an event to display it
      *
-     * @param eventId
-     * @param timezoneOffset
+     * @param eventId eventId
+     * @param timezoneOffset timezoneOffset of the browser
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return a Map of one event
      */
     @CrossOrigin
     @GetMapping("/api/event")
@@ -127,7 +127,7 @@ public class RestEventController {
      * Create a new event
      *
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return a map of the Event
      */
     @CrossOrigin
     @PostMapping(value = "/api/event/create", produces = "application/json")
@@ -158,7 +158,7 @@ public class RestEventController {
         payload.put(RestJsonConstants.LIMIT_SUBSCRIPTION, eventOperationResult.limitSubscription);
         payload.put(RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId());
         payload.put(RestJsonConstants.LOG_EVENTS, eventOperationResult.getEventsJson());
-        payload.put(RestJsonConstants.CST_CHILDENTITY, eventOperationResult.listChildEntity);
+        payload.put(RestJsonConstants.JSON_LIST_CHILD_ENTITIES, eventOperationResult.listChildEntities);
 
         return payload;
 
@@ -193,8 +193,8 @@ public class RestEventController {
     @PostMapping("/api/event/invitation")
     public Map<String, Object> invite(@RequestBody Map<String, Object> inviteData,
                                       @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
-        ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
-        if (toghUser == null) {
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
         }
         Long eventId = ToolCast.getLong(inviteData, "eventid", null);
@@ -216,22 +216,22 @@ public class RestEventController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
 
         // get service        
-        EventEntity eventEntity = eventService.getAllowedEventById(toghUser, eventId);
+        EventEntity eventEntity = eventService.getAllowedEventById(toghUserEntity, eventId);
         if (eventEntity == null) {
             // same error as not found: we don't want to give the information that the eventEntity exist
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
 
         // we send the list of UserId, then the eventService will control each userId given, and will update the answer invitation per invitation
-        InvitationResult invitationResult = eventService.invite(eventEntity, toghUser, listUsersId, userInvitedEmail, roleEnum, useMyEmailAsFrom, message);
+        InvitationResult invitationResult = eventService.invite(eventEntity, toghUserEntity, listUsersId, userInvitedEmail, roleEnum, useMyEmailAsFrom, message);
 
         Map<String, Object> payload = new HashMap<>();
         List<Map<String, Object>> listParticipants = new ArrayList<>();
         payload.put("participants", listParticipants);
 
         EventController eventController = new EventController(eventEntity, factoryService, factoryRepository);
-        EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, toghUser, SerializerOptions.ContextAccess.EVENTACCESS);
-        SerializerOptions serializerOptions = new SerializerOptions(toghUser,
+        EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, toghUserEntity, SerializerOptions.ContextAccess.EVENTACCESS);
+        SerializerOptions serializerOptions = new SerializerOptions(toghUserEntity,
                 eventController,
                 timezoneOffset,
                 SerializerOptions.ContextAccess.EVENTACCESS,
@@ -285,9 +285,10 @@ public class RestEventController {
     }
 
     /**
-     * @param updateMap
+     * Update an event. Give a list of Slabs
+     * @param updateMap map of Update
      * @param connectionStamp Information on the connected user
-     * @return
+     * @return the list of update status
      */
     @CrossOrigin
     @PostMapping("/api/event/update")
@@ -323,15 +324,16 @@ public class RestEventController {
                 SerializerOptions.ContextAccess.EVENTACCESS,
                 levelEventGrant);
 
-        List<Map<String, Object>> listEntity = new ArrayList<>();
-        for (BaseEntity baseEntity : eventOperationResult.listChildEntity) {
+        List<Map<String, Object>> listEntities = new ArrayList<>();
+        for (BaseEntity baseEntity : eventOperationResult.listChildEntities) {
             if (baseEntity == null)
                 continue;
             BaseSerializer serializer = factorySerializer.getFromEntity(baseEntity);
 
-            listEntity.add(serializer.getMap(baseEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
+            listEntities.add(serializer.getMap(baseEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.CST_CHILDENTITY, listEntity);
+        payload.put(RestJsonConstants.JSON_LIST_CHILD_ENTITIES, listEntities);
+        payload.put(RestJsonConstants.JSON_LIST_CHILD_ENTITIES_ID, eventOperationResult.listChildEntitiesId);
 
         // send back all the Chat group at each update - too important to miss one.
         List<EventGroupChatEntity> listGroupChat = eventEntity.getGroupChatList();
@@ -346,7 +348,6 @@ public class RestEventController {
         payload.put(EventGroupChatEntity.SLABOPERATION_GROUPCHATLIST, listGroupChatMap);
         payload.put(RestJsonConstants.LIMIT_SUBSCRIPTION, eventOperationResult.limitSubscription);
 
-        payload.put(RestJsonConstants.CHILDENTITYID, eventOperationResult.listChildEntityId);
         if (eventOperationResult.eventEntity != null) {
             BaseSerializer serializer = factorySerializer.getFromEntity(eventOperationResult.eventEntity);
             payload.put(RestJsonConstants.EVENT, serializer.getMap(eventOperationResult.eventEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
@@ -360,7 +361,7 @@ public class RestEventController {
      * Create a list of Slab from a Map
      *
      * @param listSlabMap list Slap from the REST call
-     * @return
+     * @return the list of Slab from the Rest Call
      */
     private List<Slab> getListSlab(List<Map<String, Object>> listSlabMap) {
         List<Slab> listSlab = new ArrayList<>();
@@ -385,7 +386,7 @@ public class RestEventController {
                                            AdditionalInformationEvent additionalInformationEvent,
                                            Long timezoneOffset) {
         List<Map<String, Object>> listEventsMap = new ArrayList<>();
-        FilterEvents filterEvent = null;
+        FilterEvents filterEvent;
         if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_ALLEVENTS.equals(filterEventsSt))
             filterEvent = FilterEvents.ALLEVENTS;
         else if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_MYEVENTS.equals(filterEventsSt))
@@ -413,5 +414,57 @@ public class RestEventController {
             }
             payload.put(RestJsonConstants.CST_LIST_EVENTS, listEventsMap);
         }
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/event/game/synchronizeplayers")
+    public Map<String, Object> gameSynchronizePlayer(@RequestBody Map<String, Object> gameData,
+                                                     @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                                     @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+        ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
+        if (toghUserEntity == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+        }
+        Long eventId = ToolCast.getLong(gameData, "eventId", null);
+        Long gameId = ToolCast.getLong(gameData, "gameId", null);
+
+        if (eventId == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        if (gameId == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "GameId not found");
+        boolean reset = ToolCast.getBoolean(gameData, "reset", false);
+
+        EventEntity eventEntity = eventService.getAllowedEventById(toghUserEntity, eventId);
+        if (eventEntity == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, RestHttpConstant.CST_HTTPCODE_EVENTNOTFOUND);
+
+        // check if user is an owner of the event
+        EventOperationResult eventOperationResult = eventService.gameSynchronizePlayer(eventEntity, gameId, reset, toghUserEntity);
+
+        EventController eventController = new EventController(eventEntity, factoryService, factoryRepository);
+        EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, toghUserEntity, SerializerOptions.ContextAccess.EVENTACCESS);
+        SerializerOptions serializerOptions = new SerializerOptions(toghUserEntity,
+                eventController,
+                timezoneOffset,
+                SerializerOptions.ContextAccess.EVENTACCESS,
+                eventAccessGrantor);
+
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put(RestJsonConstants.CST_EVENT_ID, eventOperationResult.getEventId());
+        payload.put(RestJsonConstants.LOG_EVENTS, eventOperationResult.getEventsJson());
+        List<Map<String, Object>> listEntities = new ArrayList<>();
+        for (BaseEntity baseEntity : eventOperationResult.listChildEntities) {
+            if (baseEntity == null)
+                continue;
+            BaseSerializer serializer = factorySerializer.getFromEntity(baseEntity);
+
+            listEntities.add(serializer.getMap(baseEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
+        }
+        payload.put(RestJsonConstants.JSON_LIST_CHILD_ENTITIES, listEntities);
+
+        payload.put(RestJsonConstants.EVENT, eventService.getMap(eventEntity, toghUserEntity, timezoneOffset, false));
+
+        return payload;
     }
 }

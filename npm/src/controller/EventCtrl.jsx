@@ -56,6 +56,7 @@ class EventCtrl {
 		this.ctrlId = new Date().getTime();
 		this.eventPreferences = new EventPreferencesCtrl(this, this.updateEventFct);
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
+		this.objectsToCallback= [];
 	}
 
 	getEvent() {
@@ -200,7 +201,7 @@ class EventCtrl {
 	 */
 	addEventChildFct(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl:addEventChildFct." + this.ctrlId + " child=" + listname)
-		/** MOCKUP 
+		/** MOCKUP
 			var toolService = FactoryService.getInstance().getToolService();
 			value.id = toolService.getUniqueCodeInList( this.event[ listname ], "id");		
 			var dataHttp ={ child : value};
@@ -214,12 +215,12 @@ class EventCtrl {
 				clearTimeout(this.timer);
 		*/
 
-		var slabRecord = SlabRecord.getAddList(this.event, listname, value, localisation);
+		let slabRecord = SlabRecord.getAddList(this.event, listname, value, localisation);
 		this.currentBasketSlabRecord.addSlabRecord(slabRecord);
 		if (this.timer)
 			clearTimeout(this.timer);
 		// no more automatic save timeout, we just sent everything to the server
-		var readyToSendBasket = this.currentBasketSlabRecord;
+		let readyToSendBasket = this.currentBasketSlabRecord;
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
 		readyToSendBasket.sendToServer(callbackfct);
 
@@ -228,11 +229,11 @@ class EventCtrl {
 	removeEventChild(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl.removeEventChildFct." + this.ctrlId + " child=" + listname)
 
-		var slabRemove = SlabRecord.getRemoveList(this.event, listname, value, localisation);
+		let slabRemove = SlabRecord.getRemoveList(this.event, listname, value, localisation);
 		this.currentBasketSlabRecord.addSlabRecord(slabRemove);
-		var readyToSendBasket = this.currentBasketSlabRecord;
+		let readyToSendBasket = this.currentBasketSlabRecord;
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
-		readyToSendBasket.sendToServer(callbackfct);
+		readyToSendBasket.sendToServer( callbackfct);
 	}
 	updateEventChild(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl.updateEventChild." + this.ctrlId + " child=" + listname)
@@ -244,15 +245,22 @@ class EventCtrl {
 
 	automaticSave() {
 		console.log("EventCtrl.AutomaticSave: ListSlab=" + this.currentBasketSlabRecord.length);
-		var readyToSendBasket = this.currentBasketSlabRecord;
+		let readyToSendBasket = this.currentBasketSlabRecord;
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
-		readyToSendBasket.sendToServer(this.callbackSendFct);
+		readyToSendBasket.sendToServer( (httpPayload) =>{this.callbackSaveFct(httpPayload)});
 		if (this.timer)
 			clearTimeout(this.timer);
 	}
 
-	callbackSendFct(httpPayload) {
+    registerUpdateCallback( objectToCallback ) {
+        if (this.objectsToCallback.indexOf(objectToCallback )=== -1 )
+            this.objectsToCallback.push( objectToCallback );
+    }
+	callbackSaveFct(httpPayload) {
 		console.log("EventCtrl.callbackSendFct: status back from sendBasket");
+        for (let i = 0; i < this.objectsToCallback.length; i++) {
+		    this.objectsToCallback[i].callbackUpdate(httpPayload.getData() );
+		}
 	}
 	// --------------------------------------------------------------
 	// 
@@ -263,6 +271,9 @@ class EventCtrl {
 	getSurveyList() {
 		return this.event.surveylist;
 	}
+	getGameList() {
+		return this.event.gamelist;
+	}
 
 	getUpdateEventFct() {
 		return this.updateEventFct;
@@ -272,17 +283,17 @@ class EventCtrl {
 		return this.eventPreferences;
 	}
 	getMyself() {
-		var authService = FactoryService.getInstance().getAuthService();
+		const authService = FactoryService.getInstance().getAuthService();
 		// console.log("Event.getUserPartipant.start");
 		return authService.getUser();
 	}
 
 	getUserParticipant() {
-		var authService = FactoryService.getInstance().getAuthService();
+		const authService = FactoryService.getInstance().getAuthService();
 		// console.log("Event.getUserParticipant.start");
-		var user = authService.getUser();
+		let user = authService.getUser();
 		// search the access right for this user
-		for (var i in this.event.participants) {
+		for (let i in this.event.participants) {
 			if (this.event.participants[i].user && this.event.participants[i].user.id === user.id) {
 				return new UserParticipantCtrl(this.event, this.event.participants[i])
 			}
@@ -291,7 +302,7 @@ class EventCtrl {
 	}
 
 	getUserParticipantFromUserId( userId ) {
-		for (var i in this.event.participants) {
+		for (let i in this.event.participants) {
 			if (this.event.participants[i].user && this.event.participants[i].user.id === userId) {
 				return new UserParticipantCtrl(this.event, this.event.participants[i])
 			}
@@ -307,8 +318,8 @@ class EventCtrl {
 		return userParticipant.getUser().label;
 	}
 	getTotalParticipants() {
-		var total = 0;
-		for (var i in this.event.participants) {
+		let total = 0;
+		for (let i in this.event.participants) {
 			if (this.event.participants[i].status === participantConstant.STATUS_ACTIF) {
 				total++;
 			}
@@ -328,7 +339,7 @@ class EventCtrl {
 	setCurrentSurveyId(surveyId) {
 
 		this.currentSurveyId = surveyId;
-		var currentSurvey = this.getCurrentSurvey();
+		let currentSurvey = this.getCurrentSurvey();
 		this.currentSurveyCtrl = new SurveyCtrl(this, currentSurvey); // userParticipant, props.updateEvent);
 		console.log("EventCtrl.setCurrentSurveyId." + this.ctrlId + ": surveyId = " + JSON.stringify(this.currentSurveyEntity));
 	}
@@ -363,11 +374,11 @@ class EventCtrl {
 		// console.log("EventCtrl.getCurrentSurvey."+this.ctrlId+": CurrentSurvey Start search "+this.currentSurveyId)
 		if (!this.currentSurveyId)
 			return null;
-		for (var i in this.event.surveylist) {
+		for (let i in this.event.surveylist) {
 			// console.log("EventCtrl.getCurrentSurvey."+this.ctrlId+": i="+i+" surverLis[].id="+this.event.surveylist[ i ].id)
 
 			if (this.event.surveylist[i].id.toString() === this.currentSurveyId.toString()) {
-				var survey = this.event.surveylist[i];
+				let survey = this.event.surveylist[i];
 				console.log("EventCtrl.getCurrentSurvey We get a candidat id=" + survey.id);
 				return survey;
 			}
@@ -375,6 +386,49 @@ class EventCtrl {
 		console.log("EventCtrl.getCurrentSurvey." + this.ctrlId + ": CurrentSurvey not found ? ! ")
 		return null;
 	}
+
+    // --------------------------------------------------------------
+    //
+    // Game
+    //
+    // --------------------------------------------------------------
+
+    /**
+     currentSurveyId is not part of the data, it's part of the controller (which survey are currently displayed)
+     */
+    setCurrentGameId(gameId) {
+        this.currentGameId = gameId;
+     }
+
+    getCurrentGameId() {
+        // Get the current Id, but if no one is set, and a list exist, move to the first one
+        if (!this.currentGameId && this.getGameList().length > 0)
+            this.setCurrentGameId(this.getGameList()[0].id);
+
+        return this.currentGameId;
+    }
+
+    getCurrentGame() {
+        let currentGameId = this.getCurrentGameId();
+        if (!currentGameId)
+            return null;
+	    for (let i in this.getGameList()) {
+			// console.log("EventCtrl.getCurrentSurvey."+this.ctrlId+": i="+i+" surveyList[].id="+this.event.surveylist[ i ].id)
+
+			if (this.getGameList()[i].id.toString() === currentGameId.toString()) {
+				return this.getGameList()[i];
+			}
+		}
+		console.log("EventCtrl.getCurrentGame." + this.ctrlId + ": CurrentSurvey not found ? ! ")
+		return null;
+	}
+
+    addGameInEvent(gameToAdd) {
+        // console.log("EventCtrl.addGameInEvent." + this.ctrlId + ":" + JSON.stringify(gameToAdd));
+        this.event.gamelist = this.event.gamelist.concat(gameToAdd);
+        this.currentGameId = gameToAdd.id;
+   	}
+
 }
 
 export default EventCtrl;

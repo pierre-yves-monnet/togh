@@ -413,7 +413,7 @@ API                                                                             
 /*                                                                                  */
 /* ******************************************************************************** */
 
-# google
+## google
 
 Aller dans API & Service / Credential Creer API pour ToghClient(googleAPIKey)
 ToghServer(TranslateKeyAPI)
@@ -455,8 +455,8 @@ we’ll add our own Google account as a test user.
 # Cloud Google & Docker
 
 /* ******************************************************************************** */
-/*                                                                                  */ /*  Cloud &
-Docker                                                                  */
+/*                                                                                  */ /*  Google Cloud &
+Docker                                                           */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
@@ -464,20 +464,26 @@ Docker                                                                  */
 https://container-registry.oracle.com
 docker pull container-registry.oracle.com/java/openjdk:latest
 
-## Tag the release
+## 1. Create Back End Togh Docker image
 
-Done automaticaly
-
-## Create Back End Togh Docker image
+mvn install build and push the docker image on docker image cloud (but we need the image in gcr.io).
 
 ```
 > mvn install
-> docker build -t pierreyvesmonnet/togh:1.0.0 .
+```
 
+To do it manually:
+
+```
+> docker build -t pierreyvesmonnet/togh:1.0.0 .
 > docker push pierreyvesmonnet/togh:1.0.0
 ```
 
-## Create Front End Togh Docker image
+### Tag the release
+
+Done automaticaly
+
+### Option Create Front End Togh Docker image
 
 ```
 > cd npm
@@ -485,7 +491,7 @@ Done automaticaly
 > docker push pierreyvesmonnet/frontendtogh:1.0.0
 ```
 
-## execute Locally Docker image
+### Option execute Locally Docker image
 
 ```
 > docker run --name togh -h localhost -e SPRING_DATASOURCE_URL=jdbc:postgresql://34.125.204.84:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" pierreyvesmonnet/togh:1.0.0 
@@ -493,11 +499,18 @@ Done automaticaly
 > docker run --name frontendtogh -h localhost -d -p 3000:3000 -p 80:80 pierreyvesmonnet/frontendtogh:1.0.0
 ```
 
+Docker compose does not works... but it should be:
 docker-compose up
 
-## Push image to gcr.io
+## 2. Push image to gcr.io
 
+First time, the PC must be log on grc:
+
+```
 gcloud auth login
+```
+
+After, this command works
 
 ```
 > cd cloud
@@ -515,7 +528,11 @@ or
 > 
 ```
 
-## Google Cloud
+Check on https://console.cloud.google.com/gcr/images/intricate-gamma-325323/global/togh?project=intricate-gamma-325323
+
+## 3. Google Cloud instance
+
+Connect on the VM Instance Download the docker image:
 
 ```
 > docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
@@ -523,9 +540,7 @@ or
 > docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 ```
 
-### run docker conteneur
-
-To execute on Computer instance
+Here is the complete procedure:
 
 ```
 $ cat updateTogh.sh
@@ -552,7 +567,7 @@ $ curl http://34.125.198.71:7080/togh/ping
 $ curl http://34.125.198.71:3000
 ```
 
-### run docker compose
+### Option : run docker compose
 
 export GCP_KEY_PATH=/home/toghnow/intricate-gamma-325323-ContainerRegistry.json docker pull
 gcr.io/intricate-gamma-325323/togh:1.0.0
@@ -572,21 +587,6 @@ docker/compose:1.24.0 up &
 
 ## SQL Database update
 
-update eventuser set name='birthday' where id=31;
-
-insert into evtparticipant (id,accessdata, role, status, user_id, eventid) values(40,'local', 1, 1, 30,31); insert into
-evtparticipant (id,accessdata, role, status, user_id, eventid) values(41,'local', 1, 1, 28,31); insert into
-evtparticipant (id,accessdata, role, status, user_id, eventid) values(42,'local', 1, 1, 29,31); insert into
-evtparticipant (id,accessdata, role, status, user_id, eventid) values(43,'local', 1, 1, 5,31); insert into
-evtparticipant (id,accessdata, role, status, user_id, eventid) values(44,'local', 1, 0, 33,31); insert into
-evtparticipant (id,accessdata, role, status, user_id, eventid) values(45,'local', 2, 2, 3,31);
-
---- Nov 22, 2021 => OK
-
-ALTER TABLE toghuser RENAME COLUMN invitation_stamp TO invitationstamp; ALTER TABLE loginlog RENAME COLUMN ip_address TO
-ipaddress; ALTER TABLE loginlog RENAME COLUMN number_of_tentatives TO numberoftentatives; ALTER TABLE loginlog RENAME
-COLUMN status_connection TO statusconnection; ALTER TABLE loginlog RENAME COLUMN time_slot TO timeslot; ALTER TABLE
-loginlog RENAME COLUMN google_id TO googleid; ALTER TABLE loginlog drop COLUMN google_id;
 
 # Documentation
 
@@ -710,27 +710,63 @@ www.1and1.com
 https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
 
 # Administration
-/* ******************************************************************************** */
-/*                                                                                  */
-/*  Administration							                                        */
-/*                                                                                  */
-/*                                                                                  */
-/*                                                                                  */
-/* ******************************************************************************** */
-## Default admin 
-  private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com";
-    private static final String TOGHADMIN_USERNAME = "toghadmin";
-    private static final String TOGHADMIN_PASSWORD = "togh";
- 
-# Tasks
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*
-Tasks                                                                            */
+Administration                                                                    */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
+
+## Database
+
+Dump:
+``
+pg_dump --blobs --create --encoding=UTF8 --host=34.125.198.71 --port=5432 --username=toghp --dbname=togh > d:\temp\togh.bak
+``
+password: ThisIsThog4Postgres
+
+Import:
+A/ Rename in d:\temp\togh.bak the database "togh" by the name togh_<date>
+``
+CREATE DATABASE togh_20211228 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8'; ALTER DATABASE togh_20211228 OWNER TO toghp; \connect togh_20211228
+``
+
+B/ Execute
+``
+psql --username=postgres < d:\temp\togh.bak
+``
+password: postgres Go to <Intellij>/src/main.ressource/application.properties and change the database
+``
+spring.datasource.url=jdbc:postgresql://localhost:5432/togh_20211228
+``
+
+## Hebergement
+
+ovh
+
+Pour l'hebergeur, j'étais chez O2switch. Ils sont français et tu as la main sur les registres DNS. Je les utilisais
+juste pour ca et pour héberger des sous domaines en php. Ils sont aussi réactifs, j'étais tres satisfait.
+
+https://github.com/chDame/fabulexie/blob/master/INSTALL.MD
+
+## Default admin
+
+private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com"; private static final String TOGHADMIN_USERNAME = "
+toghadmin"; private static final String TOGHADMIN_PASSWORD = "togh";
+
+# RoadMap
+
+/* ******************************************************************************** */
+/*                                                                                  */ /*
+Roadmap                                                                         */
+/*                                                                                  */
+/*                                                                                  */
+/*                                                                                  */
+/* ******************************************************************************** */
+
+## Tasks
 
 Simon Anchor Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie
 existe google-maps-react)
@@ -748,8 +784,6 @@ Py
 11. Revoir la deconnection, le feedback user quand on fait un save
 
 Forgot my password: email incorrect registration invitation
-
-# RoadMap
 
 ## Cours terme
 
@@ -842,21 +876,19 @@ Admin: avoir un "automatique refresh check box" : penible de clicker "connected"
 
 EventEntity.getMap : normaliser les constantes ici avec les SLAB_OPERATION (une seule constante)
 
+* eventlist : myevents ne marche pas. Ajouter un filtre "event in progress" pour ne voir que les futurs events
+
 * Je suis 2 fois : email en Majuscule et en Minuscule. Faire un test ignore case
 * admin: faire une purge d'user et un log de mauvaise connection
 * changeemail
 
 * Date des messages dans le chat qui est la date du jour
-* en tant que participant, pouvoir changer le status des gens et la date de l'invitation, ni le scope ni le status
-*
-* inviration de nouvelles personnes: ouvert que aux Onwer + Organizateur
-* Geolocalisation : titre dupliquée
+
+
 * my profile => My invitation: on affiche la liste complete
 * My invitation => evnts : on n'a que "my events" et pas tout
 
-Readonly= dans la registration
-
-Boutoun invitation : mettre un + et invitation
+Bouton invitation : mettre un + et invitation
 
 invited pierre-uves, pierre-yves monnet
 
@@ -870,9 +902,9 @@ Adresse 405 Bellevue Oakland n'est pas geolocalisée
 
 bouton ADD plus gros dans les tabs
 
-Email: The event Marielle Spiteri invites you to join is
-
 Togh & Cupris : faire des fond transparent
 
 Horaire de l'email : je met 12:00 et le mail envoi 8:00.L Mettre dans l'email heure + time zone
+
+Forget my password : le lien doit experirer dans les 10 mn, et on ne doit pas pouvoir le reutiliser plusieurs fois.
 

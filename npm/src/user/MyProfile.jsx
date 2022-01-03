@@ -283,7 +283,7 @@ class MyProfile extends React.Component {
 				</div>
 				<div class="row" style={{borderTop: "1px black solid",  marginTop: "40px", paddingTop: "10px"}}>
                     <div class="col-sm-8">
-                        <Select labelText={<FormattedMessage id="MyProfile.showTakeATour" defaultMessage="Show Take a tour" />}
+                        <Select labelText={<FormattedMessage id="MyProfile.showTakeATourLabel" defaultMessage="Select if you want to see the 'Take a tour' help" />}
                             id="showtakeatour"
                             value={this.state.user.showTakeATour}
                             onChange={(event) => this.setAttribut("showTakeATour", event.target.value)}>

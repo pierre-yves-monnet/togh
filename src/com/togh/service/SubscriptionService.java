@@ -32,8 +32,8 @@ public class SubscriptionService {
     /**
      * How many event a user can create in the month?
      *
-     * @param subscription
-     * @return
+     * @param subscription subscription
+     * @return the maximum event according the subscription
      */
     public int getMaximumEventsPerMonth(SubscriptionUserEnum subscription) {
         switch (subscription) {
@@ -48,14 +48,14 @@ public class SubscriptionService {
         }
     }
 
-    public int getMaximumEntityPerEvent(SubscriptionEventEnum subscription, Class eventController) {
+    public int getMaximumEntityPerEvent(SubscriptionEventEnum subscription, Class<?> eventController) {
         // the for the tchat, we add 50 lines
         int baseValue = 0;
         if (eventController == EventChatController.class)
             baseValue = 100;
         switch (subscription) {
             case FREE:
-                return 1 * baseValue + 20;
+                return baseValue + 20;
             case PREMIUM:
                 return 3 * baseValue + 100;
             case EXCELLENCE:
@@ -68,8 +68,8 @@ public class SubscriptionService {
     /**
      * A new time, a user reach the limit. Register it.
      *
-     * @param toghUserEntity
-     * @param limit
+     * @param toghUserEntity the user
+     * @param limit          the limit
      */
     public void registerTouchLimitSubscription(ToghUserEntity toghUserEntity, LimitReach limit) {
         statsService.registerLimitSubcription(toghUserEntity.getSubscriptionUser(), limit);
@@ -80,7 +80,7 @@ public class SubscriptionService {
      */
 
     public enum LimitReach {
-        CREATIONEVENT, TASKLIST, ITINERARY, SHOPPING, SURVEY, SURVEYCHOICE, CHATGROUP, CHAT, PARTICIPANT
+        CREATIONEVENT, TASKLIST, ITINERARY, SHOPPING, SURVEY, SURVEYCHOICE, CHATGROUP, CHAT, PARTICIPANT, GAME
     }
 
 }

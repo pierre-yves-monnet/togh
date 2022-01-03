@@ -31,7 +31,6 @@ public class EventFactoryRepository {
     @Autowired
     public EventTaskRepository eventTaskRepository;
 
-
     @Autowired
     public EventChatRepository eventChatRepository;
 
@@ -50,5 +49,7 @@ public class EventFactoryRepository {
     @Autowired
     public EventSurveyChoiceRepository surveyChoiceRepository;
 
+    @Autowired
+    public EventGameRepository eventGameRepository;
 
 }

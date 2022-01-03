@@ -56,6 +56,9 @@ class EventPreferencesEntity extends UserEntity {
     @Column(name = "accesslocalisation")
     private Boolean accessLocalisation;
 
+    @Column(name = "accessgames")
+    private Boolean accessGames;
+
     @Column(name = "accessphotos")
     private Boolean accessPhotos;
 

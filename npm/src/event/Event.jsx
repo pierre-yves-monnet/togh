@@ -28,6 +28,7 @@ import EventExpense                 from 'event/EventExpense';
 import EventSurveyList              from 'event/EventSurveyList';
 import EventChat                    from 'event/EventChat';
 import EventPreferences             from 'event/EventPreferences';
+import EventGameList                from 'event/EventGameList';
 
 import EventCtrl                    from 'controller/EventCtrl';
 
@@ -47,6 +48,7 @@ const TAB_EXPENSE = 'Expense';
 const TAB_CHAT = 'Chat';
 const TAB_TASKS = 'TaskList';
 const TAB_SURVEY = 'Survey';
+const TAB_GAMES = 'Games';
 const TAB_PHOTO = 'Photo';
 const TAB_BUDGET = 'Budget';
 const TAB_PREFERENCES= 'Preferences';
@@ -254,7 +256,7 @@ class Event extends React.Component {
 						    subject={intl.formatMessage({id:"Event.TourName",
 						                defaultMessage:"Give a name to your event"})}
 						    content={intl.formatMessage({id:"Event.TourNameContent",
-						                defaultMessage:"This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<p>Example: 'Party at San Marbella', 'House coming'"})}
+						                defaultMessage:"This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<br>Example: 'Party at San Marbella', 'House coming'"})}
                             fctCallBack={this.deactivateTakeATour}
 						    />
 						<br />
@@ -272,7 +274,7 @@ class Event extends React.Component {
     					    subject={intl.formatMessage({id:"Event.TourStatus",
                          						        defaultMessage:"Select the status"})}
     					    content={intl.formatMessage({id:"Event.TourStatusContent",
-                         						        defaultMessage:"The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><p/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event" })}
+                         						        defaultMessage:"The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><br/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event" })}
     					    notes={intl.formatMessage({id:"Event.TourStatusNote",
                                                         defaultMessage:"Only an organizer can change the status"})}
                             fctCallBack={this.deactivateTakeATour}
@@ -439,6 +441,22 @@ class Event extends React.Component {
                         </li>
 
                         <li class="nav-item">
+						    {this.hasAccessTab('Games') && <button class={this.getTabCssClass( TAB_GAMES )}
+								style={this.getTabCssStyle( TAB_GAMES )} aria-current="page"
+								onClick={() => this.accessTab( TAB_GAMES )}
+							    title={intl.formatMessage({id:"Event.TitleGames", defaultMessage:"Games"})}>
+							    <div style={{textAlign: "center"}}>
+							        <img style={{ "float": "right",width: 50 }} src="img/btnGames.png" />
+                                    { userService.prefsDisplayTips() &&
+                                        <div >
+                                            <FormattedMessage id="Event.Games" defaultMessage="Games"/>
+                                        </div>}
+                                </div>
+						    </button>
+						    }
+                        </li>
+
+                        <li class="nav-item">
 						    {this.hasAccessTab('Localisation') && <button class={this.getTabCssClass( TAB_GEOLOCALISATION )}
 								style={this.getTabCssStyle( TAB_GEOLOCALISATION )}
 								 aria-current="page"
@@ -536,6 +554,7 @@ class Event extends React.Component {
 				{this.state.show.currentSection === TAB_GEOLOCALISATION && <EventGeolocalisation eventCtrl={this.eventCtrl} />}
 
 				{this.state.show.currentSection === TAB_SURVEY && <EventSurveyList eventCtrl={this.eventCtrl} />}
+				{this.state.show.currentSection === TAB_GAMES && <EventGameList eventCtrl={this.eventCtrl} />}
 				{this.state.show.currentSection === TAB_EXPENSE  && <EventExpense event={this.state.event}
 																			updateEvent={this.updateEventFct}
 																			getUserParticipant={this.getUserParticipant}/>}

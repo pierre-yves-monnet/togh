@@ -79,7 +79,8 @@ class TakeATour extends React.Component {
 
                         <table width="100%">
                         <tr style={{backgroundColor:"#ffffcc"}}><td>
-                            <div style={{marginBottom: "10px", fontSize: "12px", fontWeight: "bold", paddingLeft: "20px"}}><FormattedMessage id="TakeATour.Deactivate" defaultMessage="You can deactivate Take a tour. Enable it again in your preferences"/></div>
+                            <div style={{marginBottom: "10px", fontSize: "12px", fontWeight: "bold", paddingLeft: "20px"}}>
+                                <FormattedMessage id="TakeATour.DeactivateTips" defaultMessage="You can deactivate Take a tour. Enable it again in your preferences"/></div>
                            </td><td>
                             <button class="btn btn-info btx-sm" style={{fontSize: "10px", margin: "5px 0px 5px 0px", padding: "0px 5px 0px 5px"}}
                                 onClick={this.deactivateTakeATour}>
