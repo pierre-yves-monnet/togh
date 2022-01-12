@@ -238,9 +238,9 @@ public class NotifyService {
     // --------------------------------------------------------------
 
     /**
-     * From the text in cartouch, return the email header
+     * From the text in Cartridge, return the email header
      *
-     * @param textInCartridge text in the cartouch
+     * @param textInCartridge text in the Cartridge
      * @param language        language to translate the header
      * @return
      */
