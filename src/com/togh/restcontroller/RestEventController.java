@@ -200,6 +200,7 @@ public class RestEventController {
         Long eventId = ToolCast.getLong(inviteData, "eventid", null);
         List<Long> listUsersId = ToolCast.getListLong(inviteData, "listUsersid", null);
         String userInvitedEmail = ToolCast.getString(inviteData, "email", null);
+        String subject = ToolCast.getString(inviteData, "subject", null);
         String message = ToolCast.getString(inviteData, "message", null);
         String role = ToolCast.getString(inviteData, "role", null);
         boolean useMyEmailAsFrom = ToolCast.getBoolean(inviteData, "useMyEmailAsFrom", false);
@@ -223,7 +224,7 @@ public class RestEventController {
         }
 
         // we send the list of UserId, then the eventService will control each userId given, and will update the answer invitation per invitation
-        InvitationResult invitationResult = eventService.invite(eventEntity, toghUserEntity, listUsersId, userInvitedEmail, roleEnum, useMyEmailAsFrom, message);
+        InvitationResult invitationResult = eventService.invite(eventEntity, toghUserEntity, listUsersId, userInvitedEmail, roleEnum, useMyEmailAsFrom, subject, message);
 
         Map<String, Object> payload = new HashMap<>();
         List<Map<String, Object>> listParticipants = new ArrayList<>();
@@ -259,6 +260,8 @@ public class RestEventController {
         }
         Long eventId = ToolCast.getLong(inviteData, "eventId", null);
         Long participantId = ToolCast.getLong(inviteData, "participantId", null);
+        String subject = ToolCast.getString(inviteData, "subject", "");
+        String message = ToolCast.getString(inviteData, "message", "");
         boolean useMyEmailAsFrom = ToolCast.getBoolean(inviteData, "useMyEmailAsFrom", false);
 
         if (eventId == null)
@@ -272,7 +275,7 @@ public class RestEventController {
             // same error as not found: we don't want to give the information that the event exist
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
-        InvitationResult invitationResult = eventService.resendInvitation(event, toghUser, participantId, useMyEmailAsFrom);
+        InvitationResult invitationResult = eventService.resendInvitation(event, toghUser, participantId, subject, message, useMyEmailAsFrom);
         Map<String, Object> payload = new HashMap<>();
         payload.put(RestJsonConstants.STATUS, invitationResult.status.toString());
         payload.put(RestJsonConstants.MESSAGE_OK, invitationResult.getOkMessage());
@@ -389,6 +392,8 @@ public class RestEventController {
         FilterEvents filterEvent;
         if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_ALLEVENTS.equals(filterEventsSt))
             filterEvent = FilterEvents.ALLEVENTS;
+        else if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_NEXTEVENTS.equals(filterEventsSt))
+            filterEvent = FilterEvents.NEXTEVENTS;
         else if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_MYEVENTS.equals(filterEventsSt))
             filterEvent = FilterEvents.MYEVENTS;
         else if (RestJsonConstants.CST_PARAM_FILTER_EVENTS_V_MYINVITATIONS.equals(filterEventsSt))

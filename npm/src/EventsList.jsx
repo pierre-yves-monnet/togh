@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
 
-import { PlusCircle,ArrowRepeat,ClipboardData,PersonCircle } from 'react-bootstrap-icons';
+import { PlusCircle,ArrowRepeat,ClipboardData,PersonCircle, Envelope,CalendarWeek } from 'react-bootstrap-icons';
 
 
 import FactoryService from 'service/FactoryService';
@@ -23,6 +23,7 @@ import UserTips 		from 'component/UserTips';
 
 
 export const FILTER_EVENT = {
+        NEXTEVENTS: "NextEvents",
 		MYEVENTS: "MyEvents",
 		ALLEVENTS : "AllEvents",
 		MYINVITATIONS: "MyInvitations"
@@ -47,32 +48,53 @@ class EventsList extends React.Component {
 						result:"",
 						listlogevents: []
 					} };
+		if (! this.state.filterEvents)
+		    this.state.filterEvents=FILTER_EVENT.NEXTEVENTS;
+		if (this.state.titleFrame === 'MYINVITATIONS')
+		    this.state.filterEvents=FILTER_EVENT.MYINVITATIONS;
+
 		// this is mandatory to have access to the variable in the method... thank you React!   
 
 		this.createEvent = this.createEvent.bind(this);
 		this.refreshListEvents = this.refreshListEvents.bind(this);
-        this.refreshAllEvents = this.refreshAllEvents.bind(this);
-        this.refreshMyEvents = this.refreshMyEvents.bind(this);
 
 		console.log("EventsList.constructor: END");
 	}
 
 	componentDidMount () {
 		console.log("EventsList.componentDidMount: BEGIN");
-		this.refreshListEvents(); 	
-		console.log("EventsList.componentDidMount: END");
+        let filter;
+
+
+        if (this.state.titleFrame === 'MYINVITATIONS')
+            filter=FILTER_EVENT.MYINVITATIONS;
+        else
+            filter=FILTER_EVENT.MYEVENTS;
+
+        this.setState({filterEvents:filter});
+
+		this.refreshListEvents(filter);
 	}
 
 	componentDidUpdate (prevProps) {
 		console.log("EventsList.componentDidUpdate titleFrame=("+this.props.titleFrame+") prevProps=("+prevProps.titleFrame+")");
+		if (prevProps.titleFrame !== this.props.titleFrame) {
+            console.log("EventsList.componentDidUpdate: Change titleFrame=("+this.props.titleFrame+")");
+            let filter;
+            if (this.props.titleFrame == 'MYINVITATIONS')
+                filter=FILTER_EVENT.MYINVITATIONS;
+            else
+                filter=FILTER_EVENT.MYEVENTS;
+
+            this.setState({titleFrame: this.props.titleFrame, filterEvents: filter} );
+       		this.refreshListEvents(filter);
+
+        }
 		if (prevProps.filterEvents !== this.props.filterEvents) {
 		    console.log("EventsList.componentDidUpdate: Change filterEvents=("+this.props.filterEvents+")");
 		    this.refreshListEvents( this.props.filterEvents );
 		}
-		if (prevProps.titleFrame !== this.props.titleFrame) {
-		    console.log("EventsList.componentDidUpdate: Change titleFrame=("+this.props.titleFrame+")");
-		    this.setState({titleFrame: this.props.titleFrame} );
-		}
+
     }
 	
 	// --------------------------------------------------------------
@@ -84,7 +106,6 @@ class EventsList extends React.Component {
 	// -------------------------------------------- render
 	render() {
 		console.log("EventList.render titleFrame=("+this.state.titleFrame+") listEvents=" + JSON.stringify(this.state.events));
-		const intl = this.props.intl;
 
 		// no map read, return
 		var listEventsHtml = [];
@@ -117,7 +138,7 @@ class EventsList extends React.Component {
 							<FormattedDate value={new Date(event.dateEndEvent)} />
 						}
 					</td>
-					<td  style={{verticalAlign: "middle",fontSize: "12px"}}>{event.listParticipants}</td>
+					<td style={{verticalAlign: "middle",fontSize: "12px", lineHeight: "15px"}}>{event.listParticipants}</td>
 				</tr>
 			);
 		}
@@ -140,29 +161,37 @@ class EventsList extends React.Component {
 					</div>
 				</div>
 				<div class="row">
-
-				<UserTips id="eventtakeatour"
-
-                        text={<FormattedMessage id="EventsList.TakeATour"
-                      defaultMessage="Explore all the functions. Click on 'Take a tour' icon to access information and help." />}
-                    />
+                    <UserTips id="eventtakeatour"
+                            text={<FormattedMessage id="EventsList.TakeATour"
+                            defaultMessage="Explore all the functions. Click on 'Take a tour' icon to access information and help." />}
+                        />
 				</div>
 				<div class="row">
 					<div class="col-sm">
 						<div class="btn-group" role="group" style={{ padding: "10px 10px 10px 10px" }}>
-							<button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
-							    onClick={() => this.refreshListEvents(this.state.filterEvents)}>
-							    <ArrowRepeat/><FormattedMessage id="EventsList.Refresh" defaultMessage="Refresh"/>
-							</button>
+						    {this.state.titleFrame === 'MYINVITATIONS' &&
+                                <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
+                                    onClick={() => this.refreshListEvents(this.state.filterEvents)}>
+                                    <ArrowRepeat/><FormattedMessage id="EventsList.Refresh" defaultMessage="Refresh"/>
+                                </button>
+							}
 							{this.state.titleFrame === 'EVENTS' &&
 							    <div>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
-							            onClick={() => this.refreshAllEvents() }>
-							            <ClipboardData/> <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/>
+                                            onClick={() => this.refreshListEvents(FILTER_EVENT.NEXTEVENTS) }>
+                                            <CalendarWeek/> <FormattedMessage id="EventsList.NextEvents" defaultMessage="Next events"/>
+                                	</button>
+							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
+                                							            onClick={() => this.refreshListEvents(FILTER_EVENT.MYEVENTS) }>
+							            <PersonCircle/> <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/>
 							        </button>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
-							            onClick={() => this.refreshMyEvents}>
-							            <PersonCircle/> <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/>
+                                							            onClick={() => this.refreshListEvents(FILTER_EVENT.MYINVITATIONS) }>
+							            <Envelope/> <FormattedMessage id="EventsList.MyInvitations" defaultMessage="My invitations"/>
+							        </button>
+							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
+                                							            onClick={() => this.refreshListEvents(FILTER_EVENT.ALLEVENTS) }>
+							            <ClipboardData/> <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/>
 							        </button>
 							    </div>
 							}
@@ -231,14 +260,6 @@ class EventsList extends React.Component {
 				this.setState({ message: httpPayload.getData().message });
 			}
 		});
-	}
-
-	refreshAllEvents() {
-	    this.refreshListEvents(FILTER_EVENT.ALLEVENTS);
-	}
-
-	refreshMyEvents() {
-	    this.refreshListEvents(FILTER_EVENT.MYEVENTS);
 	}
 
 	// ----------- refresh list event

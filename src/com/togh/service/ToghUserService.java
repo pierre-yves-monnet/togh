@@ -92,10 +92,18 @@ public class ToghUserService {
     public ToghUserEntity getUserFromConnectionStamp(String connectionStamp) {
         return toghUserRepository.findByConnectionStamp(connectionStamp);
     }
+
+    /**
+     * Encript the password
+     *
+     * @param password password to encrypt
+     * @return password encrypted
+     */
     public static String encryptPassword(String password) {
         // ATTENTION!
         // We don't want to use a secret random: we need to encrypt again a password to compare it
-
+        if (password == null)
+            return "";
         char[] passwordChar = password.toCharArray();
         byte[] saltChar = SALT.getBytes();
         PBEKeySpec spec = new PBEKeySpec(passwordChar, saltChar, ITERATIONS, KEY_LENGTH);
@@ -362,11 +370,13 @@ public class ToghUserService {
      *
      * @param email            email of the user
      * @param invitedByUser    whom invite this user
+     * @param subject          subject email
+     * @param message          message email
      * @param useMyEmailAsFrom use the user who invite as the "From" in the email for more accurancy
      * @param event            event to invite into
      * @return creation + invitation status. User may not exist in Togh
      */
-    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, boolean useMyEmailAsFrom, EventEntity event) {
+    public CreationResult inviteNewUser(String email, ToghUserEntity invitedByUser, String subject, String message, boolean useMyEmailAsFrom, EventEntity event) {
         CreationResult invitationStatus = new CreationResult();
         try {
             // Check the email now: we don't want to create a bad user
@@ -382,6 +392,8 @@ public class ToghUserService {
             NotifyService notifyService = factoryService.getNotifyService();
             NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invitationStatus.toghUser,
                     invitedByUser,
+                    subject,
+                    message,
                     useMyEmailAsFrom,
                     event);
 
@@ -693,7 +705,7 @@ public class ToghUserService {
      */
     public void setPassword(ToghUserEntity toghUserEntity, String password) {
         toghUserEntity.setPassword(encryptPassword(password));
-        toghUserEntity.setLengthPassword(password.length());
+        toghUserEntity.setLengthPassword(password == null ? 0 : password.length());
     }
 
     /**

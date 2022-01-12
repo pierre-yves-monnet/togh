@@ -50,8 +50,8 @@ public class NotifyService {
     private static final boolean MAIL_TLS = false;
     private static final String MAIL_USER_NAME = "";
     private static final String MAIL_USER_PASSWORD = "";
-    private final static LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
-    private final Logger logger = Logger.getLogger(NotifyService.class.getName());
+    private static final LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
+    private static final Logger logger = Logger.getLogger(NotifyService.class.getName());
     @Autowired
     private FactoryService factoryService;
     @Autowired
@@ -66,18 +66,24 @@ public class NotifyService {
     /**
      * @param toghUserEntity    The user to invite
      * @param invitedByToghUser Tog user who send the invitation
+     * @param subject           email subject
+     * @param message           email message
      * @param useMyEmailAsFrom  if true, the From email is the invityByToghUser email
      * @param eventEntity       the event Entity
      * @return a notification status. Email is sent
      */
     public NotificationStatus notifyNewUserInEvent(@Nonnull ToghUserEntity toghUserEntity,
                                                    ToghUserEntity invitedByToghUser,
+                                                   String subject,
+                                                   String message,
                                                    boolean useMyEmailAsFrom,
                                                    @Nonnull EventEntity eventEntity) {
 
         // the userEntity will contains the language
         String lang = toghUserEntity.getLanguage() == null ? invitedByToghUser.getLanguage() : toghUserEntity.getLanguage();
-        String subject = translatorService.getDictionarySentence(Sentence.INVITED_TOGH_EVENT, lang);
+        String subjectEmail = (subject == null || subject.trim().length() == 0) ?
+                translatorService.getDictionarySentence(Sentence.INVITED_TOGH_EVENT, lang) :
+                subject;
 
         StringBuilder cartridgeText = new StringBuilder();
         cartridgeText.append(translatorService.getDictionarySentence(Sentence.DEAR, lang));
@@ -98,7 +104,11 @@ public class NotifyService {
         StringBuilder st = new StringBuilder();
 
         st.append(getEmailHeader(cartridgeText.toString(), lang));
-
+        if (message != null && message.trim().length() > 0) {
+            st.append(BR);
+            st.append(message);
+            st.append(BR);
+        }
         st.append(translatorService.getDictionarySentence(Sentence.TOGH_EVENT_EXPLANATION, lang));
         st.append(BR);
 
@@ -122,7 +132,7 @@ public class NotifyService {
 
         return sendEmail(toghUserEntity.getEmail(),
                 (useMyEmailAsFrom ? invitedByToghUser.getEmail() : null),
-                subject, st.toString());
+                subjectEmail, st.toString());
     }
 
     /**
@@ -179,8 +189,8 @@ public class NotifyService {
      * Some person may want to be notify?
      *
      * @param eventEntity event entity
-     * @param oldStatus previous status
-     * @param oldStatus   status before the change
+     * @param oldStatus   previous status
+     * @return Notification Status
      */
     public NotificationStatus notifyEventChangeStatus(@Nonnull EventEntity eventEntity, StatusEventEnum oldStatus) {
         return new NotificationStatus();
@@ -228,14 +238,18 @@ public class NotifyService {
     // --------------------------------------------------------------
 
     /**
+     * From the text in cartouch, return the email header
+     *
+     * @param textInCartridge text in the cartouch
+     * @param language        language to translate the header
      * @return
      */
-    private String getEmailHeader(String textInCartouch, String language) {
+    private String getEmailHeader(String textInCartridge, String language) {
         StringBuilder st = new StringBuilder();
 
         st.append("<table with=\100%\"><tr>");
         st.append("<td><img src=\"" + getHttpLink(HTTP_DEFAULT_HOST_TOGH) + "/img/togh.jpg\" style=\"width:100\"/></td>");
-        st.append("<td>" + textInCartouch + "</td>");
+        st.append("<td>" + textInCartridge + "</td>");
         st.append("</table>");
         return st.toString();
 

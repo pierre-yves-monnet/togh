@@ -14,7 +14,7 @@ import java.util.List;
 
 /*
  * This is the EventRepository, Spring implementation.
- * In Spring, the implementation is a interface, and should extends the CrudRepository. Then the service method use the @autowired to generate the class
+ * In Spring, the implementation is an interface, and should extend the CrudRepository. Then the service method use the @autowired to generate the class
  */
 // extends EventRepository, CrudRepository<EventEntity, Long> JPARepository
 public interface EventRepository extends JpaRepository<EventEntity, Long> {
@@ -24,20 +24,23 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     EventEntity findByName(@Param("name") String name);
 
-    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid order by e.dateCreation")
+    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid and e.statusEvent not in ('CLOSED','CANCELLED') order by e.dateCreation")
+    List<EventEntity> findInProgressEventsUser(@Param("userid") Long userId);
+
+    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid and e.statusEvent not in ('CLOSED','CANCELLED') order by e.dateCreation")
     List<EventEntity> findMyEventsUser(@Param("userid") Long userId);
 
     @Query("SELECT e FROM EventEntity e, ToghUserEntity t join e.participantList p where p.user = t and t.id = :userid order by e.dateCreation")
     List<EventEntity> findEventsUser(@Param("userid") Long userId);
 
 
-    @Query("SELECT e FROM EventEntity e,  ToghUserEntity t join e.participantList p where p.user = t and p.status= :statusparticipant and t.id = :userid order by e.dateCreation")
-    List<EventEntity> findEventsUserByStatusParticipant(@Param("userid") Long userId, @Param("statusparticipant") ParticipantEntity.StatusEnum statusParticipant);
+    @Query("SELECT e FROM EventEntity e,  ToghUserEntity t join e.participantList p where p.user = t and p.status= :statusParticipant and t.id = :userid order by e.dateCreation")
+    List<EventEntity> findEventsUserByStatusParticipant(@Param("userid") Long userId, @Param("statusParticipant") ParticipantEntity.StatusEnum statusParticipant);
 
     @Query("SELECT count(e) FROM EventEntity e, ToghUserEntity t "
             + "JOIN e.participantList p "
-            + "WHERE p.user = t and t.id = :userid and p.role = :role and e.dateCreation > :datecreationevent")
-    Long countLastEventsUser(@Param("userid") Long userId, @Param("role") ParticipantRoleEnum role, @Param("datecreationevent") LocalDateTime dateCreationEvent);
+            + "WHERE p.user = t and t.id = :userid and p.role = :role and e.dateCreation > :dateCreationEvent")
+    Long countLastEventsUser(@Param("userid") Long userId, @Param("role") ParticipantRoleEnum role, @Param("dateCreationEvent") LocalDateTime dateCreationEvent);
 
     /**
      * Search all past event OR, if the event is just modified in the last X time, then it survived
@@ -64,9 +67,9 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
      * Search all past event OR, if the event is just modified in the last X time, then it survived
      *
      * @param timeGrace limit time under when
-     * @param status
-     * @param pageable
-     * @return
+     * @param status    status used to search event to purge
+     * @param pageable  pageable information
+     * @return a list of entity to purge
      */
     @Query("SELECT e FROM EventEntity e "
             + "WHERE e.dateModification < :timeGrace "

@@ -65,6 +65,7 @@ public class EventInvitation {
                                    String userInvitedEmail,
                                    ParticipantRoleEnum role,
                                    boolean useMyEmailAsFrom,
+                                   String subject,
                                    String message) {
         InvitationResult invitationResult = new InvitationResult();
 
@@ -80,7 +81,7 @@ public class EventInvitation {
             Optional<ToghUserEntity> toghUserEntity = userService.getUserFromEmail(userInvitedEmail);
             if (toghUserEntity.isEmpty()) {
                 // this is a real new user, register and invite it to join Togh
-                CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, useMyEmailAsFrom, event);
+                CreationResult creationStatus = userService.inviteNewUser(userInvitedEmail, invitedByToghUser, subject, message, useMyEmailAsFrom, event);
                 if (creationStatus.toghUser == null) {
                     invitationResult.status = InvitationStatus.ERRORDURINGCREATIONUSER;
                     // This is an internal message here , can't send back to the user error information
@@ -127,7 +128,7 @@ public class EventInvitation {
                 // attention, if the user is just invited to join TOGH, we don't want to send a new email.
                 // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
                 if (!setUserJustInvited.contains(toghUser)) {
-                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, useMyEmailAsFrom, event);
+                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, subject, message, useMyEmailAsFrom, event);
                     if (!notificationStatus.isCorrect())
                         invitationResult.addErrorSendEmail(toghUser);
                 }

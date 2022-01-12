@@ -321,9 +321,10 @@ public class EventController {
                                    String userInvitedEmail,
                                    ParticipantRoleEnum role,
                                    boolean useMyEmailAsFrom,
+                                   String subject,
                                    String message) {
         EventInvitation eventInvitation = new EventInvitation(this, factoryService);
-        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, message);
+        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, subject, message);
     }
 
     /* ******************************************************************************** */

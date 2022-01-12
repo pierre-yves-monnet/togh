@@ -12,7 +12,6 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-// import { Button } from 'carbon-components-react';
 import { ModalWrapper, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
 
 
@@ -21,7 +20,6 @@ import FactoryService from 'service/FactoryService';
 class Invitation extends React.Component {
 	constructor( props ) {
 		super();
-		// participantInvited()
 		// console.log("RegisterNewUser.constructor");
 		this.state = { 'event' : props.event,
 						'email' : '',
@@ -33,6 +31,7 @@ class Invitation extends React.Component {
 						'onlyNonInvitedUser': true,				
 						'role': 'PARTICIPANT',
 						'panelVisible': 'INVITATION',
+						'subject': 'You are invited to a ToghEvent',
 						'message': 'Please join this event.',
 						'statusinvitation' : '',
 						'listSearchUsers' : [],
@@ -59,7 +58,6 @@ class Invitation extends React.Component {
 	// --------------------------------------------------------------
 
 	render() {
-		// console.log("Invitation.render ");
 		// console.log("Invitation.listSearch="+ JSON.stringify( this.state.listSearchUsers ));
 		const intl = this.props.intl;
 
@@ -132,38 +130,58 @@ class Invitation extends React.Component {
 								defaultChecked={this.state.panelVisible === 'SEARCH'}
               					onChange={(event) => { this.setState( {panelVisible: 'SEARCH'})}}/>							
 	  						<label class="btn btn-outline-primary btn-sm" for="btnradio2">{<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} </label>
-	
 						</div>
 					</div>
 					
-					<div style={{display: "inline-block", float: "right"}}>	
-						<button class="btn btn-info btn-lg" 
-							onClick={this.sendInvitation}
-							disabled={! this.enableInvite() }
-							style={{paddingBottom: "10px"}}>
-							<div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
-							{this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
-						    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.SendInvitation" defaultMessage="Send Invitation"/></div>)}
-						</button>
-						<br />
-						{ this.state.statusErrorInvitation && (
-						    <div class="alert alert-warning">
-						        {<FormattedMessage id="Invitation.UsersAlreadyRegistered" defaultMessage="These participants are already registered"/>}
-						        :
-						        {this.state.statusErrorInvitation}
-						    </div>)}
-						{ this.state.statusOkInvitation && (
-						    <div class="alert alert-success">
-						        {<FormattedMessage id="Invitation.UsersInvited" defaultMessage="Users are invited with success"/>}
-						        :
-						        {this.state.statusOkInvitation}
-						    </div>)}
-						{ this.state.statusErrorSendEmail && (
-						    <div class="alert alert-warning">
-						        {<FormattedMessage id="Invitation.NoEmails" defaultMessage="Attention, email can't be sent to these users"/>}
-						        :
-						        {this.state.statusErrorSendEmail}
-						    </div>)}
+					<div style={{display: "inline-block", float: "right"}}>
+					    <div style={{"marginLeft": "10px", background: "aliceblue", border: "1px solid rgba(0,0,0,.125)", borderRadius: "0.25rem", margin:"10px 10px 10px 10px"}}>
+                            <div style={{ flex: "1 1 auto", padding: "1rem 1rem"}}>
+                                <TextInput labelText={<FormattedMessage id="Invitation.Subject" defaultMessage="Subject" />}
+                                            value={this.state.subject}
+                                            onChange={(event) => this.setState( { subject: event.target.value })}
+                                            id="Invitation.subject"/>
+
+                                <TextArea labelText="Message" value={this.state.message} onChange={(event) => this.setState({ message: event.target.value })} ></TextArea><br />
+
+                                <input type="checkbox"
+                                    onChange={(event) => {
+                                            let rememberBool = event.target.value==='on';
+                                            this.setState( {useMyEmailAsFrom: rememberBool});
+                                            }
+                                    }
+                                    defaultChecked={this.state.useMyEmailAsFrom ? 'checked': ''} />
+                                &nbsp;
+                                <FormattedMessage id="Invitation.UseMyEmailAsFrom" defaultMessage="Use my email in the From message" />
+
+                                <button class="btn btn-info btn-lg"
+                                    onClick={this.sendInvitation}
+                                    disabled={! this.enableInvite() }
+                                    style={{margin: "10px 10px 10px 10px"}}>
+                                    <div class="glyphicon glyphicon-envelope"  style={{display: "inline-block"}}> </div>
+                                    {this.state.inprogressinvitation && (<div style={{display: "inline-block"}}><InlineLoading description="inviting" status='active'/></div>) }
+                                    {this.state.inprogressinvitation === false && (<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.SendInvitation" defaultMessage="Send Invitation"/></div>)}
+                                </button>
+                                <br />
+                                { this.state.statusErrorInvitation && (
+                                    <div class="alert alert-warning">
+                                        {<FormattedMessage id="Invitation.UsersAlreadyRegistered" defaultMessage="These participants are already registered"/>}
+                                        :
+                                        {this.state.statusErrorInvitation}
+                                    </div>)}
+                                { this.state.statusOkInvitation && (
+                                    <div class="alert alert-success">
+                                        {<FormattedMessage id="Invitation.UsersInvited" defaultMessage="Users are invited with success"/>}
+                                        :
+                                        {this.state.statusOkInvitation}
+                                    </div>)}
+                                { this.state.statusErrorSendEmail && (
+                                    <div class="alert alert-warning">
+                                        {<FormattedMessage id="Invitation.NoEmails" defaultMessage="Attention, email can't be sent to these users"/>}
+                                        :
+                                        {this.state.statusErrorSendEmail}
+                                    </div>)}
+                            </div>
+                        </div>
 					</div>
 
 
@@ -173,15 +191,6 @@ class Invitation extends React.Component {
 							onChange={(event) => this.setState({ email: event.target.value })}
 							id="Invitation.email"></TextInput><br />
 
-							<input type="checkbox"
-                                    onChange={(event) => {
-                                            let rememberBool = event.target.value==='on';
-                                            this.setState( {useMyEmailAsFrom: rememberBool});
-                                            }
-                                    }
-                                    defaultChecked={this.state.useMyEmailAsFrom ? 'checked': ''} />
-                                &nbsp;
-                            <FormattedMessage id="Invitation.UseMyEmailAsFrom" defaultMessage="Use my email in the From message" />
 
 						</div>)
 					}		
@@ -223,7 +232,8 @@ class Invitation extends React.Component {
 							</tr>
 							</table>
 							<br/>
-							<button class="btn btn-info btn-lg" onClick={this.searchToghUser} disabled={this.state.inprogresssearch}>	
+
+						    <button class="btn btn-info btn-lg" onClick={this.searchToghUser} disabled={this.state.inprogresssearch}>
 								
 									<div class="glyphicon glyphicon-search" style={{display: "inline-block"}}> </div>
 									{this.state.inprogresssearch && (
@@ -233,7 +243,8 @@ class Invitation extends React.Component {
 										</div>) }
 									{this.state.inprogresssearch === false && (
 										<div style={{display: "inline-block"}}>&nbsp;<FormattedMessage id="Invitation.Search" defaultMessage="Search"/></div>)}
-							</button>
+						    </button>
+
 							<br/>
 							{this.state.countusers > -1 && (<div style={{display: "inline-block"}}> {this.state.countusers} <FormattedMessage id="Invitation.UserFound" defaultMessage="UsersFound"/><br/></div> )}
 							{this.state.messageServerSearch && (<div class="alert alert-danger">{this.state.messageServerSearch}</div>)}
@@ -271,15 +282,13 @@ class Invitation extends React.Component {
 										{(message) => <option value="OBSERVER">{message}</option>}
 		                    		</FormattedMessage>
 								</Select>
-							</td><td>
-								<TextArea labelText="Message" value={this.state.message} onChange={(event) => this.setState({ message: event.target.value })} ></TextArea><br />
 							</td>
 						</tr>
 					</table>
 								
     		</ModalWrapper>
 		);
-	};
+	}
 
 		
 	// --------------------------------------------------------------
@@ -349,13 +358,13 @@ class Invitation extends React.Component {
 	
 	sendInvitation() {
 		console.log("Invitation.sendInvitation: http[event/create?]");
-
 		var param = {
 			eventid : this.state.event.id,
 			email : this.state.email,
 			useMyEmailAsFrom: this.state.useMyEmailAsFrom,
 			listUsersid: [],
-			message : this.state.message,
+			message: this.state.message,
+			subject: this.state.subject,
 			role: this.state.role,
 			type: this.state.panelVisible,
 		}

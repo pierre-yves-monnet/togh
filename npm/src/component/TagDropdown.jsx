@@ -10,8 +10,8 @@ import React from 'react';
 
 
 import { Tag } from 'carbon-components-react';
-import { OverflowMenu } from 'carbon-components-react';
-import { OverflowMenuItem } from 'carbon-components-react';
+import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+
 
 class TagDropDown extends React.Component {
 	
@@ -26,7 +26,7 @@ class TagDropDown extends React.Component {
 	// - changeState() method 
 	constructor( props ) {
 		super();
-		console.log("TagDropDown.constructor value="+props.value);
+		// console.log("TagDropDown.constructor value="+props.value);
 
 		this.state = { listOptions : props.listOptions,
 					value : props.value,
@@ -62,7 +62,6 @@ class TagDropDown extends React.Component {
 								key={index}
 								id={item.value}
 								onClick={(event) => {
-										// console.log("TagDropdown.click new value="+item.value);
 										this.setState( { value : item.value});
 										this.props.changeState( item.value )}} />
 							);
@@ -89,6 +88,6 @@ class TagDropDown extends React.Component {
 			}
 		}
       	return tagHtml;
-	};
-};
+	}
+}
 export default TagDropDown;

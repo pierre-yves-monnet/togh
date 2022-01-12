@@ -127,7 +127,7 @@ public class EventService {
 
     /**
      * @param toghUserEntity the user
-     * @param eventName
+     * @param eventName      name of event
      * @return the EventOperationResult
      */
     public EventOperationResult createEvent(ToghUserEntity toghUserEntity, String eventName) {
@@ -197,6 +197,7 @@ public class EventService {
                                    String userInvitedEmail,
                                    ParticipantRoleEnum role,
                                    boolean useMyEmailAsFrom,
+                                   String subject,
                                    String message) {
 
         EventController eventController = getEventController(eventEntity);
@@ -207,7 +208,7 @@ public class EventService {
         }
 
         // this operation is delegated to the evenController
-        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, message);
+        InvitationResult invitationResult = eventController.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, subject, message);
         try {
             eventRepository.save(eventEntity);
         } catch (Exception e) {
@@ -222,10 +223,14 @@ public class EventService {
      * @param eventEntity       the event entity
      * @param invitedByToghUser the toghuser who resend the invitation
      * @param participantId     the participantId to re-invite
+     * @param subject           email subject
+     * @param message           email message
      * @param useMyEmailAsFrom  if true, the person who invite is the from email
-     * @return
+     * @return invitation result status
      */
-    public InvitationResult resendInvitation(EventEntity eventEntity, ToghUserEntity invitedByToghUser, Long participantId, boolean useMyEmailAsFrom) {
+    public InvitationResult resendInvitation(EventEntity eventEntity, ToghUserEntity invitedByToghUser, Long participantId,
+                                             String subject, String message,
+                                             boolean useMyEmailAsFrom) {
         // anybody can resend the invitation
         List<ParticipantEntity> searchParticipant = eventEntity.getParticipantList()
                 .stream()
@@ -237,7 +242,7 @@ public class EventService {
             invitationResult.listLogEvents.add(new LogEvent(eventParticipantNotFound, "Save event"));
         } else {
             ToghUserEntity invited = searchParticipant.get(0).getUser();
-            NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invited, invitedByToghUser, useMyEmailAsFrom, eventEntity);
+            NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invited, invitedByToghUser, subject, message, useMyEmailAsFrom, eventEntity);
             invitationResult.listLogEvents.addAll(notificationStatus.listEvents);
             invitationResult.status = notificationStatus.isCorrect() ? InvitationStatus.INVITATIONSENT : InvitationStatus.ERRORDURINVITATION;
         }
@@ -247,7 +252,8 @@ public class EventService {
     /**
      * a User access an event: do all need information (notification, etc...)
      *
-     * @param toghUserEntity
+     * @param eventEntity event
+     * @param toghUserEntity user who access the event
      */
     public EventOperationResult accessByUser(EventEntity eventEntity, ToghUserEntity toghUserEntity) {
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
@@ -287,14 +293,17 @@ public class EventService {
     /**
      * Get Events
      *
-     * @param toghUserEntity
-     * @param filterEvents
-     * @return
+     * @param toghUserEntity user who want to get the list
+     * @param filterEvents filter on event
+     * @return list of events
      */
     public EventResult getEvents(ToghUserEntity toghUserEntity, FilterEvents filterEvents) {
         EventResult eventResult = new EventResult();
         try {
             switch (filterEvents) {
+                case NEXTEVENTS:
+                    eventResult.listEvents = eventRepository.findInProgressEventsUser(toghUserEntity.getId());
+                    break;
                 case MYEVENTS:
                     eventResult.listEvents = eventRepository.findMyEventsUser(toghUserEntity.getId());
                     break;
@@ -307,7 +316,7 @@ public class EventService {
             }
         } catch (Exception e) {
             // something bad arrived
-            logger.severe(LOG_HEADER + " Error during finEventsUser toghUser[" + toghUserEntity.getId() + "] :" + e.toString());
+            logger.severe(LOG_HEADER + " Error during finEventsUser toghUser[" + toghUserEntity.getId() + "] :" + e);
             eventResult.listLogEvent.add(new LogEvent(eventFindEventError, e, "User [" + toghUserEntity.getId()));
         }
         return eventResult;
@@ -350,7 +359,7 @@ public class EventService {
      * @param toghUserEntity user who access the event
      * @param timezoneOffset time Zone Offset of the browser, to display dates in the correct timezone
      * @param isAdmin        if the user is an admin and ask to see the event as an administrator
-     * @return
+     * @return map ready to send to JSON
      */
     public Map<String, Object> getMap(EventEntity eventEntity, ToghUserEntity toghUserEntity, Long timezoneOffset, boolean isAdmin) {
         EventController eventController = getEventController(eventEntity);
@@ -437,7 +446,7 @@ public class EventService {
     }
 
     public enum FilterEvents {
-        MYEVENTS, ALLEVENTS, MYINVITATIONS
+        NEXTEVENTS, MYEVENTS, ALLEVENTS, MYINVITATIONS
     }
 
     /* ******************************************************************************** */
