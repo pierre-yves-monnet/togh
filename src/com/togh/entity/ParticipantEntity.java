@@ -37,8 +37,11 @@ class ParticipantEntity extends UserEntity {
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
-    @Column(name = "ispartof")
-    private Boolean isPartOf;
+
+    @Column(name = "partof", length = 10)
+    @Enumerated(EnumType.STRING)
+    private PartOfEnum partOf;
+
 
     @Column(name = "numberOfParticipants")
     private Integer numberOfParticipants;
@@ -74,5 +77,7 @@ class ParticipantEntity extends UserEntity {
 
     public enum StatusEnum {INVITED, ACTIF, LEFT}
 
-
+    public enum PartOfEnum {
+        NO, PARTOF, DONTKNOW
+    }
 }

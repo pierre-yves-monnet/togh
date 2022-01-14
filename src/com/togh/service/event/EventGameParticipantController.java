@@ -49,7 +49,9 @@ public class EventGameParticipantController {
         if (EventGameEntity.ScopeGameEnum.ALL.equals(gameEntity.getScopeGame())) {
             return listParticipantsEntity;
         } else if (EventGameEntity.ScopeGameEnum.ACTIVE.equals(gameEntity.getScopeGame())) {
-            return listParticipantsEntity.stream().filter(ParticipantEntity::getIsPartOf).collect(Collectors.toList());
+            return listParticipantsEntity.stream()
+                    .filter(participant -> ParticipantEntity.PartOfEnum.PARTOF.equals(participant.getPartOf()))
+                    .collect(Collectors.toList());
         }
         // return all participants
         return listParticipantsEntity;

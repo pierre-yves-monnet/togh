@@ -54,7 +54,7 @@ public class ParticipantUpdateGrantor implements BaseUpdateGrantor {
             return false;
 
         if (slab.operation == EventUpdate.SlabOperation.UPDATE) {
-            if (!updateContext.getEventController().isOrganizer(updateContext.getToghUser()))
+            if (updateContext.getEventController().isOrganizer(updateContext.getToghUser()))
                 return true;
             // I can change only information on myself
             ParticipantEntity participantEntity = (ParticipantEntity) baseEntity;
@@ -65,7 +65,7 @@ public class ParticipantUpdateGrantor implements BaseUpdateGrantor {
 
     @Override
     public List<String> getFieldsReadOnly(ToghUserEntity toghUser, EventController eventController) {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
 }

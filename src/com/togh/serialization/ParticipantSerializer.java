@@ -24,7 +24,7 @@ public class ParticipantSerializer extends BaseSerializer {
 
     public static final String JSON_ROLE = "role";
     public static final String JSON_USER = "user";
-    public static final String JSON_IS_PART_OF = "isPartOf";
+    public static final String JSON_PART_OF = "partOf";
     public static final String JSON_NUMBER_OF_PARTICIPANTS = "numberOfParticipants";
     public static final String JSON_ID = "id";
     public static final String JSON_STATUS = "status";
@@ -64,7 +64,7 @@ public class ParticipantSerializer extends BaseSerializer {
         resultMap.put(JSON_ROLE, participantEntity.getRole() == null ? null : participantEntity.getRole().toString());
         BaseSerializer userSerialize = factorySerializer.getFromEntity(participantEntity.getUser());
         resultMap.put(JSON_USER, userSerialize.getMap(participantEntity.getUser(), parentEntity, serializerOptions, factorySerializer, factoryUpdateGrantor));
-        resultMap.put(JSON_IS_PART_OF, participantEntity.getIsPartOf());
+        resultMap.put(JSON_PART_OF, participantEntity.getPartOf() == null ? ParticipantEntity.PartOfEnum.DONTKNOW : participantEntity.getPartOf().toString());
         resultMap.put(JSON_NUMBER_OF_PARTICIPANTS, participantEntity.getNumberOfParticipants());
         resultMap.put(JSON_ID, participantEntity.getId());
         resultMap.put(JSON_STATUS, participantEntity.getStatus() == null ? null : participantEntity.getStatus().toString());

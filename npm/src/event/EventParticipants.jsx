@@ -9,7 +9,8 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { Select, Tag, TextInput, Toggle}      from 'carbon-components-react';
+import { Select, Tag, TextInput}      from 'carbon-components-react';
+import { Clipboard, ClipboardCheck, ClipboardX} from 'react-bootstrap-icons';
 
 import Invitation                       from 'event/Invitation';
 import InvitationAgain                  from 'event/InvitationAgain';
@@ -65,7 +66,7 @@ class EventParticipants extends React.Component {
 		    if (participant.user.id === mySelfUser.id) {
 		        myRoleInTheEvent=participant.role;
 		    }
-		    if (participant.status !== 'INVITED' && participant.status !== 'STATUS_LEFT' && participant.isPartOf) {
+		    if (participant.status !== 'INVITED' && participant.status !== 'STATUS_LEFT' && participant.partOf == 'PARTOF') {
 		        if (participant.numberOfParticipants>0)
 		            totalParticipants += parseInt(participant.numberOfParticipants);
 		    }
@@ -102,32 +103,57 @@ class EventParticipants extends React.Component {
                     {this.state.event.participants && this.state.event.participants.map( (item, index) => {
                         return (<tr key={index} style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
                             <td style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
-                                <table><tr><td>{item.user.label}
-                                    </td><td>
-                                        {item.status === 'INVITED' && (
-                                            <InvitationAgain  event={this.state.event} participant={item}/>
-                                           )}
-                                    </td>
-                                    </tr>
-                                </table>
-                            </td><td style={{minWidth:"120px"}}>
-                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
-                                    <Toggle labelText="" aria-label=""
-                                            toggled={item.isPartOf}
-                                            selectorPrimaryFocus={item.isPartOf}
-                                            labelA={<FormattedMessage id="EventParticipant.NotPartOf" defaultMessage="Not part of"/>}
-                                            labelB={<FormattedMessage id="EventParticipant.PartOf" defaultMessage="Part Of"/>}
-                                            onChange={(event) => this.setAttributCheckbox( "isPartOf", event, item )}
-                                            disabled={(! (administratorEvent || item.user.id === mySelfUser.id))}
-                                            id={ 'partof'+index} />
-                                  )}
+                                {item.user.label}
+                            </td><td  style={{minWidth:"120px"}}>
+                                {item.status === 'INVITED' && (
+                                    <InvitationAgain  event={this.state.event} participant={item}/>
+                                   )}
+                                {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                                    <div class="btn-group btn-group-sm Basic radio toggle button group" role="partOf" >
+                                        <input type="radio"
+                                            class="btn-check"
+                                            name={"btnpartofradio-"+item.id}
+                                            id={"btnpartof1-"+item.id}
+                                            autocomplete="off"
+                                            checked={item.partOf === "DONTKNOW"}
+                                            onChange={() => this.setChildAttribut("partOf", "DONTKNOW", item)}/>
+
+                                        <label class="btn btn-outline-primary"
+                                            for={"btnpartof1-"+item.id}>
+                                            <Clipboard/>&nbsp;<FormattedMessage id="EventParticipant.PartOfDoNotKnow" defaultMessage="Do not know" />
+                                        </label>
+
+                                        <input type="radio"
+                                            class="btn-check"
+                                            name={"btnpartofradio-"+item.id}
+                                            id={"btnpartof2-"+item.id}
+                                            autocomplete="off"
+                                            checked={item.partOf === "PARTOF"}
+                                            onChange={() => this.setChildAttribut("partOf", "PARTOF", item)}/>
+                                        <label class="btn btn-outline-primary"
+                                            for={"btnpartof2-"+item.id}>
+                                            <ClipboardCheck color="#87f787"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfParticipate" defaultMessage="Participate" />
+                                        </label>
+
+                                        <input type="radio" class="btn-check"
+                                            name={"btnpartofradio-"+item.id}
+                                            id={"btnpartof3-"+item.id}
+                                            autocomplete="off"
+                                            checked={item.partOf === "NO"}
+                                            onChange={() => this.setChildAttribut("partOf", "NO",item)}/>
+                                        <label class="btn btn-outline-primary"
+                                            for={"btnpartof3-"+item.id}>
+                                            <ClipboardX color="red"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfNo" defaultMessage="No" />
+                                        </label>
+                                    </div>
+                                    )}
                              </td><td>
-                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' && (
                                      <TextInput
                                             onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
                                             keyboardType='numeric'
                                             value={item.numberOfParticipants}
-                                            disabled={(! (item.isPartOf === true && (administratorEvent || item.user.id === mySelfUser.id)))}
+                                            disabled={(! (item.partOf === 'PARTOF' && (administratorEvent || item.user.id === mySelfUser.id)))}
                                             placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
                                             style={{width: "100px"}}
                                           />
@@ -193,7 +219,7 @@ class EventParticipants extends React.Component {
         else
             this.setChildAttribut(name, false, item)
     }
-		
+
 	// --------------------------------------------------------------
 	// 
 	// Component controls
