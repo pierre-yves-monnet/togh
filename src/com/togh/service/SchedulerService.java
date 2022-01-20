@@ -23,7 +23,7 @@ public class SchedulerService {
     @Autowired
     EventService eventService;
 
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 3600000)
     public void scheduleDisconnectUser() {
         loginService.disconnectInactiveUsers();
     }
