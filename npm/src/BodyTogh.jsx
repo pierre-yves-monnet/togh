@@ -136,8 +136,10 @@ class BodyTogh extends React.Component {
 
 
 	render() {
-		var factory = FactoryService.getInstance();
-		var authService = factory.getAuthService();
+		let factory = FactoryService.getInstance();
+		let authService = factory.getAuthService();
+        let mobileService = FactoryService.getInstance().getMobileService();
+
 		// console.log("BodyTogh.render isConnected="+authService.isConnected()+" frameContent=["+this.state.frameContent+"] sizeMenu["+this.state.sizeMenu+"]");
 		
 		const params = new URLSearchParams(window.location.search)
@@ -227,13 +229,17 @@ class BodyTogh extends React.Component {
 		}
 		else { 
 			// we are connected, display the frame now
-			const styleMenu = {
+			let styleMenu = {
 				width: this.state.sizeMenu,       
 				"verticalAlign": "top", 
 				"borderRight": "2px solid #194063",
 				"paddingLeft" : "30px"
 	        };
-	
+	        if (mobileService.isSmallScreen()) {
+			     styleMenu = {
+                    "borderTop": "2px solid #194063",
+                };
+	        }
 			return (
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >
 				<div>
@@ -242,9 +248,11 @@ class BodyTogh extends React.Component {
 						<div class="col-xs-12">
 							<table style={{width: "100%", "height": "100%"}}>
 								<tr>
-									<td style={styleMenu} >
-										<Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
-									</td>
+								    { mobileService.isLargeScreen() &&
+                                        <td style={styleMenu} >
+                                            <Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
+                                        </td>
+                                     }
 									<td style={{padding: "10px", "verticalAlign": "top"}} >
 										{ this.state.frameContent === FRAME_NAME.EVENTS_LIST &&
 										    <EventsList homeSelectEvent={this.homeSelectEvent}
@@ -258,6 +266,14 @@ class BodyTogh extends React.Component {
 
 									</td>
 								</tr>
+			                    { ! mobileService.isLargeScreen() &&
+                                    <tr>
+                                        <td style={styleMenu} >
+                                            <Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
+                                        </td>
+                                    </tr>
+                                 }
+
 							</table>
 						</div>
 					</div>	

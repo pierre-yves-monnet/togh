@@ -9,7 +9,7 @@ import React from 'react';
 
 import { TextInput,  Loading,ModalWrapper } from 'carbon-components-react';
 import { injectIntl, FormattedMessage } from "react-intl";
-import { Envelope } from 'react-bootstrap-icons';
+import { Envelope, BoxArrowRight } from 'react-bootstrap-icons';
 
 // https://www.npmjs.com/package/react-google-login
 // https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
@@ -68,6 +68,7 @@ class Login extends React.Component {
 
 		let factory = FactoryService.getInstance();
 		let authService = factory.getAuthService();
+	    let mobileService = factory.getMobileService();
 
 
 		console.log("Login.render: isConnected="+authService.isConnected()+" badConnection="+this.state.badConnection+" / message=["+this.state.messageConnection+"]");
@@ -78,11 +79,18 @@ class Login extends React.Component {
     						/>);
 		
 		if (authService.isConnected()) {
-			if (authService.getMethodConnection() ==='DIRECT')
-				return (
-					<button onClick={() =>this.directLogout()} class="btn btn-warning"><FormattedMessage id="Login.logout" defaultMessage="Logout" /></button>
-					)
-			return ( <GoogleLogout 
+			if (authService.getMethodConnection() ==='DIRECT') {
+			    if (mobileService.isLargeScreen())
+				    return (
+                            <button onClick={() =>this.directLogout()} class="btn btn-warning"><FormattedMessage id="Login.logout" defaultMessage="Logout" /></button>
+                        );
+                  else
+                    return ( <a onClick={() =>this.directLogout()} href="/#"  >
+                                    <BoxArrowRight />
+                             </a>
+                        );
+			}
+			return ( <GoogleLogout
 					    clientId="393158240427-ltcco0ve39nukr7scbbdcm4r36mi4v4n.apps.googleusercontent.com"
 						buttonText={<FormattedMessage id="Login.googlelogout" defaultMessage="Login"/>}
 						onLogoutSuccess={this.logoutGoogle}/>

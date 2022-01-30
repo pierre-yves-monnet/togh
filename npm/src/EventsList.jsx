@@ -10,16 +10,16 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
 
-import { PlusCircle,ArrowRepeat,ClipboardData,PersonCircle, Envelope,CalendarWeek } from 'react-bootstrap-icons';
+import { PlusCircle,ArrowRepeat,ClipboardData, EnvelopeOpen, Calendar2Check, CalendarWeek } from 'react-bootstrap-icons';
 
 
-import FactoryService from 'service/FactoryService';
+import FactoryService               from 'service/FactoryService';
+import MobileService                from 'service/MobileService.jsx';
+import EventState                   from 'event/EventState';
+import * as userFeedbackConstant    from 'component/UserFeedback';
+import UserFeedback                 from 'component/UserFeedback';
 
-import EventState from 'event/EventState';
-import * as userFeedbackConstant from 'component/UserFeedback';
-import UserFeedback  from 'component/UserFeedback';
-
-import UserTips 		from 'component/UserTips';
+import UserTips 		            from 'component/UserTips';
 
 
 export const FILTER_EVENT = {
@@ -106,40 +106,68 @@ class EventsList extends React.Component {
 	// -------------------------------------------- render
 	render() {
 		console.log("EventList.render titleFrame=("+this.state.titleFrame+") listEvents=" + JSON.stringify(this.state.events));
+		let factory = FactoryService.getInstance();
+	    let mobileService = factory.getMobileService();
 
 		// no map read, return
 		var listEventsHtml = [];
+
 		// <button class="glyphicon glyphicon glyphicon-tint" title={<FormattedMessage id="EventsList.AccessThisEvent" defaultMessage="Access this event" />}></button>
-		
 		if (this.state.events) {
-			listEventsHtml = this.state.events.map((event,index) =>
-				<tr onClick={() => this.props.homeSelectEvent(event.id)} 
+			listEventsHtml = this.state.events.map((event,index) => {
+			    let mobileService = FactoryService.getInstance().getMobileService();
+
+			    return (
+				<div class="toghBlock"
+				    style={{marginTop: "20px", border: "2px solid rgba(0,0,0,.125)", padding: "15px"}}
+				    onClick={() => this.props.homeSelectEvent(event.id)}
 				 key={index}>
-					<td >
-						<img src="img/toghEvent.jpg" style={{ width: 60 }}     />
-					</td>
-					<td style={{verticalAlign: "middle"}}>
-						<EventState statusEvent={event.statusEvent} disabled={true} />
-					</td>
-					<td style={{verticalAlign: "middle"}}>{event.name}</td>
-					<td style={{verticalAlign: "middle"}}>
-						{event.datePolicy === 'ONEDATE' && event.dateEvent && <div><FormattedDate value={new Date(event.dateEvent)}/></div>}
-						
-						{ event.datePolicy === 'PERIOD' && event.dateStartEvent && 
-							<FormattedDate value={new Date(event.dateStartEvent)} />
-						}
-						{ event.datePolicy === 'PERIOD' && <span>
-								&nbsp;
-								<FormattedMessage id="EventsList.DateFromTo" defaultMessage="to"/>
-								&nbsp;
-								</span>
-						}
-						{ event.datePolicy === 'PERIOD' && event.dateEndEvent && 
-							<FormattedDate value={new Date(event.dateEndEvent)} />
-						}
-					</td>
-					<td style={{verticalAlign: "middle",fontSize: "12px", lineHeight: "15px"}}>{event.listParticipants}</td>
-				</tr>
+				    <div class="row">
+
+                        <div class="col-lg-2" >
+                            <img src="img/toghEvent.jpg" style={{ width: 90 }}     />
+                        </div>
+                        <div class="col-lg-10" >
+                             <div class="row">
+                                <div class="col-lg-4" style={{verticalAlign: "middle"}}>
+                                    <EventState statusEvent={event.statusEvent} disabled={true} />
+                                </div>
+                                <div class="col-lg-6" style={{verticalAlign: "middle"}}>{event.name}</div>
+                                <div class="col-lg-2" style={{verticalAlign: "middle"}}>
+
+                                    {event.datePolicy === 'ONEDATE' && event.dateEvent && <div><FormattedDate value={new Date(event.dateEvent)}/></div>}
+
+                                    { event.datePolicy === 'PERIOD' && event.dateStartEvent &&
+                                        <FormattedDate value={new Date(event.dateStartEvent)} />
+                                    }
+                                    { event.datePolicy === 'PERIOD' && <span>
+                                            &nbsp;
+                                            <FormattedMessage id="EventsList.DateFromTo" defaultMessage="to"/>
+                                            &nbsp;
+                                            </span>
+                                    }
+                                    { event.datePolicy === 'PERIOD' && event.dateEndEvent &&
+                                        <FormattedDate value={new Date(event.dateEndEvent)} />
+                                    }
+                                     {((event.datePolicy !== 'ONEDATE' && event.datePolicy !== 'PERIOD')
+                                      || (event.datePolicy === 'ONEDATE' && !event.dateEvent )) &&
+                                      <FormattedMessage id="EventsList.NoDateEvent" defaultMessage="No date" />
+                                      }
+                                </div>
+                            </div>
+                            {mobileService.isLargeScreen() && <div class="row">
+                                <div class="col-lg-12" style={{verticalAlign: "middle",fontSize: "12px", lineHeight: "15px"}}>
+                                    <span><FormattedMessage id="EventsList.WithParticipants" defaultMessage="With" />
+                                    &nbsp;&nbsp; AA
+                                    {event.listParticipants}
+                                    </span>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+				</div>
+				)}
 			);
 		}
 		return (
@@ -179,19 +207,46 @@ class EventsList extends React.Component {
 							    <div>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
                                             onClick={() => this.refreshListEvents(FILTER_EVENT.NEXTEVENTS) }>
-                                            <CalendarWeek/> <FormattedMessage id="EventsList.NextEvents" defaultMessage="Next events"/>
+                                            <CalendarWeek/>
+                                            {mobileService.isSmallScreen() &&
+                                                <FormattedMessage id="EventsList.NextEventsShort" defaultMessage="Next"/>
+                                            }
+                                            {! mobileService.isSmallScreen() &&
+                                                <FormattedMessage id="EventsList.NextEvents" defaultMessage="Next events"/>
+                                            }
                                 	</button>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
                                 							            onClick={() => this.refreshListEvents(FILTER_EVENT.MYEVENTS) }>
-							            <PersonCircle/> <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/>
+							            <Calendar2Check/>
+							            {mobileService.isSmallScreen() &&
+							                <FormattedMessage id="EventsList.MyEventsShort" defaultMessage="Mine"/>
+                                        }
+                                        {! mobileService.isSmallScreen() &&
+                                            <FormattedMessage id="EventsList.NextEvents" defaultMessage="Next events"/>
+                                        }
 							        </button>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
                                 							            onClick={() => this.refreshListEvents(FILTER_EVENT.MYINVITATIONS) }>
-							            <Envelope/> <FormattedMessage id="EventsList.MyInvitations" defaultMessage="My invitations"/>
+							            <EnvelopeOpen/>
+                                        {mobileService.isSmallScreen() &&
+							                <FormattedMessage id="EventsList.MyInvitationsShort" defaultMessage="Invitations"/>
+                                        }
+                                        {! mobileService.isSmallScreen() &&
+    							            <FormattedMessage id="EventsList.MyInvitations" defaultMessage="My invitations"/>
+                                        }
+
+							            <FormattedMessage id="EventsList.MyInvitations" defaultMessage="My invitations"/>
 							        </button>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
                                 							            onClick={() => this.refreshListEvents(FILTER_EVENT.ALLEVENTS) }>
-							            <ClipboardData/> <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/>
+							            <ClipboardData/>
+                                        {mobileService.isSmallScreen() &&
+							                <FormattedMessage id="EventsList.AllEventsShort" defaultMessage="All"/>
+                                        }
+                                        {! mobileService.isSmallScreen() &&
+							                <FormattedMessage id="EventsList.AllEvents" defaultMessage="All events"/>
+                                        }
+
 							        </button>
 							    </div>
 							}
@@ -204,22 +259,9 @@ class EventsList extends React.Component {
 							result= {this.state.operation.result}
 							listlogevents= {this.state.operation.listlogevents} />
 					
-				<div class="row">
-					<table class="toghtable" style={{padding: ".5rem .5rem", 
-							borderBottomWidth: "1px", 
-							boxShadow: "inset 0 0 0 9999px var(--bs-table-accent-bg)",
-							borderBottomColor: "currentColor"}}>
-						<thead>
-						<tr >
-							<th colSpan="2"></th>
-							<th style={{padding: ".5rem .5rem"}}><FormattedMessage id="EventsList.Name" defaultMessage="Name"/></th>
-							<th><FormattedMessage id="EventsList.Date" defaultMessage="Date"/></th>
-							<th><FormattedMessage id="EventsList.Participants" defaultMessage="Participants"/></th>
-						</tr>
-						</thead>
-						{listEventsHtml}
-					</table>
-				</div>
+
+				{listEventsHtml}
+
 			</div>)
 			// class="table table-striped toghtable"
 	}
