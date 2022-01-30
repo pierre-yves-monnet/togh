@@ -121,7 +121,7 @@ class EventsList extends React.Component {
 				<div class="toghBlock"
 				    style={{marginTop: "20px", border: "2px solid rgba(0,0,0,.125)", padding: "15px"}}
 				    onClick={() => this.props.homeSelectEvent(event.id)}
-				 key={index}>
+				    key={index}>
 				    <div class="row">
 
                         <div class="col-lg-2" >

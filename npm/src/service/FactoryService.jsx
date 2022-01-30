@@ -13,6 +13,7 @@ import UserService 					from 'service/UserService';
 import CurrencyService 				from 'service/CurrencyService';
 import ApiKeyService 				from 'service/ApiKeyService';
 import GoogleMapService 			from 'service/GoogleMapService';
+import MobileService 			    from 'service/MobileService';
 
 
 var instanceFactory;
@@ -29,7 +30,8 @@ class FactoryService  {
 		this.userService = new UserService( this );
 		this.apiKeyService = new ApiKeyService( this );
 		this.googleMapService =  new GoogleMapService( this );
-		
+		this.mobileService = new MobileService(this);
+
 		this.authService.init();
 		this.restCallService.init();
 		this.apiKeyService.init();
@@ -65,6 +67,12 @@ class FactoryService  {
 	getGoogleMapService() {
 		return this.googleMapService;
 	}
+
+	getMobileService() {
+	    return this.mobileService;
+	}
+
+	// use FactoryService.getInstance()
 	static getInstance() {
 		// console.log("FactoryService.getInstance")
 		return instanceFactory;

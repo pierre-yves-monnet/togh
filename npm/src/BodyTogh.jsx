@@ -227,7 +227,11 @@ class BodyTogh extends React.Component {
 				</IntlProvider>
 			)
 		}
-		else { 
+
+		// ------------------------------------------- Connected
+		else {
+			console.log("BodyTog.render: Connected - SmallScreen:"+ (! mobileService.isLargeScreen()));
+
 			// we are connected, display the frame now
 			let styleMenu = {
 				width: this.state.sizeMenu,       
@@ -235,7 +239,7 @@ class BodyTogh extends React.Component {
 				"borderRight": "2px solid #194063",
 				"paddingLeft" : "30px"
 	        };
-	        if (mobileService.isSmallScreen()) {
+	        if (! mobileService.isLargeScreen()) {
 			     styleMenu = {
                     "borderTop": "2px solid #194063",
                 };

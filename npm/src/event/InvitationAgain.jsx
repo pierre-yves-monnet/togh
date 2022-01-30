@@ -44,9 +44,9 @@ class InvitationAgain extends React.Component {
                     <Tag type="teal">
                         <Envelope/>
                         &nbsp;
-                        <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invitation in progress"/>
+                        <FormattedMessage id="EventParticipant.InvitationInProgress" defaultMessage="Invited"/>
                     </Tag>
-                </td><td>
+                </td><td style={{verticalAlign:"bottom"}}>
     			    <ModalWrapper
                         passiveModal
                         buttonTriggerText={<FormattedMessage id="InvitationAgain.Invitation" defaultMessage="Manage invitation"/>}

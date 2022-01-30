@@ -44,6 +44,8 @@ class EventParticipants extends React.Component {
 		// console.log("EventParticipant.constructor ");
 		this.setChildAttribut		= this.setChildAttribut.bind(this);
 		this.participantInvited 	= this.participantInvited.bind( this );
+		this.renderLargeScreen      = this.renderLargeScreen.bind( this );
+		this.renderSmallScreen      = this.renderSmallScreen.bind( this );
 	}	
 
 
@@ -55,7 +57,10 @@ class EventParticipants extends React.Component {
 
 	render() {
 		const intl = this.props.intl;
-		var authService = FactoryService.getInstance().getAuthService();
+		let factory = FactoryService.getInstance();
+   	    let mobileService = factory.getMobileService();
+		let authService = factory.getAuthService();
+
 		let mySelfUser= authService.getUser();
 
 		// search my role in this event
@@ -82,6 +87,12 @@ class EventParticipants extends React.Component {
         			/>
         		);
 		// show the list
+		let listParticipantsHtml = null;
+        if (mobileService.isLargeScreen())
+             listParticipantsHtml = this.renderLargeScreen(totalParticipants, administratorEvent);
+        else
+            listParticipantsHtml = this.renderSmallScreen(totalParticipants, administratorEvent);
+
 		return (
 		    <div>
                 <div>
@@ -90,117 +101,279 @@ class EventParticipants extends React.Component {
                         <Invitation event={this.state.event} participantInvited={this.participantInvited}/>
                     </div>
                 </div>
-
-                <table class="table table-striped toghtable">
-                    <thead>
-                        <tr >
-                            <th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
-                            <th colspan="2"><FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )</th>
-                            <th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
-                            <th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
-                        </tr>
-                    </thead>
-                    {this.state.event.participants && this.state.event.participants.map( (item, index) => {
-                        return (<tr key={index} style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
-                            <td style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
-                                {item.user.label}
-                            </td><td  style={{minWidth:"120px"}}>
-                                {item.status === 'INVITED' && (
-                                    <InvitationAgain  event={this.state.event} participant={item}/>
-                                   )}
-                                {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
-                                    <div class="btn-group btn-group-sm Basic radio toggle button group" role="partOf" >
-                                        <input type="radio"
-                                            class="btn-check"
-                                            name={"btnpartofradio-"+item.id}
-                                            id={"btnpartof1-"+item.id}
-                                            autocomplete="off"
-                                            checked={item.partOf === "DONTKNOW"}
-                                            onChange={() => this.setChildAttribut("partOf", "DONTKNOW", item)}/>
-
-                                        <label class="btn btn-outline-primary"
-                                            for={"btnpartof1-"+item.id}>
-                                            <Clipboard/>&nbsp;<FormattedMessage id="EventParticipant.PartOfDoNotKnow" defaultMessage="Do not know" />
-                                        </label>
-
-                                        <input type="radio"
-                                            class="btn-check"
-                                            name={"btnpartofradio-"+item.id}
-                                            id={"btnpartof2-"+item.id}
-                                            autocomplete="off"
-                                            checked={item.partOf === "PARTOF"}
-                                            onChange={() => this.setChildAttribut("partOf", "PARTOF", item)}/>
-                                        <label class="btn btn-outline-primary"
-                                            for={"btnpartof2-"+item.id}>
-                                            <ClipboardCheck color="#87f787"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfParticipate" defaultMessage="Participate" />
-                                        </label>
-
-                                        <input type="radio" class="btn-check"
-                                            name={"btnpartofradio-"+item.id}
-                                            id={"btnpartof3-"+item.id}
-                                            autocomplete="off"
-                                            checked={item.partOf === "NO"}
-                                            onChange={() => this.setChildAttribut("partOf", "NO",item)}/>
-                                        <label class="btn btn-outline-primary"
-                                            for={"btnpartof3-"+item.id}>
-                                            <ClipboardX color="red"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfNo" defaultMessage="No" />
-                                        </label>
-                                    </div>
-                                    )}
-                             </td><td>
-                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' && (
-                                     <TextInput
-                                            onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
-                                            keyboardType='numeric'
-                                            value={item.numberOfParticipants}
-                                            disabled={(! (item.partOf === 'PARTOF' && (administratorEvent || item.user.id === mySelfUser.id)))}
-                                            placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
-                                            style={{width: "100px"}}
-                                          />
-                                      )}
-                            </td>
-                            <td>
-                            {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
-                            {item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
-
-                            { (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
-                                <Select labelText=""
-                                    inline={true}
-                                    disabled={ ( ! administratorEvent) }
-                                    value={item.role}
-                                    onChange={(event) => this.setChildAttribut( "role", event.target.value,item )}
-                                        id="EventParticipants.role">
-                                    <FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
-                                        {(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
-                                    </FormattedMessage>
-                                    <FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
-                                        {(message) => <option value="PARTICIPANT">{message}</option>}
-                                    </FormattedMessage>
-                                    <FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
-                                        {(message) => <option value="OBSERVER">{message}</option>}
-                                    </FormattedMessage>
-
-                                </Select>
-                                    )}
-                        </td>
-                        <td>
-                            {item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}
-                            {item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}
-                            {item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}
-                        </td>
-                        </tr>
-                        )
-                        } )
-                    }
+                {listParticipantsHtml}
 
 
-                </table>
 
             </div>
             );
 		}
-		
-	
+
+
+	renderLargeScreen( totalParticipants,administratorEvent ) {
+		const intl = this.props.intl;
+        let factory = FactoryService.getInstance();
+        let authService = factory.getAuthService();
+        let mySelfUser= authService.getUser();
+
+	    return (
+	        <table class="table table-striped toghtable">
+                <thead>
+                    <tr >
+                        <th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
+                        <th colspan="2"><FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )</th>
+                        <th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
+                        <th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
+                    </tr>
+                </thead>
+                {this.state.event.participants && this.state.event.participants.map( (item, index) => {
+                    return (<tr key={index} style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
+                        <td style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
+                            {item.user.label}
+                        </td><td  style={{minWidth:"120px"}}>
+                            {item.status === 'INVITED' && (
+                                <InvitationAgain  event={this.state.event} participant={item}/>
+                               )}
+                            {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                                <div class="btn-group btn-group-sm Basic radio toggle button group" role="partOf" >
+                                    <input type="radio"
+                                        class="btn-check"
+                                        name={"btnpartofradio-"+item.id}
+                                        id={"btnpartof1-"+item.id}
+                                        autoComplete="off"
+                                        checked={item.partOf === "DONTKNOW"}
+                                        onChange={() => {
+                                            this.setChildAttribut( "numberOfParticipants",0, item);
+                                            this.setChildAttribut("partOf", "DONTKNOW", item)
+                                                }
+                                        }/>
+
+                                    <label class="btn btn-outline-primary"
+                                        for={"btnpartof1-"+item.id}>
+                                        <Clipboard/>&nbsp;<FormattedMessage id="EventParticipant.PartOfDoNotKnow" defaultMessage="Do not know" />
+                                    </label>
+
+                                    <input type="radio"
+                                        class="btn-check"
+                                        name={"btnpartofradio-"+item.id}
+                                        id={"btnpartof2-"+item.id}
+                                        autoComplete="off"
+                                        checked={item.partOf === "PARTOF"}
+                                        onChange={() => {
+                                            {
+                                                if ( item.numberOfParticipants===0 ) {
+                                                    this.setChildAttribut( "numberOfParticipants",1, item);
+                                                }
+                                                this.setChildAttribut("partOf", "PARTOF", item)
+                                            }
+                                        }
+                                        }/>
+                                    <label class="btn btn-outline-primary"
+                                        for={"btnpartof2-"+item.id}>
+                                        <ClipboardCheck color="#87f787"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfParticipate" defaultMessage="Participate" />
+                                    </label>
+
+                                    <input type="radio" class="btn-check"
+                                        name={"btnpartofradio-"+item.id}
+                                        id={"btnpartof3-"+item.id}
+                                        autoComplete="off"
+                                        checked={item.partOf === "NO"}
+                                        onChange={() => {
+                                            this.setChildAttribut( "numberOfParticipants",0, item);
+                                            this.setChildAttribut("partOf", "NO",item)
+                                            }
+                                        }/>
+                                    <label class="btn btn-outline-primary"
+                                        for={"btnpartof3-"+item.id}>
+                                        <ClipboardX color="red"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfNo" defaultMessage="No" />
+                                    </label>
+                                </div>
+                                )}
+                         </td><td>
+                             {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' && (
+                                 <TextInput
+                                        onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
+                                        keyboardType='numeric'
+                                        value={item.numberOfParticipants}
+                                        disabled={(! (item.partOf === 'PARTOF' && (administratorEvent || item.user.id === mySelfUser.id)))}
+                                        placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
+                                        style={{width: "100px"}}
+                                      />
+                                  )}
+                        </td>
+                        <td>
+                        {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
+                        {item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
+
+                        { (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
+                            <Select labelText=""
+                                inline={true}
+                                disabled={ ( ! administratorEvent) }
+                                value={item.role}
+                                onChange={(event) => this.setChildAttribut( "role", event.target.value,item )}
+                                    id="EventParticipants.role">
+                                <FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
+                                    {(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
+                                </FormattedMessage>
+                                <FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
+                                    {(message) => <option value="PARTICIPANT">{message}</option>}
+                                </FormattedMessage>
+                                <FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
+                                    {(message) => <option value="OBSERVER">{message}</option>}
+                                </FormattedMessage>
+
+                            </Select>
+                                )}
+                    </td>
+                    <td>
+                        {item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}
+                        {item.status==='INVITED' && <Tag  type="teal" title={intl.formatMessage({id: "EventParticipant.Titleinvited",defaultMessage: "Invited participant: no confirmation is received at this moment"})}><FormattedMessage id="EventParticipant.Invited" defaultMessage="Invited"/></Tag>}
+                        {item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}
+                    </td>
+                    </tr>
+                    )
+                    } )
+                }
+            </table> )
+    }
+
+    //---------------------------------------
+    //
+	renderSmallScreen( totalParticipants,administratorEvent ) {
+		const intl = this.props.intl;
+        let factory = FactoryService.getInstance();
+        let authService = factory.getAuthService();
+        let mySelfUser= authService.getUser();
+
+        return (
+            <div>
+                <div class="row" style={{height: "40px"}}>
+                    <FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )
+                </div>
+                {this.state.event.participants && this.state.event.participants.map( (item, index) => {
+                    return (
+                        <div class="toghBlock"
+                    				    style={{marginTop: "20px", border: "2px solid rgba(0,0,0,.125)", padding: "15px"}}
+                    				    key={index}>
+                            <table>
+                            <tr>
+                                <td>
+                                    {item.user.label}
+                                </td>
+                                <td  >
+                                    {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
+                                    {item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
+
+                                    { (item.role !== ROLE_OWNER && item.status !== STATUS_LEFT) && (
+                                        <Select labelText=""
+                                            inline={true}
+                                            disabled={ ( ! administratorEvent) }
+                                            value={item.role}
+                                            onChange={(event) => this.setChildAttribut( "role", event.target.value,item )}
+                                                id="EventParticipants.role">
+                                            <FormattedMessage id="EventParticipant.RoleOrganizer" defaultMessage="Organizer">
+                                                {(message) => <option value={ ROLE_ORGANIZER }>{message}</option>}
+                                            </FormattedMessage>
+                                            <FormattedMessage id="EventParticipant.RoleParticipant" defaultMessage="Participant">
+                                                {(message) => <option value="PARTICIPANT">{message}</option>}
+                                            </FormattedMessage>
+                                            <FormattedMessage id="EventParticipant.RoleObserver" defaultMessage="Observer">
+                                                {(message) => <option value="OBSERVER">{message}</option>}
+                                            </FormattedMessage>
+
+                                        </Select>
+                                            )}
+                                </td>
+                                <td  >
+                                    {item.status==='ACTIF' && <Tag  type="green" title={intl.formatMessage({id: "EventParticipant.TitleActiveParticipant",defaultMessage: "Active participant"})}><FormattedMessage id="EventParticipant.Actif" defaultMessage="Actif"/></Tag>}
+                                    {item.status==='LEFT' && <Tag  type="red" title={intl.formatMessage({id: "EventParticipant.TitleLeft",defaultMessage: "The participant left the event"})}><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></Tag>}
+                                </td>
+                            </tr>
+                            <tr>
+                                {item.status === 'INVITED' &&
+                                    <td  style={{paddingLeft: "20px"}} colspan="3">
+                                        <InvitationAgain  event={this.state.event} participant={item}/>
+                                    </td>
+                                }
+                                {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' &&
+                                    <td colspan="2">
+                                        <div class="btn-group btn-group-sm Basic radio toggle button group" role="partOf" >
+                                            <input type="radio"
+                                                class="btn-check"
+                                                name={"btnpartofradio-"+item.id}
+                                                id={"btnpartof1-"+item.id}
+                                                autocomplete="off"
+                                                checked={item.partOf === "DONTKNOW"}
+                                                onChange={() => {
+                                                    this.setChildAttribut( "numberOfParticipants",0, item);
+                                                    this.setChildAttribut("partOf", "DONTKNOW", item)
+                                                        }
+                                                }/>
+
+                                            <label class="btn btn-outline-primary"
+                                                for={"btnpartof1-"+item.id}>
+                                                <Clipboard/>&nbsp;<FormattedMessage id="EventParticipant.PartOfDoNotKnow" defaultMessage="Do not know" />
+                                            </label>
+
+                                            <input type="radio"
+                                                class="btn-check"
+                                                name={"btnpartofradio-"+item.id}
+                                                id={"btnpartof2-"+item.id}
+                                                autocomplete="off"
+                                                checked={item.partOf === "PARTOF"}
+                                                onChange={() => {
+                                                    {
+                                                        if ( item.numberOfParticipants===0 ) {
+                                                            this.setChildAttribut( "numberOfParticipants",1, item);
+                                                        }
+                                                        this.setChildAttribut("partOf", "PARTOF", item)
+                                                    }
+                                                }
+                                                }/>
+                                            <label class="btn btn-outline-primary"
+                                                for={"btnpartof2-"+item.id}>
+                                                <ClipboardCheck color="#87f787"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfParticipate" defaultMessage="Participate" />
+                                            </label>
+
+                                            <input type="radio" class="btn-check"
+                                                name={"btnpartofradio-"+item.id}
+                                                id={"btnpartof3-"+item.id}
+                                                autocomplete="off"
+                                                checked={item.partOf === "NO"}
+                                                onChange={() => {
+                                                    this.setChildAttribut( "numberOfParticipants",0, item);
+                                                    this.setChildAttribut("partOf", "NO",item)
+                                                    }
+                                                }/>
+                                            <label class="btn btn-outline-primary"
+                                                for={"btnpartof3-"+item.id}>
+                                                <ClipboardX color="red"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfNo" defaultMessage="No" />
+                                            </label>
+                                        </div>
+                                    </td>
+                                }
+                                {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' &&
+                                    <td style={{paddingLeft: "10px"}}>
+                                         <TextInput
+                                                onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
+                                                keyboardType='numeric'
+                                                value={item.numberOfParticipants}
+                                                disabled={(! (item.partOf === 'PARTOF' && (administratorEvent || item.user.id === mySelfUser.id)))}
+                                                placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
+                                                style={{width: "100px"}}
+                                              />
+
+                                    </td>
+                                }
+                            </tr>
+                            </table>
+                        </div>
+                    )
+                    } )
+                }
+            </div>
+        )
+    }
 	// --------------------------------------------------------------
 	// 
 	// Direct HTML controls

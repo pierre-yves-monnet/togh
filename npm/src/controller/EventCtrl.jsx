@@ -27,24 +27,24 @@ import * as participantConstant 	from 'event/EventParticipants';
 //
 // This class is not a ReactComponent, and it used to control the object.
 // 
-// * Data are save in the REACT component, Event. This compoment this.state.event IS THE DATA
+// * Data are save in the REACT component, Event. This component this.state.event IS THE DATA
 // 
 // * this object is created in the <Event> object, after an event is loaded
 // 
 // * when the Event has a sub Component (like EventTaskList), the main parameters given is this controller
 //  
 // * to update a attribut, the component call this.eventCtrl.setAttribut(<name>, <value>, <localisation>). 
-//    EventCtrl will execute a this.event.setState( event ) after update, which reresh the screen TOCONFIRM
+//    EventCtrl will execute a this.event.setState( event ) after update, which refresh the screen TO CONFIRM
 //
 //
-//  * some information is store in the controler. Example, we edit one survey at a time: what is the current Survey edited ? 
-//    the EventCtrl keep this currentSurvey, and it's not in the React part. Then, <EventSurvey> ask the controler to get the current Survey data
+//  * some information is store in the controller. Example, we edit one survey at a time: what is the current Survey edited ?
+//    the EventCtrl keep this currentSurvey, and it's not in the React part. Then, <EventSurvey> ask the controller to get the current Survey data
 //    Note: this currentSurvey Data is managed by REACT in the <Event> component : the controller just return the object using the current Id
 // 
 // * in some case, the sub component need to force an refresh on its date (<EventSurvey> must refresh <EventSurveyList> when the title change)
-//   this is the responsability of the SubComponent to deal with that
+//   this is the responsibility of the SubComponent to deal with that
 
-// This class contains all the controleur use to manipulate the object;
+// This class contains all the controller use to manipulate the object;
 //
 // -----------------------------------------------------------
 class EventCtrl {
@@ -284,7 +284,7 @@ class EventCtrl {
 	}
 	getMyself() {
 		const authService = FactoryService.getInstance().getAuthService();
-		// console.log("Event.getUserPartipant.start");
+		// console.log("Event.getUserParticipant.start");
 		return authService.getUser();
 	}
 
