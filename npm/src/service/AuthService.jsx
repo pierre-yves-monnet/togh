@@ -23,7 +23,6 @@ class AuthService {
 		console.log("AuthService: ------------ constructor ");
 		this.token=null;
 		this.factoryService = factoryService;
-
 	}
 
 	init() {

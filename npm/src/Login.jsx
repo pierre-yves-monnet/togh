@@ -240,8 +240,8 @@ class Login extends React.Component {
 
 					this.props.authCallback( true );
 				} else {
-					const label="Bad connection";
-					this.setState({ badConnection: true,inprogress:false,messageConnection: label });
+					const label=intl.formatMessage({id: "Login.InvalidLoginPassword",defaultMessage: "Invalid Login / Password"});
+					this.setState({ badConnection: true,inprogress:false, messageConnection: label });
 				}		
 			} );
 	}

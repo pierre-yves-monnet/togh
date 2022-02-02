@@ -222,7 +222,7 @@ class EventsList extends React.Component {
 							                <FormattedMessage id="EventsList.MyEventsShort" defaultMessage="Mine"/>
                                         }
                                         {! mobileService.isSmallScreen() &&
-                                            <FormattedMessage id="EventsList.NextEvents" defaultMessage="Next events"/>
+                                            <FormattedMessage id="EventsList.MyEvents" defaultMessage="My events"/>
                                         }
 							        </button>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
@@ -235,7 +235,6 @@ class EventsList extends React.Component {
     							            <FormattedMessage id="EventsList.MyInvitations" defaultMessage="My invitations"/>
                                         }
 
-							            <FormattedMessage id="EventsList.MyInvitations" defaultMessage="My invitations"/>
 							        </button>
 							        <button class="btn btn-outline-primary btn-sm" style={{ "marginLeft ": "10px" }}
                                 							            onClick={() => this.refreshListEvents(FILTER_EVENT.ALLEVENTS) }>
