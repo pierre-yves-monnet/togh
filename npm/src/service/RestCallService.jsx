@@ -19,7 +19,7 @@ class RestcallService {
 		this.factoryService = factoryService;
 	}
 
-	// init - separed of constructor because service use themself
+	// init - separated of constructor because service use themself
 	init() {
 		console.log( "RestcallService.init");
 		this.authService= this.factoryService.getAuthService();		
