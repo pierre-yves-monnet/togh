@@ -69,7 +69,7 @@ class EventsList extends React.Component {
         if (this.state.titleFrame === 'MYINVITATIONS')
             filter=FILTER_EVENT.MYINVITATIONS;
         else
-            filter=FILTER_EVENT.MYEVENTS;
+            filter=FILTER_EVENT.NEXTEVENTS;
 
         this.setState({filterEvents:filter});
 
