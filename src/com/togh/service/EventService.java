@@ -119,7 +119,7 @@ public class EventService {
         try {
             eventRepository.save(eventEntity);
         } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during update"));
         }
         eventOperationResult.eventEntity = eventEntity;
         return eventOperationResult;
@@ -166,7 +166,7 @@ public class EventService {
 
             EventController eventController = getEventController(eventEntity);
 
-            // let's the conductor create the participant and all needed information
+            // let the conductor create participants and all needed information
             eventController.completeConsistant();
             eventRepository.save(eventEntity);
             return new EventOperationResult(eventEntity);
@@ -212,7 +212,7 @@ public class EventService {
         try {
             eventRepository.save(eventEntity);
         } catch (Exception e) {
-            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+            invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during invitation"));
         }
         return invitationResult;
     }
@@ -239,7 +239,7 @@ public class EventService {
         InvitationResult invitationResult = new InvitationResult();
         if (searchParticipant.size() != 1) {
             // we should find only 1
-            invitationResult.listLogEvents.add(new LogEvent(eventParticipantNotFound, "Save event"));
+            invitationResult.listLogEvents.add(new LogEvent(eventParticipantNotFound, "Save event during resendInvitation"));
         } else {
             ToghUserEntity invited = searchParticipant.get(0).getUser();
             NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invited, invitedByToghUser, subject, message, useMyEmailAsFrom, eventEntity);
@@ -252,10 +252,10 @@ public class EventService {
     /**
      * a User access an event: do all need information (notification, etc...)
      *
-     * @param eventEntity event
+     * @param eventEntity    event
      * @param toghUserEntity user who access the event
      */
-    public EventOperationResult accessByUser(EventEntity eventEntity, ToghUserEntity toghUserEntity) {
+    public EventOperationResult accessedByUser(EventEntity eventEntity, ToghUserEntity toghUserEntity) {
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
 
         EventController eventController = getEventController(eventEntity);
@@ -264,7 +264,7 @@ public class EventService {
             try {
                 eventRepository.save(eventEntity);
             } catch (Exception e) {
-                eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+                eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during accessed by user"));
             }
         }
         return eventOperationResult;
@@ -294,7 +294,7 @@ public class EventService {
      * Get Events
      *
      * @param toghUserEntity user who want to get the list
-     * @param filterEvents filter on event
+     * @param filterEvents   filter on event
      * @return list of events
      */
     public EventResult getEvents(ToghUserEntity toghUserEntity, FilterEvents filterEvents) {
@@ -305,7 +305,7 @@ public class EventService {
                     eventResult.listEvents = eventRepository.findInProgressEventsUser(toghUserEntity.getId());
                     break;
                 case MYEVENTS:
-                    eventResult.listEvents = eventRepository.findMyEventsUser(toghUserEntity.getId());
+                    eventResult.listEvents = eventRepository.findMyInProgressEventsUser(toghUserEntity.getId());
                     break;
                 case ALLEVENTS:
                     eventResult.listEvents = eventRepository.findEventsUser(toghUserEntity.getId());
@@ -322,18 +322,16 @@ public class EventService {
         return eventResult;
     }
 
+    /**
+     * Get an event by it'sID
+     *
+     * @param eventId eventId
+     * @return Event entity
+     */
     public EventEntity getEventById(Long eventId) {
         if (eventId == null)
             return null;
-        EventEntity eventEntity = eventRepository.findByEventId(eventId);
-        if (eventEntity == null)
-            return null;
-        EventController eventController = getEventController(eventEntity);
-
-        // check consistant now
-        eventController.completeConsistant();
-
-        return eventEntity;
+        return eventRepository.findByEventId(eventId);
     }
 
     /**
@@ -406,13 +404,14 @@ public class EventService {
 
     /**
      * Close old events
+     *
+     * @param doTheOperation if true, operation is done, else only to know which events are in the scope
      */
     public List<EventEntity> closeOldEvents(boolean doTheOperation) {
         LocalDateTime timeCheck = LocalDateTime.now(ZoneOffset.UTC);
 
-        // modified last than 2 H? Keep it open.
-        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
-        timeGrace = timeGrace.minusMinutes(120);
+        // modified later than 2 H? Keep it open.
+        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC).minusMinutes(-120);
 
         List<EventEntity> listEventsToClose = eventRepository.findOldEvents(timeCheck, timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
@@ -428,12 +427,13 @@ public class EventService {
 
     /**
      * Close old events
+     *
+     * @param doTheOperation if true, operation is done, else only to know which events are in the scope
      */
     public List<EventEntity> purgeOldEvents(boolean doTheOperation) {
 
-        // modified last than 2 H? Keep it open.
-        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC);
-        timeGrace = timeGrace.minusDays(360);
+        // modified later than 1 year? Keep it.
+        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC).minusDays(-360);
 
         List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge(timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
@@ -519,26 +519,78 @@ public class EventService {
             eventOperationResult.addLogEvent(eventAccessError);
             return eventOperationResult;
         }
-        List<EventGameEntity> listGames = eventEntity.getGameList().stream().filter(game -> game.getId().equals(gameId)).collect(Collectors.toList());
-        if (listGames.isEmpty()) {
+        EventGameEntity game = getGame(eventEntity, gameId);
+        if (game == null) {
             EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
             eventOperationResult.addLogEvent(eventEntityNotFound);
             return eventOperationResult;
         }
 
 
-        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventPartipantController(listGames.get(0));
+        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventParticipantController(game);
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
 
         eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizePlayersWithParticipant(reset));
-        eventOperationResult.listChildEntities.add(listGames.get(0));
+        eventOperationResult.listChildEntities.add(game);
         try {
             eventRepository.save(eventEntity);
         } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event"));
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during gameSynchronizePlayer"));
+        }
+        return eventOperationResult;
+    }
+
+    /**
+     * SynchronizeTruthOrLie
+     *
+     * @param eventEntity    eventEntity
+     * @param gameId         gameId to synchronize
+     * @param playerId       playerId to synchronize
+     * @param toghUserEntity user id who asked the synchronization
+     * @return event operation
+     */
+    public EventOperationResult gameSynchronizeTruthOrLie(EventEntity eventEntity, Long gameId, Long playerId, ToghUserEntity toghUserEntity) {
+
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isActiveParticipant(toghUserEntity)
+                || (!playerId.equals(toghUserEntity.getId()) && !eventController.isOrganizer(toghUserEntity))) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventAccessError);
+            return eventOperationResult;
+        }
+        // search the number of sentences in the game
+        EventGameEntity game = getGame(eventEntity, gameId);
+        if (game == null) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventEntityNotFound);
+            return eventOperationResult;
+        }
+        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventParticipantController(game);
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+        eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizeTruthOrLie(playerId));
+        try {
+            eventRepository.save(eventEntity);
+            // add the complete game as the second child
+            eventOperationResult.listChildEntities.add(game);
+            // add in the second child the
+
+        } catch (Exception e) {
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during gameSynchronizeTruthOrLie"));
         }
         return eventOperationResult;
 
+    }
+
+    /**
+     * Retrieve the game from the ID
+     *
+     * @param eventEntity event entity to search inside
+     * @param gameId      gameID searched
+     * @return the game entity
+     */
+    private EventGameEntity getGame(EventEntity eventEntity, Long gameId) {
+        List<EventGameEntity> listGames = eventEntity.getGameList().stream().filter(game -> game.getId().equals(gameId)).collect(Collectors.toList());
+        return (listGames.isEmpty() ? null : listGames.get(0));
     }
 
     /**
