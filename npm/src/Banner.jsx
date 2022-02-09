@@ -12,7 +12,7 @@ import React from 'react';
 import ReactCustomFlagSelect from 'react-custom-flag-select';
 import "react-custom-flag-select/lib/react-custom-flag-select.min.css";
 
-import FactoryService 			from 'service/FactoryService';
+import FactoryService 			from './service/FactoryService';
 
 class Banner extends React.Component {
 	

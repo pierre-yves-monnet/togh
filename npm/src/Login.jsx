@@ -15,7 +15,7 @@ import { Envelope, BoxArrowRight } from 'react-bootstrap-icons';
 // https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
-import FactoryService from 'service/FactoryService';
+import FactoryService from './service/FactoryService';
 
 const LOCALSTORAGE_rememberMe = "loginrememberMe";
 const LOCALSTORAGE_EMAIL = "loginEmail";

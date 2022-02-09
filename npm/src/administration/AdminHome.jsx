@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import AdminUsersStats  	    from 'administration/AdminUsersStats';
-import AdminTranslator 			from 'administration/AdminTranslator';
-import AdminEmail               from 'administration/AdminEmail';
-import AdminGoogle 				from 'administration/AdminGoogle';
-import AdminAPIKey 				from 'administration/AdminAPIKey';
-import AdminInfo 				from 'administration/AdminInfo';
+import AdminUsersStats  	    	from 'administration/AdminUsersStats';
+import AdminTranslator 			    from 'administration/AdminTranslator';
+import AdminEmail               	from 'administration/AdminEmail';
+import AdminGoogle 			        from 'administration/AdminGoogle';
+import AdminAPIKey 			        from 'administration/AdminAPIKey';
+import AdminInfo 			        from 'administration/AdminInfo';
 
 // import DatePickerSkeleton from '@bit/carbon-design-system.carbon-components-react.DatePicker/DatePicker.Skeleton';
 // import TimePicker from '@bit/carbon-design-system.carbon-components-react.time-picker';

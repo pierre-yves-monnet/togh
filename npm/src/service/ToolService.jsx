@@ -13,7 +13,7 @@ class ToolService {
 	getIsoStringFromDate( datesource) {		
 		if (! datesource)
 			return datesource;
-		console.log("ToolService.getDateFromObject: "+JSON.stringify(datesource)+" isDate ?"+(datesource instanceof Date));
+		// console.log("ToolService.getDateFromObject: "+JSON.stringify(datesource)+" isDate ?"+(datesource instanceof Date));
 		if (datesource instanceof Date) {
 			console.log("ToolService.getDateFromObject: this is a date, transform it to a string");			
 			let isoDateString = datesource.toISOString();
@@ -26,8 +26,7 @@ class ToolService {
 		
 
 	getDateListFromDate( dateone, datetwo ) {
-		console.log("TITI ToolService.getDateListFromDates: "+JSON.stringify(dateone)+" isDate ?"+(dateone instanceof Date));
-		console.log("Type : "+typeof dateone);
+		// console.log("TITI ToolService.getDateListFromDates: "+JSON.stringify(dateone)+" isDate ?"+(dateone instanceof Date));
 		var listDates = [];
 		if (! dateone)
 			return listDates;

@@ -97,7 +97,7 @@ class Event extends React.Component {
 
 	//----------------------------------- Render
 	render() {
-		console.log("Event.render eventId=" + this.state.eventid + " event=" + JSON.stringify(this.state.event) + " show:" + JSON.stringify(this.state.show));
+		// console.log("Event.render eventId=" + this.state.eventid + " event=" + JSON.stringify(this.state.event) + " show:" + JSON.stringify(this.state.show));
         const intl = this.props.intl;
 
 	    var userService = FactoryService.getInstance().getUserService();
@@ -605,7 +605,7 @@ class Event extends React.Component {
 
 	// -------------------------------------------- Access different part
 	hasAccessTab( accessTab ) {
-	    console.log("Event.hasAccess["+accessTab+"]?");
+	    // console.log("Event.hasAccess["+accessTab+"]?");
 	    if (this.state && this.state.event && this.state.event && this.state.event.preferences) {
 	        let access= this.state.event.preferences[ 'access'+accessTab ];
 	        console.log("Event.hasAccess["+accessTab+"] ="+access+" pref="+JSON.stringify(this.state.event.preferences));
@@ -614,7 +614,7 @@ class Event extends React.Component {
 	    return false;
 	}
 	accessTab( accessTab ) {
-		console.log("Event.accessTab tab=" + JSON.stringify(accessTab));
+		// console.log("Event.accessTab tab=" + JSON.stringify(accessTab));
 		this.setState( { show: { currentSection: accessTab} });
 	}
 

@@ -68,4 +68,14 @@ public abstract class BaseSerializer {
         return resultMap;
     }
 
+    protected Boolean getBoolean(Boolean value, Boolean defaultValue) {
+        return (value == null ? defaultValue : value);
+    }
+
+    protected String getEnumValue(Enum value, Enum defaultValue) {
+        if (value == null)
+            return (defaultValue == null ? null : defaultValue.toString());
+        return value.toString();
+
+    }
 }

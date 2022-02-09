@@ -11,9 +11,10 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import FactoryService 		from 'service/FactoryService';
 import { Easel } from 'react-bootstrap-icons';
 import { Modal } from 'carbon-components-react';
+
+import FactoryService 			from 'service/FactoryService';
 
 
 // -----------------------------------------------------------
@@ -45,7 +46,7 @@ class TakeATour extends React.Component {
 	    const userService = FactoryService.getInstance().getUserService();
 		const intl = this.props.intl;
 
-        console.log("takeATour: Render prefUser"+userService.prefsDisplayTakeATour());
+        // console.log("takeATour: Render prefUser"+userService.prefsDisplayTakeATour());
 
 		if (userService.prefsDisplayTakeATour()) {
 		    console.log("takeATour: displayTour? "+this.state.displayTour);

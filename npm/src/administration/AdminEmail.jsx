@@ -11,7 +11,6 @@ import { FormattedMessage } from "react-intl";
 import { TextInput, Loading } from 'carbon-components-react';
 
 import FactoryService 	from 'service/FactoryService';
-
 import LogEvents 		from 'component/LogEvents';
 
 

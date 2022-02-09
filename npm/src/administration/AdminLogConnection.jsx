@@ -14,8 +14,7 @@ import { LampFill, Alarm,  List, LockFill,PersonXFill  } from 'react-bootstrap-i
 
 
 import FactoryService 		from 'service/FactoryService';
-
-import LogEvents 			from 'component/LogEvents';
+import LogEvents 		    from 'component/LogEvents';
 
 
 

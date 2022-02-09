@@ -14,7 +14,7 @@ import { XSquare,InfoCircle } from 'react-bootstrap-icons';
 
 
 
-import FactoryService 	from 'service/FactoryService';
+import FactoryService 	from './service/FactoryService';
 
 
 class RegisterNewUser extends React.Component {

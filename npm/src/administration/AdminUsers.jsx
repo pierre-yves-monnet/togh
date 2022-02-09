@@ -13,8 +13,7 @@ import { TextInput,Select, TooltipIcon, Tag, Toggle, Loading } from 'carbon-comp
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import FactoryService 		from 'service/FactoryService';
-
-import LogEvents 			from 'component/LogEvents';
+import LogEvents 		    from 'component/LogEvents';
 
 
 

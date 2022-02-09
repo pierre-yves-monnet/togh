@@ -12,7 +12,7 @@
     <version>1.0.0</version>
     <!--<packaging>jar</packaging>  jar, war? -->
     <properties>
-        <start-class>com.togh.ServletInitializer</start-class>
+        <start-class>com.togh.ToghApplicationInitializer</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <npm.output.directory>build</npm.output.directory>
 

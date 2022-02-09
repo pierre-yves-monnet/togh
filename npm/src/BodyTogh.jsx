@@ -11,20 +11,20 @@ import React from 'react';
 import { IntlProvider, FormattedMessage } from "react-intl";
 
 
-import Login 			    from 'Login';
-import Banner 			    from 'Banner';
-import Footer 			    from 'Footer';
-import Menu 			    from 'Menu';
-import {MENU_NAME} 		    from 'Menu';
-import {FILTER_EVENT}	    from 'EventsList';
-import RegisterNewUser 	    from 'RegisterNewUser';
-import ResetPassword 	    from 'ResetPassword';
-import EventsList 		    from 'EventsList';
-import Event 			    from 'event/Event';
-import AdminHome 		    from 'administration/AdminHome';
-import AdminUsers 		    from 'administration/AdminUsers';
-import AdminLogConnection	from 'administration/AdminLogConnection';
-import MyProfile		    from 'user/MyProfile.jsx'
+import Login 			    	from './Login';
+import Banner 			    	from './Banner';
+import Footer 			    	from './Footer';
+import Menu 			    	from './Menu';
+import {MENU_NAME} 		    	from './Menu';
+import {FILTER_EVENT}	    	    	from './EventsList';
+import RegisterNewUser 	    		from './RegisterNewUser';
+import ResetPassword 	    		from './ResetPassword';
+import EventsList 		    	from './EventsList';
+import Event 			    	from './event/Event';
+import AdminHome 		    	from './administration/AdminHome';
+import AdminUsers 		    	from './administration/AdminUsers';
+import AdminLogConnection		from './administration/AdminLogConnection';
+import MyProfile		    	from './user/MyProfile.jsx'
 
 
 import FactoryService from './service/FactoryService';

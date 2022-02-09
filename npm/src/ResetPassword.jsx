@@ -9,10 +9,8 @@ import React from 'react';
 
 import { injectIntl,FormattedMessage } from "react-intl";
 
-import AskPassword 				from 'component/AskPassword' 
-
-
-import FactoryService from 'service/FactoryService';
+import AskPassword 				from './component/AskPassword' 
+import FactoryService 				from './service/FactoryService';
 
 
 class ResetPassword extends React.Component {
