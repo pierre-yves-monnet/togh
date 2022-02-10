@@ -24,7 +24,7 @@ public class Chronometer {
     private final String name;
 
     /**
-     * Get the chronometer implied it is started
+     * Create a chronometer
      * Default Constructor.
      *
      * @param operationName name of operation to monitor
@@ -34,14 +34,14 @@ public class Chronometer {
     }
 
     /**
-     * restart the chronometer
+     * Restart the chronometer
      */
     public void start() {
         this.beginTime = System.currentTimeMillis();
     }
 
     /**
-     *
+     * Stop the chronometer
      */
     public void stop() {
         cumulateTime += System.currentTimeMillis() - beginTime;
@@ -62,22 +62,47 @@ public class Chronometer {
         }
     }
 
+    /**
+     * Get the name of the chronometer
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the total time accumulated by the chronometer
+     *
+     * @return the total time in ms
+     */
     public long getTimeInMs() {
         return cumulateTime;
     }
 
+    /**
+     * A chronometer may have multiple stop / start. Get the number of executions
+     *
+     * @return the number of executions
+     */
     public long getNbExecution() {
         return nbExecutions;
     }
 
+    /**
+     * Get the average, per execution
+     *
+     * @return the average per execution. If there was no execution, return 0
+     */
     public long getAverageInMs() {
         return (getNbExecution() > 0 ? (int) (getTimeInMs() / getNbExecution()) : 0);
     }
 
+    /**
+     * Get a map to display in JSON for example
+     *
+     * @return a Map to describe the chronometer
+     */
     public Map<String, Object> getMap() {
         Map<String, Object> resultChrono = new HashMap<>();
         resultChrono.put("name", getName());
