@@ -15,7 +15,7 @@ import { Loading } from 'carbon-components-react';
 import FactoryService 		from 'service/FactoryService';
 
 import LogEvents 			from 'component/LogEvents';
-import Chart                from 'component/Chart';
+import ChartTogh            from 'component/ChartTogh';
 
 
 
@@ -88,52 +88,52 @@ class AdminUsersStats extends React.Component {
                     </div>
                     <div class="row">
                         <div class="col-2">
-                            <Chart type="Doughnut" dataMap={this.state.users.status}
+                            <ChartTogh type="Doughnut" dataMap={this.state.users.status}
                                 title={intl.formatMessage({id: "AdmunUsersStats.Users",defaultMessage: "Users"}) } />
                         </div>
                         <div class="col-2">
-                            <Chart type="Doughnut" dataMap={this.state.users.source}
+                            <ChartTogh type="Doughnut" dataMap={this.state.users.source}
                                 title={intl.formatMessage({id: "AdmunUsersStats.Source",defaultMessage: "Source"}) } />
                         </div>
                         <div class="col-2">
-                            <Chart type="Doughnut" dataMap={this.state.users.privilege}
+                            <ChartTogh type="Doughnut" dataMap={this.state.users.privilege}
                                 title={intl.formatMessage({id: "AdmunUsersStats.Privilege",defaultMessage: "Privilege"}) }/>
                         </div>
                         <div class="col-2">
-                            <Chart type="Doughnut" dataMap={this.state.users.emailVisibility}
+                            <ChartTogh type="Doughnut" dataMap={this.state.users.emailVisibility}
                                 title={intl.formatMessage({id: "AdmunUsersStats.EmailVisibility",defaultMessage: "Email visi."}) } />
                         </div>
                         <div class="col-2">
-                            <Chart type="Doughnut" dataMap={this.state.users.phoneVisibility}
+                            <ChartTogh type="Doughnut" dataMap={this.state.users.phoneVisibility}
                                 title={intl.formatMessage({id: "AdmunUsersStats.PhoneVisibility",defaultMessage: "Phone visi."}) } />
                         </div>
                         <div class="col-2">
-                            <Chart type="Doughnut" dataMap={this.state.users.subscription}
+                            <ChartTogh type="Doughnut" dataMap={this.state.users.subscription}
                                 title={intl.formatMessage({id: "AdmunUsersStats.Subscription",defaultMessage: "Subscription"}) } />
                         </div>
                     </div>
                     <div class="row" style={{ margin: "10px"}}>
                         <div class="col-6">
-                            <Chart type="HorizontalBar" dataList={this.state.users.connection} oneColor={true}
+                            <ChartTogh type="HorizontalBar" dataList={this.state.users.connection} oneColor={true}
                                 title={intl.formatMessage({id: "AdmunUsersStats.ConnectionWeek",defaultMessage: "Connection week"}) } />
                         </div>
                         <div class="col-6">
-                            <Chart type="HorizontalBar" dataList={this.state.users.connectionFiveYears} oneColor={true}
+                            <ChartTogh type="HorizontalBar" dataList={this.state.users.connectionFiveYears} oneColor={true}
                                 title={intl.formatMessage({id: "AdmunUsersStats.ConnectionFiveYears",defaultMessage: "Connection five years"}) } />
                         </div>
                     </div>
                     <div class="row" style={{ margin: "10px"}}>
                         <div class="col-4">
-                                <Chart type="HorizontalBar" dataList={this.state.users.userCreation} oneColor={true}
-                                    title={intl.formatMessage({id: "AdmunUsersStats.UserCreation",defaultMessage: "User creation"}) } />
+                            <ChartTogh type="HorizontalBar" dataList={this.state.users.userCreation} oneColor={true}
+                                title={intl.formatMessage({id: "AdmunUsersStats.UserCreation",defaultMessage: "User creation"}) } />
                         </div>
                         <div class="col-4">
-                               <Chart type="HorizontalBar" dataList={this.state.users.userCreationFiveYears} oneColor={true}
-                                    title={intl.formatMessage({id: "AdmunUsersStats.UserCreationFiveYears",defaultMessage: "User creation five years"}) } />
+                           <ChartTogh type="HorizontalBar" dataList={this.state.users.userCreationFiveYears} oneColor={true}
+                                title={intl.formatMessage({id: "AdmunUsersStats.UserCreationFiveYears",defaultMessage: "User creation five years"}) } />
                         </div>
                         <div class="col-4">
-                               <Chart type="HorizontalBar" dataList={this.state.users.participantCreation} oneColor={true}
-                                    title={intl.formatMessage({id: "AdmunUsersStats.ParticipantCreation",defaultMessage: "Participants creation"}) } />
+                           <ChartTogh type="HorizontalBar" dataList={this.state.users.participantCreation} oneColor={true}
+                                title={intl.formatMessage({id: "AdmunUsersStats.ParticipantCreation",defaultMessage: "Participants creation"}) } />
                         </div>
                     </div>
 				</div>

@@ -6,8 +6,9 @@
 //
 // -----------------------------------------------------------
 import React from 'react';
-
-import { Doughnut,  Bar} from 'react-chartjs-2';
+import 'chart.js/auto';
+import { Chart }            from 'react-chartjs-2';
+import { Doughnut,  Bar}    from 'react-chartjs-2';
 
 const backgroundColor = [
     'rgba(255, 99, 132, 0.2)',
@@ -33,7 +34,7 @@ const oneBackgroundColor = [
 const oneBorderColor = [
     'rgba(255, 99, 132, 1)'
 ];
-class Chart extends React.Component {
+class ChartTogh extends React.Component {
 
 
 
@@ -41,16 +42,25 @@ class Chart extends React.Component {
 constructor(props) {
     super();
     this.state = {
-        type: props.type,
-        title: props.title,
-        labels: props.labels,
-        data: props.data,
-        dataMap: props.dataMap,
-        dataList: props.dataList,
-        oneColor: props.oneColor
+        type:       props.type,
+        title:      props.title,
+        labels:     props.labels,
+        data:       props.data,
+        dataMap:    props.dataMap,
+        dataList:   props.dataList,
+        oneColor:   props.oneColor
     };
-
     console.log("Chart.constructor: dataMap=" + JSON.stringify(props.dataMap))
+    if (props.backgroundColor !=null)
+        this.state.backgroundColor = props.backgroundColor;
+    else
+        this.state.backgroundColor = backgroundColor;
+
+    if (props.borderColor !=null)
+        this.state.borderColor = props.borderColor;
+    else
+        this.state.borderColor = borderColor;
+
     this.getLabelsDataFromMap = this.getLabelsDataFromMap.bind(this);
 }
 
@@ -76,12 +86,21 @@ componentDidUpdate(prevProps) {
         this.setState({
             labels: this.props.labels
         });
+    if (prevProps.backgroundColor !== this.props.backgroundColor) {
+        this.setState({
+            backgroundColor: this.props.backgroundColor});
+    }
+    if (prevProps.borderColor !== this.props.borderColor) {
+        this.setState({
+            borderColor: this.props.borderColor});
+    }
+
     }
 }
 
 //----------------------------------- Render
 render() {
-        console.log("Chart.render: type=" + this.state.type + " state=" + JSON.stringify(this.state))
+    console.log("Chart.render: type=" + this.state.type + " state=" + JSON.stringify(this.state))
     const chartOptions = {
         'plugins': {
             'legend': {
@@ -100,8 +119,8 @@ render() {
 
         let dataset = {};
         dataChart.datasets.push(dataset);
-        dataset.backgroundColor = backgroundColor;
-        dataset.borderColor = borderColor;
+        dataset.backgroundColor = this.state.backgroundColor;
+        dataset.borderColor = this.state.borderColor;
         dataset.borderWidth = 1;
         if (this.state.dataMap) {
             const resultTransformed = this.getLabelsDataFromMap(this.state.dataMap);
@@ -133,8 +152,8 @@ render() {
                 dataset.backgroundColor = oneBackgroundColor;
                 dataset.borderColor = oneBorderColor;
             } else {
-                dataset.backgroundColor = backgroundColor;
-                dataset.borderColor = borderColor;
+                dataset.backgroundColor = this.state.backgroundColor;
+                dataset.borderColor = this.state.borderColor;
             }
             dataset.borderWidth = 1;
 
@@ -247,4 +266,4 @@ render() {
 
 }
 
-export default Chart;
+export default ChartTogh;
