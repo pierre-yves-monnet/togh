@@ -153,15 +153,14 @@ class AdminUsers extends React.Component {
 						        <Toggle size="sm" class="sm" labelText="" aria-label=""
                                     toggled={this.state.show.details}
                                     selectorPrimaryFocus={this.state.show.details}
-                                    labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
-                                    labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details" />}
+                                    labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="DetailsA" />}
+                                    labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="DetailsB" />}
                                     onChange={(event) => {
                                         this.setState( { show: { details : event.target.checked}} );
                                         }}
                                     id="showDetails" />
                             </td><td style={{padding: "10px"}}>
 
-                                <FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="Details"/>
                             </td></tr>
                             </table>
 						</div> 
