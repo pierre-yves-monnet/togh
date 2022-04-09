@@ -38,7 +38,6 @@ class AdminStatsUsageEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     public TypeStatsEnum typeStatistique;
 
-    ;
     @Column(name = "subscriptionuser", length = 10)
     @Enumerated(EnumType.STRING)
     public SubscriptionUserEnum subscriptionUser;

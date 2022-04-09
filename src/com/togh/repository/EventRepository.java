@@ -24,11 +24,11 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     EventEntity findByName(@Param("name") String name);
 
-    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid and e.statusEvent not in ('CLOSED','CANCELLED') order by e.dateCreation")
+    @Query("SELECT e FROM EventEntity e, ToghUserEntity t join e.participantList p where p.user = t and t.id = :userid and e.statusEvent not in ('CLOSED','CANCELLED') order by e.dateCreation")
     List<EventEntity> findInProgressEventsUser(@Param("userid") Long userId);
 
-    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid and e.statusEvent not in ('CLOSED','CANCELLED') order by e.dateCreation")
-    List<EventEntity> findMyEventsUser(@Param("userid") Long userId);
+    @Query("SELECT e FROM EventEntity e, ToghUserEntity t WHERE e.author = t and t.id = :userid order by e.dateCreation desc")
+    List<EventEntity> findMyInProgressEventsUser(@Param("userid") Long userId);
 
     @Query("SELECT e FROM EventEntity e, ToghUserEntity t join e.participantList p where p.user = t and t.id = :userid order by e.dateCreation")
     List<EventEntity> findEventsUser(@Param("userid") Long userId);

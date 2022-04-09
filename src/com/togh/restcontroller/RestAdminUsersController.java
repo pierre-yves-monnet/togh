@@ -69,12 +69,12 @@ public class RestAdminUsersController {
             @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_ADMINSTRATOR, required = false) boolean filterAdministrator,
             @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_PREMIUM, required = false) boolean filterPremium,
             @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_EXCELLENCE, required = false) boolean filterExcellence,
-            @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+            @RequestParam(name = RestJsonConstants.CST_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isAdministratorConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
 
         ToghUserService.CriteriaSearchUser criteriaSearch = new ToghUserService.CriteriaSearchUser();
@@ -120,9 +120,9 @@ public class RestAdminUsersController {
         ToghUserEntity toghUser = factoryService.getLoginService().isAdministratorConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
-        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_TIMEZONEOFFSET, 0L);
 
         Long userId = ToolCast.getLong(updateMap, RestJsonConstants.PARAM_USERID, 0L);
         String attribut = ToolCast.getString(updateMap, RestJsonConstants.PARAM_ATTRIBUT, "");
@@ -135,7 +135,7 @@ public class RestAdminUsersController {
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
             payload.put(RestJsonConstants.USER, serializer.getMap(operationUser.toghUserEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, operationUser.listLogEvents);
 
         return payload;
     }
@@ -154,8 +154,8 @@ public class RestAdminUsersController {
         ToghUserEntity toghUser = factoryService.getLoginService().isAdministratorConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
-        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_TIMEZONEOFFSET, 0L);
         Long userId = ToolCast.getLong(updateMap, RestJsonConstants.PARAM_USERID, 0L);
         Map<String, Object> payload = new HashMap<>();
         LoginService.OperationLoginUser operationUser = loginService.disconnectUser(userId);
@@ -165,7 +165,7 @@ public class RestAdminUsersController {
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
             payload.put(RestJsonConstants.USER, serializer.getMap(operationUser.toghUserEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, operationUser.listLogEvents);
         return payload;
     }
 
@@ -179,7 +179,7 @@ public class RestAdminUsersController {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         ToghUserService.StatisticsUsers statisticsUsers = toghUserService.statisticsOnUsers();
         return statisticsUsers.getMap();
@@ -198,12 +198,12 @@ public class RestAdminUsersController {
             @RequestParam(name = RestJsonConstants.PARAM_SEARCHLOGINLOG_DATEEND, required = false) String filterDateEnd,
             @RequestParam(name = RestJsonConstants.PARAM_SEARCHLOGINLOG_TIMESTART, required = false) String filterTimeStart,
             @RequestParam(name = RestJsonConstants.PARAM_SEARCHLOGINLOG_TIMEEND, required = false) String filterTimeEnd,
-            @RequestParam(name = RestJsonConstants.PARAM_SEARCHLOGINLOG_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+            @RequestParam(name = RestJsonConstants.CST_TIMEZONEOFFSET, required = false) Long timezoneOffset,
             @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isAdministratorConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         var criteriaSearchLogingLog = new ToghUserService.CriteriaSearchLogingLog();
         criteriaSearchLogingLog.searchSentence = searchUserSentence;

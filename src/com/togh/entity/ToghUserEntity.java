@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 /*                                                                                  */
 /* For each physical user, an endUser is registered */
 /*                                                                                  */
+/* To get the userLabel to send to the browser, please use ToghUserSerializer       */
+/*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
@@ -136,15 +138,22 @@ class ToghUserEntity extends BaseEntity {
                 + ")";
     }
 
+
     /**
-     * Get the user Label, to add in an email, or explanation
+     * Return a lobel when we need to log a user
      *
-     * @return user label
+     * @return logLabel
      */
-    public String getLabel() {
-        if (isExist(firstName) && isExist(lastName))
-            return (firstName != null ? firstName + " " : "") + (lastName != null ? lastName : "");
-        return email;
+    public String getLogLabel() {
+        StringBuilder label = new StringBuilder();
+        if (getName() != null && getName().length() > 0)
+            label.append(getName() + " ");
+        if (getLastName() != null && getLastName().length() > 0)
+            label.append(getLastName() + " ");
+        if (label.length() == 0)
+            label.append(getEmail());
+        label.append(" (" + getId() + ")");
+        return label.toString();
     }
 
     private boolean isExist(String value) {

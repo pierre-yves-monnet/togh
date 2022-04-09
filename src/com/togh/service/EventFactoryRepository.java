@@ -52,4 +52,13 @@ public class EventFactoryRepository {
     @Autowired
     public EventGameRepository eventGameRepository;
 
+    @Autowired
+    public EventTruthOrLieRepository eventTruthOrLieRepository;
+
+    @Autowired
+    public EventTruthOrLieSentenceRepository eventTruthOrLieSentenceRepository;
+
+    @Autowired
+    public EventTruthOrLieVoteRepository eventTruthOrLieVoteRepository;
+
 }

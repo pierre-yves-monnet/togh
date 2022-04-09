@@ -11,7 +11,7 @@
 //
 // BasketSlabRecord
 //
-// User modifidy one item, then send to to the server.
+// User modify one item, then send to to the server.
 // -----------------------------------------------------------
 import FactoryService 		from 'service/FactoryService';
 
@@ -19,7 +19,7 @@ class BasketSlabRecord {
 	
 	constructor( eventCtrl ) {
 		this.eventCtrl 			= eventCtrl;
-		this.listSlabRecord 		= [];
+		this.listSlabRecord 	= [];
 		console.log("BasketSlabRecord.constructor on event="+ this.eventCtrl.getEvent().id);
 	}
 	
@@ -31,23 +31,7 @@ class BasketSlabRecord {
 	sendToServer( callbackfct ) {
 		console.log("BasketSlabRecord.sendToServer: send this slabBasket to the server eventId="+this.eventCtrl.getEvent().id+" s="+this.listSlabRecord.length+" basket="+this.getString());
 		// PostJson
-		let listParamSlab = [];
-		for (let i = this.listSlabRecord.length - 1; i >=0 ; i--) {
-			// We kept only one SlabRecord per localisation / attribut
-			let slabRecord = this.listSlabRecord[ i ];
-			let existInRecord=false;
-			for (let j in listParamSlab) {
-				if (listParamSlab[ j ].localisation === slabRecord.localisation 
-					&& listParamSlab[ j ].name === slabRecord.name)
-					existInRecord=true;
-			}
-			if (! existInRecord)
-				listParamSlab.push( slabRecord.getJson());
-		}
-		
-		
-		let param = {eventid:this.eventCtrl.event.id, listslab: listParamSlab};
-		
+		let param = this.getBasketJson();
 		const restCallService = FactoryService.getInstance().getRestCallService();
 		restCallService.postJson('/api/event/update', this, param, httpPayload => {
 			// console.log("BasketSlabRecord.Callback ! ");
@@ -56,7 +40,27 @@ class BasketSlabRecord {
 			}
 		);
 	}
-	
+
+	// return the current bask as JSON to be ready to send to the server
+	getBasketJson() {
+	    let listParamSlab = [];
+        for (let i = this.listSlabRecord.length - 1; i >=0 ; i--) {
+            // We kept only one SlabRecord per localisation / attribut
+            let slabRecord = this.listSlabRecord[ i ];
+            let existInRecord=false;
+            for (let j in listParamSlab) {
+                if (listParamSlab[ j ].localisation === slabRecord.localisation
+                    && listParamSlab[ j ].name === slabRecord.name)
+                    existInRecord=true;
+            }
+            if (! existInRecord)
+                listParamSlab.push( slabRecord.getJson());
+        }
+
+
+        let param = {eventid:this.eventCtrl.event.id, listslab: listParamSlab};
+    	return param;
+	}
 	getString() {
 		// console.log("BasketSlabRecord:getString size="+this.listSlabRecord.length);
 		let listStr = "size="+this.listSlabRecord.length+" ";

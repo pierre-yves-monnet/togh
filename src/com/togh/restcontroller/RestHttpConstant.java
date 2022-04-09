@@ -19,7 +19,7 @@ package com.togh.restcontroller;
 
 public class RestHttpConstant {
     public static final String CST_HTTPCODE_EVENTNOTFOUND = "EventNotFound";
-    public static final String HTTPCODE_NOTCONNECTED = "NotConnected";
+    public static final String CST_HTTPCODE_NOTCONNECTED = "NotConnected";
     public static final String CST_HTTPCODE_NOTANADMINISTRATOR = "NotAdministrator";
 
     /**

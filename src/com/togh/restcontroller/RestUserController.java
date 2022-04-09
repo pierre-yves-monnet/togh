@@ -65,14 +65,14 @@ public class RestUserController {
     @CrossOrigin
     @GetMapping("/api/user")
     public Map<String, Object> getUser(@RequestParam("id") Long userId,
-                                       @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                       @RequestParam(name = RestJsonConstants.CST_TIMEZONEOFFSET, required = false) Long timezoneOffset,
                                        @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         logger.fine("RestUserController:getUser id[" + userId + "]");
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null) {
             underAttackService.reportNotAutorizedAction(null, "/api/user", UnderAttackService.NOT_AUTHORIZED_REASON.NOT_CONNECTED);
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         }
         if (!(userId.equals(toghUser.getId()) || factoryService.getLoginService().isAdministrator(toghUser))) {
             // ask myself, or an administrator, this is OK, else not
@@ -114,12 +114,12 @@ public class RestUserController {
                                           @RequestParam(RestJsonConstants.PARAM_EMAIL) String email,
                                           @RequestParam(RestJsonConstants.PARAM_ONLY_NON_INVITED_USER) Boolean onlyNonInvitedUser,
                                           @RequestParam(RestJsonConstants.INJSON_EVENTID) Long eventId,
-                                          @RequestParam(name = RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, required = false) Long timezoneOffset,
+                                          @RequestParam(name = RestJsonConstants.CST_TIMEZONEOFFSET, required = false) Long timezoneOffset,
                                           @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         Map<String, Object> payload = new HashMap<>();
         SearchUsersResult searchUsers;
@@ -161,9 +161,9 @@ public class RestUserController {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
-        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.PARAM_SEARCHUSER_TIMEZONEOFFSET, 0L);
+        Long timezoneOffset = ToolCast.getLong(updateMap, RestJsonConstants.CST_TIMEZONEOFFSET, 0L);
 
         String attribut = ToolCast.getString(updateMap, RestJsonConstants.PARAM_ATTRIBUT, "");
         Object value = updateMap.get(RestJsonConstants.PARAM_VALUE);
@@ -175,7 +175,7 @@ public class RestUserController {
             SerializerOptions serializerOptions = new SerializerOptions(toghUser, timezoneOffset, SerializerOptions.ContextAccess.ADMIN);
             payload.put(RestJsonConstants.USER, serializer.getMap(operationUser.toghUserEntity, null, serializerOptions, factorySerializer, factoryUpdateGrantor));
         }
-        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, operationUser.listLogEvents);
 
         return payload;
     }
@@ -195,10 +195,10 @@ public class RestUserController {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         OperationUser operationUser = toghUserService.updateUser(toghUser.getId(), "showTakeATour", active);
         Map<String, Object> payload = new HashMap<>();
-        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, operationUser.listLogEvents);
 
         return payload;
     }
@@ -218,10 +218,10 @@ public class RestUserController {
         ToghUserEntity toghUser = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUser == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
         OperationUser operationUser = toghUserService.updateUser(toghUser.getId(), "showTipsUser", active);
         Map<String, Object> payload = new HashMap<>();
-        payload.put(RestJsonConstants.LOG_EVENTS, operationUser.listLogEvents);
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, operationUser.listLogEvents);
 
         return payload;
     }

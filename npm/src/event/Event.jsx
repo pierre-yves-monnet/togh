@@ -608,7 +608,7 @@ class Event extends React.Component {
 	    // console.log("Event.hasAccess["+accessTab+"]?");
 	    if (this.state && this.state.event && this.state.event && this.state.event.preferences) {
 	        let access= this.state.event.preferences[ 'access'+accessTab ];
-	        console.log("Event.hasAccess["+accessTab+"] ="+access+" pref="+JSON.stringify(this.state.event.preferences));
+	        // console.log("Event.hasAccess["+accessTab+"] ="+access+" pref="+JSON.stringify(this.state.event.preferences));
 	        return access;
 	    }
 	    return false;

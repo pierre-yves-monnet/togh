@@ -20,6 +20,7 @@ import UserFeedback  				from 'component/UserFeedback';
 import * as gameListConstant 		from 'event/EventGameList';
 
 import EventGameSecretSantas        from 'event/EventGameSecretSantas';
+import EventGameTruthOrLie          from 'event/EventGameTruthOrLie';
 
 
 
@@ -34,6 +35,7 @@ export const STATUS_CLOSE="CLOSE";
 
 
 const SECRET_SANTAS = "SECRETSANTAS";
+const TRUTH_OR_LIE = "TRUTHORLIE";
 
 // -----------------------------------------------------------
 //
@@ -150,6 +152,9 @@ class EventGame extends React.Component {
                     {game.typeGame == SECRET_SANTAS && <EventGameSecretSantas typeDisplay={this.state.show.typeDisplay}
                                 eventCtrl={this.eventCtrl}
                          />}
+                    {game.typeGame == TRUTH_OR_LIE && <EventGameTruthOrLie typeDisplay={this.state.show.typeDisplay}
+                                eventCtrl={this.eventCtrl}
+                         />}
                 </div>
                 );
 
@@ -172,11 +177,15 @@ class EventGame extends React.Component {
         			{ 	label: intl.formatMessage({id: "EventGame.SecretSantas",defaultMessage: "Secret Santas"}),
         			 	value: SECRET_SANTAS,
         				icon: "img/gameSecretSantas.svg",
-        			 	type: "Blue" }
+        			 	type: "red" },
+                    { 	label: intl.formatMessage({id: "EventGame.TruthOrLie",defaultMessage: "Truth or lie"}),
+        			 	value: TRUTH_OR_LIE,
+        				icon: "img/gameTruthOrLie.png",
+        			 	type: "blue" }
         			 	];
   		let game = this.eventCtrl.getCurrentGame();
 
-  	    console.log("EventGame.renderHeader: isReadOnly["+isReadOnly+"] gameId=["+game.id+"], gameName=["+game.name+"] typeGame=["+game.typeGame+"]");
+  	    // console.log("EventGame.renderHeader: isReadOnly["+isReadOnly+"] gameId=["+game.id+"], gameName=["+game.name+"] typeGame=["+game.typeGame+"]");
         if (!game.name)
             game.name="";
         return (
@@ -198,6 +207,10 @@ class EventGame extends React.Component {
                                 value={game.typeGame}
                                 readWrite={isReadOnly}
                                 changeState={(value) => {this.setAttribut("typeGame", value, game, "");}}/>
+                                <br/>
+                                <span style={{fontSize: "8px"}}>
+                                    <a href="https://www.flaticon.com/free-icons/wrong" title="wrong icons">icons created by Freepik - Flaticon</a>
+                                </span>
                     </div>
 
                     <div class="col-1">
@@ -239,7 +252,7 @@ class EventGame extends React.Component {
 	 *
 	 */
 	getTagState( game ) {
-		console.log("EventGame.getTagState item.status="+game.status);
+		// console.log("EventGame.getTagState item.status="+game.status);
 		const intl = this.props.intl;
 
 		const listOptions = [
@@ -265,7 +278,7 @@ class EventGame extends React.Component {
 	//
 	// --------------------------------------------------------------
     removeGame (game) {
-        console.log("EventGame.removeTask: event=" + JSON.stringify(this.state.event));
+        // console.log("EventGame.removeTask: event=" + JSON.stringify(this.state.event));
 
         this.setState({operation:{ inprogress:true }, listlogevents: [] });
 

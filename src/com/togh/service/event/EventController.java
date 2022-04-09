@@ -8,6 +8,9 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
+import com.togh.engine.chrono.ChronoSet;
+import com.togh.engine.chrono.Chronometer;
+import com.togh.engine.logevent.LogEvent;
 import com.togh.engine.tool.JpaTool;
 import com.togh.entity.*;
 import com.togh.entity.EventEntity.DatePolicyEnum;
@@ -16,14 +19,13 @@ import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.base.BaseEntity;
 import com.togh.entity.base.EventBaseEntity;
-import com.togh.service.EventFactoryRepository;
-import com.togh.service.EventService;
+import com.togh.serialization.FactorySerializer;
+import com.togh.service.*;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.UpdateContext;
-import com.togh.service.FactoryService;
-import com.togh.service.NotifyService;
 import com.togh.service.event.EventUpdate.Slab;
+import org.hibernate.internal.util.collections.ConcurrentReferenceHashMap;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
@@ -51,6 +53,17 @@ public class EventController {
 
     private final FactoryService factoryService;
     private final EventFactoryRepository factoryRepository;
+    /* ******************************************************************************** */
+    /*                                                                                  */
+    /* Mutex exclusion                                                                  */
+    /* If the code want to make an exclusion on the entity, this return a String,
+     * and it's possible to synchronize on this string.
+     * Note: in a multi nodes environment, make a synchronized is no sense, it's better
+     * to rely on constraints in the database                                            */
+    /*                                                                                  */
+    /*                                                                                  */
+    /* ******************************************************************************** */
+    private static final ConcurrentReferenceHashMap<Long, String> concurrentXMutex = new ConcurrentReferenceHashMap<>();
 
     private final EventEntity eventEntity;
 
@@ -67,6 +80,9 @@ public class EventController {
     private final EventChatController eventChatController;
     private final EventExpenseController eventExpenseController;
     private final EventGameController eventGameController;
+    // Note: EventGameParticipantController and EventGameTruthOrLieController are generated
+    // by the eventGameController: it may have multiple games in the event
+    private final FactorySerializer factorySerializer;
 
     /**
      * Keep all Repository
@@ -77,10 +93,11 @@ public class EventController {
      * @param factoryRepository the factory repository
      */
 
-    public EventController(EventEntity eventEntity, FactoryService factoryService, EventFactoryRepository factoryRepository) {
+    public EventController(EventEntity eventEntity, FactoryService factoryService, EventFactoryRepository factoryRepository, FactorySerializer factorySerializer) {
         this.eventEntity = eventEntity;
         this.factoryService = factoryService;
         this.factoryRepository = factoryRepository;
+        this.factorySerializer = factorySerializer;
         eventTaskController = new EventTaskController(this, eventEntity);
         eventItineraryController = new EventItineraryController(this, eventEntity);
         eventShoppingController = new EventShoppingController(this, eventEntity);
@@ -93,10 +110,7 @@ public class EventController {
         eventChatController = new EventChatController(this, eventGroupChatController, eventEntity);
         eventExpenseController = new EventExpenseController(this, eventEntity);
         eventGameController = new EventGameController(this, eventEntity);
-    }
 
-    public static EventController getInstance(EventEntity event, FactoryService factoryService, EventFactoryRepository factoryRepository) {
-        return new EventController(event, factoryService, factoryRepository);
     }
 
     public EventEntity getEvent() {
@@ -110,50 +124,19 @@ public class EventController {
     /* ******************************************************************************** */
 
     /**
-     * This method check the event consistant. It may be read from the database, and this version change some item.
-     * Or it can be just created, and we want to have the default information
+     * Build an instance from an event
+     *
+     * @param event             event to build the controller on
+     * @param factoryService    factory service
+     * @param factoryRepository factory repository
+     * @param factorySerializer factory serializer to get user label when needed
+     * @return eventController
      */
-    public List<Slab> completeConsistant() {
-        List<Slab> listSlab = new ArrayList<>();
-
-        // the author is a Organizer participant
-        boolean authorIsReferenced = false;
-        for (ParticipantEntity participant : eventEntity.getParticipantList()) {
-            if (participant.getUser() != null && participant.getUser().getId().equals(eventEntity.getAuthorId())) {
-                authorIsReferenced = true;
-                participant.setRole(ParticipantRoleEnum.OWNER);
-            }
-        }
-        if (!authorIsReferenced) {
-            // if the user does not exist, this is an issue.... ==> ToghEvent
-            eventEntity.addParticipant(eventEntity.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
-        }
-
-        // a date policy must be set
-        if (eventEntity.getDatePolicy() == null)
-            eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
-
-        // Preferences must be ready (old event may not have a preference entity)
-        if (eventEntity.getPreferences() == null) {
-            EventPreferencesEntity preferencesEntity = new EventPreferencesEntity();
-            preferencesEntity.setCurrencyCode("USD");
-            preferencesEntity.setAccessChat(true);
-            preferencesEntity.setAccessItinerary(false);
-            preferencesEntity.setAccessTasks(false);
-            preferencesEntity.setAccessBring(true);
-            preferencesEntity.setAccessSurveys(false);
-            preferencesEntity.setAccessLocalisation(true);
-            preferencesEntity.setAccessGames(false);
-            preferencesEntity.setAccessPhotos(false);
-            preferencesEntity.setAccessExpenses(false);
-            preferencesEntity.setAccessBudget(false);
-            eventEntity.setPreferences(preferencesEntity);
-        }
-
-        // itinerary: must be in the date
-        listSlab.addAll(eventItineraryController.checkItinerary());
-
-        return listSlab;
+    public static EventController getInstance(EventEntity event,
+                                              FactoryService factoryService,
+                                              EventFactoryRepository factoryRepository,
+                                              FactorySerializer factorySerializer) {
+        return new EventController(event, factoryService, factoryRepository, factorySerializer);
     }
 
     /* ******************************************************************************** */
@@ -303,28 +286,9 @@ public class EventController {
     /*                                                                                  */
     /* ******************************************************************************** */
 
-    /**
-     * send an invitation
-     *
-     * @param eventEntity       the eventEntity
-     * @param invitedByToghUser the toghUser who sent the invitation
-     * @param listUsersId       list of ToghUserId to invites
-     * @param userInvitedEmail  list of email : there are not yet toghUser
-     * @param role              role in this event
-     * @param useMyEmailAsFrom  if true, the Email "From" used in the message is the InvitedByToghUser email
-     * @param message           Message to come with the invitation
-     * @return the invitation Result
-     */
-    public InvitationResult invite(EventEntity eventEntity,
-                                   ToghUserEntity invitedByToghUser,
-                                   List<Long> listUsersId,
-                                   String userInvitedEmail,
-                                   ParticipantRoleEnum role,
-                                   boolean useMyEmailAsFrom,
-                                   String subject,
-                                   String message) {
-        EventInvitation eventInvitation = new EventInvitation(this, factoryService);
-        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, subject, message);
+    public static String getMutex(Long eventId) {
+        concurrentXMutex.putIfAbsent(eventId, eventId.toString());
+        return concurrentXMutex.get(eventId);
     }
 
     /* ******************************************************************************** */
@@ -358,23 +322,89 @@ public class EventController {
     /* ******************************************************************************** */
 
     /**
-     * Update the event. All update are done via the Slab objects
-     *
-     * @param listSlab      List of operations (list of Slob)
-     * @param updateContext Context of update
-     * @return the result of operation
+     * This method check the event consistant. It may be read from the database, and this version change some item.
+     * Or it can be just created, and we want to have the default information
      */
-    public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
-        EventUpdate eventUpdate = new EventUpdate(this);
+    public List<LogEvent> completeConsistant() {
+        List<LogEvent> listLogEvents = new ArrayList<>();
+        ChronoSet chronoSet = new ChronoSet();
+        Chronometer chronoConsistency = chronoSet.getChronometer("eventconsistancy");
+        chronoConsistency.start();
 
-        EventOperationResult eventOperationResult = eventUpdate.update(listSlab, updateContext);
-        List<Slab> listComplementSlab = completeConsistant();
-        eventOperationResult.add(eventUpdate.update(listComplementSlab, updateContext));
-        return eventOperationResult;
+        // the author is a Organizer participant
+        boolean authorIsReferenced = false;
+        for (ParticipantEntity participant : eventEntity.getParticipantList()) {
+            if (participant.getUser() != null && participant.getUser().getId().equals(eventEntity.getAuthorId())) {
+                authorIsReferenced = true;
+                participant.setRole(ParticipantRoleEnum.OWNER);
+            }
+        }
+        if (!authorIsReferenced) {
+            // if the user does not exist, this is an issue.... ==> ToghEvent
+            eventEntity.addParticipant(eventEntity.getAuthor(), ParticipantRoleEnum.OWNER, StatusEnum.ACTIF);
+        }
+
+        // a date policy must be set
+        if (eventEntity.getDatePolicy() == null)
+            eventEntity.setDatePolicy(DatePolicyEnum.ONEDATE);
+
+        // Preferences must be ready (old event may not have a preference entity)
+        if (eventEntity.getPreferences() == null) {
+            EventPreferencesEntity preferencesEntity = new EventPreferencesEntity();
+            preferencesEntity.setCurrencyCode("USD");
+            preferencesEntity.setAccessChat(true);
+            preferencesEntity.setAccessItinerary(false);
+            preferencesEntity.setAccessTasks(false);
+            preferencesEntity.setAccessBring(true);
+            preferencesEntity.setAccessSurveys(false);
+            preferencesEntity.setAccessLocalisation(true);
+            preferencesEntity.setAccessGames(false);
+            preferencesEntity.setAccessPhotos(false);
+            preferencesEntity.setAccessExpenses(false);
+            preferencesEntity.setAccessBudget(false);
+            eventEntity.setPreferences(preferencesEntity);
+        }
+
+        // itinerary: must be in the date
+        listLogEvents.addAll(eventItineraryController.checkItinerary());
+
+
+        // check game
+        for (EventGameEntity eventGameEntity : eventEntity.getGameList()) {
+            eventGameController.completeConsistant(eventGameEntity);
+        }
+
+        chronoConsistency.stopAndLog(100);
+
+        return listLogEvents;
     }
 
     protected EventService getEventService() {
         return factoryService.getEventService();
+    }
+
+    /**
+     * send an invitation
+     *
+     * @param eventEntity       the eventEntity
+     * @param invitedByToghUser the toghUser who sent the invitation
+     * @param listUsersId       list of ToghUserId to invites
+     * @param userInvitedEmail  list of email : there are not yet toghUser
+     * @param role              role in this event
+     * @param useMyEmailAsFrom  if true, the Email "From" used in the message is the InvitedByToghUser email
+     * @param message           Message to come with the invitation
+     * @return the invitation Result
+     */
+    public InvitationResult invite(EventEntity eventEntity,
+                                   ToghUserEntity invitedByToghUser,
+                                   List<Long> listUsersId,
+                                   String userInvitedEmail,
+                                   ParticipantRoleEnum role,
+                                   boolean useMyEmailAsFrom,
+                                   String subject,
+                                   String message) {
+        EventInvitation eventInvitation = new EventInvitation(this, factoryService);
+        return eventInvitation.invite(eventEntity, invitedByToghUser, listUsersId, userInvitedEmail, role, useMyEmailAsFrom, subject, message, factorySerializer);
     }
 
     protected NotifyService getNotifyService() {
@@ -492,5 +522,23 @@ public class EventController {
         return indexEntity;
     }
 
+    /**
+     * Update the event. All update are done via the Slab objects
+     *
+     * @param listSlab      List of operations (list of Slob)
+     * @param updateContext Context of update
+     * @return the result of operation
+     */
+    public EventOperationResult update(List<Slab> listSlab, UpdateContext updateContext) {
+        EventUpdate eventUpdate = new EventUpdate(this);
 
+        EventOperationResult eventOperationResult = eventUpdate.update(listSlab, updateContext);
+        eventOperationResult.listLogEvents.addAll(completeConsistant());
+
+        return eventOperationResult;
+    }
+
+    protected ToghUserService getUserService() {
+        return factoryService.getToghUserService();
+    }
 }

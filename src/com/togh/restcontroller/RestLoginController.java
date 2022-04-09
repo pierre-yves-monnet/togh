@@ -288,7 +288,7 @@ public class RestLoginController {
         ToghUserEntity toghUserEntity = factoryService.getLoginService().isConnected(connectionStamp);
         if (toghUserEntity == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         LoginResult loginResult = loginService.changePassword(toghUserEntity, userData.get(JSON_PASSWORD));
         Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
@@ -314,7 +314,7 @@ public class RestLoginController {
         ToghUserEntity toghUserEntity = factoryService.getLoginService().isAdministratorConnected(connectionStamp);
         if (toghUserEntity == null)
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+                    HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
 
         LoginResult loginResult = loginService.ghostConnect(ToolCast.getLong(param, "ghostUserId", null), request.getRemoteAddr());

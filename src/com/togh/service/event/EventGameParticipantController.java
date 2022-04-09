@@ -12,6 +12,9 @@ import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventGameEntity;
 import com.togh.entity.ParticipantEntity;
+import com.togh.entity.base.BaseEntity;
+import com.togh.service.EventService;
+import com.togh.service.SubscriptionService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,13 +30,14 @@ import java.util.stream.Collectors;
 /*                                                                                  */
 /* ******************************************************************************** */
 
-public class EventGameParticipantController {
+public class EventGameParticipantController extends EventAbsChildController {
 
-    private final EventController eventController;
-    private final EventEntity eventEntity;
-    private final EventGameEntity gameEntity;
+    protected final EventController eventController;
+    protected final EventEntity eventEntity;
+    protected final EventGameEntity gameEntity;
 
     protected EventGameParticipantController(EventController eventController, EventEntity eventEntity, EventGameEntity gameEntity) {
+        super(eventController, eventEntity);
         this.eventController = eventController;
         this.eventEntity = eventEntity;
         this.gameEntity = gameEntity;
@@ -57,7 +61,10 @@ public class EventGameParticipantController {
         return listParticipantsEntity;
     }
 
-    //
+    //completeConsistant
+    public List<LogEvent> completeConsistant() {
+        return synchronizePlayersWithParticipant(false);
+    }
 
     /**
      * resynchronize the list of players according the new participants / Players and the scope
@@ -108,5 +115,119 @@ public class EventGameParticipantController {
         // update now the list
         gameEntity.setPlayersList(listPlayers);
         return listLogEvents;
+    }
+
+
+    /**
+     * Synchronize the sentenceEntity with the number of sentences required
+     *
+     * @param playerId player to synchronize
+     * @return list of events given the status of the synchronization
+     */
+    public List<LogEvent> synchronizeTruthOrLie(Long playerId) {
+        List<LogEvent> listEvents = new ArrayList<>();
+        listEvents.addAll(synchronizePlayersWithParticipant(false));
+        listEvents.addAll(completeConsistant());
+        return listEvents;
+    }
+
+
+    /**
+     * Is this part of the event is at the limit, according the subscription?
+     *
+     * @param updateContext
+     * @return true is the controller is as the limit
+     */
+    @Override
+    public boolean isAtLimit(EventService.UpdateContext updateContext) {
+        return false;
+    }
+
+    /**
+     * Create a new ChildEntity. Object is created, not saved in the database.
+     *
+     * @param updateContext        Information on update
+     * @param slabOperation        SlabOperation to perform
+     * @param eventOperationResult operationResult updated
+     * @return List of entity to create
+     */
+    @Override
+    public EventEntityPlan createEntity(EventService.UpdateContext updateContext, EventUpdate.Slab slabOperation, EventService.EventOperationResult eventOperationResult) {
+        return null;
+    }
+
+    /**
+     * add the entity in the database
+     *
+     * @param childEntity          Entity to save
+     * @param slabOperation        SlabOperation to perform
+     * @param eventOperationResult operationResult updated
+     * @return the baseEntity added, which may be modified (persistenceid is updated)
+     */
+    @Override
+    public BaseEntity addEntity(BaseEntity childEntity, EventUpdate.Slab slabOperation, EventService.EventOperationResult eventOperationResult) {
+        return null;
+    }
+
+    /**
+     * Database may return a constraint error, because 2 threads try to do the same operation at the same time.
+     * So, the server has to deal with that. One solution is to retrieve the current record saved in the database, and return it
+     *
+     * @param childEntity          child Entity to insert
+     * @param slabOperation        slab operation in progress
+     * @param eventOperationResult eventOperationResult
+     * @return the correct entity, which may be the existing entity in the database
+     */
+    @Override
+    public BaseEntity manageConstraint(BaseEntity childEntity, EventUpdate.Slab slabOperation, EventService.EventOperationResult eventOperationResult) {
+        return null;
+    }
+
+    /**
+     * Get the entity by it id
+     *
+     * @param entityId the entityId
+     * @return the BaseEntity
+     */
+    @Override
+    public BaseEntity getEntity(long entityId) {
+        return null;
+    }
+
+    /**
+     * Save the entity transported by the controller
+     *
+     * @param childEntity
+     * @param slabOperation        SlabOperation to perform
+     * @param eventOperationResult LogEvent may be updated in case of error
+     * @return the baseEntiy, which may be has modified (persistenceid is updated)
+     */
+    @Override
+    public BaseEntity updateEntity(BaseEntity childEntity, EventUpdate.Slab slabOperation, EventService.EventOperationResult eventOperationResult) {
+        return null;
+    }
+
+    /**
+     * Remove the given entity
+     *
+     * @param childEntity          to remove
+     * @param eventOperationResult LogEvent may be updated in case of error
+     * @return
+     */
+    @Override
+    public void removeEntity(BaseEntity childEntity, EventService.EventOperationResult eventOperationResult) {
+        // Nothing to manage here, not possible to remove a participant
+    }
+
+    /**
+     * The controller return the type limit acceptable.
+     * By default, the maxEntity is not knoz, and had to be calculated outside.
+     * So, before any save call, the setLimitNumber has to be called
+     *
+     * @return
+     */
+    @Override
+    public SubscriptionService.LimitReach getLimitReach() {
+        return null;
     }
 }

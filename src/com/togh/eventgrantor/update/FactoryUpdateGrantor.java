@@ -46,10 +46,7 @@ public class FactoryUpdateGrantor {
      */
     public BaseUpdateGrantor getFromEntity(BaseEntity baseEntity) {
         BaseUpdateGrantor grantor = relations.get(baseEntity.getClass());
-        if (grantor == null) {
-            // this is not an issue: all Entity may not have a specific grantor.
-            return null;
-        }
+        // this is not an issue: all Entity may not have a specific grantor.
         return grantor;
     }
 }

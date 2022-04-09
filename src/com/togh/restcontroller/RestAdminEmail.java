@@ -73,7 +73,7 @@ public class RestAdminEmail {
         List<LogEvent> listLogEvent = apiKeyService.updateKeys(listApiKey);
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put(RestJsonConstants.LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
     }
@@ -106,7 +106,7 @@ public class RestAdminEmail {
 
                 localSmtpService);
 
-        payload.put(RestJsonConstants.LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
     }

@@ -22,5 +22,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventExpenseRepository extends JpaRepository<EventExpenseEntity, Long> {
 
-    public EventExpenseEntity findById(long id);
+    EventExpenseEntity findById(long id);
 }

@@ -9,6 +9,7 @@
 package com.togh.service;
 
 import com.togh.engine.logevent.LogEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,8 +28,11 @@ import java.util.logging.Logger;
 @Service
 public class MonitorService {
 
-    private final static String logHeader = "com.togh.MonitorService";
+    private final static String logHeader = MonitorService.class.getName() + ":";
     private final Logger logger = Logger.getLogger(MonitorService.class.getName());
+
+    @Autowired
+    private LogService LogService;
 
     public Chrono startOperation(String operationName) {
         Chrono chrono = new Chrono();
@@ -53,15 +57,12 @@ public class MonitorService {
     }
 
     /**
-     * When an error arrive in the server, we want to register it for the adminnistrator, and then display it
+     * When an error arrive in the server, we want to register it for the administrator, and then display it
      *
      * @param listEvents list of event to register
      */
     public void registerErrorEvents(List<LogEvent> listEvents) {
-        /*
-         * To be saved somewhere, only the error event.
-         * To not register multiple time a day the same error, then we check if it is not already present for this day. If yes, then just add in the counter
-         */
+        LogService.registerLog(listEvents, null);
     }
 
     public static class Chrono {

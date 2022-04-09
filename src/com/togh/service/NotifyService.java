@@ -14,6 +14,9 @@ import com.togh.engine.logevent.LogEventFactory;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.StatusEventEnum;
 import com.togh.entity.ToghUserEntity;
+import com.togh.serialization.FactorySerializer;
+import com.togh.serialization.SerializerOptions;
+import com.togh.serialization.ToghUserSerializer;
 import com.togh.service.TranslatorService.Sentence;
 import com.togh.service.event.EventController;
 import com.togh.service.event.EventPresentationAttribut;
@@ -77,9 +80,12 @@ public class NotifyService {
                                                    String subject,
                                                    String message,
                                                    boolean useMyEmailAsFrom,
-                                                   @Nonnull EventEntity eventEntity) {
+                                                   @Nonnull EventEntity eventEntity,
+                                                   FactorySerializer factorySerializer) {
+        ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromClass(ToghUserEntity.class);
+        SerializerOptions serializeOptions = new SerializerOptions(toghUserEntity, 0L, SerializerOptions.ContextAccess.EVENTACCESS);
 
-        // the userEntity will contains the language
+        // the userEntity will contain the language
         String lang = toghUserEntity.getLanguage() == null ? invitedByToghUser.getLanguage() : toghUserEntity.getLanguage();
         String subjectEmail = (subject == null || subject.trim().length() == 0) ?
                 translatorService.getDictionarySentence(Sentence.INVITED_TOGH_EVENT, lang) :
@@ -95,7 +101,7 @@ public class NotifyService {
         cartridgeText.append("," + BR);
         cartridgeText.append(translatorService.getDictionarySentence(Sentence.YOU_ARE_INVITED_BY, lang));
         cartridgeText.append(NBSP);
-        cartridgeText.append("<span style=\"color: #1f78b4;font-weight: bold;\">" + invitedByToghUser.getLabel() + "</span>");
+        cartridgeText.append("<span style=\"color: #1f78b4;font-weight: bold;\">" + toghUserSerializer.getUserLabel(invitedByToghUser, serializeOptions) + "</span>");
         cartridgeText.append(NBSP);
         cartridgeText.append(translatorService.getDictionarySentence(Sentence.TO_JOIN_A, lang));
         cartridgeText.append(NBSP);
@@ -112,15 +118,16 @@ public class NotifyService {
         st.append(translatorService.getDictionarySentence(Sentence.TOGH_EVENT_EXPLANATION, lang));
         st.append(BR);
 
-        st.append(String.format(translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang), invitedByToghUser.getLabel()));
+        st.append(String.format(translatorService.getDictionarySentence(Sentence.THE_EVENT_WE_PROPOSE_TO_JOIN, lang),
+                toghUserSerializer.getUserLabel(invitedByToghUser, serializeOptions)));
 
-        EventController eventController = EventController.getInstance(eventEntity, factoryService, factoryRepository);
+        EventController eventController = EventController.getInstance(eventEntity, factoryService, factoryRepository, factorySerializer);
         EventPresentationAttribut eventPresentationAttribut = new EventPresentationAttribut();
         eventPresentationAttribut.bannerAction = "<a href=\"" + getUrlInvitation(toghUserEntity, eventEntity) + "\""
                 + " style=\"text-decoration: none;color: white;\">"
                 + translatorService.getDictionarySentence(Sentence.REGISTER_AND_JOIN_THIS_EVENT, lang) + "</a>";
 
-        st.append(eventController.getEventPresentation().getHtmlPresentation(eventPresentationAttribut, toghUserEntity));
+        st.append(eventController.getEventPresentation().getHtmlPresentation(eventPresentationAttribut, toghUserEntity, factorySerializer));
 
         st.append(translatorService.getDictionarySentence(Sentence.TO_JOIN_EXPLANATION, lang) + BR);
 

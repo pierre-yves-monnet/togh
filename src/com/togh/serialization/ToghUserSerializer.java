@@ -68,11 +68,9 @@ public class ToghUserSerializer extends BaseSerializer {
         ToghUserEntity toghUserEntity = (ToghUserEntity) baseEntity;
         Map<String, Object> resultMap = super.getBasicMap(toghUserEntity, serializerOptions);
 
-        StringBuilder label = new StringBuilder();
         StringBuilder longLabel = new StringBuilder();
 
         if (toghUserEntity.getName() != null) {
-            label.append(toghUserEntity.getName());
             longLabel.append(toghUserEntity.getName());
         }
 
@@ -98,8 +96,6 @@ public class ToghUserSerializer extends BaseSerializer {
             resultMap.put(JSON_EMAIL, toghUserEntity.getEmail());
             if (toghUserEntity.getEmail() != null && toghUserEntity.getEmail().trim().length() > 0) {
                 // the label is the email only if there is no label at this moment
-                if (label.toString().trim().length() == 0)
-                    label.append(encapsulate("(", toghUserEntity.getEmail(), ")"));
                 longLabel.append(encapsulate(" (", toghUserEntity.getEmail(), ")"));
             }
         } else
@@ -108,14 +104,12 @@ public class ToghUserSerializer extends BaseSerializer {
         if (isVisible(toghUserEntity, toghUserEntity.getPhoneNumberVisibility(), serializerOptions)) {
             resultMap.put(JSON_PHONE_NUMBER, toghUserEntity.getPhoneNumber());
             if (toghUserEntity.getPhoneNumber() != null) {
-                if (label.length() == 0)
-                    label.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " )"));
                 longLabel.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " "));
             }
         } else
             resultMap.put(JSON_PHONE_NUMBER, "*********");
 
-        resultMap.put(JSON_LABEL, label.toString());
+        resultMap.put(JSON_LABEL, getUserLabel(toghUserEntity, serializerOptions));
         resultMap.put(JSON_LONG_LABEL, longLabel.toString());
 
         if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.MYPROFILE)
@@ -139,6 +133,34 @@ public class ToghUserSerializer extends BaseSerializer {
             resultMap.put(JSON_CONNECTED, toghUserEntity.getConnectionStamp() == null ? JSON_CONNECTED_OFFLINE : JSON_CONNECTED_ONLINE);
         }
         return resultMap;
+    }
+
+    /**
+     * Return the user label according the visible rule and the serialization option
+     *
+     * @param toghUserEntity
+     * @param serializerOptions
+     * @return
+     */
+    public String getUserLabel(ToghUserEntity toghUserEntity, SerializerOptions serializerOptions) {
+        StringBuilder label = new StringBuilder();
+        if (toghUserEntity.getName() != null) {
+            label.append(toghUserEntity.getName());
+        }
+        if (isVisible(toghUserEntity, toghUserEntity.getEmailVisibility(), serializerOptions)) {
+            if (toghUserEntity.getEmail() != null && toghUserEntity.getEmail().trim().length() > 0) {
+                // the label is the email only if there is no label at this moment
+                if (label.toString().trim().length() == 0)
+                    label.append(encapsulate("(", toghUserEntity.getEmail(), ")"));
+            }
+        }
+        if (isVisible(toghUserEntity, toghUserEntity.getPhoneNumberVisibility(), serializerOptions)) {
+            if (toghUserEntity.getPhoneNumber() != null) {
+                if (label.length() == 0)
+                    label.append(encapsulate(" ", toghUserEntity.getPhoneNumber(), " )"));
+            }
+        }
+        return label.toString();
     }
 
     /**

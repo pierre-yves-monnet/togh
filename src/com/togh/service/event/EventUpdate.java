@@ -15,6 +15,7 @@ import com.togh.engine.tool.JpaTool;
 import com.togh.entity.EventEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.base.BaseEntity;
+import com.togh.entity.base.UserEntity;
 import com.togh.eventgrantor.update.BaseUpdateGrantor;
 import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
@@ -133,7 +134,7 @@ public class EventUpdate {
                             slab.operation.toString(),
                             slab.attributName,
                             updateContext.getToghUser().getId(),
-                            updateContext.getToghUser().getLabel())));
+                            updateContext.getToghUser().getLogLabel())));
             return;
         }
 
@@ -163,7 +164,7 @@ public class EventUpdate {
             eventChildController.addEntity(entityPlan.child, slab, eventOperationResult);
         } catch (Exception e) {
             // assuming the controller update the event
-            logger.severe(LOG_HEADER + "Can't insert " + entityPlan.child.toString() + " : " + e.toString());
+            logger.severe(LOG_HEADER + "Can't insert " + entityPlan.child.toString() + " : " + e);
             entityPlan.child = eventChildController.manageConstraint(entityPlan.child, slab, eventOperationResult);
             eventOperationResult.addLogEvent(new LogEvent(eventInvalidUpdateOperation,
                     e,
@@ -198,7 +199,7 @@ public class EventUpdate {
                                 slab.operation.toString(),
                                 slab.attributName,
                                 updateContext.getToghUser().getId(),
-                                updateContext.getToghUser().getLabel())));
+                                updateContext.getToghUser().getLogLabel())));
             }
         }
     }
@@ -216,7 +217,6 @@ public class EventUpdate {
             baseEntity = slab.baseEntity == null ? event : slab.baseEntity;
         } else {
             baseEntity = eventController.localise(event, slab.localisation);
-
         }
 
         if (baseEntity == null) {
@@ -231,12 +231,17 @@ public class EventUpdate {
                             slab.operation.toString(),
                             slab.attributName,
                             updateContext.getToghUser().getId(),
-                            updateContext.getToghUser().getLabel())));
+                            updateContext.getToghUser().getLogLabel())));
             return;
         }
         eventOperationResult.listChildEntities.add(baseEntity);
         eventOperationResult.listChildEntitiesId.add(baseEntity.getId());
         eventOperationResult.addLogEvents(JpaTool.updateEntityOperation(baseEntity, slab.attributName, slab.attributValue, updateContext));
+        // update user
+        if (baseEntity instanceof UserEntity && updateContext.getToghUser() != null) {
+            ((UserEntity) baseEntity).setAuthor(updateContext.getToghUser());
+        }
+
 
         event.touch();
     }
@@ -296,6 +301,13 @@ public class EventUpdate {
             attributName = (String) recordSlab.get("name");
             attributValue = recordSlab.get("value");
             localisation = (String) recordSlab.get("localisation");
+        }
+
+        public Slab(SlabOperation operation, String attributName, Object attributValue, String localisation) {
+            this.operation = operation;
+            this.attributName = attributName;
+            this.attributValue = attributValue;
+            this.localisation = localisation;
         }
 
         public Slab(SlabOperation operation, String attributName, Object attributValue, BaseEntity baseEntity) {

@@ -8,11 +8,17 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
-import com.togh.entity.EventEntity;
-import com.togh.entity.EventGameEntity;
+import com.togh.engine.logevent.LogEvent;
+import com.togh.entity.*;
 import com.togh.entity.base.BaseEntity;
+import com.togh.serialization.FactorySerializer;
+import com.togh.serialization.SerializerOptions;
+import com.togh.serialization.ToghUserSerializer;
 import com.togh.service.EventService;
 import com.togh.service.SubscriptionService;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EventGameController extends EventAbsChildController {
 
@@ -80,14 +86,136 @@ public class EventGameController extends EventAbsChildController {
     }
 
     /**
-     * Some game are based on the participants list, giving for each participant an another participant (for a gift, to find hime, to play with him...)
+     * Some games are based on the participants list, giving for each participant a different participant (for a gift, to find him, to play with him...)
      *
      * @return the EventGameParticipantController
      */
-    public EventGameParticipantController getEventPartipantController(EventGameEntity gameEntity) {
+    public EventGameParticipantController getEventParticipantController(EventGameEntity gameEntity) {
         if (gameEntity.getTypeGame() == EventGameEntity.TypeGameEnum.SECRETSANTAS)
             return new EventGameParticipantController(getEventController(), getEventEntity(), gameEntity);
+        if (gameEntity.getTypeGame() == EventGameEntity.TypeGameEnum.TRUTHORLIE)
+            return new EventGameTruthOrLieController(getEventController(), getEventEntity(), gameEntity);
         return null;
     }
 
+    /**
+     * Complete the consistency of the game
+     *
+     * @param gameEntity game entity
+     * @return a list of Slab if any update has to be done. Some update can be performed directly in the gameEntity
+     */
+    public List<LogEvent> completeConsistant(EventGameEntity gameEntity) {
+        EventGameParticipantController gameController = getEventParticipantController(gameEntity);
+        return gameController.completeConsistant();
+    }
+
+    /**
+     * Get the result of the vote
+     *
+     * @param gameEntity     gameEntity to collect the result
+     * @param toghUserEntity user who want to have the result
+     * @return the result on a map
+     */
+    public Map<String, Object> getResult(EventGameEntity gameEntity, ToghUserEntity toghUserEntity,
+                                         SerializerOptions serializerOptions,
+                                         FactorySerializer factorySerializer) {
+        Map<String, Object> result = new HashMap<>();
+        ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromClass(ToghUserEntity.class);
+
+        boolean publish = this.getEventController().isOrganizer(toghUserEntity);
+        // check the rule: do we publish the result?
+        if (!publish) {
+            switch (gameEntity.getDiscoverResult()) {
+                case STARTEVENT:
+                    publish = this.getEventController().getEvent().isEventStarted();
+                    break;
+                case ENDEVENT:
+                    publish = this.getEventController().getEvent().isEventEnded();
+                    break;
+                case IMMEDIAT:
+                default:
+                    publish = true;
+            }
+        }
+        if (!publish)
+            return result;
+
+
+        // preparation: build a dictionary for all sentences
+        Map<Long, SentenceTransport> dictionarySentences = new HashMap<>();
+        for (EventGameTruthOrLieEntity truthOrLieEntity : gameEntity.getTruthOrLieList()) {
+            if (Boolean.TRUE.equals(truthOrLieEntity.getValidateSentences())) {
+                for (EventGameTruthOrLieSentenceEntity sentence : truthOrLieEntity.getSentencesList())
+                    dictionarySentences.put(sentence.getId(), new SentenceTransport(sentence, truthOrLieEntity));
+            }
+        }
+        int numberOfValidateSentence = 0;
+        List<Map<String, Object>> listResult = new ArrayList<>();
+        for (EventGameTruthOrLieEntity truthOrLieEntity : gameEntity.getTruthOrLieList()) {
+            if (Boolean.TRUE.equals(truthOrLieEntity.getValidateSentences())) {
+                numberOfValidateSentence++;
+            }
+            Map<String, Object> onePlayer = new HashMap<>();
+
+            onePlayer.put("name", toghUserSerializer.getUserLabel(truthOrLieEntity.getPlayerUser(), serializerOptions));
+            onePlayer.put("validatesentences", truthOrLieEntity.getValidateSentences());
+
+            List<Map<String, Object>> listVotesPlayer = new ArrayList<>();
+            onePlayer.put("vote", listVotesPlayer);
+            int numberOfVotes = 0;
+            int totalNumberOfPoints = 0;
+            for (EventGameTruthOrLieVoteEntity voteEntity : truthOrLieEntity.getVoteList()) {
+                // vote is validated?
+                if (!Boolean.TRUE.equals(voteEntity.getValidateVote()))
+                    continue;
+                numberOfVotes++;
+                // check each sentences
+                int numberOfPoints = 0;
+                for (EventGameTruthOrLieVoteOneSentenceEntity voteSentence : voteEntity.getVoteSentenceList()) {
+                    SentenceTransport sourceSentence = dictionarySentences.get(voteSentence.getSentenceId());
+                    int pointsForTheSentence = 0;
+                    if (sourceSentence.sentenceEntity.getStatusSentence().equals(voteSentence.getStatusVote()))
+                        pointsForTheSentence = 10;
+                    Map<String, Object> voteDetailsMap = new HashMap<>();
+                    voteDetailsMap.put("sentence", sourceSentence.sentenceEntity.getSentence());
+                    voteDetailsMap.put("statussentence", sourceSentence.sentenceEntity.getStatusSentence().toString());
+                    voteDetailsMap.put("statusvote", voteSentence.getStatusVote().toString());
+                    voteDetailsMap.put("pointsforthesentence", pointsForTheSentence);
+                    voteDetailsMap.put("sourceplayer", toghUserSerializer.getUserLabel(sourceSentence.truthOrLieEntity.getPlayerUser(), serializerOptions));
+                    numberOfPoints += pointsForTheSentence;
+                    // we add the details only if the user is an organizer, or if it is its own vote
+                    if (this.getEventController().isOrganizer(toghUserEntity)
+                            || toghUserEntity.getId().equals(truthOrLieEntity.getPlayerUser().getId()))
+                        listVotesPlayer.add(voteDetailsMap);
+                }
+                totalNumberOfPoints += numberOfPoints;
+            }
+            onePlayer.put("numberofvotes", numberOfVotes);
+            onePlayer.put("totalvotes", truthOrLieEntity.getVoteList().size());
+            onePlayer.put("points", totalNumberOfPoints);
+            listResult.add(onePlayer);
+
+        }
+        listResult = listResult.stream()
+                .sorted(Comparator.comparingInt(t -> -1 * ((Integer) t.get("points"))))
+                .collect(Collectors.toList());
+        //     .sorted(Collections.reverseOrder()) // Method on Stream<Integer>
+        for (int i = 0; i < listResult.size(); i++) {
+            listResult.get(i).put("range", (i + 1));
+        }
+        result.put("players", listResult);
+
+        return result;
+    }
+
+    private static class SentenceTransport {
+        EventGameTruthOrLieSentenceEntity sentenceEntity;
+        EventGameTruthOrLieEntity truthOrLieEntity;
+
+        public SentenceTransport(EventGameTruthOrLieSentenceEntity sentenceEntity,
+                                 EventGameTruthOrLieEntity truthOrLieEntity) {
+            this.sentenceEntity = sentenceEntity;
+            this.truthOrLieEntity = truthOrLieEntity;
+        }
+    }
 }

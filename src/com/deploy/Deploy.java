@@ -53,7 +53,7 @@ public class Deploy {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
             writer.append(content);
         } catch (Exception e) {
-            logger.severe("Can't write file[" + fileName + "] error " + e.toString());
+            logger.severe("Can't write file[" + fileName + "] error " + e);
         }
     }
 }

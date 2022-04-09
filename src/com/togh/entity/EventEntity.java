@@ -11,6 +11,7 @@ package com.togh.entity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.base.UserEntity;
+import com.togh.tool.ToolCast;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.BatchSize;
@@ -19,8 +20,10 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -45,7 +48,7 @@ class EventEntity extends UserEntity {
     @Column(name = "dateevent")
     private LocalDateTime dateEvent;
     /**
-     * In case of a policy Period, a Start and End event are provide.
+     * In case of a policy Period, a Start and End event are provided.
      * Nota: LocalDateTime in UTC timezone
      */
     @Column(name = "datestartevent")
@@ -107,7 +110,9 @@ class EventEntity extends UserEntity {
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 100)
     @JoinColumn(name = "eventid")
+    @OrderBy("id")
     private List<ParticipantEntity> participantList = new ArrayList<>();
+
     @Column(name = "itineraryshowmap")
     @org.hibernate.annotations.ColumnDefault("'1'")
     private Boolean itineraryShowMap;
@@ -210,6 +215,47 @@ class EventEntity extends UserEntity {
     }
 
     public EventEntity() {
+    }
+
+    public LocalDateTime getWhenTheEventStart() {
+        if (DatePolicyEnum.ONEDATE.equals(getDatePolicy()))
+            return getDateEvent();
+        else if (DatePolicyEnum.PERIOD.equals(getDatePolicy()))
+            return getDateStartEvent();
+        return null;
+    }
+
+    public boolean isEventStarted() {
+        LocalDateTime currentDate = LocalDateTime.now(ZoneOffset.UTC);
+        LocalDateTime dateStart = getWhenTheEventStart();
+        return dateStart != null && dateStart.isBefore(currentDate);
+    }
+
+
+    public Long getDurationInMinutes() {
+        if (getDurationEvent() == null)
+            return null;
+        StringTokenizer st = new StringTokenizer(getDurationEvent(), ":");
+        String hour = st.nextToken();
+        String mn = st.nextToken();
+        return ToolCast.getLong(hour, 0L) * 60 + ToolCast.getLong(mn, 0L);
+    }
+
+    public LocalDateTime getWhenTheEventEnd() {
+        if (DatePolicyEnum.ONEDATE.equals(getDatePolicy())) {
+            Long durationMinutes = getDurationInMinutes();
+            if (getDateEvent() == null || durationMinutes == null)
+                return null;
+            return getDateEvent().minusMinutes(-getDurationInMinutes());
+        } else if (DatePolicyEnum.PERIOD.equals(getDatePolicy()))
+            return getDateEndEvent();
+        return null;
+    }
+
+    public boolean isEventEnded() {
+        LocalDateTime currentDate = LocalDateTime.now(ZoneOffset.UTC);
+        LocalDateTime dateEnd = getWhenTheEventEnd();
+        return dateEnd != null && dateEnd.isAfter(currentDate);
     }
 
     /**
@@ -400,6 +446,19 @@ class EventEntity extends UserEntity {
         }
         return false;
     }
+
+    /**
+     * Add a TrueOrLie entity
+     *
+     * @param gameEntity       game where the truthOrLie must be added
+     * @param truthOrLieEntity entity to add
+     * @return the added entity
+     */
+    public EventGameTruthOrLieEntity addTruthOrLie(EventGameEntity gameEntity, EventGameTruthOrLieEntity truthOrLieEntity) {
+        gameEntity.getTruthOrLieList().add(truthOrLieEntity);
+        return truthOrLieEntity;
+    }
+
 
     @Override
     public String toString() {

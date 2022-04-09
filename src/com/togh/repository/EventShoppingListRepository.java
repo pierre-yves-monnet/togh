@@ -22,6 +22,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventShoppingListRepository extends JpaRepository<EventShoppingListEntity, Long> {
 
-    public EventShoppingListEntity findById(long id);
+    EventShoppingListEntity findById(long id);
 
 }

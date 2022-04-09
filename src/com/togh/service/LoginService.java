@@ -339,7 +339,7 @@ public class LoginService {
         ToghUserEntity toghUser = isConnected(connectionStamp);
 
         if (toghUser == null)
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.HTTPCODE_NOTCONNECTED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         // check if the user is an administrator
         if (!isAdministrator(toghUser)) {
@@ -377,7 +377,7 @@ public class LoginService {
             toghUserLostPasswordRepository.save(lostPasswordEntity);
         } catch (Exception ex) {
             loginStatus.status = LoginStatus.SERVERISSUE;
-            loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.get().getLabel() + "]"));
+            loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.get().getLogLabel() + "]"));
             monitorService.registerErrorEvents(loginStatus.listEvents);
             underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
@@ -392,11 +392,11 @@ public class LoginService {
         } else if (notificationStatus.hasServerIssue()) {
             lostPasswordEntity.setStatusProcess(StatusProcessEnum.SERVERISSUE);
             loginStatus.status = LoginStatus.SERVERISSUE;
-            loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.get().getLabel() + "]"));
+            loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.get().getLogLabel() + "]"));
         } else {
             lostPasswordEntity.setStatusProcess(StatusProcessEnum.EMAILINERROR);
             loginStatus.status = LoginStatus.BADEMAIL;
-            loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.get().getLabel() + "]"));
+            loginStatus.listEvents.add(new LogEvent(eventEmailResetPasswordFailed, "User[" + toghUserEntity.get().getLogLabel() + "]"));
 
         }
 
@@ -404,7 +404,7 @@ public class LoginService {
             toghUserLostPasswordRepository.save(lostPasswordEntity);
         } catch (Exception ex) {
             loginStatus.status = LoginStatus.SERVERISSUE;
-            loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.get().getLabel() + "]"));
+            loginStatus.listEvents.add(new LogEvent(eventCantSaveLostPassword, ex, "User[" + toghUserEntity.get().getLogLabel() + "]"));
             monitorService.registerErrorEvents(loginStatus.listEvents);
             underAttackService.reportSuspiciousLogin(loginStatus);
             return loginStatus;
@@ -581,7 +581,7 @@ public class LoginService {
         SearchUsersResult searchUsersResult = toghUserService.searchConnectedUsersNoActivity(timeCheck, 0, 1000);
         logger.info(String.format("%s disconnectInactiveUsers found %d users", LOG_HEADER, searchUsersResult.listUsers.size()));
         for (ToghUserEntity toghUserEntity : searchUsersResult.listUsers) {
-            logger.info(LOG_HEADER + "disconnectInactiveUsers Disconnect[" + toghUserEntity.getLabel() + "]");
+            logger.info(LOG_HEADER + "disconnectInactiveUsers Disconnect[" + toghUserEntity.getLogLabel() + "]");
             toghUserEntity.setConnectionStamp(null);
             toghUserService.saveUser(toghUserEntity);
         }

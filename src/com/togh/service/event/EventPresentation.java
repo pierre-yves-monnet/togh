@@ -12,6 +12,9 @@ import com.togh.entity.EventEntity;
 import com.togh.entity.EventEntity.DatePolicyEnum;
 import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ToghUserEntity;
+import com.togh.serialization.FactorySerializer;
+import com.togh.serialization.SerializerOptions;
+import com.togh.serialization.ToghUserSerializer;
 import com.togh.service.FactoryService;
 import com.togh.service.TranslatorService.Sentence;
 
@@ -26,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 /*                                                                                  */
 /*  EventPresentation,                                                              */
 /*                                                                                  */
-/*  Create presentation for an event, to send in a Email, etc                       */
+/*  Create presentation for an event, to send in an Email, etc                       */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -47,9 +50,14 @@ public class EventPresentation {
     /**
      * Return a nice HTML presentation
      *
+     * @param eventPresentationAttribut attribut to build the presentation
+     * @param toghUserEntity            user who send the presentation
+     * @param factorySerializer         to access the toghSerializer to get the user label
      * @return
      */
-    public String getHtmlPresentation(EventPresentationAttribut eventPresentationAttribut, ToghUserEntity toghUserEntity) {
+    public String getHtmlPresentation(EventPresentationAttribut eventPresentationAttribut,
+                                      ToghUserEntity toghUserEntity,
+                                      FactorySerializer factorySerializer) {
         EventEntity event = eventController.getEvent();
         StringBuilder result = new StringBuilder();
 
@@ -79,10 +87,14 @@ public class EventPresentation {
         result.append("  <td colspan=\"2\" style=\"padding: 10px 10px 10px 10px;\"><i>");
         result.append(factoryService.getTranslatorService().getDictionarySentence(Sentence.PARTICIPANTS, toghUserEntity.getLanguage()));
         result.append(":</i><br>");
+
+        ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromClass(ToghUserEntity.class);
+        SerializerOptions serializeOptions = new SerializerOptions(toghUserEntity, 0L, SerializerOptions.ContextAccess.EVENTACCESS);
+
         for (ParticipantEntity participant : event.getParticipantList()) {
             ToghUserEntity userParticipant = participant.getUser();
             if (userParticipant != null)
-                result.append(NBSP + NBSP + userParticipant.getLabel() + "<br>");
+                result.append(NBSP + NBSP + toghUserSerializer.getUserLabel(userParticipant, serializeOptions) + "<br>");
         }
         result.append("  </td>");
         result.append("</tr>");

@@ -7,12 +7,6 @@ environnment                                          */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-npm install npm install -S carbon-components carbon-components-react carbon-icons
-
-copier configuration/paths.js dans node_modules/react-scripts/config/path
-
-mvn clean install
-
 
 ## Database
 
@@ -123,41 +117,48 @@ Example : date of the event is a Date + Time (Zoned)
 
 # Development
 /* ******************************************************************************** */
-/*                                                                                  */
-/*  Development  							                                        */
+/*                                                                                  */ /*
+Development                                                                    */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
-
 ## React
 
-Explication sur React:
+copier configuration/paths.js dans node_modules/react-scripts/config/path
+
+Carbon:
+https://www.carbondesignsystem.com/developing/react-tutorial/overview
+install carbon
+https://www.npmjs.com/package/carbon-components
+
+npm config set python c:\python27\python.exe npm install --global windows-build-tools
+
+npm install -S carbon-components carbon-components-react carbon-icons npm install react-intl npm install
+babel-plugin-react-intl npm install react-custom-flag-select --save npm install react-bootstrap-icons --save npm install
+react-google-login npm install react-chartjs-2 npm install react-autosuggest npm install react-geocode npm install
+react-axios npm install react-currency-input --force npm install --save google-map-react
+
+mvn clean install
+
+## Explication sur React:
+
 https://fr.reactjs.org/docs/state-and-lifecycle.html
 
 https://daveceddia.com/angular-directives-mapped-to-react/
 https://fr.reactjs.org/docs/getting-started.html
 
-
 https://www.taniarascia.com/getting-started-with-react/
 
-
 https://www.pluralsight.com/guides/how-to-use-react-bootstrap's-popover
-Mais ca ne marche pas car il faut du JS Voici comme il fait 
+Mais ca ne marche pas car il faut du JS Voici comme il fait
 https://www.codeply.com/p/p5euzBO22C
 
 
 
 13 date picker
 https://blog.bitsrc.io/13-react-time-and-date-pickers-for-2020-d52d88d1ca0b
-
-Carbon:
-https://www.carbondesignsystem.com/developing/react-tutorial/overview
-install carbon
-https://www.npmjs.com/package/carbon-components
-npm install -S carbon-components carbon-components-react carbon-icons
-
 
 https://react.semantic-ui.com/modules/dropdown/#types-search-selection
 
@@ -585,8 +586,10 @@ docker/compose:1.24.0 up &
     -p 7080:7080 \
     -p 3000:3000 \
 
-## SQL Database update
+## SQL Database production update (sql update)
 
+update evtparticipant set partof='PARTOF' where ispartof=true; update evtparticipant set partof='NO' where
+ispartof=false; update evtparticipant set partof='DONTKNOW' where ispartof is null;
 
 # Documentation
 
@@ -766,6 +769,14 @@ Roadmap                                                                         
 /*                                                                                  */
 /* ******************************************************************************** */
 
+## infrastructure
+
+- Avoir un cluster kubernetes
+- deployer un jenkins + backup de la base de données en locale
+- CDI : je commit, et le deployment est automatique sur mon google
+- make install, et ca push une nouvelle version dans docker
+-
+
 ## Tasks
 
 Simon Anchor Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie
@@ -871,30 +882,30 @@ Admin: avoir un "automatique refresh check box" : penible de clicker "connected"
 		- invited depuis trop longtemps : a purger
 		- inactif depuis trop longtemps : 
 
-
 ## bugs
+
+game true or lie
+
+* nouvel user qui vient de valider son invitation : sa liste de sentence est vide, il faut qu'il rerentre dans le jeu
+* click sur parametre ==> Part en erreur
+* fonction vote
+* fonction result
+* parametre "je ne peux voter que si je valide mes sentences "
+
+Invitation Je veux inviter <caromaillebiau@gmail.com>= > Togh refuse Je veux inviter caro@maillebiau.com ==> Toujours
+pas possible car cet utilisateur est en mode INVITE et donc je ne peux pas l'inviter a un 2eme event
+
+Invitation Un utilisateur (makeba) est invité sur un event Elle cree un nouvel event : c'est possible et on a 2 users
+avec le meme email. Et Makeba ne vois pas l'évent
 
 EventEntity.getMap : normaliser les constantes ici avec les SLAB_OPERATION (une seule constante)
 
-* eventlist : myevents ne marche pas. Ajouter un filtre "event in progress" pour ne voir que les futurs events
-
 * Je suis 2 fois : email en Majuscule et en Minuscule. Faire un test ignore case
-* admin: faire une purge d'user et un log de mauvaise connection
 * changeemail
 
-* Date des messages dans le chat qui est la date du jour
-
-
-* my profile => My invitation: on affiche la liste complete
-* My invitation => evnts : on n'a que "my events" et pas tout
+* Date des messages dans le chat qui est la date du jour Chat : "TheFriday" ==> "On Friday"
 
 Bouton invitation : mettre un + et invitation
-
-invited pierre-uves, pierre-yves monnet
-
-Je suis 2 fois dans le systeme !!
-
-Chat : "TheFriday" ==> "On Friday"
 
 ------------ Revoir l'URL : faire un bouton Share
 

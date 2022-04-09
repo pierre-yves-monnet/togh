@@ -8,6 +8,7 @@
 /* ******************************************************************************** */
 package com.togh.service.event;
 
+import com.togh.engine.logevent.LogEvent;
 import com.togh.entity.EventEntity;
 import com.togh.entity.EventItineraryStepEntity;
 import com.togh.entity.base.BaseEntity;
@@ -15,7 +16,6 @@ import com.togh.service.EventService.EventOperationResult;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.SubscriptionService.LimitReach;
 import com.togh.service.event.EventUpdate.Slab;
-import com.togh.service.event.EventUpdate.SlabOperation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -96,24 +96,24 @@ public class EventItineraryController extends EventAbsChildController {
     /**
      * @return
      */
-    public List<Slab> checkItinerary() {
-        List<Slab> listSlab = new ArrayList<>();
-        LocalDateTime dateBegin = getEventEntity().getDateStartEvent() == null ? getEventEntity().getDateEvent() : getEventEntity().getDateStartEvent();
-        LocalDateTime dateEnd = getEventEntity().getDateEndEvent() == null ? getEventEntity().getDateEvent() : getEventEntity().getDateEndEvent();
+    public List<LogEvent> checkItinerary() {
+        List<LogEvent> listLogEvent = new ArrayList<>();
+        LocalDateTime dateBegin = getEventEntity().getWhenTheEventStart();
+        LocalDateTime dateEnd = getEventEntity().getWhenTheEventEnd();
 
         for (EventItineraryStepEntity itineraryStep : getEventEntity().getItineraryStepList()) {
             if (itineraryStep.getDateStep() == null) {
                 if (dateBegin != null) {
-                    listSlab.add(new Slab(SlabOperation.UPDATE, CST_JSON_DATE_STEP, dateBegin.toLocalDate(), itineraryStep));
+                    itineraryStep.setDateStep(dateBegin.toLocalDate());
                 }
             } else {
                 if (dateBegin != null && itineraryStep.getDateStep().compareTo(dateBegin.toLocalDate()) < 0)
-                    listSlab.add(new Slab(SlabOperation.UPDATE, CST_JSON_DATE_STEP, dateBegin.toLocalDate(), itineraryStep));
+                    itineraryStep.setDateStep(dateBegin.toLocalDate());
                 if (dateEnd != null && itineraryStep.getDateStep().compareTo(dateEnd.toLocalDate()) > 0)
-                    listSlab.add(new Slab(SlabOperation.UPDATE, CST_JSON_DATE_STEP, dateEnd.toLocalDate(), itineraryStep));
+                    itineraryStep.setDateStep(dateEnd.toLocalDate());
             }
         }
-        return listSlab;
+        return listLogEvent;
     }
 
 }

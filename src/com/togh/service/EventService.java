@@ -97,6 +97,9 @@ public class EventService {
     @Autowired
     private FactoryUpdateGrantor factoryUpdateGrantor;
 
+    @Autowired
+    private LogService logService;
+
     /**
      * Update event: update attribut, create new item, delete item. All operations on event are done via the Slab Mechanism, which is a Updater design
      *
@@ -122,6 +125,7 @@ public class EventService {
             eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during update"));
         }
         eventOperationResult.eventEntity = eventEntity;
+        logService.registerLog(eventOperationResult.listLogEvents, updateContext.getToghUser());
         return eventOperationResult;
     }
 
@@ -174,6 +178,9 @@ public class EventService {
         } catch (Exception e) {
             EventOperationResult eventOperationResult = new EventOperationResult(null);
             eventOperationResult.listLogEvents.add(new LogEvent(eventCreationError, e, "User: [" + toghUserEntity.getName() + "] eventName[" + eventName + "]"));
+
+            logService.registerLog(eventOperationResult.listLogEvents, toghUserEntity);
+
             return eventOperationResult;
         }
 
@@ -214,6 +221,8 @@ public class EventService {
         } catch (Exception e) {
             invitationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during invitation"));
         }
+        logService.registerLog(invitationResult.listLogEvents, invitedByToghUser);
+
         return invitationResult;
     }
 
@@ -221,7 +230,7 @@ public class EventService {
      * Resend the notification invitation
      *
      * @param eventEntity       the event entity
-     * @param invitedByToghUser the toghuser who resend the invitation
+     * @param invitedByToghUser the toghUser who resend the invitation
      * @param participantId     the participantId to re-invite
      * @param subject           email subject
      * @param message           email message
@@ -242,10 +251,12 @@ public class EventService {
             invitationResult.listLogEvents.add(new LogEvent(eventParticipantNotFound, "Save event during resendInvitation"));
         } else {
             ToghUserEntity invited = searchParticipant.get(0).getUser();
-            NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(invited, invitedByToghUser, subject, message, useMyEmailAsFrom, eventEntity);
+            NotifyService.NotificationStatus notificationStatus
+                    = notifyService.notifyNewUserInEvent(invited, invitedByToghUser, subject, message, useMyEmailAsFrom, eventEntity, factorySerializer);
             invitationResult.listLogEvents.addAll(notificationStatus.listEvents);
             invitationResult.status = notificationStatus.isCorrect() ? InvitationStatus.INVITATIONSENT : InvitationStatus.ERRORDURINVITATION;
         }
+        logService.registerLog(invitationResult.listLogEvents, invitedByToghUser);
         return invitationResult;
     }
 
@@ -267,6 +278,8 @@ public class EventService {
                 eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during accessed by user"));
             }
         }
+        logService.registerLog(eventOperationResult.listLogEvents, toghUserEntity);
+
         return eventOperationResult;
     }
 
@@ -381,7 +394,7 @@ public class EventService {
      * @return the EventController attached to the entity
      */
     private EventController getEventController(EventEntity eventEntity) {
-        return new EventController(eventEntity, factoryService, factoryRepository);
+        return new EventController(eventEntity, factoryService, factoryRepository, factorySerializer);
     }
 
     public LoadEntityResult loadEntity(Class<?> classEntity, Long id) {
@@ -445,8 +458,42 @@ public class EventService {
         return listEventsToClose;
     }
 
-    public enum FilterEvents {
-        NEXTEVENTS, MYEVENTS, ALLEVENTS, MYINVITATIONS
+    /**
+     * Synchronize the players with all participants for a game.
+     *
+     * @param eventEntity    event entity of the game
+     * @param gameId         game id
+     * @param reset          do a complete reset of the game
+     * @param toghUserEntity toghUser who perform the operation
+     * @return the event operation result
+     */
+    public EventOperationResult gameSynchronizePlayer(EventEntity eventEntity, Long gameId, boolean reset, ToghUserEntity toghUserEntity) {
+
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isOrganizer(toghUserEntity)) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventAccessError);
+            return eventOperationResult;
+        }
+        EventGameEntity game = getGame(eventEntity, gameId);
+        if (game == null) {
+            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+            eventOperationResult.addLogEvent(eventEntityNotFound);
+            return eventOperationResult;
+        }
+
+
+        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventParticipantController(game);
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+
+        eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizePlayersWithParticipant(reset));
+        eventOperationResult.listChildEntities.add(game);
+        try {
+            eventRepository.save(eventEntity);
+        } catch (Exception e) {
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during gameSynchronizePlayer"));
+        }
+        return eventOperationResult;
     }
 
     /* ******************************************************************************** */
@@ -503,44 +550,6 @@ public class EventService {
     /* ******************************************************************************** */
 
     /**
-     * Synchronize the players with all participants for a game.
-     *
-     * @param eventEntity    event entity of the game
-     * @param gameId         game id
-     * @param reset          do a complete reset of the game
-     * @param toghUserEntity toghuser who perform the operation
-     * @return the event operation result
-     */
-    public EventOperationResult gameSynchronizePlayer(EventEntity eventEntity, Long gameId, boolean reset, ToghUserEntity toghUserEntity) {
-
-        EventController eventController = getEventController(eventEntity);
-        if (!eventController.isOrganizer(toghUserEntity)) {
-            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-            eventOperationResult.addLogEvent(eventAccessError);
-            return eventOperationResult;
-        }
-        EventGameEntity game = getGame(eventEntity, gameId);
-        if (game == null) {
-            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-            eventOperationResult.addLogEvent(eventEntityNotFound);
-            return eventOperationResult;
-        }
-
-
-        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventParticipantController(game);
-        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-
-        eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizePlayersWithParticipant(reset));
-        eventOperationResult.listChildEntities.add(game);
-        try {
-            eventRepository.save(eventEntity);
-        } catch (Exception e) {
-            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during gameSynchronizePlayer"));
-        }
-        return eventOperationResult;
-    }
-
-    /**
      * SynchronizeTruthOrLie
      *
      * @param eventEntity    eventEntity
@@ -550,35 +559,88 @@ public class EventService {
      * @return event operation
      */
     public EventOperationResult gameSynchronizeTruthOrLie(EventEntity eventEntity, Long gameId, Long playerId, ToghUserEntity toghUserEntity) {
-
-        EventController eventController = getEventController(eventEntity);
-        if (!eventController.isActiveParticipant(toghUserEntity)
-                || (!playerId.equals(toghUserEntity.getId()) && !eventController.isOrganizer(toghUserEntity))) {
-            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-            eventOperationResult.addLogEvent(eventAccessError);
-            return eventOperationResult;
-        }
-        // search the number of sentences in the game
-        EventGameEntity game = getGame(eventEntity, gameId);
-        if (game == null) {
-            EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-            eventOperationResult.addLogEvent(eventEntityNotFound);
-            return eventOperationResult;
-        }
-        EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventParticipantController(game);
         EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
-        eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizeTruthOrLie(playerId));
         try {
+            EventController eventController = getEventController(eventEntity);
+            if (!eventController.isActiveParticipant(toghUserEntity)
+                    || (!playerId.equals(toghUserEntity.getId()) && !eventController.isOrganizer(toghUserEntity))) {
+                eventOperationResult.addLogEvent(eventAccessError);
+                return eventOperationResult;
+            }
+            // search the number of sentences in the game
+            EventGameEntity game = getGame(eventEntity, gameId);
+            if (game == null) {
+                eventOperationResult.addLogEvent(eventEntityNotFound);
+                return eventOperationResult;
+            }
+            EventGameParticipantController gameParticipantController = eventController.getEventGameController().getEventParticipantController(game);
+
+            eventOperationResult.listLogEvents.addAll(gameParticipantController.synchronizeTruthOrLie(playerId));
             eventRepository.save(eventEntity);
             // add the complete game as the second child
             eventOperationResult.listChildEntities.add(game);
-            // add in the second child the
+        } catch (Exception e) {
+            eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during gameSynchronizeTruthOrLie"));
+        } finally {
+            logService.registerLog(eventOperationResult.listLogEvents, toghUserEntity);
+        }
+        return eventOperationResult;
+    }
+
+    /**
+     * Vote in a TruthOrLie.
+     * Note: the result is not part of this service task. Result is calculated when we returned information to the user.
+     *
+     * @param eventEntity    eventEntity
+     * @param gameId         gameId where the vote is
+     * @param voteId         voteId to vote
+     * @param playerId       player ID who vote. Check that the player ID is correct for the vote
+     * @param toghUserEntity user who vote
+     * @return operation result
+     */
+    public EventOperationResult gameTruthOrLieVote(EventEntity eventEntity, Long gameId, Long voteId, Long playerId, ToghUserEntity toghUserEntity) {
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+        try {
+            EventController eventController = getEventController(eventEntity);
+            if (!eventController.isActiveParticipant(toghUserEntity)
+                    || (!playerId.equals(toghUserEntity.getId()) && !eventController.isOrganizer(toghUserEntity))) {
+                eventOperationResult.addLogEvent(eventAccessError);
+                return eventOperationResult;
+            }
+            // search the number of sentences in the game
+            EventGameEntity game = getGame(eventEntity, gameId);
+            if (game == null) {
+                eventOperationResult.addLogEvent(eventEntityNotFound);
+                return eventOperationResult;
+            }
+            List<EventGameTruthOrLieEntity> listTruthOrLies
+                    = game.getTruthOrLieList()
+                    .stream()
+                    .filter(t -> t.getPlayerUser().getId().equals(playerId))
+                    .collect(Collectors.toList());
+            if (listTruthOrLies.isEmpty()) {
+                eventOperationResult.addLogEvent(eventEntityNotFound);
+                return eventOperationResult;
+            }
+            // search the vote
+            List<EventGameTruthOrLieVoteEntity> listVotes = listTruthOrLies.get(0).getVoteList().stream().filter(t -> t.getId().equals(voteId)).collect(Collectors.toList());
+            if (listVotes.isEmpty()) {
+                eventOperationResult.addLogEvent(eventEntityNotFound);
+                return eventOperationResult;
+            }
+            // vote!
+            listVotes.get(0).setValidateVote(Boolean.TRUE);
+
+            eventRepository.save(eventEntity);
+            // add the complete game as the second child
+            eventOperationResult.listChildEntities.add(game);
 
         } catch (Exception e) {
             eventOperationResult.listLogEvents.add(new LogEvent(eventSaveError, e, "Save event during gameSynchronizeTruthOrLie"));
+        } finally {
+            logService.registerLog(eventOperationResult.listLogEvents, toghUserEntity);
         }
         return eventOperationResult;
-
     }
 
     /**
@@ -591,6 +653,11 @@ public class EventService {
     private EventGameEntity getGame(EventEntity eventEntity, Long gameId) {
         List<EventGameEntity> listGames = eventEntity.getGameList().stream().filter(game -> game.getId().equals(gameId)).collect(Collectors.toList());
         return (listGames.isEmpty() ? null : listGames.get(0));
+    }
+
+
+    public enum FilterEvents {
+        NEXTEVENTS, MYEVENTS, ALLEVENTS, MYINVITATIONS
     }
 
     /**
@@ -616,7 +683,7 @@ public class EventService {
 
         public String getErrorMessage() {
             return errorMessage.stream()
-                    .map(ToghUserEntity::getLabel)
+                    .map(ToghUserEntity::getLogLabel)
                     .collect(Collectors.joining(","));
         }
 
@@ -626,7 +693,7 @@ public class EventService {
 
         public String getErrorSendEmail() {
             return errorSendEmail.stream()
-                    .map(ToghUserEntity::getLabel)
+                    .map(ToghUserEntity::getLogLabel)
                     .collect(Collectors.joining(","));
         }
 
@@ -636,7 +703,7 @@ public class EventService {
 
         public String getOkMessage() {
             return okMessage.stream()
-                    .map(ToghUserEntity::getLabel)
+                    .map(ToghUserEntity::getLogLabel)
                     .collect(Collectors.joining(","));
         }
     }

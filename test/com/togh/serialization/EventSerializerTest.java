@@ -30,7 +30,7 @@ class EventSerializerTest {
         eventEntity.setTypeEvent(EventEntity.TypeEventEnum.OPEN);
         BaseSerializer eventSerializer = factorySerializer.getFromEntity(eventEntity);
 
-        EventController eventController = new EventController(eventEntity, null, null);
+        EventController eventController = new EventController(eventEntity, null, null, null);
         EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, null, SerializerOptions.ContextAccess.EVENTACCESS);
         SerializerOptions serializerOptions = new SerializerOptions(null,
                 eventController,
@@ -81,7 +81,7 @@ class EventSerializerTest {
 
         BaseSerializer eventSerializer = factorySerializer.getFromEntity(eventEntity);
 
-        EventController eventController = new EventController(eventEntity, null, null);
+        EventController eventController = new EventController(eventEntity, null, null, null);
         EventAccessGrantor eventAccessGrantor = EventAccessGrantor.getEventAccessGrantor(eventController, null, SerializerOptions.ContextAccess.EVENTACCESS);
         SerializerOptions serializerOptions = new SerializerOptions(null,
                 eventController,

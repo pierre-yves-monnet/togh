@@ -13,13 +13,13 @@ import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
 import { PlusCircle,ArrowRepeat,ClipboardData, EnvelopeOpen, Calendar2Check, CalendarWeek } from 'react-bootstrap-icons';
 
 
-import FactoryService               from 'service/FactoryService';
-import MobileService                from 'service/MobileService.jsx';
-import EventState                   from 'event/EventState';
-import * as userFeedbackConstant    from 'component/UserFeedback';
-import UserFeedback                 from 'component/UserFeedback';
+import FactoryService               from './service/FactoryService';
+import MobileService                from './service/MobileService.jsx';
+import EventState                   from './event/EventState';
+import * as userFeedbackConstant    from './component/UserFeedback';
+import UserFeedback                 from './component/UserFeedback';
 
-import UserTips 		            from 'component/UserTips';
+import UserTips 		    from './component/UserTips';
 
 
 export const FILTER_EVENT = {

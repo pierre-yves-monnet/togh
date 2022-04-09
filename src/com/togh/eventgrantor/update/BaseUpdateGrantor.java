@@ -33,7 +33,7 @@ public interface BaseUpdateGrantor {
      *
      * @return
      */
-    Class getEntityClass();
+    Class<?> getEntityClass();
 
     /**
      * Return true if this operation is allowed on this Slab for the user in the context
@@ -47,6 +47,6 @@ public interface BaseUpdateGrantor {
      * @param eventController event controller
      * @return list of string to move to ReadOnly
      */
-    public List<String> getFieldsReadOnly(ToghUserEntity toghUser, EventController eventController);
+    List<String> getFieldsReadOnly(ToghUserEntity toghUser, EventController eventController);
 
 }

@@ -62,7 +62,7 @@ public class RestAdminInfo {
             listInformations.add(addInformation("Database Vendor", con.getMetaData().getDatabaseProductName()));
             listInformations.add(addInformation("Database Version", con.getMetaData().getDatabaseMajorVersion() + "." + con.getMetaData().getDatabaseMinorVersion()));
         } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't get database connection " + e.toString());
+            logger.severe(LOG_HEADER + "Can't get database connection " + e);
         }
 
         listInformations.add(addInformation("Java version", System.getProperty("java.version")));

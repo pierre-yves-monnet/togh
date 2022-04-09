@@ -47,9 +47,9 @@ class RestcallService {
 		const requestOptions = {
 	        headers: headers
 	    };
-		uri = uri+"&timezoneoffset="+(new Date()).getTimezoneOffset();
-		console.log("RestCallService.getJson: uri="+uri);
-    	axios.get( this.getUrl( uri ), requestOptions)
+		let uriWithTimeZoneOffset = uri+"&timezoneoffset="+(new Date()).getTimezoneOffset();
+		console.log("RestCallService.getJson: uri="+uriWithTimeZoneOffset);
+    	axios.get( this.getUrl( uriWithTimeZoneOffset ), requestOptions)
         	.then( axiosPayload => { 
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));
 				let httpResponse = new HttpResponse( axiosPayload, null);
@@ -80,6 +80,7 @@ class RestcallService {
 		const requestOptions = {
 	        headers: headers
 	    };
+
 		var selfUri = uri;
     	axios.post( this.getUrl( uri ), param, requestOptions)
         	.then( axiosPayload => { 

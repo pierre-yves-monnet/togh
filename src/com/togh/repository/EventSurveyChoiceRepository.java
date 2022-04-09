@@ -22,7 +22,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventSurveyChoiceRepository extends JpaRepository<EventSurveyChoiceEntity, Long> {
 
-    public EventSurveyChoiceEntity findById(long id);
+    EventSurveyChoiceEntity findById(long id);
 
 
 }

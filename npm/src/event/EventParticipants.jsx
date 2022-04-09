@@ -56,7 +56,6 @@ class EventParticipants extends React.Component {
 	// --------------------------------------------------------------
 
 	render() {
-		const intl = this.props.intl;
 		let factory = FactoryService.getInstance();
    	    let mobileService = factory.getMobileService();
 		let authService = factory.getAuthService();
@@ -71,13 +70,13 @@ class EventParticipants extends React.Component {
 		    if (participant.user.id === mySelfUser.id) {
 		        myRoleInTheEvent=participant.role;
 		    }
-		    if (participant.status !== 'INVITED' && participant.status !== 'STATUS_LEFT' && participant.partOf == 'PARTOF') {
+		    if (participant.status !== 'INVITED' && participant.status !== 'STATUS_LEFT' && participant.partOf === 'PARTOF') {
 		        if (participant.numberOfParticipants>0)
 		            totalParticipants += parseInt(participant.numberOfParticipants);
 		    }
 		}
 		let administratorEvent=myRoleInTheEvent === ROLE_OWNER || myRoleInTheEvent === ROLE_ORGANIZER;
-		console.log("EventParticipant.render:  Participants:"+JSON.stringify(this.state.event.participants) );
+		// console.log("EventParticipant.render:  Participants:"+JSON.stringify(this.state.event.participants) );
 		let headerSection = (
         			<EventSectionHeader id="participant"
         				image="img/btnParticipants.png"
@@ -160,12 +159,10 @@ class EventParticipants extends React.Component {
                                         autoComplete="off"
                                         checked={item.partOf === "PARTOF"}
                                         onChange={() => {
-                                            {
-                                                if ( item.numberOfParticipants===0 ) {
-                                                    this.setChildAttribut( "numberOfParticipants",1, item);
-                                                }
-                                                this.setChildAttribut("partOf", "PARTOF", item)
+                                            if ( item.numberOfParticipants===0 ) {
+                                                this.setChildAttribut( "numberOfParticipants",1, item);
                                             }
+                                            this.setChildAttribut("partOf", "PARTOF", item)
                                         }
                                         }/>
                                     <label class="btn btn-outline-primary"

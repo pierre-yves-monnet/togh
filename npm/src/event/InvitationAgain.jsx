@@ -24,7 +24,7 @@ class InvitationAgain extends React.Component {
 						'subject': 'You are invited to a ToghEvent',
 						'message': 'Please join this event.'
 						};
-        console.log("InvitationAgain.participant :"+JSON.stringify(props.participant));
+        // console.log("InvitationAgain.participant :"+JSON.stringify(props.participant));
         this.inviteResend = this.inviteResend.bind(this);
 	}
 

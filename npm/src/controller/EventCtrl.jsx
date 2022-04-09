@@ -155,7 +155,7 @@ class EventCtrl {
 			console.log("EventCtrl.completeEvent: ERROR " + error );
 		}
 		
-		console.log("EventCtrl.completeEvent: end of " + log + " event=" + JSON.stringify(this.event));
+		// console.log("EventCtrl.completeEvent: end of " + log + " event=" + JSON.stringify(this.event));
 	}
 
 
@@ -195,7 +195,7 @@ class EventCtrl {
 
 
 	/**
-	 * Add an compo,nent (like a new Survey, a new expense). The call is immediately done, and the callback is called
+	 * Add an component (like a new Survey, a new expense). The call is immediately done, and the callback is called
      * example addChild("surveylist", {name:"Restaurant?"}, "/", callbackfct)) 
     * thjis function does not add the value in the event. It will be te responsability of the callback to do it
 	 */
@@ -223,9 +223,8 @@ class EventCtrl {
 		let readyToSendBasket = this.currentBasketSlabRecord;
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
 		readyToSendBasket.sendToServer(callbackfct);
-
-
 	}
+
 	removeEventChild(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl.removeEventChildFct." + this.ctrlId + " child=" + listname)
 
@@ -235,37 +234,49 @@ class EventCtrl {
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
 		readyToSendBasket.sendToServer( callbackfct);
 	}
+
 	updateEventChild(listname, value, localisation, callbackfct) {
 		console.log("EventCtrl.updateEventChild." + this.ctrlId + " child=" + listname)
 		var dataHttp = { child: value };
 		var httpResponse = new HttpResponseMockup(dataHttp);
 		callbackfct(httpResponse);
+	}
 
+    // get the currentBasketSlabRecord
+    getCurrentBasketSlabRecord() {
+        let readyToSendBasket = this.currentBasketSlabRecord;
+		this.currentBasketSlabRecord = new BasketSlabRecord(this);
+		return readyToSendBasket;
 	}
 
 	automaticSave() {
 		console.log("EventCtrl.AutomaticSave: ListSlab=" + this.currentBasketSlabRecord.length);
 		let readyToSendBasket = this.currentBasketSlabRecord;
 		this.currentBasketSlabRecord = new BasketSlabRecord(this);
-		readyToSendBasket.sendToServer( (httpPayload) =>{this.callbackSaveFct(httpPayload)});
-		if (this.timer)
-			clearTimeout(this.timer);
+		if (readyToSendBasket.listSlabRecord.length>0) {
+            readyToSendBasket.sendToServer( (httpPayload) =>{this.callbackSaveFct(httpPayload)});
+            if (this.timer)
+                clearTimeout(this.timer);
+        }
 	}
 
+    // an object can register itself to be callback with the update REST come
     registerUpdateCallback( objectToCallback ) {
         if (this.objectsToCallback.indexOf(objectToCallback )=== -1 )
             this.objectsToCallback.push( objectToCallback );
     }
+
+    // update object is coming, callback all objects who want to be callback
 	callbackSaveFct(httpPayload) {
-		console.log("EventCtrl.callbackSendFct: status back from sendBasket");
+		// console.log("EventCtrl.callbackSendFct: status back from sendBasket");
         for (let i = 0; i < this.objectsToCallback.length; i++) {
 		    this.objectsToCallback[i].callbackUpdate(httpPayload.getData() );
 		}
 	}
 	// --------------------------------------------------------------
-	// 
+	//
 	// Get some information
-	// 
+	//
 	// --------------------------------------------------------------
 
 	getSurveyList() {
@@ -317,6 +328,7 @@ class EventCtrl {
 			return "";
 		return userParticipant.getUser().label;
 	}
+
 	getTotalParticipants() {
 		let total = 0;
 		for (let i in this.event.participants) {
@@ -328,9 +340,9 @@ class EventCtrl {
 	}
 
 	// --------------------------------------------------------------
-	// 
+	//
 	// Survey
-	// 
+	//
 	// --------------------------------------------------------------
 
 	/**
@@ -352,13 +364,10 @@ class EventCtrl {
 		return this.currentSurveyId;
 	}
 
-
-
 	getCurrentSurveyCtrl() {
 		// console.log("EventCtrl.getCurrentSurveyCtrl." + this.ctrlId + ": ");
 		return this.currentSurveyCtrl;
 	}
-
 
 	addSurveyInEvent(surveyToAdd) {
 		// console.log("EventCtrl.addSurveyInEvent." + this.ctrlId + ":" + JSON.stringify(surveyToAdd));

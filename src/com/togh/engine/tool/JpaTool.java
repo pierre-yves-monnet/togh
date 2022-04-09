@@ -92,7 +92,7 @@ public class JpaTool {
 
                 } else if (returnType.equals(LocalDate.class)) {
                     if (attributValue instanceof LocalDate) {
-                        value = (LocalDate) attributValue;
+                        value = attributValue;
                     } else {
                         long timezoneOffset = updateContext.getTimezoneOffset();
                         if (baseEntity.isAbsoluteLocalDate(attributName))

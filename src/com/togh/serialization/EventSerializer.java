@@ -176,11 +176,15 @@ public class EventSerializer extends BaseSerializer {
      * @param eventEntity                eventEntity
      * @param serializerOptions          Serializer option
      * @param additionalInformationEvent additional information
+     * @param factorySerializer          to access the toghSerializer to get the user label
      * @return the header on event
      */
-    public Map<String, Object> getHeaderMap(EventEntity eventEntity, SerializerOptions serializerOptions,
-                                            EventEntity.AdditionalInformationEvent additionalInformationEvent) {
+    public Map<String, Object> getHeaderMap(EventEntity eventEntity,
+                                            SerializerOptions serializerOptions,
+                                            EventEntity.AdditionalInformationEvent additionalInformationEvent,
+                                            FactorySerializer factorySerializer) {
         Map<String, Object> resultMap = getBasicMap(eventEntity, serializerOptions);
+        ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromClass(ToghUserEntity.class);
 
         resultMap.put(CST_JSONOUT_NAME, eventEntity.getName());
         resultMap.put(JSON_DATE_EVENT, EngineTool.dateToString(eventEntity.getDateEvent()));
@@ -194,7 +198,7 @@ public class EventSerializer extends BaseSerializer {
             // create the list of participants
             String listParticipants = eventEntity.getParticipantList().stream()
                     .filter(t -> t.getUser() != null)
-                    .map(t -> t.getUser().getLabel())
+                    .map(t -> toghUserSerializer.getUserLabel(t.getUser(), serializerOptions))
                     .collect(Collectors.joining(", "));
 
             resultMap.put(CST_JSONOUT_LISTSYNTHETICPARTICIPANTS, listParticipants);

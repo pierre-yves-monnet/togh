@@ -20,15 +20,15 @@ import java.util.List;
 public interface LoginLogRepository extends JpaRepository<LoginLogEntity, Long> {
 
     @Query("select loginLog from LoginLogEntity loginLog  where timeSlot=:timeSlot and email=:email and googleId=:googleId and ipAddress=:ipAddress and statusConnection=:statusConnection")
-    public LoginLogEntity findByTimeSlot(@Param("timeSlot") String timeSlot,
-                                         @Param("email") String email,
-                                         @Param("googleId") String googleId,
-                                         @Param("ipAddress") String ipaddress,
-                                         @Param("statusConnection") LoginService.LoginStatus statusConnection);
+    LoginLogEntity findByTimeSlot(@Param("timeSlot") String timeSlot,
+                                  @Param("email") String email,
+                                  @Param("googleId") String googleId,
+                                  @Param("ipAddress") String ipaddress,
+                                  @Param("statusConnection") LoginService.LoginStatus statusConnection);
 
 
     @Query("select count(LoginLogEntity) from LoginLogEntity where timeSlot=:timeSlot")
-    public Long countByTimeSlot(@Param("timeSlot") String timeSlot);
+    Long countByTimeSlot(@Param("timeSlot") String timeSlot);
 
 
     //  status_connection,count(*), sum(number_of_tentatives)
@@ -36,6 +36,6 @@ public interface LoginLogRepository extends JpaRepository<LoginLogEntity, Long> 
             " from LoginLogEntity" +
             " where dateCreation >= :dateLimit" +
             " group by statusConnection, timeSlot  order by timeSlot, statusConnection")
-    public List<LoginLogStats> getStatistics(@Param("dateLimit") LocalDateTime dateLimit);
+    List<LoginLogStats> getStatistics(@Param("dateLimit") LocalDateTime dateLimit);
 
 }

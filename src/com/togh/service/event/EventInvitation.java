@@ -13,6 +13,7 @@ import com.togh.entity.ParticipantEntity;
 import com.togh.entity.ParticipantEntity.ParticipantRoleEnum;
 import com.togh.entity.ParticipantEntity.StatusEnum;
 import com.togh.entity.ToghUserEntity;
+import com.togh.serialization.FactorySerializer;
 import com.togh.service.EventService.InvitationResult;
 import com.togh.service.EventService.InvitationStatus;
 import com.togh.service.FactoryService;
@@ -57,6 +58,7 @@ public class EventInvitation {
      * @param role              role in this event
      * @param useMyEmailAsFrom  if true, the From used in the message is the InvitedByToghUser email
      * @param message           Message to come with the invitation
+     * @param factorySerializer to access the toghSerializer to get the user label
      * @return the InvitationResult
      */
     public InvitationResult invite(EventEntity event,
@@ -66,7 +68,8 @@ public class EventInvitation {
                                    ParticipantRoleEnum role,
                                    boolean useMyEmailAsFrom,
                                    String subject,
-                                   String message) {
+                                   String message,
+                                   FactorySerializer factorySerializer) {
         InvitationResult invitationResult = new InvitationResult();
 
         MonitorService monitorService = factoryService.getMonitorService();
@@ -128,7 +131,7 @@ public class EventInvitation {
                 // attention, if the user is just invited to join TOGH, we don't want to send a new email.
                 // maybe the user still have the INVITED status, because the lucky guy is invited in 2 events
                 if (!setUserJustInvited.contains(toghUser)) {
-                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, subject, message, useMyEmailAsFrom, event);
+                    NotifyService.NotificationStatus notificationStatus = notifyService.notifyNewUserInEvent(toghUser, invitedByToghUser, subject, message, useMyEmailAsFrom, event, factorySerializer);
                     if (!notificationStatus.isCorrect())
                         invitationResult.addErrorSendEmail(toghUser);
                 }

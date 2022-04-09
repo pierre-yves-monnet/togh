@@ -16,6 +16,7 @@ import com.togh.entity.LoginLogEntity;
 import com.togh.entity.ToghUserEntity;
 import com.togh.entity.ToghUserEntity.*;
 import com.togh.repository.ToghUserRepository;
+import com.togh.serialization.FactorySerializer;
 import com.togh.service.EventService.UpdateContext;
 import com.togh.service.NotifyService.NotificationStatus;
 import com.togh.tool.ToolCast;
@@ -58,6 +59,10 @@ public class ToghUserService {
 
     @Autowired
     private ToghUserRepository toghUserRepository;
+
+    @Autowired
+    private FactorySerializer factorySerializer;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -157,7 +162,7 @@ public class ToghUserService {
      * @return a toghUserEntity
      */
     public ToghUserEntity createInvitedUser(String email) {
-        String randomStamp = String.valueOf(System.currentTimeMillis()) + String.valueOf(random.nextInt(100000));
+        String randomStamp = String.valueOf(System.currentTimeMillis()) + random.nextInt(100000);
 
         ToghUserEntity toghUserEntity = createNewUser(null, null, null, email, SourceUserEnum.INVITED);
         toghUserEntity.setStatusUser(StatusUserEnum.INVITED);
@@ -382,7 +387,7 @@ public class ToghUserService {
             // Check the email now: we don't want to create a bad user
             invitationStatus.isEmailIsCorrect = true;
 
-            // fullfill the event
+            // fulfill the event
             invitationStatus.toghUser = createInvitedUser(email);
 
             factoryService.getToghUserService().saveUser(invitationStatus.toghUser);
@@ -395,7 +400,7 @@ public class ToghUserService {
                     subject,
                     message,
                     useMyEmailAsFrom,
-                    event);
+                    event, factorySerializer);
 
             invitationStatus.isEmailSent = notificationStatus.isCorrect();
 

@@ -85,7 +85,7 @@ class EventGameList extends React.Component {
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		const intl = this.props.intl;
-		console.log("EventGameList: render event="+JSON.stringify(this.state.event));
+		// console.log("EventGameList: render event="+JSON.stringify(this.state.event));
 		let userParticipant = this.eventCtrl.getUserParticipant();
 		let headerSection =(
 			<EventSectionHeader id="game" 
@@ -152,12 +152,12 @@ class EventGameList extends React.Component {
 					) }
 					)
 			);
-			listGamesHtml.push(<li  style={{borderRight:"2px solid black", height: "40px"}}/>);
+			listGamesHtml.push(<li  style={{borderRight:"2px solid black", height: "40px"}} key="terminated"/>);
 						
 			
 			var currentGame = this.eventCtrl.getCurrentGame();
 			if (currentGame) {
-				console.log("EventGameList.currentGamed = "+currentGame.id);
+				// console.log("EventGameList.currentGameId = "+currentGame.id);
 			 }
 			contentPage= (
 				<div class="row">

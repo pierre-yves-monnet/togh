@@ -11,6 +11,9 @@ package com.togh.entity;
 import com.togh.entity.base.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import java.util.List;
 /*                                                                                  */
 /*  EventGameEntity,                                                                */
 /*                                                                                  */
-/*  Manage Game in an event. Different Games exists, this entity saves all of them  */
+/*  Manage Game in an event. Different Games exists, this entity is the basic of all*/
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
@@ -54,21 +57,58 @@ class EventGameEntity extends UserEntity {
     @ElementCollection // 1
     @CollectionTable(name = "evtgameplayers", joinColumns = @JoinColumn(name = "id")) // 2
     @Column(name = "participantid") // 3
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 1000)
+    @OrderBy("id")
     private List<Long> playersList = new ArrayList<>();
 
     @Column(name = "adminshowlist")
     private Boolean adminShowList;
-    // ---------- Secret Santas
+
+    // True or lie: one entity per player
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 100)
+    @JoinColumn(name = "gameid")
+    @OrderBy("id")
+    private List<EventGameTruthOrLieEntity> truthOrLieList = new ArrayList<>();
+
+    // TruthOrLie parameters
+    @Column(name = "nbsentences")
+    private Long nbSentences;
+
+    // on this sentences, the number of truth. If 0, then the number is undefined, and each player can decide the number.
+    @Column(name = "nbtruthsrequested")
+    private Long nbTruthsRequested;
+
+
+    @Column(name = "openingofthevote", length = 15)
+    @Enumerated(EnumType.STRING)
+    private EventGameEntity.OpeningOfTheVoteEnum openingOfTheVote;
+
+    @Column(name = "discoveryofresults", length = 15)
+    @Enumerated(EnumType.STRING)
+    private EventGameEntity.DiscoverResultEnum discoverResult;
+
+    // ---------- Secret Santas + True Or Lie: who plays, ALL or only ACTIVE users (Users who say "I'm part of"
     @Column(name = "scopegame", length = 15)
     @Enumerated(EnumType.STRING)
     private EventGameEntity.ScopeGameEnum scopeGame;
+
+    public enum OpeningOfTheVoteEnum {
+        IMMEDIAT, BEFOREEVENT, STARTEVENT
+    }
+
+    public enum DiscoverResultEnum {
+        IMMEDIAT, STARTEVENT, ENDEVENT
+    }
 
     public enum GameStatusEnum {
         INPREPAR, OPEN, CLOSE
     }
 
     public enum TypeGameEnum {
-        SECRETSANTAS
+        SECRETSANTAS, TRUTHORLIE
     }
 
     public enum ScopeGameEnum {

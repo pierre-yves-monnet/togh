@@ -22,6 +22,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventSurveyRepository extends JpaRepository<EventSurveyEntity, Long> {
 
-    public EventSurveyEntity findById(long id);
+    EventSurveyEntity findById(long id);
 
 }

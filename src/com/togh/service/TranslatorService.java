@@ -66,8 +66,6 @@ public class TranslatorService {
         }
     }
 
-    ;
-
     /**
      * First implementation : read in memory
      *

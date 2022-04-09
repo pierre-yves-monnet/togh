@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ApiKeyEntityRepository extends JpaRepository<APIKeyEntity, Long> {
 
-    public APIKeyEntity findByName(String codeApi);
+    APIKeyEntity findByName(String codeApi);
 
 }

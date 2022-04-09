@@ -26,7 +26,6 @@ public class LogEvent {
 
     private final LogEvent mReferenceEvent; // event reference
 
-    ;
     public String mExceptionDetails;
     // all fields of Event
     private long mNumber;
@@ -122,7 +121,7 @@ public class LogEvent {
         // this is an error : keep the strack trace !
         final StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
-        mExceptionDetails = sw.toString() + "<p>" + e.getMessage();
+        mExceptionDetails = sw + "<p>" + e.getMessage();
 
     }
 
@@ -335,7 +334,7 @@ public class LogEvent {
         htmlEvent.append(" class=\"" + getEventClassName() + "\" ");
         htmlEvent.append(" data-bs-toggle=\"popover\" ");
         htmlEvent.append(" title=\"" + titlePopover + "\"");
-        htmlEvent.append(" data-bs-content=\"" + contentPopover.toString() + "\" >");
+        htmlEvent.append(" data-bs-content=\"" + contentPopover + "\" >");
         htmlEvent.append(getTitle() + "</button>");
         return htmlEvent.toString();
     }
@@ -422,15 +421,16 @@ public class LogEvent {
 
     /**
      * DEBUG : for debug reason
-     * INFO : in a sequence of operation, the INFO level is use to return information on the different step. For example, the method calculate an information,
+     * INFO : in a sequence of operation, the INFO level is used to return information on the different step. For example, the method calculate an information,
      * it can be a INFO event
      * SUCCESS : in the sequence of operation, report each success with a SUCCESS level
+     * MAININFO: the information is important, to get a synthesis level
      * APPLICATIONERROR : this is an error, but due to the external system. Example, the method receive an URL, but this URL is malformed : this is a
      * APPLICATIONERROR, the function can't work with this input
      * ERROR : an internal error. You catch a NullPointerException ? THe function should have an issue, and a ERROR should be reported.
      * CRITICAL : an internal error, but which are critical, and the system should stop.
      */
     public enum Level {
-        DEBUG, INFO, SUCCESS, APPLICATIONERROR, ERROR, CRITICAL
+        DEBUG, INFO, MAININFO, SUCCESS, APPLICATIONERROR, ERROR, CRITICAL
     }
 }

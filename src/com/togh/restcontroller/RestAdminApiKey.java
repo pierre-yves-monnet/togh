@@ -74,7 +74,7 @@ public class RestAdminApiKey {
         List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listkeys", new ArrayList<>());
         List<LogEvent> listLogEvent = apiKeyService.updateKeys(listApiKey);
 
-        payload.put(RestJsonConstants.LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+        payload.put(RestJsonConstants.CST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
         return payload;
     }

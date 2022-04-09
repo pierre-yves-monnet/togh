@@ -46,4 +46,19 @@ public class FactorySerializer {
         }
         return serializer;
     }
+
+    /**
+     * Get the serializer from a entity class
+     *
+     * @param baseEntityClass class of the entity
+     * @return the Serializer for this entity
+     */
+    public BaseSerializer getFromClass(Class<?> baseEntityClass) {
+        BaseSerializer serializer = relations.get(baseEntityClass);
+        if (serializer == null) {
+            logger.severe(LOG_HEADER + "Unknown relation for [" + baseEntityClass.getName() + "] ");
+            return null;
+        }
+        return serializer;
+    }
 }

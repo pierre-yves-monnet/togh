@@ -48,8 +48,7 @@ public class EventUpdateGrantor implements BaseUpdateGrantor {
 
         if (slab.operation == EventUpdate.SlabOperation.UPDATE) {
             if (Arrays.stream(updateGrantOrganizer).anyMatch(t -> t.equalsIgnoreCase(slab.attributName))) {
-                if (!updateContext.getEventController().isOrganizer(updateContext.getToghUser()))
-                    return false;
+                return updateContext.getEventController().isOrganizer(updateContext.getToghUser());
             }
 
             return true;
