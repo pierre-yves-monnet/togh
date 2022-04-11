@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 @Service
 public class LogService {
-    private final static String logHeader = LogService.class.getName() + ":";
+    private final static String LOG_HEADER = LogService.class.getName() + ":";
     private final Logger logger = Logger.getLogger(LogService.class.getName());
 
     @Autowired
@@ -31,7 +31,7 @@ public class LogService {
     /**
      * registerLog. A list of events are created, information are managed
      *
-     * @param listEvents
+     * @param listEvents event to logs
      */
     public void registerLog(List<LogEvent> listEvents, ToghUserEntity userEntity) {
         try {
@@ -54,7 +54,7 @@ public class LogService {
                     });
 
         } catch (Exception e) {
-            logger.severe(logHeader + "Can't save log " + e.toString());
+            logger.severe(LOG_HEADER + "Can't save log " + e.toString());
         }
 
     }

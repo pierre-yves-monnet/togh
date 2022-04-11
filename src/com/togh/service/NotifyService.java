@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -54,6 +56,7 @@ public class NotifyService {
     private static final String MAIL_USER_NAME = "";
     private static final String MAIL_USER_PASSWORD = "";
     private static final LogEvent eventEmailError = new LogEvent(NotifyService.class.getName(), 1, Level.APPLICATIONERROR, "Email Error", "The email can't be sent", "User will not received an email", "Check Exception");
+    private static final LogEvent eventPurged = new LogEvent(NotifyService.class.getName(), 2, Level.MAININFO, "Event Purged", "A very old event is purged");
     private static final Logger logger = Logger.getLogger(NotifyService.class.getName());
     @Autowired
     private FactoryService factoryService;
@@ -63,6 +66,8 @@ public class NotifyService {
     private TranslatorService translatorService;
     @Autowired
     private ApiKeyService apiKeyService;
+    @Autowired
+    private LogService logService;
     @Autowired
     private SendEmail sendEmail;
 
@@ -205,12 +210,23 @@ public class NotifyService {
 
     /**
      * An event is purged
-     * Some person may want to be notify?
+     * Some person may want to be notified?
      *
      * @param eventEntity the event entity
+     * @param delayPurge  delay used to purge this event
+     * @param datePurge   date close : all events before this date will be purged
      * @return the notification status
      */
-    public NotificationStatus notifyEventPurge(@Nonnull EventEntity eventEntity) {
+    public NotificationStatus notifyEventPurged(@Nonnull EventEntity eventEntity, int delayPurge, LocalDateTime datePurge) {
+        List<LogEvent> listEvents = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+
+        listEvents.add(new LogEvent(eventPurged, "Event " + eventEntity
+                + " dateEndEvent:" + (eventEntity.getDateEndEvent() == null ? "null" : eventEntity.getDateEndEvent().format(formatter))
+                + " dateModification:" + (eventEntity.getDateModification() == null ? "null" : eventEntity.getDateModification().format(formatter))
+                + " Date Close:" + datePurge.format(formatter)
+                + " Delay Purged" + delayPurge));
+        logService.registerLog(listEvents, null);
         return new NotificationStatus();
     }
 

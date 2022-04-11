@@ -446,16 +446,16 @@ public class EventService {
     public List<EventEntity> purgeOldEvents(boolean doTheOperation) {
 
         // modified later than 1 year? Keep it.
-        LocalDateTime timeGrace = LocalDateTime.now(ZoneOffset.UTC).minusDays(-360);
+        LocalDateTime datePurge = LocalDateTime.now(ZoneOffset.UTC).minusDays(-360);
 
-        List<EventEntity> listEventsToClose = eventRepository.findEventsToPurge(timeGrace, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
+        List<EventEntity> listEventsToPurge = eventRepository.findEventsToPurge(datePurge, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
-            for (EventEntity eventEntity : listEventsToClose) {
+            for (EventEntity eventEntity : listEventsToPurge) {
                 eventRepository.delete(eventEntity);
-                notifyService.notifyEventPurge(eventEntity);
+                notifyService.notifyEventPurged(eventEntity, 360, datePurge);
             }
         }
-        return listEventsToClose;
+        return listEventsToPurge;
     }
 
     /**

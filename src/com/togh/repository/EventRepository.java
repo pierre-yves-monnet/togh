@@ -66,14 +66,14 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
     /**
      * Search all past event OR, if the event is just modified in the last X time, then it survived
      *
-     * @param timeGrace limit time under when
+     * @param datePurge time under when
      * @param status    status used to search event to purge
      * @param pageable  pageable information
      * @return a list of entity to purge
      */
     @Query("SELECT e FROM EventEntity e "
-            + "WHERE e.dateModification < :timeGrace "
+            + "WHERE e.dateModification < :datePurge "
             + " and e.statusEvent = :status ")
-    List<EventEntity> findEventsToPurge(@Param("timeGrace") LocalDateTime timeGrace, @Param("status") StatusEventEnum status, Pageable pageable);
+    List<EventEntity> findEventsToPurge(@Param("datePurge") LocalDateTime datePurge, @Param("status") StatusEventEnum status, Pageable pageable);
 
 }
