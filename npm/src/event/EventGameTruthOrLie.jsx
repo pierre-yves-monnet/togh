@@ -10,11 +10,10 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, TextArea, Toggle,InlineLoading, Select } from 'carbon-components-react';
+import { TextInput, TextArea, InlineLoading, Select } from 'carbon-components-react';
 import { List, HandThumbsUpFill, HandThumbsDownFill, ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 
 import UserMessage 		            from 'component/UserMessage';
-import * as userFeedbackConstant 	from 'component/UserFeedback';
 import ChartTogh                    from 'component/ChartTogh';
 
 import FactoryService 				from 'service/FactoryService';
@@ -94,13 +93,13 @@ class EventGameTruthOrLie extends React.Component {
             // we expect the number of sentences
             let myTruthOrLie = this.getMyTruthOrLie();
 		    // console.log("EventGameTruthOrLie.componentDidUpdate Update prevProps=("+prevPropsTypeDisplay+") MySentences"+myTruthOrLie.sentencesList.length+" Expected "+game.nbSentences);
-            if (game.nbSentences != myTruthOrLie.sentencesList.length) {
+            if (game.nbSentences !== myTruthOrLie.sentencesList.length) {
                 inProgress=true;
                 this.synchronizeMySentences();
             }
         }
         // the display ADMIN will come after in a second call
-        if (this.state.show.typeDisplay != prevPropsTypeDisplay) {
+        if (this.state.show.typeDisplay !== prevPropsTypeDisplay) {
         	updateState=true;
    	        stateShow.typeDisplay= prevPropsTypeDisplay;
 
@@ -121,7 +120,6 @@ class EventGameTruthOrLie extends React.Component {
 
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
-  		let game = this.eventCtrl.getCurrentGame();
 
 		// refresh the current Game embedded
 		// this.GameEmbedded = new Game( this.state.event, currentGame, this.userParticipant, this.updateEventFct);
@@ -131,21 +129,21 @@ class EventGameTruthOrLie extends React.Component {
 		let styleGameResult={ borderBottom: "2px solid black", padding:"10px 10px 10px 10px"};
         let styleGameParameter={ borderBottom: "2px solid black", padding:"10px 10px 10px 10px"};
         let contentTab='';
-        if (this.state.show.tabName=='SENTENCES') {
+        if (this.state.show.tabName === 'SENTENCES') {
             styleGameSentence={ borderTop: "2px solid black", borderLeft: "2px solid black", borderRight: "2px solid black", padding:"10px 10px 10px 10px"};
             contentTab = this.renderSentences();
         }
-        if (this.state.show.tabName=='VOTE') {
+        if (this.state.show.tabName === 'VOTE') {
             styleGameVote={ borderTop: "2px solid black", borderLeft: "2px solid black", borderRight: "2px solid black", padding:"10px 10px 10px 10px"};
             contentTab=this.renderVote();
         }
-        if (this.state.show.tabName=='RESULTS') {
+        if (this.state.show.tabName === 'RESULTS') {
             styleGameResult={ borderTop: "2px solid black", borderLeft: "2px solid black", borderRight: "2px solid black", padding:"10px 10px 10px 10px"};
-            contentTab =this.renderResults();
+            contentTab=this.renderResults();
         }
-        if (this.state.show.tabName=='PARAMETERS') {
+        if (this.state.show.tabName === 'PARAMETERS') {
             styleGameParameter={ borderTop: "2px solid black", borderLeft: "2px solid black", borderRight: "2px solid black", padding:"10px 10px 10px 10px"};
-            contentTab =this.renderParameters();
+            contentTab=this.renderParameters();
         }
         return (
             <div>
@@ -240,7 +238,7 @@ class EventGameTruthOrLie extends React.Component {
                             {game.nbTruthsRequested}
                         </div>
                     }
-                    {(game.nbTruthsRequested == 0) &&
+                    {(game.nbTruthsRequested === 0) &&
                         <div class="row"> <FormattedMessage id="EventGameTruthOrLie.NoNumberOfTruthsRequested" defaultMessage="There is no requested number of truth: you decide" /></div>
                     }
 
@@ -256,7 +254,7 @@ class EventGameTruthOrLie extends React.Component {
                                 <UserMessage message={<FormattedMessage id="EventGameTruthOrLie.GiveAStatus" defaultMessage="You have to give a statue on each sentence." />} status="FAIL" />
                             </div>
                         }
-                        { (game.nbTruthsRequested > 0 && countTruth != game.nbTruthsRequested) &&
+                        { (game.nbTruthsRequested > 0 && countTruth !== game.nbTruthsRequested) &&
                             <div style={{paddingTop: "10px"}}>
                                 <UserMessage message={
                                     <div>
@@ -328,7 +326,7 @@ class EventGameTruthOrLie extends React.Component {
                         <br/>
                         <button class="btn btn-success btn-xs" style={{marginTop: "10px"}}
                             onClick={()=>this.seValidateMySentences("validateSentences", "true", game, myTruthOrLie ) }
-                            disabled={(game.nbTruthsRequested > 0 && countTruth != game.nbTruthsRequested)
+                            disabled={(game.nbTruthsRequested > 0 && countTruth !== game.nbTruthsRequested)
                                     || countLie + countTruth < game.nbSentences
                                     || countSentences < game.nbSentences}
                             >
@@ -456,7 +454,7 @@ class EventGameTruthOrLie extends React.Component {
                             <br/>
                             <button class="btn btn-success btn-xs" style={{marginTop: "10px"}}
                                 onClick={()=>this.validateMyVote(game, myTruthOrLie, voteToDisplay ) }
-                                disabled={(game.nbTruthsRequested > 0 && countTruth != game.nbTruthsRequested) || this.state.inProgress}
+                                disabled={(game.nbTruthsRequested > 0 && countTruth !== game.nbTruthsRequested) || this.state.inProgress}
                                 >
                                 <FormattedMessage id="EventGameTruthOrLie.VoteValidate" defaultMessage="Vote"/>
                             </button>
@@ -465,7 +463,7 @@ class EventGameTruthOrLie extends React.Component {
                                   <FormattedMessage id="EventGameTruthOrLie.VoteInProgress" defaultMessage="Vote in progress"/>
                                 </span>
                             }
-                            {(game.nbTruthsRequested > 0 && countTruth != game.nbTruthsRequested) &&
+                            {(game.nbTruthsRequested > 0 && countTruth !== game.nbTruthsRequested) &&
                                 <span style={{paddingLeft: "10px"}}>
                                   <FormattedMessage id="EventGameTruthOrLie.VoteCantBeValidated" defaultMessage="Attention, the number of true sentences selected is not the expected one"/>
                                   &nbsp;
@@ -853,8 +851,7 @@ class EventGameTruthOrLie extends React.Component {
 
     // user give a sentence, or a status (truth, lie)
     setSentence( name, value, game, myTruthOrLie, currentSentence) {
-        // console.log("EventGameTruthorLie.setSentence value="+value);
-        let mySelfUser = this.eventCtrl.getMyself();
+        // console.log("EventGameTruthOrLie.setSentence value="+value);
         let path=gameListConstant.NAMEENTITY+"/"+game.id+"/truthOrLieList/"+myTruthOrLie.id+"/sentencesList/"+currentSentence.id;
         this.eventCtrl.setAttribut(name, value, currentSentence, path);
         // console.log("EventGameTruthOrLie setSentence: game="+ JSON.stringify(game));
@@ -862,8 +859,7 @@ class EventGameTruthOrLie extends React.Component {
 
     // -- user clicks on 'validate my sentences
     seValidateMySentences( name, value, game, myTruthOrLie) {
-        // console.log("EventGameTruthorLie.setMyTruthOrLie value="+value);
-        let mySelfUser = this.eventCtrl.getMyself();
+        // console.log("EventGameTruthOrLie.setMyTruthOrLie value="+value);
         let path=gameListConstant.NAMEENTITY+"/"+game.id+"/truthOrLieList/"+myTruthOrLie.id;
         this.eventCtrl.setAttribut(name, value, myTruthOrLie, path);
         // console.log("EventGameTruthOrLie setSentence: game="+ JSON.stringify(game));
