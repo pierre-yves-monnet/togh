@@ -50,7 +50,7 @@ class EventSurveyAnswerEntity extends UserEntity {
     @Fetch(value = FetchMode.SELECT)
     @MapKeyColumn(name = "choice")
     @Column(name = "decision")
-    @OrderBy("id")
+    @OrderBy("surveyanswerid")
     private Map<String, Boolean> decision;
 
 
