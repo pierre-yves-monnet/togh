@@ -212,7 +212,10 @@
   "AdminUsers.Search": {
     "defaultMessage": "Search"
   },
-  "AdminUsers.ShowDetails": {
+  "AdminUsers.ShowDetailsA": {
+    "defaultMessage": "Details"
+  },
+  "AdminUsers.ShowDetailsB": {
     "defaultMessage": "Details"
   },
   "AdminUsers.Source": {
@@ -590,6 +593,9 @@
   "EventGame.Title": {
     "defaultMessage": "Title"
   },
+  "EventGame.TruthOrLie": {
+    "defaultMessage": "Truth or lie"
+  },
   "EventGameList.AddGame": {
     "defaultMessage": "Add a Game in the list"
   },
@@ -682,6 +688,192 @@
   },
   "EventGameSecretSantas.noAffectation": {
     "defaultMessage": "No one has been assigned to you yet."
+  },
+  "EventGameTruthOrLie.Administration": {
+    "defaultMessage": "Manage the Truth Or Lie"
+  },
+  "EventGameTruthOrLie.By": {
+    "defaultMessage": "By"
+  },
+  "EventGameTruthOrLie.DiscoverImmediat": {
+    "defaultMessage": "Immediat"
+  },
+  "EventGameTruthOrLie.DiscoverOnEndEvent": {
+    "defaultMessage": "End event"
+  },
+  "EventGameTruthOrLie.DiscoverOnStartEvent": {
+    "defaultMessage": "Start event"
+  },
+  "EventGameTruthOrLie.DiscoverResult": {
+    "defaultMessage": "Discover the result"
+  },
+  "EventGameTruthOrLie.DiscoverResultExplanation": {
+    "defaultMessage": "With the Immediate mode, when a player vote, result are immediately displayed. Else, result is visible only at one moment"
+  },
+  "EventGameTruthOrLie.ExpectedTruth": {
+    "defaultMessage": "Expected:"
+  },
+  "EventGameTruthOrLie.Explanation": {
+    "defaultMessage": "Give multiple sentences, and the status for each (this is a LIE, or this is a TRUTH)."
+  },
+  "EventGameTruthOrLie.FulfillSentences": {
+    "defaultMessage": "You have to give a sentence on each line."
+  },
+  "EventGameTruthOrLie.GiveAStatus": {
+    "defaultMessage": "You have to give a statue on each sentence."
+  },
+  "EventGameTruthOrLie.GiveTheCorrectNumberOfTruths": {
+    "defaultMessage": "Give the expected number of truth."
+  },
+  "EventGameTruthOrLie.Lie": {
+    "defaultMessage": "Lie"
+  },
+  "EventGameTruthOrLie.NbSentences": {
+    "defaultMessage": "Number Of Sentences"
+  },
+  "EventGameTruthOrLie.NoNumberOfTruthsRequested": {
+    "defaultMessage": "There is no requested number of truth: you decide"
+  },
+  "EventGameTruthOrLie.NoVoteReady": {
+    "defaultMessage": "No vote at this moment"
+  },
+  "EventGameTruthOrLie.NumberOfPlayerInScope": {
+    "defaultMessage": "Potential players"
+  },
+  "EventGameTruthOrLie.NumberOfTruths": {
+    "defaultMessage": "Number of truths:"
+  },
+  "EventGameTruthOrLie.NumberOfTruthsRequested": {
+    "defaultMessage": "Number Of Truths sentences requested"
+  },
+  "EventGameTruthOrLie.NumberOfTruthsRequestedExplanation": {
+    "defaultMessage": "Give the number of true sentences each player has to give. If '0', then each player can decide."
+  },
+  "EventGameTruthOrLie.NumberOfTruthsUpperZero": {
+    "defaultMessage": "There is a number of Truths requested:"
+  },
+  "EventGameTruthOrLie.NumberSentencesExplanation": {
+    "defaultMessage": "Give the number of sentences each players has to give"
+  },
+  "EventGameTruthOrLie.OpeningOfTheVote": {
+    "defaultMessage": "Opening of the vote"
+  },
+  "EventGameTruthOrLie.PlayerWhoSentences": {
+    "defaultMessage": "Validate Sentences"
+  },
+  "EventGameTruthOrLie.PlayerWhoVoted": {
+    "defaultMessage": "Votes"
+  },
+  "EventGameTruthOrLie.PlayersValidatedSentences": {
+    "defaultMessage": "Some players validated their sentences. These settings can no longer be changed."
+  },
+  "EventGameTruthOrLie.Result": {
+    "defaultMessage": "Result"
+  },
+  "EventGameTruthOrLie.Scope": {
+    "defaultMessage": "Players of the Truth Or Lie game"
+  },
+  "EventGameTruthOrLie.ScopeActive": {
+    "defaultMessage": "Active participants only"
+  },
+  "EventGameTruthOrLie.ScopeAll": {
+    "defaultMessage": "All participants"
+  },
+  "EventGameTruthOrLie.SelectedTruth": {
+    "defaultMessage": "Selected:"
+  },
+  "EventGameTruthOrLie.SentenceValidate": {
+    "defaultMessage": "Your list is ready. Wait for the other players to vote!"
+  },
+  "EventGameTruthOrLie.Sentences": {
+    "defaultMessage": "Sentence"
+  },
+  "EventGameTruthOrLie.StartVoteEvent": {
+    "defaultMessage": "Start event"
+  },
+  "EventGameTruthOrLie.StartVoteExplanation": {
+    "defaultMessage": "With the Immediate mode, the vote is open when a player validates its sentence. Else, one day before the event starts, or when the event starts"
+  },
+  "EventGameTruthOrLie.StartVoteImmediat": {
+    "defaultMessage": "Immediat"
+  },
+  "EventGameTruthOrLie.StartVoteOneDayBeforeEvent": {
+    "defaultMessage": "One day before event"
+  },
+  "EventGameTruthOrLie.ThisIsALie": {
+    "defaultMessage": "It' a Lie"
+  },
+  "EventGameTruthOrLie.ThisIsATruth": {
+    "defaultMessage": "It's the truth"
+  },
+  "EventGameTruthOrLie.Truth": {
+    "defaultMessage": "Truth"
+  },
+  "EventGameTruthOrLie.Validate": {
+    "defaultMessage": "Validate"
+  },
+  "EventGameTruthOrLie.ValidateExplanation": {
+    "defaultMessage": "When your list is ready, validate it. Attention, it will not be possible to modify it after: players will start to vote."
+  },
+  "EventGameTruthOrLie.VoteCantBeValidated": {
+    "defaultMessage": "Attention, the number of true sentences selected is not the expected one"
+  },
+  "EventGameTruthOrLie.VoteFindTheTruths": {
+    "defaultMessage": "In theses sentences, the number of truth sentences is:"
+  },
+  "EventGameTruthOrLie.VoteInProgress": {
+    "defaultMessage": "Vote in progress"
+  },
+  "EventGameTruthOrLie.VotePlayer": {
+    "defaultMessage": "Player"
+  },
+  "EventGameTruthOrLie.VoteValidate": {
+    "defaultMessage": "Vote"
+  },
+  "EventGameTruthOrLie.parametres": {
+    "defaultMessage": "Parameters"
+  },
+  "EventGameTruthOrLie.points": {
+    "defaultMessage": "points"
+  },
+  "EventGameTruthOrLie.result": {
+    "defaultMessage": "Results"
+  },
+  "EventGameTruthOrLie.sentenceIsLie": {
+    "defaultMessage": "is it a lie"
+  },
+  "EventGameTruthOrLie.sentenceIsTruth": {
+    "defaultMessage": "is it a truth"
+  },
+  "EventGameTruthOrLie.sentenceNotValidate": {
+    "defaultMessage": "Sentences not validated"
+  },
+  "EventGameTruthOrLie.sentences": {
+    "defaultMessage": "My Sentences"
+  },
+  "EventGameTruthOrLie.vote": {
+    "defaultMessage": "Vote"
+  },
+  "EventGameTruthOrLie.voteComplete": {
+    "defaultMessage": "Vote completed"
+  },
+  "EventGameTruthOrLie.voteError": {
+    "defaultMessage": "You were wrong"
+  },
+  "EventGameTruthOrLie.voteInError": {
+    "defaultMessage": "An error arrived during your vote - try again later."
+  },
+  "EventGameTruthOrLie.voteInProgress": {
+    "defaultMessage": "Vote in progress"
+  },
+  "EventGameTruthOrLie.voteSuccess": {
+    "defaultMessage": "You find it"
+  },
+  "EventGameTruthOrLie.voteValidate": {
+    "defaultMessage": "When your vote is ready, validate it. Attention, it will not be possible to modify it after."
+  },
+  "EventGameTruthOrLie.voteValidated": {
+    "defaultMessage": "Your vote is accepted."
   },
   "EventGeolocalisation.Address": {
     "defaultMessage": "Address"
@@ -804,7 +996,7 @@
     "defaultMessage": "Actif"
   },
   "EventParticipant.InvitationInProgress": {
-    "defaultMessage": "Invitation in progress"
+    "defaultMessage": "Invited"
   },
   "EventParticipant.Invited": {
     "defaultMessage": "Invited"
@@ -815,17 +1007,20 @@
   "EventParticipant.MainTitleParticipant": {
     "defaultMessage": "Participants"
   },
-  "EventParticipant.NotPartOf": {
-    "defaultMessage": "Not part of"
-  },
   "EventParticipant.NumberOfParticipants": {
     "defaultMessage": "Number of participants"
   },
   "EventParticipant.Owner": {
     "defaultMessage": "Owner"
   },
-  "EventParticipant.PartOf": {
-    "defaultMessage": "Part Of"
+  "EventParticipant.PartOfDoNotKnow": {
+    "defaultMessage": "Do not know"
+  },
+  "EventParticipant.PartOfNo": {
+    "defaultMessage": "No"
+  },
+  "EventParticipant.PartOfParticipate": {
+    "defaultMessage": "Participate"
   },
   "EventParticipant.ParticipantTip": {
     "defaultMessage": "Invite participant to the event"
@@ -865,12 +1060,6 @@
   },
   "EventParticipant.Titleinvited": {
     "defaultMessage": "Invited participant: no confirmation is received at this moment"
-  },
-  "EventParticipant.UrlInvitation": {
-    "defaultMessage": "Url"
-  },
-  "EventParticipant.UseMyEmailAsFrom": {
-    "defaultMessage": "Use my email in the From message"
   },
   "EventParticipants.EmailSentError": {
     "defaultMessage": "Email error"
@@ -1229,14 +1418,14 @@
   "EventsList.AllEvents": {
     "defaultMessage": "All events"
   },
+  "EventsList.AllEventsShort": {
+    "defaultMessage": "All"
+  },
   "EventsList.CantGetListItem": {
     "defaultMessage": "Can't access the list of item'"
   },
   "EventsList.CreateAnEvent": {
     "defaultMessage": "Create an Event"
-  },
-  "EventsList.Date": {
-    "defaultMessage": "Date"
   },
   "EventsList.DateFromTo": {
     "defaultMessage": "to"
@@ -1247,11 +1436,23 @@
   "EventsList.MyEvents": {
     "defaultMessage": "My events"
   },
-  "EventsList.Name": {
-    "defaultMessage": "Name"
+  "EventsList.MyEventsShort": {
+    "defaultMessage": "Mine"
   },
-  "EventsList.Participants": {
-    "defaultMessage": "Participants"
+  "EventsList.MyInvitations": {
+    "defaultMessage": "My invitations"
+  },
+  "EventsList.MyInvitationsShort": {
+    "defaultMessage": "Invitations"
+  },
+  "EventsList.NextEvents": {
+    "defaultMessage": "Next events"
+  },
+  "EventsList.NextEventsShort": {
+    "defaultMessage": "Next"
+  },
+  "EventsList.NoDateEvent": {
+    "defaultMessage": "No date"
   },
   "EventsList.Refresh": {
     "defaultMessage": "Refresh"
@@ -1267,6 +1468,9 @@
   },
   "EventsList.TitleMyInvitations": {
     "defaultMessage": "My Invitations"
+  },
+  "EventsList.WithParticipants": {
+    "defaultMessage": "With"
   },
   "Expense.Budget": {
     "defaultMessage": "Budget"
@@ -1310,6 +1514,9 @@
   "Invitation.SendInvitation": {
     "defaultMessage": "Send Invitation"
   },
+  "Invitation.Subject": {
+    "defaultMessage": "Subject"
+  },
   "Invitation.UseMyEmailAsFrom": {
     "defaultMessage": "Use my email in the From message"
   },
@@ -1331,6 +1538,39 @@
   "Invitation.UsersInvited": {
     "defaultMessage": "Users are invited with success"
   },
+  "InvitationAgain.EmailTitle": {
+    "defaultMessage": "Send the invitation email"
+  },
+  "InvitationAgain.GetTheUrlExplanation": {
+    "defaultMessage": "Get the URL, and use it"
+  },
+  "InvitationAgain.Invitation": {
+    "defaultMessage": "Manage invitation"
+  },
+  "InvitationAgain.InvitationLabel": {
+    "defaultMessage": "Invitation"
+  },
+  "InvitationAgain.InvitationTo": {
+    "defaultMessage": "Invitation sent to"
+  },
+  "InvitationAgain.Message": {
+    "defaultMessage": "Message"
+  },
+  "InvitationAgain.SendAgainExplanation": {
+    "defaultMessage": "Send again the invitation by email"
+  },
+  "InvitationAgain.Subject": {
+    "defaultMessage": "Subject"
+  },
+  "InvitationAgain.UrlTitle": {
+    "defaultMessage": "Url"
+  },
+  "InvitationAgain.UseMyEmailAsFrom": {
+    "defaultMessage": "Use my email in the From message"
+  },
+  "InvitationAgain.UseMyEmailAsFromExplantion": {
+    "defaultMessage": "In order to be accepted by the recipient, your email is used to be the sender of the email"
+  },
   "LogEvent.Action": {
     "defaultMessage": "Action"
   },
@@ -1345,6 +1585,9 @@
   },
   "Login.EmailSent": {
     "defaultMessage": "An email is sent, check your mailbox"
+  },
+  "Login.InvalidLoginPassword": {
+    "defaultMessage": "Invalid Login / Password"
   },
   "Login.LostMyPassword": {
     "defaultMessage": "I lost My password"
