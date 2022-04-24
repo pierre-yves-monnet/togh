@@ -81,7 +81,7 @@ class EventsList extends React.Component {
 		if (prevProps.titleFrame !== this.props.titleFrame) {
             console.log("EventsList.componentDidUpdate: Change titleFrame=("+this.props.titleFrame+")");
             let filter;
-            if (this.props.titleFrame == 'MYINVITATIONS')
+            if (this.props.titleFrame === 'MYINVITATIONS')
                 filter=FILTER_EVENT.MYINVITATIONS;
             else
                 filter=FILTER_EVENT.MYEVENTS;
@@ -125,7 +125,7 @@ class EventsList extends React.Component {
 				    <div class="row">
 
                         <div class="col-lg-2" >
-                            <img src="img/toghEvent.jpg" style={{ width: 90 }}     />
+                            <img src="img/toghEvent.jpg" style={{ width: 90 }} alt='Togh'    />
                         </div>
                         <div class="col-lg-10" >
                              <div class="row">

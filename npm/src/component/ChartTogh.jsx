@@ -133,72 +133,72 @@ render() {
         console.log("Chart: dataChart=" + JSON.stringify(dataChart));
 
         return ( <div style = {{padding: "10 ps 20px",borderRadius: "10px",border: "3px solid rgb(222, 203, 228)"}} >
-                    <div class = "h6" style = {{textAlign: "center"}}> {this.state.title} < /div>
-                    <Doughnut data = {dataChart} options = {chartOptions}/> <
-                /div>)
-        }
-
-        // ------------------------------------------- Horizontal Bar
-        if (this.state.type === 'VerticalBar' || this.state.type === 'HorizontalBar') {
-            const dataChart = {};
-
-            dataChart.datasets = [];
-            dataChart.datasets.label = this.state.title;
-
-
-            let dataset = {};
-            dataChart.datasets.push(dataset);
-            if (this.state.oneColor) {
-                dataset.backgroundColor = oneBackgroundColor;
-                dataset.borderColor = oneBorderColor;
-            } else {
-                dataset.backgroundColor = this.state.backgroundColor;
-                dataset.borderColor = this.state.borderColor;
-            }
-            dataset.borderWidth = 1;
-
-            if (this.state.dataList) {
-                const resultTransformed = this.getLabelsDataFromList(this.state.dataList);
-                dataChart.labels = resultTransformed.labels;
-                dataset.data = resultTransformed.data;
-            }
-
-            if (this.state.type === 'HorizontalBar') {
-                chartOptions.scales= {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            },
-                        }, ],
-                    };
-            }
-            if (this.state.type === 'VerticalBar') {
-                chartOptions.indexAxis = 'y';
-                chartOptions.elements = {
-                    bar: {
-                        borderWidth: 2,
-                    },
-                };
-                chartOptions.responsive = true;
-                chartOptions.plugins = {
-                    legend: {
-                        position: 'right',
-                    },
-                    title: {
-                        display: false,
-                    },
-                };
-            }
-
-            return ( <div style = {{padding: "10 ps 20px", borderRadius: "10px",border: "3px solid rgb(222, 203, 228)"}} >
-                        <div class = "h6" style = {{textAlign: "center"}} > {this.state.title} </div>
-                        <Bar data = {dataChart} options = {chartOptions}/>
-                     </div>
-            )
-        }
-
-        return ( < div / > );
+                    <div class = "h6" style = {{textAlign: "center"}}> {this.state.title} </div>
+                    <Doughnut data = {dataChart} options = {chartOptions}/>
+                  </div>)
     }
+
+    // ------------------------------------------- Horizontal Bar
+    if (this.state.type === 'VerticalBar' || this.state.type === 'HorizontalBar') {
+        const dataChart = {};
+
+        dataChart.datasets = [];
+        dataChart.datasets.label = this.state.title;
+
+
+        let dataset = {};
+        dataChart.datasets.push(dataset);
+        if (this.state.oneColor) {
+            dataset.backgroundColor = oneBackgroundColor;
+            dataset.borderColor = oneBorderColor;
+        } else {
+            dataset.backgroundColor = this.state.backgroundColor;
+            dataset.borderColor = this.state.borderColor;
+        }
+        dataset.borderWidth = 1;
+
+        if (this.state.dataList) {
+            const resultTransformed = this.getLabelsDataFromList(this.state.dataList);
+            dataChart.labels = resultTransformed.labels;
+            dataset.data = resultTransformed.data;
+        }
+
+        if (this.state.type === 'HorizontalBar') {
+            chartOptions.scales= {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    }, ],
+                };
+        }
+        if (this.state.type === 'VerticalBar') {
+            chartOptions.indexAxis = 'y';
+            chartOptions.elements = {
+                bar: {
+                    borderWidth: 2,
+                },
+            };
+            chartOptions.responsive = true;
+            chartOptions.plugins = {
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: false,
+                },
+            };
+        }
+
+        return ( <div style = {{padding: "10 ps 20px", borderRadius: "10px",border: "3px solid rgb(222, 203, 228)"}} >
+                    <div class = "h6" style = {{textAlign: "center"}} > {this.state.title} </div>
+                    <Bar data = {dataChart} options = {chartOptions}/>
+                 </div>
+        )
+    }
+
+    return ( < div / > );
+}
 
 /* target Doonut:
               labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

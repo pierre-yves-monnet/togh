@@ -14,8 +14,6 @@ import { TextInput, TextArea, Toggle,InlineLoading } from 'carbon-components-rea
 import {  List} from 'react-bootstrap-icons';
 
 
-import * as userFeedbackConstant 	from 'component/UserFeedback';
-
 import * as gameListConstant 		from 'event/EventGameList';
 
 import FactoryService 				from 'service/FactoryService';
@@ -71,7 +69,7 @@ class EventGameSecretSantas extends React.Component {
 	    // we propose the bestDisplay only if the Game change
   		let game = this.eventCtrl.getCurrentGame();
 	    if (this.state.show.currentGameId !== game.id
-	        || this.state.show.typeDisplay != prevPropsTypeDisplay) {
+	        || this.state.show.typeDisplay !== prevPropsTypeDisplay) {
 		    console.log("EventGameSecretSantas.componentDidUpdate prevProps=("+prevPropsTypeDisplay+")");
             this.setState( {show : {typeDisplay: prevPropsTypeDisplay, currentGameId: game.id}});
         }
@@ -150,7 +148,7 @@ class EventGameSecretSantas extends React.Component {
                             <FormattedMessage id="EventGameSecretSantas.Scope" defaultMessage="Players of the Secret Santas" />
                         </div>
                         <div class="col-6">
-                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate" >
+                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate button" >
                                 <input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autoComplete="off"
                                     checked={game.scopeGame === "ALL"}
                                     onChange={() => this.setAttribut("scopeGame", "ALL", game)}

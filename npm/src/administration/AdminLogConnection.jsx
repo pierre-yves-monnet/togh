@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,  TooltipIcon,  Toggle, Loading, DatePicker, DatePickerInput, TimePicker } from 'carbon-components-react';
+import { TextInput,  Tooltip,  Toggle, Loading, DatePicker, DatePickerInput, TimePicker } from 'carbon-components-react';
 import { LampFill, Alarm,  List, LockFill,PersonXFill  } from 'react-bootstrap-icons';
 
 
@@ -222,27 +222,27 @@ class AdminLogConnection extends React.Component {
 									
 									<td> 
 										{item.statusConnection === 'OK' &&
-											<TooltipIcon
+											<Tooltip
       											tooltipText={intl.formatMessage({id: "AdminLogConnection.ConnectionOk",defaultMessage: "Connection correct"})} >
 												<LampFill style={{color:"green", fill:"green"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.statusConnection === 'UNKNOWUSER' &&
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminLogConnection.UnknowUser", defaultMessage: "User unknown"})}>
 												<PersonXFill style={{color:"red", fill:"red"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 										
 										{item.statusConnection === 'BADPASSWORD' &&
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminLogConnection.BadPassword", defaultMessage: "Bad Password"})}>
 												<LockFill style={{color:"red", fill:"red"}} />
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.numberOfTentatives > 5 && item.statusConnection !== 'OK' &&
-                                            <TooltipIcon
+                                            <Tooltip
                                                 tooltipText={intl.formatMessage({id: "AdminLogConnection.UnderAttackTentatives", defaultMessage: "Under Attack (lot of tentatives)"})}
                                                 style={{paddingLeft:"10px"}}>
                                                 <Alarm style={{color:"red", fill:"red"}} />
-                                            </TooltipIcon>}
+                                            </Tooltip>}
 									</td>
                                     <td style={{fontSize:"smaller"}}> {item.statusConnection} </td>
 									<td> {item.connectionTimeHumanZone} </td>

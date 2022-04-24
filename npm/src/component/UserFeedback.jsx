@@ -59,7 +59,7 @@ class UserFeedback extends React.Component {
 		if (this.state.status==="" && ! this.state.inprogress)
 			return ( <div>&nbsp;</div>);
 		if (this.state.inprogress) {
-			return (<div style={{fontStyle: "italic"}}><table><tr><td><InlineLoading/></td><td> {this.state.label}</td></tr></table></div>);
+			return (<div style={{fontStyle: "italic"}}><table><tr><td><InlineLoading description="Loading"/></td><td> {this.state.label}</td></tr></table></div>);
 		}
 		
 		// Display the status

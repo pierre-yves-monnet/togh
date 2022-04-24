@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, TooltipIcon, Tag, Toggle, Loading } from 'carbon-components-react';
+import { TextInput,Select, Tooltip, Tag, Toggle, Loading } from 'carbon-components-react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import FactoryService 		from 'service/FactoryService';
@@ -153,8 +153,8 @@ class AdminUsers extends React.Component {
 						        <Toggle size="sm" class="sm" labelText="" aria-label=""
                                     toggled={this.state.show.details}
                                     selectorPrimaryFocus={this.state.show.details}
-                                    labelA={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="DetailsA" />}
-                                    labelB={<FormattedMessage id="AdminUsers.ShowDetails" defaultMessage="DetailsB" />}
+                                    labelA={<FormattedMessage id="AdminUsers.ShowDetailsA" defaultMessage="Details" />}
+                                    labelB={<FormattedMessage id="AdminUsers.ShowDetailsB" defaultMessage="Details" />}
                                     onChange={(event) => {
                                         this.setState( { show: { details : event.target.checked}} );
                                         }}
@@ -190,67 +190,67 @@ class AdminUsers extends React.Component {
 									
 									<td> 
 										{item.connected === 'ONLINE' && 
-											<TooltipIcon
+											<Tooltip
       											tooltipText={intl.formatMessage({id: "AdminUsers.ConnectedOnLine",defaultMessage: "User connected"})} >
 												<LampFill style={{color:"green", fill:"green"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.connected === 'OFFLINE' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.ConnectedOffline", defaultMessage: "User offline"})}>
 												<Lamp />
-											</TooltipIcon>}
+											</Tooltip>}
 										
 										{item.statusUser === 'ACTIF' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.LongStatusUserActif", defaultMessage: "User actif"})}>
 												<PersonBadge style={{color:"green", fill:"green"}} />
-											</TooltipIcon>}
+											</Tooltip>}
 											
 											
 											
 											
 										{item.statusUser === 'DISABLED' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.LongStatusUserDisabled", defaultMessage: "User disabled"})}>
 												<PersonBadge style={{color:"gray", fill:"gray"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.statusUser === 'BLOCK' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.LongStatusUserBlock", defaultMessage: "User Blocked"})}>
 												<PersonBadge style={{color:"red", fill:"red"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 											
 										
 										
 										
 										{item.subscription === 'FREE' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionFree", defaultMessage: "Free subscription"})}>
 												<Bookmark />
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.subscription === 'PREMIUM' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionPremium", defaultMessage: "Premium subscription"})}>
 												<BookmarkStar style={{color:"#ff6666", fill:"#ff6666"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.subscription === 'EXCELLENCE' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.subscriptionExcellence", defaultMessage: "Excellence subscription"})}>
 												<BookmarkStar style={{color:"#a17f1a",  fill:"#a17f1a"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 
 
 
 										{item.privilegeuser === 'ADMIN' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.privilegeAdmin", defaultMessage: "Administrator"})}>
 												<AwardFill style={{fill:"#ff6666"}}/>
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.privilegeuser === 'TRANS' && 
-											<TooltipIcon
+											<Tooltip
 												tooltipText={intl.formatMessage({id: "AdminUsers.privilegeTrans", defaultMessage: "Translator"})}>
 												<Fonts />
-											</TooltipIcon>}
+											</Tooltip>}
 										{item.privilegeuser === 'USER' && <div />}
  
 									</td>

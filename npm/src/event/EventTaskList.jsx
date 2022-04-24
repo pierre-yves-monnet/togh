@@ -254,7 +254,7 @@ class EventTaskList extends React.Component {
 							
 							
 					</td><td style={{ paddingLeft: "50px", paddingRight: "50px" }}>
-						<div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate" >
+						<div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate button" >
 							<input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autoComplete="off"
 								checked={this.state.showProperties.filterState === "ALL"}
 								onChange={() => this.setSwitcherValue("filterState", "ALL")}/>

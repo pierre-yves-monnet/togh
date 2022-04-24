@@ -233,7 +233,7 @@ class EventGameTruthOrLie extends React.Component {
 
                     {(game.nbTruthsRequested > 0) &&
                         <div class="row">
-                             <FormattedMessage id="EventGameTruthOrLie.NumberOfTruths" defaultMessage="There is a number of Truths requested:" />
+                             <FormattedMessage id="EventGameTruthOrLie.NumberOfTruthsUpperZero" defaultMessage="There is a number of Truths requested:" />
                             &nbsp;
                             {game.nbTruthsRequested}
                         </div>
@@ -288,7 +288,7 @@ class EventGameTruthOrLie extends React.Component {
                             </TextArea>
                         </div>
                         <div class="col-4" >
-                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate" >
+                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate button" >
                                 <input type="radio"
                                     class="btn-check"
                                     name={"btntruthorlieradio_"+currentSentence.id}
@@ -322,7 +322,7 @@ class EventGameTruthOrLie extends React.Component {
                 <div class="row"  style={{ marginTop: "10px"}}>
                     {! myTruthOrLie.validate &&
                     <div>
-                        <FormattedMessage id="EventGameTruthOrLie.Validate" defaultMessage="When your list is ready, validate it. Attention, it will not be possible to modify it after: players will start to vote." />
+                        <FormattedMessage id="EventGameTruthOrLie.ValidateExplanation" defaultMessage="When your list is ready, validate it. Attention, it will not be possible to modify it after: players will start to vote." />
                         <br/>
                         <button class="btn btn-success btn-xs" style={{marginTop: "10px"}}
                             onClick={()=>this.seValidateMySentences("validateSentences", "true", game, myTruthOrLie ) }
@@ -358,7 +358,7 @@ class EventGameTruthOrLie extends React.Component {
             index=myTruthOrLie.voteList.length-1;
 
         let countTotalVote= myTruthOrLie.voteList.length;
-        if (countTotalVote==0) {
+        if (countTotalVote === 0) {
             return (<FormattedMessage id="EventGameTruthOrLie.NoVoteReady" defaultMessage="No vote at this moment" />);
         }
 
@@ -869,7 +869,6 @@ class EventGameTruthOrLie extends React.Component {
 
     setVote( name, value, game, myTruthOrLie, voteToDisplay, currentSentence) {
         // console.log("EventGameTruthorLie.setVote value="+value);
-        let mySelfUser = this.eventCtrl.getMyself();
         let path=gameListConstant.NAMEENTITY+"/"+game.id+"/truthOrLieList/"+myTruthOrLie.id+"/voteList/"+voteToDisplay.id+"/voteSentenceList/"+currentSentence.id;
         this.eventCtrl.setAttribut(name, value, currentSentence, path);
         // console.log("EventGameTruthOrLie setVote: game="+ JSON.stringify(game));

@@ -31,7 +31,7 @@ Note:
 le projet doit etre not� "Dynamic web application" sinon Spring ne veut pas d�marr� ( ? )
 Click droit => Properties => Project Facet => Dynamic Web Application
 
-# Intellij
+## Intellij
 Launch the class com.togh.ServerInitializer.
 
 ## Lombok 
@@ -40,18 +40,6 @@ The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
 ## mobile
 
 https://flutter.dev/
-
-## install npm
-
-npx create-react-app togh
-
-## Install carbon
-
-https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e
-
-npm add carbon-components carbon-components-react carbon-icons npm add node-sass@4.14.1
-
-npm start
 
 ## using h2
 
@@ -112,10 +100,10 @@ So:
 
  
 Example : date of the event is a Date + Time (Zoned)
-  That's mean 
- 
+  That's mean
 
 # Development
+
 /* ******************************************************************************** */
 /*                                                                                  */ /*
 Development                                                                    */
@@ -124,23 +112,147 @@ Development                                                                    *
 /*                                                                                  */
 /* ******************************************************************************** */
 
-## React
+## Install React from scratch
 
-copier configuration/paths.js dans node_modules/react-scripts/config/path
+```
+npx create-react-app togh
+```
 
-Carbon:
+Downgrade : modify package.json
+
+```
+"react": "17.0.2",
+"react-dom": "17.0.2",
+"react-scripts": "4.0.1",
+````
+
+change in index.js:
+
+````
+import ReactDOM from 'react-dom';
+ReactDOM.render(<App />, document.getElementById('root'));
+````
+
+Create index.scss
+
+````
+@import 'carbon-components/scss/globals/scss/styles.scss';
+````
+
+Allow the indirect reference in import:
+See https://saurabhshah23.medium.com/react-app-with-absolute-paths-using-jsconfig-json-2b07b1cb24d4
+and create a jsonfig.js
+
+````
+cp configuration/paths.js node_modules/react-scripts/config/path
+````
+
+## Carbon:
+
+https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e
+https://www.carbondesignsystem.com/developing/react-tutorial/step-1/
+https://github.com/carbon-design-system/carbon-tutorial/tree/master/src
+
 https://www.carbondesignsystem.com/developing/react-tutorial/overview
-install carbon
-https://www.npmjs.com/package/carbon-components
 
-npm config set python c:\python27\python.exe npm install --global windows-build-tools
+```
+  
+npm install carbon-components@10.25.0 carbon-components-react@7.25.0 @carbon/icons-react@10.22.0 carbon-icons@7.0.7
+npm install sass@1.29.0
+```
 
-npm install -S carbon-components carbon-components-react carbon-icons npm install react-intl npm install
-babel-plugin-react-intl npm install react-custom-flag-select --save npm install react-bootstrap-icons --save npm install
-react-google-login npm install react-chartjs-2 npm install react-autosuggest npm install react-geocode npm install
-react-axios npm install react-currency-input --force npm install --save google-map-react
+-------------------------------- OLD
+"@carbon/react": "^1.0.3",
+"react": "17.0.2",
+"react-scripts": "5.0.0",
+"@testing-library/jest-dom": "^5.16.4",
+"@testing-library/react": "^13.0.1",
+"@testing-library/user-event": "^13.5.0",
+"babel-plugin-react-intl": "^8.2.25",
+"google-map-react": "^2.1.10",
+"react-autosuggest": "^10.1.0",
+"react-axios": "^2.0.5",
+"react-bootstrap-icons": "^1.8.1",
+"react-chartjs-2": "^4.1.0",
+"react-currency-input": "^1.3.6",
+"react-custom-flag-select": "^3.0.7",
+"react-dom": "17.0.2",
+"react-geocode": "^0.2.3",
+"react-google-login": "^5.2.2",
+"react-intl": "^5.24.8",
+"web-vitals": "^2.1.4"
 
-mvn clean install
+-------------------------------- 
+
+## other library
+
+```
+npm install axios
+npm install react-axios --force
+npm install react-chartjs-2 
+npm install react-custom-flag-select
+npm install react-bootstrap-icons
+npm install react-google-login
+npm install react-autosuggest
+npm install react-geocode
+npm install react-currency-input --force
+npm install google-map-react
+npm install react-intl --force
+npm install babel-plugin-react-intl
+
+npm install lodash@4.17.21
+
+npm config set python D:\atelier\Python\Python310\python.exe 
+npm install --global windows-build-tools
+
+```
+
+## Translation
+
+1. Installation
+   https://www.freecodecamp.org/news/setting-up-internationalization-in-react-from-start-to-finish-6cb94a7af725/
+
+Extraction: visit
+https://formatjs.io/docs/getting-started/message-extraction/
+
+```
+> npm install -D @formatjs/cli
+```
+
+Add in package.json
+
+```
+"extract": "formatjs extract src/**/*.jsx --out-file lang/en.json"
+```
+
+2. Usage
+
+```
+> cd npm
+> npm run extract
+```
+
+https://phrase.com/blog/posts/react-i18n-best-libraries/
+
+https://lokalise.com/blog/react-i18n-intl/
+{
+"app.channel.plug": "Tutorial brought to you by {blogName}"
+}
+
+<FormattedMessage id = "app.channel.plug"
+defaultMessage="Tutorial brought to you by Lokalise"
+values = {{blogName: "Lokalise"}} />
+
+--------- from JS import { injectIntl, FormattedMessage } from "react-intl";
+
+const intl = this.props.intl;
+
+title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}
+
+export default injectIntl(EventShoppingList);
+
+Extraction : follow
+https://formatjs.io/docs/getting-started/message-extraction/
 
 ## Explication sur React:
 
@@ -201,16 +313,35 @@ Marron : 210/165/108	#d2a66c
 		
 Lounes : $5 / icons
 
-Chat                : OK/Paid Task                : OK/Paid Shopping List        : OK/Paid Participant        :
-OK/Paid     
-Itinerary            : Ok/Paid Survey                : OK /Paid Geolocalisation    : OK/Paid Photo                :
-OK/Paid Frais                : OK/Paid references            : todo / Engrenages budget                : OK/Paid / sac
-ou tirelire/Paid Default Boy            : ok/Paid (togh)
-Default girl        : Ok/Paid (cypris)
-
-Starter        : OK/Paid Ender            : OK/Paid Point d'interet    : todo Visite            : todo
-Achat            : sac de courses Divertissement    : todo Aeroport        : todo Stations de bus    : todo
-gare            : todo port            : todo restaurant        : todo nuit (hotel)    : todo
+| Icon | Status |
+|---|---|
+|Chat                | OK/Paid|
+|Task                | OK/Paid| 
+|Shopping List       | OK/Paid |
+|Participant        | OK/Paid   |  
+|Itinerary            | Ok/Paid |
+|Survey              |OK /Paid |
+|Geolocalisation    | OK/|
+|Paid Photo              |OK/Paid| 
+|Frais                | OK/Paid |
+|references            | todo / |
+|Engrenages ||
+|budget                |OK/Paid /| 
+|sac ou tirelire | OK/Paid |
+|Default Boy            | ok/Paid (togh)|
+|Default girl        | Ok/Paid (cypris)|
+|Starter        | OK/Paid |
+|Ender            | OK/Paid| 
+|Point d'interet    | todo |
+|Visite            | todo|
+|Achat            | sac de courses| 
+|Divertissement    | todo |
+|Aeroport        | todo |
+|Stations de bus   | todo|
+|gare            | todo |
+|port            | todo |
+|restaurant       | todo |
+|nuit (hotel)    | todo|
 
 const ITINERARYITEM_POI = "POI"; const ITINERARYITEM_BEGIN = "BEGIN"; const ITINERARYITEM_END = "END";  
 const ITINERARYITEM_SHOPPING = "SHOPPING"; ok const ITINERARYITEM_AIRPORT = "AIRPORT"; const ITINERARYITEM_BUS = "BUS";
@@ -235,66 +366,6 @@ componentDidUpdate(prevProps) {
 Contexte
 https://fr.reactjs.org/docs/context.html
 
-## Carbon
-import { DatePicker } from 'carbon-components-react';
-import { DatePickerInput } from 'carbon-components-react';
-import { TimePicker } from 'carbon-components-react';
-import { TimePickerSelect } from 'carbon-components-react';
-import { RadioButtonGroup } from 'carbon-components-react';
-import { RadioButton } from 'carbon-components-react';
-import { TextInput } from 'carbon-components-react';
-import { TextArea } from 'carbon-components-react';
-import { Select } from 'carbon-components-react';
-import { SelectItem } from 'carbon-components-react';
-import { Tag } from 'carbon-components-react';
-
-
-					<RadioButtonGroup
-							valueSelected={this.state.panelVisible}
-							legend=""
-							name="type"
-							onChange={(event) => {
-								console.log("Invitation.Change type="+event);        					
-								this.setState( {"panelVisible": event})}
-								}
-							>
-							<RadioButton value="INVITATION" id="invitation_r1" labelText={<FormattedMessage id="Invitation.ByEmail" defaultMessage="Send an Email"/>} labelPosition="right" />
-							<RadioButton value="SEARCH" id="invitation_r2"  labelText={<FormattedMessage id="Invitation.SearchAUser" defaultMessage="Search a user"/>} labelPosition="right"/>
-						</RadioButtonGroup>     
-
-## Translation
-
-```
-> cd npm
-> npm i -D @formatjs/cli
-> npm run extract
-```
-
-https://phrase.com/blog/posts/react-i18n-best-libraries/
-
-https://www.freecodecamp.org/news/setting-up-internationalization-in-react-from-start-to-finish-6cb94a7af725/
-
-https://lokalise.com/blog/react-i18n-intl/
-{
-"app.channel.plug": "Tutorial brought to you by {blogName}"
-}
-
-<FormattedMessage id = "app.channel.plug"
-defaultMessage="Tutorial brought to you by Lokalise"
-values = {{blogName: "Lokalise"}} />
-
---------- from JS import { injectIntl, FormattedMessage } from "react-intl";
-
-const intl = this.props.intl;
-
-title={intl.formatMessage({id: "EventShoppingList.removeItem",defaultMessage: "Remove this item"})}
-
-export default injectIntl(EventShoppingList);
-
-Extraction : follow
-https://formatjs.io/docs/getting-started/message-extraction/
-
-
 # Open question
 /* ******************************************************************************** */
 /*                                                                                  */
@@ -304,7 +375,6 @@ https://formatjs.io/docs/getting-started/message-extraction/
 /*                                                                                  */
 /* ******************************************************************************** */
 
- Comment faire marcher le @configuration ?
  
  Comment locker un record dans la table ?
  Voici mon cas d'uisage. Une evenement peut etre modifié en meme temps par 2 utilisateurs, donc 2 threads en meme temps.
@@ -324,18 +394,7 @@ De plus, moi je veux mettre cet @ dans ma classe d'application (qui est un @Serv
 je me trompe ? 
 
  
- * comment faire un update sur un champ?
- Ma REST API va etre du type "UPDATE / ROOT / DESCRIPTION" value="Ceci est ma nouvelle description"
- "UPDATE / ININERARY / Pid=111 / NAME" "Visite du musée
- Le serveur va faire / read event / Update description='Ceci est ma nouvelle description' / Save
- 
- Comment je met a jour un seul champ de maniere dynamique ? Je voudrais avoir une methode "setAttribut( name, value)" ?
- //https://www.baeldung.com/apache-commons-beanutils
- 	==> Beanutils.copy
- 	PersistenceUtil.copyNonNullProperties(u, user);
-https://github.com/chDame/fabulexie/blob/c7471210f2c6df6f7cf6d9022986a24aa11d48b0/[…]e-backend/src/main/java/org/fabulexie/util/PersistenceUtil.java
- 	
- 
+
  
 ## profile
 See https://www.baeldung.com/spring-profiles
@@ -396,10 +455,6 @@ React:
 	// 
 	// --------------------------------------------------------------
 
-## tool for react :
-
-vscode react hooks
-
 ## tools to explore
 
 buildpack.io : create a docker container easely
@@ -408,7 +463,7 @@ buildpack.io : create a docker container easely
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*  Google
-API                                                                                */
+API                                                                      */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
@@ -457,7 +512,7 @@ we’ll add our own Google account as a test user.
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*  Google Cloud &
-Docker                                                           */
+docker                                                           */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
@@ -495,7 +550,7 @@ Done automaticaly
 ### Option execute Locally Docker image
 
 ```
-> docker run --name togh -h localhost -e SPRING_DATASOURCE_URL=jdbc:postgresql://34.125.204.84:5432/togh -e SPRING_DATASOURCE_USERNAME=toghp -e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres --network="host" pierreyvesmonnet/togh:1.0.0 
+> docker run --name togh -h localhost -e SPRING_DATASOURCE_URL=jdbc:postgresql://<HOST> -e SPRING_DATASOURCE_USERNAME=<USERNAME> -e SPRING_DATASOURCE_PASSWORD=<Password> --network="host" pierreyvesmonnet/togh:1.0.0 
 
 > docker run --name frontendtogh -h localhost -d -p 3000:3000 -p 80:80 pierreyvesmonnet/frontendtogh:1.0.0
 ```
@@ -556,8 +611,8 @@ $ docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
 $ docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 $ docker run --name togh \
 -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh \
--e SPRING_DATASOURCE_USERNAME=toghp \
--e SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres \
+-e SPRING_DATASOURCE_USERNAME=<USERNAME> \
+-e SPRING_DATASOURCE_PASSWORD=<PASSWORD> \
 --network="host" --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/togh:1.0.0
 
 $ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs \
@@ -587,9 +642,6 @@ docker/compose:1.24.0 up &
     -p 3000:3000 \
 
 ## SQL Database production update (sql update)
-
-update evtparticipant set partof='PARTOF' where ispartof=true; update evtparticipant set partof='NO' where
-ispartof=false; update evtparticipant set partof='DONTKNOW' where ispartof is null;
 
 # Documentation
 
@@ -696,11 +748,7 @@ su - postgres pg_ctlcluster 11 main start
 
 creation de la la base de donnée \conninfo psql CREATE DATABASE together;
 
-## Save the container
-
-## importer le container
-
-## Arret de docker
+## Arret de docker windows
 
 wsl --shutdown
 
@@ -713,6 +761,8 @@ www.1and1.com
 https://tomgregory.com/building-a-spring-boot-application-in-jenkins/
 
 # Administration
+
+Go into an image docker run -it image_name sh docker run -it gcr.io/intricate-gamma-325323/togh:1.0.0 sh
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*

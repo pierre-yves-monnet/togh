@@ -149,10 +149,10 @@ class EventGame extends React.Component {
 
 		return (<div>
        		        {headerHtml}
-                    {game.typeGame == SECRET_SANTAS && <EventGameSecretSantas typeDisplay={this.state.show.typeDisplay}
+                    {game.typeGame === SECRET_SANTAS && <EventGameSecretSantas typeDisplay={this.state.show.typeDisplay}
                                 eventCtrl={this.eventCtrl}
                          />}
-                    {game.typeGame == TRUTH_OR_LIE && <EventGameTruthOrLie typeDisplay={this.state.show.typeDisplay}
+                    {game.typeGame === TRUTH_OR_LIE && <EventGameTruthOrLie typeDisplay={this.state.show.typeDisplay}
                                 eventCtrl={this.eventCtrl}
                          />}
                 </div>

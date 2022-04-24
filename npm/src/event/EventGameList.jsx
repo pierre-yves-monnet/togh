@@ -120,7 +120,7 @@ class EventGameList extends React.Component {
 			
 			listGamesHtml.push( this.state.event.gamelist.map( (item, index) => {
 				let classGame = "list-group-item list-group-item-warning";
-				let styleGame="";
+				let styleGame={};
 				// color
 				if (item.status === EventGameConstant.STATUS_INPREPAR)
 					classGame= "list-group-item list-group-item-dark"

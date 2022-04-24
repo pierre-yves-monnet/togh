@@ -125,7 +125,7 @@ class EventSurveyList extends React.Component {
 			
 			listSurveyHtml.push( this.state.event.surveylist.map( (item, index) => {
 				let classSurvey = "";
-				let styleSurvey="";
+				let styleSurvey={};
 				// color
 				if (item.status === surveyConstant.STATUS_INPREPAR)
 					classSurvey= "list-group-item list-group-item-dark"

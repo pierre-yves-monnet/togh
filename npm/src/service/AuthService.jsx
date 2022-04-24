@@ -175,7 +175,7 @@ class AuthService {
                 self.user =  httpPayload.getData().user;
                 self.connectMethod='DIRECT';
 
-                var httpResponse = new HttpResponse( httpPayload.getData(), null);
+                // let httpResponse = new HttpResponse( httpPayload.getData(), null);
                 fctToCallback.call(objToCall, httpPayload);
             });
 	}
@@ -211,10 +211,9 @@ class AuthService {
 	logout( objToCall, fctToCallback) {
 		console.log("AuthService.logout: token = " +this.token);
 	
-		var param = {};
+		let param = {};
 		var self=this;
-		var headers= {'Authorization': this.token};
-		axios.post( this.restcallService.getUrl('/api/logout?'), param, 
+		axios.post( this.restcallService.getUrl('/api/logout?'), param,
 			{
     			headers: this.getHeaders(null)
   			}).then(
