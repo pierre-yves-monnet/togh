@@ -341,7 +341,7 @@ class Event extends React.Component {
 
                 <EventSectionHeader id="helptabs"
                     showPlusButton  = {false}
-                    userTipsText={<FormattedMessage id="Event.HelpTabsAccess" defaultMessage="You have access to different functions in the event. Open and close functions in your preference: only some function are accessible by default" />}
+                    userTipsText={<FormattedMessage id="Event.HelpTabsAccess" defaultMessage="You have access to different functions in the event. Open and close functions in your preference: only some functions are accessible by default" />}
 				    />
 				<div class="row" style={{ padding: "10px 30px 10px" }}>
                     <ul class="nav nav-tabs" style={{borderBottom: "6px solid #e9ecef"}}>
@@ -607,9 +607,8 @@ class Event extends React.Component {
 	hasAccessTab( accessTab ) {
 	    // console.log("Event.hasAccess["+accessTab+"]?");
 	    if (this.state && this.state.event && this.state.event && this.state.event.preferences) {
-	        let access= this.state.event.preferences[ 'access'+accessTab ];
+	        return this.state.event.preferences[ 'access'+accessTab ];
 	        // console.log("Event.hasAccess["+accessTab+"] ="+access+" pref="+JSON.stringify(this.state.event.preferences));
-	        return access;
 	    }
 	    return false;
 	}

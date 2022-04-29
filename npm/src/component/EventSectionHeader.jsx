@@ -43,9 +43,11 @@ class EventSectionHeader extends React.Component {
 		return (
 			<div>
 				<div class="eventsection">
-					<div style={{ float: "left" }}>
-						<img style={{ "float": "right",width: 100 }} src={this.state.image} alt="State" /><br />
-					</div>
+				  {this.state.image &&
+                        <div style={{ float: "left" }}>
+                            <img style={{ float: "right", width: "100" }} src={this.state.image} alt="State" /><br />
+                        </div>
+					}
 					{this.state.title}
 					{this.state.showPlusButton &&
 						<div style={{ float: "right" }}>
