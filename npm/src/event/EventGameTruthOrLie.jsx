@@ -288,7 +288,7 @@ class EventGameTruthOrLie extends React.Component {
                             </TextArea>
                         </div>
                         <div class="col-4" >
-                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate button" >
+                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="group" aria-label="Status" >
                                 <input type="radio"
                                     class="btn-check"
                                     name={"btntruthorlieradio_"+currentSentence.id}
@@ -415,7 +415,7 @@ class EventGameTruthOrLie extends React.Component {
                                 </TextArea>
                             </div>
                             <div class="col-4" >
-                                <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupvote" >
+                                <div class="btn-group btn-group-sm radio toggle button group Basic" role="group" aria-label="Status">
                                     <input type="radio"
                                         class="btn-check"
                                         name={"btnvoteradio_"+currentSentence.id}
@@ -611,7 +611,7 @@ class EventGameTruthOrLie extends React.Component {
                             <FormattedMessage id="EventGameTruthOrLie.Scope" defaultMessage="Players of the Truth Or Lie game" />
                         </div>
                         <div class="col-6">
-                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="groupstate" >
+                            <div class="btn-group btn-group-sm radio toggle button group Basic" role="group" aria-label="Status">
                                 <input type="radio" class="btn-check" name="btnradiostate" id="filterState1" autoComplete="off"
                                     checked={game.scopeGame === "ALL"}
                                     onChange={() => this.setAttribut("scopeGame", "ALL", game)}

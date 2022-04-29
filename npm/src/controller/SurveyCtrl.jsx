@@ -70,8 +70,8 @@ class SurveyCtrl {
 		let surveyAnswer=null;
 		// avoid the JSON Circular
 		for (var i in this.survey[ CHILD_ANSWER ]) {
-			if (this.survey[ CHILD_ANSWER ] [i].whoid === answerParticipant.whoid ) {
-				surveyAnswer=this.survey[ CHILD_ANSWER ] [i];
+			if (this.survey[ CHILD_ANSWER ][i].whoid === answerParticipant.whoid ) {
+				surveyAnswer=this.survey[ CHILD_ANSWER ][i];
 				surveyAnswer.decision[ surveyChoiceCode ] = value;
  				this.setChildAttribut( "decision", surveyAnswer.decision, "/"+CHILD_ANSWER+"/"+answerParticipant.id);
 				return;

@@ -134,7 +134,7 @@ class EventParticipants extends React.Component {
                                 <InvitationAgain  event={this.state.event} participant={item}/>
                                )}
                             {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
-                                <div class="btn-group btn-group-sm Basic radio toggle button group" role="partOf" >
+                                <div class="btn-group btn-group-sm Basic radio toggle button group" role="group" aria-label="participants">
                                     <input type="radio"
                                         class="btn-check"
                                         name={"btnpartofradio-"+item.id}
@@ -294,7 +294,7 @@ class EventParticipants extends React.Component {
                                 }
                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' &&
                                     <td colspan="2">
-                                        <div class="btn-group btn-group-sm Basic radio toggle button group" role="partOf" >
+                                        <div class="btn-group btn-group-sm Basic radio toggle button group" role="group" aria-label="Status" >
                                             <input type="radio"
                                                 class="btn-check"
                                                 name={"btnpartofradio-"+item.id}

@@ -51,7 +51,7 @@ class EventExpense extends React.Component {
 	// <input value={item.who} onChange={(event) => this.setChildAttribut( "who", event.target.value, item )} class="toghinput"></input>
 	render() {
 		var listHtml = [];
-		var currencyService = FactoryService.getInstance().getCurrencyService();
+		// var currencyService = FactoryService.getInstance().getCurrencyService();
 
 		for (var i in this.state.listexpenses) {
 			var line = this.state.listexpenses[i]
@@ -98,7 +98,7 @@ class EventExpense extends React.Component {
 
 	getCurrencySelectHtml() {
 		//---- List Currency
-		var currencyService = FactoryService.getInstance().getCurrencyService();
+		// var currencyService = FactoryService.getInstance().getCurrencyService();
 		/*
 		return (<Select labelText={<FormattedMessage id="EventExpense.CurrencyOnEvent" defaultMessage="Currency used in this event" />}
 							id="currentEvent"

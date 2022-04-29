@@ -8,8 +8,6 @@
 //
 
 import React from 'react';
-import { Search } from 'carbon-components-react';
-import Autosuggest from 'react-autosuggest';
 import { TextInput } from 'carbon-components-react';
 
 

@@ -159,10 +159,10 @@ class BodyTogh extends React.Component {
 										<h1><FormattedMessage id="BodyTogh.ResetYourPassword" defaultMessage="Reset your password" /></h1>
 										
 									<br/><br/>
-										<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
+										<img  style={{"float": "right",width:350}} src="img/togh.jpg" alt="Togh"/>
 									</div>
 									<div class="col-sm-5" >
-										<ResetPassword uuid= {uuid}  authCallback={this.authCallback}/>
+										<ResetPassword uuid= {uuid} authCallback={this.authCallback}/>
 									</div>
 									<div class="col-sm-2" ></div>
 								</div>
@@ -201,7 +201,7 @@ class BodyTogh extends React.Component {
 									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
 									
 								<br/><br/>
-									<img  style={{"float": "right"}} src="img/togh.jpg" style={{width:350}} />
+									<img  style={{"float": "right", width:350}} src="img/togh.jpg" alt="Togh"/>
 								</div>
 									
 								<div class="col-sm-5">	

@@ -189,6 +189,7 @@ npm install sass@1.29.0
 ```
 npm install axios
 npm install react-axios --force
+npm install chart.js
 npm install react-chartjs-2 
 npm install react-custom-flag-select
 npm install react-bootstrap-icons
@@ -349,42 +350,42 @@ const ITINERARYITEM_TRAIN = "TRAIN"; const ITINERARYITEM_BOAT = "BOAT"; const IT
 ITINERARYITEM_VISITE = "VISITE"; const ITINERARYITEM_RESTAURANT = "RESTAURANT"; const ITINERARYITEM_ENTERTAINMENT = "
 ENTERTAINMENT"
 
-##Structure
-componentDidUpdate(prevProps) {
-		 JSON.stringify(this.props.positions));
-		if (prevProps.positions !== this.props.positions) {
-			this.setState({ positions: this.props.positions });
-		}
-		
+## Structure
+
+componentDidUpdate(prevProps) { JSON.stringify(this.props.positions)); if (prevProps.positions !== this.props.positions)
+{ this.setState({ positions: this.props.positions }); }
 
 ## React structure
- {names.map(function(name, index){
-                    return <li key={ index }>{name}</li>;
-                  })}
-                  
+
+{names.map(function(name, index){ return <li key={ index }>{name}</li>; })}
 
 Contexte
 https://fr.reactjs.org/docs/context.html
 
+## Aria role
+
+To avoid the warning Line 418:101:  Elements with ARIA roles must use a valid, non-abstract ARIA role jsx-a11y/aria-role
+
+Add role="group" aria-label="Status"
+
 # Open question
+
 /* ******************************************************************************** */
-/*                                                                                  */
-/*  Open Question							                                        */
+/*                                                                                  */ /*  Open
+Question                                                                    */
 /*                                                                                  */
 /*                                                                                  */
 /*                                                                                  */
 /* ******************************************************************************** */
 
- 
- Comment locker un record dans la table ?
- Voici mon cas d'uisage. Une evenement peut etre modifié en meme temps par 2 utilisateurs, donc 2 threads en meme temps.
- Il me faut donc, quand je veut modifier l'element, faire un "lock Event ID=444 / Read Event id=444/ My manipulation / Save Eventid=444 / Unlock ID=444
- Et si le thread n'arrive pas a faire le lock, je vais mettre en place une strategie tel "sleep 5 s / reesaaye
- Si j'en crois 
- https://www.baeldung.com/java-jpa-transaction-locks
- https://www.baeldung.com/jpa-pessimistic-locking
- 
- SQL ACID Atomic Consistent Isolation...
+Comment locker un record dans la table ? Voici mon cas d'uisage. Une evenement peut etre modifié en meme temps par 2
+utilisateurs, donc 2 threads en meme temps. Il me faut donc, quand je veut modifier l'element, faire un "lock Event
+ID=444 / Read Event id=444/ My manipulation / Save Eventid=444 / Unlock ID=444 Et si le thread n'arrive pas a faire le
+lock, je vais mettre en place une strategie tel "sleep 5 s / reesaaye Si j'en crois
+https://www.baeldung.com/java-jpa-transaction-locks
+https://www.baeldung.com/jpa-pessimistic-locking
+
+SQL ACID Atomic Consistent Isolation...
  
  Je devrais mettre devant ma methode
  
@@ -591,9 +592,9 @@ Check on https://console.cloud.google.com/gcr/images/intricate-gamma-325323/glob
 Connect on the VM Instance Download the docker image:
 
 ```
-> docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
+> docker pull gcr.io/intricate-gamma-325323/togh:2.0.0
 
-> docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+> docker pull gcr.io/intricate-gamma-325323/frontendtogh:2.0.0
 ```
 
 Here is the complete procedure:
@@ -607,13 +608,13 @@ $ docker image ls -a | grep togh | awk '{ print $3 " " $1}'
 $ docker image rm XXX
 
 
-$ docker pull gcr.io/intricate-gamma-325323/togh:1.0.0
-$ docker pull gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
+$ docker pull gcr.io/intricate-gamma-325323/togh:2.0.0
+$ docker pull gcr.io/intricate-gamma-325323/frontendtogh:2.0.0
 $ docker run --name togh \
 -e SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh \
 -e SPRING_DATASOURCE_USERNAME=<USERNAME> \
 -e SPRING_DATASOURCE_PASSWORD=<PASSWORD> \
---network="host" --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/togh:1.0.0
+--network="host" --log-driver=gcplogs -d gcr.io/intricate-gamma-325323/togh:2.0.0
 
 $ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs \
 -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
@@ -934,13 +935,19 @@ Admin: avoir un "automatique refresh check box" : penible de clicker "connected"
 
 ## bugs
 
+event on a une icone "state" non définie a coté de la barre des icones
+
 game true or lie
 
-* nouvel user qui vient de valider son invitation : sa liste de sentence est vide, il faut qu'il rerentre dans le jeu
-* click sur parametre ==> Part en erreur
-* fonction vote
-* fonction result
-* parametre "je ne peux voter que si je valide mes sentences "
+* validate my sentence : le bouton ne s'invalide pas
+* j'ai pu valider avec 2 sequences vide
+* je suis le seul participant, je click sur vote, ca part en couille
+* en tant qu'administrateur, je doit pouvoir reouvrir une sequence
+
+invitation:
+
+* email error pas plus d'information
+* le copy sur l'URL ne marche pas
 
 Invitation Je veux inviter <caromaillebiau@gmail.com>= > Togh refuse Je veux inviter caro@maillebiau.com ==> Toujours
 pas possible car cet utilisateur est en mode INVITE et donc je ne peux pas l'inviter a un 2eme event

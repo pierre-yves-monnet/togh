@@ -90,7 +90,7 @@ class AdminTranslator extends React.Component {
 							</tr>
 							{this.state.translate && this.state.translate.listLanguages && this.state.translate.listLanguages.map((language,index) =>
 								<tr key={index}>
-									<td><img src={this.getIcon( language ) }  style={{width: "40px", verticalAlign: "middle"}}/></td>
+									<td><img src={this.getIcon( language ) }  style={{width: "40px", verticalAlign: "middle"}} alt="Language"/></td>
 									<td>{language.name}</td>
 									<td>{language.nbMissingSentences}</td>
 				        			<td>{language.nbTranslatedSentences}</td>

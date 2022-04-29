@@ -239,7 +239,7 @@ class Event extends React.Component {
 				{ this.state.event.systemerror && <div class="alert alert-danger">{this.state.event.systemerror}</div>}
 				<div class="row">
 					<div class="col-sm-1">
-						<img src="img/toghEvent.jpg" style={{ width: 90 }}     />
+						<img src="img/toghEvent.jpg" style={{ width: 90 }} alt="Event"  />
 					</div>
 
 					<div class="col-sm-4"
@@ -351,7 +351,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_CHAT ) }
                             title={intl.formatMessage({id:"Event.TitleChat", defaultMessage:"Chat with all participants"})}>
                                 <div style={{textAlign: "center"}}>
-                                    <img style={{float: "right", width: 50 }} src="img/btnChat.png" />
+                                    <img style={{float: "right", width: 50 }} src="img/btnChat.png" alt="Chat"/>
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Chat" defaultMessage="Chat"/>
@@ -366,7 +366,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_PARTICIPANT )}
                                 title={intl.formatMessage({id:"Event.TitleParticipant", defaultMessage:"Invite participant to your event"})}>
                                 <div style={{textAlign: "center"}}>
-                                    <img style={{ "float": "right", width: 50 }} src="img/btnParticipants.png" />
+                                    <img style={{ "float": "right", width: 50 }} src="img/btnParticipants.png" alt="Participants"/>
                                     { userService.prefsDisplayTips() &&
                                         <div>
                                             <FormattedMessage id="Event.Participant" defaultMessage="Participants"/>
@@ -382,7 +382,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_ITINERARY )}
 								title={intl.formatMessage({id:"Event.TitleItinerary", defaultMessage:"Define your itinerary, and point of interest"})}>
 								<div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right",width: 50 }} src="img/btnItinerary.png" />
+							        <img style={{ "float": "right",width: 50 }} src="img/btnItinerary.png"  alt="Itinerary" />
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Itinerary" defaultMessage="Itinerary"/>
@@ -398,7 +398,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_TASKS )}
 							    title={intl.formatMessage({id:"Event.TitleTasks", defaultMessage:"Tasks" })}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right",width: 50 }} src="img/btnTask.png" />
+							        <img style={{ "float": "right",width: 50 }} src="img/btnTask.png"  alt="Tasks"/>
 							        { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Tasks" defaultMessage="Tasks"/>
@@ -414,7 +414,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_SHOPPINGLIST )}
 							    title={intl.formatMessage({id:"Event.TitleBringList", defaultMessage:"What to brings?" })}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right",width: 50 }} src="img/btnShoppingList.png" />
+							        <img style={{ "float": "right",width: 50 }} src="img/btnShoppingList.png"  alt="Shopping"/>
 							        { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.BringList" defaultMessage="Bring List"/>
@@ -430,7 +430,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_SURVEY )}
 							    title={intl.formatMessage({id:"Event.TitleSurvey", defaultMessage:"Survey"})}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right",width: 50 }} src="img/btnSurvey.png" />
+							        <img style={{ "float": "right",width: 50 }} src="img/btnSurvey.png"  alt="Surveys"/>
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Survey" defaultMessage="Survey"/>
@@ -446,7 +446,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_GAMES )}
 							    title={intl.formatMessage({id:"Event.TitleGames", defaultMessage:"Games"})}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right",width: 50 }} src="img/btnGames.png" />
+							        <img style={{ "float": "right",width: 50 }} src="img/btnGames.png"  alt="Games"/>
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Games" defaultMessage="Games"/>
@@ -463,7 +463,7 @@ class Event extends React.Component {
 								onClick={() => this.accessTab( TAB_GEOLOCALISATION )}
 							    title={intl.formatMessage({id:"Event.TitleGeolocalisation",defaultMessage:"Where is the event?"})}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right", width: 50}} src="img/btnGeolocalisation.png" />
+							        <img style={{ "float": "right", width: 50}} src="img/btnGeolocalisation.png"  alt="Geolocalisation"/>
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Geolocalisation" defaultMessage="Geolocalisation"/>
@@ -478,7 +478,7 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_PHOTO )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitlePhotos", defaultMessage:"Photos" })}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right", width: 50 }} src="img/btnPhoto.png" /><br />
+							        <img style={{ "float": "right", width: 50 }} src="img/btnPhoto.png"  alt="Photos"/><br />
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Photos" defaultMessage="Photos"/>
@@ -493,7 +493,7 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_EXPENSE )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleExpense",  defaultMessage:"Manage and share expenses" })}>
 							    <div style={{textAlign: "center"}}>
-							        <img src="img/btnExpense.png" style={{ width: 50 }} />
+							        <img src="img/btnExpense.png" style={{ width: 50 }} alt="Expenses" />
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Expense" defaultMessage="Expenses"/>
@@ -508,7 +508,7 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_BUDGET )} aria-current="page"
 							    title={intl.formatMessage({id:"Event.TitleBudget", defaultMessage:"Budget" })}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right", width: 50 }} src="img/btnBudget.png" />
+							        <img style={{ "float": "right", width: 50 }} src="img/btnBudget.png"  alt="Budget"/>
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Budget" defaultMessage="Budget"/>
@@ -523,7 +523,7 @@ class Event extends React.Component {
 								style={this.getTabCssStyle( TAB_PREFERENCES )} aria-current="page" onClick={() => this.accessTab( TAB_PREFERENCES )}
 							    title={intl.formatMessage({id:"Event.TitlePreferences", defaultMessage:"Preferences" })}>
 							    <div style={{textAlign: "center"}}>
-							        <img style={{ "float": "right",width: 50 }} src="img/btnPreferences.png"  />
+							        <img style={{ "float": "right",width: 50 }} src="img/btnPreferences.png"   alt="Preferences"/>
                                     { userService.prefsDisplayTips() &&
                                         <div >
                                             <FormattedMessage id="Event.Preferences" defaultMessage="Preferences"/>

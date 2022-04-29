@@ -29,7 +29,7 @@ class Footer extends React.Component {
 		   <div class="toghfooter">
 		   		<div class="row">
 					<div class="col-xs-12" style={{background:"#e0f9d6"}} >
-						<div style={{color: "black", textAlign: "right", fontSize: "small"}}>Py 2020</div>
+						<div style={{color: "black", textAlign: "right", fontSize: "small"}}>Py Apr 2022</div>
 					</div>
 				</div>
 		   </div>
