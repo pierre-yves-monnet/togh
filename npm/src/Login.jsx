@@ -104,62 +104,62 @@ class Login extends React.Component {
 
 		return (
 			<div className="App">
-				 {inprogresshtml}
-				 <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>}
-					id="loginemail" 
-					value={this.state.email} 
-					onChange={(event) => 
-						{ this.setState({ email: event.target.value });
-							if (this.state.rememberMe) {
-								localStorage.setItem(LOCALSTORAGE_EMAIL,  event.target.value);
-							}
-						}
-						} /><p />
-				
-				<TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>} 
-					type="password"
-					id="loginpassword" 
-					value={this.state.password} 
-					onChange={(event) => this.setState({ password: event.target.value })} /><p />
-				<br/>
-				
+			    <div class="row">
+				    {inprogresshtml}
+				    <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>}
+                        id="loginemail"
+                        value={this.state.email}
+                        onChange={(event) =>
+                            { this.setState({ email: event.target.value });
+                                if (this.state.rememberMe) {
+                                    localStorage.setItem(LOCALSTORAGE_EMAIL,  event.target.value);
+                                }
+                            }
+                        } /><p />
+                </div>
+                <div class="row">
+                    <TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>}
+                        type="password"
+                        id="loginpassword"
+                        value={this.state.password}
+                        onChange={(event) => this.setState({ password: event.target.value })} /><p />
+                    <br/>
+			    </div>
 				
 					
-				<table >
-				<tr>
-				<td style={{paddingLeft: "150px"}}>
-					
-					<button onClick={this.loginConnect} class="btn btn-primary"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
-					
-					<input type="checkbox"
-						onChange={(event) => { 
-								let rememberBool = event.target.value==='on';
-								this.setState( {"rememberMe":  rememberBool});
-								localStorage.setItem(LOCALSTORAGE_rememberMe, rememberBool);
-								if (! event.target.value) {
-									localStorage.setItem(LOCALSTORAGE_EMAIL, "");
-									}
-								}
-						}
-						defaultChecked={this.state.rememberMe ? 'checked': ''} />
-					&nbsp;
-					<FormattedMessage id="Login.rememberMe" defaultMessage="Remember Me" />
-				
-					{messageConnectionHtml}
-				</td>
-				<td style={{paddingRight : "40px"}} >
-				    {this.state.showGoogleLogin &&
-					<GoogleLogin
-					    clientId="81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com"
-					    buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
-					    onSuccess={this.loginGoogle}				    
-					    cookiePolicy={'single_host_origin'}
-					  />
-					  }
-				</td>
-				</tr>
-				<tr>
-				<td colspan="2" style={{paddingRight : "40px", paddingLeft : "150px"}}>
+				<div class="row" style={{paddingLeft: "20px"}}>
+					<div class="col-6">
+                        <button onClick={this.loginConnect} class="btn btn-primary"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
+
+                        <input type="checkbox"
+                            onChange={(event) => {
+                                    let rememberBool = event.target.value==='on';
+                                    this.setState( {"rememberMe":  rememberBool});
+                                    localStorage.setItem(LOCALSTORAGE_rememberMe, rememberBool);
+                                    if (! event.target.value) {
+                                        localStorage.setItem(LOCALSTORAGE_EMAIL, "");
+                                        }
+                                    }
+                            }
+                            defaultChecked={this.state.rememberMe ? 'checked': ''} />
+                        &nbsp;
+                        <FormattedMessage id="Login.rememberMe" defaultMessage="Remember Me" />
+
+                        {messageConnectionHtml}
+				    </div>
+				    <div class="col-6">
+                        {this.state.showGoogleLogin &&
+                        <GoogleLogin
+                            clientId="81841339298-lh7ql69i8clqdt0p7sir8eenkk2p0hsr.apps.googleusercontent.com"
+                            buttonText={<FormattedMessage id="Login.googlelogin" defaultMessage="Login"/>}
+                            onSuccess={this.loginGoogle}
+                            cookiePolicy={'single_host_origin'}
+                          />
+                          }
+				    </div>
+				</div>
+				<div class="row">
+
 					
 					<div style={{marginTop: "80px", marginBottom: "10px"}}>
 						<FormattedMessage id="Login.LostMyPasswordExplanation" defaultMessage="You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one"/>
@@ -192,10 +192,7 @@ class Login extends React.Component {
 							
 						</div>
 					</ModalWrapper>
-					
-				</td>
-				</tr>
-				</table>
+				</div>
 				
 								
 			</div>

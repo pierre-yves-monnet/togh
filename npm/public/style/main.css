@@ -180,6 +180,13 @@ table.toghtable td {
     flex-direction: column;
 */
 
+.toghImageBackground {
+    background-image: url('/img/togh.jpg');
+    background-repeat: no-repeat;
+    background-position: 20px 30px;
+    background-size: 400px
+}
+
 .bs-component {
     position: relative;
 }

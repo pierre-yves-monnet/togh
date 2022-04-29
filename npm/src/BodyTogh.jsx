@@ -180,7 +180,7 @@ class BodyTogh extends React.Component {
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
 					<div>
 						<Banner language={this.state.language} changeLanguage={this.changeLanguage} />						
-						<div class="container">
+						<div class="toghImageBackground">
 	  						{this.state.currentEventId && <div class="row" >
 									<div class="col-sm-12" >
 									 	<div style={{border:"1px solid",
@@ -196,13 +196,10 @@ class BodyTogh extends React.Component {
 									</div>
 								</div> }
 								
-	  						<div class="row">
-								<div class="col-sm-2" style={{fontFamily: "Brush Script MT, cursive", fontSize:"40px"}} >
+	  						<div class="row ">
+								<div class="col-sm-3" style={{fontFamily: "Brush Script MT, cursive", fontSize:"40px"}} >
 									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
-									
-								<br/><br/>
-									<img  style={{"float": "right", width:350}} src="img/togh.jpg" alt="Togh"/>
-								</div>
+							    </div>
 									
 								<div class="col-sm-5">	
 									{this.state.showLoginPanel && 
@@ -210,7 +207,7 @@ class BodyTogh extends React.Component {
 											defaultLoginEmail={this.state.defaultLoginEmail} 
 										/>}
 								</div>
-								<div class="col-sm-5">
+								<div class="col-sm-4">
 									{this.state.showRegisterUserPanel && 
 										<RegisterNewUser authCallback={this.authCallback} 
 											showRegisterUserForm={this.state.showRegisterUserForm}
