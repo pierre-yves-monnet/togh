@@ -94,7 +94,7 @@ class EventParticipants extends React.Component {
 
 		return (
 		    <div>
-                <div>
+                <div >
         			{headerSection}
                     <div style={{float: "right"}}>
                         <Invitation event={this.state.event} participantInvited={this.participantInvited}/>
@@ -116,11 +116,11 @@ class EventParticipants extends React.Component {
         let mySelfUser= authService.getUser();
 
 	    return (
-	        <table class="table table-striped toghtable">
+	        <table class="table table-striped toghtable" style={{ marginTop: "90px"}}>
                 <thead>
                     <tr >
                         <th><FormattedMessage id="EventParticipant.Person" defaultMessage="Person"/></th>
-                        <th colspan="2"><FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )</th>
+                        <th ><FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )</th>
                         <th><FormattedMessage id="EventParticipant.Role" defaultMessage="Role"/></th>
                         <th><FormattedMessage id="EventParticipant.Status" defaultMessage="Status"/></th>
                     </tr>
@@ -129,11 +129,15 @@ class EventParticipants extends React.Component {
                     return (<tr key={index} style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
                         <td style={{borderBottom: "aliceblue", borderStyle: "solid"}}>
                             {item.user.label}
-                        </td><td  style={{minWidth:"120px"}}>
-                            {item.status === 'INVITED' && (
+                        </td>
+                        {item.status === 'INVITED' && (
+                            <td style={{minWidth:"120px"}}>
                                 <InvitationAgain  event={this.state.event} participant={item}/>
-                               )}
-                            {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                           </td>
+                           )}
+                        {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && (
+                            <td style={{minWidth:"120px"}}>
+                                <table><tr><td>
                                 <div class="btn-group btn-group-sm Basic radio toggle button group" role="group" aria-label="participants">
                                     <input type="radio"
                                         class="btn-check"
@@ -185,19 +189,24 @@ class EventParticipants extends React.Component {
                                         <ClipboardX color="red"/>&nbsp;<FormattedMessage id="EventParticipant.PartOfNo" defaultMessage="No" />
                                     </label>
                                 </div>
-                                )}
-                         </td><td>
-                             {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' && (
-                                 <TextInput
-                                        onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
-                                        keyboardType='numeric'
-                                        value={item.numberOfParticipants}
-                                        disabled={(! (item.partOf === 'PARTOF' && (administratorEvent || item.user.id === mySelfUser.id)))}
-                                        placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
-                                        style={{width: "100px"}}
-                                      />
-                                  )}
-                        </td>
+                                </td>
+                                {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' &&
+                                    <td>
+                                    <TextInput
+                                            onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
+                                            keyboardType='numeric'
+                                            value={item.numberOfParticipants}
+                                            disabled={(! (item.partOf === 'PARTOF' && (administratorEvent || item.user.id === mySelfUser.id)))}
+                                            placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
+                                            style={{width: "100px"}}
+                                          />
+                                    </td>
+                                }
+                                </tr></table>
+                            </td>)
+                        }
+
+
                         <td>
                         {item.role === ROLE_OWNER && (<div class="label label-info"><FormattedMessage id="EventParticipant.Owner" defaultMessage="Owner"/></div>)}
                         {item.status === STATUS_LEFT && (<div class="label label-info"><FormattedMessage id="EventParticipant.Left" defaultMessage="Left"/></div>)}
@@ -243,7 +252,7 @@ class EventParticipants extends React.Component {
         let mySelfUser= authService.getUser();
 
         return (
-            <div>
+            <div style={{ marginTop: "50px"}}>
                 <div class="row" style={{height: "40px"}}>
                     <FormattedMessage id="EventParticipant.Participation" defaultMessage="Participation"/> ( {totalParticipants} )
                 </div>
@@ -288,12 +297,12 @@ class EventParticipants extends React.Component {
                             </tr>
                             <tr>
                                 {item.status === 'INVITED' &&
-                                    <td  style={{paddingLeft: "20px"}} colspan="3">
+                                    <td style={{paddingLeft: "20px"}} >
                                         <InvitationAgain  event={this.state.event} participant={item}/>
                                     </td>
                                 }
                                 {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' &&
-                                    <td colspan="2">
+                                    <td>
                                         <div class="btn-group btn-group-sm Basic radio toggle button group" role="group" aria-label="Status" >
                                             <input type="radio"
                                                 class="btn-check"
@@ -348,10 +357,10 @@ class EventParticipants extends React.Component {
                                             </label>
                                         </div>
                                     </td>
-                                }
-                                {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' &&
-                                    <td style={{paddingLeft: "10px"}}>
-                                         <TextInput
+                                    }
+                                    {item.status !== 'INVITED' && item.status !== 'STATUS_LEFT' && item.partOf === 'PARTOF' &&
+                                        <td style={{paddingLeft: "10px"}}>
+                                            <TextInput
                                                 onChange={(event) => this.setChildAttribut( "numberOfParticipants", event.target.value, item )}
                                                 keyboardType='numeric'
                                                 value={item.numberOfParticipants}
@@ -359,9 +368,9 @@ class EventParticipants extends React.Component {
                                                 placeholder={intl.formatMessage({id: "EventParticipant.NumberOfParticipants", defaultMessage: "Number of participants"})}
                                                 style={{width: "100px"}}
                                               />
+                                        </td>
+                                    }
 
-                                    </td>
-                                }
                             </tr>
                             </table>
                         </div>

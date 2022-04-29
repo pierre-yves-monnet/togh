@@ -219,7 +219,7 @@ class EventTaskList extends React.Component {
 			
 			{this.getFilterTaskHtml()}
 			<div>
-				<table class="toghtable">
+				<table class="table table-striped toghtable">
 					<thead>
 						<tr >
 							<th><FormattedMessage id="EventTaskList.State" defaultMessage="State" /></th>

@@ -13,6 +13,7 @@ import React from 'react';
 import { injectIntl, FormattedMessage } from "react-intl";
 
 import { ModalWrapper, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
+import { PlusCircle } from 'react-bootstrap-icons';
 
 
 import FactoryService from 'service/FactoryService';
@@ -115,7 +116,7 @@ class Invitation extends React.Component {
 		return ( 
 			  <ModalWrapper
 				passiveModal
-				buttonTriggerText={<FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/>}
+				buttonTriggerText={<div><PlusCircle style={{marginRight:"10px"}} /><FormattedMessage id="Invitation.Invitation" defaultMessage="Invitation"/></div>}
      			modalLabel={intl.formatMessage({id: "Invitation.Invitation", defaultMessage: "Invitation"})}
 				size='lg'>
 					<div style={{display: "inline-block"}}>
