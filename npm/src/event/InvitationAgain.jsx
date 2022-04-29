@@ -19,13 +19,16 @@ class InvitationAgain extends React.Component {
 	constructor( props ) {
 		super();
 		// console.log("RegisterNewUser.constructor");
-		this.state = {  'event' : props.event,
-		                'participant': props.participant,
-						'subject': 'You are invited to a ToghEvent',
-						'message': 'Please join this event.'
+		this.state = {  event : props.event,
+		                participant: props.participant,
+						subject: 'You are invited to a ToghEvent',
+						message: 'Please join this event.',
+						urlCopied: false,
+						useMyEmailAsFrom: true
 						};
         // console.log("InvitationAgain.participant :"+JSON.stringify(props.participant));
-        this.inviteResend = this.inviteResend.bind(this);
+        this.inviteResend   = this.inviteResend.bind(this);
+        this.copyUrl        = this.copyUrl.bind(this);
 	}
 
 
@@ -52,30 +55,36 @@ class InvitationAgain extends React.Component {
                         buttonTriggerText={<FormattedMessage id="InvitationAgain.Invitation" defaultMessage="Manage invitation"/>}
                         modalLabel={intl.formatMessage({id: "InvitationAgain.InvitationLabel", defaultMessage: "Invitation"})}
                         size='lg'>
-                            <div class="row">
-                                <p>
-                                <FormattedMessage id="InvitationAgain.InvitationTo" defaultMessage="Invitation sent to"/>
-                                &nbsp;
-                                {this.state.participant.user.label}
-                                </p>
+                            <div class="row" style={{marginTop: "10px", marginBottom: "10px"}}>
+                                <h2>
+                                <center>
+                                    <FormattedMessage id="InvitationAgain.InvitationFor" defaultMessage="Invitation for"/>
+                                    &nbsp;
+                                    <span style={{fontWeight: "bold"}}>{this.state.participant.user.label}</span>
+                                 </center>
+                                </h2>
                             </div>
                             <div class="row" style={{marginTop : "10px"}}>
                                 <h5><FormattedMessage id="InvitationAgain.EmailTitle" defaultMessage="Send the invitation email"/></h5>
                             </div>
-                            <div class="row">
-                                <FormattedMessage id="InvitationAgain.SendAgainExplanation" defaultMessage="Send again the invitation by email"/>
+                            <div class="row" style={{paddingLeft: "40px"}}>
+                                <FormattedMessage id="InvitationAgain.SendAgainEmailExplanation" defaultMessage="Email is resent to the invited person"/>
                             </div>
                             <div class="row">
-                                <TextInput labelText={<FormattedMessage id="InvitationAgain.Subject" defaultMessage="Subject" />}
-                                                                        value={this.state.subject}
-                                                                        onChange={(event) => this.setState( { subject: event.target.value })}
-                                                                        id="InvitationAgain.subject"/>
+                                <TextInput  labelText={<FormattedMessage id="InvitationAgain.Subject" defaultMessage="Subject" />}
+                                            id="subject"
+                                            value={this.state.subject}
+                                            onChange={(event) => this.setState( { subject: event.target.value })}
+                                            id="InvitationAgain.subject"/>
 
-                                <TextArea labelText={intl.formatMessage({id: "InvitationAgain.Message", defaultMessage: "Message"})}
-                                    value={this.state.message} onChange={(event) => this.setState({ message: event.target.value })} ></TextArea><br />
+                                <TextArea   labelText={intl.formatMessage({id: "InvitationAgain.Message", defaultMessage: "Message"})}
+                                            id="message"
+                                            value={this.state.message}
+                                            onChange={(event) => this.setState({ message: event.target.value })} ></TextArea><br />
 
                                 <div col="col-2">
                                     <input type="checkbox"
+                                        checked
                                         style={{marginLeft: "15px", marginRight:"5px"}}
                                         onChange={(event) =>
                                                this.setState({ 'useMyEmailAsFrom': event.target.value==='on'})
@@ -102,8 +111,8 @@ class InvitationAgain extends React.Component {
                                 <h5><FormattedMessage id="InvitationAgain.UrlTitle" defaultMessage="Url"/></h5>
                             </div>
 
-                            <div class="row">
-                                <FormattedMessage id="InvitationAgain.GetTheUrlExplanation" defaultMessage="Get the URL, and use it"/>
+                            <div class="row" style={{paddingLeft: "40px"}}>
+                                <FormattedMessage id="InvitationAgain.CopyTheUrlExplanation" defaultMessage="The URL is copied to your clipboard. Make a Paste to use anywhere you want."/>
                             </div>
                             <div class="row">
                                 <span
@@ -111,7 +120,9 @@ class InvitationAgain extends React.Component {
                                     title={intl.formatMessage({id: "EventParticipant.TitleUrlInvitation", defaultMessage: "Copy the URL in your clipboard. Paste it and Use it in a direct email"})}>
 
                                     {this.state.participant.urlInvitation}
-                                    <Files onClick={() => {navigator.clipboard.writeText(this.state.participant.urlInvitation)}} />
+                                    <Files onClick={() => this.copyUrl() } />
+                                    {this.state.urlCopied && <span style={{fontWeight: "bold", paddingLeft: "5px", fontSize:"8px"}}><FormattedMessage id="InvitationAgain.UrlCopied" defaultMessage="Copied"/></span>}
+
                                 </span>
                             </div>
 
@@ -119,6 +130,16 @@ class InvitationAgain extends React.Component {
                 </td></tr>
             </table>);
 	}
+
+    copyUrl() {
+        navigator.clipboard.writeText(this.state.participant.urlInvitation);
+        this.setState( {urlCopied:true});
+        console.log("UrlCopied");
+        var thisTimer=this;
+        setInterval(function () { thisTimer.setState( {urlCopied:false}) },3000);
+
+    }
+
 
 
     // Send again the invitation
