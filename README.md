@@ -34,7 +34,8 @@ Click droit => Properties => Project Facet => Dynamic Web Application
 ## Intellij
 Launch the class com.togh.ServerInitializer.
 
-## Lombok 
+## Lombok
+
 The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
 
 ## mobile
@@ -43,7 +44,7 @@ https://flutter.dev/
 
 ## using h2
 
-Using h2 database instead of postgres -Dspring.profiles.active=dev
+Using h2 database instead of postgres -Dspring.profiles.active=dev or --spring.profiles.active=h2
 
 # Architecture
 
@@ -826,21 +827,26 @@ Roadmap                                                                         
 - deployer un jenkins + backup de la base de données en locale
 - CDI : je commit, et le deployment est automatique sur mon google
 - make install, et ca push une nouvelle version dans docker
--
+
+    - change email server (envoi SMS possible)
+      https://developers.sendinblue.com/reference/sendtransacemail
+      https://github.com/sendinblue/APIv3-java-library
+      or
+      https://developers.google.com/identity/protocols/oauth2
+
+Simon: Docker basé sur JDK 17.
 
 ## Tasks
 
-Simon Anchor Simon ? Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie
-existe google-maps-react)
+Simon: Comment afficher un itineraire avec google-map-react (attention, map sans S car une autre librairie existe
+google-maps-react)
 
-Simon ? Date Carbon: le format de date ne respecte pas la langue
+Simon (P2): Date Carbon: le format de date ne respecte pas la langue
+
+Simon: login google, faire une investigation Simon: Email SMTP Google avec clee Auth 2.0
 
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas
-
-CSS : le footer n'est pas tout a fait en bas et il est 1 pixel en haut
-
-Py
 
 10. Refresh sur plusieurs postes : Walter modifie une valeur, elle doit etre repercutée ailleurs
 11. Revoir la deconnection, le feedback user quand on fait un save
@@ -851,8 +857,7 @@ Forgot my password: email incorrect registration invitation
 
 * What change on the event avec badge sur les fonctions
 * what change by email
-* revoir les invitations, pour avoir un bouton "share" quand la personne n'a pas encore repondue a l'invitation plutot
-  que pleins de boutons
+
 
 ## interne
 
@@ -896,13 +901,14 @@ Notification generale dans toutes les langues
 
 ## look and feel
 
-==> Boutons => tab dans les onglets
+Simon: Comment limiter la taille des TextInput/TextArea?
+https://react.carbondesignsystem.com/?path=/story/components-textarea--default
+enableCounter & maxCount n'a pas d'effet
+https://codesandbox.io/s/carbon-components-react-730-textinputtextarea-value-z63zr?file=/src/index.js
 
 ## invitation
 
 Pouvoir mettre une photo dans l'invitation pour le House Warming
-
-Pouvoir dire "non je ne vais pas venir dans cette event"
 
 Invitation: copier le contenu de l'email dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
 veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de modification"
@@ -935,7 +941,6 @@ Admin: avoir un "automatique refresh check box" : penible de clicker "connected"
 
 ## bugs
 
-event on a une icone "state" non définie a coté de la barre des icones
 
 game true or lie
 
@@ -946,8 +951,6 @@ game true or lie
 
 invitation:
 
-* email error pas plus d'information
-* le copy sur l'URL ne marche pas
 
 Invitation Je veux inviter <caromaillebiau@gmail.com>= > Togh refuse Je veux inviter caro@maillebiau.com ==> Toujours
 pas possible car cet utilisateur est en mode INVITE et donc je ne peux pas l'inviter a un 2eme event
@@ -961,8 +964,6 @@ EventEntity.getMap : normaliser les constantes ici avec les SLAB_OPERATION (une 
 * changeemail
 
 * Date des messages dans le chat qui est la date du jour Chat : "TheFriday" ==> "On Friday"
-
-Bouton invitation : mettre un + et invitation
 
 ------------ Revoir l'URL : faire un bouton Share
 
