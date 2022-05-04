@@ -114,6 +114,7 @@ class GoogleMapDisplay extends React.Component {
 									lat={pos.lat}
 									lng={pos.lng}
 									direction={pos.direction}
+									style={{marginTop:-30, marginLeft:-15}}
 								>
 									<GeoAltFill width="30px" height="30px" style={{ color: "red" }} />
 								</div>
@@ -124,6 +125,7 @@ class GoogleMapDisplay extends React.Component {
 								<div key={pos.key}
 									lat={pos.lat}
 									lng={pos.lng}
+									style={{marginTop:-30, marginLeft:-15}}
 								>
 									<GeoAltFill width="30px" height="30px" style={{ color: "red" }} />
 								</div>
