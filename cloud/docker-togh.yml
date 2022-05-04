@@ -1,0 +1,21 @@
+services:
+  toghbackend:
+    image: gcr.io/intricate-gamma-325323/togh:2.0.0
+    container_name:
+    port:
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/togh
+      - SPRING_DATASOURCE_USERNAME=toghp
+      - SPRING_DATASOURCE_PASSWORD=ThisIsThog4Postgres
+    networks:
+      - host
+
+  toghfrontend:
+    image: gcr.io/intricate-gamma-325323/frontendtogh:2.0.0
+    container_name:
+    port:
+    environment:
+    networks:
+      - host
+    depends_on:
+      - toghbackend
