@@ -198,6 +198,8 @@ public class ToghUserService {
             adminUser.setSubscriptionUser(SubscriptionUserEnum.EXCELLENCE);
             adminUser.setTypePicture(TypePictureEnum.TOGH);
 
+            logger.info("*****************  No users are detected, a user is created [" + TOGH_ADMIN_USERNAME + "] Password[" + TOGH_ADMIN_PASSWORD + "]");
+
             toghUserRepository.save(adminUser);
         }
 

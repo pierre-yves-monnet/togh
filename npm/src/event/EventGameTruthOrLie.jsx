@@ -15,6 +15,7 @@ import { List, HandThumbsUpFill, HandThumbsDownFill, ArrowLeft, ArrowRight } fro
 
 import UserMessage 		            from 'component/UserMessage';
 import ChartTogh                    from 'component/ChartTogh';
+import IntermittentMessage          from 'component/IntermittentMessage';
 
 import FactoryService 				from 'service/FactoryService';
 
@@ -52,7 +53,9 @@ class EventGameTruthOrLie extends React.Component {
 			},
 			inProgress:false,
 			inProgressVote: false,
-			isErrorVote: false
+			isErrorVote: false,
+			inProgressValidate:0,
+			inProgressUnvalidate:0
 		};
 
 		this.eventCtrl = props.eventCtrl;
@@ -185,7 +188,7 @@ class EventGameTruthOrLie extends React.Component {
                                     onClick={ (event) =>{
                                         this.setShowStateProperty( 'tabName', 'PARAMETERS' );
                                     }} >
-                                    <FormattedMessage id="EventGameTruthOrLie.parametres" defaultMessage="Parameters" />
+                                    <FormattedMessage id="EventGameTruthOrLie.administration" defaultMessage="Administration" />
                                 </li>
                              }
 					    </ul>
@@ -283,8 +286,12 @@ class EventGameTruthOrLie extends React.Component {
                         <div class="col-8">
                             <TextArea value={currentSentence.sentence}
                                 onChange={(event) => this.setSentence("sentence", event.target.value, game, myTruthOrLie, currentSentence)}
-                                disabled={myTruthOrLie.validate}
-                                labelText={<FormattedMessage id="EventGameTruthOrLie.Sentences" defaultMessage="Sentence" />}>
+                                disabled={myTruthOrLie.validateSentences}
+                                labelText={<FormattedMessage id="EventGameTruthOrLie.Sentences" defaultMessage="Sentence" />}
+                                enableCounter={true}
+                                maxCount={400}
+                                >
+
                             </TextArea>
                         </div>
                         <div class="col-4" >
@@ -295,7 +302,7 @@ class EventGameTruthOrLie extends React.Component {
                                     id={"btntruthorlie_1_"+currentSentence.id}
                                     autoComplete="off"
                                     checked={currentSentence.statusSentence === CST_LIE}
-                                    disabled={myTruthOrLie.validate}
+                                    disabled={myTruthOrLie.validateSentences}
                                     onChange={() => this.setSentence("statusSentence",CST_LIE, game, myTruthOrLie, currentSentence)}
                                     />
                                 <label class="btn btn-outline-primary" for={"btntruthorlie_1_"+currentSentence.id}>
@@ -307,7 +314,7 @@ class EventGameTruthOrLie extends React.Component {
                                     name={"btntruthorlieradio_"+currentSentence.id}
                                     id={"btntruthorlie_2_"+currentSentence.id}
                                     checked={currentSentence.statusSentence === CST_TRUTH}
-                                    disabled={myTruthOrLie.validate}
+                                    disabled={myTruthOrLie.validateSentences}
                                     onChange={() => this.setSentence("statusSentence",CST_TRUTH, game, myTruthOrLie, currentSentence)}
                                     />
                                 <label class="btn btn-outline-primary" for={"btntruthorlie_2_"+currentSentence.id}>
@@ -320,22 +327,24 @@ class EventGameTruthOrLie extends React.Component {
                 }
 
                 <div class="row"  style={{ marginTop: "10px"}}>
-                    {! myTruthOrLie.validate &&
+                    {! myTruthOrLie.validateSentences &&
                     <div>
                         <FormattedMessage id="EventGameTruthOrLie.ValidateExplanation" defaultMessage="When your list is ready, validate it. Attention, it will not be possible to modify it after: players will start to vote." />
                         <br/>
                         <button class="btn btn-success btn-xs" style={{marginTop: "10px"}}
-                            onClick={()=>this.seValidateMySentences("validateSentences", "true", game, myTruthOrLie ) }
+                            onClick={()=>this.setValidateMySentences("validateSentences", "true", game, myTruthOrLie ) }
                             disabled={(game.nbTruthsRequested > 0 && countTruth !== game.nbTruthsRequested)
                                     || countLie + countTruth < game.nbSentences
-                                    || countSentences < game.nbSentences}
+                                    || countSentences < game.nbSentences
+                                    || myTruthOrLie.validateSentences}
                             >
                             <FormattedMessage id="EventGameTruthOrLie.Validate" defaultMessage="Validate"/>
                         </button>
+
                     </div>
                     }
-                    {myTruthOrLie.validate &&
-                          <FormattedMessage id="EventGameTruthOrLie.SentenceValidate" defaultMessage="Your list is ready. Wait for the other players to vote!" />
+                    {myTruthOrLie.validateSentences &&
+                          <FormattedMessage id="EventGameTruthOrLie.SentencesValidated" defaultMessage="Your list is ready. You can proceed to the vote" />
                     }
                 </div>
 
@@ -354,6 +363,8 @@ class EventGameTruthOrLie extends React.Component {
         let index= this.state.show.currentVote;
         if (index<0)
             index=0;
+        if (! myTruthOrLie.voteList)
+            myTruthOrLie.voteList=[];
         if (index>=myTruthOrLie.voteList.length)
             index=myTruthOrLie.voteList.length-1;
 
@@ -601,6 +612,7 @@ class EventGameTruthOrLie extends React.Component {
         const colorsChart = [
                        'rgba(54, 162, 235, 0.2)',
                        'rgba(255, 99, 132, 0.2)'];
+        let myTruthOrLie=this.getMyTruthOrLie();
 
          return (<div>
                     <div class="row">
@@ -733,6 +745,15 @@ class EventGameTruthOrLie extends React.Component {
                                 title={intl.formatMessage({id: "EventGameTruthOrLie.PlayerWhoSentences",defaultMessage: "Validate Sentences"}) } />
                             <div style={{textAlign: "center"}}>
                                 {game.numberOfPlayersWhoSentences} ({game.numberOfPlayersWhoSentencesPercent} %)
+
+                              <button class="btn btn-primary btn-xs" style={{marginTop: "10px"}}
+                                    onClick={()=>this.unvalidateSentence( game, myTruthOrLie ) }>
+                                    <FormattedMessage id="EventGameTruthOrLie.UnValidate" defaultMessage="UnValidate"/>
+                              </button>
+
+                              <IntermittentMessage
+                                    state={this.state.inProgressUnvalidate}
+                                    message={this.state.inProgressUnvalidateStatus} />
                             </div>
                         </div>
                         <div class="col-2">
@@ -858,13 +879,51 @@ class EventGameTruthOrLie extends React.Component {
     }
 
     // -- user clicks on 'validate my sentences
-    seValidateMySentences( name, value, game, myTruthOrLie) {
+    setValidateMySentences( name, value, game, myTruthOrLie) {
         // console.log("EventGameTruthOrLie.setMyTruthOrLie value="+value);
         let path=gameListConstant.NAMEENTITY+"/"+game.id+"/truthOrLieList/"+myTruthOrLie.id;
         this.eventCtrl.setAttribut(name, value, myTruthOrLie, path);
+        this.setState({inProgressValidate:2});
+
         // console.log("EventGameTruthOrLie setSentence: game="+ JSON.stringify(game));
     }
 
+    unvalidateSentence( game, myTruthOrLie) {
+        // console.log("EventGameTruthOrLie.setMyTruthOrLie value="+value);
+		const restCallService = FactoryService.getInstance().getRestCallService();
+
+        let param={ "gameId":game.id, 'eventId': this.eventCtrl.event.id,};
+		this.setState({inProgress:false, inProgressUnvalidate:1, inProgressUnvalidateStatus:''});
+
+        restCallService.postJson('/api/event/game/unvalidatetruthorlie?', this, param, httpPayload => {
+    	    const intl = this.props.intl;
+
+            // update the sentences list
+            let game = this.eventCtrl.getCurrentGame();
+
+            if (httpPayload.isError()) {
+                this.setState({isErrorVote:true});
+            }
+
+            let message='';
+            let stateUnvalidate=3;
+            if (httpPayload.getData() && httpPayload.getData()) {
+                // we update all the truthOrLie, for all players (not important to synchronize the another players)
+                let game = this.eventCtrl.getCurrentGame();
+                let myTruthOrLie=this.getMyTruthOrLie();
+                myTruthOrLie.validateSentences=false;
+                message=intl.formatMessage({id: "EventGameTruthOrLie.UnvalidateStatusDone",defaultMessage: "Sentences unvalidated"});
+                stateUnvalidate=2;
+            }
+            else {
+                message=intl.formatMessage({id: "EventGameTruthOrLie.UnvalidateStatusError",defaultMessage: "Unvalidation failed"});
+                stateUnvalidate=3;
+            }
+            this.setState({inProgress:false, inProgressUnvalidate:stateUnvalidate,inProgressUnvalidateStatus: message});
+        }
+        );
+        // console.log("EventGameTruthOrLie setSentence: game="+ JSON.stringify(game));
+    }
 
 
     setVote( name, value, game, myTruthOrLie, voteToDisplay, currentSentence) {

@@ -157,7 +157,7 @@ class EventGameSecretSantas extends React.Component {
                                     <List />&nbsp;<FormattedMessage id="EventGameSecretSantas.ScopeAll" defaultMessage="All participants" />
                                 </label>
 
-                                <input type="radio" class="btn-check" name="btnradiostate" id="filterState2" autocomplete="off"
+                                <input type="radio" class="btn-check" name="btnradiostate" id="filterState2" autoComplete="off"
                                     checked={game.scopeGame === "ACTIVE"}
                                     onChange={() => this.setAttribut("scopeGame", "ACTIVE",game)}
                                     disabled={this.state.inProgress}/>

@@ -12,6 +12,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { Tag, ModalWrapper, TextInput, TextArea } from 'carbon-components-react';
 import { Envelope,Files } from 'react-bootstrap-icons';
 
+import IntermittentMessage          from 'component/IntermittentMessage';
 
 import FactoryService from 'service/FactoryService';
 
@@ -23,7 +24,7 @@ class InvitationAgain extends React.Component {
 		                participant: props.participant,
 						subject: 'You are invited to a ToghEvent',
 						message: 'Please join this event.',
-						urlCopied: false,
+						urlCopiedState:0,
 						useMyEmailAsFrom: true
 						};
         // console.log("InvitationAgain.participant :"+JSON.stringify(props.participant));
@@ -121,8 +122,12 @@ class InvitationAgain extends React.Component {
 
                                     {this.state.participant.urlInvitation}
                                     <Files onClick={() => this.copyUrl() } />
-                                    {this.state.urlCopied && <span style={{fontWeight: "bold", paddingLeft: "5px", fontSize:"8px"}}><FormattedMessage id="InvitationAgain.UrlCopied" defaultMessage="Copied"/></span>}
+                                    {this.state.urlCopied && <span style={{fontWeight: "bold", paddingLeft: "5px", fontSize:"8px"}}>
+                                        <FormattedMessage id="InvitationAgain.UrlCopied" defaultMessage="Copied"/></span>}
 
+                                    <IntermittentMessage
+                                        state={this.state.urlCopiedState}
+                                        message={<FormattedMessage id="InvitationAgain.UrlCopied" defaultMessage="Copied"/>} />
                                 </span>
                             </div>
 
@@ -133,10 +138,9 @@ class InvitationAgain extends React.Component {
 
     copyUrl() {
         navigator.clipboard.writeText(this.state.participant.urlInvitation);
-        this.setState( {urlCopied:true});
-        console.log("UrlCopied");
+        this.setState( { urlCopiedState:2});
         var thisTimer=this;
-        setInterval(function () { thisTimer.setState( {urlCopied:false}) },3000);
+        var thisInterval=setInterval(function () { thisTimer.setState( { urlCopiedState:0});clearInterval( thisInterval); },3000);
 
     }
 

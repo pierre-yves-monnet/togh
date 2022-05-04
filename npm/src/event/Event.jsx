@@ -324,6 +324,8 @@ class Event extends React.Component {
                             labelText={<FormattedMessage id="Event.Description" defaultMessage="Description" />}
 							style={{ width: "100%", maxWidth: "100%" }}
 							rows={5}
+							enableCounter={true}
+                            maxCount={400}
 							value={this.state.event.description}
 							onChange={(event) => this.setAttribut("description", event.target.value)} />
 					</div>

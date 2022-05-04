@@ -18,10 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -37,7 +34,7 @@ import java.util.stream.Collectors;
 @Component
 public class GameTruthOrLieSerializer extends BaseSerializer {
     public static final String JSON_PARTICIPANT_ID = "participantId";
-    public static final String JSON_VALIDATE = "validate";
+    public static final String VALIDATE_SENTENCES = "validateSentences";
     public static final String JSON_SENTENCES_LIST = "sentencesList";
     public static final String JSON_VOTE_LIST = "voteList";
     public static final String JSON_VOTE_SENTENCES_LIST = "voteSentenceList";
@@ -76,13 +73,13 @@ public class GameTruthOrLieSerializer extends BaseSerializer {
 
         ToghUserSerializer toghUserSerializer = (ToghUserSerializer) factorySerializer.getFromClass(ToghUserEntity.class);
 
-        Map<String, Object> record = getBasicMap(truthOrLieEntity, serializerOptions);
+        Map<String, Object> recordBasicMap = getBasicMap(truthOrLieEntity, serializerOptions);
 
-        record.put(JSON_PARTICIPANT_ID, truthOrLieEntity.getPlayerUser().getId());
-        record.put(JSON_VALIDATE, getBoolean(truthOrLieEntity.getValidateSentences(), Boolean.FALSE));
+        recordBasicMap.put(JSON_PARTICIPANT_ID, truthOrLieEntity.getPlayerUser().getId());
+        recordBasicMap.put(VALIDATE_SENTENCES, getBoolean(truthOrLieEntity.getValidateSentences(), Boolean.FALSE));
 
         List<Map<String, Object>> listSentences = new ArrayList<>();
-        record.put(JSON_SENTENCES_LIST, listSentences);
+        recordBasicMap.put(JSON_SENTENCES_LIST, listSentences);
         for (EventGameTruthOrLieSentenceEntity sentenceEntity : truthOrLieEntity.getSentencesList()) {
             BaseSerializer serializer = factorySerializer.getFromEntity(sentenceEntity);
 
@@ -97,6 +94,9 @@ public class GameTruthOrLieSerializer extends BaseSerializer {
 
         // only validate question can be join
         if (eventGameEntity != null) {
+
+            // give a default value
+            recordBasicMap.put(JSON_VOTE_LIST, Collections.emptyList());
             if (EventGameEntity.OpeningOfTheVoteEnum.IMMEDIAT.equals(eventGameEntity.getOpeningOfTheVote()))
                 joinTheVote = true;
             else if (EventGameEntity.OpeningOfTheVoteEnum.BEFOREEVENT.equals(eventGameEntity.getOpeningOfTheVote())) {
@@ -115,14 +115,14 @@ public class GameTruthOrLieSerializer extends BaseSerializer {
                 }
 
                 // manage votation
-                record.put(JSON_VOTE_LIST,
+                recordBasicMap.put(JSON_VOTE_LIST,
                         truthOrLieEntity.getVoteList()
                                 .stream()
                                 .map(votation -> {
                                     Map<String, Object> votationMap = getBasicMap(votation, serializerOptions);
                                     votationMap.put(JSON_PLAYER_ID, votation.getOtherPlayer().getId());
                                     votationMap.put(JSON_PLAYER_NAME, toghUserSerializer.getUserLabel(votation.getOtherPlayer(), serializerOptions));
-                                    votationMap.put(JSON_VALIDATE, getBoolean(votation.getValidateVote(), Boolean.FALSE));
+                                    votationMap.put(VALIDATE_SENTENCES, getBoolean(votation.getValidateVote(), Boolean.FALSE));
 
                                     votationMap.put(JSON_VOTE_SENTENCES_LIST,
                                             votation.getVoteSentenceList().stream().map(voteEntity -> {
@@ -134,6 +134,6 @@ public class GameTruthOrLieSerializer extends BaseSerializer {
                                 }).collect(Collectors.toList()));
             }
         }
-        return record;
+        return recordBasicMap;
     }
 }

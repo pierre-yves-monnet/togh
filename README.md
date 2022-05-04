@@ -843,7 +843,9 @@ google-maps-react)
 
 Simon (P2): Date Carbon: le format de date ne respecte pas la langue
 
-Simon: login google, faire une investigation Simon: Email SMTP Google avec clee Auth 2.0
+Simon: login google, faire une investigation py: comment afficher le login google?
+
+Simon: Email SMTP Google avec clee Auth 2.0
 
 	Comment surcharger une class CSS ? bx--content-switcher-btn bx--content-switcher--selected ==> changer le fond noir en fond plus doux
 		.togh.bx--content-switcher--selected ==> Marche pas

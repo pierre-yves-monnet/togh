@@ -587,6 +587,26 @@ public class EventService {
         return eventOperationResult;
     }
 
+    public EventOperationResult unvalidateTruthOrLie(EventEntity eventEntity, Long gameId, ToghUserEntity toghUserEntity) {
+        EventOperationResult eventOperationResult = new EventOperationResult(eventEntity);
+        EventController eventController = getEventController(eventEntity);
+        if (!eventController.isOrganizer(toghUserEntity)) {
+            eventOperationResult.addLogEvent(eventAccessError);
+            return eventOperationResult;
+        }
+        // search the number of sentences in the game
+        EventGameEntity game = getGame(eventEntity, gameId);
+        if (game == null) {
+            eventOperationResult.addLogEvent(eventEntityNotFound);
+            return eventOperationResult;
+        }
+        game.getTruthOrLieList().stream().forEach(t -> t.setValidateSentences(false));
+        eventRepository.save(eventEntity);
+
+        return eventOperationResult;
+    }
+
+
     /**
      * Vote in a TruthOrLie.
      * Note: the result is not part of this service task. Result is calculated when we returned information to the user.
