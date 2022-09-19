@@ -39,13 +39,13 @@ class IntermittentMessage extends React.Component {
 
 	componentDidUpdate(prevProps) {
 	    let redoTimer=false;
-		if (this.props.state != this.state.state) {
+		if (this.props.state !== this.state.state) {
 			// console.log("IntermittentMessage.componentDidUpdate propsstate=" + this.props.state+",state="+this.state.state+" message=["+this.props.message+"]" );
 
 		    this.setState({ state: this.props.state, showMessage:true });
 		    redoTimer=true;
 		}
-		if (this.props.message != this.state.message) {
+		if (this.props.message !== this.state.message) {
 			// console.log("IntermittentMessage.componentDidUpdate Message=" + this.props.state+" message=["+this.props.message+"]" );
 
             this.setState({ message: this.props.message, showMessage:true });
@@ -59,15 +59,15 @@ class IntermittentMessage extends React.Component {
 
 
 	render() {
-	    if (this.state.state ==0)
+	    if (this.state.state === 0)
 	        return (<span></span>);
-	    if (this.state.state ==1)
+	    if (this.state.state === 1)
 	        return (<InlineLoading/>);
-	    if (this.state.state ==2) {
+	    if (this.state.state === 2) {
 	        return (<span style={{fontWeight: "bold", paddingLeft: "5px", paddingTop:"10px", fontSize:"10px",color:"blue"}}>{this.getMessage()}</span>);
 
 	    }
-	    if (this.state.state ==3)
+	    if (this.state.state === 3)
 	        return (<span style={{fontWeight: "bold", paddingLeft: "5px", paddingTop:"10px", fontSize:"10px",color:"red"}}>{this.getMessage()}</span>);
 
         return (<span>No State acceptable{this.state.state}</span>);
@@ -77,7 +77,7 @@ class IntermittentMessage extends React.Component {
     armTimer() {
         let delay=3000;
 
-        if (this.props.state==3) {
+        if (this.props.state === 3) {
             delay=10000;
         }
 
