@@ -64,11 +64,11 @@ public class TranslateDictionary {
     }
 
     /**
-     * @return
+     * @return translation status
      */
     private TranslateResult operationOnDictionary(boolean translate) {
         TranslateResult translateResult = new TranslateResult();
-        // load all dictionnary
+        // load all dictionary
 
         try {
 
@@ -111,29 +111,29 @@ public class TranslateDictionary {
                         if (toghLanguage.exist(sentenceEntry.key)) {
                             // override the original sentence
                             toghLanguage.setSentence(sentenceEntry.key, toghLanguage.getTranslation(sentenceEntry.key), sentenceEntry.translation);
+                            continue;
+                        }
+                        languageResult.nbMissingSentences++;
+                        if (!translate)
+                            continue;
+                        if ("en".equals(language)) {
+                            // no translation needed here
+                            languageResult.nbTranslatedSentences++;
+                            toghLanguage.setSentence(sentenceEntry.key, sentenceEntry.translation, sentenceEntry.translation);
                         } else {
-                            languageResult.nbMissingSentences++;
-                            if (!translate)
-                                continue;
-                            if ("en".equals(language)) {
-                                // no translation needed here
+                            if (countTranslation > 1000)
+                                break;
+
+                            countTranslation++;
+                            // traduction needed
+                            chronoTranslate.start();
+                            TranslateSentenceResult translation = translatorGoogle.translateSentence(sentenceEntry.translation, "en", language);
+                            chronoTranslate.stop();
+
+                            translateResult.listEvents.addAll(translation.listEvents);
+                            if (!LogEventFactory.isError(translation.listEvents)) {
                                 languageResult.nbTranslatedSentences++;
-                                toghLanguage.setSentence(sentenceEntry.key, sentenceEntry.translation, sentenceEntry.translation);
-                            } else {
-                                if (countTranslation > 1000)
-                                    break;
-
-                                countTranslation++;
-                                // traduction needed
-                                chronoTranslate.start();
-                                TranslateSentenceResult translation = translatorGoogle.translateSentence(sentenceEntry.translation, "en", language);
-                                chronoTranslate.stop();
-
-                                translateResult.listEvents.addAll(translation.listEvents);
-                                if (!LogEventFactory.isError(translation.listEvents)) {
-                                    languageResult.nbTranslatedSentences++;
-                                    toghLanguage.setSentence(sentenceEntry.key, translation.getTranslation(), sentenceEntry.translation);
-                                }
+                                toghLanguage.setSentence(sentenceEntry.key, translation.getTranslation(), sentenceEntry.translation);
                             }
                         }
                     }
@@ -179,15 +179,16 @@ public class TranslateDictionary {
      * Detect all languages
      *
      * @param directoryLanguage
-     * @return
+     * @return list of language detected
      */
     private List<String> detectLanguages(File directoryLanguage) {
         List<String> listLanguages = new ArrayList<>();
-        for (File fileInDirectory : directoryLanguage.listFiles()) {
-            if (fileInDirectory.isFile() && fileInDirectory.getName().endsWith(".json")) {
-                listLanguages.add(fileInDirectory.getName().substring(0, fileInDirectory.getName().length() - ".json".length()));
+        if (directoryLanguage != null)
+            for (File fileInDirectory : directoryLanguage.listFiles()) {
+                if (fileInDirectory.isFile() && fileInDirectory.getName().endsWith(".json")) {
+                    listLanguages.add(fileInDirectory.getName().substring(0, fileInDirectory.getName().length() - ".json".length()));
+                }
             }
-        }
         return listLanguages;
     }
 

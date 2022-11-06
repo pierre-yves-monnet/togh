@@ -20,4 +20,5 @@ public class ToghApplicationInitializer extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ToghApplicationInitializer.class);
     }
+
 }
