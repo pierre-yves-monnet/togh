@@ -37,7 +37,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -253,8 +252,7 @@ public class RestLoginController {
     @ResponseBody
     public Map<String, Object> resetPasswordInfo(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginResult loginResult = loginService.getFromUUID(userData.get("uuid"));
-        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
-        return finalStatus;
+        return new HashMap<>(loginService.getLoginResultMap(loginResult));
     }
 
 
@@ -268,8 +266,7 @@ public class RestLoginController {
     @ResponseBody
     public Map<String, Object> resetPassword(@RequestBody Map<String, String> userData, HttpServletResponse response) {
         LoginResult loginResult = loginService.changePasswordAndConnect(userData.get("uuid"), userData.get(JSON_PASSWORD));
-        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
-        return finalStatus;
+        return new HashMap<>(loginService.getLoginResultMap(loginResult));
     }
 
     /**
@@ -291,8 +288,7 @@ public class RestLoginController {
                     HttpStatus.UNAUTHORIZED, RestHttpConstant.CST_HTTPCODE_NOTCONNECTED);
 
         LoginResult loginResult = loginService.changePassword(toghUserEntity, userData.get(JSON_PASSWORD));
-        Map<String, Object> finalStatus = new HashMap<>(loginService.getLoginResultMap(loginResult));
-        return finalStatus;
+        return new HashMap<>(loginService.getLoginResultMap(loginResult));
     }
 
     /**
@@ -326,19 +322,5 @@ public class RestLoginController {
         return finalStatus;
     }
 
-    /**
-     * @param message to give it back
-     * @return REST API Answer
-     */
-    @CrossOrigin
-    @GetMapping(value = "/api/ping", produces = "application/json")
-    public Map<String, Object> ping(@RequestParam(required = false) String message) {
-        logger.info(LOG_HEADER + "Ping!");
-        Map<String, Object> result = new HashMap<>();
-        result.put("now", LocalDateTime.now());
-        if (message != null)
-            result.put("message", message);
-        return result;
-    }
 
 }

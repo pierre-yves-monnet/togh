@@ -72,8 +72,8 @@ class AuthService {
 	        headers: this.getHeaders({})
 	    };
 		
-		
-		axios.post( this.restcallService.getUrl('/api/login?'), param, requestOptions)
+		let urlLogin= this.restcallService.getUrl('/api/login?');
+		axios.post( urlLogin, param, requestOptions)
 				.then( axiosPayload => {
 					console.log("AuthService.loginCallback, httpPayload="+JSON.stringify(axiosPayload));
 					self.token = axiosPayload.data.token;

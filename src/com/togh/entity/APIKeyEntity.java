@@ -28,7 +28,7 @@ import javax.persistence.*;
 public @Data
 class APIKeyEntity extends BaseEntity {
 
-    @Column(name = "privilegekey", length = 10)
+    @Column(name = "privilegekey", length = 10, unique = true)
     @Enumerated(EnumType.STRING)
     @org.hibernate.annotations.ColumnDefault("'FREE'")
     PrivilegeKeyEnum privilegeKey;

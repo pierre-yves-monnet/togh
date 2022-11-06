@@ -9,10 +9,11 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { Loading } from 'carbon-components-react';
+import { Loading, TextInput } from 'carbon-components-react';
 
-import ToghVersion from 'component/ToghVersion';
+import ToghVersion          from 'component/ToghVersion';
 import FactoryService 		from 'service/FactoryService';
+import LogEvents 		    from 'component/LogEvents';
 
 
 
@@ -30,8 +31,12 @@ class AdminInfo extends React.Component {
 	constructor(props) {
 		super();
 		this.state = { inprogress: false,
-					message:"",
-					listinfos:[]};
+					updateIdAddress: {},
+					listAdminParameters: {},
+					listInfos: [],
+					listIpAddresses: [],
+					listIpAddressesError: []};
+		this.updateIpaddress = this.updateIpaddress.bind(this);
 	}
 	
 	componentDidMount() {
@@ -42,11 +47,17 @@ class AdminInfo extends React.Component {
 			// httpPayload.trace("AdminInfo.callback");
 			this.setState({inprogress: false });
 			if (httpPayload.isError()) {
-				this.setState({ "message": "Server connection error" });
+				this.setState({ messageUpdateIpAddress:"",
+				                errorUpdateIpAddress: "Server connection error" });
 			}
 			else {
-				this.setState({ message: "",
-								listinfos: httpPayload.getData() });
+				this.setState({ messageUpdateIpAddress: "",
+				                errorUpdateIpAddress: "",
+								listInfos: httpPayload.getData().listInfos,
+								listIpAddresses: httpPayload.getData().listIpAddresses,
+								listIpAddressesError: httpPayload.getData().listIpAddressesError,
+								listAdminParameters : httpPayload.getData().listAdminParameters,
+								ipAddress: httpPayload.getData().listAdminParameters.ipAddress});
 			}
 		});
 	
@@ -69,23 +80,68 @@ class AdminInfo extends React.Component {
 					{this.state.message}<br/> 
 
 				<table class="table table-striped toghtable">
-					{this.state.listinfos && this.state.listinfos.map((info,index) =>
+					{this.state.listInfos && this.state.listInfos.map((info,index) =>
 						<tr key={index}>
 							<td>{info.name}</td>
 							<td style={{fontWeigh: "bold", fontSize:"smaller"}}>{info.value}</td>
 						</tr>)}
                         <tr>
-						    <td >Portal version</td>
+						    <td ><FormattedMessage id="AdminInfo.PortalVersion" defaultMessage="Portal version" /></td>
 						    <td style={{fontWeigh: "bold", fontSize:"smaller"}}>
 						            <ToghVersion/>
 						    </td>
 						</tr>
+						<tr>
+						    <td><FormattedMessage id="AdminInfo.IpAddress" defaultMessage="IpAddress" /></td>
+						</tr>
+						<tr>
+						    <td colspan="2">
+						    <TextInput labelText={<FormattedMessage id="AdminInfo.IpAddress" defaultMessage="Ip Address"/>}
+						        value={this.state.ipAddress}
+                                onChange={(event) => {
+                                        this.setState( {ipAddress: event.target.value});
+                                        }} ></TextInput><br />
+                            </td>
+                        </tr>
 				</table>
+				<button class="btn btn-info btn-sm" onClick={this.updateIpaddress}>
+                    <FormattedMessage id="AdminInfo.updateIpAddress" defaultMessage="Update IP Address"/>
+                </button>
+
+                <LogEvents listEvents={this.state.updateIdAddress.listEvents} />
+
+                 <br/>
+                 <FormattedMessage id="AdminInfo.ListIpAddresses" defaultMessage="List Ip Addresses detected" />
+                 <br/>
+                 <div  style={{fontSize: "12px"}}>
+                     {this.state.listIpAddresses.map((ipAddress) => {
+                                                        return <span> {ipAddress},&nbsp;</span>
+                                                       } )
+                     }
+                 </div>
 				</div>	 
 			</div>
 			);
 	}
-	
+
+
+	updateIpaddress() {
+		console.log("AdminInfo.updateIpaddress:");
+		this.setState({inprogress: true });
+		let restCallService = FactoryService.getInstance().getRestCallService();
+		let postPayload={'adminParameters':{'ipAddress': this.state.ipAddress}};
+		debugger;
+		restCallService.postJson('/api/admin/setadminparameter', this, postPayload, httpPayload =>{
+            // httpPayload.trace("AdminInfo.updateIpaddress");
+			this.setState({inprogress: false });
+			if (httpPayload.isError()) {
+				this.setState({ "message": "Server connection error" });
+			}
+			else {
+				this.setState({ updateIdAddress: httpPayload.getData()});
+			}
+		});
+	}
 	
 }
 

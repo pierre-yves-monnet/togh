@@ -42,11 +42,25 @@ The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
 
 https://flutter.dev/
 
-## using h2
+## Using h2
 
 Using h2 database instead of postgres -Dspring.profiles.active=dev or --spring.profiles.active=h2
 
+# Start
+
+Spring Boot :
+
 # Architecture
+
+Execute com.togh.ToghApplicationInitializer Reac :
+On a terminal
+
+```
+cd npm
+npm start
+```
+
+Access http://localhost:8080
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*
@@ -620,7 +634,7 @@ $ docker run --name togh \
 $ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs \
 -d gcr.io/intricate-gamma-325323/frontendtogh:1.0.0
 
-
+docker compose
 $ curl http://34.125.198.71:7080/togh/ping
 $ curl http://34.125.198.71:3000
 ```

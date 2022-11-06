@@ -445,14 +445,14 @@ public class EventService {
      */
     public List<EventEntity> purgeOldEvents(boolean doTheOperation) {
 
-        // modified later than 1 year? Keep it.
-        LocalDateTime datePurge = LocalDateTime.now(ZoneOffset.UTC).minusDays(-360);
+        // Keep it 10 years
+        LocalDateTime datePurge = LocalDateTime.now(ZoneOffset.UTC).minusYears(10);
 
         List<EventEntity> listEventsToPurge = eventRepository.findEventsToPurge(datePurge, StatusEventEnum.CLOSED, PageRequest.of(0, 1000));
         if (doTheOperation) {
             for (EventEntity eventEntity : listEventsToPurge) {
                 eventRepository.delete(eventEntity);
-                notifyService.notifyEventPurged(eventEntity, 360, datePurge);
+                notifyService.notifyEventPurged(eventEntity, 10 * 360, datePurge);
             }
         }
         return listEventsToPurge;
@@ -600,7 +600,7 @@ public class EventService {
             eventOperationResult.addLogEvent(eventEntityNotFound);
             return eventOperationResult;
         }
-        game.getTruthOrLieList().stream().forEach(t -> t.setValidateSentences(false));
+        game.getTruthOrLieList().forEach(t -> t.setValidateSentences(false));
         eventRepository.save(eventEntity);
 
         return eventOperationResult;

@@ -17,19 +17,56 @@ class RestcallService {
 	constructor( factoryService) {
 		console.log("AuthService: ------------ constructor ");
 		this.factoryService = factoryService;
+		this.serverHttp="";
 	}
+
+/**
+	* depends on where is the web site.
+	* OVH: we must have an IP Address
+	* Google : we don't have the IP adress, only the domain, but on Google, there is no way to redirect a POST request
+	*   so we have to call the server to get it's public IP Address we can use...
+	*
+	*/
+	async determineURlHost() {
+	    // let's communicate with the server to find the header
+
+		var i = window.location.href.indexOf(":",7); // skype http: or https:
+        var urlPing = window.location.href.substring(0,i)+":7080/togh/api/ping?serverInfo=true&timezoneoffset="+(new Date()).getTimezoneOffset();
+        let headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );
+
+        const requestOptions = {
+            headers: headers
+        };
+
+        var self=this;
+        const axiosPayload = await axios.get( urlPing, requestOptions);
+
+        let httpResponse = new HttpResponse( axiosPayload, null);
+        self.serverHttp=httpResponse.getData().serverHttp;
+        console.log("RestCallService.determineUrlHost server=["+self.serverHttp+"]");
+    }
 
 	// init - separated of constructor because service use themself
 	init() {
 		console.log( "RestcallService.init");
-		this.authService= this.factoryService.getAuthService();		
+		this.authService= this.factoryService.getAuthService();
+        this.determineURlHost();
+
 	}
 	
 	// From the URL, complete to have a complete URL
 	getUrl( uri ) {
 		// console.log("RestCall.geturl : "+window.location.href);
-		var i = window.location.href.indexOf(":",7); // skype http: or https:
-		var headerUrl = window.location.href.substring(0,i)+":7080/togh";
+		var headerUrl="";
+		if (this.serverHttp !== "") {
+    		let i = window.location.href.indexOf(":",0); // skip http: or https:
+            let protocol = window.location.href.substring(0,i);
+		    headerUrl=protocol+"://"+this.serverHttp+":7080/togh";
+		} else {
+    		var i = window.location.href.indexOf(":",7); // skip http: or https:
+    			    	headerUrl = window.location.href.substring(0,i)+":7080/togh";
+		}
+
 		// search something like http://localhost:3000/#
 		return headerUrl+uri; 
 	}
@@ -83,7 +120,7 @@ class RestcallService {
 
 		var selfUri = uri;
     	axios.post( this.getUrl( uri ), param, requestOptions)
-        	.then( axiosPayload => { 
+        	.then( axiosPayload => {
 				// console.log("RestCallService.getJson: payload:"+JSON.stringify(axiosPayload.data));	
 				let httpResponse = new HttpResponse( axiosPayload, null);
 				fctToCallback.call(objToCall, httpResponse); 
@@ -101,6 +138,8 @@ class RestcallService {
 
 				});
 	}
-		
+
+
+
 }
 export default RestcallService;
