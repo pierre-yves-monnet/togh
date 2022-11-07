@@ -24,13 +24,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: npm
-        run: |
-          npm install
-          npm ci
+        run: npm install
+
       # build and test the apps
       - name: build
-          run: |
-            npm run build
+        run: npm run build
 
       - name: Build Frontend Docker image
         working-directory: npm
