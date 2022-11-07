@@ -20,6 +20,11 @@ jobs:
         working-directory: npm
         run: npm install
 
+      - name: setup node
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
+
       # build and test the apps
       - name: build
         run: npm run build
