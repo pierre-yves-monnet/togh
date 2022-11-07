@@ -20,5 +20,5 @@ jobs:
         run: docker build . --file Dockerfile --tag  pierreyvesmonnet/togh:1.0.0
 
       - name: Build Frontend Docker image
-        workdir: npm
+        working-directory: npm
         run: docker build . --file Dockerfile --tag  pierreyvesmonnet/frontendtogh:1.0.0
