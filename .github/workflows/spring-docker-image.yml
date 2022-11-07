@@ -1,0 +1,23 @@
+name: Docker Togh CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    name: Build Togh Docker image
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build backoffice
+        run: mvn package
+
+      - name: Build backoffice Docker image
+        run: docker build . --file Dockerfile --tag  pierreyvesmonnet/togh:1.0.0
