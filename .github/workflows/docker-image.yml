@@ -16,8 +16,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Build backoffice
+        run: mvn package
+
       - name: Build backoffice Docker image
         run: docker build . --file Dockerfile --tag  pierreyvesmonnet/togh:1.0.0
+
+      - name: Install dependencies
+        working-directory: npm
+        run: |
+          npm install
+          npm ci
+      # build and test the apps
+      - name: build
+          run: |
+            npm run build
 
       - name: Build Frontend Docker image
         working-directory: npm
