@@ -11,8 +11,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    name: Build Togh Docker image
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag  pierreyvesmonnet/togh:1.0.0
+      - uses: actions/checkout@v3
+        name: Build backoffice Docker image
+        run: docker build . --file Dockerfile --tag  pierreyvesmonnet/togh:1.0.0
+
+      - uses: actions/checkout@v3
+        name: Build Frontend Docker image
+        workdir: npm
+        run: docker build . --file Dockerfile --tag  pierreyvesmonnet/frontendtogh:1.0.0
