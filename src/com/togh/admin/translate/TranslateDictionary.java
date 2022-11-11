@@ -24,6 +24,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * https://code.google.com/archive/p/java-google-translate-text-to-speech/
@@ -44,10 +45,10 @@ public class TranslateDictionary {
     private static final LogEvent eventDictionaryOperationError = new LogEvent(TranslateDictionary.class.getName(), 1, Level.ERROR, "During Dictionary operation", "Operation on dictionnary will failed", "Dictionary is empty", "Check Exception");
     private static final LogEvent eventDictionaryPathNotDefined = new LogEvent(TranslateDictionary.class.getName(), 2, Level.ERROR, "Path to access dictionnary is not setted in the configuration file", "Operation on dictionnaries are not possible", "Dictionaries will not change", "Check configuration file");
     private static final LogEvent eventDictionaryTranslationSuccess = new LogEvent(TranslateDictionary.class.getName(), 3, Level.SUCCESS, "Translation success", "Translation done with success");
-    private static final String logHeader = TranslateDictionary.class.getName() + ":";
+    private static final String LOG_HEADER = TranslateDictionary.class.getName() + ":";
+    private final Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
     @Autowired
     private TranslatorGoogle translatorGoogle;
-    private final Logger logger = Logger.getLogger(TranslateDictionary.class.getName());
     // dictionary.LangPath=D:\dev\git\togh\npm\src\lang
     @Value("${dictionary.lang-path}")
     private String propertyDictionaryPath;
@@ -164,7 +165,7 @@ public class TranslateDictionary {
             e.printStackTrace(new PrintWriter(sw));
             String exceptionDetails = sw.toString();
 
-            logger.severe(logHeader + "During operationDictionary " + e + " at " + exceptionDetails);
+            logger.severe(LOG_HEADER + "During operationDictionary " + e + " at " + exceptionDetails);
             translateResult.listEvents.add(new LogEvent(eventDictionaryOperationError, e, e.getMessage()));
         }
 
@@ -178,22 +179,31 @@ public class TranslateDictionary {
     /**
      * Detect all languages
      *
-     * @param directoryLanguage
+     * @param directoryLanguage Directory where all languages are
      * @return list of language detected
      */
     private List<String> detectLanguages(File directoryLanguage) {
         List<String> listLanguages = new ArrayList<>();
-        if (directoryLanguage != null)
-            for (File fileInDirectory : directoryLanguage.listFiles()) {
-                if (fileInDirectory.isFile() && fileInDirectory.getName().endsWith(".json")) {
-                    listLanguages.add(fileInDirectory.getName().substring(0, fileInDirectory.getName().length() - ".json".length()));
-                }
+        try {
+            if (directoryLanguage == null) {
+                logger.severe("Detectlanguage: Directory Langage is null");
+            } else if (directoryLanguage.listFiles() == null) {
+                logger.info("Detectlanguage:No files under [" + directoryLanguage.getAbsolutePath() + "]");
+            } else {
+                listLanguages = Arrays.stream(directoryLanguage.listFiles())
+                    .filter(f -> f.isFile() && f.getName().endsWith(".json"))
+                    .map(c -> c.getName().substring(0, c.getName().length() - ".json".length()))
+                    .collect(Collectors.toList());
+                logger.info("Detectlanguage: in [" + directoryLanguage.getAbsolutePath()
+                    + "] languages: [" + String.join(", ", listLanguages) + "]");
             }
+        } catch (Exception e) {
+            logger.severe("Can't detect language in directory [" + directoryLanguage.getAbsolutePath() + "] " + e);
+        }
         return listLanguages;
     }
 
     public static class LanguageResult {
-
         public String name;
         public int nbMissingSentences = 0;
         public int nbTranslatedSentences = 0;
