@@ -7,6 +7,8 @@ docker pull container-registry.oracle.com/java/openjdk:latest
 
 mvn install build and push the docker image on docker image cloud (but we need the image in gcr.io).
 
+You must be connected via Docker Destop
+
 ```
 > mvn install
 ```
@@ -23,6 +25,7 @@ To do it manually:
 Done automaticaly
 
 ### Option Create Front End Togh Docker image
+
 
 ```
 > cd npm
@@ -107,6 +110,16 @@ $ docker run --name frontendtogh  --network="host"  --log-driver=gcplogs \
 docker compose
 $ curl http://34.125.198.71:7080/togh/ping
 $ curl http://34.125.198.71:3000
+```
+
+### troubleshoot
+
+Remove a container after it was stop but still here?
+
+```
+docker container ls --all
+docker container prune
+
 ```
 
 ### Option : run docker compose

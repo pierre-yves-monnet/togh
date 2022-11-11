@@ -27,19 +27,19 @@ import java.util.Map;
 
 @Component
 public abstract class UserSerializer extends BaseSerializer {
-    /**
-     * getBaseMap. Each entity depend on UserEntity. So, this is the basic map
-     *
-     * @param baseEntity        Base entity to serialize
-     * @param serializerOptions Serialize options
-     * @return
-     */
-    @Override
-    protected Map<String, Object> getBasicMap(BaseEntity baseEntity, SerializerOptions serializerOptions) {
-        Map<String, Object> resultMap = super.getBasicMap(baseEntity, serializerOptions);
-        if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.ADMIN))
-            resultMap.put(JSON_AUTHORID, ((UserEntity) baseEntity).getAuthorId());
-        return resultMap;
-    }
+  /**
+   * getBaseMap. Each entity depend on UserEntity. So, this is the basic map
+   *
+   * @param baseEntity        Base entity to serialize
+   * @param serializerOptions Serialize options
+   * @return
+   */
+  @Override
+  protected Map<String, Object> getBasicMap(BaseEntity baseEntity, SerializerOptions serializerOptions) {
+    Map<String, Object> resultMap = super.getBasicMap(baseEntity, serializerOptions);
+    if (serializerOptions.getContextAccess().equals(SerializerOptions.ContextAccess.ADMIN))
+      resultMap.put(JSON_AUTHORID, ((UserEntity) baseEntity).getAuthorId());
+    return resultMap;
+  }
 
 }

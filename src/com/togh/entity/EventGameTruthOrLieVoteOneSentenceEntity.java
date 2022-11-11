@@ -32,18 +32,18 @@ public @Data
 class EventGameTruthOrLieVoteOneSentenceEntity extends UserEntity {
 
 
-    /*
-     * this vote is for the sentence for another player sentence.
-     * The player must have validated its proposition of course
-     */
-    @Column(name = "sentenceid")
-    private Long sentenceId;
+  /*
+   * this vote is for the sentence for another player sentence.
+   * The player must have validated its proposition of course
+   */
+  @Column(name = "sentenceid")
+  private Long sentenceId;
 
-    /*
-     * The choice: LIE or TRUTH?
-     */
-    @Column(name = "statusvote", length = 10)
-    @Enumerated(EnumType.STRING)
-    private EventGameTruthOrLieSentenceEntity.StatusSentenceEnum statusVote;
+  /*
+   * The choice: LIE or TRUTH?
+   */
+  @Column(name = "statusvote", length = 10)
+  @Enumerated(EnumType.STRING)
+  private EventGameTruthOrLieSentenceEntity.StatusSentenceEnum statusVote;
 
 }

@@ -22,6 +22,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventItineraryStepRepository extends JpaRepository<EventItineraryStepEntity, Long> {
 
-    EventItineraryStepEntity findById(long id);
+  EventItineraryStepEntity findById(long id);
 
 }

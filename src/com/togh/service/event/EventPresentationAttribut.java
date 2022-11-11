@@ -18,14 +18,14 @@ package com.togh.service.event;
 /* ******************************************************************************** */
 public class EventPresentationAttribut {
 
-    /**
-     * at the end of the presentation, a Banner can be added
-     */
+  /**
+   * at the end of the presentation, a Banner can be added
+   */
 
-    public String bannerMessage;
-    /**
-     * The banner action is a link, then color is different (background is blue for example)
-     */
-    public String bannerAction;
+  public String bannerMessage;
+  /**
+   * The banner action is a link, then color is different (background is blue for example)
+   */
+  public String bannerAction;
 
 }

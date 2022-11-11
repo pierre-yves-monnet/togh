@@ -26,76 +26,76 @@ import org.springframework.stereotype.Service;
 public class FactoryService {
 
 
-    @Autowired
-    private LoginService loginService;
+  @Autowired
+  private LoginService loginService;
 
-    @Autowired
-    private ToghUserService userService;
+  @Autowired
+  private ToghUserService userService;
 
-    @Autowired
-    private EventService eventService;
+  @Autowired
+  private EventService eventService;
 
-    @Autowired
-    private MonitorService monitorService;
+  @Autowired
+  private MonitorService monitorService;
 
-    @Autowired
-    private NotifyService notifyService;
+  @Autowired
+  private NotifyService notifyService;
 
-    @Autowired
-    private ApiKeyService apiKeyService;
+  @Autowired
+  private ApiKeyService apiKeyService;
 
-    @Autowired
-    private StatsService statsService;
+  @Autowired
+  private StatsService statsService;
 
-    @Autowired
-    private SubscriptionService subscriptionService;
+  @Autowired
+  private SubscriptionService subscriptionService;
 
-    @Autowired
-    private TranslatorService translatorService;
+  @Autowired
+  private TranslatorService translatorService;
 
-    @Autowired
-    private FactoryUpdateGrantor factoryGrantor;
+  @Autowired
+  private FactoryUpdateGrantor factoryGrantor;
 
 
-    public LoginService getLoginService() {
-        return loginService;
-    }
+  public LoginService getLoginService() {
+    return loginService;
+  }
 
-    public ToghUserService getToghUserService() {
-        return userService;
-    }
+  public ToghUserService getToghUserService() {
+    return userService;
+  }
 
-    public EventService getEventService() {
-        return eventService;
-    }
+  public EventService getEventService() {
+    return eventService;
+  }
 
-    public MonitorService getMonitorService() {
-        return monitorService;
-    }
+  public MonitorService getMonitorService() {
+    return monitorService;
+  }
 
-    public NotifyService getNotifyService() {
-        return notifyService;
-    }
+  public NotifyService getNotifyService() {
+    return notifyService;
+  }
 
-    public ApiKeyService getApiKeyService() {
-        return apiKeyService;
-    }
+  public ApiKeyService getApiKeyService() {
+    return apiKeyService;
+  }
 
-    public StatsService getStatsService() {
-        return statsService;
-    }
+  public StatsService getStatsService() {
+    return statsService;
+  }
 
-    public SubscriptionService getSubscriptionService() {
-        return subscriptionService;
-    }
+  public SubscriptionService getSubscriptionService() {
+    return subscriptionService;
+  }
 
-    public TranslatorService getTranslatorService() {
-        return translatorService;
-    }
+  public TranslatorService getTranslatorService() {
+    return translatorService;
+  }
 
-    public FactoryUpdateGrantor getFactoryGrantor() {
-        return factoryGrantor;
-    }
+  public FactoryUpdateGrantor getFactoryGrantor() {
+    return factoryGrantor;
+  }
 
 
 }

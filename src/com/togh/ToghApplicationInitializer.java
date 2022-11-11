@@ -12,13 +12,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 public class ToghApplicationInitializer extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ToghApplicationInitializer.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(ToghApplicationInitializer.class, args);
+  }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ToghApplicationInitializer.class);
-    }
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    return application.sources(ToghApplicationInitializer.class);
+  }
 
 }

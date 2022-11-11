@@ -34,113 +34,112 @@ import java.util.stream.Collectors;
 @RequestMapping("togh")
 public class RestPingController {
 
-    private final Logger logger = Logger.getLogger(RestPingController.class.getName());
-    private final static String LOG_HEADER = RestLoginController.class.getSimpleName() + ": ";
+  private final static String LOG_HEADER = RestLoginController.class.getSimpleName() + ": ";
+  private final Logger logger = Logger.getLogger(RestPingController.class.getName());
+  @Autowired
+  DataSource dataSource;
 
-    @Autowired
-    DataSource dataSource;
+  @Autowired
+  AdminParameterService adminParameterService;
 
-    @Autowired
-    AdminParameterService adminParameterService;
+  @Value("${togh.version}")
+  private String toghVersion;
 
-    @Value("${togh.version}")
-    private String toghVersion;
+  /**
+   * Call the ping function
+   *
+   * @param message message to send back, to verify this is not a cache URL - optional
+   * @return ping information
+   */
+  @CrossOrigin
+  @GetMapping(value = "/api/ping", produces = "application/json")
+  public Map<String, Object> ping(@RequestParam(required = false) String message,
+                                  @RequestParam(required = false, name = "serverInfo") Boolean serverInfo) {
+    logger.info(LOG_HEADER + "Ping!");
+    Map<String, Object> result = new HashMap<>();
+    result.put("now", LocalDateTime.now());
+    result.put("version", toghVersion);
+    if (message != null)
+      result.put("message", message);
+    // information on the datasource: are we connected?
+    try (Connection con = dataSource.getConnection()) {
+      con.getMetaData().getDatabaseProductName();
+      result.put("database", "Database is up and running");
+    } catch (Exception e) {
+      result.put("database", "Can't connect");
+    }
+    if (serverInfo) {
+      try {
+        CollectedIpAddresses collectedIpAddressCollectes = getListIpAddress();
 
+        result.put("serverHttp", collectedIpAddressCollectes.bestIpAddress);
+        result.put("allHttp", collectedIpAddressCollectes.allIpAddresses);
+      } catch (Exception e) {
+        logger.severe("Can't access IP Address");
+        result.put("accessIp", e.toString());
+      }
+    }
+    return result;
+  }
+
+
+  /**
+   * Call the ping function
+   *
+   * @param message message to send back, to verify this is not a cache URL - optional
+   * @return ping information
+   */
+  @CrossOrigin
+  @GetMapping(value = "ping", produces = "application/json")
+  public Map<String, Object> toghPing(@RequestParam(required = false) String message) {
+    return ping(message, false);
+  }
+
+  public CollectedIpAddresses getListIpAddress() throws UnknownHostException, SocketException {
+    CollectedIpAddresses collectedIpAddress = new CollectedIpAddresses();
+    collectedIpAddress.allIpAddresses.add(InetAddress.getLocalHost());
+    for (Iterator<NetworkInterface> it = NetworkInterface.getNetworkInterfaces().asIterator();
+         it.hasNext(); ) {
+      NetworkInterface network = it.next();
+      collectedIpAddress.allIpAddresses.addAll(Collections.list(network.getInetAddresses()));
+    }
+
+    collectedIpAddress.allIpAddressesString = collectedIpAddress.allIpAddresses.stream()
+        .map(InetAddress::getHostAddress)
+        .collect(Collectors.toList());
+
+    // get the best IP
+    List<Object> collectedAddressIp = collectedIpAddress.allIpAddresses.stream()
+        .filter(w -> !w.isAnyLocalAddress())
+        .filter(w -> !w.isLoopbackAddress())
+        .map(InetAddress::getHostAddress)
+        .filter(w -> !w.startsWith("127"))
+        .filter(w -> !w.contains(":"))
+        .filter(w -> !w.startsWith("192"))
+        .filter(w -> !w.startsWith("172"))
+        .collect(Collectors.toList());
+    List<String> localIp = collectedIpAddress.allIpAddresses.stream()
+        .map(InetAddress::getHostAddress)
+        .filter(w -> (w.startsWith("192") || w.startsWith("127") || w.startsWith("172")))
+        .collect(Collectors.toList());
     /**
-     * Call the ping function
-     *
-     * @param message message to send back, to verify this is not a cache URL - optional
-     * @return ping information
+     * This is the local environment (debugger), so let's return the local IP
      */
-    @CrossOrigin
-    @GetMapping(value = "/api/ping", produces = "application/json")
-    public Map<String, Object> ping(@RequestParam(required = false) String message,
-                                    @RequestParam(required = false, name = "serverInfo") Boolean serverInfo) {
-        logger.info(LOG_HEADER + "Ping!");
-        Map<String, Object> result = new HashMap<>();
-        result.put("now", LocalDateTime.now());
-        result.put("version", toghVersion);
-        if (message != null)
-            result.put("message", message);
-        // information on the datasource: are we connected?
-        try (Connection con = dataSource.getConnection()) {
-            con.getMetaData().getDatabaseProductName();
-            result.put("database", "Database is up and running");
-        } catch (Exception e) {
-            result.put("database", "Can't connect");
-        }
-        if (serverInfo) {
-            try {
-                CollectedIpAddresses collectedIpAddressCollectes = getListIpAddress();
+    if (collectedAddressIp.isEmpty())
+      collectedAddressIp.addAll(localIp);
 
-                result.put("serverHttp", collectedIpAddressCollectes.bestIpAddress);
-                result.put("allHttp", collectedIpAddressCollectes.allIpAddresses);
-            } catch (Exception e) {
-                logger.severe("Can't access IP Address");
-                result.put("accessIp", e.toString());
-            }
-        }
-        return result;
-    }
+    // if there is a saved IP address, get it
+    Optional<String> ipAddress = adminParameterService.getParameter(AdminParameterService.AdminParameter.IPADDRESS);
+    collectedIpAddress.bestIpAddress = ipAddress.isPresent() ? ipAddress.get() : localIp.get(0);
+    return collectedIpAddress;
+  }
 
-
-    /**
-     * Call the ping function
-     *
-     * @param message message to send back, to verify this is not a cache URL - optional
-     * @return ping information
-     */
-    @CrossOrigin
-    @GetMapping(value = "ping", produces = "application/json")
-    public Map<String, Object> toghPing(@RequestParam(required = false) String message) {
-        return ping(message, false);
-    }
-
-    public CollectedIpAddresses getListIpAddress() throws UnknownHostException, SocketException {
-        CollectedIpAddresses collectedIpAddress = new CollectedIpAddresses();
-        collectedIpAddress.allIpAddresses.add(InetAddress.getLocalHost());
-        for (Iterator<NetworkInterface> it = NetworkInterface.getNetworkInterfaces().asIterator();
-             it.hasNext(); ) {
-            NetworkInterface network = it.next();
-            collectedIpAddress.allIpAddresses.addAll(Collections.list(network.getInetAddresses()));
-        }
-
-        collectedIpAddress.allIpAddressesString = collectedIpAddress.allIpAddresses.stream()
-                .map(InetAddress::getHostAddress)
-                .collect(Collectors.toList());
-
-        // get the best IP
-        List<Object> collectedAddressIp = collectedIpAddress.allIpAddresses.stream()
-                .filter(w -> !w.isAnyLocalAddress())
-                .filter(w -> !w.isLoopbackAddress())
-                .map(InetAddress::getHostAddress)
-                .filter(w -> !w.startsWith("127"))
-                .filter(w -> !w.contains(":"))
-                .filter(w -> !w.startsWith("192"))
-                .filter(w -> !w.startsWith("172"))
-                .collect(Collectors.toList());
-        List<String> localIp = collectedIpAddress.allIpAddresses.stream()
-                .map(InetAddress::getHostAddress)
-                .filter(w -> (w.startsWith("192") || w.startsWith("127") || w.startsWith("172")))
-                .collect(Collectors.toList());
-        /**
-         * This is the local environment (debugger), so let's return the local IP
-         */
-        if (collectedAddressIp.isEmpty())
-            collectedAddressIp.addAll(localIp);
-
-        // if there is a saved IP address, get it
-        Optional<String> ipAddress = adminParameterService.getParameter(AdminParameterService.AdminParameter.IPADDRESS);
-        collectedIpAddress.bestIpAddress = ipAddress.isPresent() ? ipAddress.get() : localIp.get(0);
-        return collectedIpAddress;
-    }
-
-    /**
-     * Collect all IP Address visible by the server
-     */
-    public static class CollectedIpAddresses {
-        List<InetAddress> allIpAddresses = new ArrayList<>();
-        List<String> allIpAddressesString = new ArrayList<>();
-        String bestIpAddress;
-    }
+  /**
+   * Collect all IP Address visible by the server
+   */
+  public static class CollectedIpAddresses {
+    List<InetAddress> allIpAddresses = new ArrayList<>();
+    List<String> allIpAddressesString = new ArrayList<>();
+    String bestIpAddress;
+  }
 }

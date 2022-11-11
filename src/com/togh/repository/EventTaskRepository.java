@@ -22,6 +22,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventTaskRepository extends JpaRepository<EventTaskEntity, Long> {
 
-    EventTaskEntity findById(long id);
+  EventTaskEntity findById(long id);
 
 }

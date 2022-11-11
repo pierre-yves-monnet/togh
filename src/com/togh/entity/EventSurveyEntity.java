@@ -38,37 +38,37 @@ import java.util.List;
 public @Data
 class EventSurveyEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
+  public static final String CST_SLABOPERATION_SURVEYLIST = "surveylist";
 
 
-    @Column(name = "status", length = 10, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private SurveyStatusEnum status;
+  @Column(name = "status", length = 10, nullable = false)
+  @Enumerated(EnumType.STRING)
+  private SurveyStatusEnum status;
 
 
-    // name is part of the baseEntity
-    @Column(name = "description", length = 400)
-    private String description;
+  // name is part of the baseEntity
+  @Column(name = "description", length = 400)
+  private String description;
 
-    // choice : list of "code/ proposition"
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "surveyid")
-    @OrderBy("id")
-    private List<EventSurveyChoiceEntity> choicelist = new ArrayList<>();
-
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @Column(name = "answer", length = 100)
-    @JoinColumn(name = "surveyid")
-    @OrderBy("id")
-    private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
+  // choice : list of "code/ proposition"
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @Fetch(value = FetchMode.SELECT)
+  @BatchSize(size = 100)
+  @JoinColumn(name = "surveyid")
+  @OrderBy("id")
+  private List<EventSurveyChoiceEntity> choicelist = new ArrayList<>();
 
 
-    public enum SurveyStatusEnum {
-        INPREPAR, OPEN, CLOSE
-    }
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @Fetch(value = FetchMode.SELECT)
+  @Column(name = "answer", length = 100)
+  @JoinColumn(name = "surveyid")
+  @OrderBy("id")
+  private List<EventSurveyAnswerEntity> answerlist = new ArrayList<>();
+
+
+  public enum SurveyStatusEnum {
+    INPREPAR, OPEN, CLOSE
+  }
 
 }

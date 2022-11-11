@@ -19,39 +19,39 @@ import java.util.logging.Logger;
 
 public class ChronoSet {
 
-    private final static String LOG_HEADER = ChronoSet.class.getSimpleName() + ": ";
+  private final static String LOG_HEADER = ChronoSet.class.getSimpleName() + ": ";
 
-    public final Map<String, Chronometer> mapChrono = new HashMap<>();
-    private final Logger logger = Logger.getLogger(ChronoSet.class.getName());
+  public final Map<String, Chronometer> mapChrono = new HashMap<>();
+  private final Logger logger = Logger.getLogger(ChronoSet.class.getName());
 
-    public ChronoSet() {
-        // nothing to do
+  public ChronoSet() {
+    // nothing to do
+  }
+
+
+  public Chronometer getChronometer(String operationName) {
+    Chronometer chrono = mapChrono.computeIfAbsent(operationName, k -> new Chronometer(operationName));
+    // do systematicaly a start
+    chrono.start();
+    return chrono;
+  }
+
+  public void logChronometer() {
+    StringBuilder logChrono = new StringBuilder();
+    for (Chronometer chrono : mapChrono.values()) {
+      logChrono.append(chrono.getName() + ": " + chrono.getTimeInMs() + " ms (" + chrono.getNbExecution() + "),");
     }
+    logger.info(LOG_HEADER + logChrono);
+  }
 
-
-    public Chronometer getChronometer(String operationName) {
-        Chronometer chrono = mapChrono.computeIfAbsent(operationName, k -> new Chronometer(operationName));
-        // do systematicaly a start
-        chrono.start();
-        return chrono;
+  /**
+   * @return
+   */
+  public Map<String, Object> getMap() {
+    Map<String, Object> result = new HashMap<>();
+    for (Chronometer chrono : mapChrono.values()) {
+      result.put(chrono.getName(), chrono.getMap());
     }
-
-    public void logChronometer() {
-        StringBuilder logChrono = new StringBuilder();
-        for (Chronometer chrono : mapChrono.values()) {
-            logChrono.append(chrono.getName() + ": " + chrono.getTimeInMs() + " ms (" + chrono.getNbExecution() + "),");
-        }
-        logger.info(LOG_HEADER + logChrono);
-    }
-
-    /**
-     * @return
-     */
-    public Map<String, Object> getMap() {
-        Map<String, Object> result = new HashMap<>();
-        for (Chronometer chrono : mapChrono.values()) {
-            result.put(chrono.getName(), chrono.getMap());
-        }
-        return result;
-    }
+    return result;
+  }
 }

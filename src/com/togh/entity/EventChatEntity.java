@@ -31,15 +31,15 @@ import javax.persistence.*;
 public @Data
 class EventChatEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_CHAT = "chat";
+  public static final String CST_SLABOPERATION_CHAT = "chat";
 
-    // User attached to this task (maybe an external user, why not ?
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "whoid")
-    private ToghUserEntity whoId;
+  // User attached to this task (maybe an external user, why not ?
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "whoid")
+  private ToghUserEntity whoId;
 
-    @Column(name = "message", length = 400)
-    private String message;
+  @Column(name = "message", length = 400)
+  private String message;
 
 
 }

@@ -24,39 +24,39 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("togh")
 public class RestAdminTranslator {
 
-    @Autowired
-    private LoginService loginService;
+  @Autowired
+  private LoginService loginService;
 
-    @Autowired
-    private TranslateDictionary translateDictionnary;
+  @Autowired
+  private TranslateDictionary translateDictionnary;
 
-    /**
-     * @param connectionStamp Information on the connected user
-     * @return Translation status
-     */
-    @CrossOrigin
-    @GetMapping(value = "/api/admin/translator/status", produces = "application/json")
-    public TranslateResult translatorStatus(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+  /**
+   * @param connectionStamp Information on the connected user
+   * @return Translation status
+   */
+  @CrossOrigin
+  @GetMapping(value = "/api/admin/translator/status", produces = "application/json")
+  public TranslateResult translatorStatus(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
-        loginService.isAdministratorConnected(connectionStamp);
+    loginService.isAdministratorConnected(connectionStamp);
 
-        return translateDictionnary.check();
+    return translateDictionnary.check();
 
-    }
+  }
 
-    /**
-     * @param connectionStamp Information on the connected user
-     * @return Translation result
-     */
-    @CrossOrigin
-    @PostMapping(value = "/api/admin/translator/complete", produces = "application/json")
-    public TranslateResult translator(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+  /**
+   * @param connectionStamp Information on the connected user
+   * @return Translation result
+   */
+  @CrossOrigin
+  @PostMapping(value = "/api/admin/translator/complete", produces = "application/json")
+  public TranslateResult translator(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
-        loginService.isAdministratorConnected(connectionStamp);
+    loginService.isAdministratorConnected(connectionStamp);
 
-        return translateDictionnary.complete();
+    return translateDictionnary.complete();
 
-    }
+  }
 
 
 }

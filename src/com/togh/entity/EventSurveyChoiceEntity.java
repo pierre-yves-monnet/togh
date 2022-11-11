@@ -32,13 +32,13 @@ import javax.persistence.Table;
 public @Data
 class EventSurveyChoiceEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_CHOICELIST = "choicelist";
+  public static final String CST_SLABOPERATION_CHOICELIST = "choicelist";
 
-    @Column(name = "code", nullable = false)
-    private Integer code;
+  @Column(name = "code", nullable = false)
+  private Integer code;
 
-    @Column(name = "proptext", length = 50)
-    private String proptext;
+  @Column(name = "proptext", length = 50)
+  private String proptext;
 
 
 }

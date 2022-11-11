@@ -35,47 +35,47 @@ import java.util.stream.Stream;
 @RequestMapping("togh")
 public class RestAdminApiKey {
 
-    @Autowired
-    private LoginService loginService;
+  @Autowired
+  private LoginService loginService;
 
-    @Autowired
-    private ApiKeyService apiKeyService;
+  @Autowired
+  private ApiKeyService apiKeyService;
 
-    /**
-     * @param connectionStamp Information on the connected user
-     * @return
-     */
-    @CrossOrigin
-    @GetMapping(value = "/api/admin/apikey/get", produces = "application/json")
-    public List<APIKeyEntity> getApiKeys(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+  /**
+   * @param connectionStamp Information on the connected user
+   * @return
+   */
+  @CrossOrigin
+  @GetMapping(value = "/api/admin/apikey/get", produces = "application/json")
+  public List<APIKeyEntity> getApiKeys(@RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
-        loginService.isAdministratorConnected(connectionStamp);
-        return apiKeyService.getListApiKeys(Stream.concat(ApiKey.listKeysApi.stream(), ApiKey.listKeysBrowser.stream())
-                .collect(Collectors.toList()));
+    loginService.isAdministratorConnected(connectionStamp);
+    return apiKeyService.getListApiKeys(Stream.concat(ApiKey.listKeysApi.stream(), ApiKey.listKeysBrowser.stream())
+        .collect(Collectors.toList()));
 
-    }
+  }
 
-    /**
-     * @param updateMap
-     * @param connectionStamp Information on the connected user
-     * @return
-     */
-    @CrossOrigin
-    @PostMapping(value = "/api/admin/apikey/update", produces = "application/json")
-    @ResponseBody
-    public Map<String, Object> updateKey(
-            @RequestBody Map<String, Object> updateMap,
-            @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
+  /**
+   * @param updateMap
+   * @param connectionStamp Information on the connected user
+   * @return
+   */
+  @CrossOrigin
+  @PostMapping(value = "/api/admin/apikey/update", produces = "application/json")
+  @ResponseBody
+  public Map<String, Object> updateKey(
+      @RequestBody Map<String, Object> updateMap,
+      @RequestHeader(RestJsonConstants.PARAM_AUTHORIZATION) String connectionStamp) {
 
-        Map<String, Object> payload = new HashMap<>();
-        loginService.isAdministratorConnected(connectionStamp);
+    Map<String, Object> payload = new HashMap<>();
+    loginService.isAdministratorConnected(connectionStamp);
 
-        @SuppressWarnings("unchecked")
-        List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listkeys", new ArrayList<>());
-        List<LogEvent> listLogEvent = apiKeyService.updateKeys(listApiKey);
+    @SuppressWarnings("unchecked")
+    List<Map<String, Object>> listApiKey = ToolCast.getList(updateMap, "listkeys", new ArrayList<>());
+    List<LogEvent> listLogEvent = apiKeyService.updateKeys(listApiKey);
 
-        payload.put(RestJsonConstants.CST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
+    payload.put(RestJsonConstants.CST_LOG_EVENTS, LogEventFactory.getJson(listLogEvent));
 
-        return payload;
-    }
+    return payload;
+  }
 }

@@ -32,39 +32,39 @@ import javax.persistence.Table;
 public @Data
 class EventPreferencesEntity extends UserEntity {
 
-    public static final String CST_SLABOPERATION_PREFERENCES = "preferences";
-    public static final String CST_ENTITY_NAME = "preferences";
+  public static final String CST_SLABOPERATION_PREFERENCES = "preferences";
+  public static final String CST_ENTITY_NAME = "preferences";
 
-    @Column(name = "currencycode", length = 10, nullable = false)
-    private String currencyCode;
+  @Column(name = "currencycode", length = 10, nullable = false)
+  private String currencyCode;
 
-    @Column(name = "accesschat")
-    private Boolean accessChat;
+  @Column(name = "accesschat")
+  private Boolean accessChat;
 
-    @Column(name = "accessitinerary")
-    private Boolean accessItinerary;
+  @Column(name = "accessitinerary")
+  private Boolean accessItinerary;
 
-    @Column(name = "accesstasks")
-    private Boolean accessTasks;
+  @Column(name = "accesstasks")
+  private Boolean accessTasks;
 
-    @Column(name = "accessbring")
-    private Boolean accessBring;
+  @Column(name = "accessbring")
+  private Boolean accessBring;
 
-    @Column(name = "accesssurveys")
-    private Boolean accessSurveys;
+  @Column(name = "accesssurveys")
+  private Boolean accessSurveys;
 
-    @Column(name = "accesslocalisation")
-    private Boolean accessLocalisation;
+  @Column(name = "accesslocalisation")
+  private Boolean accessLocalisation;
 
-    @Column(name = "accessgames")
-    private Boolean accessGames;
+  @Column(name = "accessgames")
+  private Boolean accessGames;
 
-    @Column(name = "accessphotos")
-    private Boolean accessPhotos;
+  @Column(name = "accessphotos")
+  private Boolean accessPhotos;
 
-    @Column(name = "accessexpenses")
-    private Boolean accessExpenses;
+  @Column(name = "accessexpenses")
+  private Boolean accessExpenses;
 
-    @Column(name = "accessbudget")
-    private Boolean accessBudget;
+  @Column(name = "accessbudget")
+  private Boolean accessBudget;
 }

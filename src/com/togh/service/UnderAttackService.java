@@ -29,70 +29,70 @@ import java.util.logging.Logger;
 
 @Service
 public class UnderAttackService {
-    private final static String LOG_HEADER = UnderAttackService.class.getSimpleName() + ": ";
-    private final Logger logger = Logger.getLogger(UnderAttackService.class.getName());
-    @Autowired
-    private LoginLogRepository loginLogRepository;
+  private final static String LOG_HEADER = UnderAttackService.class.getSimpleName() + ": ";
+  private final Logger logger = Logger.getLogger(UnderAttackService.class.getName());
+  @Autowired
+  private LoginLogRepository loginLogRepository;
 
-    /**
-     * Suspicious and incorrect login
-     *
-     * @param loginStatus the login is suspicious
-     */
-    public void reportSuspiciousLogin(LoginService.LoginResult loginStatus) {
-        // first, calculate the timeSlot
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HH:");
-        String timeSlot = now.format(formatter) + ((now.getMinute() / 15) * 15);
-        logger.info(LOG_HEADER + "Connection Email[" + loginStatus.email + "] googleId[" + loginStatus.googleId + "] Status[" + loginStatus.status + "] @ [" + timeSlot + "]");
+  /**
+   * Suspicious and incorrect login
+   *
+   * @param loginStatus the login is suspicious
+   */
+  public void reportSuspiciousLogin(LoginService.LoginResult loginStatus) {
+    // first, calculate the timeSlot
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HH:");
+    String timeSlot = now.format(formatter) + ((now.getMinute() / 15) * 15);
+    logger.info(LOG_HEADER + "Connection Email[" + loginStatus.email + "] googleId[" + loginStatus.googleId + "] Status[" + loginStatus.status + "] @ [" + timeSlot + "]");
 
-        if (loginLogRepository.countByTimeSlot(timeSlot) > 100) {
-            // we are under attack: Stop to log
-            try {
-                Thread.sleep(30000);
-            } catch (Exception e) {
-                // nothing to do here
-            }
-        }
-        try {
-            LoginLogEntity loginLogEntity = loginLogRepository.findByTimeSlot(timeSlot,
-                    loginStatus.email,
-                    loginStatus.googleId,
-                    loginStatus.ipAddress,
-                    loginStatus.status);
-
-            if (loginLogEntity != null && loginLogEntity.getStatusConnection().equals(loginStatus.status)) {
-                loginLogEntity.setNumberOfTentatives(loginLogEntity.getNumberOfTentatives() + 1);
-            } else {
-                loginLogEntity = new LoginLogEntity();
-                loginLogEntity.setEmail(loginStatus.email);
-                loginLogEntity.setGoogleId(loginStatus.googleId);
-                loginLogEntity.setIpAddress(loginStatus.ipAddress);
-                loginLogEntity.setTimeSlot(timeSlot);
-                loginLogEntity.setNumberOfTentatives(1);
-                loginLogEntity.setStatusConnection(loginStatus.status);
-                loginLogEntity.setExplanation(loginStatus.explanation);
-            }
-
-            loginLogRepository.save(loginLogEntity);
-        } catch (Exception e) {
-            logger.severe(LOG_HEADER + "Can't save loginLog " + e);
-        }
+    if (loginLogRepository.countByTimeSlot(timeSlot) > 100) {
+      // we are under attack: Stop to log
+      try {
+        Thread.sleep(30000);
+      } catch (Exception e) {
+        // nothing to do here
+      }
     }
+    try {
+      LoginLogEntity loginLogEntity = loginLogRepository.findByTimeSlot(timeSlot,
+          loginStatus.email,
+          loginStatus.googleId,
+          loginStatus.ipAddress,
+          loginStatus.status);
 
-    /**
-     * Report an incorrect access
-     *
-     * @param toghUser      the user who do the action. May be null if nobody is connected (reason sould be NOT_CONNECTED or NOT_AN_ADMINISTRATOR
-     * @param urlOrFunction Url or function to access
-     * @param reason        reason
-     */
-    public void reportNotAutorizedAction(ToghUserEntity toghUser, String urlOrFunction, NOT_AUTHORIZED_REASON reason) {
-        // to be implemented
+      if (loginLogEntity != null && loginLogEntity.getStatusConnection().equals(loginStatus.status)) {
+        loginLogEntity.setNumberOfTentatives(loginLogEntity.getNumberOfTentatives() + 1);
+      } else {
+        loginLogEntity = new LoginLogEntity();
+        loginLogEntity.setEmail(loginStatus.email);
+        loginLogEntity.setGoogleId(loginStatus.googleId);
+        loginLogEntity.setIpAddress(loginStatus.ipAddress);
+        loginLogEntity.setTimeSlot(timeSlot);
+        loginLogEntity.setNumberOfTentatives(1);
+        loginLogEntity.setStatusConnection(loginStatus.status);
+        loginLogEntity.setExplanation(loginStatus.explanation);
+      }
+
+      loginLogRepository.save(loginLogEntity);
+    } catch (Exception e) {
+      logger.severe(LOG_HEADER + "Can't save loginLog " + e);
     }
+  }
+
+  /**
+   * Report an incorrect access
+   *
+   * @param toghUser      the user who do the action. May be null if nobody is connected (reason sould be NOT_CONNECTED or NOT_AN_ADMINISTRATOR
+   * @param urlOrFunction Url or function to access
+   * @param reason        reason
+   */
+  public void reportNotAutorizedAction(ToghUserEntity toghUser, String urlOrFunction, NOT_AUTHORIZED_REASON reason) {
+    // to be implemented
+  }
 
 
-    public enum NOT_AUTHORIZED_REASON {NOT_CONNECTED, NOT_AN_ADMINISTRATOR, CONFIDENTIAL_ACCESS}
+  public enum NOT_AUTHORIZED_REASON {NOT_CONNECTED, NOT_AN_ADMINISTRATOR, CONFIDENTIAL_ACCESS}
 
 
 }

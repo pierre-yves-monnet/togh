@@ -28,51 +28,51 @@ import java.util.logging.Logger;
 @Service
 public class MonitorService {
 
-    private final static String logHeader = MonitorService.class.getName() + ":";
-    private final Logger logger = Logger.getLogger(MonitorService.class.getName());
+  private final static String logHeader = MonitorService.class.getName() + ":";
+  private final Logger logger = Logger.getLogger(MonitorService.class.getName());
 
-    @Autowired
-    private LogService LogService;
+  @Autowired
+  private LogService LogService;
 
-    public Chrono startOperation(String operationName) {
-        Chrono chrono = new Chrono();
-        chrono.name = operationName;
-        return chrono;
+  public Chrono startOperation(String operationName) {
+    Chrono chrono = new Chrono();
+    chrono.name = operationName;
+    return chrono;
+  }
+
+  public void endOperation(Chrono chrono) {
+    LocalDateTime timeReference = LocalDateTime.now();
+    long milliseconds = ChronoUnit.MILLIS.between(chrono.startChrono, timeReference);
+    if (milliseconds > 500)
+      logger.info(logHeader + " ****** PERFORMANCE ISSUE " + chrono.name + " in " + milliseconds + " ms");
+    // next will be to register that somewhere
+  }
+
+  public void endOperationWithStatus(Chrono chrono, String status) {
+    LocalDateTime timeReference = LocalDateTime.now();
+    long milliseconds = ChronoUnit.MILLIS.between(chrono.startChrono, timeReference);
+    if (milliseconds > 500)
+      logger.info(logHeader + " ****** PERFORMANCE ISSUE " + chrono.name + " in " + milliseconds + " ms");
+    // next will be to register that somewhere
+  }
+
+  /**
+   * When an error arrive in the server, we want to register it for the administrator, and then display it
+   *
+   * @param listEvents list of event to register
+   */
+  public void registerErrorEvents(List<LogEvent> listEvents) {
+    LogService.registerLog(listEvents, null);
+  }
+
+  public static class Chrono {
+    protected LocalDateTime startChrono = LocalDateTime.now();
+    protected int nbHits = 0;
+    protected String name;
+
+    public void touch() {
+      nbHits++;
     }
-
-    public void endOperation(Chrono chrono) {
-        LocalDateTime timeReference = LocalDateTime.now();
-        long milliseconds = ChronoUnit.MILLIS.between(chrono.startChrono, timeReference);
-        if (milliseconds > 500)
-            logger.info(logHeader + " ****** PERFORMANCE ISSUE " + chrono.name + " in " + milliseconds + " ms");
-        // next will be to register that somewhere
-    }
-
-    public void endOperationWithStatus(Chrono chrono, String status) {
-        LocalDateTime timeReference = LocalDateTime.now();
-        long milliseconds = ChronoUnit.MILLIS.between(chrono.startChrono, timeReference);
-        if (milliseconds > 500)
-            logger.info(logHeader + " ****** PERFORMANCE ISSUE " + chrono.name + " in " + milliseconds + " ms");
-        // next will be to register that somewhere
-    }
-
-    /**
-     * When an error arrive in the server, we want to register it for the administrator, and then display it
-     *
-     * @param listEvents list of event to register
-     */
-    public void registerErrorEvents(List<LogEvent> listEvents) {
-        LogService.registerLog(listEvents, null);
-    }
-
-    public static class Chrono {
-        protected LocalDateTime startChrono = LocalDateTime.now();
-        protected int nbHits = 0;
-        protected String name;
-
-        public void touch() {
-            nbHits++;
-        }
-    }
+  }
 
 }

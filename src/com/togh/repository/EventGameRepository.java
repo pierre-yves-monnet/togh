@@ -22,7 +22,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventGameRepository extends JpaRepository<EventGameEntity, Long> {
 
-    EventGameEntity findById(long id);
+  EventGameEntity findById(long id);
 
 }
 

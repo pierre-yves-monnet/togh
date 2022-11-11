@@ -28,25 +28,25 @@ import java.time.LocalDateTime;
 public @Data
 class ToghUserLostPasswordEntity extends BaseEntity {
 
-    // User attached to this participant
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userid")
-    private ToghUserEntity user;
+  // User attached to this participant
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "userid")
+  private ToghUserEntity user;
 
-    /**
-     * A UUID is given in the email, to be able to be sure the correct user respond
-     */
-    @Column(name = "uuid", length = 300, nullable = false)
-    private String uuid;
+  /**
+   * A UUID is given in the email, to be able to be sure the correct user respond
+   */
+  @Column(name = "uuid", length = 300, nullable = false)
+  private String uuid;
 
-    @Column(name = "datevalidity", nullable = false)
-    private LocalDateTime dateValidity;
-    @Column(name = "statusprocess", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private StatusProcessEnum StatusProcess = StatusProcessEnum.PREPARATION;
+  @Column(name = "datevalidity", nullable = false)
+  private LocalDateTime dateValidity;
+  @Column(name = "statusprocess", length = 15, nullable = false)
+  @Enumerated(EnumType.STRING)
+  private StatusProcessEnum StatusProcess = StatusProcessEnum.PREPARATION;
 
-    public enum StatusProcessEnum {
-        PREPARATION, EMAILINERROR, SERVERISSUE, EMAILSENT, PAGEACCESS, RESETOK
-    }
+  public enum StatusProcessEnum {
+    PREPARATION, EMAILINERROR, SERVERISSUE, EMAILSENT, PAGEACCESS, RESETOK
+  }
 
 }

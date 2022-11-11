@@ -28,13 +28,13 @@ import javax.persistence.MappedSuperclass;
 public abstract class EventBaseEntity extends UserEntity {
 
 
-    /*
-     * if the entity accept expense, it has to override this two methods
-     */
-    public boolean acceptExpense() {
-        return false;
-    }
+  /*
+   * if the entity accept expense, it has to override this two methods
+   */
+  public boolean acceptExpense() {
+    return false;
+  }
 
-    public void setExpense(EventExpenseEntity expense) {
-    }
+  public void setExpense(EventExpenseEntity expense) {
+  }
 }

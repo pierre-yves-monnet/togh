@@ -30,9 +30,9 @@ import javax.persistence.Table;
 public @Data
 class AdminParameterEntity extends BaseEntity {
 
-    // baseEntity contains a Name - use it for the key name
+  // baseEntity contains a Name - use it for the key name
 
-    @Column(name = "value", length = 200, unique = true)
-    private String value;
+  @Column(name = "value", length = 200, unique = true)
+  private String value;
 
 }

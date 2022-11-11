@@ -18,13 +18,13 @@ package com.togh.service;
 /* ******************************************************************************** */
 
 public interface SmtpKeyService {
-    String getSmtpHost();
+  String getSmtpHost();
 
-    int getSmtpPort();
+  int getSmtpPort();
 
-    String getSmtpUserName();
+  String getSmtpUserName();
 
-    String getSmtpUserPassword();
+  String getSmtpUserPassword();
 
-    String getSmtpFrom();
+  String getSmtpFrom();
 }

@@ -22,52 +22,52 @@ import java.util.stream.Stream;
 /* ******************************************************************************** */
 
 public enum ApiKey {
-    HTTP_TOGH_SERVER("HttpToghServer"),
-    SMTP_USER_PASSWORD("SmtpUserPassword"),
-    SMTP_USER_NAME("SmtpUserName"),
-    SMTP_PORT("StmpPort"),
-    SMTP_FROM("SmtpFrom"),
-    SMTP_HOST("SmtpHost"),
-    GEOCODE_API_KEY("geocodeAPIKey"),
-    GOOGLE_API_KEY("googleAPIKey"),
-    TRANSLATE_KEY_API("TranslateKeyAPI");
+  HTTP_TOGH_SERVER("HttpToghServer"),
+  SMTP_USER_PASSWORD("SmtpUserPassword"),
+  SMTP_USER_NAME("SmtpUserName"),
+  SMTP_PORT("StmpPort"),
+  SMTP_FROM("SmtpFrom"),
+  SMTP_HOST("SmtpHost"),
+  GEOCODE_API_KEY("geocodeAPIKey"),
+  GOOGLE_API_KEY("googleAPIKey"),
+  TRANSLATE_KEY_API("TranslateKeyAPI");
 
-    public static final List<ApiKey> listKeysEmail = List.of(SMTP_HOST, SMTP_PORT, SMTP_USER_NAME, SMTP_USER_PASSWORD, SMTP_FROM);
-
-
-    public static final List<ApiKey> listKeysApi = List.of(TRANSLATE_KEY_API, HTTP_TOGH_SERVER);
-
-    public static final List<ApiKey> listKeysServer = Stream.concat(listKeysEmail.stream(), listKeysApi.stream())
-            .collect(Collectors.toList());
+  public static final List<ApiKey> listKeysEmail = List.of(SMTP_HOST, SMTP_PORT, SMTP_USER_NAME, SMTP_USER_PASSWORD, SMTP_FROM);
 
 
-    public static final List<ApiKey> listKeysBrowser = List.of(GOOGLE_API_KEY, GEOCODE_API_KEY);
+  public static final List<ApiKey> listKeysApi = List.of(TRANSLATE_KEY_API, HTTP_TOGH_SERVER);
 
-    private final String name;
+  public static final List<ApiKey> listKeysServer = Stream.concat(listKeysEmail.stream(), listKeysApi.stream())
+      .collect(Collectors.toList());
 
-    ApiKey(String name) {
-        this.name = name;
-    }
 
-    public static List<ApiKey> getAlls() {
-        return Stream.of(ApiKey.values()).collect(Collectors.toList());
-    }
+  public static final List<ApiKey> listKeysBrowser = List.of(GOOGLE_API_KEY, GEOCODE_API_KEY);
 
-    public String getName() {
-        return name;
-    }
+  private final String name;
 
-    @Override
-    public String toString() {
-        return getName();
-    }
+  ApiKey(String name) {
+    this.name = name;
+  }
 
-    /**
-     * Key using in the browser has a privilege, according the user subscription
-     *
-     * @return if this key is submitted to the privilege
-     */
-    public boolean isPrivilegeKey() {
-        return (listKeysBrowser.contains(this));
-    }
+  public static List<ApiKey> getAlls() {
+    return Stream.of(ApiKey.values()).collect(Collectors.toList());
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  @Override
+  public String toString() {
+    return getName();
+  }
+
+  /**
+   * Key using in the browser has a privilege, according the user subscription
+   *
+   * @return if this key is submitted to the privilege
+   */
+  public boolean isPrivilegeKey() {
+    return (listKeysBrowser.contains(this));
+  }
 }

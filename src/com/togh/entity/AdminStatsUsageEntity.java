@@ -32,22 +32,22 @@ import javax.persistence.*;
 public @Data
 class AdminStatsUsageEntity extends BaseEntity {
 
-    @Column(name = "yearmonthday", length = 10)
-    public String yearMonthDay;
-    @Column(name = "typestats", length = 15)
-    @Enumerated(EnumType.STRING)
-    public TypeStatsEnum typeStatistique;
+  @Column(name = "yearmonthday", length = 10)
+  public String yearMonthDay;
+  @Column(name = "typestats", length = 15)
+  @Enumerated(EnumType.STRING)
+  public TypeStatsEnum typeStatistique;
 
-    @Column(name = "subscriptionuser", length = 10)
-    @Enumerated(EnumType.STRING)
-    public SubscriptionUserEnum subscriptionUser;
-    @Column(name = "limitreach", length = 15)
-    @Enumerated(EnumType.STRING)
-    public LimitReach limitReach;
-    @Column(name = "value")
-    public Long value;
+  @Column(name = "subscriptionuser", length = 10)
+  @Enumerated(EnumType.STRING)
+  public SubscriptionUserEnum subscriptionUser;
+  @Column(name = "limitreach", length = 15)
+  @Enumerated(EnumType.STRING)
+  public LimitReach limitReach;
+  @Column(name = "value")
+  public Long value;
 
 
-    public enum TypeStatsEnum {CONNECTION, ACCESS, LIMITSUBSCRIPT}
+  public enum TypeStatsEnum {CONNECTION, ACCESS, LIMITSUBSCRIPT}
 
 }

@@ -33,13 +33,13 @@ import java.math.BigDecimal;
 public @Data
 class EventExpenseEntity extends UserEntity {
 
-    public static final String CST_ENTITY_NAME = "expense";
+  public static final String CST_ENTITY_NAME = "expense";
 
-    @Column(name = "budget")
-    private BigDecimal budget;
+  @Column(name = "budget")
+  private BigDecimal budget;
 
 
-    @Column(name = "cost")
-    private BigDecimal cost;
+  @Column(name = "cost")
+  private BigDecimal cost;
 
 }

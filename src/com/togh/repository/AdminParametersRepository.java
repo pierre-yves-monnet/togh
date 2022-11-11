@@ -17,9 +17,9 @@ import java.util.List;
 public interface AdminParametersRepository extends JpaRepository<AdminParameterEntity, Long> {
 
 
-    @Query("SELECT e FROM AdminParameterEntity e where e.name = :name order by e.name")
-    AdminParameterEntity findByName(String name);
+  @Query("SELECT e FROM AdminParameterEntity e where e.name = :name order by e.name")
+  AdminParameterEntity findByName(String name);
 
-    @Query("SELECT e FROM AdminParameterEntity e order by e.name")
-    List<AdminParameterEntity> findAll();
+  @Query("SELECT e FROM AdminParameterEntity e order by e.name")
+  List<AdminParameterEntity> findAll();
 }

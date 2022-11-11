@@ -28,25 +28,25 @@ import javax.persistence.*;
 public @Data
 class APIKeyEntity extends BaseEntity {
 
-    @Column(name = "privilegekey", length = 10, unique = true)
-    @Enumerated(EnumType.STRING)
-    @org.hibernate.annotations.ColumnDefault("'FREE'")
-    PrivilegeKeyEnum privilegeKey;
-    @Column(name = "provider", length = 10)
-    @Enumerated(EnumType.STRING)
-    private TypeProviderEnum providerEnum;
+  @Column(name = "privilegekey", length = 10, unique = true)
+  @Enumerated(EnumType.STRING)
+  @org.hibernate.annotations.ColumnDefault("'FREE'")
+  PrivilegeKeyEnum privilegeKey;
+  @Column(name = "provider", length = 10)
+  @Enumerated(EnumType.STRING)
+  private TypeProviderEnum providerEnum;
 
-    @Column(name = "keyapi", length = 200)
-    private String keyApi;
+  @Column(name = "keyapi", length = 200)
+  private String keyApi;
 
-    public enum TypeProviderEnum {
-        GOOGLE, WHEATHER, OTHER
-    }
+  public enum TypeProviderEnum {
+    GOOGLE, WHEATHER, OTHER
+  }
 
-    /**
-     * Key may be different according the privilege of the user
-     */
-    public enum PrivilegeKeyEnum {FREE, PREMIUM}
+  /**
+   * Key may be different according the privilege of the user
+   */
+  public enum PrivilegeKeyEnum {FREE, PREMIUM}
 
 
 }

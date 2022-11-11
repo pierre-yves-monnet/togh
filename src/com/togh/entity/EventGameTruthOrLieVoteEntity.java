@@ -41,28 +41,28 @@ public @Data
 class EventGameTruthOrLieVoteEntity extends UserEntity {
 
 
-    /*
-     * this vote is for the sentence for another player sentence.
-     * The player must have validated its proposition of course
-     */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "sentenceplayerid")
-    private ToghUserEntity otherPlayer;
+  /*
+   * this vote is for the sentence for another player sentence.
+   * The player must have validated its proposition of course
+   */
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "sentenceplayerid")
+  private ToghUserEntity otherPlayer;
 
-    /*
-     * The vote is validated
-     */
-    @Column(name = "validatevote")
-    private Boolean validateVote;
+  /*
+   * The vote is validated
+   */
+  @Column(name = "validatevote")
+  private Boolean validateVote;
 
 
-    // Vote of THIS player. There is on EventGameTruthOrLieVoteEntity another players
-    // Example with 3 players: at the end, the list should have 2 votes here (players vote for the 2 another players)
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "voteid")
-    @OrderBy("id")
-    private List<EventGameTruthOrLieVoteOneSentenceEntity> voteSentenceList = new ArrayList<>();
+  // Vote of THIS player. There is on EventGameTruthOrLieVoteEntity another players
+  // Example with 3 players: at the end, the list should have 2 votes here (players vote for the 2 another players)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @Fetch(value = FetchMode.SELECT)
+  @BatchSize(size = 100)
+  @JoinColumn(name = "voteid")
+  @OrderBy("id")
+  private List<EventGameTruthOrLieVoteOneSentenceEntity> voteSentenceList = new ArrayList<>();
 
 }

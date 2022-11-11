@@ -22,43 +22,43 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventFactoryRepository {
 
-    @Autowired
-    public EventRepository eventRepository;
+  @Autowired
+  public EventRepository eventRepository;
 
-    @Autowired
-    public EventItineraryStepRepository eventItineraryStepRepository;
+  @Autowired
+  public EventItineraryStepRepository eventItineraryStepRepository;
 
-    @Autowired
-    public EventTaskRepository eventTaskRepository;
+  @Autowired
+  public EventTaskRepository eventTaskRepository;
 
-    @Autowired
-    public EventChatRepository eventChatRepository;
+  @Autowired
+  public EventChatRepository eventChatRepository;
 
-    @Autowired
-    public EventGroupChatRepository eventGroupChatRepository;
+  @Autowired
+  public EventGroupChatRepository eventGroupChatRepository;
 
-    @Autowired
-    public EventShoppingListRepository eventShoppingListRepository;
+  @Autowired
+  public EventShoppingListRepository eventShoppingListRepository;
 
-    @Autowired
-    public EventSurveyRepository eventSurveyRepository;
+  @Autowired
+  public EventSurveyRepository eventSurveyRepository;
 
-    @Autowired
-    public EventSurveyAnswerRepository surveyAnswerRepository;
+  @Autowired
+  public EventSurveyAnswerRepository surveyAnswerRepository;
 
-    @Autowired
-    public EventSurveyChoiceRepository surveyChoiceRepository;
+  @Autowired
+  public EventSurveyChoiceRepository surveyChoiceRepository;
 
-    @Autowired
-    public EventGameRepository eventGameRepository;
+  @Autowired
+  public EventGameRepository eventGameRepository;
 
-    @Autowired
-    public EventTruthOrLieRepository eventTruthOrLieRepository;
+  @Autowired
+  public EventTruthOrLieRepository eventTruthOrLieRepository;
 
-    @Autowired
-    public EventTruthOrLieSentenceRepository eventTruthOrLieSentenceRepository;
+  @Autowired
+  public EventTruthOrLieSentenceRepository eventTruthOrLieSentenceRepository;
 
-    @Autowired
-    public EventTruthOrLieVoteRepository eventTruthOrLieVoteRepository;
+  @Autowired
+  public EventTruthOrLieVoteRepository eventTruthOrLieVoteRepository;
 
 }

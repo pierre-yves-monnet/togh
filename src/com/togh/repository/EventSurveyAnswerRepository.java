@@ -26,11 +26,11 @@ import java.util.List;
 
 public interface EventSurveyAnswerRepository extends JpaRepository<EventSurveyAnswerEntity, Long> {
 
-    EventSurveyAnswerEntity findById(long id);
+  EventSurveyAnswerEntity findById(long id);
 
-    @Query("SELECT e FROM EventSurveyEntity s join s.answerlist e join e.whoId t " +
-            " WHERE s.id = :surveyId " +
-            " and t.id = :whoId")
-    List<EventSurveyAnswerEntity> findBySurveyAndWhoId(@Param("surveyId") Long surveyId, @Param("whoId") Long whoId);
+  @Query("SELECT e FROM EventSurveyEntity s join s.answerlist e join e.whoId t " +
+      " WHERE s.id = :surveyId " +
+      " and t.id = :whoId")
+  List<EventSurveyAnswerEntity> findBySurveyAndWhoId(@Param("surveyId") Long surveyId, @Param("whoId") Long whoId);
 
 }

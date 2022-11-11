@@ -34,24 +34,24 @@ public @Data
 class EventSurveyAnswerEntity extends UserEntity {
 
 
-    public static final String CST_SLABOPERATION_ANSWERLIST = "answerlist";
+  public static final String CST_SLABOPERATION_ANSWERLIST = "answerlist";
 
-    // User attached to this task (maybe an external user, why not ?
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "whoid")
-    private ToghUserEntity whoId;
+  // User attached to this task (maybe an external user, why not ?
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "whoid")
+  private ToghUserEntity whoId;
 
-    /**
-     * Map to save the vote. This will create a sub-table to save this map
-     */
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "EVTSURVEYANSWERCHOICE",
-            joinColumns = {@JoinColumn(name = "surveyanswerid", referencedColumnName = "id")})
-    @Fetch(value = FetchMode.SELECT)
-    @MapKeyColumn(name = "choice")
-    @Column(name = "decision")
-    @OrderBy("surveyanswerid")
-    private Map<String, Boolean> decision;
+  /**
+   * Map to save the vote. This will create a sub-table to save this map
+   */
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "EVTSURVEYANSWERCHOICE",
+      joinColumns = {@JoinColumn(name = "surveyanswerid", referencedColumnName = "id")})
+  @Fetch(value = FetchMode.SELECT)
+  @MapKeyColumn(name = "choice")
+  @Column(name = "decision")
+  @OrderBy("surveyanswerid")
+  private Map<String, Boolean> decision;
 
 
 }

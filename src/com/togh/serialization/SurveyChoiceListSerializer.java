@@ -20,28 +20,28 @@ import java.util.Map;
 public class SurveyChoiceListSerializer extends BaseSerializer {
 
 
-    @Override
-    public Class getEntityClass() {
-        return EventSurveyChoiceEntity.class;
-    }
+  @Override
+  public Class getEntityClass() {
+    return EventSurveyChoiceEntity.class;
+  }
 
-    /**
-     * GetMap - implement EntitySerialization
-     *
-     * @param baseEntity           Entity to serialize
-     * @param parentEntity         Parent entity
-     * @param serializerOptions    Serialization options
-     * @param factorySerializer    factory to access all serializer
-     * @param factoryUpdateGrantor factory to access Update Grantor
-     * @return a serialisation map
-     */
-    @Override
-    public Map<String, Object> getMap(BaseEntity baseEntity, BaseEntity parentEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
-        EventSurveyChoiceEntity surveyChoiceEntity = (EventSurveyChoiceEntity) baseEntity;
-        Map<String, Object> resultMap = getBasicMap(surveyChoiceEntity, serializerOptions);
+  /**
+   * GetMap - implement EntitySerialization
+   *
+   * @param baseEntity           Entity to serialize
+   * @param parentEntity         Parent entity
+   * @param serializerOptions    Serialization options
+   * @param factorySerializer    factory to access all serializer
+   * @param factoryUpdateGrantor factory to access Update Grantor
+   * @return a serialisation map
+   */
+  @Override
+  public Map<String, Object> getMap(BaseEntity baseEntity, BaseEntity parentEntity, SerializerOptions serializerOptions, FactorySerializer factorySerializer, FactoryUpdateGrantor factoryUpdateGrantor) {
+    EventSurveyChoiceEntity surveyChoiceEntity = (EventSurveyChoiceEntity) baseEntity;
+    Map<String, Object> resultMap = getBasicMap(surveyChoiceEntity, serializerOptions);
 
-        resultMap.put("code", surveyChoiceEntity.getCode());
-        resultMap.put("proptext", surveyChoiceEntity.getProptext());
-        return resultMap;
-    }
+    resultMap.put("code", surveyChoiceEntity.getCode());
+    resultMap.put("proptext", surveyChoiceEntity.getProptext());
+    return resultMap;
+  }
 }

@@ -22,5 +22,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventGroupChatRepository extends JpaRepository<EventGroupChatEntity, Long> {
 
-    EventGroupChatEntity findById(long id);
+  EventGroupChatEntity findById(long id);
 }

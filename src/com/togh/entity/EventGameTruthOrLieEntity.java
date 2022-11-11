@@ -46,41 +46,41 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public @Data
 class EventGameTruthOrLieEntity extends UserEntity {
-    public static final String CST_SLABOPERATION_SENTENCE = "sentencelist";
-    public static final String CST_SLABOPERATION_PLAYERVOTE = "playervote";
+  public static final String CST_SLABOPERATION_SENTENCE = "sentencelist";
+  public static final String CST_SLABOPERATION_PLAYERVOTE = "playervote";
 
 
-    // Secret Santa: a list of participants. Each participant must do a gift to the next in the line
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "tolid")
-    @OrderBy("id")
-    private List<EventGameTruthOrLieSentenceEntity> sentencesList = new ArrayList<>();
+  // Secret Santa: a list of participants. Each participant must do a gift to the next in the line
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @Fetch(value = FetchMode.SELECT)
+  @BatchSize(size = 100)
+  @JoinColumn(name = "tolid")
+  @OrderBy("id")
+  private List<EventGameTruthOrLieSentenceEntity> sentencesList = new ArrayList<>();
 
-    /*
-     * Sentences are validated.
-     */
-    @Column(name = "validatesentences")
-    private Boolean validateSentences;
+  /*
+   * Sentences are validated.
+   */
+  @Column(name = "validatesentences")
+  private Boolean validateSentences;
 
-    /*
-     * Who proposed this list
-     * User attached to this task (maybe an external user, why not ?)
-     */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "playerid")
-    private ToghUserEntity playerUser;
+  /*
+   * Who proposed this list
+   * User attached to this task (maybe an external user, why not ?)
+   */
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "playerid")
+  private ToghUserEntity playerUser;
 
 
-    // Vote of THIS player. There is on EventGameTruthOrLieVoteEntity another players
-    // Example with 3 players: at the end, the list should have 2 votes here (players vote for the 2 another players)
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SELECT)
-    @BatchSize(size = 100)
-    @JoinColumn(name = "tolid")
-    @OrderBy("id")
-    private List<EventGameTruthOrLieVoteEntity> voteList = new ArrayList<>();
+  // Vote of THIS player. There is on EventGameTruthOrLieVoteEntity another players
+  // Example with 3 players: at the end, the list should have 2 votes here (players vote for the 2 another players)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @Fetch(value = FetchMode.SELECT)
+  @BatchSize(size = 100)
+  @JoinColumn(name = "tolid")
+  @OrderBy("id")
+  private List<EventGameTruthOrLieVoteEntity> voteList = new ArrayList<>();
 
 
 }
