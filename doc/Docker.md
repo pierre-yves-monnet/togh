@@ -72,7 +72,10 @@ Check on https://console.cloud.google.com/gcr/images/intricate-gamma-325323/glob
 ## 3. Google Cloud instance
 
 Connect on the VM Instance Download the docker image:
-
+1. Connect to https://console.cloud.google.com/
+2. Switch to the Togh user
+3. Access Compute Engine / VM Instance
+4. Machine is here
 ```
 > docker pull gcr.io/intricate-gamma-325323/togh:2.0.0
 
