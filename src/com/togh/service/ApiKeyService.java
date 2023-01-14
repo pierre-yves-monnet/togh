@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.logging.Logger;
 
 
 /* ******************************************************************************** */
@@ -34,6 +35,7 @@ import java.util.*;
 @Service
 public class ApiKeyService implements SmtpKeyService {
 
+  private final Logger logger = Logger.getLogger(ApiKeyService.class.getName());
 
   private static final LogEvent eventUnknownCode = new LogEvent(ApiKeyService.class.getName(), 1, Level.ERROR, "Unknown code", "This APIKey is unknow",
       "A code is unknown, and can't be updated in the database", "Verify the code");
@@ -47,10 +49,13 @@ public class ApiKeyService implements SmtpKeyService {
 
   @PostConstruct
   public void init() {
+    logger.info("ApiKeyService: Check existence API Key");
     // Verify that all keys are here
     for (ApiKey codeApi : ApiKey.listKeysServer) {
       APIKeyEntity codeApiEntity = apiKeyRepository.findByName(codeApi.getName());
       if (codeApiEntity == null) {
+        logger.info("ApiKeyService: add API Key [" + codeApi.getName() + "]");
+
         codeApiEntity = new APIKeyEntity();
         codeApiEntity.setName(codeApi.getName());
         codeApiEntity.setPrivilegeKey(PrivilegeKeyEnum.PREMIUM);
@@ -61,6 +66,8 @@ public class ApiKeyService implements SmtpKeyService {
       for (PrivilegeKeyEnum priviledge : listSuffixPrivilege) {
         APIKeyEntity codeApiEntity = apiKeyRepository.findByName(getFinalCode(codeApi, priviledge));
         if (codeApiEntity == null) {
+          logger.info("ApiKeyService: add API Key [" + codeApi.getName() + "]");
+
           codeApiEntity = new APIKeyEntity();
           codeApiEntity.setName(codeApi + "_" + priviledge);
           codeApiEntity.setPrivilegeKey(priviledge);
@@ -106,8 +113,8 @@ public class ApiKeyService implements SmtpKeyService {
   /**
    * Update the list of KEY
    *
-   * @param listApiKey
-   * @return
+   * @param listApiKey list of all API keys to update
+   * @return list of event
    */
   public List<LogEvent> updateKeys(List<Map<String, Object>> listApiKey) {
     List<LogEvent> listLogEvent = new ArrayList<>();
@@ -150,7 +157,7 @@ public class ApiKeyService implements SmtpKeyService {
   /**
    * Return the Translate Key API
    *
-   * @return
+   * @return Google Translate key
    */
   public String getApiKeyGoogleTranslate() {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.TRANSLATE_KEY_API.getName());
@@ -160,6 +167,10 @@ public class ApiKeyService implements SmtpKeyService {
     return null;
   }
 
+  /**
+   * @param defaultHttp default value
+   * @return value of Togh Server
+   */
   public String getHttpToghServer(String defaultHttp) {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.HTTP_TOGH_SERVER.getName());
     if (codeApiEntity != null) {
@@ -171,7 +182,7 @@ public class ApiKeyService implements SmtpKeyService {
   /**
    * ReturnSmtpHostName
    *
-   * @return
+   * @return SmtpHost
    */
   public String getSmtpHost() {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.SMTP_HOST.getName());
@@ -182,7 +193,7 @@ public class ApiKeyService implements SmtpKeyService {
   }
 
   /**
-   * @return
+   * @return StmpFrom SmtpFrom
    */
   public String getSmtpFrom() {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.SMTP_FROM.getName());
@@ -195,7 +206,7 @@ public class ApiKeyService implements SmtpKeyService {
   /**
    * getSmtpPort
    *
-   * @return
+   * @return Smtp port number
    */
   public int getSmtpPort() {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.SMTP_PORT.getName());
@@ -210,7 +221,7 @@ public class ApiKeyService implements SmtpKeyService {
   }
 
   /**
-   * @return
+   * @return Smtp user name
    */
   public String getSmtpUserName() {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.SMTP_USER_NAME.getName());
@@ -224,7 +235,7 @@ public class ApiKeyService implements SmtpKeyService {
   }
 
   /**
-   * @return
+   * @return Smtp user Password
    */
   public String getSmtpUserPassword() {
     APIKeyEntity codeApiEntity = apiKeyRepository.findByName(ApiKey.SMTP_USER_PASSWORD.getName());
