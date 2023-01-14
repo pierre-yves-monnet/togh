@@ -48,9 +48,16 @@ Using h2 database instead of postgres -Dspring.profiles.active=dev or --spring.p
 
 Spring Boot :
 
-# Architecture
+## Spring application
 
-Execute com.togh.ToghApplicationInitializer Reac :
+|Type |Value |
+|---|---|
+|Start|              com.togh.ToghApplicationInitializer|
+|Working directory|  D:\dev\git\togh|
+|Argument: | emtpy or --spring.profiles.active=h2 to use H2 |
+
+## React application
+
 On a terminal
 
 ```
@@ -58,7 +65,16 @@ cd npm
 npm start
 ```
 
-Access http://localhost:8080
+## Access the application
+
+|Type |Value |
+|---|---|
+| Application | http://localhost:3000|
+| BackOffice | http://localhost:7080 |
+
+## First connection
+
+A user "toghadmin@togh.com" / password "togh" is created by default
 
 /* ******************************************************************************** */
 /*                                                                                  */ /*
@@ -84,22 +100,20 @@ import org.springframework.boot.SpringApplication; import org.springframework.bo
 }
 -----------------------------------------
 
-
-
-com.together.service : Service to access information and data
-
-https://start.spring.io/
+# architecture
 
 ## Date management
 
 There is two king of date : Date+Time (Zoned) and Date
 
 * Date+Time (Zoned) : this is an Instant. When I give for the event date, Feb 1, 14:00 ==> in Pacific time. A user in
-  Paris time shoud see Feb 1, 23:00 (depends of the date, there is 8 or 9 hours delay)
+  Paris time should see Feb 1, 23:00 (depends of the date, there is 8 or 9 hours delay)
+
 * Date : an absolute date. In an itinerary I give "Feb 3", that's mean it's Feb 3 and that it.
 
 In Database, a Date+Time is saved as a LocalDateTime, UTC ( SPRING use a string: 2021-03-31 07:00:00), a Date in
-LocalDate. SPRING use a string : 2021-03-31
+LocalDate. SPRING use a string : 2021-03-31 NOTE: in the database, we should use Instant, but we use a LocalDateTime
+based on UTC.
 
 Browser return in all case a UTC Date, whatever the widget
 "2026-08-07T07:00:00.000Z"
