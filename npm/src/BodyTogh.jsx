@@ -16,9 +16,9 @@ import Banner 			    	from './Banner';
 import Footer 			    	from './Footer';
 import Menu 			    	from './Menu';
 import {MENU_NAME} 		    	from './Menu';
-import {FILTER_EVENT}	    	    	from './EventsList';
-import RegisterNewUser 	    		from './RegisterNewUser';
-import ResetPassword 	    		from './ResetPassword';
+import {FILTER_EVENT}	    	from './EventsList';
+import RegisterNewUser 	    	from './RegisterNewUser';
+import ResetPassword 	    	from './ResetPassword';
 import EventsList 		    	from './EventsList';
 import Event 			    	from './event/Event';
 import AdminHome 		    	from './administration/AdminHome';
@@ -178,49 +178,82 @@ class BodyTogh extends React.Component {
 			console.log("BodyTog.render: NonConnected - LoginPanel:"+this.state.showLoginPanel+" showRegisterUserPanel:"+this.state.showRegisterUserPanel);
 			return (	
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
-					<div>
-						<Banner language={this.state.language} changeLanguage={this.changeLanguage} />						
-						<div class="toghImageBackground">
-	  						{this.state.currentEventId && <div class="row" >
-									<div class="col-sm-12" >
-									 	<div style={{border:"1px solid",
-													margin: "5px 5px 5px 5px", 
-													padding: "10px 10px 10px 10px", 
-													backgroundColor: "#337ab7", 
-													borderColor: "#2e6da4",
-													color: "#ffffff"}}>
-                							<center>
-												<FormattedMessage id="BodyTogh.YouAreInvited" defaultMessage="You are invited to an event! Register or Connect to access it" />
-											</center>
-										</div>	
-									</div>
-								</div> }
-								
-	  						<div class="row ">
-								<div class="col-sm-3" style={{fontFamily: "Brush Script MT, cursive", fontSize:"40px"}} >
-									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
-							    </div>
-									
-								<div class="col-sm-5">	
-									{this.state.showLoginPanel && 
-										<Login authCallback={this.authCallback}
-											defaultLoginEmail={this.state.defaultLoginEmail} 
-										/>}
-								</div>
-								<div class="col-sm-4">
-									{this.state.showRegisterUserPanel && 
-										<RegisterNewUser authCallback={this.authCallback} 
-											showRegisterUserForm={this.state.showRegisterUserForm}
-											defaultLoginEmail={this.state.defaultLoginEmail}
-											readOnlyRegisterEmail={this.state.readOnlyRegisterEmail}
-										/>}
-									
-								</div>
-							  
-							</div>
+					<div style={{border: "5px solid",  borderColor: "#d1f5fc", borderRadius: "30px"}}>
+					<div style={{border: "5px solid",  borderColor: "#b1dce9", borderRadius: "30px"}}>
+					<div style={{border: "12px solid", borderColor: "#c8e6ee", borderRadius: "30px"}}>
+				        <div class="row ">
+						    <Banner language={this.state.language} changeLanguage={this.changeLanguage}  clickMenu={this.clickMenu}/>
 						</div>
+                        {this.state.currentEventId && <div class="row" >
+                                <div class="col-sm-12" >
+                                    <div style={{border:"1px solid",
+                                                margin: "5px 5px 5px 5px",
+                                                padding: "10px 10px 10px 10px",
+                                                backgroundColor: "#337ab7",
+                                                borderColor: "#2e6da4",
+                                                color: "#ffffff"}}>
+                                        <center>
+                                            <FormattedMessage id="BodyTogh.YouAreInvited" defaultMessage="You are invited to an event! Register or Connect to access it" />
+                                        </center>
+                                    </div>
+                                </div>
+                            </div> }
+
+    				    <div class="row ">
+    				        <table>
+    				        <tr>
+    				            <td style={{width: "200px", verticalAlign: "top"}}>
+    				                {this.state.showLoginPanel &&
+                                        <Login authCallback={this.authCallback}
+                                            defaultLoginEmail={this.state.defaultLoginEmail}
+                                        />}
+
+                                    {this.state.showRegisterUserPanel &&
+                                        <RegisterNewUser authCallback={this.authCallback}
+                                            showRegisterUserForm={this.state.showRegisterUserForm}
+                                            defaultLoginEmail={this.state.defaultLoginEmail}
+                                            readOnlyRegisterEmail={this.state.readOnlyRegisterEmail}
+                                        />}
+    				            </td>
+    				            <td style={{verticalAlign: "top"}}>
+    				                <img src="img/decor/anim_desktop_650x550.gif" />
+    				            </td>
+    				            { mobileService.isLargeScreen() && <td style={{width: "300px"}}>
+                                    <div style={{paddingBottom: "10px",
+                                                font: "normal 10px/13px Montserrat",
+                                                letterSpacing: "0px",
+                                                color: "#3682B2",
+                                                opacity: 1 }}>
+                                         <img src="img/decor/pic_travel.svg"/>
+    				                    <FormattedMessage id="BodyTogh.explInvitePeople" defaultMessage="Invite Participants and plan everything, travel, activities, map, expenses..."/>
+    				                </div>
+                                    <div style={{paddingBottom: "10px",
+                                                font: "normal 10px/13px Montserrat",
+                                                letterSpacing: "0px",
+                                                color: "#3682B2",
+                                                opacity: 1 }}>
+                                         <img src="img/decor/pic_party.svg"/>
+    				                    <FormattedMessage id="BodyTogh.explParty" defaultMessage="Potluck with the school? Barbecue with Friends? Share location, task list, secret santas"/>
+    				                </div>
+
+                                    <div style={{paddingBottom: "10px",
+                                                font: "normal 10px/13px Montserrat",
+                                                letterSpacing: "0px",
+                                                color: "#3682B2",
+                                                opacity: 1 }}>
+    				                    <img src="img/decor/pic_sky.svg"/>
+    				                    <FormattedMessage id="BodyTogh.explSky" defaultMessage="Organize holidays, parties, trips with family or friends"/>
+                                    </div>
+				    		     </td>
+				    		     }
+
+    				        </tr>
+    				        </table>
+                        </div>
 						<Footer language={this.state.language} />					
-					</div>  
+					</div>
+					</div>
+					</div>
 				</IntlProvider>
 			)
 		}
@@ -243,43 +276,27 @@ class BodyTogh extends React.Component {
 	        }
 			return (
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >
-				<div>
-					<Banner language={this.state.language} changeLanguage={this.changeLanguage}/>
+                <div style={{border: "5px solid",  borderColor: "#d1f5fc", borderRadius: "30px"}}>
+                <div style={{border: "5px solid",  borderColor: "#b1dce9", borderRadius: "30px"}}>
+                <div style={{border: "12px solid", borderColor: "#c8e6ee", borderRadius: "30px"}}>
+					<Banner language={this.state.language} changeLanguage={this.changeLanguage} clickMenu={this.clickMenu}/>
 					<div class="row">
 						<div class="col-xs-12">
-							<table style={{width: "100%", "height": "100%"}}>
-								<tr>
-								    { mobileService.isLargeScreen() &&
-                                        <td style={styleMenu} >
-                                            <Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
-                                        </td>
-                                     }
-									<td style={{padding: "10px", "verticalAlign": "top"}} >
-										{ this.state.frameContent === FRAME_NAME.EVENTS_LIST &&
-										    <EventsList homeSelectEvent={this.homeSelectEvent}
-										        filterEvents={this.state.filterEvents}
-										        titleFrame={this.state.titleFrame}/>}
-										{ this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currentEventId} />}
-										{ this.state.frameContent === FRAME_NAME.MY_PROFILE && <MyProfile  />}
-										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
-										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_USERS && <AdminUsers refreshScreenCallback={this.refreshScreenCallback}/>}
-										{ this.state.frameContent === FRAME_NAME.ADMINISTRATION_LOGCONNECTION && <AdminLogConnection />}
-
-									</td>
-								</tr>
-			                    { ! mobileService.isLargeScreen() &&
-                                    <tr>
-                                        <td style={styleMenu} >
-                                            <Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
-                                        </td>
-                                    </tr>
-                                 }
-
-							</table>
+                            { this.state.frameContent === FRAME_NAME.EVENTS_LIST &&
+                                <EventsList homeSelectEvent={this.homeSelectEvent}
+                                    filterEvents={this.state.filterEvents}
+                                    titleFrame={this.state.titleFrame}/>}
+                            { this.state.frameContent === FRAME_NAME.EVENT && <Event eventid={this.state.currentEventId} />}
+                            { this.state.frameContent === FRAME_NAME.MY_PROFILE && <MyProfile  />}
+                            { this.state.frameContent === FRAME_NAME.ADMINISTRATION && <AdminHome />}
+                            { this.state.frameContent === FRAME_NAME.ADMINISTRATION_USERS && <AdminUsers refreshScreenCallback={this.refreshScreenCallback}/>}
+                            { this.state.frameContent === FRAME_NAME.ADMINISTRATION_LOGCONNECTION && <AdminLogConnection />}
 						</div>
-					</div>	
+					</div>
 					<Footer language={this.state.language} />
-				</div>	
+				</div>
+				</div>
+				</div>
 				</IntlProvider>	
 			);
 		}
@@ -365,3 +382,82 @@ class BodyTogh extends React.Component {
 }
 
 export default BodyTogh;
+
+/*
+Old togh image
+<div class="toghImageBackground">
+	  						{this.state.currentEventId && <div class="row" >
+									<div class="col-sm-12" >
+									 	<div style={{border:"1px solid",
+													margin: "5px 5px 5px 5px",
+													padding: "10px 10px 10px 10px",
+													backgroundColor: "#337ab7",
+													borderColor: "#2e6da4",
+													color: "#ffffff"}}>
+                							<center>
+												<FormattedMessage id="BodyTogh.YouAreInvited" defaultMessage="You are invited to an event! Register or Connect to access it" />
+											</center>
+										</div>
+									</div>
+								</div> }
+
+	  						<div class="row ">
+								<div class="col-sm-3" style={{fontFamily: "Brush Script MT, cursive", fontSize:"40px"}} >
+									<FormattedMessage id="BodyTogh.welcome" defaultMessage="Welcome to Togh" />
+							    </div>
+
+								<div class="col-sm-5">
+									{this.state.showLoginPanel &&
+										<Login authCallback={this.authCallback}
+											defaultLoginEmail={this.state.defaultLoginEmail}
+										/>}
+								</div>
+								<div class="col-sm-4">
+									{this.state.showRegisterUserPanel &&
+										<RegisterNewUser authCallback={this.authCallback}
+											showRegisterUserForm={this.state.showRegisterUserForm}
+											defaultLoginEmail={this.state.defaultLoginEmail}
+											readOnlyRegisterEmail={this.state.readOnlyRegisterEmail}
+										/>}
+
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+  { ! mobileService.isLargeScreen() &&
+                                       <tr>
+                                           <td style={styleMenu} >
+                                               <Menu showMenu={this.showMenu} clickMenu={this.clickMenu} authCallback={this.authCallback}/>
+                                           </td>
+                                       </tr>
+                                    }
+                                   */
+
+/*
+                                    <div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whatisToghTitle" defaultMessage="What is Togh?" /></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExplanation" defaultMessage="Togh is an application to manage your event."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExample" defaultMessage="Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghPossibility" defaultMessage="In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who." /></div>
+
+                                    <div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whyTogh" defaultMessage="Why Togh?" /></div>
+
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghMotivation" defaultMessage="I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghBorn" defaultMessage="Here Togh was born. I was thinking of this application for five years now."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghHistory" defaultMessage="Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghConclusion" defaultMessage="So this application was really needed at this moment."/></div>
+
+
+                                    <div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.thankYou" defaultMessage="Thank you" /></div>
+
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIntroduction" defaultMessage="Big thank you to everybody who helps me on the road. "/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSimon" defaultMessage="Simon, to be an extraordinary exploratory and figure out a lot of clues."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouLounes" defaultMessage="Lounes to design these awesome graphics and icons."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSalome" defaultMessage="Salomé for her assistance with the English grammar."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIsmail" defaultMessage="Ismail for sharing ideas."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristel" defaultMessage="Christel to support and encourage me."/></div>
+                                    <div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristelBand" defaultMessage="Christel's
+*/

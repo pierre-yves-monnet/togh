@@ -8,9 +8,12 @@
 // -----------------------------------------------------------
 import React from 'react';
 
+import { FormattedMessage } from "react-intl";
 
 import ReactCustomFlagSelect from 'react-custom-flag-select';
 import "react-custom-flag-select/lib/react-custom-flag-select.min.css";
+
+import Menu 			    	from './Menu';
 
 import FactoryService 			from './service/FactoryService';
 
@@ -21,9 +24,10 @@ class Banner extends React.Component {
 
 	constructor( props ) {
 		super();
-			this.state = { language: props.language}
-	
-		}
+		this.state = { language: props.language}
+		this.clickMenuBanner                  = this.clickMenuBanner.bind( this )
+
+	}
 
 
 
@@ -77,11 +81,60 @@ class Banner extends React.Component {
 								    }}
 		    />
 		)
-								
-		if (authService.isConnected()) {
-			var user = authService.getUser();
+
+		let user = authService.getUser();
+
+        return (
+            <div class="container-fluid">
+                <div class="row">
+                    <table style={{width: "100%"}}>
+                    <tr>
+                    <td style={{width: "10px"}}>
+                        <img src="img/decor/logo_Togh_Banner.svg" alt="Togh"/>
+                    </td>
+                    <td >
+                        <Menu showMenu={this.showMenu} clickMenu={this.clickMenuBanner} authCallback={this.authCallback}/>
+                    </td>
+                    <td style={{width: "10px"}}>
+                        {allFlags}
+                    </td>
+                    {authService.isConnected() && user &&
+                        <td style={{"color":"#888787", textAlign: "right" , verticalAlign: "middle", width: "200px"}}>
+
+                            { user.typePicture=== 'TOGH' &&
+                                <img  src="img/togh.png" style={{width:20}} alt="Togh"/>
+                            }
+                            { user.typePicture=== 'CYPRIS' &&
+                                <img  src="img/cypris.png" style={{width:20}} alt="Cypris"/>
+                            }
+                            { user.typePicture=== 'URL' &&
+                                <img  src={user.picture} style={{width:20}} alt="Url"/>
+                            }
+                            <br/>
+                            {user.name}
+                        </td>
+                    }
+                    </tr>
+                    </table>
+                </div>
+            </div>)
+
+	}
+
+
+ 	clickMenuBanner( menuName ) {
+ 		console.log("Banner.clickMenuBanner: menuAction=["+menuName+"]");
+        this.props.clickMenu( menuName);
+ 	}
+
+}	
+export default Banner;
+
+
+/**
+if (authService.isConnected()) {
 			// console.log("Banner: User Connected "+JSON.stringify(user));
-			return ( 
+			return (
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12 banner">
@@ -92,21 +145,10 @@ class Banner extends React.Component {
 								Togh
 							</td>
 							<td style={{"color":"#888787", textAlign: "right" , verticalAlign: "top"}}>
-							
+
 								{allFlags}
 								</td>
-							<td style={{"color":"#888787", textAlign: "right" , verticalAlign: "middle"}}>
-								Welcome {user.name}
-								{ user.typePicture=== 'TOGH' && 
-									<img  src="img/togh.png" style={{width:20}} alt="Togh"/>
-								}
-								{ user.typePicture=== 'CYPRIS' && 
-									<img  src="img/cypris.png" style={{width:20}} alt="Cypris"/>
-								}
-								{ user.typePicture=== 'URL' && 
-									<img  src={user.picture} style={{width:20}} alt="Url"/>
-								}
-							</td>
+
 							</tr>
 							</table>
 						</div>
@@ -115,18 +157,4 @@ class Banner extends React.Component {
 				)
 		}
 		else {
-			return ( 
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12 banner">
-							<div style={{"float": "right", "color":"#888787", textAlign: "right" , verticalAlign: "top"}}>
-								{allFlags}
-							</div>
-						</div>
-					</div>
-				</div>)
-		}
-	}
- 
-}	
-export default Banner;
+		**/

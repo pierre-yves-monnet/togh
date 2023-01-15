@@ -143,28 +143,6 @@ class RegisterNewUser extends React.Component {
 				    <FormattedMessage id="RegisterNewUser.RegisterButton" defaultMessage="Register New User"/>
 				</button>
 				
-				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whatisToghTitle" defaultMessage="What is Togh?" /></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExplanation" defaultMessage="Togh is an application to manage your event."/></div> 
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghExample" defaultMessage="Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event."/></div> 
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whatisToghPossibility" defaultMessage="In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who." /></div>
-									
-				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.whyTogh" defaultMessage="Why Togh?" /></div>
-				
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghMotivation" defaultMessage="I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghBorn" defaultMessage="Here Togh was born. I was thinking of this application for five years now."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghHistory" defaultMessage="Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.whyToghConclusion" defaultMessage="So this application was really needed at this moment."/></div>
-
-
-				<div style={{fontStyle:"italic", paddingTop: "20px", paddingBottom: "10px",fontSize: "18px", fontWeight:"bold"}}><FormattedMessage id="BodyTogh.thankYou" defaultMessage="Thank you" /></div>
-
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIntroduction" defaultMessage="Big thank you to everybody who helps me on the road. "/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSimon" defaultMessage="Simon, to be an extraordinary exploratory and figure out a lot of clues."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouLounes" defaultMessage="Lounes to design these awesome graphics and icons."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouSalome" defaultMessage="Salomé for her assistance with the English grammar."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouIsmail" defaultMessage="Ismail for sharing ideas."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristel" defaultMessage="Christel to support and encourage me."/></div>
-				<div style={{paddingBottom: "10px"}}><FormattedMessage id="BodyTogh.thankYouChristelBand" defaultMessage="Christel's band to use the application and for their lovely feedback."/></div>
 				</div>
 				)
 		}

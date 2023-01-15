@@ -56,8 +56,62 @@ class Menu extends React.Component {
                     margin:"0px",
                     textAlign:"center"
                 };
+
+        return (
+            <div  >
+                <a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTS_LIST)} href="/#" class="toghMenu">
+                                    <FormattedMessage id="Menu.Events" defaultMessage="Events" />
+                </a>
+
+                <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_INVITATIONS)} href="/#" class="toghMenu">
+                                <FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
+                </a>
+                <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_PROFILE )} href="/#"  class="toghMenu">
+                    <FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
+                </a>
+                {user && user.privilegeUser === "ADMIN" &&
+                    <div>
+                        <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghMenu">
+                            <FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
+                        </a>
+                        <ul>
+                            <li>
+                                <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_USERS )} href="/#" class="toghSubMenu">
+                                    <FormattedMessage id="Menu.AdministrationUsers" defaultMessage="Users" />
+                                </a>
+                            </li>
+                            <li>
+                                <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_LOGCONNECTION )} href="/#" class="toghSubMenu">
+                                    <FormattedMessage id="Menu.AdministrationLogConnection" defaultMessage="Connection" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+         );
+
+	}
+
+	// 
+	googleSignOut() {
+		console.log("Menu.GoogleSignOut : start");
+		window["generalGoogleSignOut"]();
+		
+	}
+	authCallback( login ) {
+		console.log("Menu.authCallback login="+login);
+		// call the parent then
+		this.props.authCallback( login );
+	}
+}
+export default Menu;
+
+
+ /* ---------------
+
 		if (this.state.showMenu) {
-			return ( <div  > 
+		//	return ( <div  >
 				<div style={{display:"none"}}>Menu.jsx</div>
 				{mobileService.isLargeScreen() && <div style={{float: "right"}}>
 					<a onClick={() =>this.setVisibleMenu(false)} href="/#">
@@ -75,19 +129,6 @@ class Menu extends React.Component {
                             <FormattedMessage id="Menu.EventsExplanation" defaultMessage="Access all events you can access" />
                         </div>
 
-                        <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_INVITATIONS)} href="/#" class="toghMenu">
-                                        <FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
-                        </a>
-                        <div class="toghMenuLabel">
-                            <FormattedMessage id="Menu.InvitationExplanation" defaultMessage="Check your invitations, accept them." />
-                        </div>
-
-                        <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_PROFILE )} href="/#"  class="toghMenu">
-                            <FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
-                        </a>
-                        <div class="toghMenuLabel">
-                            <FormattedMessage id="Menu.MyProfileExplanation" defaultMessage="Manage your preferences, set up an avatar." />
-                        </div>
                         <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_INVITATIONS)} href="/#" class="toghMenu">
                                         <FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
                         </a>
@@ -165,14 +206,14 @@ class Menu extends React.Component {
 
 
 
-				
+
 
 
 			</div>
 			)
 		} else {
-			return ( 
-				<div> 
+			return (
+				<div>
 					<div style={{float: "right"}}>
 						<a onClick={() =>this.setVisibleMenu(true)} href="/#">
 						<ChevronCompactRight height="40px" width="40px"/></a>
@@ -180,38 +221,4 @@ class Menu extends React.Component {
 				</div>
 			)
 		}
-	}
-    /*
-     								<a onClick={() =>this.props.clickMenu( 'eventlist')} href="/#" class="toghMenu">
-                    					<FormattedMessage id="Menu.Join" defaultMessage="Join an event" />
-                    				</a>
-                    				<div class="toghMenuLabel">
-                    					<FormattedMessage id="Menu.JoinExplanation" defaultMessage="Search and join events" />
-                    				</div>
-*/
-
-/*
-     				<a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTSLIST)} href="/#"  class="toghMenu">
-       					<FormattedMessage id="Menu.MyFriends" defaultMessage="My Friends" />
-       				</a>
-       				<div class="toghMenuLabel">
-       					<FormattedMessage id="Menu.MyFriendExplanation" defaultMessage="See all your friends, invite new, send messages." />
-       				</div>
-*/
-
-	// 
-	googleSignOut() {
-		console.log("Menu.GoogleSignOut : start");
-		window["generalGoogleSignOut"]();
-		
-	}
-	authCallback( login ) {
-		console.log("Menu.authCallback login="+login);
-		// call the parent then
-		this.props.authCallback( login );
-	}
-}
-export default Menu;
-
-
-	
+		*/
