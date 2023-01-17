@@ -180,7 +180,7 @@ class BodyTogh extends React.Component {
 				<IntlProvider locale={this.state.language}  messages={messages[ this.state.language  ]} >			
 					<div style={{border: "5px solid",  borderColor: "#d1f5fc", borderRadius: "30px"}}>
 					<div style={{border: "5px solid",  borderColor: "#b1dce9", borderRadius: "30px"}}>
-					<div style={{border: "12px solid", borderColor: "#c8e6ee", borderRadius: "30px"}}>
+					<div style={{border: "12px solid", borderColor: "#c8e6ee", borderRadius: "30px", padding: "30px"}}>
 				        <div class="row ">
 						    <Banner language={this.state.language} changeLanguage={this.changeLanguage}  clickMenu={this.clickMenu}/>
 						</div>
@@ -200,14 +200,14 @@ class BodyTogh extends React.Component {
                             </div> }
 
     				    <div class="row ">
-    				        <table>
-    				        <tr>
+    				        <table><tr>
     				            <td style={{width: "200px", verticalAlign: "top"}}>
-    				                {this.state.showLoginPanel &&
-                                        <Login authCallback={this.authCallback}
-                                            defaultLoginEmail={this.state.defaultLoginEmail}
-                                        />}
-
+    				                <div style={{padding:"0px 0px 20px 0px"}}>
+                                        {this.state.showLoginPanel &&
+                                            <Login authCallback={this.authCallback}
+                                                defaultLoginEmail={this.state.defaultLoginEmail}
+                                            />}
+                                    </div>
                                     {this.state.showRegisterUserPanel &&
                                         <RegisterNewUser authCallback={this.authCallback}
                                             showRegisterUserForm={this.state.showRegisterUserForm}
@@ -219,31 +219,58 @@ class BodyTogh extends React.Component {
     				                <img src="img/decor/anim_desktop_650x550.gif" />
     				            </td>
     				            { mobileService.isLargeScreen() && <td style={{width: "300px"}}>
-                                    <div style={{paddingBottom: "10px",
-                                                font: "normal 10px/13px Montserrat",
-                                                letterSpacing: "0px",
-                                                color: "#3682B2",
-                                                opacity: 1 }}>
-                                         <img src="img/decor/pic_travel.svg"/>
-    				                    <FormattedMessage id="BodyTogh.explInvitePeople" defaultMessage="Invite Participants and plan everything, travel, activities, map, expenses..."/>
-    				                </div>
-                                    <div style={{paddingBottom: "10px",
-                                                font: "normal 10px/13px Montserrat",
-                                                letterSpacing: "0px",
-                                                color: "#3682B2",
-                                                opacity: 1 }}>
-                                         <img src="img/decor/pic_party.svg"/>
-    				                    <FormattedMessage id="BodyTogh.explParty" defaultMessage="Potluck with the school? Barbecue with Friends? Share location, task list, secret santas"/>
-    				                </div>
-
-                                    <div style={{paddingBottom: "10px",
-                                                font: "normal 10px/13px Montserrat",
-                                                letterSpacing: "0px",
-                                                color: "#3682B2",
-                                                opacity: 1 }}>
-    				                    <img src="img/decor/pic_sky.svg"/>
-    				                    <FormattedMessage id="BodyTogh.explSky" defaultMessage="Organize holidays, parties, trips with family or friends"/>
+    				                <div style={{padding: "20px",
+                                           font: "normal 10px/13px Montserrat",
+                                          color: "black",
+                                          fontFamily: "Montserrat-Regular",
+                                          fontSize: "25px",
+                                          fontWeight: "bold",
+                                          lineHeight: "0.9",
+                                          opacity: 1 }}>
+    				                    <FormattedMessage id="BodyTogh.explCreateGreatExperience" defaultMessage="Create Great experiences!"/>
                                     </div>
+    				                <table style={{backgroundColor: "#f3f6f7", borderRadius: "2px", marginBottom: "20px"}}><tr>
+    				                    <td ><img src="img/decor/pic_travel.svg"/></td>
+    				                    <td style={{padding: "2px 5px 0px 5px",
+                                                font: "normal 10px/13px Montserrat",
+                                                letterSpacing: "0px",
+                                                fontFamily: "Montserrat-Regular",
+                                                fontSize: "15px",
+                                                color: "#3682b2",
+                                                verticalAlign:"top",
+                                                opacity: 1 }}>
+    				                        <FormattedMessage id="BodyTogh.explInvitePeople" defaultMessage="Invite Participants and plan everything, travel, activities, map, expenses..."/>
+    				                    </td>
+    				                </tr></table>
+
+      				                <table style={{backgroundColor: "#f3f6f7", borderRadius: "2px", marginBottom: "20px"}}><tr>
+                                         <td ><img src="img/decor/pic_party.svg"/></td>
+                                         <td style={{padding: "2px 5px 0px 5px",
+                                                             font: "normal 10px/13px Montserrat",
+                                                             letterSpacing: "0px",
+                                                             fontFamily: "Montserrat-Regular",
+                                                             fontSize: "15px",
+                                                             color: "#3682b2",
+                                                             verticalAlign:"top",
+                                                             opacity: 1 }}>
+    				                        <FormattedMessage id="BodyTogh.explParty" defaultMessage="Potluck with the school? Barbecue with Friends? Share location, task list, secret santas"/>
+    				                     </td>
+                                    </tr></table>
+
+      				                <table style={{backgroundColor: "#f3f6f7", borderRadius: "2px", marginBottom: "20px"}}><tr>
+                                         <td ><img src="img/decor/pic_sky.svg"/></td>
+                                         <td style={{padding: "2px 5px 0px 5px",
+                                                             font: "normal 10px/13px Montserrat",
+                                                             letterSpacing: "0px",
+                                                             fontFamily: "Montserrat-Regular",
+                                                             fontSize: "15px",
+                                                             color: "#3682b2",
+                                                             verticalAlign:"top",
+                                                             opacity: 1 }}>
+    				                    <FormattedMessage id="BodyTogh.explSky" defaultMessage="Organize holidays, parties, trips with family or friends"/>
+    				                    </td>
+                                    </tr></table>
+
 				    		     </td>
 				    		     }
 

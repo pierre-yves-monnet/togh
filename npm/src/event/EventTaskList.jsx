@@ -177,7 +177,7 @@ class EventTaskList extends React.Component {
 						<td><TextArea labelText="" 
 								value={item.description} 
 								onChange={(event) => this.setAttribut("description", event.target.value, item)} 
-								class="toghinput" ></TextArea></td>
+								class="toghInput" ></TextArea></td>
 						<td>
 							<ChooseParticipant userid={item.whoid} 
 								event={this.state.event} 

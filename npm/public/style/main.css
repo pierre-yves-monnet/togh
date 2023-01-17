@@ -1,6 +1,16 @@
 body>div.container {margin-top:10px;}
 
+
 .toghMenu {
+    font-family: "Montserrat-Regular";
+    font-size: 25;
+    padding-right: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+/* deprecated */
+.toghMenu2 {
     color: #1f78b4;
     font-weight: bold;
     height: 19px;
@@ -14,6 +24,7 @@ body>div.container {margin-top:10px;}
     vertical-align: middle;
     margin: 10px 0;
 }
+/* deprecated */
 .toghSubMenu {
     padding: 3px 10px 2px 20px;
     color: #1f78b4;
@@ -31,10 +42,20 @@ body>div.container {margin-top:10px;}
     text-decoration: none;
 }
 
-.toghinput {
-    background: #D1F5FC 0% 0% no-repeat padding-box;
+.toghButton {
+    background: #2c8e9a;
+    border-color:  #2c8e9a;
+    border-radius: 6px;
+
+}
+/* #D1F5FC; */
+.toghInput {
+    background-color: #D1F5FC;
     border-radius: 5px;
     opacity: 1;
+}
+.toghInput:selected {
+    background: yellow;
 }
 /* font-size: 15px; 
  	height: 30px; 
@@ -44,7 +65,7 @@ body>div.container {margin-top:10px;}
  	margin-bottom: 15px;
 */
 .thoginputreadonly {
-    background: aliceblue;
+    background: #D1F5FC;
     font-style: italic;
 }
 .Loading {

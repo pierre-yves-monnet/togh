@@ -184,14 +184,14 @@ class EventShoppingList extends React.Component {
 					 labelText={<FormattedMessage id="EventShoppingList.What" defaultMessage="What" />}
 						value={item.name} 
 						onChange={(event) => this.setAttribut("name", event.target.value, item)} 
-						class="toghinput"></TextInput>
+						class="toghInput"></TextInput>
 				</div>
 				{this.state.event.shoppinglistshowdetails && (
 					<div class="col-4">
 							<TextArea labelText={<FormattedMessage id="EventShoppingList.Description" defaultMessage="Description" />} 
 								value={item.description} 
 								onChange={(event) => this.setAttribut("description", event.target.value, item)} 
-								class="toghinput"></TextArea>
+								class="toghInput"></TextArea>
 					</div>)}
 				<div class="col-4">
 					<ChooseParticipant userid={item.whoid}

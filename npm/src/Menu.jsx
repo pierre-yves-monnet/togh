@@ -11,8 +11,10 @@ import { FormattedMessage } from "react-intl";
 
 import { ChevronCompactLeft, ChevronCompactRight, CalendarWeek, EnvelopeOpen, Person,Speedometer2 } from 'react-bootstrap-icons';
 
-import Login 			from './Login';
+import Login 			    from './Login';
 import FactoryService 		from './service/FactoryService';
+
+import './fonts/Montserrat-Regular.ttf';
 
 
 export const MENU_NAME = {
@@ -60,33 +62,31 @@ class Menu extends React.Component {
         return (
             <div  >
                 <a onClick={() =>this.props.clickMenu( MENU_NAME.EVENTS_LIST)} href="/#" class="toghMenu">
-                                    <FormattedMessage id="Menu.Events" defaultMessage="Events" />
+                    <FormattedMessage id="Menu.Events" defaultMessage="Events" />
                 </a>
 
                 <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_INVITATIONS)} href="/#" class="toghMenu">
-                                <FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
+                    <FormattedMessage id="Menu.MyInvitations" defaultMessage="My Invitations" />
                 </a>
                 <a onClick={() =>this.props.clickMenu( MENU_NAME.MY_PROFILE )} href="/#"  class="toghMenu">
                     <FormattedMessage id="Menu.MyProfile" defaultMessage="My Profile" />
                 </a>
                 {user && user.privilegeUser === "ADMIN" &&
-                    <div>
+                    <span>
                         <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION )} href="/#"  class="toghMenu">
                             <FormattedMessage id="Menu.Administration" defaultMessage="Administration" />
                         </a>
-                        <ul>
-                            <li>
-                                <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_USERS )} href="/#" class="toghSubMenu">
-                                    <FormattedMessage id="Menu.AdministrationUsers" defaultMessage="Users" />
+                        <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_USERS )} href="/#" class="toghMenu">
+                                    (<FormattedMessage id="Menu.AdministrationUsers" defaultMessage="Users" />)
                                 </a>
-                            </li>
-                            <li>
-                                <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_LOGCONNECTION )} href="/#" class="toghSubMenu">
-                                    <FormattedMessage id="Menu.AdministrationLogConnection" defaultMessage="Connection" />
+
+
+                                <a onClick={() =>this.props.clickMenu( MENU_NAME.ADMINISTRATION_LOGCONNECTION )} href="/#" class="toghMenu">
+                                    (<FormattedMessage id="Menu.AdministrationLogConnection" defaultMessage="Connection" />)
                                 </a>
-                            </li>
-                        </ul>
-                    </div>
+
+
+                    </span>
                 }
             </div>
          );

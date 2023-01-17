@@ -92,14 +92,14 @@ class Banner extends React.Component {
                     <td style={{width: "10px"}}>
                         <img src="img/decor/logo_Togh_Banner.svg" alt="Togh"/>
                     </td>
-                    <td >
+                    <td style={{verticalAlign: "top", padding: "15px"}} >
                         <Menu showMenu={this.showMenu} clickMenu={this.clickMenuBanner} authCallback={this.authCallback}/>
                     </td>
-                    <td style={{width: "10px"}}>
+                    <td style={{width: "10px", verticalAlign: "top", padding: "15px"}}>
                         {allFlags}
                     </td>
                     {authService.isConnected() && user &&
-                        <td style={{"color":"#888787", textAlign: "right" , verticalAlign: "middle", width: "200px"}}>
+                        <td style={{"color":"#888787", textAlign: "right" , verticalAlign: "middle", width: "150px"}}>
 
                             { user.typePicture=== 'TOGH' &&
                                 <img  src="img/togh.png" style={{width:20}} alt="Togh"/>

@@ -2,5 +2,5 @@
 import React from 'react';
 class ToghVersion extends React.Component {
   render() {
-    return ("janv. 15, 2023 12:58")
+    return ("janv. 16, 2023 14:18")
   }}export default ToghVersion;

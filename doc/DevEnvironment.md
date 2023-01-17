@@ -17,20 +17,21 @@ spring.datasource.hikari.connectionTimeout=20000 spring.datasource.hikari.maximu
 spring.datasource.url=jdbc:postgresql://localhost:5432/together spring.datasource.username=postgres
 spring.datasource.password=postgres spring.datasource.driver-class-name=org.postgresql.Driver
 
-## Eclipse
+## tools
 
-https://crunchify.com/step-by-step-guide-to-setup-and-install-apache-tomcat-server-in-eclipse-development-environment-ide/
-
-Puis faire sur le projet un "Debug in server"
-==> Le war va demarrer
-
-Note:
-le projet doit etre not� "Dynamic web application" sinon Spring ne veut pas d�marr� ( ? )
-Click droit => Properties => Project Facet => Dynamic Web Application
+Java (JDK 1.17)
+Intellij maven npm
 
 ## Intellij
 
 Launch the class com.togh.ServerInitializer.
+
+## React
+
+```
+> cd npm
+> npm install --save
+```
 
 ## Lombok
 
@@ -215,6 +216,7 @@ npm install sass@1.29.0
 ## other library
 
 ```
+npm install -S @carbon/react
 npm install axios
 npm install react-axios --force
 npm install chart.js

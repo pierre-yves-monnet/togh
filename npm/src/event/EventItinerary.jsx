@@ -422,7 +422,7 @@ class EventItinerary extends React.Component {
 						<TextArea
 							labelText={<FormattedMessage id="EventItineray.Description" defaultMessage="Description" />} 
 							value={item.description} onChange={(event) => this.setChildAttribut("description", event.target.value, item)} 
-							class="toghinput" />
+							class="toghInput" />
 					</div> ) }
 				
 				<div class="col-1">

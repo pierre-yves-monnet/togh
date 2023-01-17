@@ -109,6 +109,7 @@ class Login extends React.Component {
 				    <TextInput labelText={<FormattedMessage id="Login.email" defaultMessage="Email"/>}
                         id="loginemail"
                         value={this.state.email}
+                        class="toghInput"
                         onChange={(event) =>
                             { this.setState({ email: event.target.value });
                                 if (this.state.rememberMe) {
@@ -121,6 +122,7 @@ class Login extends React.Component {
                     <TextInput labelText={<FormattedMessage id="Login.password" defaultMessage="Password"/>}
                         type="password"
                         id="loginpassword"
+                        class="toghInput"
                         value={this.state.password}
                         onChange={(event) => this.setState({ password: event.target.value })} /><p />
                     <br/>
@@ -129,7 +131,10 @@ class Login extends React.Component {
 					
 				<div class="row" style={{paddingLeft: "20px"}}>
 					<div class="col-6">
-                        <button onClick={this.loginConnect} class="btn btn-primary"><FormattedMessage id="Login.connection" defaultMessage="Connection"/></button><br/><br/>
+                        <button onClick={this.loginConnect}
+                            class="btn btn-primary toghButton">
+                            <FormattedMessage id="Login.connection" defaultMessage="Connection"/>
+                        </button><br/><br/>
 
                         <input type="checkbox"
                             onChange={(event) => {
@@ -166,6 +171,7 @@ class Login extends React.Component {
 					</div>
 					<ModalWrapper
 						passiveModal
+						style={{ borderRadius: "6px", backgroundColor:"red"}}
 						buttonTriggerText={<FormattedMessage id="Login.LostMyPassword" defaultMessage="I lost My password"/>}
 		     			modalLabel={intl.formatMessage({id: "Login.LostMyPasswordLabel", defaultMessage: "Reset my password"})}
 						size='lg'>

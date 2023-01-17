@@ -139,7 +139,7 @@ class RegisterNewUser extends React.Component {
 		else {
 			return 	(
 				<div>
-				<button  class="btn btn-primary" onClick={this.showRegistration}>
+				<button  class="btn btn-primary toghButton" onClick={this.showRegistration}>
 				    <FormattedMessage id="RegisterNewUser.RegisterButton" defaultMessage="Register New User"/>
 				</button>
 				
