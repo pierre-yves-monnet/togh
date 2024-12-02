@@ -1,0 +1,46 @@
+# This docker compose start a Cherry runtime, based on Postgres, and attach a local folder
+# In the local folder, Connector JAR file are present. Cherry runtime loads and start these connector
+
+services:
+  togh-runtime:
+    image: ghcr.io/camunda-community-hub/zeebe-cherry-runtime:latest
+    container_name: toghruntime
+    ports:
+      - "9081:9081"
+    environment:
+      - LOGGING_LEVEL_ROOT=INFO
+      - spring.profiles.active=postgres
+      - spring.datasource.url=jdbc:postgresql://postgres/cherrydb
+      - spring.datasource.username=camunda
+      - spring.datasource.password=camundapassword
+      - spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+      - org.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+      - cherry.connectorslib.uploadpath=/localstorage/uploadpath
+
+    # save in the jarconnectors any connectors you want to upload at startup
+    networks:
+      - togh-platform
+    depends_on:
+      - postgres
+
+  postgres: # https://hub.docker.com/_/postgres
+    container_name: postgres-togh
+    image: postgres:${POSTGRES_VERSION:-14.5-alpine}
+    ports:
+      - "5440:5432"
+
+    environment:
+      POSTGRES_DB: toghdb
+      POSTGRES_USER: togh
+      POSTGRES_PASSWORD: toghpassword
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - togh-platform
+
+networks:
+  togh-platform:
