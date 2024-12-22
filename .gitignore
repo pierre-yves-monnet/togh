@@ -22,3 +22,4 @@ db-data/
 .idea/jpa-buddy.xml
 /src/main/resources/application-production.yaml
 /.idea/
+/.idea/

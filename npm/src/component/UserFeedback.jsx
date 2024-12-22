@@ -10,7 +10,7 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { InlineLoading } from 'carbon-components-react';
+import { InlineLoading } from '@carbon/react';
 
 import LogEvents 			from 'component/LogEvents';
 

@@ -35,6 +35,7 @@ Launch the class com.togh.ServerInitializer.
 ## Lombok
 
 The https://projectlombok.org/setup/eclipse has to be installed in eclipse.
+Plug-in Intellij must be installed ( File > Settings > Plugins)
 
 ## mobile
 
@@ -55,6 +56,7 @@ On a terminal
 
 ```
 cd npm
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
 npm start
 ```
 
@@ -131,7 +133,10 @@ Development                                                                    *
 ```
 npx create-react-app togh
 ```
-
+or (to install on a new machine)
+```
+npm install --legacy-peer-deps
+```
 Downgrade : modify package.json
 
 ```
@@ -150,7 +155,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 Create index.scss
 
 ````
-@import 'carbon-components/scss/globals/scss/styles.scss';
+@import '@carbon/react';
+
+
 ````
 
 Allow the indirect reference in import:
@@ -171,8 +178,7 @@ https://www.carbondesignsystem.com/developing/react-tutorial/overview
 
 ```
   
-npm install carbon-components@10.25.0 carbon-components-react@7.25.0 @carbon/icons-react@10.22.0 carbon-icons@7.0.7
-npm install sass@1.29.0
+npm install @carbonreact
 ```
 
 -------------------------------- OLD

@@ -12,7 +12,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 import { Easel } from 'react-bootstrap-icons';
-import { Modal } from 'carbon-components-react';
+import { Modal } from '@carbon/react';
 
 import FactoryService 			from 'service/FactoryService';
 

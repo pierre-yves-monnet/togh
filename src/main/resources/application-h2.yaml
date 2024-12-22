@@ -1,0 +1,33 @@
+server.port: 7080
+
+  ## default connection pool
+spring.datasource:
+  hikari.connectionTimeout: 20000
+  hikari.maximumPoolSize: 5
+
+  ## H2
+  url: jdbc:h2:file:~/togh.db
+  driver-class-name: org.h2.Driver
+  username: sa
+  password: password
+  database-platform: org.hibernate.dialect.H2Dialect
+
+  # Spring Mail
+spring.mail:
+  host: smtp.gmail.com
+  port: 587
+  username: DefaultUserName
+  password: DefaultPassword
+  properties.mail.smtp.auth: true
+  properties.mail.smtp.starttls.enable: true
+
+  ## https://www.baeldung.com/spring-data-jpa-generate-db-schema
+  # spring.jpa.properties.javax.persistence.schema-generation.scripts.action: create
+  # spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target: c:/temp/create.sql
+  # spring.jpa.properties.javax.persistence.schema-generation.scripts.create-source: metadata
+  # spring.jpa.properties.hibernate.format_sql: true
+
+  # https://www.baeldung.com/hibernate-notnull-vs-nullable
+spring.jpa:
+  hibernate.ddl-auto: update
+  show-sql: true

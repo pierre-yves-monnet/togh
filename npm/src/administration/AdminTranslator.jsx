@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
-import { Loading } from 'carbon-components-react';
+import { Loading } from '@carbon/react';
 
 import { ChevronDown, ChevronRight } from 'react-bootstrap-icons';
 

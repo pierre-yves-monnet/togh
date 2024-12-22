@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { TextInput,Select, Tooltip, Tag, Toggle, Loading } from 'carbon-components-react';
+import { TextInput,Select, Tooltip, Tag, Toggle, Loading } from '@carbon/react';
 import { LampFill, Lamp, PersonBadge,Bookmark, BookmarkStar,AwardFill, Fonts, List  } from 'react-bootstrap-icons';
 
 import FactoryService 		from 'service/FactoryService';

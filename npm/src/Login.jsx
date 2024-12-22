@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput,  Loading,ModalWrapper } from 'carbon-components-react';
+import { TextInput,  Loading,ModalWrapper } from '@carbon/react';
 import { injectIntl, FormattedMessage } from "react-intl";
 import { Envelope, BoxArrowRight } from 'react-bootstrap-icons';
 

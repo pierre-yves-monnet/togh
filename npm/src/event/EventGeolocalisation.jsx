@@ -9,7 +9,7 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { Toggle, TextArea } from 'carbon-components-react';
+import { Toggle, TextArea } from '@carbon/react';
 
 import EventSectionHeader 		from 'component/EventSectionHeader';
 import GoogleAddressGeocode 	from 'component/GoogleAddressGeocode';

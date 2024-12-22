@@ -18,7 +18,7 @@
 
 import React from 'react';
 
-import { InlineLoading } from 'carbon-components-react';
+import { InlineLoading } from '@carbon/react';
 
 
 

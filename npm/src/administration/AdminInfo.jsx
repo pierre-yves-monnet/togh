@@ -9,7 +9,7 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { Loading, TextInput } from 'carbon-components-react';
+import { Loading, TextInput } from '@carbon/react';
 
 import ToghVersion          from 'component/ToghVersion';
 import FactoryService 		from 'service/FactoryService';

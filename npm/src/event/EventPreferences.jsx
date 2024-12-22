@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { FormattedMessage } from "react-intl";
-import { Select, Toggle } from 'carbon-components-react';
+import { Select, Toggle } from '@carbon/react';
 import FactoryService 		from 'service/FactoryService';
 import EventSectionHeader 	from 'component/EventSectionHeader';
 

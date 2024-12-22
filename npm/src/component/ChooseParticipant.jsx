@@ -8,7 +8,7 @@
 //
 
 import React from 'react';
-import { Search } from 'carbon-components-react';
+import { Search } from '@carbon/react';
 import Autosuggest from 'react-autosuggest';
 
 // test push

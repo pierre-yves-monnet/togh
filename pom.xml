@@ -191,7 +191,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>install</arguments>
+                            <arguments>install --force</arguments>
                         </configuration>
                     </execution>
                     <execution>
@@ -219,7 +219,7 @@
                             <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/npm/build/</directory>
+                                    <directory>${basedir}/src/main/frontend/build/</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -317,73 +317,7 @@
                 </executions>
             </plugin>
 
-            <!-- build the Frontend Docker image -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <executions>
 
-                    <execution>
-                        <id>FrontEnd npm run build</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <executable>npm</executable>
-                            <workingDirectory>npm</workingDirectory>
-                            <arguments>
-                                <argument>run</argument>
-                                <argument>build</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>FrontEnd Docker build</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <workingDirectory>npm</workingDirectory>
-                            <executable>docker</executable>
-                            <arguments>
-                                <argument>build</argument>
-                                <argument>-t</argument>
-                                <argument>pierreyvesmonnet/frontendtogh:${project.version}</argument>
-                                <argument>.</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>frontend Docker push</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <workingDirectory>npm</workingDirectory>
-                            <executable>docker</executable>
-                            <arguments>
-                                <argument>push</argument>
-                                <argument>pierreyvesmonnet/frontendtogh:${project.version}</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <environmentVariables>
-                        <CI>false</CI>
-                        <NPM_CONFIG_PREFIX>${basedir}/npm</NPM_CONFIG_PREFIX>
-                        <NPM_CONFIG_CACHE>${basedir}/npm/cache</NPM_CONFIG_CACHE>
-                        <NPM_CONFIG_TMP>${project.build.directory}/npmtmp</NPM_CONFIG_TMP>
-                    </environmentVariables>
-                </configuration>
-            </plugin>
 
             <!-- Maven JAR plugin for Docker
             <plugin>

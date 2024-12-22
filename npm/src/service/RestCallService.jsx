@@ -29,7 +29,7 @@ class RestcallService {
 	*/
 	async determineURlHost() {
 	    // let's communicate with the server to find the header
-
+debugger;
 		var i = window.location.href.indexOf(":",7); // skype http: or https:
         var urlPing = window.location.href.substring(0,i)+":7080/togh/api/ping?serverInfo=true&timezoneoffset="+(new Date()).getTimezoneOffset();
         let headers = this.authService.getHeaders( { 'Content-Type': 'application/json' } );

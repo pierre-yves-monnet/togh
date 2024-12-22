@@ -17,6 +17,14 @@ with friends or family.
 
 I'm Pierre-Yves, a developer who wanted to discover new technologies (Spring Boot, React, Google Cloud).
 
+## Documentation
+
+* [install.md](doc/install.md) for explanation on the installation
+* [Roadmap.md](doc/Roadmap.md) describe the road map
+* [Docker.md](doc%2FDocker.md) a guide to build docker image application
+* npm -v
+* 
+
 ## Contribution
 
 Do you want to help to develop? Did you find a bug? Do you have an idea? Do not hesitate to create an issue.

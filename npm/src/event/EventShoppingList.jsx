@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, TextArea, Toggle } from 'carbon-components-react';
+import { TextInput, TextArea, Toggle } from '@carbon/react';
 
 import { DashCircle, PlusCircle } from 'react-bootstrap-icons';
 

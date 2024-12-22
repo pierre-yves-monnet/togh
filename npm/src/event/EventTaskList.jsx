@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, DatePicker, DatePickerInput, TextArea, InlineLoading, Toggle } from 'carbon-components-react';
+import { TextInput, DatePicker, DatePickerInput, TextArea, InlineLoading, Toggle } from '@carbon/react';
 import { PlusCircle, DashCircle, List } from 'react-bootstrap-icons';
 
 import FactoryService from '../service/FactoryService';

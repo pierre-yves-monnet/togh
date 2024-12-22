@@ -11,7 +11,7 @@ import React from 'react';
 import { injectIntl, FormattedMessage,FormattedDate } from "react-intl";
 import { PlusCircle, ArrowUp, ArrowDown, DashCircle } from 'react-bootstrap-icons';
 
-import { TextInput,  TimePicker, TextArea, Toggle } from 'carbon-components-react';
+import { TextInput,  TimePicker, TextArea, Toggle } from '@carbon/react';
 
 import FactoryService 				from 'service/FactoryService';
 

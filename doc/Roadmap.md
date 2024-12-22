@@ -64,6 +64,9 @@ Notification ; je veux pouvoir dire "previens moi si qq chose change
 Changer le niveau d'un utilisateur de FREE a PREMIUM => TOus les events dont c'est l'owner doit changer Expense
 Preference affichage Budget Administration Statistics usage
 
+
+
+
 ## integration
 
 Integration what's app & Instagram Weather
@@ -101,7 +104,13 @@ Pouvoir mettre une photo dans l'invitation pour le House Warming
 Invitation: copier le contenu de l'email dans l'écran: l'user peut alors faire un copier coller pour le mettre ou il
 veut Notification: je veux pouvoir dire "je veux recevoir un email en cas de modification"
 
-Jpoin Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
+Join Togh: je met un email et ca envoi un email pour dire "join moi sur Togh"
+
+je ne suis pas Organisateur d'un event: griser le bouton Invitation!
+
+Enlever tous les zones de recherche "prenom/nom.... " et une seule zone.
+
+Selectionner par defaut le resultat de la recherche
 
 ## Administration
 

@@ -7,7 +7,7 @@
 // -----------------------------------------------------------
 import React from 'react';
 
-import { TextInput } from 'carbon-components-react';
+import { TextInput } from '@carbon/react';
 import { injectIntl,FormattedMessage } from "react-intl";
 
 import { XSquare,InfoCircle } from 'react-bootstrap-icons';

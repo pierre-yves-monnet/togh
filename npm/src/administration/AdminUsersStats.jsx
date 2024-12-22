@@ -9,7 +9,7 @@
 import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
-import { Loading } from 'carbon-components-react';
+import { Loading } from '@carbon/react';
 
 
 import FactoryService 		from 'service/FactoryService';

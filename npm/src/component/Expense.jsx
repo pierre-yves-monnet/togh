@@ -12,7 +12,7 @@ import React from 'react';
 import { FormattedMessage,FormattedDate } from "react-intl";
 
 import { ArrowUp, ArrowDown, Cash, DashCircle, ChevronDown, ChevronRight } from 'react-bootstrap-icons';
-import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle, Search } from 'carbon-components-react';
+import { TextInput,  NumberInput, TextArea, Tag, OverflowMenu, OverflowMenuItem, ContentSwitcher, Switch, Toggle, Search } from '@carbon/react';
 import CurrencyInput from 'react-currency-input';
  
 

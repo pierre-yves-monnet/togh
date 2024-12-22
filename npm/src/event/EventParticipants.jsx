@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { Select, Tag, TextInput}      from 'carbon-components-react';
+import { Select, Tag, TextInput}      from '@carbon/react';
 import { Clipboard, ClipboardCheck, ClipboardX} from 'react-bootstrap-icons';
 
 import Invitation                       from 'event/Invitation';

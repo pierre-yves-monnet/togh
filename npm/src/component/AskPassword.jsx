@@ -9,7 +9,7 @@
 import React from 'react';
 import { FormattedMessage } from "react-intl";
 
-import { TextInput,  } from 'carbon-components-react';
+import { TextInput,  } from '@carbon/react';
 
 class AskPaswword extends React.Component {
 	

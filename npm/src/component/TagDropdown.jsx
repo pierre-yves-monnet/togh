@@ -9,8 +9,8 @@
 import React from 'react';
 
 
-import { Tag } from 'carbon-components-react';
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import { Tag } from '@carbon/react';
+import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 
 class TagDropDown extends React.Component {

@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput } from 'carbon-components-react';
+import { TextInput } from '@carbon/react';
 import {  DashCircle} from 'react-bootstrap-icons';
 
 import TagDropdown 					from 'component/TagDropdown';

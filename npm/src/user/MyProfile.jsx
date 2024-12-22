@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { ModalWrapper, RadioButtonGroup, RadioButton,TextInput,Loading,Select } from 'carbon-components-react';
+import { ModalWrapper, RadioButtonGroup, RadioButton,TextInput,Loading,Select } from '@carbon/react';
 
 import AskPassword 				from 'component/AskPassword';
 import UserMessage 				from 'component/UserMessage';

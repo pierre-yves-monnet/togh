@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { Tag, ModalWrapper, TextInput, TextArea } from 'carbon-components-react';
+import { Tag, ModalWrapper, TextInput, TextArea } from '@carbon/react';
 import { Envelope,Files } from 'react-bootstrap-icons';
 
 import IntermittentMessage          from 'component/IntermittentMessage';

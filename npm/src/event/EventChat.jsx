@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage, FormattedDate} from "react-intl";
 
-import { TextArea } from 'carbon-components-react';
+import { TextArea } from '@carbon/react';
 
 import { SkipBackwardCircle } from 'react-bootstrap-icons';
 

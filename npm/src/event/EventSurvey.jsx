@@ -9,7 +9,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl"; 
 
-import { TextInput, TextArea } from 'carbon-components-react';
+import { TextInput, TextArea } from '@carbon/react';
 import { Pencil, Eye, DashCircle, PlusCircle, Check2Square, Square} from 'react-bootstrap-icons';
 
 import TagDropdown 					from 'component/TagDropdown';

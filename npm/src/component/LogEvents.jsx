@@ -12,7 +12,7 @@ import React from 'react';
 
 import { FormattedMessage } from "react-intl";
 
-import { Tooltip } from 'carbon-components-react';
+import { Tooltip } from '@carbon/react';
 
 
 // -----------------------------------------------------------

@@ -12,7 +12,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { ModalWrapper, TextInput, TextArea, Select, Checkbox, InlineLoading } from 'carbon-components-react';
+import { ModalWrapper, TextInput, TextArea, Select, Checkbox, InlineLoading } from '@carbon/react';
 import { PlusCircle } from 'react-bootstrap-icons';
 
 

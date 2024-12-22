@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, TextArea, Toggle,InlineLoading } from 'carbon-components-react';
+import { TextInput, TextArea, Toggle,InlineLoading } from '@carbon/react';
 import {  List} from 'react-bootstrap-icons';
 
 

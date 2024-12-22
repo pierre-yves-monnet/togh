@@ -10,7 +10,7 @@ import React from 'react';
 
 import { injectIntl, FormattedMessage } from "react-intl";
 
-import { TextInput, TextArea, InlineLoading, Select } from 'carbon-components-react';
+import { TextInput, TextArea, InlineLoading, Select } from '@carbon/react';
 import { List, HandThumbsUpFill, HandThumbsDownFill, ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 
 import UserMessage 		            from 'component/UserMessage';
