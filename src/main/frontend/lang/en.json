@@ -1,0 +1,1928 @@
+{
+  "AdminAPIKey.Title": {
+    "defaultMessage": "API Keys"
+  },
+  "AdminAPIKey.updateKey": {
+    "defaultMessage": "Update key"
+  },
+  "AdminEmail.SendEmailTo": {
+    "defaultMessage": "Send Email test to"
+  },
+  "AdminEmail.Title": {
+    "defaultMessage": "Email parameters"
+  },
+  "AdminEmail.testEmail": {
+    "defaultMessage": "Test Email"
+  },
+  "AdminEmail.updateKey": {
+    "defaultMessage": "Update key"
+  },
+  "AdminGoogle.Billing": {
+    "defaultMessage": "Billing"
+  },
+  "AdminGoogle.Dahsboard": {
+    "defaultMessage": "Dashboard"
+  },
+  "AdminGoogle.Google": {
+    "defaultMessage": "Google"
+  },
+  "AdminInfo.Information": {
+    "defaultMessage": "Information"
+  },
+  "AdminLogConnection.AllLogs": {
+    "defaultMessage": "All Logs"
+  },
+  "AdminLogConnection.BadPassword": {
+    "defaultMessage": "Bad Password"
+  },
+  "AdminLogConnection.ConnectionOk": {
+    "defaultMessage": "Connection correct"
+  },
+  "AdminLogConnection.DateAndTime": {
+    "defaultMessage": "Date"
+  },
+  "AdminLogConnection.Email": {
+    "defaultMessage": "Email"
+  },
+  "AdminLogConnection.EndDate": {
+    "defaultMessage": "End Date"
+  },
+  "AdminLogConnection.EndTime": {
+    "defaultMessage": "End Time"
+  },
+  "AdminLogConnection.GoogleId": {
+    "defaultMessage": "Google Id"
+  },
+  "AdminLogConnection.IpAddress": {
+    "defaultMessage": "Ip Address"
+  },
+  "AdminLogConnection.NumberOfTentatives": {
+    "defaultMessage": "Nb. Tentatives"
+  },
+  "AdminLogConnection.Ok": {
+    "defaultMessage": "Ok"
+  },
+  "AdminLogConnection.Pages": {
+    "defaultMessage": "Pages"
+  },
+  "AdminLogConnection.Search": {
+    "defaultMessage": "Search"
+  },
+  "AdminLogConnection.ShowDetails": {
+    "defaultMessage": "Details"
+  },
+  "AdminLogConnection.StartDate": {
+    "defaultMessage": "Start Date"
+  },
+  "AdminLogConnection.StartTime": {
+    "defaultMessage": "Start Time"
+  },
+  "AdminLogConnection.Status": {
+    "defaultMessage": "Status"
+  },
+  "AdminLogConnection.Title": {
+    "defaultMessage": "Connection"
+  },
+  "AdminLogConnection.UnderAttack": {
+    "defaultMessage": "Under Attack"
+  },
+  "AdminLogConnection.UnderAttackTentatives": {
+    "defaultMessage": "Under Attack (lot of tentatives)"
+  },
+  "AdminLogConnection.UnknowUser": {
+    "defaultMessage": "User unknown"
+  },
+  "AdminLogConnection.UnknownUser": {
+    "defaultMessage": "UnknownUser"
+  },
+  "AdminLogConnection.Users": {
+    "defaultMessage": "Users"
+  },
+  "AdminLogConnection.searchSentence": {
+    "defaultMessage": "Search"
+  },
+  "AdminTransaltor.Title": {
+    "defaultMessage": "Translation"
+  },
+  "AdminTranslator.AverageTranslation": {
+    "defaultMessage": "Average (in Milliseconds)"
+  },
+  "AdminTranslator.CheckDictionary": {
+    "defaultMessage": "Check Dictionary"
+  },
+  "AdminTranslator.CompleteDictionary": {
+    "defaultMessage": "Complete Dictionary"
+  },
+  "AdminTranslator.MissingSentences": {
+    "defaultMessage": "Missing sentences"
+  },
+  "AdminTranslator.Name": {
+    "defaultMessage": "Name"
+  },
+  "AdminTranslator.TimeTranslation": {
+    "defaultMessage": "Time of translation"
+  },
+  "AdminTranslator.Title": {
+    "defaultMessage": "Translation"
+  },
+  "AdminTranslator.TooMuchSentences": {
+    "defaultMessage": "Overflow Sentence"
+  },
+  "AdminTranslator.TranslateSentences": {
+    "defaultMessage": "Translated sentences"
+  },
+  "AdminTranslator.nbTransations": {
+    "defaultMessage": "Number of translation"
+  },
+  "AdminUser.CantGhost": {
+    "defaultMessage": "Can't Ghost this user"
+  },
+  "AdminUsers.Administrator": {
+    "defaultMessage": "Administrator"
+  },
+  "AdminUsers.AllUsers": {
+    "defaultMessage": "All Users"
+  },
+  "AdminUsers.Blocked": {
+    "defaultMessage": "Blocked"
+  },
+  "AdminUsers.CompleteName": {
+    "defaultMessage": "Complete Name"
+  },
+  "AdminUsers.Connected": {
+    "defaultMessage": "Connected"
+  },
+  "AdminUsers.ConnectedOffline": {
+    "defaultMessage": "User offline"
+  },
+  "AdminUsers.ConnectedOnLine": {
+    "defaultMessage": "User connected"
+  },
+  "AdminUsers.Disconnect": {
+    "defaultMessage": "Disconnect"
+  },
+  "AdminUsers.Email": {
+    "defaultMessage": "Email"
+  },
+  "AdminUsers.Excellence": {
+    "defaultMessage": "Excellence"
+  },
+  "AdminUsers.GhostUser": {
+    "defaultMessage": "Ghost user"
+  },
+  "AdminUsers.LastActivityTime": {
+    "defaultMessage": "Last Activiy"
+  },
+  "AdminUsers.LastConnectionTime": {
+    "defaultMessage": "Last Connection"
+  },
+  "AdminUsers.LongStatusUserActif": {
+    "defaultMessage": "User actif"
+  },
+  "AdminUsers.LongStatusUserBlock": {
+    "defaultMessage": "User Blocked"
+  },
+  "AdminUsers.LongStatusUserDisabled": {
+    "defaultMessage": "User disabled"
+  },
+  "AdminUsers.Myself": {
+    "defaultMessage": "Myself"
+  },
+  "AdminUsers.Pages": {
+    "defaultMessage": "Pages"
+  },
+  "AdminUsers.PhoneNumber": {
+    "defaultMessage": "PhoneNumber"
+  },
+  "AdminUsers.Premium": {
+    "defaultMessage": "Premium"
+  },
+  "AdminUsers.PrivilegeUser": {
+    "defaultMessage": "Privilege"
+  },
+  "AdminUsers.PrivilegeUserAdmin": {
+    "defaultMessage": "Administrator"
+  },
+  "AdminUsers.PrivilegeUserAdminTRANS": {
+    "defaultMessage": "Translator"
+  },
+  "AdminUsers.PrivilegeUserUser": {
+    "defaultMessage": "User"
+  },
+  "AdminUsers.Search": {
+    "defaultMessage": "Search"
+  },
+  "AdminUsers.ShowDetailsA": {
+    "defaultMessage": "Details"
+  },
+  "AdminUsers.ShowDetailsB": {
+    "defaultMessage": "Details"
+  },
+  "AdminUsers.Source": {
+    "defaultMessage": "Source"
+  },
+  "AdminUsers.Status": {
+    "defaultMessage": "Status"
+  },
+  "AdminUsers.StatusUserActif": {
+    "defaultMessage": "Actif"
+  },
+  "AdminUsers.StatusUserBlocked": {
+    "defaultMessage": "Blocked"
+  },
+  "AdminUsers.StatusUserDisabled": {
+    "defaultMessage": "Disabled"
+  },
+  "AdminUsers.SubscriptionEnum": {
+    "defaultMessage": "Subscription"
+  },
+  "AdminUsers.SubscriptionUserExcellence": {
+    "defaultMessage": "Excellence"
+  },
+  "AdminUsers.SubscriptionUserFree": {
+    "defaultMessage": "Free"
+  },
+  "AdminUsers.SubscriptionUserPremium": {
+    "defaultMessage": "Premium"
+  },
+  "AdminUsers.Title": {
+    "defaultMessage": "Users"
+  },
+  "AdminUsers.UserName": {
+    "defaultMessage": "User Name"
+  },
+  "AdminUsers.Users": {
+    "defaultMessage": "Users"
+  },
+  "AdminUsers.privilegeAdmin": {
+    "defaultMessage": "Administrator"
+  },
+  "AdminUsers.privilegeTrans": {
+    "defaultMessage": "Translator"
+  },
+  "AdminUsers.searchSentence": {
+    "defaultMessage": "Search"
+  },
+  "AdminUsers.subscriptionExcellence": {
+    "defaultMessage": "Excellence subscription"
+  },
+  "AdminUsers.subscriptionFree": {
+    "defaultMessage": "Free subscription"
+  },
+  "AdminUsers.subscriptionPremium": {
+    "defaultMessage": "Premium subscription"
+  },
+  "AdminUsersStats.Title": {
+    "defaultMessage": "Users"
+  },
+  "AdminUsersStats.nbConnected": {
+    "defaultMessage": "Users connected"
+  },
+  "AdminUsersStats.nbUsers": {
+    "defaultMessage": "Total Users"
+  },
+  "AdmunUsersStats.ConnectionFiveYears": {
+    "defaultMessage": "Connection five years"
+  },
+  "AdmunUsersStats.ConnectionWeek": {
+    "defaultMessage": "Connection week"
+  },
+  "AdmunUsersStats.EmailVisibility": {
+    "defaultMessage": "Email visi."
+  },
+  "AdmunUsersStats.ParticipantCreation": {
+    "defaultMessage": "Participants creation"
+  },
+  "AdmunUsersStats.PhoneVisibility": {
+    "defaultMessage": "Phone visi."
+  },
+  "AdmunUsersStats.Privilege": {
+    "defaultMessage": "Privilege"
+  },
+  "AdmunUsersStats.Source": {
+    "defaultMessage": "Source"
+  },
+  "AdmunUsersStats.Subscription": {
+    "defaultMessage": "Subscription"
+  },
+  "AdmunUsersStats.UserCreation": {
+    "defaultMessage": "User creation"
+  },
+  "AdmunUsersStats.UserCreationFiveYears": {
+    "defaultMessage": "User creation five years"
+  },
+  "AdmunUsersStats.Users": {
+    "defaultMessage": "Users"
+  },
+  "AskPassword.DifferentPassword": {
+    "defaultMessage": "Password are different"
+  },
+  "AskPassword.NewPassword": {
+    "defaultMessage": "New password"
+  },
+  "AskPassword.RetypePassword": {
+    "defaultMessage": "Retype password to verify it"
+  },
+  "AskPassword.ToSmalPassword": {
+    "defaultMessage": "Give minimum 3 characters for the password"
+  },
+  "BodyTogh.ResetYourPassword": {
+    "defaultMessage": "Reset your password"
+  },
+  "BodyTogh.YouAreInvited": {
+    "defaultMessage": "You are invited to an event! Register or Connect to access it"
+  },
+  "BodyTogh.thankYou": {
+    "defaultMessage": "Thank you"
+  },
+  "BodyTogh.thankYouChristel": {
+    "defaultMessage": "Christel to support and encourage me."
+  },
+  "BodyTogh.thankYouChristelBand": {
+    "defaultMessage": "Christel's band to use the application and for their lovely feedback."
+  },
+  "BodyTogh.thankYouIntroduction": {
+    "defaultMessage": "Big thank you to everybody who helps me on the road."
+  },
+  "BodyTogh.thankYouIsmail": {
+    "defaultMessage": "Ismail for sharing ideas."
+  },
+  "BodyTogh.thankYouLounes": {
+    "defaultMessage": "Lounes to design these awesome graphics and icons."
+  },
+  "BodyTogh.thankYouSalome": {
+    "defaultMessage": "Salomé for her assistance with the English grammar."
+  },
+  "BodyTogh.thankYouSimon": {
+    "defaultMessage": "Simon, to be an extraordinary exploratory and figure out a lot of clues."
+  },
+  "BodyTogh.welcome": {
+    "defaultMessage": "Welcome to Togh"
+  },
+  "BodyTogh.whatisToghExample": {
+    "defaultMessage": "Potluck with the school? Barbecue with Friends? Road trip with Family on m? multiple days? This is an event."
+  },
+  "BodyTogh.whatisToghExplanation": {
+    "defaultMessage": "Togh is an application to manage your event."
+  },
+  "BodyTogh.whatisToghPossibility": {
+    "defaultMessage": "In one event, organize participants, register tasks and shopping list, give address, specify steps your road trip. You can ask the participant any survey: do they prefer to visit Hollywood Bld, or the Griffith Observatory (Paul want to visit both!) Visualize the itinerary on the map. Calculate expense. Togh will tell who owns who."
+  },
+  "BodyTogh.whatisToghTitle": {
+    "defaultMessage": "What is Togh?"
+  },
+  "BodyTogh.whyTogh": {
+    "defaultMessage": "Why Togh?"
+  },
+  "BodyTogh.whyToghBorn": {
+    "defaultMessage": "Here Togh was born. I was thinking of this application for five years now."
+  },
+  "BodyTogh.whyToghConclusion": {
+    "defaultMessage": "So this application was really needed at this moment."
+  },
+  "BodyTogh.whyToghHistory": {
+    "defaultMessage": "Last year, when I organized a road trip for my family (which was canceled, due the Covid), I had to use Furkot to build the itinerary, make Doogle for the survey, opening a Splitwise to share the expense, a Google Doc to describe the itinerary, Facebook group to exchange idea."
+  },
+  "BodyTogh.whyToghMotivation": {
+    "defaultMessage": "I wanted to learn React, Spring. Plus, I wanted to put my hand in the Cloud deployment. So, why not build an application using all these technologies, and see what's going on?"
+  },
+  "Event.BringList": {
+    "defaultMessage": "Bring List"
+  },
+  "Event.Budget": {
+    "defaultMessage": "Budget"
+  },
+  "Event.Chat": {
+    "defaultMessage": "Chat"
+  },
+  "Event.DateEvent": {
+    "defaultMessage": "Date Event"
+  },
+  "Event.DatePolicy": {
+    "defaultMessage": "Date policy"
+  },
+  "Event.Description": {
+    "defaultMessage": "Description"
+  },
+  "Event.DurationEvent": {
+    "defaultMessage": "Duration"
+  },
+  "Event.EndDate": {
+    "defaultMessage": "End Date"
+  },
+  "Event.EventDate": {
+    "defaultMessage": "Date"
+  },
+  "Event.Expense": {
+    "defaultMessage": "Expenses"
+  },
+  "Event.ExplanationYourTimeZone": {
+    "defaultMessage": "This date is calculated in your time zone"
+  },
+  "Event.Games": {
+    "defaultMessage": "Games"
+  },
+  "Event.Geolocalisation": {
+    "defaultMessage": "Geolocalisation"
+  },
+  "Event.HelpTabsAccess": {
+    "defaultMessage": "You have access to different functions in the event. Open and close functions in your preference: only some function are accessible by default"
+  },
+  "Event.Itinerary": {
+    "defaultMessage": "Itinerary"
+  },
+  "Event.OneDate": {
+    "defaultMessage": "One date"
+  },
+  "Event.Participant": {
+    "defaultMessage": "Participants"
+  },
+  "Event.Period": {
+    "defaultMessage": "Period"
+  },
+  "Event.Photos": {
+    "defaultMessage": "Photos"
+  },
+  "Event.Preferences": {
+    "defaultMessage": "Preferences"
+  },
+  "Event.Scope": {
+    "defaultMessage": "Scope"
+  },
+  "Event.ScopeLimited": {
+    "defaultMessage": "Limited"
+  },
+  "Event.ScopeOpen": {
+    "defaultMessage": "Open"
+  },
+  "Event.ScopeOpenConfirmation": {
+    "defaultMessage": "Open on confirmation"
+  },
+  "Event.ScopeSecret": {
+    "defaultMessage": "Secret"
+  },
+  "Event.StartDate": {
+    "defaultMessage": "Start Date"
+  },
+  "Event.Status": {
+    "defaultMessage": "Status"
+  },
+  "Event.Survey": {
+    "defaultMessage": "Survey"
+  },
+  "Event.Tasks": {
+    "defaultMessage": "Tasks"
+  },
+  "Event.TimeEvent": {
+    "defaultMessage": "Time"
+  },
+  "Event.TitleBringList": {
+    "defaultMessage": "What to brings?"
+  },
+  "Event.TitleBudget": {
+    "defaultMessage": "Budget"
+  },
+  "Event.TitleChat": {
+    "defaultMessage": "Chat with all participants"
+  },
+  "Event.TitleExpense": {
+    "defaultMessage": "Manage and share expenses"
+  },
+  "Event.TitleGames": {
+    "defaultMessage": "Games"
+  },
+  "Event.TitleGeolocalisation": {
+    "defaultMessage": "Where is the event?"
+  },
+  "Event.TitleItinerary": {
+    "defaultMessage": "Define your itinerary, and point of interest"
+  },
+  "Event.TitleParticipant": {
+    "defaultMessage": "Invite participant to your event"
+  },
+  "Event.TitlePhotos": {
+    "defaultMessage": "Photos"
+  },
+  "Event.TitlePreferences": {
+    "defaultMessage": "Preferences"
+  },
+  "Event.TitleSurvey": {
+    "defaultMessage": "Survey"
+  },
+  "Event.TitleTasks": {
+    "defaultMessage": "Tasks"
+  },
+  "Event.TourDates": {
+    "defaultMessage": "Date or period"
+  },
+  "Event.TourDatesContent": {
+    "defaultMessage": "An event can be at a specific date (a party with friends) on a period (a road trip with your family)."
+  },
+  "Event.TourDatesNote": {
+    "defaultMessage": "Only an organizer can change the scope"
+  },
+  "Event.TourName": {
+    "defaultMessage": "Give a name to your event"
+  },
+  "Event.TourNameContent": {
+    "defaultMessage": "This name must be explicit. It will be used in Email, visible by participants.<br> You can reuse the same name.<br>Example: 'Party at San Marbella', 'House coming'"
+  },
+  "Event.TourScope": {
+    "defaultMessage": "Select the scope"
+  },
+  "Event.TourScopeContent": {
+    "defaultMessage": "The scope determines who can see and search the event.<li>Open: everybody can search and join the event.</li><li>Open on confirmation: anybody can search, ask to join. Then, an organizer must validate the person.</li><li>Limited:Only invited person can access it</li><li>Secret: share a number. The only person with this number can join, and participants are hidden from each other.</li>"
+  },
+  "Event.TourScopeNote": {
+    "defaultMessage": "Only an organizer can change the scope"
+  },
+  "Event.TourStatus": {
+    "defaultMessage": "Select the status"
+  },
+  "Event.TourStatusContent": {
+    "defaultMessage": "The status event change: at the beginning, it will be <i>in preparation</i>, <i>active</i>. After the event, the status is <i>done</i><br/> You can change the status manually, but keep in mind Togh will move it automatically to Active when it will start, and done after the end of the event"
+  },
+  "Event.TourStatusNote": {
+    "defaultMessage": "Only an organizer can change the status"
+  },
+  "EventChat.ChatTip": {
+    "defaultMessage": "Chat with all participants"
+  },
+  "EventChat.MainTitleChat": {
+    "defaultMessage": "Chat"
+  },
+  "EventChat.SendBy": {
+    "defaultMessage": "Send by"
+  },
+  "EventChat.The": {
+    "defaultMessage": "The"
+  },
+  "EventChat.WhatYouWantToSay": {
+    "defaultMessage": "What do you want to say?"
+  },
+  "EventExpense.AddExpense": {
+    "defaultMessage": "Add a expense"
+  },
+  "EventExpense.ExpenseTip": {
+    "defaultMessage": "Register all expenses in the Event. Expenses from another section (Itinerary, Shopping List) are visible here"
+  },
+  "EventExpense.MainTitleExpense": {
+    "defaultMessage": "Expense"
+  },
+  "EventGame.Closed": {
+    "defaultMessage": "closed"
+  },
+  "EventGame.GameRemoved": {
+    "defaultMessage": "The game is removed"
+  },
+  "EventGame.InPreparation": {
+    "defaultMessage": "In preparation"
+  },
+  "EventGame.InProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventGame.NoAccessForGameInPreparation": {
+    "defaultMessage": "This Game is in preparation. You can't access it for the moment."
+  },
+  "EventGame.RemoveThisGame": {
+    "defaultMessage": "Remove this game"
+  },
+  "EventGame.SecretSantas": {
+    "defaultMessage": "Secret Santas"
+  },
+  "EventGame.Title": {
+    "defaultMessage": "Title"
+  },
+  "EventGame.TruthOrLie": {
+    "defaultMessage": "Truth or lie"
+  },
+  "EventGameList.AddGame": {
+    "defaultMessage": "Add a Game in the list"
+  },
+  "EventGameList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventGameList.AddingGame": {
+    "defaultMessage": "Adding a game"
+  },
+  "EventGameList.CantaddItem": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventGameList.GameAdded": {
+    "defaultMessage": "A Game is added"
+  },
+  "EventGameList.GameTip": {
+    "defaultMessage": "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a Game and collect review."
+  },
+  "EventGameList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of Game allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventGameList.MainTitleGameList": {
+    "defaultMessage": "Games"
+  },
+  "EventGameList.NoItem": {
+    "defaultMessage": "You don't have any game ready in the list."
+  },
+  "EventGameList.addItem": {
+    "defaultMessage": "Create a new game in the list"
+  },
+  "EventGameSecretSantas.Administration": {
+    "defaultMessage": "Manage the Secret Santas"
+  },
+  "EventGameSecretSantas.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventGameSecretSantas.IncludeNewPerson": {
+    "defaultMessage": "Adjust players to participants"
+  },
+  "EventGameSecretSantas.NewDraw": {
+    "defaultMessage": "New Random Draw"
+  },
+  "EventGameSecretSantas.NumberOfPlayerInScope": {
+    "defaultMessage": "Potential players"
+  },
+  "EventGameSecretSantas.NumberOfPlayers": {
+    "defaultMessage": "Number of players"
+  },
+  "EventGameSecretSantas.Player": {
+    "defaultMessage": "Player"
+  },
+  "EventGameSecretSantas.PlayerTo": {
+    "defaultMessage": "To Player"
+  },
+  "EventGameSecretSantas.PrepareAGiftTo": {
+    "defaultMessage": "Prepare a gift to"
+  },
+  "EventGameSecretSantas.Scope": {
+    "defaultMessage": "Players of the Secret Santas"
+  },
+  "EventGameSecretSantas.ScopeActive": {
+    "defaultMessage": "Active participants only"
+  },
+  "EventGameSecretSantas.ScopeAll": {
+    "defaultMessage": "All participants"
+  },
+  "EventGameSecretSantas.ShowPlayers": {
+    "defaultMessage": "List of players"
+  },
+  "EventGameSecretSantas.SynchronizePlayers": {
+    "defaultMessage": "Synchronize players"
+  },
+  "EventGameSecretSantas.YouDontWantToSeeTheList": {
+    "defaultMessage": "You don't want to see the list..."
+  },
+  "EventGameSecretSantas.YourSecretSantas": {
+    "defaultMessage": "Your Secret Santas"
+  },
+  "EventGameSecretSantas.explanation": {
+    "defaultMessage": "Each player gets a participant name. Offer him/her/in a gift. And keep in mind you are on the list of someone."
+  },
+  "EventGameSecretSantas.giftedForYou": {
+    "defaultMessage": "You have to do a secret gift to"
+  },
+  "EventGameSecretSantas.listVisibleToggleOff": {
+    "defaultMessage": "Hide the list"
+  },
+  "EventGameSecretSantas.listVisibleToggleOn": {
+    "defaultMessage": "Show the list"
+  },
+  "EventGameSecretSantas.noAffectation": {
+    "defaultMessage": "No one has been assigned to you yet."
+  },
+  "EventGameTruthOrLie.Administration": {
+    "defaultMessage": "Manage the Truth Or Lie"
+  },
+  "EventGameTruthOrLie.By": {
+    "defaultMessage": "By"
+  },
+  "EventGameTruthOrLie.DiscoverImmediat": {
+    "defaultMessage": "Immediat"
+  },
+  "EventGameTruthOrLie.DiscoverOnEndEvent": {
+    "defaultMessage": "End event"
+  },
+  "EventGameTruthOrLie.DiscoverOnStartEvent": {
+    "defaultMessage": "Start event"
+  },
+  "EventGameTruthOrLie.DiscoverResult": {
+    "defaultMessage": "Discover the result"
+  },
+  "EventGameTruthOrLie.DiscoverResultExplanation": {
+    "defaultMessage": "With the Immediate mode, when a player vote, result are immediately displayed. Else, result is visible only at one moment"
+  },
+  "EventGameTruthOrLie.ExpectedTruth": {
+    "defaultMessage": "Expected:"
+  },
+  "EventGameTruthOrLie.Explanation": {
+    "defaultMessage": "Give multiple sentences, and the status for each (this is a LIE, or this is a TRUTH)."
+  },
+  "EventGameTruthOrLie.FulfillSentences": {
+    "defaultMessage": "You have to give a sentence on each line."
+  },
+  "EventGameTruthOrLie.GiveAStatus": {
+    "defaultMessage": "You have to give a statue on each sentence."
+  },
+  "EventGameTruthOrLie.GiveTheCorrectNumberOfTruths": {
+    "defaultMessage": "Give the expected number of truth."
+  },
+  "EventGameTruthOrLie.Lie": {
+    "defaultMessage": "Lie"
+  },
+  "EventGameTruthOrLie.NbSentences": {
+    "defaultMessage": "Number Of Sentences"
+  },
+  "EventGameTruthOrLie.NoNumberOfTruthsRequested": {
+    "defaultMessage": "There is no requested number of truth: you decide"
+  },
+  "EventGameTruthOrLie.NoVoteReady": {
+    "defaultMessage": "No vote at this moment"
+  },
+  "EventGameTruthOrLie.NumberOfPlayerInScope": {
+    "defaultMessage": "Potential players"
+  },
+  "EventGameTruthOrLie.NumberOfTruths": {
+    "defaultMessage": "Number of truths:"
+  },
+  "EventGameTruthOrLie.NumberOfTruthsRequested": {
+    "defaultMessage": "Number Of Truths sentences requested"
+  },
+  "EventGameTruthOrLie.NumberOfTruthsRequestedExplanation": {
+    "defaultMessage": "Give the number of true sentences each player has to give. If '0', then each player can decide."
+  },
+  "EventGameTruthOrLie.NumberOfTruthsUpperZero": {
+    "defaultMessage": "There is a number of Truths requested:"
+  },
+  "EventGameTruthOrLie.NumberSentencesExplanation": {
+    "defaultMessage": "Give the number of sentences each players has to give"
+  },
+  "EventGameTruthOrLie.OpeningOfTheVote": {
+    "defaultMessage": "Opening of the vote"
+  },
+  "EventGameTruthOrLie.PlayerWhoSentences": {
+    "defaultMessage": "Validate Sentences"
+  },
+  "EventGameTruthOrLie.PlayerWhoVoted": {
+    "defaultMessage": "Votes"
+  },
+  "EventGameTruthOrLie.PlayersValidatedSentences": {
+    "defaultMessage": "Some players validated their sentences. These settings can no longer be changed."
+  },
+  "EventGameTruthOrLie.Result": {
+    "defaultMessage": "Result"
+  },
+  "EventGameTruthOrLie.Scope": {
+    "defaultMessage": "Players of the Truth Or Lie game"
+  },
+  "EventGameTruthOrLie.ScopeActive": {
+    "defaultMessage": "Active participants only"
+  },
+  "EventGameTruthOrLie.ScopeAll": {
+    "defaultMessage": "All participants"
+  },
+  "EventGameTruthOrLie.SelectedTruth": {
+    "defaultMessage": "Selected:"
+  },
+  "EventGameTruthOrLie.SentenceValidate": {
+    "defaultMessage": "Your list is ready. Wait for the other players to vote!"
+  },
+  "EventGameTruthOrLie.Sentences": {
+    "defaultMessage": "Sentence"
+  },
+  "EventGameTruthOrLie.StartVoteEvent": {
+    "defaultMessage": "Start event"
+  },
+  "EventGameTruthOrLie.StartVoteExplanation": {
+    "defaultMessage": "With the Immediate mode, the vote is open when a player validates its sentence. Else, one day before the event starts, or when the event starts"
+  },
+  "EventGameTruthOrLie.StartVoteImmediat": {
+    "defaultMessage": "Immediat"
+  },
+  "EventGameTruthOrLie.StartVoteOneDayBeforeEvent": {
+    "defaultMessage": "One day before event"
+  },
+  "EventGameTruthOrLie.ThisIsALie": {
+    "defaultMessage": "It' a Lie"
+  },
+  "EventGameTruthOrLie.ThisIsATruth": {
+    "defaultMessage": "It's the truth"
+  },
+  "EventGameTruthOrLie.Truth": {
+    "defaultMessage": "Truth"
+  },
+  "EventGameTruthOrLie.Validate": {
+    "defaultMessage": "Validate"
+  },
+  "EventGameTruthOrLie.ValidateExplanation": {
+    "defaultMessage": "When your list is ready, validate it. Attention, it will not be possible to modify it after: players will start to vote."
+  },
+  "EventGameTruthOrLie.VoteCantBeValidated": {
+    "defaultMessage": "Attention, the number of true sentences selected is not the expected one"
+  },
+  "EventGameTruthOrLie.VoteFindTheTruths": {
+    "defaultMessage": "In theses sentences, the number of truth sentences is:"
+  },
+  "EventGameTruthOrLie.VoteInProgress": {
+    "defaultMessage": "Vote in progress"
+  },
+  "EventGameTruthOrLie.VotePlayer": {
+    "defaultMessage": "Player"
+  },
+  "EventGameTruthOrLie.VoteValidate": {
+    "defaultMessage": "Vote"
+  },
+  "EventGameTruthOrLie.parametres": {
+    "defaultMessage": "Parameters"
+  },
+  "EventGameTruthOrLie.points": {
+    "defaultMessage": "points"
+  },
+  "EventGameTruthOrLie.result": {
+    "defaultMessage": "Results"
+  },
+  "EventGameTruthOrLie.sentenceIsLie": {
+    "defaultMessage": "is it a lie"
+  },
+  "EventGameTruthOrLie.sentenceIsTruth": {
+    "defaultMessage": "is it a truth"
+  },
+  "EventGameTruthOrLie.sentenceNotValidate": {
+    "defaultMessage": "Sentences not validated"
+  },
+  "EventGameTruthOrLie.sentences": {
+    "defaultMessage": "My Sentences"
+  },
+  "EventGameTruthOrLie.vote": {
+    "defaultMessage": "Vote"
+  },
+  "EventGameTruthOrLie.voteComplete": {
+    "defaultMessage": "Vote completed"
+  },
+  "EventGameTruthOrLie.voteError": {
+    "defaultMessage": "You were wrong"
+  },
+  "EventGameTruthOrLie.voteInError": {
+    "defaultMessage": "An error arrived during your vote - try again later."
+  },
+  "EventGameTruthOrLie.voteInProgress": {
+    "defaultMessage": "Vote in progress"
+  },
+  "EventGameTruthOrLie.voteSuccess": {
+    "defaultMessage": "You find it"
+  },
+  "EventGameTruthOrLie.voteValidate": {
+    "defaultMessage": "When your vote is ready, validate it. Attention, it will not be possible to modify it after."
+  },
+  "EventGameTruthOrLie.voteValidated": {
+    "defaultMessage": "Your vote is accepted."
+  },
+  "EventGeolocalisation.Address": {
+    "defaultMessage": "Address"
+  },
+  "EventGeolocalisation.GeolocalisationTip": {
+    "defaultMessage": "Where is the event? Do I want to share my position ? Note: for a multi place event, use the Itinerary."
+  },
+  "EventGeolocalisation.Instructions": {
+    "defaultMessage": "Instructions"
+  },
+  "EventGeolocalisation.MainTitleGeolocation": {
+    "defaultMessage": "Geolocalisation"
+  },
+  "EventGeolocalisation.ShareMyLocation": {
+    "defaultMessage": "Share my localisation during the event"
+  },
+  "EventItinerary.AddingStep": {
+    "defaultMessage": "Adding a step"
+  },
+  "EventItinerary.CantaddItem": {
+    "defaultMessage": "A step can't be added"
+  },
+  "EventItinerary.ItineraryTip": {
+    "defaultMessage": "List all places you want to visit during this event. If the event is on multiple days, then you can setup day per day your itinerary"
+  },
+  "EventItinerary.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of steps allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventItinerary.MainTitleItinerary": {
+    "defaultMessage": "Itinerary"
+  },
+  "EventItinerary.NoAddressProvided": {
+    "defaultMessage": "No address are provided for this day."
+  },
+  "EventItinerary.ProvideDateInEvent": {
+    "defaultMessage": "Select a date for this event"
+  },
+  "EventItinerary.ProvidePeriodDateInEvent": {
+    "defaultMessage": "Select a start and a end date for this event"
+  },
+  "EventItinerary.ShowDetail": {
+    "defaultMessage": "Show Detail"
+  },
+  "EventItinerary.ShowExpense": {
+    "defaultMessage": "Show Expense"
+  },
+  "EventItinerary.ShowItineraryMap": {
+    "defaultMessage": "Show itinerary map"
+  },
+  "EventItinerary.StepAdded": {
+    "defaultMessage": "A step is added"
+  },
+  "EventItineray.Address": {
+    "defaultMessage": "Address"
+  },
+  "EventItineray.Airport": {
+    "defaultMessage": "Airport"
+  },
+  "EventItineray.Begin": {
+    "defaultMessage": "Begin"
+  },
+  "EventItineray.BusStation": {
+    "defaultMessage": "Bus Station"
+  },
+  "EventItineray.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventItineray.Duration": {
+    "defaultMessage": "Duration"
+  },
+  "EventItineray.End": {
+    "defaultMessage": "End"
+  },
+  "EventItineray.Entertainment": {
+    "defaultMessage": "Entertainment"
+  },
+  "EventItineray.Expense": {
+    "defaultMessage": "Expense"
+  },
+  "EventItineray.Harbor": {
+    "defaultMessage": "Harbor"
+  },
+  "EventItineray.Night": {
+    "defaultMessage": "Night"
+  },
+  "EventItineray.PointOfInterest": {
+    "defaultMessage": "Point Of Interest"
+  },
+  "EventItineray.RemoveThisStep": {
+    "defaultMessage": "Remove this step"
+  },
+  "EventItineray.Restaurant": {
+    "defaultMessage": "Restaurant"
+  },
+  "EventItineray.Shopping": {
+    "defaultMessage": "Shopping"
+  },
+  "EventItineray.Title": {
+    "defaultMessage": "Title"
+  },
+  "EventItineray.TrainStation": {
+    "defaultMessage": "Train Station"
+  },
+  "EventItineray.UpThisLine": {
+    "defaultMessage": "Up this line"
+  },
+  "EventItineray.VisitTime": {
+    "defaultMessage": "Visit time"
+  },
+  "EventItineray.Visite": {
+    "defaultMessage": "Visite"
+  },
+  "EventItineray.WebSite": {
+    "defaultMessage": "WebSite"
+  },
+  "EventItineray.downThisLine": {
+    "defaultMessage": "Down this line"
+  },
+  "EventParticipant.Actif": {
+    "defaultMessage": "Actif"
+  },
+  "EventParticipant.InvitationInProgress": {
+    "defaultMessage": "Invited"
+  },
+  "EventParticipant.Invited": {
+    "defaultMessage": "Invited"
+  },
+  "EventParticipant.Left": {
+    "defaultMessage": "Left"
+  },
+  "EventParticipant.MainTitleParticipant": {
+    "defaultMessage": "Participants"
+  },
+  "EventParticipant.NumberOfParticipants": {
+    "defaultMessage": "Number of participants"
+  },
+  "EventParticipant.Owner": {
+    "defaultMessage": "Owner"
+  },
+  "EventParticipant.PartOfDoNotKnow": {
+    "defaultMessage": "Do not know"
+  },
+  "EventParticipant.PartOfNo": {
+    "defaultMessage": "No"
+  },
+  "EventParticipant.PartOfParticipate": {
+    "defaultMessage": "Participate"
+  },
+  "EventParticipant.ParticipantTip": {
+    "defaultMessage": "Invite participant to the event"
+  },
+  "EventParticipant.Participation": {
+    "defaultMessage": "Participation"
+  },
+  "EventParticipant.Person": {
+    "defaultMessage": "Person"
+  },
+  "EventParticipant.Role": {
+    "defaultMessage": "Role"
+  },
+  "EventParticipant.RoleObserver": {
+    "defaultMessage": "Observer"
+  },
+  "EventParticipant.RoleOrganizer": {
+    "defaultMessage": "Organizer"
+  },
+  "EventParticipant.RoleParticipant": {
+    "defaultMessage": "Participant"
+  },
+  "EventParticipant.SendAgainInvitation": {
+    "defaultMessage": "Send again"
+  },
+  "EventParticipant.Status": {
+    "defaultMessage": "Status"
+  },
+  "EventParticipant.TitleActiveParticipant": {
+    "defaultMessage": "Active participant"
+  },
+  "EventParticipant.TitleLeft": {
+    "defaultMessage": "The participant left the event"
+  },
+  "EventParticipant.TitleUrlInvitation": {
+    "defaultMessage": "Copy the URL in your clipboard. Paste it and Use it in a direct email"
+  },
+  "EventParticipant.Titleinvited": {
+    "defaultMessage": "Invited participant: no confirmation is received at this moment"
+  },
+  "EventParticipants.EmailSentError": {
+    "defaultMessage": "Email error"
+  },
+  "EventParticipants.EmailSentOk": {
+    "defaultMessage": "Email sent"
+  },
+  "EventPreferences.CurrencyOnEvent": {
+    "defaultMessage": "Currency used in this event"
+  },
+  "EventPreferences.DisplayFunction": {
+    "defaultMessage": "Display Functions"
+  },
+  "EventPreferences.EventSubscription": {
+    "defaultMessage": "Subscription"
+  },
+  "EventPreferences.MainTitlePreferences": {
+    "defaultMessage": "Preferences"
+  },
+  "EventPreferences.PreferencesTip": {
+    "defaultMessage": "Set up all preferences for the event"
+  },
+  "EventPreferences.SubscriptionExcellenceExplanation": {
+    "defaultMessage": "A Excellence event contains all functions, and a limit of 1000 per items"
+  },
+  "EventPreferences.SubscriptionFreeExplanation": {
+    "defaultMessage": "A Free event contains all functions except the budget and is limited in the number of participants (20) and items (50)"
+  },
+  "EventPreferences.SubscriptionPremiumExplanation": {
+    "defaultMessage": "A Premium event contains all functions, upper limitation participants (100) and items (100)"
+  },
+  "EventPreferences.accessBringNo": {
+    "defaultMessage": "Bring list"
+  },
+  "EventPreferences.accessBringYes": {
+    "defaultMessage": "Bring list"
+  },
+  "EventPreferences.accessBudgetNo": {
+    "defaultMessage": "Budget"
+  },
+  "EventPreferences.accessBudgetYes": {
+    "defaultMessage": "Budget"
+  },
+  "EventPreferences.accessChatNo": {
+    "defaultMessage": "Chat"
+  },
+  "EventPreferences.accessChatYes": {
+    "defaultMessage": "Chat"
+  },
+  "EventPreferences.accessExpensesNo": {
+    "defaultMessage": "Expenses"
+  },
+  "EventPreferences.accessExpensesYes": {
+    "defaultMessage": "Expenses"
+  },
+  "EventPreferences.accessGamesNo": {
+    "defaultMessage": "Games"
+  },
+  "EventPreferences.accessGamesYes": {
+    "defaultMessage": "Games"
+  },
+  "EventPreferences.accessItineraryNo": {
+    "defaultMessage": "Itinerary"
+  },
+  "EventPreferences.accessItineraryYes": {
+    "defaultMessage": "Itinerary"
+  },
+  "EventPreferences.accessLocalisationNo": {
+    "defaultMessage": "Localisation"
+  },
+  "EventPreferences.accessLocalisationYes": {
+    "defaultMessage": "Localisation"
+  },
+  "EventPreferences.accessPhotosNo": {
+    "defaultMessage": "Photos"
+  },
+  "EventPreferences.accessPhotosYes": {
+    "defaultMessage": "Photos"
+  },
+  "EventPreferences.accessSurveysNo": {
+    "defaultMessage": "Surveys"
+  },
+  "EventPreferences.accessSurveysYes": {
+    "defaultMessage": "Surveys"
+  },
+  "EventPreferences.accessTasksNo": {
+    "defaultMessage": "Tasks"
+  },
+  "EventPreferences.accessTasksYes": {
+    "defaultMessage": "Tasks"
+  },
+  "EventShoppingList.AddItem": {
+    "defaultMessage": "Add a item in the list"
+  },
+  "EventShoppingList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventShoppingList.AddingItem": {
+    "defaultMessage": "Adding a item"
+  },
+  "EventShoppingList.Cancelled": {
+    "defaultMessage": "Cancelled"
+  },
+  "EventShoppingList.CantAddTask": {
+    "defaultMessage": "An item can't be added"
+  },
+  "EventShoppingList.CantRemoveItem": {
+    "defaultMessage": "The item can't be removed"
+  },
+  "EventShoppingList.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventShoppingList.Done": {
+    "defaultMessage": "Done"
+  },
+  "EventShoppingList.ItemRemoved": {
+    "defaultMessage": "The item is removed"
+  },
+  "EventShoppingList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of items allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventShoppingList.MainTitleBringList": {
+    "defaultMessage": "Bring List"
+  },
+  "EventShoppingList.NoItem": {
+    "defaultMessage": "You don't have any item to bring in the list."
+  },
+  "EventShoppingList.RemovingItem": {
+    "defaultMessage": "Removing an item"
+  },
+  "EventShoppingList.ShoppingListTip": {
+    "defaultMessage": "You have a list of item to bing to the event. List them, decide who have to bought them"
+  },
+  "EventShoppingList.ShowDetails": {
+    "defaultMessage": "Detail"
+  },
+  "EventShoppingList.ShowExpense": {
+    "defaultMessage": "Show Expense"
+  },
+  "EventShoppingList.TaskAdded": {
+    "defaultMessage": "The item is added"
+  },
+  "EventShoppingList.ToBring": {
+    "defaultMessage": "To bring"
+  },
+  "EventShoppingList.What": {
+    "defaultMessage": "What"
+  },
+  "EventShoppingList.Who": {
+    "defaultMessage": "Who"
+  },
+  "EventShoppingList.addItem": {
+    "defaultMessage": "Add a new item in the list"
+  },
+  "EventShoppingList.removeItem": {
+    "defaultMessage": "Remove this item"
+  },
+  "EventState.Actif": {
+    "defaultMessage": "Actif"
+  },
+  "EventState.Cancelled": {
+    "defaultMessage": "Cancelled"
+  },
+  "EventState.Done": {
+    "defaultMessage": "Done"
+  },
+  "EventState.InPreparation": {
+    "defaultMessage": "In Preparation"
+  },
+  "EventSurvey.AddAnswer": {
+    "defaultMessage": "Adding your answer"
+  },
+  "EventSurvey.AddOption": {
+    "defaultMessage": "Option"
+  },
+  "EventSurvey.AddingChoice": {
+    "defaultMessage": "Adding a choice"
+  },
+  "EventSurvey.AddingSurvey": {
+    "defaultMessage": "Adding a survey"
+  },
+  "EventSurvey.AnswerAdded": {
+    "defaultMessage": "answer added"
+  },
+  "EventSurvey.CantaddAnswer": {
+    "defaultMessage": "Can't add the answer"
+  },
+  "EventSurvey.CantaddItem": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventSurvey.Closed": {
+    "defaultMessage": "closed"
+  },
+  "EventSurvey.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventSurvey.InPreparation": {
+    "defaultMessage": "In preparation"
+  },
+  "EventSurvey.InProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventSurvey.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of choice allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventSurvey.NoAccessForSurveyInPreparation": {
+    "defaultMessage": "This survey is in preparation. You can't access it for the moment."
+  },
+  "EventSurvey.Option": {
+    "defaultMessage": "Option"
+  },
+  "EventSurvey.RemovingChoice": {
+    "defaultMessage": "Removing a choice"
+  },
+  "EventSurvey.SurveyInPreparationNoParticipantsVisible": {
+    "defaultMessage": "This survey is in preparation. Participants are not visible"
+  },
+  "EventSurvey.TaskAdded": {
+    "defaultMessage": "A task is added"
+  },
+  "EventSurvey.Title": {
+    "defaultMessage": "Title"
+  },
+  "EventSurvey.removeItem": {
+    "defaultMessage": "Remove this item"
+  },
+  "EventSurveyList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventSurveyList.AddSurvey": {
+    "defaultMessage": "Add a survey in the list"
+  },
+  "EventSurveyList.CantaddItem": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventSurveyList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of survey allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventSurveyList.MainTitleSurveyList": {
+    "defaultMessage": "Surveys"
+  },
+  "EventSurveyList.NoItem": {
+    "defaultMessage": "You don't have any survey ready in the list."
+  },
+  "EventSurveyList.SurveyAdded": {
+    "defaultMessage": "A survey is added"
+  },
+  "EventSurveyList.SurveyTip": {
+    "defaultMessage": "Participants prefer to visit an art or an aerospace museum? Prefer Japanase, Italian or French restaurant? Create a survey and collect review."
+  },
+  "EventSurveyList.addItem": {
+    "defaultMessage": "Create a new survey in the list"
+  },
+  "EventTaskList.AddOne": {
+    "defaultMessage": "Add one !"
+  },
+  "EventTaskList.AddingTask": {
+    "defaultMessage": "Adding a task"
+  },
+  "EventTaskList.Begin": {
+    "defaultMessage": "Begin"
+  },
+  "EventTaskList.Cancelled": {
+    "defaultMessage": "Cancelled"
+  },
+  "EventTaskList.CantRemoveTask": {
+    "defaultMessage": "The task can't be removed"
+  },
+  "EventTaskList.CantaddItem": {
+    "defaultMessage": "A task can't be added"
+  },
+  "EventTaskList.Description": {
+    "defaultMessage": "Description"
+  },
+  "EventTaskList.Done": {
+    "defaultMessage": "Done"
+  },
+  "EventTaskList.End": {
+    "defaultMessage": "End"
+  },
+  "EventTaskList.FilterAllParticipants": {
+    "defaultMessage": "All participants"
+  },
+  "EventTaskList.FilterAllStates": {
+    "defaultMessage": "All states"
+  },
+  "EventTaskList.FilterDone": {
+    "defaultMessage": "Done"
+  },
+  "EventTaskList.FilterInProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventTaskList.FilterMyTasks": {
+    "defaultMessage": "My tasks"
+  },
+  "EventTaskList.FilterPlanned": {
+    "defaultMessage": "Planned"
+  },
+  "EventTaskList.FilterUnaffected": {
+    "defaultMessage": "Unaffected"
+  },
+  "EventTaskList.InProgress": {
+    "defaultMessage": "In progress"
+  },
+  "EventTaskList.LimitSubsscription": {
+    "defaultMessage": "You reach the limit of tasks allowed in the event. Go to your profile to see your subscription"
+  },
+  "EventTaskList.MainTitleTaskList": {
+    "defaultMessage": "Tasks List"
+  },
+  "EventTaskList.NoItem": {
+    "defaultMessage": "You don't have any task in the list."
+  },
+  "EventTaskList.RemoveThisTask": {
+    "defaultMessage": "Remove this task"
+  },
+  "EventTaskList.RemovingTask": {
+    "defaultMessage": "Removing a task"
+  },
+  "EventTaskList.ShowDate": {
+    "defaultMessage": "Show dates"
+  },
+  "EventTaskList.State": {
+    "defaultMessage": "State"
+  },
+  "EventTaskList.StatePlanned": {
+    "defaultMessage": "Planned"
+  },
+  "EventTaskList.Subject": {
+    "defaultMessage": "Subject"
+  },
+  "EventTaskList.TaskAdded": {
+    "defaultMessage": "A task is added"
+  },
+  "EventTaskList.TaskRemoved": {
+    "defaultMessage": "The task is removed"
+  },
+  "EventTaskList.TaskTip": {
+    "defaultMessage": "Use tasks to reference what you have to do for your event. You can assign participant, and mark the status of the task: planned, done.... According your preference, you may receive a notation when you have a task to realize"
+  },
+  "EventTaskList.Who": {
+    "defaultMessage": "Who"
+  },
+  "EventTaskList.addItem": {
+    "defaultMessage": "Add a task in the list"
+  },
+  "Eventitinerary.CantremoveItem": {
+    "defaultMessage": "The step can't be removed"
+  },
+  "Eventitinerary.RemovingStep": {
+    "defaultMessage": "Removing a step"
+  },
+  "Eventitinerary.StepRemoved": {
+    "defaultMessage": "The step is removed"
+  },
+  "EventsList.AllEvents": {
+    "defaultMessage": "All events"
+  },
+  "EventsList.AllEventsShort": {
+    "defaultMessage": "All"
+  },
+  "EventsList.CantGetListItem": {
+    "defaultMessage": "Can't access the list of item'"
+  },
+  "EventsList.CreateAnEvent": {
+    "defaultMessage": "Create an Event"
+  },
+  "EventsList.DateFromTo": {
+    "defaultMessage": "to"
+  },
+  "EventsList.LimitSubscription": {
+    "defaultMessage": "You reach the limit of events allowed in the last period. Go to your profile to see your subscription"
+  },
+  "EventsList.MyEvents": {
+    "defaultMessage": "My events"
+  },
+  "EventsList.MyEventsShort": {
+    "defaultMessage": "Mine"
+  },
+  "EventsList.MyInvitations": {
+    "defaultMessage": "My invitations"
+  },
+  "EventsList.MyInvitationsShort": {
+    "defaultMessage": "Invitations"
+  },
+  "EventsList.NextEvents": {
+    "defaultMessage": "Next events"
+  },
+  "EventsList.NextEventsShort": {
+    "defaultMessage": "Next"
+  },
+  "EventsList.NoDateEvent": {
+    "defaultMessage": "No date"
+  },
+  "EventsList.Refresh": {
+    "defaultMessage": "Refresh"
+  },
+  "EventsList.ServerConnectionError": {
+    "defaultMessage": "Server connection error"
+  },
+  "EventsList.TakeATour": {
+    "defaultMessage": "Explore all the functions. Click on 'Take a tour' icon to access information and help."
+  },
+  "EventsList.TitleEvents": {
+    "defaultMessage": "Events"
+  },
+  "EventsList.TitleMyInvitations": {
+    "defaultMessage": "My Invitations"
+  },
+  "EventsList.WithParticipants": {
+    "defaultMessage": "With"
+  },
+  "Expense.Budget": {
+    "defaultMessage": "Budget"
+  },
+  "Expense.Cost": {
+    "defaultMessage": "Cost"
+  },
+  "Invitation.ByEmail": {
+    "defaultMessage": "Send an Email"
+  },
+  "Invitation.Email": {
+    "defaultMessage": "Email"
+  },
+  "Invitation.FirstName": {
+    "defaultMessage": "First name"
+  },
+  "Invitation.Invitation": {
+    "defaultMessage": "Invitation"
+  },
+  "Invitation.LastName": {
+    "defaultMessage": "Last name"
+  },
+  "Invitation.NoEmails": {
+    "defaultMessage": "Attention, email can't be sent to these users"
+  },
+  "Invitation.OnlyUserNotAlreadyAParticipant": {
+    "defaultMessage": "Only users not already a participant"
+  },
+  "Invitation.PhoneNumber": {
+    "defaultMessage": "Phone number"
+  },
+  "Invitation.Search": {
+    "defaultMessage": "Search"
+  },
+  "Invitation.SearchAUser": {
+    "defaultMessage": "Search a user"
+  },
+  "Invitation.Searching": {
+    "defaultMessage": "Searching"
+  },
+  "Invitation.SendInvitation": {
+    "defaultMessage": "Send Invitation"
+  },
+  "Invitation.Subject": {
+    "defaultMessage": "Subject"
+  },
+  "Invitation.UseMyEmailAsFrom": {
+    "defaultMessage": "Use my email in the From message"
+  },
+  "Invitation.UserEmail": {
+    "defaultMessage": "Email"
+  },
+  "Invitation.UserFound": {
+    "defaultMessage": "UsersFound"
+  },
+  "Invitation.UserName": {
+    "defaultMessage": "Name"
+  },
+  "Invitation.UserPhoneNumber": {
+    "defaultMessage": "Phone number"
+  },
+  "Invitation.UsersAlreadyRegistered": {
+    "defaultMessage": "These participants are already registered"
+  },
+  "Invitation.UsersInvited": {
+    "defaultMessage": "Users are invited with success"
+  },
+  "InvitationAgain.EmailTitle": {
+    "defaultMessage": "Send the invitation email"
+  },
+  "InvitationAgain.GetTheUrlExplanation": {
+    "defaultMessage": "Get the URL, and use it"
+  },
+  "InvitationAgain.Invitation": {
+    "defaultMessage": "Manage invitation"
+  },
+  "InvitationAgain.InvitationLabel": {
+    "defaultMessage": "Invitation"
+  },
+  "InvitationAgain.InvitationTo": {
+    "defaultMessage": "Invitation sent to"
+  },
+  "InvitationAgain.Message": {
+    "defaultMessage": "Message"
+  },
+  "InvitationAgain.SendAgainExplanation": {
+    "defaultMessage": "Send again the invitation by email"
+  },
+  "InvitationAgain.Subject": {
+    "defaultMessage": "Subject"
+  },
+  "InvitationAgain.UrlTitle": {
+    "defaultMessage": "Url"
+  },
+  "InvitationAgain.UseMyEmailAsFrom": {
+    "defaultMessage": "Use my email in the From message"
+  },
+  "InvitationAgain.UseMyEmailAsFromExplantion": {
+    "defaultMessage": "In order to be accepted by the recipient, your email is used to be the sender of the email"
+  },
+  "LogEvent.Action": {
+    "defaultMessage": "Action"
+  },
+  "LogEvent.Consequence": {
+    "defaultMessage": "Consequence"
+  },
+  "Login.CantConnectToTheServer": {
+    "defaultMessage": "Can't Connect To The Server"
+  },
+  "Login.EmailIncorrect": {
+    "defaultMessage": "Email address is incorrect"
+  },
+  "Login.EmailSent": {
+    "defaultMessage": "An email is sent, check your mailbox"
+  },
+  "Login.InvalidLoginPassword": {
+    "defaultMessage": "Invalid Login / Password"
+  },
+  "Login.LostMyPassword": {
+    "defaultMessage": "I lost My password"
+  },
+  "Login.LostMyPasswordExplanation": {
+    "defaultMessage": "You have an account, but you can't connect? Click on the 'I list my password' button to get a temporary one"
+  },
+  "Login.LostMyPasswordLabel": {
+    "defaultMessage": "Reset my password"
+  },
+  "Login.LostPasswordExplanation": {
+    "defaultMessage": "A link to change your password will be send to your email"
+  },
+  "Login.SendEmail": {
+    "defaultMessage": "Send the email"
+  },
+  "Login.ServerConnectionError": {
+    "defaultMessage": "Server connection error"
+  },
+  "Login.ServerIssue": {
+    "defaultMessage": "An error arrived on the server, please try later"
+  },
+  "Login.connection": {
+    "defaultMessage": "Connection"
+  },
+  "Login.email": {
+    "defaultMessage": "Email"
+  },
+  "Login.googlelogin": {
+    "defaultMessage": "Login"
+  },
+  "Login.googlelogout": {
+    "defaultMessage": "Login"
+  },
+  "Login.logout": {
+    "defaultMessage": "Logout"
+  },
+  "Login.password": {
+    "defaultMessage": "Password"
+  },
+  "Login.rememberMe": {
+    "defaultMessage": "Remember Me"
+  },
+  "Menu.AdmininstratorExplanation": {
+    "defaultMessage": "Administrator function."
+  },
+  "Menu.Administration": {
+    "defaultMessage": "Administration"
+  },
+  "Menu.AdministrationLogConnection": {
+    "defaultMessage": "Connection"
+  },
+  "Menu.AdministrationUsers": {
+    "defaultMessage": "Users"
+  },
+  "Menu.Events": {
+    "defaultMessage": "Events"
+  },
+  "Menu.EventsExplanation": {
+    "defaultMessage": "Access all events you can access"
+  },
+  "Menu.InvitationExplanation": {
+    "defaultMessage": "Check your invitations, accept them."
+  },
+  "Menu.MyInvitations": {
+    "defaultMessage": "My Invitations"
+  },
+  "Menu.MyProfile": {
+    "defaultMessage": "My Profile"
+  },
+  "Menu.MyProfileExplanation": {
+    "defaultMessage": "Manage your preferences, set up an avatar."
+  },
+  "MyProfile.ChangeMyPassword": {
+    "defaultMessage": "Change my password"
+  },
+  "MyProfile.Cypris": {
+    "defaultMessage": "Cypris"
+  },
+  "MyProfile.Email": {
+    "defaultMessage": "Email"
+  },
+  "MyProfile.EmailExplanation": {
+    "defaultMessage": "Your email is important. This is the unique identifier for each user. If you lost your password, Togh will send you a new passwor on this email"
+  },
+  "MyProfile.EmailVisibility": {
+    "defaultMessage": "Email visibility"
+  },
+  "MyProfile.EmailVisibilityAlwayButSearch": {
+    "defaultMessage": "Everywhere except search"
+  },
+  "MyProfile.EmailVisibilityAlwayButSearchExplanation": {
+    "defaultMessage": "Search does not use your email, but the result display it. A user connected to an event see your email"
+  },
+  "MyProfile.EmailVisibilityAlways": {
+    "defaultMessage": "Always"
+  },
+  "MyProfile.EmailVisibilityAlwaysExplanation": {
+    "defaultMessage": "Your email is visible for any user connected to Togh"
+  },
+  "MyProfile.EmailVisibilityLimitedEvent": {
+    "defaultMessage": "Limited Event"
+  },
+  "MyProfile.EmailVisibilityLimitedEventExplanation": {
+    "defaultMessage": "Your email is visible only on event, for all users registered in the event"
+  },
+  "MyProfile.EmailVisibilityNever": {
+    "defaultMessage": "Never"
+  },
+  "MyProfile.EmailVisibilityNeverExplanation": {
+    "defaultMessage": "Your email is not visible at all."
+  },
+  "MyProfile.Image": {
+    "defaultMessage": "Image"
+  },
+  "MyProfile.PhoneNumber": {
+    "defaultMessage": "Phone Number"
+  },
+  "MyProfile.PhoneNumberExplanation": {
+    "defaultMessage": "Togh does not use it, but you can share it with users in the same event"
+  },
+  "MyProfile.PhoneNumberVisibilityAlwayButSearch": {
+    "defaultMessage": "Everywhere except search"
+  },
+  "MyProfile.PhoneNumberVisibilityAlwayButSearchExplanation": {
+    "defaultMessage": "Search does not use your phone number, but the result display it. A user connected to an event see your phone"
+  },
+  "MyProfile.PhoneNumberVisibilityAlways": {
+    "defaultMessage": "Always"
+  },
+  "MyProfile.PhoneNumberVisibilityAlwaysExplanation": {
+    "defaultMessage": "Your phone number is visible for any user connected to Togh"
+  },
+  "MyProfile.PhoneNumberVisibilityLimitedEvent": {
+    "defaultMessage": "Limited Event"
+  },
+  "MyProfile.PhoneNumberVisibilityLimitedEventExplanation": {
+    "defaultMessage": "Your Phone number is visible only on event, for all users registered in the event"
+  },
+  "MyProfile.PhoneNumberVisibilityNever": {
+    "defaultMessage": "Never"
+  },
+  "MyProfile.PhoneNumberVisibilityNeverExplanation": {
+    "defaultMessage": "Your phone number is not visible at all."
+  },
+  "MyProfile.SearchableExplanation": {
+    "defaultMessage": "Your user can be visible in the search function. If not, the only way to invite you is to give your email explicitly."
+  },
+  "MyProfile.SetANewPassword": {
+    "defaultMessage": "Set a new password"
+  },
+  "MyProfile.ShowTakeATourExplanation": {
+    "defaultMessage": "Where a tour is available, the icon is presented. Clicks on it to access explanations."
+  },
+  "MyProfile.ShowTipsExplanation": {
+    "defaultMessage": "Tips are visible. This help you to knows the different functions."
+  },
+  "MyProfile.Togh": {
+    "defaultMessage": "Togh"
+  },
+  "MyProfile.URL": {
+    "defaultMessage": "Url"
+  },
+  "MyProfile.UpdateMyPassword": {
+    "defaultMessage": "Update my password"
+  },
+  "MyProfile.UserName": {
+    "defaultMessage": "User name"
+  },
+  "MyProfile.errorServer": {
+    "defaultMessage": "Error connection"
+  },
+  "MyProfile.firstname": {
+    "defaultMessage": "FirstName"
+  },
+  "MyProfile.hideTakeATour": {
+    "defaultMessage": "Hide take a tour"
+  },
+  "MyProfile.hideTipsUser": {
+    "defaultMessage": "Hide tips"
+  },
+  "MyProfile.lastName": {
+    "defaultMessage": "LastName"
+  },
+  "MyProfile.passwordChangeFailed": {
+    "defaultMessage": "Change failed"
+  },
+  "MyProfile.passwordChangeInProgress": {
+    "defaultMessage": "In progress"
+  },
+  "MyProfile.passwordChangedOk": {
+    "defaultMessage": "Password changed"
+  },
+  "MyProfile.searchable": {
+    "defaultMessage": "Searchable"
+  },
+  "MyProfile.searchableFalse": {
+    "defaultMessage": "Never in the search result"
+  },
+  "MyProfile.searchableTrue": {
+    "defaultMessage": "Yes, I will appears on search"
+  },
+  "MyProfile.showTakeATour": {
+    "defaultMessage": "Show take a tour"
+  },
+  "MyProfile.showTakeATourLabel": {
+    "defaultMessage": "Select if you want to see the 'Take a tour' help"
+  },
+  "MyProfile.showTipsUser": {
+    "defaultMessage": "Show tips"
+  },
+  "MyProfile.showtipuser": {
+    "defaultMessage": "ShowTipUsers"
+  },
+  "MyProfile.subscriptionExcellentExplanation": {
+    "defaultMessage": "The Excellence subscription reaches the sky! Large events, no real limit. And you help to maintain the application."
+  },
+  "MyProfile.subscriptionFreeExplanation": {
+    "defaultMessage": "The Free subscription contains all you need to organize your events. It's just limited to avoid the cost. You are limited in the number of events you can create per month, number of participants per event."
+  },
+  "MyProfile.subscriptionPremiumExplanation": {
+    "defaultMessage": "The Premium subscription push the limit. You can organize multiple events, manage budget. Perfect for professional who want to have a great system to track and organize everything, or for users who organize a lot of events!"
+  },
+  "MyProfile.subscriptionUser": {
+    "defaultMessage": "Subscription"
+  },
+  "MyProfile.subscriptionUserExplanation": {
+    "defaultMessage": "Different level of subscription exists."
+  },
+  "MyProfile.typeProfile": {
+    "defaultMessage": "Picture"
+  },
+  "RegisterNewUser.Account Create": {
+    "defaultMessage": "Account Created"
+  },
+  "RegisterNewUser.AccountAlreadyExist": {
+    "defaultMessage": "Account already exist"
+  },
+  "RegisterNewUser.CloseRegistration": {
+    "defaultMessage": "Close registration"
+  },
+  "RegisterNewUser.Email": {
+    "defaultMessage": "Email"
+  },
+  "RegisterNewUser.FirstName": {
+    "defaultMessage": "First name"
+  },
+  "RegisterNewUser.InformationLogin": {
+    "defaultMessage": "Login"
+  },
+  "RegisterNewUser.InformationVisibility": {
+    "defaultMessage": "Access information"
+  },
+  "RegisterNewUser.Information_1": {
+    "defaultMessage": "Register a user in Togh to access and create events, receive notifications. Access your profile to change any settings."
+  },
+  "RegisterNewUser.Information_2": {
+    "defaultMessage": "Your login is your email. Togh will send you a confirmation email to validate your account. This email is used when you lost your password."
+  },
+  "RegisterNewUser.Information_3": {
+    "defaultMessage": "In the profile, you can change the setting to not be visible by another Togh user. By default, you are visible in search via name and email. Your friend needs to see you! But you can decide not to be visible in a general search. Then, your friend must know your email to add you as a participant."
+  },
+  "RegisterNewUser.LastName": {
+    "defaultMessage": "Last name"
+  },
+  "RegisterNewUser.Password": {
+    "defaultMessage": "Password"
+  },
+  "RegisterNewUser.RegisterButton": {
+    "defaultMessage": "Register New User"
+  },
+  "RegisterNewUser.Registration": {
+    "defaultMessage": "Registration"
+  },
+  "RegisterNewUser.RetypePassword": {
+    "defaultMessage": "Retype password"
+  },
+  "RegisterNewUser.ServerError": {
+    "defaultMessage": "Server error"
+  },
+  "RegisterUser.EmailIsMandatory": {
+    "defaultMessage": "Email is mandatory"
+  },
+  "RegisterUser.FirstNameIsMandatory": {
+    "defaultMessage": "First Name is mandatory"
+  },
+  "RegisterUser.PasswordIsMandatory": {
+    "defaultMessage": "Password is mandatory"
+  },
+  "RegisterUser.PasswordSizeMandatory": {
+    "defaultMessage": "Password must have minimum 4 characters"
+  },
+  "RegisterUser.PasswordsAreDifferent": {
+    "defaultMessage": "Passwords are different"
+  },
+  "ResetPassword.ResetPasswordProcedure": {
+    "defaultMessage": "You can now change your password. It will be changed, and you will be connected immediately"
+  },
+  "ResetPassword.UpdateMyPassword": {
+    "defaultMessage": "Update my password"
+  },
+  "ResetPassword.passwordchanged": {
+    "defaultMessage": "Password changed"
+  },
+  "ResetPassword.passwordchangefailed": {
+    "defaultMessage": "Change failed"
+  },
+  "TakeATour.Deactivate": {
+    "defaultMessage": "Deactivate"
+  },
+  "TakeATour.DeactivateTips": {
+    "defaultMessage": "You can deactivate Take a tour. Enable it again in your preferences"
+  },
+  "TakeATour.TakeATour": {
+    "defaultMessage": "Take A Tour"
+  },
+  "TakeATour.TakeATourLabel": {
+    "defaultMessage": "Take A Tour"
+  },
+  "UserFeedback.OperationFailed": {
+    "defaultMessage": "Operation Failed"
+  },
+  "UserFeedback.OperationHttpError": {
+    "defaultMessage": "Connection to the server lost"
+  },
+  "UserFeedback.OperationSuccess": {
+    "defaultMessage": "Operation successful"
+  },
+  "UserFeedback.OperationSuccessfull": {
+    "defaultMessage": "Success"
+  },
+  "UserTips.Deactivate": {
+    "defaultMessage": "Deactivate"
+  },
+  "UserTips.DeactivateTip": {
+    "defaultMessage": "You can deactivate tips, and enable it again in your preferences"
+  }
+}
