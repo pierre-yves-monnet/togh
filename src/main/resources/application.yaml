@@ -2,6 +2,9 @@
 # Attention, change the proxy in package.json
 server.port: 7080
 
+spring.jpa.database: POSTGRESQL
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQL10Dialect
 
   ## default connection pool
 spring.datasource:
@@ -12,6 +15,11 @@ spring.datasource:
   username: postgres
   password: postgres
   driver-class-name: org.postgresql.Driver
+
+logging.level.org.hibernate.SQL: DEBUG
+
+
+
 
   ## Google PostgreSQL
   # Spring Mail
