@@ -19,7 +19,7 @@ I'm Pierre-Yves, a developer who wanted to discover new technologies (Spring Boo
 
 ## Documentation
 
-* [install.md](doc/install.md) for explanation on the installation
+* [install.md](doc/development/install.md) for explanation on the installation
 * [Roadmap.md](doc/Roadmap.md) describe the road map
 * [Docker.md](doc%2FDocker.md) a guide to build docker image application
 * npm -v

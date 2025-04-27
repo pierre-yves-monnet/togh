@@ -51,7 +51,7 @@ Spring Boot :
 
 # Architecture
 
-Execute com.togh.ToghApplicationInitializer Reac :
+Execute com.togh.ToghApplication Reac :
 On a terminal
 
 ```

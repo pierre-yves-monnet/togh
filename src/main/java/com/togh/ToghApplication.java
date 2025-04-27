@@ -8,17 +8,17 @@ import org.springframework.context.annotation.ComponentScan;
 
 // see https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-traditional-deployment
 @SpringBootApplication
-@ComponentScan(basePackageClasses = ToghApplicationInitializer.class)
+@ComponentScan(basePackageClasses = ToghApplication.class)
 
-public class ToghApplicationInitializer extends SpringBootServletInitializer {
+public class ToghApplication extends SpringBootServletInitializer {
 
   public static void main(String[] args) {
-    SpringApplication.run(ToghApplicationInitializer.class, args);
+    SpringApplication.run(ToghApplication.class, args);
   }
 
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-    return application.sources(ToghApplicationInitializer.class);
+    return application.sources(ToghApplication.class);
   }
 
 }

@@ -1,24 +1,60 @@
-# Cloud Google & Docker
+# Cloud GKE
 
 See Docker documentation
 
-# Documentation
 
-## cloud
+# Google cloud
 
-Deployer une image docker: 	
-https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
-
-Deployer Postgres
-https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke
-
-# google cloud
+Create a google instance, ready to accept dockers images
 
 https://cloud.google.com/community/tutorials/kotlin-springboot-compute-engine
 
+# Publish the image on Google Repository
+
+Github Action?
+
+# Create the first docker compose
+
+## First: postgres
+
+The first docker creates the Postgres and the Togh pod
+
+## Then Togh
+
+# First access: change the password, add keys
+
+
+First start ;
+use toghadmin/togh to connect
+
+![img.png](images/FirstStart.png)
+
+Go to MyProfile
+
+![MyProfile](images/MyProfile.png)
+
+## Smtp
+
+Create an application password
+https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4McBDQ0zWMWKf8san_RREmpP2Q-XzhZjDLU2dO_0gnT7XYxnqBqiZRqz-t23igUhcua_xdGEN8T5iPWRGp16otSAyjsE__9p1sAyRS-FtMHy042o2k
+![img.png](CreateApplicationPassword.png)
+
+SMTP Server smtp.gmail.com
+TLS 587
+SSL 465
+
+# Automatic backup
+
+
+
+
+
+
+
 cd d:\atelier\cloud cloud_env.bat
 
-# Create Google instance
+## Google
+  Create Google instance
 
 > https://cloud.google.com/community/tutorials/cloud-run-local-dev-docker-compose
 
@@ -35,7 +71,7 @@ export GCP_KEY_PATH=~/intricate-gamma-325323-ContainerRegistry.json
 
 ## Allow Docker to publish to gcr.io:
 
-As a Windows administrateur
+As a Windows administrator
 
 ```
 > net localgroup docker-users rhaegal\pymonnet /add
@@ -157,7 +193,14 @@ juste pour ca et pour héberger des sous domaines en php. Ils sont aussi réacti
 
 https://github.com/chDame/fabulexie/blob/master/INSTALL.MD
 
-## Default admin
+# First start
 
-private static final String TOGHADMIN_EMAIL = "toghadmin@togh.com"; private static final String TOGHADMIN_USERNAME = "
-toghadmin"; private static final String TOGHADMIN_PASSWORD = "togh";
+# Documentation
+
+## cloud
+
+Deployer une image docker: 	
+https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
+
+Deployer Postgres
+https://cloud.google.com/solutions/deploying-highly-available-postgresql-with-gke

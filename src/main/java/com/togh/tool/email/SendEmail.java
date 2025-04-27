@@ -80,6 +80,9 @@ public class SendEmail {
     props.put("mail.transport.protocol", "smtp");
     props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.starttls.required", "true"); // <-- required sometimes
+    props.put("mail.smtp.ssl.protocols", "TLSv1.2");  // <-- important for Java 11+
+
     props.put("mail.debug", "true");
 
     logConnection += String.format("host[%s] port[%d] Auth[true] starttls.enable[true] user[%s]",

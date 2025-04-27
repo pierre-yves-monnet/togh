@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "@carbon/react": "^1.72.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",

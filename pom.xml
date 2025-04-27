@@ -17,7 +17,7 @@
 
     <!--<packaging>jar</packaging>  jar, war? -->
     <properties>
-        <start-class>com.togh.ToghApplicationInitializer</start-class>
+        <start-class>com.togh.ToghApplication</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <npm.output.directory>build</npm.output.directory>
 
@@ -266,7 +266,7 @@
 
             </plugin>
 
-            <!-- build the Backend Docker image -->
+            <!-- build the Backend Docker image
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -308,7 +308,7 @@
                     </execution>
                 </executions>
             </plugin>
-
+-->
 
 
             <!-- build the Application Docker image -->
