@@ -22,7 +22,7 @@ To do it manually:
 
 ### Tag the release
 
-Done automaticaly
+Done automatically
 
 ### Option Create Front End Togh Docker image
 

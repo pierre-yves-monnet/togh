@@ -1,0 +1,258 @@
+body>div.container {margin-top:10px;}
+
+.toghMenu {
+    border-left: 6px solid #1f78b4;
+    color: #1f78b4;
+    font-weight: bold;
+    height: 19px;
+    white-space: nowrap;
+    display: block;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 10px 2px 8px;
+    text-decoration: none;
+}
+.toghSubMenu {
+    padding: 3px 10px 2px 20px;
+    color: #1f78b4;
+    border-left: 6px solid #1f78b4;
+    font-weight: bold;
+    font-size: 10px;
+    text-decoration: none;
+}
+.toghMenuLabel {
+    display: block;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 10px 2px 20px;
+    text-decoration: none;
+}
+
+.toghinput {
+	
+}
+/* font-size: 15px; 
+ 	height: 30px; 
+ 	line-height: 24px; 
+ 	width: 95%; 
+ 	margin-top: 4px; 
+ 	margin-bottom: 15px;
+*/
+.thoginputreadonly {
+    background: aliceblue;
+    font-style: italic;
+}
+.Loading {
+	display: inline-block;
+	vertical-align: middle;
+	background-position: center;
+	background: no-repeat;
+	background-image:
+		url('data:image/gif;base64,R0lGODlhFAAUAIQAAGRmZLS2tNze3IyOjPTy9Hx6fMTGxKSmpOzq7Pz6/ISChMzOzJSWlKyurHRydMTCxOTm5JSSlPT29Hx+fMzKzOzu7Pz+/ISGhNTS1LSytP///wAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQIBgAAACwAAAAAFAAUAAAFsqAmjqKEIBKpipYlJhCEQMnrkslcJcQ8S4mKrMbyQQgmGYogk90szZMmmTo1b5qKr7Ji6nBaAnZk6VWwCeBqJSRMYwj3WgShGAxK5Vxk7zdlexoLdxQUEkpyc3V3EBo8KYEaTIkIDAUHkDgLGQ9cLBMAoQcrCwemATcVoaEFGhQDAxQaGQcNpkQJDqsRAhe+FwIPpgcZRBoYugoID78XDwQBxI04Yhq9vwIaZcZzFBGxcyEAIfkECAYAAAAsAAAAABQAFACEZGZktLa03N7clJKU9PL0zM7MpKak7OrsnJqc/Pr81NbUhIaExMbErK6sbG5svLq85ObklJaU9Pb01NLUrKqs7O7snJ6c/P783Nrc////AAAAAAAAAAAAAAAAAAAAAAAABbZgJo6idBwSqYrXJSYQdEDJ65LJXCXEPEuJiqzG8kEIJhmKIJPdLs1TJpk6NW+Ziq+yYupwWgJ2dOlVsIqAYrXi1QKA+IM98kIkjjjAQRdZT3lxfH1WMg96c31eBwQZGAEYfSM8KSIEFBEPlSQXAhMKmxcIC6SJJAIMqRM3BKSkCBkKDQ1rE6kFDEQJA64UEBQGwAcKqQwFRI68CAQTwQYGEwm2BY04Yhm/zhAZFwnIdAoUFGtsIQAh+QQIBgAAACwAAAAAFAAUAIRkZmS0trTc3tyMjoz08vTExsR8enykpqTs6uz8+vzMzsyEgoSsrqx0cnTEwsTk5uSUkpT09vTMyszs7uz8/vzU0tSEhoS0srT///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAFrSAmjmKEIBGpislEYcnzIE/CvmTVAAtC0LRIa2Zj7QAAiGmGIsxmuAkSacCYUBggUURZTA8rJ21CQkAMhyIp8XONBAXBasW2FSx4yXwkfkQGeBYQeyJaZoGDhIZ3eYQYfSkCEnKOMARqBA4XCmojFG1qFAEHpAphT2QlpAwHFxgPChIPWVo4CRekBw4EBRIFBQQTQAg4r6wBTr++NUApawk2BBIOvgQ3lQ8SsnshACH5BAgGAAAALAAAAAAUABQAhGRmZLS2tNze3JSSlPTy9MzOzKSmpOzq7JyanPz6/NTW1ISGhMTGxKyurHRydLy6vOTm5JSWlPT29NTS1KyqrOzu7JyenPz+/Nza3P///wAAAAAAAAAAAAAAAAAAAAAAAAWzYCaOYuA4AamKCXFlCiADCvuSwrBYVTADgUTlcJCMErrFgjL5TQgQCPFGUCoRiccpSJRCbheE9bEaSg+kCgXxMKouhEPlloEoIKtVKwGjGCg1eSJxUgQNfwYNgiIHXgcNfomLGY2VCoiBgoRFdRNokxkSoiMSGAUCdCNwcnwiFxMMsQIrUESfGQmxBQwToURGXVKtCbuxGAmOEmZTIwS7Ey3JCV2tRwl8yJVuF6l5Eo1uKyEAIfkECAYAAAAsAAAAABQAFACEZGZktLa03N7cjI6M9PL0xMbEfHp8pKak7Ors/Pr8zM7MhIKErK6sdHJ0xMLE5ObklJKU9Pb0zMrM7O7s/P781NLUhIaEtLK0////AAAAAAAAAAAAAAAAAAAAAAAAAAAABbYgJo5iMQwFqYpURGGCJVsCRk2J+lxHQDgziwOxADQqowTjwHTEZgIIYNrIYSJM5gUjgQwkGMN0SmAFlgew6jBevES/S8VKShwMEMSI8CivVAkEOQ8FBRIPf3sPCA8REoYOCokijJUKhRJqiZWLD48FiJMElWUTfZMjEapJEwgEbyQUoxOwGK2LfiS3CBMjFJx6EQgIERjAVr+dBMKdCbsIsAmMOBGdrs6LxbFvCdbaFLV/wsSJIQAh+QQIBgAAACwAAAAAFAAUAIRkZmS0trTc3tyUkpT08vTMzsykpqTs6uycmpz8+vzU1tSEhoTExsSsrqxsbmy8urzk5uSUlpT09vTU0tSsqqzs7uycnpz8/vzc2tz///8AAAAAAAAAAAAAAAAAAAAAAAAFsWAmjqLSNAqpildyZRBlyFB2EYlaFcwkTbPZpIJYDASjC4/BwMQM0NhiOshlEkzmJDM5YTKR6ZTAmmSRqocY8RIlMBNBm5R4IChkkQS3Wk0CKRIHEAd5fRkBAIoPg42HIg6KAA6NhI8ZkYoOBIQQEpcPkg9XfJcZCg9bLBWFc0kEBxVWIgeNFSucg7csnbUZggefjYNtF5WyvXu9cwm6N704FYSzLG0JnRBWF659wJ99IQAh+QQIBgAAACwAAAAAFAAUAAAFtaAmjiJEURCpipYlEoZBGYRmSYmaIFCVQLIYhBA4ZFIsHo9Qmc0Ij4M0k7NBlAiNCaXJSKWSUUVZWVEa0oBLlBgT1qQEJfCosXGrlcAg0EggV3Z5GgYXhhQIWIMiA4YXEVeAWYuNhgN/iYJ5hYcaCQRhiyICFH0sbnAjEgcTEZMiY4ErBwC1CmsWkYl+iWEFtbV2Fko9P0oSEcAOVZ48PphXEggKAA4YKi1sumEWBMyD0hChKyEAIfkECAYAAAAsAAAAABQAFACEZGZktLa03N7clJKU9PL0zM7MpKak7OrsnJqc/Pr81NbUhIaExMbErK6sdHJ0vLq85ObklJaU9Pb01NLUrKqs7O7snJ6c/P783Nrc////AAAAAAAAAAAAAAAAAAAAAAAABbRgJo6idBwSqYrXJSYQdEBJdiU1mcxVQswziWTCKFRGFyCEYJKhMIxoIXeROTPNFDHKyGUqwKNKIJ14E2CCSwWbmEcJiXc1gkwg2NiBQB8pKAYUCidXfRkNgQYNVjKGhwaBFBJOfIZ/kAoZPimOGXYHSGlrOgEIFGIiYDKVJAELrxZrVUAHFwEODgEXCK+vlUlWFQoAxAATFL0DZzwJAcUAARW8AxgqLSITzxM2BHN0D7gBfSEAOw==');
+	width: 20px;
+	height: 20px;
+	margin-top: 6px;
+	margin-right: 7px;
+}
+.toghfooter { 
+    position: fixed; 
+    left: 0 ; right: 0; bottom: -2;
+    margin-top: 5px ;
+    height: 15px 
+}
+.requiredField::after {
+	content:" * " ;
+    color:red   
+}
+
+.fieldlabel {
+	 font-size: 0.75rem;
+	 letter-spacing: 0.32px;
+     margin-bottom: 0.5rem;
+     color: #525252;
+     font-weight: 400;
+     line-height: 1rem;
+     vertical-align: baseline;
+}
+
+h1{
+	color: #ac1e4a;
+	overflow: hidden;
+    max-width: 315px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 24px !important;
+    line-height: 38px;
+    height: 38px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 5px
+
+}
+/** background: #550A21; */
+.banner {
+	background:#ccebc5
+	
+}
+/* color: #550A21;   border-top: 2px solid #550A21; background: #fff1d2; */
+.eventsection {
+	font-size: 30px;
+    margin-bottom: 0.65em;
+    
+    color: #2e6da4;
+
+    margin: 10px 0 30px; 
+}
+
+
+/* we try to overload the class but it's not works... */
+.togh.bx--content-switcher--selected {
+	background-color: #2e6da4;
+}
+
+/** when a list of item (shopping list..) this CSS is use
+background-color: #99D9EA;
+**/ 
+table.toghtable th {
+	background-color: #b3cde3;
+	font-weight: bold;
+	
+}
+table.toghtable td {
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 15px;
+	color: #2c3e50;
+	line-height: 1.42857143;
+	line-height:40px;
+	padding-right: 10px;
+	
+}
+
+/**
+ * use to display an event, like an itineray item
+ */
+.toghBlock {
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 25px; /* .25rem;*/
+    background-color: #fff5e691;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px
+
+}
+
+.toghTips {
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 25px; /* .25rem;*/
+    background-color: #ffffcc;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px 30px 30px 20px
+
+}
+
+.toghSectionHeader {
+	vertical-align: middle;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	background-color: #b3cde3;
+}
+/*
+    min-width: 0;
+	font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.16px;
+    color: #161616;
+    line-height: 1;
+    box-sizing: border-box;
+	position: relative;
+    display: flex;
+    flex-direction: column;
+*/
+
+.toghImageBackground {
+    background-image: url('/img/togh.jpg');
+    background-repeat: no-repeat;
+    background-position: 20px 30px;
+    background-size: 400px
+}
+
+.bs-component {
+    position: relative;
+}
+
+.bs-component p.portal_link_container	{margin-bottom:0;}
+
+img.avatar	{width:100px;}
+
+#source-button {
+    position: absolute;
+    top:0;
+    right:0;
+    z-index:9;
+}
+
+table.stats td, table.stats th	{text-align:center;}
+
+
+/** maps for Google */
+
+  
+.map-h2 {
+  text-transform: uppercase;
+  font-size: 1rem;
+  padding: 20px;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.google-map {
+  width: 100%;
+  height: 60vh;
+}
+
+.pin {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  color: var(--main-blue);
+}
+
+.pin-icon {
+  font-size: 4rem;
+}
+
+.pin-text {
+  font-size: 1.3em;
+}
+
+@media screen and (min-width: 799px) {
+  .google-map {
+    height: 80vh;
+  }
+
+  .map-h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
+
+  .pin {
+    width: 15vw;
+  }
+
+  .pin-icon {
+    font-size: 10vw;
+  }
+}
+
+
