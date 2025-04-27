@@ -4,8 +4,7 @@ COPY . .
 RUN mvn clean install -DskipTests && ls -lh target/
 
 FROM eclipse-temurin:21-jdk-alpine
-EXPOSE 9081
-
+EXPOSE 7080
 WORKDIR /app
-COPY --from=builder target/togh.jar togh.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=production", "-jar","/app/togh.jar"]
+COPY --from=builder /app/target/togh.jar togh.jar
+ENTRYPOINT ["java","-Dspring.profiles.active=production", "-jar","togh.jar"]
