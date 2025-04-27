@@ -3,8 +3,6 @@ WORKDIR /app
 COPY . .
 RUN mvn clean install -DskipTests && ls -lh target/
 
-
-FROM
 FROM eclipse-temurin:21-jdk-alpine
 EXPOSE 9081
 
